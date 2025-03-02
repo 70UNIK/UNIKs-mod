@@ -217,6 +217,46 @@ return {
                     "{C:unik_wall_color}The Wall{} is triggered",                    
                 },                 
             },
+            j_unik_goading_joker = {
+                name = 'Goading Joker',
+                text={
+                    "{C:attention}All Spade cards{} are {C:red}debuffed{}", 
+                    "{C:red}Self destructs{} when number of Spade", 
+                    "cards in deck fall below {C:attention}#2#{} or",
+                    "{C:unik_goad_color}The Goad{} is triggered",      
+                    "{C:inactive}(Currently #1# Spade(s))",
+                },                 
+            },
+            j_unik_headless_joker = {
+                name = 'Headless Joker',
+                text={
+                    "{C:attention}All Heart cards{} are {C:red}debuffed{}", 
+                    "{C:red}Self destructs{} when number of Heart", 
+                    "cards in deck fall below {C:attention}#2#{} or",
+                    "{C:unik_goad_color}The Head{} is triggered",      
+                    "{C:inactive}(Currently #1# Hearts(s))",
+                },                 
+            },
+            j_unik_broken_window = {
+                name = 'Headless Joker',
+                text={
+                    "{C:attention}All Diamond cards{} are {C:red}debuffed{}", 
+                    "{C:red}Self destructs{} when number of Diamond", 
+                    "cards in deck fall below {C:attention}#2#{} or",
+                    "{C:unik_goad_color}The Window{} is triggered",      
+                    "{C:inactive}(Currently #1# Diamonds(s))",
+                },                 
+            },
+            j_unik_caveman_club = {
+                name = 'Caveman Club',
+                text={
+                    "{C:attention}All Club cards{} are {C:red}debuffed{}", 
+                    "{C:red}Self destructs{} when number of Club", 
+                    "cards in deck fall below {C:attention}#2#{} or",
+                    "{C:unik_goad_color}The Club{} is triggered",      
+                    "{C:inactive}(Currently #1# Clubs(s))",
+                },                 
+            },
             j_unik_moonlight_cookie = {
                 name = 'Moonlight Cookie',
                 text = {
@@ -234,10 +274,66 @@ return {
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
                     "{C:inactive,s:0.9}I basically just inserted myself here.{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 }
-            }
+            },
+            --Cube jokers
+            j_unik_cube_joker = {
+                name="Cube Joker",
+                text={
+                    "This Joker gains {X:chips,C:white}X#2#{} Chips",
+                    "if played hand has",
+                    "exactly {C:attention}3{} cards",
+                    "{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)",
+                },
+            },
+            j_unik_jsab_cube = {
+                name="The Cube",
+                text={
+                    "This Joker gains {X:chips,C:white}X#2#{} Chips",
+                    "if played hand has",
+                    "exactly {C:attention}3{} cards",
+                    "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
+                    "{C:inactive,s:0.9}They want to be beside you in your journey.{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                },
+            },
+            j_unik_jsab_yokana = {
+                name="Yokana Ramirez",
+                text={
+                    "This Joker gains {X:chips,C:white}X#1#{} Chips for each", 
+                    "played, {C:attention}unscoring Queens{}",
+                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)",
+                    "{C:inactive,s:0.9}Quite strange being here, but I'll try to help out as much as I can.{}",
+                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                },
+            },
+            j_unik_jsab_maya = {
+                name="Maya Ramirez",
+                text={
+                    "This Joker gains {X:chips,C:white}X#1#{} Chips when", 
+                    "a card is destroyed",
+                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)",
+                    "{C:inactive,s:0.9}I'm doubtful if all this will succeed, but I'll still contribute.{}",
+                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                },
+            },
+            j_unik_jsab_chelsea = {
+                name="Chelsea Ramirez",
+                text={
+                    "This Joker gains {X:chips,C:white}X#1#{} Chips", 
+                    "for each type {C:chips}Chips{} or {X:chips,C:white}XChips{} joker triggered",
+                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
+                    "{C:inactive,s:0.9}Owo what is this? Kind of feels strange but nice that I'm a card...{}",
+                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                },
+            },
+            
         },
         Other={},
         Planet={},
