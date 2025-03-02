@@ -1,0 +1,17 @@
+{
+	"id": "unik",
+	"name": "UNIK's mod",
+	"author": ["70UNIK"],
+	"description": "An addon to Cryptid that adds more unbalanced stuff, mostly not in your favour. Currently just starting to mod.",
+	"prefix": "unik",
+	"main_file": "unik.lua",
+	"priority": 999999999999999999999999999999999999999999999999999999,
+	"badge_colour": "fe90ff",
+	"badge_text_colour": "",
+	"version": "0.0.0.1-TEST-BUILD",
+	"dependencies": [
+        "Steamodded",
+        "Cryptid (>=0.5.4)",
+		"Talisman (>=2.0.2)"
+    ]
+}

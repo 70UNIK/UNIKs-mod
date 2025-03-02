@@ -1,0 +1,71 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+### Indigo ICBM - Trigger player death - AFTER cryptid
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''G.GAME.blind.in_blind = false'''
+position = 'before'
+payload = '''--Indigo ICBM will set chips and mult to 0 if exceeding 3x requirements before causing an instant game over.
+if (G.GAME.blind and (G.GAME.blind.config.blind.key == "bl_unik_indigo_icbm")) and not (G.GAME.blind.disabled)then
+    local upper = G.GAME.chips
+    local ceiling = G.GAME.blind.chips * 3
+    if to_big(upper) > to_big(ceiling) then
+        G.GAME.chips = 0
+        game_over = true
+        local text = localize('k_unik_nuked')
+        ease_colour(G.C.UI_CHIPS, {0.0, 0.0, 0.0, 666666})
+        ease_colour(G.C.UI_MULT, {0.0, 0.0, 0.0, 666666})
+        attention_text({
+            scale = 1.4, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
+        })
+        G.GAME.blind.triggered = true
+        G.GAME.blind:wiggle()
+        G.GAME.unik_killed_by_nuke = true
+    end
+end'''
+match_indent = true
+
+### Custom boss blind death messages
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})'''
+position = 'at'
+payload = '''
+if G.GAME.unik_killed_by_nuke then
+    Jimbo:add_speech_bubble('special_lose_unik_get_nuked', nil, {quip = true})
+    G.GAME.unik_killed_by_nuke = nil
+elseif G.GAME.unik_arrested_by_batman then
+    Jimbo:add_speech_bubble('special_lose_unik_defeated_by_batman', nil, {quip = true})
+    G.GAME.unik_arrested_by_batman = nil
+elseif G.GAME.unik_killed_by_pentagram then
+    Jimbo:add_speech_bubble('special_lose_unik_killed_by_pentagram', nil, {quip = true})
+    G.GAME.unik_killed_by_pentagram = nil
+    G.GAME.unik_pentagram_manager_fix = nil
+elseif G.GAME.unik_killed_by_placard then
+    Jimbo:add_speech_bubble('special_lose_unik_killed_by_placard', nil, {quip = true})
+    G.GAME.unik_killed_by_placard = nil
+elseif G.GAME.unik_killed_by_joyless then
+    Jimbo:add_speech_bubble('special_lose_unik_joyless', nil, {quip = true})
+    G.GAME.unik_killed_by_joyless = nil
+elseif G.GAME.unik_eaten_by_lily then
+    Jimbo:add_speech_bubble('special_lose_unik_sprunki_lily', nil, {quip = true})
+    G.GAME.unik_eaten_by_lily = nil
+elseif G.GAME.unik_killed_by_poppy then
+    Jimbo:add_speech_bubble('special_lose_unik_tall_poppy_syndrome', nil, {quip = true})
+    G.GAME.unik_killed_by_poppy = nil
+elseif G.GAME.unik_killed_by_boo then
+    Jimbo:add_speech_bubble('special_lose_unik_bigger_boo', nil, {quip = true})
+    G.GAME.unik_killed_by_boo = nil
+    G.GAME.unik_pentagram_manager_fix = nil
+else
+    Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
+end
+'''
+match_indent = true

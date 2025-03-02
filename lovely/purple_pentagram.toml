@@ -1,0 +1,15 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### pentagram dupe fix 
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if G.GAME.blind and G.GAME.blind.in_blind then G.E_MANAGER:add_event(Event({ func = function() G.GAME.blind:set_blind(nil, true, nil); return true end })) end'''
+position = 'at'
+payload = '''if G.GAME.blind and G.GAME.blind.in_blind and (not G.GAME.unik_pentagram_manager_fix) then 
+    G.E_MANAGER:add_event(Event({ func = function() G.GAME.blind:set_blind(nil, true, nil); return true end }))
+end'''
+match_indent = true

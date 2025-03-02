@@ -1,0 +1,112 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+# Patch into cryptid to force happiness to be positive in a reliable way
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''if card.ability.name == "cry-universe" then
+		card:set_edition("e_cry_astral", true, nil, true)
+	end'''
+position = "after"
+payload = '''
+if card.ability.name == "j_unik_happiness" then
+    card:set_edition("e_unik_positive", true, nil, true)
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''and card.ability.name ~= "cry-universe"'''
+position = "after"
+payload = '''and card.ability.name ~= "j_unik_happiness"'''
+match_indent = true
+
+
+
+## Always apply negative shine (will have its own shader)
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if (self.edition and self.edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then'''
+position = "at"
+payload = '''if (self.edition and (self.edition.negative or self.edition.unik_positive)) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then'''
+match_indent = true
+
+## POSITIVE consumable and playing card label logic
+
+### Badge
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if v == 'negative_consumable' or v == 'negative_playing_card' then v = 'negative' end"
+position = "after"
+payload = '''
+if v == 'unik_positive_consumable' or v == 'unik_positive_playing_card' then v = 'unik_positive' end
+'''
+match_indent = true
+
+### 
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''if v:sub(1,9) == 'negative_' then
+    info_queue[#info_queue+1] = {key = 'e_'..v, set = 'Edition', config = {extra = G.P_CENTERS['e_negative'].config.card_limit}}
+end'''
+position = "after"
+payload = '''if v:sub(1,14) == 'unik_positive_' then
+    info_queue[#info_queue+1] = {key = 'e_'..v, set = 'Edition', config = {extra = G.P_CENTERS['e_unik_positive'].config.card_limit}}
+end'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "badges[#badges + 1] = 'negative_playing_card'"
+position = "after"
+payload = """
+elseif self.edition.type == 'unik_positive' and self.ability.consumeable then
+    badges[#badges + 1] = 'unik_positive_consumable'
+elseif self.edition.type == 'unik_positive' and (self.ability.set == 'Enhanced' or self.ability.set == 'Default') then
+    badges[#badges + 1] = 'unik_positive_playing_card'"""
+match_indent = true
+
+### Bad edition colors: Instead of a blueshift, its a redshift, just to show how shitty it is
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "self.C.DARK_EDITION[2] = math.min(self.C.DARK_EDITION[3], self.C.DARK_EDITION[1])"
+position = "after"
+payload = """--self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)
+        self.C.UNIK_SHITTY_EDITION[1] = 0.6+0.2*(1- math.sin(self.TIMERS.REAL*1.3))
+        --self.C.UNIK_SHITTY_EDITION[4] = 0.6-0.2*(1- math.sin(self.TIMERS.REAL*1.3))
+        self.C.UNIK_SHITTY_EDITION[2] = math.min(self.C.DARK_EDITION[1], self.C.DARK_EDITION[2])"""
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "globals.lua"
+pattern = "DARK_EDITION = {0,0,0,1},"
+position = "after"
+payload = """UNIK_SHITTY_EDITION = {1,0,0,1},
+UNIK_THE_PLANT = HEX('709284'),
+UNIK_THE_MANACLE = HEX('575757'),
+UNIK_THE_WALL = HEX('8a59a5'),"""
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "dark_edition = G.C.DARK_EDITION,"
+position = "after"
+payload = """unik_shitty_edition = G.C.UNIK_SHITTY_EDITION,
+unik_plant_color = G.C.UNIK_THE_PLANT,
+unik_manacle_color = G.C.UNIK_THE_MANACLE,
+unik_wall_color = G.C.UNIK_THE_WALL,"""
+match_indent = true
+
