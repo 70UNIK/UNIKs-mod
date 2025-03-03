@@ -9,8 +9,7 @@ SMODS.Challenge{
 		modifiers = {},
 	},
     jokers = {
-        { id = "j_sly", stickers = {"perishable" }},
-        { id = "j_cry_antennastoheaven", stickers = {"cry_absolute" }},
+        { id = "j_unik_jsab_chelsea", stickers = {"cry_absolute" }},
 	},
 	deck = {
 		type = "Challenge Deck",
@@ -228,11 +227,11 @@ SMODS.Challenge{
             { id = "j_zany" },  
 
             -- --Default consumables
-            { id = "c_justice" },
-            { id = "c_chariot" },
-            { id = "c_empress" },
-            { id = "v_observatory" },
-        
+            -- { id = "c_justice" },
+            -- { id = "c_chariot" },
+            -- { id = "c_empress" },
+            -- { id = "v_observatory" },
+            -- { id = "c_cry_seraph" },
         },
         banned_tags = {
             --Disincourage holgraphic, polychrome, astral, fragile, jolly 
@@ -254,6 +253,44 @@ SMODS.Challenge{
     },
 
 }
+for i = 1, #G.CHALLENGES do
+    if G.CHALLENGES[i].id == 'c_unik_chips_only' and #G.CHALLENGES[i].restrictions.banned_cards <=144 then
+
+                -- Add buffoonery and extra credit Jokers to banlist
+        if (SMODS.Mods["Buffoonery"] or {}).can_load then
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_laidback'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_fivefingers'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_afan'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_whitepony'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_blackstallion'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_kerman'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_maggit'}
+            --G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_maggit_alt'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_camarosa'}
+        end
+        if (SMODS.Mods["extracredit"] or {}).can_load then
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_shipoftheseus'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_clowncar'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_pridefuljoker'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_corgi'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_trafficlight'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_tengallon'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_turtle'}
+            G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_ExtraCredit_compost'}
+        end
+        -- When Jen's almanac is updated, also add them
+        if (SMODS.Mods["jen"] or {}).can_load then
+            
+        end
+        -- Add justice, chariot, express, observatory and light cards to the list
+
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_justice'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_empress'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_chariot'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'v_observatory'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_cry_seraph'}
+    end
+end
 
 -- Chipzel's effect
 local chipzel_mod_mult = mod_mult

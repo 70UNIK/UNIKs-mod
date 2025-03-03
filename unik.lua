@@ -40,6 +40,12 @@ SMODS.Atlas {
 	py = 95
 }
 SMODS.Atlas {
+	key = "unik_stickers",
+	path = "unik_stickers.png",
+	px = 71,
+	py = 95
+}
+SMODS.Atlas {
 	key = "unik_common",
 	path = "unik_common.png",
 	px = 71,
@@ -97,8 +103,10 @@ NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/cube_joker.lua")()
 --- Rare ---
 --- Epic ---
+NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --- Legendary ---
 --- Exotic ---
 ---- Character cards ----

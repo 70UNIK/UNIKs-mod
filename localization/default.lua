@@ -291,28 +291,16 @@ return {
                 }
             },
             --Cube jokers
-            j_unik_cube_joker = {
+            j_unik_cube_joker = {  -- uncommon: gains x0.09 chips
                 name="Cube Joker",
                 text={
                     "This Joker gains {X:chips,C:white}X#2#{} Chips",
                     "if played hand has",
-                    "exactly {C:attention}3{} cards",
-                    "{C:inactive}(Currently {C:chips}#1#{C:inactive} Chips)",
-                },
-            },
-            j_unik_jsab_cube = {
-                name="The Cube",
-                text={
-                    "This Joker gains {X:chips,C:white}X#2#{} Chips",
-                    "if played hand has",
-                    "exactly {C:attention}3{} cards",
+                    "exactly {C:attention}4{} cards",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9}They want to be beside you in your journey.{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            j_unik_jsab_yokana = {
+            j_unik_jsab_yokana = { --epic: gains x0.75 chips
                 name="Yokana Ramirez",
                 text={
                     "This Joker gains {X:chips,C:white}X#1#{} Chips for each", 
@@ -323,7 +311,7 @@ return {
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            j_unik_jsab_maya = {
+            j_unik_jsab_maya = { --epic: gains x0.5 chips
                 name="Maya Ramirez",
                 text={
                     "This Joker gains {X:chips,C:white}X#1#{} Chips when", 
@@ -334,13 +322,13 @@ return {
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            j_unik_jsab_chelsea = {
+            j_unik_jsab_chelsea = { --epic: gains x0.07 chips 
                 name="Chelsea Ramirez",
                 text={
-                    "This Joker gains {X:chips,C:white}X#1#{} Chips", 
-                    "for each type {C:chips}Chips{} or {X:chips,C:white}XChips{} joker triggered",
-                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9}Owo what is this? Kind of feels strange but nice that I'm a card...{}",
+                    "This Joker gains {X:chips,C:white}X#2#{} Chips", 
+                    "when {C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} are triggered",
+                    "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
+                    "{C:inactive,s:0.9}OwO what's all this? Maybe I can help!{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },

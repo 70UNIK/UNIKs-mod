@@ -5,6 +5,7 @@
 SMODS.Consumable{
     set = 'Tarot', 
 	atlas = 'placeholders',
+    cost = 4,
 	pos = {x = 1, y = 2},
 	key = 'unik_wheel_of_misfortune',
     update = function(self,card,dt)

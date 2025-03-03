@@ -26,7 +26,7 @@ position = "after"
 payload = '''and card.ability.name ~= "j_unik_happiness"'''
 match_indent = true
 
-
+		
 
 ## Always apply negative shine (will have its own shader)
 [[patches]]

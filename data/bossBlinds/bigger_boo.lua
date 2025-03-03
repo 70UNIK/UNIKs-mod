@@ -1,3 +1,5 @@
+--todo:
+-- if jens almanac is updated, this boss is banned
 SMODS.Blind{
     key = 'unik_bigger_boo',
     boss = {min = 1, showdown = true}, 
