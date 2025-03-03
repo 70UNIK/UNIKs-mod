@@ -75,7 +75,11 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+-- stickers
 NFS.load(mod_path .. "data/stickers/depleted.lua")()
+-- consumables
+NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
+
 --BLINDS--
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")()
 --NFS.load(mod_path .. "data/bossBlinds/joyless.lua")() --Not listed until I fix the issue of M jokers not counting as "Jolly"

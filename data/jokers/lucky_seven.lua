@@ -9,8 +9,10 @@ SMODS.Joker {
 	eternal_compat = true,
     config = { extra = {mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
     loc_vars = function(self, info_queue, center)
-        return { vars = {(G.GAME.probabilities.normal or 1), center.ability.extra.mult,center.ability.extra.odds_mult,center.ability.extra.p_dollars,center.ability.extra.odds_money} }
+        return { vars = {card and cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged)or 1, 
+        center.ability.extra.mult,center.ability.extra.odds_mult,center.ability.extra.p_dollars,center.ability.extra.odds_money} }
 	end,
+    
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
@@ -18,10 +20,10 @@ SMODS.Joker {
             if context.other_card:get_id() == 7 then
                 local multTrue = false
                 local moneyTrue = false
-                if pseudorandom('unik_lucky_seven') < G.GAME.probabilities.normal/card.ability.extra.odds_money then
+                if pseudorandom('unik_lucky_seven') < cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged)/card.ability.extra.odds_money then
                     moneyTrue = true
                 end
-                if pseudorandom('unik_lucky_seven') < G.GAME.probabilities.normal/card.ability.extra.odds_mult then
+                if pseudorandom('unik_lucky_seven') < cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged)/card.ability.extra.odds_mult then
                     multTrue = true
                 end
                 if multTrue and moneyTrue then

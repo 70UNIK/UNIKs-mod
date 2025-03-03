@@ -362,7 +362,15 @@ return {
         Spectral={},
         Stake={},
         Tag={},
-        Tarot={},
+        Tarot={c_unik_wheel_of_misfortune = {
+            name = "Wheel of Misfortune",
+            text = {
+                "{C:green}#1# in #2#{} chance to create ",
+                "a {X:cry_cursed,C:white}Cursed{} Joker",
+                "otherwise apply {C:dark_edition}Negative{}, {C:dark_edition}Mosaic{},",
+                "or {C:dark_edition}Astral{} to a {C:attention}random{} Joker",
+            }
+        }},
         Voucher={},
     },
     misc = {
@@ -405,6 +413,7 @@ return {
             k_unik_arm_healed="Healed!",
             k_unik_water_burgular="Drained!",
             k_unik_boss_blind_joker="Boss Blind",
+            k_unik_too_bad="Too Bad!",
         },
         high_scores={},
         labels={

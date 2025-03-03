@@ -9,5 +9,6 @@ By: 70UNIK
 - 5 Cursed Jokers, 3 of which are Boss Blinds in Joker form
 - 1 "Edition" (Shader not done)
 - 6 very cruel Blinds designed to seriously mess you up
+- 1 Tarot based on the Wheel of Fortune, that has a high chance of adding a cursed Joker
 
 I'll make more over time
