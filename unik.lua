@@ -33,7 +33,12 @@ NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 -- 	px = 71,
 -- 	py = 95
 -- }
-
+SMODS.Atlas {
+	key = "unik_stickers",
+	path = "unik_stickers.png",
+	px = 71,
+	py = 95
+}
 SMODS.Atlas {
 	key = "unik_common",
 	path = "unik_common.png",
@@ -70,6 +75,7 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+NFS.load(mod_path .. "data/stickers/depleted.lua")()
 --BLINDS--
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")()
 --NFS.load(mod_path .. "data/bossBlinds/joyless.lua")() --Not listed until I fix the issue of M jokers not counting as "Jolly"
@@ -97,6 +103,7 @@ NFS.load(mod_path .. "data/jokers/unik.lua")()
 
 --- Cursed ---
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
+NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
 NFS.load(mod_path .. "data/jokers/handcuffs.lua")()
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
@@ -107,4 +114,5 @@ NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 --- Challenges
 NFS.load(mod_path .. "data/challenges/chipzel.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+
 

@@ -233,17 +233,17 @@ return {
                     "{C:attention}All Heart cards{} are {C:red}debuffed{}", 
                     "{C:red}Self destructs{} when number of Heart", 
                     "cards in deck fall below {C:attention}#2#{} or",
-                    "{C:unik_goad_color}The Head{} is triggered",      
+                    "{C:unik_head_color}The Head{} is triggered",      
                     "{C:inactive}(Currently #1# Hearts(s))",
                 },                 
             },
             j_unik_broken_window = {
-                name = 'Headless Joker',
+                name = 'Broken Window',
                 text={
                     "{C:attention}All Diamond cards{} are {C:red}debuffed{}", 
                     "{C:red}Self destructs{} when number of Diamond", 
                     "cards in deck fall below {C:attention}#2#{} or",
-                    "{C:unik_goad_color}The Window{} is triggered",      
+                    "{C:unik_window_color}The Window{} is triggered",      
                     "{C:inactive}(Currently #1# Diamonds(s))",
                 },                 
             },
@@ -253,8 +253,20 @@ return {
                     "{C:attention}All Club cards{} are {C:red}debuffed{}", 
                     "{C:red}Self destructs{} when number of Club", 
                     "cards in deck fall below {C:attention}#2#{} or",
-                    "{C:unik_goad_color}The Club{} is triggered",      
+                    "{C:unik_club_color}The Club{} is triggered",      
                     "{C:inactive}(Currently #1# Clubs(s))",
+                },                 
+            },
+            --Basically instead of being "eaten", popcorn and ice cream become negative, ramen becomes < 1.0X, Turtle bean reduces hand size.
+            -- Right now it only supports those 4, since they self destruct at a certain value (1 or 0)
+            j_unik_autocannibalism = {
+                name = 'Autocannibalism',
+                text={
+                    "Create an {C:attention}Eternal Depleted{}", 
+                    "{C:attention}Popcorn, Ramen, Ice Cream or Turtle Bean{}", 
+                    "Add {C:attention}Eternal and Depleted{} to all new and existing",
+                    "{C:attention}Popcorn, Ramen, Ice Cream and Turtle Beans{}",      
+                    "{C:red}Self destructs{} if none of above Jokers are owned",
                 },                 
             },
             j_unik_moonlight_cookie = {
@@ -335,7 +347,17 @@ return {
             },
             
         },
-        Other={},
+        Other={			
+            unik_depleted = {
+                name = "Depleted",
+                text = {
+                    "Set values to self-destruct values",
+                    "Decrementing values {C:red}do{}",
+                    "{C:red}not{} cause {C:red}self destruction{}",
+                    "until at {C:attention}negative max{} value",
+                },
+            },
+        },
         Planet={},
         Spectral={},
         Stake={},
@@ -387,6 +409,7 @@ return {
         high_scores={},
         labels={
             unik_positive="Positive",
+            unik_depleted = "Depleted",
         },
         poker_hand_descriptions={},
         poker_hands={},

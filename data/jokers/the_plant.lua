@@ -24,7 +24,6 @@ SMODS.Joker {
     end,
 	update = function(self, card, dt)
         local hasFace = false
-        G.GAME.unik_plant_active = true
         if G.deck and card.added_to_deck then 
             for i, w in pairs(G.deck.cards) do
                 if w:is_face(true) then
@@ -59,22 +58,21 @@ SMODS.Joker {
         end 
         if card.added_to_deck then
             if hasFace == false and card.ability.extra.selfDestruct == false and G.jokers then
-                selfDestruction(card,"k_unik_plant_no_face")
+                SSSselfDestruction(card,"k_unik_plant_no_face")
                 card.ability.extra.selfDestruct = true
             end
         end
 	end,
     calculate = function(self, card, context)
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Plant")) and not (G.GAME.blind.disabled) then
-            selfDestruction(card,"k_unik_blind_start_plant")
+            SSSselfDestruction(card,"k_unik_blind_start_plant")
             card.ability.extra.selfDestruct = true
         end
     end
 }
 
-function selfDestruction(card,message)
+function SSSselfDestruction(card,message)
     -- This part plays the animation.
-    G.GAME.unik_plant_active = nil
     G.E_MANAGER:add_event(Event({
         func = function()
             play_sound('tarot1')

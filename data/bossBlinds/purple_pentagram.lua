@@ -54,7 +54,7 @@ SMODS.Blind{
                         -- This part destroys the card.
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
-                            delay = 0.3,
+                            delay = 0.0,
                             blockable = false,
                             func = function()
                                 v:start_dissolve()

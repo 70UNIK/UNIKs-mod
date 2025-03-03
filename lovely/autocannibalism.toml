@@ -1,0 +1,75 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### Adding code to force certain food jokers (Turtle Bean, Ramen, Popcorn, Ice cream) to decrement until reaching the negative max value
+
+### Turtle Bean: self destructs when reaches -5 hand size (uh oh!)
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.extra.h_size - self.ability.extra.h_mod <= 0 then"
+position = "at"
+payload = '''
+-- adding depleted functionality for turtle bean
+if (self.ability.unik_depleted and self.ability.extra.h_size - self.ability.extra.h_mod <= -4) or (not (self.ability.unik_depleted) and self.ability.extra.h_size - self.ability.extra.h_mod <= 0) then
+'''
+match_indent = true
+
+### Popcorn: self destructs when reaches -20 mult
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.mult - self.ability.extra <= 0 then"
+position = "at"
+payload = '''
+-- adding depleted functionality for popcorn
+if (self.ability.unik_depleted and self.ability.mult - self.ability.extra <= -20) or (not self.ability.unik_depleted and self.ability.mult - self.ability.extra <= 0) then
+'''
+match_indent = true
+
+### ice cream: self destructs when reaches -100 chips
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.extra.chips - self.ability.extra.chip_mod <= 0 then"
+position = "at"
+payload = '''
+-- adding depleted functionality for popcorn
+if (self.ability.unik_depleted and self.ability.extra.chips - self.ability.extra.chip_mod <= -100) or (not self.ability.unik_depleted and self.ability.extra.chips - self.ability.extra.chip_mod <= 0) then
+'''
+match_indent = true
+
+### Ramen: self destructs when reaches -2x mult
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.x_mult - self.ability.extra <= 1 then"
+position = "at"
+payload = '''
+-- adding depleted functionality for popcorn
+if (self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <=-2) or (not self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <= 1) then
+'''
+match_indent = true
+
+### Force popcorn and ramen to produce negative mult
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Popcorn' and to_big(self.ability.mult) > to_big(0) then"
+position = "at"
+payload = '''
+-- adding depleted functionality for popcorn and ramen
+if (self.ability.name == 'Ramen' and to_big(self.ability.x_mult) > to_big(1) and not self.ability.unik_depleted) or (self.ability.unik_depleted and self.ability.name == 'Ramen') then
+    return {
+        message = localize({ type = "variable", key = "a_xmult", vars = { self.ability.x_mult } }),
+        Xmult_mod = self.ability.x_mult,
+        colour = G.C.MULT,
+    }
+end
+if (self.ability.name == 'Popcorn' and to_big(self.ability.mult) > to_big(0) and not self.ability.unik_depleted) or (self.ability.unik_depleted and self.ability.name == 'Popcorn') then
+'''
+match_indent = true
+

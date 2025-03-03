@@ -70,7 +70,7 @@ SMODS.Joker {
                 card.ability.extra.applied = true
             end
             if card.ability.extra.selfDestruct == false and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wall")) and not (G.GAME.blind.disabled) then
-                selfDestruction(card,"k_unik_blind_start_wall")
+                SselfDestruction(card,"k_unik_blind_start_wall")
                 card.ability.extra.selfDestruct = true
             else
                 return {
@@ -84,7 +84,7 @@ SMODS.Joker {
         if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
             card.ability.extra.applied = false
             if (G.GAME.chips > G.GAME.blind.chips * card.ability.extra.exceeds) then
-                selfDestruction(card,"k_unik_wall_jumped")
+                SselfDestruction(card,"k_unik_wall_jumped")
                 card.ability.extra.selfDestruct = true
             end
         end
@@ -92,9 +92,8 @@ SMODS.Joker {
 }
 
 
-function selfDestruction(card,message)
+function SselfDestruction(card,message)
     -- This part plays the animation.
-    G.GAME.unik_plant_active = nil
     G.E_MANAGER:add_event(Event({
         func = function()
             play_sound('tarot1')

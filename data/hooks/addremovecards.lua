@@ -4,34 +4,6 @@ function CheckSlots(card,slotLimit)
     --print("SlotCount")
     if G.jokers.config.card_limit <= slotLimit then
         selfDestruction(card,"k_unik_happiness3",G.C.BLACK)
-        --print("trytodestroy")
-        -- This part plays the animation.
-            -- G.E_MANAGER:add_event(Event({
-            --     func = function()
-            --         play_sound('tarot1')
-            --         card.T.r = -0.2
-            --         card:juice_up(0.3, 0.4)
-            --         card.states.drag.is = true
-            --         card.children.center.pinch.x = true
-            --         -- This part destroys the card.
-            --         G.E_MANAGER:add_event(Event({
-            --             trigger = 'after',
-            --             delay = 0.3,
-            --             blockable = false,
-            --             func = function()
-            --                 G.jokers:remove_card(card)
-            --                 card:remove()
-            --                 card = nil
-            --                 return true;
-            --             end
-            --         }))
-            --         return true
-            --     end
-            -- }))
-            -- return {
-            --     message = localize(),
-            --     colour = G.C.BLACK,
-            -- }
     end
 end
 
@@ -70,15 +42,59 @@ function Card:remove_from_deck(from_debuff)
         --print("Joker deleted")
         --print(self.ability.name)
         --Happiness is mandatory: Joker slot check
+        --Counter for autocannibalism
+        local cannibalCards = 0
+        local autoCannibalExists = false
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
             if v.ability.name == "j_unik_happiness" then
                 --print("checkSlots")
                 CheckSlots(v,v.ability.extra.slotLimit)
-            --Plant: dynamic face card check
+            --Autocannibalism: check if any turtle beans, ice cream, popcorn or ramen remain
+            elseif v.ability.name == "j_unik_autocannibalism" then
+                autoCannibalExists = true
+            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" then
+                cannibalCards = cannibalCards + 1
             end
 
+        end
+        --Apply depleted stickers if an autocannibalism exists
+        if (cannibalCards > 0 and autoCannibalExists) then
+            for _, v in pairs(G.jokers.cards) do
+                --print("Joker in set:")
+                --print(v.ability.name)
+                if not v.ability.unik_depleted then
+                    if v.ability.name == "Turtle Bean" then
+                        --cancel out hand size increase
+                        G.hand:change_size(-v.ability.extra.h_size)
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true
+                        v.ability.extra.h_size = 0
+                    elseif  v.ability.name == "Ramen" then
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true            
+                        v.ability.x_mult = 1      
+                    elseif v.ability.name == "Ice Cream" then
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true    
+                        v.ability.extra.chips = 0
+                    elseif v.ability.name == "Popcorn" then
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true    
+                        v.ability.mult = 0
+                    end
+                end
+            end
+        elseif (autoCannibalExists)then
+            --destroy all autocannibalism instances
+            for _, v in pairs(G.jokers.cards) do
+                --print("Joker in set:")
+                --print(v.ability.name)
+                if v.ability.name == "j_unik_autocannibalism" then
+                    selfDestruction(v,"k_eaten_ex",G.C.BLACK)
+                end
+            end
         end
     end
     local ret = removeHook(self,from_debuff)
@@ -89,6 +105,8 @@ function CardArea:emplace(card, location, stay_flipped)
 
     emplaceHook(self,card, location, stay_flipped)
     --Happiness is mandatory: Joker slot check after the hook
+    local cannibalCards = 0
+    local autoCannibalExists = false
     if self == G.jokers then
         --print("Joker added")
         --print(card.ability.name)
@@ -98,8 +116,50 @@ function CardArea:emplace(card, location, stay_flipped)
             if v.ability.name == "j_unik_happiness" then
                 --print("checkSlots")
                 CheckSlots(v,v.ability.extra.slotLimit)
+                --Autocannibalism: forcibly apply eternal and depleted to all new and existing turtle beans, ice cream, popcorn and ramen Jokers
+            elseif v.ability.name == "j_unik_autocannibalism" then
+                autoCannibalExists = true
+            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" then
+                cannibalCards = cannibalCards + 1
             end
 
         end
+    end
+    --Apply depleted stickers if an autocannibalism exists
+    if (cannibalCards > 0 and autoCannibalExists) then
+        for _, v in pairs(G.jokers.cards) do
+            --print("Joker in set:")
+            --print(v.ability.name)
+            if not v.ability.unik_depleted then
+                if v.ability.name == "Turtle Bean" then
+                    --cancel out hand size increase
+                    G.hand:change_size(-v.ability.extra.h_size)
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true
+                    v.ability.extra.h_size = 0
+                elseif  v.ability.name == "Ramen" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true            
+                    v.ability.x_mult = 1   
+                elseif v.ability.name == "Ice Cream" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true    
+                    v.ability.extra.chips = 0
+                elseif v.ability.name == "Popcorn" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true    
+                    v.ability.mult = 0
+                end
+            end
+        end
+    -- elseif (autoCannibalExists)then
+    --     --destroy all autocannibalism instances
+    --     for _, v in pairs(G.jokers.cards) do
+    --         --print("Joker in set:")
+    --         --print(v.ability.name)
+    --         if v.ability.name == "j_unik_autocannibalism" then
+    --             selfDestruction(v,"k_eaten_ex",G.C.BLACK)
+    --         end
+    --     end
     end
 end

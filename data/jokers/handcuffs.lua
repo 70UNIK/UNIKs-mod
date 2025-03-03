@@ -28,10 +28,10 @@ SMODS.Joker {
     update = function(self, card, dt)
         if G.hand then
             if G.hand.config.card_limit < card.ability.extra.min and card.ability.extra.selfDestruct == false then
-                selfDestruction(card,"k_unik_manacle_small")
+                SSselfDestruction(card,"k_unik_manacle_small")
                 card.ability.extra.selfDestruct = true
             elseif G.hand.config.card_limit > card.ability.extra.max and card.ability.extra.selfDestruct == false then
-                selfDestruction(card,"k_unik_manacle_big")
+                SSselfDestruction(card,"k_unik_manacle_big")
                 card.ability.extra.selfDestruct = true
             end
         end
@@ -39,16 +39,15 @@ SMODS.Joker {
     calculate = function(self, card, context)
         --old manacle counts
         if card.ability.extra.selfDestruct == false and context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Manacle" or G.GAME.blind.config.blind.key == "oldmanacle")) and not (G.GAME.blind.disabled) then
-            selfDestruction(card,"k_unik_blind_start_manacle")
+            SSselfDestruction(card,"k_unik_blind_start_manacle")
             card.ability.extra.selfDestruct = true
         end
     end
 }
 
 
-function selfDestruction(card,message)
+function SSselfDestruction(card,message)
     -- This part plays the animation.
-    G.GAME.unik_plant_active = nil
     G.E_MANAGER:add_event(Event({
         func = function()
             play_sound('tarot1')
