@@ -85,11 +85,14 @@ SMODS.Joker {
                             delay = 0.0,
                             blockable = false,
                             func = function()
-                                v:start_dissolve()
                                 card_eval_status_text(v, "extra", nil, nil, nil, {
                                     message = localize("k_eaten_ex"),
                                     colour = G.C.BLACK,
+                                    card=v,
                                 })
+                                G.jokers:remove_card(v)
+                                v:remove()
+                                v = nil
                                 return true;
                             end
                         }))

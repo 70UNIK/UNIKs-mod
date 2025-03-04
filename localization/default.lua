@@ -148,6 +148,14 @@ return {
                     "to win {C:money}$#4#",
                 }
             },
+            j_unik_holepunched_card = {
+                name = 'Holepunched Card',
+                text={
+                    "Retrigger {C:attention}last{} played",
+                    "card used in scoring",
+                    "{C:attention}#1#{} additional times",
+                },
+            },
             j_unik_yes_nothing = {
                 name = 'Yes! Nothing*',
                 text={
@@ -166,12 +174,29 @@ return {
                     "{C:inactive}(Can overflow){}",
                 }
             },
+            j_unik_gt710 = {
+                name = 'GT 710',
+                text = {
+                    "If hand contains", 
+                    "a scoring {C:attention}7{} and {C:attention}10{},",
+                    "earn {C:money}$#1#{}",
+                }
+            },
             j_unik_riif_roof = {
                 name = 'Riif-Roof',
                 text={
                     "{C:blue}Common{} Jokers",
                     "each give {X:mult,C:white} X#1# {} Mult",
                     "{C:inactive,s:0.7}ROOF! ROOF!{}",
+                },
+            },
+            j_unik_recycler = {
+                name = 'Recycler',
+                text={
+					"This Joker gains",
+					"{X:mult,C:white} X#2# {} Mult per",
+					"{C:attention}card{} discarded",
+					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
                 },
             },
             j_unik_happiness = {
@@ -315,7 +340,7 @@ return {
                 name="Maya Ramirez",
                 text={
                     "This Joker gains {X:chips,C:white}X#1#{} Chips when", 
-                    "a card is destroyed",
+                    "a card is {C:attention}destroyed{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)",
                     "{C:inactive,s:0.9}I'm doubtful if all this will succeed, but I'll still contribute.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
@@ -325,15 +350,27 @@ return {
             j_unik_jsab_chelsea = { --epic: gains x0.07 chips 
                 name="Chelsea Ramirez",
                 text={
-                    "This Joker gains {X:chips,C:white}X#2#{} Chips", 
-                    "when {C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} are triggered",
+                    "This Joker gains {X:chips,C:white}X#2#{} Chips when", 
+                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} are triggered",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
                     "{C:inactive,s:0.9}OwO what's all this? Maybe I can help!{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            
+            --rare: x1.5x mult from destroying cursed jokers, but only up to 8, the 9th one will cause self destruciton and release ALL cursed jokers
+            j_unik_ghost_trap = {
+                name="Ghost Trap",
+                text={
+					"This Joker {C:attention}captures{} all {X:cry_cursed,C:white}Cursed{} Jokers",
+                    "and gains {X:mult,C:white}X#2#{} Mult per Joker captured",
+					"{C:red}Self destructs{} if exceeds {C:attention}#4#{} {X:cry_cursed,C:white}Cursed{} Jokers",
+					"and {C:red}releases all captured{} {X:cry_cursed,C:white}Cursed{} {C:red}Jokers{}",
+                    "{C:red}if sold or destroyed{}",   
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult, {X:cry_cursed,C:white}#3#{C:inactive} Cursed Jokers){}",
+                    "{C:inactive,s:0.9}(The {C:attention}leftmost{C:inactive} Ghost Trap will capture first){}",
+                },
+            }
         },
         Other={			
             unik_depleted = {
@@ -402,6 +439,8 @@ return {
             k_unik_water_burgular="Drained!",
             k_unik_boss_blind_joker="Boss Blind",
             k_unik_too_bad="Too Bad!",
+            k_unik_ghost_trap_captured="Captured!",
+            k_unik_ghost_trap_explode="Too much!",
         },
         high_scores={},
         labels={

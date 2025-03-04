@@ -28,10 +28,10 @@ SMODS.Joker {
     update = function(self, card, dt)
         if G.hand then
             if G.hand.config.card_limit < card.ability.extra.min and card.ability.extra.selfDestruct == false then
-                SSselfDestruction(card,"k_unik_manacle_small")
+                selfDestruction(card,"k_unik_manacle_small",HEX("575757"))
                 card.ability.extra.selfDestruct = true
             elseif G.hand.config.card_limit > card.ability.extra.max and card.ability.extra.selfDestruct == false then
-                SSselfDestruction(card,"k_unik_manacle_big")
+                selfDestruction(card,"k_unik_manacle_big",HEX("575757"))
                 card.ability.extra.selfDestruct = true
             end
         end
@@ -39,38 +39,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
         --old manacle counts
         if card.ability.extra.selfDestruct == false and context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Manacle" or G.GAME.blind.config.blind.key == "oldmanacle")) and not (G.GAME.blind.disabled) then
-            SSselfDestruction(card,"k_unik_blind_start_manacle")
+            selfDestruction(card,"k_unik_blind_start_manacle",HEX("575757"))
             card.ability.extra.selfDestruct = true
         end
     end
 }
-
-
-function SSselfDestruction(card,message)
-    -- This part plays the animation.
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            play_sound('tarot1')
-            card.T.r = -0.2
-            card:juice_up(0.3, 0.4)
-            card.states.drag.is = true
-            card.children.center.pinch.x = true
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.3,
-                blockable = false,
-                func = function()
-                    G.jokers:remove_card(card)
-                    card:remove()
-                    card = nil
-                    return true;
-                end
-            }))
-            return true
-        end
-    }))
-    return {
-        message = localize(message),
-        colour = HEX("575757"),
-    }
-end

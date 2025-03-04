@@ -4,9 +4,9 @@ SMODS.Joker {
     atlas = 'placeholders',
     rarity = 'cry_epic',
 	pos = { x = 3, y = 0 },
-    cost = 10,
+    cost = 12,
 	blueprint_compat = true,
-    perishable_compat = true,
+    perishable_compat = false,
 	eternal_compat = true,
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.07} },
 	loc_vars = function(self, info_queue, center)

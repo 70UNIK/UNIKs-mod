@@ -70,7 +70,7 @@ SMODS.Joker {
                 card.ability.extra.applied = true
             end
             if card.ability.extra.selfDestruct == false and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wall")) and not (G.GAME.blind.disabled) then
-                SselfDestruction(card,"k_unik_blind_start_wall")
+                selfDestruction(card,"k_unik_blind_start_wall",HEX("8a59a5"))
                 card.ability.extra.selfDestruct = true
             else
                 return {
@@ -84,7 +84,7 @@ SMODS.Joker {
         if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
             card.ability.extra.applied = false
             if (G.GAME.chips > G.GAME.blind.chips * card.ability.extra.exceeds) then
-                SselfDestruction(card,"k_unik_wall_jumped")
+                selfDestruction(card,"k_unik_wall_jumped",HEX("8a59a5"))
                 card.ability.extra.selfDestruct = true
             end
         end
@@ -92,31 +92,32 @@ SMODS.Joker {
 }
 
 
-function SselfDestruction(card,message)
-    -- This part plays the animation.
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            play_sound('tarot1')
-            card.T.r = -0.2
-            card:juice_up(0.3, 0.4)
-            card.states.drag.is = true
-            card.children.center.pinch.x = true
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.3,
-                blockable = false,
-                func = function()
-                    G.jokers:remove_card(card)
-                    card:remove()
-                    card = nil
-                    return true;
-                end
-            }))
-            return true
-        end
-    }))
-    return {
-        message = localize(message),
-        colour = HEX("8a59a5"),
-    }
-end
+-- function SselfDestruction(card,message)
+--     -- This part plays the animation.
+--     G.E_MANAGER:add_event(Event({
+--         func = function()
+--             play_sound('tarot1')
+--             card.T.r = -0.2
+--             card:juice_up(0.3, 0.4)
+--             card.states.drag.is = true
+--             card.children.center.pinch.x = true
+--             G.E_MANAGER:add_event(Event({
+--                 trigger = 'after',
+--                 delay = 0.3,
+--                 blockable = false,
+--                 func = function()
+--                     G.jokers:remove_card(card)
+--                     card:remove()
+--                     card = nil
+--                     return true;
+--                 end
+--             }))
+--             return true
+--         end
+--     }))
+--     return {
+--         message = localize(message),
+--         colour = HEX("8a59a5"),
+--         card=card,
+--     }
+-- end

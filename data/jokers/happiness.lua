@@ -28,6 +28,7 @@ function CheckSlots(card,slotLimit)
             return {
                 message = localize("k_unik_happiness3"),
                 colour = G.C.BLACK,
+                card=card,
             }
     end
 end
@@ -100,14 +101,19 @@ SMODS.Joker {
             G.E_MANAGER:add_event(Event({
                 func = function()
                     card:juice_up(0.8, 0.8)
+                    card_eval_status_text(card, "extra", nil, nil, nil, {
+                        message = localize("k_unik_happiness1"),
+                        colour = G.C.BLACK,
+                        card=card,
+                    })
+                    for i = 1, #G.play.cards do
+                        if i < 2 then
+                            G.play.cards[i]:set_edition({ unik_positive = true }, true, nil, true)
+                        end
+                    end
                     return true
                 end
             }))
-            for i = 1, #G.play.cards do
-                if i < 2 then
-                    G.play.cards[i]:set_edition({ unik_positive = true }, true, nil, true)
-                end
-            end
             return{
                 message = localize("k_unik_happiness1"),
                 colour = G.C.BLACK,
@@ -133,6 +139,7 @@ SMODS.Joker {
             return{
                 message = localize("k_unik_happiness2"),
                 colour = G.C.BLACK,
+                
             }
         end
     end

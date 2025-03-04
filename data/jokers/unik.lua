@@ -13,7 +13,7 @@ SMODS.Joker {
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
 	blueprint_compat = true,
-    perishable_compat = true,
+    perishable_compat = false,
 	eternal_compat = true,
     config = { extra = {Echips_mod = 0.03, Echips = 1.0} },
 	loc_vars = function(self, info_queue, center)

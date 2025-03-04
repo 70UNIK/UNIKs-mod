@@ -98,18 +98,21 @@ NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 NFS.load(mod_path .. "data/editions/positive.lua")()
 -- JOKERS --
 --- Common ---
+NFS.load(mod_path .. "data/jokers/holepunched_card.lua")()
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
+NFS.load(mod_path .. "data/jokers/gt710.lua")()
 --- Uncommon ---
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")()
+NFS.load(mod_path .. "data/jokers/recycler.lua")()
 --- Rare ---
+NFS.load(mod_path .. "data/jokers/ghost_trap.lua")()
 --- Epic ---
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --- Legendary ---
 --- Exotic ---
----- Character cards ----
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")()
 

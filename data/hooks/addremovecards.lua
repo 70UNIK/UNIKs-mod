@@ -7,33 +7,41 @@ function CheckSlots(card,slotLimit)
     end
 end
 
-function selfDestruction(card,message,color)
+function selfDestruction(card,message,color,dissolve)
     -- This part plays the animation.
     G.E_MANAGER:add_event(Event({
         func = function()
-            play_sound('tarot1')
-            card.T.r = -0.2
-            card:juice_up(0.3, 0.4)
-            card.states.drag.is = true
-            card.children.center.pinch.x = true
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.3,
-                blockable = false,
-                func = function()
-                    G.jokers:remove_card(card)
-                    card:remove()
-                    card = nil
-                    return true;
-                end
-            }))
+            card_eval_status_text(card, "extra", nil, nil, nil, {
+                message = localize(message),
+                colour = color,
+                card=card,
+            })
+            --Dissolving
+            if (dissolve) then
+                card:start_dissolve()
+            --extinct animation
+            else
+                play_sound('tarot1')
+                card.T.r = -0.2
+                card:juice_up(0.3, 0.4)
+                card.states.drag.is = true
+                card.children.center.pinch.x = true
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.3,
+                    blockable = false,
+                    func = function()
+                        G.jokers:remove_card(card)
+                        card:remove()
+                        card = nil
+                        return true;
+                    end
+                }))
+            end
+            
             return true
         end
     }))
-    return {
-        message = localize(message),
-        colour = color,
-    }
 end
 
 local removeHook = Card.remove_from_deck
@@ -56,6 +64,30 @@ function Card:remove_from_deck(from_debuff)
                 autoCannibalExists = true
             elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" then
                 cannibalCards = cannibalCards + 1
+            elseif v.ability.name == "j_unik_ghost_trap" then
+                if self.config.center.rarity == "cry_cursed" and self.ability.extra.getting_captured then
+                    self.ability.extra.getting_captured = nil
+                    v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.x_mult_mod
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.0,
+                        blockable = false,
+                        func = function()
+                            card_eval_status_text(v, "extra", nil, nil, nil, {
+                                message = localize({
+                                    type = "variable",
+                                    key = "a_xmult",
+                                    vars = {
+                                        number_format(to_big(v.ability.extra.x_mult)),
+                                    },
+                                }),
+                                colour = G.C.MULT,
+                                card = v
+                            })
+                            return true;
+                        end
+                    }))
+                end
             end
 
         end
@@ -121,6 +153,9 @@ function CardArea:emplace(card, location, stay_flipped)
                 autoCannibalExists = true
             elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" then
                 cannibalCards = cannibalCards + 1
+            --ghost trap functionality
+            elseif v.ability.name == "j_unik_ghost_trap" then
+                GhostTrap1(v)
             end
 
         end
@@ -161,5 +196,23 @@ function CardArea:emplace(card, location, stay_flipped)
     --             selfDestruction(v,"k_eaten_ex",G.C.BLACK)
     --         end
     --     end
+    end
+end
+
+function GhostTrap1(self)
+    for x, w in pairs(G.jokers.cards) do
+        if w.config.center.rarity == "cry_cursed" and not w.ability.extra.getting_captured then
+            --Add to value
+            table.insert(self.ability.extra.cursed_joker_list,w)
+            --set to list amount
+            self.ability.extra.cursed_jokers = #self.ability.extra.cursed_joker_list
+            w.ability.extra.getting_captured = true
+            --destory ghost
+            selfDestruction(w,"k_unik_ghost_trap_captured",G.C.MULT,true)
+            --If too much
+            if (self.ability.extra.cursed_jokers > self.ability.extra.cursed_joker_limit) then
+                selfDestruction(self,"k_unik_ghost_trap_explode",G.C.BLACK)
+            end
+        end
     end
 end

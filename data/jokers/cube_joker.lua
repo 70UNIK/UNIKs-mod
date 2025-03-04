@@ -7,9 +7,9 @@ SMODS.Joker {
 
     cost = 6,
 	blueprint_compat = true,
-    perishable_compat = true,
+    perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_chips = 1.0, x_chips_mod = 0.2} },
+    config = { extra = {x_chips = 1.0, x_chips_mod = 0.25} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.max_size} }
 	end,
