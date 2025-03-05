@@ -4,6 +4,7 @@ dump_lua = true
 priority = 9999
 
 ### Indigo ICBM - Trigger player death - AFTER cryptid
+### Also includes green goalpost functionality;
 
 [[patches]]
 [patches.pattern]
@@ -27,6 +28,9 @@ if (G.GAME.blind and (G.GAME.blind.config.blind.key == "bl_unik_indigo_icbm")) a
         G.GAME.blind:wiggle()
         G.GAME.unik_killed_by_nuke = true
     end
+-- Green goalpost: Not done yet
+elseif (G.GAME.blind and (G.GAME.blind.config.blind.key == "bl_unik_green_goalpost")) and not (G.GAME.blind.disabled) then
+    G.GAME.win_ante = G.GAME.win_ante + 2
 end'''
 match_indent = true
 

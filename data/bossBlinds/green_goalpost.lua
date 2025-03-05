@@ -1,0 +1,1 @@
+--defeating this blind will increase victory requirements by 2 antes. All antes until victory become finisher blinds.

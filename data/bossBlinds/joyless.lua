@@ -21,19 +21,20 @@ SMODS.Blind{
 		end
         local jollycount = 0
         for i = 1, #G.jokers.cards do
-            if G.jokers.cards[i]:is_jolly() or safe_get(G.jokers.cards[i], "pools", "M") then
+			--How to detect 
+            if Find_Jolly(G.jokers.cards[i].config.center.key) or G.jokers.cards[i]:is_jolly() then
                 jollycount = jollycount + 1
             end
         end
 		return (#advanced_find_joker(nil, nil, "e_cry_m", nil, true) ~= 0 or jollycount > 0)
 	end,
 	recalc_debuff = function(self, card, from_blind)
-		if not G.GAME.blind.disabled and (card.ability.name == "Jolly Joker"
+		if not G.GAME.blind.disabled and (Find_Jolly(card) or card.ability.name == "Jolly Joker"
         or (card.edition and card.edition.key == "e_cry_m")
         or (safe_get(card, "pools", "M"))) then
 			return true
 		end
-        if not G.GAME.blind.disabled and (card.area == G.jokers) and safe_get(card, "pools", "M") then
+        if not G.GAME.blind.disabled and (card.area == G.jokers) and (safe_get(card, "pools", "M") or Find_Jolly(card.config.center.key)) then
             return true   
         end
 		return false
@@ -48,4 +49,46 @@ SMODS.Blind{
 		G.GAME.unik_killed_by_joyless = nil
 	end,
 }
+--Utility function to check things without erroring???
+function safe_get(t, ...)
+	local current = t
+	for _, k in ipairs({ ... }) do
+		if current[k] == nil then
+			return false
+		end
+		current = current[k]
+	end
+	return current
+end
 
+function Find_Jolly(card)
+	
+	local MjokerList = {
+		"j_cry_biggestm",
+		"j_cry_m",
+		"j_cry_M",
+		"j_cry_bubblem",
+		"j_cry_foodm",
+		"j_cry_mstack",
+		"j_cry_mneon",
+		"j_cry_notebook",
+		"j_cry_bonk",
+		"j_cry_loopy",
+		"j_cry_scrabble",
+		"j_cry_sacrifice",
+		"j_cry_reverse",
+		"j_cry_doodlem",
+		"j_cry_virgo",
+		"j_cry_smallestm",
+		"j_cry_macabre",
+		"j_cry_Megg",
+		"j_cry_longboi",
+		"j_cry_mprime",
+	}
+	for i = 1, #MjokerList do
+		if card == MjokerList[i] then
+			return true
+		end
+	end
+	return false
+end

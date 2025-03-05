@@ -88,7 +88,8 @@ NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 
 --BLINDS--
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")()
---NFS.load(mod_path .. "data/bossBlinds/joyless.lua")() --Not listed until I fix the issue of M jokers not counting as "Jolly"
+NFS.load(mod_path .. "data/bossBlinds/joyless.lua")() --Not listed until I fix the issue of M jokers not counting as "Jolly"
+
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
 NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")()
 NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
