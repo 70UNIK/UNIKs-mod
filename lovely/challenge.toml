@@ -65,3 +65,19 @@ else
 end
 '''
 match_indent = true
+
+# Force the last blind of ante 8 (or higher) to become Obsidian Orb
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.GAME.round_resets.blind_choices.Boss = get_new_boss()'''
+position = "at"
+payload = '''if (G.GAME.round_resets.ante)%G.GAME.win_ante == 0 and G.GAME.round_resets.ante >= 2 and G.GAME.modifiers.unik_obsidian_showdown then
+    G.GAME.unik_its_orbin_time = true
+    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
+    G.GAME.unik_its_orbin_time = nil
+else
+    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
+end'''
+match_indent = true
+

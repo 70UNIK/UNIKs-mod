@@ -6,6 +6,8 @@ SMODS.Blind{
     pos = { x = 0, y = 2},
     boss_colour= HEX("0a0a0a"),
     dollars = 8,
+	--Stop him from appearing in obsidian orb
+	no_orb = true,
     mult = 0.1,
 	--Disable if doing Jokerless or if above ante 10 cause unless you pivot or doing jokerless, it will be your worst nightmare
 	   in_pool = function()

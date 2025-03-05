@@ -130,5 +130,6 @@ NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 --- Challenges
 NFS.load(mod_path .. "data/challenges/chipzel.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
 
 

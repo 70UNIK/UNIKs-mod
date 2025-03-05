@@ -404,6 +404,7 @@ return {
         challenge_names={
             c_unik_chips_only="ChipZel",
             c_unik_common_muck="Common Muck",
+            c_unik_boss_rush_2="Enter the Gungeon II"
         },
         collabs={},
         dictionary={
@@ -529,6 +530,10 @@ return {
             ch_c_unik_mult_ban = { "{C:mult}Mult{}, {X:mult,C:white}XMult{} and {X:dark_edition,C:white}^Mult{} Jokers and cards are {C:red}banned{}"},
             ch_c_unik_mult_ban2 = {"{C:inactive}(As much as possible){}"},
             ch_c_unik_common_only = {"Only {C:Blue}Common{} Jokers can spawn"},
+            ch_c_cry_big_showdown = {"{C:attention}Final{} Boss Blinds can appear in {C:attention}any{} Ante"},
+            --DO YOU WANT TO SUFFER?
+            ch_c_unik_obsidian_showdown = {"{C:attention}Final{} blind is always the {C:red}Obsidian Orb{}"},
+            ch_c_unik_ante_12_victory = {"Must beat Ante {C:attention}10{} to win"},
         },
     },
 }
