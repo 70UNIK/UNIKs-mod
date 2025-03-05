@@ -1,15 +1,15 @@
 SMODS.Blind{
     key = 'unik_black_bat',
     config = {},
-    boss = {min = 1, showdown = true}, 
+    boss = {min = 1, max = 9, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 2},
     boss_colour= HEX("0a0a0a"),
     dollars = 8,
-    mult = 0.3,
-	--Disable if doing Jokerless:
+    mult = 0.1,
+	--Disable if doing Jokerless or if above ante 10 cause unless you pivot or doing jokerless, it will be your worst nightmare
 	   in_pool = function()
-        if (G.GAME.modifiers.no_shop_jokers)then
+        if (G.GAME.modifiers.no_shop_jokers or G.GAME.round_resets.ante > 10)then
             return false
         end
         return true

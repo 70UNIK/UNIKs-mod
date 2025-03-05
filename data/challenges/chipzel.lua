@@ -236,6 +236,14 @@ for i = 1, #G.CHALLENGES do
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_chariot'}
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'v_observatory'}
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_cry_seraph'}
+    --Ban Pirahna plant from Mad World
+    elseif G.CHALLENGES[i].id == 'c_mad_world_1' and #G.CHALLENGES[i].restrictions.banned_cards <=0 then
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_unik_the_plant'}
+    --Ban Persimmon PLacard and batman
+    elseif G.CHALLENGES[i].id == 'c_jokerless_1' and #G.CHALLENGES[i].restrictions.banned_other <= 3 then
+        G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = 'bl_unik_persimmon_placard',type='blind'}
+        G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = 'bl_unik_black_bat',type='blind'}
+        G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = 'bl_unik_bigger_boo',type='blind'}
     end
 end
 

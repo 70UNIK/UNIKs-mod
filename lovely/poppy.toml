@@ -4,6 +4,7 @@ dump_lua = true
 priority = 9999
 
 ### THE Poppy: disallow hands exceeding 3x blind size
+### ALso triger matador if you have one
 
 [[patches]]
 [patches.pattern]
@@ -26,6 +27,21 @@ payload = '''if (to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2) and (G
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
                     play_area_status_text("Not Allowed!")
+                    -- trigger matador as its a "disallowed card", just very delayed
+                    for _, v in pairs(G.jokers.cards) do
+                        if v.ability.name == 'Matador' then
+                            ease_dollars(v.ability.extra)
+                            G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + v.ability.extra
+                            G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+                            card_eval_status_text(v, "extra", nil, nil, nil, {
+                               message = localize('$')..v.ability.extra,
+                                colour = G.C.MONEY,
+                                card=v,
+                            })
+                        end
+                    end
+
+
                     return true
                 end   
             }))
@@ -56,3 +72,4 @@ if (to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2) and (G.GAME.blind a
         end
 '''
 match_indent = true
+

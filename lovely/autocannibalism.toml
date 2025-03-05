@@ -73,3 +73,21 @@ if (self.ability.name == 'Popcorn' and to_big(self.ability.mult) > to_big(0) and
 '''
 match_indent = true
 
+### force clicked cookie to decrement as well
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
+pattern = '''if card.ability.extra.chips - card.ability.extra.chip_mod <= 0 then'''
+position = "at"
+payload = '''if (to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(0) and not card.ability.unik_depleted) or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(-200))then'''
+match_indent = true
+
+### add clicked cookie to autocannibal category
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
+pattern = '''local cookie = {'''
+position = "after"
+payload = '''pools = { ["autocannibalism_food"] = true },'''
+match_indent = true

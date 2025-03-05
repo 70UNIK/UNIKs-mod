@@ -26,7 +26,7 @@ SMODS.Joker {
 		G.hand:change_size(-card.ability.extra.hand_size)
 	end,
     update = function(self, card, dt)
-        if G.hand then
+        if G.hand and card.added_to_deck then
             if G.hand.config.card_limit < card.ability.extra.min and card.ability.extra.selfDestruct == false then
                 selfDestruction(card,"k_unik_manacle_small",HEX("575757"))
                 card.ability.extra.selfDestruct = true

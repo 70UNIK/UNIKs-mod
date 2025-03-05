@@ -30,14 +30,16 @@ SMODS.Joker {
                             return true
                         end,
                     }))
+                    card_eval_status_text(card, "extra", nil, nil, nil, {
+                        message = localize("cry_good_luck_ex"),
+                        colour = HEX("8a59a5"),
+                        card=card,
+                    })
                     return true
                 end,
             }))
+
             card.ability.extra.applied = true
-            return {
-                message = localize("cry_good_luck_ex"),
-                colour = HEX("8a59a5"),
-            }
         end
 	end,
 	-- Inverse of above function.
@@ -64,21 +66,21 @@ SMODS.Joker {
                                 return true
                             end,
                         }))
+                        if card.ability.extra.selfDestruct == false and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wall")) and not (G.GAME.blind.disabled) then
+                            selfDestruction(card,"k_unik_blind_start_wall",HEX("8a59a5"))
+                            card.ability.extra.selfDestruct = true
+                        else
+                            card_eval_status_text(card, "extra", nil, nil, nil, {
+                                message = localize("cry_good_luck_ex"),
+                                colour = HEX("8a59a5"),
+                                card=card,
+                            })
+                        end
                         return true
                     end,
                 }))
                 card.ability.extra.applied = true
             end
-            if card.ability.extra.selfDestruct == false and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wall")) and not (G.GAME.blind.disabled) then
-                selfDestruction(card,"k_unik_blind_start_wall",HEX("8a59a5"))
-                card.ability.extra.selfDestruct = true
-            else
-                return {
-                    message = localize("cry_good_luck_ex"),
-                    colour = HEX("8a59a5"),
-                }
-            end
-            
         end
         --end applied
         if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then

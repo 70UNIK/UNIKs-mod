@@ -62,7 +62,7 @@ function Card:remove_from_deck(from_debuff)
             --Autocannibalism: check if any turtle beans, ice cream, popcorn or ramen remain
             elseif v.ability.name == "j_unik_autocannibalism" then
                 autoCannibalExists = true
-            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" then
+            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             elseif v.ability.name == "j_unik_ghost_trap" then
                 if self.config.center.rarity == "cry_cursed" and self.ability.extra.getting_captured then
@@ -111,6 +111,10 @@ function Card:remove_from_deck(from_debuff)
                         v.ability.unik_depleted = true
                         v.ability.eternal = true    
                         v.ability.extra.chips = 0
+                    elseif v.config.center.key == "j_cry_clicked_cookie" then
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true    
+                        v.ability.extra.chips = 0
                     elseif v.ability.name == "Popcorn" then
                         v.ability.unik_depleted = true
                         v.ability.eternal = true    
@@ -151,7 +155,7 @@ function CardArea:emplace(card, location, stay_flipped)
                 --Autocannibalism: forcibly apply eternal and depleted to all new and existing turtle beans, ice cream, popcorn and ramen Jokers
             elseif v.ability.name == "j_unik_autocannibalism" then
                 autoCannibalExists = true
-            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" then
+            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             --ghost trap functionality
             elseif v.ability.name == "j_unik_ghost_trap" then
@@ -177,6 +181,10 @@ function CardArea:emplace(card, location, stay_flipped)
                     v.ability.eternal = true            
                     v.ability.x_mult = 1   
                 elseif v.ability.name == "Ice Cream" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true    
+                    v.ability.extra.chips = 0
+                elseif v.config.center.key == "j_cry_clicked_cookie" then
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
                     v.ability.extra.chips = 0

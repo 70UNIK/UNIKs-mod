@@ -285,12 +285,12 @@ return {
             --Basically instead of being "eaten", popcorn and ice cream become negative, ramen becomes < 1.0X, Turtle bean reduces hand size.
             -- Right now it only supports those 4, since they self destruct at a certain value (1 or 0)
             j_unik_autocannibalism = {
-                name = 'Autocannibalism',
+                name = 'Esophagus Now',
                 text={
-                    "Create an {C:attention}Eternal Depleted{}", 
-                    "{C:attention}Popcorn, Ramen, Ice Cream or Turtle Bean{}", 
+                    "Create an {C:attention}Eternal Depleted{} decrementing food Joker", 
+                    "{C:attention}(Popcorn, Ramen, Ice Cream, Turtle Bean, Clicked Cookie){}", 
                     "Add {C:attention}Eternal and Depleted{} to all new and existing",
-                    "{C:attention}Popcorn, Ramen, Ice Cream and Turtle Beans{}",      
+                    "decrementing food Jokers and set values to {C:attention}self destruct values{}",      
                     "{C:red}Self destructs{} if none of above Jokers are owned",
                 },                 
             },
@@ -376,7 +376,6 @@ return {
             unik_depleted = {
                 name = "Depleted",
                 text = {
-                    "Set values to self-destruct values",
                     "Decrementing values {C:red}do{}",
                     "{C:red}not{} cause {C:red}self destruction{}",
                     "until at {C:attention}negative max{} value",
