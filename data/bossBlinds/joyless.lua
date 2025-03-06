@@ -26,7 +26,7 @@ SMODS.Blind{
                 jollycount = jollycount + 1
             end
         end
-		return (#advanced_find_joker(nil, nil, "e_cry_m", nil, true) ~= 0 or jollycount > 0)
+		return (jollycount > 0)
 	end,
 	recalc_debuff = function(self, card, from_blind)
 		if not G.GAME.blind.disabled and (Find_Jolly(card) or card.ability.name == "Jolly Joker"

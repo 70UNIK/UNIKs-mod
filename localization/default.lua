@@ -5,7 +5,7 @@ return {
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
-					"Create 5 Cursed Jokers",
+					"Create 4 Cursed Jokers",
                     "on Blind Selection",
 				},
             },

@@ -12,7 +12,7 @@ SMODS.Blind{
         if not reset then
             --print("vvvv")
             G.GAME.unik_killed_by_pentagram = true
-            for i = 1, 5 do
+            for i = 1, 4 do
                     local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_pentagram_curse")
                     --destroy card2 if its jimbo
                     if (card2.ability.name ~= "Joker") then
@@ -43,7 +43,7 @@ SMODS.Blind{
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.rarity == "cry_cursed" and cursedDestroyed < 5 then
+            if v.config.center.rarity == "cry_cursed" and cursedDestroyed < 4 then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound('tarot1')
