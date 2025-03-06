@@ -4,7 +4,7 @@ SMODS.Blind{
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 0},
     boss_colour= HEX("7b00ff"),
-    dollars = 7,
+    dollars = 8,
     mult = 2,
     config = {},
     set_blind = function(self, reset, silent)
