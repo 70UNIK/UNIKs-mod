@@ -48,7 +48,7 @@ SMODS.Joker {
             end
         end 
         --set the min cards needed
-        card.ability.extra.minCards = math.ceil(Cards/2.0) + 1
+        card.ability.extra.minCards = math.ceil(Cards/2.0)
     end,
     remove_from_deck = function(self, card, from_debuff)
         if G.deck then 
