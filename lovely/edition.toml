@@ -101,7 +101,10 @@ UNIK_THE_WALL = HEX('8a59a5'),
 UNIK_THE_GOAD = HEX('b95c96'),
 UNIK_THE_WINDOW = HEX('a9a295'),
 UNIK_THE_CLUB = HEX('b9cb92'),
-UNIK_THE_HEAD = HEX('ac9db4'),"""
+UNIK_THE_HEAD = HEX('ac9db4'),
+UNIK_MAYA = HEX('ff00ab'),
+UNIK_YOKANA = HEX('86cafe'),
+UNIK_CHELSEA = HEX('d298fd'),"""
 match_indent = true
 
 
@@ -118,6 +121,9 @@ unik_goad_color = G.C.UNIK_THE_GOAD,
 unik_window_color = G.C.UNIK_THE_WINDOW,
 unik_club_color = G.C.UNIK_THE_CLUB,
 unik_head_color = G.C.UNIK_THE_HEAD,
+unik_maya_color = G.C.UNIK_MAYA,
+unik_yokana_color = G.C.UNIK_YOKANA,
+unik_chelsea_color = G.C.UNIK_CHELSEA,
 """
 match_indent = true
 

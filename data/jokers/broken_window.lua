@@ -83,7 +83,7 @@ SMODS.Joker {
 	end,
 	update = function(self, card, dt)
         local Cards = 0
-        if G.deck then 
+        if G.deck and card.added_to_deck then 
             for i, w in pairs(G.deck.cards) do
                 --bypass debuff to ensure it doesnt self destruct
                 if w:is_suit(card.ability.extra.suit,true) then
@@ -92,7 +92,7 @@ SMODS.Joker {
                 end
             end
         end
-        if G.hand then 
+        if G.hand and card.added_to_deck then 
             for i, w in pairs(G.hand.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
                     Cards = Cards + 1     
@@ -100,7 +100,7 @@ SMODS.Joker {
                 end
             end
         end
-        if G.play then 
+        if G.play and card.added_to_deck  then 
             for i, w in pairs(G.play.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
                     Cards = Cards + 1  
@@ -108,7 +108,7 @@ SMODS.Joker {
                 end
             end
         end
-        if G.discard then 
+        if G.discard and card.added_to_deck then 
             for i, w in pairs(G.discard.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
                     Cards = Cards + 1     

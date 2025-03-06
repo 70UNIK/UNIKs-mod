@@ -327,33 +327,39 @@ return {
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
                 },
             },
-            j_unik_jsab_yokana = { --epic: gains x0.75 chips
-                name="Yokana Ramirez",
+            j_unik_jsab_yokana = { --epic: 1.25x chips for EVERY chips, xchips or ^chips trigger (pentationals and tettrati0onals included), excluding herself (otherwise infinite loop)
+            --Increases by 1.3x chips if maya and chelsea are present
+                name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
-                    "This Joker gains {X:chips,C:white}X#1#{} Chips for each", 
-                    "played, {C:attention}unscoring Queens{}",
-                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9}Quite strange being here, but I'll try to help out as much as I can.{}",
+                    "{X:chips,C:white}X#1#{} Chips when {C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
+                    "{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
+                    "{C:inactive,s:0.9}Quite strange being here,{}",
+                    "{C:inactive,s:0.9}but I'll try to help out as much as I can.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            j_unik_jsab_maya = { --epic: gains x0.5 chips
-                name="Maya Ramirez",
+            j_unik_jsab_maya = { --epic: each non-face card played gains 0.75x chips, each non-face card held gains 0.25x chips
+            --Increases by 1.3x chips if maya and chelsea are present
+            --Her triggering does not trigger yokana and chelsea, but does help but providing more Xchips and more triggers for them (xchips + chips = double trigger)
+            --Basically provided its not face cards, she's a souped up hiker
+                name="{C:unik_maya_color}Maya Ramirez{}",
                 text={
-                    "This Joker gains {X:chips,C:white}X#1#{} Chips when", 
-                    "a card is {C:attention}destroyed{}",
-                    "{C:inactive}(Currently {X:chips,C:white}X#2#{C:inactive} Chips)",
+                    "{C:attention}Scored{} non-face cards permanently gain {X:chips,C:white}X#1#{} Chips",
+                    "{C:attention}Held{} non-face cards permanently gain {X:chips,C:white}X#2#{} Chips",
+                    "{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive,s:0.9}I'm doubtful if all this will succeed, but I'll still contribute.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            j_unik_jsab_chelsea = { --epic: gains x0.07 chips 
-                name="Chelsea Ramirez",
+            j_unik_jsab_chelsea = { --epic: gains x0.07 chips for EVERY chips, xchips or ^chips trigger (pentationals and tettrati0onals included)
+            --Increases by 1.3x if maya and yokana are present
+                name="{C:unik_chelsea_color}Chelsea Ramirez{}",
                 text={
                     "This Joker gains {X:chips,C:white}X#2#{} Chips when", 
-                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} are triggered",
+                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
+                    "{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
                     "{C:inactive,s:0.9}OwO what's all this? Maybe I can help!{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",

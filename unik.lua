@@ -112,6 +112,8 @@ NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")()
 --- Epic ---
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
+--NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips
+NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")()
 --- Legendary ---
 --- Exotic ---
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
