@@ -21,7 +21,6 @@ SMODS.Challenge{
 	jokers = {
 		{ id = "j_cry_apjoker", stickers = { "cry_absolute" } },
         { id = "j_mr_bones", stickers = { "eternal" }, edition = "negative" },
-        { id = "j_cry_pumpkin" },
 	},
 	deck = {
 		type = "Challenge Deck",

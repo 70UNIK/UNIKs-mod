@@ -11,7 +11,7 @@ SMODS.Blind{
     mult = 0.1,
 	--Disable if doing Jokerless or if above ante 10 cause unless you pivot or doing jokerless, it will be your worst nightmare
 	   in_pool = function()
-        if (G.GAME.modifiers.no_shop_jokers or G.GAME.round_resets.ante > 10)then
+        if (G.GAME.modifiers.no_shop_jokers or G.GAME.round_resets.ante > 8)then
             return false
         end
         return true

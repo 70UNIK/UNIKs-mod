@@ -1,1 +1,2 @@
 --defeating this blind will increase victory requirements by 2 antes. All antes until victory become finisher blinds.
+--Will NOT appear in obsidian orb when orbin time is active as otherwise you will never win.

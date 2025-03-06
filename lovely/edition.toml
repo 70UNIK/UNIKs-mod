@@ -88,6 +88,7 @@ payload = """--self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL
         self.C.UNIK_SHITTY_EDITION[2] = math.min(self.C.DARK_EDITION[1], self.C.DARK_EDITION[2])"""
 match_indent = true
 
+
 [[patches]]
 [patches.pattern]
 target = "globals.lua"
@@ -96,8 +97,13 @@ position = "after"
 payload = """UNIK_SHITTY_EDITION = {1,0,0,1},
 UNIK_THE_PLANT = HEX('709284'),
 UNIK_THE_MANACLE = HEX('575757'),
-UNIK_THE_WALL = HEX('8a59a5'),"""
+UNIK_THE_WALL = HEX('8a59a5'),
+UNIK_THE_GOAD = HEX('b95c96'),
+UNIK_THE_WINDOW = HEX('a9a295'),
+UNIK_THE_CLUB = HEX('b9cb92'),
+UNIK_THE_HEAD = HEX('ac9db4'),"""
 match_indent = true
+
 
 [[patches]]
 [patches.pattern]
@@ -107,6 +113,11 @@ position = "after"
 payload = """unik_shitty_edition = G.C.UNIK_SHITTY_EDITION,
 unik_plant_color = G.C.UNIK_THE_PLANT,
 unik_manacle_color = G.C.UNIK_THE_MANACLE,
-unik_wall_color = G.C.UNIK_THE_WALL,"""
+unik_wall_color = G.C.UNIK_THE_WALL,
+unik_goad_color = G.C.UNIK_THE_GOAD,
+unik_window_color = G.C.UNIK_THE_WINDOW,
+unik_club_color = G.C.UNIK_THE_CLUB,
+unik_head_color = G.C.UNIK_THE_HEAD,
+"""
 match_indent = true
 

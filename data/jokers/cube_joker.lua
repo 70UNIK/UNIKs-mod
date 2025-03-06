@@ -41,3 +41,21 @@ SMODS.Joker {
 		end
     end,
 }
+
+-- Pool used by "squares/cubes"
+--Unik is not part of this to maintain rarity.
+-- SMODS.ObjectType({
+-- 	key = "cube",
+-- 	default = "j_square",
+-- 	cards = {
+-- 		["j_unik_cube_joker"] = true,
+-- 		["j_cry_cube"] = true,
+-- 		["j_cry_big_cube"] = true,
+-- 		["j_unik_jsab_chelsea"] = true,
+-- 	},
+-- 	inject = function(self)
+-- 		SMODS.ObjectType.inject(self)
+-- 		-- insert base game jokers
+-- 		self:inject_card(G.P_CENTERS.j_square)
+-- 	end,
+-- })

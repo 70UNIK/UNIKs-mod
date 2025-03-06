@@ -12,15 +12,50 @@ SMODS.Joker {
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 2, y = 0,extra = { x = 1, y = 0 } },
     cost = 1,
-    config = { extra = { selfDestruct = false,faceCards = true} },
+    config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false} },
     pools = { ["unik_boss_blind_joker"] = true, ["unik_copyrighted"] = true },
 	blueprint_compat = false,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_plant
+        --Nerf to requiring half of face cards destroyed (rounded to whole num), so its more in line with Blacklist's requirements
+        return { vars = { center.ability.extra.minFaceCards,center.ability.extra.faceCards} }
 	end,
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_plant'), G.C.UNIK_THE_PLANT, G.C.WHITE, 1.0 )
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        local faceCards = 0
+        if G.deck then 
+            for i, w in pairs(G.deck.cards) do
+                if w:is_face(true) then
+                    faceCards = faceCards + 1
+                end
+            end
+        end
+        if G.hand then 
+            for i, w in pairs(G.hand.cards) do
+                if w:is_face(true) then
+                    faceCards = faceCards + 1                    
+                end
+            end
+        end
+        if G.play then 
+            for i, w in pairs(G.play.cards) do
+                if w:is_face(true) then
+                    faceCards = faceCards + 1                    
+                end
+            end
+        end
+        if G.discard then 
+            for i, w in pairs(G.discard.cards) do
+                if w:is_face(true) then
+                    faceCards = faceCards + 1                    
+                end
+            end
+        end 
+        --set the min face cards needed
+        card.ability.extra.minFaceCards = math.ceil(faceCards/2.0) + 1
     end,
     remove_from_deck = function(self, card, from_debuff)
         if G.deck then 
@@ -53,12 +88,12 @@ SMODS.Joker {
         end 
 	end,
 	update = function(self, card, dt)
-        local hasFace = false
+        local faceCards = 0
         if G.deck and card.added_to_deck then 
             for i, w in pairs(G.deck.cards) do
                 if w:is_face(true) then
                     w:set_debuff(true)
-                    hasFace = true
+                    faceCards = faceCards + 1  
                 end
             end
         end
@@ -66,7 +101,7 @@ SMODS.Joker {
             for i, w in pairs(G.hand.cards) do
                 if w:is_face(true) then
                     w:set_debuff(true)
-                    hasFace = true
+                    faceCards = faceCards + 1  
                 end
             end
         end
@@ -74,7 +109,7 @@ SMODS.Joker {
             for i, w in pairs(G.play.cards) do
                 if w:is_face(true) then
                     w:set_debuff(true)
-                    hasFace = true
+                    faceCards = faceCards + 1  
                 end
             end
         end
@@ -82,12 +117,13 @@ SMODS.Joker {
             for i, w in pairs(G.discard.cards) do
                 if w:is_face(true) then
                     w:set_debuff(true)
-                    hasFace = true
+                    faceCards = faceCards + 1  
                 end
             end
         end 
         if card.added_to_deck then
-            if hasFace == false and card.ability.extra.selfDestruct == false and G.jokers then
+            card.ability.extra.faceCards = faceCards
+            if (faceCards < card.ability.extra.minFaceCards or faceCards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
                 selfDestruction(card,"k_unik_plant_no_face",HEX("709284"))
                 card.ability.extra.selfDestruct = true
             end

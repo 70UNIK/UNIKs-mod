@@ -41,7 +41,7 @@ if (self.ability.unik_depleted and self.ability.extra.chips - self.ability.extra
 '''
 match_indent = true
 
-### Ramen: self destructs when reaches -2x mult
+### Ramen: self destructs when reaches 0x mult
 
 [[patches]]
 [patches.pattern]
@@ -50,7 +50,7 @@ pattern = "if self.ability.x_mult - self.ability.extra <= 1 then"
 position = "at"
 payload = '''
 -- adding depleted functionality for popcorn
-if (self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <=-2) or (not self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <= 1) then
+if (self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <=0) or (not self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <= 1) then
 '''
 match_indent = true
 

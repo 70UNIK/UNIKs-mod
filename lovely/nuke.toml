@@ -56,7 +56,7 @@ elseif G.GAME.unik_killed_by_placard then
     Jimbo:add_speech_bubble('special_lose_unik_killed_by_placard', nil, {quip = true})
     G.GAME.unik_killed_by_placard = nil
 elseif G.GAME.unik_killed_by_joyless then
-    Jimbo:add_speech_bubble('special_lose_unik_joyless', nil, {quip = true})
+    Jimbo:add_speech_bubble('special_lose_unik_jollyless', nil, {quip = true})
     G.GAME.unik_killed_by_joyless = nil
 elseif G.GAME.unik_eaten_by_lily then
     Jimbo:add_speech_bubble('special_lose_unik_sprunki_lily', nil, {quip = true})

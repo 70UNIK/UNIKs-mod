@@ -39,6 +39,14 @@ SMODS.Blind{
         end
 		return false
 	end,
+	--also prevent pairs from being made (exactly a pair, not other hands containing pairs)
+	debuff_hand = function(self, cards, hand, handname, check)
+		if next(hand["Pair"]) then
+			G.GAME.blind.triggered = true
+			return true
+		end
+		return false
+	end,
 	set_blind = function(self)
 		G.GAME.unik_killed_by_joyless = true
 	end,
