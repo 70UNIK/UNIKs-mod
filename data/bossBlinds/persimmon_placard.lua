@@ -7,11 +7,18 @@ SMODS.Blind{
     boss_colour= HEX("EC5800"),
     dollars = 8,
     mult = 0.75,
-    --Disable if doing Jokerless:
+    --Disable if doing Jokerless: or has no jokers
     in_pool = function()
         if (G.GAME.modifiers.no_shop_jokers)then
             return false
         end
+        if G.jokers then
+			if G.jokers.cards then
+				if #G.jokers.cards <= 0 then
+					return false
+				end
+			end
+		end
         return true
 	end,
     recalc_debuff = function(self, card, from_blind)

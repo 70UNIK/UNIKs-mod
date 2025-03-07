@@ -51,8 +51,8 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
 		if not center.edition or (center.edition and not center.edition.unik_positive) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
-            info_queue[#info_queue + 1] = G.P_CENTERS.j_smiley
 		end
+        info_queue[#info_queue + 1] = G.P_CENTERS.j_smiley
         return { vars = { center.ability.extra.slotLimit } }
 	end,
     --Check every time if a joker is added or removed from deck

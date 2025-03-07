@@ -12,7 +12,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_mult = 1.0, x_mult_mod = 1.0,cursed_jokers = 0, cursed_joker_limit = 8, cursed_joker_list = {}} },
+    config = { extra = {x_mult = 1.0, x_mult_mod = 1.25,cursed_jokers = 0, cursed_joker_limit = 8, cursed_joker_list = {}} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.cursed_jokers,center.ability.extra.cursed_joker_limit} }
 	end,

@@ -29,10 +29,13 @@ return {
 					"All cards are debuffed",
 				},
             },
+            --In cryptid where jokers are key, debuffing all jokers is bound for disaster
+            --So I'll nerf it to debuff 3/4 of all Jokers (and also have a min 1 Joker remaining)
             bl_unik_black_bat={
                 name = "Black Bat",
 				text = {
-					"All Jokers are debuffed",
+					"~75% of Jokers from the right",
+                    "are debuffed"
 				},
             },
             bl_unik_bigger_boo={
@@ -261,7 +264,7 @@ return {
                     "{C:red}Self destructs{} when less than", 
                     "{C:attention}#1#{} {C:hearts}Heart{} card(s) remain in deck or",
                     "{C:unik_head_color}The Head{} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:hearts}Hearts(s){C:inactive})",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:hearts}Heart(s){C:inactive})",
                 },                 
             },
             j_unik_broken_window = {
@@ -271,7 +274,7 @@ return {
                     "{C:red}Self destructs{} when less than", 
                     "{C:attention}#1#{} {C:diamonds}Diamond{} card(s) remain in deck or",
                     "{C:unik_window_color}The Window{} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:diamonds}Diamonds(s){C:inactive})",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:diamonds}Diamond(s){C:inactive})",
                 },                 
             },
             j_unik_caveman_club = {
@@ -281,7 +284,19 @@ return {
                     "{C:red}Self destructs{} when less than", 
                     "{C:attention}#1#{} {C:clubs}Club{} card(s) remain in deck or",
                     "{C:unik_club_color}The Club{} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:clubs}Clubs(s){C:inactive})",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:clubs}Club(s){C:inactive})",
+                    "{C:inactive,s:0.6}We are going to beat you to death.{}",
+                },                 
+            },
+            j_unik_broken_arm = {
+                name = 'Broken Arm',
+                text={
+                    "{C:red}Levels down{} played {C:attention}poker hand{}", 
+                    "by {C:attention}#1#{} level {C:attention}before{} each hand",
+                    "{C:red}Self destructs{} when a level 1", 
+                    "hand is played {C:attention}#2#{} times {C:attention}consecutively{}",
+                    "or {C:unik_arm_color}The Arm{} is triggered",   
+                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} Hand(s))",
                 },                 
             },
             --Basically instead of being "eaten", popcorn and ice cream become negative, ramen becomes < 1.0X, Turtle bean reduces hand size.
@@ -455,14 +470,17 @@ return {
             k_unik_wall_jumped="Jumped over!",   
             k_unik_weapon_destroyed="Broke!",
             k_unik_goading_fuck_you="FUCK YOU!",
+            k_unik_goading_f_u_family_friendly="GET OUT!",
             k_unik_window_fixed="Fixed!",
             k_unik_blind_start_window="The Window",
             k_unik_blind_start_head="The Head",
             k_unik_blind_start_club="The Club",
             k_unik_blind_start_goad="The Goad",
+            k_unik_arm_downgrade="Downgrade!",
             k_unik_headless_rotted="Rotted!",
             k_unik_house_demolished="Demolished!",
             k_unik_arm_healed="Healed!",
+            k_unik_blind_start_arm="The Arm",
             k_unik_water_burgular="Drained!",
             k_unik_boss_blind_joker="Boss Blind",
             k_unik_too_bad="Too Bad!",
@@ -551,7 +569,9 @@ return {
         suits_plural={},
         suits_singular={},
         tutorial={},
-        v_dictionary={},
+        v_dictionary={
+            a_unik_hands_1={"#1# hands"}
+        },
         v_text={			
             ch_c_unik_mult_set_to_one = { "Mult is {C:attention}set{} to {C:red}<=1{}" },
             ch_c_unik_mult_ban = { "{C:mult}Mult{}, {X:mult,C:white}XMult{} and {X:dark_edition,C:white}^Mult{} Jokers and cards are {C:red}banned{}"},
