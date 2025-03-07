@@ -245,7 +245,12 @@ for i = 1, #G.CHALLENGES do
         G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = 'bl_unik_persimmon_placard',type='blind'}
         G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = 'bl_unik_black_bat',type='blind'}
         G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = 'bl_unik_bigger_boo',type='blind'}
+    --ban collapse in jimball
+    elseif G.CHALLENGES[i].id == 'c_cry_ballin' and #G.CHALLENGES[i].restrictions.banned_other <= 0 then
+        G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = 'bl_unik_collapse',type='blind'}
     end
+
+
 end
 
 -- Chipzel's effect

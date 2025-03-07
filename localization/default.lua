@@ -70,7 +70,7 @@ return {
                 name = "The Lily",
 				text = {
 					"Destroy all played cards,",
-                    "+0.04x blind size for",
+                    "+0.03x blind size for",
                     "each destroyed card",
 				},
             },
@@ -104,6 +104,27 @@ return {
                     "not score",
 				},
             },
+            bl_unik_collapse={
+                name = "The Collapse",
+				text = {
+					"All Rankless and Suitless",
+					"cards are debuffed",
+				},
+            },
+            bl_unik_sync_catalyst_fail={
+                name = "The Leak",
+				text = {
+					"Chips and Mult are",
+					"no longer balanced",
+				},
+            },
+            bl_unik_evil_pc_building_company={
+                name = "The Artisan",
+				text = {
+					"Shop rerolls increase",
+					"blind requirements by +0.5x",
+				},
+            },
             bl_unik_the_wind={
                 name = "The Wind",
 				text = {
@@ -115,8 +136,8 @@ return {
             bl_unik_the_gale={
                 name = "The Gale",
 				text = {
-					"#1# in #2# chance for",
-					"played hand to not score",
+					"1 random hand",
+					"will not score",
 				},
             }
         },
