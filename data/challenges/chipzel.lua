@@ -55,10 +55,10 @@ SMODS.Challenge{
             { id = "j_cry_happyhouse"},
             { id = "j_cry_home"},
             { id = "j_cry_jimball"},
-            -- { id = "j_cry_jollysus"},
+            { id = "j_cry_jollysus"},
             { id = "j_cry_kooky"},
             { id = "j_cry_krustytheclown"},
-            --{ id = "j_cry_kaleidoscope"},
+            { id = "j_cry_kscope"},
             { id = "j_cry_lightupthenight"},
             { id = "j_cry_longboi"},
             { id = "j_cry_loopy"},
@@ -200,9 +200,10 @@ SMODS.Challenge{
 
 }
 for i = 1, #G.CHALLENGES do
-    if G.CHALLENGES[i].id == 'c_unik_chips_only' and #G.CHALLENGES[i].restrictions.banned_cards <=144 then
+    if G.CHALLENGES[i].id == 'c_unik_chips_only' and #G.CHALLENGES[i].restrictions.banned_cards <=146 then
 
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_unik_recycler'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_unik_ghost_trap'}
                 -- Add buffoonery and extra credit Jokers to banlist
         if (SMODS.Mods["Buffoonery"] or {}).can_load then
             G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_buf_laidback'}

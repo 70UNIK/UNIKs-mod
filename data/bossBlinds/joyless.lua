@@ -92,6 +92,7 @@ function Find_Jolly(card)
 		"j_cry_Megg",
 		"j_cry_longboi",
 		"j_cry_mprime",
+		"j_cry_jollysus",
 	}
 	for i = 1, #MjokerList do
 		if card == MjokerList[i] then

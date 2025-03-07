@@ -7,7 +7,6 @@ SMODS.Challenge{
 		modifiers = {},
 	},
     jokers = {
-        { id = "j_unik_riif_roof"},
 	},
 	deck = {
 		type = "Challenge Deck",
@@ -28,6 +27,7 @@ SMODS.Challenge{
         banned_other = {
             {id = 'bl_cry_box', type = 'blind'},
             {id = 'bl_cry_striker', type = 'blind'},
+            {id = 'bl_cry_windmill', type = 'blind'},
             {id = 'bl_cry_pin', type = 'blind'},
         },
     },

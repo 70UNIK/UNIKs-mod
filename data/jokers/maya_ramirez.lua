@@ -10,7 +10,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = {x_chips_scored = 0.75, x_chips_held = 0.1, family_x_bonus = 1.3} },
+    config = { extra = {x_chips_scored = 0.5, x_chips_held = 0.1, family_x_bonus = 1.3} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips_scored, center.ability.extra.x_chips_held, center.ability.extra.family_x_bonus} }
 	end,

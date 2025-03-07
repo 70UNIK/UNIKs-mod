@@ -81,6 +81,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+-- Pool used by boss blind jokers
+SMODS.ObjectType({
+	key = "unik_boss_blind_joker",
+	default = "j_obelisk",
+	cards = {},
+})
 -- stickers
 NFS.load(mod_path .. "data/stickers/depleted.lua")()
 -- consumables
@@ -136,7 +142,9 @@ NFS.load(mod_path .. "data/jokers/broken_arm.lua")()
 --- 
 --- Challenges
 NFS.load(mod_path .. "data/challenges/chipzel.lua")()
+NFS.load(mod_path .. "data/challenges/multiplication.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
+
 
 
