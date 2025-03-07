@@ -107,7 +107,10 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 -- JOKERS --
 --- Common ---
 NFS.load(mod_path .. "data/jokers/holepunched_card.lua")()
-NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
+-- If extra credit is installed, this is disabled, as it's redundant --
+if not((SMODS.Mods["extracredit"] or {}).can_load) then
+	NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
+end
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
 --- Uncommon ---
 NFS.load(mod_path .. "data/jokers/711.lua")()
