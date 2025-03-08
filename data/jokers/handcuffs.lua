@@ -25,17 +25,6 @@ SMODS.Joker {
 		-- Adds - instead of +, so they get subtracted when this card is removed.
 		G.hand:change_size(-card.ability.extra.hand_size)
 	end,
-    update = function(self, card, dt)
-        if G.hand and card.added_to_deck then
-            if G.hand.config.card_limit < card.ability.extra.min and card.ability.extra.selfDestruct == false then
-                selfDestruction(card,"k_unik_manacle_small",HEX("575757"))
-                card.ability.extra.selfDestruct = true
-            elseif G.hand.config.card_limit > card.ability.extra.max and card.ability.extra.selfDestruct == false then
-                selfDestruction(card,"k_unik_manacle_big",HEX("575757"))
-                card.ability.extra.selfDestruct = true
-            end
-        end
-    end,
     calculate = function(self, card, context)
         --old manacle counts
         if card.ability.extra.selfDestruct == false and context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Manacle" or G.GAME.blind.config.blind.key == "oldmanacle")) and not (G.GAME.blind.disabled) then

@@ -44,9 +44,12 @@ function selfDestruction(card,message,color,dissolve)
     }))
 end
 
+
 local removeHook = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
     if (self.added_to_deck) then
+        --Pirahna Plant and other suit based cursed Jokers go here,
+        
         --print("Joker deleted")
         --print(self.ability.name)
         --Happiness is mandatory: Joker slot check
@@ -143,6 +146,7 @@ function CardArea:emplace(card, location, stay_flipped)
     --Happiness is mandatory: Joker slot check after the hook
     local cannibalCards = 0
     local autoCannibalExists = false
+    
     if self == G.jokers then
         --print("Joker added")
         --print(card.ability.name)
@@ -224,3 +228,119 @@ function GhostTrap1(self)
         end
     end
 end
+
+--calculate debuffed cards if Death is used (replace card)
+local deathDebuffCopy = copy_card
+function copy_card(other, new_card, card_scale, playing_card, strip_edition)
+    local res = deathDebuffCopy(other, new_card, card_scale, playing_card, strip_edition)
+    if G.jokers then
+        for x, h in pairs(G.jokers.cards) do
+            if h.ability.name == "j_unik_the_plant" then
+                local faceCards = 0
+                if G.deck and h.added_to_deck then 
+                    for i, w in pairs(G.deck.cards) do
+                        if w:is_face(true) then
+                            SMODS.debuff_card(w,true,"unik_plant")
+                            faceCards = faceCards + 1  
+                        else
+                            SMODS.debuff_card(w,false,"unik_plant")
+                        end
+                    end
+                end
+                if G.hand and h.added_to_deck then 
+                    for i, w in pairs(G.hand.cards) do
+                        if w:is_face(true) then
+                            SMODS.debuff_card(w,true,"unik_plant")
+                            faceCards = faceCards + 1  
+
+                        else
+                            SMODS.debuff_card(w,false,"unik_plant")
+                        end
+                    end
+                end
+                if G.play and h.added_to_deck then 
+                    for i, w in pairs(G.play.cards) do
+                        if w:is_face(true) then
+                            SMODS.debuff_card(w,true,"unik_plant")
+                            faceCards = faceCards + 1  
+
+                        else
+                            SMODS.debuff_card(w,false,"unik_plant")
+                        end
+                    end
+                end
+                if G.discard and h.added_to_deck then 
+                    for i, w in pairs(G.discard.cards) do
+                        if w:is_face(true) then
+                            SMODS.debuff_card(w,true,"unik_plant")
+                            faceCards = faceCards + 1  
+
+                        else
+                            SMODS.debuff_card(w,false,"unik_plant")
+                        end
+                    end
+                end 
+                if h.added_to_deck then
+                    h.ability.extra.faceCards = faceCards
+                    if (faceCards < h.ability.extra.minFaceCards or faceCards <= 0) and h.ability.extra.selfDestruct == false and G.jokers then
+                        selfDestruction(h,"k_unik_plant_no_face",HEX("709284"))
+                        h.ability.extra.selfDestruct = true
+                    end
+                end   
+            elseif h.ability.name == "j_unik_caveman_club" or  h.ability.name == "j_unik_broken_window" or h.ability.name == "j_unik_goading_joker" or  h.ability.name == "j_unik_headless_joker" then
+                local Cards = 0
+                if G.deck and h.added_to_deck then 
+                    for i, w in pairs(G.deck.cards) do
+                        --bypass debuff to ensure it doesnt self destruct
+                        if w:is_suit(h.ability.extra.suit,true) then
+                            Cards = Cards + 1
+                            SMODS.debuff_card(w,true,"unik_club")
+                        else
+                            SMODS.debuff_card(w,false,"unik_club")
+                        end
+                    end
+                end
+                if G.hand and h.added_to_deck then 
+                    for i, w in pairs(G.hand.cards) do
+                        if w:is_suit(h.ability.extra.suit,true) then
+                            Cards = Cards + 1     
+                            SMODS.debuff_card(w,true,"unik_club")           
+                        else
+                            SMODS.debuff_card(w,false,"unik_club")
+                        end
+                    end
+                end
+                if G.play and h.added_to_deck then 
+                    for i, w in pairs(G.play.cards) do
+                        if w:is_suit(h.ability.extra.suit,true) then
+                            Cards = Cards + 1  
+                            SMODS.debuff_card(w,true,"unik_club")
+                        else
+                            SMODS.debuff_card(w,false,"unik_club")
+                        end
+                    end
+                end
+                if G.discard and h.added_to_deck then 
+                    for i, w in pairs(G.discard.cards) do
+                        if w:is_suit(h.ability.extra.suit,true) then
+                            Cards = Cards + 1     
+                            SMODS.debuff_card(w,true,"unik_club")
+                        else
+                            SMODS.debuff_card(w,false,"unik_club")
+                        end
+                    end
+                end 
+                if h.added_to_deck then
+                    h.ability.extra.cards = Cards
+                    if (Cards < h.ability.extra.minCards or Cards <= 0) and h.ability.extra.selfDestruct == false and G.jokers then
+                        selfDestruction(h,"k_unik_weapon_destroyed",HEX("b9cb92"))
+                        h.ability.extra.selfDestruct = true
+                    end
+                end
+            end
+        end
+    end
+    return res
+end
+
+

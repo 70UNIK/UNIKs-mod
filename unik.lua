@@ -16,6 +16,7 @@ SMODS.Atlas({
 	py = 34, 
 	frames = 21 })
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
+NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 --Creates an atlas for cards to use
 -- SMODS.Atlas {
 -- 	-- Key for code to find it with
@@ -148,6 +149,7 @@ NFS.load(mod_path .. "data/challenges/chipzel.lua")()
 NFS.load(mod_path .. "data/challenges/multiplication.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
+NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")()
 
 
 

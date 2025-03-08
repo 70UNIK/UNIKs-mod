@@ -66,7 +66,8 @@ SMODS.Joker {
                                 return true
                             end,
                         }))
-                        if card.ability.extra.selfDestruct == false and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wall")) and not (G.GAME.blind.disabled) then
+                        --Unique to gungeon III, never self destruct if absolute.
+                        if card.ability.extra.selfDestruct == false and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wall")) and not (G.GAME.blind.disabled) and not card.ability.cry_absolute then
                             selfDestruction(card,"k_unik_blind_start_wall",HEX("8a59a5"))
                             card.ability.extra.selfDestruct = true
                         else
@@ -85,7 +86,7 @@ SMODS.Joker {
         --end applied
         if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
             card.ability.extra.applied = false
-            if (G.GAME.chips > G.GAME.blind.chips * card.ability.extra.exceeds) then
+            if (G.GAME.chips > G.GAME.blind.chips * card.ability.extra.exceeds and not card.ability.cry_absolute) then
                 selfDestruction(card,"k_unik_wall_jumped",HEX("8a59a5"))
                 card.ability.extra.selfDestruct = true
             end

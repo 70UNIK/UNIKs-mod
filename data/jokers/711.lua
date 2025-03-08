@@ -27,6 +27,9 @@ SMODS.Joker {
 	blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
+	loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = { set = "Other", key = "food_jokers" }
+	end,
 	pools = {["unik_copyrighted"] = true ,["unik_seven"] = true },
     add_to_deck = function(self, card, context)
 		--only shake if a blind has started

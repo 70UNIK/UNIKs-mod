@@ -49,8 +49,7 @@ function get_new_boss()
 	end
 	--stolen from nostalgic deck CODE, this involves forcing obsidian orb to be at the final ante boss, cause THE FINAL BOSS.
 	local bl = gnb2()
-	if G.GAME.modifiers.unik_obsidian_showdown and G.GAME.unik_its_orbin_time then
-        --print("ITS ORBIN TIME!!!!!!!!!!!")
+	if (G.GAME.modifiers.unik_obsidian_showdown or G.GAME.modifiers.unik_obsidian_swarm) and G.GAME.unik_its_orbin_time then
 		return "bl_cry_obsidian_orb"
 	end
 	return bl
@@ -62,6 +61,9 @@ function Game:start_run(args)
     if self.GAME and self.GAME.modifiers then
         if self.GAME.modifiers.unik_ante_12_victory then
             self.GAME.win_ante = 10
+            --print("BE PREPARED FOR SUFFERING.")
+		elseif self.GAME.modifiers.unik_ante_13_victory then
+            self.GAME.win_ante = 13
             --print("BE PREPARED FOR SUFFERING.")
         end
     end

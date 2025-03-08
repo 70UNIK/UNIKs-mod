@@ -67,6 +67,7 @@ end
 match_indent = true
 
 # Force the last blind of ante 8 (or higher) to become Obsidian Orb
+# alternatively, force all last blinds to become obsidian orb
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
@@ -76,8 +77,24 @@ payload = '''if (G.GAME.round_resets.ante)%G.GAME.win_ante == 0 and G.GAME.round
     G.GAME.unik_its_orbin_time = true
     G.GAME.round_resets.blind_choices.Boss = get_new_boss()
     G.GAME.unik_its_orbin_time = nil
+elseif G.GAME.modifiers.unik_obsidian_swarm then
+    G.GAME.unik_its_orbin_time = true
+    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
+    G.GAME.unik_its_orbin_time = nil
 else
     G.GAME.round_resets.blind_choices.Boss = get_new_boss()
 end'''
 match_indent = true
 
+# Force the first boss blind to be obsidian orb
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.GAME.round_resets.blind_states = G.GAME.round_resets.blind_states or {Small = 'Select', Big = 'Upcoming', Boss = 'Upcoming'}'''
+position = "after"
+payload = '''if G.GAME.modifiers.unik_obsidian_swarm then
+    G.GAME.unik_its_orbin_time = true
+    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
+    G.GAME.unik_its_orbin_time = nil
+end'''
+match_indent = true

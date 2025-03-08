@@ -465,7 +465,8 @@ return {
             c_unik_chips_only="ChipZel",
             c_unik_mult_only="Multiplication",
             c_unik_common_muck="Common Muck",
-            c_unik_boss_rush_2="Enter the Gungeon II"
+            c_unik_boss_rush_2="Enter the Gungeon II",
+            c_unik_boss_rush_3="Enter the Gungeon III",
         },
         collabs={},
         dictionary={
@@ -618,7 +619,9 @@ return {
             ch_c_cry_big_showdown = {"{C:attention}Final{} Boss Blinds can appear in {C:attention}any{} Ante"},
             --DO YOU WANT TO SUFFER?
             ch_c_unik_obsidian_showdown = {"{C:attention}Final{} blind is always the {C:red}Obsidian Orb{}"},
+            ch_c_unik_obsidian_swarm = {"{C:attention}Final{} blind of {C:attention}each ante{} is always the {C:red}Obsidian Orb{}"},
             ch_c_unik_ante_12_victory = {"Must beat Ante {C:attention}10{} to win"},
+            ch_c_unik_ante_13_victory = {"Must beat Ante {C:attention}13{} to win"},
         },
     },
 }
