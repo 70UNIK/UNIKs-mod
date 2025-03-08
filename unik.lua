@@ -96,6 +96,7 @@ NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
+NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
 NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")() 

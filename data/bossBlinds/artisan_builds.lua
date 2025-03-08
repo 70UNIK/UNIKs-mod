@@ -1,0 +1,2 @@
+--Every shop reroll in this ante increases blind requirements by 1.5x
+--When entering blind, say "AND THERES THE REROLLLLLLL!!!", the obvious reference being that infamous PC company

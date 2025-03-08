@@ -111,6 +111,7 @@ return {
 					"cards are debuffed",
 				},
             },
+            --exclusive to plasma deck or if you have sync catalyst
             bl_unik_sync_catalyst_fail={
                 name = "The Leak",
 				text = {
@@ -121,8 +122,8 @@ return {
             bl_unik_evil_pc_building_company={
                 name = "The Artisan",
 				text = {
-					"Shop rerolls increase",
-					"blind requirements by +0.5x",
+					"Shop rerolls multiply",
+					"blind requirements by 2x",
 				},
             },
             bl_unik_the_wind={
@@ -508,6 +509,7 @@ return {
             k_unik_too_bad="Too Bad!",
             k_unik_ghost_trap_captured="Captured!",
             k_unik_ghost_trap_explode="Too much!",
+            k_unik_plasma_deck_fail="Not Balanced!",
         },
         high_scores={},
         labels={
@@ -586,6 +588,18 @@ return {
                 "your jokers. Maybe",
                 "do that next time!"
             },      
+            --getting killed by the leak
+            special_lose_unik_the_leak={
+                "Damn! You need to get",
+                "a better Sync Catalyst",
+                "next time!",
+            },   
+            --getting killed by artisan builds
+            special_lose_unik_artisan_builds={
+                "Maybe watch Gamers Nexus's",
+                "video on the Artisan Builds",
+                "scandal!",
+            },   
         },
         ranks={},
         suits_plural={},
