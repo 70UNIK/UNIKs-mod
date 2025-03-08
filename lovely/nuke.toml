@@ -12,7 +12,7 @@ target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
 payload = '''--Indigo ICBM will set chips and mult to 0 if exceeding 3x requirements before causing an instant game over.
-if (G.GAME.blind and (G.GAME.blind.config.blind.key == "bl_unik_indigo_icbm")) and not (G.GAME.blind.disabled)then
+if (G.GAME.blind and G.GAME.unik_nuke_activate) and not (G.GAME.blind.disabled)then
     local upper = G.GAME.chips
     local ceiling = G.GAME.blind.chips * 3
     if to_big(upper) > to_big(ceiling) then
@@ -45,6 +45,7 @@ payload = '''
 if G.GAME.unik_killed_by_nuke then
     Jimbo:add_speech_bubble('special_lose_unik_get_nuked', nil, {quip = true})
     G.GAME.unik_killed_by_nuke = nil
+    G.GAME.unik_nuke_activate = nil
 elseif G.GAME.unik_arrested_by_batman then
     Jimbo:add_speech_bubble('special_lose_unik_defeated_by_batman', nil, {quip = true})
     G.GAME.unik_arrested_by_batman = nil
@@ -64,6 +65,7 @@ elseif G.GAME.unik_eaten_by_lily then
 elseif G.GAME.unik_killed_by_poppy then
     Jimbo:add_speech_bubble('special_lose_unik_tall_poppy_syndrome', nil, {quip = true})
     G.GAME.unik_killed_by_poppy = nil
+    G.GAME.unik_poppy_ceil = nil
 elseif G.GAME.unik_killed_by_boo then
     Jimbo:add_speech_bubble('special_lose_unik_bigger_boo', nil, {quip = true})
     G.GAME.unik_killed_by_boo = nil

@@ -1,9 +1,9 @@
 --Transferrable function designed to be used for all suit based jokers
 SMODS.Joker {
 	key = 'unik_broken_window',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = "cry_cursed",
-	pos = { x = 3, y = 1 },
+	pos = { x = 3, y = 0 },
     cost = 1,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Diamonds"} },
     pools = { ["unik_boss_blind_joker"] = true},

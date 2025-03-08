@@ -1,9 +1,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_cube_joker',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
+	pos = { x = 3, y = 0 },
 
     cost = 6,
 	blueprint_compat = true,
@@ -13,6 +13,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.max_size} }
 	end,
+	pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)
 		if context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1)) then
 			return {
@@ -41,6 +42,7 @@ SMODS.Joker {
 		end
     end,
 }
+
 
 -- Pool used by "squares/cubes"
 --Unik is not part of this to maintain rarity.

@@ -30,11 +30,11 @@ return {
 				},
             },
             --In cryptid where jokers are key, debuffing all jokers is bound for disaster
-            --So I'll nerf it to debuff 3/4 of all Jokers (and also have a min 1 Joker remaining)
+            --So I'll nerf it to debuff 4/5 of all Jokers (and also have a min 1 Joker remaining)
             bl_unik_black_bat={
                 name = "Black Bat",
 				text = {
-					"~75% of Jokers from the right",
+					"~80% of Jokers from the right",
                     "are debuffed"
 				},
             },

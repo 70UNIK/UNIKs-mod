@@ -12,5 +12,12 @@ SMODS.Blind{
         attention_text({
             scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
         })
+        G.GAME.unik_nuke_activate = true
+	end,
+    disable = function(self)
+		G.GAME.unik_nuke_activate = nil
+	end,
+	defeat = function(self)
+		G.GAME.unik_nuke_activate = nil
 	end,
 }

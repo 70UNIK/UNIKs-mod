@@ -1,8 +1,8 @@
 SMODS.Joker {
 	key = 'unik_border_wall',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = "cry_cursed",
-	pos = { x = 3, y = 1 },
+	pos = { x = 1, y = 0 },
     cost = 1,
     config = { extra = { selfDestruct = false,blind_size = 2,exceeds = 3,applied = false} },
     pools = { ["unik_boss_blind_joker"] = true},

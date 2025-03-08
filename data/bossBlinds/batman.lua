@@ -39,7 +39,7 @@ SMODS.Blind{
 			local jokerCount = #G.jokers.cards
 			if jokerCount > 1 then
 				for i = 1, jokerCount do
-					if (card.area == G.jokers) and G.jokers.cards[i] == card and i > 1 and i > math.ceil((jokerCount * 0.25)) and not G.GAME.blind.disabled then
+					if (card.area == G.jokers) and G.jokers.cards[i] == card and i > 1 and i > math.ceil((jokerCount * 0.75)) and not G.GAME.blind.disabled then
 						return true
 					end
 				end

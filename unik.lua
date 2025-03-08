@@ -88,17 +88,17 @@ SMODS.ObjectType({
 	cards = {},
 })
 -- stickers
-NFS.load(mod_path .. "data/stickers/depleted.lua")()
+NFS.load(mod_path .. "data/stickers/depleted.lua")() 
 -- consumables
-NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
+NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 
 --BLINDS--
-NFS.load(mod_path .. "data/bossBlinds/poppy.lua")()
+NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
-NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")()
+NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
@@ -106,40 +106,38 @@ NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 NFS.load(mod_path .. "data/editions/positive.lua")()
 -- JOKERS --
 --- Common ---
-NFS.load(mod_path .. "data/jokers/holepunched_card.lua")()
--- If extra credit is installed, this is disabled, as it's redundant --
-if not((SMODS.Mods["extracredit"] or {}).can_load) then
+NFS.load(mod_path .. "data/jokers/holepunched_card.lua")() -- no image
+-- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS
 	NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
-end
-NFS.load(mod_path .. "data/jokers/gt710.lua")()
+NFS.load(mod_path .. "data/jokers/gt710.lua")() -- no image
 --- Uncommon ---
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
-NFS.load(mod_path .. "data/jokers/cube_joker.lua")()
-NFS.load(mod_path .. "data/jokers/recycler.lua")()
+NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/recycler.lua")() --no image
 --- Rare ---
-NFS.load(mod_path .. "data/jokers/ghost_trap.lua")()
+NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() --no image
 --- Epic ---
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips
-NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")()
+NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() --no image
 --- Legendary ---
 --- Exotic ---
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/unik.lua")()
+NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
 
 --- Cursed ---
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
-NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
+NFS.load(mod_path .. "data/jokers/caveman_club.lua")() --no image
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
-NFS.load(mod_path .. "data/jokers/goading_joker.lua")()
+NFS.load(mod_path .. "data/jokers/goading_joker.lua")() --no image
 NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
-NFS.load(mod_path .. "data/jokers/handcuffs.lua")()
+NFS.load(mod_path .. "data/jokers/handcuffs.lua")() --no image
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
-NFS.load(mod_path .. "data/jokers/broken_arm.lua")()
+NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image
 --- Devastating ---
 --- Catastrophic ---
 --- 
