@@ -242,7 +242,8 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                         if w:is_face(true) then
                             SMODS.debuff_card(w,true,"unik_plant")
                             faceCards = faceCards + 1  
-                        else
+                        -- Handle incase others do have debuffs
+                        elseif not w.debuff then
                             SMODS.debuff_card(w,false,"unik_plant")
                         end
                     end
@@ -252,8 +253,7 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                         if w:is_face(true) then
                             SMODS.debuff_card(w,true,"unik_plant")
                             faceCards = faceCards + 1  
-
-                        else
+                        elseif not w.debuff then
                             SMODS.debuff_card(w,false,"unik_plant")
                         end
                     end
@@ -263,8 +263,8 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                         if w:is_face(true) then
                             SMODS.debuff_card(w,true,"unik_plant")
                             faceCards = faceCards + 1  
-
-                        else
+                        -- Handle incase others do have debuffs
+                        elseif not w.debuff then
                             SMODS.debuff_card(w,false,"unik_plant")
                         end
                     end
@@ -275,7 +275,8 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                             SMODS.debuff_card(w,true,"unik_plant")
                             faceCards = faceCards + 1  
 
-                        else
+                            -- Handle incase others do have debuffs
+                        elseif not w.debuff then
                             SMODS.debuff_card(w,false,"unik_plant")
                         end
                     end
@@ -294,9 +295,11 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                         --bypass debuff to ensure it doesnt self destruct
                         if w:is_suit(h.ability.extra.suit,true) then
                             Cards = Cards + 1
-                            SMODS.debuff_card(w,true,"unik_club")
-                        else
-                            SMODS.debuff_card(w,false,"unik_club")
+                            SMODS.debuff_card(w,true,h.ability.extra.debuff_name)
+
+                            -- Handle incase others do have debuffs
+                        elseif not w.debuff then
+                            SMODS.debuff_card(w,false,h.ability.extra.debuff_name)
                         end
                     end
                 end
@@ -304,9 +307,9 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                     for i, w in pairs(G.hand.cards) do
                         if w:is_suit(h.ability.extra.suit,true) then
                             Cards = Cards + 1     
-                            SMODS.debuff_card(w,true,"unik_club")           
-                        else
-                            SMODS.debuff_card(w,false,"unik_club")
+                            SMODS.debuff_card(w,true,h.ability.extra.debuff_name)           
+                        elseif not w.debuff then
+                            SMODS.debuff_card(w,false,h.ability.extra.debuff_name)
                         end
                     end
                 end
@@ -314,9 +317,9 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                     for i, w in pairs(G.play.cards) do
                         if w:is_suit(h.ability.extra.suit,true) then
                             Cards = Cards + 1  
-                            SMODS.debuff_card(w,true,"unik_club")
-                        else
-                            SMODS.debuff_card(w,false,"unik_club")
+                            SMODS.debuff_card(w,true,h.ability.extra.debuff_name)
+                        elseif not w.debuff then
+                            SMODS.debuff_card(w,false,h.ability.extra.debuff_name)
                         end
                     end
                 end
@@ -324,16 +327,17 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
                     for i, w in pairs(G.discard.cards) do
                         if w:is_suit(h.ability.extra.suit,true) then
                             Cards = Cards + 1     
-                            SMODS.debuff_card(w,true,"unik_club")
-                        else
-                            SMODS.debuff_card(w,false,"unik_club")
+                            SMODS.debuff_card(w,true,h.ability.extra.debuff_name)
+
+                        elseif not w.debuff then
+                            SMODS.debuff_card(w,false,h.ability.extra.debuff_name)
                         end
                     end
                 end 
                 if h.added_to_deck then
                     h.ability.extra.cards = Cards
                     if (Cards < h.ability.extra.minCards or Cards <= 0) and h.ability.extra.selfDestruct == false and G.jokers then
-                        selfDestruction(h,"k_unik_weapon_destroyed",HEX("b9cb92"))
+                        selfDestruction(h,h.ability.extra.death_message,HEX(h.ability.extra.color))
                         h.ability.extra.selfDestruct = true
                     end
                 end

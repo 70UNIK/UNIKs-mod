@@ -12,7 +12,7 @@ SMODS.Joker {
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 2, y = 0,extra = { x = 1, y = 0 } },
     cost = 1,
-    config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false} },
+    config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false,debuff_name = "unik_plant"} },
     pools = { ["unik_boss_blind_joker"] = true, ["unik_copyrighted"] = true },
 	blueprint_compat = false,
     perishable_compat = false,
@@ -60,6 +60,11 @@ SMODS.Joker {
         end 
         --set the min face cards needed
         card.ability.extra.minFaceCards = math.ceil(faceCards/2.0)
+        card.ability.extra.cards = faceCards
+        if faceCards == 0 and card.ability.extra.selfDestruct == false and G.jokers then
+            selfDestruction(card,"k_unik_plant_no_face",HEX("709284"))
+            card.ability.extra.selfDestruct = true
+        end
     end,
     remove_from_deck = function(self, card, from_debuff)
         if G.deck then 
@@ -93,8 +98,23 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         --Check if cards are destroyed, added or removed
-        if context.cards_destroyed or context.playing_card_added or context.remove_playing_cards then
+        if context.playing_card_added or context.remove_playing_cards or context.cards_destroyed then
             local faceCards = 0
+            --additional check to see if cards are removed via glass shattering or via tarots
+            if context.cards_destroyed then
+                for k, val in ipairs(context.glass_shattered) do
+                    if val:is_face(true) then
+                        faceCards = faceCards - 1
+                    end
+                end
+            end
+            if context.remove_playing_cards then
+                for k, val in ipairs(context.removed) do
+                    if val:is_face(true) then
+                        faceCards = faceCards - 1
+                    end
+                end
+            end
             if G.deck and card.added_to_deck then 
                 for i, w in pairs(G.deck.cards) do
                     if w:is_face(true) then
@@ -127,6 +147,7 @@ SMODS.Joker {
                     end
                 end
             end 
+            
             if card.added_to_deck then
                 card.ability.extra.faceCards = faceCards
                 if (faceCards < card.ability.extra.minFaceCards or faceCards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then

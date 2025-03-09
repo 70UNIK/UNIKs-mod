@@ -5,7 +5,7 @@ SMODS.Joker {
     rarity = "cry_cursed",
 	pos = { x = 3, y = 1 },
     cost = 1,
-    config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Spades"} },
+    config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Spades",debuff_name = "unik_goad",death_message = "k_unik_goading_fuck_you",color = "b95c96"} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
@@ -53,6 +53,11 @@ SMODS.Joker {
         end 
         --set the min cards needed
         card.ability.extra.minCards = math.ceil(Cards/2.0)
+        card.ability.extra.cards = Cards
+        if (Cards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
+            selfDestruction(card,"k_unik_goading_fuck_you",HEX("b95c96"))
+            card.ability.extra.selfDestruct = true
+        end
     end,
     remove_from_deck = function(self, card, from_debuff)
         if G.deck then 
@@ -88,6 +93,20 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.cards_destroyed or context.playing_card_added or context.remove_playing_cards then
             local Cards = 0
+            if context.cards_destroyed then
+                for k, val in ipairs(context.glass_shattered) do
+                    if val:is_suit(card.ability.extra.suit,true) then
+                        Cards = Cards - 1
+                    end
+                end
+            end
+            if context.remove_playing_cards then
+                for k, val in ipairs(context.removed) do
+                    if val:is_suit(card.ability.extra.suit,true) then
+                        Cards = Cards - 1
+                    end
+                end
+            end
             if G.deck and card.added_to_deck then 
                 for i, w in pairs(G.deck.cards) do
                     --bypass debuff to ensure it doesnt self destruct
