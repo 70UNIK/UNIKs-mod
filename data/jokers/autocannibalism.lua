@@ -22,11 +22,8 @@ SMODS.Joker {
 	blueprint_compat = false,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
-        info_queue[#info_queue + 1] = G.P_CENTERS.j_ramen
-        info_queue[#info_queue + 1] = G.P_CENTERS.j_popcorn
-        info_queue[#info_queue + 1] = G.P_CENTERS.j_turtle_bean
-        info_queue[#info_queue + 1] = G.P_CENTERS.j_ice_cream
-        info_queue[#info_queue + 1] = G.P_CENTERS.j_cry_clicked_cookie
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_depleted" }
         return { vars = { center.ability.extra.selfDestruct} }
 	end,
 	add_to_deck = function(self, card, from_debuff)

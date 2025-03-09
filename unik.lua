@@ -108,16 +108,16 @@ NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 NFS.load(mod_path .. "data/editions/positive.lua")()
 -- JOKERS --
 --- Common ---
-NFS.load(mod_path .. "data/jokers/holepunched_card.lua")() -- no image
+NFS.load(mod_path .. "data/jokers/holepunched_card.lua")() -- maybe change to "donkey vote"? with an australian styled voting ballot
 -- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS
 	NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
-NFS.load(mod_path .. "data/jokers/gt710.lua")() -- no image
+NFS.load(mod_path .. "data/jokers/gt710.lua")()
 --- Uncommon ---
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
-NFS.load(mod_path .. "data/jokers/recycler.lua")() --no image
+NFS.load(mod_path .. "data/jokers/recycler.lua")()
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() --no image
 --- Epic ---
@@ -133,13 +133,13 @@ NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
-NFS.load(mod_path .. "data/jokers/caveman_club.lua")() --no image
+NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
 NFS.load(mod_path .. "data/jokers/goading_joker.lua")() --no image
 NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
-NFS.load(mod_path .. "data/jokers/handcuffs.lua")() --no image
+NFS.load(mod_path .. "data/jokers/handcuffs.lua")() 
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
-NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image
+NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
 --- Devastating ---
 --- Catastrophic ---
 --- 

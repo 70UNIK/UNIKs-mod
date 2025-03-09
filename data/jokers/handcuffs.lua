@@ -1,8 +1,8 @@
 SMODS.Joker {
 	key = 'unik_handcuffs',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = "cry_cursed",
-	pos = { x = 3, y = 1 },
+	pos = { x = 4, y = 0 },
     cost = 1,
     config = { extra = { selfDestruct = false,hand_size = -1,max = 8, min = 6} },
     pools = { ["unik_boss_blind_joker"] = true},

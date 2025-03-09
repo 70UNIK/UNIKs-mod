@@ -217,7 +217,7 @@ return {
                 },
             },
             j_unik_recycler = {
-                name = 'Recycler',
+                name = 'Recycle Bin',
                 text={
 					"This Joker gains",
 					"{X:mult,C:white} X#2# {} Mult per",
@@ -269,6 +269,7 @@ return {
                     "{C:unik_wall_color}The Wall{} is triggered",                    
                 },                 
             },
+            --Patronizing joker, but way more crass and ragged
             j_unik_goading_joker = {
                 name = 'Goading Joker',
                 text={
@@ -299,6 +300,7 @@ return {
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:diamonds}Diamond(s){C:inactive})",
                 },                 
             },
+            --a caveman club smashing a club ace
             j_unik_caveman_club = {
                 name = 'Caveman Club',
                 text={
@@ -310,6 +312,7 @@ return {
                     "{C:inactive,s:0.6}We are going to beat you to death.{}",
                 },                 
             },
+            --Space joker but has a broken arm, fitting the theme
             j_unik_broken_arm = {
                 name = 'Broken Arm',
                 text={
@@ -327,9 +330,9 @@ return {
                 name = 'Esophagus Now',
                 text={
                     "Create an {C:attention}Eternal Depleted{} decrementing food Joker", 
-                    "{C:attention}(Popcorn, Ramen, Ice Cream, Turtle Bean, Clicked Cookie){}", 
-                    "Add {C:attention}Eternal and Depleted{} to all new and existing",
-                    "decrementing food Jokers and set values to {C:attention}self destruct values{}",      
+                    "Add {C:attention}Eternal and Depleted{} to new and",
+                    "existing decrementing food Jokers and",
+                    "set values to {C:attention}self destruct values{}",      
                     "{C:red}Self destructs{} if none of above Jokers are owned",
                 },                 
             },
@@ -412,7 +415,7 @@ return {
 					"{C:red}Self destructs{} if exceeds {C:attention}#4#{} {X:cry_cursed,C:white}Cursed{} Jokers",
 					"and {C:red}releases all captured{} {X:cry_cursed,C:white}Cursed{} {C:red}Jokers{}",
                     "{C:red}if sold or destroyed{}",   
-					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult, {X:cry_cursed,C:white}#3#{C:inactive} Cursed Jokers){}",
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult, {C:attention}#3# {X:cry_cursed,C:white}Cursed{C:inactive} Jokers){}",
                     "{C:inactive,s:0.9}(The {C:attention}leftmost{C:inactive} Ghost Trap will capture first){}",
                 },
             }
@@ -441,13 +444,20 @@ return {
 					"up to {C:attention}#2# Square Joker#s2#{}",
 				},
 			},
+            unik_decrementing_food_jokers = {
+				name = "Decrementing Food Jokers",
+				text = {
+					"{s:0.8}Turtle Bean, Popcorn, Ramen,",
+					"{s:0.8}Ice Cream and Clicked Cookie",
+				},
+			},
         },
         Planet={},
         Spectral={},
         Stake={},
         Tag={},
         Tarot={c_unik_wheel_of_misfortune = {
-            name = "Wheel of Misfortune",
+            name = "The Evocation",
             text = {
                 "{C:green}#1# in #2#{} chance to create ",
                 "a {X:cry_cursed,C:white}Cursed{} Joker",

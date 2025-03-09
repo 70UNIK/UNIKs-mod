@@ -19,7 +19,7 @@ SMODS.Challenge{
             { id = "unik_obsidian_swarm"},
 		},
 		modifiers = {                
-            {id = 'joker_slots', value = 8},
+            {id = 'joker_slots', value = 7},
             {id = 'consumable_slots', value = 3},
     },
 	},

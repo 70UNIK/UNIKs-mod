@@ -114,10 +114,7 @@ SMODS.Joker {
                     return true
                 end
             }))
-            return{
-                message = localize("k_unik_happiness1"),
-                colour = G.C.BLACK,
-            }
+            return
         end
         --works
         if context.after and context.cardarea == G.jokers then
