@@ -1,9 +1,17 @@
+SMODS.Atlas {
+	key = "unik_yokana",
+	path = "unik_yokana.png",
+	px = 71,
+	py = 95
+}
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_yokana',
-    atlas = 'placeholders',
+    atlas = 'unik_yokana',
     rarity = 'cry_epic',
-	pos = { x = 3, y = 0 },
+	pos = { x = 0, y = 0 },
+	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
+	soul_pos = { x = 1, y = 0 },
     cost = 12,
 	blueprint_compat = true,
     perishable_compat = true,

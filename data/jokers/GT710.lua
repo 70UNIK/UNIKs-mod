@@ -1,6 +1,6 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
-	key = 'gt710',
+	key = 'unik_gt710',
     atlas = 'unik_common',
     rarity = 1,
 	pos = { x = 1, y = 0 },
@@ -30,6 +30,8 @@ SMODS.Joker {
 				--G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
                 G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money
                 G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+                card.ability.extra.has10 = false
+                card.ability.extra.has7 = false
                 return {
                     dollars = card.ability.extra.money,
                     card = self

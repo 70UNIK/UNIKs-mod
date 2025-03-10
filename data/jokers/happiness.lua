@@ -99,22 +99,24 @@ SMODS.Joker {
 		if context.before and context.cardarea == G.jokers then
             --print("turn them happy")
             G.E_MANAGER:add_event(Event({
+
                 func = function()
                     card:juice_up(0.8, 0.8)
-                    card_eval_status_text(card, "extra", nil, nil, nil, {
-                        message = localize("k_unik_happiness1"),
-                        colour = G.C.BLACK,
-                        card=card,
-                    })
                     for i = 1, #G.play.cards do
                         if i < 2 then
                             G.play.cards[i]:set_edition({ unik_positive = true }, true, nil, true)
                         end
                     end
+
                     return true
                 end
             }))
-            return
+
+            return{
+                message = localize("k_unik_happiness1"),
+                colour = G.C.BLACK,
+                
+            }
         end
         --works
         if context.after and context.cardarea == G.jokers then

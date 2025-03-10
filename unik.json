@@ -10,7 +10,7 @@
 	"badge_text_colour": "",
 	"version": "0.0.0.1-TEST-BUILD",
 	"dependencies": [
-        "Steamodded",
+        "Steamodded (>=1.0.0~BETA-0309c)",
         "Cryptid (>=0.5.4)",
 		"Talisman (>=2.0.2)"
     ]

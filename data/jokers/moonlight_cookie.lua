@@ -15,9 +15,8 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    --Emult is 1.4 instead of 1.25 because of the limited consumable slots and the limited opportunities (azure seal, perkeo, digital hallucinations) for expanding them. Also 1.25 does not work well with multiply.
 	-- I can imagine this will become souped up in almanac with it's 10 slots.
-    config = { extra = { Emult = 1.3} },
+    config = { extra = { Emult = 1.25} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot} }
 	end,

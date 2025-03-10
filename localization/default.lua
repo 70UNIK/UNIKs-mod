@@ -372,7 +372,7 @@ return {
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
                     "{X:chips,C:white}X#1#{} Chips when {C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
-                    "{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
+                    --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:inactive,s:0.9}Quite strange being here,{}",
                     "{C:inactive,s:0.9}but I'll try to help out as much as I can.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
@@ -387,7 +387,7 @@ return {
                 text={
                     "{C:attention}Scored{} non-face cards permanently gain {X:chips,C:white}X#1#{} Chips",
                     "{C:attention}Held{} non-face cards permanently gain {X:chips,C:white}X#2#{} Chips",
-                    "{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
+                    --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive,s:0.9}I'm doubtful if all this will succeed, but I'll still contribute.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
@@ -399,7 +399,7 @@ return {
                 text={
                     "This Joker gains {X:chips,C:white}X#2#{} Chips when", 
                     "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
-                    "{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
+                    --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
                     "{C:inactive,s:0.9}OwO what's all this? Maybe I can help!{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
@@ -417,6 +417,26 @@ return {
                     "{C:red}if sold or destroyed{}",   
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult, {C:attention}#3# {X:cry_cursed,C:white}Cursed{C:inactive} Jokers){}",
                     "{C:inactive,s:0.9}(The {C:attention}leftmost{C:inactive} Ghost Trap will capture first){}",
+                },
+            },
+            j_unik_lily_sprunki = {
+                name="Lily",
+                text={
+                    "{C:red}Destroy{} {C:attention}all{} played cards except the ", 
+                    "{C:attention}leftmost{} played card after scoring",
+                    "{C:inactive,s:0.9}#1#{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:dark_edition,s:0.6,E:2}Character by : Kaeofthekae{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : SPRUNKI{}",
+                },                
+            },
+            j_unik_big_joker = {
+                name="Big Joker",
+                text={
+                    "{C:mult}+#1#{} Mult if played hand contains",
+                    "{C:attention}#3#{} or more cards",
+                    "Each played card above {C:attention}#3#{} cards",
+                    "increases this by {C:mult}+#2#{} Mult",
                 },
             }
         },
@@ -521,6 +541,9 @@ return {
             k_unik_ghost_trap_captured="Captured!",
             k_unik_ghost_trap_explode="Too much!",
             k_unik_plasma_deck_fail="Not Balanced!",
+            k_unik_lily_sprunki_normal="*Microwave Sounds* How did I get here?",
+            k_unik_lily_sprunki_monster="RRRAGGRAAGRGRGRHHHH!!!",
+            k_unik_lily_sprunki_after="oh... oh... god...",
         },
         high_scores={},
         labels={
