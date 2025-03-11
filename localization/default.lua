@@ -371,7 +371,9 @@ return {
             --Increases by 1.3x chips if maya and chelsea are present
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
-                    "{X:chips,C:white}X#1#{} Chips when {C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
+                    "{X:chips,C:white}X#1#{} Chips for every {C:attention}scored{} Card",
+                    "or {C:attention}Joker{} triggered during play",
+                    "{C:inactive,s:0.8}(Does not trigger on herself or her copies)",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:inactive,s:0.9}Quite strange being here,{}",
                     "{C:inactive,s:0.9}but I'll try to help out as much as I can.{}",
@@ -438,6 +440,32 @@ return {
                     "Each played card above {C:attention}#3#{} cards",
                     "increases this by {C:mult}+#2#{} Mult",
                 },
+            },
+            j_unik_no_standing_zone = {
+                name="No Standing Zone",
+                text={
+                    "{X:mult,C:white}X#1#{} Mult, decreases by ",
+                    "{X:mult,C:white}X#4#{} every {C:attention}second{} in Blinds",
+                    "and {X:mult,C:white}X#5#{} every {C:attention}second{} elsewhere",
+                    "Turns into {C:red}Impound Notice{}",
+                    "if Mult becomes {X:mult,C:white}X1{}.",
+                    "Resets to {X:mult,C:white}X#3#{} Mult",
+                    "at the start and end of {C:attention}Round{}",
+                    "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
+                }, 
+            },
+            --0.5x Mult, Debuff up to 2 random non-cursed Jokers, sells for double the total of debuffed Jokers to remove debuff and itself. Destruction will remove debuffs. Selling Jokers wi
+            j_unik_impounded = {
+                name="Impound Notice",
+                text={
+                    "{X:mult,C:white}X#1#{} Mult {C:attention}after scoring{}",
+                    "{C:red}Debuffs{} and adds {C:attention}Eternal and Rental{}",
+                    " to a random Joker on spawn",
+                    "{C:attention}Sell{} to remove debuff, Eternal and Rental",
+                    "Selling costs {X:money,C:white}X#2#ln(x+1){} the total",
+                    "{C:attention}selling price{} of debuffed Joker",
+                    "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
+                }
             }
         },
         Other={			
@@ -544,6 +572,9 @@ return {
             k_unik_lily_sprunki_normal="*Microwave Sounds* How did I get here?",
             k_unik_lily_sprunki_monster="RRRAGGRAAGRGRGRHHHH!!!",
             k_unik_lily_sprunki_after="oh... oh... god...",
+            k_unik_no_standing_towed="Towed Away!",
+            k_unik_impounded="Impounded!",
+            k_unik_debt="Not Enough Money!"
         },
         high_scores={},
         labels={

@@ -120,11 +120,13 @@ NFS.load(mod_path .. "data/jokers/gt710.lua")()
 NFS.load(mod_path .. "data/jokers/big_joker.lua")()
 
 --- Uncommon ---
+NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
+
 -- No standing Zone: 3x mult, decreases by 0.01x per 2 seconds in this ante after purchase. If hits 1x mult, switches to "Towaway" (Cursed). Resets after defeating a boss blind.
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
@@ -141,6 +143,7 @@ NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
+NFS.load(mod_path .. "data/jokers/impounded.lua")()
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
@@ -155,7 +158,6 @@ NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker
 --Forced Seance: Create 1 Eternal Banana Seance after each hand. Self destructs when there are 13 seances present.
 --Vampiric Hammer: Remove all card enhancements after scoring. Self destruct if you have <30% enhanced cards in your deck or The Hammer is triggered (Ortalab)
 --Jimbillion Virus: Replace 1 random joker with Jimbo before each hand (except for Jimbotron 9000). Self destructs when all jokers are jimbo.
--- Towaway: x0.4x Mult (Always after) until you spend $25 and sell 1 Joker. Upon doing so, it will revert back to No Standing Zone.
 
 --- Devastating ---
 --- Catastrophic ---

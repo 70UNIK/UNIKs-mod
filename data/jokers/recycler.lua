@@ -20,11 +20,11 @@ SMODS.Joker {
 				Xmult_mod = card.ability.extra.x_mult,
 			}
 		end
-        if context.discard and context.cardarea == G.jokers and not context.blueprint then
+        if context.discard and not context.blueprint then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             return {
-				extra = { focus = card, message = localize("k_upgrade_ex") },
-				card = card,
+				delay = 0.2,
+				message = localize("k_upgrade_ex"),
 				colour = G.C.MULT,
             }
 		end

@@ -1,0 +1,45 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### Make impounded sellable
+# Patch into cryptid to force happiness to be positive in a reliable way
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/spooky.lua"]'''
+pattern = '''and card.ability.name ~= "cry-Monopoly"'''
+position = "after"
+payload = '''and card.config.center.key ~= "j_unik_impounded"'''
+match_indent = true
+
+### allow modify cost of impounded
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'if self.area and self.ability.couponed and (self.area == G.shop_jokers or self.area == G.shop_booster) then self.cost = 0 end'
+position = 'after'
+match_indent = true
+payload = '''
+if self.config.center.key == 'j_unik_impounded' and self.added_to_deck then
+    self.sell_cost = self.ability.extra.cost + (self.ability.extra_value or 0)
+end
+'''
+
+### do not set impounded cost to 0
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/spooky.lua"]'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+position = "at"
+payload = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" and self.config.center.key ~= "j_unik_impounded" then'''
+match_indent = true
+
+### do not set impounded cost to 0
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+position = "at"
+payload = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" and self.config.center.key ~= "j_unik_impounded" then'''
+match_indent = true

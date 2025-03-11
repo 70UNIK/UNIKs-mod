@@ -16,7 +16,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_chips = 1.0, x_chips_mod = 0.08,family_x_bonus = 1.3} },
+    config = { extra = {x_chips = 1.0, x_chips_mod = 0.07,family_x_bonus = 1.3} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.family_x_bonus} }
 	end,
@@ -48,21 +48,24 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
 ) and amount ~= 1) or
 
     key == "chips" or key == "chip_mod" or key == "chip" or key == "chips_mod" then
-        --print("Chips triggered!")
-        for _,v in pairs(SMODS.find_card('j_unik_jsab_yokana')) do
-            --avoid infinite recursion by having it not work with other yokanas (otherwise will become infinite)
-            -- if v.config.center.key ~= scored_card.config.center.key then
-                card_eval_status_text(v, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_xchips",
-                        vars = { number_format(to_big(v.ability.extra.x_chips)) },
-                    }),
-                    Xchip_mod = v.ability.extra.x_chips,
-                    colour = G.C.CHIPS,
-                })
-            -- end
-        end
+        -- -- print("Chips triggered!")
+        -- -- Yokana's effect
+        -- for _,v in pairs(SMODS.find_card('j_unik_jsab_yokana')) do
+        --     --avoid infinite recursion/overflow error by having it not work with other yokanas (otherwise will become infinite)
+        --     --Maybe add a method to make it compatible with blueprint, or in other words, create the context
+        --      if (v.config.center.key ~= scored_card.config.center.key) then
+        --         SMODS.calculate_effect({
+        --             message = localize({
+        --                 type = "variable",
+        --                 key = "a_xchips",
+        --                 vars = { number_format(to_big(v.ability.extra.x_chips)) },
+        --             }),
+        --             Xchip_mod = v.ability.extra.x_chips,
+        --             colour = G.C.CHIPS,
+        --         }, v)
+        --      end
+        -- end
+
         for _, v in pairs(SMODS.find_card('j_unik_jsab_chelsea')) do
 
             v.ability.extra.x_chips = v.ability.extra.x_chips + v.ability.extra.x_chips_mod

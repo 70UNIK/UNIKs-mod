@@ -4,6 +4,8 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+--Used to trigger on any chips, Xchips and Echips trigger, but since that does not work out with blueprint
+--She should instead trigger 1.5x chips based on cards played and jokers triggered
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_yokana',
@@ -16,8 +18,40 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = {x_chips = 1.5,family_x_bonus = 1.3} },
+    config = { extra = {x_chips = 1.2,family_x_bonus = 1.3,scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
 	end,
+	calculate = function(self, card, context)
+		if context.before then
+			card.ability.extra.scoring = true
+		end
+		if context.individual and context.cardarea == G.play then
+			return {
+                message = localize({
+					type = "variable",
+					key = "a_xchips",
+					vars = { number_format(card.ability.extra.x_chips) },
+				}),
+				Xchip_mod = card.ability.extra.x_chips,
+				colour = G.C.CHIPS,
+				card = card
+			}
+		end
+		if context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card then
+			return {
+                message = localize({
+					type = "variable",
+					key = "a_xchips",
+					vars = { number_format(card.ability.extra.x_chips) },
+				}),
+				Xchip_mod = card.ability.extra.x_chips,
+				colour = G.C.CHIPS,
+				card = card
+			}
+		end
+		if context.after then
+			card.ability.extra.scoring = false
+		end
+    end,
 }
