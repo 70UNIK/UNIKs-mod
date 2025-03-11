@@ -12,7 +12,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_mult = 3.0, x_mult_mod = 0.07,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.07, shop_decay_mult = 0.1,message_produced = false} },
+    config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.05, shop_decay_mult = 0.08,message_produced = false} },
 	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.x_mult_initial,center.ability.extra.blind_decay_mult,center.ability.extra.shop_decay_mult},

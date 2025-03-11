@@ -14,7 +14,7 @@ SMODS.Joker {
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
     cost = 8,
-    config = {extra = {triggered = false}},
+    config = {extra = {triggered = false,feral = false}},
     loc_vars = function(self, info_queue, center)
         return { vars = { localize(G.GAME.sprunki_lily_quote) } }
     end,
@@ -36,6 +36,7 @@ SMODS.Joker {
 			and #context.full_hand > 1 -- 3 cards in played hand
 			and not context.blueprint
 			and not context.retrigger_joker 
+            and card.ability.extra.feral == true
         then
 
             if (context.destroy_card) then
@@ -56,7 +57,7 @@ SMODS.Joker {
                                     card.children.center:set_sprite_pos({x = 0, y = 1})
                                     card.children.floating_sprite:set_sprite_pos({x = 2, y = 1})
                                     G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_monster"
-                                    return true
+                                    return not context.destroy_card.ability.eternal
                                 end
                             }))
                         end
@@ -64,7 +65,7 @@ SMODS.Joker {
                 }
             end
         end
-        if context.after and context.cardarea == G.jokers and #context.full_hand > 1  then
+        if context.after and context.cardarea == G.jokers and #context.full_hand > 1 and card.ability.extra.feral == true then
             --return to normal sprite
             G.E_MANAGER:add_event(Event({
                 func = function()
@@ -73,6 +74,7 @@ SMODS.Joker {
                     card.children.floating_sprite:set_sprite_pos({x = 1, y = 0})
                     G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_normal"
                     card.ability.extra.triggered = false
+                    card.ability.extra.feral = false
                     return true
                 end
             }))
@@ -82,20 +84,30 @@ SMODS.Joker {
             }
         end
         if context.before and context.cardarea == G.jokers and #context.full_hand > 1 then
-            --print("turn them happy")
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    card:juice_up(0.5, 0.5)
-                    card.children.center:set_sprite_pos({x = 0, y = 1})
-					card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
-                    G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_monster"
-                    return true
+            --only turn feral if theres any valid card
+            local valid = false
+                for i, w in pairs(G.hand.cards) do
+                    if not w.ability.eternal then
+                        valid = true
+                    end
                 end
-            }))
-            return{
-                message = localize("k_unik_lily_sprunki_monster"),
-                colour = HEX("d377dc"),
-            }
+            if valid == true then
+                card.ability.extra.feral = true
+                --print("turn them happy")
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card:juice_up(0.5, 0.5)
+                        card.children.center:set_sprite_pos({x = 0, y = 1})
+                        card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
+                        G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_monster"
+                        return true
+                    end
+                }))
+                return{
+                    message = localize("k_unik_lily_sprunki_monster"),
+                    colour = HEX("d377dc"),
+                }
+            end
         end
 	end
 }

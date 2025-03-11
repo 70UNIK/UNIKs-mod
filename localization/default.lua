@@ -373,7 +373,6 @@ return {
                 text={
                     "{X:chips,C:white}X#1#{} Chips for every {C:attention}scored{} Card",
                     "or {C:attention}Joker{} triggered during play",
-                    "{C:inactive,s:0.8}(Does not trigger on herself or her copies)",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:inactive,s:0.9}Quite strange being here,{}",
                     "{C:inactive,s:0.9}but I'll try to help out as much as I can.{}",
