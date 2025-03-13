@@ -17,18 +17,23 @@ SMODS.Blind{
 	set_blind = function(self)
 		G.GAME.unik_killed_by_magnet = true
         --Get all unenhanced cards
-		local text = localize('k_unik_magnet_start')
-        attention_text({
-            scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
-        })
-        for i, w in pairs(G.deck.cards) do
-            if w.config.center == G.P_CENTERS.c_base and (pseudorandom(pseudoseed("magnet")) < ((G.GAME.probabilities.normal * 2) / 3))then
-                w:set_ability(G.P_CENTERS["m_steel"], nil, true)
+        if not reset then
+            local text = localize('k_unik_magnet_start')
+            attention_text({
+                scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
+            })
+            for i, w in pairs(G.deck.cards) do
+                if w.config.center == G.P_CENTERS.c_base and (pseudorandom(pseudoseed("magnet")) < ((G.GAME.probabilities.normal * 2) / 3))then
+                    w:set_ability(G.P_CENTERS["m_steel"], nil, true)
+                end
             end
+            G.GAME.blind.triggered = true
+            G.GAME.blind:wiggle()
+            G.hand:change_size(2)
         end
-        G.GAME.blind.triggered = true
-        G.GAME.blind:wiggle()
-        G.hand:change_size(2)
+	end,
+    get_loc_debuff_text = function(self)
+		return localize("k_unik_magnet_warning")
 	end,
     --debuff hand if a steel card is held in hand and unselected
     debuff_hand = function(self, cards, hand, handname, check)
@@ -84,15 +89,19 @@ SMODS.Blind{
 	end,
 	disable = function(self)
         --avoid chicot permanently depleting hand size to 0 by only triggering if the killed by magnet flag is true
-        if G.GAME.unik_killed_by_magnet then
-            G.hand:change_size(-2)
+        if not G.GAME.blind.disabled then
+            if G.GAME.unik_killed_by_magnet then
+                G.hand:change_size(-2)
+            end
+            G.GAME.unik_killed_by_magnet = nil
         end
-        G.GAME.unik_killed_by_magnet = nil
 	end,
 	defeat = function(self)
-        if G.GAME.unik_killed_by_magnet then
-            G.hand:change_size(-2)
+        if not G.GAME.blind.disabled then
+            if G.GAME.unik_killed_by_magnet then
+                G.hand:change_size(-2)
+            end
+            G.GAME.unik_killed_by_magnet = nil
         end
-		G.GAME.unik_killed_by_magnet = nil
 	end,
 }

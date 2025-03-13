@@ -1,0 +1,14 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+### video poker functions:
+### force playing 5 cards (not even trying to force a nonscoring hand through like with psychic)
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "if #G.hand.highlighted <= (G.GAME.blind and G.GAME.blind.name == 'cry-Sapphire Stamp' and not G.GAME.blind.disabled and 1 or 0) or G.GAME.blind.block_play then"
+position = "at"
+payload = "if #G.hand.highlighted <= (not G.GAME.unik_video_poker_rules and G.GAME.blind and G.GAME.blind.name == 'cry-Sapphire Stamp' and not G.GAME.blind.disabled and 1 or 0) or G.GAME.blind.block_play or (#G.hand.highlighted <= 4 and G.GAME.unik_video_poker_rules and not G.GAME.blind.disabled) then"
+match_indent = true

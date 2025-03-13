@@ -22,6 +22,9 @@ SMODS.Blind{
 		G.GAME.unik_protection_racket = nil
         G.GAME.unik_killed_by_racket = nil
 	end,
+    get_loc_debuff_text = function(self)
+		return localize("k_unik_racket_warning")
+	end,
     --Give a warning if you dont have enough money
     debuff_hand = function(self, cards, hand, handname, check)
         if check and G.GAME.unik_protection_racket then

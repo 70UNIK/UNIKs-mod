@@ -88,6 +88,10 @@ elseif G.GAME.unik_killed_by_magnet then
 elseif G.GAME.unik_killed_by_racket then
     Jimbo:add_speech_bubble('special_lose_unik_racket', nil, {quip = true})
     G.GAME.unik_killed_by_racket = nil
+elseif G.GAME.unik_killed_by_video_poker then
+    Jimbo:add_speech_bubble('special_lose_unik_video_poker', nil, {quip = true})
+    G.GAME.unik_killed_by_video_poker = nil
+    G.GAME.unik_video_poker_rules = nil
 else
     Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
 end

@@ -92,6 +92,16 @@ return {
                     "hand must not hold Steel cards",
 				},
             },
+            --just like the actual gambling machine
+            bl_unik_video_poker={
+                name = "Video Poker",
+				text = {
+                    "Hand Size fixed to 5",
+					"Only 1 Discard per Hand",
+                    "Can only play 5 cards",
+                    "High Cards must have Jacks or better",
+				},
+            },
             bl_unik_the_lily={
                 name = "The Lily",
 				text = {
@@ -609,6 +619,10 @@ return {
             k_unik_nuke_placeholder="(3x requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
             k_unik_magnet_placeholder="(50% of)",
+            k_unik_racket_warning="Must have at least $25",
+            k_unik_magnet_warning="Must not hold any Steel Cards",
+            k_unik_video_poker_warning="High Cards must have Jacks or Better",
+
         },
         high_scores={},
         labels={
@@ -703,6 +717,11 @@ return {
             special_lose_unik_magnet={
                 "Seems like you lack",
                 "balls of steel!",
+            }, 
+            --getting killed by video poker
+            special_lose_unik_video_poker={
+                "Maybe try playing the",
+                "actual Video Poker game!",
             }, 
         },
         ranks={},

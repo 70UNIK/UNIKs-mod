@@ -110,9 +110,12 @@ NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
+NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
+--Video Poker: Hand size fixed to 5 (disregarding negative cards), discards set to 1 per hand, discard modifiers are debuffed, Must play 5 cards , high cards must have a scoring jack or better to score. X1 score
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
+
 
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
