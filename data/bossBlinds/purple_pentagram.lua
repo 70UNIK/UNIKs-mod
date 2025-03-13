@@ -21,6 +21,7 @@ SMODS.Blind{
                         G.jokers:emplace(card2)
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
+                        G.ROOM.jiggle = G.ROOM.jiggle + 1
                         delay(0.15)
                         
                     else

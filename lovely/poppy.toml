@@ -5,13 +5,14 @@ priority = 9999
 
 ### THE Poppy: disallow hands exceeding 3x blind size
 ### ALso triger matador if you have one
+### WIll also have functionality for the Raspberry Racket
 
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
 pattern = '''check_and_set_high_score('hand', hand_chips*mult)'''
 position = 'before'
-payload = '''if to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2) and (G.GAME.blind and G.GAME.unik_poppy_ceil and not (G.GAME.blind.disabled)) then
+payload = '''if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2.5) and (G.GAME.blind and G.GAME.unik_poppy_ceil)) or ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0))) and not (G.GAME.blind.disabled) then
 --print("TESTING THE POPPY_1")
             
             local supposedHands = hand_chips
@@ -25,8 +26,13 @@ payload = '''if to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2) and (G.
                     hand_chips = 0
                     mult = 0
                     G.GAME.blind.triggered = true
+                    G.ROOM.jiggle = G.ROOM.jiggle + 3
                     G.GAME.blind:wiggle()
-                    play_area_status_text("Not Allowed!")
+                    if G.GAME.unik_protection_racket then
+                        play_area_status_text("Not Enough Money!")
+                    else
+                        play_area_status_text("Not Allowed!")
+                    end
                     -- trigger matador as its a "disallowed card", just very delayed
                     for _, v in pairs(G.jokers.cards) do
                         if v.ability.name == 'Matador' then
@@ -46,6 +52,18 @@ payload = '''if to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2) and (G.
                 end   
             }))
         end
+        if ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) >= to_big(0)) and not (G.GAME.blind.disabled) then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',delay = 0.4,
+                    func = function()
+                        G.GAME.blind.triggered = true
+                        G.GAME.blind:wiggle()
+                        ease_dollars(-25, true)
+                        G.ROOM.jiggle = G.ROOM.jiggle + 0.7
+                    return true
+                end   
+            }))
+        end
 '''
 match_indent = true
 
@@ -57,7 +75,7 @@ pattern = '''        func = (function()  update_hand_text({delay = 0, immediate 
       }))'''
 position = 'after'
 payload = '''
-if (to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2) and (G.GAME.blind and G.GAME.unik_poppy_ceil) and not (G.GAME.blind.disabled)) then
+if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2.5) and (G.GAME.blind and G.GAME.unik_poppy_ceil)) or ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0))) and not (G.GAME.blind.disabled) then
             --print("TESTING THE POPPY4")
             local supposedHands = hand_chips
             local supposedMult = mult

@@ -104,9 +104,15 @@ NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
 NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")() 
+NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
+NFS.load(mod_path .. "data/bossBlinds/raspberry_racket.lua")()
 NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
+NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
+--Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
+--Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
+--Both of above will lack boss music and chicot and luchador will not be active/trigger.
 
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
@@ -143,7 +149,7 @@ NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
-NFS.load(mod_path .. "data/jokers/impounded.lua")()
+NFS.load(mod_path .. "data/jokers/impounded.lua")() -- no image, an impound notice
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
@@ -153,17 +159,17 @@ NFS.load(mod_path .. "data/jokers/handcuffs.lua")()
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
 --Hook n' discard (The Hook): Discards 2 random cards before play. Self destruct after 16 consecutive discards with only two cards or the hook is triggered
---Expired smoothie: x0.5 mult, sell to multiply all values of all owned jokers by 0.8x
+--Rancid smoothie: x0.33 mult, sell to multiply all values of all owned jokers by 0.8x
 --Monster spawner: Create 1 Cursed Joker after defeating each Boss Blind; 69 in 70 chance for it to not be negative. Self destruct if spawned 2 cursed jokers. If absolute, will never expire (for challenges). WIll never spawn another monster spawner.
---Forced Seance: Create 1 Eternal Banana Seance after each hand. Self destructs when there are 13 seances present.
---Vampiric Hammer: Remove all card enhancements after scoring. Self destruct if you have <30% enhanced cards in your deck or The Hammer is triggered (Ortalab)
---Jimbillion Virus: Replace 1 random joker with Jimbo before each hand (except for Jimbotron 9000). Self destructs when all jokers are jimbo.
+--Vampiric Hammer: Remove all card enhancements after scoring. Self destruct if you have <30% enhanced cards in your deck or Ortalab's The Hammer is triggered
+
 
 --- Devastating ---
 --- Catastrophic ---
 --- 
 --- 
 --- Challenges
+NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 NFS.load(mod_path .. "data/challenges/chipzel.lua")()
 NFS.load(mod_path .. "data/challenges/multiplication.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()

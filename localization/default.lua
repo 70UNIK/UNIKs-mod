@@ -12,7 +12,7 @@ return {
             bl_unik_indigo_icbm={
                 name = "Indigo ICBM",
 				text = {
-					"If score is >3X requirements,",
+					"If score is over #1#,",
                     "cause instant death",
 				},
             },
@@ -34,7 +34,7 @@ return {
             bl_unik_black_bat={
                 name = "Black Bat",
 				text = {
-					"~80% of Jokers from the right",
+					"#1# Jokers from the right",
                     "are debuffed"
 				},
             },
@@ -51,9 +51,9 @@ return {
             bl_unik_raspberry_racket={
                 name = "Raspberry Racket",
 				text = {
-					"Spend $#1# before",
+					"Spend $25 after",
                     "each hand,",
-                    "if entering debt",
+                    "if money below $25",
                     "hand will not score",
 				},
             },
@@ -64,6 +64,32 @@ return {
                     "no discards and",
                     "all discard and hand",
                     "modifiers debuffed",
+				},
+            },
+            bl_unik_green_goalpost={
+                name = "Green Goalpost",
+				text = {
+                    "Defeating this blind",
+                    "will increase victory",
+                    "requirements by 2 antes",
+				},
+            },
+            bl_unik_bigger_blind={
+                name = "Bigger Blind",
+            },
+            bl_unik_boring_blank={
+                name = "Boring Blank",
+                text = {
+                    "Does nothing?",
+				},
+            },
+            bl_unik_maroon_magnet={
+                name = "Maroon Magnet",
+				text = {
+                    "+2 Hand Size",
+					"Convert #1# in #2# unenhanced cards",
+					"in deck to Steel cards",
+                    "hand must not hold Steel cards",
 				},
             },
             bl_unik_the_lily={
@@ -100,7 +126,7 @@ return {
                 name = "The Poppy",
 				text = {
 					"Played hands exceeding",
-                    "2X requirements will",
+                    "#1# will",
                     "not score",
 				},
             },
@@ -141,6 +167,7 @@ return {
 					"will not score",
 				},
             }
+            
         },
         Edition={            
             e_unik_positive={
@@ -265,7 +292,7 @@ return {
                 text={
                     "{C:red}#2#x{} Blind size",
                     "{C:red}Self destructs{} when scoring", 
-                    "{C:attention}#3#x{} Blind requirements or",
+                    " above {C:attention}#3#x{} Blind requirements or",
                     "{C:unik_wall_color}The Wall{} is triggered",                    
                 },                 
             },
@@ -524,6 +551,7 @@ return {
             c_unik_common_muck="Common Muck",
             c_unik_boss_rush_2="Enter the Gungeon II",
             c_unik_boss_rush_3="Enter the Gungeon III",
+            c_unik_rng_2="RNG II",
         },
         collabs={},
         dictionary={
@@ -535,9 +563,12 @@ return {
             k_unik_pentagram_start="Hell's Legion is coming...",
             k_unik_pentagram_purified="Sent to hell!",
             k_unik_batman_start='"You WILL ALL be forgotten, Jokers. Because of me."',
+            k_unik_magnet_start='The age of steel is over...',
             k_unik_nuke_start="Nuclear war is coming...",
             k_unik_placard_start="NO PLACARDED LOADS IN PLAY",
             k_unik_boo_start="Bigger Boo wants to know your location",
+            k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."',
+            k_unik_protection_racket_start='"The government has organized a protection racket."',
             k_unik_boo_disabled="Exorcised!",
             k_unik_boo_possessed="Possessed!",
             k_unik_boo_eternal_bypass="Eternal Bypassed!",
@@ -573,7 +604,11 @@ return {
             k_unik_lily_sprunki_after="oh... oh... god...",
             k_unik_no_standing_towed="Towed Away!",
             k_unik_impounded="Impounded!",
-            k_unik_debt="Not Enough Money!"
+            k_unik_debt="Not Enough Money!",
+            k_unik_poppy_placeholder="(2.5x requirements)",
+            k_unik_nuke_placeholder="(3x requirements)",
+            k_unik_batman_placeholder="(80% of Jokers)",
+            k_unik_magnet_placeholder="(50% of)",
         },
         high_scores={},
         labels={
@@ -664,6 +699,11 @@ return {
                 "video on the Artisan Builds",
                 "scandal!",
             },   
+            --getting killed by magnet
+            special_lose_unik_magnet={
+                "Seems like you lack",
+                "balls of steel!",
+            }, 
         },
         ranks={},
         suits_plural={},
@@ -682,9 +722,12 @@ return {
             ch_c_cry_big_showdown = {"{C:attention}Final{} Boss Blinds can appear in {C:attention}any{} Ante"},
             --DO YOU WANT TO SUFFER?
             ch_c_unik_obsidian_showdown = {"{C:attention}Final{} blind is always the {C:red}Obsidian Orb{}"},
+            --ITS ALL HELL FROM HERE
             ch_c_unik_obsidian_swarm = {"{C:attention}Final{} blind of {C:attention}each ante{} is always the {C:red}Obsidian Orb{}"},
             ch_c_unik_ante_12_victory = {"Must beat Ante {C:attention}10{} to win"},
             ch_c_unik_ante_13_victory = {"Must beat Ante {C:attention}13{} to win"},
+            ch_c_unik_vermillion_pandemic = {"One {C:attention}random{} Joker {C:red}replaced{} after every hand"},
+
         },
     },
 }

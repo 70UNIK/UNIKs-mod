@@ -21,6 +21,7 @@ G.E_MANAGER:add_event(Event({
         })
         G.GAME.blind.triggered = true
         G.GAME.blind:wiggle()
+        G.ROOM.jiggle = G.ROOM.jiggle + 3
         return true
     end)
 }))
@@ -28,4 +29,16 @@ G.E_MANAGER:add_event(Event({
     return args.chips, args.mult
 end
 '''
+match_indent = true
+
+### Sync catalyst will have a finisher blind bg to reflect the fact that chips and mult do not balance (hence red and blue)
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''if v.boss.showdown then'''
+position = 'at'
+payload = '''
+-- If the blind is a showdown or THE LEAK
+if v.boss.showdown or G.GAME.blind.config.blind.key == "bl_unik_sync_catalyst_fail" then'''
 match_indent = true

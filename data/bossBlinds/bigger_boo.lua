@@ -32,7 +32,7 @@ SMODS.Blind{
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
                     delay(0.15)
-                        
+                    G.ROOM.jiggle = G.ROOM.jiggle + 1
                     -- else
                     --     card2:remove()
                     -- end
@@ -145,5 +145,6 @@ function turnJokerIntoGhost(location)
         G.jokers:align_cards()    
         G.GAME.blind.triggered = true
         G.GAME.blind:wiggle()
+        G.ROOM.jiggle = G.ROOM.jiggle + 1
     end
 end

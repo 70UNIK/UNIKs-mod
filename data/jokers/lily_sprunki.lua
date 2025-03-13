@@ -57,6 +57,7 @@ SMODS.Joker {
                                     card.children.center:set_sprite_pos({x = 0, y = 1})
                                     card.children.floating_sprite:set_sprite_pos({x = 2, y = 1})
                                     G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_monster"
+                                    G.ROOM.jiggle = G.ROOM.jiggle + 3
                                     return not context.destroy_card.ability.eternal
                                 end
                             }))

@@ -9,6 +9,12 @@ SMODS.Blind{
 	--Stop him from appearing in obsidian orb
 	no_orb = true,
     mult = 0.15,
+	loc_vars = function(self, info_queue, card)
+		return { vars = { math.floor((#G.jokers.cards * 0.8))  } } -- no bignum?
+	end,
+	collection_loc_vars = function(self)
+		return { vars = { localize("k_unik_batman_placeholder") } }
+	end,
 	-- collection_loc_vars = function (self)
 	-- 	local display = "~75% of"
 	-- 	if G.jokers then
@@ -39,7 +45,7 @@ SMODS.Blind{
 			local jokerCount = #G.jokers.cards
 			if jokerCount > 1 then
 				for i = 1, jokerCount do
-					if (card.area == G.jokers) and G.jokers.cards[i] == card and i > 1 and i > math.ceil((jokerCount * 0.75)) and not G.GAME.blind.disabled then
+					if (card.area == G.jokers) and G.jokers.cards[i] == card and i > 1 and i > math.ceil((jokerCount * 0.2)) and not G.GAME.blind.disabled then
 						return true
 					end
 				end

@@ -21,6 +21,7 @@ if (G.GAME.blind and G.GAME.unik_nuke_activate) and not (G.GAME.blind.disabled)t
         local text = localize('k_unik_nuked')
         ease_colour(G.C.UI_CHIPS, {0.0, 0.0, 0.0, 666666})
         ease_colour(G.C.UI_MULT, {0.0, 0.0, 0.0, 666666})
+        G.ROOM.jiggle = G.ROOM.jiggle + 25
         attention_text({
             scale = 1.4, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
         })
@@ -28,9 +29,14 @@ if (G.GAME.blind and G.GAME.unik_nuke_activate) and not (G.GAME.blind.disabled)t
         G.GAME.blind:wiggle()
         G.GAME.unik_killed_by_nuke = true
     end
--- Green goalpost: Not done yet
-elseif (G.GAME.blind and (G.GAME.blind.config.blind.key == "bl_unik_green_goalpost")) and not (G.GAME.blind.disabled) then
+end
+-- Green goalpost: 
+if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disabled) then
     G.GAME.win_ante = G.GAME.win_ante + 2
+    G.GAME.unik_moving_the_goalposts = nil
+    G.GAME.blind.triggered = true
+    G.GAME.blind:wiggle()
+    G.ROOM.jiggle = G.ROOM.jiggle + 3
 end'''
 match_indent = true
 
@@ -76,6 +82,12 @@ elseif G.GAME.unik_killed_by_leak then
 elseif G.GAME.unik_killed_by_artisan_builds then
     Jimbo:add_speech_bubble('special_lose_unik_artisan_builds', nil, {quip = true})
     G.GAME.unik_killed_by_artisan_builds = nil
+elseif G.GAME.unik_killed_by_magnet then
+    Jimbo:add_speech_bubble('special_lose_unik_magnet', nil, {quip = true})
+    G.GAME.unik_killed_by_magnet = nil
+elseif G.GAME.unik_killed_by_racket then
+    Jimbo:add_speech_bubble('special_lose_unik_racket', nil, {quip = true})
+    G.GAME.unik_killed_by_racket = nil
 else
     Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
 end

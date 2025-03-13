@@ -50,7 +50,7 @@ SMODS.Joker {
 				card = card
 			}
 		end
-		if context.after then
+		if context.final_scoring_step then
 			card.ability.extra.scoring = false
 		end
     end,
