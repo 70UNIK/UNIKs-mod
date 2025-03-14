@@ -579,6 +579,7 @@ return {
             k_unik_boo_start="Bigger Boo wants to know your location",
             k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."',
             k_unik_protection_racket_start='"The government has organized a protection racket."',
+            k_unik_video_poker_start='#1 Classic Video Poker Games Worldwide!',
             k_unik_boo_disabled="Exorcised!",
             k_unik_boo_possessed="Possessed!",
             k_unik_boo_eternal_bypass="Eternal Bypassed!",

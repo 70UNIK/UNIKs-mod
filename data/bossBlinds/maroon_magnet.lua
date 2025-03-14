@@ -32,6 +32,35 @@ SMODS.Blind{
             G.hand:change_size(2)
         end
 	end,
+    --Disable if no cards are enhanced and no steel cards present AND if alloy is obtained, also no gold cards
+    in_pool = function()
+        local goldenAlloy = false
+        local steels = 0
+        local unenhanced = 0
+        if G.jokers then
+            for _, v in pairs(G.jokers.cards) do
+                if v.config.center.key == "j_ExtraCredit_alloy" then
+                    goldenAlloy =true
+                end
+            end
+        end
+        if G.deck then 
+            for i, v in pairs(G.deck.cards) do
+                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                    steels = steels + 1
+                end
+            end
+            for i, w in pairs(G.deck.cards) do
+                if w.config.center == G.P_CENTERS.c_base then
+                    unenhanced = unenhanced + 1
+                end
+            end
+        end
+        if steels > 3 or unenhanced > 3 then
+            return true
+        end
+        return false
+    end,
     get_loc_debuff_text = function(self)
 		return localize("k_unik_magnet_warning")
 	end,
