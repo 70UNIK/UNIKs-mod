@@ -573,6 +573,70 @@ return {
 					"{s:0.8}Ice Cream and Clicked Cookie",
 				},
 			},
+            unik_disposable = {
+				name = "Disposable",
+				text = {
+					"{C:red}Destroys{} itself after",
+					"{C:attention}each{} round",
+				},
+            },
+            unik_niko = {
+				name = "Niko",
+				text = {
+					"{C:red}Destroys{} itself after",
+					"{C:attention}each{} round",
+                    "{C:red}Unremovable{}",
+				},
+            },
+            unik_disposable_consumable = {
+                name = "Disposable",
+				text = {
+                    "{C:green}#1# in #2#{} chance to do",
+                     "nothing on use",
+					"{C:red}Destroys{} itself after",
+					"{C:attention}each{} round",
+				},
+            },
+            unik_disposable_voucher = {
+				name = "Disposable",
+				text = {
+					"{C:red}Unredeems{} itself after",
+					"{C:attention}each{} round",
+				},
+            },
+            unik_disposable_booster = {
+				name = "Disposable",
+				text = {
+					"All cards in pack",
+					"are {C:attention}Disposable{}",
+				},
+            },
+            unik_niko_consumable = {
+                name = "Niko",
+				text = {
+                    "{C:green}#1# in #2#{} chance to do",
+                     "nothing on use",
+					"{C:red}Destroys{} itself after",
+					"{C:attention}each{} round",
+                    "{C:red}Unremovable{}",
+				},
+            },
+            unik_niko_voucher = {
+				name = "Niko",
+				text = {
+					"{C:red}Unredeems{} itself after",
+					"{C:attention}each{} round",
+                    "{C:red}Unremovable{}",
+				},
+            },
+            unik_niko_booster = {
+				name = "Niko",
+				text = {
+					"All cards in pack",
+					"are {C:attention}Disposable{}",
+                    "{C:red}Unremovable{}",
+				},
+            },
         },
         Planet={},
         Spectral={},
@@ -668,11 +732,15 @@ return {
             k_unik_magnet_warning="Must not hold any Steel Cards",
             k_unik_video_poker_warning="High cards are banned and pairs must have scoring Jacks or Better",
             k_unik_spawned="Spawned!",
+            k_unik_disposed="Disposed!",
+            k_unik_you_killed_niko="You Killed Niko.",
         },
         high_scores={},
         labels={
             unik_positive="Positive",
             unik_depleted = "Depleted",
+            unik_niko = "Niko",
+            unik_disposable = "Disposable",
         },
         poker_hand_descriptions={},
         poker_hands={},

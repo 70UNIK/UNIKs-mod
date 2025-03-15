@@ -90,6 +90,8 @@ SMODS.ObjectType({
 })
 -- stickers
 NFS.load(mod_path .. "data/stickers/depleted.lua")() 
+NFS.load(mod_path .. "data/stickers/disposable.lua")() 
+NFS.load(mod_path .. "data/stickers/niko.lua")() 
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 
@@ -139,6 +141,7 @@ NFS.load(mod_path .. "data/jokers/recycler.lua")()
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
+--- Tech Demo: Obtain a 
 --- Epic ---
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
