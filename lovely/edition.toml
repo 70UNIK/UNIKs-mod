@@ -88,13 +88,23 @@ payload = """--self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL
         self.C.UNIK_SHITTY_EDITION[2] = math.min(self.C.DARK_EDITION[1], self.C.DARK_EDITION[2])"""
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "self.C.DARK_EDITION[2] = math.min(self.C.DARK_EDITION[3], self.C.DARK_EDITION[1])"
+position = "after"
+payload = """--self.C.UNIK_SYNC_CATALYST_FAIL[1] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)
+        self.C.UNIK_SYNC_CATALYST_FAIL[3] = 0.6+0.2*(1- math.sin(self.TIMERS.REAL*1.3))
+        self.C.UNIK_SYNC_CATALYST_FAIL[2] = math.min(self.C.UNIK_SYNC_CATALYST_FAIL[1], self.C.UNIK_SYNC_CATALYST_FAIL[3])"""
+match_indent = true
+
 
 [[patches]]
 [patches.pattern]
 target = "globals.lua"
 pattern = "DARK_EDITION = {0,0,0,1},"
 position = "after"
-payload = """UNIK_SHITTY_EDITION = {1,0,0,1},
+payload = """UNIK_SHITTY_EDITION = {0,0,0,1},
 UNIK_THE_PLANT = HEX('709284'),
 UNIK_THE_MANACLE = HEX('575757'),
 UNIK_THE_WALL = HEX('8a59a5'),
@@ -109,6 +119,7 @@ UNIK_MAYA = HEX('ff00ab'),
 UNIK_YOKANA = HEX('86cafe'),
 UNIK_CHELSEA = HEX('d298fd'),
 UNIK_EYE_SEARING_BLUE = HEX('0000ff'),
+UNIK_SYNC_CATALYST_FAIL = {0,0,0,1},
 """
 match_indent = true
 

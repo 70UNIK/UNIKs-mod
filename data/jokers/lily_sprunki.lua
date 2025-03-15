@@ -86,12 +86,11 @@ SMODS.Joker {
         end
         if context.before and context.cardarea == G.jokers and #context.full_hand > 1 then
             --only turn feral if theres any valid card
-            local valid = false
-                for i, w in pairs(G.hand.cards) do
-                    if not w.ability.eternal then
-                        valid = true
-                    end
+            for i, w in pairs(context.full_hand) do
+                if not w.ability.eternal then
+                    valid = true
                 end
+            end
             if valid == true then
                 card.ability.extra.feral = true
                 --print("turn them happy")

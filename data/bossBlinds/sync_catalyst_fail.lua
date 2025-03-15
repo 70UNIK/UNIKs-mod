@@ -7,7 +7,7 @@ SMODS.Blind{
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 9},
-    boss_colour= HEX("6981bd"),
+    boss_colour= G.C.DARK_EDITION,
     dollars = 5,
     mult = 1.5,
 	--Only appear if you have at least 5 stone cardsSMODS.has_no_suit(v)
