@@ -540,7 +540,25 @@ return {
                     "creating {C:attention}#1#{} {X:cry_cursed,C:white}Cursed{} Jokers",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} {X:cry_cursed,C:white}Cursed{C:inactive} Joker(s))",
                 }               
-            }
+            },
+            j_unik_tech_demo = {
+                name="Tech Demo",
+                text={
+                    "Sell this card to create a random",
+                    "{C:attention}Disposable Eternal Rental{}", 
+                    "{C:legendary}Legendary{} Joker",
+                    "{C:inactive}(Can overflow){}",
+                }               
+            },
+            j_unik_a_taste_of_power = {
+                name="A Taste of Power",
+                text={
+                    "Sell to create a random",
+                    "{C:attention}Niko Absolute Rental{}", 
+                    "{C:cry_exotic}Exotic{} Joker",
+                    "{C:inactive}(Can overflow){}",
+                }               
+            },
         },
         Other={			
             unik_depleted = {
@@ -734,6 +752,7 @@ return {
             k_unik_spawned="Spawned!",
             k_unik_disposed="Disposed!",
             k_unik_you_killed_niko="You Killed Niko.",
+            k_unik_taste_of_power="Enjoy it while it lasts!",
         },
         high_scores={},
         labels={

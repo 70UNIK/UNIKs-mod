@@ -1,7 +1,7 @@
 --Niko: Self destructs after final scoring is finished (aka after 1 round). CANNOT be removed
 SMODS.Sticker{
     key="unik_niko",
-    badge_colour=HEX("ff0000"),
+    badge_colour=G.C.UNIK_SHITTY_EDITION,
     atlas = 'unik_stickers', 
     pos = { x = 1, y = 1 },
     rate = 0.0,

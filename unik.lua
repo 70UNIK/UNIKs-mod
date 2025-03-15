@@ -136,12 +136,15 @@ NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
+NFS.load(mod_path .. "data/jokers/tech_demo.lua")()
 
 -- No standing Zone: 3x mult, decreases by 0.01x per 2 seconds in this ante after purchase. If hits 1x mult, switches to "Towaway" (Cursed). Resets after defeating a boss blind.
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
+NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")()
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
---- Tech Demo: Obtain a 
+--- Tech Demo: Get a Rental Niko Exotic Joker
+
 --- Epic ---
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
