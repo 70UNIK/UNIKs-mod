@@ -553,7 +553,7 @@ return {
             j_unik_a_taste_of_power = {
                 name="A Taste of Power",
                 text={
-                    "Sell to create a random",
+                    "Sell this card to create a random",
                     "{C:attention}Niko Absolute Rental{}", 
                     "{C:cry_exotic}Exotic{} Joker",
                     "{C:inactive}(Can overflow){}",
