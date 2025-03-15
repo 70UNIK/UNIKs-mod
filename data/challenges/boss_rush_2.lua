@@ -33,6 +33,10 @@ SMODS.Challenge{
 			{ id = "j_diet_cola" },
 			{ id = "v_directors_cut" },
 			{ id = "v_retcon" },
+			{ id = "j_cry_pickle" },
+			{ id = "v_cry_copies" },
+			{ id = "v_cry_tag_printer" },
+			{ id = "v_cry_clone_machine" },
 		},
 		banned_other = {},
 	},
@@ -51,6 +55,8 @@ function get_new_boss()
 	local bl = gnb2()
 	if (G.GAME.modifiers.unik_obsidian_showdown or G.GAME.modifiers.unik_obsidian_swarm) and G.GAME.unik_its_orbin_time then
 		return "bl_cry_obsidian_orb"
+	elseif G.GAME.modifiers.unik_all_video_poker then
+		return "bl_unik_video_poker"
 	end
 	return bl
 end
@@ -66,6 +72,9 @@ function Game:start_run(args)
             self.GAME.win_ante = 13
             --print("BE PREPARED FOR SUFFERING.")
         end
+		if self.GAME.modifiers.unik_purple_scaling then
+			self.GAME.modifiers.scaling = 3
+		end
     end
     return inl
 end

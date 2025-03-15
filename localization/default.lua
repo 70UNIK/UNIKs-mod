@@ -92,14 +92,14 @@ return {
                     "hand must not hold Steel cards",
 				},
             },
-            --just like the actual gambling machine
+            --just like the actual gambling machine - Jacks or better
             bl_unik_video_poker={
                 name = "Video Poker",
 				text = {
-                    "Hand Size fixed to 5",
+                    "Hand Size fixed to 5 (Efficinare debuffed)",
 					"Only 1 Discard per Hand",
-                    "Can only play 5 cards",
-                    "High Cards must have Jacks or better",
+                    "Must play all cards, High cards are banned",
+                    "Pairs must have scoring Jacks or better",
 				},
             },
             bl_unik_the_lily={
@@ -502,6 +502,44 @@ return {
                     "{C:attention}selling price{} of debuffed Joker",
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
+            },
+            j_unik_rancid_smoothie = {
+                name="Rancid Smoothie",
+                text={
+                    "{X:dark_edition,C:white}^#1#{} Mult {C:attention}after scoring{}",
+                    "Selling will {C:red}divide{} values",
+					"of owned jokers by {C:attention}#2#{}",
+                }
+            },
+            j_unik_hook_n_discard = {
+                name="Hook n' Discard",
+                text={
+                    "Discards {C:attention}#2#{} {C:attention}random{} cards per hand",
+                    "{C:red}Self destructs{} after {C:attention}#1#{} {C:attention}consecutive{}",
+					"discards with only {C:attention}#2#{} cards",
+                    "or {C:unik_hook_color}The Hook{} is triggered",      
+                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} discards)",
+                }
+            },
+            j_unik_vampiric_hammer = {
+                name="Vampiric Hammer",
+                text={
+                    "C:red}Remove{} card {C:attention}enhancements{} after scoring",
+                    "{C:red}Self destructs{} when less than", 
+                    "{C:attention}#1#{} {C:attention}Enhanced{} card(s) remain in deck or",
+                    "{C:unik_orta_hammer_color}The Hammer (Ortalab){} is triggered",      
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} enhanced cards)",
+                }
+            },
+            j_unik_monster_spawner = {
+                name="Monster Spawner",
+                text={
+                    "Create {C:attention}1{} {X:cry_cursed,C:white}Cursed{} Joker",
+                    "at end of Boss Blind", 
+                    "{C:red}Self destructs{} after",
+                    "creating {C:attention}#1#{} {X:cry_cursed,C:white}Cursed{} Jokers",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {X:cry_cursed,C:white}Cursed{C:inactive} Joker(s))",
+                }               
             }
         },
         Other={			
@@ -562,6 +600,8 @@ return {
             c_unik_boss_rush_2="Enter the Gungeon II",
             c_unik_boss_rush_3="Enter the Gungeon III",
             c_unik_rng_2="RNG II",
+            c_unik_video_poker_1="Jacks or Better",
+            c_unik_video_poker_2="Jacks or Better II",
         },
         collabs={},
         dictionary={
@@ -599,7 +639,11 @@ return {
             k_unik_blind_start_head="The Head",
             k_unik_blind_start_club="The Club",
             k_unik_blind_start_goad="The Goad",
+            k_unik_blind_start_hook="The Hook",
+            k_unik_blind_start_orta_hammer="The Hammer (Ortalab)",
+            k_unik_orta_hammer_stripped="Stripped!",
             k_unik_arm_downgrade="Downgrade!",
+            k_unik_hooked="Discarding!",
             k_unik_headless_rotted="Rotted!",
             k_unik_house_demolished="Demolished!",
             k_unik_arm_healed="Healed!",
@@ -622,8 +666,8 @@ return {
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $25",
             k_unik_magnet_warning="Must not hold any Steel Cards",
-            k_unik_video_poker_warning="High Cards must have Jacks or Better",
-
+            k_unik_video_poker_warning="High cards are banned and pairs must have scoring Jacks or Better",
+            k_unik_spawned="Spawned!",
         },
         high_scores={},
         labels={
@@ -730,7 +774,8 @@ return {
         suits_singular={},
         tutorial={},
         v_dictionary={
-            a_unik_hands_1={"#1# hands"}
+            a_unik_hands_1={"#1# hands"},
+            a_unik_discards_1={"#1# discards"}
         },
         v_text={			
             ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is {C:attention}set{} to {C:red}<=1{}" },
@@ -747,6 +792,8 @@ return {
             ch_c_unik_ante_12_victory = {"Must beat Ante {C:attention}10{} to win"},
             ch_c_unik_ante_13_victory = {"Must beat Ante {C:attention}13{} to win"},
             ch_c_unik_vermillion_pandemic = {"One {C:attention}random{} Joker {C:red}replaced{} after every hand"},
+            ch_c_unik_all_video_poker = {"All Boss Blinds are {X:unik_eye_searing_blue,C:money}Video {X:unik_eye_searing_blue,C:money}Poker{}"},
+            ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"}
 
         },
     },

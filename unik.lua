@@ -111,7 +111,6 @@ NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
---Video Poker: Hand size fixed to 5 (disregarding negative cards), discards set to 1 per hand, discard modifiers are debuffed, Must play 5 cards , high cards must have a scoring jack or better to score. X1 score
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
@@ -153,6 +152,8 @@ NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/impounded.lua")() -- no image, an impound notice
+NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
+NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() --mc monster spawner
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
@@ -160,11 +161,9 @@ NFS.load(mod_path .. "data/jokers/goading_joker.lua")() --no image, patronizing 
 NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
 NFS.load(mod_path .. "data/jokers/handcuffs.lua")() 
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
+NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
---Hook n' discard (The Hook): Discards 2 random cards before play. Self destruct after 16 consecutive discards with only two cards or the hook is triggered
---Rancid smoothie: x0.33 mult, sell to multiply all values of all owned jokers by 0.8x
---Monster spawner: Create 1 Cursed Joker after defeating each Boss Blind; 69 in 70 chance for it to not be negative. Self destruct if spawned 2 cursed jokers. If absolute, will never expire (for challenges). WIll never spawn another monster spawner.
---Vampiric Hammer: Remove all card enhancements after scoring. Self destruct if you have <30% enhanced cards in your deck or Ortalab's The Hammer is triggered
+NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() 
 
 
 --- Devastating ---
@@ -176,8 +175,26 @@ NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 NFS.load(mod_path .. "data/challenges/chipzel.lua")()
 NFS.load(mod_path .. "data/challenges/multiplication.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
+NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
+NFS.load(mod_path .. "data/challenges/video_poker_3.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")()
+
+-- achievements
+-- Jackpot! - Score a Royal Flush against Video Poker
+-- IN SPACE! - Have Observatory, Perkeo and Moonlight Cookie all at once
+-- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
+-- Self Insert - Get UNIK from a gateway.
+-- Dicey - Complete the RNG II challenge
+
+-- Self offering - Rig an Evocation and use it.
+-- Atomic Precision: Die to the Obsidian Orb from the Indigo ICBM's effect while The Poppy is also active.
+-- Hell Invasion - Own every Cursed Joker in the collection.
+-- Debuffs, Debuffs everywhere - Have all your Jokers and your entire deck debuffed.
+-- Beaned - Die from having zero hand size from depleted Turtle Beans
+-- Epic Fail - Score under -1.79e308 Chips in a single hand
+-- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
 
 
 

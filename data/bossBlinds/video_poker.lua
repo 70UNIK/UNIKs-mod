@@ -1,4 +1,6 @@
 --video poker rules be like
+--Known issues:
+--Having the manacle in Video Poker will permanently reduce hand size by 1 after defeating video poker. Selling merry andy during this blind has the same effect
 SMODS.Blind{
     key = 'unik_video_poker',
     config = {},
@@ -7,28 +9,7 @@ SMODS.Blind{
     pos = { x = 0, y = 16},
     boss_colour= HEX("0000ff"),
     dollars = 8,
-    mult = 1,
-	loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1) * 2), 3 } }
-	end,
-	collection_loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1) * 2), 3 } }
-	end,
-    --Disable if no jacks or better are present
-    in_pool = function()
-        local jacksOrBetter = 0
-        if G.deck then 
-            for i, v in pairs(G.deck.cards) do
-                if v:get_id() == 11 or v:get_id() == 12 or v:get_id() == 13 or v:get_id() == 14 then
-                    jacksOrBetter = jacksOrBetter + 1
-                end
-            end
-        end
-        if jacksOrBetter > 2 then
-            return true
-        end
-        return false
-    end,
+    mult = 0.4,
     set_blind = function(self, reset, silent)
         if not reset then
             if not next(SMODS.find_card('j_chicot')) then
@@ -37,8 +18,8 @@ SMODS.Blind{
                 ease_discard(1)
                 G.GAME.unik_killed_by_video_poker = true
                 G.GAME.unik_video_poker_rules = true
-    
-                G.GAME.blind.unik_original_hand_size = G.hand.config.card_limit
+
+                G.GAME.unik_original_hand_size = G.hand.config.card_limit
                 G.hand:change_size(-G.hand.config.card_limit + 5)
                 local text = localize('k_unik_video_poker_start')
                 attention_text({
@@ -49,6 +30,12 @@ SMODS.Blind{
             end
 
         end
+	end,
+    recalc_debuff = function(self, card, from_blind)
+        if (card.area == G.jokers) and card.config.center.key == "j_cry_effarcire" then
+            return true
+        end
+        return false
 	end,
     --add 1 discard after a hand.
     cry_after_play = function(self)
@@ -62,18 +49,42 @@ SMODS.Blind{
     get_loc_debuff_text = function(self)
 		return localize("k_unik_video_poker_warning")
 	end,
-    --debuff hand if a high card does not contain jacks or better
+    --debuff hand if a pair does not contain jacks or better. Note that splash will enable pairs to have only 1 jack, queen, king or ace
     debuff_hand = function(self, cards, hand, handname, check)
+        local Splash = false
+        for _, v in pairs(G.jokers.cards) do
+            if v.config.center.key == "j_splash" then
+                Splash = true
+            end
+        end
         --during initial selection
-        if handname == 'High Card' and not G.GAME.blind.disabled then
+        if handname == 'Pair' and not G.GAME.blind.disabled and G.GAME.unik_video_poker_rules then
+            local jacks = 0
+            local queens = 0
+            local kings = 0
+            local aces = 0
             for k, v in ipairs(cards) do
-                --if a jack or better is inside, negate the warning
-                if v:get_id() == 11 or v:get_id() == 12 or v:get_id() == 13 or v:get_id() == 14 then
-                    return false
+                --if 2 jacks or better are visible, negate warning
+                if v:get_id() == 11 then
+                    jacks = jacks + 1
+                elseif v:get_id() == 12 then
+                    queens = queens + 1
+                elseif v:get_id() == 13 then
+                    kings = kings + 1
+                elseif v:get_id() == 14 then
+                    aces = aces + 1
                 end
             end
+            if jacks > 1 or queens > 1 or kings > 1 or aces > 1 then
+                return false
+            elseif Splash == true and (jacks > 0 or queens > 0 or kings > 0 or aces > 0) then
+                return false
+            else
+                return true
+            end
+		elseif handname == "High Card" and not G.GAME.blind.disabled and G.GAME.unik_video_poker_rules then
             return true
-		end
+        end
         return false
 	end,
 	disable = function(self)
@@ -81,16 +92,26 @@ SMODS.Blind{
         if G.GAME.unik_video_poker_rules then
             G.GAME.unik_killed_by_video_poker = nil
             G.GAME.unik_video_poker_rules = nil
-            G.hand:change_size(G.GAME.blind.unik_original_hand_size - G.hand.config.card_limit)
+            --Formula:
+            --5 (BASE) + unexpected modifiers (selling merry andy,juggler, handcuff self destruct) = original hand size (around 8)
+            G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 5))
             ease_discard(-G.GAME.current_round.discards_left)
             ease_discard(G.GAME.blind.discards_sub)
+            --redraw if you have effarcire
+            if G.jokers then
+                for _, v in pairs(G.jokers.cards) do
+                    if v.config.center.key == "j_cry_effarcire" then
+                        G.FUNCS.draw_from_deck_to_hand(#G.deck.cards)
+                    end
+                end
+            end
         end
 	end,
 	defeat = function(self)
         if G.GAME.unik_video_poker_rules then
             G.GAME.unik_killed_by_video_poker = nil
             G.GAME.unik_video_poker_rules = nil
-            G.hand:change_size(G.GAME.blind.unik_original_hand_size - G.hand.config.card_limit)
+            G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 5))
         end
 	end,
 }

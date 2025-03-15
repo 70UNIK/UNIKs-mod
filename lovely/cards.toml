@@ -10,7 +10,8 @@ priority = 999
 target = '''=[SMODS Cryptid "items/spooky.lua"]'''
 pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
-payload = '''and card.config.center.key ~= "j_unik_impounded"'''
+payload = '''and card.config.center.key ~= "j_unik_impounded" 
+and card.config.center.key ~= "j_unik_rancid_smoothie"'''
 match_indent = true
 
 ### allow modify cost of impounded
@@ -43,3 +44,47 @@ pattern = '''if self.config and self.config.center and self.config.center.rarity
 position = "at"
 payload = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
+
+### Hook n discard, ensure cards are discarded BEFORE scoring (similar to the hook)
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.blind:press_play() then'''
+position = 'before'
+match_indent = true
+payload = '''
+if G.jokers then
+    for _, v in pairs(G.jokers.cards) do
+        if v.ability.name == "j_unik_hook_n_discard" then
+            --taken from the hook
+            G.E_MANAGER:add_event(Event({ 
+                trigger = 'after',
+                func = function()
+                local any_selected = nil
+                local _cards = {}
+                for k, v in ipairs(G.hand.cards) do
+                    _cards[#_cards+1] = v
+                end
+                for i = 1, 2 do
+                    if G.hand.cards[i] then 
+                        local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('hook'))
+                        G.hand:add_to_highlighted(selected_card, true)
+                        table.remove(_cards, card_key)
+                        any_selected = true
+                        play_sound('card1', 1)
+                    end
+                end
+                if any_selected then G.FUNCS.discard_cards_from_highlighted(nil, true) end
+                if any_selected then
+                    v:juice_up(0.8, 0.8)
+                end
+            return true end })) 
+            card_eval_status_text(v, "extra", nil, nil, nil, {
+                message = localize("k_unik_hooked"),
+                colour = G.C.UNIK_THE_HOOK,
+                card=v,
+            })
+        end
+    end
+end
+'''

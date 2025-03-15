@@ -16,6 +16,7 @@ SMODS.Joker {
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_goad'), G.C.UNIK_THE_GOAD, G.C.WHITE, 1.0 )
     end,
+    immutable = true,
     add_to_deck = function(self, card, from_debuff)
         local Cards = 0
         if G.deck and card.added_to_deck then 

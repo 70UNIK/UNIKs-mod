@@ -39,6 +39,14 @@ target = 'functions/common_events.lua'
 pattern = '''if v.boss.showdown then'''
 position = 'at'
 payload = '''
--- If the blind is a showdown or THE LEAK
-if v.boss.showdown or G.GAME.blind.config.blind.key == "bl_unik_sync_catalyst_fail" then'''
+--video poker has the blue bg
+if blindname == "bl_unik_video_poker" then
+    ease_background_colour{new_colour = G.C.UNIK_EYE_SEARING_BLUE , special_colour = G.C.UNIK_EYE_SEARING_BLUE , contrast = 0.3}
+    return
+--sync catalyst will have a mixture of red blue and purple
+elseif blindname == "bl_unik_sync_catalyst_fail" then
+    ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.PURPLE, tertiary_colour = G.C.RED, contrast = 3}
+    return
+-- If the blind is a showdown
+elseif v.boss.showdown then'''
 match_indent = true
