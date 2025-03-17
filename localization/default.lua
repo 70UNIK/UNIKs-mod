@@ -574,12 +574,11 @@ return {
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult", 
-                    "{C:green}#2# in #3#{} chance to not {C:red}self destruct{} after shop",
+                    "{X:dark_edition,C:white}^#1#{} Mult, {C:red}Self destructs{} after shop",
                     "{C:attention}On destruction{}, create a copy of herself with",
-                    "{X:mult,C:white}X#4#{} the {X:dark_edition,C:white}^Mult{} amount, BUT {C:red}33%{} selling price",
+                    "{X:dark_edition,C:white}^#2#{} Mult, BUT {C:red}80%{} selling price",
                     "{C:inactive,s:0.8}(Removes stickers from copy){}",
-                    "{C:inactive,s:0.8}(Cannot copy if destroyed by sticker effects){}",           
+                    "{C:red,s:0.8}(Cannot copy if destroyed by sticker effects){}",           
                     "{C:inactive,s:0.9}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
@@ -592,6 +591,13 @@ return {
                     "at the end of round",
                     "{C:green}#1# in #2#{} chance not to redeem another", 
                     "{C:attention}disposable{} Voucher",
+                }         
+            },
+            j_unik_noon = {
+                name="Noon",
+                text={
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "only on {C:attention}first hand{}",
                 }         
             }
         },

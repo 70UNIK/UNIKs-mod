@@ -105,8 +105,8 @@ NFS.load(mod_path .. "data/bossBlinds/poppy.lua")()
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
---The lily: Destroy all cards played after scoring; each card destroyed increases blind requirements by 0.02%
---The Garbage: Add random permanently debuffed cards equal to 16% of total cards in deck (they self destruct after blind ends)
+--The lily: Destroy all cards played after scoring
+--The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
 NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")() 
@@ -132,6 +132,8 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
 NFS.load(mod_path .. "data/jokers/big_joker.lua")()
+NFS.load(mod_path .. "data/jokers/noon.lua")()
+-- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
 --- Uncommon ---
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
@@ -141,20 +143,20 @@ NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
-NFS.load(mod_path .. "data/jokers/tech_demo.lua")()
+NFS.load(mod_path .. "data/jokers/tech_demo.lua")() --the joker presenting a "tech demo" of technology
 
-NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
-NFS.load(mod_path .. "data/jokers/big_alice.lua")()
+NFS.load(mod_path .. "data/jokers/coupon_codes.lua")() -- coupon codes
+--NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
-NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")()
---- 
+NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() -- A small sample of Crustulium 
+
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")() --rare
 --- Epic ---
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
 NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
-NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
+NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")() -- white lily cookie's moonflower form.
 
 ---- this will be her moonflower faerie form
 --- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
@@ -165,7 +167,7 @@ NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/impounded.lua")() -- no image, an impound notice
-NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
+NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")() -- no image, the smoothie, but looking ass
 NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() --mc monster spawner
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
@@ -176,7 +178,7 @@ NFS.load(mod_path .. "data/jokers/handcuffs.lua")()
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
-NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() 
+NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a vampire with a hammer, or candy apple cookie with her hammer, destroying a mult card.
 
 --- Devastating ---
 --- Catastrophic ---

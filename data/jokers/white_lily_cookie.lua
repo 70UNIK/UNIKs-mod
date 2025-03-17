@@ -14,8 +14,8 @@ local function White_lily_copy(card)
     _card.ability.cry_flickering = nil
     _card.ability.cry_possessed = nil
     _card.ability.extra.copying = false
-    _card.ability.extra.Emult = _card.ability.extra.Emult * _card.ability.extra.Emult_mod
-    _card.ability.extra_value = _card.ability.extra_value - (math.floor(_card.sell_cost*2*100/3)/100)
+    _card.ability.extra.Emult = _card.ability.extra.Emult * 1.06
+    _card.ability.extra_value = _card.ability.extra_value - (math.floor(_card.sell_cost*100*0.8)/100)
     _card:set_cost()
 
     card_eval_status_text(_card, "extra", nil, nil, nil, {
@@ -30,6 +30,7 @@ local function White_lily_copy(card)
         card = _card
     })
 end
+--remove RNG
 SMODS.Joker {
 	key = 'unik_white_lily_cookie',
     atlas = 'placeholders',
@@ -39,12 +40,9 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.25,Emult_mod = 1.15,odds = 7, sold = false,copying = false} },
+    config = { extra = { Emult = 1.1, sold = false,copying = false} },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult , 
-        center and cry_prob(center.ability.cry_prob*5 or 5,center.ability.extra.odds,center.ability.cry_rigged)or 5, 
-        center.ability.extra.odds, 
-        center.ability.extra.Emult_mod} }
+		return { vars = {center.ability.extra.Emult,center.ability.extra.Emult*1.06} }
 	end,
     add_to_deck = function(self, card, from_debuff)
         card.ability.perishable = nil
@@ -65,7 +63,7 @@ SMODS.Joker {
 			}
 		end
         if context.ending_shop and not context.repetition and not context.blueprint then
-            if not (pseudorandom('unik_white_lily') < cry_prob(card.ability.cry_prob*5 or 5,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) and card.ability.extra.copying == false then
+            if card.ability.extra.copying == false then
                 card.ability.extra.copying = true
                 selfDestruction(card,"k_unik_plant_no_face",HEX("bfb2f6"))
                 G.E_MANAGER:add_event(Event({
@@ -77,12 +75,6 @@ SMODS.Joker {
                     end,
                 }))
                 
-            else
-                card_eval_status_text(card, "extra", nil, nil, nil, {
-                    message = localize("k_nope_ex"),
-                    colour = HEX("bfb2f6"),
-                    card = card
-                })                
             end
         end
         if context.cry_start_dissolving and not context.repetition and not context.blueprint and context.card == card and card.ability.extra.sold == false and card.ability.extra.copying == false then
