@@ -23,7 +23,7 @@ SMODS.Joker {
             if G.jokers.cards[i].config.center.rarity ~= "cry_cursed" and G.jokers.cards[i].config.center.key ~= "j_unik_impounded" then
                 table.insert(validEntries,i)
             end
-            if G.jokers.cards[i].config.center.key == "j_unik_ghost_trap" then
+            if G.jokers.cards[i].config.center.key == "j_unik_ghost_trap" or G.jokers.cards[i].config.center.key == "j_cry_formidiulosus" then
                 ghostTrap = true
                 validEntries = {}
                 break
@@ -64,7 +64,7 @@ SMODS.Joker {
                 card_eval_status_text(G.jokers.cards[select], 'extra', nil, nil, nil, {message = localize('k_unik_impounded'), colour = G.C.BLACK})
                 G.E_MANAGER:add_event(Event({
                     func = function() 
-                        G.jokers.cards[select].ability.extra.unik_impounded = true
+                        G.jokers.cards[select].config.extra.unik_impounded = true
                         --Scale logarithmically, so cheaper jokers would proportionately cost more, while exotics proportinately cost less, but still always increasing.
                         card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(G.jokers.cards[select].sell_cost+1))/100
                         G.jokers.cards[select].sell_cost = 0
@@ -84,11 +84,13 @@ SMODS.Joker {
     --remove debuffs
     remove_from_deck = function(self, card, from_debuff)
         for i = 1,#G.jokers.cards do
-            if G.jokers.cards[i].ability.extra.unik_impounded then
-                SMODS.debuff_card(G.jokers.cards[i],false,"unik_impounded")
-                G.jokers.cards[i].ability.extra.unik_impounded = nil
-                G.jokers.cards[i].ability.eternal = false
-                G.jokers.cards[i].ability.rental= false
+            if G.jokers.cards[i].config.extra then
+                if G.jokers.cards[i].config.extra.unik_impounded then
+                    SMODS.debuff_card(G.jokers.cards[i],false,"unik_impounded")
+                    G.jokers.cards[i].config.extra.unik_impounded = nil
+                    G.jokers.cards[i].ability.eternal = false
+                    G.jokers.cards[i].ability.rental= false
+                end
             end
         end
     end,

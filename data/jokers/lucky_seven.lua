@@ -7,9 +7,9 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = {mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
+    config = { extra = {odds = 1,mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
     loc_vars = function(self, info_queue, center)
-        return { vars = {card and cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged)or 1, 
+        return { vars = {center and cry_prob(center.ability.cry_prob,center.ability.extra.odds_money,center.ability.cry_rigged)or 1, 
         center.ability.extra.mult,center.ability.extra.odds_mult,center.ability.extra.p_dollars,center.ability.extra.odds_money} }
 	end,
     
@@ -23,7 +23,7 @@ SMODS.Joker {
                 if pseudorandom('unik_lucky_seven') < cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged)/card.ability.extra.odds_money then
                     moneyTrue = true
                 end
-                if pseudorandom('unik_lucky_seven') < cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged)/card.ability.extra.odds_mult then
+                if pseudorandom('unik_lucky_seven') < cry_prob(card.ability.cry_prob,card.ability.extra.odds_mult,card.ability.cry_rigged)/card.ability.extra.odds_mult then
                     multTrue = true
                 end
                 if multTrue and moneyTrue then

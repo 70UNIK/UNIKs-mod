@@ -17,6 +17,10 @@ SMODS.Atlas({
 	frames = 21 })
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
+SMODS.Sound({
+	key = "gore6",
+	path = "gore6.ogg",
+})
 --Creates an atlas for cards to use
 -- SMODS.Atlas {
 -- 	-- Key for code to find it with
@@ -132,25 +136,28 @@ NFS.load(mod_path .. "data/jokers/big_joker.lua")()
 --- Uncommon ---
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
+
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/tech_demo.lua")()
 
--- No standing Zone: 3x mult, decreases by 0.01x per 2 seconds in this ante after purchase. If hits 1x mult, switches to "Towaway" (Cursed). Resets after defeating a boss blind.
+NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
+NFS.load(mod_path .. "data/jokers/big_alice.lua")()
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")()
-NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
---- Tech Demo: Get a Rental Niko Exotic Joker
-
+--- 
+NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")() --rare
 --- Epic ---
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
 NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
---- Legendary ---
---- Exotic ---
+NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
+
+---- this will be her moonflower faerie form
+--- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
 
@@ -171,12 +178,12 @@ NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")()
 NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
 NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() 
 
-
 --- Devastating ---
 --- Catastrophic ---
 --- 
 --- 
 --- Challenges
+NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")()
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 NFS.load(mod_path .. "data/challenges/chipzel.lua")()
 NFS.load(mod_path .. "data/challenges/multiplication.lua")()

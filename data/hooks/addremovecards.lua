@@ -15,6 +15,7 @@ function selfDestruction(card,message,color,dissolve)
                 message = localize(message),
                 colour = color,
                 card=card,
+                delay = 0.5,
             })
             --Dissolving
             if (dissolve) then
@@ -85,7 +86,8 @@ function Card:remove_from_deck(from_debuff)
                                     },
                                 }),
                                 colour = G.C.MULT,
-                                card = v
+                                card = v,
+                                delay = 0.5
                             })
                             return true;
                         end
@@ -164,6 +166,19 @@ function CardArea:emplace(card, location, stay_flipped)
             --ghost trap functionality
             elseif v.ability.name == "j_unik_ghost_trap" then
                 GhostTrap1(v)
+            --Formidicus fix, now constantly destroys cursed jokers
+            elseif v.config.center.key == "j_cry_formidiulosus" then
+                for x, w in pairs(G.jokers.cards) do
+                    if w.config.center.rarity == "cry_cursed" and not w.ability.extra.getting_captured then
+                        --destory ghost
+                        selfDestruction(w,"k_unik_pentagram_purified",G.C.MULT)
+                        card_eval_status_text(v, "extra", nil, nil, nil, {
+                            message = localize("k_nope_ex"),
+                            colour = G.C.BLACK,
+                            delay = 0.3
+                        })
+                    end
+                end
             end
 
         end

@@ -1,0 +1,68 @@
+--Redeem a random disposable voucher at the end of the round. 1 in 2 chance to redeem another disposable voucher.
+SMODS.Joker {
+	-- How the code refers to the joker.
+	key = 'unik_coupon_codes',
+    atlas = 'placeholders',
+    rarity = 2,
+	pos = { x = 1, y = 0 },
+
+    cost = 7,
+	blueprint_compat = true,
+    perishable_compat = true,
+	eternal_compat = true,
+    config = { extra = {odds = 5} },
+	loc_vars = function(self, info_queue, center)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_disposable" }
+		return { vars = { 
+        center and cry_prob(center.ability.cry_prob*3 or 3,center.ability.extra.odds,center.ability.cry_rigged)or 3, 
+        center.ability.extra.odds} }
+	end,
+    calculate = function(self, card, context)
+        if context.end_of_round and context.game_over == false then
+            card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})
+            local max = 1
+            if not(pseudorandom('unik_coupon_codes') < cry_prob(card.ability.cry_prob*3 or 3,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
+                max = 2
+            end
+            for i = 1, max do
+                local area
+                if G.STATE == G.STATES.HAND_PLAYED then
+                    if not G.redeemed_vouchers_during_hand then
+                        G.redeemed_vouchers_during_hand =
+                            CardArea(G.play.T.x, G.play.T.y, G.play.T.w, G.play.T.h, { type = "play", card_limit = 5 })
+                    end
+                    area = G.redeemed_vouchers_during_hand
+                else
+                    area = G.play
+                end
+                local _pool = get_current_pool("Voucher", nil, nil, nil, true)
+                local center = pseudorandom_element(_pool, pseudoseed("cry_trade_redeem"))
+                local it = 1
+                while center == "UNAVAILABLE" do
+                    it = it + 1
+                    center = pseudorandom_element(_pool, pseudoseed("cry_trade_redeem_resample" .. it))
+                end
+                local card = create_card("Voucher", area, nil, nil, nil, nil, center)
+                card:start_materialize()
+                card.ability.unik_disposable = true
+                --Prevent disposable's effect from activating immediately
+                card.ability.shield_immediate_disposal = true
+                area:emplace(card)
+                card.cost = 0
+                card.shop_voucher = false
+                local current_round_voucher = G.GAME.current_round.voucher
+                card:redeem()
+                G.GAME.current_round.voucher = current_round_voucher
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0,
+                    func = function()
+                        card:start_dissolve()
+                        
+                        return true
+                    end,
+                }))
+            end
+        end
+    end,
+}

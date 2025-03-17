@@ -477,6 +477,15 @@ return {
                     "increases this by {C:mult}+#2#{} Mult",
                 },
             },
+            j_unik_big_alice = {
+                name="Giant Alice",
+                text={
+                    "{X:mult,C:white}X#1#{} Mult if played hand contains",
+                    "{C:attention}#3#{} or more cards",
+                    "Each played card above {C:attention}#3#{} cards",
+                    "increases this by {X:mult,C:white}X#2#{} Mult",
+                },
+            },
             j_unik_no_standing_zone = {
                 name="No Standing Zone",
                 text={
@@ -524,7 +533,7 @@ return {
             j_unik_vampiric_hammer = {
                 name="Vampiric Hammer",
                 text={
-                    "C:red}Remove{} card {C:attention}enhancements{} after scoring",
+                    "{C:red}Remove{} card {C:attention}enhancements{} after scoring",
                     "{C:red}Self destructs{} when less than", 
                     "{C:attention}#1#{} {C:attention}Enhanced{} card(s) remain in deck or",
                     "{C:unik_orta_hammer_color}The Hammer (Ortalab){} is triggered",      
@@ -541,6 +550,7 @@ return {
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} {X:cry_cursed,C:white}Cursed{C:inactive} Joker(s))",
                 }               
             },
+            --almanac version will create exotics
             j_unik_tech_demo = {
                 name="Tech Demo",
                 text={
@@ -550,6 +560,7 @@ return {
                     "{C:inactive}(Can overflow){}",
                 }               
             },
+            --almanac version will create wonderous, transdescendant and ritualistic jokers (except kosmos)
             j_unik_a_taste_of_power = {
                 name="A Taste of Power",
                 text={
@@ -559,6 +570,30 @@ return {
                     "{C:inactive}(Can overflow){}",
                 }               
             },
+            -- ^1.25 Mult, 1 in 6 chance to self destruct, on destruction, copies herself with x1.4 stats,
+            j_unik_white_lily_cookie = {
+                name = 'White Lily Cookie',
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Mult", 
+                    "{C:green}#2# in #3#{} chance to not {C:red}self destruct{} after shop",
+                    "{C:attention}On destruction{}, create a copy of herself with",
+                    "{X:mult,C:white}X#4#{} the {X:dark_edition,C:white}^Mult{} amount, BUT {C:red}33%{} selling price",
+                    "{C:inactive,s:0.8}(Removes stickers from copy){}",
+                    "{C:inactive,s:0.8}(Cannot copy if destroyed by sticker effects){}",           
+                    "{C:inactive,s:0.9}All I wanted was for everyone to be happy...{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                }
+            },
+            j_unik_coupon_codes = {
+                name="Coupon Codes",
+                text={
+                    "Redeem a {C:attention}random{} {C:attention}disposable{} Voucher",
+                    "at the end of round",
+                    "{C:green}#1# in #2#{} chance not to redeem another", 
+                    "{C:attention}disposable{} Voucher",
+                }         
+            }
         },
         Other={			
             unik_depleted = {
@@ -676,6 +711,7 @@ return {
         achievement_names={},
         blind_states={},
         challenge_names={
+            c_unik_lily_goes_fucking_berserk="Devourer",
             c_unik_chips_only="ChipZel",
             c_unik_mult_only="Multiplication",
             c_unik_common_muck="Common Muck",
