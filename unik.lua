@@ -131,7 +131,7 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 -- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
-NFS.load(mod_path .. "data/jokers/big_joker.lua")()
+NFS.load(mod_path .. "data/jokers/big_joker.lua")() --TODO: change to one and a half joker (since it involves 1 joker + aditional "halves" for +5 cards)
 NFS.load(mod_path .. "data/jokers/noon.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
@@ -161,7 +161,7 @@ NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")() -- white lily cookie
 ---- this will be her moonflower faerie form
 --- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image?
+NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image to be more "lively" like with Chelsea and Yokana
 
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
@@ -194,7 +194,7 @@ NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_3.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
-NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")()
+NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")() --hell
 
 -- achievements
 -- Jackpot! - Score a Royal Flush against Video Poker

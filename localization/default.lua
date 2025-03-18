@@ -104,10 +104,41 @@ return {
             bl_unik_legendary_vessel={
                 name = "Väkivaltainenalus", --Violent Vessel
 				text = {
-                    "^6.66 Blind Size",
+                    "^2.666 Blind Size",
 					"If requirements reached before",
                     "last hand, instantly die",
 				},
+            },
+            bl_unik_legendary_trophy={
+                name = "Häpeänpalkinto", --Trophy of Dishonor
+				text = {
+                    "If Mult, XMult or ^Mult",
+					"is triggered",
+                    "instantly die",
+				},  
+            },            
+            bl_unik_legendary_batman={
+                name = "Kostonhimoinenvartija", --Vengeful Vigilante
+				text = {
+                    "^0.00666 blind size",
+                    "If at least 1 Joker is owned",
+                    "instantly die",
+				},                  
+            },
+            bl_unik_legendary_tornado={
+                name = "Myrskynsilmä", --Eye of the storm
+				text = {
+                    "#1# in #2# chance", -- yes nothing is the only way to survive
+                    "played hand will kill you",
+				},                  
+            },
+            bl_unik_legendary_leaf={
+                name = "Palavalehti", --Burning Leaf
+				text = {
+                    "Destroy all but 1", 
+                    "random Joker",
+                    "including eternals",
+				},  
             },
             --just like the actual gambling machine - Jacks or better
             bl_unik_video_poker={
@@ -947,8 +978,8 @@ return {
             ch_c_unik_ante_13_victory = {"Must beat Ante {C:attention}13{} to win"},
             ch_c_unik_vermillion_pandemic = {"One {C:attention}random{} Joker {C:red}replaced{} after every hand"},
             ch_c_unik_all_video_poker = {"All Boss Blinds are {X:unik_eye_searing_blue,C:money}Video {X:unik_eye_searing_blue,C:money}Poker{}"},
-            ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"}
-
+            ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
+            ch_c_unik_legendary_at_any_time = {"{X:unik_void_color, C:unik_eye_searing_red}LEGENDARY{X:unik_void_color, C:unik_eye_searing_red} BLINDS{X:unik_void_color, C:unik_eye_searing_red} {X:unik_void_color, C:unik_eye_searing_red}CAN {X:unik_void_color, C:unik_eye_searing_red}SPAWN {X:unik_void_color, C:unik_eye_searing_red}ANY {X:unik_void_color, C:unik_eye_searing_red}TIME.{}"},
         },
     },
 }

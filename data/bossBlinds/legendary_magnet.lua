@@ -10,7 +10,6 @@ SMODS.Blind{
     boss_colour= HEX("ff0000"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 0.666,
-    
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
 		G.GAME.unik_killed_by_magnet_legendary = true
@@ -35,7 +34,7 @@ SMODS.Blind{
                         G.P_CENTERS.m_steel, 
                         {playing_card = G.playing_card})
 
-                        card.ability.unik_niko = true --Avoid permanent damage and lag
+                        -- card.ability.unik_niko = true --Avoid permanent damage and lag
                         card:set_edition({ polychrome = true }, nil, nil, true)
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card)
@@ -50,9 +49,9 @@ SMODS.Blind{
             
         G.hand:change_size(6)
 	end,
-    --Only appear if over round 66 or "legendary_hell_blinds" are enabled (they can spawn ANY TIME)
+    --Only appear if over round 120 or "legendary_hell_blinds" are enabled (they can spawn ANY TIME)
     in_pool = function()
-        if G.GAME.round >= 66 or G.GAME.unik_legendary_at_any_time then
+        if G.GAME.round >= 120 or G.GAME.unik_legendary_at_any_time then
             return true
         end
         return false
