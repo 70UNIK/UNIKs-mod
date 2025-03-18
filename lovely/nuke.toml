@@ -92,6 +92,11 @@ elseif G.GAME.unik_killed_by_video_poker then
     Jimbo:add_speech_bubble('special_lose_unik_video_poker', nil, {quip = true})
     G.GAME.unik_killed_by_video_poker = nil
     G.GAME.unik_video_poker_rules = nil
+elseif G.GAME.unik_killed_by_magnet_legendary then
+    Jimbo:add_speech_bubble('special_lose_unik_magnet_legendary', nil, {quip = true})
+    G.GAME.unik_killed_by_magnet_legendary = nil
+        G.GAME.unik_pentagram_manager_fix = nil
+         G.GAME.unik_deathly_debuff_text = nil
 else
     Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
 end

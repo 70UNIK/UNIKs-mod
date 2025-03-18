@@ -12,7 +12,7 @@ SMODS.Blind{
         if not reset then
             --print("vvvv")
             G.GAME.unik_killed_by_pentagram = true
-            for i = 1, 4 do
+            for i = 1, 5 do
                     local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_pentagram_curse")
                     --destroy card2 if its jimbo
                     if (card2.ability.name ~= "Joker") then

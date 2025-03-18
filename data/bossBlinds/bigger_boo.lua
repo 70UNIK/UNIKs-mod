@@ -83,7 +83,7 @@ function killEternalGhosts()
     for _, v in pairs(G.jokers.cards) do
         --print("Joker in set:")
         --print(v.ability.name)
-        if v.ability.name == "j_cry_ghost" and v.ability.eternal then
+        if (v.ability.name == "j_cry_ghost" and v.ability.eternal) or v.ability.cry_possessed then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')

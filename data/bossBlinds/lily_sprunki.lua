@@ -1,4 +1,4 @@
---Destroys all cards played and each card destroyed increases blind requirements by +0.05
+--Destroys all cards played
 SMODS.Blind{
     --Hahahahahah no jolly for you
     key = 'unik_lily_sprunki_blind',

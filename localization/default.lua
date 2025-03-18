@@ -5,7 +5,7 @@ return {
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
-					"Create 4 Cursed Jokers",
+					"Create 5 Cursed Jokers",
                     "on Blind Selection",
 				},
             },
@@ -61,9 +61,7 @@ return {
                 name = "White Wire",
 				text = {
 					"Play 1 hand with",
-                    "no discards and",
-                    "all discard and hand",
-                    "modifiers debuffed",
+                    "0 discards",
 				},
             },
             bl_unik_green_goalpost={
@@ -80,7 +78,7 @@ return {
             bl_unik_boring_blank={
                 name = "Boring Blank",
                 text = {
-                    "Does nothing?",
+                    "Does nothing?", --yes, it really does nothing. To the point where chicot and luchador will sleep
 				},
             },
             bl_unik_maroon_magnet={
@@ -90,6 +88,25 @@ return {
 					"Convert #1# in #2# unenhanced cards",
 					"in deck to Steel cards",
                     "hand must not hold Steel cards",
+				},
+            },
+            bl_unik_legendary_magnet={
+                name = "Murhaavamagneetti", --Murderous Magnet
+				text = {
+                    "+6 Hand Size",
+					"Add Steel Polychrome Aces equal",
+					"to 2x cards in deck",
+                    "If hand has held Steel cards",
+                    "or played Polychrome Cards",
+                    "instantly die",
+				},
+            },
+            bl_unik_legendary_vessel={
+                name = "Väkivaltainenalus", --Violent Vessel
+				text = {
+                    "^6.66 Blind Size",
+					"If requirements reached before",
+                    "last hand, instantly die",
 				},
             },
             --just like the actual gambling machine - Jacks or better
@@ -105,9 +122,7 @@ return {
             bl_unik_the_lily={
                 name = "The Lily",
 				text = {
-					"Destroy all played cards,",
-                    "+0.03x blind size for",
-                    "each destroyed card",
+					"Destroy all played cards",
 				},
             },
             bl_unik_the_replay={
@@ -574,12 +589,11 @@ return {
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult", 
-                    "{C:green}#2# in #3#{} chance to not {C:red}self destruct{} after shop",
+                    "{X:dark_edition,C:white}^#1#{} Mult, {C:red}Self destructs{} after shop",
                     "{C:attention}On destruction{}, create a copy of herself with",
-                    "{X:mult,C:white}X#4#{} the {X:dark_edition,C:white}^Mult{} amount, BUT {C:red}33%{} selling price",
+                    "{X:dark_edition,C:white}^#2#{} Mult, BUT {C:red}80%{} selling price",
                     "{C:inactive,s:0.8}(Removes stickers from copy){}",
-                    "{C:inactive,s:0.8}(Cannot copy if destroyed by sticker effects){}",           
+                    "{C:red,s:0.8}(Cannot copy if destroyed by sticker effects){}",           
                     "{C:inactive,s:0.9}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
@@ -592,6 +606,13 @@ return {
                     "at the end of round",
                     "{C:green}#1# in #2#{} chance not to redeem another", 
                     "{C:attention}disposable{} Voucher",
+                }         
+            },
+            j_unik_noon = {
+                name="Noon",
+                text={
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "only on {C:attention}first hand{}",
                 }         
             }
         },
@@ -732,6 +753,7 @@ return {
             k_unik_pentagram_purified="Sent to hell!",
             k_unik_batman_start='"You WILL ALL be forgotten, Jokers. Because of me."',
             k_unik_magnet_start='The age of steel is over...',
+            k_unik_magnet_legendary_start='TORTURE AND AGONY BAKED IN IRON.',
             k_unik_nuke_start="Nuclear war is coming...",
             k_unik_placard_start="NO PLACARDED LOADS IN PLAY",
             k_unik_boo_start="Bigger Boo wants to know your location",
@@ -784,11 +806,16 @@ return {
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $25",
             k_unik_magnet_warning="Must not hold any Steel Cards",
+            k_unik_magnet_legendary_warning="MUST NOT HOLD STEEL CARDS OR PLAY POLYCHROME CARDS",
             k_unik_video_poker_warning="High cards are banned and pairs must have scoring Jacks or Better",
             k_unik_spawned="Spawned!",
             k_unik_disposed="Disposed!",
             k_unik_you_killed_niko="You Killed Niko.",
             k_unik_taste_of_power="Enjoy it while it lasts!",
+            ph_unik_instakill_hand="YOU WILL DIE.",
+            k_unik_die="DIE.",
+            k_unik_boss_immune="YOU CANNOT STOP IT",
+            k_unik_boss_reroll_nope="YOU CANNOT CHANGE YOUR FATE",
         },
         high_scores={},
         labels={
@@ -885,6 +912,10 @@ return {
             special_lose_unik_magnet={
                 "Seems like you lack",
                 "balls of steel!",
+            }, 
+            special_lose_unik_magnet_legendary={
+                "Maybe try holding onto",
+                "some Hanged Mans...",
             }, 
             --getting killed by video poker
             special_lose_unik_video_poker={

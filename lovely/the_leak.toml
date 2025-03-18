@@ -32,6 +32,8 @@ end
 match_indent = true
 
 ### Sync catalyst will have a finisher blind bg to reflect the fact that chips and mult do not balance (hence red and blue)
+### Other custom BGs go here.
+### Legendary Blinds will instead be searing red and black, reflecting it's satanic nature
 
 [[patches]]
 [patches.pattern]
@@ -46,6 +48,10 @@ if blindname == "bl_unik_video_poker" then
 --sync catalyst will have a mixture of red blue and purple
 elseif blindname == "bl_unik_sync_catalyst_fail" then
     ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.PURPLE, tertiary_colour = G.C.RED, contrast = 3}
+    return
+-- If the blind is a legendary
+elseif v.boss.legendary then
+    ease_background_colour{new_colour = G.C.UNIK_VOID_COLOR, special_colour = G.C.UNIK_EYE_SEARING_RED, tertiary_colour = G.C.UNIK_VOID_COLOR, contrast = 3}
     return
 -- If the blind is a showdown
 elseif v.boss.showdown then'''
