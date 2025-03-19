@@ -44,6 +44,15 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+--placeholder boss icons
+SMODS.Atlas ({
+	key = "BlindChips",
+	atlas_table = "ANIMATION_ATLAS", 
+	path = "BlindChips.png",
+	px = 34,
+	py = 34,
+	frames = 21 })
+
 SMODS.Atlas {
 	key = "unik_stickers",
 	path = "unik_stickers.png",
@@ -105,6 +114,7 @@ NFS.load(mod_path .. "data/bossBlinds/poppy.lua")()
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
+NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 --The lily: Destroy all cards played after scoring
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 
@@ -121,6 +131,8 @@ NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
 NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
+NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
+NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
 
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
@@ -132,6 +144,7 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
 NFS.load(mod_path .. "data/jokers/big_joker.lua")() --TODO: change to one and a half joker (since it involves 1 joker + aditional "halves" for +5 cards)
+-- NFS.load(mod_path .. "data/jokers/dawn.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 

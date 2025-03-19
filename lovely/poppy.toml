@@ -3,7 +3,7 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999
 
-### THE Poppy: disallow hands exceeding 3x blind size
+### old poppy, now its INDIGO ICBM's function
 ### ALso triger matador if you have one
 ### WIll also have functionality for the Raspberry Racket
 
@@ -12,7 +12,7 @@ priority = 9999
 target = 'functions/state_events.lua'
 pattern = '''check_and_set_high_score('hand', hand_chips*mult)'''
 position = 'before'
-payload = '''if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2.5) and (G.GAME.blind and G.GAME.unik_poppy_ceil)) or ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0))) and not (G.GAME.blind.disabled) then
+payload = '''if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 3) and (G.GAME.blind and G.GAME.unik_nuke_ceil)) or ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0))) and not (G.GAME.blind.disabled) then
 --print("TESTING THE POPPY_1")
             
             local supposedHands = hand_chips
@@ -33,7 +33,7 @@ payload = '''if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2.5) and
                     else
                         play_area_status_text("Not Allowed!")
                     end
-                    -- trigger matador as its a "disallowed card", just very delayed
+                    -- trigger matador as its a "disallowed hand", just very delayed
                     for _, v in pairs(G.jokers.cards) do
                         if v.ability.name == 'Matador' then
                             ease_dollars(v.ability.extra)
@@ -75,7 +75,7 @@ pattern = '''        func = (function()  update_hand_text({delay = 0, immediate 
       }))'''
 position = 'after'
 payload = '''
-if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 2.5) and (G.GAME.blind and G.GAME.unik_poppy_ceil)) or ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0))) and not (G.GAME.blind.disabled) then
+if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 3) and (G.GAME.blind and G.GAME.unik_nuke_ceil)) or ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0))) and not (G.GAME.blind.disabled) then
             --print("TESTING THE POPPY4")
             local supposedHands = hand_chips
             local supposedMult = mult

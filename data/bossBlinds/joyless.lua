@@ -44,7 +44,7 @@ SMODS.Blind{
 	end,
 	--also prevent pairs from being made (exactly a pair, not other hands containing pairs)
 	debuff_hand = function(self, cards, hand, handname, check)
-		if next(hand["Pair"]) then
+		if handname == "Pair" and not G.GAME.blind.disabled then
 			G.GAME.blind.triggered = true
 			return true
 		end
@@ -54,7 +54,7 @@ SMODS.Blind{
 		G.GAME.unik_killed_by_joyless = true
 	end,
 	disable = function(self)
-		G.GAME.unikk_killed_by_joyless = nil
+		G.GAME.unik_killed_by_joyless = nil
 	end,
 	defeat = function(self)
 		G.GAME.unik_killed_by_joyless = nil

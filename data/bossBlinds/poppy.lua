@@ -1,5 +1,7 @@
+--Used to prevent hand from scorng if exceeding 2.5x requirements, 
+--now it's a conditional version of The Tax, where hands exceeding 2.5x reqs get their score multiplied by 0.05x, meaning its possible to brute force if scoring really high.
 SMODS.Blind{
-    --Hahahahahah no jolly for you
+
     key = 'unik_the_poppy',
     config = {},
 	boss = {
@@ -18,15 +20,22 @@ SMODS.Blind{
 	end,
 	set_blind = function(self)
 		G.GAME.unik_killed_by_poppy = true
-		--To make it work with obsidian orb, it uses flag
-		G.GAME.unik_poppy_ceil = true
+		--G.GAME.unik_poppy_ceil = true
 	end,
 	disable = function(self)
 		G.GAME.unik_killed_by_poppy = nil
-		G.GAME.unik_poppy_ceil = nil
+		--G.GAME.unik_poppy_ceil = nil
+	end,
+	--The tax's functionality is used here instead. Pray it only activates if outside 2.5x reqs.
+	cry_cap_score = function(self, score)
+		if score > 2.5 * G.GAME.blind.chips then
+            G.GAME.blind.triggered = true
+            G.GAME.blind:wiggle()
+			return 0.075 * score
+		end
 	end,
 	defeat = function(self)
 		G.GAME.unik_killed_by_poppy = nil
-		G.GAME.unik_poppy_ceil = nil
+		--G.GAME.unik_poppy_ceil = nil
 	end,
 }

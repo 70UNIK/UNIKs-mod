@@ -19,7 +19,7 @@ SMODS.Blind{
 		if not reset then
             local text = localize('k_unik_magnet_legendary_start')
             attention_text({
-                scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,cover_colour = G.C.RED
+                scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.RED
             })
 			for i = 1, #G.playing_cards * 2 do
 				G.E_MANAGER:add_event(Event({
@@ -51,7 +51,7 @@ SMODS.Blind{
 	end,
     --Only appear if over round 120 or "legendary_hell_blinds" are enabled (they can spawn ANY TIME)
     in_pool = function()
-        if G.GAME.round >= 120 or G.GAME.unik_legendary_at_any_time then
+        if G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time then
             return true
         end
         return false

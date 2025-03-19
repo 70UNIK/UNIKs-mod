@@ -1,3 +1,0 @@
---SERPENT (uncommon)
---Always draw 4 cards after playing or discarding
---Sidegrade, but since it's upgraded to 4 cards, it would be worthwhile in a high card or steel king orientated build

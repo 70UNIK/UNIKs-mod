@@ -3,7 +3,7 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999
 
-### Indigo ICBM - Trigger player death - AFTER cryptid
+### legendary nuke - Trigger player death - AFTER cryptid
 ### Also includes green goalpost functionality;
 
 [[patches]]
@@ -11,11 +11,11 @@ priority = 9999
 target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
-payload = '''--Indigo ICBM will set chips and mult to 0 if exceeding 3x requirements before causing an instant game over.
-if (G.GAME.blind and G.GAME.unik_nuke_activate) and not (G.GAME.blind.disabled)then
+payload = '''--legendary nuke will set chips and mult to 0 if exceeding 3x requirements before causing an instant game over.
+if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.unik_kill_player_before_last_hand and G.GAME.current_round.hands_left > 0)) and not (G.GAME.blind.disabled)then
     local upper = G.GAME.chips
-    local ceiling = G.GAME.blind.chips * 3
-    if to_big(upper) > to_big(ceiling) then
+    local ceiling = G.GAME.blind.chips^1.5
+    if to_big(upper) > to_big(ceiling) or G.GAME.unik_kill_player_before_last_hand then
         G.GAME.chips = 0
         game_over = true
         local text = localize('k_unik_nuked')
@@ -37,7 +37,17 @@ if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disab
     G.GAME.blind.triggered = true
     G.GAME.blind:wiggle()
     G.ROOM.jiggle = G.ROOM.jiggle + 3
-end'''
+end
+-- scores really big for regular indigo icbm
+local upper22 = G.GAME.chips
+local ceiling22 = G.GAME.blind.chips^1.5
+--print(upper22)
+--print(ceiling22)
+if to_big(upper22) > to_big(ceiling22) then
+     G.GAME.unik_scores_really_big = G.GAME.unik_scores_really_big + 1
+end
+--print(G.GAME.unik_scores_really_big)
+'''
 match_indent = true
 
 ### Custom boss blind death messages

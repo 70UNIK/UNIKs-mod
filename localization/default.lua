@@ -12,8 +12,8 @@ return {
             bl_unik_indigo_icbm={
                 name = "Indigo ICBM",
 				text = {
-					"If score is over #1#,",
-                    "cause instant death",
+					"Hands exceeding #1#",
+                    "will not score",
 				},
             },
             bl_unik_harlequin_hurricane={
@@ -101,6 +101,14 @@ return {
                     "instantly die",
 				},
             },
+            bl_unik_legendary_nuke={ --aka old nuke
+                name = "Tuomiopäivänlaite",
+                text = {
+                    "^0.8 blind size",
+                    "If score exceeds #1#,",
+                    "instantly die",
+                },
+            },
             bl_unik_legendary_vessel={
                 name = "Väkivaltainenalus", --Violent Vessel
 				text = {
@@ -175,15 +183,15 @@ return {
 				text = {
 					"All M Jokers and Jolly",
                     "Cards are debuffed",
-                    "No hands containing pairs",
+                    "No pairs",
 				},
             },
             bl_unik_the_poppy={
                 name = "The Poppy",
 				text = {
-					"Played hands exceeding",
-                    "#1# will",
-                    "not score",
+					"Hands exceeding #1#",
+                    "will be multiplied",
+                    "by 0.075x",
 				},
             },
             bl_unik_collapse={
@@ -201,11 +209,12 @@ return {
 					"no longer balanced",
 				},
             },
-            bl_unik_evil_pc_building_company={
+            bl_unik_artisan_builds={
                 name = "The Artisan",
 				text = {
-					"Shop rerolls multiply",
-					"blind requirements by 2x",
+					"Shop rerolls in this ante",
+					"increase blind requirements",
+                    "by +0.5x",
 				},
             },
             bl_unik_the_wind={
@@ -639,13 +648,22 @@ return {
                     "{C:attention}disposable{} Voucher",
                 }         
             },
-            j_unik_noon = {
+            -- there may already be a Dawn image in cryptid, so maybe dont add it?
+            -- j_unik_dawn = {
+            --     name="Dawn",
+            --     text={
+            --         "{X:mult,C:white}X#1#{} Mult",
+            --         "only on {C:attention}first hand{}",
+            --     }         
+            -- },
+            j_unik_noon = { --this would suck on black deck or with 3 hands...
                 name="Noon",
                 text={
                     "{X:mult,C:white}X#1#{} Mult",
-                    "only on {C:attention}first hand{}",
-                }         
-            }
+                    "if {C:red}not{} the {C:attention}first{}",
+                    " or {C:attention}last{} hand",
+                }    
+            },
         },
         Other={			
             unik_depleted = {
@@ -780,15 +798,18 @@ return {
             k_unik_happiness2="HAPPINESS IS MANDATORY.",
             k_unik_happiness3="TREASON!",
             k_unik_nuked="DIE.          NOW.",
+            k_unik_artisan_builds="aNd ThErE\'s ThE ReRoLlLl!!!!111!!!!",
             k_unik_pentagram_start="Hell's Legion is coming...",
             k_unik_pentagram_purified="Sent to hell!",
             k_unik_batman_start='"You WILL ALL be forgotten, Jokers. Because of me."',
+            k_unik_legendary_batman_start='"I\'m doing what YOU won\'t! I\'m taking them out."', -- red hood
             k_unik_magnet_start='The age of steel is over...',
-            k_unik_magnet_legendary_start='TORTURE AND AGONY BAKED IN IRON.',
+            k_unik_magnet_legendary_start='Torture and agony baked in iron.',
             k_unik_nuke_start="Nuclear war is coming...",
+            k_unik_legendary_nuke_start='"Jesus Christ! They\'ve done it... They\'ve done it!"', --threads 1984
             k_unik_placard_start="NO PLACARDED LOADS IN PLAY",
             k_unik_boo_start="Bigger Boo wants to know your location",
-            k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."',
+            k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."', -- darth vader, moving the goalposts
             k_unik_protection_racket_start='"The government has organized a protection racket."',
             k_unik_video_poker_start='#1 Classic Video Poker Games Worldwide!',
             k_unik_boo_disabled="Exorcised!",
@@ -833,6 +854,7 @@ return {
             k_unik_debt="Not Enough Money!",
             k_unik_poppy_placeholder="(2.5x requirements)",
             k_unik_nuke_placeholder="(3x requirements)",
+            k_unik_legendary_nuke_placeholder="(^1.5 requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $25",
@@ -945,8 +967,8 @@ return {
                 "balls of steel!",
             }, 
             special_lose_unik_magnet_legendary={
-                "Maybe try holding onto",
-                "some Hanged Mans...",
+                "Maybe try holding",
+                "onto a vacuum!",
             }, 
             --getting killed by video poker
             special_lose_unik_video_poker={
@@ -979,7 +1001,7 @@ return {
             ch_c_unik_vermillion_pandemic = {"One {C:attention}random{} Joker {C:red}replaced{} after every hand"},
             ch_c_unik_all_video_poker = {"All Boss Blinds are {X:unik_eye_searing_blue,C:money}Video {X:unik_eye_searing_blue,C:money}Poker{}"},
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
-            ch_c_unik_legendary_at_any_time = {"{X:unik_void_color, C:unik_eye_searing_red}LEGENDARY{X:unik_void_color, C:unik_eye_searing_red} BLINDS{X:unik_void_color, C:unik_eye_searing_red} {X:unik_void_color, C:unik_eye_searing_red}CAN {X:unik_void_color, C:unik_eye_searing_red}SPAWN {X:unik_void_color, C:unik_eye_searing_red}ANY {X:unik_void_color, C:unik_eye_searing_red}TIME.{}"},
+            ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
         },
     },
 }

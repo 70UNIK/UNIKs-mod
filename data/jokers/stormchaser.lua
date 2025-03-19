@@ -1,4 +1,0 @@
---Stormchaser (rare)
---Gains x0.5 mult per debuffed card played
---Gains 1x mult per debuffed hand played
---Themed after turquoise tornado and then later 3 more weather-themed boss blinds and will become required in "The Day After Tomorrow"
