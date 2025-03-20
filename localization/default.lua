@@ -664,30 +664,47 @@ return {
                     " or {C:attention}last{} hand",
                 }    
             },
-            -- I'll hold until permission is granted to use the character
-            -- j_unik_extra_credit_alice = { 
-            --     name = 'Alice',
-            --     text = {
-            --         "{X:dark_edition,C:white}^#1#{} Mult and {X:chips,C:white}X#2#{} Chips",
-            --         "until end of round if",
-            --         "hand contains a scoring",
-            --         "{C:attention}Odd{} and {C:attention}Even{} card",
-			-- 		"{C:inactive}(Currently {C:attention}#3#{}{C:inactive}){}",
-            --         "{C:inactive,s:0.9,E:1}Teehee! It's time I join in on the fun!{}",
-            --         "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-            --         "{C:dark_edition,s:0.6,E:2}Character by : KittyKnight{}",
-            --         "{C:cry_exotic,s:0.6,E:2}Origin : Balatro - Extra Credit{}",
-            --     }
-            -- }, 
-            -- j_ExtraCredit_averagealice = { --overriding loc to include a 0.6% chance to get Alice on purchase
-            --     name = 'Average Alice',
-            --     text = {
-            --         "{C:white,X:mult}X#1#{} Mult if played",
-            --         "hand contains a scoring",
-            --         "{C:attention}Odd{} and {C:attention}Even{} card",
-            --         "{C:inactive,s:0.7,E:1}Fixed {C:green,s:0.7,E:1}0.6%{C:inactive,s:0.7,E:1} chance if added to deck to obtain {C:cry_exotic,s:0.7,E:1}Alice {C:inactive,s:0.7,E:1}instead",
-            --     }
-            -- }
+            j_unik_extra_credit_alice = { 
+                name = 'Alice',
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Mult and {X:dark_edition,C:white}^#2#{} Chips",
+                    "if hand contains a scoring",
+                    "{C:attention}Odd{} and {C:attention}Even{} card",
+                    "{C:inactive,s:0.9,E:1}Teehee! It's time I join in on the fun!{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:dark_edition,s:0.6,E:2}Character by : KittyKnight{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Balatro - Extra Credit{}",
+                }
+            }, 
+            j_ExtraCredit_averagealice = { --overriding loc to include a 0.6% chance to get Alice on purchase
+                name = 'Average Alice',
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if played",
+                    "hand contains a scoring",
+                    "{C:attention}Odd{} and {C:attention}Even{} card",
+                    "{C:inactive,s:0.7}If obtained, fixed {C:green,s:0.7,E:1}0.8%{C:inactive,s:0.7,E:1} chance",
+                    "{C:inactive,s:0.7}to obtain {C:cry_exotic,s:0.7,E:1}Alice {C:inactive,s:0.7,E:1}instead",
+                }
+            },
+            j_unik_the_long_line = {
+                name = 'The Long Line',
+                text = {
+                    "After playing {C:attention}80{} hands",
+                    "sell this card to create",
+                    "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
+					"{C:inactive}(Currently #1#/80){}",
+                }
+            },
+            j_unik_broken_scale = {
+                name = 'Broken Scale',
+                text = {
+                    "Scaling {C:attention}Jokers",
+                    "scale {C:red}1/3 as fast{}",
+                    "{E:2,C:red}Self destructs{}",
+					"after {C:attention}#2#{} rounds",
+                    "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",
+                }
+            }
         },
         Other={			
             unik_depleted = {
@@ -903,7 +920,9 @@ return {
             k_unik_die="DIE.",
             k_unik_boss_immune="YOU CANNOT STOP IT",
             k_unik_boss_reroll_nope="YOU CANNOT CHANGE YOUR FATE",
-            unik_debuff_no_pairs="No Pairs"
+            unik_debuff_no_pairs="No Pairs",
+            k_unik_average_alice="Average!",
+            k_unik_active="Active!",
         },
         high_scores={},
         labels={

@@ -145,7 +145,7 @@ NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
 NFS.load(mod_path .. "data/jokers/big_joker.lua")() --TODO: change to one and a half joker (since it involves 1 joker + aditional "halves" for +5 cards)
 -- NFS.load(mod_path .. "data/jokers/dawn.lua")()
-NFS.load(mod_path .. "data/jokers/noon.lua")()
+NFS.load(mod_path .. "data/jokers/noon.lua")() -- no image: Dusk/night but in the day
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
 --- Uncommon ---
@@ -156,32 +156,38 @@ NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
-NFS.load(mod_path .. "data/jokers/tech_demo.lua")() --the joker presenting a "tech demo" of technology
+NFS.load(mod_path .. "data/jokers/tech_demo.lua")() --no image: the joker presenting a "tech demo" of technology
 
-NFS.load(mod_path .. "data/jokers/coupon_codes.lua")() -- coupon codes
+NFS.load(mod_path .. "data/jokers/coupon_codes.lua")() -- no image: coupon codes
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
-NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() -- A small sample of Crustulium 
+NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() -- no image: A small sample of Crustulium 
 
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")() --rare
 --- Epic ---
+NFS.load(mod_path .. "data/jokers/the_long_line.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
 NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
-NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")() -- white lily cookie's moonflower form.
+if (SMODS.Mods["extracredit"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/ALICE.lua")() --no image: average alice
+end
+NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")() --no image:  white lily cookie's moonflower form.
 
 ---- this will be her moonflower faerie form
 --- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() --maybe rework image to be more "lively" like with Chelsea and Yokana
 
+
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/impounded.lua")() -- no image, an impound notice
 NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")() -- no image, the smoothie, but looking ass
-NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() --mc monster spawner
+NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() --no image: mc monster spawner
+NFS.load(mod_path .. "data/jokers/broken_scale.lua")() -- A rotten log with a shitty background
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()

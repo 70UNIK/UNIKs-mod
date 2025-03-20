@@ -150,6 +150,44 @@ function CardArea:emplace(card, location, stay_flipped)
     local autoCannibalExists = false
     
     if self == G.jokers then
+        --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)
+        if (SMODS.Mods["extracredit"] or {}).can_load then
+            if card.config.center.key == "j_ExtraCredit_averagealice" then
+                if pseudorandom('unik_average_alice_exotic_change') < 0.8/100 then
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card_eval_status_text(card, "extra", nil, nil, nil, {
+                                message = localize("k_unik_average_alice"),
+                                colour = G.C.PURPLE,
+                                card=card,
+                            })
+                            play_sound('tarot1')
+                            card.T.r = -0.2
+                            card:juice_up(0.3, 0.4)
+                            card.states.drag.is = true
+                            card.children.center.pinch.x = true
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                delay = 0.3,
+                                blockable = false,
+                                func = function()
+                                    G.jokers:remove_card(card)
+                                    card:remove()
+                                    card = nil
+                                    return true;
+                                end
+                            }))
+                            local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_extra_credit_alice")
+                            card2:start_materialize()
+                            card2:add_to_deck()
+                            G.jokers:emplace(card2)
+                            return true
+                        end
+                    }))
+                end
+            end
+        end
+
         --print("Joker added")
         --print(card.ability.name)
         for _, v in pairs(G.jokers.cards) do
