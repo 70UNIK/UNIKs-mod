@@ -466,8 +466,7 @@ return {
                     "{X:chips,C:white}X#1#{} Chips for every {C:attention}scored{} Card",
                     "or {C:attention}Joker{} triggered during play",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
-                    "{C:inactive,s:0.9}Quite strange being here,{}",
-                    "{C:inactive,s:0.9,E:1}but I'll try to help out as much as I can.{}",
+                    "{C:inactive,s:0.9,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -481,7 +480,7 @@ return {
                     "{C:attention}Scored{} non-face cards permanently gain {X:chips,C:white}X#1#{} Chips",
                     "{C:attention}Held{} non-face cards permanently gain {X:chips,C:white}X#2#{} Chips",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
-                    "{C:inactive,s:0.9,E:1}I'm doubtful if all this will succeed, but I'll still contribute.{}",
+                    "{C:inactive,s:0.9,E:1}I'm doubtful if it will be successful, but I'll still try...{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -625,7 +624,7 @@ return {
                     "{C:inactive}(Can overflow){}",
                 }               
             },
-            -- ^1.25 Mult, 1 in 6 chance to self destruct, on destruction, copies herself with x1.4 stats,
+            -- Upgrades on self destruction and destruciton, making her very resilient and synegises with dagger, ankh and additional gateways
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
@@ -665,6 +664,30 @@ return {
                     " or {C:attention}last{} hand",
                 }    
             },
+            -- I'll hold until permission is granted to use the character
+            -- j_unik_extra_credit_alice = { 
+            --     name = 'Alice',
+            --     text = {
+            --         "{X:dark_edition,C:white}^#1#{} Mult and {X:chips,C:white}X#2#{} Chips",
+            --         "until end of round if",
+            --         "hand contains a scoring",
+            --         "{C:attention}Odd{} and {C:attention}Even{} card",
+			-- 		"{C:inactive}(Currently {C:attention}#3#{}{C:inactive}){}",
+            --         "{C:inactive,s:0.9,E:1}Teehee! It's time I join in on the fun!{}",
+            --         "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+            --         "{C:dark_edition,s:0.6,E:2}Character by : KittyKnight{}",
+            --         "{C:cry_exotic,s:0.6,E:2}Origin : Balatro - Extra Credit{}",
+            --     }
+            -- }, 
+            -- j_ExtraCredit_averagealice = { --overriding loc to include a 0.6% chance to get Alice on purchase
+            --     name = 'Average Alice',
+            --     text = {
+            --         "{C:white,X:mult}X#1#{} Mult if played",
+            --         "hand contains a scoring",
+            --         "{C:attention}Odd{} and {C:attention}Even{} card",
+            --         "{C:inactive,s:0.7,E:1}Fixed {C:green,s:0.7,E:1}0.6%{C:inactive,s:0.7,E:1} chance if added to deck to obtain {C:cry_exotic,s:0.7,E:1}Alice {C:inactive,s:0.7,E:1}instead",
+            --     }
+            -- }
         },
         Other={			
             unik_depleted = {

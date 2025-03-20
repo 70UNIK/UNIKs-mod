@@ -1,0 +1,3 @@
+--Average alice but souped up
+--If hand contains a scoring odd or even card, X4 Chips and ^2 mult until the end of the round
+--Exotic, fixed 0.6% chance to replace Alice if obtained, only avaliable if Extra Credit is installed

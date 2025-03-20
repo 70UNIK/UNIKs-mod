@@ -10,7 +10,7 @@ SMODS.Blind{
     pos = { x = 0, y = 10},
     boss_colour= HEX("152c54"),
     dollars = 5,
-    mult = 1.5,
+    mult = 2,
 	--Only appear if you have at least 5 stone cardsSMODS.has_no_suit(v)
     set_blind = function(self, reset, silent)
         if not reset then
