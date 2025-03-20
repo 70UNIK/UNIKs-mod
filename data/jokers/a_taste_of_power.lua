@@ -14,7 +14,7 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
 		if context.selling_self and not (context.retrigger_joker or context.blueprint) then
-            card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("unik_taste_of_power") ,colour = G.C.DARK_EDITION})
+            card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_unik_taste_of_power") ,colour = G.C.DARK_EDITION})
             play_sound("timpani")
             local card2 = create_card("Joker", G.jokers, nil, "cry_exotic", nil, nil, nil, "unik_a_taste_of_power")
             card2.ability.rental = true

@@ -433,7 +433,7 @@ return {
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    "{C:inactive,s:0.9}May I wish you happy dreams...{}",
+                    "{C:inactive,s:0.9,E:1}May I wish you happy dreams...{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
@@ -444,7 +444,7 @@ return {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9}I basically just inserted myself here.{}",
+                    "{C:inactive,s:0.9,E:1}I basically just inserted myself here.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -467,7 +467,7 @@ return {
                     "or {C:attention}Joker{} triggered during play",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:inactive,s:0.9}Quite strange being here,{}",
-                    "{C:inactive,s:0.9}but I'll try to help out as much as I can.{}",
+                    "{C:inactive,s:0.9,E:1}but I'll try to help out as much as I can.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -481,7 +481,7 @@ return {
                     "{C:attention}Scored{} non-face cards permanently gain {X:chips,C:white}X#1#{} Chips",
                     "{C:attention}Held{} non-face cards permanently gain {X:chips,C:white}X#2#{} Chips",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
-                    "{C:inactive,s:0.9}I'm doubtful if all this will succeed, but I'll still contribute.{}",
+                    "{C:inactive,s:0.9,E:1}I'm doubtful if all this will succeed, but I'll still contribute.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -494,7 +494,7 @@ return {
                     "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
                     --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9}OwO what's all this? Maybe I can help!{}",
+                    "{C:inactive,s:0.9,E:1}OwO what's all this? Maybe I can help!{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -517,7 +517,7 @@ return {
                 text={
                     "{C:red}Destroy{} {C:attention}all{} played cards except the ", 
                     "{C:attention}leftmost{} played card after scoring",
-                    "{C:inactive,s:0.9}#1#{}",
+                    "{C:inactive,s:0.9,E:1}#1#{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:dark_edition,s:0.6,E:2}Character by : Kaeofthekae{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : SPRUNKI{}",
@@ -629,12 +629,13 @@ return {
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult, {C:red}Self destructs{} after shop",
-                    "{C:attention}On destruction{}, create a copy of herself with",
-                    "{X:dark_edition,C:white}^#2#{} Mult, BUT {C:red}80%{} selling price",
-                    "{C:inactive,s:0.8}(Removes stickers from copy){}",
-                    "{C:red,s:0.8}(Cannot copy if destroyed by sticker effects){}",           
-                    "{C:inactive,s:0.9}All I wanted was for everyone to be happy...{}",
+                    "This Joker creates a copy with {X:dark_edition,C:white}",
+                    "an additional {X:dark_edition,C:white}^#2#{} Mult on {E:2,C:red}destruction{}",
+                    "{E:2,C:red}Self destructs{} at the end of the {C:attention}shop{}",
+                    "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
+                    "{C:inactive,s:0.7}(Removes stickers from copy){}",
+                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",           
+                    "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
@@ -762,7 +763,17 @@ return {
             },
         },
         Planet={},
-        Spectral={},
+        Spectral={
+            --only appears with a 0.3 chance in the cube booster pack. It's basically a gateway, but exclusively creating UNIK 
+            c_unik_hypercube = {
+				name = "HyperCube",
+				text = {
+					"Create {C:cry_exotic,E:1}UNIK{}",
+					"destroy all",
+					"other Jokers",
+				},
+			},
+        },
         Stake={},
         Tag={},
         Tarot={c_unik_wheel_of_misfortune = {
@@ -869,6 +880,7 @@ return {
             k_unik_die="DIE.",
             k_unik_boss_immune="YOU CANNOT STOP IT",
             k_unik_boss_reroll_nope="YOU CANNOT CHANGE YOUR FATE",
+            unik_debuff_no_pairs="No Pairs"
         },
         high_scores={},
         labels={

@@ -29,7 +29,7 @@ SMODS.Blind{
 		return (jollycount > 0)
 	end,
 	get_loc_debuff_text = function(self)
-		return localize("cry_debuff_oldmark")
+		return localize("unik_debuff_no_pairs")
 	end,
 	recalc_debuff = function(self, card, from_blind)
 		if not G.GAME.blind.disabled and (Find_Jolly(card) or card.ability.name == "Jolly Joker"

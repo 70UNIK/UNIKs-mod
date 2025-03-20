@@ -14,8 +14,12 @@ local function White_lily_copy(card)
     _card.ability.cry_flickering = nil
     _card.ability.cry_possessed = nil
     _card.ability.extra.copying = false
-    _card.ability.extra.Emult = _card.ability.extra.Emult * 1.06
-    _card.ability.extra_value = _card.ability.extra_value - (math.floor(_card.sell_cost*100*0.8)/100)
+    _card.ability.extra.Emult = _card.ability.extra.Emult + _card.ability.extra.Emult_mod
+    _card.ability.extra_value = _card.ability.extra_value - (math.floor(_card.sell_cost*100*0.2)/100)
+    --avoid permanently doubling her values to her copy so the multiply properties must transfer
+    if card.config.cry_multiply then
+        _card.config.cry_multiply = card.config.cry_multiply
+    end
     _card:set_cost()
 
     card_eval_status_text(_card, "extra", nil, nil, nil, {
@@ -30,7 +34,7 @@ local function White_lily_copy(card)
         card = _card
     })
 end
---remove RNG
+--TODO: fix if she self destructs while //MULTIPLY is active on her.
 SMODS.Joker {
 	key = 'unik_white_lily_cookie',
     atlas = 'placeholders',
@@ -40,16 +44,16 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.1, sold = false,copying = false} },
+    config = { extra = { Emult = 1.0, Emult_mod = 0.1, sold = false,copying = false} },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult,center.ability.extra.Emult*1.06} }
+		return { vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod} }
 	end,
     add_to_deck = function(self, card, from_debuff)
         card.ability.perishable = nil
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
-        if context.joker_main then
+        if context.joker_main and (to_big(card.ability.extra.Emult) > to_big(1)) then
 			return {
                 message = localize({
 					type = "variable",
