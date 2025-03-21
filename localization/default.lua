@@ -428,7 +428,7 @@ return {
                     "{C:red}Self destructs{} if none of above Jokers are owned",
                 },                 
             },
-            j_unik_moonlight_cookie = {
+            j_unik_moonlight_cookie = { --unconditional ^1.25 mult per planet
                 name = 'Moonlight Cookie',
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
@@ -438,12 +438,35 @@ return {
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
             },
-            j_unik_unik = {
+            j_unik_moonlight_cookie_modest = { --^1.15 mult for specified poker hand
+                name = 'Moonlight Cookie',
+                text = {
+                    "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
+                    "each give {X:dark_edition,C:white}^#1#{} Mult for",
+                    " their specified {C:attention}poker hand",
+                    "{C:inactive,s:0.9,E:1}May I wish you happy dreams...{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                }
+            },
+            j_unik_unik = { --mainline: ^0.03 chips
                 name = 'UNIK',
                 text = {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
+                    "{C:inactive,s:0.9,E:1}I basically just inserted myself here.{}",
+                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                }
+            },
+            j_unik_unik_modest = { --modest: ^0.01 mult, caps at ^2.5 chips
+                name = 'UNIK',
+                text = {
+                    "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
+                    "for each {C:attention}7{} scored",
+                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
+                    "{C:inactive}(Caps at {X:dark_edition,C:white}^#3#{C:inactive} Chips)",
                     "{C:inactive,s:0.9,E:1}I basically just inserted myself here.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",

@@ -15,9 +15,14 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {Echips_mod = 0.03, Echips = 1.0} },
+    config = { extra = {Echips_mod = 0.03, Echips = 1.0,cap = 2.5} },
+	gameset_config = {
+		modest = { extra = {Echips_mod = 0.02, Echips = 1.0,cap = 2.0} },
+	},
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips} }
+		return {
+		key = Cryptid.gameset_loc(self, {modest = "modest" }), 
+		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips,center.ability.extra.cap} }
 	end,
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
@@ -35,18 +40,20 @@ SMODS.Joker {
 			}
 		end
         if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 and not context.blueprint then
-			card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
-			return {
-				message = localize({
-                    type = "variable",
-                    key = "a_powchips",
-                    vars = {
-                        number_format(to_big(card.ability.extra.Echips)),
-                    },
-                }),
-				colour = G.C.DARK_EDITION,
-				card = card
-			}
+			if (Card.get_gameset(card) == "exp_modest" and card.ability.extra.Echips <= center.ability.extra.cap) or Card.get_gameset(card) ~= "exp_modest" then
+				card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
+				return {
+					message = localize({
+						type = "variable",
+						key = "a_powchips",
+						vars = {
+							number_format(to_big(card.ability.extra.Echips)),
+						},
+					}),
+					colour = G.C.DARK_EDITION,
+					card = card
+				}
+			end
 		end
     end,
 }

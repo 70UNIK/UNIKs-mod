@@ -16,7 +16,7 @@ SMODS.Joker {
 	load = function(self, card, card_table, other_card)
 		--Do not spam the shake
         card.ability.extra.juiced_up = false
-        if card.ability.extra.hands >= 2 and card.ability.extra.juiced_up == false then
+        if card.ability.extra.hands >= 80 and card.ability.extra.juiced_up == false then
             local eval = function(card)
                 return not card.REMOVED
             end

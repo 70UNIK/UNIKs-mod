@@ -17,8 +17,15 @@ SMODS.Joker {
 	eternal_compat = true,
 	-- I can imagine this will become souped up in almanac with it's 10 slots.
     config = { extra = { Emult = 1.25} },
+	gameset_config = {
+		modest = { extra = { Emult = 1.15} },
+	},
+	extra_gamesets = { "exp_modest" },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot} }
+		return { 
+			key = Cryptid.gameset_loc(self, { modest = "modest" }), 
+			vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot} 
+		}
 	end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     -- add_to_deck = function(self, card, from_debuff)
@@ -33,8 +40,37 @@ SMODS.Joker {
 	-- end,
     calculate = function(self, card, context)
 		--Known issue: does not work with retriggers.
-        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' then
-			if not Talisman.config_file.disable_anims then
+        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet'
+		then
+			local valid = false
+			--automatically ignore hand type if its modest
+			if Card.get_gameset(card) ~= "modest" then
+				valid = true
+				print("not modest")
+			end
+			--check if its the right planet
+			if context.other_consumeable.ability.hand_type and valid == false then
+				if context.other_consumeable.ability.hand_type == context.scoring_name then
+					print("valid hand")
+					print(context.other_consumeable.ability.hand_type)
+					valid = true
+				end
+			end
+			--for loop if it has hand_types for compatibility with 3 planet cards
+			if context.other_consumeable.ability.hand_types and valid == false then
+				print("3 planet detected")
+				if context.other_consumeable.ability.hand_types then
+					for i = 1,#context.other_consumeable.ability.hand_types do
+						if context.other_consumeable.ability.hand_types[i] == context.scoring_name then
+							valid = true
+							print("valid hand")
+							print(context.other_consumeable.ability.hand_types[i])
+							break
+						end
+					end
+				end
+			end
+			if not Talisman.config_file.disable_anims and valid == true then
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						context.other_consumeable:juice_up(0.5, 0.5)
@@ -42,18 +78,23 @@ SMODS.Joker {
 					end,
 				}))
 			end
-            return {
-                message = localize({
-                    type = "variable",
-                    key = "a_powmult",
-                    vars = {
-                        number_format(card.ability.extra.Emult),
-                    },
-                }),
-                Emult_mod = card.ability.extra.Emult,
-				colour = G.C.DARK_EDITION,
-            }
-            
+			if context.other_consumeable.debuff and valid == true then
+				card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+				return true
+			elseif valid == true then
+				return {
+					message = localize({
+						type = "variable",
+						key = "a_powmult",
+						vars = {
+							number_format(card.ability.extra.Emult),
+						},
+					}),
+					Emult_mod = card.ability.extra.Emult,
+					colour = G.C.DARK_EDITION,
+					card = context.other_consumeable
+				}
+			end
         end
     end,
     -- cry_credits = {

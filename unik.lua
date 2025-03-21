@@ -222,9 +222,9 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 -- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
 -- Self Insert - Get UNIK from a gateway.
 -- Dicey - Complete the RNG II challenge
+-- Alice in Wonderland - Get Alice from obtaining Average Alice
 
 -- Self offering - Rig an Evocation and use it.
--- Atomic Precision: Die to the Obsidian Orb from the Indigo ICBM's effect while The Poppy is also active.
 -- Hell Invasion - Own every Cursed Joker in the collection.
 -- Debuffs, Debuffs everywhere - Have all your Jokers and your entire deck debuffed.
 -- Beaned - Die from having zero hand size from depleted Turtle Beans

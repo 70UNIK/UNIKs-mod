@@ -155,7 +155,7 @@ function Blind:disable()
 	local obj = self.config.blind
 	if obj then
 		if obj.boss.legendary then
-			play_sound('cancel', 0.8, 1)
+			play_sound('cancel', 0.7 + 0.05, 0.7)
             local text = localize('k_unik_boss_immune')
             attention_text({
                 scale = 1.0, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
@@ -172,7 +172,7 @@ local gfrb2 = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)
 	local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
 	if obj.boss.legendary then
-		play_sound('cancel', 0.8, 1)
+		play_sound('cancel', 0.7 + 0.05, 0.7)
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
