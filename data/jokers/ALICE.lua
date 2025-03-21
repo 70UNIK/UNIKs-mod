@@ -11,11 +11,19 @@ local function contains(table_, value)
 
     return false
 end
+SMODS.Atlas {
+	key = "unik_alice",
+	path = "unik_alice.png",
+	px = 71,
+	py = 95
+}
 SMODS.Joker {
 	key = 'unik_extra_credit_alice',
-    atlas = 'placeholders',
+    atlas = 'unik_alice',
     rarity = "cry_exotic",
-	pos = { x = 0, y = 1 },
+	pos = { x = 0, y = 0 },
+	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
+	soul_pos = { x = 1, y = 0 },
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,

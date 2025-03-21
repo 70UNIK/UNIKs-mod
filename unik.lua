@@ -143,7 +143,7 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 -- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
-NFS.load(mod_path .. "data/jokers/big_joker.lua")() --TODO: change to one and a half joker (since it involves 1 joker + aditional "halves" for +5 cards)
+NFS.load(mod_path .. "data/jokers/1_5_joker.lua")() --TODO: change to one and a half joker (since it involves 1 joker + aditional "halves" for +5 cards)
 -- NFS.load(mod_path .. "data/jokers/dawn.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")() -- no image: Dusk/night but in the day
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
@@ -224,12 +224,31 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 -- Dicey - Complete the RNG II challenge
 -- Alice in Wonderland - Get Alice from obtaining Average Alice
 
--- Self offering - Rig an Evocation and use it.
+-- Stupid Summoning - Rig an Evocation and use it.
 -- Hell Invasion - Own every Cursed Joker in the collection.
 -- Debuffs, Debuffs everywhere - Have all your Jokers and your entire deck debuffed.
 -- Beaned - Die from having zero hand size from depleted Turtle Beans
 -- Epic Fail - Score under -1.79e308 Chips in a single hand
 -- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
+
+--Artwork to do:
+
+--Coupon Codes
+--Noon
+--Taste of power
+--Monster spawner
+--Tech Demo
+--Rancid Smoothie
+--Impound Notice
+--Broken scale
+--Goading Joker
+--Broken Arm
+--Vampiric Hammer
+--The Evocation
+--hypercube
+--cube pack (booster)
+
+--Legendary magnet, vessel and nuke
 
 
 

@@ -7,7 +7,10 @@ SMODS.Blind{
     pos = {x=0, y=29}, --placeholder is violet vessel, will have an  appropriate icon later
     boss_colour= HEX("ff0000"), --all legendary blinds will be blood red and black.
     dollars = 13,
-    mult = 2, --
+    mult = 2,
+    gameset_config = {
+		modest = { disabled = true},
+	},
     set_blind = function(self, reset, silent)
         --set blind size to ^2.666x
         G.GAME.unik_kill_player_before_last_hand = true

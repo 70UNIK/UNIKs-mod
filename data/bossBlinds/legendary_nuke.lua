@@ -9,6 +9,9 @@ SMODS.Blind{
     boss_colour= HEX("ff0000"),
     dollars = 13,
     mult = 2,
+    gameset_config = {
+		modest = { disabled = true},
+	},
     loc_vars = function(self, info_queue, card)
 		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^0.8)^1.5 } } -- no bignum?
 	end,

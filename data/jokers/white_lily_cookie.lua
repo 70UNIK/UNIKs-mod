@@ -34,12 +34,20 @@ local function White_lily_copy(card)
         card = _card
     })
 end
+SMODS.Atlas {
+	key = "unik_white_lily",
+	path = "unik_white_lily.png",
+	px = 71,
+	py = 95
+}
 --TODO: fix if she self destructs while //MULTIPLY is active on her.
 SMODS.Joker {
 	key = 'unik_white_lily_cookie',
-    atlas = 'placeholders',
+    atlas = 'unik_white_lily',
     rarity = "cry_exotic",
-	pos = { x = 0, y = 1 },
+	pos = { x = 0, y = 0 },
+	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
+	soul_pos = { x = 1, y = 0 },
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,

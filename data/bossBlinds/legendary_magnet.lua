@@ -10,6 +10,9 @@ SMODS.Blind{
     boss_colour= HEX("ff0000"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 0.666,
+    gameset_config = {
+		modest = { disabled = true},
+	},
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
 		G.GAME.unik_killed_by_magnet_legendary = true

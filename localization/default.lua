@@ -582,8 +582,8 @@ return {
                     "{C:cry_exotic,s:0.6,E:2}Origin : SPRUNKI{}",
                 },                
             },
-            j_unik_big_joker = {
-                name="Big Joker",
+            j_unik_1_5_joker = {
+                name="One-and-a-Half Joker",
                 text={
                     "{C:mult}+#1#{} Mult if played hand contains",
                     "{C:attention}#3#{} or more cards",

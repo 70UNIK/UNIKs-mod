@@ -1,16 +1,26 @@
 --10 mult for playing 5 cards (not all will have to score), +4 mult for any additional cards above 5
+SMODS.Atlas {
+	key = "unik_one_and_a_half_joker",
+	path = "unik_one_and_a_half_joker.png",
+	px = 71,
+	py = 144
+}
 SMODS.Joker {
 	-- How the code refers to the joker.
-	key = 'unik_big_joker',
-    atlas = 'unik_common',
+	key = 'unik_1_5_joker',
+    atlas = 'unik_one_and_a_half_joker',
     rarity = 1,
-	pos = { x = 2, y = 0 },
-    config = { extra = { mult = 10, mult_mod = 5,hand_size = 5} },
+	pos = { x = 0, y = 0 },
+	-- Modest
+    config = { extra = { mult = 10, mult_mod = 8,hand_size = 5} },
+	gameset_config = {
+		modest = { extra = { mult = 8, mult_mod = 6,hand_size = 5} },
+	},
     cost = 4,
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
-	display_size = { w = 1.35 * 71, h = 1.35 * 95 },
+	display_size = { w = 71, h = 144 },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.extra.hand_size} }
 	end,
