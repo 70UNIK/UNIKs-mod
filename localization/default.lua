@@ -841,6 +841,7 @@ return {
             c_unik_rng_2="RNG II",
             c_unik_video_poker_1="Jacks or Better",
             c_unik_video_poker_2="Jacks or Better II",
+            c_unik_rush_hour_4="Rush Hour IV",
         },
         collabs={},
         dictionary={

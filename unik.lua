@@ -214,6 +214,7 @@ NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_3.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")() --hell
+NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 -- achievements
 -- Jackpot! - Score a Royal Flush against Video Poker

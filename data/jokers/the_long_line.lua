@@ -32,14 +32,14 @@ SMODS.Joker {
 			and not context.retrigger_joker
 		then
             card.ability.extra.hands = card.ability.extra.hands + 1
-            if card.ability.extra.hands < 2 then --Hardcoded, dont want misprint to mess with this
+            if card.ability.extra.hands < 80 then --Hardcoded, dont want misprint to mess with this
 				return {
 					card_eval_status_text(card, "extra", nil, nil, nil, {
 						message = card.ability.extra.hands .. "/80",
 						colour = G.C.CRY_EXOTIC,
 					}),
 				}
-			elseif card.ability.extra.hands >= 2 and card.ability.extra.juiced_up == false then
+			elseif card.ability.extra.hands >= 80 and card.ability.extra.juiced_up == false then
                 
                 local eval = function(card)
                     return not card.REMOVED
@@ -54,7 +54,7 @@ SMODS.Joker {
             end
         end
         if context.selling_self and not context.blueprint and not context.retrigger_joker then
-			if card.ability.extra.hands >= 2 then
+			if card.ability.extra.hands >= 80 then
 				local card = create_card("Joker", G.jokers, nil, "cry_exotic", nil, nil, nil, "unik_long_line")
 				card:add_to_deck()
 				G.jokers:emplace(card)

@@ -12,7 +12,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.04, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
+    config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.05, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.x_mult_initial,center.ability.extra.blind_decay_mult,center.ability.extra.shop_decay_mult},
@@ -89,7 +89,6 @@ SMODS.Joker {
 		end
 		--pause timer if scoring (to ease pain in lack of control in scoring and to avoid talisman animation exploit)
 		if context.before then
-			print("stop")
 			card.ability.extra.in_scoring = true
 			return true
 		end
@@ -98,7 +97,6 @@ SMODS.Joker {
 				trigger='after',
 				delay=0.3,
 				func = function()
-					print("start")
 					card.ability.extra.in_scoring = false
 					return true
 				end
