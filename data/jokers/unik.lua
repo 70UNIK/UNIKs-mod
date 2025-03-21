@@ -40,7 +40,7 @@ SMODS.Joker {
 			}
 		end
         if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 and not context.blueprint then
-			if (Card.get_gameset(card) == "exp_modest" and card.ability.extra.Echips <= center.ability.extra.cap) or Card.get_gameset(card) ~= "exp_modest" then
+			if (Card.get_gameset(card) == "modest" and card.ability.extra.Echips <= center.ability.extra.cap) or Card.get_gameset(card) ~= "modest" then
 				card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
 				return {
 					message = localize({

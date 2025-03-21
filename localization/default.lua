@@ -266,6 +266,15 @@ return {
                     "to win {C:money}$#4#",
                 }
             },
+            --Disable if extracredit is installed
+            j_unik_lucky_seven_modest = {
+                name = 'Lucky 7',
+                text = {
+                    "{C:attention}7s{} are considered", 
+                    "{C:attention}Lucky Cards{}",
+                    "{C:inactive}(Overrides enhancements){}",
+                }
+            },
             j_unik_holepunched_card = {
                 name = 'Holepunched Card',
                 text={
@@ -283,6 +292,14 @@ return {
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}~0 in 3{C:inactive})",
                 },
             },
+            j_unik_yes_nothing_modest = {
+                name = 'Yes! Nothing*',
+                text={
+                    "Halves all {C:attention}listed{}",
+                    "{C:green,E:1,S:1.1}probabilities{}",
+                    "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}1 in 3{C:inactive})",
+                },
+            },
             j_unik_711 = {
                 name = '7/11',
                 text = {
@@ -290,6 +307,15 @@ return {
                     "a scoring {C:attention}7{} and {C:attention}Ace{},",
                     "create a {C:attention}random{} Food Joker",
                     "{C:inactive}(Can overflow){}",
+                }
+            },
+            j_unik_711_modest = {
+                name = '7/11',
+                text = {
+                    "Once per round, if hand contains", 
+                    "a scoring {C:attention}7{} and {C:attention}Ace{},",
+                    "create a {C:attention}random{} Food Joker",
+                    "{C:inactive}(Must have room){}",
                 }
             },
             j_unik_gt710 = {
@@ -444,6 +470,17 @@ return {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult for",
                     " their specified {C:attention}poker hand",
+                    "{C:inactive,s:0.9,E:1}May I wish you happy dreams...{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                }
+            },
+            j_unik_moonlight_cookie_madness = { --^same as modest, but with an extra consumable slot
+                name = 'Moonlight Cookie',
+                text = {
+                    "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
+                    "each give {X:dark_edition,C:white}^#1#{} Mult",
+                    "{C:attention}+1{} Consumable Slot",
                     "{C:inactive,s:0.9,E:1}May I wish you happy dreams...{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",

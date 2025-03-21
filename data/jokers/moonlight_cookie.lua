@@ -19,25 +19,31 @@ SMODS.Joker {
     config = { extra = { Emult = 1.25} },
 	gameset_config = {
 		modest = { extra = { Emult = 1.15} },
+		madness = { extra = { Emult = 1.25,consumeSlot = 1} },
 	},
 	extra_gamesets = { "exp_modest" },
 	loc_vars = function(self, info_queue, center)
 		return { 
 			key = Cryptid.gameset_loc(self, { modest = "modest" }), 
+			key = Cryptid.gameset_loc(self, { madness = "madness" }), 
 			vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot} 
 		}
 	end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
-    -- add_to_deck = function(self, card, from_debuff)
-	-- 	-- Changes a G.GAME variable, which is usually a global value that's specific to the current run.
-	-- 	-- These are initialized in game.lua under the Game:init_game_object() function, and you can look through them to get an idea of the things you can change.
-	-- 	G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.consumeSlot
-	-- end,
-	-- -- Inverse of above function.
-	-- remove_from_deck = function(self, card, from_debuff)
-	-- 	-- Adds - instead of +, so they get subtracted when this card is removed.
-	-- 	G.consumeables.config.card_limit = G.consumeables.config.card_limit - card.ability.extra.consumeSlot
-	-- end,
+    add_to_deck = function(self, card, from_debuff)
+		-- Changes a G.GAME variable, which is usually a global value that's specific to the current run.
+		-- These are initialized in game.lua under the Game:init_game_object() function, and you can look through them to get an idea of the things you can change.
+		if Card.get_gameset(card) == "madness" then
+			G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.consumeSlot
+		end
+	end,
+	-- Inverse of above function.
+	remove_from_deck = function(self, card, from_debuff)
+		-- Adds - instead of +, so they get subtracted when this card is removed.
+		if Card.get_gameset(card) == "madness" then
+			G.consumeables.config.card_limit = G.consumeables.config.card_limit - card.ability.extra.consumeSlot
+		end
+	end,
     calculate = function(self, card, context)
 		--Known issue: does not work with retriggers.
         if context.other_consumeable and context.other_consumeable.ability.set == 'Planet'
@@ -46,24 +52,21 @@ SMODS.Joker {
 			--automatically ignore hand type if its modest
 			if Card.get_gameset(card) ~= "modest" then
 				valid = true
-				print("not modest")
 			end
 			--check if its the right planet
 			if context.other_consumeable.ability.hand_type and valid == false then
 				if context.other_consumeable.ability.hand_type == context.scoring_name then
-					print("valid hand")
+
 					print(context.other_consumeable.ability.hand_type)
 					valid = true
 				end
 			end
 			--for loop if it has hand_types for compatibility with 3 planet cards
 			if context.other_consumeable.ability.hand_types and valid == false then
-				print("3 planet detected")
 				if context.other_consumeable.ability.hand_types then
 					for i = 1,#context.other_consumeable.ability.hand_types do
 						if context.other_consumeable.ability.hand_types[i] == context.scoring_name then
 							valid = true
-							print("valid hand")
 							print(context.other_consumeable.ability.hand_types[i])
 							break
 						end
