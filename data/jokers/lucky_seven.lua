@@ -8,14 +8,20 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     config = { extra = {odds = 1,mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
+    --ONLY DISABLE if extracredit is installed
+    gameset_config = {
+		modest = { disabled = (SMODS.Mods["extracredit"] or {}).can_load },
+	},
     loc_vars = function(self, info_queue, center)
-        return { vars = {center and cry_prob(center.ability.cry_prob,center.ability.extra.odds_money,center.ability.cry_rigged)or 1, 
+        return { 
+            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
+            vars = {center and cry_prob(center.ability.cry_prob,center.ability.extra.odds_money,center.ability.cry_rigged)or 1, 
         center.ability.extra.mult,center.ability.extra.odds_mult,center.ability.extra.p_dollars,center.ability.extra.odds_money} }
 	end,
     
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play then
+        if context.individual and context.cardarea == G.play and Card.get_gameset(card) ~= "modest" then
             -- if a seven
             if context.other_card:get_id() == 7 then
                 local multTrue = false
@@ -44,6 +50,11 @@ SMODS.Joker {
                     }
                 end
 			end
+        end
+        if context.check_enhancement and SMODS.Ranks[context.other_card.base.value].key == "7" and Card.get_gameset(card) == "modest" then
+            return{
+                m_lucky = true
+            }
         end
     end,
 }

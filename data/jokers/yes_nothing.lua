@@ -10,7 +10,16 @@ SMODS.Joker {
     --config = { extra = { Xmult = 1.32} },
     -- loc_vars = function(self, info_queue, center)
 	-- 	return { vars = {center.ability.extra.Xmult} }
-	-- end,
+	-- end,\
+    --ortalab has woo all 1s, hence its redundant on modest
+    gameset_config = {
+		modest = { disabled = (SMODS.Mods["ortalab"] or {}).can_load },
+	},
+    loc_vars = function(self, info_queue, center)
+		return { 
+			key = Cryptid.gameset_loc(self, { modest = "modest"}), 
+		}
+	end,
     add_to_deck = function(self, card, from_debuff)
         local yesNothingExists = 0
         for _, v in pairs(G.jokers.cards) do
@@ -26,7 +35,11 @@ SMODS.Joker {
         if yesNothingExists <= 0 then
             --print("reduce")
             for k, v in pairs(G.GAME.probabilities) do 
-                G.GAME.probabilities[k] = v/1e100
+                if  Card.get_gameset(card) ~= "modest" then
+                    G.GAME.probabilities[k] = v/1e100
+                else
+                    G.GAME.probabilities[k] = v/2
+                end
             end
         end
 	end,
@@ -46,7 +59,11 @@ SMODS.Joker {
         if yesNothingExists <= 0 then
             --print("add")
             for k, v in pairs(G.GAME.probabilities) do 
-                G.GAME.probabilities[k] = v*1e100
+                if  Card.get_gameset(card) ~= "modest" then
+                    G.GAME.probabilities[k] = v*1e100
+                else
+                    G.GAME.probabilities[k] = v*2
+                end
             end
         end
 	end,

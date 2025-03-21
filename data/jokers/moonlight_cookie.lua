@@ -21,11 +21,9 @@ SMODS.Joker {
 		modest = { extra = { Emult = 1.15} },
 		madness = { extra = { Emult = 1.25,consumeSlot = 1} },
 	},
-	extra_gamesets = { "exp_modest" },
 	loc_vars = function(self, info_queue, center)
 		return { 
-			key = Cryptid.gameset_loc(self, { modest = "modest" }), 
-			key = Cryptid.gameset_loc(self, { madness = "madness" }), 
+			key = Cryptid.gameset_loc(self, { modest = "modest",madness = "madness"  }), 
 			vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot} 
 		}
 	end,

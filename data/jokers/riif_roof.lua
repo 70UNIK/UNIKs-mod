@@ -8,13 +8,13 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     config = { extra = { Xmult = 1.26} },
-    loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Xmult} }
-	end,
     gameset_config = {
 		modest = { extra = { Xmult = 1.2} }, --around 2X mult with 4 commons
 		madness = { extra = { Xmult = 1.32} }, --around 3X mult with 4 commons
 	},
+    loc_vars = function(self, info_queue, center)
+		return { vars = {center.ability.extra.Xmult} }
+	end,
     calculate = function(self, card, context)
         if context.other_joker and card ~= context.other_joker then
             if context.other_joker.config.center.rarity == 1 then --Common

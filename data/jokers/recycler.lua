@@ -10,12 +10,12 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     config = { extra = {x_mult = 1.0, x_mult_mod = 0.02} },
-	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
-	end,
 	gameset_config = {
 		modest = { extra = {x_mult = 1.0, x_mult_mod = 0.01} },
 	},
+	loc_vars = function(self, info_queue, center)
+		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
+	end,
     calculate = function(self, card, context)
 		if context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1)) then
 			return {
