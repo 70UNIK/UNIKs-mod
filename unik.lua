@@ -83,12 +83,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
--- SMODS.Atlas {
--- 	key = "unik_epic",
--- 	path = "unik_epic.png",
--- 	px = 71,
--- 	py = 95
--- }
+SMODS.Atlas {
+	key = "unik_epic",
+	path = "unik_epic.png",
+	px = 71,
+	py = 95
+}
 SMODS.Atlas {
 	key = "unik_cursed",
 	path = "unik_cursed.png",
@@ -156,17 +156,17 @@ NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
-NFS.load(mod_path .. "data/jokers/tech_demo.lua")() --no image: the joker presenting a "tech demo" of technology
+NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 
 NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
-NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() -- no image: A small sample of Crustulium 
+NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 
  --rare
 --- Epic ---
-NFS.load(mod_path .. "data/jokers/the_long_line.lua")() --no image
+NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 --NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
@@ -232,9 +232,6 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 -- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
 
 --Artwork to do:
-
---Long line
---Tech Demo
 
 --Monster spawner
 --Rancid Smoothie

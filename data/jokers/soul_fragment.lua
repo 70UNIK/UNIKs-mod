@@ -1,10 +1,10 @@
 --Sell to create a disposable eternal rental legendary joker
 SMODS.Joker {
 	-- How the code refers to the joker.
-	key = 'unik_tech_demo',
-    atlas = 'unik_placeholders',
+	key = 'unik_soul_fragment',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
+	pos = { x = 2, y = 1 },
     cost = 5,
 	blueprint_compat = false,
     perishable_compat = false,

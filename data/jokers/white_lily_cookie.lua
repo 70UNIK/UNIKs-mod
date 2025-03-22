@@ -15,6 +15,7 @@ local function White_lily_copy(card)
     _card.ability.cry_possessed = nil
     _card.ability.extra.copying = false
     _card.ability.extra.Emult = _card.ability.extra.Emult + _card.ability.extra.Emult_mod
+    _card.ability.extra.x_mult = _card.ability.extra.x_mult + _card.ability.extra.x_mult_mod
     _card.ability.extra_value = _card.ability.extra_value - (math.floor(_card.sell_cost*100*0.2)/100)
     --avoid permanently doubling her values to her copy so the multiply properties must transfer
     if card.config.cry_multiply then
@@ -22,17 +23,32 @@ local function White_lily_copy(card)
     end
     _card:set_cost()
 
-    card_eval_status_text(_card, "extra", nil, nil, nil, {
-        message = localize({
-            type = "variable",
-            key = "a_powmult",
-            vars = {
-                number_format(to_big(_card.ability.extra.Emult)),
-            },
-        }),
-        colour = G.C.DARK_EDITION,
-        card = _card
-    })
+    if Card.get_gameset(card) ~= "modest" then
+        card_eval_status_text(_card, "extra", nil, nil, nil, {
+            message = localize({
+                type = "variable",
+                key = "a_powmult",
+                vars = {
+                    number_format(to_big(_card.ability.extra.Emult)),
+                },
+            }),
+            colour = G.C.DARK_EDITION,
+            card = _card
+        })
+    else
+        card_eval_status_text(_card, "extra", nil, nil, nil, {
+            message = localize({
+                type = "variable",
+                key = "a_xmult",
+                vars = {
+                    number_format(to_big(_card.ability.extra.x_mult)),
+                },
+            }),
+            colour = G.C.MULT,
+            card = _card
+        })
+    end 
+
 end
 SMODS.Atlas {
 	key = "unik_white_lily",
@@ -57,27 +73,48 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.0, Emult_mod = 0.1, sold = false,copying = false} },
+    config = { extra = { Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.0, sold = false,copying = false} },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod} }
+		return { 
+            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
+            vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
 	end,
     add_to_deck = function(self, card, from_debuff)
         card.ability.perishable = nil
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
-        if context.joker_main and (to_big(card.ability.extra.Emult) > to_big(1)) then
-			return {
-                message = localize({
-					type = "variable",
-					key = "a_powmult",
-                    vars = {
-                        number_format(card.ability.extra.Emult),
-                    },
-				}),
-				Emult_mod = card.ability.extra.Emult,
-                colour = G.C.DARK_EDITION,
-			}
+        if context.joker_main then
+            if Card.get_gameset(card) ~= "modest" then
+                if (to_big(card.ability.extra.Emult) > to_big(1)) then
+                    return {
+                        message = localize({
+                            type = "variable",
+                            key = "a_powmult",
+                            vars = {
+                                number_format(card.ability.extra.Emult),
+                            },
+                        }),
+                        Emult_mod = card.ability.extra.Emult,
+                        colour = G.C.DARK_EDITION,
+                    }
+                end
+            else
+                if (to_big(card.ability.extra.x_mult) > to_big(1)) then
+                    return {
+                        message = localize({
+                            type = "variable",
+                            key = "a_xmult",
+                            vars = {
+                                number_format(card.ability.extra.x_mult),
+                            },
+                        }),
+                        Xmult_mod = card.ability.extra.x_mult,
+                        colour = G.C.MULT,
+                    }
+                end    
+            end
+
 		end
         if context.ending_shop and not context.repetition and not context.blueprint then
             if card.ability.extra.copying == false then

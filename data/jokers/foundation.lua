@@ -6,10 +6,10 @@ SMODS.Joker {
 			"set_cry_epic",
 		},
     },
-    key = 'unik_the_long_line',
-    atlas = 'placeholders',
+    key = 'unik_foundation',
+    atlas = 'unik_epic',
     rarity = 'cry_epic',
-	pos = { x = 3, y = 0 },
+	pos = { x = 0, y = 0 },
     cost = 10,
     config = {extra = {hands = 0,juiced_up = false}},
     loc_vars = function(self, info_queue, center)

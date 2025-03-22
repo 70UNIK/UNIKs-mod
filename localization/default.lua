@@ -688,8 +688,8 @@ return {
                 }               
             },
             --almanac version will create exotics
-            j_unik_tech_demo = {
-                name="Tech Demo",
+            j_unik_soul_fragment = {
+                name="Soul Fragment",
                 text={
                     "Sell this card to create a random",
                     "{C:attention}Disposable Eternal Rental{}", 
@@ -726,9 +726,9 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     "This Joker creates a copy with {X:mult,C:white}",
-                    "an additional {X:mult,C:white}X#2#{} Mult on {E:2,C:red}destruction{}",
+                    "an additional {X:mult,C:white}X#4#{} Mult on {E:2,C:red}destruction{}",
                     "{E:2,C:red}Self destructs{} at the end of the {C:attention}shop{}",
-                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
                     "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",           
                     "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
@@ -779,17 +779,18 @@ return {
                     "{C:white,X:mult}X#1#{} Mult if played",
                     "hand contains a scoring",
                     "{C:attention}Odd{} and {C:attention}Even{} card",
-                    "{C:inactive,s:0.7}If obtained, fixed {C:green,s:0.7,E:1}0.8%{C:inactive,s:0.7,E:1} chance",
-                    "{C:inactive,s:0.7}to obtain {C:cry_exotic,s:0.7,E:1}Alice {C:inactive,s:0.7,E:1}instead",
+                    "{C:inactive,s:0.7}If obtained, fixed {C:green,s:0.7}0.8%{C:inactive,s:0.7} chance",
+                    "{C:inactive,s:0.7}to obtain {C:cry_exotic,s:0.7,E:1}Alice {C:inactive,s:0.7}instead",
                 }
             },
-            j_unik_the_long_line = {
-                name = 'The Long Line',
+            j_unik_foundation = {
+                name = 'Foundation',
                 text = {
                     "After playing {C:attention}80{} hands",
                     "sell this card to create",
                     "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
 					"{C:inactive}(Currently #1#/80){}",
+                    "{C:inactive,E:1,s:0.7}It will be worth it in the end!{}",
                 }
             },
             j_unik_broken_scale = {
