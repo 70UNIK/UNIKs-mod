@@ -14,6 +14,9 @@ SMODS.Joker {
 	blueprint_compat = false,
     perishable_compat = false,
     eternal_compat = false,
+    gameset_config = {
+		modest = {extra = { min_discards = 7, discarded_cards = 2, current_discards = 0} },
+	},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.min_discards, center.ability.extra.discarded_cards, center.ability.extra.current_discards} }
 	end,
@@ -27,7 +30,7 @@ SMODS.Joker {
                 card.ability.extra.current_discards = card.ability.extra.current_discards + 1
                 if to_big(card.ability.extra.current_discards) >= to_big(card.ability.extra.min_discards) then
                     selfDestruction(card,"k_unik_weapon_destroyed",G.C.UNIK_THE_HOOK)
-                    return true
+                    --return true
                 else
                     return {
                         message = localize({type='variable',key='a_unik_discards_1',vars={card.ability.extra.current_discards}}),

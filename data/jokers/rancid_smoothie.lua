@@ -18,6 +18,9 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult,center.ability.extra.divisor} }
 	end,
+	gameset_config = {
+		modest = {extra = {Emult = 0.96, divisor = 1.1} },
+	},
     immutable = true,
     calculate = function(self, card, context)
 		if context.final_scoring_step and (to_big(card.ability.extra.Emult) < to_big(1)) then

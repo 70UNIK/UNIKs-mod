@@ -9,21 +9,29 @@ SMODS.Joker {
     rarity = "cry_cursed",
 	pos = { x = 3, y = 1 },
     cost = 1,
-    config = { extra = { decrease = 1, maxLevel1 = 7, level1 = 0, selfDestruct = false} },
+    config = { extra = { decrease = 1, maxLevel1 = 7, level1 = 0, selfDestruct = false,odds = 4} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
-        return { vars = {center.ability.extra.decrease, center.ability.extra.maxLevel1,center.ability.extra.level1} }
+        return { 
+            key = Cryptid.gameset_loc(self, { modest = "modest"}),
+            vars = {center.ability.extra.decrease, center.ability.extra.maxLevel1,center.ability.extra.level1,
+        center and cry_prob(center.ability.cry_prob,center.ability.extra.odds,center.ability.cry_rigged)or 1, 
+        center.ability.extra.odds
+    } }
 	end,
+    gameset_config = {
+		modest = {extra = { decrease = 1, maxLevel1 = 5, level1 = 0, selfDestruct = false,odds = 4} },
+	},
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_arm'), G.C.UNIK_THE_ARM, G.C.WHITE, 1.0 )
     end,
 	-- Inverse of above function.
     calculate = function(self, card, context)
 
-        if context.cardarea == G.jokers and context.before then
+        if context.cardarea == G.jokers and context.before and ((Card.get_gameset(card) ~= "modest") or (Card.get_gameset(card) == "modest" and pseudorandom('unik_the_arm') < cry_prob(card.ability.cry_prob,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds))then
             if to_big(G.GAME.hands[context.scoring_name].level) > to_big(1) then
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize("k_unik_arm_downgrade"),

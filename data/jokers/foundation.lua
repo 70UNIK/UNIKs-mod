@@ -56,7 +56,6 @@ SMODS.Joker {
                     colour = G.C.CRY_EXOTIC,
                 })
                 card.ability.juiced_up = true
-                return true
             end
         end
         if context.selling_self and not context.blueprint and not context.retrigger_joker then

@@ -45,14 +45,16 @@ SMODS.Joker {
 	},
     pools = {},
     calculate = function(self, card, context)
-        if context.joker_main then
+        if context.cardarea == G.jokers and context.joker_main then
             local _odd, _even = false, false
             for i = 1, #context.scoring_hand do
-                if contains({14,3,5,7,9}, context.scoring_hand[i]:get_id()) and not SMODS.has_no_suit(context.scoring_hand[i]) then
-                    _odd = true
-                end
-                if contains({2,4,6,8,10}, context.scoring_hand[i]:get_id()) and not SMODS.has_no_suit(context.scoring_hand[i]) then
-                    _even = true
+                if not SMODS.has_no_rank(context.scoring_hand[i]) then
+                    if contains({14,3,5,7,9}, context.scoring_hand[i]:get_id()) then
+                        _odd = true
+                    end
+                    if contains({2,4,6,8,10}, context.scoring_hand[i]:get_id()) then
+                        _even = true
+                    end
                 end
             end
             if _odd and _even then
@@ -64,7 +66,7 @@ SMODS.Joker {
                     }),
                     Echip_mod = card.ability.extra.Echips,
                     colour = G.C.DARK_EDITION,
-                }, card)
+                }, context.blueprint_card or card)
                 SMODS.calculate_effect({
                     message = localize({
                         type = "variable",
@@ -73,9 +75,8 @@ SMODS.Joker {
                     }),
                     Emult_mod = card.ability.extra.Emult,
                     colour = G.C.DARK_EDITION,
-                }, card)
+                }, context.blueprint_card or card)
             end
-            return true
 		end
     end,
 

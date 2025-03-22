@@ -58,7 +58,9 @@ SMODS.Joker {
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
 		end
         info_queue[#info_queue + 1] = G.P_CENTERS.j_smiley
-        return { vars = { center.ability.extra.slotLimit } }
+        return { 
+            key = Cryptid.gameset_loc(self, { modest = "modest"}),
+            vars = { center.ability.extra.slotLimit } }
 	end,
     --Check every time if a joker is added or removed from deck
     add_to_deck = function(self, card, context)
@@ -101,7 +103,7 @@ SMODS.Joker {
         --     CheckSlots(card,card.ability.extra.slotLimit)
         -- end
         --Per hand, turn 2 leftmost played cards positive and create a tainted smiley face. Need to fix 
-		if context.before and context.cardarea == G.jokers then
+		if context.before and context.cardarea == G.jokers and Card.get_gameset(card) ~= "modest" then
             --print("turn them happy")
             G.E_MANAGER:add_event(Event({
 

@@ -29,34 +29,35 @@ SMODS.Joker {
                 --bypass debuff to ensure it doesnt self destruct
                 if w:is_suit(card.ability.extra.suit,true) then
                     Cards = Cards + 1
-                    SMODS.debuff_card(w,true,"unik_club")
+                    w:set_debuff(true)
                 end
             end
         end
         if G.hand and card.added_to_deck then 
             for i, w in pairs(G.hand.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1     
-                    SMODS.debuff_card(w,true,"unik_club")           
+                    Cards = Cards + 1   
+                    w:set_debuff(true)
                 end
             end
         end
         if G.play and card.added_to_deck then 
             for i, w in pairs(G.play.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1  
-                    SMODS.debuff_card(w,true,"unik_club")
+                    Cards = Cards + 1   
+                    w:set_debuff(true)
                 end
             end
         end
+        
         if G.discard and card.added_to_deck then 
             for i, w in pairs(G.discard.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1     
-                    SMODS.debuff_card(w,true,"unik_club")
+                    Cards = Cards + 1   
+                    w:set_debuff(true)
                 end
             end
-        end 
+        end
         --set the min cards needed
         card.ability.extra.minCards = math.ceil(Cards/2.0)
         card.ability.extra.cards = Cards
@@ -65,96 +66,142 @@ SMODS.Joker {
             card.ability.extra.selfDestruct = true
         end
     end,
-    remove_from_deck = function(self, card, from_debuff)
-        if G.deck then 
+    update = function(self, card, dt)
+        local Cards = 0
+        if G.deck and card.added_to_deck then 
             for i, w in pairs(G.deck.cards) do
                 --bypass debuff to ensure it doesnt self destruct
                 if w:is_suit(card.ability.extra.suit,true) then
-                    SMODS.debuff_card(w,false,"unik_club")
+                    Cards = Cards + 1
+                    w:set_debuff(true)
                 end
             end
         end
-        if G.hand then 
+        if G.hand and card.added_to_deck then 
             for i, w in pairs(G.hand.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
-                    SMODS.debuff_card(w,false,"unik_club")          
+                    Cards = Cards + 1   
+                    w:set_debuff(true)
                 end
             end
         end
-        if G.play then 
+        
+        if G.play and card.added_to_deck then 
             for i, w in pairs(G.play.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
-                    SMODS.debuff_card(w,false,"unik_club")                  
+                    Cards = Cards + 1   
+                    w:set_debuff(true)
                 end
             end
         end
-        if G.discard then 
+        
+        if G.discard and card.added_to_deck then 
             for i, w in pairs(G.discard.cards) do
                 if w:is_suit(card.ability.extra.suit,true) then
-                    SMODS.debuff_card(w,false,"unik_club")                      
+                    Cards = Cards + 1   
+                    w:set_debuff(true)
                 end
             end
-        end 
-	end,
-    calculate = function(self, card, context)
-        if context.cards_destroyed or context.playing_card_added or context.remove_playing_cards then
-            local Cards = 0
-            if context.cards_destroyed then
-                for k, val in ipairs(context.glass_shattered) do
-                    if val:is_suit(card.ability.extra.suit,true) then
-                        Cards = Cards - 1
-                    end
-                end
-            end
-            if context.remove_playing_cards then
-                for k, val in ipairs(context.removed) do
-                    if val:is_suit(card.ability.extra.suit,true) then
-                        Cards = Cards - 1
-                    end
-                end
-            end
-            if G.deck and card.added_to_deck then 
-                for i, w in pairs(G.deck.cards) do
-                    --bypass debuff to ensure it doesnt self destruct
-                    if w:is_suit(card.ability.extra.suit,true) then
-                        Cards = Cards + 1
-                        SMODS.debuff_card(w,true,"unik_club")
-                    end
-                end
-            end
-            if G.hand and card.added_to_deck then 
-                for i, w in pairs(G.hand.cards) do
-                    if w:is_suit(card.ability.extra.suit,true) then
-                        Cards = Cards + 1     
-                        SMODS.debuff_card(w,true,"unik_club")           
-                    end
-                end
-            end
-            if G.play and card.added_to_deck then 
-                for i, w in pairs(G.play.cards) do
-                    if w:is_suit(card.ability.extra.suit,true) then
-                        Cards = Cards + 1  
-                        SMODS.debuff_card(w,true,"unik_club")
-                    end
-                end
-            end
-            if G.discard and card.added_to_deck then 
-                for i, w in pairs(G.discard.cards) do
-                    if w:is_suit(card.ability.extra.suit,true) then
-                        Cards = Cards + 1     
-                        SMODS.debuff_card(w,true,"unik_club")
-                    end
-                end
-            end 
-            if card.added_to_deck then
-                card.ability.extra.cards = Cards
-                if (Cards < card.ability.extra.minCards or Cards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
-                    selfDestruction(card,"k_unik_weapon_destroyed",HEX("b9cb92"))
-                    card.ability.extra.selfDestruct = true
-                end
-            end
-            return
         end
+        if card.added_to_deck then
+            card.ability.extra.cards = Cards
+            if (Cards < card.ability.extra.minCards or Cards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
+                selfDestruction(card,"k_unik_weapon_destroyed",HEX("b9cb92"))
+                card.ability.extra.selfDestruct = true
+            end
+        end       
+    end,
+    -- remove_from_deck = function(self, card, from_debuff)
+    --     if G.deck then 
+    --         for i, w in pairs(G.deck.cards) do
+    --             --bypass debuff to ensure it doesnt self destruct
+    --             if w:is_suit(card.ability.extra.suit,true) then
+    --                 SMODS.debuff_card(w,false,"unik_club")
+    --             end
+    --         end
+    --     end
+    --     if G.hand then 
+    --         for i, w in pairs(G.hand.cards) do
+    --             if w:is_suit(card.ability.extra.suit,true) then
+    --                 SMODS.debuff_card(w,false,"unik_club")          
+    --             end
+    --         end
+    --     end
+    --     if G.play then 
+    --         for i, w in pairs(G.play.cards) do
+    --             if w:is_suit(card.ability.extra.suit,true) then
+    --                 SMODS.debuff_card(w,false,"unik_club")                  
+    --             end
+    --         end
+    --     end
+    --     if G.discard then 
+    --         for i, w in pairs(G.discard.cards) do
+    --             if w:is_suit(card.ability.extra.suit,true) then
+    --                 SMODS.debuff_card(w,false,"unik_club")                      
+    --             end
+    --         end
+    --     end 
+	-- end,
+
+    calculate = function(self, card, context)
+        -- if context.cards_destroyed or context.playing_card_added or context.remove_playing_cards then
+        --     local Cards = 0
+        --     if context.cards_destroyed then
+        --         for k, val in ipairs(context.glass_shattered) do
+        --             if val:is_suit(card.ability.extra.suit,true) then
+        --                 Cards = Cards - 1
+        --             end
+        --         end
+        --     end
+        --     if context.remove_playing_cards then
+        --         for k, val in ipairs(context.removed) do
+        --             if val:is_suit(card.ability.extra.suit,true) then
+        --                 Cards = Cards - 1
+        --             end
+        --         end
+        --     end
+        --     if G.deck and card.added_to_deck then 
+        --         for i, w in pairs(G.deck.cards) do
+        --             --bypass debuff to ensure it doesnt self destruct
+        --             if w:is_suit(card.ability.extra.suit,true) then
+        --                 Cards = Cards + 1
+        --                 SMODS.debuff_card(w,true,"unik_club")
+        --             end
+        --         end
+        --     end
+        --     if G.hand and card.added_to_deck then 
+        --         for i, w in pairs(G.hand.cards) do
+        --             if w:is_suit(card.ability.extra.suit,true) then
+        --                 Cards = Cards + 1     
+        --                 SMODS.debuff_card(w,true,"unik_club")           
+        --             end
+        --         end
+        --     end
+        --     if G.play and card.added_to_deck then 
+        --         for i, w in pairs(G.play.cards) do
+        --             if w:is_suit(card.ability.extra.suit,true) then
+        --                 Cards = Cards + 1  
+        --                 SMODS.debuff_card(w,true,"unik_club")
+        --             end
+        --         end
+        --     end
+        --     if G.discard and card.added_to_deck then 
+        --         for i, w in pairs(G.discard.cards) do
+        --             if w:is_suit(card.ability.extra.suit,true) then
+        --                 Cards = Cards + 1     
+        --                 SMODS.debuff_card(w,true,"unik_club")
+        --             end
+        --         end
+        --     end 
+        --     if card.added_to_deck then
+        --         card.ability.extra.cards = Cards
+        --         if (Cards < card.ability.extra.minCards or Cards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
+        --             selfDestruction(card,"k_unik_weapon_destroyed",HEX("b9cb92"))
+        --             card.ability.extra.selfDestruct = true
+        --         end
+        --     end
+        --     return
+        -- end
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Club")) and not (G.GAME.blind.disabled) then
             selfDestruction(card,"k_unik_blind_start_club",HEX("b9cb92"))
             card.ability.extra.selfDestruct = true

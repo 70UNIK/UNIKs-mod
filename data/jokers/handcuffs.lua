@@ -24,6 +24,14 @@ SMODS.Joker {
 		-- Changes a G.GAME variable, which is usually a global value that's specific to the current run.
 		-- These are initialized in game.lua under the Game:init_game_object() function, and you can look through them to get an idea of the things you can change.
 		G.hand:change_size(card.ability.extra.hand_size)
+        if Card.get_gameset(card) ~= "modest" then
+            card.ability.extra.max = G.hand.config.card_limit
+            card.ability.extra.min = G.hand.config.card_limit - 2
+        else
+            card.ability.extra.max = G.hand.config.card_limit - 1
+            card.ability.extra.min = G.hand.config.card_limit - 1
+        end
+        
 	end,
 	-- Inverse of above function.
 	remove_from_deck = function(self, card, from_debuff)
@@ -31,8 +39,7 @@ SMODS.Joker {
 		G.hand:change_size(-card.ability.extra.hand_size)
 	end,
     calculate = function(self, card, context)
-        --old manacle counts
-        if card.ability.extra.selfDestruct == false and context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Manacle" or G.GAME.blind.config.blind.key == "oldmanacle")) and not (G.GAME.blind.disabled) then
+        if card.ability.extra.selfDestruct == false and context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Manacle")) and not (G.GAME.blind.disabled) then
             selfDestruction(card,"k_unik_blind_start_manacle",HEX("575757"))
             card.ability.extra.selfDestruct = true
         end

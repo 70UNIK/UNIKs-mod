@@ -35,8 +35,8 @@ SMODS.Challenge{
 }
 --add override for enabling the pandemic
 local gfep2 = G.FUNCS.evaluate_play
-function G.FUNCS.evaluate_play(e)
-	gfep2(e)
+function G.FUNCS:evaluate_play(e)
+	local var = gfep2(self,e)
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         delay = 0.4,
@@ -70,5 +70,5 @@ function G.FUNCS.evaluate_play(e)
             return true
         end
     }))
-
+    return var
 end

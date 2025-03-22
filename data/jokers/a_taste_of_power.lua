@@ -28,7 +28,7 @@ SMODS.Joker {
             card2:add_to_deck()
             G.jokers:emplace(card2)
             card2:juice_up(0.3, 0.5)
-            return true
+           -- return true
 		end
 	end,
 }

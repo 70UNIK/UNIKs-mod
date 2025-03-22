@@ -1,4 +1,5 @@
 --spawn a cursed joker after a boss blind. Destroys itself after spawning two total cursed jokers. It CAN spawn itself as well!
+--modest makes it only spawn 1, which may seem redundant until with this, it keeps you in tension until the boss blind ends and gives time to use a knife to stop it.
 
 SMODS.Joker {
 	-- How the code refers to the joker.
@@ -46,7 +47,7 @@ SMODS.Joker {
         if card.ability.extra.jokers_spawned >= card.ability.extra.max_jokers and card.ability.extra.self_destruct == false then
             card.ability.extra.self_destruct = true
             selfDestruction(card,"k_extinct_ex",G.C.BLACK)
-            return true
+            --return true
         end
         return{
             message = localize("k_unik_spawned"),

@@ -20,6 +20,9 @@ SMODS.Joker {
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_wall'), G.C.UNIK_THE_WALL, G.C.WHITE, 1.0 )
     end,
+    gameset_config = {
+		modest = {extra = {selfDestruct = false,blind_size = 1.4,exceeds = 2,applied = false} },
+	},
 	add_to_deck = function(self, card, from_debuff)
 		-- If it appears during a blind (purple pentagram, trick o treat), then it should adjust it on spawn
         if G.GAME.blind.in_blind and card.ability.extra.applied == false then

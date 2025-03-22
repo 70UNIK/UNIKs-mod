@@ -272,7 +272,6 @@ return {
                 text = {
                     "{C:attention}7s{} are considered", 
                     "{C:attention}Lucky Cards{}",
-                    "{C:inactive}(Overrides enhancements){}",
                 }
             },
             j_unik_holepunched_card = {
@@ -353,7 +352,19 @@ return {
                     "and turns the {C:attention} leftmost{} played card {C:unik_shitty_edition}Positive{}", 
                     "{C:red}Self destructs{} after maximum Joker slots becomes {C:attention}#1#{}" ,
                     "{C:red}On destruction{}, remove {C:attention}Eternal{} from {C:attention}all Smiley Faces.{}" ,
-                    "{C:inactive,s:0.7}Happiness is mandatory. Failure to be happy is treason.{}",
+                    "{C:inactive,s:0.7,E:1}Happiness is mandatory. Failure to be happy is treason.{}",
+                }
+            },
+            j_unik_happiness_modest = {
+                name = 'Happiness is Mandatory',
+                text = {
+                    "On spawn, turn the {C:attention}leftmost{} Joker", 
+                    "and {C:attention}all{} equipped consumables {C:unik_shitty_edition}Positive{}", 
+                    "Each hand played creates a",
+                    "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Banana Smiley Face{}",
+                    "{C:red}Self destructs{} after maximum Joker slots becomes {C:attention}#1#{}" ,
+                    "{C:red}On destruction{}, remove {C:attention}Eternal{} from {C:attention}all Smiley Faces.{}" ,
+                    "{C:inactive,s:0.7,E:1}Happiness is mandatory. Failure to be happy is treason.{}",
                 }
             },
             j_unik_the_plant = {
@@ -364,7 +375,7 @@ return {
                     "{C:attention}#1# face{} card(s) remain in deck or",
                     "{C:unik_plant_color}The Plant{} is triggered",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} Face Card(s))",
-                    "{C:inactive,s:0.9}Grawr Charble Grawr!{}",
+                    "{C:inactive,s:0.9,E:1}Grawr Charble Grawr!{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Super Mario Bros.{}",
                 }                
@@ -436,6 +447,19 @@ return {
                 text={
                     "{C:red}Levels down{} played {C:attention}poker hand{}", 
                     "by {C:attention}#1#{} level {C:attention}before{} each hand",
+                    "{C:red}Self destructs{} when a level 1", 
+                    "hand is played {C:attention}#2#{} times {C:attention}consecutively{}",
+                    "or {C:unik_arm_color}The Arm{} is triggered",   
+                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} Hand(s))",
+                },                 
+            },
+            --1 in 4 chance to make it in line with Space Joker in modest
+            j_unik_broken_arm_modest = {
+                name = 'Broken Arm',
+                text={
+                    "{C:green}#4# in #5#{} chance to {C:red}Level down{}", 
+                    "played {C:attention}poker hand{} by", 
+                    "{C:attention}#1#{} level {C:attention}before{} each hand",
                     "{C:red}Self destructs{} when a level 1", 
                     "hand is played {C:attention}#2#{} times {C:attention}consecutively{}",
                     "or {C:unik_arm_color}The Arm{} is triggered",   
@@ -602,15 +626,6 @@ return {
                     "increases this by {C:mult}+#2#{} Mult",
                 },
             },
-            j_unik_big_alice = {
-                name="Giant Alice",
-                text={
-                    "{X:mult,C:white}X#1#{} Mult if played hand contains",
-                    "{C:attention}#3#{} or more cards",
-                    "Each played card above {C:attention}#3#{} cards",
-                    "increases this by {X:mult,C:white}X#2#{} Mult",
-                },
-            },
             j_unik_no_standing_zone = {
                 name="No Standing Zone",
                 text={
@@ -649,6 +664,17 @@ return {
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
             },
+            j_unik_impounded_modest = {
+                name="Impound Notice",
+                text={
+                    "{C:red}Debuffs{} and adds {C:attention}Eternal and Rental{}",
+                    " to a random Joker on spawn",
+                    "{C:attention}Sell{} to remove debuff, Eternal and Rental",
+                    "Selling costs {X:money,C:white}X#2{} the total",
+                    "{C:attention}selling price{} of debuffed Joker",
+                    "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
+                }
+            },
             j_unik_rancid_smoothie = {
                 name="Rancid Smoothie",
                 text={
@@ -660,9 +686,9 @@ return {
             j_unik_hook_n_discard = {
                 name="Hook n' Discard",
                 text={
-                    "Discards {C:attention}#2#{} {C:attention}random{} cards per hand",
+                    "Discards {C:attention}2{} {C:attention}random{} cards per hand",
                     "{C:red}Self destructs{} after {C:attention}#1#{} {C:attention}consecutive{}",
-					"discards with only {C:attention}#2#{} cards",
+					"discards with only {C:attention}2{} cards",
                     "or {C:unik_hook_color}The Hook{} is triggered",      
                     "{C:inactive}(Currently {C:attention}#3#{C:inactive} discards)",
                 }
@@ -798,6 +824,16 @@ return {
                 text = {
                     "Scaling {C:attention}Jokers",
                     "scale {C:red}1/3 as fast{}",
+                    "{E:2,C:red}Self destructs{}",
+					"after {C:attention}#2#{} rounds",
+                    "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",
+                }
+            },
+            j_unik_broken_scale_modest = {
+                name = 'Broken Scale',
+                text = {
+                    "Scaling {C:attention}Jokers",
+                    "scale {C:red}3/4 as fast{}",
                     "{E:2,C:red}Self destructs{}",
 					"after {C:attention}#2#{} rounds",
                     "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",

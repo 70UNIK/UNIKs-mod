@@ -16,8 +16,13 @@ SMODS.Joker {
 	eternal_compat = false,
     config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20} },
     loc_vars = function(self, info_queue, center)
-        return { vars = { center.ability.extra.x_mult,center.ability.extra.multiplier,center.ability.extra.fallback_cost} }
+        return { 
+            key = Cryptid.gameset_loc(self, { modest = "modest"}),
+            vars = { center.ability.extra.x_mult,center.ability.extra.multiplier,center.ability.extra.fallback_cost} }
 	end,
+    gameset_config = {
+		modest = { extra = {x_mult = 1.0,multiplier = 2.5,cost = -15,fallback_cost = 10} },
+	},
     --add debuffs
     add_to_deck = function(self, card, from_debuff)
 
@@ -71,7 +76,11 @@ SMODS.Joker {
                     func = function() 
                         G.jokers.cards[select].ability.unik_impounded = true
                         --Scale logarithmically, so cheaper jokers would proportionately cost more, while exotics proportinately cost less, but still always increasing.
-                        card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(G.jokers.cards[select].sell_cost+1))/100
+                        if Card.get_gameset(card) ~= "modest" then
+                            card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(G.jokers.cards[select].sell_cost+1))/100
+                        else
+                            card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * G.jokers.cards[select].sell_cost)/100
+                        end
                         G.jokers.cards[select].sell_cost = 0
                         G.jokers.cards[select].ability.eternal = true
                         G.jokers.cards[select].ability.rental = true
@@ -101,7 +110,7 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         --calculate Xmult
-		if context.final_scoring_step then
+		if context.final_scoring_step and Card.get_gameset(card) ~= "modest" then
 			return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,

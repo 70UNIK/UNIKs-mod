@@ -15,7 +15,9 @@ SMODS.Joker {
 	eternal_compat = true,
     config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.05, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
 	loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded
+		if Card.get_gameset(card) ~= "modest" then
+			info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded
+		end
 		return { 
 			key = Cryptid.gameset_loc(self, { modest = "modest"}),
 			vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.x_mult_initial,center.ability.extra.blind_decay_mult,center.ability.extra.shop_decay_mult},
@@ -95,11 +97,13 @@ SMODS.Joker {
 			}
 		end
 		--pause timer if scoring (to ease pain in lack of control in scoring and to avoid talisman animation exploit)
-		if context.before then
+		if context.before and not context.blueprint_card
+		and not context.retrigger_joker then
 			card.ability.extra.in_scoring = true
-			return true
+			--return true
 		end
-		if context.after then
+		if context.after and not context.blueprint_card
+		and not context.retrigger_joker then
 			G.E_MANAGER:add_event(Event({
 				trigger='after',
 				delay=0.3,
@@ -108,7 +112,7 @@ SMODS.Joker {
 					return true
 				end
 			}))
-			return true
+			--return true
 		end
         --reset to 3x
         if

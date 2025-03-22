@@ -86,7 +86,7 @@ SMODS.Joker {
 			end
 			if context.other_consumeable.debuff and valid == true then
 				card_eval_status_text(card, "debuff", nil, nil, nil, nil)
-				return true
+				--return true
 			elseif valid == true then
 				return {
 					message = localize({

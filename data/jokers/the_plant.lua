@@ -36,7 +36,7 @@ SMODS.Joker {
             for i, w in pairs(G.deck.cards) do
                 if w:is_face(true) then
                     faceCards = faceCards + 1
-                    SMODS.debuff_card(w,true,"unik_plant")
+                    w:set_debuff(true)
                 end
             end
         end
@@ -44,26 +44,27 @@ SMODS.Joker {
             for i, w in pairs(G.hand.cards) do
                 if w:is_face(true) then
                     faceCards = faceCards + 1  
-                    SMODS.debuff_card(w,true,"unik_plant")
+                    w:set_debuff(true)
                 end
             end
         end
-        if G.play then 
+        if G.play and card.added_to_deck then 
             for i, w in pairs(G.play.cards) do
                 if w:is_face(true) then
+                    w:set_debuff(true)
                     faceCards = faceCards + 1  
-                    SMODS.debuff_card(w,true,"unik_plant")                
                 end
             end
         end
-        if G.discard then 
+        if G.discard and card.added_to_deck then 
             for i, w in pairs(G.discard.cards) do
                 if w:is_face(true) then
-                    faceCards = faceCards + 1     
-                    SMODS.debuff_card(w,true,"unik_plant")             
+                    w:set_debuff(true)
+                    faceCards = faceCards + 1  
                 end
             end
         end 
+
         --set the min face cards needed
         card.ability.extra.minFaceCards = math.ceil(faceCards/2.0)
         card.ability.extra.cards = faceCards
@@ -72,97 +73,109 @@ SMODS.Joker {
             card.ability.extra.selfDestruct = true
         end
     end,
-    remove_from_deck = function(self, card, from_debuff)
+    update = function(self, card, dt)
+        local faceCards = 0
         if G.deck then 
             for i, w in pairs(G.deck.cards) do
                 if w:is_face(true) then
-                    SMODS.debuff_card(w,false,"unik_plant")
+                    faceCards = faceCards + 1
+                    w:set_debuff(true)
                 end
             end
         end
         if G.hand then 
             for i, w in pairs(G.hand.cards) do
                 if w:is_face(true) then
-                    SMODS.debuff_card(w,false,"unik_plant")
+                    faceCards = faceCards + 1  
+                    w:set_debuff(true)
                 end
             end
         end
-        if G.play then 
+        if G.play and card.added_to_deck then 
             for i, w in pairs(G.play.cards) do
                 if w:is_face(true) then
-                    SMODS.debuff_card(w,false,"unik_plant")
+                    w:set_debuff(true)
+                    faceCards = faceCards + 1  
                 end
             end
         end
-        if G.discard then 
+        if G.discard and card.added_to_deck then 
             for i, w in pairs(G.discard.cards) do
                 if w:is_face(true) then
-                    SMODS.debuff_card(w,false,"unik_plant")
+                    w:set_debuff(true)
+                    faceCards = faceCards + 1  
                 end
             end
         end 
-	end,
+        if card.added_to_deck then
+            card.ability.extra.cards = faceCards
+            if (faceCards < card.ability.extra.minFaceCards or faceCards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
+                selfDestruction(card,"k_unik_weapon_destroyed",HEX("b9cb92"))
+                card.ability.extra.selfDestruct = true
+            end
+        end       
+    end,
     calculate = function(self, card, context)
-        --Check if cards are destroyed, added or removed
-        if context.playing_card_added or context.remove_playing_cards or context.cards_destroyed then
-            local faceCards = 0
-            --additional check to see if cards are removed via glass shattering or via tarots
-            if context.cards_destroyed then
-                for k, val in ipairs(context.glass_shattered) do
-                    if val:is_face(true) then
-                        faceCards = faceCards - 1
-                    end
-                end
-            end
-            if context.remove_playing_cards then
-                for k, val in ipairs(context.removed) do
-                    if val:is_face(true) then
-                        faceCards = faceCards - 1
-                    end
-                end
-            end
-            if G.deck and card.added_to_deck then 
-                for i, w in pairs(G.deck.cards) do
-                    if w:is_face(true) then
-                        SMODS.debuff_card(w,true,"unik_plant")
-                        faceCards = faceCards + 1  
-                    end
-                end
-            end
-            if G.hand and card.added_to_deck then 
-                for i, w in pairs(G.hand.cards) do
-                    if w:is_face(true) then
-                        SMODS.debuff_card(w,true,"unik_plant")
-                        faceCards = faceCards + 1  
-                    end
-                end
-            end
-            if G.play and card.added_to_deck then 
-                for i, w in pairs(G.play.cards) do
-                    if w:is_face(true) then
-                        SMODS.debuff_card(w,true,"unik_plant")
-                        faceCards = faceCards + 1  
-                    end
-                end
-            end
-            if G.discard and card.added_to_deck then 
-                for i, w in pairs(G.discard.cards) do
-                    if w:is_face(true) then
-                        SMODS.debuff_card(w,true,"unik_plant")
-                        faceCards = faceCards + 1  
-                    end
-                end
-            end 
+        -- --Check if cards are destroyed, added or removed
+        -- if context.playing_card_added or context.remove_playing_cards or context.cards_destroyed then
+        --     local faceCards = 0
+        --     --additional check to see if cards are removed via glass shattering or via tarots
+        --     if context.cards_destroyed then
+        --         for k, val in ipairs(context.glass_shattered) do
+        --             if val:is_face(true) then
+        --                 faceCards = faceCards - 1
+        --             end
+        --         end
+        --     end
+        --     if context.remove_playing_cards then
+        --         for k, val in ipairs(context.removed) do
+        --             if val:is_face(true) then
+        --                 faceCards = faceCards - 1
+        --             end
+        --         end
+        --     end
+        --     if G.deck and card.added_to_deck then 
+        --         for i, w in pairs(G.deck.cards) do
+        --             if w:is_face(true) then
+        --                 SMODS.debuff_card(w,true,"unik_plant")
+        --                 faceCards = faceCards + 1  
+        --             end
+        --         end
+        --     end
+        --     if G.hand and card.added_to_deck then 
+        --         for i, w in pairs(G.hand.cards) do
+        --             if w:is_face(true) then
+        --                 SMODS.debuff_card(w,true,"unik_plant")
+        --                 faceCards = faceCards + 1  
+        --             end
+        --         end
+        --     end
+        --     if G.play and card.added_to_deck then 
+        --         for i, w in pairs(G.play.cards) do
+        --             if w:is_face(true) then
+        --                 SMODS.debuff_card(w,true,"unik_plant")
+        --                 faceCards = faceCards + 1  
+        --             end
+        --         end
+        --     end
+        --     if G.discard and card.added_to_deck then 
+        --         for i, w in pairs(G.discard.cards) do
+        --             if w:is_face(true) then
+        --                 SMODS.debuff_card(w,true,"unik_plant")
+        --                 faceCards = faceCards + 1  
+        --             end
+        --         end
+        --     end 
             
-            if card.added_to_deck then
-                card.ability.extra.faceCards = faceCards
-                if (faceCards < card.ability.extra.minFaceCards or faceCards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
-                    selfDestruction(card,"k_unik_plant_no_face",HEX("709284"))
-                    card.ability.extra.selfDestruct = true
-                end
-            end   
-            return
-        end
+        --     if card.added_to_deck then
+        --         card.ability.extra.faceCards = faceCards
+        --         if (faceCards < card.ability.extra.minFaceCards or faceCards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
+        --             selfDestruction(card,"k_unik_plant_no_face",HEX("709284"))
+        --             card.ability.extra.selfDestruct = true
+        --         end
+        --     end   
+        --     return
+        -- end
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Plant")) and not (G.GAME.blind.disabled) then
             selfDestruction(card,"k_unik_blind_start_plant",HEX("709284"))
             card.ability.extra.selfDestruct = true

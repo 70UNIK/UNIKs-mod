@@ -10,6 +10,7 @@ SMODS.Joker {
     rarity = "cry_cursed",
 	pos = { x = 3, y = 1 },
     cost = 1,
+    --will not be changed in modest
     config = { extra = { selfDestruct = false,min_enhanced_cards = 2, enhanced_cards = 1} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
