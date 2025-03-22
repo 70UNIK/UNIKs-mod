@@ -2,9 +2,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_coupon_codes',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
+	pos = { x = 1, y = 1 },
 
     cost = 7,
 	blueprint_compat = true,
@@ -17,6 +17,9 @@ SMODS.Joker {
         center and cry_prob(center.ability.cry_prob*3 or 3,center.ability.extra.odds,center.ability.cry_rigged)or 3, 
         center.ability.extra.odds} }
 	end,
+    gameset_config = {
+		modest = {extra = {odds = 30} },
+	},
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over == false then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})

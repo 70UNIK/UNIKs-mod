@@ -5,6 +5,11 @@ SMODS.Atlas {
 	py = 95
 }
 SMODS.Joker {
+	dependencies = {
+		items = {
+			"set_cry_exotic",
+		},
+    },
 	key = 'unik_moonlight_cookie',
     atlas = 'unik_moonlight',
     rarity = "cry_exotic",

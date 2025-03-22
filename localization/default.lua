@@ -574,8 +574,19 @@ return {
             j_unik_lily_sprunki = {
                 name="Lily",
                 text={
-                    "{C:red}Destroy{} {C:attention}all{} played cards except the ", 
+                    "{C:red}Destroy{} {C:attention}all{} played cards except the", 
                     "{C:attention}leftmost{} played card after scoring",
+                    "{C:inactive,s:0.9,E:1}#1#{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:dark_edition,s:0.6,E:2}Character by : Kaeofthekae{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : SPRUNKI{}",
+                },                
+            },
+            j_unik_lily_sprunki_modest = {
+                name="Lily",
+                text={
+                    "{C:red}Destroy{} played cards except the", 
+                    "{C:attention}3 leftmost{} played cards after scoring",
                     "{C:inactive,s:0.9,E:1}#1#{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:dark_edition,s:0.6,E:2}Character by : Kaeofthekae{}",
@@ -608,6 +619,18 @@ return {
                     "and {X:mult,C:white}X#5#{} every {C:attention}second{} elsewhere",
                     "Turns into {C:red}Impound Notice{}",
                     "if Mult becomes {X:mult,C:white}X1{}.",
+                    "Resets to {X:mult,C:white}X#3#{} Mult",
+                    "at the start and end of {C:attention}Round{}",
+                    "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
+                }, 
+            },
+            j_unik_no_standing_zone_modest = {
+                name="No Standing Zone",
+                text={
+                    "{X:mult,C:white}X#1#{} Mult, decreases by ",
+                    "{X:mult,C:white}X#4#{} every {C:attention}second{} in Blinds",
+                    "and {X:mult,C:white}X#5#{} every {C:attention}second{} elsewhere",
+                    "{C:red}Self destructs{} if Mult becomes {X:mult,C:white}X1{}.",
                     "Resets to {X:mult,C:white}X#3#{} Mult",
                     "at the start and end of {C:attention}Round{}",
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
@@ -692,6 +715,20 @@ return {
                     "an additional {X:dark_edition,C:white}^#2#{} Mult on {E:2,C:red}destruction{}",
                     "{E:2,C:red}Self destructs{} at the end of the {C:attention}shop{}",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
+                    "{C:inactive,s:0.7}(Removes stickers from copy){}",
+                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",           
+                    "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                }
+            },
+            j_unik_white_lily_cookie_modest = { --instead of +^1.1 per destruction, becomes +x1.25 Mult 
+                name = 'White Lily Cookie',
+                text = {
+                    "This Joker creates a copy with {X:mult,C:white}",
+                    "an additional {X:mult,C:white}X#2#{} Mult on {E:2,C:red}destruction{}",
+                    "{E:2,C:red}Self destructs{} at the end of the {C:attention}shop{}",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
                     "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",           
                     "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",

@@ -45,6 +45,11 @@ SMODS.Joker {
 	key = 'unik_white_lily_cookie',
     atlas = 'unik_white_lily',
     rarity = "cry_exotic",
+    dependencies = {
+		items = {
+			"set_cry_exotic",
+		},
+    },
 	pos = { x = 0, y = 0 },
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },

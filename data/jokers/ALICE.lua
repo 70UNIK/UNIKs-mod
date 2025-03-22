@@ -18,6 +18,14 @@ SMODS.Atlas {
 	py = 95
 }
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_exotic",
+		},
+        mods = {
+          "extracredit", --While she *can* work without Average Alice, its more fun to require the mod
+        }
+    },
 	key = 'unik_extra_credit_alice',
     atlas = 'unik_alice',
     rarity = "cry_exotic",
@@ -28,10 +36,13 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 2, Echips = 2}},
+    config = { extra = { Emult = 1.8, Echips = 1.8}},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult,center.ability.extra.Echips} }
 	end,
+    gameset_config = {
+		modest = {extra = {Emult = 1.4, Echips = 1.4} },
+	},
     pools = {},
     calculate = function(self, card, context)
         if context.joker_main then

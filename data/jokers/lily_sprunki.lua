@@ -17,7 +17,9 @@ SMODS.Joker {
     cost = 8,
     config = {extra = {triggered = false,feral = false}},
     loc_vars = function(self, info_queue, center)
-        return { vars = { localize(G.GAME.sprunki_lily_quote) } }
+        return { 
+            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
+            vars = { localize(G.GAME.sprunki_lily_quote) } }
     end,
     blueprint_compat = false,
 	perishable_compat = true,
@@ -33,8 +35,8 @@ SMODS.Joker {
         --destroy cards and have her "eat" cards
 		if
 			(context.cardarea == G.play or context.cardarea == "unscored")
-			and context.destroy_card ~= context.full_hand[1]
-			and #context.full_hand > 1 -- 3 cards in played hand
+			and context.destroy_card ~= context.full_hand[1] and ((Card.get_gameset(card) ~= "modest") or (context.destroy_card ~= context.full_hand[2] and context.destroy_card ~= context.full_hand[3] and Card.get_gameset(card) == "modest"))
+			and ((#context.full_hand > 1 and Card.get_gameset(card) ~= "modest") or (#context.full_hand > 3 and Card.get_gameset(card) == "modest")) -- 3 cards in played hand
 			and not context.blueprint
 			and not context.retrigger_joker 
             and card.ability.extra.feral == true
@@ -68,7 +70,7 @@ SMODS.Joker {
                 }
             end
         end
-        if context.after and context.cardarea == G.jokers and #context.full_hand > 1 and card.ability.extra.feral == true then
+        if context.after and context.cardarea == G.jokers and ((#context.full_hand > 1 and Card.get_gameset(card) ~= "modest") or (#context.full_hand > 3 and Card.get_gameset(card) == "modest")) and card.ability.extra.feral == true then
             --return to normal sprite
             G.E_MANAGER:add_event(Event({
                 func = function()
@@ -86,7 +88,7 @@ SMODS.Joker {
                 colour = HEX("d377dc"),
             }
         end
-        if context.before and context.cardarea == G.jokers and #context.full_hand > 1 then
+        if context.before and context.cardarea == G.jokers and ((#context.full_hand > 1 and Card.get_gameset(card) ~= "modest") or (#context.full_hand > 3 and Card.get_gameset(card) == "modest")) then
             --only turn feral if theres any valid card
             for i, w in pairs(context.full_hand) do
                 if not w.ability.eternal then

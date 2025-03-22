@@ -5,6 +5,11 @@ SMODS.Joker {
 	key = 'unik_jsab_maya',
     atlas = 'placeholders',
     rarity = 'cry_epic',
+    dependencies = {
+		items = {
+			"set_cry_epic",
+		},
+	},
 	pos = { x = 3, y = 0 },
     cost = 12,
 	blueprint_compat = true,

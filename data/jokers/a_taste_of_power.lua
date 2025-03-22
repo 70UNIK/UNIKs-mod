@@ -1,10 +1,15 @@
 --sell to create an Absolute Rental Niko Exotic Joker
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_exotic",
+		},
+    },
 	-- How the code refers to the joker.
 	key = 'unik_a_taste_of_power',
-    atlas = 'unik_placeholders',
+    atlas = 'unik_rare',
     rarity = 3,
-	pos = { x = 2, y = 0 },
+	pos = { x = 1, y = 0 },
     cost = 6,
 	blueprint_compat = false,
     perishable_compat = false,

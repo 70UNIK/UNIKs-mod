@@ -1,5 +1,10 @@
 --Transferrable function designed to be used for all suit based jokers
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_cursed",
+		},
+	},
 	key = 'unik_caveman_club',
     atlas = 'unik_cursed',
     rarity = "cry_cursed",

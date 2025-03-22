@@ -12,6 +12,9 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult} }
 	end,
+	gameset_config = {
+		modest = {extra = {x_mult = 1.6,shaking = false} },
+	},
     add_to_deck = function(self, card, context)
 		--only shake if a blind has started
 		G.E_MANAGER:add_event(Event({

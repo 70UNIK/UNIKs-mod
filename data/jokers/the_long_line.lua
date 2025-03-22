@@ -1,5 +1,11 @@
 -- after playing 80 hands, sell to get an exotic joker. EPIC
 SMODS.Joker {
+	dependencies = {
+		items = {
+			"set_cry_exotic",
+			"set_cry_epic",
+		},
+    },
     key = 'unik_the_long_line',
     atlas = 'placeholders',
     rarity = 'cry_epic',

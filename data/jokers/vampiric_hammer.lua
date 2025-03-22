@@ -1,5 +1,10 @@
 --Strips cards of enhancements after played hand
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_cursed",
+		},
+	},
 	key = 'unik_vampiric_hammer',
     atlas = 'placeholders',
     rarity = "cry_cursed",

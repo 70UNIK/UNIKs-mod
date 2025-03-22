@@ -5,6 +5,11 @@ SMODS.Atlas {
 	py = 95
 }
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_cursed",
+		},
+	},
 	key = 'unik_the_plant',
     atlas = 'unik_the_plant',
     rarity = "cry_cursed",

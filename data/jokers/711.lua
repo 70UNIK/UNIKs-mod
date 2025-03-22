@@ -28,7 +28,11 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
 	loc_vars = function(self, info_queue, center)
+		
 		info_queue[#info_queue + 1] = { set = "Other", key = "food_jokers" }
+		return {
+			key = Cryptid.gameset_loc(self, {modest = "modest" }), 
+		}
 	end,
 	pools = {["unik_copyrighted"] = true ,["unik_seven"] = true },
     add_to_deck = function(self, card, context)
@@ -70,10 +74,12 @@ SMODS.Joker {
 		-- After checking cards, create a food joker if conditions are met
 		if context.joker_main then
 			--if card.ability.extra.hasAce == true and not (context.blueprint_card or self).getting_sliced and card.ability.extra.has7 == true and card.ability.extra.spawn == true and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-			if card.ability.extra.hasAce == true and not (context.blueprint_card or self).getting_sliced and card.ability.extra.has7 == true and card.ability.extra.spawn == true then
+			if card.ability.extra.hasAce == true and not (context.blueprint_card or self).getting_sliced and card.ability.extra.has7 == true and card.ability.extra.spawn == true 
+			and (Card.get_gameset(card) ~= "modest" or (#G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit and Card.get_gameset(card) == "modest"))
+			then
 				-- Create a Food Joker according to Cryptid.
-				--local jokers_to_create = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
-				--G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
+				local jokers_to_create = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
+				G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						card:juice_up(0.3, 0.4)
@@ -81,16 +87,15 @@ SMODS.Joker {
 						
 						-- local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, Cryptid.get_food("711"))
 
-						--if (jokers_to_create > 0)then
+						if (jokers_to_create > 0 or Card.get_gameset(card) ~= "modest")then
 							local card2 = create_card("Food", G.jokers, nil, nil, nil, nil, nil, "711")
 							card2:add_to_deck()
 							G.jokers:emplace(card2)
 							card2:start_materialize()
-							--G.GAME.joker_buffer = 0
-						--end
-						--If it can spawn, it should not spawn again (blueprint for instance, if you have 2 blueprints, and the blueprint does it first, then it should count as "created")
-						card.ability.extra.spawn = false
-						--last problem: It's overflowing. Either it's bad implementation of buffer or get_food bypasses copy by its nature
+							G.GAME.joker_buffer = 0
+							--If it can spawn, it should not spawn again (blueprint for instance, if you have 2 blueprints, and the blueprint does it first, then it should count as "created")
+							card.ability.extra.spawn = false
+						end
 						return true
 					end
 				}))

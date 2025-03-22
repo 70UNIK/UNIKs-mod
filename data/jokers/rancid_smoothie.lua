@@ -1,5 +1,10 @@
 
 SMODS.Joker {
+	dependencies = {
+		items = {
+			"set_cry_cursed",
+		},
+	},
 	-- How the code refers to the joker.
 	key = 'unik_rancid_smoothie',
     atlas = 'placeholders',

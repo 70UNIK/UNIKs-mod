@@ -1,4 +1,9 @@
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_cursed",
+		},
+	},
 	key = 'unik_border_wall',
     atlas = 'unik_cursed',
     rarity = "cry_cursed",

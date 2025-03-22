@@ -3,6 +3,7 @@
 --resets on blind start and defeat
 --TODO: Dynamic text that will dynamically show the current mult even when hovering over
 SMODS.Joker {
+	
 	-- How the code refers to the joker.
 	key = 'unik_no_standing_zone',
     atlas = 'unik_uncommon',
@@ -15,10 +16,14 @@ SMODS.Joker {
     config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.05, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded
-		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.x_mult_initial,center.ability.extra.blind_decay_mult,center.ability.extra.shop_decay_mult},
+		return { 
+			key = Cryptid.gameset_loc(self, { modest = "modest"}),
+			vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.x_mult_initial,center.ability.extra.blind_decay_mult,center.ability.extra.shop_decay_mult},
     }
 	end,
-	
+	gameset_config = {
+		modest = {extra = {x_mult = 3.0, x_mult_mod = 0.06,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.06, shop_decay_mult = 0.07,message_produced = false,in_scoring = false} },
+	},
     add_to_deck = function(self, card, from_debuff)
         card.ability.extra.x_mult = card.ability.extra.x_mult_initial
 		if G.GAME.blind.in_blind then
@@ -36,17 +41,19 @@ SMODS.Joker {
 			if card.ability.extra.x_mult <= 1 and card.ability.extra.selfDestruction == false then
 				card.ability.extra.selfDestruction = true
 				selfDestruction(card,"k_unik_no_standing_towed",G.C.BLACK)
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					delay = 0.8,
-					func = function()
-							local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_impounded")
-							card2:add_to_deck()
-							G.jokers:emplace(card2)
-							card2:start_materialize()
-						return true
-					end
-				}))
+				if Card.get_gameset(card) ~= "modest" then
+					G.E_MANAGER:add_event(Event({
+						trigger = 'after',
+						delay = 0.8,
+						func = function()
+								local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_impounded")
+								card2:add_to_deck()
+								G.jokers:emplace(card2)
+								card2:start_materialize()
+							return true
+						end
+					}))
+				end
 			end
 			local roundedXmult = math.floor(card.ability.extra.x_mult*100)/100
 			--Popup alerts

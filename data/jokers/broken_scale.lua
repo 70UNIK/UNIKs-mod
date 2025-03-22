@@ -1,6 +1,11 @@
 --Broken Scale: Scaling Jokers 1/3 as fast
 --Self destructs after e^2 rounds (>7 rounds)
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_cursed",
+		},
+	},
 	key = 'unik_broken_scale',
     atlas = 'placeholders',
     rarity = "cry_cursed",

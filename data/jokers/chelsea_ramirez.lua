@@ -9,6 +9,11 @@ SMODS.Joker {
 	key = 'unik_jsab_chelsea',
     atlas = 'unik_chelsea',
     rarity = 'cry_epic',
+    dependencies = {
+		items = {
+			"set_cry_epic",
+		},
+	},
 	pos = { x = 0, y = 0 },
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
@@ -17,6 +22,9 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.07,family_x_bonus = 1.3} },
+    gameset_config = {
+		modest = { extra = {x_chips = 1.0, x_chips_mod = 0.03,family_x_bonus = 1.3} },
+	},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.family_x_bonus} }
 	end,

@@ -11,6 +11,11 @@ SMODS.Joker {
 	key = 'unik_jsab_yokana',
     atlas = 'unik_yokana',
     rarity = 'cry_epic',
+	dependencies = {
+		items = {
+			"set_cry_epic",
+		},
+	},
 	pos = { x = 0, y = 0 },
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
@@ -22,6 +27,9 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
 	end,
+	gameset_config = {
+		modest = { extra = {x_chips = 1.1,family_x_bonus = 1.3,scoring = false} },
+	},
 	calculate = function(self, card, context)
 		if context.before then
 			card.ability.extra.scoring = true
@@ -50,7 +58,8 @@ SMODS.Joker {
 				card = card
 			}
 		end
-		if context.final_scoring_step then
+		--during consumeables stage, disable scoring (moonlight cookie, observatory)
+		if context.other_consumeable then
 			card.ability.extra.scoring = false
 		end
     end,

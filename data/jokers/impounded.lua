@@ -1,5 +1,10 @@
 --0.5X mult after scoring, debuffs up to two random Jokers and set their sell prices to $0. Sell to remove this joker and the debuffs. Selling costs double the sum of the original jokers selling prices.
 SMODS.Joker {
+    dependencies = {
+		items = {
+			"set_cry_cursed",
+		},
+	},
 	-- How the code refers to the joker.
 	key = 'unik_impounded',
     atlas = 'placeholders',

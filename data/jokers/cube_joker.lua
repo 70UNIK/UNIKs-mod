@@ -13,6 +13,9 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.max_size} }
 	end,
+	gameset_config = {
+		modest = {extra = {x_chips = 1.0, x_chips_mod = 0.05} },
+	},
 	pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)
 		if context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1)) then

@@ -5,9 +5,15 @@ SMODS.Atlas {
 	py = 95
 }
 SMODS.Joker {
+	dependencies = {
+		items = {
+			"set_cry_exotic",
+		},
+    },
 	key = 'unik_unik',
     atlas = 'unik_unik',
     rarity = "cry_exotic",
+	
 	pos = { x = 0, y = 0 },
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
@@ -17,7 +23,7 @@ SMODS.Joker {
 	eternal_compat = true,
     config = { extra = {Echips_mod = 0.03, Echips = 1.0,cap = 2.5} },
 	gameset_config = {
-		modest = { extra = {Echips_mod = 0.02, Echips = 1.0,cap = 2.0} },
+		modest = { extra = {Echips_mod = 0.01, Echips = 1.0,cap = 2.0} },
 	},
 	loc_vars = function(self, info_queue, center)
 		return {

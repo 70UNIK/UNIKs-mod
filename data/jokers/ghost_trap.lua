@@ -16,6 +16,9 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.cursed_jokers,center.ability.extra.cursed_joker_limit} }
 	end,
+	gameset_config = {
+		modest = { center = { rarity = 2 },extra = {x_mult = 1.0, x_mult_mod = 0.5,cursed_jokers = 0, cursed_joker_limit = 8, cursed_joker_list = {}}},
+	},
 	-- on self destruction, release all cursed jokers
 	remove_from_deck = function(self, card, from_debuff)
 		for _, v in pairs(card.ability.extra.cursed_joker_list) do
@@ -29,7 +32,10 @@ SMODS.Joker {
                     return true
                 end
             }))
+
 		end
+		--clear list (in case of debuff)
+		card.ability.extra.cursed_joker_list = {}
 	end,
 
     calculate = function(self, card, context)

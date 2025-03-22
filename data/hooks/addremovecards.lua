@@ -68,7 +68,7 @@ function Card:remove_from_deck(from_debuff)
                 autoCannibalExists = true
             elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
-            elseif v.ability.name == "j_unik_ghost_trap" then
+            elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
                 if self.config.center.rarity == "cry_cursed" and self.ability.extra.getting_captured then
                     self.ability.extra.getting_captured = nil
                     v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.x_mult_mod
@@ -141,7 +141,23 @@ function Card:remove_from_deck(from_debuff)
     local ret = removeHook(self,from_debuff)
     return ret
 end
+
+local add_to_deck_hook = Card.add_to_deck
+function Card:add_to_deck(from_debuff)
+    add_to_deck_hook(self,from_debuff)
+    if G.jokers then
+        if G.jokers.cards then
+            for _, v in pairs(G.jokers.cards) do
+                if v.ability.name == "j_unik_ghost_trap" and not v.debuff then
+                    GhostTrap1(v)
+                end
+            end
+        end
+    end
+end
+
 local emplaceHook = CardArea.emplace
+
 function CardArea:emplace(card, location, stay_flipped)
 
     emplaceHook(self,card, location, stay_flipped)
@@ -202,7 +218,7 @@ function CardArea:emplace(card, location, stay_flipped)
             elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             --ghost trap functionality
-            elseif v.ability.name == "j_unik_ghost_trap" then
+            elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
                 GhostTrap1(v)
             --Formidicus fix, now constantly destroys cursed jokers
             elseif v.config.center.key == "j_cry_formidiulosus" then
