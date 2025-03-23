@@ -25,6 +25,7 @@ SMODS.Joker {
     gameset_config = {
 		modest = { extra = {x_chips = 1.0, x_chips_mod = 0.03,family_x_bonus = 1.3} },
 	},
+    pools = {["unik_cube"] = true },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.family_x_bonus} }
 	end,

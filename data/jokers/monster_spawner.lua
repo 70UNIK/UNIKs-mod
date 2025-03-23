@@ -4,7 +4,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_monster_spawner',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = "cry_cursed",
 	pos = { x = 3, y = 1 },
     cost = 1,

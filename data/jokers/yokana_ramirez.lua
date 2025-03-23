@@ -30,6 +30,7 @@ SMODS.Joker {
 	gameset_config = {
 		modest = { extra = {x_chips = 1.1,family_x_bonus = 1.3,scoring = false} },
 	},
+	pools = {["unik_cube"] = true },
 	calculate = function(self, card, context)
 		if context.before then
 			card.ability.extra.scoring = true

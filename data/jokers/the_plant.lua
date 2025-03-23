@@ -38,7 +38,7 @@ SMODS.Joker {
                 if Card.get_gameset(card) ~= "modest" then
                     card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards/2)
                 else
-                    card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards*3/4)
+                    card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards*4/5)
         
                 end
                 card.ability.extra.entered = true

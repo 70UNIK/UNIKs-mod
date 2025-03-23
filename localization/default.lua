@@ -670,7 +670,7 @@ return {
                     "{C:red}Debuffs{} and adds {C:attention}Eternal and Rental{}",
                     " to a random Joker on spawn",
                     "{C:attention}Sell{} to remove debuff, Eternal and Rental",
-                    "Selling costs {X:money,C:white}X#2{} the total",
+                    "Selling costs {X:money,C:white}X#2#{} the total",
                     "{C:attention}selling price{} of debuffed Joker",
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
@@ -851,17 +851,24 @@ return {
                 },
             },
             p_unik_cube_1 = {
-				name = "Square Pack",
+				name = "Jumbo Cube Pack",
 				text = {
 					"Choose {C:attention}#1#{} of",
-					"up to {C:attention}#2# Square Joker#s2#{}",
+					"up to {C:attention}#2# Cube/Square Jokers{}",
 				},
 			},
             p_unik_cube_2 = {
-				name = "Square Pack",
+				name = "Jumbo Cube Pack",
 				text = {
 					"Choose {C:attention}#1#{} of",
-					"up to {C:attention}#2# Square Joker#s2#{}",
+					"up to {C:attention}#2# Cube/Square Jokers{}",
+				},
+			},
+            p_unik_cube_3 = {
+				name = "Mega Cube Pack",
+				text = {
+					"Choose {C:attention}#1#{} of",
+					"up to {C:attention}#2# Cube/Square Jokers{}",
 				},
 			},
             unik_decrementing_food_jokers = {
@@ -935,15 +942,16 @@ return {
                     "{C:red}Unremovable{}",
 				},
             },
+
         },
         Planet={},
         Spectral={
             --only appears with a 0.3 chance in the cube booster pack. It's basically a gateway, but exclusively creating UNIK 
-            c_unik_hypercube = {
-				name = "HyperCube",
+            c_unik_gateway = {
+				name = "Hypercube",
 				text = {
 					"Create {C:cry_exotic,E:1}UNIK{}",
-					"destroy all",
+					"{C:red}destroy{} all",
 					"other Jokers",
 				},
 			},
@@ -1058,6 +1066,7 @@ return {
             unik_debuff_no_pairs="No Pairs",
             k_unik_average_alice="Average!",
             k_unik_active="Active!",
+            k_unik_cube_pack = "Cube Pack",
         },
         high_scores={},
         labels={

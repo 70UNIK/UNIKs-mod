@@ -7,9 +7,9 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_broken_scale',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = "cry_cursed",
-	pos = { x = 3, y = 1 },
+	pos = { x = 0, y = 2 },
     cost = 1,
     config = { extra = {rounds = 0,round_limit = 8} },
     loc_vars = function(self, info_queue, center)

@@ -7,9 +7,9 @@ SMODS.Joker {
 	},
 	-- How the code refers to the joker.
 	key = 'unik_impounded',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = "cry_cursed",
-	pos = { x = 3, y = 1 },
+	pos = { x = 4, y = 1 },
     cost = 0,
 	blueprint_compat = false,
     perishable_compat = false,

@@ -16,6 +16,7 @@ SMODS.Joker {
 	gameset_config = {
 		modest = {extra = {x_chips = 1.0, x_chips_mod = 0.05} },
 	},
+	pools = {["unik_cube"] = true },
 	pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)
 		if context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1)) then
@@ -49,18 +50,14 @@ SMODS.Joker {
 
 -- Pool used by "squares/cubes"
 --Unik is not part of this to maintain rarity.
--- SMODS.ObjectType({
--- 	key = "cube",
--- 	default = "j_square",
--- 	cards = {
--- 		["j_unik_cube_joker"] = true,
--- 		["j_cry_cube"] = true,
--- 		["j_cry_big_cube"] = true,
--- 		["j_unik_jsab_chelsea"] = true,
--- 	},
--- 	inject = function(self)
--- 		SMODS.ObjectType.inject(self)
--- 		-- insert base game jokers
--- 		self:inject_card(G.P_CENTERS.j_square)
--- 	end,
--- })
+SMODS.ObjectType({
+	key = "unik_cube",
+	default = "j_square",
+	cards = {
+	},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game jokers
+		self:inject_card(G.P_CENTERS.j_square)
+	end,
+})

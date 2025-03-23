@@ -9,13 +9,13 @@ SMODS.Joker {
     rarity = "cry_cursed",
 	pos = { x = 3, y = 1 },
     cost = 1,
-    config = { extra = { min_discards = 13, discarded_cards = 2, current_discards = 0} },
+    config = { extra = { min_discards = 12, discarded_cards = 2, current_discards = 0} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
     eternal_compat = false,
     gameset_config = {
-		modest = {extra = { min_discards = 7, discarded_cards = 2, current_discards = 0} },
+		modest = {extra = { min_discards = 6, discarded_cards = 2, current_discards = 0} },
 	},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.min_discards, center.ability.extra.discarded_cards, center.ability.extra.current_discards} }

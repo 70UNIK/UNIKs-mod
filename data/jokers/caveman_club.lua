@@ -30,7 +30,7 @@ SMODS.Joker {
                 if Card.get_gameset(card) ~= "modest" then
                     card.ability.extra.minCards = math.ceil(G.GAME.unik_clubs/2)
                 else
-                    card.ability.extra.minCards = math.ceil(G.GAME.unik_clubs*3/4)
+                    card.ability.extra.minCards = math.ceil(G.GAME.unik_clubs*4/5)
         
                 end
                 card.ability.extra.entered = true

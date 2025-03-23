@@ -23,7 +23,7 @@ SMODS.Joker {
     } }
 	end,
     gameset_config = {
-		modest = {extra = { decrease = 1, maxLevel1 = 5, level1 = 0, selfDestruct = false,odds = 4} },
+		modest = {extra = { decrease = 1, maxLevel1 = 4, level1 = 0, selfDestruct = false,odds = 4} },
 	},
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_arm'), G.C.UNIK_THE_ARM, G.C.WHITE, 1.0 )

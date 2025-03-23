@@ -99,7 +99,7 @@ SMODS.Atlas {
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
 	key = "unik_boss_blind_joker",
-	default = "j_obelisk",
+	default = "j_seance", --cause that is hot garbage
 	cards = {},
 })
 -- stickers
@@ -108,8 +108,9 @@ NFS.load(mod_path .. "data/stickers/disposable.lua")()
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
-
-
+NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
+--boosters
+NFS.load(mod_path .. "data/boosters/cube_pack.lua")() 
 --BLINDS--
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
@@ -234,17 +235,12 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 --Artwork to do:
 
---Monster spawner
---Rancid Smoothie
---Impound Notice
---Broken scale
 --Goading Joker
 
 --Broken Arm
 --Vampiric Hammer
+
 --The Evocation
---hypercube
---cube pack (booster)
 
 --Legendary magnet, vessel and nuke
 
