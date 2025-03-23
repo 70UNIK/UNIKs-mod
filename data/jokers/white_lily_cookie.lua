@@ -16,7 +16,6 @@ local function White_lily_copy(card)
     _card.ability.extra.copying = false
     _card.ability.extra.Emult = _card.ability.extra.Emult + _card.ability.extra.Emult_mod
     _card.ability.extra.x_mult = _card.ability.extra.x_mult + _card.ability.extra.x_mult_mod
-    _card.ability.extra_value = _card.ability.extra_value - (math.floor(_card.sell_cost*100*0.2)/100)
     --avoid permanently doubling her values to her copy so the multiply properties must transfer
     if card.config.cry_multiply then
         _card.config.cry_multiply = card.config.cry_multiply
@@ -73,7 +72,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.0, sold = false,copying = false} },
+    config = { extra = { Emult = 1.0, Emult_mod = 0.09, x_mult = 1.0, x_mult_mod = 1.0, sold = false,copying = false} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}), 

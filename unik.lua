@@ -96,6 +96,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "unik_tarots",
+	path = "unik_tarots.png",
+	px = 71,
+	py = 95
+}
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
 	key = "unik_boss_blind_joker",
@@ -186,14 +192,14 @@ NFS.load(mod_path .. "data/jokers/unik.lua")()
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
-NFS.load(mod_path .. "data/jokers/impounded.lua")() -- no image, an impound notice
-NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")() -- no image, the smoothie, but looking ass
-NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() --no image: mc monster spawner
-NFS.load(mod_path .. "data/jokers/broken_scale.lua")() -- broken double scale/vary fair
+NFS.load(mod_path .. "data/jokers/impounded.lua")() 
+NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
+NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() 
+NFS.load(mod_path .. "data/jokers/broken_scale.lua")()
 NFS.load(mod_path .. "data/jokers/the_plant.lua")()
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
-NFS.load(mod_path .. "data/jokers/goading_joker.lua")() --no image, patronizing joker, but more crass, rugged and dirty
+NFS.load(mod_path .. "data/jokers/goading_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
 NFS.load(mod_path .. "data/jokers/handcuffs.lua")() 
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
@@ -235,13 +241,9 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 --Artwork to do:
 
---Goading Joker
-
 --Broken Arm
 --Vampiric Hammer
---hook n discard
 
---The Evocation
 
 --Legendary magnet, vessel and nuke
 
