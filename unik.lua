@@ -239,6 +239,7 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 --Broken Arm
 --Vampiric Hammer
+--hook n discard
 
 --The Evocation
 
