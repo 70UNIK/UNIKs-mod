@@ -10,7 +10,7 @@ SMODS.Joker {
     rarity = "cry_cursed",
 	pos = { x = 3, y = 1 },
     cost = 1,
-    config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Spades",debuff_name = "unik_goad",death_message = "k_unik_goading_fuck_you",color = "b95c96"} },
+    config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Spades",debuff_name = "unik_goad",death_message = "k_unik_goading_fuck_you",color = "b95c96",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
@@ -23,183 +23,31 @@ SMODS.Joker {
     end,
     immutable = true,
     add_to_deck = function(self, card, from_debuff)
-        local Cards = 0
-        if G.deck and card.added_to_deck then 
-            for i, w in pairs(G.deck.cards) do
-                --bypass debuff to ensure it doesnt self destruct
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1
-                    w:set_debuff(true)
-                end
-            end
-        end
-        if G.hand and card.added_to_deck then 
-            for i, w in pairs(G.hand.cards) do
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1   
-                    w:set_debuff(true)
-                end
-            end
-        end
-        if G.play and card.added_to_deck then 
-            for i, w in pairs(G.play.cards) do
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1   
-                    w:set_debuff(true)
-                end
-            end
-        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                card.ability.extra.cards = G.GAME.unik_spades
+                if Card.get_gameset(card) ~= "modest" then
+                    card.ability.extra.minCards = math.ceil(G.GAME.unik_spades/2)
+                else
+                    card.ability.extra.minCards = math.ceil(G.GAME.unik_spades*3/4)
         
-        if G.discard and card.added_to_deck then 
-            for i, w in pairs(G.discard.cards) do
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1   
-                    w:set_debuff(true)
                 end
+                card.ability.extra.entered = true
+                return true
             end
-        end
-        --set the min cards needed
-        card.ability.extra.minCards = math.ceil(Cards/2.0)
-        card.ability.extra.cards = Cards
-        if (Cards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
-            selfDestruction(card,"k_unik_goading_fuck_you",HEX("b95c96"))
-            card.ability.extra.selfDestruct = true
-        end
+        }))
     end,
-    -- remove_from_deck = function(self, card, from_debuff)
-    --     if G.deck then 
-    --         for i, w in pairs(G.deck.cards) do
-    --             --bypass debuff to ensure it doesnt self destruct
-    --             if w:is_suit(card.ability.extra.suit,true) then
-    --                 SMODS.debuff_card(w,false,"unik_goad")
-    --             end
-    --         end
-    --     end
-    --     if G.hand then 
-    --         for i, w in pairs(G.hand.cards) do
-    --             if w:is_suit(card.ability.extra.suit,true) then
-    --                 SMODS.debuff_card(w,false,"unik_goad")          
-    --             end
-    --         end
-    --     end
-    --     if G.play then 
-    --         for i, w in pairs(G.play.cards) do
-    --             if w:is_suit(card.ability.extra.suit,true) then
-    --                 SMODS.debuff_card(w,false,"unik_goad")                  
-    --             end
-    --         end
-    --     end
-    --     if G.discard then 
-    --         for i, w in pairs(G.discard.cards) do
-    --             if w:is_suit(card.ability.extra.suit,true) then
-    --                 SMODS.debuff_card(w,false,"unik_goad")                      
-    --             end
-    --         end
-    --     end 
-	-- end,
-    update = function(self, card, dt)
-        local Cards = 0
-        if G.deck and card.added_to_deck then 
-            for i, w in pairs(G.deck.cards) do
-                --bypass debuff to ensure it doesnt self destruct
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1
-                    w:set_debuff(true)
-                end
-            end
-        end
-        if G.hand and card.added_to_deck then 
-            for i, w in pairs(G.hand.cards) do
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1   
-                    w:set_debuff(true)
-                end
-            end
-        end
-        if G.play and card.added_to_deck then 
-            for i, w in pairs(G.play.cards) do
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1   
-                    w:set_debuff(true)
-                end
-            end
-        end
-        
-        if G.discard and card.added_to_deck then 
-            for i, w in pairs(G.discard.cards) do
-                if w:is_suit(card.ability.extra.suit,true) then
-                    Cards = Cards + 1   
-                    w:set_debuff(true)
-                end
-            end
-        end
-        if card.added_to_deck then
-            card.ability.extra.cards = Cards
-            if (Cards < card.ability.extra.minCards or Cards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
+    update = function(self,card,dt)
+        if card.added_to_deck and card.ability.extra.entered == true then
+            card.ability.extra.cards = G.GAME.unik_spades
+            if card.ability.extra.selfDestruct == false and (card.ability.extra.cards <= 0 or card.ability.extra.cards < card.ability.extra.minCards) then
                 selfDestruction(card,"k_unik_goading_fuck_you",HEX("b95c96"))
                 card.ability.extra.selfDestruct = true
             end
-        end     
+        end
     end,
     calculate = function(self, card, context)
-        -- if context.cards_destroyed or context.playing_card_added or context.remove_playing_cards then
-        --     local Cards = 0
-        --     if context.cards_destroyed then
-        --         for k, val in ipairs(context.glass_shattered) do
-        --             if val:is_suit(card.ability.extra.suit,true) then
-        --                 Cards = Cards - 1
-        --             end
-        --         end
-        --     end
-        --     if context.remove_playing_cards then
-        --         for k, val in ipairs(context.removed) do
-        --             if val:is_suit(card.ability.extra.suit,true) then
-        --                 Cards = Cards - 1
-        --             end
-        --         end
-        --     end
-        --     if G.deck and card.added_to_deck then 
-        --         for i, w in pairs(G.deck.cards) do
-        --             --bypass debuff to ensure it doesnt self destruct
-        --             if w:is_suit(card.ability.extra.suit,true) then
-        --                 Cards = Cards + 1
-        --                 SMODS.debuff_card(w,true,"unik_goad")
-        --             end
-        --         end
-        --     end
-        --     if G.hand and card.added_to_deck then 
-        --         for i, w in pairs(G.hand.cards) do
-        --             if w:is_suit(card.ability.extra.suit,true) then
-        --                 Cards = Cards + 1     
-        --                 SMODS.debuff_card(w,true,"unik_goad")           
-        --             end
-        --         end
-        --     end
-        --     if G.play and card.added_to_deck then 
-        --         for i, w in pairs(G.play.cards) do
-        --             if w:is_suit(card.ability.extra.suit,true) then
-        --                 Cards = Cards + 1  
-        --                 SMODS.debuff_card(w,true,"unik_goad")
-        --             end
-        --         end
-        --     end
-        --     if G.discard and card.added_to_deck then 
-        --         for i, w in pairs(G.discard.cards) do
-        --             if w:is_suit(card.ability.extra.suit,true) then
-        --                 Cards = Cards + 1     
-        --                 SMODS.debuff_card(w,true,"unik_goad")
-        --             end
-        --         end
-        --     end 
-        --     if card.added_to_deck then
-        --         card.ability.extra.cards = Cards
-        --         if (Cards < card.ability.extra.minCards or Cards <= 0) and card.ability.extra.selfDestruct == false and G.jokers then
-        --             selfDestruction(card,"k_unik_goading_fuck_you",HEX("b95c96"))
-        --             card.ability.extra.selfDestruct = true
-        --         end
-        --     end
-        --     return
-        -- end
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Goad")) and not (G.GAME.blind.disabled) then
             selfDestruction(card,"k_unik_blind_start_goad",HEX("b95c96"))
             card.ability.extra.selfDestruct = true

@@ -17,6 +17,7 @@ SMODS.Atlas({
 	frames = 21 })
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
+NFS.load(mod_path .. "data/hooks/debuff_jokers.lua")()
 SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
