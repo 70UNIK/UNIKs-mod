@@ -1,4 +1,22 @@
 local mod_path = "" .. SMODS.current_mod.path
+unik_config = SMODS.current_mod.config
+SMODS.current_mod.config_tab = function() --Config tab
+    return {
+      n = G.UIT.ROOT,
+      config = {
+        align = "cm",
+        padding = 0.05,
+        colour = G.C.CLEAR,
+      },
+      nodes = {
+        create_toggle({
+            label = localize("unik_legendary_blinds_option"),
+            ref_table = unik_config,
+            ref_value = "unik_legendary_blinds",
+        }),
+      },
+    }
+end
 
 SMODS.Atlas {
 	key = "modicon",
@@ -15,6 +33,13 @@ SMODS.Atlas({
 	px = 34, 
 	py = 34, 
 	frames = 21 })
+	SMODS.Atlas({ 
+		key = "unik_legendary_blinds", 
+		atlas_table = "ANIMATION_ATLAS", 
+		path = "unik_legendary_blinds.png", 
+		px = 34, 
+		py = 34, 
+		frames = 21 })
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/debuff_jokers.lua")()
@@ -138,10 +163,11 @@ NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
-NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
-NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
-NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
-
+if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
+end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
 -- JOKERS --

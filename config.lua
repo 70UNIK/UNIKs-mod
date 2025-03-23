@@ -1,0 +1,1 @@
+return {["unik_legendary_blinds"]=false}

@@ -34,7 +34,7 @@ SMODS.Consumable{
 		end
 		return {
 			vars = {
-				card and cry_prob(card.ability.cry_prob * 4 or 4, card.ability.extra.odds, card.ability.cry_rigged) or 4,
+				card and cry_prob(4 or card.ability.cry_prob * 4, card.ability.extra.odds, card.ability.cry_rigged) or 4,
 				card and card.ability.extra.odds or self.config.extra.odds,
 			},
 		}
@@ -42,7 +42,7 @@ SMODS.Consumable{
     
 	use = function(self, card, area, copier)
         local used_consumable = copier or card
-        if pseudorandom(pseudoseed("unik_wheelmisfortune")) < cry_prob(card.ability.cry_prob * 4 or 4, card.ability.extra.odds, card.ability.cry_rigged)
+        if pseudorandom(pseudoseed("unik_wheelmisfortune")) < cry_prob(4 or card.ability.cry_prob*4, card.ability.extra.odds, card.ability.cry_rigged)
 		/ card.ability.extra.odds then --bad
             G.E_MANAGER:add_event(Event({
 				trigger = "after",

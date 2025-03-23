@@ -5,9 +5,9 @@ SMODS.Blind{
     key = 'unik_legendary_magnet',
     config = {},
     boss = {min = 1, showdown = true,legendary = true}, 
-    atlas = "unik_showdown_blinds",
-    pos = { x = 0, y = 11}, --placeholder, will have an appropriate icon.
-    boss_colour= HEX("ff0000"), --all legendary blinds will be blood red and black.
+    atlas = "unik_legendary_blinds",
+    pos = {x=0, y=1},
+    boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 0.666,
     gameset_config = {
@@ -22,9 +22,9 @@ SMODS.Blind{
 		if not reset then
             local text = localize('k_unik_magnet_legendary_start')
             attention_text({
-                scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.RED
+                scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
             })
-			for i = 1, #G.playing_cards * 2 do
+			for i = 1, #G.playing_cards * 3 do
 				G.E_MANAGER:add_event(Event({
 					delay = 0.1,
 					func = function()
@@ -42,12 +42,13 @@ SMODS.Blind{
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card)
 						G.deck:emplace(card)
+                        G.GAME.blind.triggered = true
+                        G.GAME.blind:wiggle()
 						return true
 					end
 				}))
 			end
-            G.GAME.blind.triggered = true
-            G.GAME.blind:wiggle()
+
         end
             
         G.hand:change_size(6)
@@ -115,9 +116,12 @@ SMODS.Blind{
                 end
             end
             for k, v in ipairs(cards) do
-                if v.edition.polychrome then
-                    polychromes = polychromes + 1
+                if v.edition then
+                    if v.edition.polychrome then
+                        polychromes = polychromes + 1
+                    end
                 end
+
             end
             if steels > 0 or polychromes > 0 then
                 G.GAME.blind.triggered = true

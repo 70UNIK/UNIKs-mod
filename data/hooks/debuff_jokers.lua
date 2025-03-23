@@ -78,46 +78,47 @@ function CheckDebuffSuits()
     G.GAME.unik_face_cards = 0
     if G.jokers then
         for x, h in pairs(G.jokers.cards) do
-            if h.ability.name == "j_unik_the_plant" and not h.debuff then
+            if h.ability.name == "j_unik_the_plant" and not h.debuff and not h.removed then
                 plant = true
             end
-            if h.ability.name == "j_unik_caveman_club"  and not h.debuff then
+            if h.ability.name == "j_unik_caveman_club"  and not h.debuff and not h.removed then
                 club = true
             end
-            if h.ability.name == "j_unik_broken_window"  and not h.debuff then
+            if h.ability.name == "j_unik_broken_window"  and not h.debuff and not h.removed then
                 window = true
             end
-            if h.ability.name == "j_unik_goading_joker" and not h.debuff  then
+            if h.ability.name == "j_unik_goading_joker" and not h.debuff and not h.removed then
                 goad = true
             end
-            if h.ability.name == "j_unik_headless_joker"  and not h.debuff then
+            if h.ability.name == "j_unik_headless_joker"  and not h.debuff and not h.removed then
                 head = true
             end
         end
     end
-    if G.deck then 
-        for i, w in pairs(G.deck.cards) do
-            DebuffCheck(w,plant,goad,head,window,club)
-        end
-    end
 
-    if G.hand then 
-        for i, w in pairs(G.hand.cards) do
-            DebuffCheck(w,plant,goad,head,window,club)
+        if G.deck then 
+            for i, w in pairs(G.deck.cards) do
+                DebuffCheck(w,plant,goad,head,window,club)
+            end
         end
-    end    
 
-    if G.play then 
-        for i, w in pairs(G.play.cards) do
-            DebuffCheck(w,plant,goad,head,window,club)
-        end
-    end         
+        if G.hand then 
+            for i, w in pairs(G.hand.cards) do
+                DebuffCheck(w,plant,goad,head,window,club)
+            end
+        end    
 
-    if G.discard  then 
-        for i, w in pairs(G.discard.cards) do
-            DebuffCheck(w,plant,goad,head,window,club)
-        end
-    end 
+        if G.play then 
+            for i, w in pairs(G.play.cards) do
+                DebuffCheck(w,plant,goad,head,window,club)
+            end
+        end         
+
+        if G.discard  then 
+            for i, w in pairs(G.discard.cards) do
+                DebuffCheck(w,plant,goad,head,window,club)
+            end
+        end 
 
 
 end
@@ -161,15 +162,26 @@ end
 local emplaceHook2 = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
     emplaceHook2(self,card, location, stay_flipped)
-    if self == G.jokers then
+    if self == G.jokers and card.ability and
+    (card.ability.name == "j_unik_the_plant" or 
+    card.ability.name == "j_unik_caveman_club" or
+    card.ability.name == "j_unik_headless_joker" or
+    card.ability.name == "j_unik_goading_joker" or
+    card.ability.name == "j_unik_broken_window"
+)then
         CheckDebuffSuits()
     end
 end
 local add_to_deckHook = Card.add_to_deck
 function Card:add_to_deck(from_debuff)
     local res = add_to_deckHook(self,from_debuff)
-    if self.added_to_deck then
-      --  print("addCheck")
+    if self.added_to_deck and self.ability and
+    (self.ability.name == "j_unik_the_plant" or 
+    self.ability.name == "j_unik_caveman_club" or
+    self.ability.name == "j_unik_headless_joker" or
+    self.ability.name == "j_unik_goading_joker" or
+    self.ability.name == "j_unik_broken_window"
+)then
         CheckDebuffSuits()
     end
     return res
@@ -189,8 +201,14 @@ end
 local removeHook3 = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
     
-    if (self.added_to_deck) then
-       -- print("removeCheck")
+    if (self.added_to_deck and self.ability and
+    (self.ability.name == "j_unik_the_plant" or 
+    self.ability.name == "j_unik_caveman_club" or
+    self.ability.name == "j_unik_headless_joker" or
+    self.ability.name == "j_unik_goading_joker" or
+    self.ability.name == "j_unik_broken_window"
+)) then
+
         CheckDebuffSuits()
     end
     local ret = removeHook3(self,from_debuff)

@@ -15,6 +15,7 @@ SMODS.Challenge{
         --Ban all jokers except commons (Riif roof is the only uncommon)
         banned_cards = {
             { id = "p_cry_meme_1", ids = { "p_cry_meme_1", "p_cry_meme_two", "p_cry_meme_three" } },
+            { id = "p_unik_cube_1", ids = { "p_unik_cube_1", "p_unik_cube_two", "p_unik_cube_three" } },
         },
         banned_tags = {
             --Ban empowered and gamblers tag, as well as rare, uncommon and epic tags

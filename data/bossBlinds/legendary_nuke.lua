@@ -4,9 +4,9 @@ SMODS.Blind{
     key = 'unik_legendary_nuke',
     config = {},
     boss = {min = 1, showdown = true,legendary = true}, 
-    atlas = "unik_showdown_blinds",
-    pos = { x = 0, y = 1},
-    boss_colour= HEX("ff0000"),
+    atlas = "unik_legendary_blinds",
+    pos = {x=0, y=2},
+    boss_colour= HEX("600000"),
     dollars = 13,
     mult = 2,
     gameset_config = {
@@ -33,7 +33,7 @@ SMODS.Blind{
     set_blind = function(self, reset, silent)
         local text = localize('k_unik_legendary_nuke_start')
         attention_text({
-            scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.RED
+            scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
         })
         G.GAME.blind.chips = G.GAME.blind.chips^0.8
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)

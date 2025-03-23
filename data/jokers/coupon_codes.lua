@@ -14,7 +14,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_disposable" }
 		return { vars = { 
-        center and cry_prob(center.ability.cry_prob*3 or 3,center.ability.extra.odds,center.ability.cry_rigged)or 3, 
+        center and cry_prob(3 or center.ability.cry_prob*3 ,center.ability.extra.odds,center.ability.cry_rigged)or 3, 
         center.ability.extra.odds} }
 	end,
     gameset_config = {
@@ -24,7 +24,7 @@ SMODS.Joker {
         if context.end_of_round and context.game_over == false then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})
             local max = 1
-            if not(pseudorandom('unik_coupon_codes') < cry_prob(card.ability.cry_prob*3 or 3,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
+            if not(pseudorandom('unik_coupon_codes') < cry_prob(3 or card.ability.cry_prob*3 ,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
                 max = 2
             end
             for i = 1, max do

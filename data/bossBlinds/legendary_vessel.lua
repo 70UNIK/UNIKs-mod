@@ -3,9 +3,9 @@ SMODS.Blind{
     key = 'unik_legendary_vessel',
     config = {},
     boss = {min = 1, showdown = true,legendary = true}, 
-    atlas = "BlindChips",
-    pos = {x=0, y=29}, --placeholder is violet vessel, will have an  appropriate icon later
-    boss_colour= HEX("ff0000"), --all legendary blinds will be blood red and black.
+    atlas = "unik_legendary_blinds",
+    pos = {x=0, y=0},
+    boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 2,
     gameset_config = {

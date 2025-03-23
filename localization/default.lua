@@ -95,7 +95,7 @@ return {
 				text = {
                     "+6 Hand Size",
 					"Add Steel Polychrome Aces equal",
-					"to 2x cards in deck",
+					"to 3x cards in deck",
                     "If hand has held Steel cards",
                     "or played Polychrome Cards",
                     "instantly die",
@@ -987,6 +987,7 @@ return {
         },
         collabs={},
         dictionary={
+            unik_legendary_blinds_option = "Legendary Blinds (Restart Required)",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
             k_unik_happiness2="HAPPINESS IS MANDATORY.",
