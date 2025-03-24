@@ -126,7 +126,7 @@ SMODS.Joker {
 							}),
 							Emult_mod = card.ability.extra.Emult^(context.other_consumeable.ability.qty or 1),
 							colour = G.C.DARK_EDITION,
-							card = context.other_consumeable
+
 						}
 				-- end
 				else
@@ -140,7 +140,7 @@ SMODS.Joker {
 						}),
 						Emult_mod = card.ability.extra.Emult,
 						colour = G.C.DARK_EDITION,
-						card = context.other_consumeable
+
 					}
 					-- SMODS.calculate_effect({
 					-- 	message = localize({

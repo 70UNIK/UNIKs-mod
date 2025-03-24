@@ -16,7 +16,7 @@ SMODS.Blind{
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
 		G.GAME.unik_killed_by_magnet_legendary = true
-        G.GAME.unik_deathly_debuff_text = true --instead of "Hand will not score", it will say, YOU WILL DIE. And if blind is triggered, you will die.
+        --G.GAME.unik_deathly_debuff_text = true --instead of "Hand will not score", it will say, YOU WILL DIE. And if blind is triggered, you will die.
 
         --Get all unenhanced cards
 		if not reset then
@@ -139,7 +139,7 @@ SMODS.Blind{
                 G.hand:change_size(-6)
             end
             G.GAME.unik_killed_by_magnet_legendary = nil
-            G.GAME.unik_deathly_debuff_text = nil
+           -- G.GAME.unik_deathly_debuff_text = nil
             G.GAME.unik_pentagram_manager_fix = nil
         end
 	end,
@@ -149,7 +149,7 @@ SMODS.Blind{
                 G.hand:change_size(-6)
             end
             G.GAME.unik_killed_by_magnet_legendary = nil
-            G.GAME.unik_deathly_debuff_text = nil
+       --     G.GAME.unik_deathly_debuff_text = nil
             G.GAME.unik_pentagram_manager_fix = nil
         end
 	end,
