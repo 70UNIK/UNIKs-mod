@@ -55,7 +55,7 @@ SMODS.Blind{
 	end,
     --Only appear if over round 120 or "legendary_hell_blinds" are enabled (they can spawn ANY TIME)
     in_pool = function()
-        if G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time then
+        if Cryptid.gameset() ~= "modest" and (G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time) then
             return true
         end
         return false

@@ -21,9 +21,10 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {Echips_mod = 0.03, Echips = 1.0,cap = 2.5} },
+    config = { extra = {Echips_mod = 0.03, Echips = 1.0,cap = 999999,in_menu = false} }, --normally he should not be cappted in mainline+
+	--also: in_menu is EXCLUSIVELY for the menu display, just so the code can hook onto his soul sprite.
 	gameset_config = {
-		modest = { extra = {Echips_mod = 0.01, Echips = 1.0,cap = 2.0} },
+		modest = { extra = {Echips_mod = 0.01, Echips = 1.0,cap = 3.0,in_menu = false} },
 	},
 	loc_vars = function(self, info_queue, center)
 		return {

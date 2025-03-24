@@ -102,7 +102,7 @@ return {
 				},
             },
             bl_unik_legendary_nuke={ --aka old nuke
-                name = "Tuomiopäivänlaite",
+                name = "Tuomiopäivänlaite", --doomsday device
                 text = {
                     "^0.8 blind size",
                     "If score exceeds #1#,",
@@ -133,11 +133,22 @@ return {
                     "instantly die",
 				},                  
             },
-            bl_unik_legendary_tornado={
-                name = "Myrskynsilmä", --Eye of the storm
+            bl_unik_legendary_sword={ --ortalab's silver sword on CRACK. X66.6 blind requirements as well and all burgulars are debuffed
+                name = "Sadistinenmiekka", --Sadistic Sword
 				text = {
-                    "#1# in #2# chance", -- yes nothing is the only way to survive
-                    "played hand will kill you",
+                    "Hand Size set to 1",
+                    "Play only 1 hand,",
+                    "with 0 discards",
+				},  
+
+            },
+            bl_unik_legendary_tornado={
+                name = "Ylihuomenna", --Day after tomorrow
+				text = {
+                    "Set hands to 66", -- set hands to 66, only 2 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
+                    "only 2 hands will score",
+                    "#1# in #2# chance hand", --1 in 666 chance
+                    "will instantly kill you",
 				},                  
             },
             bl_unik_legendary_leaf={
@@ -147,6 +158,17 @@ return {
                     "random Joker",
                     "including eternals",
 				},  
+            },
+            bl_unik_legendary_pentagram={
+                name = "Helvettimaanpäällä",--Hell on Earth
+                text ={
+                    "Create every cursed Joker",
+                    "in the collection, then",
+                    "duplicate each one owned",
+                    "if any Cursed Joker is destroyed",
+                    "by Daggers, Ghost Traps or Formidiulosus,", --Daggers, formdiscus, ghost trap
+                    "instantly die"
+                }
             },
             --just like the actual gambling machine - Jacks or better
             bl_unik_video_poker={
@@ -1068,6 +1090,7 @@ return {
             k_unik_average_alice="Average!",
             k_unik_active="Active!",
             k_unik_cube_pack = "Cube Pack",
+            k_unik_hands_remaining = " scoring hands remaining"
         },
         high_scores={},
         labels={
@@ -1169,6 +1192,30 @@ return {
                 "Maybe try holding",
                 "onto a vacuum!",
             }, 
+            special_lose_unik_vessel_legendary={
+                "The panopicon would",
+                "help with this...",
+            },
+            special_lose_unik_nuke_legendary={
+                "Maybe don't score above",
+                "^1.5 requirements...",
+            },
+            special_lose_unik_tornado_legendary={
+                "Keep your scoring consistent",
+                "and have a blank die next time...",
+            },
+            special_lose_unik_sword_legendary={
+                "Maybe practice single",
+                "high card scoring...",
+            },
+            special_lose_unik_pentagram_legendary1={
+                "Some monsters",
+                "can't be killed...",
+            },
+            special_lose_unik_pentagram_legendary2={
+                "Maybe ensure your build",
+                "is resilient to these beasts...",
+            },
             --getting killed by video poker
             special_lose_unik_video_poker={
                 "Maybe try playing the",

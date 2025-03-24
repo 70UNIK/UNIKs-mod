@@ -12,7 +12,18 @@ target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
 payload = '''--legendary nuke will set chips and mult to 0 if exceeding 3x requirements before causing an instant game over.
-if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.unik_kill_player_before_last_hand and G.GAME.current_round.hands_left > 0)) and not (G.GAME.blind.disabled)then
+--If you have panopicon, it disables this part of the violent vessel
+local cry_panopicon = false
+if G.jokers then
+        if G.jokers.cards then
+            for _, v in pairs(G.jokers.cards) do
+                if v.config.center.key == "j_cry_panopticon" and not v.debuff then
+                    cry_panopicon = true
+                end
+            end
+        end
+    end
+if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.unik_kill_player_before_last_hand and G.GAME.current_round.hands_left > 0 and not cry_panopicon)) and not (G.GAME.blind.disabled)then
     local upper = G.GAME.chips
     local ceiling = G.GAME.blind.chips^1.5
     if to_big(upper) > to_big(ceiling) or G.GAME.unik_kill_player_before_last_hand then
@@ -27,7 +38,12 @@ if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.uni
         })
         G.GAME.blind.triggered = true
         G.GAME.blind:wiggle()
-        G.GAME.unik_killed_by_nuke = true
+        if G.GAME.unik_kill_player_before_last_hand then
+            G.GAME.unik_killed_by_legendary_vessel = true
+        else
+            G.GAME.unik_killed_by_nuke_legendary = true
+        end
+        
     end
 end
 -- Green goalpost: 
@@ -62,6 +78,13 @@ if G.GAME.unik_killed_by_nuke then
     Jimbo:add_speech_bubble('special_lose_unik_get_nuked', nil, {quip = true})
     G.GAME.unik_killed_by_nuke = nil
     G.GAME.unik_nuke_activate = nil
+elseif G.GAME.unik_killed_by_nuke_legendary then
+    Jimbo:add_speech_bubble('special_lose_unik_nuke_legendary', nil, {quip = true})
+    G.GAME.unik_killed_by_nuke_legendary = nil
+    G.GAME.unik_nuke_activate = nil
+elseif G.GAME.unik_killed_by_legendary_vessel then
+    Jimbo:add_speech_bubble('special_lose_unik_vessel_legendary', nil, {quip = true})
+    G.GAME.unik_killed_by_legendary_vessel = nil
 elseif G.GAME.unik_arrested_by_batman then
     Jimbo:add_speech_bubble('special_lose_unik_defeated_by_batman', nil, {quip = true})
     G.GAME.unik_arrested_by_batman = nil
@@ -107,8 +130,16 @@ elseif G.GAME.unik_killed_by_magnet_legendary then
     G.GAME.unik_killed_by_magnet_legendary = nil
         G.GAME.unik_pentagram_manager_fix = nil
          G.GAME.unik_deathly_debuff_text = nil
+elseif G.GAME.unik_killed_by_sword_legendary then
+    Jimbo:add_speech_bubble('special_lose_unik_sword_legendary', nil, {quip = true})
+    G.GAME.unik_killed_by_sword_legendary = nil
+elseif G.GAME.unik_killed_by_tornado_legendary then
+    Jimbo:add_speech_bubble('special_lose_unik_tornado_legendary', nil, {quip = true})
+    G.GAME.unik_killed_by_tornado_legendary = nil
+    G.GAME.unik_deathly_debuff_text = nil
 else
     Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
+    G.GAME.unik_deathly_debuff_text = nil
 end
 '''
 match_indent = true

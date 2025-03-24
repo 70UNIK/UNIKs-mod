@@ -20,7 +20,7 @@ SMODS.Blind{
 	end,
     in_pool = function()
 
-        if G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time then
+        if Cryptid.gameset() ~= "modest" and (G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time) then
             if G.GAME.unik_scores_really_big then
                 --print(G.GAME.unik_scores_really_big)
                 if G.GAME.unik_scores_really_big > 5 then

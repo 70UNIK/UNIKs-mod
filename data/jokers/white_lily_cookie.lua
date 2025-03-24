@@ -72,7 +72,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.0, Emult_mod = 0.09, x_mult = 1.0, x_mult_mod = 1.0, sold = false,copying = false} },
+    config = { extra = { Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.0, sold = false,copying = false} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}), 

@@ -19,7 +19,8 @@ SMODS.Blind{
         G.HUD_blind:recalculate(true)
 	end,
     in_pool = function()
-        if G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time then
+        --do not appear in modest, scaling of blind size is enough of a challenge in vanilla.
+        if Cryptid.gameset() ~= "modest" and (G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time) then
             return true
         end
         return false

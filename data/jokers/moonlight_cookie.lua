@@ -20,11 +20,12 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-	-- I can imagine this will become souped up in almanac with it's 10 slots.
-    config = { extra = { Emult = 1.25} },
+	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
+	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
+    config = { extra = { Emult = 1.3} },
 	gameset_config = {
-		modest = { extra = { Emult = 1.15} },
-		madness = { extra = { Emult = 1.25,consumeSlot = 1} },
+		modest = { extra = { Emult = 1.2} },
+		madness = { extra = { Emult = 1.3,consumeSlot = 1} },
 	},
 	loc_vars = function(self, info_queue, center)
 		return { 
@@ -88,18 +89,71 @@ SMODS.Joker {
 				card_eval_status_text(card, "debuff", nil, nil, nil, nil)
 				--return true
 			elseif valid == true then
-				return {
-					message = localize({
-						type = "variable",
-						key = "a_powmult",
-						vars = {
-							number_format(card.ability.extra.Emult),
-						},
-					}),
-					Emult_mod = card.ability.extra.Emult,
-					colour = G.C.DARK_EDITION,
-					card = context.other_consumeable
-				}
+				--if using incantation, she should exponent over and over for x quantity.
+				
+				if (SMODS.Mods["incantation"] or {}).can_load then
+					-- if not Talisman.config_file.disable_anims then
+					-- 	for i = 1,(context.other_consumeable.ability.qty or 1) do
+					-- 		SMODS.calculate_effect({
+					-- 			message = localize({
+					-- 				type = "variable",
+					-- 				key = "a_powmult",
+					-- 				vars = { number_format(to_big(card.ability.extra.Emult)) },
+					-- 			}),
+					-- 			Emult_mod = card.ability.extra.Emult,
+					-- 			colour = G.C.DARK_EDITION,
+					-- 			card = context.other_consumeable,
+					-- 		}, context.blueprint_card or context.retrigger_joker or card)
+					-- 	end
+					-- else
+					-- 	SMODS.calculate_effect({
+					-- 		message = localize({
+					-- 			type = "variable",
+					-- 			key = "a_powmult",
+					-- 			vars = { number_format(to_big(card.ability.extra.Emult)) },
+					-- 		}),
+					-- 		Emult_mod = card.ability.extra.Emult^(context.other_consumeable.ability.qty or 1),
+					-- 		colour = G.C.DARK_EDITION,
+					-- 		card = context.other_consumeable,
+					-- 	}, context.blueprint_card or context.retrigger_joker or card)
+						return {
+							message = localize({
+								type = "variable",
+								key = "a_powmult",
+								vars = {
+									number_format(card.ability.extra.Emult),
+								},
+							}),
+							Emult_mod = card.ability.extra.Emult^(context.other_consumeable.ability.qty or 1),
+							colour = G.C.DARK_EDITION,
+							card = context.other_consumeable
+						}
+				-- end
+				else
+					return {
+						message = localize({
+							type = "variable",
+							key = "a_powmult",
+							vars = {
+								number_format(card.ability.extra.Emult),
+							},
+						}),
+						Emult_mod = card.ability.extra.Emult,
+						colour = G.C.DARK_EDITION,
+						card = context.other_consumeable
+					}
+					-- SMODS.calculate_effect({
+					-- 	message = localize({
+					-- 		type = "variable",
+					-- 		key = "a_powmult",
+					-- 		vars = { number_format(to_big(card.ability.extra.Emult)) },
+					-- 	}),
+					-- 	Emult_mod = card.ability.extra.Emult,
+					-- 	colour = G.C.DARK_EDITION,
+					-- 	card = context.other_consumeable,
+					-- }, context.blueprint_card or card)
+				end
+
 			end
         end
     end,

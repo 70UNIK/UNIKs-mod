@@ -21,9 +21,9 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_chips = 1.0, x_chips_mod = 0.08,family_x_bonus = 1.3} },
+    config = { extra = {x_chips = 1.0, x_chips_mod = 0.1,family_x_bonus = 1.3} },
     gameset_config = {
-		modest = { extra = {x_chips = 1.0, x_chips_mod = 0.04,family_x_bonus = 1.3} },
+		modest = { extra = {x_chips = 1.0, x_chips_mod = 0.05,family_x_bonus = 1.3} },
 	},
     pools = {["unik_cube"] = true },
 	loc_vars = function(self, info_queue, center)

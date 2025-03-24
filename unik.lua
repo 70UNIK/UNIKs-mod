@@ -167,6 +167,8 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
 end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
@@ -267,11 +269,30 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 --Artwork to do:
 
---Broken Arm
 --Vampiric Hammer
 
 
---Legendary magnet, vessel and nuke
+--Finally adding myself to the main menu for some reason
 
+--Multiplies the card's size by mod - solely for the main menu- code by jen 
+function Card:resize(mod, force_save)
+	self:hard_set_T(self.T.x, self.T.y, self.T.w * mod, self.T.h * mod)
+	remove_all(self.children)
+	self.children = {}
+	self.children.shadow = Moveable(0, 0, 0, 0)
+	self:set_sprites(self.config.center, self.base.id and self.config.card)
+end
+local mainmenuref2 = Game.main_menu
+Game.main_menu = function(change_context)
+
+	local ret = mainmenuref2(change_context)
+
+	local newcard = create_card("Joker", G.title_top, nil, nil, nil, nil, "j_unik_unik", "unik_title")
+	G.title_top:emplace(newcard)
+	newcard:start_materialize()
+	newcard:resize(1.1 * 1.2)
+	newcard.no_ui = true
+	return ret
+end
 
 

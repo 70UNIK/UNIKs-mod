@@ -1,0 +1,22 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+## crossmod talisman fixes, as I've designed my mod in mind with cryptid, talisman and extra credit to an extent (for some reason)
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS extracredit "src/essay.lua"]'''
+pattern = '''if context.cardarea == G.jokers and (sum_levels() - 12) > 0 and context.joker_main then'''
+position = "at"
+payload = '''if context.cardarea == G.jokers and to_big((sum_levels() - 12)) > to_big(0) and context.joker_main then'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS extracredit "src/essay.lua"]'''
+pattern = '''if context.cardarea == G.jokers and context.joker_main and (card.ability.extra.Xmult*math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0))/card.ability.extra.dollars)) > 0 then'''
+position = "at"
+payload = '''if context.cardarea == G.jokers and context.joker_main and to_big((card.ability.extra.Xmult*math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0))/card.ability.extra.dollars))) > to_big(0) then'''
+match_indent = true

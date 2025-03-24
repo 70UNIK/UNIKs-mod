@@ -23,16 +23,16 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = {x_chips = 1.25,family_x_bonus = 1.3,scoring = false} },
+    config = { extra = {x_chips = 1.35,family_x_bonus = 1.3,scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
 	end,
 	gameset_config = {
-		modest = { extra = {x_chips = 1.12,family_x_bonus = 1.3,scoring = false} },
+		modest = { extra = {x_chips = 1.2,family_x_bonus = 1.3,scoring = false} },
 	},
 	pools = {["unik_cube"] = true },
 	calculate = function(self, card, context)
-		if context.before then
+		if context.before and not context.blueprint_card and not context.retrigger_joker  then
 			card.ability.extra.scoring = true
 		end
 		if context.individual and context.cardarea == G.play then
@@ -60,7 +60,13 @@ SMODS.Joker {
 			}
 		end
 		--during consumeables stage, disable scoring (moonlight cookie, observatory)
-		if context.other_consumeable then
+		if context.other_consumeable and not context.blueprint_card and not context.retrigger_joker then
+			card.ability.extra.scoring = false
+		end
+		if context.final_scoring_step and not context.blueprint_card and not context.retrigger_joker then
+			card.ability.extra.scoring = false
+		end
+		if context.after and not context.blueprint_card and not context.retrigger_joker then
 			card.ability.extra.scoring = false
 		end
     end,

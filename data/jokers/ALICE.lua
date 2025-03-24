@@ -58,24 +58,35 @@ SMODS.Joker {
                 end
             end
             if _odd and _even then
-                SMODS.calculate_effect({
+                --This does NOT work with retrigger jokers (chad, for instance) so sadly, it had to be the one from circulus pistoris...
+                -- SMODS.calculate_effect({
+                --     message = localize({
+                --         type = "variable",
+                --         key = "a_powchips",
+                --         vars = { number_format(to_big(card.ability.extra.Echips)) },
+                --     }),
+                --     Echip_mod = card.ability.extra.Echips,
+                --     colour = G.C.DARK_EDITION,
+                -- }, context.blueprint_card or context.retrigger_joker or card)
+                -- SMODS.calculate_effect({
+                --     message = localize({
+                --         type = "variable",
+                --         key = "a_powmult",
+                --         vars = { number_format(to_big(card.ability.extra.Emult)) },
+                --     }),
+                --     Emult_mod = card.ability.extra.Emult,
+                --     colour = G.C.DARK_EDITION,
+                -- }, context.blueprint_card or context.retrigger_joker or card)
+                return {
+                    Echip_mod = card.ability.extra.Echips,
+                    Emult_mod = card.ability.extra.Emult,
                     message = localize({
                         type = "variable",
-                        key = "a_powchips",
+                        key = "a_powmultchips",
                         vars = { number_format(to_big(card.ability.extra.Echips)) },
                     }),
-                    Echip_mod = card.ability.extra.Echips,
-                    colour = G.C.DARK_EDITION,
-                }, context.blueprint_card or card)
-                SMODS.calculate_effect({
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = { number_format(to_big(card.ability.extra.Emult)) },
-                    }),
-                    Emult_mod = card.ability.extra.Emult,
-                    colour = G.C.DARK_EDITION,
-                }, context.blueprint_card or card)
+                    colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
+                }
             end
 		end
     end,
