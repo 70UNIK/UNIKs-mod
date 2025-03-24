@@ -6,9 +6,9 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_vampiric_hammer',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = "cry_cursed",
-	pos = { x = 3, y = 1 },
+	pos = { x = 4, y = 2 },
     cost = 1,
     --will not be changed in modest
     config = { extra = { selfDestruct = false,min_enhanced_cards = 2, enhanced_cards = 1} },

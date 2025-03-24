@@ -147,8 +147,6 @@ return {
 				text = {
                     "Set hands to 66", -- set hands to 66, only 2 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
                     "only 2 hands will score",
-                    "#1# in #2# chance hand", --1 in 666 chance
-                    "will instantly kill you",
 				},                  
             },
             bl_unik_legendary_leaf={

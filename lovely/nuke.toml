@@ -118,6 +118,7 @@ elseif G.GAME.unik_killed_by_artisan_builds then
 elseif G.GAME.unik_killed_by_magnet then
     Jimbo:add_speech_bubble('special_lose_unik_magnet', nil, {quip = true})
     G.GAME.unik_killed_by_magnet = nil
+    G.GAME.unik_deathly_debuff_text = nil
 elseif G.GAME.unik_killed_by_racket then
     Jimbo:add_speech_bubble('special_lose_unik_racket', nil, {quip = true})
     G.GAME.unik_killed_by_racket = nil
@@ -141,5 +142,6 @@ else
     Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
     G.GAME.unik_deathly_debuff_text = nil
 end
+G.GAME.unik_deathly_debuff_text = nil
 '''
 match_indent = true

@@ -127,9 +127,16 @@ local deathDebuffCopy = copy_card
 function copy_card(other, new_card, card_scale, playing_card, strip_edition)
     local res = deathDebuffCopy(other, new_card, card_scale, playing_card, strip_edition)
     
-    if new_card ~= nil then
+    if new_card ~= nil and not G.GAME.unik_stop_repeat then
        -- print("deathhook")
         CheckDebuffSuits()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.GAME.unik_stop_repeat = nil
+                return true
+            end
+        }))
     end
     return res
 end
@@ -137,8 +144,17 @@ end
 local change_suitHook = Card.change_suit
 function Card:change_suit(new_suit)
     local res = change_suitHook(self,new_suit)
+    if not G.GAME.unik_stop_repeat then 
     --print("suitchange")
         CheckDebuffSuits()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.GAME.unik_stop_repeat = nil
+                return true
+            end
+        }))
+    end
     return res
 end
 --WIld cards,  This causes lag when bringing up the deck as its linked to copy_card
@@ -211,10 +227,42 @@ function Card:remove_from_deck(from_debuff)
 
         CheckDebuffSuits()
     end
+
     local ret = removeHook3(self,from_debuff)
-    if self.playing_card and G.deck and G.GAME then
+    local plant = false
+    local goad = false
+    local head = false
+    local window = false
+    local club = false
+    if G.jokers then
+        for x, h in pairs(G.jokers.cards) do
+            if h.ability.name == "j_unik_the_plant" and not h.debuff and not h.removed then
+                plant = true
+            end
+            if h.ability.name == "j_unik_caveman_club"  and not h.debuff and not h.removed then
+                club = true
+            end
+            if h.ability.name == "j_unik_broken_window"  and not h.debuff and not h.removed then
+                window = true
+            end
+            if h.ability.name == "j_unik_goading_joker" and not h.debuff and not h.removed then
+                goad = true
+            end
+            if h.ability.name == "j_unik_headless_joker"  and not h.debuff and not h.removed then
+                head = true
+            end
+        end
+    end
+    if self.playing_card and G.deck and G.GAME and (plant or goad or head or window or club) and not G.GAME.unik_stop_repeat then
       --  print("removeCheck2")
         CheckDebuffSuits()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.GAME.unik_stop_repeat = nil
+                return true
+            end
+        }))
     end
     return ret
 end

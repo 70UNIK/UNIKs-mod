@@ -10,12 +10,12 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
-    loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 666 } }
-	end,
-    collection_loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 666 } }
-	end,
+    -- loc_vars = function(self)
+	-- 	return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 666 } }
+	-- end,
+    -- collection_loc_vars = function(self)
+	-- 	return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 666 } }
+	-- end,
     set_blind = function(self, reset, silent)
 		if not reset then
             ease_hands_played(-G.GAME.current_round.hands_left)
@@ -31,18 +31,18 @@ SMODS.Blind{
         return false
     end,
 	debuff_hand = function(self, cards, hand, handname, check)
-		--Phase 1: Check for 1 in 666 chance of instakill cause its funny
-        if
-            not check
-            and (pseudorandom(pseudoseed("unik_legendary_tornado_instakill")) < ((G.GAME.probabilities.normal) / 666))
-            and not G.GAME.blind.disabled
-        then
-            --deathly debuff text will force an instakill instead the hand not scoring
-            --print("got sucked up")
-            G.GAME.unik_deathly_debuff_text = true
-            G.GAME.blind.triggered = true
-            return true
-        end
+		-- --Phase 1: Check for 1 in 666 chance of instakill cause its funny
+        -- if
+        --     not check
+        --     and (pseudorandom(pseudoseed("unik_legendary_tornado_instakill")) < ((G.GAME.probabilities.normal) / 666))
+        --     and not G.GAME.blind.disabled
+        -- then
+        --     --deathly debuff text will force an instakill instead the hand not scoring
+        --     --print("got sucked up")
+        --     G.GAME.unik_deathly_debuff_text = true
+        --     G.GAME.blind.triggered = true
+        --     return true
+        -- end
         --Phase 2: Hand Numerator. 
         --How it works is: Allowed hands/Hands remaining. So if 64 hands do not score first, asumming no instakill, the remaining hands WILL score. It ignores probabilities such as OAS or YN
         --If successful 2 times, then set hands to -666
