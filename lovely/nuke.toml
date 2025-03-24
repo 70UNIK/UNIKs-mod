@@ -25,7 +25,7 @@ if G.jokers then
     end
 if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.unik_kill_player_before_last_hand and G.GAME.current_round.hands_left > 0 and not cry_panopicon)) and not (G.GAME.blind.disabled)then
     local upper = G.GAME.chips
-    local ceiling = G.GAME.blind.chips^1.5
+    local ceiling = G.GAME.blind.chips^1.666
     if to_big(upper) > to_big(ceiling) or G.GAME.unik_kill_player_before_last_hand then
         G.GAME.chips = 0
         game_over = true
@@ -56,7 +56,7 @@ if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disab
 end
 -- scores really big for regular indigo icbm
 local upper22 = G.GAME.chips
-local ceiling22 = G.GAME.blind.chips^1.5
+local ceiling22 = G.GAME.blind.chips^2
 --print(upper22)
 --print(ceiling22)
 if to_big(upper22) > to_big(ceiling22) then

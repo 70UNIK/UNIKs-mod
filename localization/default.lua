@@ -91,7 +91,7 @@ return {
 				},
             },
             bl_unik_legendary_magnet={
-                name = "Murhaavamagneetti", --Murderous Magnet
+                name = "Murhaavamagneetti", --Murderous Magnet --nerfed to just not score to give more control
 				text = {
                     "+6 Hand Size",
 					"Add Steel Polychrome Aces equal",
@@ -144,8 +144,10 @@ return {
             bl_unik_legendary_tornado={
                 name = "Ylihuomenna", --Day after tomorrow
 				text = {
-                    "Set hands to 66", -- set hands to 66, only 2 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
-                    "only 2 hands will score",
+                    "Set hands to 66", -- set hands to 66, only 3 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
+                    "only 3 random hands", --now there's a pity system that every 22 hands, 1 will score 
+                    "will score",
+                    "(always 1 every <=22 hands)",
 				},                  
             },
             bl_unik_legendary_leaf={
@@ -1068,7 +1070,7 @@ return {
             k_unik_debt="Not Enough Money!",
             k_unik_poppy_placeholder="(2.5x requirements)",
             k_unik_nuke_placeholder="(3x requirements)",
-            k_unik_legendary_nuke_placeholder="(^1.5 requirements)",
+            k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $25",
@@ -1195,7 +1197,7 @@ return {
             },
             special_lose_unik_nuke_legendary={
                 "Maybe don't score above",
-                "^1.5 requirements...",
+                "^1.666 requirements...",
             },
             special_lose_unik_tornado_legendary={
                 "Keep your scoring consistent",

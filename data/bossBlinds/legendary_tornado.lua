@@ -20,7 +20,8 @@ SMODS.Blind{
 		if not reset then
             ease_hands_played(-G.GAME.current_round.hands_left)
             ease_hands_played(66)
-			G.GAME.blind.unik_tornado_hands_remaining = 2
+			G.GAME.blind.unik_tornado_hands_remaining = 3
+            G.GAME.blind.unik_tornado_pity = 0
             G.GAME.unik_killed_by_tornado_legendary = true
 		end
 	end,
@@ -50,7 +51,9 @@ SMODS.Blind{
         not check
         and (pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter")) < ((G.GAME.current_round.hands_left-G.GAME.blind.unik_tornado_hands_remaining)/ G.GAME.current_round.hands_left))
         and not G.GAME.blind.disabled
+        and G.GAME.blind.unik_tornado_pity < 22
         then
+            G.GAME.blind.unik_tornado_pity = G.GAME.blind.unik_tornado_pity + 1
             G.GAME.unik_deathly_debuff_text = nil
             return true
         elseif not check and not G.GAME.blind.disabled then
@@ -59,6 +62,7 @@ SMODS.Blind{
             attention_text({
                 scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
             })
+            G.GAME.blind.unik_tornado_pity = 0
             -- no hands left? set to -666
             if G.GAME.blind.unik_tornado_hands_remaining <= 0 then
                 ease_hands_played(-G.GAME.current_round.hands_left)

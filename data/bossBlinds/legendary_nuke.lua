@@ -13,7 +13,7 @@ SMODS.Blind{
 		modest = { disabled = true},
 	},
     loc_vars = function(self, info_queue, card)
-		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^0.8)^1.5 } } -- no bignum?
+		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_legendary_nuke_placeholder") } }
@@ -23,7 +23,7 @@ SMODS.Blind{
         if Cryptid.gameset() ~= "modest" and (G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time) then
             if G.GAME.unik_scores_really_big then
                 --print(G.GAME.unik_scores_really_big)
-                if G.GAME.unik_scores_really_big > 5 then
+                if G.GAME.unik_scores_really_big > 8 then
                     return true
                 end
             end

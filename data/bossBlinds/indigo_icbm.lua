@@ -19,7 +19,7 @@ SMODS.Blind{
         -- only appear if player scores above ^1.5 reqs 5 times in a run
         if G.GAME.unik_scores_really_big then
             --print(G.GAME.unik_scores_really_big)
-            if G.GAME.unik_scores_really_big >= 5 then
+            if G.GAME.unik_scores_really_big >= 8 then
                 return true
             end
         end
