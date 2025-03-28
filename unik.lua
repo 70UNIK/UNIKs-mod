@@ -205,6 +205,7 @@ NFS.load(mod_path .. "data/jokers/gt710.lua")()
 NFS.load(mod_path .. "data/jokers/1_5_joker.lua")() 
 -- NFS.load(mod_path .. "data/jokers/dawn.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
+NFS.load(mod_path .. "data/jokers/scratch.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
 --- Uncommon ---

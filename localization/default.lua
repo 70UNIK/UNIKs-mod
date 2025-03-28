@@ -509,6 +509,13 @@ return {
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
             },
+            j_unik_scratch = { 
+                name = 'Scratch',
+                text = {
+                    "{C:cry_code}Code{} cards {C:attention}in your consumable area{}", 
+                    "each give {C:mult}+#1#{} Mult",
+                }
+            },
             j_unik_moonlight_cookie_modest = { --^1.15 mult for specified poker hand
                 name = 'Moonlight Cookie',
                 text = {
@@ -582,10 +589,10 @@ return {
             --Basically provided its not face cards, she's a souped up hiker
                 name="{C:unik_maya_color}Maya Ramirez{}",
                 text={
-                    "{C:attention}Scored{} non-face cards permanently gain {X:chips,C:white}X#1#{} Chips",
-                    "{C:attention}Held{} non-face cards permanently gain {X:chips,C:white}X#2#{} Chips",
+                    "{C:attention}Scored{} cards permanently gain {X:chips,C:white}X#1#{} Chips",
+                    "{C:attention}Held{} cards permanently gain {X:chips,C:white}X#2#{} Chips",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
-                    "{C:inactive,s:0.9,E:1}I'm doubtful if it will be successful, but I'll still try...{}",
+                    "{C:inactive,s:0.9,E:1}I'm here to help, but PLEASE be careful.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -763,7 +770,8 @@ return {
                     "{E:2,C:red}Self destructs{} at the end of round",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",           
+                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",        
+                    "{C:red,s:0.4}(Cannot exceed {X:dark_edition,C:white,s:0.4}^e300{C:red,s:0.4} due to bignum copy bug){}",   
                     "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
@@ -994,7 +1002,7 @@ return {
                     "{C:green}#1# in #2#{} chance to either",
                     "create a {X:cry_cursed,C:white}Cursed{} Joker,",
                     "{C:red}destroy{} a {C:attention}random{} Joker,",
-                    "create a {C:unik_manacle_color}Handcuffs Tag",
+                    "create a {C:unik_manacle_color}Handcuffs Tag{},",
                     "add {C:unik_shitty_edition}Positive{} to a {C:attention}random{} Joker,",
                     "or create a {C:purple}Vessel Tag",
                     "Otherwise, create an",
@@ -1004,7 +1012,7 @@ return {
             tag_unik_vessel = {
                 name = "Vessel Tag",
                 text={
-                    "{C:red}3x{} Requirements",
+                    "{C:red}#1#x{} Requirements",
                     "next round",
                 },
             },

@@ -13,6 +13,7 @@ SMODS.Tag{
     min_ante = 2,
     loc_vars = function(self, info_queue)
 		info_queue[#info_queue + 1] = { set = "Tag", key = "tag_unik_extended_empowered" }
+        info_queue[#info_queue + 1] = { set = "Tag", key = "tag_unik_manacle" }
         info_queue[#info_queue + 1] = { set = "Tag", key = "tag_unik_vessel" }
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
 		return { vars = { G.GAME.probabilities.normal*4 or 4, self.config.odds } }

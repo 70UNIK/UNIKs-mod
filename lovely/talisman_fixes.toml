@@ -20,3 +20,22 @@ pattern = '''if context.cardarea == G.jokers and context.joker_main and (card.ab
 position = "at"
 payload = '''if context.cardarea == G.jokers and context.joker_main and to_big((card.ability.extra.Xmult*math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0))/card.ability.extra.dollars))) > to_big(0) then'''
 match_indent = true
+
+##Maya perma_x_chip fix attempt
+[[patches]]
+[patches.pattern]
+target = '''main.lua'''
+pattern = '''function Card:get_chip_x_bonus()
+    if self.debuff then return 0 end
+    if self.ability.set == 'Joker' then return 0 end
+    if (self.ability.x_chips or 0) <= 1 then return 0 end
+    return self.ability.x_chips
+end'''
+position = "at"
+payload = '''function Card:get_chip_x_bonus()
+    if self.debuff then return 0 end
+    if self.ability.set == 'Joker' then return 0 end
+    if (SMODS.multiplicative_stacking(self.ability.x_chips or 1, self.ability.perma_x_chips or 0) or 0) <= 1 then return 0 end
+    return SMODS.multiplicative_stacking(self.ability.x_chips or 1, self.ability.perma_x_chips or 0)
+end'''
+match_indent = true
