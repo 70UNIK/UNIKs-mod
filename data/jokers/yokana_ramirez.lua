@@ -35,7 +35,15 @@ SMODS.Joker {
 		if context.before and not context.blueprint_card and not context.retrigger_joker  then
 			card.ability.extra.scoring = true
 		end
-		if context.individual and context.cardarea == G.play then
+		if context.individual and context.cardarea == G.play and not context.cardarea == G.hand then
+			if not Talisman.config_file.disable_anims and valid == true then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						context.other_card:juice_up(0.5, 0.5)
+						return true
+					end,
+				}))
+			end
 			return {
                 message = localize({
 					type = "variable",
@@ -44,10 +52,18 @@ SMODS.Joker {
 				}),
 				Xchip_mod = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
-				card = context.individual
+
 			}
 		end
 		if context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card then
+			if not Talisman.config_file.disable_anims and valid == true then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						context.other_card:juice_up(0.5, 0.5)
+						return true
+					end,
+				}))
+			end
 			return {
                 message = localize({
 					type = "variable",
@@ -56,7 +72,7 @@ SMODS.Joker {
 				}),
 				Xchip_mod = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
-				card = card
+
 			}
 		end
 		--during consumeables stage, disable scoring (moonlight cookie, observatory)

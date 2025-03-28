@@ -4,7 +4,7 @@ dump_lua = true
 priority = 999
 
 ### Stop more impossible combinations from occurring
-### Video Poker =/= Nostalgic Arm, Video Poker =/= Sapphire Stamp, indigo ICBM + the poppy and lavender loop
+### Video Poker =/= Nostalgic Arm, Video Poker =/= Sapphire Stamp, indigo ICBM + the poppy and lavender loop, video poker + sadistic sword + manacle + 
 ### 
 
 [[patches]]
@@ -27,5 +27,9 @@ and (self.name ~= "cry-Lavender Loop" or not G.GAME.defeated_blinds["bl_unik_pop
 and (self.name ~= "bl_unik_poppy" or not G.GAME.defeated_blinds["bl_cry_lavender_loop"])
 and (self.name ~= "cry-Lavender Loop" or not G.GAME.defeated_blinds["bl_unik_indigo_icbm"])
 and (self.name ~= "bl_unik_indigo_icbm" or not G.GAME.defeated_blinds["bl_cry_lavender_loop"])
+and (self.name ~= "cry-Lavender Loop" or not G.GAME.defeated_blinds["bl_unik_legendary_nuke"])
+and (self.name ~= "bl_unik_legendary_nuke" or not G.GAME.defeated_blinds["bl_cry_lavender_loop"])
+and (self.name ~= "cry-Lavender Loop" or not G.GAME.defeated_blinds["bl_unik_legendary_tornado"])
+and (self.name ~= "bl_unik_legendary_nuke" or not G.GAME.defeated_blinds["bl_cry_lavender_loop"])
 '''
 match_indent = true

@@ -125,6 +125,8 @@ for i = 1, #G.CHALLENGES do
             
         end
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "c_heirophant" }
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "j_unik_jsab_maya" }
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "j_unik_scratch" }
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "c_tower" }
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "j_marble" }
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "p_unik_cube_1", ids = { "p_unik_cube_1", "p_unik_cube_two", "p_unik_cube_three" } }

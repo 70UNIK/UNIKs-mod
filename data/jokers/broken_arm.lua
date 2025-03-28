@@ -31,15 +31,16 @@ SMODS.Joker {
 	-- Inverse of above function.
     calculate = function(self, card, context)
 
-        if context.cardarea == G.jokers and context.before and ((Card.get_gameset(card) ~= "modest") or (Card.get_gameset(card) == "modest" and pseudorandom('unik_the_arm') < cry_prob(card.ability.cry_prob,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds))then
-            if to_big(G.GAME.hands[context.scoring_name].level) > to_big(1) then
+        if context.cardarea == G.jokers and context.before then
+            if to_big(G.GAME.hands[context.scoring_name].level) > to_big(1) and ((Card.get_gameset(card) ~= "modest") or (Card.get_gameset(card) == "modest" and pseudorandom('unik_the_arm') < cry_prob(card.ability.cry_prob,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds)) then
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize("k_unik_arm_downgrade"),
                     colour = G.C.UNIK_THE_ARM,
                     card=card,
                 })
                 level_up_hand(card, context.scoring_name, nil, -1)
-                if (card.ability.extra.level1 > 0) then
+                --only consecutive if mainline+
+                if (card.ability.extra.level1 > 0 and Card.get_gameset(card) ~= "modest") then
                     card_eval_status_text(card, "extra", nil, nil, nil, {
                         message = localize('k_reset'),
                         colour = G.C.UNIK_THE_ARM,
@@ -48,8 +49,8 @@ SMODS.Joker {
 
                     card.ability.extra.level1 = 0
                 end
-
-            else
+            --increase counter every time a level 1 hand is played. always for non modest due to above, but requres level 1 hand for non modest
+            elseif to_big(G.GAME.hands[context.scoring_name].level) <= to_big(1) then
                 card.ability.extra.level1 = card.ability.extra.level1 + 1
                 if card.ability.extra.level1 == card.ability.extra.maxLevel1 then
                     selfDestruction(card,"k_unik_arm_healed",G.C.UNIK_THE_ARM)

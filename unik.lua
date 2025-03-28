@@ -279,14 +279,15 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 -- achievements
 -- Jackpot! - Score a Royal Flush against Video Poker
--- Spacefarer - Own Observatory, Perkeo and Moonlight Cookie all at once
+-- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once
 -- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
--- Self Insert - Get UNIK from a gateway.
+-- Self Insert - Get UNIK from a gateway (or hypercube)
 -- Dicey - Complete the RNG II challenge
 -- Alice in Wonderland - Get Alice from obtaining Average Alice
 -- Dante's Inferno - Survive a Legendary Blind
 
 -- Stupid Summoning - Rig an Evocation and use it.
+-- Bloodbath 1% - Own an Oops All 6s and get a Demon Tag
 -- Hell Invasion - Own every Cursed Joker in the collection.
 -- Debuffs, Debuffs everywhere - Have all your Jokers and your entire deck debuffed.
 -- Beaned - Die from having zero hand size from depleted Turtle Beans

@@ -48,7 +48,9 @@ if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.uni
 end
 -- Green goalpost: 
 if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disabled) then
-    G.GAME.win_ante = G.GAME.win_ante + 2
+    G.GAME.win_ante = G.GAME.win_ante + 3
+    --increase by 2 then later decrease by amount if victory.
+    G.GAME.unik_goalpost_ante_win_increase = G.GAME.unik_goalpost_ante_win_increase + 3
     G.GAME.unik_moving_the_goalposts = nil
     G.GAME.blind.triggered = true
     G.GAME.blind:wiggle()
@@ -66,6 +68,17 @@ end
 '''
 match_indent = true
 
+### Green goalpost: reset ante victory reqs after victory:
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''G.GAME.win_notified = true'''
+position = 'before'
+payload = '''
+    G.GAME.win_ante = G.GAME.win_ante - G.GAME.unik_goalpost_ante_win_increase
+    G.GAME.unik_goalpost_ante_win_increase = 0
+'''
+match_indent = true
 ### Custom boss blind death messages
 
 [[patches]]

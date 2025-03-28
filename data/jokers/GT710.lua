@@ -4,7 +4,7 @@ SMODS.Joker {
     atlas = 'unik_common',
     rarity = 1,
 	pos = { x = 1, y = 0 },
-    config = { extra = { money = 7,has10 = false, has7 = false} },
+    config = { extra = { money = 6,has10 = false, has7 = false} },
     cost = 4,
     blueprint_compat = true,
 	perishable_compat = true,
