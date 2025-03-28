@@ -1,29 +1,38 @@
 --context.cardarea = G.play and context.individual
 --CURRENTLY BROKEN
+SMODS.Atlas {
+	key = "unik_maya",
+	path = "unik_maya.png",
+	px = 71,
+	py = 95
+}
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_maya',
-    atlas = 'placeholders',
+    atlas = 'unik_maya',
     rarity = 'cry_epic',
     dependencies = {
 		items = {
 			"set_cry_epic",
 		},
 	},
-	pos = { x = 3, y = 0 },
+	pos = { x = 0, y = 0 },
+	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
+	soul_pos = { x = 1, y = 0 },
     cost = 12,
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     pools = {["unik_cube"] = true },
-    config = { extra = {x_chips_scored = 0.5, x_chips_held = 0.1, family_x_bonus = 1.3} },
+    config = { extra = {x_chips_scored = 0.3, x_chips_held = 0.05, family_x_bonus = 1.3} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips_scored, center.ability.extra.x_chips_held, center.ability.extra.family_x_bonus} }
 	end,
     calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
-            context.other_card.ability.xchips = context.other_card.ability.xchips or 1
-            context.other_card.ability.xchips = context.other_card.ability.xchips + card.ability.extra.x_chips_scored
+            context.other_card.ability["perma_x_chips"] = math.max(context.other_card.ability["perma_x_chips"],1)
+            
+            context.other_card.ability["perma_x_chips"] = context.other_card.ability["perma_x_chips"] + card.ability.extra.x_chips_scored
             return {
                 extra = {message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
                 colour = G.C.CHIPS,
@@ -36,8 +45,8 @@ SMODS.Joker {
                 if context.other_card.debuff then
                     card_eval_status_text(context.other_card, "debuff", nil, nil, nil, nil)
                 else
-                    context.other_card.ability.xchips = context.other_card.ability.xchips or 1
-                    context.other_card.ability.xchips = context.other_card.ability.xchips + card.ability.extra.x_chips_held
+                    context.other_card.ability["perma_x_chips"] = math.max(context.other_card.ability["perma_x_chips"],1)
+                    context.other_card.ability["perma_x_chips"] = context.other_card.ability["perma_x_chips"] + card.ability.extra.x_chips_held
                     return {
                         extra = {message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
                         colour = G.C.CHIPS,
