@@ -26,12 +26,12 @@ SMODS.Challenge{
 	},
 	jokers = {
 		{ id = "j_cry_apjoker", stickers = { "cry_absolute" } },
-		{ id = "j_cry_apjoker", stickers = { "cry_absolute","banana" } },
-		{ id = "j_cry_big_cube", stickers = { "cry_absolute","banana" } },
 		{ id = "j_unik_jsab_chelsea", stickers = { "cry_absolute" } },
+		{ id = "j_unik_unik", stickers = { "cry_absolute" } },
         { id = "j_cry_fleshpanopticon", stickers = { "cry_absolute" }},
         { id = "j_unik_border_wall", stickers = { "cry_absolute" }},
         { id = "j_mr_bones", stickers = { "cry_absolute" }, edition = "negative" },
+		{ id = "j_unik_white_lily_cookie"},
         { id = "j_cavendish", stickers = { "cry_rigged","perishable","banana","cry_flickering","pinned","cry_absolute","eternal" }, edition = "unik_positive" },
         { id = "j_cavendish", stickers = { "cry_rigged","perishable","banana","cry_flickering","pinned","cry_absolute","eternal" }, edition = "unik_positive" },
 		{ id = "j_cavendish", stickers = { "cry_rigged","perishable","banana","cry_flickering","pinned","cry_absolute","eternal" }, edition = "unik_positive" },
@@ -44,6 +44,7 @@ SMODS.Challenge{
 	restrictions = {
 		banned_cards = {
 			{ id = "j_luchador" },
+			{ id = "j_cry_candy_sticks" }, --to avoid formidiscus basically making it extremely easy
 			{ id = "j_chicot" },
 			{ id = "j_throwback" },
 			{ id = "j_diet_cola" },

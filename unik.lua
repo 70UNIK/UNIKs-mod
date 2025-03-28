@@ -80,10 +80,16 @@ SMODS.Atlas ({
 	frames = 21 })
 
 SMODS.Atlas {
-	key = "unik_stickers",
-	path = "unik_stickers.png",
-	px = 71,
-	py = 95
+	key = "unik_tags",
+	path = "unik_tags.png",
+	px = 34,
+	py = 34
+}
+SMODS.Atlas {
+	key = "unik_tags_shiny",
+	path = "unik_tags_shiny.png",
+	px = 34,
+	py = 34
 }
 SMODS.Atlas {
 	key = "unik_common",
@@ -141,7 +147,24 @@ NFS.load(mod_path .. "data/stickers/niko.lua")()
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --boosters
-NFS.load(mod_path .. "data/boosters/cube_pack.lua")() 
+NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
+
+--tags
+NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
+NFS.load(mod_path .. "data/tags/demon_tag.lua")()
+NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
+NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
+--manacle tag: -1 hand size
+
+--Extended empowered pack: Chose between a SOUL, a gateway or a foundation 
+--Tags
+-- Devil's Tag (GD demon): 4 in 5 chance of the following random negative effects:
+--- Spawns a cursed Joker
+--- Destroys a random Joker owned, bypassing eternals
+--- Turn two random Jokers positive
+--- Create a "Vessel" Tag (3x blind size)
+-- otherwise create an extended empowered pack
+
 --BLINDS--
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
@@ -189,7 +212,7 @@ NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
 
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
-NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
@@ -197,6 +220,7 @@ NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
+NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 
@@ -205,7 +229,7 @@ NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")()
 NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
---NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
+NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
 NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
 NFS.load(mod_path .. "data/jokers/ALICE.lua")()
 
@@ -254,11 +278,12 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 -- achievements
 -- Jackpot! - Score a Royal Flush against Video Poker
--- IN SPACE! - Have Observatory, Perkeo and Moonlight Cookie all at once
+-- Spacefarer - Own Observatory, Perkeo and Moonlight Cookie all at once
 -- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
 -- Self Insert - Get UNIK from a gateway.
 -- Dicey - Complete the RNG II challenge
 -- Alice in Wonderland - Get Alice from obtaining Average Alice
+-- Dante's Inferno - Survive a Legendary Blind
 
 -- Stupid Summoning - Rig an Evocation and use it.
 -- Hell Invasion - Own every Cursed Joker in the collection.
@@ -266,6 +291,9 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 -- Beaned - Die from having zero hand size from depleted Turtle Beans
 -- Epic Fail - Score under -1.79e308 Chips in a single hand
 -- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
+-- The Abyss - Die to a Legendary Blind
+-- Thats no Moon! - Own Stella Mortis and Moonlight Cookie at the same time without a Perkeo (Stella mortis destroys planets, Moonlight cookie needs planets)
+-- 
 
 --Artwork to do:
 

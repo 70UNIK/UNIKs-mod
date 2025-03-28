@@ -227,7 +227,7 @@ function Card:remove_from_deck(from_debuff)
 
         CheckDebuffSuits()
     end
-
+    
     local ret = removeHook3(self,from_debuff)
     local plant = false
     local goad = false

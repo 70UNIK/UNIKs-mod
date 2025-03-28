@@ -1,0 +1,16 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+# shiny tags
+[[patches]]
+[patches.pattern]
+target = "tag.lua"
+pattern = '''elseif G.P_TAGS[self.key].atlas == 'cry_tag_cry' then'''
+position = "before"
+payload = '''
+elseif G.P_TAGS[self.key].atlas == 'unik_tags' then
+    tagatlas = G.ASSET_ATLAS['cry_shinyc']
+'''
+match_indent = true

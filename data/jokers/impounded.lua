@@ -47,6 +47,7 @@ SMODS.Joker {
             --Fallback: If it happened to target a cursed joker, retry until it hits another one or no non cursed exist to avoid debuffing a non cursed joker or itself
             if G.jokers.cards[select].config.center.rarity == "cry_cursed" then
                 retry = true
+                successful = false
                 print("Uh oh, looks like it tried to debuff a cursed joker or itself... Retrying...")
                 while retry == true do
                     validEntries = {}
@@ -60,6 +61,7 @@ SMODS.Joker {
                         local select = pseudorandom(pseudoseed("unik_impoundSelect"), 1, #validEntries)
                         if G.jokers.cards[select].config.center.rarity ~= "cry_cursed" then
                             retry = false
+                            successful = true
                             break
                         end
                     else

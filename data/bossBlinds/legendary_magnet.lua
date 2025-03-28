@@ -4,7 +4,7 @@
 SMODS.Blind{
     key = 'unik_legendary_magnet',
     config = {},
-    boss = {min = 1, showdown = true,legendary = true}, 
+    boss = {min = 1,legendary = true, showdown = true}, 
     atlas = "unik_legendary_blinds",
     pos = {x=0, y=1},
     boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
@@ -13,6 +13,7 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    ignore_showdown_check = true,
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
 		G.GAME.unik_killed_by_magnet_legendary = true
@@ -29,16 +30,16 @@ SMODS.Blind{
 					delay = 0.1,
 					func = function()
                         local _suit, _rank = nil, nil
-                        _rank = 'A'
+                        _rank = 'K'
                         _suit = pseudorandom_element({'S','H','D','C'}, pseudoseed('grim_create'))
 						G.playing_card = (G.playing_card and G.playing_card + 1) or 1
 						local card = Card(G.play.T.x + G.play.T.w/2, G.play.T.y, G.CARD_W, G.CARD_H, 
                         G.P_CARDS[_suit..'_'.._rank], 
                         G.P_CENTERS.m_steel, 
                         {playing_card = G.playing_card})
-
-                        -- card.ability.unik_niko = true --Avoid permanent damage and lag
-                        card:set_edition({ polychrome = true }, nil, nil, true)
+                        card:set_seal('Red',nil, true)
+                         card.ability.unik_niko = true --Avoid permanent damage and lag
+                        --card:set_edition({ polychrome = true }, nil, nil, true) --too long
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card)
 						G.deck:emplace(card)
@@ -55,7 +56,16 @@ SMODS.Blind{
 	end,
     --Only appear if over round 120 or "legendary_hell_blinds" are enabled (they can spawn ANY TIME)
     in_pool = function()
-        if Cryptid.gameset() ~= "modest" and (G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time) then
+        local hasExotic = false
+        if not G.jokers or not G.jokers.cards then
+			return false
+		end
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
+                hasExotic = true
+            end
+        end
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 and hasExotic) or G.GAME.modifiers.unik_legendary_at_any_time) then
             return true
         end
         return false
@@ -70,7 +80,7 @@ SMODS.Blind{
             local goldenAlloy = false
             local steels = 0
             local steelsPlayed = 0
-            local polychromes = 0
+            -- local polychromes = 0
             --If alloy (extra credit) is present, treat GOLD cards as steel cards as well!
             for _, v in pairs(G.jokers.cards) do
                 if v.config.center.key == "j_ExtraCredit_alloy" then
@@ -87,14 +97,14 @@ SMODS.Blind{
                     steelsPlayed = steelsPlayed + 1
                 end
             end
-            for k, v in ipairs(cards) do
-                if v.edition then
-                    if v.edition.key == "e_polychrome" then
-                        polychromes = polychromes + 1
-                    end
-                end
-            end
-            if steels > steelsPlayed or polychromes > 0 then
+            -- for k, v in ipairs(cards) do
+            --     if v.edition then
+            --         if v.edition.key == "e_polychrome" then
+            --             polychromes = polychromes + 1
+            --         end
+            --     end
+            -- end
+            if steels > 0 or steelsPlayed > 0 then
                 G.GAME.blind.triggered = true
                 return true
             else
@@ -103,7 +113,7 @@ SMODS.Blind{
         else
             local goldenAlloy = false
             local steels = 0
-            local polychromes = 0
+            -- local polychromes = 0
             --If alloy (extra credit) is present, treat GOLD cards as steel cards as well!
             for _, v in pairs(G.jokers.cards) do
                 if v.config.center.key == "j_ExtraCredit_alloy" then
@@ -116,21 +126,19 @@ SMODS.Blind{
                 end
             end
             for k, v in ipairs(cards) do
-                if v.edition then
-                    if v.edition.polychrome then
-                        polychromes = polychromes + 1
-                    end
+                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                    steels = steels + 1
                 end
-
             end
-            if steels > 0 or polychromes > 0 then
+
+            
+            if steels > 0 then
                 G.GAME.blind.triggered = true
                 return true
             else
                 return false
             end
         end
-
 	end,
 	disable = function(self)
         --avoid chicot permanently depleting hand size to 0 by only triggering if the killed by magnet flag is true

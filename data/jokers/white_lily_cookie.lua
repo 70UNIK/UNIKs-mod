@@ -1,5 +1,8 @@
 local function White_lily_copy(card)
     local _card = copy_card(card, nil, nil, nil, nil)
+    print(_card.ability.extra.initial)
+    _card.ability.extra.initial = true
+    
     _card:add_to_deck()
     _card:start_materialize()
     G.jokers:emplace(_card)
@@ -14,39 +17,12 @@ local function White_lily_copy(card)
     _card.ability.cry_flickering = nil
     _card.ability.cry_possessed = nil
     _card.ability.extra.copying = false
-    _card.ability.extra.Emult = _card.ability.extra.Emult + _card.ability.extra.Emult_mod
-    _card.ability.extra.x_mult = _card.ability.extra.x_mult + _card.ability.extra.x_mult_mod
+    _card.ability.extra.sold = false
+    --TODO: Double Scale and Scalae support for when she self destructs or gets destroyed
     --avoid permanently doubling her values to her copy so the multiply properties must transfer
     if card.config.cry_multiply then
         _card.config.cry_multiply = card.config.cry_multiply
     end
-    _card:set_cost()
-
-    if Card.get_gameset(card) ~= "modest" then
-        card_eval_status_text(_card, "extra", nil, nil, nil, {
-            message = localize({
-                type = "variable",
-                key = "a_powmult",
-                vars = {
-                    number_format(to_big(_card.ability.extra.Emult)),
-                },
-            }),
-            colour = G.C.DARK_EDITION,
-            card = _card
-        })
-    else
-        card_eval_status_text(_card, "extra", nil, nil, nil, {
-            message = localize({
-                type = "variable",
-                key = "a_xmult",
-                vars = {
-                    number_format(to_big(_card.ability.extra.x_mult)),
-                },
-            }),
-            colour = G.C.MULT,
-            card = _card
-        })
-    end 
 
 end
 SMODS.Atlas {
@@ -72,7 +48,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.0, sold = false,copying = false} },
+    config = { extra = { Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.25, sold = false,copying = false,initial = false,true_Emult_mod = 0.1, true_x_mult_mod = 1.25} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}), 
@@ -80,6 +56,15 @@ SMODS.Joker {
 	end,
     add_to_deck = function(self, card, from_debuff)
         card.ability.perishable = nil
+        card.ability.extra.copying = false
+        card.ability.extra.sold = false
+        --To keep misprint deck consistent, when initializing her in deck, have her true values be set to initial values
+        if card.ability.extra.initial == false then
+            print("set initial variables!~")
+            card.ability.extra.true_Emult_mod = card.ability.extra.true_Emult_mod
+            card.ability.extra.true_x_mult_mod = card.ability.extra.x_mult_mod
+            card.ability.extra.initial = true
+        end
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
@@ -115,19 +100,51 @@ SMODS.Joker {
             end
 
 		end
-        if context.ending_shop and not context.repetition and not context.blueprint then
+        if context.ending_shop and not context.blueprint and not context.repetition and not context.retrigger_joker then
             if card.ability.extra.copying == false then
                 card.ability.extra.copying = true
-                selfDestruction(card,"k_unik_plant_no_face",HEX("bfb2f6"))
+                card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+                card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+                --do not make multiple clones of her! 
                 G.E_MANAGER:add_event(Event({
                     trigger = "after",
-                    delay = 0.2,
                     func = function()
-                        White_lily_copy(card)
+                        selfDestruction(card,"k_unik_plant_no_face",HEX("bfb2f6"))
+                        G.E_MANAGER:add_event(Event({
+                            trigger = "after",
+                            func = function()
+                                White_lily_copy(card)
+                                return true
+                            end,
+                        }))
                         return true
                     end,
                 }))
-                
+                if Card.get_gameset(card) ~= "modest" then
+                    return{
+                        message = localize({
+                            type = "variable",
+                            key = "a_powmult",
+                            vars = {
+                                number_format(to_big(card.ability.extra.Emult)),
+                            },
+                        }),
+                        colour = G.C.DARK_EDITION,
+                        card = card,
+                    }
+                else
+                    return{
+                        message = localize({
+                            type = "variable",
+                            key = "a_xmult",
+                            vars = {
+                                number_format(to_big(card.ability.extra.x_mult)),
+                            },
+                        }),
+                        colour = G.C.MULT,
+                        card = card,
+                    }
+                end 
             end
         end
         if context.cry_start_dissolving and not context.repetition and not context.blueprint and context.card == card and card.ability.extra.sold == false and card.ability.extra.copying == false then

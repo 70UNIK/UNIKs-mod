@@ -1,19 +1,21 @@
 SMODS.Joker {
     key = 'unik_yes_nothing',
     atlas = 'unik_uncommon',
-    rarity = 2,
+    rarity = 3,
 	pos = { x = 2, y = 0 },
     cost = 4,
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = true,
+    immutable = true,
     --config = { extra = { Xmult = 1.32} },
     -- loc_vars = function(self, info_queue, center)
 	-- 	return { vars = {center.ability.extra.Xmult} }
 	-- end,\
     --ortalab has woo all 1s, hence its redundant on modest
+    -- Now that Demon Tag exists, this should be rare, otherwise ppl will be keep on trying to get foundation a lot more easily.
     gameset_config = {
-		modest = { disabled = (SMODS.Mods["ortalab"] or {}).can_load },
+		modest = { disabled = (SMODS.Mods["ortalab"] or {}).can_load,center = { rarity = 2 } },
 	},
     loc_vars = function(self, info_queue, center)
 		return { 

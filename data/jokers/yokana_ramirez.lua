@@ -44,7 +44,7 @@ SMODS.Joker {
 				}),
 				Xchip_mod = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
-				card = card
+				card = context.individual
 			}
 		end
 		if context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card then

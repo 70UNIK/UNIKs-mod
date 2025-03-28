@@ -1,7 +1,7 @@
 SMODS.Blind{
     key = 'unik_legendary_sword',
     config = {},
-    boss = {min = 1, showdown = true,legendary = true}, 
+    boss = {min = 1,legendary = true,showdown = true}, 
     atlas = "unik_legendary_blinds",
     pos = {x=0, y=3},
     boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
@@ -10,6 +10,7 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    ignore_showdown_check = true,
     set_blind = function(self, reset, silent)
         G.GAME.unik_killed_by_sword_legendary = true
         --set blind size to ^2.666x
@@ -21,7 +22,16 @@ SMODS.Blind{
         G.hand:change_size(-G.hand.config.card_limit + 1)
 	end,
     in_pool = function()
-        if Cryptid.gameset() ~= "modest" and (G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time) then
+        local hasExotic = false
+        if not G.jokers or not G.jokers.cards then
+			return false
+		end
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
+                hasExotic = true
+            end
+        end
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 and hasExotic) or G.GAME.modifiers.unik_legendary_at_any_time) then
             return true
         end
         return false

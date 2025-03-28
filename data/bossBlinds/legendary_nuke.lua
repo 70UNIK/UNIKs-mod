@@ -3,7 +3,7 @@
 SMODS.Blind{
     key = 'unik_legendary_nuke',
     config = {},
-    boss = {min = 1, showdown = true,legendary = true}, 
+    boss = {min = 1,legendary = true,showdown = true}, 
     atlas = "unik_legendary_blinds",
     pos = {x=0, y=2},
     boss_colour= HEX("600000"),
@@ -12,6 +12,7 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
 		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
 	end,
@@ -19,8 +20,17 @@ SMODS.Blind{
 		return { vars = { localize("k_unik_legendary_nuke_placeholder") } }
 	end,
     in_pool = function()
+        local hasExotic = false
+        if not G.jokers or not G.jokers.cards then
+			return false
+		end
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
+                hasExotic = true
+            end
+        end
 
-        if Cryptid.gameset() ~= "modest" and (G.GAME.round >= 100 or G.GAME.modifiers.unik_legendary_at_any_time) then
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 and hasExotic) or G.GAME.modifiers.unik_legendary_at_any_time) then
             if G.GAME.unik_scores_really_big then
                 --print(G.GAME.unik_scores_really_big)
                 if G.GAME.unik_scores_really_big > 8 then

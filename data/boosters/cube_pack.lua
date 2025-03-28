@@ -73,7 +73,7 @@ SMODS.Booster{
 	end,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, G.C.CHIPS)
-		ease_background_colour({ new_colour = G.C.CHIPS, special_colour = G.C.DARK_EDITION, contrast = 2 })
+		ease_background_colour({ new_colour = G.C.CHIPS, special_colour = G.C.BLACK, contrast = 2 })
 	end,
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -86,7 +86,7 @@ SMODS.Booster{
 	group_key = "k_unik_cube_pack",
 	update_pack = function(self, dt)
 		ease_colour(G.C.DYN_UI.MAIN, G.C.CHIPS)
-		ease_background_colour({ new_colour = G.C.CHIPS, special_colour = G.C.DARK_EDITION, contrast = 2 })
+		ease_background_colour({ new_colour = G.C.CHIPS, special_colour = G.C.BLACK, contrast = 2 })
 		SMODS.Booster.update_pack(self, dt)
 	end,
 }
