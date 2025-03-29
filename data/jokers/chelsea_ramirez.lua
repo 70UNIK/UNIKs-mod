@@ -57,7 +57,7 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
 ) and amount ~= 1) or
 
     key == "chips" or key == "chip_mod" or key == "chip" or key == "chips_mod" then
-        -- -- print("Chips triggered!")
+        -- ----print("Chips triggered!")
         -- -- Yokana's effect
         -- for _,v in pairs(SMODS.find_card('j_unik_jsab_yokana')) do
         --     --avoid infinite recursion/overflow error by having it not work with other yokanas (otherwise will become infinite)

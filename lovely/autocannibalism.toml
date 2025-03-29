@@ -13,7 +13,7 @@ pattern = "if self.ability.extra.h_size - self.ability.extra.h_mod <= 0 then"
 position = "at"
 payload = '''
 -- adding depleted functionality for turtle bean
-if (self.ability.unik_depleted and self.ability.extra.h_size - self.ability.extra.h_mod <= -4) or (not (self.ability.unik_depleted) and self.ability.extra.h_size - self.ability.extra.h_mod <= 0) then
+if (self.ability.unik_depleted and self.ability.extra.h_size - self.ability.extra.h_mod < -4) or (not (self.ability.unik_depleted) and self.ability.extra.h_size - self.ability.extra.h_mod <= 0) then
 '''
 match_indent = true
 
@@ -25,7 +25,7 @@ pattern = "if self.ability.mult - self.ability.extra <= 0 then"
 position = "at"
 payload = '''
 -- adding depleted functionality for popcorn
-if (self.ability.unik_depleted and self.ability.mult - self.ability.extra <= -20) or (not self.ability.unik_depleted and self.ability.mult - self.ability.extra <= 0) then
+if (self.ability.unik_depleted and self.ability.mult - self.ability.extra < -20) or (not self.ability.unik_depleted and self.ability.mult - self.ability.extra <= 0) then
 '''
 match_indent = true
 
@@ -37,7 +37,7 @@ pattern = "if self.ability.extra.chips - self.ability.extra.chip_mod <= 0 then"
 position = "at"
 payload = '''
 -- adding depleted functionality for popcorn
-if (self.ability.unik_depleted and self.ability.extra.chips - self.ability.extra.chip_mod <= -100) or (not self.ability.unik_depleted and self.ability.extra.chips - self.ability.extra.chip_mod <= 0) then
+if (self.ability.unik_depleted and self.ability.extra.chips - self.ability.extra.chip_mod < -100) or (not self.ability.unik_depleted and self.ability.extra.chips - self.ability.extra.chip_mod <= 0) then
 '''
 match_indent = true
 
@@ -50,7 +50,7 @@ pattern = "if self.ability.x_mult - self.ability.extra <= 1 then"
 position = "at"
 payload = '''
 -- adding depleted functionality for popcorn
-if (self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <=0) or (not self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <= 1) then
+if (self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <0) or (not self.ability.unik_depleted and self.ability.x_mult - self.ability.extra <= 1) then
 '''
 match_indent = true
 
@@ -79,7 +79,7 @@ match_indent = true
 target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
 pattern = '''if card.ability.extra.chips - card.ability.extra.chip_mod <= 0 then'''
 position = "at"
-payload = '''if (to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(0) and not card.ability.unik_depleted) or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(-200))then'''
+payload = '''if (to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(0) and not card.ability.unik_depleted) or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) < to_big(-200))then'''
 match_indent = true
 
 ### add clicked cookie to autocannibal category

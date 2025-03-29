@@ -49,6 +49,7 @@ end
 local removeHook = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
     if (self.added_to_deck) then
+       --print("10")
         --Pirahna Plant and other suit based cursed Jokers go here,
         
         --print("Joker deleted")
@@ -145,6 +146,7 @@ end
 local add_to_deck_hook = Card.add_to_deck
 function Card:add_to_deck(from_debuff)
     add_to_deck_hook(self,from_debuff)
+   --print("1")
     if G.jokers then
         if G.jokers.cards then
             for _, v in pairs(G.jokers.cards) do
@@ -166,6 +168,7 @@ function CardArea:emplace(card, location, stay_flipped)
     local autoCannibalExists = false
     
     if self == G.jokers then
+       --print("11")
         --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)
         if (SMODS.Mods["extracredit"] or {}).can_load then
             if card.config.center.key == "j_ExtraCredit_averagealice" then

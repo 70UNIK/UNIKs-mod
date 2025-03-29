@@ -879,6 +879,15 @@ return {
                     "or {C:attention}0{} for {X:mult,C:white}XMult{}",
                 },
             },
+            unik_impounded = {
+                name = "Impounded",
+                text = {
+                    "Card is {C:red}debuffed{}",
+                    "and has {C:purple}eternal{} and {C:attention}rental{}",
+                    "until {C:red}Impound Notice{} is sold",
+                    "{C:red}Unremovable{}",
+                },
+            },
             p_unik_cube_1 = {
 				name = "Jumbo Cube Pack",
 				text = {
@@ -1183,6 +1192,7 @@ return {
         labels={
             unik_positive="Positive",
             unik_depleted = "Depleted",
+            unik_impounded = "Impounded",
             unik_niko = "Niko",
             unik_disposable = "Disposable",
         },

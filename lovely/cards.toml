@@ -115,6 +115,12 @@ payload = '''pools = { ["unik_cube"] = true, ["Meme"] = true,  },
 	end,'''
 match_indent = true
 
-### Perma Xchip fix for maya
-
+### wild card ability fix for cursed Jokers
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''new_card:set_ability(other.config.center)'''
+position = "at"
+payload = '''new_card:set_ability(other.config.center,nil,nil,true)'''
+match_indent = true
 

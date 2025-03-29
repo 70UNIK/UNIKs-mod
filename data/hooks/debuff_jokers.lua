@@ -1,14 +1,14 @@
 --global function to check boss blind cursed joker stuff
 --This would instead be centralized here instead of spread out across jokers for coding and performance reasons
 --These will make use of global variables involving debuff suits
-function ShouldBeDebuffed(card,suit,faceCard,debuffed,ignore_debuff)
+local function ShouldBeDebuffed(card,suit,faceCard,debuffed,ignore_debuff)
     if not card.removed and not ignore_debuff and ((suit and card:is_suit(suit,true)) or (faceCard == true and card:is_face(true))) then
         SMODS.debuff_card(card,debuffed,"unik_cursed_debuff")
         return true
     end
     return false
 end
-function DebuffCheck(card,plant,goad,head,window,club)
+local function DebuffCheck(card,plant,goad,head,window,club)
     if plant == true then
         if ShouldBeDebuffed(card,nil,true,true) then
             G.GAME.unik_face_cards = G.GAME.unik_face_cards + 1
@@ -63,7 +63,7 @@ function DebuffCheck(card,plant,goad,head,window,club)
         ShouldBeDebuffed(card,"Spades",false,false)
     end
 end
-function CheckDebuffSuits()
+local function CheckDebuffSuits()
     --print("Checking")
     local plant = false
     local goad = false
@@ -122,13 +122,19 @@ function CheckDebuffSuits()
 
 
 end
+--since set_debuff is already addressed for death, suit tarots and wild cards,
+-- local bossDebuffHook = G.GAME.blind.debuff_card
+-- function G.GAME.blind:debuff_card(card,from_blind)
+
+-- end
 --Death. This causes lag when bringing up the deck
 local deathDebuffCopy = copy_card
 function copy_card(other, new_card, card_scale, playing_card, strip_edition)
     local res = deathDebuffCopy(other, new_card, card_scale, playing_card, strip_edition)
     
-    if new_card ~= nil and not G.GAME.unik_stop_repeat then
-       -- print("deathhook")
+    if new_card ~= nil then
+       ----print("deathhook")
+      --print("4")
         CheckDebuffSuits()
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -144,7 +150,8 @@ end
 local change_suitHook = Card.change_suit
 function Card:change_suit(new_suit)
     local res = change_suitHook(self,new_suit)
-    if not G.GAME.unik_stop_repeat then 
+    --if not G.GAME.unik_stop_repeat then 
+       --print("3")
     --print("suitchange")
         CheckDebuffSuits()
         G.E_MANAGER:add_event(Event({
@@ -154,22 +161,35 @@ function Card:change_suit(new_suit)
                 return true
             end
         }))
-    end
+    --end
     return res
 end
 --WIld cards,  This causes lag when bringing up the deck as its linked to copy_card
 local setAbilityHook = Card.set_ability
-function Card:set_ability(center, initial, delay_sprites)
-    if not initial and not G.GAME.unik_stop_repeat then 
-      --  print("setabilityhook")
-        CheckDebuffSuits() 
+function Card:set_ability(center, initial, delay_sprites,from_deck)
+    -- if not initial then
+    --    --print(center)
+    -- end
+    --print(center == G.P_CENTERS.m_wild)
+    if center == G.P_CENTERS.m_wild and not initial and not from_deck then 
+       --print("2")
+      -- --print("setabilityhook")
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                G.GAME.unik_stop_repeat = nil
+                CheckDebuffSuits() 
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        G.GAME.unik_stop_repeat = nil
+                        return true
+                    end
+                }))
                 return true
             end
         }))
+        
+        
     end
     local rest = setAbilityHook(self,center,initial,delay_sprites)
     return rest
@@ -185,7 +205,15 @@ function CardArea:emplace(card, location, stay_flipped)
     card.ability.name == "j_unik_goading_joker" or
     card.ability.name == "j_unik_broken_window"
 )then
+   --print("5")
         CheckDebuffSuits()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.GAME.unik_stop_repeat = nil
+                return true
+            end
+        }))
     end
 end
 local add_to_deckHook = Card.add_to_deck
@@ -198,7 +226,15 @@ function Card:add_to_deck(from_debuff)
     self.ability.name == "j_unik_goading_joker" or
     self.ability.name == "j_unik_broken_window"
 )then
+   --print("6")
         CheckDebuffSuits()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.GAME.unik_stop_repeat = nil
+                return true
+            end
+        }))
     end
     return res
 end
@@ -209,14 +245,14 @@ end
 --     if cardArea 
 --     local ret = removeHook2(self)
 --     CheckDebuffSuits()
---     print("removechjeck2")
+--    --print("removechjeck2")
 --     return ret
 -- end
 
 --Only triggers for when jokers are removed
 local removeHook3 = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
-    
+
     if (self.added_to_deck and self.ability and
     (self.ability.name == "j_unik_the_plant" or 
     self.ability.name == "j_unik_caveman_club" or
@@ -224,8 +260,15 @@ function Card:remove_from_deck(from_debuff)
     self.ability.name == "j_unik_goading_joker" or
     self.ability.name == "j_unik_broken_window"
 )) then
-
+       --print("7")
         CheckDebuffSuits()
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.GAME.unik_stop_repeat = nil
+                return true
+            end
+        }))
     end
     
     local ret = removeHook3(self,from_debuff)
@@ -253,8 +296,12 @@ function Card:remove_from_deck(from_debuff)
             end
         end
     end
-    if self.playing_card and G.deck and G.GAME and (plant or goad or head or window or club) and not G.GAME.unik_stop_repeat then
-      --  print("removeCheck2")
+    --print("ddd")
+    --print( G.GAME.unik_stop_repeat)
+    --print((plant == true or goad == true or head == true or window == true or club== true))
+    if self.playing_card and G.deck and G.GAME and (plant == true or goad == true or head == true or window == true or club== true) and not G.GAME.unik_stop_repeat then
+      -- --print("removeCheck2")
+     --print("8")
         CheckDebuffSuits()
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
@@ -264,5 +311,12 @@ function Card:remove_from_deck(from_debuff)
             end
         }))
     end
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        func = function()
+            G.GAME.unik_stop_repeat = nil
+            return true
+        end
+    }))
     return ret
 end

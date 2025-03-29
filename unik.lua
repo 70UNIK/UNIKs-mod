@@ -141,6 +141,7 @@ SMODS.ObjectType({
 })
 -- stickers
 NFS.load(mod_path .. "data/stickers/depleted.lua")() 
+NFS.load(mod_path .. "data/stickers/impounded.lua")() 
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 -- consumables

@@ -36,84 +36,96 @@ SMODS.Tag{
                     tag.triggered = true
                 --Destroy a random Joker
                 elseif pseudorandom("unik_get_demoned") < 0.4 then
-                    local deletable_jokers = {}
-                    for k, v in pairs(G.jokers.cards) do
-                        if not v.ability.eternal and v.config.center.rarity ~= "cry_cursed" then
-                            deletable_jokers[#deletable_jokers + 1] = v
-                        end
-                    end
-                    if #deletable_jokers > 0 then
-                        local lock = tag.ID
-                        G.CONTROLLER.locks[lock] = true
-                        tag:too_bad("TOO BAD", G.C.BLACK, function()
-                            local _first_dissolve = nil
-                            local select = pseudorandom_element(deletable_jokers, pseudoseed("unik_delete_select"))
-                            select:start_dissolve(nil, _first_dissolve)
-                            _first_dissolve = true
-                            --card_eval_status_text(G.jokers.cards[select], "extra", nil, nil, nil, { message = localize("k_disabled_ex") ,colour = G.C.BLACK})
-                            G.CONTROLLER.locks[lock] = nil
-                            return true
-                        end)
-                        tag.triggered = true
-                    else
-                        local lock = tag.ID
-                        G.CONTROLLER.locks[lock] = true
-                        tag:too_bad("TOO BAD", G.C.BLACK, function()
-                            local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
-                            card:add_to_deck()
-                            G.jokers:emplace(card)
-                            G.CONTROLLER.locks[lock] = nil
-                            return true
-                        end)
-                        tag.triggered = true
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        func = function()
+                            local deletable_jokers = {}
+                            for k, v in pairs(G.jokers.cards) do
+                                if not v.ability.eternal and v.config.center.rarity ~= "cry_cursed" then
+                                    deletable_jokers[#deletable_jokers + 1] = v
+                                end
+                            end
+                            if #deletable_jokers > 0 then
+                                local lock = tag.ID
+                                G.CONTROLLER.locks[lock] = true
+                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                    local _first_dissolve = nil
+                                    local select = pseudorandom_element(deletable_jokers, pseudoseed("unik_delete_select"))
+                                    select:start_dissolve(nil, _first_dissolve)
+                                    _first_dissolve = true
+                                    --card_eval_status_text(G.jokers.cards[select], "extra", nil, nil, nil, { message = localize("k_disabled_ex") ,colour = G.C.BLACK})
+                                    G.CONTROLLER.locks[lock] = nil
+                                    return true
+                                end)
+                                tag.triggered = true
+                            else
+                                local lock = tag.ID
+                                G.CONTROLLER.locks[lock] = true
+                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                    local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
+                                    card:add_to_deck()
+                                    G.jokers:emplace(card)
+                                    G.CONTROLLER.locks[lock] = nil
+                                    return true
+                                end)
+                                tag.triggered = true
 
-                    end
+                            end
+                            return true
+                        end
+                    }))
                 --turn a joker positive
                 elseif pseudorandom("unik_get_demoned") < 0.6 then
                     --print("positivity")
-                    local validEntries = {}
-                    for k, v in pairs(G.jokers.cards) do
-                        if not v.edition then
-                            validEntries[#validEntries + 1] = v
-                        elseif v.edition and not v.edition.unik_positive then
-                            validEntries[#validEntries + 1] = v
-                           
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        func = function()
+                            local validEntries = {}
+                            for k, v in pairs(G.jokers.cards) do
+                                if not v.edition then
+                                    validEntries[#validEntries + 1] = v
+                                elseif v.edition and not v.edition.unik_positive then
+                                    validEntries[#validEntries + 1] = v
+                                
+                                end
+                            end
+                            --print(validEntries)
+                            if #validEntries > 0 then
+                                local lock = tag.ID
+                                G.CONTROLLER.locks[lock] = true
+                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                    local select = pseudorandom_element(validEntries, pseudoseed("unik_positive_select"))
+                                    select:set_edition({ unik_positive = true }, true,nil, true)
+                                    G.CONTROLLER.locks[lock] = nil
+                                    return true
+                                end)
+                                tag.triggered = true
+                            else
+                                local lock = tag.ID
+                                G.CONTROLLER.locks[lock] = true
+                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                    local emp = Tag("tag_unik_manacle")
+                                    if tag.ability.shiny then -- good fucking luck
+                                    	emp.ability.shiny = cry_rollshinybool()
+                                    end
+                                    add_tag(emp)
+                                    G.CONTROLLER.locks[lock] = nil   
+                                    return true
+                                end)
+                                tag.triggered = true
+                            end
+                            return true
                         end
-                    end
-                    --print(validEntries)
-                    if #validEntries > 0 then
-                        local lock = tag.ID
-                        G.CONTROLLER.locks[lock] = true
-                        tag:too_bad("TOO BAD", G.C.BLACK, function()
-                            local select = pseudorandom_element(validEntries, pseudoseed("unik_positive_select"))
-                            select:set_edition({ unik_positive = true }, true,nil, true)
-                            G.CONTROLLER.locks[lock] = nil
-                            return true
-                        end)
-                        tag.triggered = true
-                    else
-                        local lock = tag.ID
-                        G.CONTROLLER.locks[lock] = true
-                        tag:too_bad("TOO BAD", G.C.BLACK, function()
-                            local emp = Tag("tag_unik_vessel")
-                            -- if tag.ability.shiny then -- good fucking luck
-                            -- 	emp.ability.shiny = cry_rollshinybool()
-                            -- end
-                            add_tag(emp)
-                            G.CONTROLLER.locks[lock] = nil   
-                            return true
-                        end)
-                        tag.triggered = true
-                    end
+                    }))
                 --manacle
                 elseif pseudorandom("unik_get_demoned") < 0.8 then
                     local lock = tag.ID
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD", G.C.BLACK, function()
                         local emp = Tag("tag_unik_manacle")
-                        -- if tag.ability.shiny then -- good fucking luck
-                        -- 	emp.ability.shiny = cry_rollshinybool()
-                        -- end
+                        if tag.ability.shiny then -- good fucking luck
+                            emp.ability.shiny = cry_rollshinybool()
+                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -126,9 +138,9 @@ SMODS.Tag{
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD", G.C.BLACK, function()
                         local emp = Tag("tag_unik_vessel")
-                        -- if tag.ability.shiny then -- good fucking luck
-                        -- 	emp.ability.shiny = cry_rollshinybool()
-                        -- end
+                        if tag.ability.shiny then -- good fucking luck
+                            emp.ability.shiny = cry_rollshinybool()
+                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -148,9 +160,9 @@ SMODS.Tag{
 				G.CONTROLLER.locks[lock] = true
 				tag:yep("+", G.C.SECONDARY_SET.Spectral, function()
 					local emp = Tag("tag_unik_extended_empowered")
-					-- if tag.ability.shiny then -- good fucking luck
-					-- 	emp.ability.shiny = cry_rollshinybool()
-					-- end
+                    if tag.ability.shiny then -- good fucking luck
+                        emp.ability.shiny = cry_rollshinybool()
+                    end
 					add_tag(emp)
 					tag.triggered = true
 					emp:apply_to_run({ type = "new_blind_choice" })

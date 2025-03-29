@@ -1,6 +1,6 @@
 local function White_lily_copy(card)
     local _card = copy_card(card, nil, nil, nil, nil)
-    print(_card.ability.extra.initial)
+   --print(_card.ability.extra.initial)
     _card.ability.extra.initial = true
     
     _card:add_to_deck()
@@ -60,7 +60,7 @@ SMODS.Joker {
         card.ability.extra.sold = false
         --To keep misprint deck consistent, when initializing her in deck, have her true values be set to initial values
         if card.ability.extra.initial == false then
-            print("set initial variables!~")
+           --print("set initial variables!~")
             card.ability.extra.true_Emult_mod = card.ability.extra.true_Emult_mod
             card.ability.extra.true_x_mult_mod = card.ability.extra.x_mult_mod
             card.ability.extra.initial = true
@@ -101,7 +101,7 @@ SMODS.Joker {
 
 		end
         if context.ending_shop and not context.blueprint and not context.repetition and not context.retrigger_joker then
-            print(card.ability.extra.copying)
+           --print(card.ability.extra.copying)
             if card.ability.extra.copying == false then
                 card.ability.extra.copying = true
                 card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
