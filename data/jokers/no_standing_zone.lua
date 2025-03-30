@@ -13,7 +13,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.05, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
+    config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.07, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		if Card.get_gameset(card) ~= "modest" then
 			info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded

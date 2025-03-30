@@ -13,7 +13,7 @@ SMODS.Tag{
 	end,
 	apply = function(self, tag, context)
         if context.type == "round_start_bonus" then
-            tag:too_bad("TOO BAD", G.C.BLACK, function()
+            tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                 return true
             end)
             G.GAME.blind.chips = G.GAME.blind.chips * tag.config.extra.size

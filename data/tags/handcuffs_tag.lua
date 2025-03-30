@@ -12,7 +12,7 @@ SMODS.Tag{
 	end,
 	apply = function(self, tag, context)
         if context.type == "round_start_bonus" then
-            tag:too_bad("TOO BAD", G.C.BLACK, function()
+            tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                 return true
             end)
             G.hand:change_size(tag.config.extra.h_size)

@@ -1,0 +1,65 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### Bigger Blind and Boring Blank functionality to emulate Small and Big Blinds in appearance and functionality, while still ""bosses""
+### And also make them ineligable for reroll (but can appear naturally) and not enable chicot/luchador to function
+
+### Generic BG color
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif blindname == 'Small Blind' or blindname == 'Big Blind' or blindname == '' then'''
+position = "before"
+payload = '''
+elseif blindname == 'bl_unik_boring_blank' or blindname == 'bl_unik_bigger_blind' then
+    ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}
+'''
+match_indent = true
+
+### Standard music
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''(G.GAME.blind and G.GAME.blind.boss and 'music5') or'''
+position = "at"
+payload = '''
+(G.GAME.blind and G.GAME.blind.boss and G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank' and 'music5') or
+'''
+match_indent = true
+
+### Have luchador and Chicot sleep on these blinds
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''local disableable = G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss'))'''
+position = "at"
+payload = '''
+local disableable = G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss') and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank'))
+
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Chicot' and not context.blueprint'''
+position = "after"
+payload = '''
+and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank')
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Chicot' and G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled then'''
+position = "at"
+payload = '''
+if self.ability.name == 'Chicot' and G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank') then
+
+'''
+match_indent = true
+
+### Prevent them from showing up if boss is rerolled

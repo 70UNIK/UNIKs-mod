@@ -51,9 +51,8 @@ return {
             bl_unik_raspberry_racket={
                 name = "Raspberry Racket",
 				text = {
-					"Spend $25 after",
-                    "each hand,",
-                    "if money below $25",
+					"Lose $40 per hand",
+                    "if money below $40",
                     "hand will not score",
 				},
             },
@@ -73,7 +72,7 @@ return {
 				},
             },
             bl_unik_bigger_blind={
-                name = "Bigger Blind",
+                name = "Bigger Blind", --no description, it does nothing
             },
             bl_unik_boring_blank={
                 name = "Boring Blank",
@@ -812,6 +811,14 @@ return {
             --         "only on {C:attention}first hand{}",
             --     }         
             -- },
+            j_unik_vessel_kiln = { --overrides get tag function to instead generate Violet vessel, negating the benefit of this Joker. It's chips cause ceramic.
+                name="Vessel Kiln",
+                text={
+                    "{X:chips,C:white}X#1#{} Chips",
+                    "All future Tags",
+                    "become {C:purple}Vessel Tags{}",
+                }    
+            },
             j_unik_noon = { --this would suck on black deck or with 3 hands...
                 name="Noon",
                 text={
@@ -1034,6 +1041,14 @@ return {
                 text = {
                     "{C:red}#1#{} hand size",
                     "next round",
+                }
+            },
+            tag_unik_positive = {
+                name = "Positive Tag",
+                text = {
+                    "Next base edition shop",
+                    "Joker is free and",
+                    "becomes {C:unik_shitty_edition}Positive",
                 }
             },
 			tag_unik_extended_empowered = {

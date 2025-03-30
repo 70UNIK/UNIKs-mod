@@ -12,9 +12,9 @@ SMODS.Tag{
     config = { type = "round_start_bonus", odds = 5 },
     min_ante = 2,
     loc_vars = function(self, info_queue)
-		info_queue[#info_queue + 1] = { set = "Tag", key = "tag_unik_extended_empowered" }
-        info_queue[#info_queue + 1] = { set = "Tag", key = "tag_unik_manacle" }
-        info_queue[#info_queue + 1] = { set = "Tag", key = "tag_unik_vessel" }
+		info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_extended_empowered
+        info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_vessel
+        info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_manacle
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
 		return { vars = { G.GAME.probabilities.normal*4 or 4, self.config.odds } }
 	end,
@@ -26,7 +26,7 @@ SMODS.Tag{
                     
                     local lock = tag.ID
                     G.CONTROLLER.locks[lock] = true
-                    tag:too_bad("TOO BAD", G.C.BLACK, function()
+                    tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
                         card:add_to_deck()
                         G.jokers:emplace(card)
@@ -46,7 +46,7 @@ SMODS.Tag{
                             if #deletable_jokers > 0 then
                                 local lock = tag.ID
                                 G.CONTROLLER.locks[lock] = true
-                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                                     local _first_dissolve = nil
                                     local select = pseudorandom_element(deletable_jokers, pseudoseed("unik_delete_select"))
                                     select:start_dissolve(nil, _first_dissolve)
@@ -59,7 +59,7 @@ SMODS.Tag{
                             else
                                 local lock = tag.ID
                                 G.CONTROLLER.locks[lock] = true
-                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                                     local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
                                     card:add_to_deck()
                                     G.jokers:emplace(card)
@@ -86,7 +86,7 @@ SMODS.Tag{
                             if #validEntries > 0 then
                                 local lock = tag.ID
                                 G.CONTROLLER.locks[lock] = true
-                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                                     local select = pseudorandom_element(validEntries, pseudoseed("unik_positive_select"))
                                     select:set_edition({ unik_positive = true }, true,nil, true)
                                     G.CONTROLLER.locks[lock] = nil
@@ -96,11 +96,9 @@ SMODS.Tag{
                             else
                                 local lock = tag.ID
                                 G.CONTROLLER.locks[lock] = true
-                                tag:too_bad("TOO BAD", G.C.BLACK, function()
+                                tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                                     local emp = Tag("tag_unik_manacle")
-                                    if tag.ability.shiny then -- good fucking luck
                                     	emp.ability.shiny = cry_rollshinybool()
-                                    end
                                     add_tag(emp)
                                     G.CONTROLLER.locks[lock] = nil   
                                     return true
@@ -112,11 +110,9 @@ SMODS.Tag{
                 elseif pseudorandom("unik_get_demoned") < 0.8 then
                     local lock = tag.ID
                     G.CONTROLLER.locks[lock] = true
-                    tag:too_bad("TOO BAD", G.C.BLACK, function()
+                    tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_manacle")
-                        if tag.ability.shiny then -- good fucking luck
                             emp.ability.shiny = cry_rollshinybool()
-                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -127,11 +123,9 @@ SMODS.Tag{
                     
                     local lock = tag.ID
                     G.CONTROLLER.locks[lock] = true
-                    tag:too_bad("TOO BAD", G.C.BLACK, function()
+                    tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_vessel")
-                        if tag.ability.shiny then -- good fucking luck
                             emp.ability.shiny = cry_rollshinybool()
-                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true

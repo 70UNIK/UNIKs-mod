@@ -158,6 +158,7 @@ NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
 --tags
 NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
+NFS.load(mod_path .. "data/tags/positive.lua")()
 NFS.load(mod_path .. "data/tags/demon_tag.lua")()
 NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
 NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
@@ -173,6 +174,7 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 -- otherwise create an extended empowered pack
 
 --BLINDS--
+NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
@@ -180,7 +182,7 @@ NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 --The lily: Destroy all cards played after scoring
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
-
+NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
 NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
@@ -190,6 +192,7 @@ NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
+
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
@@ -223,6 +226,7 @@ NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 

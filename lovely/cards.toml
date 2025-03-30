@@ -124,3 +124,17 @@ position = "at"
 payload = '''new_card:set_ability(other.config.center,nil,nil,true)'''
 match_indent = true
 
+### vessel kiln, override cat tags and other tags to replace with vessel tags
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''if next(SMODS.find_card('j_cry_kittyprinter')) then
+	_tag = Tag('tag_cry_cat', nil, blind_choice)
+end'''
+position = "after"
+payload = '''
+if next(SMODS.find_card('j_unik_vessel_kiln')) then
+	_tag = Tag('tag_unik_vessel', nil, blind_choice)
+end
+'''
+match_indent = true

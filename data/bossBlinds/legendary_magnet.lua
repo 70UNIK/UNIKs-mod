@@ -195,6 +195,7 @@ G.FUNCS.reroll_boss = function(e)
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
 	else
+        
 		return gfrb2(e)
 	end
 end
