@@ -26,17 +26,6 @@ position = "after"
 payload = '''and card.ability.name ~= "j_unik_happiness"'''
 match_indent = true
 
-		
-
-## Always apply negative shine (will have its own shader)
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''if (self.edition and self.edition.negative) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then'''
-position = "at"
-payload = '''if (self.edition and (self.edition.negative or self.edition.unik_positive)) or (self.ability.name == 'Antimatter' and (self.config.center.discovered or self.bypass_discovery_center)) then'''
-match_indent = true
-
 ## POSITIVE consumable and playing card label logic
 
 ### Badge
@@ -151,3 +140,11 @@ unik_chelsea_color = G.C.UNIK_CHELSEA,
 """
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/enhanced.lua"]'''
+pattern = '''polychrome = { atlas = "cry_atlaseditiondeck", pos = { x = 2, y = 0 } },'''
+position = "after"
+payload = '''
+unik_positive = { atlas = "unik_edition_deck", pos = { x = 0, y = 0 } },'''
+match_indent = true

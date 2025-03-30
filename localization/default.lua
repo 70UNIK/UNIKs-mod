@@ -20,7 +20,7 @@ return {
                 name = "Harlequin Hurricane",
 				text = {
 					"#1# in #2# chance for",
-					"played hand to be negative,",
+					"scored hand to be negative,",
 				},
             },
             bl_unik_persimmon_placard={
@@ -121,15 +121,15 @@ return {
 				text = {
                     "If Mult, XMult or ^Mult",
 					"is triggered",
-                    "instantly die",
+                    "hand will not score",
 				},  
             },            
             bl_unik_legendary_batman={
                 name = "Kostonhimoinenvartija", --Vengeful Vigilante
 				text = {
                     "^0.00666 blind size",
-                    "If at least 1 Joker is owned",
-                    "instantly die",
+                    "Hand will not score until",
+                    "no jokers remain",
 				},                  
             },
             bl_unik_legendary_sword={ --ortalab's silver sword on CRACK. X66.6 blind requirements as well and all burgulars are debuffed
@@ -144,8 +144,8 @@ return {
             bl_unik_legendary_tornado={
                 name = "Ylihuomenna", --Day after tomorrow
 				text = {
-                    "Set hands to 66", -- set hands to 66, only 3 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
-                    "only 3 random hands", --now there's a pity system that every 22 hands, 1 will score 
+                    "Set hands to 66", -- set hands to 66, only 23 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
+                    "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity
                     "will score",
                     "(always 1 every <=22 hands)",
 				},                  
@@ -162,10 +162,10 @@ return {
                 name = "Helvettimaanpäällä",--Hell on Earth
                 text ={
                     "Create every cursed Joker",
-                    "in the collection, then",
-                    "duplicate each one owned",
+                    "in the collection, duplicate and",
+                    "add absolute to each one owned",
                     "if any Cursed Joker is destroyed",
-                    "by Daggers, Ghost Traps or Formidiulosus,", --Daggers, formdiscus, ghost trap
+                    "by Formidiulosus or Ghost Trap,", 
                     "instantly die"
                 }
             },
@@ -212,7 +212,7 @@ return {
 				text = {
 					"Hands exceeding #1#",
                     "will be multiplied",
-                    "by 0.075x",
+                    "by 0.03x",
 				},
             },
             bl_unik_collapse={
@@ -238,19 +238,23 @@ return {
                     "by +0.5x",
 				},
             },
+            --weather themed blinds:
+            --Wind, Gale, Tornado, Typhoon, Hurricane ()
             bl_unik_the_wind={
                 name = "The Wind",
 				text = {
 					"Each played card has",
 					"a #1# in #2# chance",
-                    "to be debuffed before scoring",
+                    "to be debuffed before scoring", --likely utilising cry_before_play
 				},
             },
             bl_unik_the_gale={
                 name = "The Gale",
 				text = {
-					"1 random hand",
+					"#1# in #2# chance",
+                    "a single hand", --this means each hand has a set chance of fail, but once said hand fails, rest are free (a lenient version of tornado)
 					"will not score",
+                    "for this round",
 				},
             }
             
@@ -370,7 +374,7 @@ return {
                     "and {C:attention}all{} equipped consumables {C:unik_shitty_edition}Positive{}", 
                     "Each hand played creates a",
                     "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Banana Smiley Face{}",
-                    "and turns the {C:attention} leftmost{} played card {C:unik_shitty_edition}Positive{}", 
+                    "and turns a {C:attention} random{} played card {C:unik_shitty_edition}Positive{}", 
                     "{C:red}Self destructs{} after maximum Joker slots becomes {C:attention}#1#{}" ,
                     "{C:red}On destruction{}, remove {C:attention}Eternal{} from {C:attention}all Smiley Faces.{}" ,
                     "{C:inactive,s:0.7,E:1}Happiness is mandatory. Failure to be happy is treason.{}",
@@ -575,8 +579,8 @@ return {
             --Increases by 1.3x chips if maya and chelsea are present
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
-                    "{X:chips,C:white}X#1#{} Chips for every {C:attention}scored{} Card",
-                    "or {C:attention}Joker{} triggered during play",
+                    "Each played card gives", --when  Caeruleum  is added, her values will be exponented by ^0.3 for balancing
+                    "{X:chips,C:white}X#1#{} Chips when scored",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:inactive,s:0.9,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
@@ -589,7 +593,7 @@ return {
             --Basically provided its not face cards, she's a souped up hiker
                 name="{C:unik_maya_color}Maya Ramirez{}",
                 text={
-                    "{C:attention}Scored{} cards permanently gain {X:chips,C:white}X#1#{} Chips",
+                    "{C:attention}Scored{} cards permanently gain {X:chips,C:white}X#1#{} Chips", --values will be exponented by ^0.3
                     "{C:attention}Held{} cards permanently gain {X:chips,C:white}X#2#{} Chips",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive,s:0.9,E:1}I'm here to help, but PLEASE be careful.{}",
@@ -601,7 +605,7 @@ return {
             --Increases by 1.3x if maya and yokana are present
                 name="{C:unik_chelsea_color}Chelsea Ramirez{}",
                 text={
-                    "This Joker gains {X:chips,C:white}X#2#{} Chips when", 
+                    "This Joker gains {X:chips,C:white}X#2#{} Chips when", --gain will become exponented by ^0.4 (around Exponentia)
                     "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
                     --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
@@ -1173,6 +1177,8 @@ return {
             k_unik_racket_warning="Must have at least $25",
             k_unik_magnet_warning="Must not hold any Steel Cards",
             k_unik_magnet_legendary_warning="Must not hold or play any Steel Cards",
+            k_unik_legendary_pentagram_start="Behold! The Gates of Hell are opened and the horrors of the masses plague the earth...",
+            k_unik_legendary_pentagram_die="YOU CAN'T DO THAT",
             k_unik_video_poker_warning="High cards are banned and pairs must have scoring Jacks or Better",
             k_unik_spawned="Spawned!",
             k_unik_disposed="Disposed!",

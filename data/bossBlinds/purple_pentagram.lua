@@ -13,21 +13,25 @@ SMODS.Blind{
             --print("vvvv")
             G.GAME.unik_killed_by_pentagram = true
             for i = 1, 5 do
-                    local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_pentagram_curse")
-                    --destroy card2 if its jimbo
-                    if (card2.ability.name ~= "Joker") then
-                        card2:start_materialize()
-                        card2:add_to_deck() --This causes problems. Why?
-                        G.jokers:emplace(card2)
-                        G.GAME.blind.triggered = true
-                        G.GAME.blind:wiggle()
-                        G.ROOM.jiggle = G.ROOM.jiggle + 1
-                        delay(0.15)
-                        
-                    else
-                        card2:remove()
+                G.E_MANAGER:add_event(Event({
+                    delay = 0.5,
+                    func = function()
+                        local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_pentagram_curse")
+                        --destroy card2 if its jimbo
+                        if (card2.ability.name ~= "Joker") then
+                            card2:start_materialize()
+                            card2:add_to_deck() --This causes problems. Why?
+                            G.jokers:emplace(card2)
+                            G.GAME.blind.triggered = true
+                            G.GAME.blind:wiggle()
+                            G.ROOM.jiggle = G.ROOM.jiggle + 1
+                            delay(0.3)
+                        else
+                            card2:remove()
+                        end
+                        return true
                     end
-
+                }))
             end
             local text = localize('k_unik_pentagram_start')
             attention_text({

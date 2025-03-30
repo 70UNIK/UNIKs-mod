@@ -234,7 +234,33 @@ function CardArea:emplace(card, location, stay_flipped)
                             colour = G.C.BLACK,
                             delay = 0.3
                         })
+                        if G.GAME.unik_prevent_killing_cursed_jokers and not G.GAME.unik_prevent_killing_cursed_jokers2 then
+                            --instantly lose
+                            selfDestruction(v,"k_extinct_ex",G.C.BLACK)
+                            G.GAME.unik_prevent_killing_cursed_jokers2 = true
+                            -- G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you
+                            -- Event({
+                            --     trigger = "after",
+                            --     delay = 0.2,
+                            --     func = function()
+
+                            --         return true
+                            --     end,
+                            -- }))
+                            local text = localize('k_unik_legendary_pentagram_die')
+                            attention_text({
+                                scale = 2, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+                            })
+                            G.ROOM.jiggle = G.ROOM.jiggle + 5
+                            if G.STATE ~= G.STATES.SELECTING_HAND then
+                                return false
+                            end
+                            G.STATE = G.STATES.HAND_PLAYED
+                            G.STATE_COMPLETE = true
+                            end_round()
+                        end
                     end
+                    
                 end
             end
 
@@ -296,6 +322,30 @@ function GhostTrap1(self)
             --If too much
             if (self.ability.extra.cursed_jokers > self.ability.extra.cursed_joker_limit) then
                 selfDestruction(self,"k_unik_ghost_trap_explode",G.C.BLACK)
+            end
+            if G.GAME.unik_prevent_killing_cursed_jokers and not G.GAME.unik_prevent_killing_cursed_jokers2 then
+                --instantly lose
+                selfDestruction(self,"k_extinct_ex",G.C.BLACK)
+                G.GAME.unik_prevent_killing_cursed_jokers2 = true
+                G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you
+                Event({
+                    trigger = "after",
+                    delay = 0.2,
+                    func = function()
+                        if G.STATE ~= G.STATES.SELECTING_HAND then
+                            return false
+                        end
+                        G.STATE = G.STATES.HAND_PLAYED
+                        G.STATE_COMPLETE = true
+                        end_round()
+                        return true
+                    end,
+                }))
+                local text = localize('k_unik_legendary_pentagram_die')
+                attention_text({
+                    scale = 2, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+                })
+                G.ROOM.jiggle = G.ROOM.jiggle + 5
             end
         end
     end

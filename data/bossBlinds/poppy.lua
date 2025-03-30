@@ -31,7 +31,7 @@ SMODS.Blind{
 		if score > 2.5 * G.GAME.blind.chips then
             G.GAME.blind.triggered = true
             G.GAME.blind:wiggle()
-			return 0.075 * score
+			return 0.03 * score
 		end
 	end,
 	defeat = function(self)

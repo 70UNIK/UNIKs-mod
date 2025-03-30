@@ -71,6 +71,39 @@ vec4 HSL(vec4 c)
 	hsl.x = mod(hsl.x / 6., 1.);
 	return hsl;
 }
+extern PRECISION mat3 YIQ_CONVERT = mat3(
+    0.299, 0.596, 0.211,
+    0.587, -0.274, -0.523,
+    0.114, -0.322, 0.312
+);
+extern PRECISION mat3 RGB_CONVERT = mat3(
+    1.0, 1.0, 1.0,
+    0.956, -0.272, -1.106,
+    0.621, -0.647, 1.703
+);
+//https://agatedragon.blog/2024/04/02/hue-shift-shader/
+vec3 ToYIQ(vec3 colour)
+{
+    return YIQ_CONVERT * colour;
+}
+vec3 ToRGB(vec3 colour)
+{
+    return RGB_CONVERT * colour;
+}
+vec3 HueShift(vec3 colour,float shift)
+{
+    //to pi
+    
+    vec3 yiq = ToYIQ(colour);
+ 
+    mat2 rotMatrix = mat2(
+        cos(shift), -sin(shift),
+        sin(shift), cos(shift)
+    );
+    yiq.yz *= rotMatrix;
+ 
+    return ToRGB(yiq);
+}
 
 // This is what actually changes the look of card
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
@@ -82,12 +115,15 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 
     //Do shit here
 
-
-
+    
     // // For all vectors (vec2, vec3, vec4), .rgb is equivalent of .xyz, so uv.y == uv.g
     // // .a is last parameter for vec4 (usually the alpha channel - transparency)
+    float shift = 3.1415926535897932384626433832795;
+    if (positive.g > 0.0 || positive.g < 0.0) {
+		shift = 3.1415926535897932384626433832795;
+	}
+    tex = vec4(HueShift(vec3(tex.r,tex.g,tex.b),shift),tex.a);
 
-    // // generic shimmer copied straight from negative_shine.fs
     // number low = min(tex.r, min(tex.g, tex.b));
     // number high = max(tex.r, max(tex.g, tex.b));
     // number delta = high-low -0.1;
@@ -100,22 +136,39 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 
     // number maxfac = 0.7*max(max(fac, max(fac2, max(fac3,0.0))) + (fac+fac2+fac3*fac4), 0.);
 
-    // // normally this would have both a tex.b and tex.r for this segement but
-    // // it made the card look rainbow
-    // tex.g = tex.g-delta + delta*maxfac*(0.7 - fac5*0.27) - 0.1;
+    // //tex.rgb = tex.rgb*0.5 + vec3(0.4, 0.4, 0.8);
 
-    // // make the red channel really bright and **SLIGHTLY** dependant on the rotation of the card
-    // tex.r = tex.r*1.1 + (0.1*positive.y);
-    // // reduce the green channel and **SLIGHTLY** dependant on the rotation of the card
-    // tex.g = tex.g*0.65 + (0.000001*positive.x);
-    // // greatly reduce the blue channel
-    // tex.b = tex.b*0.2;
+    // tex.r = tex.r-delta + delta*maxfac*(0.7 + fac5*0.27) - 0.1;
+    // tex.g = tex.g-delta + delta*maxfac*(0.7 - fac5*0.27) - 0.1;
+    // tex.b = tex.b-delta + delta*maxfac*0.7 - 0.1;
+    // tex.a = tex.a*(0.5*max(min(1., max(0.,0.3*max(low*0.2, delta)+ min(max(maxfac*0.1,0.), 0.4)) ), 0.) + 0.15*maxfac*(0.1+delta));
+
+
+    // vec4 SAT = HSL(tex);
+    // vec4 SAT2 = HSL(tex);
+
+
+
+     //tex = tex + 0.8*vec4((103.+(0.01*positive.y -0.01*positive.x))/255., 103.+(0.01*positive.y -0.01*positive.x)/255.,103.+(0.01*positive.y -0.01*positive.x)/255.,0.);
+    // if (positive.r > 0.0 || positive.r < 0.0) {
+	// 	SAT.r = (SAT.g);
+	// }
+    
+	// SAT.b = SAT.g;
+    // SAT.r = (SAT.b);
+    // generic shimmer copied straight from positive.fs
+    	// if (positive.g > 0.0 || positive.g < 0.0) {
+
+
+
+
 	if (tex[3] < 0.7)
 		tex[3] = tex[3]/3.;
     // required
 	return dissolve_mask(tex*colour, texture_coords, uv);
 
 }
+
 
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv)
 {

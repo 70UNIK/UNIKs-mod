@@ -41,8 +41,9 @@ SMODS.Joker {
 			and not context.retrigger_joker 
             and card.ability.extra.feral == true
         then
-
+           -- print("nom mom")
             if (context.destroy_card) then
+                
                 return{
                     remove = not context.destroy_card.ability.eternal,
                     func = function()

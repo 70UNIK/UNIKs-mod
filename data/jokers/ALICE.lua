@@ -36,7 +36,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.75, Echips = 1.75}},
+    config = { extra = { Emult = 1.8, Echips = 1.8}},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult,center.ability.extra.Echips} }
 	end,

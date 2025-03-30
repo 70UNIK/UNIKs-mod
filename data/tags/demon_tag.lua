@@ -36,9 +36,7 @@ SMODS.Tag{
                     tag.triggered = true
                 --Destroy a random Joker
                 elseif pseudorandom("unik_get_demoned") < 0.4 then
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        func = function()
+
                             local deletable_jokers = {}
                             for k, v in pairs(G.jokers.cards) do
                                 if not v.ability.eternal and v.config.center.rarity ~= "cry_cursed" then
@@ -71,15 +69,10 @@ SMODS.Tag{
                                 tag.triggered = true
 
                             end
-                            return true
-                        end
-                    }))
+
                 --turn a joker positive
                 elseif pseudorandom("unik_get_demoned") < 0.6 then
-                    --print("positivity")
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        func = function()
+
                             local validEntries = {}
                             for k, v in pairs(G.jokers.cards) do
                                 if not v.edition then
@@ -114,9 +107,7 @@ SMODS.Tag{
                                 end)
                                 tag.triggered = true
                             end
-                            return true
-                        end
-                    }))
+
                 --manacle
                 elseif pseudorandom("unik_get_demoned") < 0.8 then
                     local lock = tag.ID

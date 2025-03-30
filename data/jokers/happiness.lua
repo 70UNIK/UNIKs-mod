@@ -105,15 +105,25 @@ SMODS.Joker {
         --Per hand, turn 2 leftmost played cards positive and create a tainted smiley face. Need to fix 
 		if context.before and context.cardarea == G.jokers and Card.get_gameset(card) ~= "modest" then
             --print("turn them happy")
+            
             G.E_MANAGER:add_event(Event({
 
                 func = function()
-                    card:juice_up(0.8, 0.8)
-                    for i = 1, #G.play.cards do
-                        if i < 2 then
-                            G.play.cards[i]:set_edition({ unik_positive = true }, true, nil, true)
+                    
+                    local validCards = {}
+                    for i,v in pairs(G.play.cards) do
+                        if not v.edition then
+                            validCards[#validCards + 1] = v
+                        elseif v.edition and not v.edition.unik_positive then
+                            validCards[#validCards + 1] = v
                         end
                     end
+                    if #validCards > 0 then
+                        card:juice_up(0.8, 0.8)
+                        local select = pseudorandom_element(validCards, pseudoseed("unik_positive_card_select"))
+                        select:set_edition({ unik_positive = true }, true,nil, true)
+                    end
+
 
                     return true
                 end

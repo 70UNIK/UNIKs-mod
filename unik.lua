@@ -24,6 +24,12 @@ SMODS.Atlas {
 	px = 34,
 	py = 34
 }
+SMODS.Atlas {
+	key = "unik_edition_deck",
+	path = "unik_edition_deck.png",
+	px = 71,
+	py = 95
+}
 --hooks--
 ---happiness is mandatory ---
 SMODS.Atlas({ 
@@ -193,6 +199,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
+	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()

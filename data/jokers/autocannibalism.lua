@@ -37,6 +37,7 @@ SMODS.Joker {
 	add_to_deck = function(self, card, from_debuff)
         --add 1 random Eternal Depleted food joker
         G.E_MANAGER:add_event(Event({
+            trigger = 'before',
             func = function()
                 card:juice_up(0.8, 0.8)
                 local card2 = create_card("autocannibalism_food", G.jokers, nil, nil, nil, nil, nil, "autocannibal")
