@@ -48,13 +48,22 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.25, sold = false,copying = false,initial = false,true_Emult_mod = 0.1, true_x_mult_mod = 1.25} },
+    -- Mainline:
+    -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
+    -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
+    config = { extra = { commits_left = 1, commit_message = "(Not committed)",Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.25, sold = false,copying = false,initial = false,true_Emult_mod = 0.1, true_x_mult_mod = 1.25} },
 	loc_vars = function(self, info_queue, center)
 		return { 
-            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
-            vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
+            key = Cryptid.gameset_loc(self, { modest = "modest",madness = "madness"}), 
+            vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.commit_message} }
 	end,
     add_to_deck = function(self, card, from_debuff)
+        if card.ability.extra.commits_left > 0 then
+            card.ability.extra.commit_message = localize("k_unik_white_lily_not_committed")
+        else
+            card.ability.extra.commit_message = localize("k_unik_white_lily_committed")
+        end
+        
         card.ability.perishable = nil
         card.ability.extra.copying = false
         card.ability.extra.sold = false
@@ -147,7 +156,14 @@ SMODS.Joker {
             card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             --do not make multiple clones of her! 
-            if Card.get_gameset(card) ~= "modest" then
+            if card.ability.extra.commits_left < 0 and Card.get_gameset(card) ~= "madness" then
+                play_sound('cancel', 1, 0.7)
+                card_eval_status_text(card, "extra", nil, nil, nil, {
+                    message = localize("k_extinct_ex"),
+                    colour = G.C.BLACK,
+                    card = card,
+                })
+            elseif Card.get_gameset(card) ~= "modest" then
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize({
                         type = "variable",
@@ -172,7 +188,9 @@ SMODS.Joker {
                     card = card,
                 })
             end 
-            White_lily_copy(card)
+            if (card.ability.extra.commits_left >= 0) or Card.get_gameset(card) == "madness"  then
+                White_lily_copy(card)
+            end
 		end
         --selling her will NOT clone her
         if context.selling_self and not context.repetition and not context.blueprint then

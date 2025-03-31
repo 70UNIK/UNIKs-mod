@@ -138,3 +138,17 @@ if next(SMODS.find_card('j_unik_vessel_kiln')) then
 end
 '''
 match_indent = true
+
+### Commit: Exclusive to white lily, in mainline, she should only be able to respawn via commit ONCE. 
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/code.lua"]'''
+pattern = '''local _first_dissolve = nil'''
+position = "after"
+payload = '''
+-- reduce commit limit by 1
+if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
+    G.jokers.highlighted[1].ability.extra.commits_left = G.jokers.highlighted[1].ability.extra.commits_left - 1
+end
+'''
+match_indent = true
