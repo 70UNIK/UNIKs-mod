@@ -44,6 +44,10 @@ SMODS.Consumable{
         local used_consumable = copier or card
         if pseudorandom(pseudoseed("unik_wheelmisfortune")) < cry_prob(4 or card.ability.cry_prob*4, card.ability.extra.odds, card.ability.cry_rigged)
 		/ card.ability.extra.odds then --bad
+			--you rig it, its your fault.
+			if card.ability.cry_rigged then
+				check_for_unlock({ type = "unik_guaranteed_summon_cursed" })
+			end
             G.E_MANAGER:add_event(Event({
 				trigger = "after",
 				delay = 0.4,

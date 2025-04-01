@@ -17,12 +17,26 @@ SMODS.current_mod.config_tab = function() --Config tab
       },
     }
 end
-
+Cryptid.cross_mod_names = {
+	CardSleeves = "Card Sleeves",
+	Cryptid = "Cryptid",
+	jen = "Jen's Almanac",
+	sdm0sstuff = "SDM_0's Stuff",
+	magic_the_jokering = "Magic the Jokering",
+	extracredit = "Extra Credit",
+	Buffoonery = "Buffoonery",
+}
 SMODS.Atlas {
 	key = "modicon",
 	path = "modicon.png",
 	px = 34,
 	py = 34
+}
+SMODS.Atlas {
+	key = "achievements",
+	path = "cry_achievements.png",
+	px = 66,
+	py = 66,
 }
 SMODS.Atlas {
 	key = "unik_edition_deck",
@@ -112,6 +126,12 @@ SMODS.Atlas {
 SMODS.Atlas {
 	key = "placeholders",
 	path = "placeholders.png",
+	px = 71,
+	py = 95
+}
+SMODS.Atlas {
+	key = "placeholders2",
+	path = "placeholders2.png",
 	px = 71,
 	py = 95
 }
@@ -206,6 +226,11 @@ if unik_config.unik_legendary_blinds then
 end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
+-- ENHANCEMENTS --
+-- When Jen's almanac is updated, also add this
+if (SMODS.Mods["jen"] or {}).can_load and (SMODS.Mods["Buffoonery"] or {}).can_load then
+	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
+end
 -- JOKERS --
 --- Common ---
 -- NFS.load(mod_path .. "data/jokers/holepunched_card.lua")() -- too unoriginal? Could have niche use in multi card hands, but is hanging chad with extra steps
@@ -286,10 +311,15 @@ NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_3.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
-NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")() --hell
+--NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")() --hell
 NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 -- achievements
+NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
+NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
+NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
+NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
+NFS.load(mod_path .. "data/achievements/abyss.lua")()
 -- Jackpot! - Score a Royal Flush against Video Poker
 -- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once
 -- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
@@ -298,15 +328,12 @@ NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 -- Alice in Wonderland - Get Alice from obtaining Average Alice
 -- Dante's Inferno - Survive a Legendary Blind
 
--- Stupid Summoning - Rig an Evocation and use it.
--- Bloodbath 1% - Own an Oops All 6s and get a Demon Tag
+-- Vessel Printer - Own Energia and gain 66 Vessel tags at once
 -- Hell Invasion - Own every Cursed Joker in the collection.
 -- Debuffs, Debuffs everywhere - Have all your Jokers and your entire deck debuffed.
 -- Beaned - Die from having zero hand size from depleted Turtle Beans
--- Epic Fail - Score under -1.79e308 Chips in a single hand
 -- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
 -- The Abyss - Die to a Legendary Blind
--- Thats no Moon! - Own Stella Mortis and Moonlight Cookie at the same time without a Perkeo (Stella mortis destroys planets, Moonlight cookie needs planets)
 -- 
 
 --Artwork to do:
@@ -329,10 +356,34 @@ Game.main_menu = function(change_context)
 
 	local ret = mainmenuref2(change_context)
 
-	local newcard = create_card("Joker", G.title_top, nil, nil, nil, nil, "j_unik_unik", "unik_title")
-	G.title_top:emplace(newcard)
-	newcard:start_materialize()
+	local newcard = Card(
+			G.title_top.T.x,
+			G.title_top.T.y,
+			G.CARD_W,
+			G.CARD_H,
+			G.P_CARDS.empty,
+			G.P_CENTERS.j_unik_unik,
+			{ bypass_discovery_center = true }
+		)
+		G.title_top:emplace(newcard)
 	newcard:resize(1.1 * 1.2)
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0,
+		blockable = false,
+		blocking = false,
+		func = function()
+			if change_context == "splash" then
+				newcard.states.visible = true
+				newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, true, 2.5)
+			else
+				newcard.states.visible = true
+				newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, nil, 1.2)
+			end
+			return true
+		end,
+	}))
+
 	newcard.no_ui = true
 	return ret
 end

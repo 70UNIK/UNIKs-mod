@@ -152,3 +152,5 @@ if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
 end
 '''
 match_indent = true
+
+### Ship of thesus: Only have a fixed 2 in 7 chance to add tainted ceramic cards to deck if they break

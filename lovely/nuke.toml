@@ -56,13 +56,15 @@ if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disab
     G.GAME.blind:wiggle()
     G.ROOM.jiggle = G.ROOM.jiggle + 3
 end
--- scores really big for regular indigo icbm
+-- scores really big for regular indigo icbm. Can only spawn if you scored over ^1.5 reqs consecutively
 local upper22 = G.GAME.chips
 local ceiling22 = G.GAME.blind.chips^2
 --print(upper22)
 --print(ceiling22)
 if to_big(upper22) > to_big(ceiling22) then
      G.GAME.unik_scores_really_big = G.GAME.unik_scores_really_big + 1
+else
+    G.GAME.unik_scores_really_big = 0
 end
 --print(G.GAME.unik_scores_really_big)
 '''
@@ -151,6 +153,9 @@ elseif G.GAME.unik_killed_by_tornado_legendary then
     Jimbo:add_speech_bubble('special_lose_unik_tornado_legendary', nil, {quip = true})
     G.GAME.unik_killed_by_tornado_legendary = nil
     G.GAME.unik_deathly_debuff_text = nil
+elseif G.GAME.unik_killed_by_bigger_blind then
+    Jimbo:add_speech_bubble('special_lose_bigger_blind', nil, {quip = true})
+    G.GAME.unik_killed_by_bigger_blind = nil
 else
     Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
     G.GAME.unik_deathly_debuff_text = nil

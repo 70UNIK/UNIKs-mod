@@ -22,6 +22,10 @@ SMODS.Tag{
 		if context.type == "new_blind_choice" then
 			if pseudorandom("unik_demon_tag") < G.GAME.probabilities.normal*4 / tag.config.odds then
                 --cursed joker creation
+                --if owning OAS:
+                if #Cryptid.advanced_find_joker("Oops! All 6s", nil, nil, nil, true) > 0 then
+                    check_for_unlock({ type = "unik_bloodbath" })
+                end
                 if pseudorandom("unik_get_demoned") < 0.2 then
                     
                     local lock = tag.ID

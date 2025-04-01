@@ -16,10 +16,10 @@ SMODS.Blind{
 		return { vars = { localize("k_unik_nuke_placeholder") } }
 	end,
     in_pool = function()
-        -- only appear if player scores above ^1.5 reqs 5 times in a run
+        -- only appear if player scores above ^1.5 reqs 6 times consecutively
         if G.GAME.unik_scores_really_big then
             --print(G.GAME.unik_scores_really_big)
-            if G.GAME.unik_scores_really_big >= 8 then
+            if G.GAME.unik_scores_really_big >= 6 then
                 return true
             end
         end

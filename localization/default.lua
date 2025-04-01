@@ -278,7 +278,22 @@ return {
                 },
             },
         },
-        Enhanced={},
+        Enhanced={
+            --ALMANAC + BUFFOONERY EXCLUSIVE ENHANCEMENTS--
+            m_unik_buf_jen_tainted_ceramic = {
+                name = "Tainted Ceramic",
+				text = {
+						"{X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", --jen logic, complete with 6 ^s!
+						"{C:green}#2# in #3#{} chance card is", --glass card properties (4 in 6 chance)
+                        "{C:red,E:2}destroyed{} when scored",
+                        "{C:red,E:2}Guaranteed chance{} if",
+                        "not played with {C:attention}exactly{}", --porcelain card properties
+                        "{C:attention}#4#{} cards, {C:attention}held{} or {C:attention}unscored{}",
+                        "{C:inactive,s:0.7}(Numerator cannot fall below 3)",
+                        "{C:inactive,s:0.7}(Denominator cannot go above 6)",
+				}
+            }
+        },
         Joker={
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
@@ -897,9 +912,21 @@ return {
 					"after {C:attention}#2#{} rounds",
                     "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",
                 }
+            },
+
+            --ALMANAC + BUFFOONERY EXCLUSIVES--
+            j_unik_buf_jen_kosmos_tea = { --godsmarble dorkshire tea from buffoonery, cause thats funny
+                name = 'Kosmos\' Tea',
+                text = {
+                    "If hand contains exactly 6 cards",
+                    "All cards become Tainted Ceramic",
+                }
             }
+            
+
         },
         Other={			
+
             unik_depleted = {
                 name = "Depleted",
                 text = {
@@ -1093,24 +1120,7 @@ return {
     },
     misc = {
         achievement_descriptions={
-            ach_unik_royal_poker="Jackpot!",
-            ach_unik_space="Spacefarer",
-            ach_unik_magnet_full_deck="Big Hand, Iron Fist",
-            ach_unik_unik="Self-Insert",
-            ach_unik_rng_ii="Dicey",
-            ach_unik_average_alice="Alice in Wonderland",
-            ach_unik_legendary_blinds="Dante's Inferno",
-            ach_unik_stupid_summoning="Stupid Summoning",
-            ach_unik_bloodbath="Bloodbath 1%",
-            ach_unik_all_cursed_jokers="UAC Earth",
-            ach_unik_all_debuffs="Debuffs, Debuffs Everywhere",
-            ach_unik_turtle_beaned="Turtle Beaned",
-            ach_unik_epic_fail="Epic Fail",
-            ach_unik_royal_fail="Royal Fuck",
-            ach_unik_death_star_moonlight="That's No Moon Light!",
-            ach_unik_legendary_loss="The Abyss",
-        },
-        achievement_names={
+
             ach_unik_royal_poker="Score a Royal Flush against Video Poker",
             ach_unik_space="Own Satellite, Space Joker, Observatory, Perkeo and Moonlight Cookie at the same time",
             ach_unik_magnet_full_deck="Defeat Maroon Magnet while owning Efficinare",
@@ -1126,7 +1136,25 @@ return {
             ach_unik_epic_fail="Score under -1.79e308 chips in a single hand",
             ach_unik_royal_fail="Score a Royal Flush against Video Poker and die anyway",
             ach_unik_death_star_moonlight="Own Stella Mortis and Moonlight Cookie without Perkeo at the same time",
-            ach_unik_legendary_loss="Die to a Legendary Blind",
+            ach_unik_abyss="Die to a Legendary Blind",
+        },
+        achievement_names={
+            ach_unik_royal_poker="Jackpot!",
+            ach_unik_space="Spacefarer",
+            ach_unik_magnet_full_deck="Big Hand, Iron Fist",
+            ach_unik_unik="Self-Insert",
+            ach_unik_rng_ii="Dicey",
+            ach_unik_average_alice="Alice in Wonderland",
+            ach_unik_legendary_blinds="Dante's Inferno",
+            ach_unik_stupid_summoning="Stupid Summoning", --done
+            ach_unik_bloodbath="Bloodbath 1%", --done
+            ach_unik_all_cursed_jokers="Dial 666 to see your UAC spokesperson",
+            ach_unik_all_debuffs="Debuffs, Debuffs Everywhere",
+            ach_unik_turtle_beaned="Turtle Beaned",
+            ach_unik_epic_fail="Epic Fail", --done
+            ach_unik_royal_fail="Royal Fuck",
+            ach_unik_death_star_moonlight="That's No Moon Light!", --done
+            ach_unik_abyss="The Abyss", --done
         },
         blind_states={},
         challenge_names={
@@ -1143,6 +1171,7 @@ return {
         },
         collabs={},
         dictionary={
+
             unik_legendary_blinds_option = "Legendary Blinds (Restart Required)",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
@@ -1360,12 +1389,17 @@ return {
                 "Maybe try playing the",
                 "actual Video Poker game!",
             }, 
+            special_lose_bigger_blind={
+                "It does nothing and",
+                "you just died. Wow.",
+            }
         },
         ranks={},
         suits_plural={},
         suits_singular={},
         tutorial={},
         v_dictionary={
+            a_hyper_three_chips = { "^^^#1# Chips" },
             a_unik_hands_1={"#1# hands"},
             a_unik_discards_1={"#1# discards"}
         },

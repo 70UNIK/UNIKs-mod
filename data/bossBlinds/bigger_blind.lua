@@ -16,4 +16,13 @@ SMODS.Blind{
         --return false if the player has rerolled (you cannot get it via rerolling to avoid exploitation of Retcon, it HAS to generate naturally)
         return true
 	end,
+    set_blind = function(self)
+		G.GAME.unik_killed_by_bigger_blind = true
+		--G.GAME.unik_poppy_ceil = true
+	end,
+
+	defeat = function(self)
+		G.GAME.unik_killed_by_bigger_blind = nil
+
+	end,
 }
