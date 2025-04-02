@@ -24,16 +24,27 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = {x_chips = 1.6,family_x_bonus = 1.3} },
+    config = { extra = {x_chips = 1.3,family_x_bonus = 1.3,scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
 	end,
 	gameset_config = {
-		modest = { extra = {x_chips = 1.12,family_x_bonus = 1.3,scoring = false} },
+		modest = { extra = {x_chips = 1.15,family_x_bonus = 1.3,scoring = false} },
 	},
 	pools = {["unik_cube"] = true },
 	calculate = function(self, card, context)
+		if context.before and not context.blueprint_card and not context.retrigger_joker  then
+			card.ability.extra.scoring = true
+		end
 		if context.individual and context.cardarea == G.play then
+			-- if not Talisman.config_file.disable_anims then
+			-- 	G.E_MANAGER:add_event(Event({
+			-- 		func = function()
+			-- 			context.other_card:juice_up(0.5, 0.5)
+			-- 			return true
+			-- 		end,
+			-- 	}))
+			-- end
 			return {
                 message = localize({
 					type = "variable",
@@ -42,8 +53,36 @@ SMODS.Joker {
 				}),
 				Xchip_mod = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
-				
+
 			}
 		end
-    end,
+		if context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card then
+			if not Talisman.config_file.disable_anims then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						context.other_card:juice_up(0.5, 0.5)
+						return true
+					end,
+				}))
+			end
+			
+			return {
+                message = localize({
+					type = "variable",
+					key = "a_xchips",
+					vars = { number_format(card.ability.extra.x_chips) },
+				}),
+				card = card,
+				Xchip_mod = card.ability.extra.x_chips,
+				colour = G.C.CHIPS,
+			}
+		end
+
+		if context.final_scoring_step and not context.blueprint_card and not context.retrigger_joker then
+			card.ability.extra.scoring = false
+		end
+		if context.after and not context.blueprint_card and not context.retrigger_joker then
+			card.ability.extra.scoring = false
+		end
+	end
 }

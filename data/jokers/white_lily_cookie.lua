@@ -54,7 +54,7 @@ SMODS.Joker {
     config = { extra = { commits_left = 1, commit_message = "(Not committed)",Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.25, sold = false,copying = false,initial = false,true_Emult_mod = 0.1, true_x_mult_mod = 1.25} },
 	loc_vars = function(self, info_queue, center)
 		return { 
-            key = Cryptid.gameset_loc(self, { modest = "modest",madness = "madness"}), 
+            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
             vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.commit_message} }
 	end,
     add_to_deck = function(self, card, from_debuff)
@@ -156,7 +156,7 @@ SMODS.Joker {
             card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             --do not make multiple clones of her! 
-            if card.ability.extra.commits_left < 0 and Card.get_gameset(card) ~= "madness" then
+            if card.ability.extra.commits_left < 0 then
                 play_sound('cancel', 1, 0.7)
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize("k_extinct_ex"),
@@ -188,7 +188,7 @@ SMODS.Joker {
                     card = card,
                 })
             end 
-            if (card.ability.extra.commits_left >= 0) or Card.get_gameset(card) == "madness"  then
+            if (card.ability.extra.commits_left >= 0) then
                 White_lily_copy(card)
             end
 		end

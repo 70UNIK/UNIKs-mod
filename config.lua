@@ -1,1 +1,1 @@
-return {["unik_legendary_blinds"]=false}
+return {["unik_legendary_blinds"]=true}

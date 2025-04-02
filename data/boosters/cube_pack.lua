@@ -22,7 +22,7 @@ SMODS.Booster{
     atlas = "unik_cube_boosters",
 	pos = { x = 0, y = 0 },
     cost = 9,
-    weight = 0.09 / 3, --0.18 base ÷ 3 since there are 3 identical packs
+    weight = 0.08 / 3, --0.18 base ÷ 3 since there are 3 identical packs
     config = { extra = 4, choose = 1 },
     cry_digital_hallucinations = cube_digital_hallucinations,
     create_card = function(self, card)
@@ -59,7 +59,7 @@ SMODS.Booster{
     atlas = "unik_cube_boosters",
 	pos = { x = 1, y = 0 },
     cost = 9,
-    weight = 0.09 / 3, --0.18 base ÷ 3 since there are 3 identical packs
+    weight = 0.08 / 3, --0.18 base ÷ 3 since there are 3 identical packs
     config = { extra = 4, choose = 1 },
     cry_digital_hallucinations = cube_digital_hallucinations,
     create_card = function(self, card)
@@ -96,7 +96,7 @@ SMODS.Booster{
     atlas = "unik_cube_boosters",
 	pos = { x = 2, y = 0 },
     cost = 16,
-    weight = 0.09 / 3, --0.18 base ÷ 3 since there are 3 identical packs
+    weight = 0.04 / 3, --0.18 base ÷ 3 since there are 3 identical packs
     config = { extra = 4, choose = 2 },
     cry_digital_hallucinations = cube_digital_hallucinations,
     create_card = function(self, card)

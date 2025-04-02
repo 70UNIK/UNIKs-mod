@@ -165,6 +165,8 @@ SMODS.ObjectType({
 	default = "j_seance", --cause that is hot garbage
 	cards = {},
 })
+
+
 -- stickers
 NFS.load(mod_path .. "data/stickers/depleted.lua")() 
 NFS.load(mod_path .. "data/stickers/impounded.lua")() 
@@ -209,7 +211,13 @@ NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
 NFS.load(mod_path .. "data/bossBlinds/raspberry_racket.lua")()
 NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
-NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
+if (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/bossBlinds/red_rot.lua")()
+else
+	NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
+end
+
+
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 
@@ -231,6 +239,8 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 if (SMODS.Mods["jen"] or {}).can_load and (SMODS.Mods["Buffoonery"] or {}).can_load then
 	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
 end
+
+
 -- JOKERS --
 --- Common ---
 -- NFS.load(mod_path .. "data/jokers/holepunched_card.lua")() -- too unoriginal? Could have niche use in multi card hands, but is hanging chad with extra steps
@@ -278,6 +288,18 @@ NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
 
+--adding fusions and jen exclusives to the mix
+if (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/celesial_of_chaos.lua")()
+
+	--The first fusion (with a placeholder sadly)
+	Jen.add_fusion('Mutate Moonlight Cookie',1e3,"j_unik_celesial_of_chaos",{'j_unik_moonlight_cookie','j_jen_godsmarble'})
+end
+--function for reference
+-- function Jen.add_fusion(key, cost, output, ...)
+-- 	local inputs = { ... }
+-- 	Jen.fusions[key] = {cost = cost, output = output, ingredients = inputs}
+-- end
 
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
@@ -309,9 +331,7 @@ NFS.load(mod_path .. "data/challenges/multiplication.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
-NFS.load(mod_path .. "data/challenges/video_poker_3.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
---NFS.load(mod_path .. "data/challenges/boss_rush_3.lua")() --hell
 NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 -- achievements
@@ -319,7 +339,9 @@ NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
 NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
 NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
 NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
-NFS.load(mod_path .. "data/achievements/abyss.lua")()
+if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/achievements/abyss.lua")()
+end
 -- Jackpot! - Score a Royal Flush against Video Poker
 -- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once
 -- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
@@ -327,6 +349,7 @@ NFS.load(mod_path .. "data/achievements/abyss.lua")()
 -- Dicey - Complete the RNG II challenge
 -- Alice in Wonderland - Get Alice from obtaining Average Alice
 -- Dante's Inferno - Survive a Legendary Blind
+-- the other family - Own Yokana, Maya and Chelsea at the same time
 
 -- Vessel Printer - Own Energia and gain 66 Vessel tags at once
 -- Hell Invasion - Own every Cursed Joker in the collection.
@@ -335,11 +358,6 @@ NFS.load(mod_path .. "data/achievements/abyss.lua")()
 -- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
 -- The Abyss - Die to a Legendary Blind
 -- 
-
---Artwork to do:
-
---Vampiric Hammer
-
 
 --Finally adding myself to the main menu for some reason
 

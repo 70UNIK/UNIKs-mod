@@ -48,6 +48,17 @@ return {
                     "to each Ghost into Ghosts",
 				},
             },
+            bl_unik_red_rot={ --Almanac replacement for Bigger Boo, maybe have the hunter instantly explode when entering this blind as a secret.
+                name = "Red Rot",
+				text = {
+					"Create an absolute Rot",
+                    "on Blind Selection",
+                    "and before each hand",
+                    "convert Jokers adjacent",
+                    "to each Rot into The Rot",
+                    "(Hunter will become the rot on entering blind)",
+				},
+            },
             bl_unik_raspberry_racket={
                 name = "Raspberry Racket",
 				text = {
@@ -522,7 +533,7 @@ return {
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    "{C:inactive,s:0.9,E:1}May I wish you happy dreams...{}",
+                    "{C:inactive,s:0.9,E:1}#3#{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
@@ -539,8 +550,8 @@ return {
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult for",
-                    " their specified {C:attention}poker hand",
-                    "{C:inactive,s:0.9,E:1}May I wish you happy dreams...{}",
+                    "their specified {C:attention}poker hand",
+                    "{C:inactive,s:0.9,E:1}#3#{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
@@ -550,10 +561,20 @@ return {
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    "{C:attention}+1{} Consumable Slot",
-                    "{C:inactive,s:0.9,E:1}May I wish you happy dreams...{}",
+                    "{C:attention}+#2#{} Consumable Slot(s)",
+                    "{C:inactive,s:0.9,E:1}#3#{}",
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                }
+            },
+            j_unik_celesial_of_chaos = { --^same as modest, but with an extra consumable slot
+                name = 'The Celesial of Chaos',
+                text = {
+                    "{C:jen_RGB,E:1}Omega {C:planet}Planet{} cards {C:attention}in your consumable area{}", 
+                    "each give {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult",
+                    "{C:attention}+#2#{} Consumable Slot(s)",
+                    "{C:inactive,s:0.9,E:1}#3#{}",
+                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                 }
             },
             j_unik_unik = { --mainline: ^0.03 chips
@@ -593,8 +614,8 @@ return {
             --Increases by 1.3x chips if maya and chelsea are present
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
-                    "Each played card gives", --when  Caeruleum  is added, her values will be exponented by ^0.3 for balancing
-                    "{X:chips,C:white}X#1#{} Chips when scored",
+                    "{X:chips,C:white}X#1#{} Chips for every {C:attention}scored{} Card",
+                    "or {C:attention}Joker{} triggered during play",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:inactive,s:0.9,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
@@ -788,26 +809,10 @@ return {
                     "{E:2,C:red}Self destructs{} at the end of round",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",        
-                    "{C:red,s:0.7}(Can only copy once from {C:cry_code,s:0.7}//:COMMIT{C:red,s:0.7}) {C:attention,s:0.7}#5#{}",   
+                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
+                    "{C:red,s:0.7}(Can only copy once from {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7}) {C:attention,s:0.7}#5#{}",   
                     "{C:red,s:0.4}(Cannot exceed {X:dark_edition,C:white,s:0.4}^e300{C:red,s:0.4} due to bignum copy bug){}",   
-                    "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
-                }
-            },
-            -- Upgrades on self destruction and destruciton, making her very resilient and synegises with dagger, ankh and additional gateways
-            j_unik_white_lily_cookie_madness = {
-                name = 'White Lily Cookie',
-                text = {
-                    "This Joker creates a copy with {X:dark_edition,C:white}",
-                    "an additional {X:dark_edition,C:white}^#2#{} Mult on {E:2,C:red}destruction{}",
-                    "{E:2,C:red}Self destructs{} at the end of round",
-                    "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
-                    "{C:inactive,s:0.7}(Removes stickers from copy){}",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",        
-                    "{C:red,s:0.4}(Cannot exceed {X:dark_edition,C:white,s:0.4}^e300{C:red,s:0.4} due to bignum copy bug){}",   
-                    "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
+                    "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
                     "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
@@ -1189,6 +1194,7 @@ return {
             k_unik_legendary_nuke_start='"Jesus Christ! They\'ve done it... They\'ve done it!"', --threads 1984
             k_unik_placard_start="NO PLACARDED LOADS IN PLAY",
             k_unik_boo_start="Bigger Boo wants to know your location",
+            k_unik_rot_start='" I cannot help you. I cannot even help myself."',
             k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."', -- darth vader, moving the goalposts
             k_unik_protection_racket_start='"The government has organized a protection racket."',
             k_unik_video_poker_start='#1 Classic Video Poker Games Worldwide!',
@@ -1239,10 +1245,10 @@ return {
             k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
             k_unik_magnet_placeholder="(50% of)",
-            k_unik_racket_warning="Must have at least $25",
+            k_unik_racket_warning="Must have at least $40",
             k_unik_magnet_warning="Must not hold any Steel Cards",
             k_unik_magnet_legendary_warning="Must not hold or play any Steel Cards",
-            k_unik_legendary_pentagram_start="Behold! The Gates of Hell are opened and the horrors of the masses plague the earth...",
+            k_unik_legendary_pentagram_start='"Dial 666 to see your UAC representative!"',
             k_unik_legendary_pentagram_die="YOU CAN'T DO THAT",
             k_unik_video_poker_warning="High cards are banned and pairs must have scoring Jacks or Better",
             k_unik_spawned="Spawned!",
@@ -1257,7 +1263,28 @@ return {
             k_unik_average_alice="Average!",
             k_unik_active="Active!",
             k_unik_cube_pack = "Cube Pack",
-            k_unik_hands_remaining = " scoring hands remaining"
+            k_unik_hands_remaining = " scoring hands remaining",
+
+            --Almanac Quotes:
+
+            --Moonlight Cookie: She will be the first Joker with full almanac functionality (has a fusion, different quotes)
+            ---Normal:
+            k_unik_moonlight_normal1 = "May I wish you happy dreams...",
+            k_unik_moonlight_normal2 = "The stars dance and the dreams flow...",
+            k_unik_moonlight_normal3 = "It will be nice to dream for a while...",
+            ---Scared:
+            k_unik_moonlight_scared1 = "Is this is what nightmares are made of...?",
+            ---Godsmarble Near:
+            k_unik_moonlight_godsmarble1 = "Oh god... What are those thoughts...?",
+            k_unik_moonlight_godsmarble2 = "Get this thing away from me...!",
+            k_unik_moonlight_godsmarble3 = "I... something is happening to me...!",
+            ---Godsmarbled: The Celesial of Chaos
+            k_unik_celestial_of_chaos1 = "DARKNESS SHALL COVER THE UNIVERSE...",
+            k_unik_celestial_of_chaos2 = "I'LL PLUNGE THE WORLD INTO THE VOID...",
+            k_unik_celestial_of_chaos3 = "IT DOESN'T MATTER DOESN'T IT?",
+
+            
+
         },
         high_scores={},
         labels={
@@ -1288,6 +1315,11 @@ return {
                 "Maybe play Yoshi's Island",
                 "W2-4 to practice fighting",
                 "ghosts before your next revive!",
+            },
+            special_lose_unik_red_rot={ --red rot
+                "I do suggest not",
+                "entering Five Pebbles",
+                "with the conditon he has!",
             },
             --Turquoise tornado, harlequin hurricane,
             special_lose_unik_F5={
@@ -1400,6 +1432,7 @@ return {
         tutorial={},
         v_dictionary={
             a_hyper_three_chips = { "^^^#1# Chips" },
+            a_hyper_three_mult = { "^^^#1# Mult" },
             a_unik_hands_1={"#1# hands"},
             a_unik_discards_1={"#1# discards"}
         },

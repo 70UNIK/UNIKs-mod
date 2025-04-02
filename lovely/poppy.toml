@@ -52,13 +52,13 @@ payload = '''if ((to_big(hand_chips*mult) > to_big(G.GAME.blind.chips * 3) and (
                 end   
             }))
         end
-        if ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) >= to_big(0)) and not (G.GAME.blind.disabled) then
+        if ((G.GAME.blind and G.GAME.unik_protection_racket) and to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 40) >= to_big(0)) and not (G.GAME.blind.disabled) then
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',delay = 0.4,
                     func = function()
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
-                        ease_dollars(-25, true)
+                        ease_dollars(-40, true)
                         G.ROOM.jiggle = G.ROOM.jiggle + 0.7
                     return true
                 end   

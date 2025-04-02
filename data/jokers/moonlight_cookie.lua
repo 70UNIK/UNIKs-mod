@@ -4,6 +4,23 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+--from maxie
+local moonlight_quotes = {
+	normal = {
+		'k_unik_moonlight_normal1',
+		'k_unik_moonlight_normal2',
+		'k_unik_moonlight_normal3',
+	},
+	drama = {
+		'k_unik_moonlight_scared1',
+	},
+	gods = {
+		'k_unik_moonlight_godsmarble1',
+		'k_unik_moonlight_godsmarble2',
+		'k_unik_moonlight_godsmarble3',
+	}
+}
+
 SMODS.Joker {
 	dependencies = {
 		items = {
@@ -22,18 +39,28 @@ SMODS.Joker {
 	eternal_compat = true,
 	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
 	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
-    config = { extra = { Emult = 1.3} },
+    config = { extra = { Emult = 1.3,consumeSlot = 1} },
 	gameset_config = {
 		modest = { extra = { Emult = 1.2} },
 		madness = { extra = { Emult = 1.3,consumeSlot = 1} },
 	},
 	loc_vars = function(self, info_queue, center)
+		--normal quotes only if not Jen
+		local quoteset = 'normal'
+		if (SMODS.Mods["jen"] or {}).can_load then
+			quoteset = Jen.dramatic and 'drama' or Jen.gods() and 'gods' or 'normal'
+		end
 		return { 
 			key = Cryptid.gameset_loc(self, { modest = "modest",madness = "madness"  }), 
-			vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot} 
+			vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot,
+			localize(moonlight_quotes[quoteset][math.random(#moonlight_quotes[quoteset])] .. "")
+		} 
 		}
 	end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
+	set_ability = function(self, card, initial, delay_sprites)
+	end,
+	
     add_to_deck = function(self, card, from_debuff)
 		-- Changes a G.GAME variable, which is usually a global value that's specific to the current run.
 		-- These are initialized in game.lua under the Game:init_game_object() function, and you can look through them to get an idea of the things you can change.
@@ -92,43 +119,24 @@ SMODS.Joker {
 				--if using incantation, she should exponent over and over for x quantity.
 				
 				if (SMODS.Mods["incantation"] or {}).can_load then
-					-- if not Talisman.config_file.disable_anims then
-					-- 	for i = 1,(context.other_consumeable.ability.qty or 1) do
-					-- 		SMODS.calculate_effect({
-					-- 			message = localize({
-					-- 				type = "variable",
-					-- 				key = "a_powmult",
-					-- 				vars = { number_format(to_big(card.ability.extra.Emult)) },
-					-- 			}),
-					-- 			Emult_mod = card.ability.extra.Emult,
-					-- 			colour = G.C.DARK_EDITION,
-					-- 			card = context.other_consumeable,
-					-- 		}, context.blueprint_card or context.retrigger_joker or card)
-					-- 	end
-					-- else
-					-- 	SMODS.calculate_effect({
-					-- 		message = localize({
-					-- 			type = "variable",
-					-- 			key = "a_powmult",
-					-- 			vars = { number_format(to_big(card.ability.extra.Emult)) },
-					-- 		}),
-					-- 		Emult_mod = card.ability.extra.Emult^(context.other_consumeable.ability.qty or 1),
-					-- 		colour = G.C.DARK_EDITION,
-					-- 		card = context.other_consumeable,
-					-- 	}, context.blueprint_card or context.retrigger_joker or card)
-						return {
-							message = localize({
-								type = "variable",
-								key = "a_powmult",
-								vars = {
-									number_format(card.ability.extra.Emult),
-								},
-							}),
-							Emult_mod = card.ability.extra.Emult^(context.other_consumeable.ability.qty or 1),
-							colour = G.C.DARK_EDITION,
-
-						}
-				-- end
+					for i = 1, context.other_consumeable.ability.qty do
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                return {
+                                    message = localize({
+										type = "variable",
+										key = "a_powmult",
+										vars = {
+											number_format(card.ability.extra.Emult),
+										},
+									}),
+									Emult_mod = card.ability.extra.Emult,
+									colour = G.C.DARK_EDITION,
+                                }
+                            end,
+                        }))
+                    end
+					
 				else
 					return {
 						message = localize({
@@ -142,24 +150,11 @@ SMODS.Joker {
 						colour = G.C.DARK_EDITION,
 
 					}
-					-- SMODS.calculate_effect({
-					-- 	message = localize({
-					-- 		type = "variable",
-					-- 		key = "a_powmult",
-					-- 		vars = { number_format(to_big(card.ability.extra.Emult)) },
-					-- 	}),
-					-- 	Emult_mod = card.ability.extra.Emult,
-					-- 	colour = G.C.DARK_EDITION,
-					-- 	card = context.other_consumeable,
-					-- }, context.blueprint_card or card)
+
 				end
 
 			end
         end
     end,
-    -- cry_credits = {
-	-- 	idea = { "70UNIK" },
-	-- 	art = { "70UNIK (originally from Devsisters)" },
-	-- 	code = { "70UNIK (partially from Cryptid)" },
-	-- },
+
 }

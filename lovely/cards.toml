@@ -139,7 +139,7 @@ end
 '''
 match_indent = true
 
-### Commit: Exclusive to white lily, in mainline, she should only be able to respawn via commit ONCE. 
+### Commit: Exclusive to white lily, she should only be able to respawn via commit ONCE. 
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/code.lua"]'''
@@ -153,4 +153,16 @@ end
 '''
 match_indent = true
 
-### Ship of thesus: Only have a fixed 2 in 7 chance to add tainted ceramic cards to deck if they break
+### REWORK: White Lily should immediately die without respawn if used REWORK on her:
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/code.lua"]'''
+pattern = '''tag.ability.rework_edition = G.P_CENTER_POOLS.Edition[found_index].key'''
+position = "after"
+payload = '''
+-- reduce commit limit by 666
+if jkr.config.center.key == "j_unik_white_lily_cookie" then
+    jkr.ability.extra.commits_left = jkr.ability.extra.commits_left - 666
+end
+'''
+match_indent = true
