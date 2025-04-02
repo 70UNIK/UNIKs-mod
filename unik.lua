@@ -279,7 +279,9 @@ NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
 NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
-NFS.load(mod_path .. "data/jokers/ALICE.lua")()
+if (SMODS.Mods["extracredit"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/ALICE.lua")()
+end
 
 NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
 
@@ -289,17 +291,26 @@ NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
 
 --adding fusions and jen exclusives to the mix
-if (SMODS.Mods["jen"] or {}).can_load then
-	NFS.load(mod_path .. "data/jokers/celesial_of_chaos.lua")()
+if Jen and (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/celestial_of_chaos.lua")()
 
 	--The first fusion (with a placeholder sadly)
-	Jen.add_fusion('Mutate Moonlight Cookie',1e3,"j_unik_celesial_of_chaos",{'j_unik_moonlight_cookie','j_jen_godsmarble'})
+	if Jen.fusions then
+		Jen.fusions['Mutate Moonlight Cookie'] = {
+			cost = 1e3,
+			output = "j_unik_celesial_of_chaos",
+			ingredients = {
+				'j_unik_moonlight_cookie',
+				'j_jen_godsmarble'
+			}
+		}
+		print("Fusion successfully applied!")
+	else
+		--error("Fusion failed to be applied",1)
+	end
 end
 --function for reference
--- function Jen.add_fusion(key, cost, output, ...)
--- 	local inputs = { ... }
--- 	Jen.fusions[key] = {cost = cost, output = output, ingredients = inputs}
--- end
+
 
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
@@ -362,48 +373,69 @@ end
 --Finally adding myself to the main menu for some reason
 
 --Multiplies the card's size by mod - solely for the main menu- code by jen 
-function Card:resize(mod, force_save)
-	self:hard_set_T(self.T.x, self.T.y, self.T.w * mod, self.T.h * mod)
-	remove_all(self.children)
-	self.children = {}
-	self.children.shadow = Moveable(0, 0, 0, 0)
-	self:set_sprites(self.config.center, self.base.id and self.config.card)
+--Only loads in cryptid by itself. It will not run with jens installed
+if not (SMODS.Mods["jen"] or {}).can_load then
+	function Card:resize(mod, force_save)
+		self:hard_set_T(self.T.x, self.T.y, self.T.w * mod, self.T.h * mod)
+		remove_all(self.children)
+		self.children = {}
+		self.children.shadow = Moveable(0, 0, 0, 0)
+		self:set_sprites(self.config.center, self.base.id and self.config.card)
+	end
+	local mainmenuref2 = Game.main_menu
+	Game.main_menu = function(change_context)
+
+		local ret = mainmenuref2(change_context)
+
+		local newcard = Card(
+				G.title_top.T.x,
+				G.title_top.T.y,
+				G.CARD_W,
+				G.CARD_H,
+				G.P_CARDS.empty,
+				G.P_CENTERS.j_unik_unik,
+				{ bypass_discovery_center = true }
+			)
+			G.title_top:emplace(newcard)
+		newcard:resize(1.1 * 1.2)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0,
+			blockable = false,
+			blocking = false,
+			func = function()
+				if change_context == "splash" then
+					newcard.states.visible = true
+					newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, true, 2.5)
+				else
+					newcard.states.visible = true
+					newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, nil, 1.2)
+				end
+				return true
+			end,
+		}))
+
+		newcard.no_ui = true
+		return ret
+	end
+else
+	local mainmenuref2 = Game.main_menu
+	Game.main_menu = function(change_context)
+		if Jen.fusions then
+			-- local alreadyApplied = false
+			-- for i,v in pairs(Jen.fusions) do
+			-- 	print(v)
+			-- end
+			Jen.add_fusion('Mutate Moonlight Cookie',2e3,"j_unik_celestial_of_chaos",
+				'j_unik_moonlight_cookie',
+				'j_jen_godsmarble'
+			)
+			print("Fusions successfully applied!")
+		else
+			error("Fusions failed to be applied",1)
+		end
+		local ret = mainmenuref2(change_context)
+		return ret
+	end
 end
-local mainmenuref2 = Game.main_menu
-Game.main_menu = function(change_context)
-
-	local ret = mainmenuref2(change_context)
-
-	local newcard = Card(
-			G.title_top.T.x,
-			G.title_top.T.y,
-			G.CARD_W,
-			G.CARD_H,
-			G.P_CARDS.empty,
-			G.P_CENTERS.j_unik_unik,
-			{ bypass_discovery_center = true }
-		)
-		G.title_top:emplace(newcard)
-	newcard:resize(1.1 * 1.2)
-	G.E_MANAGER:add_event(Event({
-		trigger = "after",
-		delay = 0,
-		blockable = false,
-		blocking = false,
-		func = function()
-			if change_context == "splash" then
-				newcard.states.visible = true
-				newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, true, 2.5)
-			else
-				newcard.states.visible = true
-				newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, nil, 1.2)
-			end
-			return true
-		end,
-	}))
-
-	newcard.no_ui = true
-	return ret
-end
-
 

@@ -37,6 +37,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+	fusable = true,
 	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
 	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
     config = { extra = { Emult = 1.3,consumeSlot = 1} },
@@ -77,11 +78,39 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
 		--Known issue: does not work with retriggers.
-        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet'
+		if context.other_consumeable then
+			print(context.other_consumeable.ability.atlas)
+			print(context.other_consumeable.atlas)
+		end
+		
+        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' or 
+		(context.other_consumeable and context.other_consumeable.ability.set == 'jen_omegaconsumable')
 		then
 			local valid = false
+			--jen exclusive, check if omega consumable is a planet/black hole
+			if (SMODS.Mods["jen"] or {}).can_load and context.other_consumeable.ability.set == 'jen_omegaconsumable' then
+				if 
+				context.other_consumeable.config.center.key == 'c_jen_pluto_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_mercury_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_uranus_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_venus_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_saturn_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_jupiter_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_earth_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_mars_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_neptune_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_planet_x_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_ceres_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_eris_omega' or
+				context.other_consumeable.config.center.key == 'c_jen_black_hole_omega'
+				then
+					valid = true
+				end
+
+			end
+			
 			--automatically ignore hand type if its modest
-			if Card.get_gameset(card) ~= "modest" then
+			if Card.get_gameset(card) ~= "modest" and context.other_consumeable.ability.set ~= 'jen_omegaconsumable' then
 				valid = true
 			end
 			--check if its the right planet
@@ -120,19 +149,21 @@ SMODS.Joker {
 				
 				if (SMODS.Mods["incantation"] or {}).can_load then
 					--hmm maybe this could work?
-					for i = 1, context.other_consumeable.ability.qty-1 do
-						SMODS.calculate_effect({
-							message = localize({
-								type = "variable",
-								key = "a_powmult",
-								vars = {
-									number_format(card.ability.extra.Emult),
-								},
-							}),
-							Emult_mod = card.ability.extra.Emult,
-							colour = G.C.DARK_EDITION,
-						}, (card or context.blueprint_card or context.retrigger_joker or context.repetition))
-                    end
+					if context.other_consumeable.ability.qty and context.other_consumeable.ability.qty > 1 then
+						for i = 1, context.other_consumeable.ability.qty-1 do
+							SMODS.calculate_effect({
+								message = localize({
+									type = "variable",
+									key = "a_powmult",
+									vars = {
+										number_format(card.ability.extra.Emult),
+									},
+								}),
+								Emult_mod = card.ability.extra.Emult,
+								colour = G.C.DARK_EDITION,
+							}, (card or context.blueprint_card or context.retrigger_joker or context.repetition))
+						end
+					end
 					return {
 						message = localize({
 							type = "variable",

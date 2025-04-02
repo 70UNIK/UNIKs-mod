@@ -567,8 +567,8 @@ return {
                     "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
                 }
             },
-            j_unik_celesial_of_chaos = { --^same as modest, but with an extra consumable slot
-                name = 'The Celesial of Chaos',
+            j_unik_celestial_of_chaos = { --^same as modest, but with an extra consumable slot
+                name = 'The Celestial of Chaos',
                 text = {
                     "{C:jen_RGB,E:1}Omega {C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult",
