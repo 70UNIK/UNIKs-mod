@@ -47,27 +47,31 @@ SMODS.Joker {
 				--if using incantation, she should exponent over and over for x quantity.
 				
 				if (SMODS.Mods["incantation"] or {}).can_load then
-                    for i = 1, context.other_consumeable.ability.qty do
-                        G.E_MANAGER:add_event(Event({
-                            func = function()
-                                card:juice_up(1.0, 1.0)
-                                G.ROOM.jiggle = G.ROOM.jiggle + 6
-                                return {
-                                    message = localize({
-                                        type = "variable",
-                                        key = "a_hyper_three_mult",
-                                        vars = {
-                                            number_format(card.ability.extra.EEEmult),
-                                        },
-                                    }),
-                                    EEEmult_mod = card.ability.extra.EEEmult,
-                                    colour = G.C.UNIK_VOID_COLOR,
-        
-                                }
-                            end,
-                        }))
+                    for i = 1, context.other_consumeable.ability.qty-1 do
+						SMODS.calculate_effect({
+                            message = localize({
+                                type = "variable",
+                                key = "a_hyper_three_mult",
+                                vars = {
+                                    number_format(card.ability.extra.EEEmult),
+                                },
+                            }),
+                            EEEmult_mod = card.ability.extra.EEEmult,
+                            colour = G.C.UNIK_VOID_COLOR,
+						}, (card or context.blueprint_card or context.retrigger_joker or context.repetition))
                     end
-						
+                    return {
+                        message = localize({
+                            type = "variable",
+                            key = "a_hyper_three_mult",
+                            vars = {
+                                number_format(card.ability.extra.EEEmult),
+                            },
+                        }),
+                        EEEmult_mod = card.ability.extra.EEEmult,
+                        colour = G.C.UNIK_VOID_COLOR,
+
+                    }
 				-- end
 				else
                     G.E_MANAGER:add_event(Event({

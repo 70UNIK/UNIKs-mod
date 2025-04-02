@@ -119,24 +119,31 @@ SMODS.Joker {
 				--if using incantation, she should exponent over and over for x quantity.
 				
 				if (SMODS.Mods["incantation"] or {}).can_load then
-					for i = 1, context.other_consumeable.ability.qty do
-                        G.E_MANAGER:add_event(Event({
-                            func = function()
-                                return {
-                                    message = localize({
-										type = "variable",
-										key = "a_powmult",
-										vars = {
-											number_format(card.ability.extra.Emult),
-										},
-									}),
-									Emult_mod = card.ability.extra.Emult,
-									colour = G.C.DARK_EDITION,
-                                }
-                            end,
-                        }))
+					--hmm maybe this could work?
+					for i = 1, context.other_consumeable.ability.qty-1 do
+						SMODS.calculate_effect({
+							message = localize({
+								type = "variable",
+								key = "a_powmult",
+								vars = {
+									number_format(card.ability.extra.Emult),
+								},
+							}),
+							Emult_mod = card.ability.extra.Emult,
+							colour = G.C.DARK_EDITION,
+						}, (card or context.blueprint_card or context.retrigger_joker or context.repetition))
                     end
-					
+					return {
+						message = localize({
+							type = "variable",
+							key = "a_powmult",
+							vars = {
+								number_format(card.ability.extra.Emult),
+							},
+						}),
+						Emult_mod = card.ability.extra.Emult,
+						colour = G.C.DARK_EDITION,
+					}
 				else
 					return {
 						message = localize({
