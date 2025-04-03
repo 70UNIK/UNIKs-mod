@@ -43,6 +43,7 @@ SMODS.Challenge{
 
 }
 
+
 local gnb2 = get_new_boss
 function get_new_boss()
 	--Fix an issue with adding bosses mid-run

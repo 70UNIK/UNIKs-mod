@@ -22,6 +22,11 @@ SMODS.Blind{
         G.hand:change_size(-G.hand.config.card_limit + 1)
 	end,
     in_pool = function()
+        local straddle = 0
+        --if you increase straddle, these fuckers can spawn earlier!
+        if G.GAME.straddle then
+            straddle = straddle - G.GAME.straddle
+        end
         local hasExotic = false
         if not G.jokers or not G.jokers.cards then
 			return false
@@ -31,7 +36,7 @@ SMODS.Blind{
                 hasExotic = true
             end
         end
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 and hasExotic) or G.GAME.modifiers.unik_legendary_at_any_time) then
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*3) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
             return true
         end
         return false

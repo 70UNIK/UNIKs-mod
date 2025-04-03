@@ -16,10 +16,15 @@ SMODS.Blind{
 		return { vars = { localize("k_unik_nuke_placeholder") } }
 	end,
     in_pool = function()
+        local straddle = 0
+        --if you increase straddle, these fuckers can spawn earlier!
+        if G.GAME.straddle then
+            straddle = straddle - G.GAME.straddle
+        end
         -- only appear if player scores above ^1.5 reqs 6 times consecutively
         if G.GAME.unik_scores_really_big then
             --print(G.GAME.unik_scores_really_big)
-            if G.GAME.unik_scores_really_big >= 6 then
+            if G.GAME.unik_scores_really_big >= 6 - straddle then
                 return true
             end
         end

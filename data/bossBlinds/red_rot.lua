@@ -2,7 +2,7 @@
 --Replace Ghosts with The Rot
 --Otherwise functions the same
 SMODS.Blind{
-    key = 'unik_bigger_boo',
+    key = 'unik_red_rot',
     boss = {min = 1, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 4}, --placeholder until I make an appropriate boss icon
@@ -36,6 +36,7 @@ SMODS.Blind{
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
                     delay(0.15)
+                    play_sound('jen_gore6')
                     G.ROOM.jiggle = G.ROOM.jiggle + 1
                     -- else
                     --     card2:remove()
@@ -48,6 +49,28 @@ SMODS.Blind{
             G.GAME.blind:wiggle()
 
             --also immediately kill hunter
+            for i=1,#G.jokers.cards do
+                --print("POSSESS")
+                 if G.jokers.cards[i].ability.name == "j_jen_hunter" then
+                    local card = G.jokers.cards[i]
+                    card:flip()
+                    card:juice_up(2, 0.8)
+                    card_status_text(card, 'Dead!', nil, 0.05*card.T.h, G.C.BLACK, 2, 0, 0, nil, 'bm', 'jen_gore6')
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            local card2 = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_jen_rot', 'hunter_rot_death')
+                            card2:add_to_deck()
+                            G.jokers:emplace(card2)
+                            card:set_eternal(nil)
+                            card2:set_eternal(true)
+                            card:start_dissolve()
+                            play_sound('jen_gore6')
+                            return true
+                        end
+                    }))
+                 end
+            end
+            
         end
     end,
     --stolen from Cryptid, similar to vermillion virus, except it detects where each ghost is, check for adjacent non cursed jokers and convert them into MORE ghosts!
@@ -77,6 +100,7 @@ SMODS.Blind{
     disable = function(self)
         killEternalRots()
         G.GAME.unik_killed_by_rot = nil
+        G.GAME.unik_pentagram_manager_fix = nil
     end,
     defeat = function(self)
         killEternalRots()
@@ -114,7 +138,6 @@ function killEternalRots()
                     return true
                 end
             }))
-            break
         end
     end
 end
@@ -151,10 +174,12 @@ function turnJokerIntoRot(location)
         _card:start_materialize()
         G.jokers.cards[location] = _card
         _card:set_card_area(G.jokers)
+        _card.ability.eternal = true
         G.jokers:set_ranks()
         G.jokers:align_cards()    
         G.GAME.blind.triggered = true
         G.GAME.blind:wiggle()
         G.ROOM.jiggle = G.ROOM.jiggle + 1
+        play_sound('jen_gore6')
     end
 end

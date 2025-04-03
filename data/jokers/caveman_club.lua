@@ -8,6 +8,7 @@ SMODS.Joker {
 	key = 'unik_caveman_club',
     atlas = 'unik_cursed',
     rarity = "cry_cursed",
+    no_dbl = true,
 	pos = { x = 1, y = 1 },
     cost = 1,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Clubs",debuff_name = "unik_club",death_message = "k_unik_weapon_destroyed",color = "b9cb92",entered = false} },

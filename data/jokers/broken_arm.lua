@@ -7,6 +7,7 @@ SMODS.Joker {
 	key = 'unik_broken_arm',
     atlas = 'unik_cursed',
     rarity = "cry_cursed",
+    no_dbl = true,
 	pos = { x = 3, y = 2 },
     cost = 1,
     config = { extra = { decrease = 1, maxLevel1 = 7, level1 = 0, selfDestruct = false,odds = 4} },

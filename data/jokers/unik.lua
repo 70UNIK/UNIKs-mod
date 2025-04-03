@@ -4,6 +4,24 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+local unik_quotes = {
+	normal = {
+		'k_unik_unik_normal1',
+		'k_unik_unik_normal2',
+		'k_unik_unik_normal3',
+	},
+	drama = {
+		'k_unik_unik_scared1',
+		'k_unik_unik_scared2',
+	},
+	gods = {
+		'k_unik_unik_godsmarble1',
+		'k_unik_unik_godsmarble2',
+		'k_unik_unik_godsmarble3',
+		'k_unik_unik_godsmarble4',
+	}
+}
+
 SMODS.Joker {
 	dependencies = {
 		items = {
@@ -17,18 +35,27 @@ SMODS.Joker {
 	pos = { x = 0, y = 0 },
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
+	drama = { x = 1, y = 0 }, --WIP: Remains the same
+	godsmarbling = {x = 1, y = 0 }, --may remove once a seperate "godsmarbling" sprite function is made by jen (Scared but exclusively when godsmarble is present)
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
+	fusable = true,
     config = { extra = {Echips_mod = 0.03, Echips = 1.0,cap = 999999} }, --normally he should not be cappted in mainline+
 	gameset_config = {
 		modest = { extra = {Echips_mod = 0.01, Echips = 1.0,cap = 5.0} },
 	},
 	loc_vars = function(self, info_queue, center)
+		local quoteset = 'normal'
+		if (SMODS.Mods["jen"] or {}).can_load then
+			quoteset = Jen.dramatic and 'drama' or Jen.gods() and 'gods' or 'normal'
+		end
 		return {
 		key = Cryptid.gameset_loc(self, {modest = "modest" }), 
-		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips,center.ability.extra.cap} }
+		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips,center.ability.extra.cap
+	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. "")
+	} }
 	end,
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)

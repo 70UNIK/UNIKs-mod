@@ -14,6 +14,7 @@ SMODS.Joker {
 	blueprint_compat = false,
     perishable_compat = false,
     eternal_compat = false,
+    no_dbl = true,
     gameset_config = {
 		modest = {extra = { min_discards = 6, discarded_cards = 2, current_discards = 0} },
 	},

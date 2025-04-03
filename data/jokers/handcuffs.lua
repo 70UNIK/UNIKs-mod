@@ -8,6 +8,7 @@ SMODS.Joker {
     atlas = 'unik_cursed',
     rarity = "cry_cursed",
 	pos = { x = 4, y = 0 },
+    no_dbl = true,
     cost = 1,
     config = { extra = { selfDestruct = false,hand_size = -1,max = 8, min = 6} },
     pools = { ["unik_boss_blind_joker"] = true},

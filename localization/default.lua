@@ -56,7 +56,6 @@ return {
                     "and before each hand",
                     "convert Jokers adjacent",
                     "to each Rot into The Rot",
-                    "(Hunter will become the rot on entering blind)",
 				},
             },
             bl_unik_raspberry_racket={
@@ -583,11 +582,21 @@ return {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9,E:1}I basically just inserted myself here.{}",
+                    "{C:inactive,s:0.9,E:1}#4#{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 }
             },
+            j_unik_cube_of_calamity = { --mainline: ^0.03 chips
+            name = 'The Cube of Calamity',
+            text = {
+                "This Joker gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", 
+                "for each {C:attention}7{} scored",
+                "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2#{C:inactive} Chips)",
+                "{C:inactive,s:0.9,E:1}#3#{}",
+                "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+            }
+        },
             j_unik_unik_modest = { --modest: ^0.01 mult, caps at ^2.5 chips
                 name = 'UNIK',
                 text = {
@@ -595,7 +604,7 @@ return {
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
                     "{C:inactive}(Caps at {X:dark_edition,C:white}^#3#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9,E:1}I basically just inserted myself here.{}",
+                    "{C:inactive,s:0.9,E:1}#4#{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -636,17 +645,39 @@ return {
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
+            
             j_unik_jsab_chelsea = { --epic: gains x0.07 chips for EVERY chips, xchips or ^chips trigger (pentationals and tettrati0onals included)
             --Increases by 1.3x if maya and yokana are present
                 name="{C:unik_chelsea_color}Chelsea Ramirez{}",
                 text={
                     "This Joker gains {X:chips,C:white}X#2#{} Chips when", --gain will become exponented by ^0.4 (around Exponentia)
-                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{} trigger",
+                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
                     --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9,E:1}OwO what's all this? Maybe I can help!{}",
+                    "{C:inactive,s:0.9,E:1}#4#{}",
                     "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                     "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                },
+            },
+            j_unik_jsab_chelsea_debuffed = { --godsmarble her family members, she will NOT help you anymore
+                name="{C:unik_chelsea_color}Chelsea Ramirez{}",
+                text={
+                    "{C:red}All abilities are disabled... You monster.",
+                    "{C:inactive,s:0.9,E:1}#4#{}",
+                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                },
+            },
+            j_unik_mutilated_mess = { --epic: gains x0.07 chips for EVERY chips, xchips or ^chips trigger (pentationals and tettrati0onals included)
+            --Increases by 1.3x if maya and yokana are present
+                name="The Mutilated Mess",
+                text={
+                    "This Joker gains {X:jen_RGB,C:white}^^#2#{} Chips when", --gain will become exponented by ^0.4 (around Exponentia)
+                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
+                    --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
+                    "{C:inactive}(Currently {X:jen_RGB,C:white}^^#1#{C:inactive} Chips)",
+                    "{C:inactive,s:0.9,E:1}#3#{}",
+                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
                 },
             },
             --rare: x1.5x mult from destroying cursed jokers, but only up to 8, the 9th one will cause self destruciton and release ALL cursed jokers
@@ -742,6 +773,7 @@ return {
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
             },
+            --this will not be disabled in almanac, since its a cursed joker
             j_unik_rancid_smoothie = {
                 name="Rancid Smoothie",
                 text={
@@ -919,12 +951,25 @@ return {
                 }
             },
 
+            --Override hunter loc to include "Red Rot"
+            j_jen_hunter = {
+                name = 'The Hunter',
+                text = {
+                    'Whenever {C:blue}current hands{} are below your {C:blue}maximum hands{},',
+                    '{C:attention}refill{} your {C:blue}hands{} to the maximum',
+                    '{C:red,s,E:1}Succumbs to the Rot after #1#, or selecting the Red Rot Blind',
+                    '{C:inactive}(Selling this card at 7 rounds remaining or less also creates the Rot)',
+                    '{C:dark_edition,s:0.7,E:2}Face art by : jenwalter666',
+                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World'
+                }
+            },
+
             --ALMANAC + BUFFOONERY EXCLUSIVES--
             j_unik_buf_jen_kosmos_tea = { --godsmarble dorkshire tea from buffoonery, cause thats funny
                 name = 'Kosmos\' Tea',
                 text = {
                     "If hand contains exactly 6 cards",
-                    "All cards become Tainted Ceramic",
+                    "All scored cards become Tainted Ceramic",
                 }
             }
             
@@ -1194,7 +1239,7 @@ return {
             k_unik_legendary_nuke_start='"Jesus Christ! They\'ve done it... They\'ve done it!"', --threads 1984
             k_unik_placard_start="NO PLACARDED LOADS IN PLAY",
             k_unik_boo_start="Bigger Boo wants to know your location",
-            k_unik_rot_start='" I cannot help you. I cannot even help myself."',
+            k_unik_rot_start='" I cannot help you. I cannot even help myself."', --Five Pebbles
             k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."', -- darth vader, moving the goalposts
             k_unik_protection_racket_start='"The government has organized a protection racket."',
             k_unik_video_poker_start='#1 Classic Video Poker Games Worldwide!',
@@ -1265,6 +1310,10 @@ return {
             k_unik_cube_pack = "Cube Pack",
             k_unik_hands_remaining = " scoring hands remaining",
 
+            --Godsmarble ramirez family members
+            k_unik_family_disabled = "All abilities are disabled...",
+            k_unik_family_disabled2 = "...you monster.",
+            k_unik_family_disabled3 = "(They are no longer willing to help, after what you did.)",
             --Almanac Quotes:
 
             --Moonlight Cookie: She will be the first Joker with full almanac functionality (has a fusion, different quotes)
@@ -1283,6 +1332,68 @@ return {
             k_unik_celestial_of_chaos2 = "I'LL PLUNGE THE WORLD INTO THE VOID...",
             k_unik_celestial_of_chaos3 = "IT DOESN'T MATTER DOESN'T IT?",
 
+            --Unik
+            ---Normal:
+            k_unik_unik_normal1 = "Can't believe I just inserted myself here.",
+            k_unik_unik_normal2 = "I'll help out here, although I'll take my time.",
+            k_unik_unik_normal3 = "Maybe you don't mind I'm crossdressing here...",
+            ---Scared:
+            k_unik_unik_scared1 = "Wh... It's too much!",
+            k_unik_unik_scared2 = "What the hell is all this?!",
+            ---Godsmarble Near:
+            k_unik_unik_godsmarble1 = "I... I... am.... F A L L I N G...",
+            k_unik_unik_godsmarble2 = "WHAT IS HAPPENING TO ME?!",
+            k_unik_unik_godsmarble3 = "That thing is doing... SOMETHING!...",
+            k_unik_unik_godsmarble4 = "WHY DID YOU PUT THAT HERE?! IT HURTS SO MUCH!",
+            ---Godsmarbled: Cube of Calamity (basically I lose myself into mindlessness similar to Giygas)
+            k_unik_cube_of_calamity1 = "I   F E E L...    B A D...",
+            k_unik_cube_of_calamity2 = "I   C A N T...",
+            k_unik_cube_of_calamity3 = "F A L L I N G...",
+            k_unik_cube_of_calamity4 = "ITHURTSITHURTSITHURTSI T H U R T S...",
+            k_unik_cube_of_calamity5 = "E V E R Y T H I N G... G O N E",
+
+            --Chelsea
+            ---Normal:
+            k_unik_chelsea_normal1 = "Hola! Maybe I can help out?",
+            k_unik_chelsea_normal2 = "What is all this? Everything is quite different...",
+            k_unik_chelsea_normal3 = "Hey, is it alright if I do something here?",
+            k_unik_chelsea_normal4 = "I miss being with my family...",
+            k_unik_chelsea_normal_1member = "Mom! It’s nice to not be alone for once...",
+            k_unik_chelsea_normal_family = "Oh! Maya, Yokana! I’m glad you two are here!",
+
+            --godsmarble maya
+            k_unik_chelsea_normal_maya_god1 = "Mom! Maya! What happened to you?!",
+            k_unik_chelsea_normal_maya_god2 = "Oh god… Why did you do this to her?!",
+            
+            --godsmarble yokana
+            k_unik_chelsea_normal_yokana_god1 = "Mom! Can you hear me? Please?!",
+            k_unik_chelsea_normal_yokana_god2 = "I don’t want to hurt you… Please are you still here?...",
+
+            --both parents godsmarbled
+            k_unik_chelsea_normal_family_god1 = "You... Monster...",
+            k_unik_chelsea_normal_family_god2 = "Get... Out...",
+            k_unik_chelsea_normal_family_god3 = "*Sob* *Sob*",
+            k_unik_chelsea_normal_family_god4 = "Why did you do this to us...",
+            ---Scared:
+            k_unik_chelsea_scared1 = "It’s getting too much for me!",
+            k_unik_chelsea_scared2 = "¡Dios mío! What is going on??!",
+            ---Godsmarble Near:
+            k_unik_chelsea_godsmarble1 = "My arms are pulling apart!... It hurts...!",
+            k_unik_chelsea_godsmarble2 = "I feel so tight... My body is burning up...!",
+            k_unik_chelsea_godsmarble3 = "AAAAaaaaAAAARRRGHHH!!",
+            k_unik_chelsea_godsmarble4 = "IT HURTS SO MUCH!!!!",
+            k_unik_chelsea_godsmarble5 = "WAAAHHH!... aaarrgghhh...",
+            k_unik_chelsea_godsmarble6 = "(Uncontrollable crying)",
+            k_unik_chelsea_godsmarble_parents = "Mommy! Please... Help... Me...",
+            k_unik_chelsea_godsmarble_parents_gods = "Why..........",
+            ---Godsmarbled: Cube of Calamity (basically I lose myself into mindlessness similar to Giygas)
+            k_unik_mutilated_mess1 = "AAAAAAAAAAAAAAAAAA…A.AA.A..A.A.A.AAAAAAAAHHHH...",
+            k_unik_mutilated_mess2 = "Uuurggh... aarrrghh... AAAAAAA...arrgghh...",
+            k_unik_mutilated_mess3 = "*Sob* *Sob* *Sob* *Sob*",
+            k_unik_mutilated_mess4 = "H.....H—hurts.....",
+            k_unik_mutilated_mess5 = "(Nothing but uncontrollable crying echoes from her)",
+
+            --
             
 
         },
@@ -1319,7 +1430,7 @@ return {
             special_lose_unik_red_rot={ --red rot
                 "I do suggest not",
                 "entering Five Pebbles",
-                "with the conditon he has!",
+                "with the condition he has!",
             },
             --Turquoise tornado, harlequin hurricane,
             special_lose_unik_F5={
@@ -1431,6 +1542,7 @@ return {
         suits_singular={},
         tutorial={},
         v_dictionary={
+            a_EEchips = { "^^#1# Chips" },
             a_hyper_three_chips = { "^^^#1# Chips" },
             a_hyper_three_mult = { "^^^#1# Mult" },
             a_unik_hands_1={"#1# hands"},

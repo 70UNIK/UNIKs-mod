@@ -12,6 +12,7 @@ SMODS.Joker {
 	pos = { x = 4, y = 1 },
     cost = 0,
 	blueprint_compat = false,
+    no_dbl = true,
     perishable_compat = false,
 	eternal_compat = false,
     config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20} },

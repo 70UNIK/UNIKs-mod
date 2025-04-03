@@ -20,6 +20,11 @@ SMODS.Blind{
 		return { vars = { localize("k_unik_legendary_nuke_placeholder") } }
 	end,
     in_pool = function()
+        local straddle = 0
+        --if you increase straddle, these fuckers can spawn earlier!
+        if G.GAME.straddle then
+            straddle = straddle - G.GAME.straddle
+        end
         local hasExotic = false
         if not G.jokers or not G.jokers.cards then
 			return false
@@ -30,10 +35,10 @@ SMODS.Blind{
             end
         end
 
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 and hasExotic) or G.GAME.modifiers.unik_legendary_at_any_time) then
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*3) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
             if G.GAME.unik_scores_really_big then
                 --print(G.GAME.unik_scores_really_big)
-                if G.GAME.unik_scores_really_big > 6 then
+                if G.GAME.unik_scores_really_big > 6 - straddle then
                     return true
                 end
             end

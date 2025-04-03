@@ -71,6 +71,7 @@ SMODS.Joker {
 			end
 			if not Talisman.config_file.disable_anims and valid == true then
 				G.E_MANAGER:add_event(Event({
+					trigger = 'immediate',
 					func = function()
 						context.other_consumeable:juice_up(1, 1)
 						return true
@@ -87,6 +88,7 @@ SMODS.Joker {
 					if context.other_consumeable.ability.qty and context.other_consumeable.ability.qty > 1 then
 						for i = 1, context.other_consumeable.ability.qty-1 do
 							G.E_MANAGER:add_event(Event({
+								trigger = 'immediate',
 								func = function()
 									card:juice_up(1.0, 1.0)
 									G.ROOM.jiggle = G.ROOM.jiggle + 6
@@ -107,6 +109,7 @@ SMODS.Joker {
 						end
 					end
 					G.E_MANAGER:add_event(Event({
+						trigger = 'immediate',
                         func = function()
                             card:juice_up(1.0, 1.0)
                             G.ROOM.jiggle = G.ROOM.jiggle + 6
@@ -123,11 +126,12 @@ SMODS.Joker {
                         }),
                         EEEmult_mod = card.ability.extra.EEEmult,
                         colour = G.C.UNIK_VOID_COLOR,
-
+						
                     }
 				-- end
 				else
                     G.E_MANAGER:add_event(Event({
+						trigger = 'immediate',
                         func = function()
                             card:juice_up(1.0, 1.0)
                             G.ROOM.jiggle = G.ROOM.jiggle + 6

@@ -63,6 +63,7 @@ SMODS.Atlas({
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/debuff_jokers.lua")()
+NFS.load(mod_path .. "data/hooks/godsmarbling_sprites.lua")()
 SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
@@ -292,22 +293,9 @@ NFS.load(mod_path .. "data/jokers/unik.lua")()
 
 --adding fusions and jen exclusives to the mix
 if Jen and (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/mutilated_mess.lua")()
 	NFS.load(mod_path .. "data/jokers/celestial_of_chaos.lua")()
-
-	--The first fusion (with a placeholder sadly)
-	if Jen.fusions then
-		Jen.fusions['Mutate Moonlight Cookie'] = {
-			cost = 1e3,
-			output = "j_unik_celesial_of_chaos",
-			ingredients = {
-				'j_unik_moonlight_cookie',
-				'j_jen_godsmarble'
-			}
-		}
-		print("Fusion successfully applied!")
-	else
-		--error("Fusion failed to be applied",1)
-	end
+	NFS.load(mod_path .. "data/jokers/cube_of_calamity.lua")()
 end
 --function for reference
 
@@ -426,10 +414,18 @@ else
 			-- for i,v in pairs(Jen.fusions) do
 			-- 	print(v)
 			-- end
-			Jen.add_fusion('Mutate Moonlight Cookie',2e3,"j_unik_celestial_of_chaos",
+			Jen.add_fusion('Mutate Moonlight Cookie',1500,"j_unik_celestial_of_chaos",
 				'j_unik_moonlight_cookie',
 				'j_jen_godsmarble'
 			)
+			Jen.add_fusion('Mutilate Chelsea',300,"j_unik_mutilated_mess",
+				'j_unik_jsab_chelsea',
+				'j_jen_godsmarble'
+			)
+			Jen.add_fusion('Corrupt UNIK',1777,"j_unik_cube_of_calamity",
+			'j_unik_unik',
+			'j_jen_godsmarble'
+		)
 			print("Fusions successfully applied!")
 		else
 			error("Fusions failed to be applied",1)

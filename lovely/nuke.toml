@@ -156,6 +156,7 @@ elseif G.GAME.unik_killed_by_tornado_legendary then
 elseif G.GAME.unik_killed_by_rot then
     Jimbo:add_speech_bubble('special_lose_unik_red_rot', nil, {quip = true})
     G.GAME.unik_killed_by_rot = nil
+        G.GAME.unik_pentagram_manager_fix = nil
 elseif G.GAME.unik_killed_by_bigger_blind then
     Jimbo:add_speech_bubble('special_lose_bigger_blind', nil, {quip = true})
     G.GAME.unik_killed_by_bigger_blind = nil

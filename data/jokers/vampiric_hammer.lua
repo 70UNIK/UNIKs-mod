@@ -9,6 +9,7 @@ SMODS.Joker {
     atlas = 'unik_cursed',
     rarity = "cry_cursed",
 	pos = { x = 4, y = 2 },
+    no_dbl = true,
     cost = 1,
     --will not be changed in modest
     config = { extra = { selfDestruct = false,min_enhanced_cards = 2, enhanced_cards = 1} },

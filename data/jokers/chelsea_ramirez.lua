@@ -4,6 +4,53 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+
+local chelsea_quotes = {
+	normal = {
+		'k_unik_chelsea_normal1',
+		'k_unik_chelsea_normal2',
+		'k_unik_chelsea_normal3',
+        'k_unik_chelsea_normal4',
+	},
+    family1 = {
+        'k_unik_chelsea_normal_1member'
+    },
+    family2 = {
+        'k_unik_chelsea_normal_family'
+    },
+    godsmaya = {
+        'k_unik_chelsea_normal_maya_god1',
+        'k_unik_chelsea_normal_maya_god2'
+    },
+    godsyokana = {
+        'k_unik_chelsea_normal_yokana_god1',
+        'k_unik_chelsea_normal_yokana_god2'
+    },
+    godsorphan = {
+        'k_unik_chelsea_normal_family_god1',
+        'k_unik_chelsea_normal_family_god2',
+        'k_unik_chelsea_normal_family_god3',
+        'k_unik_chelsea_normal_family_god4',
+    },
+	drama = {
+		'k_unik_chelsea_scared1',
+        'k_unik_chelsea_scared2',
+	},
+	gods = {
+		'k_unik_chelsea_godsmarble1',
+		'k_unik_chelsea_godsmarble2',
+		'k_unik_chelsea_godsmarble3',
+        'k_unik_chelsea_godsmarble4',
+        'k_unik_chelsea_godsmarble5',
+        'k_unik_chelsea_godsmarble6',
+	},
+    gods_parents = {
+        'k_unik_chelsea_godsmarble_parents',
+    },
+    gods_orphan = {
+        'k_unik_chelsea_godsmarble_parents_gods',
+    }
+}
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_chelsea',
@@ -17,20 +64,31 @@ SMODS.Joker {
 	pos = { x = 0, y = 0 },
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
+    godsmarble_family_trauma = { x = 1, y = 0 },
+    drama = { x = 1, y = 0 }, --WIP: Remains the same
+	godsmarbling = {x = 1, y = 0 }, --may remove once a seperate "godsmarbling" sprite function is made (Scared but exclusively when godsmarble is present)
     cost = 12,
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {x_chips = 1.0, x_chips_mod = 0.1,family_x_bonus = 1.3} },
+    fusable = true,
+    config = { extra = {x_chips = 1.0, x_chips_mod = 0.1,family_x_bonus = 1.3,unik_godsmarble_debuff = false} },
     gameset_config = {
 		modest = { extra = {x_chips = 1.0, x_chips_mod = 0.05,family_x_bonus = 1.3} },
 	},
     pools = {["unik_cube"] = true },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.family_x_bonus} }
+        local quoteset = 'normal'
+		if (SMODS.Mods["jen"] or {}).can_load then
+			quoteset = Jen.dramatic and 'drama' or Jen.gods() and 'gods' or 'normal'
+        end
+		return { 
+            vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.family_x_bonus
+            ,localize(chelsea_quotes[quoteset][math.random(#chelsea_quotes[quoteset])] .. "")
+        } }
 	end,
     calculate = function(self, card, context)
-		if context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1)) then
+		if context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1)) and not card.ability.extra.unik_godsmarble_debuff then
 			return {
                 message = localize({
 					type = "variable",
@@ -76,17 +134,65 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
         -- end
 
         for _, v in pairs(SMODS.find_card('j_unik_jsab_chelsea')) do
-
-            v.ability.extra.x_chips = v.ability.extra.x_chips + v.ability.extra.x_chips_mod
+            if not v.ability.extra.unik_godsmarble_debuff then
+                v.ability.extra.x_chips = v.ability.extra.x_chips + v.ability.extra.x_chips_mod
+                card_eval_status_text(v, "extra", nil, nil, nil, {
+                    message = localize({
+                        type = "variable",
+                        key = "a_xchips",
+                        vars = { number_format(to_big(v.ability.extra.x_chips)) },
+                    }),
+                    colour = G.C.CHIPS,
+                })
+            end
+        end
+        for _, v in pairs(SMODS.find_card('j_unik_mutilated_mess')) do
+            v.ability.extra.EEchips = v.ability.extra.EEchips + v.ability.extra.EEchips_mod
             card_eval_status_text(v, "extra", nil, nil, nil, {
                 message = localize({
                     type = "variable",
-                    key = "a_xchips",
-                    vars = { number_format(to_big(v.ability.extra.x_chips)) },
+                    key = "a_EEchips",
+                    vars = { number_format(to_big(v.ability.extra.EEchips)) },
                 }),
-                colour = G.C.CHIPS,
+                colour = G.C.jen_RGB,
             })
-    end
+        end
     end
     return ret
 end
+
+-- --special function for when family members get godsmarbled
+-- function Family_godsmarble_loc(card)
+--     local debuffed = false
+--     local chelseaBlacklist = {'j_unik_impaled_inferno','j_unik_mutated_monster'}
+--     local yokanaBlacklist = {'j_unik_mutilated_mess','j_unik_impaled_inferno'}
+--     local mayaBlacklist = {'j_unik_mutilated_mess','j_unik_mutated_monster'}
+--     local chelseaWhitelist = {'j_unik_yokana','j_unik_mutated_monster'}
+--     local yokanaWhitelist = {'j_unik_mutilated_mess','j_unik_impaled_inferno'}
+--     local mayaWhitelist = {'j_unik_mutilated_mess','j_unik_mutated_monster'}
+--     local blacklist = nil
+--     local whitelist = nil
+--     if G.Jokers and G.Jokers.cards then
+--         if card.config.center.key == 'j_unik_jsab_yokana' then
+--             blacklist = yokanaBlacklist
+--         elseif  card.config.center.key == 'j_unik_jsab_chelsea' then
+--             blacklist = chelseaBlacklist
+--         elseif card.config.center.key == 'j_unik_jsab_maya' then
+--             blacklist = mayaBlacklist
+--         end
+--         if blacklist ~= nil and whitelist ~= nil then
+--             for j,w in pairs(blacklist) do
+--                 if v.config.center.key == w then
+--                     debuffed = true
+--                 end
+--             end
+--         end
+
+--     end
+-- 	if debuffed then
+--         card.ability.extra.unik_godsmarble_debuff = true
+-- 		return card.key .. "_" .. "debuff"
+--     else
+-- 		return card.key
+-- 	end
+-- end

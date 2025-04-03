@@ -14,6 +14,17 @@ payload = '''and card.config.center.key ~= "j_unik_impounded"
 and card.config.center.key ~= "j_unik_rancid_smoothie"'''
 match_indent = true
 
+### Make impounded sellable (cryptid build dev)
+# Patch into cryptid to force happiness to be positive in a reliable way
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/ui.lua"]'''
+pattern = '''and card.ability.name ~= "cry-Monopoly"'''
+position = "after"
+payload = '''and card.config.center.key ~= "j_unik_impounded" 
+and card.config.center.key ~= "j_unik_rancid_smoothie"'''
+match_indent = true
+
 ### allow modify cost of impounded
 [[patches]]
 [patches.pattern]

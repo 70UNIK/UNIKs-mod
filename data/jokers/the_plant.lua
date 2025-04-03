@@ -11,6 +11,7 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_the_plant',
+    no_dbl = true,
     atlas = 'unik_the_plant',
     rarity = "cry_cursed",
 	pos = { x = 0, y = 0 },

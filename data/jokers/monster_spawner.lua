@@ -10,6 +10,7 @@ SMODS.Joker {
     cost = 1,
 	blueprint_compat = false,
     perishable_compat = false,
+    no_dbl = true,
 	eternal_compat = false,
     config = { extra = {max_jokers = 2,jokers_spawned = 0,self_destruct = false} },
 	loc_vars = function(self, info_queue, center)

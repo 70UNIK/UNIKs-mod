@@ -21,6 +21,7 @@ SMODS.Joker {
 	key = 'unik_autocannibalism',
     atlas = 'unik_cursed',
     rarity = "cry_cursed",
+    no_dbl = true,
 	pos = { x = 0, y = 1 },
     cost = 1,
     config = { extra = { selfDestruct = false} },

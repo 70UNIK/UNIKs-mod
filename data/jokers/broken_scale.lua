@@ -9,6 +9,7 @@ SMODS.Joker {
 	key = 'unik_broken_scale',
     atlas = 'unik_cursed',
     rarity = "cry_cursed",
+    no_dbl = true,
 	pos = { x = 0, y = 2 },
     cost = 1,
     config = { extra = {rounds = 0,round_limit = 8} },
