@@ -48,7 +48,7 @@ SMODS.Blind{
             G.GAME.blind.triggered = true
             G.GAME.blind:wiggle()
 
-            --also immediately kill hunter
+            --also immediately kill hunter. Code taken from hunter kill function as its considered "killed by the rot"
             for i=1,#G.jokers.cards do
                 --print("POSSESS")
                  if G.jokers.cards[i].ability.name == "j_jen_hunter" then
@@ -63,8 +63,28 @@ SMODS.Blind{
                             G.jokers:emplace(card2)
                             card:set_eternal(nil)
                             card2:set_eternal(true)
-                            card:start_dissolve()
                             play_sound('jen_gore6')
+                            return true
+                        end
+                    }))
+                    for i = 1, card.ability.hands_replenished do
+                        G.E_MANAGER:add_event(Event({
+                            delay='0.1',
+                            trigger='after',
+                            func = function()
+                                local hunter_prizes = { 'c_jen_solace', 'c_jen_sorrow', 'c_jen_singularity', 'c_jen_pandemonium', 'c_jen_spectacle' }
+                                local card3 = create_card('Spectral', G.consumeables, nil, nil, nil, nil, pseudorandom_element(hunter_prizes, pseudoseed('hunter_prizecards')), 'hunter_prizecard')
+                                card3:add_to_deck()
+                                G.consumeables:emplace(card3)
+                                return true
+                            end
+                        }))
+                    end
+                    G.E_MANAGER:add_event(Event({
+                        delay='1',
+                        trigger='after',
+                        func = function()
+                            card:start_dissolve()
                             return true
                         end
                     }))

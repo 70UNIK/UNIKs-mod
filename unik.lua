@@ -265,8 +265,10 @@ NFS.load(mod_path .. "data/jokers/cube_joker.lua")()
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
-
-NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
+--banned in jen due to unredeem not working
+if Jen and (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
+end
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()

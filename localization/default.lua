@@ -425,8 +425,8 @@ return {
                     "{C:unik_plant_color}The Plant{} is triggered",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} Face Card(s))",
                     "{C:inactive,s:0.9,E:1}Grawr Charble Grawr!{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Super Mario Bros.{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Super Mario Bros.{}",
                 }                
             },
             j_unik_handcuffs = {
@@ -533,8 +533,8 @@ return {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
                     "{C:inactive,s:0.9,E:1}#3#{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
             j_unik_scratch = { 
@@ -551,8 +551,8 @@ return {
                     "each give {X:dark_edition,C:white}^#1#{} Mult for",
                     "their specified {C:attention}poker hand",
                     "{C:inactive,s:0.9,E:1}#3#{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
             j_unik_moonlight_cookie_madness = { --^same as modest, but with an extra consumable slot
@@ -562,8 +562,8 @@ return {
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
                     "{C:attention}+#2#{} Consumable Slot(s)",
                     "{C:inactive,s:0.9,E:1}#3#{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
             j_unik_celestial_of_chaos = { --^same as modest, but with an extra consumable slot
@@ -573,7 +573,7 @@ return {
                     "each give {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult",
                     "{C:attention}+#2#{} Consumable Slot(s)",
                     "{C:inactive,s:0.9,E:1}#3#{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                 }
             },
             j_unik_unik = { --mainline: ^0.03 chips
@@ -583,8 +583,8 @@ return {
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
                     "{C:inactive,s:0.9,E:1}#4#{}",
-                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
             },
             j_unik_cube_of_calamity = { --mainline: ^0.03 chips
@@ -594,7 +594,7 @@ return {
                 "for each {C:attention}7{} scored",
                 "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2#{C:inactive} Chips)",
                 "{C:inactive,s:0.9,E:1}#3#{}",
-                "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+                "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
             }
         },
             j_unik_unik_modest = { --modest: ^0.01 mult, caps at ^2.5 chips
@@ -605,8 +605,8 @@ return {
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
                     "{C:inactive}(Caps at {X:dark_edition,C:white}^#3#{C:inactive} Chips)",
                     "{C:inactive,s:0.9,E:1}#4#{}",
-                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
             },
             --Cube jokers
@@ -627,8 +627,8 @@ return {
                     "or {C:attention}Joker{} triggered during play",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:inactive,s:0.9,E:1}I'll always be there for you and my family.{}",
-                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
             j_unik_jsab_maya = { --epic: each non-face card played gains 0.75x chips, each non-face card held gains 0.25x chips
@@ -641,8 +641,8 @@ return {
                     "{C:attention}Held{} cards permanently gain {X:chips,C:white}X#2#{} Chips",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive,s:0.9,E:1}I'm here to help, but PLEASE be careful.{}",
-                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
             
@@ -655,8 +655,8 @@ return {
                     --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
                     "{C:inactive,s:0.9,E:1}#4#{}",
-                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
             j_unik_jsab_chelsea_debuffed = { --godsmarble her family members, she will NOT help you anymore
@@ -664,8 +664,8 @@ return {
                 text={
                     "{C:red}All abilities are disabled... You monster.",
                     "{C:inactive,s:0.9,E:1}#4#{}",
-                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
             j_unik_mutilated_mess = { --epic: gains x0.07 chips for EVERY chips, xchips or ^chips trigger (pentationals and tettrati0onals included)
@@ -677,7 +677,7 @@ return {
                     --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:jen_RGB,C:white}^^#1#{C:inactive} Chips)",
                     "{C:inactive,s:0.9,E:1}#3#{}",
-                    "{C:dark_edition,s:0.6,E:2}Character and face art by : 70UNIK{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                 },
             },
             --rare: x1.5x mult from destroying cursed jokers, but only up to 8, the 9th one will cause self destruciton and release ALL cursed jokers
@@ -699,9 +699,9 @@ return {
                     "{C:red}Destroy{} {C:attention}all{} played cards except the", 
                     "{C:attention}leftmost{} played card after scoring",
                     "{C:inactive,s:0.9,E:1}#1#{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:dark_edition,s:0.6,E:2}Character by : Kaeofthekae{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : SPRUNKI{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
                 },                
             },
             j_unik_lily_sprunki_modest = {
@@ -710,9 +710,9 @@ return {
                     "{C:red}Destroy{} played cards except the", 
                     "{C:attention}3 leftmost{} played cards after scoring",
                     "{C:inactive,s:0.9,E:1}#1#{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:dark_edition,s:0.6,E:2}Character by : Kaeofthekae{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : SPRUNKI{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
                 },                
             },
             j_unik_1_5_joker = {
@@ -845,8 +845,8 @@ return {
                     "{C:red,s:0.7}(Can only copy once from {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7}) {C:attention,s:0.7}#5#{}",   
                     "{C:red,s:0.4}(Cannot exceed {X:dark_edition,C:white,s:0.4}^e300{C:red,s:0.4} due to bignum copy bug){}",   
                     "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
             j_unik_white_lily_cookie_modest = { --instead of +^1.1 per destruction, becomes +x1.25 Mult 
@@ -861,8 +861,8 @@ return {
                     "{C:red,s:0.7}(Can only copy once from {C:cry_code,s:0.7}//:COMMIT{C:red,s:0.7}){}",   
                     "#5#",      
                     "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Cookie Run{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
             j_unik_coupon_codes = {
@@ -905,9 +905,9 @@ return {
                     "if hand contains a scoring",
                     "{C:attention}Odd{} and {C:attention}Even{} card",
                     "{C:inactive,s:0.9,E:1}Teehee! It's time I join in on the fun!{}",
-                    "{C:dark_edition,s:0.6,E:2}Face art by : 70UNIK{}",
-                    "{C:dark_edition,s:0.6,E:2}Character by : KittyKnight{}",
-                    "{C:cry_exotic,s:0.6,E:2}Origin : Balatro - Extra Credit{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:dark_edition,s:0.7,E:2}Character by : KittyKnight{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Balatro - Extra Credit{}",
                 }
             }, 
             j_ExtraCredit_averagealice = { --overriding loc to include a 0.6% chance to get Alice on purchase
@@ -923,10 +923,10 @@ return {
             j_unik_foundation = {
                 name = 'Foundation',
                 text = {
-                    "After playing {C:attention}80{} hands",
+                    "After playing {C:attention}#2#{} hands",
                     "sell this card to create",
                     "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
-					"{C:inactive}(Currently #1#/80){}",
+					"{C:inactive}(Currently #1#/#2#){}",
                     "{C:inactive,E:1,s:0.7}It will be worth it in the end!{}",
                 }
             },
@@ -957,12 +957,41 @@ return {
                 text = {
                     'Whenever {C:blue}current hands{} are below your {C:blue}maximum hands{},',
                     '{C:attention}refill{} your {C:blue}hands{} to the maximum',
-                    '{C:red,s,E:1}Succumbs to the Rot after #1#, or selecting the Red Rot Blind',
-                    '{C:inactive}(Selling this card at 7 rounds remaining or less also creates the Rot)',
-                    '{C:dark_edition,s:0.7,E:2}Face art by : jenwalter666',
-                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World'
+                    '{C:red,s,E:1}Succumbs to the Rot after #1#, or selecting Red Rot Blind',
+                    'When this Joker {C:red}dies to the Rot{},',
+                    '{C:attention}create random {C:spectral}Spirits',
+                    'equal to the {C:attention}cumulative number of',
+                    '{C:blue}hands{} that this Joker has replenished',
+                    '{C:inactive}(Currently #2#)',
+                    '{C:inactive}(Selling this card at 7 rounds remaining creates Rot, but gives {C:red}no rewards{C:inactive})',
+                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
+                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
                 }
             },
+            --override saint loc to allow foundations to produce exotics after 5 hands
+            j_jen_saint = {
+                name = 'The Saint',
+                text = {
+                    '{C:spectral}Gateway{} will {C:attention}not destroy Jokers{} when used',
+                    '{C:cry_epic}Foundation{} requires only {C:attention}5{} hands played to activate',
+                    'After using {C:attention}10 {C:spectral}Gateways{}, {C:jen_RGB}attune{} this Joker',
+                    '{C:inactive,s:1.5}[{C:attention,s:1.5}#1#{C:inactive,s:1.5}/10]',
+                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
+                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
+                }
+            },
+            j_jen_saint_attuned = {
+                name = 'The Saint {C:jen_RGB}(Attuned)',
+                text = {
+                    '{C:spectral}Gateway{} will {C:attention}not destroy Jokers{} when used',
+                    '{C:cry_epic}Foundation{} is always {C:dark_edition}negative{} and activated {C:attention}immediately{}',
+                    '{C:cry_ascendant}Yawetag{} also has {C:attention}no negative effect{} when used',
+                    '{X:black,C:red,s:3}^^^3{C:purple} Chips & Mult',
+                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
+                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
+                }
+            },
+            --override attuned saint loc to force foundations to be negative and to produce exotics immediately.
 
             --ALMANAC + BUFFOONERY EXCLUSIVES--
             j_unik_buf_jen_kosmos_tea = { --godsmarble dorkshire tea from buffoonery, cause thats funny
