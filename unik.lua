@@ -14,6 +14,11 @@ SMODS.current_mod.config_tab = function() --Config tab
             ref_table = unik_config,
             ref_value = "unik_legendary_blinds",
         }),
+		create_toggle({
+            label = localize("unik_almanac_fusions_in_cryptid_option"),
+            ref_table = unik_config,
+            ref_value = "unik_almanac_fusions_in_cryptid",
+        }),
       },
     }
 end
@@ -187,14 +192,20 @@ NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
 NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 --manacle tag: -1 hand size
 
---Extended empowered pack: Chose between a SOUL, a gateway or a foundation 
---Tags
--- Devil's Tag (GD demon): 4 in 5 chance of the following random negative effects:
---- Spawns a cursed Joker
---- Destroys a random Joker owned, bypassing eternals
---- Turn two random Jokers positive
---- Create a "Vessel" Tag (3x blind size)
--- otherwise create an extended empowered pack
+--If jens not installed, for presentation purposes, create """"dummy"""" versions of Jen's rarities, to act as a "preview"
+if not (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/hooks/color_updater.lua")()
+end
+SMODS.Rarity {
+	key = 'ritualistic_placeholder',
+	loc_txt = {},
+	badge_colour = G.C.BLACK
+}
+SMODS.Rarity {
+	key = 'transcendent_placeholder',
+	loc_txt = {},
+	badge_colour = G.C.jen_RGB
+}
 
 --BLINDS--
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
@@ -236,8 +247,8 @@ end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
 -- ENHANCEMENTS --
--- When Jen's almanac is updated, also add this
-if (SMODS.Mods["jen"] or {}).can_load and (SMODS.Mods["Buffoonery"] or {}).can_load then
+-- Requires both buffoonery and jen's almanac
+if (unik_config.unik_almanac_fusions_in_cryptid or (SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
 	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
 end
 
@@ -266,7 +277,7 @@ NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 --banned in jen due to unredeem not working
-if Jen and (SMODS.Mods["jen"] or {}).can_load then
+if not (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 end
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
@@ -294,9 +305,11 @@ NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
 
 --adding fusions and jen exclusives to the mix
-if Jen and (SMODS.Mods["jen"] or {}).can_load then
+if unik_config.unik_almanac_fusions_in_cryptid or (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/mutilated_mess.lua")()
-	NFS.load(mod_path .. "data/jokers/celestial_of_chaos.lua")()
+	if (SMODS.Mods["jen"] or {}).can_load then
+		NFS.load(mod_path .. "data/jokers/celestial_of_chaos.lua")()
+	end
 	NFS.load(mod_path .. "data/jokers/cube_of_calamity.lua")()
 end
 --function for reference
@@ -364,6 +377,8 @@ end
 
 --Multiplies the card's size by mod - solely for the main menu- code by jen 
 --Only loads in cryptid by itself. It will not run with jens installed
+--If Jen is enabled, replace existing sizes with jen sizes to make it more in line with Epic Blinds
+
 if not (SMODS.Mods["jen"] or {}).can_load then
 	function Card:resize(mod, force_save)
 		self:hard_set_T(self.T.x, self.T.y, self.T.w * mod, self.T.h * mod)

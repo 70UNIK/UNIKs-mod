@@ -10,12 +10,13 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    jen_blind_resize = 1e66,
     ignore_showdown_check = true,
     set_blind = function(self, reset, silent)
         G.GAME.unik_killed_by_sword_legendary = true
         --set blind size to ^2.666x
         G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
-        ease_discard(-G.GAME.current_round.discards_left)
+        ease_discard(-G.GAME.current_round.discards_left - 666)
         G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
         ease_hands_played(-G.GAME.blind.hands_sub)
         G.GAME.unik_original_hand_size = G.hand.config.card_limit
@@ -25,7 +26,7 @@ SMODS.Blind{
         local straddle = 0
         --if you increase straddle, these fuckers can spawn earlier!
         if G.GAME.straddle then
-            straddle = straddle - G.GAME.straddle
+            straddle = G.GAME.straddle
         end
         local hasExotic = false
         if not G.jokers or not G.jokers.cards then
@@ -36,11 +37,16 @@ SMODS.Blind{
                 hasExotic = true
             end
         end
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*3) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*5) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
             return true
         end
         return false
     end,
+    --no fucking around this time
+    cry_after_play = function(self)
+        ease_hands_played(-G.GAME.current_round.hands_left)
+        ease_hands_played(-666)
+	end,
     recalc_debuff = function(self, card, from_blind)
         if (card.area == G.jokers) and (card.config.center.key == "j_burglar" or card.config.center.key == "j_cry_effarcire") then
             return true
@@ -50,7 +56,7 @@ SMODS.Blind{
     --somehow if that happens, set the base to be 
     disable = function(self)
         G.GAME.unik_killed_by_sword_legendary = nil
-        ease_discard(G.GAME.blind.discards_sub)
+        ease_discard(G.GAME.blind.discards_sub + 666)
         ease_hands_played(G.GAME.blind.hands_sub)
         G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 1))
         if G.jokers then

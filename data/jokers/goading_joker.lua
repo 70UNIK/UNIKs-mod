@@ -10,6 +10,7 @@ SMODS.Joker {
     rarity = "cry_cursed",
 	pos = { x = 2, y = 2 },
     no_dbl = true,
+    experimental = true,
     cost = 1,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Spades",debuff_name = "unik_goad",death_message = "k_unik_goading_fuck_you",color = "b95c96",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true},

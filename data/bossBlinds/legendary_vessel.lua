@@ -8,6 +8,7 @@ SMODS.Blind{
     boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 2,
+    jen_blind_resize = 1e300, --To align with epic blind sizing
     gameset_config = {
 		modest = { disabled = true},
 	},
@@ -26,7 +27,7 @@ SMODS.Blind{
         local straddle = 0
         --if you increase straddle, these fuckers can spawn earlier!
         if G.GAME.straddle then
-            straddle = straddle - G.GAME.straddle
+            straddle = G.GAME.straddle
         end
         if not G.jokers or not G.jokers.cards then
 			return false
@@ -37,7 +38,12 @@ SMODS.Blind{
             end
         end
 
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*3) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
+        --how this works:
+        --Disabled in modest
+        --In base cryptid, has to exceed round 100 with an exotic in hand to activate
+        --In almanac, just has to exceed round 100 - (straddle x 5)
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*5) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
+
             return true
         end
         return false

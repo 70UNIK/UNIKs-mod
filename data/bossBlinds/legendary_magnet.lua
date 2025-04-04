@@ -1,4 +1,4 @@
---+5 Hand Size, Add polychrome steel kings equal to 3x the cards in deck. If a steel card is held or a polychrome card is played, instantly die.
+--+5 Hand Size, Add polychrome steel kings equal to 3x the cards in deck. If a steel card is held or a polychrome card is played, instantly lose.
 --Basically Magnet + EpicFish + instant death = horrible.
 --Cannot be skipped or disabled by any means.
 SMODS.Blind{
@@ -13,6 +13,7 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    jen_blind_resize = 1e16,
     ignore_showdown_check = true,
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
@@ -38,7 +39,11 @@ SMODS.Blind{
                         G.P_CENTERS.m_steel, 
                         {playing_card = G.playing_card})
                         card:set_seal('Red',nil, true)
-                         card.ability.unik_niko = true --Avoid permanent damage and lag
+                        --only niko if not jens mod (for balance),
+                        if not (SMODS.Mods["jen"] or {}).can_load then
+                            card.ability.unik_niko = true
+                        end
+                         --Avoid permanent damage and lag
                         --card:set_edition({ polychrome = true }, nil, nil, true) --too long
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card)
@@ -59,7 +64,7 @@ SMODS.Blind{
         local straddle = 0
         --if you increase straddle, these fuckers can spawn earlier!
         if G.GAME.straddle then
-            straddle = straddle - G.GAME.straddle
+            straddle = G.GAME.straddle
         end
         local hasExotic = false
         if not G.jokers or not G.jokers.cards then
@@ -70,7 +75,7 @@ SMODS.Blind{
                 hasExotic = true
             end
         end
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*3) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*5) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
             return true
         end
         return false
@@ -167,6 +172,8 @@ SMODS.Blind{
         end
 	end,
 }
+
+
 
 --Hooks taken from Jen's for Epic Blinds
 local disblref2 = Blind.disable

@@ -41,6 +41,19 @@ local disableable = G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.bl
 '''
 match_indent = true
 
+### sell luchador to do nothing
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then'''
+position = "at"
+payload = '''
+if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss') and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank')) then
+
+'''
+match_indent = true
+
+
 [[patches]]
 [patches.pattern]
 target = "card.lua"

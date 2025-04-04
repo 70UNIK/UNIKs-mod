@@ -11,6 +11,7 @@ SMODS.Joker {
     no_dbl = true,
 	pos = { x = 3, y = 0 },
     cost = 1,
+    experimental = true,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Diamonds",debuff_name = "unik_window",death_message = "k_unik_window_fixed",color = "a9a295",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,

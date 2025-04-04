@@ -167,6 +167,9 @@ function turnJokerIntoRot(location)
     and not G.jokers.cards[location].ability.cry_absolute
     and not G.jokers.cards[location].ability.jen_permaeternal
     and not G.jokers.cards[location].ability.jen_dissolve_immune
+    and not G.jokers.cards[location].config.center.jen_permaeternal
+    and not G.jokers.cards[location].config.center.jen_dissolve_immune
+    and not G.jokers.cards[location].config.center.immune_to_vermillion
 ) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then

@@ -11,9 +11,18 @@ local cube_quotes = {
 }
 
 SMODS.Joker {
+    dependencies = {
+        mods = {
+            "jen", 
+          }
+    },
+    gameset_config = {
+		modest = {disabled = true},
+	},
 	key = 'unik_cube_of_calamity',
     atlas = 'placeholders',
-    rarity = "jen_transcendent",
+    rarity = "unik_transcendent_placeholder",
+    
     pos = { x = 1, y = 1 },
 	-- -- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	-- soul_pos = { x = 1, y = 0 },
@@ -21,11 +30,11 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
+    no_doe = ((SMODS.Mods["jen"] or {}).can_load or unik_config.unik_almanac_fusions_in_cryptid),
     config = { extra = {EEEchips_mod = 0.02, EEEchips = 1.0} }, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		return {
-		key = Cryptid.gameset_loc(self, {modest = "modest" }), 
 		vars = {center.ability.extra.EEEchips_mod,center.ability.extra.EEEchips
 	,localize(cube_quotes[quoteset][math.random(#cube_quotes[quoteset])] .. "")
 	} }

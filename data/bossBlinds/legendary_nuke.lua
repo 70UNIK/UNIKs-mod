@@ -12,6 +12,7 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    --no jen resize to make it more painful in almanac
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
 		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
@@ -23,7 +24,7 @@ SMODS.Blind{
         local straddle = 0
         --if you increase straddle, these fuckers can spawn earlier!
         if G.GAME.straddle then
-            straddle = straddle - G.GAME.straddle
+            straddle = G.GAME.straddle
         end
         local hasExotic = false
         if not G.jokers or not G.jokers.cards then
@@ -35,7 +36,7 @@ SMODS.Blind{
             end
         end
 
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*3) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*5) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
             if G.GAME.unik_scores_really_big then
                 --print(G.GAME.unik_scores_really_big)
                 if G.GAME.unik_scores_really_big > 6 - straddle then

@@ -177,3 +177,13 @@ if jkr.config.center.key == "j_unik_white_lily_cookie" then
 end
 '''
 match_indent = true
+
+### jen rgb for when you do enable almanac fusions in base cryptid (can only appear in DoE)
+[[patches]]
+[patches.pattern]
+target = "globals.lua"
+pattern = "EDITION = {1,1,1,1},"
+position = "before"
+payload = '''jen_RGB = {0,0,0,1},
+jen_RGB_HUE = 0,'''
+match_indent = true

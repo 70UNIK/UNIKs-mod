@@ -114,7 +114,7 @@ return {
                 text = {
                     "^0.8 blind size",
                     "If score exceeds #1#,",
-                    "instantly die",
+                    "instantly lose",
                 },
             },
             bl_unik_legendary_vessel={
@@ -122,14 +122,14 @@ return {
 				text = {
                     "^2.666 Blind Size",
 					"If requirements reached before",
-                    "last hand, instantly die",
+                    "last hand, instantly lose",
 				},
             },
             bl_unik_legendary_trophy={
                 name = "Häpeänpalkinto", --Trophy of Dishonor
 				text = {
                     "If Mult, XMult or ^Mult",
-					"is triggered",
+					"is triggered during scoring",
                     "hand will not score",
 				},  
             },            
@@ -156,7 +156,7 @@ return {
                     "Set hands to 66", -- set hands to 66, only 23 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
                     "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity
                     "will score",
-                    "(always 1 every <=22 hands)",
+                    "(always 1 every <=33 hands)",
 				},                  
             },
             bl_unik_legendary_leaf={
@@ -175,7 +175,7 @@ return {
                     "add absolute to each one owned",
                     "if any Cursed Joker is destroyed",
                     "by Formidiulosus or Ghost Trap,", 
-                    "instantly die"
+                    "instantly lose"
                 }
             },
             --just like the actual gambling machine - Jacks or better
@@ -1252,6 +1252,7 @@ return {
         dictionary={
 
             unik_legendary_blinds_option = "Legendary Blinds (Restart Required)",
+            unik_almanac_fusions_in_cryptid_option = "Enable Almanac Fusions in Base Cryptid (Restart Required)",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
             k_unik_happiness2="HAPPINESS IS MANDATORY.",
@@ -1338,6 +1339,10 @@ return {
             k_unik_active="Active!",
             k_unik_cube_pack = "Cube Pack",
             k_unik_hands_remaining = " scoring hands remaining",
+
+            --placeholder fusion rarities
+            k_unik_transcendent_placeholder = "Transcendent",
+            k_unik_ritualistic_placeholder = "Ritualistic",
 
             --Godsmarble ramirez family members
             k_unik_family_disabled = "All abilities are disabled...",

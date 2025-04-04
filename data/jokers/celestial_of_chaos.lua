@@ -8,9 +8,19 @@ local celestial_quotes = {
 
 }
 SMODS.Joker {
+	dependencies = {
+        mods = {
+            "jen", 
+          }
+    },
+	gameset_config = {
+		modest = {disabled = true},
+		mainline = {disabled = not (SMODS.Mods["jen"] or {}).can_load}, 
+		madness = {disabled = not (SMODS.Mods["jen"] or {}).can_load} --will never load without omega consumeables 
+	},
 	key = 'unik_celestial_of_chaos',
     atlas = 'placeholders',
-    rarity = "jen_transcendent",
+    rarity = "unik_transcendent_placeholder",
 	pos = { x = 1, y = 1 },
 	-- -- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	-- soul_pos = { x = 1, y = 0 },
@@ -19,7 +29,6 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	no_doe = true,
-    dangerous = true, --especially with incantation.
 	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
 	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
     config = { extra = { EEEmult = 1.3,consumeSlot = 6} },

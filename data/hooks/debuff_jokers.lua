@@ -136,13 +136,7 @@ function copy_card(other, new_card, card_scale, playing_card, strip_edition)
        ----print("deathhook")
       --print("4")
         CheckDebuffSuits()
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            func = function()
-                G.GAME.unik_stop_repeat = nil
-                return true
-            end
-        }))
+        G.GAME.unik_stop_repeat = nil
     end
     return res
 end
@@ -154,13 +148,7 @@ function Card:change_suit(new_suit)
        --print("3")
     --print("suitchange")
         CheckDebuffSuits()
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            func = function()
-                G.GAME.unik_stop_repeat = nil
-                return true
-            end
-        }))
+        G.GAME.unik_stop_repeat = nil
     --end
     return res
 end
@@ -172,24 +160,10 @@ function Card:set_ability(center, initial, delay_sprites,from_deck)
     -- end
     --print(center == G.P_CENTERS.m_wild)
     if center == G.P_CENTERS.m_wild and not initial and not from_deck then 
-       --print("2")
-      -- --print("setabilityhook")
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            func = function()
-                CheckDebuffSuits() 
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    func = function()
-                        G.GAME.unik_stop_repeat = nil
-                        return true
-                    end
-                }))
-                return true
-            end
-        }))
-        
-        
+        --print("2")
+        -- --print("setabilityhook")
+        CheckDebuffSuits() 
+        G.GAME.unik_stop_repeat = nil
     end
     local rest = setAbilityHook(self,center,initial,delay_sprites)
     return rest
@@ -207,13 +181,8 @@ function CardArea:emplace(card, location, stay_flipped)
 )then
    --print("5")
         CheckDebuffSuits()
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            func = function()
-                G.GAME.unik_stop_repeat = nil
-                return true
-            end
-        }))
+        G.GAME.unik_stop_repeat = nil
+
     end
 end
 local add_to_deckHook = Card.add_to_deck
@@ -228,13 +197,7 @@ function Card:add_to_deck(from_debuff)
 )then
    --print("6")
         CheckDebuffSuits()
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            func = function()
-                G.GAME.unik_stop_repeat = nil
-                return true
-            end
-        }))
+        G.GAME.unik_stop_repeat = nil
     end
     return res
 end
@@ -262,13 +225,7 @@ function Card:remove_from_deck(from_debuff)
 )) then
        --print("7")
         CheckDebuffSuits()
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            func = function()
-                G.GAME.unik_stop_repeat = nil
-                return true
-            end
-        }))
+        G.GAME.unik_stop_repeat = nil
     end
     
     local ret = removeHook3(self,from_debuff)
@@ -311,12 +268,13 @@ function Card:remove_from_deck(from_debuff)
             end
         }))
     end
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        func = function()
-            G.GAME.unik_stop_repeat = nil
-            return true
-        end
-    }))
+    G.GAME.unik_stop_repeat = nil
+    -- G.E_MANAGER:add_event(Event({
+    --     trigger = 'after',
+    --     func = function()
+            
+    --         return true
+    --     end
+    -- }))
     return ret
 end

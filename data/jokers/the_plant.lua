@@ -18,6 +18,7 @@ SMODS.Joker {
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 2, y = 0,extra = { x = 1, y = 0 } },
     cost = 1,
+    experimental = true, --requires a complex function for iterating per card so this is appropriate
     config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false,debuff_name = "unik_plant",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true, ["unik_copyrighted"] = true },
 	blueprint_compat = false,

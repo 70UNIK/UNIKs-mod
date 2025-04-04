@@ -9,17 +9,25 @@ local mess_quotes = {
 
 }
 SMODS.Joker {
+	dependencies = {
+        mods = {
+            "jen", 
+          }
+    },
 	-- How the code refers to the joker.
     atlas = 'placeholders',
     key = 'unik_mutilated_mess',
-    rarity = 'jen_ritualistic',
+    rarity = 'unik_ritualistic_placeholder',
+	gameset_config = {
+		modest = {disabled = true},
+	},
 	pos = { x = 1, y = 1 },
     cost = 250,
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
     config = { extra = {EEchips = 1.0, EEchips_mod = 0.05} },
-    no_doe = true,
+    no_doe = ((SMODS.Mods["jen"] or {}).can_load or unik_config.unik_almanac_fusions_in_cryptid),
 	loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
 		return { 
