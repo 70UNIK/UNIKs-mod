@@ -56,6 +56,17 @@ if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disab
     G.GAME.blind:wiggle()
     G.ROOM.jiggle = G.ROOM.jiggle + 3
 end
+-- The Vice: Halve interval of blind = 
+if G.GAME.blind and G.GAME.unik_vice_enabled and not (G.GAME.blind.disabled) then
+    G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze * 2
+    G.GAME.blind.triggered = true
+    G.GAME.blind:wiggle()
+    G.ROOM.jiggle = G.ROOM.jiggle + 3
+    local text = localize('k_unik_viced')
+    attention_text({
+        scale = 0.8, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
+    })
+end
 -- scores really big for regular indigo icbm. Can only spawn if you scored over ^1.5 reqs consecutively
 local upper22 = G.GAME.chips
 local ceiling22 = G.GAME.blind.chips^2

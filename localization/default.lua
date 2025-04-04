@@ -201,6 +201,14 @@ return {
                     "defeated blind",
 				},
             },
+            bl_unik_vice={
+                name = "The Vice",
+				text = {
+					"Defeating this Blind",
+                    "will cause Final Boss Blinds",
+                    "to appear every #1#",
+				},
+            },
             bl_unik_the_petard={
                 name = "The Petard",
 				text = {
@@ -1318,6 +1326,7 @@ return {
             k_unik_poppy_placeholder="(2.5x requirements)",
             k_unik_nuke_placeholder="(3x requirements)",
             k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
+            k_unik_vice_placeholder ="(halved Final Boss spawn ante requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $40",
@@ -1337,6 +1346,7 @@ return {
             unik_debuff_no_pairs="No Pairs",
             k_unik_average_alice="Average!",
             k_unik_active="Active!",
+            k_unik_viced="Final Bosses now appear twice as often",
             k_unik_cube_pack = "Cube Pack",
             k_unik_hands_remaining = " scoring hands remaining",
 

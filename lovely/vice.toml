@@ -1,0 +1,23 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+## vice's fx: make showdown blinds appear twice as frequent
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''elseif not v.boss.showdown and (v.boss.min <= math.max(1, G.GAME.round_resets.ante) and ((math.max(1, G.GAME.round_resets.ante))%G.GAME.win_ante ~= 0 or G.GAME.round_resets.ante < 2)) then
+    eligible_bosses[k] = true
+elseif v.boss.showdown and (((G.GAME.round_resets.ante)%G.GAME.win_ante == 0 and G.GAME.round_resets.ante >= 2) or G.GAME.modifiers.cry_big_showdown ) then
+    eligible_bosses[k] = true
+end'''
+position = 'at'
+payload = '''
+elseif not v.boss.showdown and (v.boss.min <= math.max(1, G.GAME.round_resets.ante) and ((math.max(1, G.GAME.round_resets.ante))%math.ceil(G.GAME.win_ante/G.GAME.unik_vice_squeeze) ~= 0 or G.GAME.round_resets.ante < 2)) then
+    eligible_bosses[k] = true
+elseif v.boss.showdown and (((G.GAME.round_resets.ante)%math.ceil(G.GAME.win_ante/G.GAME.unik_vice_squeeze) == 0 and G.GAME.round_resets.ante >= 2) or G.GAME.modifiers.cry_big_showdown ) then
+    eligible_bosses[k] = true
+end
+'''
+match_indent = true
