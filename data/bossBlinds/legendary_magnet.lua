@@ -190,6 +190,11 @@ function Blind:disable()
             G.ROOM.jiggle = G.ROOM.jiggle + 7
 			G.GAME.blind:wiggle()
 			return true
+        elseif obj.boss.epic then
+			play_sound('cancel', 0.8, 1)
+			jl.a(obj.immunity_quote or 'Blind is immune!', G.SETTINGS.GAMESPEED * 2, 0.8, obj.boss_colour or G.C.RED)
+			G.GAME.blind:wiggle()
+			return true
 		end
 	end
 	return disblref2(self)
@@ -206,6 +211,9 @@ G.FUNCS.reroll_boss = function(e)
         })
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+    elseif obj.boss.epic then
+        play_sound('cancel', 0.8, 1)
+        jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, obj.boss_colour or G.C.RED)
 	else
         
 		return gfrb2(e)

@@ -53,6 +53,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "unik_sticker_deck",
+	path = "unik_sticker_decks.png",
+	px = 71,
+	py = 95
+}
 --hooks--
 ---happiness is mandatory ---
 SMODS.Atlas({ 
@@ -242,6 +248,7 @@ NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
 if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
@@ -260,6 +267,7 @@ end
 
 -- JOKERS --
 --- Common ---
+
 -- NFS.load(mod_path .. "data/jokers/holepunched_card.lua")() -- too unoriginal? Could have niche use in multi card hands, but is hanging chad with extra steps
 
 -- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS

@@ -153,3 +153,15 @@ position = "after"
 payload = '''
 unik_positive = { atlas = "unik_edition_deck", pos = { x = 0, y = 0 } },'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/enhanced.lua"]'''
+pattern = '''cry_flickering = { atlas = "cry_atlasdeck", pos = { x = 6, y = 2 } },'''
+position = "after"
+payload = '''
+unik_depleted = { atlas = "unik_sticker_deck", pos = { x = 0, y = 0 } },
+unik_disposable = { atlas = "unik_sticker_deck", pos = { x = 1, y = 0 } },
+unik_niko = { atlas = "unik_sticker_deck", pos = { x = 2, y = 0 } },
+unik_impounded = { atlas = "unik_sticker_deck", pos = { x = 0, y = 1 } },'''
+match_indent = true

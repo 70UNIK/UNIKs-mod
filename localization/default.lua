@@ -81,6 +81,39 @@ return {
                     "requirements by 3 antes",
 				},
             },
+            bl_unik_epic_artisan={
+                name = "Korruptoitunuttietokoneenluoja", --the corrupt computer creator
+				text = {
+                    "Shop rerolls this ante increase",
+                    "Blind requirements by ^#1#",
+                    "#2#", --"If done < 10 rerolls this ante,",
+                    "#3#", --"on Blind select, instantly lose",
+				},
+            },
+            bl_unik_epic_collapse={ --only appears if you have at least 5 stone cards in the deck
+                name = "Kaatuvapilvenpiirtäjä", --the collapsing skyscraper
+				text = {
+                    "If played hand",
+                    "contains a suit or a rank,",
+                    "instantly lose",
+				},
+            },
+            bl_unik_epic_box={
+                name = "Murskauslaatikko", --the crushing box
+				text = {
+                    "If Blind selected without",
+                    "at least #1# common Jokers", --50% of total jokers
+                    "instantly lose",
+				},
+            },
+            bl_unik_epic_reed={
+                name = "Haitallinenruoko", --the infestive reed (the reed from ortalab)
+				text = {
+                    "If hand does not contain",
+                    "ranks #1# and #2#,", --2 random ranks accoring to your deck composition
+                    "instantly lose",
+				},
+            },
             bl_unik_bigger_blind={
                 name = "Bigger Blind", --no description, it does nothing
             },
@@ -112,7 +145,6 @@ return {
             bl_unik_legendary_nuke={ --aka old nuke
                 name = "Tuomiopäivänlaite", --doomsday device
                 text = {
-                    "^0.8 blind size",
                     "If score exceeds #1#,",
                     "instantly lose",
                 },
@@ -131,7 +163,6 @@ return {
             bl_unik_legendary_vessel={
                 name = "Väkivaltainenalus", --Violent Vessel
 				text = {
-                    "^2.666 Blind Size",
 					"If requirements reached before",
                     "last hand, instantly lose",
 				},
@@ -259,7 +290,7 @@ return {
 				},
             },
             bl_unik_artisan_builds={
-                name = "The Artisan",
+                name = "The Artesian",
 				text = {
 					"Shop rerolls in this ante",
 					"increase blind requirements",
@@ -1276,6 +1307,12 @@ return {
             k_unik_happiness3="TREASON!",
             k_unik_nuked="DIE.          NOW.",
             k_unik_artisan_builds="aNd ThErE\'s ThE ReRoLlLl!!!!111!!!!",
+            k_unik_artisan_builds_epic='"GIVE ME THE F-CKING COMPUTER, JIMBO!!!!"',
+            k_unik_artisan_builds_epic_lose='"FINE, YOU F-CKING COWARD, NOW DIE!!!!"',
+            k_unik_artisan_builds_epic_line2="If tension is < 23,",
+            k_unik_artisan_builds_epic_line3="On Blind Select, instantly lose",
+            k_unik_artisan_builds_epic_line2alt="If less than 10 rerolls are done this ante",
+            k_unik_artisan_builds_epic_line2alt2="If less than 25 rerolls are done this ante",
             k_unik_pentagram_start="Hell's Legion is coming...",
             k_unik_pentagram_purified="Sent to hell!",
             k_unik_batman_start='"You WILL ALL be forgotten, Jokers. Because of me."',
@@ -1358,6 +1395,7 @@ return {
             k_unik_viced="Final Bosses now appear twice as often",
             k_unik_cube_pack = "Cube Pack",
             k_unik_hands_remaining = " scoring hands remaining",
+            k_unik_base = " base",
 
             --placeholder fusion rarities
             k_unik_transcendent_placeholder = "Transcendent",
@@ -1400,7 +1438,7 @@ return {
             k_unik_unik_godsmarble4 = "WHY DID YOU PUT THAT HERE?! IT HURTS SO MUCH!",
             ---Godsmarbled: Cube of Calamity (basically I lose myself into mindlessness similar to Giygas)
             k_unik_cube_of_calamity1 = "I   F E E L...    B A D...",
-            k_unik_cube_of_calamity2 = "I   C A N T...",
+            k_unik_cube_of_calamity2 = "I   C A N ' T...",
             k_unik_cube_of_calamity3 = "F A L L I N G...",
             k_unik_cube_of_calamity4 = "ITHURTSITHURTSITHURTSI T H U R T S...",
             k_unik_cube_of_calamity5 = "E V E R Y T H I N G... G O N E",
@@ -1588,6 +1626,11 @@ return {
             special_lose_bigger_blind={
                 "It does nothing and",
                 "you just died. Wow.",
+            },
+            special_lose_unik_artisan_builds_epic={
+                "Wow, given that Noah Katz",
+                "is now an international criminal", --not really, just saying that as part of the blind, but yeah, he is still shitty
+                "you should've armed yourself here...",
             }
         },
         ranks={},

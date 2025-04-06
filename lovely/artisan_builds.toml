@@ -12,7 +12,13 @@ position = 'after'
 match_indent = true
 payload = '''
 
-if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss and (G.GAME.defeated_blinds["bl_unik_artisan_builds"] or G.GAME.round_resets.blind_choices.Boss == 'bl_unik_artisan_builds') then
+if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss and (
+    G.GAME.defeated_blinds["bl_unik_artisan_builds"] or 
+    G.GAME.round_resets.blind_choices.Boss == 'bl_unik_artisan_builds' or
+    G.GAME.defeated_blinds["bl_unik_epic_artisan"] or 
+    G.GAME.round_resets.blind_choices.Boss == 'bl_unik_epic_artisan'
+    
+    ) then
     G.GAME.unik_artisan_reroll_time = true
 
 else

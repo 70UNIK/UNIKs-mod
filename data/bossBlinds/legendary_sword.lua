@@ -6,11 +6,12 @@ SMODS.Blind{
     pos = {x=0, y=3},
     boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
     dollars = 13,
-    mult = 66.6,
     gameset_config = {
 		modest = { disabled = true},
 	},
-    jen_blind_resize = 1e66,
+    mult = 1,
+    exponent = 1.4666,
+    jen_blind_exponent_resize = 2.1666,
     ignore_showdown_check = true,
     set_blind = function(self, reset, silent)
         G.GAME.unik_killed_by_sword_legendary = true
@@ -66,6 +67,13 @@ SMODS.Blind{
                 end
             end
         end
+        if(SMODS.Mods["jen"] or {}).can_load then
+            G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^2.1666)
+        else
+            G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^1.4666)
+        end
+        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+        G.HUD_blind:recalculate(true)
 	end,
 	defeat = function(self)
         G.GAME.unik_killed_by_sword_legendary = nil

@@ -8,14 +8,15 @@ SMODS.Blind{
     pos = {x=0, y=2},
     boss_colour= HEX("600000"),
     dollars = 13,
-    mult = 2,
+    mult = 1,
+    exponent = 0.8,
     gameset_config = {
 		modest = { disabled = true},
 	},
     --no jen resize to make it more painful in almanac
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
-		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
+		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_legendary_nuke_placeholder") } }
@@ -51,9 +52,6 @@ SMODS.Blind{
         attention_text({
             scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
         })
-        G.GAME.blind.chips = G.GAME.blind.chips^0.8
-        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-        G.HUD_blind:recalculate(true)
         G.GAME.unik_nuke_activate = true
 	end,
     disable = function(self)

@@ -32,6 +32,7 @@ SMODS.Atlas {
 	py = 95
 }
 --TODO: fix if she self destructs while //MULTIPLY is active on her.
+--TODO: also disable her cloning functionality if you use BALATRO's SOUL, to not make her way to op, but more importantly, fix a critical issue (she will get destroyed and clone over and over, crashing the game)
 SMODS.Joker {
 	key = 'unik_white_lily_cookie',
     atlas = 'unik_white_lily',
@@ -155,8 +156,8 @@ SMODS.Joker {
             card.ability.extra.copying = true
             card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-            --do not make multiple clones of her! 
-            if card.ability.extra.commits_left < 0 then
+            --do not make multiple clones of her! AND DO NOT COPY IF THE SOUL IS BANNED!
+            if card.ability.extra.commits_left < 0 or G.GAME.banned_keys.c_jen_soul_omega then
                 play_sound('cancel', 1, 0.7)
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize("k_extinct_ex"),
@@ -188,7 +189,7 @@ SMODS.Joker {
                     card = card,
                 })
             end 
-            if (card.ability.extra.commits_left >= 0) then
+            if (card.ability.extra.commits_left >= 0 and not G.GAME.banned_keys.c_jen_soul_omega) then
                 White_lily_copy(card)
             end
 		end

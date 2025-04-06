@@ -23,7 +23,6 @@ SMODS.Blind{
 		end
         --Apply effect if with plasma sleeve
         if CardSleeves and G.GAME.selected_sleeve then
-            print(G.GAME.selected_sleeve)
             if G.GAME.selected_sleeve == 'sleeve_casl_plasma' then
                 return true
             end

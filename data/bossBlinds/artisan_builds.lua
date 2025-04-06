@@ -30,7 +30,7 @@ SMODS.Blind{
                     scale = 0.9, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
                 })
             end
-
+            
         end
     end,
     disable = function()

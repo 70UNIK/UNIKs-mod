@@ -133,8 +133,13 @@ if (SMODS.Mods["jen"] or {}).can_load then
         if v.jen_blind_resize and v.boss then
             v.mult = v.jen_blind_resize
         end
+        if v.exponent and v.jen_blind_exponent_resize and v.boss then
+            v.exponent = v.jen_blind_exponent_resize
+        end
         if v.boss and v.boss.showdown and v.boss.legendary then
             v.dollars = 66.6
+        elseif v.boss and v.boss.showdown and v.boss.epic and v.jen_dollars then
+            v.dollars = v.jen_dollars
         end
     end
     for k, v in pairs(G.P_CENTERS) do
