@@ -24,6 +24,9 @@ j_unik_noon = true,
 j_unik_no_standing_zone = true,
 j_unik_gt710 = true,
 j_unik_cube_joker = true,
+j_unik_mutilated_mess = true,
+j_unik_cube_of_calamity = true,
+j_unik_celestial_of_chaos = true,
 '''
 match_indent = true
 

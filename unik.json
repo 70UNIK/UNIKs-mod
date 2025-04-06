@@ -5,7 +5,7 @@
 	"description": "An addon to Cryptid that may or may not help you.",
 	"prefix": "unik",
 	"main_file": "unik.lua",
-	"priority": 999999999999999999999999999999999999999999999999999999,
+	"priority": 9999999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
 	"version": "0.0.1-ALPHA",

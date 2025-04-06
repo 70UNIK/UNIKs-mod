@@ -14,11 +14,21 @@ function Card:draw(layer)
                     --print("33333")
 					if (CEN.godsmarbling and godsmarble_fear) and not self.about_to_get_godsmarbled then
 						self.about_to_get_godsmarbled = true
+                        if CEN.godsmarbling_back then
+                            self.children.center:set_sprite_pos(CEN.godsmarbling_back)
+                        end
                         --print("fear2")
 						self.children.floating_sprite:set_sprite_pos(CEN.godsmarbling)
 					elseif not (CEN.godsmarbling and godsmarble_fear) and self.about_to_get_godsmarbled then
 						self.about_to_get_godsmarbled = nil
-						self.children.floating_sprite:set_sprite_pos(CEN.soul_pos)
+                        --only set back to original if not in drama
+                        if CEN.godsmarbling_back and not self.in_drama_state then
+                            self.children.center:set_sprite_pos(CEN.pos)
+                        end
+                        --only set back to original if not in drama
+                        if not self.in_drama_state then
+                            self.children.floating_sprite:set_sprite_pos(CEN.soul_pos)
+                        end
 					end
 				end
                 --do not spam shake too much (or else it gets too annoying)

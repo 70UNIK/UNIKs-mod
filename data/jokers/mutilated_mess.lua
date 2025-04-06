@@ -22,7 +22,7 @@ SMODS.Joker {
 		modest = {disabled = true},
 	},
 	pos = { x = 1, y = 1 },
-    cost = 250,
+    cost = 700,
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,

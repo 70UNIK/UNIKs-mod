@@ -117,6 +117,17 @@ return {
                     "instantly lose",
                 },
             },
+            --Kiristysmaila: Extortion Racket
+            bl_unik_legendary_racket={
+                name = "Kiristysmaila", --Extortion Racket
+				text = {
+                    "Scored hand capped at #1#", --50%
+					"Set money to -$66 per hand", --you gonna need lucky cards, wario or gold seals
+                    "Hand will not score if money is",
+                    "less than $#2#", --less than the amount you entered the blind in
+                    "If in debt after a hand, instantly lose",
+				},
+            },
             bl_unik_legendary_vessel={
                 name = "Väkivaltainenalus", --Violent Vessel
 				text = {
@@ -781,7 +792,7 @@ return {
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
             },
-            --this will not be disabled in almanac, since its a cursed joker
+            --this will not be disabled in almanac, since its a cursed joker that permanently makes values WORSE
             j_unik_rancid_smoothie = {
                 name="Rancid Smoothie",
                 text={
@@ -849,8 +860,7 @@ return {
                     "{E:2,C:red}Self destructs{} at the end of round",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
-                    "{C:red,s:0.7}(Can only copy once from {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7}) {C:attention,s:0.7}#5#{}",   
+                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
                     "{C:red,s:0.4}(Cannot exceed {X:dark_edition,C:white,s:0.4}^e300{C:red,s:0.4} due to bignum copy bug){}",   
                     "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
@@ -865,14 +875,13 @@ return {
                     "{E:2,C:red}Self destructs{} at the end of the {C:attention}shop{}",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects){}",    
-                    "{C:red,s:0.7}(Can only copy once from {C:cry_code,s:0.7}//:COMMIT{C:red,s:0.7}){}",   
-                    "#5#",      
+                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
                     "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
+            --banned in almanac due to persistent voucher bug when unredeeming
             j_unik_coupon_codes = {
                 name="Coupon Codes",
                 text={
@@ -1277,7 +1286,7 @@ return {
             k_unik_legendary_nuke_start='"Jesus Christ! They\'ve done it... They\'ve done it!"', --threads 1984
             k_unik_placard_start="NO PLACARDED LOADS IN PLAY",
             k_unik_boo_start="Bigger Boo wants to know your location",
-            k_unik_rot_start='" I cannot help you. I cannot even help myself."', --Five Pebbles
+            k_unik_rot_start='"I cannot help you. I cannot even help myself."', --Five Pebbles
             k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."', -- darth vader, moving the goalposts
             k_unik_protection_racket_start='"The government has organized a protection racket."',
             k_unik_video_poker_start='#1 Classic Video Poker Games Worldwide!',

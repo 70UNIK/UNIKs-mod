@@ -1,4 +1,10 @@
 --Each scored seven has this joker gain ^^^0.02 Chips
+SMODS.Atlas {
+	key = "unik_cube_of_calamity",
+	path = "unik_cube_of_calamity.png",
+	px = 71,
+	py = 95
+}
 local cube_quotes = {
 	normal = {
 		'k_unik_cube_of_calamity1',
@@ -20,10 +26,10 @@ SMODS.Joker {
 		modest = {disabled = true},
 	},
 	key = 'unik_cube_of_calamity',
-    atlas = 'placeholders',
+    atlas = 'unik_cube_of_calamity',
     rarity = "unik_transcendent_placeholder",
-    
-    pos = { x = 1, y = 1 },
+    pos = { x = 0, y = 0 },
+    soul_pos = { x = 1, y = 0, extra = { x = 2, y = 0 }},
 	-- -- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	-- soul_pos = { x = 1, y = 0 },
     cost = 1e3,

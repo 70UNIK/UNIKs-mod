@@ -5,7 +5,7 @@ SMODS.Blind{
     key = 'unik_red_rot',
     boss = {min = 1, showdown = true}, 
     atlas = "unik_showdown_blinds",
-    pos = { x = 0, y = 4}, --placeholder until I make an appropriate boss icon
+    pos = { x = 0, y = 17},
     boss_colour= HEX("ff0000"), 
     dollars = 8,
     mult = 2,

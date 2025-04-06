@@ -35,8 +35,9 @@ SMODS.Joker {
 	pos = { x = 0, y = 0 },
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
-	drama = { x = 1, y = 0 }, --WIP: Remains the same
-	godsmarbling = {x = 1, y = 0 }, --may remove once a seperate "godsmarbling" sprite function is made by jen (Scared but exclusively when godsmarble is present)
+	drama = { x = 2, y = 0 }, 
+	godsmarbling = {x = 1, y = 1 }, 
+	godsmarbling_back = { x = 0, y = 1 }, --used to change the backplate
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,

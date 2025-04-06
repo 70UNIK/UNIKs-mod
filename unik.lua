@@ -1,26 +1,30 @@
 local mod_path = "" .. SMODS.current_mod.path
 unik_config = SMODS.current_mod.config
-SMODS.current_mod.config_tab = function() --Config tab
-    return {
-      n = G.UIT.ROOT,
-      config = {
-        align = "cm",
-        padding = 0.05,
-        colour = G.C.CLEAR,
-      },
-      nodes = {
-        create_toggle({
-            label = localize("unik_legendary_blinds_option"),
-            ref_table = unik_config,
-            ref_value = "unik_legendary_blinds",
-        }),
-		create_toggle({
-            label = localize("unik_almanac_fusions_in_cryptid_option"),
-            ref_table = unik_config,
-            ref_value = "unik_almanac_fusions_in_cryptid",
-        }),
-      },
-    }
+--config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
+if not (SMODS.Mods["jen"] or {}).can_load then
+	SMODS.current_mod.config_tab = function() --Config tab
+		
+		return {
+		n = G.UIT.ROOT,
+		config = {
+			align = "cm",
+			padding = 0.05,
+			colour = G.C.CLEAR,
+		},
+		nodes = {
+			create_toggle({
+				label = localize("unik_legendary_blinds_option"),
+				ref_table = unik_config,
+				ref_value = "unik_legendary_blinds",
+			}),
+			create_toggle({
+				label = localize("unik_almanac_fusions_in_cryptid_option"),
+				ref_table = unik_config,
+				ref_value = "unik_almanac_fusions_in_cryptid",
+			}),
+		},
+		}
+	end
 end
 Cryptid.cross_mod_names = {
 	CardSleeves = "Card Sleeves",
@@ -354,9 +358,15 @@ NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
 NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
 NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
 NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
-if unik_config.unik_legendary_blinds then
+if unik_config.unik_legendary_blinds or (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
+--Future jokers to take ownership:
+--Popcorn, Ice Cream, Ramen, Turtle Bean, Clicked Cookie: Properly display negative values + state self destruct values when depleted
+--Average Alice (Extra Credit): Godsmarble functionality + sprites
+--Dorkshire Tea (Extra Credit): Godsmarble functionality + sprites
+
+
 -- Jackpot! - Score a Royal Flush against Video Poker
 -- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once
 -- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
@@ -366,7 +376,7 @@ end
 -- Dante's Inferno - Survive a Legendary Blind
 -- the other family - Own Yokana, Maya and Chelsea at the same time
 
--- Vessel Printer - Own Energia and gain 66 Vessel tags at once
+-- Vessel Printer - Own Energia and gain 40 Vessel tags at once
 -- Hell Invasion - Own every Cursed Joker in the collection.
 -- Debuffs, Debuffs everywhere - Have all your Jokers and your entire deck debuffed.
 -- Beaned - Die from having zero hand size from depleted Turtle Beans
@@ -427,7 +437,7 @@ if not (SMODS.Mods["jen"] or {}).can_load then
 else
 	local mainmenuref2 = Game.main_menu
 	Game.main_menu = function(change_context)
-		if Jen.fusions then
+		if Jen and Jen.fusions then
 			-- local alreadyApplied = false
 			-- for i,v in pairs(Jen.fusions) do
 			-- 	print(v)
@@ -436,7 +446,7 @@ else
 				'j_unik_moonlight_cookie',
 				'j_jen_godsmarble'
 			)
-			Jen.add_fusion('Mutilate Chelsea',300,"j_unik_mutilated_mess",
+			Jen.add_fusion('Mutilate Chelsea',750,"j_unik_mutilated_mess",
 				'j_unik_jsab_chelsea',
 				'j_jen_godsmarble'
 			)

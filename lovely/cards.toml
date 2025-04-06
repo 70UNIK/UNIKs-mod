@@ -150,7 +150,7 @@ end
 '''
 match_indent = true
 
-### Commit: Exclusive to white lily, she should only be able to respawn via commit ONCE. 
+### Commit: Exclusive to white lily, she should die immediately and not respawn to not clone infinite exotics, even with that single commit limit (what if you use invisible joker on an uncommitted white lily?)
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/code.lua"]'''
@@ -159,7 +159,7 @@ position = "after"
 payload = '''
 -- reduce commit limit by 1
 if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
-    G.jokers.highlighted[1].ability.extra.commits_left = G.jokers.highlighted[1].ability.extra.commits_left - 1
+    G.jokers.highlighted[1].ability.extra.commits_left = G.jokers.highlighted[1].ability.extra.commits_left - 666
 end
 '''
 match_indent = true
