@@ -1,0 +1,1 @@
+--Godsmarbled Yokana. Each Joker Triggered or Card scored gives ^^1.1 Chips

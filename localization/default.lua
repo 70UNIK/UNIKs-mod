@@ -1391,12 +1391,12 @@ return {
             k_unik_unik_normal2 = "I'll help out here, although I'll take my time.",
             k_unik_unik_normal3 = "Maybe you don't mind I'm crossdressing here...",
             ---Scared:
-            k_unik_unik_scared1 = "Wh... It's too much!",
+            k_unik_unik_scared1 = "Wh... IT'S TOO MUCH!!!",
             k_unik_unik_scared2 = "What the hell is all this?!",
             ---Godsmarble Near:
             k_unik_unik_godsmarble1 = "I... I... am.... F A L L I N G...",
             k_unik_unik_godsmarble2 = "WHAT IS HAPPENING TO ME?!",
-            k_unik_unik_godsmarble3 = "That thing is doing... SOMETHING!...",
+            k_unik_unik_godsmarble3 = "That thing is doing... Something to me!...",
             k_unik_unik_godsmarble4 = "WHY DID YOU PUT THAT HERE?! IT HURTS SO MUCH!",
             ---Godsmarbled: Cube of Calamity (basically I lose myself into mindlessness similar to Giygas)
             k_unik_cube_of_calamity1 = "I   F E E L...    B A D...",
@@ -1439,7 +1439,7 @@ return {
             k_unik_chelsea_godsmarble6 = "(Uncontrollable crying)",
             k_unik_chelsea_godsmarble_parents = "Mommy! Please... Help... Me...",
             k_unik_chelsea_godsmarble_parents_gods = "Why..........",
-            ---Godsmarbled: Cube of Calamity (basically I lose myself into mindlessness similar to Giygas)
+            ---Godsmarbled: mutilated mess (chelsea gets her limbs, wings, ears ripped out, horrifically burned. Think like Curly from Mouthwashing)
             k_unik_mutilated_mess1 = "AAAAAAAAAAAAAAAAAA…A.AA.A..A.A.A.AAAAAAAAHHHH...",
             k_unik_mutilated_mess2 = "Uuurggh... aarrrghh... AAAAAAA...arrgghh...",
             k_unik_mutilated_mess3 = "*Sob* *Sob* *Sob* *Sob*",

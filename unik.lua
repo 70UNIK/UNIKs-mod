@@ -216,7 +216,7 @@ NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
-NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
+-- NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 --The lily: Destroy all cards played after scoring
