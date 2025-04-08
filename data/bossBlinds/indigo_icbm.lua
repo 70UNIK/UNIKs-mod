@@ -15,6 +15,7 @@ SMODS.Blind{
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_nuke_placeholder") } }
 	end,
+    death_message = 'special_lose_unik_get_nuked',
     in_pool = function()
         local straddle = 0
         --if you increase straddle, these fuckers can spawn earlier!
@@ -37,14 +38,11 @@ SMODS.Blind{
             scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
         })
         G.GAME.unik_nuke_ceil = true
-        G.GAME.unik_killed_by_nuke = true
 	end,
     disable = function(self)
 		G.GAME.unik_nuke_ceil = nil
-        G.GAME.unik_killed_by_nuke = nil
 	end,
 	defeat = function(self)
 		G.GAME.unik_nuke_ceil = nil
-        G.GAME.unik_killed_by_nuke = nil
 	end,
 }

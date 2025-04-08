@@ -9,7 +9,7 @@ SMODS.Blind{
     boss_colour= HEX("600000"),
     dollars = 13,
     mult = 1,
-    exponent = 0.8,
+    exponent = {1,0.8},
     gameset_config = {
 		modest = { disabled = true},
 	},

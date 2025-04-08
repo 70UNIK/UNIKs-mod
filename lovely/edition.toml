@@ -116,6 +116,8 @@ UNIK_EYE_SEARING_BLUE = HEX('0000ff'),
 UNIK_SYNC_CATALYST_FAIL = {0,0,0,1},
 UNIK_VOID_COLOR = HEX('000000'),
 UNIK_EYE_SEARING_RED= HEX('ff0000'),
+UNIK_UNIK = HEX('fe90ff'),
+UNIK_CAPTION = HEX('009A9A'),
 """
 match_indent = true
 
@@ -142,6 +144,8 @@ unik_void_color = G.C.UNIK_VOID_COLOR,
 unik_maya_color = G.C.UNIK_MAYA,
 unik_yokana_color = G.C.UNIK_YOKANA,
 unik_chelsea_color = G.C.UNIK_CHELSEA,
+unik_unik_color = G.C.UNIK_UNIK,
+unik_caption = G.C.UNIK_CAPTION,
 """
 match_indent = true
 

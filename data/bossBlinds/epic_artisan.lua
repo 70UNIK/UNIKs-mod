@@ -32,6 +32,7 @@ SMODS.Blind	{
     jen_dollars = 25, --dollar change with almanac
     mult = 2,
     jen_blind_resize = 1e9,
+    death_message = "special_lose_unik_artisan_builds_epic",
 	ignore_showdown_check = true,
 	in_pool = function(self)
         if G.GAME.modifiers.unik_legendary_at_any_time then
@@ -96,7 +97,6 @@ SMODS.Blind	{
 	end,
     set_blind = function(self, reset, silent)
         if not reset then
-            G.GAME.unik_killed_by_artisan_builds_epic = true
             G.GAME.unik_original_chips_artisan = G.GAME.blind.chips
             if G.GAME.ante_rerolls and G.GAME.ante_rerolls > 0 then
                 for i = 1,G.GAME.ante_rerolls do
@@ -118,7 +118,7 @@ SMODS.Blind	{
             --Alamanc version: KILL player if tension is < 23 (aka you're forced to reroll to the point of triggering straddle)
             if (SMODS.Mods["jen"] or {}).can_load then
                 if Jen.config.punish_reroll_abuse then
-                    if G.GAME.tension < 23 then
+                    if G.GAME.tension < 21 then
                         --kill player
                         local text = localize('k_unik_artisan_builds_epic_lose')
                         attention_text({
@@ -171,13 +171,11 @@ SMODS.Blind	{
         end
     end,
     disable = function()
-        G.GAME.unik_killed_by_artisan_builds_epic = nil
         G.GAME.blind.chips = G.GAME.unik_original_chips_artisan
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.HUD_blind:recalculate(true)
     end,
     defeat = function()
-        G.GAME.unik_killed_by_artisan_builds_epic = nil
         G.GAME.ante_rerolls = 0
     end
 }

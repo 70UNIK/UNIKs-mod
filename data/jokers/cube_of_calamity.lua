@@ -36,7 +36,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    no_doe = ((SMODS.Mods["jen"] or {}).can_load or unik_config.unik_almanac_fusions_in_cryptid),
+    no_doe = true,
     config = { extra = {EEEchips_mod = 0.02, EEEchips = 1.0} }, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'

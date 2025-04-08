@@ -10,8 +10,8 @@ SMODS.Blind{
 		modest = { disabled = true},
 	},
     mult = 1,
-    exponent = 1.4666,
-    jen_blind_exponent_resize = 2.1666,
+    exponent = {1,1.4666},
+    jen_blind_exponent_resize = {1,2.1666},
     ignore_showdown_check = true,
     set_blind = function(self, reset, silent)
         G.GAME.unik_killed_by_sword_legendary = true

@@ -11,7 +11,7 @@ target = 'functions/state_events.lua'
 pattern = '''play_area_status_text("Not Allowed!")--localize('k_not_allowed_ex'), true)'''
 position = 'at'
 payload = '''
-if G.GAME.unik_deathly_debuff_text then
+if G.GAME.unik_instant_death_hand then
     play_area_status_text("DIE.")
 
     G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you
@@ -43,7 +43,7 @@ match_indent = true
 target = 'game.lua'
 pattern = '''if not self.boss_warning_text then'''
 position = 'at'
-payload = '''if not self.boss_warning_text and not G.GAME.unik_deathly_debuff_text then'''
+payload = '''if not self.boss_warning_text and not G.GAME.unik_instant_death_hand then'''
 match_indent = true
 
 [[patches]]
@@ -53,7 +53,7 @@ pattern = '''play_sound('chips1', math.random()*0.1 + 0.55, 0.12)
             end'''
 position = 'after'
 payload = '''
-if not self.boss_warning_text and G.GAME.unik_deathly_debuff_text then 
+if not self.boss_warning_text and G.GAME.unik_instant_death_hand then 
                 self.boss_warning_text = UIBox{
                     definition = 
                       {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR, padding = 0.2}, nodes={
@@ -74,6 +74,7 @@ if not self.boss_warning_text and G.GAME.unik_deathly_debuff_text then
                   self.boss_warning_text.states.collide.can = false
                   G.GAME.blind.children.animatedSprite:juice_up(0.5, 0.2)
                   play_sound('cancel', 0.8, 1)
+                  G.ROOM.jiggle = G.ROOM.jiggle + 2
             end
 '''
 match_indent = true

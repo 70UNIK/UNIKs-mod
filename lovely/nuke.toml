@@ -100,10 +100,8 @@ target = 'game.lua'
 pattern = '''Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})'''
 position = 'at'
 payload = '''
-if G.GAME.unik_killed_by_nuke then
-    Jimbo:add_speech_bubble('special_lose_unik_get_nuked', nil, {quip = true})
-    G.GAME.unik_killed_by_nuke = nil
-    G.GAME.unik_nuke_activate = nil
+if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
+    Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
 elseif G.GAME.unik_killed_by_nuke_legendary then
     Jimbo:add_speech_bubble('special_lose_unik_nuke_legendary', nil, {quip = true})
     G.GAME.unik_killed_by_nuke_legendary = nil
@@ -111,9 +109,6 @@ elseif G.GAME.unik_killed_by_nuke_legendary then
 elseif G.GAME.unik_killed_by_legendary_vessel then
     Jimbo:add_speech_bubble('special_lose_unik_vessel_legendary', nil, {quip = true})
     G.GAME.unik_killed_by_legendary_vessel = nil
-elseif G.GAME.unik_arrested_by_batman then
-    Jimbo:add_speech_bubble('special_lose_unik_defeated_by_batman', nil, {quip = true})
-    G.GAME.unik_arrested_by_batman = nil
 elseif G.GAME.unik_killed_by_pentagram then
     Jimbo:add_speech_bubble('special_lose_unik_killed_by_pentagram', nil, {quip = true})
     G.GAME.unik_killed_by_pentagram = nil

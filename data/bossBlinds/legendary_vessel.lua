@@ -8,8 +8,8 @@ SMODS.Blind{
     boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 1,
-    exponent = 2.1666,
-    jen_blind_exponent_resize = 4.666, --to align with epic blinds. ^9.666 that also kills you if you overshoot is worse than *e100
+    exponent = {1,2.1666},
+    jen_blind_exponent_resize = {1,4.666}, --to align with epic blinds. ^9.666 that also kills you if you overshoot is worse than *e100
     --Proof: Lets say you face epicWall at blind e300. THe epic wall already applies x e100, so becomes e400. Overshoot, and it adds e100, = e500.
     --If facing against this, 300 x 6.666 = ~e2000, which is way over what the wall can do most of the time.
     gameset_config = {

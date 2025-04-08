@@ -26,8 +26,8 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    config = { extra = {EEchips = 1.0, EEchips_mod = 0.04} },
-    no_doe = ((SMODS.Mods["jen"] or {}).can_load or unik_config.unik_almanac_fusions_in_cryptid),
+    config = { extra = {EEchips = 1.0, EEchips_mod = 0.02} },
+    no_doe = true,
 	loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
 		return { 

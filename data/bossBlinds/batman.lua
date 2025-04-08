@@ -15,6 +15,7 @@ SMODS.Blind{
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_batman_placeholder") } }
 	end,
+	death_message = 'special_lose_unik_defeated_by_batman',
 	-- collection_loc_vars = function (self)
 	-- 	local display = "~75% of"
 	-- 	if G.jokers then

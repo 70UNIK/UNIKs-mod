@@ -11,7 +11,7 @@ target = "blind.lua"
 pattern = '''self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling'''
 position = "before"
 payload = '''
-if (not self.exponent) or self.exponent <= 0 then
+if (not self.exponent) or self.exponent[2] <= 0 then
 '''
 match_indent = true
 
@@ -21,7 +21,8 @@ target = "blind.lua"
 pattern = '''self.mult = blind and blind.mult or 0'''
 position = "after"
 payload = '''
-self.exponent = blind and blind.exponent or 0
+self.exponent = blind and blind.exponent or {1,0}
+self.death_message = blind and blind.death_message or nil
 '''
 match_indent = true
 
@@ -31,8 +32,10 @@ target = "blind.lua"
 pattern = '''self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling'''
 position = "after"
 payload = '''
-elseif self.exponent > 0 then
-    self.chips = (get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling)^self.exponent
+elseif self.exponent[2] > 0 then
+    local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
+    initial = initial:arrow(self.exponent[1], self.exponent[2])
+    self.chips = initial
 end
 '''
 match_indent = true
@@ -57,7 +60,9 @@ pattern = '''local blind_amt = get_blind_amount(G.GAME.round_resets.blind_ante)*
 position = "after"
 payload = '''
 if blind_choice.config.exponent then
-        blind_amt = (get_blind_amount(G.GAME.round_resets.blind_ante)*G.GAME.starting_params.ante_scaling)^blind_choice.config.exponent
+      local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
+      initial = initial:arrow(blind_choice.config.exponent[1], blind_choice.config.exponent[2])
+      blind_amt = initial
 end
 '''
 match_indent = true
@@ -69,6 +74,15 @@ pattern = '''local stake_sprite = get_stake_sprite(G.GAME.stake or 1, 0.4)'''
 position = "after"
 payload = '''
 if blind.exponent then
+    local exponents = ""
+    local exponents2 = ""
+    for i = 1, blind.exponent[1] do
+      exponents = exponents .. "^"
+    end
+    if blind.exponent[1] > 5 then
+      exponents = ""
+      exponents2 = "{" .. blind.exponent[1] .. "}"
+    end
     blind_text[#blind_text + 1] =
       {n=G.UIT.R, config={align = "cm", emboss = 0.05, r = 0.1, minw = 2.5, padding = 0.07, colour = G.C.WHITE}, nodes={
         {n=G.UIT.R, config={align = "cm", maxw = 2.4}, nodes={
@@ -76,7 +90,7 @@ if blind.exponent then
         }},
         {n=G.UIT.R, config={align = "cm"}, nodes={
           {n=G.UIT.O, config={object = stake_sprite}},
-          {n=G.UIT.T, config={text = '^' .. blind.exponent..localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
+          {n=G.UIT.T, config={text = exponents .. blind.exponent[2].. exponents2 .. localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
         }},
         {n=G.UIT.R, config={align = "cm"}, nodes={
           {n=G.UIT.T, config={text = localize('ph_blind_reward'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},

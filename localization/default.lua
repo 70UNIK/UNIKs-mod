@@ -82,7 +82,7 @@ return {
 				},
             },
             bl_unik_epic_artisan={
-                name = "Korruptoitunuttietokoneenluoja", --the corrupt computer creator
+                name = "Arteesisetrakenteet", --literally artesian builds
 				text = {
                     "Shop rerolls this ante increase",
                     "Blind requirements by ^#1#",
@@ -91,7 +91,7 @@ return {
 				},
             },
             bl_unik_epic_collapse={ --only appears if you have at least 5 stone cards in the deck
-                name = "Kaatuvapilvenpiirtäjä", --the collapsing skyscraper
+                name = "Kaatuvatorni", --the collapsing tower
 				text = {
                     "If played hand",
                     "contains a suit or a rank,",
@@ -101,9 +101,9 @@ return {
             bl_unik_epic_box={
                 name = "Murskauslaatikko", --the crushing box
 				text = {
-                    "If Blind selected without",
-                    "at least #1# common Jokers", --50% of total jokers
-                    "instantly lose",
+                    "Hand will not score",
+                    "without having at least 60% of",
+                    "owned Jokers be Common rarity",
 				},
             },
             bl_unik_epic_reed={
@@ -582,7 +582,7 @@ return {
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    "{C:inactive,s:0.9,E:1}#3#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
@@ -600,7 +600,7 @@ return {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult for",
                     "their specified {C:attention}poker hand",
-                    "{C:inactive,s:0.9,E:1}#3#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
@@ -611,7 +611,7 @@ return {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
                     "{C:attention}+#2#{} Consumable Slot(s)",
-                    "{C:inactive,s:0.9,E:1}#3#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
@@ -622,7 +622,7 @@ return {
                     "{C:jen_RGB,E:1}Omega {C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult",
                     "{C:attention}+#2#{} Consumable Slot(s)",
-                    "{C:inactive,s:0.9,E:1}#3#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                 }
             },
@@ -632,7 +632,7 @@ return {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9,E:1}#4#{}",
+                    "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -643,18 +643,17 @@ return {
                 "This Joker gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", 
                 "for each {C:attention}7{} scored",
                 "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2#{C:inactive} Chips)",
-                "{C:inactive,s:0.9,E:1}#3#{}",
+                "{C:unik_caption,s:0.7,E:1}#3#{}",
                 "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
             }
         },
-            j_unik_unik_modest = { --modest: ^0.01 mult, caps at ^2.5 chips
-                name = 'UNIK',
+            j_unik_unik_modest = { --modest: ^0.02 chips, ONLY once if a 7 is scored
+                name = '{C:unik_unik}UNIK',
                 text = {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
-                    "for each {C:attention}7{} scored",
+                    "if played hand contains a scoring {C:attention}7{}",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:inactive}(Caps at {X:dark_edition,C:white}^#3#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9,E:1}#4#{}",
+                    "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -676,7 +675,7 @@ return {
                     "{X:chips,C:white}X#1#{} Chips for every {C:attention}scored{} Card",
                     "or {C:attention}Joker{} triggered during play",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
-                    "{C:inactive,s:0.9,E:1}I'll always be there for you and my family.{}",
+                    "{C:unik_caption,s:0.7,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -690,7 +689,7 @@ return {
                     "{C:attention}Scored{} cards permanently gain {X:chips,C:white}X#1#{} Chips", --values will be exponented by ^0.3
                     "{C:attention}Held{} cards permanently gain {X:chips,C:white}X#2#{} Chips",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
-                    "{C:inactive,s:0.9,E:1}I'm here to help, but PLEASE be careful.{}",
+                    "{C:unik_caption,s:0.7,E:1}I'm here to help, but PLEASE be careful.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -704,7 +703,7 @@ return {
                     "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
                     --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9,E:1}#4#{}",
+                    "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -713,7 +712,7 @@ return {
                 name="{C:unik_chelsea_color}Chelsea Ramirez{}",
                 text={
                     "{C:red}All abilities are disabled... You monster.",
-                    "{C:inactive,s:0.9,E:1}#4#{}",
+                    "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -726,7 +725,7 @@ return {
                     "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
                     --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:inactive}(Currently {X:jen_RGB,C:white}^^#1#{C:inactive} Chips)",
-                    "{C:inactive,s:0.9,E:1}#3#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                 },
             },
@@ -748,7 +747,7 @@ return {
                 text={
                     "{C:red}Destroy{} {C:attention}all{} played cards except the", 
                     "{C:attention}leftmost{} played card after scoring",
-                    "{C:inactive,s:0.9,E:1}#1#{}",
+                    "{C:unik_caption,s:0.7,E:1}#1#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
@@ -759,7 +758,7 @@ return {
                 text={
                     "{C:red}Destroy{} played cards except the", 
                     "{C:attention}3 leftmost{} played cards after scoring",
-                    "{C:inactive,s:0.9,E:1}#1#{}",
+                    "{C:unik_caption,s:0.7,E:1}#1#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
@@ -893,7 +892,7 @@ return {
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
                     "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
                     "{C:red,s:0.4}(Cannot exceed {X:dark_edition,C:white,s:0.4}^e300{C:red,s:0.4} due to bignum copy bug){}",   
-                    "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
+                    "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
@@ -907,7 +906,7 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
                     "{C:inactive,s:0.7}(Removes stickers from copy){}",
                     "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
-                    "{C:inactive,s:0.9,E:1}All I wanted was for everyone to be happy...{}",
+                    "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
@@ -952,7 +951,7 @@ return {
                     "{X:dark_edition,C:white}^#1#{} Mult and {X:dark_edition,C:white}^#2#{} Chips",
                     "if hand contains a scoring",
                     "{C:attention}Odd{} and {C:attention}Even{} card",
-                    "{C:inactive,s:0.9,E:1}Teehee! It's time I join in on the fun!{}",
+                    "{C:unik_caption,s:0.7,E:1}Teehee! It's time I join in on the fun!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : KittyKnight{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Balatro - Extra Credit{}",
@@ -1306,13 +1305,14 @@ return {
             k_unik_happiness2="HAPPINESS IS MANDATORY.",
             k_unik_happiness3="TREASON!",
             k_unik_nuked="DIE.          NOW.",
+            k_unik_common_jokers="At least 75% of owned Jokers must be Common",
             k_unik_artisan_builds="aNd ThErE\'s ThE ReRoLlLl!!!!111!!!!",
             k_unik_artisan_builds_epic='"GIVE ME THE F-CKING COMPUTER, JIMBO!!!!"',
             k_unik_artisan_builds_epic_lose='"FINE, YOU F-CKING COWARD, NOW DIE!!!!"',
-            k_unik_artisan_builds_epic_line2="If tension is < 23,",
+            k_unik_artisan_builds_epic_line2="If tension is < 21,", --aka you're forced to progress straddle with this
             k_unik_artisan_builds_epic_line3="On Blind Select, instantly lose",
-            k_unik_artisan_builds_epic_line2alt="If less than 10 rerolls are done this ante",
-            k_unik_artisan_builds_epic_line2alt2="If less than 25 rerolls are done this ante",
+            k_unik_artisan_builds_epic_line2alt="If less than 10 rerolls are done this ante", --cryptid
+            k_unik_artisan_builds_epic_line2alt2="If less than 25 rerolls are done this ante", --almanac
             k_unik_pentagram_start="Hell's Legion is coming...",
             k_unik_pentagram_purified="Sent to hell!",
             k_unik_batman_start='"You WILL ALL be forgotten, Jokers. Because of me."',
@@ -1374,6 +1374,7 @@ return {
             k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
             k_unik_vice_placeholder ="(halved Final Boss spawn ante requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
+            k_unik_epic_box_placeholder="(75%)",
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $40",
             k_unik_magnet_warning="Must not hold any Steel Cards",
@@ -1385,8 +1386,9 @@ return {
             k_unik_disposed="Disposed!",
             k_unik_you_killed_niko="You Killed Niko.",
             k_unik_taste_of_power="Enjoy it while it lasts!",
-            ph_unik_instakill_hand="YOU WILL DIE.",
+            ph_unik_instakill_hand="YOU WILL LOSE.",
             k_unik_die="DIE.",
+            k_unik_only_stone="Must not hold cards with ranks or suits",
             k_unik_boss_immune="YOU CANNOT STOP IT",
             k_unik_boss_reroll_nope="YOU CANNOT CHANGE YOUR FATE",
             unik_debuff_no_pairs="No Pairs",
@@ -1442,7 +1444,6 @@ return {
             k_unik_cube_of_calamity3 = "F A L L I N G...",
             k_unik_cube_of_calamity4 = "ITHURTSITHURTSITHURTSI T H U R T S...",
             k_unik_cube_of_calamity5 = "E V E R Y T H I N G... G O N E",
-
             --Chelsea
             ---Normal:
             k_unik_chelsea_normal1 = "Hola! Maybe I can help out?",
@@ -1482,7 +1483,7 @@ return {
             k_unik_mutilated_mess2 = "Uuurggh... aarrrghh... AAAAAAA...arrgghh...",
             k_unik_mutilated_mess3 = "*Sob* *Sob* *Sob* *Sob*",
             k_unik_mutilated_mess4 = "H.....H—hurts.....",
-            k_unik_mutilated_mess5 = "(Nothing but uncontrollable crying echoes from her)",
+            k_unik_mutilated_mess5 = "(Nothing but uncontrollable crying)",
 
             --
             
@@ -1631,6 +1632,15 @@ return {
                 "Wow, given that Noah Katz",
                 "is now an international criminal", --not really, just saying that as part of the blind, but yeah, he is still shitty
                 "you should've armed yourself here...",
+            },
+            special_lose_unik_epic_collapse={
+                "Hmm, maybe that other",
+                "Epic Blind could've",
+                "helped out here...",
+            },
+            special_lose_unik_epic_box={
+                "Have you've forgotten",
+                "about me and Jimbo?",
             }
         },
         ranks={},
@@ -1642,7 +1652,7 @@ return {
             a_hyper_three_chips = { "^^^#1# Chips" },
             a_hyper_three_mult = { "^^^#1# Mult" },
             a_unik_hands_1={"#1# hands"},
-            a_unik_discards_1={"#1# discards"}
+            a_unik_discards_1={"#1# discards"},
         },
         v_text={			
             ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is {C:attention}set{} to {C:red}<=1{}" },

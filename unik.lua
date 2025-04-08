@@ -17,11 +17,6 @@ if not (SMODS.Mods["jen"] or {}).can_load then
 				ref_table = unik_config,
 				ref_value = "unik_legendary_blinds",
 			}),
-			create_toggle({
-				label = localize("unik_almanac_fusions_in_cryptid_option"),
-				ref_table = unik_config,
-				ref_value = "unik_almanac_fusions_in_cryptid",
-			}),
 		},
 		}
 	end
@@ -202,21 +197,6 @@ NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
 NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 --manacle tag: -1 hand size
 
---If jens not installed, for presentation purposes, create """"dummy"""" versions of Jen's rarities, to act as a "preview"
-if not (SMODS.Mods["jen"] or {}).can_load then
-	NFS.load(mod_path .. "data/hooks/color_updater.lua")()
-end
-SMODS.Rarity {
-	key = 'ritualistic_placeholder',
-	loc_txt = {},
-	badge_colour = G.C.BLACK
-}
-SMODS.Rarity {
-	key = 'transcendent_placeholder',
-	loc_txt = {},
-	badge_colour = G.C.jen_RGB
-}
-
 --BLINDS--
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
@@ -234,11 +214,13 @@ NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
 NFS.load(mod_path .. "data/bossBlinds/raspberry_racket.lua")()
 NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
+--jens mod replacement: Red Rot (as ghost is banned, but the concept should be the same: a single detrimental joker spreads and replaces)
 if (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/bossBlinds/red_rot.lua")()
 else
 	NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 end
+--MAYBE? Glop mod installed will replace bigger boo with "bigger banana", replacing ghosts with well ummm... bananas
 
 
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
@@ -248,6 +230,8 @@ NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
 if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
@@ -260,7 +244,7 @@ end
 NFS.load(mod_path .. "data/editions/positive.lua")()
 -- ENHANCEMENTS --
 -- Requires both buffoonery and jen's almanac
-if (unik_config.unik_almanac_fusions_in_cryptid or (SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
+if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
 	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
 end
 
@@ -318,11 +302,9 @@ NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
 
 --adding fusions and jen exclusives to the mix
-if unik_config.unik_almanac_fusions_in_cryptid or (SMODS.Mods["jen"] or {}).can_load then
+if (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/mutilated_mess.lua")()
-	if (SMODS.Mods["jen"] or {}).can_load then
-		NFS.load(mod_path .. "data/jokers/celestial_of_chaos.lua")()
-	end
+	NFS.load(mod_path .. "data/jokers/celestial_of_chaos.lua")()
 	NFS.load(mod_path .. "data/jokers/cube_of_calamity.lua")()
 end
 --function for reference
@@ -398,51 +380,7 @@ end
 --Only loads in cryptid by itself. It will not run with jens installed
 --If Jen is enabled, replace existing sizes with jen sizes to make it more in line with Epic Blinds
 
-if not (SMODS.Mods["jen"] or {}).can_load then
-	function Card:resize(mod, force_save)
-		self:hard_set_T(self.T.x, self.T.y, self.T.w * mod, self.T.h * mod)
-		remove_all(self.children)
-		self.children = {}
-		self.children.shadow = Moveable(0, 0, 0, 0)
-		self:set_sprites(self.config.center, self.base.id and self.config.card)
-	end
-	local mainmenuref2 = Game.main_menu
-	Game.main_menu = function(change_context)
-
-		local ret = mainmenuref2(change_context)
-
-		local newcard = Card(
-				G.title_top.T.x,
-				G.title_top.T.y,
-				G.CARD_W,
-				G.CARD_H,
-				G.P_CARDS.empty,
-				G.P_CENTERS.j_unik_unik,
-				{ bypass_discovery_center = true }
-			)
-			G.title_top:emplace(newcard)
-		newcard:resize(1.1 * 1.2)
-		G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			delay = 0,
-			blockable = false,
-			blocking = false,
-			func = function()
-				if change_context == "splash" then
-					newcard.states.visible = true
-					newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, true, 2.5)
-				else
-					newcard.states.visible = true
-					newcard:start_materialize({ G.C.WHITE, G.C.WHITE }, nil, 1.2)
-				end
-				return true
-			end,
-		}))
-
-		newcard.no_ui = true
-		return ret
-	end
-else
+if (SMODS.Mods["jen"] or {}).can_load then
 	local mainmenuref2 = Game.main_menu
 	Game.main_menu = function(change_context)
 		if Jen and Jen.fusions then

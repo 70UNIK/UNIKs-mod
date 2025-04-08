@@ -14,6 +14,7 @@ SMODS.Consumable{
 	cost = 4,
 	atlas = "unik_gateway",
 	order = 90,
+	no_doe = true, --cause gateway exists
 	hidden = true,
 	soul_rate = 0.003,
 	soul_set = "unik_cube", --only appear in the cube booster packs
