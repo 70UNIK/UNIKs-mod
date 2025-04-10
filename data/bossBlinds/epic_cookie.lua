@@ -11,7 +11,24 @@ SMODS.Blind{
     mult = 1,
     exponent = {1,1},
     jen_blind_exponent_resize = {1,1.3},
-
+    loc_vars = function(self, info_queue, card)
+        local string = ""
+        if (SMODS.Mods["jen"] or {}).can_load then
+            string = "" .. 1.01
+        else
+            string = "" .. 1.0025
+        end
+		return { vars = { string } }
+	end,
+	collection_loc_vars = function(self)
+        local string = ""
+        if (SMODS.Mods["jen"] or {}).can_load then
+            string = "" .. 1.01
+        else
+            string = "" .. 1.0025
+        end
+		return { vars = { string } }
+	end,
     death_message = "special_lose_unik_epic_cookie",
     set_blind = function(self, reset, silent)
         if not reset then
@@ -71,7 +88,6 @@ SMODS.Blind{
                     --destroy a random card in hand. Make sure it's not eternal
                     local validCards = {}
                     local selectedDest1 = nil
-                    local selectedDest2 = nil
                     if G.hand then
                         for i,v in pairs(G.hand.cards) do
                             if (not v.ability.eternal) and (not v.ability.set_for_destruction) then
@@ -79,25 +95,9 @@ SMODS.Blind{
                             end
                         end
                     end
-                    if G.hand then 
+                    if G.hand and #validCards > 0 then 
                         selectedDest1 = pseudorandom_element(validCards, pseudoseed("unik_epic_cookie_destroy1"))
                         selectedDest1.ability.set_for_destruction = true
-                    end
-                    --reset for the next pass (Destroy random selected card)
-                    validCards = {}
-                    if G.hand then
-                        for i,v in pairs(G.hand.highlighted) do
-                            if (not v.ability.eternal) and (not v.ability.set_for_destruction) then
-                                validCards[#validCards + 1] = v
-                            end
-                        end
-                    end
-                    --destroy a random selected card (that is not already random)
-                    if G.GAME.epic_cookie_click_interval % 6 == 0 then
-                        if G.hand and #validCards > 0 then 
-                            selectedDest2 = pseudorandom_element(validCards, pseudoseed("unik_epic_cookie_destroy1"))
-                            selectedDest2.ability.set_for_destruction = true
-                        end
                     end
 
                     --destroy listed cards
@@ -106,10 +106,7 @@ SMODS.Blind{
                         selfDestruction_noMessage(selectedDest1,true)
                         --print("boom")
                     end
-                    if selectedDest2 ~= nil then
-                        selfDestruction_noMessage(selectedDest2,true)
-                       -- print("boom2")
-                    end
+
 
                     --decrease hand size by 1 
                     if G.GAME.epic_cookie_click_interval % 8 == 0 then
@@ -130,7 +127,12 @@ SMODS.Blind{
             -- 2 = ^^req, etc...
             --{Amount,operator}
             --For multiplication and exponentiation, ideally have it above 1.
-			return {1.01,1}
+            if (SMODS.Mods["jen"] or {}).can_load then
+                return {1.01,1}
+            else--cryptid is a bit more lenient
+                return {1.001,1}
+            end
+			
 		end
     end,
 }

@@ -1,4 +1,4 @@
---+5 Hand Size, Add polychrome steel kings equal to 3x the cards in deck. If a steel card is held or a polychrome card is played, instantly lose.
+--+5 Hand Size, Add polychrome steel kings equal to 3x the cards in deck. If a steel card is held or a polychrome card is played, die.
 --Basically Magnet + EpicFish + instant death = horrible.
 --Cannot be skipped or disabled by any means.
 SMODS.Blind{

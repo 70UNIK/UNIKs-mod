@@ -242,7 +242,7 @@ function CardArea:emplace(card, location, stay_flipped)
                             delay = 0.3
                         })
                         if G.GAME.unik_prevent_killing_cursed_jokers and not G.GAME.unik_prevent_killing_cursed_jokers2 then
-                            --instantly lose
+                            --die
                             selfDestruction(v,"k_extinct_ex",G.C.BLACK)
                             G.GAME.unik_prevent_killing_cursed_jokers2 = true
                             -- G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you
@@ -331,7 +331,7 @@ function GhostTrap1(self)
                 selfDestruction(self,"k_unik_ghost_trap_explode",G.C.BLACK)
             end
             if G.GAME.unik_prevent_killing_cursed_jokers and not G.GAME.unik_prevent_killing_cursed_jokers2 then
-                --instantly lose
+                --die
                 selfDestruction(self,"k_extinct_ex",G.C.BLACK)
                 G.GAME.unik_prevent_killing_cursed_jokers2 = true
                 G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you

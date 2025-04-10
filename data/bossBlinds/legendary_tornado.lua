@@ -67,7 +67,7 @@ SMODS.Blind{
         if
         not check
         and (pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter")) < ((G.GAME.current_round.hands_left-G.GAME.blind.unik_tornado_hands_remaining)/ G.GAME.current_round.hands_left))
-        and (pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter2")) < ((33-G.GAME.blind.unik_tornado_pity)/ 33*2))
+        and ( (SMODS.Mods["jen"] or {}).can_load or pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter2")) < ((33-G.GAME.blind.unik_tornado_pity)/ 33*2))
         and not G.GAME.blind.disabled
         and G.GAME.blind.unik_tornado_pity < 33
         then

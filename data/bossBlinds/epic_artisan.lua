@@ -1,6 +1,6 @@
 --epic artisan: Korruptoitunuttietokoneenluoja (Corrupt Computer Creator), cause company reference
---Rerolls increase requirements by ^1.1. If tension < 23 on blind selection, instantly lose
---Baseline Cryptid/no punish reroll abuse version: Rerolls increase reqs by ^1.05, If less than 10 rerolls done in this ante, instantly lose on blind select. 
+--Rerolls increase requirements by ^1.1. If tension < 23 on blind selection, die
+--Baseline Cryptid/no punish reroll abuse version: Rerolls increase reqs by ^1.05, If less than 10 rerolls done in this ante, die on blind select. 
 local function KillPlayerOnSelect()
     G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you
     Event({

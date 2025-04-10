@@ -87,15 +87,15 @@ return {
                     "Shop rerolls this ante increase",
                     "Blind requirements by ^#1#",
                     "#2#", --"If done < 10 rerolls this ante,",
-                    "#3#", --"on Blind select, instantly lose",
+                    "#3#", --"on Blind select, die",
 				},
             },
             bl_unik_epic_collapse={ --only appears if you have at least 5 stone cards in the deck
                 name = "Kaatuvatorni", --the collapsing tower
 				text = {
                     "If played hand",
-                    "contains a suit or a rank,",
-                    "instantly lose",
+                    "contains a suit",
+                    "or a rank, die",
 				},
             },
             bl_unik_epic_box={
@@ -109,12 +109,11 @@ return {
             bl_unik_epic_cookie={
                 name = "Pimeydenkeksi", --the cookie of darkness
                 text = {
-					"^1.01 requirements every",
+					"^#1# requirements every",
                     "click in this Ante",
                     "Skipping Blinds are banned",
-                    "In Blind, Destroy a random card in hand per click,",
-                    "destroy a random selected card every 6 clicks",
-                    "decrease hand size by 1 every 8 clicks",
+                    "Destroy a random card per click,",
+                    "-1 hand size every 8 clicks",
 				},
                 --maybe have a special interaction with White Lily Cookie (hmm dark enchantress)
             },
@@ -122,8 +121,7 @@ return {
                 name = "Haitallinenruoko", --the infestive reed (the reed from ortalab)
 				text = {
                     "If hand does not contain",
-                    "ranks #1# and #2#,", --2 random ranks accoring to your deck composition
-                    "instantly lose",
+                    "ranks #1# and #2#, die", --2 random ranks accoring to your deck composition
 				},
             },
             bl_unik_bigger_blind={
@@ -157,8 +155,8 @@ return {
             bl_unik_legendary_nuke={ --aka old nuke
                 name = "Tuomiopäivänlaite", --doomsday device
                 text = {
-                    "If score exceeds #1#,",
-                    "instantly lose",
+                    "If score exceeds",
+                    "#1#, die",
                 },
             },
             --Kiristysmaila: Extortion Racket
@@ -169,14 +167,14 @@ return {
 					"Set money to -$66 per hand", --you gonna need lucky cards, wario or gold seals
                     "Hand will not score if money is",
                     "less than $#2#", --less than the amount you entered the blind in
-                    "If in debt after a hand, instantly lose",
+                    "If in debt after a hand, die",
 				},
             },
             bl_unik_legendary_vessel={
                 name = "Väkivaltainenalus", --Violent Vessel
 				text = {
-					"If requirements reached before",
-                    "last hand, instantly lose",
+					"If requirements reached",
+                    "before last hand, die",
 				},
             },
             bl_unik_legendary_trophy={
@@ -210,7 +208,6 @@ return {
                     "Set hands to 66", -- set hands to 66, only 23 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
                     "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity. Maybe remove the pity in almanac!
                     "will score",
-                    "(always 1 every <=33 hands)",
 				},                  
             },
             bl_unik_legendary_leaf={
@@ -222,14 +219,14 @@ return {
 				},  
             },
             bl_unik_legendary_pentagram={
-                name = "Helvettimaanpäällä",--Hell on Earth
+                name = "Kaaoksen valtakunta",--WARHAMMER 40K WARP!
                 text ={
-                    "Create every cursed Joker",
-                    "in the collection, duplicate and",
-                    "add absolute to each one owned",
-                    "if any Cursed Joker is destroyed",
-                    "by Formidiulosus or Ghost Trap,", 
-                    "instantly lose"
+                    "Convert 66.6% of owned Jokers",
+                    "into Cursed Jokers, including",
+                    "eternals and permaeternals",
+                    "Every Joker has a 6 in 10 chance", 
+                    "to convert into a Cursed Joker",
+                    "before every hand",
                 }
             },
             --just like the actual gambling machine - Jacks or better
@@ -1329,7 +1326,7 @@ return {
             k_unik_artisan_builds_epic='"GIVE ME THE F-CKING COMPUTER, JIMBO!!!!"',
             k_unik_artisan_builds_epic_lose='"FINE, YOU F-CKING COWARD, NOW DIE!!!!"',
             k_unik_artisan_builds_epic_line2="If tension is < 21,", --aka you're forced to progress straddle with this
-            k_unik_artisan_builds_epic_line3="On Blind Select, instantly lose",
+            k_unik_artisan_builds_epic_line3="On Blind Select, die",
             k_unik_artisan_builds_epic_line2alt="If less than 10 rerolls are done this ante", --cryptid
             k_unik_artisan_builds_epic_line2alt2="If less than 25 rerolls are done this ante", --almanac
             k_unik_pentagram_start="Hell's Legion is coming...",
@@ -1406,7 +1403,7 @@ return {
             k_unik_disposed="Disposed!",
             k_unik_you_killed_niko="You Killed Niko.",
             k_unik_taste_of_power="Enjoy it while it lasts!",
-            ph_unik_instakill_hand="YOU WILL LOSE.",
+            ph_unik_instakill_hand="YOU WILL DIE.",
             k_unik_die="DIE.",
             k_unik_only_stone="Must not hold cards with ranks or suits",
             k_unik_boss_immune="YOU CANNOT STOP IT",
@@ -1636,8 +1633,8 @@ return {
                 "can't be killed...",
             },
             special_lose_unik_pentagram_legendary2={
-                "Maybe ensure your build",
-                "is resilient to these beasts...",
+                "You should've invested",
+                "in a Gellar Field",
             },
             --getting killed by video poker
             special_lose_unik_video_poker={

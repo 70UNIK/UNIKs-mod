@@ -123,13 +123,31 @@ local function BlindIncrement(penalty)
 							/ 2
 					end
 				elseif  G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "bl_unik_epic_cookie" then
-                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1
+                    if (SMODS.Mods["jen"] or {}).can_load then
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1.3
+                    else
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1
+                    end
                 else
 					G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 0
 				end
 				G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult_ante = G.GAME.round_resets.ante
-			end
+			elseif G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult == 0
+            and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult_ante ~= G.GAME.round_resets.ante then
+                if  G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "bl_unik_epic_cookie" then
+                    
+                    if (SMODS.Mods["jen"] or {}).can_load then
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1.3
+                    else
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1
+                    end
+
+                end
+            end
 			if
 				G.GAME.round_resets.blind_states[c] ~= "Current"
 				and G.GAME.round_resets.blind_states[c] ~= "Defeated"
@@ -144,10 +162,10 @@ local function BlindIncrement(penalty)
                         )
                     --multiplication
                     elseif G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[2] == 0 then
-                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult == 0 then
+                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult < 1 then
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
                         end
-                        if G.GAME.CRY_BLINDS[c] == 0 then
+                        if G.GAME.CRY_BLINDS[c] and G.GAME.CRY_BLINDS[c] < 1 then
                             G.GAME.CRY_BLINDS[c] = 1
                         end
                         G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult)
@@ -157,18 +175,23 @@ local function BlindIncrement(penalty)
                     --exponentiation, tetration, etc...
                     else
                         -- --The problem with this is that exponentiation doesnt work at x1 mult. So it has to be multiplied for used exponentiation
-                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult == 0 or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] == 0 then
+                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult < 0 or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] == 0 then
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1
                         end
-                        if G.GAME.CRY_BLINDS[c] == 0 then
-                            G.GAME.CRY_BLINDS[c] = 1
+                        if G.GAME.CRY_BLINDS[c] and  G.GAME.CRY_BLINDS[c] < 1 then
+                            if (SMODS.Mods["jen"] or {}).can_load then
+                                G.GAME.CRY_BLINDS[c] = 1.3
+                            else
+                                G.GAME.CRY_BLINDS[c] = 1
+                            end
                         end
+
                         G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2])
                         * (
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
                         )
-                        print(G.GAME.CRY_BLINDS[c])
+
                         --print(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2])
                         -- G.GAME.CRY_BLINDS[c] = to_big(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult):arrow(
                         --     G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[2] or 1,
@@ -251,9 +274,7 @@ local function BlindIncrement(penalty)
                             * get_blind_amount(G.GAME.round_resets.ante)
                             * G.GAME.starting_params.ante_scaling
                     else
-                        G.GAME.blind.chips = to_big((G.GAME.blind.chips
-                            * get_blind_amount(G.GAME.round_resets.ante)
-                            * G.GAME.starting_params.ante_scaling)):arrow(G.GAME.blind:unik_clicky_click_mod(true)[2],G.GAME.blind:unik_clicky_click_mod(true)[1])
+                        G.GAME.blind.chips = to_big(G.GAME.blind.chips):arrow(G.GAME.blind:unik_clicky_click_mod(true)[2],G.GAME.blind:unik_clicky_click_mod(true)[1])
                     end
                 end
                 
