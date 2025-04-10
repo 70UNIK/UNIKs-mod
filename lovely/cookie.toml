@@ -1,0 +1,32 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+##The cookie: Obsidian orb compat
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/blind.lua"]'''
+pattern = '''cry_ante_base_mod = function(self, dt)
+		local mod = 0'''
+position = "before"
+payload = '''
+	unik_clicky_click_mod = function(self)
+		local mod = 0
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+			if s.unik_clicky_click_mod then
+                if s:unik_clicky_click_mod(true)[2] <= -1 then
+                    mod = mod + s:unik_clicky_click_mod(false)[1]
+                elseif s:unik_clicky_click_mod(true)[2] <= 0 then
+                    mod = mod * s:unik_clicky_click_mod(false)[1]
+                else
+                    mod =  to_big(mod):arrow(s:unik_clicky_click_mod(true)[2],s:unik_clicky_click_mod(false)[1])
+                end
+			end
+		end
+		return mod
+	end,
+'''
+match_indent = true

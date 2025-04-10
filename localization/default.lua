@@ -106,6 +106,18 @@ return {
                     "owned Jokers be Common rarity",
 				},
             },
+            bl_unik_epic_cookie={
+                name = "Pimeydenkeksi", --the cookie of darkness
+                text = {
+					"^1.01 requirements every",
+                    "click in this Ante",
+                    "Skipping Blinds are banned",
+                    "In Blind, Destroy a random card in hand per click,",
+                    "destroy a random selected card every 6 clicks",
+                    "decrease hand size by 1 every 8 clicks",
+				},
+                --maybe have a special interaction with White Lily Cookie (hmm dark enchantress)
+            },
             bl_unik_epic_reed={
                 name = "Haitallinenruoko", --the infestive reed (the reed from ortalab)
 				text = {
@@ -196,7 +208,7 @@ return {
                 name = "Ylihuomenna", --Day after tomorrow
 				text = {
                     "Set hands to 66", -- set hands to 66, only 23 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
-                    "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity
+                    "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity. Maybe remove the pity in almanac!
                     "will score",
                     "(always 1 every <=33 hands)",
 				},                  
@@ -230,7 +242,7 @@ return {
                     "Pairs must have scoring Jacks or better",
 				},
             },
-            bl_unik_the_lily={
+            bl_unik_the_lily={ --rename to the consumer -- all consumeables are debuffed (only spawn if you have perkeo, moonlight, observatory, >15 consumeables (cough cough almanac) or >5 ccd cards)
                 name = "The Lily",
 				text = {
 					"Destroy all played cards",
@@ -241,6 +253,13 @@ return {
 				text = {
 					"Repeats the previous",
                     "defeated blind",
+				},
+            },
+            bl_unik_cookie={
+                name = "The Cookie",
+				text = {
+					"+0.025x requirements every",
+                    "click in this Ante",
 				},
             },
             bl_unik_vice={
@@ -474,7 +493,7 @@ return {
                     "{C:attention}#1# face{} card(s) remain in deck or",
                     "{C:unik_plant_color}The Plant{} is triggered",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} Face Card(s))",
-                    "{C:inactive,s:0.9,E:1}Grawr Charble Grawr!{}",
+                    "{C:unik_caption,s:0.7,E:1}Grawr Charble Grawr!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Super Mario Bros.{}",
                 }                
@@ -632,7 +651,7 @@ return {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#4#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -648,12 +667,12 @@ return {
             }
         },
             j_unik_unik_modest = { --modest: ^0.02 chips, ONLY once if a 7 is scored
-                name = '{C:unik_unik}UNIK',
+                name = '{C:unik_unik_color}UNIK',
                 text = {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "if played hand contains a scoring {C:attention}7{}",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#4#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -1305,7 +1324,7 @@ return {
             k_unik_happiness2="HAPPINESS IS MANDATORY.",
             k_unik_happiness3="TREASON!",
             k_unik_nuked="DIE.          NOW.",
-            k_unik_common_jokers="At least 75% of owned Jokers must be Common",
+            k_unik_common_jokers="At least 60% of owned Jokers must be Common",
             k_unik_artisan_builds="aNd ThErE\'s ThE ReRoLlLl!!!!111!!!!",
             k_unik_artisan_builds_epic='"GIVE ME THE F-CKING COMPUTER, JIMBO!!!!"',
             k_unik_artisan_builds_epic_lose='"FINE, YOU F-CKING COWARD, NOW DIE!!!!"',
@@ -1327,6 +1346,7 @@ return {
             k_unik_goalpost_start= '"I am altering the deal. Pray I don’t alter it any further."', -- darth vader, moving the goalposts
             k_unik_protection_racket_start='"The government has organized a protection racket."',
             k_unik_video_poker_start='#1 Classic Video Poker Games Worldwide!',
+            k_unik_epic_cookie_start='"Cookies are mean\'t to be eaten!"',
             k_unik_boo_disabled="Exorcised!",
             k_unik_boo_possessed="Possessed!",
             k_unik_boo_eternal_bypass="Eternal Bypassed!",
@@ -1374,7 +1394,7 @@ return {
             k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
             k_unik_vice_placeholder ="(halved Final Boss spawn ante requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
-            k_unik_epic_box_placeholder="(75%)",
+            k_unik_epic_box_placeholder="(60%)",
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $40",
             k_unik_magnet_warning="Must not hold any Steel Cards",
@@ -1641,6 +1661,15 @@ return {
             special_lose_unik_epic_box={
                 "Have you've forgotten",
                 "about me and Jimbo?",
+            },
+            special_lose_unik_cookie={
+                "Don't get addicted",
+                "to Cookie Clicker!",
+            },
+            special_lose_unik_epic_cookie={
+                "What? Are you a fucking",
+                "liar like Gingerbrave?",
+                "Don't be like him.",
             }
         },
         ranks={},

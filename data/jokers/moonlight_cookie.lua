@@ -81,8 +81,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
 		--Known issue: does not work with retriggers.
 		if context.other_consumeable then
-			print(context.other_consumeable.ability.atlas)
-			print(context.other_consumeable.atlas)
+			--print(context.other_consumeable.ability.atlas)
+			--print(context.other_consumeable.atlas)
 		end
 		
         if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' or 
@@ -119,7 +119,7 @@ SMODS.Joker {
 			if context.other_consumeable.ability.hand_type and valid == false then
 				if context.other_consumeable.ability.hand_type == context.scoring_name then
 
-					print(context.other_consumeable.ability.hand_type)
+					--print(context.other_consumeable.ability.hand_type)
 					valid = true
 				end
 			end
@@ -129,7 +129,7 @@ SMODS.Joker {
 					for i = 1,#context.other_consumeable.ability.hand_types do
 						if context.other_consumeable.ability.hand_types[i] == context.scoring_name then
 							valid = true
-							print(context.other_consumeable.ability.hand_types[i])
+							--print(context.other_consumeable.ability.hand_types[i])
 							break
 						end
 					end
@@ -144,6 +144,12 @@ SMODS.Joker {
 				}))
 			end
 			if context.other_consumeable.debuff and valid == true then
+				if
+				G.HUD_blind
+				and G.HUD_blind:get_UIE_by_ID("HUD_blind_debuff_1")
+				then
+					G.HUD_blind:get_UIE_by_ID("HUD_blind_debuff_1"):juice_up(0.3, 0)
+				end
 				card_eval_status_text(card, "debuff", nil, nil, nil, nil)
 				--return true
 			elseif valid == true then

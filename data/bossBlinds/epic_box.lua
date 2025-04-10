@@ -53,13 +53,16 @@ SMODS.Blind	{
         for i,v in pairs(G.jokers.cards) do
             if v.config.center.rarity == 1 then
                 commonCount = commonCount + 1
+                
             end
         end
-        if commonCount < #G.jokers.cards * 0.60 then
+
+        if commonCount < #G.jokers.cards * 0.6 then
             --jiggle non common jokers
             for i,v in pairs(G.jokers.cards) do
                 if v.config.center.rarity ~= 1 then
-                    v:juice_up(0.5,0.5)
+                    v:juice_up(0,0.5)
+
                 end
             end
             return true

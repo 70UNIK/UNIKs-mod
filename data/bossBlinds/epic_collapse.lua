@@ -18,18 +18,19 @@ SMODS.Blind	{
 	death_message = 'special_lose_unik_epic_collapse',
 	ignore_showdown_check = true,
 	in_pool = function(self)
-		-- local stoneCards = 0
-        -- if G.deck then 
-        --     for i, w in pairs(G.deck.cards) do
-        --         if SMODS.has_no_suit(w) then
-        --             stoneCards = stoneCards + 1
-        --         end
-        --     end
-        -- end
-        -- if stoneCards < 5 then
-        --     return false
-        -- end
-        --maybe its funnier to have it spawn even without stone hands in deck
+		local stoneCards = 0
+        if G.deck then 
+            for i, w in pairs(G.deck.cards) do
+                if SMODS.has_no_suit(w) then
+                    stoneCards = stoneCards + 1
+                end
+            end
+        end
+                --in cryptid, at least it only spawns if yoy have at least 5 stone cards
+        if stoneCards < 5 and not (SMODS.Mods["jen"] or {}).can_load then
+            return false
+        end
+        --maybe its funnier to have it spawn even without stone hands in deck in almanac
         if G.GAME.modifiers.unik_legendary_at_any_time then
             return true
         end

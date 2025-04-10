@@ -21,21 +21,21 @@ SMODS.Joker {
 	},
 	-- on self destruction, release all cursed jokers
 	remove_from_deck = function(self, card, from_debuff)
-		for _, v in pairs(card.ability.extra.cursed_joker_list) do
+		-- for _, v in pairs(card.ability.extra.cursed_joker_list) do
 
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil,v.config.center.key)
-                    card2:add_to_deck()
-                    G.jokers:emplace(card2)
-                    card2:start_materialize()
-                    return true
-                end
-            }))
+        --     G.E_MANAGER:add_event(Event({
+        --         func = function()
+        --             local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil,v.config.center.key)
+        --             card2:add_to_deck()
+        --             G.jokers:emplace(card2)
+        --             card2:start_materialize()
+        --             return true
+        --         end
+        --     }))
 
-		end
-		--clear list (in case of debuff)
-		card.ability.extra.cursed_joker_list = {}
+		-- end
+		-- --clear list (in case of debuff)
+		-- card.ability.extra.cursed_joker_list = {}
 	end,
 
     calculate = function(self, card, context)

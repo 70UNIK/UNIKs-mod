@@ -15,7 +15,7 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.x_chips} }
 	end,
 	gameset_config = {
-		modest = {extra = {x_chips = 2} },
+		modest = {extra = {x_chips = 2.5} },
 	},
     add_to_deck = function(self, card, from_debuff)
 		G.GAME.unik_vesselled = true
@@ -40,7 +40,7 @@ function add_tag(_tag)
     local res
     if G.GAME.unik_vesselled then
         local emp = Tag("tag_unik_vessel")
-        emp.ability.shiny = cry_rollshinybool()
+        emp.ability.shiny = Cryptid.is_shiny()
         res = overrideTagHook(emp)
     else
         res = overrideTagHook(_tag)

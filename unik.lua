@@ -205,6 +205,7 @@ NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 -- NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
+NFS.load(mod_path .. "data/bossBlinds/cookie.lua")()
 --The lily: Destroy all cards played after scoring
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()
@@ -233,6 +234,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()

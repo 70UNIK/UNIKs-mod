@@ -16,6 +16,7 @@ unik_consumeable_niko_death_odds = 3,
 unik_goalpost_ante_win_increase = 0,
 unik_scores_really_big = 0,
 unik_vice_squeeze = 1, -- 1: normal, 2: halved, 4, 8
+epic_cookie_click_interval = -1, -- -1 = disabled.
 ante_rerolls = 0,
 unik_spades = 0,
 unik_hearts = 0,

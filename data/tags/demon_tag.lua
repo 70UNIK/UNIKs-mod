@@ -102,7 +102,7 @@ SMODS.Tag{
                                 G.CONTROLLER.locks[lock] = true
                                 tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                                     local emp = Tag("tag_unik_manacle")
-                                    	emp.ability.shiny = cry_rollshinybool()
+                                    	emp.ability.shiny = Cryptid.is_shiny()
                                     add_tag(emp)
                                     G.CONTROLLER.locks[lock] = nil   
                                     return true
@@ -116,7 +116,7 @@ SMODS.Tag{
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_manacle")
-                            emp.ability.shiny = cry_rollshinybool()
+                            emp.ability.shiny = Cryptid.is_shiny()
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -129,7 +129,7 @@ SMODS.Tag{
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_vessel")
-                            emp.ability.shiny = cry_rollshinybool()
+                            emp.ability.shiny = Cryptid.is_shiny()
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -150,7 +150,7 @@ SMODS.Tag{
 				tag:yep("+", G.C.SECONDARY_SET.Spectral, function()
 					local emp = Tag("tag_unik_extended_empowered")
                     if tag.ability.shiny then -- good fucking luck
-                        emp.ability.shiny = cry_rollshinybool()
+                        emp.ability.shiny = Cryptid.is_shiny()
                     end
 					add_tag(emp)
 					tag.triggered = true

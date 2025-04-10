@@ -211,11 +211,13 @@ G.FUNCS.reroll_boss = function(e)
         })
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
-    elseif obj.boss.epic then
+    elseif obj.boss.epic and not (SMODS.Mods["jen"] or {}).can_load then
         play_sound('cancel', 0.8, 1)
-        jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, obj.boss_colour or G.C.RED)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+        })
 	else
-        
 		return gfrb2(e)
 	end
 end
