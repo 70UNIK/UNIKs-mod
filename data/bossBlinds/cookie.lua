@@ -10,6 +10,13 @@ SMODS.Blind{
     dollars = 5,
     mult = 0,
     death_message = "special_lose_unik_cookie",
+	defeat = function(self, silent)
+		G.P_BLINDS.bl_unik_cookie.mult = 0
+	end,
+	disable = function(self, silent)
+		G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling * 2
+		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+	end,
     unik_clicky_click_mod = function(self,prevent_rep)
         if G.SETTINGS.paused then
 			return {0.0,-1}
@@ -56,6 +63,25 @@ G.FUNCS.skip_blind = function(e)
 
 end
 
+--refresh on reload
+local sr2 = Game.start_run
+function Game:start_run(args)
+	sr2(self, args)
+	if G.P_BLINDS.bl_unik_cookie then
+		G.P_BLINDS.bl_unik_cookie.mult = 0
+    end
+    if G.P_BLINDS.bl_unik_epic_cookie then
+        G.P_BLINDS.bl_unik_epic_cookie.mult = 1
+        if (SMODS.Mods["jen"] or {}).can_load then
+            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1.3
+        else
+            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
+        end
+    end
+	if not G.GAME.defeated_blinds then
+		G.GAME.defeated_blinds = {}
+	end
+end
 
 --Update when you click
 function Blind:unik_clicky_click_mod(prevent_rep)
@@ -93,14 +119,20 @@ function reset_blinds()
 		G.GAME.CRY_BLINDS = {}
 		if G.P_BLINDS.bl_unik_cookie then
 			G.P_BLINDS.bl_unik_cookie.mult = 0
-        elseif G.P_BLINDS.bl_unik_epic_cookie then
-			G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
+        end
+        if G.P_BLINDS.bl_unik_epic_cookie then
+            if (SMODS.Mods["jen"] or {}).can_load then
+                G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1.3
+            else
+                G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
+            end
+            G.P_BLINDS.bl_unik_epic_cookie.mult = 1
         end
 	end
 	rb2()
 end
 
-
+--BUG: losing against the cookie (both variants) will carry over the blind size.
 local function BlindIncrement(penalty)
     local choices = { "Small", "Big", "Boss" }
 	G.GAME.CRY_BLINDS = G.GAME.CRY_BLINDS or {}

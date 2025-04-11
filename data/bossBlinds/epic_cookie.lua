@@ -29,6 +29,7 @@ SMODS.Blind{
         end
 		return { vars = { string } }
 	end,
+    
     death_message = "special_lose_unik_epic_cookie",
     set_blind = function(self, reset, silent)
         if not reset then
@@ -68,6 +69,14 @@ SMODS.Blind{
         G.GAME.decrementer_hand = 0
     end,
     defeat = function(self)
+        G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling * 2
+		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+        G.P_BLINDS.bl_unik_epic_cookie.mult = 0
+        if (SMODS.Mods["jen"] or {}).can_load then
+            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1.3
+        else
+            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
+        end
         G.GAME.epic_cookie_click_interval = -1
         G.hand:change_size(G.GAME.decrementer_hand)
         G.GAME.decrementer_hand = 0
