@@ -56,6 +56,8 @@ SMODS.Blind{
                     card:flip()
                     card:juice_up(2, 0.8)
                     card_status_text(card, 'Dead!', nil, 0.05*card.T.h, G.C.BLACK, 2, 0, 0, nil, 'bm', 'jen_gore6')
+                    G.GAME.blind.triggered = true
+                    G.GAME.blind:wiggle()
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             local card2 = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_jen_rot', 'hunter_rot_death')
@@ -64,6 +66,8 @@ SMODS.Blind{
                             card:set_eternal(nil)
                             card2:set_eternal(true)
                             play_sound('jen_gore6')
+                            G.GAME.blind.triggered = true
+                            G.GAME.blind:wiggle()
                             return true
                         end
                     }))
@@ -85,6 +89,8 @@ SMODS.Blind{
                         trigger='after',
                         func = function()
                             card:start_dissolve()
+                            G.GAME.blind.triggered = true
+                            G.GAME.blind:wiggle()
                             return true
                         end
                     }))

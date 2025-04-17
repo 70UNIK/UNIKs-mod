@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_yes_nothing',
     atlas = 'unik_uncommon',
-    rarity = 2, --split between uncommon and rare, If enough negative probabilities are added, it might s well be rare, but so far with:
+    rarity = 3, --Abstract cards make this rare now.
     -- The wheel
     -- Turquoise tornado
     -- Maroon Magnet (unik)

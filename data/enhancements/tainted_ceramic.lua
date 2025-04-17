@@ -78,6 +78,7 @@ dependencies = {
                     end 
                 }))
             end
+            self.ability.extinct = true
         end
 		
 		if context.final_scoring_step and card.ability.extra.marked then

@@ -13,17 +13,24 @@ pattern = '''cry_ante_base_mod = function(self, dt)
 position = "before"
 payload = '''
 	unik_clicky_click_mod = function(self)
-		local mod = 0
+		local mod = {0,-1}
 		for k, _ in pairs(G.GAME.defeated_blinds) do
 			s = G.P_BLINDS[k]
 			if s.unik_clicky_click_mod then
-                if s:unik_clicky_click_mod(true)[2] <= -1 then
-                    mod = mod + s:unik_clicky_click_mod(false)[1]
-                elseif s:unik_clicky_click_mod(true)[2] <= 0 then
-                    mod = mod * s:unik_clicky_click_mod(false)[1]
-                else
-                    mod =  to_big(mod):arrow(s:unik_clicky_click_mod(true)[2],s:unik_clicky_click_mod(false)[1])
-                end
+				if s:unik_clicky_click_mod(true)[2] <= -1 then
+					mod[1] = mod[1] + s:unik_clicky_click_mod(false)[1]
+				elseif s:unik_clicky_click_mod(true)[2] <= 0 then
+					if mod[1] <= 0 then
+						mod[1] = 1
+					end
+					mod[1] = mod[1] * s:unik_clicky_click_mod(false)[1]
+				else
+					if mod[1] <= 0 then
+						mod[1] = 1
+					end
+					mod[1] = mod[1] * s:unik_clicky_click_mod(false)[1]
+					mod[2] = s:unik_clicky_click_mod(true)[2]
+				end
 			end
 		end
 		return mod

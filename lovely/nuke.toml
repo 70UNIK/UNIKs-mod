@@ -69,7 +69,7 @@ if G.GAME.blind and G.GAME.unik_vice_enabled and not (G.GAME.blind.disabled) the
 end
 -- scores really big for regular indigo icbm. Can only spawn if you scored over ^1.5 reqs consecutively
 local upper22 = G.GAME.chips
-local ceiling22 = G.GAME.blind.chips^2
+local ceiling22 = G.GAME.blind.chips^1.65
 --print(upper22)
 --print(ceiling22)
 if to_big(upper22) > to_big(ceiling22) then

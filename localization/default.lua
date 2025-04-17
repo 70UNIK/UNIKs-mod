@@ -310,7 +310,7 @@ return {
 				text = {
 					"Shop rerolls in this ante",
 					"increase blind requirements",
-                    "by +0.5x",
+                    "by +1x",
 				},
             },
             --weather themed blinds:

@@ -219,7 +219,8 @@ NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 if (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/bossBlinds/red_rot.lua")()
 else
-	NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
+	--Disabled due to ghost being crash happy
+	--NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 end
 --MAYBE? Glop mod installed will replace bigger boo with "bigger banana", replacing ghosts with well ummm... bananas
 

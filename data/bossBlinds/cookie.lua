@@ -22,7 +22,7 @@ SMODS.Blind{
 			return {0.0,-1}
 		else
             --only wiggle on click if inside the cookie or has this function, otherwise produce a sound indicating that the cookie is active.
-            if G.GAME.blind.in_blind and (G.GAME.blind.name == 'bl_unik_cookie' or G.GAME.blind.name == 'bl_unik_epic_cookie' or G.GAME.blind.name == 'bl_cry_obsidian_orb') and G.GAME.blind.unik_clicky_click_mod then
+            if G.GAME.blind.in_blind and (G.GAME.blind.name == 'bl_unik_cookie' or G.GAME.blind.name == 'bl_unik_epic_cookie' or G.GAME.blind.name == 'cry-Obsidian Orb') and G.GAME.blind.unik_clicky_click_mod then
                 if not prevent_rep or prevent_rep == false then
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
