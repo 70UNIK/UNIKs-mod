@@ -1,13 +1,22 @@
+SMODS.Atlas({ 
+    key = "unik_legendary_tornado", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_legendary_tornado.png", 
+    px = 34, 
+    py = 34, 
+frames = 21 })
+
 SMODS.Blind{
     key = 'unik_legendary_tornado',
     config = {},
     boss = {min = 1,legendary = true,showdown = true}, 
-    atlas = "unik_legendary_blinds",
-    pos = {x=0, y=4},
-    boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
+    atlas = "unik_legendary_tornado",
+    pos = {x=0, y=0},
+    boss_colour= HEX("3dd9ca"), 
     dollars = 13,
     mult = 0.666,
     jen_blind_resize = 1e16,
+    glitchy_anim = true,
     gameset_config = {
 		modest = { disabled = true},
 	},

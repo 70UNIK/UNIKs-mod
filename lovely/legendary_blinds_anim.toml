@@ -14,7 +14,7 @@ position = "before"
 payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if blind_choice.config.glitchy_anim or blind_choice.glitchy_anim then
-    print("GLITCH FOUND")
+    --print("GLITCH FOUND")
     blind_choice.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind_choice.config.atlas] or G.ANIMATION_ATLAS['blind_chips'],  blind_choice.config.pos,true)
 else
 '''
@@ -39,8 +39,8 @@ pattern = '''local temp_blind = AnimatedSprite(0,0,s,s, G.ANIMATION_ATLAS[discov
 position = "after"
 payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
-if v.config.glitchy_anim or v.glitchy_anim then
-    print("GLITCH FOUND")
+if v.glitchy_anim then
+    --print("GLITCH FOUND")
     temp_blind = AnimatedSprite(0,0,s,s, G.ANIMATION_ATLAS[discovered and v.atlas or 'blind_chips'], discovered and v.pos or G.b_undiscovered.pos,discovered)
 end
 '''
@@ -55,8 +55,8 @@ pattern = '''local temp_blind = AnimatedSprite(0,0,1,1, G.ANIMATION_ATLAS[v.atla
 position = "after"
 payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
-if v.config.glitchy_anim or v.glitchy_anim then
-    print("GLITCH FOUND5")
+if v.glitchy_anim then
+    --print("GLITCH FOUND5")
     temp_blind = AnimatedSprite(0,0,1,1, G.ANIMATION_ATLAS[v.atlas or ''] or G.ANIMATION_ATLAS['blind_chips'], v.pos,true)
 end
 '''
@@ -72,10 +72,10 @@ pattern = '''local temp_blind = AnimatedSprite(G.your_collection[row].T.x + G.yo
 position = "after"
 payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
-if v.config.glitchy_anim or v.glitchy_anim then
+if v.glitchy_anim then
 		temp_blind = AnimatedSprite(G.your_collection[row].T.x + G.your_collection[row].T.w/2, G.your_collection[row].T.y, 1.3, 1.3, G.ANIMATION_ATLAS[v.discovered and v.atlas or 'blind_chips'],
 			v.discovered and v.pos or G.b_undiscovered.pos,v.discovered)
-            print("GLITCH REGISTERED3")
+            --print("GLITCH REGISTERED3")
 end
 '''
 match_indent = true
@@ -89,7 +89,7 @@ position = "before"
 payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if self.glitchy_anim then
-print("GLITCH REGISTERED2")
+--print("GLITCH REGISTERED2")
     self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos,true)
 end
 '''
@@ -104,7 +104,7 @@ position = "after"
 payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if G.GAME.blind.glitchy_anim then
-print("GLITCH REGISTERED")
+--print("GLITCH REGISTERED")
     blind_sprite = AnimatedSprite(0, 0, 1.2, 1.2, G.ANIMATION_ATLAS[obj.atlas] or G.ANIMATION_ATLAS['blind_chips'], copy_table(G.GAME.blind.pos),true)
 end
 '''
@@ -122,7 +122,7 @@ if v.unik_enable_legendary_glitch then
     if math.random(150) == 1 then
         v.legendary_glitch = math.random(10, 50)
         v:shift_atlas({x = 0, y = math.random(1, 5)})
-        print("GLITCH")
+        --print("GLITCH")
     elseif v.legendary_glitch then
         if v.legendary_glitch <= 1 then
             v:shift_atlas({x = 0, y = 0})

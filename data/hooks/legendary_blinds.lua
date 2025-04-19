@@ -22,7 +22,7 @@ function AnimatedSprite:init(X, Y, W, H, new_sprite_atlas, sprite_pos,unik_legen
     --print("GGG")
     local vars = animatedSpriteInitLegend(self,X, Y, W, H, new_sprite_atlas, sprite_pos)
         if unik_legendary then
-            print("LEGENDARY FOUND")
+            --print("LEGENDARY FOUND")
             self.unik_enable_legendary_glitch = true
             table.insert(G.UNIK_LEGENDARY_GLITCH, self)
         end
