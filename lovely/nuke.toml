@@ -67,6 +67,8 @@ if G.GAME.blind and G.GAME.unik_vice_enabled and not (G.GAME.blind.disabled) the
         scale = 0.8, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
     })
 end
+-- legendary crown: force set new high score:
+G.GAME.round_scores['hand'].amt = G.GAME.chips
 -- scores really big for regular indigo icbm. Can only spawn if you scored over ^1.5 reqs consecutively
 local upper22 = G.GAME.chips
 local ceiling22 = G.GAME.blind.chips^1.65

@@ -74,6 +74,7 @@ NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/debuff_jokers.lua")()
 NFS.load(mod_path .. "data/hooks/godsmarbling_sprites.lua")()
+NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
@@ -241,6 +242,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")()
 	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
 -- EDITIONS --

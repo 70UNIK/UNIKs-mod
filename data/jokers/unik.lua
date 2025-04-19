@@ -74,19 +74,21 @@ SMODS.Joker {
                 colour = G.C.DARK_EDITION,
 			}
 		end
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 and Card.get_gameset(card) ~= "modest" and not context.blueprint then
-			card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_powchips",
-					vars = {
-						number_format(to_big(card.ability.extra.Echips)),
-					},
-				}),
-				colour = G.C.DARK_EDITION,
-				card = card
-			}
+        if context.individual and context.cardarea == G.play and Card.get_gameset(card) ~= "modest" then
+			if context.other_card:get_id() == 7 and not context.blueprint  then
+				card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
+				return {
+					message = localize({
+						type = "variable",
+						key = "a_powchips",
+						vars = {
+							number_format(to_big(card.ability.extra.Echips)),
+						},
+					}),
+					colour = G.C.DARK_EDITION,
+					card = card
+				}
+			end
 		end		
 		if context.before and context.cardarea == G.jokers and not context.blueprint and Card.get_gameset(card) == "modest" then
 

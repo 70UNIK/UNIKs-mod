@@ -219,7 +219,7 @@ return {
 				},  
             },
             bl_unik_legendary_pentagram={
-                name = "Kaaoksen valtakunta",--WARHAMMER 40K WARP!
+                name = "Kaaoksenvaltakunta",--WARHAMMER 40K WARP!
                 text ={
                     "Convert 66.6% of owned Jokers",
                     "into Cursed Jokers, including",
@@ -227,6 +227,18 @@ return {
                     "Every Joker has a 6 in 10 chance", 
                     "to convert into a Cursed Joker",
                     "before every hand",
+                }
+            },
+            bl_unik_legendary_crown={ --Celeste's golden crown, but WORSE. Set requirements to highest score this run. Defeat this blind (number of hands) times, increase reqs by 2x after each defeat. If hands < 2, blind size is ^2 reqs.
+                name = "Korruptionkruunu", --Corrupted Crown
+                text ={
+                    "Defeat this blind #1# time#2#",
+                    "Set hands to 1, only replenish",
+                    "per blind defeat",
+                    "Per defeat, rescale blind to",
+                    "(best hand this run)#3#",
+                    "If hands = 1, increase",
+                    "requirements by #4#",
                 }
             },
             --just like the actual gambling machine - Jacks or better
@@ -1305,11 +1317,12 @@ return {
             c_unik_mult_only="Multiplication",
             c_unik_common_muck="Common Muck",
             c_unik_boss_rush_2="Enter the Gungeon II",
-            c_unik_boss_rush_3="Enter the Gungeon III",
+            c_unik_boss_rush_3="Enter the Gungeon III", --
             c_unik_rng_2="RNG II",
             c_unik_video_poker_1="Jacks or Better",
             c_unik_video_poker_2="Jacks or Better II",
             c_unik_rush_hour_4="Rush Hour IV",
+            c_unik_coupon_codes_only="TEMU Vouchers", --No vouchers spawn, start with 4 negative absolute coupon codes and 2 negative KEYGENs. AKA: Vouchers become temporary powerups that cycle per round
         },
         collabs={},
         dictionary={
@@ -1415,6 +1428,11 @@ return {
             k_unik_cube_pack = "Cube Pack",
             k_unik_hands_remaining = " scoring hands remaining",
             k_unik_base = " base",
+            k_unik_high_score = " = Best hand in Run",
+            k_unik_legendary_crown_start="",
+            k_unik_legendary_crown_defeat_x_times1="Defeat this blind ",
+            k_unik_legendary_crown_defeat_x_times2=" time(s)",
+            k_unik_legendary_crown_placeholder="(Current hands)",
 
             --placeholder fusion rarities
             k_unik_transcendent_placeholder = "Transcendent",
@@ -1667,6 +1685,11 @@ return {
                 "What? Are you a fucking",
                 "liar like Gingerbrave?",
                 "Don't be like him.",
+            },
+            special_lose_unik_legendary_crown={
+                "Over 322 people have died",
+                "on this summit.",
+                "You're now one of them.",
             }
         },
         ranks={},
@@ -1698,6 +1721,7 @@ return {
             ch_c_unik_all_video_poker = {"All Boss Blinds are {X:unik_eye_searing_blue,C:money}Video {X:unik_eye_searing_blue,C:money}Poker{}"},
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
             ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
+
         },
     },
 }

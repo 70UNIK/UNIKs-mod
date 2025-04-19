@@ -1,0 +1,151 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+### General Legendary Blinds animation stuff
+#### Register legendary blind animations 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''blind_choice.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind_choice.config.atlas] or G.ANIMATION_ATLAS['blind_chips'],  blind_choice.config.pos)'''
+position = "before"
+payload = '''
+--If the blind has a "glitchy animation" (Legendary blinds only)
+if blind_choice.config.glitchy_anim or blind_choice.glitchy_anim then
+    print("GLITCH FOUND")
+    blind_choice.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind_choice.config.atlas] or G.ANIMATION_ATLAS['blind_chips'],  blind_choice.config.pos,true)
+else
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''blind_choice.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind_choice.config.atlas] or G.ANIMATION_ATLAS['blind_chips'],  blind_choice.config.pos)'''
+position = "after"
+payload = '''
+end
+'''
+match_indent = true
+
+## Register blind animations 2
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''local temp_blind = AnimatedSprite(0,0,s,s, G.ANIMATION_ATLAS[discovered and v.atlas or 'blind_chips'], discovered and v.pos or G.b_undiscovered.pos)'''
+position = "after"
+payload = '''
+--If the blind has a "glitchy animation" (Legendary blinds only)
+if v.config.glitchy_anim or v.glitchy_anim then
+    print("GLITCH FOUND")
+    temp_blind = AnimatedSprite(0,0,s,s, G.ANIMATION_ATLAS[discovered and v.atlas or 'blind_chips'], discovered and v.pos or G.b_undiscovered.pos,discovered)
+end
+'''
+match_indent = true
+
+## Register blind animations 3
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''local temp_blind = AnimatedSprite(0,0,1,1, G.ANIMATION_ATLAS[v.atlas or ''] or G.ANIMATION_ATLAS['blind_chips'], v.pos)'''
+position = "after"
+payload = '''
+--If the blind has a "glitchy animation" (Legendary blinds only)
+if v.config.glitchy_anim or v.glitchy_anim then
+    print("GLITCH FOUND5")
+    temp_blind = AnimatedSprite(0,0,1,1, G.ANIMATION_ATLAS[v.atlas or ''] or G.ANIMATION_ATLAS['blind_chips'], v.pos,true)
+end
+'''
+match_indent = true
+
+## Register blind animations 4
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/overrides.lua"]'''
+pattern = '''local temp_blind = AnimatedSprite(G.your_collection[row].T.x + G.your_collection[row].T.w/2, G.your_collection[row].T.y, 1.3, 1.3, G.ANIMATION_ATLAS[v.discovered and v.atlas or 'blind_chips'],
+			v.discovered and v.pos or G.b_undiscovered.pos)'''
+position = "after"
+payload = '''
+--If the blind has a "glitchy animation" (Legendary blinds only)
+if v.config.glitchy_anim or v.glitchy_anim then
+		temp_blind = AnimatedSprite(G.your_collection[row].T.x + G.your_collection[row].T.w/2, G.your_collection[row].T.y, 1.3, 1.3, G.ANIMATION_ATLAS[v.discovered and v.atlas or 'blind_chips'],
+			v.discovered and v.pos or G.b_undiscovered.pos,v.discovered)
+            print("GLITCH REGISTERED3")
+end
+'''
+match_indent = true
+
+## Register blind animations 5
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''self.children.animatedSprite.atlas = G.ANIMATION_ATLAS[obj.atlas] or G.ANIMATION_ATLAS['blind_chips']'''
+position = "before"
+payload = '''
+--If the blind has a "glitchy animation" (Legendary blinds only)
+if self.glitchy_anim then
+print("GLITCH REGISTERED2")
+    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos,true)
+end
+'''
+match_indent = true
+
+## Register blind animations 6
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''local blind_sprite = AnimatedSprite(0, 0, 1.2, 1.2, G.ANIMATION_ATLAS[obj.atlas] or G.ANIMATION_ATLAS['blind_chips'], copy_table(G.GAME.blind.pos))'''
+position = "after"
+payload = '''
+--If the blind has a "glitchy animation" (Legendary blinds only)
+if G.GAME.blind.glitchy_anim then
+print("GLITCH REGISTERED")
+    blind_sprite = AnimatedSprite(0, 0, 1.2, 1.2, G.ANIMATION_ATLAS[obj.atlas] or G.ANIMATION_ATLAS['blind_chips'], copy_table(G.GAME.blind.pos),true)
+end
+'''
+match_indent = true
+
+
+## Add animation 
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''v:animate(self.real_dt*self.SPEEDFACTOR)'''
+position = "after"
+payload = '''
+if v.unik_enable_legendary_glitch then
+    if math.random(150) == 1 then
+        v.legendary_glitch = math.random(10, 50)
+        v:shift_atlas({x = 0, y = math.random(1, 5)})
+        print("GLITCH")
+    elseif v.legendary_glitch then
+        if v.legendary_glitch <= 1 then
+            v:shift_atlas({x = 0, y = 0})
+            v.legendary_glitch = nil
+        else
+            v.legendary_glitch = v.legendary_glitch - 1
+        end
+    end
+end
+'''
+match_indent = true
+
+## Add global for animation
+
+
+[[patches]]
+[patches.pattern]
+target = "globals.lua"
+pattern = '''self.ANIMATIONS = {}'''
+position = "after"
+payload = '''
+self.UNIK_LEGENDARY_GLITCH = {}
+'''
+match_indent = true
+
+

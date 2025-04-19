@@ -11,7 +11,7 @@ target = "blind.lua"
 pattern = '''self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling'''
 position = "before"
 payload = '''
-if (not self.exponent) or self.exponent[2] <= 0 then
+if ((not self.exponent) or self.exponent[2] <= 0) and ((not self.high_score_size))then
 '''
 match_indent = true
 
@@ -23,6 +23,8 @@ position = "after"
 payload = '''
 self.exponent = blind and blind.exponent or {1,0}
 self.death_message = blind and blind.death_message or nil
+self.high_score_size = blind and blind.high_score_size or nil
+self.glitchy_anim = blind and blind.glitchy_anim or nil
 '''
 match_indent = true
 
@@ -36,6 +38,8 @@ elseif self.exponent[2] > 0 then
     local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
     initial = initial:arrow(self.exponent[1], self.exponent[2])
     self.chips = initial
+elseif self.high_score_size then
+    self.chips = G.GAME.round_scores['hand'].amt or 0
 end
 '''
 match_indent = true
@@ -63,6 +67,8 @@ if blind_choice.config.exponent then
       local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
       initial = initial:arrow(blind_choice.config.exponent[1], blind_choice.config.exponent[2])
       blind_amt = initial
+elseif blind_choice.config.high_score_size then
+    blind_amt = G.GAME.round_scores['hand'].amt or 0
 end
 '''
 match_indent = true
@@ -91,6 +97,22 @@ if blind.exponent then
         {n=G.UIT.R, config={align = "cm"}, nodes={
           {n=G.UIT.O, config={object = stake_sprite}},
           {n=G.UIT.T, config={text = exponents .. blind.exponent[2].. exponents2 .. localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
+        }},
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+          {n=G.UIT.T, config={text = localize('ph_blind_reward'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},
+          {n=G.UIT.O, config={object = DynaText({string = {_dollars and string.rep(localize('$'),_dollars) or '-'}, colours = {G.C.MONEY}, rotate = true, bump = true, silent = true, scale = 0.45})}},
+        }},
+        ability_text[1] and {n=G.UIT.R, config={align = "cm", padding = 0.08, colour = mix_colours(blind.boss_colour, G.C.GREY, 0.4), r = 0.1, emboss = 0.05, minw = 2.5, minh = 0.9}, nodes=ability_text} or nil
+      }}
+elseif blind.high_score_size then
+    blind_text[#blind_text + 1] =
+      {n=G.UIT.R, config={align = "cm", emboss = 0.05, r = 0.1, minw = 2.5, padding = 0.07, colour = G.C.WHITE}, nodes={
+        {n=G.UIT.R, config={align = "cm", maxw = 2.4}, nodes={
+          {n=G.UIT.T, config={text = localize('ph_blind_score_at_least'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},
+        }},
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+          {n=G.UIT.O, config={object = stake_sprite}},
+          {n=G.UIT.T, config={text = localize('k_unik_high_score'), scale = 0.4, colour = G.C.RED}},
         }},
         {n=G.UIT.R, config={align = "cm"}, nodes={
           {n=G.UIT.T, config={text = localize('ph_blind_reward'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},

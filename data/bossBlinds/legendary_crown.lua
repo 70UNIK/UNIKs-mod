@@ -1,0 +1,106 @@
+--LEGENDARY CROWN
+--Blind size = Highest score
+--Defeat this blind, [Number of hands] times
+--Set hands to 1, only replenish if defeated blind (otherwise set to -6666, to counter hunter)
+--As for if deck is replenished, it WILL NOT be replenished, it just immediately sets score to 0 then displays disabled text
+--After each defeat, rescale to highest score x 1.25 (^1.01 in almanac)
+--If hands = 1, blind size is increased by ^6.666 (^^6.666 in almanac)
+--To survive, joker rearrangement, scaling jokers or in almanac, amalgamate or hydrea is the way to survive (as well as high consistent scoring and keeping an eye on the highest score)
+SMODS.Atlas({ 
+    key = "unik_legendary_crown", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_legendary_crown.png", 
+    px = 34, 
+    py = 34, 
+frames = 21 })
+SMODS.Blind{
+    key = 'unik_legendary_crown',
+    config = {},
+    boss = {min = 1,legendary = true,showdown = true, no_orb = true, hardcore = true}, 
+    atlas = "unik_legendary_crown",
+    pos = {x=0, y=0}, --This could shift with glitch FX (may use dandy code for this)
+    boss_colour= HEX("e0bc42"), --This blind will not be blood red and black every since the sneak peak of Jens legendary blinds
+    dollars = 13,
+    gameset_config = {
+		modest = { disabled = true},
+	},
+    mult = 1,
+    glitchy_anim = true,
+    death_message = "special_lose_unik_legendary_crown",
+    get_loc_debuff_text = function(self)
+		return localize("k_unik_legendary_crown_defeat_x_times1") .. (G.GAME.unik_crown_progress or G.GAME.round_resets.hands) .. localize("k_unik_legendary_crown_defeat_x_times2")
+	end,
+    high_score_size = true, --force high score
+    ignore_showdown_check = true,
+    loc_vars = function(self)
+        local exponent1 = "x1.5"
+        local exponent2 = "^6.666"
+        if (SMODS.Mods["jen"] or {}).can_load then
+            exponent1 = "^1.1"
+            exponent2 = "^^6.666"
+        end
+		return { vars = { (G.GAME.unik_crown_progress or G.GAME.round_resets.hands), (G.GAME.unik_crown_progress or G.GAME.round_resets.hands) == 1 and '' or 's', exponent1,exponent2 } } -- no bignum?
+	end,
+	collection_loc_vars = function(self)
+        local exponent1 = "x1.5"
+        local exponent2 = "^6.666"
+        if (SMODS.Mods["jen"] or {}).can_load then
+            exponent1 = "^1.1"
+            exponent2 = "^^6.666"
+        end
+		return { vars = { localize('k_unik_legendary_crown_placeholder'), 's', exponent1,exponent2} } -- no bignum?
+	end,
+    set_blind = function(self, reset, silent)
+        if not reset then
+            local text = localize('k_unik_legendary_crown_start')
+            attention_text({
+                scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+            })
+            G.GAME.unik_crown_progress = G.GAME.round_resets.hands
+            if G.GAME.round_resets.hands == 1 then
+                if (SMODS.Mods["jen"] or {}).can_load then
+                    G.GAME.blind.chips = to_big(G.GAME.round_scores['hand'].amt):arrow(2,6.666)
+                else
+                    G.GAME.blind.chips = G.GAME.round_scores['hand'].amt^6.666
+                end
+            end
+            G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
+            ease_hands_played(-G.GAME.blind.hands_sub)
+            
+        end
+
+	end,
+    in_pool = function()
+        local straddle = 0
+        --if you increase straddle, these fuckers can spawn earlier!
+        if G.GAME.straddle then
+            straddle = G.GAME.straddle
+        end
+        local hasExotic = false
+        if not G.jokers or not G.jokers.cards then
+			return false
+		end
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
+                hasExotic = true
+            end
+        end
+        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*5) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
+            return true
+        end
+        return false
+    end,
+    --no fucking around this time
+    cry_after_play = function(self)
+        ease_hands_played(-G.GAME.current_round.hands_left)
+        ease_hands_played(-666)
+	end,
+    --i wont bother programming in a disable function since its not menant to be dsiabled
+    disable = function(self)
+
+	end,
+	defeat = function(self)
+        G.GAME.unik_crown_progress = nil
+
+	end,
+}
