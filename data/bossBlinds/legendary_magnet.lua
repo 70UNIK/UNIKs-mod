@@ -1,15 +1,23 @@
 --+5 Hand Size, Add polychrome steel kings equal to 3x the cards in deck. If a steel card is held or a polychrome card is played, die.
---Basically Magnet + EpicFish + instant death = horrible.
+--Basically Magnet + EpicFish = horrible.
 --Cannot be skipped or disabled by any means.
+SMODS.Atlas({ 
+    key = "unik_legendary_magnet", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_legendary_magnet.png", 
+    px = 34, 
+    py = 34, 
+frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_magnet',
     config = {},
     boss = {min = 1,legendary = true, showdown = true}, 
-    atlas = "unik_legendary_blinds",
-    pos = {x=0, y=1},
-    boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
+    atlas = "unik_legendary_magnet",
+    pos = {x=0, y=0},
+    boss_colour= HEX("5c0007"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 0.666,
+    glitchy_anim = true,
     gameset_config = {
 		modest = { disabled = true},
 	},

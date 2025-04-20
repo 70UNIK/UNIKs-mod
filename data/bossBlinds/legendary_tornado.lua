@@ -31,8 +31,8 @@ SMODS.Blind{
 		if not reset then
             ease_hands_played(-G.GAME.current_round.hands_left)
             ease_hands_played(66)
-			G.GAME.blind.unik_tornado_hands_remaining = 2
-            G.GAME.blind.unik_tornado_pity = 0
+			G.GAME.unik_tornado_hands_remaining = 2
+            G.GAME.unik_tornado_pity = 0
             G.GAME.unik_killed_by_tornado_legendary = true
 		end
 	end,
@@ -75,23 +75,23 @@ SMODS.Blind{
         --If successful 2 times, then set hands to -666
         if
         not check
-        and (pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter")) < ((G.GAME.current_round.hands_left-G.GAME.blind.unik_tornado_hands_remaining)/ G.GAME.current_round.hands_left))
-        and ( (SMODS.Mods["jen"] or {}).can_load or pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter2")) < ((33-G.GAME.blind.unik_tornado_pity)/ 33*2))
+        and (pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter")) < ((G.GAME.current_round.hands_left-G.GAME.unik_tornado_hands_remaining)/ G.GAME.current_round.hands_left))
+        and ( (SMODS.Mods["jen"] or {}).can_load or pseudorandom(pseudoseed("unik_legendary_tornado_hand_filter2")) < ((33-G.GAME.unik_tornado_pity)/ 33*2))
         and not G.GAME.blind.disabled
-        and G.GAME.blind.unik_tornado_pity < 33
+        and G.GAME.unik_tornado_pity < 33
         then
-            G.GAME.blind.unik_tornado_pity = G.GAME.blind.unik_tornado_pity + 1
+            G.GAME.unik_tornado_pity = G.GAME.unik_tornado_pity + 1
             G.GAME.unik_deathly_debuff_text = nil
             return true
         elseif not check and not G.GAME.blind.disabled then
-            G.GAME.blind.unik_tornado_hands_remaining = G.GAME.blind.unik_tornado_hands_remaining - 1
-            local text = G.GAME.blind.unik_tornado_hands_remaining .. localize('k_unik_hands_remaining') 
+            G.GAME.unik_tornado_hands_remaining = G.GAME.unik_tornado_hands_remaining - 1
+            local text = G.GAME.unik_tornado_hands_remaining .. localize('k_unik_hands_remaining') 
             attention_text({
                 scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
             })
-            G.GAME.blind.unik_tornado_pity = 0
+            G.GAME.unik_tornado_pity = 0
             -- no hands left? set to -666
-            if G.GAME.blind.unik_tornado_hands_remaining <= 0 then
+            if G.GAME.unik_tornado_hands_remaining <= 0 then
                 ease_hands_played(-G.GAME.current_round.hands_left)
                 ease_hands_played(-666)
             end

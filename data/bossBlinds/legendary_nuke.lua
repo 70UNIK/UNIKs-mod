@@ -1,15 +1,23 @@
 --Doomsday device: ^0.75 blind size, kills you if exceeding ^1.5 blind size. Carries over the effects of Indigo ICBM, as instakills as a normal finisher blind may be wayy too much
 --Does NOT have the same requires ^1.5 score 3 times requirements as its assumed it would already have happened during endless
+SMODS.Atlas({ 
+    key = "unik_legendary_nuke", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_legendary_nuke.png", 
+    px = 34, 
+    py = 34, 
+frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_nuke',
     config = {},
     boss = {min = 1,legendary = true,showdown = true}, 
-    atlas = "unik_legendary_blinds",
-    pos = {x=0, y=2},
-    boss_colour= HEX("600000"),
+    atlas = "unik_legendary_nuke",
+    pos = {x=0, y=0},
+    boss_colour= HEX("250088"),
     dollars = 13,
     mult = 1,
     exponent = {1,0.8},
+    glitchy_anim = true,
     gameset_config = {
 		modest = { disabled = true},
 	},

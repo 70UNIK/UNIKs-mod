@@ -1,15 +1,24 @@
+SMODS.Atlas({ 
+    key = "unik_legendary_sword", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_legendary_sword.png", 
+    px = 34, 
+    py = 34, 
+frames = 21 })
+
 SMODS.Blind{
     key = 'unik_legendary_sword',
     config = {},
     boss = {min = 1,legendary = true,showdown = true}, 
-    atlas = "unik_legendary_blinds",
-    pos = {x=0, y=3},
-    boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.
+    atlas = "unik_legendary_sword",
+    pos = {x=0, y=0},
+    boss_colour= HEX("9bafcf"), --all legendary blinds will be blood red and black.
     dollars = 13,
     gameset_config = {
 		modest = { disabled = true},
 	},
     mult = 1,
+    glitchy_anim = true,
     exponent = {1,1.4666},
     jen_blind_exponent_resize = {2,2.1666},
     ignore_showdown_check = true,
