@@ -204,3 +204,93 @@ SMODS.Joker {
     end,
 
 }
+--So how she will work:
+--^Emult (multiplied by number of planets and triggers, which... is painful. Have to build this on my own)
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_moonlight_cookie"] = {
+		extra = {
+			{
+				{
+					ref_table = "card.joker_display_values",
+					ref_value = "localized_text_poker_hand",
+					colour = G.C.FILTER,
+					scale = 0.3,
+				},		
+			},
+			{
+				{
+					border_nodes = {
+						{ text = "^" },
+						{ ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
+					},
+					border_colour = G.C.DARK_EDITION,
+				},
+				{
+					ref_table = "card.joker_display_values",
+					ref_value = "localized_text",
+					colour = G.C.SECONDARY_SET.Planet,
+				},
+			},
+			
+		},
+		calc_function = function(card)
+			local Emult = 1
+			local text, _, scoring_hand = JokerDisplay.evaluate_hand() --get poker hand
+			if Card.get_gameset(card) ~= "modest" or (text ~= 'Unknown' and text ~= 'NULL' and Card.get_gameset(card) == "modest") then
+				--Iterate through each consumeable, checking for poker hand type (if modest)
+				for i,v in pairs(G.consumeables.cards) do
+					local valid = false
+					if v.ability.set == "Planet" then
+						--Indiscriminate if not modest
+						if Card.get_gameset(card) ~= "modest" then
+							valid = true
+						end
+						--Otherwise check poker hand type
+						--check if its the right planet
+						if v.ability.hand_type and valid == false then
+							--print(v.ability.hand_type .. text)
+							if v.ability.hand_type == text then
+								--print(context.other_consumeable.ability.hand_type)
+								valid = true
+							end
+						end
+						--for loop if it has hand_types for compatibility with 3 planet cards
+						if v.ability.hand_types and valid == false then
+							if v.ability.hand_types then
+								for i = 1,#v.ability.hand_types do
+									--print(v.ability.hand_types[i] .. text)
+									if v.ability.hand_types[i] == text then
+										valid = true
+										--print(context.other_consumeable.ability.hand_types[i])
+										break
+									end
+								end
+							end
+						end
+						if valid then
+							if (SMODS.Mods["incantation"] or {}).can_load then
+								if v.ability.qty and v.ability.qty > 1 then
+									Emult = (Emult * card.ability.extra.Emult)^v.ability.qty
+								else
+									Emult = (Emult * card.ability.extra.Emult)
+								end				
+							else
+								Emult = (Emult * card.ability.extra.Emult)
+							end
+							
+						end
+					end			
+				end
+			end
+			card.joker_display_values.Emult = Emult
+			card.joker_display_values.localized_text = " (" .. localize("k_planet") .. ")"
+			--Only display poker hand if in modest
+			if text ~= 'Unknown' and text ~= 'NULL' and Card.get_gameset(card) == "modest" then
+				card.joker_display_values.localized_text_poker_hand = text
+			else
+				card.joker_display_values.localized_text_poker_hand = " "
+			end
+			
+		end,
+	}
+end

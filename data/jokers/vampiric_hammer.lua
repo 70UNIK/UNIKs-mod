@@ -23,6 +23,7 @@ SMODS.Joker {
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_orta_hammer'), G.C.UNIK_ORTA_THE_HAMMER, G.C.WHITE, 1.0 )
     end,
+    immutable = true,
     add_to_deck = function(self, card, from_debuff)
         card.ability.extra.enhanced_cards = 0
         if G.playing_cards then

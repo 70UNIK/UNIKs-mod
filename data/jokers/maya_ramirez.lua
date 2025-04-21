@@ -58,3 +58,8 @@ SMODS.Joker {
         end
     end,
 }
+
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_jsab_maya"] = {
+    }
+end

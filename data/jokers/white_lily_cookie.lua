@@ -199,3 +199,21 @@ SMODS.Joker {
         end
     end,
 }
+
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_white_lily_cookie"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "^" },
+					{
+						ref_table = "card.ability.extra",
+						ref_value = "Emult",
+						retrigger_type = "exp"
+					},
+				},
+				border_colour = G.C.DARK_EDITION,
+			},
+		},
+	}
+end

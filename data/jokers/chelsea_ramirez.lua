@@ -161,6 +161,25 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
     return ret
 end
 
+--Simple XChips display
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_jsab_chelsea"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "X" },
+					{
+						ref_table = "card.ability.extra",
+						ref_value = "x_chips",
+						retrigger_type = "exp"
+					},
+				},
+				border_colour = G.C.CHIPS,
+			},
+		},
+	}
+end
+
 -- --special function for when family members get godsmarbled
 -- function Family_godsmarble_loc(card)
 --     local debuffed = false

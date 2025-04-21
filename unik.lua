@@ -339,12 +339,15 @@ NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a v
 --- 
 --- Challenges
 NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")()
-NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 NFS.load(mod_path .. "data/challenges/chipzel.lua")()
 NFS.load(mod_path .. "data/challenges/multiplication.lua")()
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+if not (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
+end
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
+NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
 NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 

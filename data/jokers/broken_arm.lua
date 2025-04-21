@@ -13,6 +13,7 @@ SMODS.Joker {
     config = { extra = { decrease = 1, maxLevel1 = 7, level1 = 0, selfDestruct = false,odds = 4} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
+    immutable = true,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle

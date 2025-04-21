@@ -15,6 +15,7 @@ SMODS.Joker {
     perishable_compat = false,
     eternal_compat = false,
     no_dbl = true,
+    immutable = true,
     gameset_config = {
 		modest = {extra = { min_discards = 6, discarded_cards = 2, current_discards = 0} },
 	},

@@ -24,6 +24,7 @@ SMODS.Joker {
     gameset_config = {
 		modest = {extra = {selfDestruct = false,blind_size = 1.4,exceeds = 2,applied = false} },
 	},
+    immutable = true,
 	add_to_deck = function(self, card, from_debuff)
 		-- If it appears during a blind (purple pentagram, trick o treat), then it should adjust it on spawn
         if G.GAME.blind.in_blind and card.ability.extra.applied == false then

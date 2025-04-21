@@ -48,6 +48,7 @@ SMODS.Joker {
 	blueprint_compat = false,
 	perishable_compat = false,
 	eternal_compat = false,
+    immutable = true,
     no_dbl = true,
     config = { extra = {slotLimit = -4} },
     pools = {["unik_copyrighted"] = true },

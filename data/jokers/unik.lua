@@ -118,3 +118,21 @@ SMODS.Joker {
 
     end,
 }
+--Simple EChips display
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_unik"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "^" },
+					{
+						ref_table = "card.ability.extra",
+						ref_value = "Echips",
+						retrigger_type = "exp"
+					},
+				},
+				border_colour = G.C.DARK_EDITION,
+			},
+		},
+	}
+end

@@ -123,3 +123,8 @@ function Game:init_game_object()
 	ret.sprunki_lily_quote = "k_unik_lily_sprunki_normal"
 	return ret
 end
+
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
+    }
+end

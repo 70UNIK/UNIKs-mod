@@ -11,7 +11,7 @@ SMODS.Challenge{
 			{ id = "cry_no_tags" },
             { id = "cry_big_showdown"},
             { id = "unik_ante_12_victory"},
-            { id = "unik_obsidian_showdown"},
+			{ id = "unik_legendary_at_any_time"},
 		},
 		modifiers = {                
             {id = 'joker_slots', value = 6},

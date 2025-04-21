@@ -14,6 +14,7 @@ SMODS.Joker {
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
+    immutable = true,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
         return { vars = { center.ability.extra.selfDestruct, center.ability.extra.hand_size, center.ability.extra.max, center.ability.extra.min } }

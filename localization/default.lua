@@ -1433,6 +1433,7 @@ return {
             k_unik_legendary_crown_defeat_x_times1="Defeat this blind ",
             k_unik_legendary_crown_defeat_x_times2=" time(s)",
             k_unik_legendary_crown_placeholder="(Current hands)",
+            k_unik_odd_and_even = "(Scoring odd and even)",
 
             --placeholder fusion rarities
             k_unik_transcendent_placeholder = "Transcendent",

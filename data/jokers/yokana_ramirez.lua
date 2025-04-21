@@ -86,3 +86,32 @@ SMODS.Joker {
 		end
 	end
 }
+
+--Hybrid of cards played AND baseball card like functionality
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_jsab_yokana"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "X" },
+					{ ref_table = "card.joker_display_values", ref_value = "x_chips", retrigger_type = "exp" },
+				},
+				border_colour = G.C.CHIPS,
+			},
+		},
+		calc_function = function(card)
+			local count = 0
+			local hand = next(G.play.cards) and G.play.cards or G.hand.highlighted
+			local text, _, scoring_hand = JokerDisplay.evaluate_hand(hand)
+			if text ~= "Unknown" then
+				for _, scoring_card in pairs(scoring_hand) do
+					count = count + JokerDisplay.calculate_card_triggers(scoring_card, scoring_hand)
+				end
+			end
+			card.joker_display_values.x_chips = card.ability.extra.x_chips ^ count
+		end,
+		mod_function = function(card, mod_joker)
+			return { x_chips = mod_joker.ability.extra.x_chips }
+		end,
+	}
+end

@@ -35,6 +35,7 @@ SMODS.Joker {
     gameset_config = {
 		modest = { disabled = true},
 	},
+    immutable = true,
 	add_to_deck = function(self, card, from_debuff)
         --add 1 random Eternal Depleted food joker
         G.E_MANAGER:add_event(Event({
