@@ -240,7 +240,7 @@ if JokerDisplay then
 				--Iterate through each consumeable, checking for poker hand type (if modest)
 				for i,v in pairs(G.consumeables.cards) do
 					local valid = false
-					if v.ability.set == "Planet" then
+					if v.ability.set == "Planet" and not v.debuff then
 						--Indiscriminate if not modest
 						if Card.get_gameset(card) ~= "modest" then
 							valid = true

@@ -271,12 +271,33 @@ return {
                     "click in this Ante",
 				},
             },
-            bl_unik_vice={
+            --If score exceeds 3x requirements, final boss blinds appear twice as often 
+            bl_unik_vice={ --placeholder: manacle
                 name = "The Vice",
 				text = {
-					"Defeating this Blind",
-                    "will cause Final Boss Blinds",
-                    "to appear every #1#",
+					"If score exceeds #1#",
+                    "Final Boss Blinds",
+                    "will appear every #2#",
+				},
+            },
+            --All consumeables and CCD cards are debuffed
+            --Appears if you own at least 2 consumeables and
+            --have >17 consumeables (almanac *cough*)
+            --Perkeo
+            --Moonlight Cookie
+            --Scratch
+            --Observatory
+            --At least 5 CCD cards in deck
+            --All consumeables are debuffed
+
+            --Epic consumer:
+            --Turn 90% of cards in deck to CCD
+            --Must use or all consumeables in inventory slot and no CCDs remain in deck/hand for hand to score (Excluding stuff like fusion, swabbie, artificer, etc...)
+            bl_unik_consumer={
+                name = "The Consumer",
+				text = {
+					"All consumeables",
+                    "are debuffed",
 				},
             },
             bl_unik_the_petard={
@@ -1403,6 +1424,7 @@ return {
             k_unik_nuke_placeholder="(3x requirements)",
             k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
             k_unik_vice_placeholder ="(halved Final Boss spawn ante requirements)",
+            k_unik_vice_placeholder2 ="(2x requirements)",
             k_unik_batman_placeholder="(80% of Jokers)",
             k_unik_epic_box_placeholder="(60%)",
             k_unik_magnet_placeholder="(50% of)",

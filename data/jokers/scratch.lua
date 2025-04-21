@@ -89,7 +89,7 @@ if JokerDisplay then
 		calc_function = function(card)
 			local mult = 0
 			for i,v in pairs(G.consumeables.cards) do
-				if v.ability.set == "Code" then
+				if v.ability.set == "Code" and not v.debuff then
 					if (SMODS.Mods["incantation"] or {}).can_load then
 						if v.ability.qty and v.ability.qty > 1 then
 							mult = mult + card.ability.extra.mult*v.ability.qty

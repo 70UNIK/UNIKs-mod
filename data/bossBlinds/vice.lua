@@ -6,9 +6,9 @@ SMODS.Blind{
 	boss = {
 		min = 3,
 	},
-    atlas = "BlindChips",
-    pos = { x = 0, y = 8},
-    boss_colour= HEX("666666"),
+    atlas = "unik_showdown_blinds",
+    pos = { x = 0, y = 19},
+    boss_colour= HEX("404040"),
     dollars = 5,
     mult = 2,
     loc_vars = function(self, info_queue, card)
@@ -19,10 +19,10 @@ SMODS.Blind{
             string = "ante"
         end
 
-		return { vars = { string } } -- no bignum?
+		return { vars = {  2 * get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling ,string } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
-		return { vars = { localize("k_unik_vice_placeholder") } }
+		return { vars = { localize("k_unik_vice_placeholder2"), localize("k_unik_vice_placeholder") } }
 	end,
     set_blind = function(self)
 		G.GAME.unik_vice_enabled = true

@@ -57,7 +57,9 @@ if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disab
     G.ROOM.jiggle = G.ROOM.jiggle + 3
 end
 -- The Vice: Halve interval of blind = 
-if G.GAME.blind and G.GAME.unik_vice_enabled and not (G.GAME.blind.disabled) then
+local upper2 = G.GAME.chips
+local ceiling2 = G.GAME.blind.chips*2
+if G.GAME.blind and G.GAME.unik_vice_enabled and not (G.GAME.blind.disabled) and to_big(upper2) > to_big(ceiling2) then
     G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze * 2
     G.GAME.blind.triggered = true
     G.GAME.blind:wiggle()
