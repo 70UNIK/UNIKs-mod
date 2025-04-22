@@ -151,3 +151,22 @@ function Card:can_sell_card(context)
     local vaz = sellPrevention(self,context)
     return vaz
 end
+
+--Simple EChips display
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_impounded"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "X" },
+					{
+						ref_table = "card.ability.extra",
+						ref_value = "x_mult",
+						retrigger_type = "exp"
+					},
+				},
+				border_colour = G.C.MULT,
+			},
+		},
+	}
+end

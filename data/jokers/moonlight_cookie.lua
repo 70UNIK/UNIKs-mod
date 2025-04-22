@@ -208,30 +208,27 @@ SMODS.Joker {
 --^Emult (multiplied by number of planets and triggers, which... is painful. Have to build this on my own)
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_moonlight_cookie"] = {
-		extra = {
+		text = {
 			{
-				{
-					ref_table = "card.joker_display_values",
-					ref_value = "localized_text_poker_hand",
-					colour = G.C.FILTER,
-					scale = 0.3,
-				},		
+				border_nodes = {
+					{ text = "^" },
+					{ ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
+				},
+				border_colour = G.C.DARK_EDITION,
 			},
+		},
+		reminder_text = {
 			{
-				{
-					border_nodes = {
-						{ text = "^" },
-						{ ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
-					},
-					border_colour = G.C.DARK_EDITION,
-				},
-				{
-					ref_table = "card.joker_display_values",
-					ref_value = "localized_text",
-					colour = G.C.SECONDARY_SET.Planet,
-				},
+				ref_table = "card.joker_display_values",
+				ref_value = "localized_text_poker_hand",
+				colour = G.C.FILTER,
+				scale = 0.3,
+			},		
+			{
+				ref_table = "card.joker_display_values",
+				ref_value = "localized_text",
+				colour = G.C.SECONDARY_SET.Planet,
 			},
-			
 		},
 		calc_function = function(card)
 			local Emult = 1

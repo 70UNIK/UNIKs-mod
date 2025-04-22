@@ -24,6 +24,9 @@ SMODS.Joker {
         center.ability.extra.odds
     } }
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.extra.level1 = 0
+    end,
     gameset_config = {
 		modest = {extra = { decrease = 1, maxLevel1 = 4, level1 = 0, selfDestruct = false,odds = 4} },
 	},
@@ -72,4 +75,49 @@ SMODS.Joker {
         end
     end
 }
-
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_broken_arm"] = {
+        text = {
+            {
+                ref_table = "card.joker_display_values",
+                ref_value = "level_down",
+                retrigger_type = "mult",
+                colour = G.C.RED,
+            },
+        },
+        reminder_text = {
+            {
+                ref_table = "card.joker_display_values",
+                ref_value = "level_ones",
+                retrigger_type = "mult",
+                colour = G.C.FILTER,
+            },	
+        },
+        extra = {
+            {
+                {
+                    ref_table = "card.joker_display_values",
+                    ref_value = "odds",
+                    colour = G.C.GREEN,
+                    scale = 0.3,
+                },		
+			},
+		},
+        calc_function = function(card)
+            local odds = ""
+            local levelDown = ""
+            local text, _, scoring_hand = JokerDisplay.evaluate_hand() --get poker hand
+			if text ~= 'Unknown' and text ~= 'NULL' then
+                if to_big(G.GAME.hands[text].level) > to_big(1) then
+                    levelDown = "-" .. card.ability.extra.decrease .. " " .. localize("k_level_prefix")
+                end
+            end
+            if Card.get_gameset(card) == "modest" then
+                odds = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(card.ability.cry_prob,card.ability.extra.odds,card.ability.cry_rigged), card.ability.extra.odds } }
+            end
+			card.joker_display_values.level_ones = "(" .. card.ability.extra.level1 .. "/" .. card.ability.extra.maxLevel1 .. ")"
+            card.joker_display_values.level_down = levelDown
+            card.joker_display_values.odds = odds
+        end
+	}
+end

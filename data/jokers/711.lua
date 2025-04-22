@@ -7,7 +7,7 @@ SMODS.Joker {
 		If you want to change the static value, you'd only change this number, instead
 		of going through all your code to change each instance individually.
 		]]
-	config = { extra = { spawn = true, hasAce = false, has7 = false,shaking = false} },
+	config = { extra = { spawn = false, hasAce = false, has7 = false,shaking = false} },
 	-- loc_vars gives your loc_text variables to work with, in the format of #n#, n being the variable in order.
 	-- #1# is the first variable in vars, #2# the second, #3# the third, and so on.
 	-- It's also where you'd add to the info_queue, which is where things like the negative tooltip are.
@@ -40,6 +40,7 @@ SMODS.Joker {
 		G.E_MANAGER:add_event(Event({
 			func = function()
 				if G.GAME.blind.in_blind then
+					card.ability.extra.spawn = true
 					card.ability.extra.shaking = true
 					--Do not spam the shake
 					local eval = function(card)
@@ -147,3 +148,26 @@ SMODS.Joker {
 
 	end
 }
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_711"] = {
+		text = {
+			{
+				ref_table = "card.joker_display_values",
+				ref_value = "active",
+				colour = G.C.FILTER,
+			},		
+		},
+		reminder_text = {
+			{
+				ref_table = "card.joker_display_values",
+				ref_value = "localized_text_cards",
+				scale = 0.3,
+				colour = G.C.UI.TEXT_INACTIVE,
+			},		
+		},
+        calc_function = function(card)
+			card.joker_display_values.active = ((card.ability.extra.spawn) and localize("jdis_active") or localize("jdis_inactive"))
+            card.joker_display_values.localized_text_cards = "(" .. localize("Ace", "ranks") .. "+7)"
+        end
+	}
+end

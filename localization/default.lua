@@ -829,7 +829,7 @@ return {
                     "{X:mult,C:white}X#4#{} every {C:attention}second{} in Blinds",
                     "and {X:mult,C:white}X#5#{} every {C:attention}second{} elsewhere",
                     "Turns into {C:red}Impound Notice{}",
-                    "if Mult becomes {X:mult,C:white}X1{}.",
+                    "if Mult becomes {X:mult,C:white}X1{} or {C:attention}sold{} in Blind",
                     "Resets to {X:mult,C:white}X#3#{} Mult",
                     "at the start and end of {C:attention}Round{}",
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
@@ -1456,10 +1456,12 @@ return {
             k_unik_legendary_crown_defeat_x_times2=" time(s)",
             k_unik_legendary_crown_placeholder="(Current hands)",
             k_unik_odd_and_even = "(Scoring odd and even)",
-
+            k_unik_cards="cards",
             --placeholder fusion rarities
             k_unik_transcendent_placeholder = "Transcendent",
             k_unik_ritualistic_placeholder = "Ritualistic",
+            k_unik_hurry_up="IMPOUNDMENT SOON",
+            k_unik_hurry_up2="IMPOUNDMENT IMMINENT",
 
             --Godsmarble ramirez family members
             k_unik_family_disabled = "All abilities are disabled...",

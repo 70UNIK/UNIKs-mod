@@ -144,6 +144,62 @@ SMODS.Joker {
 				colour = G.C.MULT,
             }
 		end
-
+		--also impound if sold in blind
+		if (G.GAME.blind and G.GAME.blind.in_blind) and context.selling_self and not context.repetition and not context.blueprint and card.ability.extra.selfDestruction == false then
+			card.ability.extra.selfDestruction = true
+			if Card.get_gameset(card) ~= "modest" then
+				selfDestruction(card,"k_unik_no_standing_towed",G.C.BLACK)
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.8,
+					func = function()
+							local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_impounded")
+							card2:add_to_deck()
+							G.jokers:emplace(card2)
+							card2:start_materialize()
+						return true
+					end
+				}))
+			end
+        end
     end,
 }
+--Simple EChips display
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_no_standing_zone"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "X" ,scale = 0.6},
+					{
+						ref_table = "card.ability.extra",
+						ref_value = "x_mult",
+						retrigger_type = "exp",
+						scale = 0.6,
+					},
+				},
+				border_colour = G.C.MULT,
+			},
+		},
+		reminder_text = {
+			{
+				ref_table = "card.joker_display_values",
+				ref_value = "warning",
+				colour = G.C.RED,
+			},		
+		},
+		calc_function = function(card)
+			local warning = ""
+			if card.ability.extra.x_mult < (1 + card.ability.extra.x_mult_mod*15) and card.ability.extra.x_mult > (1 + card.ability.extra.x_mult_mod*7.5) then
+				if math.ceil(card.ability.extra.x_mult*10) % 2 == 0 then
+					warning = localize('k_unik_hurry_up')
+				end
+			elseif card.ability.extra.x_mult <= (1 + card.ability.extra.x_mult_mod*7.5) then
+				if math.ceil(card.ability.extra.x_mult*20) % 2 == 0 then
+					warning = localize('k_unik_hurry_up2')
+				end
+			end
+			card.joker_display_values.warning = warning
+		end
+	}
+end

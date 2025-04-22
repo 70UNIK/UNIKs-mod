@@ -103,7 +103,20 @@ SMODS.Joker {
         end
     end
 }
-
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_border_wall"] = {
+		text = {
+			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER},
+		},
+        calc_function = function(card)
+            local text = ""
+            if not card.ability.cry_absolute or not G.GAME.blind.in_blind then
+                text = "(" .. G.GAME.chips .. "/" .. G.GAME.blind.chips * card.ability.extra.exceeds .. ")"
+            end
+			card.joker_display_values.localized_text = text
+        end
+	}
+end
 
 -- function SselfDestruction(card,message)
 --     -- This part plays the animation.

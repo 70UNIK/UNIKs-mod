@@ -157,13 +157,16 @@ SMODS.Joker {
             card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             --do not make multiple clones of her! AND DO NOT COPY IF THE SOUL IS BANNED!
-            if card.ability.extra.commits_left < 0 or G.GAME.banned_keys.c_jen_soul_omega then
+            if card.ability.extra.commits_left < 0 or (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul)) then
                 play_sound('cancel', 1, 0.7)
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize("k_extinct_ex"),
                     colour = G.C.BLACK,
                     card = card,
                 })
+                if G.GAME.banned_keys.c_jen_soul_omega then
+                    G.GAME.ban_spawn_on_bala_soul = true
+                end
             elseif Card.get_gameset(card) ~= "modest" then
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize({
@@ -189,7 +192,7 @@ SMODS.Joker {
                     card = card,
                 })
             end 
-            if (card.ability.extra.commits_left >= 0 and not G.GAME.banned_keys.c_jen_soul_omega) then
+            if (card.ability.extra.commits_left >= 0 and not (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul))) then
                 White_lily_copy(card)
             end
 		end
@@ -205,15 +208,27 @@ if JokerDisplay then
 		text = {
 			{
 				border_nodes = {
-					{ text = "^" },
-					{
-						ref_table = "card.ability.extra",
-						ref_value = "Emult",
-						retrigger_type = "exp"
-					},
+					{ ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
 				},
 				border_colour = G.C.DARK_EDITION,
 			},
+            {
+				border_nodes = {
+					{ ref_table = "card.joker_display_values", ref_value = "Xmult", retrigger_type = "exp" },
+				},
+				border_colour = G.C.MULT,
+			},
 		},
+        calc_function = function(card)
+            local Emult = ""
+            local Xmult = ""
+            if Card.get_gameset(card) ~= "modest" then
+                Emult = "^" .. card.ability.extra.Emult
+            else
+                Xmult = "X" .. card.ability.extra.x_mult
+            end
+            card.joker_display_values.Emult = Emult
+            card.joker_display_values.Xmult = Xmult
+        end
 	}
 end
