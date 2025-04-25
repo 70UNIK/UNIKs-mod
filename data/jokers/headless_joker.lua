@@ -49,6 +49,18 @@ SMODS.Joker {
             end
         end
     end,
+    in_pool = function(self)
+        local cards = 0
+
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v:is_suit("Hearts", true, true) then
+                    cards =  cards + 1 
+                end
+            end
+        end
+		return cards > 1
+	end,
     calculate = function(self, card, context)
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Head")) and not (G.GAME.blind.disabled) then
             selfDestruction(card,"k_unik_blind_start_head",HEX("ac9db4"))

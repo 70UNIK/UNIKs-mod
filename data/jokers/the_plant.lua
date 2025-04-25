@@ -48,6 +48,17 @@ SMODS.Joker {
             end
         }))
     end,
+    in_pool = function(self)
+        local cards = 0
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v:is_face(true) then
+                    cards =  cards + 1 
+                end
+            end
+        end
+		return cards > 1
+	end,
     update = function(self,card,dt)
         if card.added_to_deck and card.ability.extra.entered == true then
             card.ability.extra.faceCards = G.GAME.unik_face_cards

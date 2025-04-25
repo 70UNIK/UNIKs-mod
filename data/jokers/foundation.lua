@@ -1,4 +1,6 @@
--- after playing 80 hands, sell to get an exotic joker. EPIC
+-- after playing 150 hands, sell to get an exotic joker. EPIC
+-- After feedback, 114 hands is too op (flesh panopicon exists), legendary is too niche, so I'll try to add a (114 consecutive hands with only cards with an edition and enhancement)
+--Saint dramatically reduces this to 2 hands.
 SMODS.Joker {
 	dependencies = {
 		items = {
@@ -11,11 +13,12 @@ SMODS.Joker {
     rarity = 'cry_epic',
 	pos = { x = 0, y = 0 },
     cost = 10,
-    config = {extra = {hands = 0,juiced_up = false,threshold = 80}},
+    config = {extra = {hands = 0,juiced_up = false,threshold = 114}},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.hands,center.ability.extra.threshold} }
     end,
     immutable = true,
+	no_doe = true, --only because it becomes garbage in that mode
     blueprint_compat = false,
 	perishable_compat = false,
 	eternal_compat = false,
@@ -32,7 +35,7 @@ SMODS.Joker {
 			})
 			card.ability.extra.juiced_up = true
 		elseif #SMODS.find_card("j_jen_saint") > 0 then
-			card.ability.extra.threshold = 5
+			card.ability.extra.threshold = 2
 			
 		end
 	end,
@@ -47,7 +50,7 @@ SMODS.Joker {
 				card.ability.extra.juiced_up = true
 			end
 		elseif #SMODS.find_card("j_jen_saint") > 0 then
-			card.ability.extra.threshold = 5
+			card.ability.extra.threshold = 2
 			if card.ability.extra.juiced_up == false then
 				local eval = function(card)
 					return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
@@ -56,7 +59,7 @@ SMODS.Joker {
 				card.ability.extra.juiced_up = true
 			end
 		else
-			card.ability.extra.threshold = 80
+			card.ability.extra.threshold = 150
 		end
 		if card.ability.extra.hands < card.ability.extra.threshold then
 			card.ability.extra.juiced_up = false
@@ -82,26 +85,40 @@ SMODS.Joker {
 			and not context.blueprint
 			and not context.retrigger_joker
 		then
-            card.ability.extra.hands = card.ability.extra.hands + 1
-            if card.ability.extra.hands < card.ability.extra.threshold then --Hardcoded, dont want misprint to mess with this
-				return {
+			local reset = false
+			for i,v in pairs(G.play.cards) do
+				if not v.edition or not v.config.center_key then
+					reset = true
+				end
+			end
+			if not reset then
+				card.ability.extra.hands = card.ability.extra.hands + 1
+				if card.ability.extra.hands < card.ability.extra.threshold then 
+					return {
+						card_eval_status_text(card, "extra", nil, nil, nil, {
+							message = card.ability.extra.hands .. "/" .. card.ability.extra.threshold,
+							colour = G.C.CRY_EXOTIC,
+						}),
+					}
+				elseif card.ability.extra.hands >= card.ability.extra.threshold and card.ability.extra.juiced_up == false then
+					
+					local eval = function(card)
+						return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
+					end
+					juice_card_until(card, eval, true)
 					card_eval_status_text(card, "extra", nil, nil, nil, {
-						message = card.ability.extra.hands .. "/" .. card.ability.extra.threshold,
+						message = localize("k_unik_active"),
 						colour = G.C.CRY_EXOTIC,
-					}),
-				}
-			elseif card.ability.extra.hands >= card.ability.extra.threshold and card.ability.extra.juiced_up == false then
-                
-                local eval = function(card)
-                    return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
-                end
-                juice_card_until(card, eval, true)
+					})
+					card.ability.extra.juiced_up = true
+				end
+			elseif card.ability.extra.hands > 0 then
+				card.ability.extra.hands = 0
 				card_eval_status_text(card, "extra", nil, nil, nil, {
-                    message = localize("k_unik_active"),
-                    colour = G.C.CRY_EXOTIC,
-                })
-                card.ability.extra.juiced_up = true
-            end
+					message = localize("k_reset"),
+					colour = G.C.BLACK,
+				})
+			end
         end
         if context.selling_self and not context.blueprint and not context.retrigger_joker then
 			if card.ability.extra.hands >= card.ability.extra.threshold then

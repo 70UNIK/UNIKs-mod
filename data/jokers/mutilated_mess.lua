@@ -17,7 +17,7 @@ SMODS.Joker {
 	-- How the code refers to the joker.
     atlas = 'placeholders',
     key = 'unik_mutilated_mess',
-    rarity = 'unik_ritualistic_placeholder',
+    rarity = 'jen_ritualistic',
 	gameset_config = {
 		modest = {disabled = true},
 	},

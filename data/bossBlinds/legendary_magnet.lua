@@ -42,7 +42,7 @@ SMODS.Blind{
                         _rank = 'K'
                         _suit = pseudorandom_element({'S','H','D','C'}, pseudoseed('grim_create'))
 						G.playing_card = (G.playing_card and G.playing_card + 1) or 1
-						local card = Card(G.play.T.x + G.play.T.w/2, G.play.T.y, G.CARD_W, G.CARD_H, 
+						local card = Card(G.discard.T.x + G.discard.T.w/2, G.discard.T.y, G.CARD_W, G.CARD_H, 
                         G.P_CARDS[_suit..'_'.._rank], 
                         G.P_CENTERS.m_steel, 
                         {playing_card = G.playing_card})

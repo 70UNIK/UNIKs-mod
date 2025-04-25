@@ -34,3 +34,4 @@ SMODS.Blind{
 		G.GAME.unik_vice_enabled = nil
 	end,
 }
+--Epic vice: the next 8 boss blinds become epic+ blinds

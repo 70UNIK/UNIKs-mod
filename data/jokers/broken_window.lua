@@ -40,6 +40,19 @@ SMODS.Joker {
             end
         }))
     end,
+    --only appear if there are at least 2 diamonds
+    in_pool = function(self)
+        local cards = 0
+
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v:is_suit("Diamonds", true, true) then
+                    cards =  cards + 1 
+                end
+            end
+        end
+		return cards > 1
+	end,
     update = function(self,card,dt)
         if card.added_to_deck and card.ability.extra.entered == true then
             card.ability.extra.cards = G.GAME.unik_diamonds

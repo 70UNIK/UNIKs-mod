@@ -27,7 +27,7 @@ SMODS.Joker {
 	},
 	key = 'unik_cube_of_calamity',
     atlas = 'unik_cube_of_calamity',
-    rarity = "unik_transcendent_placeholder",
+    rarity = "jen_transcendent",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0, extra = { x = 2, y = 0 }},
 	-- -- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
@@ -47,14 +47,6 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
 		if context.joker_main and (to_big(card.ability.extra.EEEchips) > to_big(1)) then    
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                func = function()
-                    card:juice_up(1.0, 1.0)
-                    G.ROOM.jiggle = G.ROOM.jiggle + 7
-                    return true
-                end,
-            }))
 			return {
                 message = localize({
 					type = "variable",
@@ -69,14 +61,6 @@ SMODS.Joker {
 		end
         if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 and not context.blueprint then
             card.ability.extra.EEEchips = card.ability.extra.EEEchips + card.ability.extra.EEEchips_mod
-            G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                func = function()
-                    card:juice_up(0.7, 0.7)
-                    G.ROOM.jiggle = G.ROOM.jiggle + 2
-                    return true
-                end,
-            }))
             return {
                 message = localize({
                     type = "variable",

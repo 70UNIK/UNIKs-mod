@@ -1019,7 +1019,9 @@ return {
             j_unik_foundation = {
                 name = 'Foundation',
                 text = {
-                    "After playing {C:attention}#2#{} hands",
+                    "After playing {C:attention}#2#{} {C:attention}consecutive{} hands",
+                    "containing only cards with an",
+                    "{C:attention}enhancement{} and {C:dark_edition}edition{},",
                     "sell this card to create",
                     "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
 					"{C:inactive}(Currently #1#/#2#){}",
@@ -1359,7 +1361,7 @@ return {
             k_unik_artisan_builds="aNd ThErE\'s ThE ReRoLlLl!!!!111!!!!",
             k_unik_artisan_builds_epic='"GIVE ME THE F-CKING COMPUTER, JIMBO!!!!"',
             k_unik_artisan_builds_epic_lose='"FINE, YOU F-CKING COWARD, NOW DIE!!!!"',
-            k_unik_artisan_builds_epic_line2="If tension is < 21,", --aka you're forced to progress straddle with this
+            k_unik_artisan_builds_epic_line2="If tension is < 23,", --aka you're forced to progress straddle with this
             k_unik_artisan_builds_epic_line3="On Blind Select, die",
             k_unik_artisan_builds_epic_line2alt="If less than 10 rerolls are done this ante", --cryptid
             k_unik_artisan_builds_epic_line2alt2="If less than 25 rerolls are done this ante", --almanac

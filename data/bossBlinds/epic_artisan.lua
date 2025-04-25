@@ -118,7 +118,7 @@ SMODS.Blind	{
             --Alamanc version: KILL player if tension is < 23 (aka you're forced to reroll to the point of triggering straddle)
             if (SMODS.Mods["jen"] or {}).can_load then
                 if Jen.config.punish_reroll_abuse then
-                    if G.GAME.tension < 21 then
+                    if G.GAME.tension < 23 then
                         --kill player
                         local text = localize('k_unik_artisan_builds_epic_lose')
                         attention_text({

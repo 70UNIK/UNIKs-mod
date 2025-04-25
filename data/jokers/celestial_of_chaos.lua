@@ -20,7 +20,7 @@ SMODS.Joker {
 	},
 	key = 'unik_celestial_of_chaos',
     atlas = 'placeholders',
-    rarity = "unik_transcendent_placeholder",
+    rarity = "jen_transcendent",
 	pos = { x = 1, y = 1 },
 	-- -- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	-- soul_pos = { x = 1, y = 0 },
@@ -96,14 +96,6 @@ SMODS.Joker {
 				if (SMODS.Mods["incantation"] or {}).can_load then
 					if context.other_consumeable.ability.qty and context.other_consumeable.ability.qty > 1 then
 						for i = 1, context.other_consumeable.ability.qty-1 do
-							G.E_MANAGER:add_event(Event({
-								trigger = 'immediate',
-								func = function()
-									card:juice_up(1.0, 1.0)
-									G.ROOM.jiggle = G.ROOM.jiggle + 6
-									return true
-								end,
-							}))
 							SMODS.calculate_effect({
 								message = localize({
 									type = "variable",
@@ -117,14 +109,6 @@ SMODS.Joker {
 							}, (card or context.blueprint_card or context.retrigger_joker or context.repetition))
 						end
 					end
-					G.E_MANAGER:add_event(Event({
-						trigger = 'immediate',
-                        func = function()
-                            card:juice_up(1.0, 1.0)
-                            G.ROOM.jiggle = G.ROOM.jiggle + 6
-                            return true
-                        end,
-                    }))
                     return {
                         message = localize({
                             type = "variable",
@@ -139,14 +123,6 @@ SMODS.Joker {
                     }
 				-- end
 				else
-                    G.E_MANAGER:add_event(Event({
-						trigger = 'immediate',
-                        func = function()
-                            card:juice_up(1.0, 1.0)
-                            G.ROOM.jiggle = G.ROOM.jiggle + 6
-                            return true
-                        end,
-                    }))
                 
 					return {
 						message = localize({

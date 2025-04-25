@@ -40,6 +40,18 @@ SMODS.Joker {
             end
         end
     end,
+    --Only appear if there are at least 2 enhanced cards
+    in_pool = function(self)
+        local enhanced = 0
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v.config.center ~= G.P_CENTERS.c_base then
+                    enhanced =  enhanced + 1 
+                end
+            end
+        end
+		return enhanced > 1
+	end,
     update = function(self,card,dt)
         if G.playing_cards and card.added_to_deck then
             card.ability.extra.enhanced_cards = 0
