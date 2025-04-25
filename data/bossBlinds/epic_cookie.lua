@@ -112,7 +112,7 @@ SMODS.Blind{
                     --destroy listed cards
                     if selectedDest1 ~= nil then
                         --this repeats for some reason...
-                        selfDestruction_noMessage(selectedDest1,true)
+                        selfDestruction_noMessage(selectedDest1,false)
                         --print("boom")
                     end
 
@@ -146,13 +146,34 @@ SMODS.Blind{
     end,
 }
 
+--Add context for Just before cards are played
+local pcfh = G.FUNCS.play_cards_from_highlighted
+function G.FUNCS.play_cards_from_highlighted(e)
+	G.GAME.before_play_buffer = true
+    --Epic cookie: Deselect cards pending destruction
+    for i=1, #G.hand.highlighted do
+        if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.set_for_destruction then
+            G.hand:remove_from_highlighted(G.hand.highlighted[i])
+        end
+    end
+    --Only play if highlight cards are > 0
+    if #G.hand.highlighted > 0 then
+        pcfh(e)
+    end
+	G.GAME.before_play_buffer = nil
+end
+
 function selfDestruction_noMessage(card,dissolve)
     -- This part plays the animation.
     G.E_MANAGER:add_event(Event({
         func = function()
             --Dissolving
             if (dissolve) then
-                card:start_dissolve()
+                if SMODS.shatters(card) then
+                    card:shatter()
+                else
+                    card:start_dissolve()
+                end
             --extinct animation
             else
                 play_sound('tarot1')

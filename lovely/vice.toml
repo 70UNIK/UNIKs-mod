@@ -21,3 +21,26 @@ elseif v.boss.showdown and (((G.GAME.round_resets.ante)%math.ceil(G.GAME.win_ant
 end
 '''
 match_indent = true
+
+# in_pool fix: enable bosses that have in_pool to spawn when finishers are enabled or the vice causes them to spawn everywhere
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''if
+                (
+                    ((G.GAME.round_resets.ante)%G.GAME.win_ante == 0 and G.GAME.round_resets.ante >= 2) ==
+                    (v.boss.showdown or false)
+                ) or
+                (options or {}).ignore_showdown_check
+            then'''
+position = "at"
+payload = '''
+            if
+                (
+                    (((G.GAME.round_resets.ante)%(math.ceil(G.GAME.win_ante/G.GAME.unik_vice_squeeze)) == 0 and G.GAME.round_resets.ante >= 2) ) ==
+                    (v.boss.showdown or false)
+                ) or
+                (options or {}).ignore_showdown_check or G.GAME.modifiers.cry_big_showdown
+            then
+'''
+match_indent = true

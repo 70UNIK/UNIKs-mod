@@ -2,9 +2,9 @@
 SMODS.Blind{
     key = 'unik_sync_catalyst_fail',
     config = {},
-	boss = {
-		min = 1,
-	},
+
+    boss = {min = 1, max = 6666666}, 
+    
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 9},
     boss_colour= G.C.DARK_EDITION,

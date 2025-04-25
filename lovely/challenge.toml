@@ -173,24 +173,7 @@ end
 '''
 match_indent = true
 
-# in_pool fix: enable bosses that have in_pool to spawn when finishers are enabled or the vice causes them to spawn everywhere
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''(
-                    ((G.GAME.round_resets.ante)%G.GAME.win_ante == 0 and G.GAME.round_resets.ante >= 2) ==
-                    (v.boss.showdown or false)
-                ) or
-                (options or {}).ignore_showdown_check'''
-position = "at"
-payload = '''
-                (
-                    (((G.GAME.round_resets.ante)%math.ceil(G.GAME.win_ante/G.GAME.unik_vice_squeeze) == 0 and G.GAME.round_resets.ante >= 2) or G.GAME.modifiers.cry_big_showdown ) ==
-                    (v.boss.showdown or false)
-                ) or
-                (options or {}).ignore_showdown_check
-'''
-match_indent = true
+
 
 # legendaries and epic blinds can spawn anytime, including almanac ones (ignores spawn check)
 [[patches]]
