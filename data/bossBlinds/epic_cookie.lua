@@ -2,7 +2,7 @@ SMODS.Blind{
     key = 'unik_epic_cookie',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true},
+    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 9},
     boss_colour= HEX("633b11"), 
@@ -11,6 +11,7 @@ SMODS.Blind{
     mult = 1,
     exponent = {1,1},
     jen_blind_exponent_resize = {1,1.3},
+    ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
         local string = ""
         if (SMODS.Mods["jen"] or {}).can_load then
@@ -112,7 +113,7 @@ SMODS.Blind{
                     --destroy listed cards
                     if selectedDest1 ~= nil then
                         --this repeats for some reason...
-                        selfDestruction_noMessage(selectedDest1,false)
+                        selfDestruction_noMessage(selectedDest1,true)
                         --print("boom")
                     end
 
@@ -159,9 +160,14 @@ function G.FUNCS.play_cards_from_highlighted(e)
     --Only play if highlight cards are > 0
     if #G.hand.highlighted > 0 then
         pcfh(e)
+    elseif e.disable_button then
+        e.disable_button = nil
+        print("disble")
     end
 	G.GAME.before_play_buffer = nil
 end
+
+--As playing a hand is one_click, it means if lets say a card being played just happened to be disabled, then
 
 function selfDestruction_noMessage(card,dissolve)
     -- This part plays the animation.

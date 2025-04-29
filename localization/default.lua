@@ -81,6 +81,9 @@ return {
                     "requirements by 3 antes",
 				},
             },
+            --Rework:
+            --You need to be in tension 33 to survive
+            --Or must reroll total rerolls done this run^1.05 before this ante
             bl_unik_epic_artisan={
                 name = "Arteesisetrakenteet", --literally artesian builds
 				text = {
@@ -121,8 +124,44 @@ return {
                 name = "Haitallinenruoko", --the infestive reed (the reed from ortalab)
 				text = {
                     "If hand does not contain",
-                    "ranks #1# and #2#, die", --2 random ranks accoring to your deck composition
+                    "#1#, die", --2 random ranks accoring to your deck composition
 				},
+            },
+            bl_unik_epic_decision={ -- Mortoninhaarukka: Morton's Fork, cause no matter what, all choices are bad.
+                name = "Mortoninhaarukka", 
+                text = {
+                    "",
+                    "", 
+                    "",
+                },
+            },
+
+            bl_unik_epic_vader={ --Balatro goes kino
+                name = "Telekineettinentyranni", --Telikinetic Tyrant
+                text = {
+                    "Set all statistics",
+                    "of all Jokers to 0",
+                } --Better get immutables going on.
+            },
+            bl_unik_epic_xenomorph_queen={ --1 in 4 chance drawn card is permanently debuffed. If card contains undebuffed cards, die. --HARD COUNTERS DANDY --Balatro goes kino
+                name = "Syövyttäväulkomaalainen", --Corrosive Alien
+                text = {
+                    "#1# in #2# chance",
+                    "card is drawn permanently debuffed",
+                    "If played hand contains",
+                    "undebuffed cards, die"
+                }
+            },
+            bl_unik_epic_shackle={ --Reduce hand size by (number of empty joker slots x negative jokers owned) and destroy all negative jokers, cards and consumeables.
+                name = "Bifurkaationkahle", --Shackle of bifrication
+                text = {
+                    "#1# hand size",
+                    "and Joker slots by",
+                    "Empty Joker slots + Negative Jokers",
+                    "then destroy all negative",
+                    "Jokers, cards and consumeables,",
+                    "including eternals",
+                }
             },
             bl_unik_bigger_blind={
                 name = "Bigger Blind", --no description, it does nothing
@@ -1346,6 +1385,7 @@ return {
             c_unik_video_poker_2="Jacks or Better II",
             c_unik_rush_hour_4="Rush Hour IV",
             c_unik_coupon_codes_only="TEMU Vouchers", --No vouchers spawn, start with 4 negative absolute coupon codes and 2 negative KEYGENs. AKA: Vouchers become temporary powerups that cycle per round
+            c_unik_monsters="Monsters",
         },
         collabs={},
         dictionary={
@@ -1361,10 +1401,11 @@ return {
             k_unik_artisan_builds="aNd ThErE\'s ThE ReRoLlLl!!!!111!!!!",
             k_unik_artisan_builds_epic='"GIVE ME THE F-CKING COMPUTER, JIMBO!!!!"',
             k_unik_artisan_builds_epic_lose='"FINE, YOU F-CKING COWARD, NOW DIE!!!!"',
-            k_unik_artisan_builds_epic_line2="If tension is < 23,", --aka you're forced to progress straddle with this
+            k_unik_artisan_builds_epic_line2="If tension is < 23,", --aka you're forced to progress straddle with this. This will be bumped up to 33 in v0.0.9
             k_unik_artisan_builds_epic_line3="On Blind Select, die",
-            k_unik_artisan_builds_epic_line2alt="If less than 10 rerolls are done this ante", --cryptid
-            k_unik_artisan_builds_epic_line2alt2="If less than 25 rerolls are done this ante", --almanac
+            k_unik_artisan_builds_epic_line2alt="If less than ", 
+            k_unik_artisan_builds_epic_line2alt2=" rerolls are done this ante,", 
+            k_unik_artisan_builds_epic_placeholder="If less than (rerolls this run)^1.1 rerolls are done this ante,",
             k_unik_pentagram_start="Hell's Legion is coming...",
             k_unik_pentagram_purified="Sent to hell!",
             k_unik_batman_start='"You WILL ALL be forgotten, Jokers. Because of me."',
@@ -1427,7 +1468,7 @@ return {
             k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
             k_unik_vice_placeholder ="(halved Final Boss spawn ante requirements)",
             k_unik_vice_placeholder2 ="(2x requirements)",
-            k_unik_batman_placeholder="(80% of Jokers)",
+            k_unik_batman_placeholder="(80% of)",
             k_unik_epic_box_placeholder="(60%)",
             k_unik_magnet_placeholder="(50% of)",
             k_unik_racket_warning="Must have at least $40",
@@ -1442,7 +1483,7 @@ return {
             k_unik_taste_of_power="Enjoy it while it lasts!",
             ph_unik_instakill_hand="YOU WILL DIE.",
             k_unik_die="DIE.",
-            k_unik_only_stone="Must not hold cards with ranks or suits",
+            k_unik_only_stone="Must not play cards with ranks or suits",
             k_unik_boss_immune="YOU CANNOT STOP IT",
             k_unik_boss_reroll_nope="YOU CANNOT CHANGE YOUR FATE",
             unik_debuff_no_pairs="No Pairs",
@@ -1459,11 +1500,20 @@ return {
             k_unik_legendary_crown_placeholder="(Current hands)",
             k_unik_odd_and_even = "(Scoring odd and even)",
             k_unik_cards="cards",
+            k_unik_debuffed_card_only="Must only play debuffed cards",
+            k_unik_xenomorph_start='"Get away from her, you bitch!"',
+            k_unik_darth_vader_start='"Be careful not to choke on your aspirations, Director."',
             --placeholder fusion rarities
             k_unik_transcendent_placeholder = "Transcendent",
             k_unik_ritualistic_placeholder = "Ritualistic",
             k_unik_hurry_up="IMPOUNDMENT SOON",
             k_unik_hurry_up2="IMPOUNDMENT IMMINENT",
+            k_unik_shackle1="Permanently reduce", --jen
+            k_unik_shackle2="Reduce", --jenless
+            k_unik_reed_placeholder="(3 random ranks from deck)",
+            k_unik_reed_part1 = "a",
+            k_unik_reed_part2 = "or",
+            
 
             --Godsmarble ramirez family members
             k_unik_family_disabled = "All abilities are disabled...",
@@ -1717,6 +1767,18 @@ return {
                 "Over 322 people have died",
                 "on this summit.",
                 "You're now one of them.",
+            },
+            special_lose_unik_epic_xenomorph={
+                "Game over man!",
+                "Game Over!",
+            },
+            special_lose_unik_epic_darth_vader={
+                "He isn't the most feared",
+                "Sith lord for nothing...",
+            },
+            special_lose_unik_epic_shackle={
+                "Better fill up your",
+                "Joker slots!",
             }
         },
         ranks={},
@@ -1729,6 +1791,7 @@ return {
             a_hyper_three_mult = { "^^^#1# Mult" },
             a_unik_hands_1={"#1# hands"},
             a_unik_discards_1={"#1# discards"},
+            a_unik_reed_construct={"ranks #1# or #2#"}
         },
         v_text={			
             ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is {C:attention}set{} to {C:red}<=1{}" },
@@ -1748,7 +1811,7 @@ return {
             ch_c_unik_all_video_poker = {"All Boss Blinds are {X:unik_eye_searing_blue,C:money}Video {X:unik_eye_searing_blue,C:money}Poker{}"},
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
             ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
-
+            ch_c_unik_cursed_only = {"All boss blinds are {C:attention}The Decision{} and {C:attention}Purple Pentagram{}"},
         },
     },
 }

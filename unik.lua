@@ -234,9 +234,13 @@ NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_shackle.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_vader.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
@@ -345,6 +349,7 @@ NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 if not (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
 end
+NFS.load(mod_path .. "data/challenges/monsters.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()

@@ -1,6 +1,6 @@
 SMODS.Blind{
     key = 'unik_legendary_pentagram',
-    boss = {min = 1,legendary = true,showdown = true}, 
+    boss = {min = 1,legendary = true,showdown = true,no_orb = true}, 
     atlas = "unik_legendary_blinds",
     pos = {x=0, y=5},
     boss_colour= HEX("600000"), --all legendary blinds will be blood red and black.

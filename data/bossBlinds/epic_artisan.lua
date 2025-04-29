@@ -23,7 +23,7 @@ SMODS.Blind	{
     key = 'unik_epic_artisan',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true},
+    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
     boss_colour = HEX("0f2140"),
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 6},
@@ -59,21 +59,25 @@ SMODS.Blind	{
         local exponent = 1.05
         local line2 = ""
         local line3 = ""
+        local maxRerolls = G.GAME.global_rerolls_pause_val
+        if maxRerolls < 12 then
+            maxRerolls = 12
+        end
         if (SMODS.Mods["jen"] or {}).can_load then
             exponent = 1.1
             if Jen.config.punish_reroll_abuse then
-                line2 = 'k_unik_artisan_builds_epic_line2'
+                line2 = localize('k_unik_artisan_builds_epic_line2')
             else
-                line2 = 'k_unik_artisan_builds_epic_line2alt2'
+                line2 = localize('k_unik_artisan_builds_epic_line2alt') .. (math.ceil(maxRerolls^1.1)) ..localize('k_unik_artisan_builds_epic_line2alt2')
             end
         else
-            line2 = 'k_unik_artisan_builds_epic_line2alt'
+            line2 = localize('k_unik_artisan_builds_epic_line2alt') .. (math.ceil(maxRerolls^1.1)) ..localize('k_unik_artisan_builds_epic_line2alt2')
             exponent = 1.05
         end
         line3 = 'k_unik_artisan_builds_epic_line3'
 
         --very complex variations for 1 blind, as it has to adapt to if reroll abuse is enabled or not.
-		return { vars = { exponent.. "",localize(line2),localize(line3) } }
+		return { vars = { exponent.. "",line2,localize(line3) } }
 	end,
     collection_loc_vars = function(self)
         local exponent = 1.05
@@ -84,10 +88,10 @@ SMODS.Blind	{
             if Jen.config.punish_reroll_abuse then
                 line2 = 'k_unik_artisan_builds_epic_line2'
             else
-                line2 = 'k_unik_artisan_builds_epic_line2alt2'
+                line2 = 'k_unik_artisan_builds_epic_placeholder'
             end
         else
-            line2 = 'k_unik_artisan_builds_epic_line2alt'
+            line2 = 'k_unik_artisan_builds_epic_placeholder'
             exponent = 1.05
         end
         line3 = 'k_unik_artisan_builds_epic_line3'
@@ -97,6 +101,10 @@ SMODS.Blind	{
 	end,
     set_blind = function(self, reset, silent)
         if not reset then
+            local maxRerolls = G.GAME.global_rerolls_pause_val
+            if maxRerolls < 12 then
+                maxRerolls = 12
+            end
             G.GAME.unik_original_chips_artisan = G.GAME.blind.chips
             if G.GAME.ante_rerolls and G.GAME.ante_rerolls > 0 then
                 for i = 1,G.GAME.ante_rerolls do
@@ -134,7 +142,7 @@ SMODS.Blind	{
                         })
                     end
                 else
-                    if G.GAME.ante_rerolls and G.GAME.ante_rerolls < 25 then --crank it up to 30
+                    if G.GAME.ante_rerolls and G.GAME.ante_rerolls < maxRerolls^1.1 then --crank it up to 30
                         --kill player
                         local text = localize('k_unik_artisan_builds_epic_lose')
                         attention_text({
@@ -151,7 +159,7 @@ SMODS.Blind	{
                     end
                 end
             else --cryptid version: kill player if less than 12 rerolls
-                if G.GAME.ante_rerolls and G.GAME.ante_rerolls < 10 then
+                if G.GAME.ante_rerolls and G.GAME.ante_rerolls < math.ceil(maxRerolls^1.1) then
                     --kill player
                     local text = localize('k_unik_artisan_builds_epic_lose')
                     attention_text({

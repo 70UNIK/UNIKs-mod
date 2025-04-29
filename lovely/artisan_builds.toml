@@ -20,7 +20,7 @@ if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss 
     
     ) then
     G.GAME.unik_artisan_reroll_time = true
-
+    
 else
     G.GAME.unik_artisan_reroll_time = nil
     G.GAME.ante_rerolls = 0

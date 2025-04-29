@@ -1,7 +1,7 @@
 SMODS.Blind{
     key = 'unik_black_bat',
     config = {},
-    boss = {min = 1, max = 10, showdown = true}, 
+    boss = {min = 1, max = 10, showdown = true, no_orb = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 2},
     boss_colour= HEX("0a0a0a"),

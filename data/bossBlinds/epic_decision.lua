@@ -1,0 +1,21 @@
+--EPIC DECISION:
+--Upon entering the blind:
+--Open an ultra baneful booster pack:
+--Choose 4 of 8 horrible consumeable effects (called Lartceps):
+--Cannot be skipped at all.
+--- Hellspawn: Add 20 Cursed Jokers. Temporarily create a Showman in the process. (Default)
+--- Placard: Add Absolute and Rental to all Jokers, 50% chance to add Banana, 25% chance to add Perishable, 10% chance to add Niko
+--- Wipe (styled as a code card): Destroy all but 1 card in the deck
+--- Garbage: Add random cards equal to 2x your deck size
+--- Sinners: The next 4 Boss Blinds will become Epic+ Blinds. 
+--- Trim (styled as a code card): Set Joker slots to 0 (Almanac)/Remove all empty joker slots (Cryptid)
+--- Reeducation: All your Jokers, Cards and Consumeables become Positive.
+--- Expulsion: Randomly banish 66% of owned Jokers, eternals included
+--- Extortion: Set money to -$666.
+--- Escalation: Ante^1.5, tension^1.5, straddle^1.5, rounded up.
+--- Summit: Increases next blind/current blind size by ^^2.
+--- The Single (Styled as a tarot): Set hand size to 1.
+--- Bretheren Moon (Styled as a planet): Remove all bonuses and set all hand levels to 0. 
+--- Powerdown: Destroy 50% of jokers, cards, consumeables and halve all levels (rounded down). Art is MX ripping GF in 2
+--- Expiry: Unredeem all vouchers
+-- Likewise, Lartceps are always eternal and rental and always have the positive edition (reservia counter)

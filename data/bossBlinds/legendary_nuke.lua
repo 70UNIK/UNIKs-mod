@@ -10,7 +10,7 @@ frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_nuke',
     config = {},
-    boss = {min = 1,legendary = true,showdown = true}, 
+    boss = {min = 1,legendary = true,showdown = true,no_orb = true}, 
     atlas = "unik_legendary_nuke",
     pos = {x=0, y=0},
     boss_colour= HEX("250088"),
