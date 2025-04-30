@@ -42,10 +42,12 @@ SMODS.Joker {
 	fusable = true,
 	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
 	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
-    config = { extra = { Emult = 1.3,consumeSlot = 1} },
+	-- Given moonlight is very difficult to scale without perkeo, especially on higher antes (you need chambered or azure seals):
+	--- 2 in 5 chance to not turn a random planet negative
+	--- In return, she will not add a consumeable slot (except when godsmarbled) and her Emult becomes ^1.25
+    config = { extra = { Emult = 1.25,odds = 5} },
 	gameset_config = {
-		modest = { extra = { Emult = 1.2} },
-		madness = { extra = { Emult = 1.3,consumeSlot = 1} },
+		modest = { extra = { Emult = 1.1,odds = 999999} },
 	},
 	loc_vars = function(self, info_queue, center)
 		--normal quotes only if not Jen
@@ -54,8 +56,9 @@ SMODS.Joker {
 			quoteset = Jen.dramatic and 'drama' or Jen.gods() and 'gods' or 'normal'
 		end
 		return { 
-			key = Cryptid.gameset_loc(self, { modest = "modest",madness = "madness"  }), 
-			vars = {center.ability.extra.Emult , center.ability.extra.consumeSlot,
+			key = Cryptid.gameset_loc(self, { modest = "modest"  }), 
+			vars = {center.ability.extra.Emult, center and cry_prob(2 or center.ability.cry_prob*2,center.ability.extra.odds,center.ability.cry_rigged) or 2, 
+			center.ability.extra.odds,
 			localize(moonlight_quotes[quoteset][math.random(#moonlight_quotes[quoteset])] .. "")
 		} 
 		}
@@ -63,28 +66,62 @@ SMODS.Joker {
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
 	set_ability = function(self, card, initial, delay_sprites)
 	end,
-	
-    add_to_deck = function(self, card, from_debuff)
-		-- Changes a G.GAME variable, which is usually a global value that's specific to the current run.
-		-- These are initialized in game.lua under the Game:init_game_object() function, and you can look through them to get an idea of the things you can change.
-		if Card.get_gameset(card) == "madness" then
-			G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.consumeSlot
-		end
-	end,
-	-- Inverse of above function.
-	remove_from_deck = function(self, card, from_debuff)
-		-- Adds - instead of +, so they get subtracted when this card is removed.
-		if Card.get_gameset(card) == "madness" then
-			G.consumeables.config.card_limit = G.consumeables.config.card_limit - card.ability.extra.consumeSlot
-		end
-	end,
     calculate = function(self, card, context)
-		--Known issue: does not work with retriggers.
-		if context.other_consumeable then
-			--print(context.other_consumeable.ability.atlas)
-			--print(context.other_consumeable.atlas)
-		end
 		
+		if context.ending_shop and Card.get_gameset(card) ~= "modest" and 
+		not(pseudorandom('unik_moonlight_negative') < cry_prob(2 or center.ability.cry_prob*2,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
+			--What if you decide to stack non negative consumeables (I prefer NOT to do that, but its a possibility. It should decrement the value and create one)
+			if G.consumeables.cards[1] then
+				--Get valid cards
+				local validCards = {}
+				for i,v in pairs(G.consumeables.cards) do
+					if (v.ability.set == 'Planet' or 
+					v.config.center.key == 'c_jen_pluto_omega' or
+					v.config.center.key == 'c_jen_mercury_omega' or
+					v.config.center.key == 'c_jen_uranus_omega' or
+					v.config.center.key == 'c_jen_venus_omega' or
+					v.config.center.key == 'c_jen_saturn_omega' or
+					v.config.center.key == 'c_jen_jupiter_omega' or
+					v.config.center.key == 'c_jen_earth_omega' or
+					v.config.center.key == 'c_jen_mars_omega' or
+					v.config.center.key == 'c_jen_neptune_omega' or
+					v.config.center.key == 'c_jen_planet_x_omega' or
+					v.config.center.key == 'c_jen_ceres_omega' or
+					v.config.center.key == 'c_jen_eris_omega' or
+					v.config.center.key == 'c_jen_black_hole_omega') and not v.edition then
+						validCards[#validCards + 1] = v
+					end
+				end
+				if #validCards > 0 then
+					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
+					--If incantation, automatically split 1 negative from a big pile
+					if (SMODS.Mods["incantation"] or {}).can_load then
+						if card2.getQty then
+							local amount = card2:getQty()
+							if amount > 1 then
+								local newCard = card2:split(1)
+								newCard:set_edition('e_negative', true)
+								newCard:try_merge()
+								card:juice_up(0.5, 0.5)
+							else
+								card2:set_edition('e_negative', true)
+								card2:try_merge()
+								card:juice_up(0.5, 0.5)
+							end
+						else
+							card2:set_edition('e_negative', true)
+							card2:try_merge()
+							card:juice_up(0.5, 0.5)
+						end
+					else
+						card2:set_edition('e_negative', true)
+						card:juice_up(0.5, 0.5)
+					end
+				end
+			end
+		end
+
+
         if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' or 
 		(context.other_consumeable and context.other_consumeable.ability.set == 'jen_omegaconsumable')
 		then
@@ -108,7 +145,7 @@ SMODS.Joker {
 				then
 					valid = true
 				end
-
+				
 			end
 			
 			--automatically ignore hand type if its modest

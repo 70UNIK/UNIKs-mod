@@ -157,7 +157,7 @@ return {
                 text = {
                     "#1# hand size",
                     "and Joker slots by",
-                    "Empty Joker slots + Negative Jokers",
+                    "(Empty Joker slots) x (Negative Jokers)",
                     "then destroy all negative",
                     "Jokers, cards and consumeables,",
                     "including eternals",
@@ -670,7 +670,9 @@ return {
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:green}#2# in #3#{} to not add {C:dark_edition}Negative{} to a",
+                    "random {C:planet}planet{} in your possession after {C:attention}shop{}",
+                    "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
@@ -688,22 +690,22 @@ return {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult for",
                     "their specified {C:attention}poker hand",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
-            j_unik_moonlight_cookie_madness = { --^same as modest, but with an extra consumable slot
-                name = 'Moonlight Cookie',
-                text = {
-                    "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
-                    "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    "{C:attention}+#2#{} Consumable Slot(s)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
-                }
-            },
+            -- j_unik_moonlight_cookie_madness = { --^same as modest, but with an extra consumable slot
+            --     name = 'Moonlight Cookie',
+            --     text = {
+            --         "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
+            --         "each give {X:dark_edition,C:white}^#1#{} Mult",
+            --         "{C:attention}+#2#{} Consumable Slot(s)",
+            --         "{C:unik_caption,s:0.7,E:1}#3#{}",
+            --         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+            --         "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
+            --     }
+            -- },
             j_unik_celestial_of_chaos = { --^same as modest, but with an extra consumable slot
                 name = 'The Celestial of Chaos',
                 text = {

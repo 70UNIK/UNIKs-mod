@@ -42,14 +42,16 @@ SMODS.Blind{
                         }))
                     end
                 end
-                if (negativeJokers + emptySlots) > 0 then
-                    G.GAME.unik_original_size = negativeJokers + emptySlots
-                    G.hand:change_size(-negativeJokers - emptySlots)
+                if (negativeJokers * emptySlots) > 0 then
+                    G.GAME.unik_original_size = negativeJokers * emptySlots
+                    G.hand:change_size(-negativeJokers * emptySlots)
                     if G.jokers.change_size_absolute then
-                        G.jokers:change_size_absolute(- (negativeJokers + emptySlots))
+                        G.jokers:change_size_absolute(- (negativeJokers * emptySlots))
                     else
-                        G.jokers.config.card_limit = G.jokers.config.card_limit - (negativeJokers + emptySlots)
+                        G.jokers.config.card_limit = G.jokers.config.card_limit - (negativeJokers * emptySlots)
                     end
+                    G.GAME.blind.triggered = true
+                    G.GAME.blind:wiggle()
                 end
                 for i,v in pairs(G.consumeables.cards) do
                     if v.edition and v.edition.key == "e_negative" then
