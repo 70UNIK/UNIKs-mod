@@ -1541,31 +1541,42 @@ return {
 
             --Unik
             ---Normal:
-            k_unik_unik_normal1 = "Can't believe I just inserted myself here.",
+            k_unik_unik_normal1 = "Maybe you don't mind I'm crossdressing here...",
             k_unik_unik_normal2 = "I'll help out here, although I'll take my time.",
-            k_unik_unik_normal3 = "Maybe you don't mind I'm crossdressing here...",
+            k_unik_unik_normal3 = "Quite an experience, wearing this here...",
+            k_unik_unik_normal4 = "I can admittedly be a bit deary at times...",
+            k_unik_unik_normal5 = "Let me know what I can help out with.",
+            k_unik_unik_normal6 = "Umm, hi... Can't believe I'm here now...",
             ---Scared:
             k_unik_unik_scared1 = "Wh... IT'S TOO MUCH!!!",
-            k_unik_unik_scared2 = "What the hell is all this?!",
+            k_unik_unik_scared2 = "PLEASE STOP! I can't handle this!",
+            k_unik_unik_scared3 = "The fuck is all this?!",
             ---Godsmarble Near:
             k_unik_unik_godsmarble1 = "I... I... am.... F A L L I N G...",
             k_unik_unik_godsmarble2 = "WHAT IS HAPPENING TO ME?!",
             k_unik_unik_godsmarble3 = "That thing is doing... Something to me!...",
-            k_unik_unik_godsmarble4 = "WHY DID YOU PUT THAT HERE?! IT HURTS SO MUCH!",
+            k_unik_unik_godsmarble4 = "WHY DID YOU PUT THAT HERE?! IT... MY MIND...!",
+            k_unik_unik_godsmarble5 = "IT HURTS SO MUCH... IT HURTS...",
+            k_unik_unik_godsmarble6 = "It hurts... Why are you... doing... this...",
+            k_unik_unik_godsmarble7 = "*sobbing* *sob*",
             ---Godsmarbled: Cube of Calamity (basically I lose myself into mindlessness similar to Giygas)
             k_unik_cube_of_calamity1 = "I   F E E L...    B A D...",
             k_unik_cube_of_calamity2 = "I   C A N ' T...",
             k_unik_cube_of_calamity3 = "F A L L I N G...",
             k_unik_cube_of_calamity4 = "ITHURTSITHURTSITHURTSI T H U R T S...",
-            k_unik_cube_of_calamity5 = "E V E R Y T H I N G... G O N E",
+            k_unik_cube_of_calamity5 = "G E T O U T G E T O U T...",
+            k_unik_cube_of_calamity6 = "I M S O R R Y I M S O R R Y...",
+            k_unik_cube_of_calamity7 = "Y O U...",
+            k_unik_cube_of_calamity8 = "A A A A A A A A A A A A A A A A A A...",
+            k_unik_cube_of_calamity9 = "N O T H I N G...   L E F T...",
             --Chelsea
             ---Normal:
             k_unik_chelsea_normal1 = "Hola! Maybe I can help out?",
             k_unik_chelsea_normal2 = "What is all this? Everything is quite different...",
             k_unik_chelsea_normal3 = "Hey, is it alright if I do something here?",
             k_unik_chelsea_normal4 = "I miss being with my family...",
-            k_unik_chelsea_normal_1member = "Mom! It’s nice to not be alone for once...",
-            k_unik_chelsea_normal_family = "Oh! Maya, Yokana! I’m glad you two are here!",
+            k_unik_chelsea_normal_1member = "Mom! It's nice to not be alone for once...",
+            k_unik_chelsea_normal_family = "Oh! Maya, Yokana! I'm glad you two are here!",
 
             --godsmarble maya
             k_unik_chelsea_normal_maya_god1 = "Mom! Maya! What happened to you?!",
@@ -1573,7 +1584,7 @@ return {
             
             --godsmarble yokana
             k_unik_chelsea_normal_yokana_god1 = "Mom! Can you hear me? Please?!",
-            k_unik_chelsea_normal_yokana_god2 = "I don’t want to hurt you… Please are you still here?...",
+            k_unik_chelsea_normal_yokana_god2 = "I don't want to hurt you… Please are you still here?...",
 
             --both parents godsmarbled
             k_unik_chelsea_normal_family_god1 = "You... Monster...",
@@ -1581,7 +1592,7 @@ return {
             k_unik_chelsea_normal_family_god3 = "*Sob* *Sob*",
             k_unik_chelsea_normal_family_god4 = "Why did you do this to us...",
             ---Scared:
-            k_unik_chelsea_scared1 = "It’s getting too much for me!",
+            k_unik_chelsea_scared1 = "It's getting too much for me!",
             k_unik_chelsea_scared2 = "¡Dios mío! What is going on??!",
             ---Godsmarble Near:
             k_unik_chelsea_godsmarble1 = "My arms are pulling apart!... It hurts...!",

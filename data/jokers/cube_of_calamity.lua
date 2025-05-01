@@ -12,6 +12,10 @@ local cube_quotes = {
 		'k_unik_cube_of_calamity3',
 		'k_unik_cube_of_calamity4',
 		'k_unik_cube_of_calamity5',
+        'k_unik_cube_of_calamity6',
+        'k_unik_cube_of_calamity7',
+        'k_unik_cube_of_calamity8',
+        'k_unik_cube_of_calamity9',
 	},
 
 }

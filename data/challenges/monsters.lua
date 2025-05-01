@@ -14,7 +14,7 @@ SMODS.Challenge{
 	},
 	jokers = {
 		{ id = "j_ring_master", stickers = { "cry_absolute" }, edition = "negative" },
-        { id = "j_ceremonial", stickers = { "cry_absolute" }},
+        { id = "j_ceremonial", stickers = { "perishable" }},
 	},
 	deck = {
 		type = "Challenge Deck",

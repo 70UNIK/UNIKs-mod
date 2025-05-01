@@ -9,16 +9,23 @@ local unik_quotes = {
 		'k_unik_unik_normal1',
 		'k_unik_unik_normal2',
 		'k_unik_unik_normal3',
+		'k_unik_unik_normal4',
+		'k_unik_unik_normal5',
+		'k_unik_unik_normal6',
 	},
 	drama = {
 		'k_unik_unik_scared1',
 		'k_unik_unik_scared2',
+		'k_unik_unik_scared3',
 	},
 	gods = {
 		'k_unik_unik_godsmarble1',
 		'k_unik_unik_godsmarble2',
 		'k_unik_unik_godsmarble3',
 		'k_unik_unik_godsmarble4',
+		'k_unik_unik_godsmarble5',
+		'k_unik_unik_godsmarble6',
+		'k_unik_unik_godsmarble7',
 	}
 }
 
