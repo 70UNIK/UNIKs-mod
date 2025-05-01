@@ -162,7 +162,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
         pcfh(e)
     elseif e.disable_button then
         e.disable_button = nil
-        print("disble")
+       -- print("disble")
     end
 	G.GAME.before_play_buffer = nil
 end

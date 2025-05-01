@@ -60,7 +60,7 @@ SMODS.Blind	{
         local line2 = ""
         local line3 = ""
         local maxRerolls = G.GAME.global_rerolls_pause_val
-        if maxRerolls < 12 then
+        if not G.GAME.global_rerolls_pause_val or maxRerolls < 12 then
             maxRerolls = 12
         end
         if (SMODS.Mods["jen"] or {}).can_load then

@@ -53,7 +53,7 @@ SMODS.Blind	{
 	end,
 	unik_kill_hand = function(self, cards, hand, handname, check)
 		for k, v in ipairs(cards) do
-			if not v:norank() and not v:nosuit() then
+			if not SMODS.has_no_rank(v) and not SMODS.has_no_suit(v) then
 				return true
 			end
 		end

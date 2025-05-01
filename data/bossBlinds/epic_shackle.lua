@@ -96,12 +96,14 @@ SMODS.Blind{
         if not (SMODS.Mods["jen"] or {}).can_load and G.GAME.unik_original_size then
             G.hand:change_size(G.GAME.unik_original_size)
             G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
+            G.GAME.unik_original_size = nil
         end
 	end,
 	defeat = function(self)
         if not (SMODS.Mods["jen"] or {}).can_load and G.GAME.unik_original_size then
             G.hand:change_size(G.GAME.unik_original_size)
             G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
+            G.GAME.unik_original_size = nil
         end
 	end,
 	in_pool = function(self)
@@ -118,8 +120,11 @@ SMODS.Blind{
 				end
 			end
 		end
+        if not G.jokers or not G.jokers.cards then
+            return false
+        end
         --maybe its funnier to have it spawn even without stone hands in deck in almanac
-        if G.GAME.modifiers.unik_legendary_at_any_time then
+        if G.GAME.modifiers.unik_legendary_at_any_time and G.jokers then
             return (#Cryptid.advanced_find_joker(nil, nil, "e_negative", nil, true) ~= 0 or G.jokers.config.card_limit - #G.jokers.cards > 0)
         end
         if (SMODS.Mods["jen"] or {}).can_load then
