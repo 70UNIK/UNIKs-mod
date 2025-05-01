@@ -1544,7 +1544,7 @@ return {
             k_unik_unik_normal1 = "Maybe you don't mind I'm crossdressing here...",
             k_unik_unik_normal2 = "I'll help out here, although I'll take my time.",
             k_unik_unik_normal3 = "Quite an experience, wearing this here...",
-            k_unik_unik_normal4 = "I can admittedly be a bit deary at times...",
+            k_unik_unik_normal4 = "I can admittedly be a bit dreary at times...",
             k_unik_unik_normal5 = "Let me know what I can help out with.",
             k_unik_unik_normal6 = "Umm, hi... Can't believe I'm here now...",
             ---Scared:
