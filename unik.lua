@@ -240,7 +240,10 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/epic_vader.lua")()
+	--Jen has plenty of immutable jokers, thus this would be extremely devastating outside of jens
+	if (SMODS.Mods["jen"] or {}).can_load then 
+		NFS.load(mod_path .. "data/bossBlinds/epic_vader.lua")()
+	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
