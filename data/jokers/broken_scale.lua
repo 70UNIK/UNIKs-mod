@@ -46,3 +46,15 @@ SMODS.Joker {
         end
     end
 } 
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_broken_scale"] = {
+		text = {
+			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER},
+		},
+        calc_function = function(card)
+            local text = ""
+            text = "(" .. card.ability.extra.rounds .. "/" .. card.ability.extra.round_limit .. ")"
+			card.joker_display_values.localized_text = text
+        end
+	}
+end

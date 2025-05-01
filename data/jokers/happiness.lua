@@ -161,3 +161,15 @@ SMODS.Joker {
         end
     end
 }
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_happiness"] = {
+		text = {
+			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER},
+		},
+        calc_function = function(card)
+            local text = ""
+            text = G.jokers and G.jokers.config and "(" .. card.ability.extra.slotLimit .. "/" .. G.jokers.config.card_limit .. ")" or "YOU SHOULDNT SEE THIS"
+			card.joker_display_values.localized_text = text
+        end
+	}
+end

@@ -1,3 +1,4 @@
+--Reverse the probabilities
 SMODS.Joker {
     key = 'unik_lucky_seven',
     atlas = 'unik_common',
@@ -58,3 +59,34 @@ SMODS.Joker {
         end
     end,
 }
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_lucky_seven"] = {
+        text = {
+			{ text = "+", colour = G.C.MULT },
+			{ ref_table = "card.ability.extra", ref_value = "mult", colour = G.C.MULT, retrigger_type = "mult" },
+			{ text = " $", colour = G.C.GOLD },
+			{ ref_table = "card.ability.extra", ref_value = "p_dollars", colour = G.C.GOLD, retrigger_type = "mult" },
+        },
+        extra = {
+            {
+                {
+                    ref_table = "card.joker_display_values",
+                    ref_value = "odds1",
+                    colour = G.C.GREEN,
+                    scale = 0.3,
+                },		
+                {text = " "},
+                {
+                    ref_table = "card.joker_display_values",
+                    ref_value = "odds2",
+                    colour = G.C.GREEN,
+                    scale = 0.3,
+                },	
+			},
+		},
+        calc_function = function(card)
+            card.joker_display_values.odds1 = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(card.ability.cry_prob,card.ability.extra.odds_mult,card.ability.cry_rigged) or 1, card.ability.extra.odds_mult } }
+            card.joker_display_values.odds2 = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged) or 1, card.ability.extra.odds_money } }
+        end
+	}
+end

@@ -55,6 +55,24 @@ SMODS.Joker {
         end
     end
 }
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_hook_n_discard"] = {
+		text = {
+			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER},
+		},
+        reminder_text = {
+			{
+				ref_table = "card.joker_display_values",
+				ref_value = "stuff",
+				colour = G.C.UI.TEXT_INACTIVE,
+			},		
+		},
+        calc_function = function(card)
+            card.joker_display_values.localized_text = "(" .. card.ability.extra.current_discards .. "/" .. card.ability.extra.min_discards .. ")"
+            card.joker_display_values.stuff = "(2x" .. localize("k_unik_cards") ..")"
+        end
+	}
+end
 --Hook does not work as it will select cards to discard DURING play! Joker context before does not work as it wont discard them!
 -- local pcfh2 = G.FUNCS.play_cards_from_highlighted
 -- function G.FUNCS.play_cards_from_highlighted(e)

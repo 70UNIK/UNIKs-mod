@@ -140,3 +140,16 @@ SMODS.Joker {
 		end
     end
 }
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_foundation"] = {
+		reminder_text = {
+			{ ref_table = "card.joker_display_values", ref_value = "localized_text" },
+		},
+		calc_function = function(card)
+			local is_active = card.ability.extra.hands >= card.ability.extra.threshold
+			card.joker_display_values.localized_text = "("
+				.. (is_active and localize("k_active_ex") or (card.ability.extra.hands .. "/" .. card.ability.extra.threshold))
+				.. ")"
+		end,
+	}
+end

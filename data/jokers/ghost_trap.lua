@@ -48,3 +48,27 @@ SMODS.Joker {
 		end
     end,
 }
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_ghost_trap"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "X"},
+					{
+						ref_table = "card.ability.extra",
+						ref_value = "x_mult",
+						retrigger_type = "exp",
+					},
+				},
+				border_colour = G.C.MULT,
+			},
+		},
+		reminder_text = {
+			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER },
+		},
+		calc_function = function(card)
+			card.joker_display_values.localized_text = "(" .. (card.ability.extra.cursed_jokers .. "/" .. card.ability.extra.cursed_joker_limit)
+				.. ")"
+		end,
+	}
+end

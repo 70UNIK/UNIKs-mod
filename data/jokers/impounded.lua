@@ -168,5 +168,12 @@ if JokerDisplay then
 				border_colour = G.C.MULT,
 			},
 		},
+        reminder_text = {
+            { text = "(" },
+            { text = "$",         colour = G.C.GOLD },
+            { ref_table = "card", ref_value = "sell_cost", colour = G.C.GOLD },
+            { text = ")" },
+        },
+        reminder_text_config = { scale = 0.35 }
 	}
 end

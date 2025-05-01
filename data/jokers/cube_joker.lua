@@ -46,7 +46,23 @@ SMODS.Joker {
 		end
     end,
 }
-
+if JokerDisplay then
+	JokerDisplay.Definitions["j_unik_cube_joker"] = {
+		text = {
+			{
+				border_nodes = {
+					{ text = "X" },
+					{
+						ref_table = "card.ability.extra",
+						ref_value = "x_chips",
+						retrigger_type = "exp"
+					},
+				},
+				border_colour = G.C.CHIPS,
+			},
+		},
+	}
+end
 
 -- Pool used by "squares/cubes"
 --Unik is not part of this to maintain rarity.

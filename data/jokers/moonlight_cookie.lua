@@ -267,8 +267,19 @@ if JokerDisplay then
 				colour = G.C.SECONDARY_SET.Planet,
 			},
 		},
+		extra = {
+            {
+                {
+                    ref_table = "card.joker_display_values",
+                    ref_value = "odds",
+                    colour = G.C.GREEN,
+                    scale = 0.3,
+                },		
+			},
+		},
 		calc_function = function(card)
 			local Emult = 1
+			local odds = ""
 			local text, _, scoring_hand = JokerDisplay.evaluate_hand() --get poker hand
 			if Card.get_gameset(card) ~= "modest" or (text ~= 'Unknown' and text ~= 'NULL' and Card.get_gameset(card) == "modest") then
 				--Iterate through each consumeable, checking for poker hand type (if modest)
@@ -317,10 +328,14 @@ if JokerDisplay then
 				end
 			end
 			card.joker_display_values.Emult = Emult
-			card.joker_display_values.localized_text = " (" .. localize("k_planet") .. ")"
+			card.joker_display_values.localized_text = "(" .. localize("k_planet") .. ")"
+			if Card.get_gameset(card) ~= "modest" then
+                odds = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(2 or card.ability.cry_prob * 2,card.ability.extra.odds,card.ability.cry_rigged) or 2, card.ability.extra.odds } }
+            end
+			card.joker_display_values.odds = odds
 			--Only display poker hand if in modest
 			if text ~= 'Unknown' and text ~= 'NULL' and Card.get_gameset(card) == "modest" then
-				card.joker_display_values.localized_text_poker_hand = text
+				card.joker_display_values.localized_text_poker_hand = text .. ' '
 			else
 				card.joker_display_values.localized_text_poker_hand = " "
 			end
