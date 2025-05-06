@@ -4,6 +4,7 @@ SMODS.Sticker{
     atlas = 'unik_stickers', 
     pos = { x = 0, y = 1 },
     rate = 0.0,
+    no_sticker_sheet = true,
     apply = function(self, card, val)
         card.ability[self.key] = val
         card.ability.eternal = true

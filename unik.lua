@@ -196,6 +196,7 @@ SMODS.ConsumableType {
 
 
 -- stickers
+NFS.load(mod_path .. "data/stickers/triggering.lua")() 
 NFS.load(mod_path .. "data/stickers/depleted.lua")() 
 NFS.load(mod_path .. "data/stickers/impounded.lua")() 
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 

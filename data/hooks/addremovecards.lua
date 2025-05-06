@@ -169,6 +169,10 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.cry_absolute = true
         card.ability.perishable = nil
         card.ability.rental = true
+        card.ability.unik_triggering = true
+        card.ability.dissolve_immune = true
+        card.ability.debuff_immune = true
+        card.ability.permaeternal = true
     end
     if self == G.jokers then
        --print("11")

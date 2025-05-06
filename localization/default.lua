@@ -1274,10 +1274,35 @@ return {
 				name = "Niko",
 				text = {
 					"All cards in pack",
-					"are {C:attention}Disposable{}",
+					"are {C:attention}Niko{}",
                     "{C:red}Unremovable{}",
 				},
             },
+            unik_triggering = {
+                name = "Triggering",
+                text = {
+                    "{C:inactive}Does nothing...",
+					"{C:inactive}for now",
+                    "{C:red}Unremovable{}",
+                }
+            },
+            unik_triggering_consumeable = {
+                name = "Triggering",
+                text = {
+                    "{C:attention}Automatically used{} when",
+					"possible (left to right)",
+                    "{C:red}Unremovable{}",
+                }
+            },
+            unik_ultradebuffed = { --exclusively produced by placard; immune to patch or dandy
+                name = "Ultradebuffed",
+                text = {
+                    "Card is {C:red}debuffed{}",
+                    "{C:red}permanently{}, {C:attention}regardless{}",
+                    "of Jokers or other modifiers",
+					"{C:red}Unremovable{}",
+                }
+            }
 
         },
         Planet={},
@@ -1719,6 +1744,7 @@ return {
             unik_niko = "Niko",
             unik_disposable = "Disposable",
             unik_lartceps = "Lartceps",
+            unik_triggering = "Triggering",
         },
         poker_hand_descriptions={},
         poker_hands={},

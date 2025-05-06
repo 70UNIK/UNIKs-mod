@@ -9,6 +9,7 @@ SMODS.Sticker{
     atlas = 'unik_stickers', 
     pos = { x = 1, y = 0 },
     rate = 0.0,
+    
     loc_vars = function(self, info_queue, card)
 		if card.ability.consumeable then
 			return { key = "unik_disposable_consumable", vars = { G.GAME.probabilities.normal*2 or 2, 3 } }
