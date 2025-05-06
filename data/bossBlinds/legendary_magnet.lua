@@ -199,8 +199,11 @@ function Blind:disable()
 			G.GAME.blind:wiggle()
 			return true
         elseif obj.boss.epic then
-			play_sound('cancel', 0.8, 1)
-			jl.a(obj.immunity_quote or 'Blind is immune!', G.SETTINGS.GAMESPEED * 2, 0.8, obj.boss_colour or G.C.RED)
+            play_sound('cancel', 0.8, 1)
+            local text = 'Blind is immune!'
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+            })
 			G.GAME.blind:wiggle()
 			return true
 		end

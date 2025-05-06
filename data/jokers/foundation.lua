@@ -1,6 +1,11 @@
 -- after playing 150 hands, sell to get an exotic joker. EPIC
--- After feedback, 114 hands is too op (flesh panopicon exists), legendary is too niche, so I'll try to add a (114 consecutive hands with only cards with an edition and enhancement)
---Saint dramatically reduces this to 2 hands.
+-- TODO: Must play at least 4 cards,
+-- All cards must not be unmodified
+-- and cards ranks and suit must
+-- be different to any card in last hand
+-- Stone cards are printed as "stone", abstract cardsa are printed as "abstract"
+
+--Saint instantly procs this.
 SMODS.Joker {
 	dependencies = {
 		items = {
@@ -13,7 +18,7 @@ SMODS.Joker {
     rarity = 'cry_epic',
 	pos = { x = 0, y = 0 },
     cost = 10,
-    config = {extra = {hands = 0,juiced_up = false,threshold = 150}},
+    config = {extra = {hands = 0,juiced_up = false,threshold = 150,banned_cards = {}}},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.hands,center.ability.extra.threshold} }
     end,
@@ -23,7 +28,7 @@ SMODS.Joker {
 	perishable_compat = false,
 	eternal_compat = false,
 	add_to_deck = function(self, card, from_debuff)
-		if #SMODS.find_card("j_jen_saint_attuned") > 0 then
+		if #SMODS.find_card("j_jen_saint_attuned") > 0 or #SMODS.find_card("j_jen_saint") > 0 then
 			card.ability.extra.threshold = 0
 			local eval = function(card)
 				return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
@@ -34,23 +39,11 @@ SMODS.Joker {
 				colour = G.C.CRY_EXOTIC,
 			})
 			card.ability.extra.juiced_up = true
-		elseif #SMODS.find_card("j_jen_saint") > 0 then
-			card.ability.extra.threshold = 2
-			
 		end
 	end,
 	update = function(self,card,dt)
-		if #SMODS.find_card("j_jen_saint_attuned") > 0 then
+		if #SMODS.find_card("j_jen_saint_attuned") > 0 or #SMODS.find_card("j_jen_saint") > 0 then
 			card.ability.extra.threshold = 0
-			if card.ability.extra.juiced_up == false then
-				local eval = function(card)
-					return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
-				end
-				juice_card_until(card, eval, true)
-				card.ability.extra.juiced_up = true
-			end
-		elseif #SMODS.find_card("j_jen_saint") > 0 then
-			card.ability.extra.threshold = 2
 			if card.ability.extra.juiced_up == false then
 				local eval = function(card)
 					return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
@@ -153,3 +146,4 @@ if JokerDisplay then
 		end,
 	}
 end
+

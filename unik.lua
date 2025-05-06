@@ -171,12 +171,28 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "unik_lartceps",
+	path = "unik_lartceps.png",
+	px = 71,
+	py = 95
+}
+
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
 	key = "unik_boss_blind_joker",
 	default = "j_seance", --cause that is hot garbage
 	cards = {},
 })
+SMODS.ConsumableType {
+	key = "lartceps",
+	prefix_config = { key = true },
+	primary_colour = HEX("000000"),
+	secondary_colour = HEX("ff0000"),
+	shop_rate = 0.0,
+	loc_txt = {},
+	default = "c_unik_brethren_moon", --for now
+}
 
 
 -- stickers
@@ -187,6 +203,9 @@ NFS.load(mod_path .. "data/stickers/niko.lua")()
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
+--L A R T C E P S--
+NFS.load(mod_path .. "data/lartceps/brethren_moon.lua")() 
+NFS.load(mod_path .. "data/lartceps/expiry.lua")() 
 --boosters
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 

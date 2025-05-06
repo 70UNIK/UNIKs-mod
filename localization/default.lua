@@ -127,7 +127,7 @@ return {
                     "#1#, die", --2 random ranks accoring to your deck composition
 				},
             },
-            bl_unik_epic_decision={ -- Mortoninhaarukka: Morton's Fork, cause no matter what, all choices are bad.
+            bl_unik_epic_decision={ -- Mortoninhaarukka: Morton's Fork, cause no matter what, all choices are bad. Created last due to the effort needed to create the entire "lartceps" set (baneful spectrals)
                 name = "Mortoninhaarukka", 
                 text = {
                     "",
@@ -1061,8 +1061,9 @@ return {
                 name = 'Foundation',
                 text = {
                     "After playing {C:attention}#2#{} {C:attention}consecutive{} hands",
-                    "containing only cards with an",
-                    "{C:attention}enhancement{} and {C:dark_edition}edition{},",
+                    "each containing at least 4 modified cards",
+                    "with different ranks and suits",
+                    "to cards in last hand,",
                     "sell this card to create",
                     "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
 					"{C:inactive}(Currently #1#/#2#){}",
@@ -1144,7 +1145,14 @@ return {
 
         },
         Other={			
-
+			undiscovered_unik_lartceps = {
+				name = "Not Discovered",
+				text = {
+					"Use this card in an",
+					"unseeded run to",
+					"learn what it does",
+				},
+			},
             unik_depleted = {
                 name = "Depleted",
                 text = {
@@ -1199,6 +1207,13 @@ return {
 					"{s:0.8}Ice Cream and Clicked Cookie",
 				},
 			},
+            unik_banned_ranks_foundation = {
+                name = "Banned Cards",
+				text = {
+					"{C:red}Must not play",
+					"{C:attention}#1#",
+				},
+            },
             unik_disposable = {
 				name = "Disposable",
 				text = {
@@ -1334,6 +1349,87 @@ return {
                 }
             }
         },
+        unik_lartceps = {
+            c_unik_rip_girlfriend = {
+                name = "Powerdown",
+                text = {
+                    "{C:attention}Randomly{} {E:2,C:red}Destroy 50%{} of",
+                    "Jokers, Consumables and Cards",
+                    "{C:attention}including{} {C:purple}Eternals{},",
+                    "then {E:2,C:red}halve{} {C:attention}all{} hand statistics",
+                }
+            },
+            c_unik_placard = {
+                name = "Placard",
+                text = {
+                    "Add {C:purple}Absolute{} and {E:2,C:red}Permadebuffed{}", --Brute force counters dandy (through update functions) and patch
+                    "to all cards in deck,",
+                }
+            },
+            c_unik_brethren_moon = { --worse than epic arm; Note that mult will always remain zero (otherwise the negatives cancel each other out)
+                name = "Brethren Moon",
+                text = {
+                    "For {C:attention}all{} hands, set {C:mult}mult{} to {E:2,C:red}0{}",
+                    "{C:chips}chips{} to {E:2,C:red}negative{} and",
+                    "all levels to {E:2,C:red}0{}"
+                }
+            },
+            c_unik_trim = {
+                name = "://TRIM",
+                text = {
+                    "{E:2,C:red}Remove{} {C:attention}all{} empty",
+                    "Joker slots, then",
+                    "{E:2,C:red}halve{} remaining",
+                    "Joker slots",
+                }
+            },
+            -- c_unik_trim = {
+            --     name = "://TRIM",
+            --     text = {
+            --         "Set Joker slots to {E:2,C:red}0{}",
+            --     }
+            -- },
+            c_unik_expiry = {
+                name = "Expiry",
+                text = {
+                    "{E:2,C:red}Unredeem{} and {E:2,C:red}Banish{}",
+                    "{C:attention}all{} owned vouchers",
+                }
+            },
+            c_unik_extortion = {
+                name = "Extortion",
+                text = {
+                    "Set money to {E:2,C:red}-$#1#{}", -- -$666
+                }
+            },
+            c_unik_single = {
+                name = "The Single",
+                text = {
+                    "Set hand size to {E:2,C:red}1{}", -- 1
+                }
+            },
+            c_unik_garbage = {
+                name = "Garbage",
+                text = {
+                    "{C:attention}Add{} {E:2,C:red}random{} cards equal",
+                    "to {E:2,C:red}#1#{}x cards in deck", 
+                }
+            },
+            c_unik_reeducation = {
+                name = "Reeducation",
+                text = {
+                    "{C:attention}All{} Jokers, Consumeables",
+                    "and cards become {C:unik_shitty_edition}Positive{}",
+                }
+            },
+            c_unik_hellspawn = {
+                name = "Hellspawn", -- DEFAULT
+                text = {
+                    "{E:2,C:red}Add 20{} {X:cry_cursed,C:white}Cursed{} Jokers",
+                    "{C:inactive,s:0.5}(Temporarily create a showman in the process)", 
+                }
+            }
+        },
         Voucher={},
     },
     misc = {
@@ -1391,7 +1487,8 @@ return {
         },
         collabs={},
         dictionary={
-
+            k_unik_lartceps="Lartceps",
+            b_unik_lartceps_cards = "Lartceps Cards",
             unik_legendary_blinds_option = "Legendary Blinds (Restart Required)",
             unik_almanac_fusions_in_cryptid_option = "Enable Almanac Fusions in Base Cryptid (Restart Required)",
             k_unik_711="7-Eleven!",
@@ -1621,6 +1718,7 @@ return {
             unik_impounded = "Impounded",
             unik_niko = "Niko",
             unik_disposable = "Disposable",
+            unik_lartceps = "Lartceps",
         },
         poker_hand_descriptions={},
         poker_hands={},

@@ -45,7 +45,6 @@ function selfDestruction(card,message,color,dissolve)
     }))
 end
 
-
 local removeHook = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
     if (self.added_to_deck) then
@@ -166,7 +165,11 @@ function CardArea:emplace(card, location, stay_flipped)
     --Happiness is mandatory: Joker slot check after the hook
     local cannibalCards = 0
     local autoCannibalExists = false
-    
+    if card.ability.set == "unik_lartceps" then
+        card.ability.cry_absolute = true
+        card.ability.perishable = nil
+        card.ability.rental = true
+    end
     if self == G.jokers then
        --print("11")
         --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)

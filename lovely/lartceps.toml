@@ -1,0 +1,54 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### Epic Decision and Lartceps
+
+
+### Brethren Moon: Force text to be red
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''if to_big(delta) < to_big(0) then delta = number_format(delta); col = G.C.RED'''
+position = "at"
+payload = '''
+local forceRed = nil
+if vals.forceRed then
+    forceRed = true
+end
+--For when you have black holes that subtract all levels. or eldritch shit that destroy your hand levels.
+if forceRed then
+col = G.C.RED
+elseif to_big(delta) < to_big(0) then delta = number_format(delta); col = G.C.RED
+'''
+match_indent = true
+
+### Force selling prices to be -666 for lartceps
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''if self.ability.set == "Voucher" and G.GAME.modifiers.cry_voucher_price_hike then'''
+position = "before"
+payload = '''
+if self.ability.set == "unik_lartceps" then
+    self.sell_cost = -666
+    self.sell_cost_label = -666
+end
+'''
+match_indent = true
+
+
+###shader
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''if self.ability.set == 'Booster' or self.ability.set == 'Spectral' then'''
+position = "before"
+payload = '''
+if self.ability.set == 'unik_lartceps' then
+    self.children.center:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
+end
+'''
+match_indent = true
+
