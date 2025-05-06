@@ -212,6 +212,7 @@ NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
 --tags
 NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
+NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
 NFS.load(mod_path .. "data/tags/positive.lua")()
 NFS.load(mod_path .. "data/tags/demon_tag.lua")()
 NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
@@ -255,6 +256,7 @@ NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_shackle.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_decision.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()

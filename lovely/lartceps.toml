@@ -52,4 +52,150 @@ end
 '''
 match_indent = true
 
+###stolen from the decision, but adapted for when entering the blind
+
+## Get back into blind and complete it after using the pack
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.2*delayfac,
+          func = function()
+            save_run()
+            return true
+      end}))'''
+position = "at"
+payload = '''
+G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.2*delayfac,
+      func = function()
+      if G.GAME.unik_mortons_fork then
+            G.GAME.unik_halt_round = nil
+            G.GAME.cry_fastened = nil
+            new_round()
+      else
+            save_run()
+      end
+      
+      return true
+end}))
+
+'''
+match_indent = true
+
+## Cryptid baneful buffon compat
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''if G.GAME.cry_make_a_decision then
+                  G.GAME.cry_make_a_decision = nil
+                  G.STATE = G.STATES.ROUND_EVAL
+                  G.STATE_COMPLETE = false'''
+position = "after"
+payload = '''
+      elseif G.GAME.unik_mortons_fork then
+            G.GAME.unik_halt_round = nil
+            G.GAME.cry_fastened = nil
+            new_round()
+
+'''
+match_indent = true
+
+## Do not trigger booster pack tags after ending the baneful pack, otherwise it will be awkward
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''if G.GAME.tags[i]:apply_to_run({type = 'new_blind_choice'}) then break end'''
+position = "before"
+payload = '''
+	if not G.GAME.unik_mortons_fork then
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''if G.GAME.tags[i]:apply_to_run({type = 'new_blind_choice'}) then break end'''
+position = "after"
+payload = '''
+	end
+'''
+match_indent = true
+
+
+##Part 1 of below:
+[[patches]]
+[patches.pattern]
+target = '''functions/misc_functions.lua'''
+pattern = '''--Control the music here'''
+position = "before"
+payload = '''
+local disable_booster_music = false
+local obj = SMODS.OPENED_BOOSTER
+if obj and obj.config and obj.config.center and obj.config.center.no_music then
+	disable_booster_music = true
+end
+'''
+match_indent = true
+
+## Force music to be Boss Blind music while in baneful pack
+[[patches]]
+[patches.pattern]
+target = '''functions/misc_functions.lua'''
+pattern = '''(G.booster_pack and not G.booster_pack.REMOVED and 'music2') or'''
+position = "at"
+payload = '''(G.booster_pack and not G.booster_pack.REMOVED and not disable_booster_music and 'music2') or'''
+match_indent = true
+
+### Part 1 of hardcoding: If mortons fork is present, skip the first part beyond the setting blind
+[[patches]]
+[patches.pattern]
+target = '''functions/state_events.lua'''
+pattern = '''    G.RESET_JIGGLES = nil
+    delay(0.4)
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()'''
+position = "after"
+payload = '''if not G.GAME.unik_mortons_fork then'''
+match_indent = true
+
+### Part 2 of hardcoding: After blind set, do not proceed further if inside a booster context. Part 3 of hardcoding: If in a booster and mortons fork is enabled after ending the booster, then mortons fork should be disabled
+[[patches]]
+[patches.pattern]
+target = '''functions/state_events.lua'''
+pattern = '''G.GAME.blind:set_blind(G.GAME.round_resets.blind)'''
+position = "after"
+payload = '''
+end
+if not G.GAME.unik_halt_round then
+G.GAME.unik_mortons_fork = nil
+'''
+match_indent = true
+
+### end of abo0ve
+[[patches]]
+[patches.pattern]
+target = '''functions/state_events.lua'''
+pattern = '''G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    G.STATE = G.STATES.DRAW_TO_HAND
+                    G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+                    G.deck:hard_set_T()
+if G.SCORING_COROUTINE then return false end 
+                    G.STATE_COMPLETE = false
+                    return true
+                end
+            }))'''
+position = "after"
+payload = '''
+end'''
+match_indent = true
+
+# Conveyor Deck and the decision - Don't sort cards
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "table.sort(self.cards, function (a, b) return a.T.x + a.T.w/2 - 100*((a.pinned and not a.ignore_pinned) and a.sort_id or 0) < b.T.x + b.T.w/2 - 100*((b.pinned and not b.ignore_pinned) and b.sort_id or 0) end)"
+position = "at"
+payload = "if not G.GAME.modifiers.cry_conveyor and not G.GAME.cry_fastened then table.sort(self.cards, function (a, b) return a.T.x + a.T.w/2 - 100*((a.pinned and not a.ignore_pinned) and a.sort_id or 0) < b.T.x + b.T.w/2 - 100*((b.pinned and not b.ignore_pinned) and b.sort_id or 0) end) end"
+match_indent = true
 

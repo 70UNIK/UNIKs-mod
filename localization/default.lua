@@ -128,14 +128,20 @@ return {
 				},
             },
             bl_unik_epic_decision={ -- Mortoninhaarukka: Morton's Fork, cause no matter what, all choices are bad. Created last due to the effort needed to create the entire "lartceps" set (baneful spectrals)
-                name = "Mortoninhaarukka", 
+                name = "Mortoninhaarukka", --Epic Decision
                 text = {
-                    "",
-                    "", 
-                    "",
+                    "On Blind Select,",
+                    "Open an unskippable", 
+                    "Lartceps Bundle Pack",
                 },
             },
-
+            bl_unik_epic_sand={
+                name = "Juoksuhiekka", --quicksand -- Epic sand (Bunco)
+                text = {
+                    "Increase Blind Size by",
+                    "#1#", --Cryptid: ^(Tags held x Max Hands), Almanac: {Tags Held}Max Hands
+                },
+            },
             bl_unik_epic_vader={ --Balatro goes kino
                 name = "Telekineettinentyranni", --Telikinetic Tyrant
                 text = {
@@ -1200,6 +1206,14 @@ return {
 					"up to {C:attention}#2# Cube/Square Jokers{}",
 				},
 			},
+            p_unik_lartceps_bundle = {
+                name = "Lartceps Bundle",
+				text = {
+					"Choose {C:attention}#1#{} of",
+					"up to {C:attention}#2# {X:unik_lartceps,C:unik_lartceps_inverse}Lartceps{} Card#<s>2#{}",
+					"{C:red}Unskippable{}",
+				},
+            },
             unik_decrementing_food_jokers = {
 				name = "Decrementing Food Jokers",
 				text = {
@@ -1615,6 +1629,8 @@ return {
             k_unik_active="Active!",
             k_unik_viced="Final Bosses now appear twice as often",
             k_unik_cube_pack = "Cube Pack",
+            k_unik_lartceps_bundle = "Lartceps Bundle",
+            k_unik_lartceps_pack = "Lartceps Pack",
             k_unik_hands_remaining = " scoring hands remaining",
             k_unik_base = " base",
             k_unik_high_score = " = Best hand in Run",
@@ -1733,7 +1749,7 @@ return {
             k_unik_mutilated_mess5 = "(Nothing but uncontrollable crying)",
 
             --
-            
+            unik_plus_lartceps = "+1 Lartceps...",
 
         },
         high_scores={},
