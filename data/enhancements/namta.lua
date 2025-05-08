@@ -27,23 +27,28 @@ SMODS.Enhancement {
 				G.consumeables:emplace(card2)
 				return true
 			end }))
-            SMODS.calculate_effect({
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
-                colour = G.C.CHIPS,
-            }, card)
+            -- SMODS.calculate_effect({
+            --     message = localize({
+			-- 		type = "variable",
+			-- 		key = "a_xchips",
+			-- 		vars = { number_format(card.ability.extra.x_chips) },
+			-- 	}),
+			-- 	Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
+            --     colour = G.C.CHIPS,
+            -- }, card)
+            -- return {
+            --     message = localize({
+			-- 		type = "variable",
+			-- 		key = "a_xmult",
+			-- 		vars = { number_format(card.ability.extra.x_mult) },
+			-- 	}),
+            --     Xmult_mod = lenient_bignum(card.ability.extra.x_mult),
+            --     colour = G.C.RED,
+            -- } 
             return {
-                message = localize({
-					type = "variable",
-					key = "a_xmult",
-					vars = { number_format(card.ability.extra.x_mult) },
-				}),
-                Xmult_mod = lenient_bignum(card.ability.extra.x_mult),
-                colour = G.C.RED,
+                message = localize('unik_plus_lartceps'),
+                colour = G.C.UNIK_LARTCEPS,
+                card = card
             }
 		end
         if context.cardarea == G.hand and context.main_scoring and not context.end_of_round then

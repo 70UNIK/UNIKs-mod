@@ -451,12 +451,11 @@ return {
             m_unik_namta = {
                 name = "Namta",
                 text = {
-                    "{X:mult,C:white}X#1#{} Mult, {X:chips,C:white}X#2#{} Chips",
                     "Has no rank or suit",
                     "{X:unik_void_color,E:2,C:red}^#3#{} Blind Size if held",
                     "Create a {X:unik_lartceps,C:unik_lartceps_inverse}Lartceps{} card",
-                    "when {C:attention}scored{}",
-                    "{C:red,E:2}Self Destructs{}",
+                    "when {C:attention}scored, then{}",
+                    "{C:red,E:2}Self Destruct{}",
                 }
             }
         },
