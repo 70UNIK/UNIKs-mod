@@ -191,7 +191,7 @@ SMODS.ConsumableType {
 	secondary_colour = HEX("ff0000"),
 	shop_rate = 0.0,
 	loc_txt = {},
-	default = "c_unik_rip_girlfriend", 
+	default = "c_unik_hellspawn", 
 }
 
 
@@ -220,6 +220,8 @@ NFS.load(mod_path .. "data/lartceps/reeducation.lua")()
 NFS.load(mod_path .. "data/lartceps/garbage.lua")() 
 NFS.load(mod_path .. "data/lartceps/hellspawn.lua")() 
 NFS.load(mod_path .. "data/lartceps/escalation.lua")() 
+NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
+NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
 --boosters
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
@@ -273,6 +275,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Jen has plenty of immutable jokers, thus this would be extremely devastating outside of jens
@@ -294,7 +297,7 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
 	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
 end
-
+NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 
 -- JOKERS --
 --- Common ---

@@ -10,15 +10,16 @@
 --- Trim (styled as a code card): Set Joker slots to 0 (Almanac)/Remove empty joker slots then halve joker slots (Cryptid)
 --- Reeducation: All your Jokers, Cards and Consumeables become Positive.
 --- Expulsion: Randomly banish 66% of owned Jokers, eternals included
+--- ://BACKDOOR: For the next 5 rounds, 1 in 4 chance for a purchasable item to become a Cursed Joker instead
 --- Extortion: Set money to -$666.
 --- Escalation: Ante^1.5, tension^1.5, straddle^1.5, rounded up.
 --- Summit: Increases next blind/current blind size by ^^2.
 --- The Single (Styled as a tarot): Set hand size to 1.
 --- Bretheren Moon (Styled as a planet): Remove all bonuses and set all hand levels to 0. 
 --- Powerdown: Destroy 50% of jokers, cards, consumeables and halve all levels (rounded down). Art is MX ripping GF in 2
---- Mouth of Sauron: Add "matla" unhancement to 50% of cards in deck (create a lartceps on trigger, then self destructs)
+--- The Sauron: Add "matla" unhancement to 3 in 4 cards in deck (create a lartceps on trigger, then self destructs)
 --- Expiry: Unredeem all vouchers
---- Blank Larceps (almanac exclusive): copies and automatically triggers the last lartceps used
+--- Blank Larceps (almanac exclusive): copies the last lartceps used
 -- Likewise, Lartceps are always eternal and rental and always have the positive edition (reservia counter). They will also have a "triggering" sticker (1 in 2 chance to be used at the start of blind)
 --TODO:
 --Ponpon: Enable skipping of booster if 

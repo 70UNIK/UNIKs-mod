@@ -178,12 +178,22 @@ end
 '''
 match_indent = true
 
-### jen rgb for when you do enable almanac fusions in base cryptid (can only appear in DoE)
+### Custom card destruction anim thing (lily, possibly tainted ceramics)
 [[patches]]
 [patches.pattern]
-target = "globals.lua"
-pattern = "EDITION = {1,1,1,1},"
+target = "functions/state_events.lua"
+pattern = "cards_destroyed[i]:start_dissolve()"
 position = "before"
-payload = '''jen_RGB = {0,0,0,1},
-jen_RGB_HUE = 0,'''
+payload = '''if cards_destroyed[i].ability.gore_6_destruction then
+    cards_destroyed[i]:gore6_break()
+else
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "cards_destroyed[i]:start_dissolve()"
+position = "after"
+payload = '''end
+'''
 match_indent = true

@@ -136,10 +136,11 @@ return {
                 },
             },
             bl_unik_epic_sand={
-                name = "Juoksuhiekka", --quicksand -- Epic sand (Bunco)
+                name = "Juoksuhiekka",
                 text = {
-                    "Increase Blind Size by",
-                    "#1#", --Cryptid: ^(Tags held x Max Hands), Almanac: {Tags Held}Max Hands
+                    "#1#",
+                    "#2#", 
+                    "(Currently #3##4##5#)"
                 },
             },
             bl_unik_epic_vader={ --Balatro goes kino
@@ -446,6 +447,17 @@ return {
                         "{C:inactive,s:0.7}(Numerator cannot fall below 3)",
                         "{C:inactive,s:0.7}(Denominator cannot go above 6)",
 				}
+            },
+            m_unik_namta = {
+                name = "Namta",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult, {X:chips,C:white}X#2#{} Chips",
+                    "Has no rank or suit",
+                    "{X:unik_void_color,E:2,C:red}^#3#{} Blind Size if held",
+                    "Create a {X:unik_lartceps,C:unik_lartceps_inverse}Lartceps{} card",
+                    "when {C:attention}scored{}",
+                    "{C:red,E:2}Self Destructs{}",
+                }
             }
         },
         Joker={
@@ -1501,6 +1513,20 @@ return {
                     "{E:2,C:red}Add #1#{} {X:cry_cursed,C:white}Cursed{} Jokers",
                     "{C:inactive,s:0.5}(Temporarily create a showman in the process)", 
                 }
+            },
+            c_unik_blank_lartceps = {
+                name = "Blank Lartceps",
+                text = {
+                    "{C:attention}Copies{} the last used",
+                    "{X:unik_lartceps,C:unik_lartceps_inverse}Lartceps{} card", 
+                }
+            },
+            c_unik_sauron = {
+                name = "The Sauron",
+                text = {
+                    "Convert {C:green}#1# in #2#{} cards",
+                    "in deck to {X:unik_lartceps,C:unik_lartceps_inverse}Namta{} cards", 
+                }
             }
         },
         Voucher={},
@@ -1687,6 +1713,7 @@ return {
             k_unik_reed_placeholder="(3 random ranks from deck)",
             k_unik_reed_part1 = "a",
             k_unik_reed_part2 = "or",
+            k_unik_epic_sand_placeholder = "(Tags held)",
             
 
             --Godsmarble ramirez family members
@@ -1784,6 +1811,12 @@ return {
 
             --
             unik_plus_lartceps = "+1 Lartceps...",
+            k_unik_copied = "Copied...",
+            k_unik_epic_sand_cry_1 = "^2 Blind size",
+            k_unik_epic_sand_cry_2 = "per tag held",
+            k_unik_tag="tags",
+            k_unik_epic_sand_almanac_1 = "Increase blind size",
+            k_unik_epic_sand_almanac_2 = "by {Tags held}1.1",
 
         },
         high_scores={},
@@ -1974,6 +2007,7 @@ return {
         suits_singular={},
         tutorial={},
         v_dictionary={
+            a_eblindsize = {"^#1# Blind Size"},
             a_EEchips = { "^^#1# Chips" },
             a_hyper_three_chips = { "^^^#1# Chips" },
             a_hyper_three_mult = { "^^^#1# Mult" },

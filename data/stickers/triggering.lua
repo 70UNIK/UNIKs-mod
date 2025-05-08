@@ -33,21 +33,25 @@ function Card:update(dt)
         if self.area == G.consumeables and self.ability and self.ability.unik_can_autotrigger then
             local canUse = false
             canUse = self:can_use_consumeable()
-            if canUse and not self.ability.unik_already_used and not G.GAME.unik_using_automatic_consumeable then
+            if canUse and not self.ability.unik_already_used and not G.GAME.unik_using_automatic_consumeable and not G.GAME.before_play_buffer then
                 self.ability.unik_already_used = true
                 G.GAME.unik_using_automatic_consumeable = true
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
-                    delay = 0.2,
                     func = function()
-                        G.FUNCS.use_card({config = {ref_table = self}})
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'after',
-                            func = function()
-                                G.GAME.unik_using_automatic_consumeable = nil
-                                return true
-                            end
-                        }))
+                        if not G.GAME.before_play_buffer then
+                            G.FUNCS.use_card({config = {ref_table = self}})
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                func = function()
+                                    G.GAME.unik_using_automatic_consumeable = nil
+                                    return true
+                                end
+                            }))
+                        else
+                            self.ability.unik_already_used = nil
+                            G.GAME.unik_using_automatic_consumeable = nil
+                        end
                         return true
                     end
                 }))

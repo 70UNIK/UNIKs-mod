@@ -16,7 +16,7 @@ match_indent = true
 payload = '''
 --Playing cards
 if self.ability and self.ability.set and self.ability.unik_triggering and self.ability.set == "Default" then
-    if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and pseudorandom('triggered_card') < G.GAME.probabilities.normal / 10 then
+    if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and pseudorandom('triggered_card') < G.GAME.probabilities.normal / 10 and not G.GAME.unik_using_automatic_consumeable then
         local cards = {}
         for i = 1, #G.hand.highlighted do
             table.insert(cards, G.hand.highlighted[i])
@@ -24,13 +24,15 @@ if self.ability and self.ability.set and self.ability.unik_triggering and self.a
         G.E_MANAGER:add_event(Event({
             trigger = 'after', 
             func = function()
-                for i = 1, #cards do
-                    if not cards[i].highlighted then
-                        cards[i]:highlight()
+                if not G.GAME.unik_using_automatic_consumeable then
+                    for i = 1, #cards do
+                        if not cards[i].highlighted then
+                            cards[i]:highlight()
+                        end
                     end
-                end
-                if G.hand.highlighted then
-                    G.FUNCS.play_cards_from_highlighted()
+                    if G.hand.highlighted then
+                        G.FUNCS.play_cards_from_highlighted()
+                    end
                 end
                 return true 
         end}))

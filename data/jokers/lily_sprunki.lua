@@ -43,17 +43,19 @@ SMODS.Joker {
         then
            -- print("nom mom")
             if (context.destroy_card) then
-                
+                if not context.destroy_card.ability.eternal then
+                    context.destroy_card.ability.gore_6_destruction = true
+                end
                 return{
                     remove = not context.destroy_card.ability.eternal,
                     func = function()
                         if card.ability.extra.triggered == false then
                             card.ability.extra.triggered = true
-                            card_eval_status_text(card, "extra", nil, nil, nil, {
-                                message = localize("k_eaten_ex"),
-                                colour = HEX("d377dc"),
-                                card = card
-                            })
+                            -- card_eval_status_text(card, "extra", nil, nil, nil, {
+                            --     message = localize("k_eaten_ex"),
+                            --     colour = HEX("d377dc"),
+                            --     card = card
+                            -- })
                             G.E_MANAGER:add_event(Event({
                                 trigger='immediate',
                                 func = function()
@@ -62,7 +64,7 @@ SMODS.Joker {
                                     card.children.floating_sprite:set_sprite_pos({x = 2, y = 1})
                                     G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_monster"
                                     G.ROOM.jiggle = G.ROOM.jiggle + 5
-                                    play_sound("unik_gore6") --thats funny
+                                    --play_sound("unik_gore6") --thats funny
                                     return not context.destroy_card.ability.eternal
                                 end
                             }))
@@ -127,4 +129,56 @@ end
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
     }
+end
+
+--Gore6 (custom card destruction animation)
+function Card:gore6_break()
+    local dissolve_time = 0.7
+    self.shattered = true
+    self.dissolve = 0
+    self.dissolve_colours = {{0.5,0,0,0.8}}
+    self:juice_up()
+    local childParts = Particles(0, 0, 0,0, {
+        timer_type = 'TOTAL',
+        timer = 0.007*dissolve_time,
+        scale = 0.3,
+        speed = 4,
+        lifespan = 0.5*dissolve_time,
+        attach = self,
+        colours = self.dissolve_colours,
+        fill = true
+    })
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.5*dissolve_time,
+        func = (function() childParts:fade(0.15*dissolve_time) return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        blockable = false,
+        func = (function()
+                play_sound("unik_gore6", math.random()*0.2 + 0.9,0.5)
+                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
+            return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blockable = false,
+        ref_table = self,
+        ref_value = 'dissolve',
+        ease_to = 1,
+        delay =  0.5*dissolve_time,
+        func = (function(t) return t end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.55*dissolve_time,
+        func = (function() self:remove() return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.51*dissolve_time,
+    }))
 end

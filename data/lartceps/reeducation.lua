@@ -3,7 +3,7 @@ SMODS.Consumable{
     set = 'unik_lartceps', 
 	atlas = 'unik_lartceps',
     cost = 0,
-	pos = {x = 0, y = 0},
+	pos = {x = 1, y = 1},
 	key = 'unik_reeducation',
     config = {},
     can_use = function(self, card)
