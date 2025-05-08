@@ -1,0 +1,5 @@
+--Explosive sticker: 
+--Playing cards have a 1 in 8 chance to EXPLODE before play, regardless if held or played, exploding destroys adjacent cards. Will also explode if destroyed
+--Jokers have a 1 in 10 chance to EXPLODE at the end of round, destroying adjacent jokers. Will explode if destroyed or sold
+--consumeables destroy adjacent consumeables on use and has a 1 in 6 chance to do nothing on use. Will explode if destroyed or sold
+--Vouchers have a 1 in 12 chance to be unredeemed at the end of round; if unredeemed, unredeem 2 random vouchers in the process.

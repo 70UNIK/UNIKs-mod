@@ -160,7 +160,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
     --Only play if highlight cards are > 0
     if #G.hand.highlighted > 0 then
         pcfh(e)
-    elseif e.disable_button then
+    elseif e and e.disable_button then
         e.disable_button = nil
        -- print("disble")
     end

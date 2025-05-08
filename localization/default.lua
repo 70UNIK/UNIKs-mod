@@ -1297,7 +1297,20 @@ return {
                 text = {
                     "{C:inactive}Does nothing...",
 					"{C:inactive}for now",
-                    "{C:red}Unremovable{}",
+                }
+            },
+            unik_triggering_playing_card = {
+                name = "Triggering",
+                text = {
+                    "{C:green}#1# in #2#{} chance to {C:attention}play{}",
+					"selected cards when {C:attention}selected{}",
+                }
+            },
+            unik_triggering_joker = {
+                name = "Triggering",
+                text = {
+                    "{C:attention}Automatically{} {C:red}sold{}",
+					"when {C:attention}selected{}",
                 }
             },
             unik_triggering_consumeable = {
@@ -1305,7 +1318,20 @@ return {
                 text = {
                     "{C:attention}Automatically used{} when",
 					"possible (left to right)",
-                    "{C:red}Unremovable{}",
+                }
+            },
+            unik_triggering_booster = {
+                name = "Triggering",
+                text = {
+                    "All cards in pack",
+					"are {C:attention}Triggering{}",
+                }
+            },
+            unik_triggering_voucher = {
+                name = "Triggering",
+                text = {
+                    "{C:inactive}Does nothing...",
+					"{C:inactive}for now",
                 }
             },
             unik_ultradebuffed = { --exclusively produced by placard; immune to patch or dandy
@@ -1401,8 +1427,8 @@ return {
             c_unik_placard = {
                 name = "Placard",
                 text = {
-                    "Add {C:purple}Absolute{} and {E:2,C:red}Permadebuffed{}", --Brute force counters dandy (through update functions) and patch
-                    "to all cards in deck,",
+                    "Add {C:purple}Absolute{} and {E:2,C:red}Ultradebuffed{}", --Brute force counters dandy (through update functions) and patch
+                    "to all cards in deck",
                 }
             },
             c_unik_brethren_moon = { --worse than epic arm; Note that mult will always remain zero (otherwise the negatives cancel each other out)
@@ -1422,12 +1448,20 @@ return {
                     "Joker slots",
                 }
             },
-            -- c_unik_trim = {
-            --     name = "://TRIM",
-            --     text = {
-            --         "Set Joker slots to {E:2,C:red}0{}",
-            --     }
-            -- },
+            c_unik_escalation_cryptid = {
+                name = "Escalation",
+                text = {
+                    "{X:unik_void_color,E:2,C:red}^#1#{} {C:attention}ante{}",
+                }
+            },
+            c_unik_escalation_almanac = {
+                name = "Escalation",
+                text = {
+                    "{X:unik_void_color,E:2,C:red}X#1#{} {C:attention}ante{},",
+                    "{X:unik_void_color,E:2,C:red}^#2#{} {C:cry_ember}Tension{},",
+                    "Activates {C:attention}Straddle{}",
+                }
+            },
             c_unik_expiry = {
                 name = "Expiry",
                 text = {
@@ -1438,7 +1472,7 @@ return {
             c_unik_extortion = {
                 name = "Extortion",
                 text = {
-                    "Set money to {E:2,C:red}-$#1#{}", -- -$666
+                    "Set {C:gold}money{} to {E:2,C:red}-$#1#{}", -- -$6666
                 }
             },
             c_unik_single = {
@@ -1450,8 +1484,8 @@ return {
             c_unik_garbage = {
                 name = "Garbage",
                 text = {
-                    "{C:attention}Add{} {E:2,C:red}random{} cards equal",
-                    "to {E:2,C:red}#1#{}x cards in deck", 
+                    "{C:attention}Add{} {E:2,C:red}#1#{} {E:2,C:red}random{}",
+                    "cards to deck", 
                 }
             },
             c_unik_reeducation = {
@@ -1464,7 +1498,7 @@ return {
             c_unik_hellspawn = {
                 name = "Hellspawn", -- DEFAULT
                 text = {
-                    "{E:2,C:red}Add 20{} {X:cry_cursed,C:white}Cursed{} Jokers",
+                    "{E:2,C:red}Add #1#{} {X:cry_cursed,C:white}Cursed{} Jokers",
                     "{C:inactive,s:0.5}(Temporarily create a showman in the process)", 
                 }
             }
@@ -1761,6 +1795,7 @@ return {
             unik_disposable = "Disposable",
             unik_lartceps = "Lartceps",
             unik_triggering = "Triggering",
+            unik_ultradebuffed = "Ultradebuffed",
         },
         poker_hand_descriptions={},
         poker_hands={},

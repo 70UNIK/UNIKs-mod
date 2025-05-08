@@ -36,6 +36,7 @@ pattern = '''SMODS.Stickers.cry_flickering:apply(CARD, nil)'''
 position = "before"
 payload = '''
 CARD.ability.unik_depleted = nil
+CARD.ability.unik_triggering = nil
 CARD.ability.unik_disposable = nil
 '''
 match_indent = true

@@ -191,7 +191,7 @@ SMODS.ConsumableType {
 	secondary_colour = HEX("ff0000"),
 	shop_rate = 0.0,
 	loc_txt = {},
-	default = "c_unik_brethren_moon", --for now
+	default = "c_unik_rip_girlfriend", 
 }
 
 
@@ -201,12 +201,25 @@ NFS.load(mod_path .. "data/stickers/depleted.lua")()
 NFS.load(mod_path .. "data/stickers/impounded.lua")() 
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
+NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+--Stakes
+--Persimmon Stake: All cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables
+--Shitty Stake: All cards can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable 
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --L A R T C E P S--
+NFS.load(mod_path .. "data/lartceps/placard.lua")() 
+NFS.load(mod_path .. "data/lartceps/powerdown.lua")() 
 NFS.load(mod_path .. "data/lartceps/brethren_moon.lua")() 
+NFS.load(mod_path .. "data/lartceps/trim.lua")() 
 NFS.load(mod_path .. "data/lartceps/expiry.lua")() 
+NFS.load(mod_path .. "data/lartceps/extortion.lua")() 
+
+NFS.load(mod_path .. "data/lartceps/reeducation.lua")() 
+NFS.load(mod_path .. "data/lartceps/garbage.lua")() 
+NFS.load(mod_path .. "data/lartceps/hellspawn.lua")() 
+NFS.load(mod_path .. "data/lartceps/escalation.lua")() 
 --boosters
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 

@@ -56,6 +56,7 @@ SMODS.Blind{
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card)
 						G.deck:emplace(card)
+                        playing_card_joker_effects({true})
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
 						return true

@@ -16,7 +16,7 @@ SMODS.Booster{
 	pos = { x = 1, y = 1 },
     cost = 0,
     weight = 0, 
-    config = { extra = 10, choose = 4 },
+    config = { extra = 10, choose = 5 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = lartceps_digital_hallucinations_compat,
 	draw_hand = true,

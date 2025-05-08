@@ -20,6 +20,8 @@
 --- Expiry: Unredeem all vouchers
 --- Blank Larceps (almanac exclusive): copies and automatically triggers the last lartceps used
 -- Likewise, Lartceps are always eternal and rental and always have the positive edition (reservia counter). They will also have a "triggering" sticker (1 in 2 chance to be used at the start of blind)
+--TODO:
+--Ponpon: Enable skipping of booster if 
 SMODS.Blind	{
     key = 'unik_epic_decision',
     config = {},
@@ -123,4 +125,28 @@ G.FUNCS.can_skip_booster = function(e)
 	e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 	e.config.button = nil
 	end
+end
+
+--Hook for booster skip to say NOPE! in almanac (since alamanac overrides)
+local almanac_no_skip = G.FUNCS.skip_booster
+G.FUNCS.skip_booster = function(e)
+    local obj = SMODS.OPENED_BOOSTER.config.center
+    local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
+    if obj.unskippable and type(obj.unskippable) == "function" and obj:unskippable() == true then
+        if G.GAME.blind then
+            play_sound('cancel', 0.8, 1)
+            local text = localize('k_nope_ex')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj2.boss_colour or G.C.RED
+            })
+			G.GAME.blind:wiggle()
+            G.GAME.blind.triggered = true
+        end
+        if e.disable_button then
+            e.disable_button = nil
+           -- print("disble")
+        end
+    else
+        almanac_no_skip(e)
+    end
 end

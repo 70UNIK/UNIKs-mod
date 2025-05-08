@@ -174,6 +174,17 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.debuff_immune = true
         card.ability.permaeternal = true
     end
+    if card.ability.unik_triggering then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.3,
+            blockable = false,
+            func = function()
+                card.ability.unik_can_autotrigger = true
+                return true;
+            end
+        }))
+    end
     if self == G.jokers then
        --print("11")
         --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)

@@ -36,6 +36,7 @@ SMODS.Consumable{
             card.cost = 0
             card.shop_voucher = false
             local current_round_voucher = G.GAME.current_round.voucher
+            card:juice_up(0.3, 0.5)
             card:unredeem()
             G.GAME.current_round.voucher = current_round_voucher
             G.E_MANAGER:add_event(Event({

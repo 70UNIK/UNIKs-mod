@@ -1,5 +1,8 @@
 --Consumeable exclusive sticker; Immediately uses consumeable when possible (left to right)
---If conditions for use are avaliable and its in consumeable slot, the consumeable will trigger. Lartceps will always have this sticker, so reserving it will not save you. Otherwise is cosmetic
+--If conditions for use are avaliable and its in consumeable slot, the consumeable will trigger. Lartceps will always have this sticker, so reserving it will not save you.\
+--Playing cards: 1 in 10 chance to play selected cards when selected
+--Vouchers: Immediately purchased when possible in shop (not implemented)
+--Jokers: Immediately sold when selected (when possible)
 SMODS.Sticker{
     key="unik_triggering",
     badge_colour=HEX("db5700"),
@@ -10,20 +13,27 @@ SMODS.Sticker{
     loc_vars = function(self, info_queue, card)
 		if card.ability.consumeable then
 			return { key = "unik_triggering_consumeable"}
+        elseif card.ability.set == "Joker" then
+            return { key = "unik_triggering_joker" }
+        elseif card.ability.set == "Default" then
+            return { key = "unik_triggering_playing_card" , vars = { G.GAME.probabilities.normal, 10 }}
+        elseif card.ability.set == "Voucher" then
+			return { key = "unik_triggering_voucher" }
+		elseif card.ability.set == "Booster" then
+			return { key = "unik_triggering_booster" }
 		else
-			return { }
+            return { key = "unik_triggering_playing_card", vars = { G.GAME.probabilities.normal, 10 } }
 		end
 	end,
-    update = function(self,card,dt)
-        
-    end
 }
 
 local updateStickerHook = Card.update
 function Card:update(dt)
     if self.ability and self.ability.unik_triggering then
-        if self.area == G.consumeables then
-            if self:can_use_consumeable() and not self.ability.unik_already_used and not G.GAME.unik_using_automatic_consumeable then
+        if self.area == G.consumeables and self.ability and self.ability.unik_can_autotrigger then
+            local canUse = false
+            canUse = self:can_use_consumeable()
+            if canUse and not self.ability.unik_already_used and not G.GAME.unik_using_automatic_consumeable then
                 self.ability.unik_already_used = true
                 G.GAME.unik_using_automatic_consumeable = true
                 G.E_MANAGER:add_event(Event({
@@ -43,6 +53,13 @@ function Card:update(dt)
                 }))
 
             end
+        end
+    --Ultradebuffed
+    elseif self.ability and self.ability.unik_ultradebuffed then
+        if not self.debuff then
+            self.debuff = true
+            self.perma_debuff = true
+            if self.area == G.jokers then self:remove_from_deck(true) end
         end
     end
     local ret = updateStickerHook(self,dt)

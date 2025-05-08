@@ -1,0 +1,46 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+
+### copied from bunco
+
+# function Card:highlight (triggering sticker)
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'self.highlighted = is_higlighted'
+position = 'after'
+match_indent = true
+payload = '''
+--Playing cards
+if self.ability and self.ability.set and self.ability.unik_triggering and self.ability.set == "Default" then
+    if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and pseudorandom('triggered_card') < G.GAME.probabilities.normal / 10 then
+        local cards = {}
+        for i = 1, #G.hand.highlighted do
+            table.insert(cards, G.hand.highlighted[i])
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after', 
+            func = function()
+                for i = 1, #cards do
+                    if not cards[i].highlighted then
+                        cards[i]:highlight()
+                    end
+                end
+                if G.hand.highlighted then
+                    G.FUNCS.play_cards_from_highlighted()
+                end
+                return true 
+        end}))
+    end
+-- Jokers
+elseif self.ability and self.area and self.ability.unik_triggering and self.area == G.jokers and self.config.center.rarity  ~= "cry_cursed" then
+    if self:can_sell_card() and not self.ability.unik_automatic_sold then
+        self.ability.unik_automatic_sold = true
+        self:sell_card()
+    end
+end
+
+'''
