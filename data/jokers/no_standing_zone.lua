@@ -91,7 +91,7 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         --calculate Xmult
-		if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) or context.forcetrigger then
+		if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) then
 			return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,

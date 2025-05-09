@@ -17,9 +17,15 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.Xmult} }
 	end,
     calculate = function(self, card, context)
-        if (context.other_joker and card ~= context.other_joker) or context.forcetrigger then
-            if context.other_joker.config.center.rarity == 1 or context.forcetrigger then --Common
-                if not Talisman.config_file.disable_anims and not context.forcetrigger then
+        if context.forcetrigger then
+            return {
+                message = localize { type = 'variable', key = 'a_xmult', vars = { card.ability.extra.Xmult } },
+                Xmult_mod = card.ability.extra.Xmult
+            }
+        end
+        if (context.other_joker and card ~= context.other_joker) then
+            if context.other_joker.config.center.rarity == 1 then --Common
+                if not Talisman.config_file.disable_anims then
 					G.E_MANAGER:add_event(Event({
 						func = function()
 							context.other_joker:juice_up(0.5, 0.5)

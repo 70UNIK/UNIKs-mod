@@ -97,10 +97,11 @@ SMODS.Joker {
 					key = "a_xchips",
 					vars = { number_format(card.ability.extra.x_chips) },
 				}),
+				Xchip_mod = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
         end
-		if ((context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1))) or context.forcetrigger) and not card.ability.extra.unik_godsmarble_debuff then
+		if (context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1))) and not card.ability.extra.unik_godsmarble_debuff then
 			return {
                 message = localize({
 					type = "variable",

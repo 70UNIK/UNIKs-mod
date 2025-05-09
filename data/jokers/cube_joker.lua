@@ -20,7 +20,8 @@ SMODS.Joker {
 	pools = {["unik_cube"] = true },
 	pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)
-		if ((context.joker_main) and (to_big(card.ability.extra.x_chips) > to_big(1))) or context.forcetrigger then
+		if context.forcetrigger then
+			card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
 			return {
                 message = localize({
 					type = "variable",
@@ -31,7 +32,18 @@ SMODS.Joker {
 				colour = G.C.CHIPS,
 			}
 		end
-        if (context.before and context.cardarea == G.jokers and #context.full_hand == 4 and not context.blueprint)   or context.forcetrigger then
+		if ((context.joker_main) and (to_big(card.ability.extra.x_chips) > to_big(1))) then
+			return {
+                message = localize({
+					type = "variable",
+					key = "a_xchips",
+					vars = { number_format(card.ability.extra.x_chips) },
+				}),
+				Xchip_mod = card.ability.extra.x_chips,
+				colour = G.C.CHIPS,
+			}
+		end
+        if (context.before and context.cardarea == G.jokers and #context.full_hand == 4 and not context.blueprint) then
 			card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
 			return {
 				message = localize({

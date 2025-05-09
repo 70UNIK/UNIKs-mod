@@ -14,7 +14,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	experimental = true,
 	demicoloncompat = true,
-    config = { extra = {x_mult = 1.0, x_mult_mod = 1.25,cursed_jokers = 0, cursed_joker_limit = 8, cursed_joker_list = {}} },
+    config = { extra = {x_mult = 1.0, x_mult_mod = 1.25,cursed_jokers = 0, cursed_joker_limit = 8, cursed_joker_list = {},already_destroyed = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.cursed_jokers,center.ability.extra.cursed_joker_limit} }
 	end,
@@ -23,25 +23,27 @@ SMODS.Joker {
 	},
 	-- on self destruction, release all cursed jokers
 	remove_from_deck = function(self, card, from_debuff)
-		for _, v in pairs(card.ability.extra.cursed_joker_list) do
+		if not card.ability.extra.already_destroyed then
+			for _, v in pairs(card.ability.extra.cursed_joker_list) do
 
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil,v.config.center.key)
-                    card2:add_to_deck()
-                    G.jokers:emplace(card2)
-                    card2:start_materialize()
-                    return true
-                end
-            }))
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil,v.config.center.key)
+						card2:add_to_deck()
+						G.jokers:emplace(card2)
+						card2:start_materialize()
+						return true
+					end
+				}))
 
+			end
 		end
 		--clear list (in case of debuff)
 		card.ability.extra.cursed_joker_list = {}
 	end,
 
     calculate = function(self, card, context)
-		if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) or context.forcetrigger then
+		if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) then
 			return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,
@@ -63,8 +65,13 @@ SMODS.Joker {
 				}))
 
 			end
+			card.ability.extra.already_destroyed = true
 			--clear list (in case of debuff)
 			card.ability.extra.cursed_joker_list = {}
+			return {
+				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
+				Xmult_mod = card.ability.extra.x_mult,
+			}
 		end
     end,
 }

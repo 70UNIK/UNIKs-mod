@@ -24,6 +24,7 @@ SMODS.Enhancement {
             G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
 				local card2 = create_card("unik_lartceps", G.pack_cards, nil, nil, true, nil, nil, "namta")
 				card2:add_to_deck()
+                card2:start_materialize()
 				G.consumeables:emplace(card2)
 				return true
 			end }))

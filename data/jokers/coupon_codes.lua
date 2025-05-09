@@ -22,10 +22,59 @@ SMODS.Joker {
 		modest = {extra = {odds = 30} },
 	},
     calculate = function(self, card, context)
-        if (context.end_of_round and context.game_over == false) or context.forcetrigger then
+        if context.forcetrigger then
+            card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})
+            G.E_MANAGER:add_event(Event({
+                    trigger = "before",
+                    delay = 0,
+                    func = function()
+                        local max = 2
+                        for i = 1, max do
+                            local area
+                            if G.STATE == G.STATES.HAND_PLAYED then
+                                if not G.redeemed_vouchers_during_hand then
+                                    G.redeemed_vouchers_during_hand =
+                                        CardArea(G.play.T.x, G.play.T.y, G.play.T.w, G.play.T.h, { type = "play", card_limit = 5 })
+                                end
+                                area = G.redeemed_vouchers_during_hand
+                            else
+                                area = G.play
+                            end
+                            local _pool = get_current_pool("Voucher", nil, nil, nil, true)
+                            local center = pseudorandom_element(_pool, pseudoseed("cry_trade_redeem"))
+                            local it = 1
+                            while center == "UNAVAILABLE" do
+                                it = it + 1
+                                center = pseudorandom_element(_pool, pseudoseed("cry_trade_redeem_resample" .. it))
+                            end
+                            local card = create_card("Voucher", area, nil, nil, nil, nil, center)
+                            card:start_materialize()
+                            card.ability.unik_disposable = true
+
+                            area:emplace(card)
+                            card.cost = 0
+                            card.shop_voucher = false
+                            local current_round_voucher = G.GAME.current_round.voucher
+                            card:redeem()
+                            G.GAME.current_round.voucher = current_round_voucher
+                            G.E_MANAGER:add_event(Event({
+                                trigger = "after",
+                                delay = 0,
+                                func = function()
+                                    card:start_dissolve()
+                                    
+                                    return true
+                                end,
+                            }))
+                        end
+                    return true
+                end,
+            }))
+        end
+        if (context.end_of_round and context.game_over == false) then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})
             local max = 1
-            if not(pseudorandom('unik_coupon_codes') < cry_prob(3 or card.ability.cry_prob*3 ,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) or context.forcetrigger then
+            if not(pseudorandom('unik_coupon_codes') < cry_prob(3 or card.ability.cry_prob*3 ,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
                 max = 2
             end
             for i = 1, max do

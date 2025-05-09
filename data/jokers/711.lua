@@ -80,15 +80,11 @@ SMODS.Joker {
 					
 					-- local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, Cryptid.get_food("711"))
 
-					if (jokers_to_create > 0 or Card.get_gameset(card) ~= "modest")then
-						local card2 = create_card("Food", G.jokers, nil, nil, nil, nil, nil, "711")
-						card2:add_to_deck()
-						G.jokers:emplace(card2)
-						card2:start_materialize()
-						G.GAME.joker_buffer = 0
-						--If it can spawn, it should not spawn again (blueprint for instance, if you have 2 blueprints, and the blueprint does it first, then it should count as "created")
-						card.ability.extra.spawn = false
-					end
+					
+					local card2 = create_card("Food", G.jokers, nil, nil, nil, nil, nil, "711")
+					card2:add_to_deck()
+					G.jokers:emplace(card2)
+					card2:start_materialize()
 					return true
 				end
 			}))

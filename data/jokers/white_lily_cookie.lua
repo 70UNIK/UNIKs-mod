@@ -79,7 +79,59 @@ SMODS.Joker {
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
-        if context.joker_main or context.forcetrigger then
+        if context.forcetrigger then
+            if card.ability.extra.copying == false then
+                card.ability.extra.copying = true
+                card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+                card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+                --do not make multiple clones of her! 
+                if Card.get_gameset(card) ~= "modest" then
+                    card_eval_status_text(card, "extra", nil, nil, nil, {
+                        message = localize({
+                            type = "variable",
+                            key = "a_powmult",
+                            vars = {
+                                number_format(to_big(card.ability.extra.Emult)),
+                            },
+                        }),
+                        colour = G.C.DARK_EDITION,
+                        card = card,
+                    })
+                else
+                    card_eval_status_text(card, "extra", nil, nil, nil, {
+                        message = localize({
+                            type = "variable",
+                            key = "a_xmult",
+                            vars = {
+                                number_format(to_big(card.ability.extra.x_mult)),
+                            },
+                        }),
+                        colour = G.C.MULT,
+                        card = card,
+                    })
+                end 
+                selfDestruction(card,"k_unik_plant_no_face",HEX("bfb2f6"))
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    func = function()
+                        White_lily_copy(card)
+                        return true
+                    end,
+                }))
+            end
+            return {
+                message = localize({
+                    type = "variable",
+                    key = "a_powmult",
+                    vars = {
+                        number_format(card.ability.extra.Emult),
+                    },
+                }),
+                Emult_mod = card.ability.extra.Emult,
+                colour = G.C.DARK_EDITION,
+            }
+        end
+        if context.joker_main then
             if Card.get_gameset(card) ~= "modest" then
                 if (to_big(card.ability.extra.Emult) > to_big(1)) then
                     return {
@@ -111,7 +163,7 @@ SMODS.Joker {
             end
 
 		end
-        if context.forcetrigger or (context.ending_shop and not context.blueprint and not context.repetition and not context.retrigger_joker) then
+        if (context.ending_shop and not context.blueprint and not context.repetition and not context.retrigger_joker) then
            --print(card.ability.extra.copying)
             if card.ability.extra.copying == false then
                 card.ability.extra.copying = true

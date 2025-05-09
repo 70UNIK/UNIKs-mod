@@ -37,7 +37,18 @@ SMODS.Joker {
 		if context.before and not context.blueprint_card and not context.retrigger_joker  then
 			card.ability.extra.scoring = true
 		end
-		if (context.individual and context.cardarea == G.play) or context.forcetrigger then
+		if context.forcetrigger then
+			return {
+                message = localize({
+					type = "variable",
+					key = "a_xchips",
+					vars = { number_format(card.ability.extra.x_chips) },
+				}),
+				Xchip_mod = card.ability.extra.x_chips,
+				colour = G.C.CHIPS,
+			}
+		end
+		if (context.individual and context.cardarea == G.play) then
 			-- if not Talisman.config_file.disable_anims then
 			-- 	G.E_MANAGER:add_event(Event({
 			-- 		func = function()
@@ -57,7 +68,7 @@ SMODS.Joker {
 
 			}
 		end
-		if (context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card) or context.forcetrigger then
+		if (context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card) then
 			if not Talisman.config_file.disable_anims then
 				G.E_MANAGER:add_event(Event({
 					func = function()
