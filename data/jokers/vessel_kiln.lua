@@ -10,6 +10,7 @@ SMODS.Joker {
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
+	demicoloncompat = true,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_vessel
 		return { vars = {center.ability.extra.x_chips} }
@@ -25,7 +26,7 @@ SMODS.Joker {
 		G.GAME.unik_vesselled = nil
 	end,
     calculate = function(self, card, context)
-		if context.joker_main then
+		if context.joker_main or context.forcetrigger then
 			return {
 				message = localize({ type = "variable", key = "a_xchips", vars = { card.ability.extra.x_chips } }),
 				Xchip_mod = card.ability.extra.x_chips,

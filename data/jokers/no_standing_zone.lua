@@ -13,6 +13,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
+	demicoloncompat = true,
     config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.07, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		if Card.get_gameset(card) ~= "modest" then
@@ -90,11 +91,28 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         --calculate Xmult
-		if context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1)) then
+		if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) or context.forcetrigger then
 			return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,
 			}
+		end
+		if context.forcetrigger then
+			card.ability.extra.selfDestruction = true
+			selfDestruction(card,"k_unik_no_standing_towed",G.C.BLACK)
+			if Card.get_gameset(card) ~= "modest" then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.8,
+					func = function()
+							local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_impounded")
+							card2:add_to_deck()
+							G.jokers:emplace(card2)
+							card2:start_materialize()
+						return true
+					end
+				}))
+			end
 		end
 		--pause timer if scoring (to ease pain in lack of control in scoring and to avoid talisman animation exploit)
 		if context.before and not context.blueprint_card

@@ -18,6 +18,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+	demicoloncompat = true,
     config = { extra = { mult = 20} },
 	gameset_config = {
 		modest = { extra = { mult = 15} },
@@ -30,6 +31,20 @@ SMODS.Joker {
     pools = {["unik_copyrighted"] = true },
     calculate = function(self, card, context)
 		--Known issue: does not work with retriggers.
+		if context.forcetrigger then
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_mult",
+					vars = {
+						number_format(card.ability.extra.mult),
+					},
+				}),
+				mult_mod = card.ability.extra.mult,
+				colour = G.C.MULT,
+
+			}
+		end
         if context.other_consumeable and context.other_consumeable.ability.set == 'Code'
 		then
 

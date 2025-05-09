@@ -71,6 +71,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
+    demicoloncompat = true,
     fusable = true,
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.1,family_x_bonus = 1.3,unik_godsmarble_debuff = false} },
     gameset_config = {
@@ -88,7 +89,18 @@ SMODS.Joker {
         } }
 	end,
     calculate = function(self, card, context)
-		if context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1)) and not card.ability.extra.unik_godsmarble_debuff then
+        if context.forcetrigger then
+            v.ability.extra.x_chips = v.ability.extra.x_chips + v.ability.extra.x_chips_mod
+            return {
+                message = localize({
+					type = "variable",
+					key = "a_xchips",
+					vars = { number_format(card.ability.extra.x_chips) },
+				}),
+				colour = G.C.CHIPS,
+			}
+        end
+		if ((context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1))) or context.forcetrigger) and not card.ability.extra.unik_godsmarble_debuff then
 			return {
                 message = localize({
 					type = "variable",

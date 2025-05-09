@@ -39,6 +39,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+	demicoloncompat = true,
 	fusable = true,
 	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
 	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
@@ -68,8 +69,7 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
 		
-		if context.ending_shop and Card.get_gameset(card) ~= "modest" and 
-		not(pseudorandom('unik_moonlight_negative') < cry_prob(2 or center.ability.cry_prob*2,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
+		if (context.unik_blinds_refresh or context.forcetrigger) and Card.get_gameset(card) ~= "modest" then
 			--What if you decide to stack non negative consumeables (I prefer NOT to do that, but its a possibility. It should decrement the value and create one)
 			if G.consumeables.cards[1] then
 				--Get valid cards
@@ -119,6 +119,19 @@ SMODS.Joker {
 					end
 				end
 			end
+		end
+		if context.forcetrigger then
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_powmult",
+					vars = {
+						number_format(card.ability.extra.Emult),
+					},
+				}),
+				Emult_mod = card.ability.extra.Emult,
+				colour = G.C.DARK_EDITION,
+			}
 		end
 
 
@@ -267,16 +280,16 @@ if JokerDisplay then
 				colour = G.C.SECONDARY_SET.Planet,
 			},
 		},
-		extra = {
-            {
-                {
-                    ref_table = "card.joker_display_values",
-                    ref_value = "odds",
-                    colour = G.C.GREEN,
-                    scale = 0.3,
-                },		
-			},
-		},
+		-- extra = {
+        --     {
+        --         {
+        --             ref_table = "card.joker_display_values",
+        --             ref_value = "odds",
+        --             colour = G.C.GREEN,
+        --             scale = 0.3,
+        --         },		
+		-- 	},
+		-- },
 		calc_function = function(card)
 			local Emult = 1
 			local odds = ""
@@ -329,10 +342,10 @@ if JokerDisplay then
 			end
 			card.joker_display_values.Emult = Emult
 			card.joker_display_values.localized_text = "(" .. localize("k_planet") .. ")"
-			if Card.get_gameset(card) ~= "modest" then
-                odds = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(2 or card.ability.cry_prob * 2,card.ability.extra.odds,card.ability.cry_rigged) or 2, card.ability.extra.odds } }
-            end
-			card.joker_display_values.odds = odds
+			-- if Card.get_gameset(card) ~= "modest" then
+            --     odds = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(2 or card.ability.cry_prob * 2,card.ability.extra.odds,card.ability.cry_rigged) or 2, card.ability.extra.odds } }
+            -- end
+			-- card.joker_display_values.odds = odds
 			--Only display poker hand if in modest
 			if text ~= 'Unknown' and text ~= 'NULL' and Card.get_gameset(card) == "modest" then
 				card.joker_display_values.localized_text_poker_hand = text .. ' '

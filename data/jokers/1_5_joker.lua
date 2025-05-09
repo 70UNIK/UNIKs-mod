@@ -20,6 +20,7 @@ SMODS.Joker {
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
+	demicoloncompat = true,
 	display_size = { w = 71, h = 144 },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.extra.hand_size} }
@@ -32,6 +33,12 @@ SMODS.Joker {
                     mult_mod = card.ability.extra.mult
                 }
 			end
+		end
+		if context.forcetrigger then
+			return {
+				message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult + (#context.full_hand > 0 and card.ability.extra.mult_mod * (#context.full_hand - card.ability.extra.hand_size) or 0)}},
+				mult_mod = card.ability.extra.mult
+			}
 		end
 	end
 }

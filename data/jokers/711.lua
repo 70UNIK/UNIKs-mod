@@ -26,6 +26,7 @@ SMODS.Joker {
 	cost = 7,
 	blueprint_compat = true,
 	perishable_compat = true,
+	demicoloncompat = true,
 	eternal_compat = true,
 	loc_vars = function(self, info_queue, center)
 		
@@ -71,7 +72,31 @@ SMODS.Joker {
 	-- The functioning part of the joker, looks at context to decide what step of scoring the game is on, and then gives a 'return' value if something activates.
     calculate = function(self, card, context)
 
+		if context.forcetrigger then
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					card:juice_up(0.3, 0.4)
+					--This will need to be updated when refactor branch is complete.
+					
+					-- local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, Cryptid.get_food("711"))
 
+					if (jokers_to_create > 0 or Card.get_gameset(card) ~= "modest")then
+						local card2 = create_card("Food", G.jokers, nil, nil, nil, nil, nil, "711")
+						card2:add_to_deck()
+						G.jokers:emplace(card2)
+						card2:start_materialize()
+						G.GAME.joker_buffer = 0
+						--If it can spawn, it should not spawn again (blueprint for instance, if you have 2 blueprints, and the blueprint does it first, then it should count as "created")
+						card.ability.extra.spawn = false
+					end
+					return true
+				end
+			}))
+			return{
+				message = localize("k_unik_711"),
+				colour = HEX("008161"),
+			}
+        end
 		-- After checking cards, create a food joker if conditions are met
 		if context.joker_main then
 			--if card.ability.extra.hasAce == true and not (context.blueprint_card or self).getting_sliced and card.ability.extra.has7 == true and card.ability.extra.spawn == true and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then

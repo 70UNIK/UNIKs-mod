@@ -10,6 +10,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+    demicoloncompat = true,
     config = { extra = {odds = 5} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_disposable" }
@@ -21,10 +22,10 @@ SMODS.Joker {
 		modest = {extra = {odds = 30} },
 	},
     calculate = function(self, card, context)
-        if context.end_of_round and context.game_over == false then
+        if (context.end_of_round and context.game_over == false) or context.forcetrigger then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})
             local max = 1
-            if not(pseudorandom('unik_coupon_codes') < cry_prob(3 or card.ability.cry_prob*3 ,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
+            if not(pseudorandom('unik_coupon_codes') < cry_prob(3 or card.ability.cry_prob*3 ,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) or context.forcetrigger then
                 max = 2
             end
             for i = 1, max do

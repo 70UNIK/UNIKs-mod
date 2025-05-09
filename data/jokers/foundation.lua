@@ -27,6 +27,7 @@ SMODS.Joker {
     blueprint_compat = false,
 	perishable_compat = false,
 	eternal_compat = false,
+	demicoloncompat = true, --NOPE!
 	add_to_deck = function(self, card, from_debuff)
 		if #SMODS.find_card("j_jen_saint_attuned") > 0 or #SMODS.find_card("j_jen_saint") > 0 then
 			card.ability.extra.threshold = 0
@@ -72,6 +73,13 @@ SMODS.Joker {
 		end
 	end,
     calculate = function(self, card, context)
+		if context.forcetrigger then --NOPE!
+			card.ability.extra.hands = 0
+			card_eval_status_text(card, "extra", nil, nil, nil, {
+				message = localize("k_reset"),
+				colour = G.C.BLACK,
+			})
+		end
         if
 			context.cardarea == G.jokers
 			and context.before

@@ -94,6 +94,7 @@ function reset_blinds()
         G.GAME.global_rerolls_pause_val = G.GAME.global_rerolls
         --print( G.GAME.global_rerolls_pause_val)
         --If rerolls < 15, set to 15^1.1.
+        SMODS.calculate_context({unik_blinds_refresh = true})
     end
     resetReedRanks()
 end

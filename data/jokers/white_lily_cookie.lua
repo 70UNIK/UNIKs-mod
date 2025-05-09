@@ -48,6 +48,7 @@ SMODS.Joker {
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,
+    demicoloncompat = true,
 	eternal_compat = true,
     -- Mainline:
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
@@ -78,7 +79,7 @@ SMODS.Joker {
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
-        if context.joker_main then
+        if context.joker_main or context.forcetrigger then
             if Card.get_gameset(card) ~= "modest" then
                 if (to_big(card.ability.extra.Emult) > to_big(1)) then
                     return {
@@ -110,7 +111,7 @@ SMODS.Joker {
             end
 
 		end
-        if context.ending_shop and not context.blueprint and not context.repetition and not context.retrigger_joker then
+        if context.forcetrigger or (context.ending_shop and not context.blueprint and not context.repetition and not context.retrigger_joker) then
            --print(card.ability.extra.copying)
             if card.ability.extra.copying == false then
                 card.ability.extra.copying = true

@@ -24,6 +24,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+	demicoloncompat = true,
     config = { extra = {x_chips = 1.3,family_x_bonus = 1.3,scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
@@ -36,7 +37,7 @@ SMODS.Joker {
 		if context.before and not context.blueprint_card and not context.retrigger_joker  then
 			card.ability.extra.scoring = true
 		end
-		if context.individual and context.cardarea == G.play then
+		if (context.individual and context.cardarea == G.play) or context.forcetrigger then
 			-- if not Talisman.config_file.disable_anims then
 			-- 	G.E_MANAGER:add_event(Event({
 			-- 		func = function()
@@ -56,7 +57,7 @@ SMODS.Joker {
 
 			}
 		end
-		if context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card then
+		if (context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card) or context.forcetrigger then
 			if not Talisman.config_file.disable_anims then
 				G.E_MANAGER:add_event(Event({
 					func = function()

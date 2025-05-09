@@ -7,6 +7,7 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+    demicoloncompat = true,
     config = { extra = { Xmult = 1.26} },
     gameset_config = {
 		modest = { extra = { Xmult = 1.2} }, 
@@ -16,9 +17,9 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.Xmult} }
 	end,
     calculate = function(self, card, context)
-        if context.other_joker and card ~= context.other_joker then
-            if context.other_joker.config.center.rarity == 1 then --Common
-                if not Talisman.config_file.disable_anims then
+        if (context.other_joker and card ~= context.other_joker) or context.forcetrigger then
+            if context.other_joker.config.center.rarity == 1 or context.forcetrigger then --Common
+                if not Talisman.config_file.disable_anims and not context.forcetrigger then
 					G.E_MANAGER:add_event(Event({
 						func = function()
 							context.other_joker:juice_up(0.5, 0.5)

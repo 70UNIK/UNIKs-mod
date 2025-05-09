@@ -49,6 +49,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
+	demicoloncompat = true,
 	fusable = true,
     config = { extra = {Echips_mod = 0.03, Echips = 1.0} }, --normally he should not be cappted in mainline+
 	gameset_config = {
@@ -68,7 +69,7 @@ SMODS.Joker {
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
 		local check = false
-		if context.joker_main and (to_big(card.ability.extra.Echips) > to_big(1)) then
+		if (context.joker_main or context.forcetrigger) and (to_big(card.ability.extra.Echips) > to_big(1)) then
 			return {
                 message = localize({
 					type = "variable",
@@ -81,7 +82,7 @@ SMODS.Joker {
                 colour = G.C.DARK_EDITION,
 			}
 		end
-        if context.individual and context.cardarea == G.play and Card.get_gameset(card) ~= "modest" then
+        if ((context.individual and context.cardarea == G.play) or context.forcetrigger) and Card.get_gameset(card) ~= "modest" then
 			if context.other_card:get_id() == 7 and not context.blueprint  then
 				card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
 				return {
@@ -97,7 +98,7 @@ SMODS.Joker {
 				}
 			end
 		end		
-		if context.before and context.cardarea == G.jokers and not context.blueprint and Card.get_gameset(card) == "modest" then
+		if (context.before and context.cardarea == G.jokers and not context.blueprint and Card.get_gameset(card) == "modest") or context.forcetrigger then
 
             --print("turn them happy")
 			for k, v in ipairs(context.full_hand) do

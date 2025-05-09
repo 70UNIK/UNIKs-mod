@@ -9,6 +9,7 @@ SMODS.Joker {
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
+    demicoloncompat = true,
     pools = {["unik_seven"] = true },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.money} }
@@ -23,6 +24,12 @@ SMODS.Joker {
                 card.ability.extra.has7 = true
 			end
 		end
+        if context.forcetrigger then
+            return {
+                    dollars = card.ability.extra.money,
+                    card = self
+                }
+        end
 		if context.joker_main then
 			if card.ability.extra.has10 == true and not (context.blueprint_card or self).getting_sliced and card.ability.extra.has7 == true then
 				-- Create a Food Joker according to Cryptid.

@@ -8,6 +8,7 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+    demicoloncompat = true,
     config = { extra = {odds = 1,mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
     --ONLY DISABLE if extracredit is installed
     gameset_config = {
@@ -22,6 +23,13 @@ SMODS.Joker {
     
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
+        if context.forcetrigger then
+            return {
+                p_dollars = card.ability.extra.p_dollars,
+                mult = card.ability.extra.mult,
+                card = card,
+            }
+        end
         if context.individual and context.cardarea == G.play and Card.get_gameset(card) ~= "modest" then
             -- if a seven
             if context.other_card:get_id() == 7 then

@@ -35,6 +35,7 @@ SMODS.Joker {
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,
+    demicoloncompat = true,
 	eternal_compat = true,
     config = { extra = { Emult = 1.8, Echips = 1.8}},
 	loc_vars = function(self, info_queue, center)
@@ -45,7 +46,7 @@ SMODS.Joker {
 	},
     pools = {},
     calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.joker_main then
+        if (context.cardarea == G.jokers and context.joker_main) or context.forcetrigger then
             local _odd, _even = false, false
             for i = 1, #context.scoring_hand do
                 if not SMODS.has_no_rank(context.scoring_hand[i]) then
@@ -57,7 +58,7 @@ SMODS.Joker {
                     end
                 end
             end
-            if _odd and _even then
+            if (_odd and _even) or context.forcetrigger then
                 --This does NOT work with retrigger jokers (chad, for instance) so sadly, it had to be the one from circulus pistoris...
                 -- SMODS.calculate_effect({
                 --     message = localize({

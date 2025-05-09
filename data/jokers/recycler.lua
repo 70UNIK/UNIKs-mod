@@ -9,6 +9,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+	demicoloncompat = true,
     config = { extra = {x_mult = 1.0, x_mult_mod = 0.02} },
 	gameset_config = {
 		modest = { extra = {x_mult = 1.0, x_mult_mod = 0.01} },
@@ -17,13 +18,13 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
 	end,
     calculate = function(self, card, context)
-		if context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1)) then
+		if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) or context.forcetrigger then
 			return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,
 			}
 		end
-        if context.discard and not context.blueprint then
+        if (context.discard and not context.blueprint) or context.forcetrigger then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             return {
 				delay = 0.2,
