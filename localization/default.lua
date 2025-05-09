@@ -986,7 +986,7 @@ return {
                 name="Soul Fragment",
                 text={
                     "Sell this card to create a random",
-                    "{C:attention}Disposable Eternal Rental{}", 
+                    "{C:attention}Eternal Disposable{}", 
                     "{C:legendary}Legendary{} Joker",
                     "{C:inactive}(Can overflow){}",
                 }               
@@ -996,7 +996,7 @@ return {
                 name="A Taste of Power",
                 text={
                     "Sell this card to create a random",
-                    "{C:attention}Niko Absolute Rental{}", 
+                    "{C:attention}Absolute Niko{}", 
                     "{C:cry_exotic}Exotic{} Joker",
                     "{C:inactive}(Can overflow){}",
                 }               

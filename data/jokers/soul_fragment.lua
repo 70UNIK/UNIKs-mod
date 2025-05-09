@@ -15,14 +15,14 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
 		if (context.selling_self and not (context.retrigger_joker or context.blueprint)) or context.forcetrigger then
+            card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_unik_taste_of_power") ,colour = G.C.PURPLE})
             G.E_MANAGER:add_event(Event({
                 trigger = "before",
                 delay = 0,
                 func = function()
-                    card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_unik_taste_of_power") ,colour = G.C.PURPLE})
+                    
                     play_sound("timpani")
                     local card2 = create_card("Joker", G.jokers, true, nil, nil, nil, nil, "unik_tech_demo")
-                    card2.ability.rental = true
                     card2.ability.unik_disposable = true
                     card2.ability.eternal = true
                     card2:add_to_deck()
