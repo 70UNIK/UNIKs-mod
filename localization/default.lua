@@ -170,6 +170,19 @@ return {
                     "including eternals",
                 }
             },
+            bl_cry_cube={ --I don't like cube being worse than lemon trophy. So I'll just nerf it to reduce mult by ^0.5 and blind size to be ^0.33. Still severe, but can be brute forced 
+                name = "The Cube",
+                text = {
+                    "Mult is reduced",
+                    "by ^0.33",
+                },
+            },
+            bl_unik_epic_cube={ --an effect of this caliber should be an epic blind instead (literally chipzel challenge)
+                name = "Kaaoksenkuutio", --Cube of chaos
+                text = {
+                    "Mult is set to <1",
+                },
+            },
             bl_unik_bigger_blind={
                 name = "Bigger Blind", --no description, it does nothing
             },
