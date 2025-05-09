@@ -90,7 +90,7 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         if context.forcetrigger then
-            v.ability.extra.x_chips = v.ability.extra.x_chips + v.ability.extra.x_chips_mod
+            card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
             return {
                 message = localize({
 					type = "variable",
