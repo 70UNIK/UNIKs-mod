@@ -48,7 +48,7 @@ SMODS.Enhancement {
             -- } 
             return {
                 message = localize('unik_plus_lartceps'),
-                colour = G.C.UNIK_LARTCEPS,
+                colour = G.C.UNIK_LARTCEPS1,
                 card = card
             }
 		end

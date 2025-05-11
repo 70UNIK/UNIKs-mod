@@ -172,7 +172,6 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.unik_triggering = true
         card.ability.dissolve_immune = true
         card.ability.debuff_immune = true
-        card.ability.permaeternal = true
     end
     if card.ability.unik_triggering then
         G.E_MANAGER:add_event(Event({

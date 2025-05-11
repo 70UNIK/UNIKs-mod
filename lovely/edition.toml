@@ -91,13 +91,13 @@ payload = """--self.C.UNIK_SYNC_CATALYST_FAIL[1] = 0.6+0.2*math.sin(self.TIMERS.
         self.C.UNIK_SYNC_CATALYST_FAIL[3] = 0.6+0.2*(1- math.sin(self.TIMERS.REAL*1.3))
         self.C.UNIK_SYNC_CATALYST_FAIL[2] = math.min(self.C.UNIK_SYNC_CATALYST_FAIL[1], self.C.UNIK_SYNC_CATALYST_FAIL[3])
         
-        self.C.UNIK_LARTCEPS[1] = 0.5+0.5*(1- math.sin(self.TIMERS.REAL*5))
-        self.C.UNIK_LARTCEPS[2] = 0.5+0.5*math.sin(self.TIMERS.REAL*5)
-        self.C.UNIK_LARTCEPS[3] = 0.5+0.5*math.sin(self.TIMERS.REAL*5)
+        self.C.UNIK_LARTCEPS1[1] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
+        self.C.UNIK_LARTCEPS1[2] = 0.5+0.6*math.sin(self.TIMERS.REAL*5)
+        self.C.UNIK_LARTCEPS1[3] = 0.5+0.6*math.sin(self.TIMERS.REAL*5)
 
-        self.C.UNIK_LARTCEPS_INVERSE[1] = 0.5+0.5*math.sin(self.TIMERS.REAL*5)
-        self.C.UNIK_LARTCEPS_INVERSE[2] = 0.5+0.5*(1- math.sin(self.TIMERS.REAL*5))
-        self.C.UNIK_LARTCEPS_INVERSE[3] = 0.5+0.5*(1- math.sin(self.TIMERS.REAL*5))
+        self.C.UNIK_LARTCEPS_INVERSE[1] = 0.5+0.6*math.sin(self.TIMERS.REAL*5)
+        self.C.UNIK_LARTCEPS_INVERSE[2] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
+        self.C.UNIK_LARTCEPS_INVERSE[3] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
         
 """
 match_indent = true
@@ -109,7 +109,7 @@ target = "globals.lua"
 pattern = "DARK_EDITION = {0,0,0,1},"
 position = "after"
 payload = """UNIK_SHITTY_EDITION = {0,0,0,1},
-UNIK_LARTCEPS = {0,1,1,1},
+UNIK_LARTCEPS1 = {1,0,0,1},
 UNIK_LARTCEPS_INVERSE = {1,0,0,1},
 UNIK_THE_PLANT = HEX('709284'),
 UNIK_THE_MANACLE = HEX('575757'),
@@ -158,7 +158,7 @@ unik_yokana_color = G.C.UNIK_YOKANA,
 unik_chelsea_color = G.C.UNIK_CHELSEA,
 unik_unik_color = G.C.UNIK_UNIK,
 unik_caption = G.C.UNIK_CAPTION,
-unik_lartceps = G.C.UNIK_LARTCEPS,
+unik_lartceps1 = G.C.UNIK_LARTCEPS1,
 unik_lartceps_inverse = G.C.UNIK_LARTCEPS_INVERSE,
 """
 match_indent = true

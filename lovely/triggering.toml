@@ -15,8 +15,8 @@ position = 'after'
 match_indent = true
 payload = '''
 --Playing cards
-if self.ability and self.ability.set and self.ability.unik_triggering and self.ability.set == "Default" then
-    if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and pseudorandom('triggered_card') < G.GAME.probabilities.normal / 10 and not G.GAME.unik_using_automatic_consumeable then
+if self.ability and self.ability.set and self.ability.unik_triggering and (self.ability.set == "Default" or self.area == G.hand) then
+    if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and pseudorandom('triggered_card') < G.GAME.probabilities.normal / 8 and not G.GAME.unik_using_automatic_consumeable then
         local cards = {}
         for i = 1, #G.hand.highlighted do
             table.insert(cards, G.hand.highlighted[i])
@@ -38,7 +38,7 @@ if self.ability and self.ability.set and self.ability.unik_triggering and self.a
         end}))
     end
 -- Jokers
-elseif self.ability and self.area and self.ability.unik_triggering and self.area == G.jokers and self.config.center.rarity  ~= "cry_cursed" then
+elseif self.ability and self.area and self.ability.unik_triggering and self.area == G.jokers and not self.ability.unik_cursed_unsellable then
     if self:can_sell_card() and not self.ability.unik_automatic_sold then
         self.ability.unik_automatic_sold = true
         self:sell_card()

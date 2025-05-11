@@ -25,6 +25,15 @@ payload = '''and card.config.center.key ~= "j_unik_impounded"
 and card.config.center.key ~= "j_unik_rancid_smoothie"'''
 match_indent = true
 
+## Unsellable jokers for triggering
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/ui.lua"]'''
+pattern = '''table.remove(abc.nodes[1].nodes, 1)'''
+position = "after"
+payload = '''card.ability.unik_cursed_unsellable = true'''
+match_indent = true
+
 ### allow modify cost of impounded
 [[patches]]
 [patches.pattern]
@@ -69,7 +78,6 @@ if G.jokers then
         if v.ability.name == "j_unik_hook_n_discard" then
             --taken from the hook
             G.E_MANAGER:add_event(Event({ 
-                trigger = 'after',
                 func = function()
                 local any_selected = nil
                 local _cards = {}
@@ -89,6 +97,7 @@ if G.jokers then
                 if any_selected then
                     v:juice_up(0.8, 0.8)
                 end
+                delay(0.7)
             return true end })) 
             card_eval_status_text(v, "extra", nil, nil, nil, {
                 message = localize("k_unik_hooked"),

@@ -6,6 +6,9 @@ SMODS.Consumable{
 	pos = {x = 6, y = 0},
 	key = 'unik_extortion',
     config = {extra = {money = 6666}},
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     can_use = function(self, card)
 		return true
 	end,

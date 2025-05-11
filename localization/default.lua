@@ -466,7 +466,7 @@ return {
                 text = {
                     "Has no rank or suit",
                     "{X:unik_void_color,E:2,C:red}^#3#{} Blind Size if held",
-                    "Create a {X:unik_lartceps,C:unik_lartceps_inverse}Lartceps{} card",
+                    "Create a {X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card",
                     "when {C:attention}scored, then{}",
                     "{C:red,E:2}Self Destruct{}",
                 }
@@ -1234,7 +1234,7 @@ return {
                 name = "Lartceps Bundle",
 				text = {
 					"Choose {C:attention}#1#{} of",
-					"up to {C:attention}#2# {X:unik_lartceps,C:unik_lartceps_inverse}Lartceps{} Card#<s>2#{}",
+					"up to {C:attention}#2# {X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} Card#<s>2#{}",
 					"{C:red}Unskippable{}",
 				},
             },
@@ -1530,14 +1530,14 @@ return {
                 name = "Blank Lartceps",
                 text = {
                     "{C:attention}Copies{} the last used",
-                    "{X:unik_lartceps,C:unik_lartceps_inverse}Lartceps{} card", 
+                    "{X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card", 
                 }
             },
             c_unik_sauron = {
                 name = "The Sauron",
                 text = {
                     "Convert {C:green}#1# in #2#{} cards",
-                    "in deck to {X:unik_lartceps,C:unik_lartceps_inverse}Namta{} cards", 
+                    "in deck to {X:unik_lartceps_inverse,C:unik_lartceps1}Namta{} cards", 
                 }
             }
         },

@@ -1,5 +1,5 @@
 local lartceps_digital_hallucinations_compat = {
-	colour = G.C.UNIK_LARTCEPS,
+	colour = G.C.UNIK_LARTCEPS1,
 	loc_key = "unik_plus_lartceps",
 	create = function()
 		local ccard = create_card("unik_lartceps", G.consumeables, nil, nil, nil, nil, nil, "diha")
@@ -29,11 +29,11 @@ SMODS.Booster{
 		}
 	end,
 	ease_background_colour = function(self)
-		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_LARTCEPS)
+		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_LARTCEPS1)
         ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.RED, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
 	end,
     update_pack = function(self, dt)
-		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_LARTCEPS)
+		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_LARTCEPS1)
         ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.RED, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
 		SMODS.Booster.update_pack(self, dt)
 	end,
@@ -45,5 +45,8 @@ SMODS.Booster{
 	create_card = function(self, card, i)
         return create_card("unik_lartceps", G.pack_cards, nil, nil, true, nil, nil, "lartceps_bundle_pack")
 	end,
+	in_pool = function(self, args)
+        return false
+    end,
 	group_key = "k_unik_lartceps_pack",
 }

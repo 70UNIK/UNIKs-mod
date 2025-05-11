@@ -37,3 +37,37 @@ SMODS.Blind{
 --increases by 15% every time green goalpost is obtained.
 --Primarily designed to punish goalpost abuse to not trigger straddle (by extending victory reqs to unnatural values)
 --Will never spawn in endless
+function ease_victory_reqs(mod)
+     G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = function()
+          local ante_UI = G.hand_text_area.ante
+          mod = mod or 0
+          local text = '+'
+          local col = G.C.UNIK_LARTCEPS_INVERSE
+          if to_big(mod) < to_big(0) then
+              text = '-'
+              col = G.C.IMPORTANT
+          end
+          G.GAME.win_ante = G.GAME.win_ante + mod
+        --   G.GAME.round_resets.ante_disp = number_format(G.GAME.round_resets.ante)
+          G.GAME.win_ante = Big and (to_number(math.floor(to_big(G.GAME.win_ante)))) or math.floor(G.GAME.win_ante)
+          check_and_set_high_score('furthest_ante', G.GAME.round_resets.ante)
+          ante_UI.config.object:update()
+          G.HUD:recalculate()
+          --Popup text next to the chips in UI showing number of chips gained/lost
+          attention_text({
+            text = text..tostring(math.abs(mod)),
+            scale = 1, 
+            hold = 0.7,
+            cover = ante_UI.parent,
+            cover_colour = col,
+            align = 'cm',
+            })
+          --Play a chip sound
+            play_sound('highlight2', 0.5, 0.2)
+            play_sound('generic1')
+          return true
+      end
+    }))
+end

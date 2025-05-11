@@ -48,13 +48,13 @@ if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.uni
 end
 -- Green goalpost: 
 if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disabled) then
-    G.GAME.win_ante = G.GAME.win_ante + 3
+    ease_victory_reqs(3)
     --increase by 2 then later decrease by amount if victory.
     G.GAME.unik_goalpost_ante_win_increase = G.GAME.unik_goalpost_ante_win_increase + 3
     G.GAME.unik_moving_the_goalposts = nil
     G.GAME.blind.triggered = true
     G.GAME.blind:wiggle()
-    G.ROOM.jiggle = G.ROOM.jiggle + 3
+
 end
 -- The Vice: Halve interval of blind = 
 local upper2 = G.GAME.chips
@@ -92,7 +92,8 @@ target = 'functions/state_events.lua'
 pattern = '''G.GAME.win_notified = true'''
 position = 'before'
 payload = '''
-    G.GAME.win_ante = G.GAME.win_ante - G.GAME.unik_goalpost_ante_win_increase
+
+    ease_victory_reqs(-G.GAME.unik_goalpost_ante_win_increase)
     G.GAME.unik_goalpost_ante_win_increase = 0
 '''
 match_indent = true

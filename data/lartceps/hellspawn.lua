@@ -6,6 +6,9 @@ SMODS.Consumable{
 	pos = {x = 0, y = 1},
 	key = 'unik_hellspawn',
     config = {extra = {jokers = 20}},
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     can_use = function(self, card)
 		return true
 	end,

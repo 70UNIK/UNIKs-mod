@@ -5,6 +5,9 @@ SMODS.Consumable {
 	pos = {x = 3, y = 1},
 	key = 'unik_blank_lartceps',
     config = {},
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     can_use = function(self, card)
         return (card.area or {}) ~= G.consumeables
     end,
@@ -15,7 +18,7 @@ SMODS.Consumable {
             card2:add_to_deck()
             G.consumeables:emplace(card2)
         end
-    end
+    end,
 }
 
 --Originated from Polterworx,
@@ -30,7 +33,7 @@ function Card:use_consumeable(area, copier)
 			v.changing_from_blank = true
 			card_eval_status_text(v, 'extra', nil, nil, nil, {
 				message = localize('k_unik_copied'),
-				colour = G.C.UNIK_LARTCEPS,
+				colour = G.C.UNIK_LARTCEPS1,
 			})
             G.E_MANAGER:add_event(Event({
                 trigger = "after",

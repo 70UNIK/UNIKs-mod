@@ -11,6 +11,9 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     loc_vars = function(self, info_queue, center)
         if (SMODS.Mods["jen"] or {}).can_load then
             local tension = false

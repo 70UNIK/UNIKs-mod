@@ -36,13 +36,13 @@ SMODS.Joker {
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                card.ability.extra.faceCards = G.GAME.unik_face_cards
-                if Card.get_gameset(card) ~= "modest" then
-                    card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards/2)
-                else
-                    card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards*4/5)
+                -- card.ability.extra.faceCards = G.GAME.unik_face_cards
+                -- if Card.get_gameset(card) ~= "modest" then
+                --     card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards/2)
+                -- else
+                --     card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards*4/5)
         
-                end
+                -- end
                 card.ability.extra.entered = true
                 return true
             end
@@ -61,8 +61,17 @@ SMODS.Joker {
 	end,
     update = function(self,card,dt)
         if card.added_to_deck and card.ability.extra.entered == true then
-            card.ability.extra.faceCards = G.GAME.unik_face_cards
-            if card.ability.extra.selfDestruct == false and (card.ability.extra.faceCards <= 0 or card.ability.extra.faceCards < card.ability.extra.minFaceCards) then
+            local cards = 0
+            if G.playing_cards then
+                for k, v in pairs(G.playing_cards) do
+                    if v:is_face(true) then
+                        v:set_debuff(true)
+                        cards =cards + 1
+                    end
+                end
+            end
+            card.ability.extra.faceCards = cards
+            if card.ability.extra.selfDestruct == false and (cards <= card.ability.extra.minFaceCards) then
                 selfDestruction(card,"k_unik_plant_no_face",HEX("709284"))
                 card.ability.extra.selfDestruct = true
             end

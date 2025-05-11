@@ -9,6 +9,9 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     loc_vars = function(self, info_queue, center)
 		if not center.edition or (center.edition and not center.edition.unik_positive) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive

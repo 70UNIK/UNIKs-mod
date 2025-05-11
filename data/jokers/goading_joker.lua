@@ -28,13 +28,6 @@ SMODS.Joker {
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                card.ability.extra.cards = G.GAME.unik_spades
-                if Card.get_gameset(card) ~= "modest" then
-                    card.ability.extra.minCards = math.ceil(G.GAME.unik_spades/2)
-                else
-                    card.ability.extra.minCards = math.ceil(G.GAME.unik_spades*4/5)
-        
-                end
                 card.ability.extra.entered = true
                 return true
             end
@@ -42,7 +35,16 @@ SMODS.Joker {
     end,
     update = function(self,card,dt)
         if card.added_to_deck and card.ability.extra.entered == true then
-            card.ability.extra.cards = G.GAME.unik_spades
+            local cards = 0
+            if G.playing_cards then
+                for k, v in pairs(G.playing_cards) do
+                    if v:is_suit(card.ability.extra.suit, true, true) then
+                        v:set_debuff(true)
+                        cards =  cards + 1 
+                    end
+                end
+            end
+            card.ability.extra.cards = cards
             if card.ability.extra.selfDestruct == false and (card.ability.extra.cards <= 0 or card.ability.extra.cards < card.ability.extra.minCards) then
                 selfDestruction(card,"k_unik_goading_fuck_you",HEX("b95c96"))
                 card.ability.extra.selfDestruct = true

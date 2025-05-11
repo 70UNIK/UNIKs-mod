@@ -9,6 +9,9 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_namta
 		return {

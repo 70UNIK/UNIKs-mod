@@ -5,6 +5,9 @@ SMODS.Consumable{
 	pos = {x = 0, y = 0},
 	key = 'unik_garbage',
     config = {extra = {size = 100}},
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     can_use = function(self, card)
 		return true
 	end,

@@ -28,7 +28,7 @@ SMODS.Blind	{
     config = {},
 	showdown = true,
     boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
-    boss_colour = G.C.UNIK_LARTCEPS,
+    boss_colour = G.C.UNIK_LARTCEPS1,
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 16},
     vars = {},
@@ -79,7 +79,28 @@ SMODS.Blind	{
             --Booster will contain:
             --4 cursed Jokers
             --1 "tarot" to banish the rightmost joker
-            G.GAME.blind:alert_debuff(true)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = G.SETTINGS.GAMESPEED*0.05,
+                blockable = false,
+                func = (function()
+                        play_sound('whoosh1', 0.55, 0.62)
+                        for i = 1, 4 do
+                            local wait_time = (0.1*(i-1))
+                            G.E_MANAGER:add_event(Event({ blockable = false, trigger = 'after', delay = G.SETTINGS.GAMESPEED*wait_time,
+                            func = function()
+                                if i == 1 then G.GAME.blind:juice_up() end
+                                play_sound('cancel', 0.7 + 0.05*i, 0.7)
+                                return true end }))  
+                        end
+                        local hold_time = G.SETTINGS.GAMESPEED*(#G.GAME.blind.loc_debuff_text*0.035 + 1.3)
+                        local disp_text = G.GAME.blind:get_loc_debuff_text()
+                        attention_text({
+                            scale = 0.7, text = disp_text, maxw = 12, hold = hold_time, align = 'cm', offset = {x = 0,y = -1},major = G.play
+                        })
+                    return true
+                end)
+            }))
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 func = function()

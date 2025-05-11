@@ -6,6 +6,9 @@ SMODS.Consumable{
 	pos = {x = 1, y = 0},
 	key = 'unik_placard',
     config = {},
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     can_use = function(self, card)
 		return true
 	end,

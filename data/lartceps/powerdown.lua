@@ -18,6 +18,9 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
 	use = function(self, card, area, copier)
         local used_consumable = copier or card
         local targetsJokers = {}

@@ -6,6 +6,9 @@ SMODS.Consumable{
 	pos = {x = 5, y = 0},
 	key = 'unik_expiry',
     config = {},
+    no_doe = true,
+    no_grc = true,
+	no_ccd = true,
     can_use = function(self, card)
 		return true --Fallback for now if no vouchers exist, as the booster is unskippable (avoid softlock).
 	end,

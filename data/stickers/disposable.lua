@@ -3,6 +3,7 @@
 --Vouchers unredeem after 1 round
 --Consumables self destruct after 1 round and have 1 in 2 chance to do nothing on use
 --Cost is set to 0.
+--incompatible with eternal
 SMODS.Sticker{
     key="unik_disposable",
     badge_colour=HEX("ff0000"),

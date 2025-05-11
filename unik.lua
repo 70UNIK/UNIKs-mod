@@ -192,6 +192,9 @@ SMODS.ConsumableType {
 	shop_rate = 0.0,
 	loc_txt = {},
 	default = "c_unik_hellspawn", 
+	in_pool = function(self, args)
+        return false
+    end
 }
 
 
@@ -367,11 +370,11 @@ NFS.load(mod_path .. "data/jokers/impounded.lua")()
 NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
 NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_scale.lua")()
--- NFS.load(mod_path .. "data/jokers/the_plant.lua")() --Commented out since the debuff functionality is incredibly glitchy and somehow conflicfts with the existing card debuff blinds
--- NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
--- NFS.load(mod_path .. "data/jokers/broken_window.lua")()
--- NFS.load(mod_path .. "data/jokers/goading_joker.lua")() 
--- NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
+NFS.load(mod_path .. "data/jokers/the_plant.lua")() --Commented out since the debuff functionality is incredibly glitchy and somehow conflicfts with the existing card debuff blinds
+NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
+NFS.load(mod_path .. "data/jokers/broken_window.lua")()
+NFS.load(mod_path .. "data/jokers/goading_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
 NFS.load(mod_path .. "data/jokers/handcuffs.lua")() 
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")() 
