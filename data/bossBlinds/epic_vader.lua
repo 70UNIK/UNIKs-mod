@@ -70,6 +70,24 @@ SMODS.Blind{
                             Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
                             Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
                             Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
+                            Cryptid.misprintize(v, { min = 1e-300, max = 1e-300 }, true, true)
                             G.GAME.blind.triggered = true
                             G.GAME.blind:wiggle()
                             v:juice_up(0,0.5)
@@ -95,26 +113,7 @@ SMODS.Blind{
 				end
 			end
 		end
-        --maybe its funnier to have it spawn even without stone hands in deck in almanac
-        if G.GAME.modifiers.unik_legendary_at_any_time then
-            return true
-        end
-        if (SMODS.Mods["jen"] or {}).can_load then
-            return G.GAME.round > Jen.config.ante_threshold * 2
-        else
-
-            local hasExotic = false
-            if not G.jokers or not G.jokers.cards then
-                return false
-            end
-            
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
-                    hasExotic = true
-                end
-            end
-            return (G.GAME.round > 50 and hasExotic and Cryptid.gameset() ~= "modest") --only appear after round 50 in mainline cryptid, and you have an exotic at hand
-        end
+        return CanSpawnEpic()
 	end,
 }
 

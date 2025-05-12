@@ -4,7 +4,7 @@ SMODS.Blind{
     key = 'unik_vice',
     config = {},
 	boss = {
-		min = 3,
+		min = 2,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 19},

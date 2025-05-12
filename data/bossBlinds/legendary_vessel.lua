@@ -28,32 +28,7 @@ SMODS.Blind{
 	end,
     ignore_showdown_check = true,
     in_pool = function()
-        --do not appear in modest, scaling of blind size is enough of a challenge in vanilla.
-        -- it requires you to have an exotic joker on hand as well to spawn
-        local hasExotic = false
-        local straddle = 0
-        --if you increase straddle, these fuckers can spawn earlier!
-        if G.GAME.straddle then
-            straddle = G.GAME.straddle
-        end
-        if not G.jokers or not G.jokers.cards then
-			return false
-		end
-        for i = 1, #G.jokers.cards do
-            if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
-                hasExotic = true
-            end
-        end
-
-        --how this works:
-        --Disabled in modest
-        --In base cryptid, has to exceed round 100 with an exotic in hand to activate
-        --In almanac, just has to exceed round 100 - (straddle x 5)
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*5) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
-
-            return true
-        end
-        return false
+        return CanSpawnLegendary()
     end,
     --somehow if that happens, set the base to be 
     disable = function(self)

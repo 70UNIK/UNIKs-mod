@@ -193,7 +193,12 @@ payload = '''
 if
     (v.boss and (v.boss.epic or v.boss.legendary) and G.GAME.modifiers.unik_legendary_at_any_time)
 then
-    eligible_bosses[k] = true
+    if v.boss.epic and string.sub(k,1,6) == "bl_jen" then
+        eligible_bosses[k] = true
+    elseif (v.boss.epic or v.boss.legendary) then
+        local res, options = v:in_pool()
+        eligible_bosses[k] = res and true or nil
+    end
 end
 '''
 match_indent = true

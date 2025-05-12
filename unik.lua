@@ -212,19 +212,21 @@ NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")()
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --L A R T C E P S--
-NFS.load(mod_path .. "data/lartceps/placard.lua")() 
-NFS.load(mod_path .. "data/lartceps/powerdown.lua")() 
-NFS.load(mod_path .. "data/lartceps/brethren_moon.lua")() 
-NFS.load(mod_path .. "data/lartceps/trim.lua")() 
-NFS.load(mod_path .. "data/lartceps/expiry.lua")() 
-NFS.load(mod_path .. "data/lartceps/extortion.lua")() 
+if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/lartceps/placard.lua")() 
+	NFS.load(mod_path .. "data/lartceps/powerdown.lua")() 
+	NFS.load(mod_path .. "data/lartceps/brethren_moon.lua")() 
+	NFS.load(mod_path .. "data/lartceps/trim.lua")() 
+	NFS.load(mod_path .. "data/lartceps/expiry.lua")() 
+	NFS.load(mod_path .. "data/lartceps/extortion.lua")() 
 
-NFS.load(mod_path .. "data/lartceps/reeducation.lua")() 
-NFS.load(mod_path .. "data/lartceps/garbage.lua")() 
-NFS.load(mod_path .. "data/lartceps/hellspawn.lua")() 
-NFS.load(mod_path .. "data/lartceps/escalation.lua")() 
-NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
-NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
+	NFS.load(mod_path .. "data/lartceps/reeducation.lua")() 
+	NFS.load(mod_path .. "data/lartceps/garbage.lua")() 
+	NFS.load(mod_path .. "data/lartceps/hellspawn.lua")() 
+	NFS.load(mod_path .. "data/lartceps/escalation.lua")() 
+	NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
+	NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
+end
 --boosters
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
@@ -272,12 +274,14 @@ NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
 if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/bossBlinds/epic_legendary_check.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_shackle.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_decision.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_vice.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
@@ -300,7 +304,9 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
 	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
 end
-NFS.load(mod_path .. "data/enhancements/namta.lua")()	
+if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
+end
 
 -- JOKERS --
 --- Common ---

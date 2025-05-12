@@ -16,8 +16,11 @@ if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss 
     G.GAME.defeated_blinds["bl_unik_artisan_builds"] or 
     G.GAME.round_resets.blind_choices.Boss == 'bl_unik_artisan_builds' or
     G.GAME.defeated_blinds["bl_unik_epic_artisan"] or 
-    G.GAME.round_resets.blind_choices.Boss == 'bl_unik_epic_artisan'
-    
+    G.GAME.round_resets.blind_choices.Boss == 'bl_unik_epic_artisan' or 
+    G.GAME.round_resets.blind_choices.Big == 'bl_unik_epic_artisan' or 
+    G.GAME.round_resets.blind_choices.Small == 'bl_unik_epic_artisan' or 
+    G.GAME.round_resets.blind_choices.Big == 'bl_unik_artisan_builds' or  
+    G.GAME.round_resets.blind_choices.Small == 'bl_unik_artisan_builds'
     ) then
     G.GAME.unik_artisan_reroll_time = true
     

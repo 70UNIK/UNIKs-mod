@@ -31,26 +31,13 @@ SMODS.Blind{
 	end,
     in_pool = function()
         local straddle = 0
-        --if you increase straddle, these fuckers can spawn earlier!
         if G.GAME.straddle then
             straddle = G.GAME.straddle
         end
-        local hasExotic = false
-        if not G.jokers or not G.jokers.cards then
-			return false
-		end
-        for i = 1, #G.jokers.cards do
-            if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
-                hasExotic = true
-            end
-        end
-
-        if Cryptid.gameset() ~= "modest" and ((G.GAME.round >= 100 - (straddle*5) and (hasExotic or (SMODS.Mods["jen"] or {}).can_load)) or G.GAME.modifiers.unik_legendary_at_any_time) then
-            if G.GAME.unik_scores_really_big then
-                --print(G.GAME.unik_scores_really_big)
-                if G.GAME.unik_scores_really_big > 6 - straddle then
-                    return true
-                end
+        if G.GAME.unik_scores_really_big then
+            --print(G.GAME.unik_scores_really_big)
+            if G.GAME.unik_scores_really_big > 6 - straddle then
+                return CanSpawnLegendary()
             end
         end
         return false

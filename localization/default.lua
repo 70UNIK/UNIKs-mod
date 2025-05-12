@@ -136,12 +136,29 @@ return {
                 },
             },
             bl_unik_epic_sand={
-                name = "Juoksuhiekka",
+                name = "Juoksuhiekka", --quicksand
                 text = {
                     "#1#",
                     "#2#", 
                     "(Currently #3##4##5#)"
                 },
+            },
+            bl_unik_epic_hannibal = { --Always draw 3 cards after play and discard. If any cards are held in hand after blind defeat, die
+                name = "Nälkäinenkannibaali", --The hungry cannibal
+                text = {
+                    "After Play or Discard,",
+                    "always draw 3 cards",
+                    "If any card is held after",
+                    "Blind Defeat, die"
+                },
+            },
+            bl_unik_epic_vice={ --The next 5 boss blinds become Epic+ Blinds (Vice excluded legendary blind restrictions still apply), increases by ^1.1, rounded up per each epic vice encountered.
+                name = "Tukehtumisenpahe", --vice of suffocation
+                text = {
+                    "The next #1# Blinds",
+                    "become Epic+ Blinds",
+                    "(Tukehtumisenpahe Excluded)",
+                }
             },
             bl_unik_epic_vader={ --Balatro goes kino
                 name = "Telekineettinentyranni", --Telikinetic Tyrant
@@ -1829,6 +1846,7 @@ return {
             k_unik_tag="tags",
             k_unik_epic_sand_almanac_1 = "Increase blind size",
             k_unik_epic_sand_almanac_2 = "by {Tags held}1.1",
+            k_unik_epic_vice_placeholder = "(5, increase by ^1.05 per Tukehtumisenpahe)"
 
         },
         high_scores={},

@@ -337,7 +337,7 @@ function GhostTrap1(self)
     for x, w in pairs(G.jokers.cards) do
         if w.config.center.rarity == "cry_cursed" and not w.ability.extra.getting_captured then
             --Add to value
-            table.insert(self.ability.extra.cursed_joker_list,w)
+            table.insert(self.ability.extra.cursed_joker_list,w.config.center.key)
             --set to list amount
             self.ability.extra.cursed_jokers = #self.ability.extra.cursed_joker_list
             w.ability.extra.getting_captured = true

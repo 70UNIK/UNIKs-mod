@@ -123,25 +123,9 @@ SMODS.Blind{
         if not G.jokers or not G.jokers.cards then
             return false
         end
-        --maybe its funnier to have it spawn even without stone hands in deck in almanac
-        if G.GAME.modifiers.unik_legendary_at_any_time and G.jokers then
-            return (#Cryptid.advanced_find_joker(nil, nil, "e_negative", nil, true) ~= 0 or G.jokers.config.card_limit - #G.jokers.cards > 0)
+        if #Cryptid.advanced_find_joker(nil, nil, "e_negative", nil, true) ~= 0 or G.jokers.config.card_limit - #G.jokers.cards > 0 then
+            return CanSpawnEpic()
         end
-        if (SMODS.Mods["jen"] or {}).can_load then
-            return G.GAME.round > Jen.config.ante_threshold * 2
-        else
-
-            local hasExotic = false
-            if not G.jokers or not G.jokers.cards then
-                return false
-            end
-            
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i].config.center.rarity == "cry_exotic" then
-                    hasExotic = true
-                end
-            end
-            return (G.GAME.round > 50 and hasExotic and Cryptid.gameset() ~= "modest" and (#Cryptid.advanced_find_joker(nil, nil, "e_negative", nil, true) ~= 0 or G.jokers.config.card_limit - #G.jokers.cards > 0)) --only appear after round 50 in mainline cryptid, and you have an exotic at hand
-        end
+        return false
 	end,
 }
