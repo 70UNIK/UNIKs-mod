@@ -124,7 +124,7 @@ SMODS.Blind	{
                         })
                     end
                 else
-                    if G.GAME.ante_rerolls and G.GAME.ante_rerolls < maxRerolls^1.1 then --crank it up to 30
+                    if G.GAME.ante_rerolls and G.GAME.ante_rerolls < math.ceil(maxRerolls^1.1) then --crank it up to 30
                         --kill player
                         local text = localize('k_unik_artisan_builds_epic_lose')
                         attention_text({

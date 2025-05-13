@@ -1187,8 +1187,15 @@ return {
                     "If hand contains exactly 6 cards",
                     "All scored cards become Tainted Ceramic",
                 }
+            },
+            j_unik_double_container = {
+                name = "Double Container",
+                text = {
+                    "{C:attention}Retrigger{} all {C:attention}held{} in",
+                    "consumable effects {C:attention}#1#{} time(s)",
+                    "{C:inactive,s:0.7}(Does not count for using consumables)",
+                }
             }
-            
 
         },
         Other={			

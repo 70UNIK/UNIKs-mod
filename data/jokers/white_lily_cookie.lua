@@ -205,56 +205,62 @@ SMODS.Joker {
                 }))
             end
         end
-        if context.cry_start_dissolving and not context.repetition and not context.blueprint and context.card == card and card.ability.extra.sold == false and card.ability.extra.copying == false then
-            card.ability.extra.copying = true
-            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-            --do not make multiple clones of her! AND DO NOT COPY IF THE SOUL IS BANNED!
-            if card.ability.extra.commits_left < 0 or (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul)) then
-                play_sound('cancel', 1, 0.7)
-                card_eval_status_text(card, "extra", nil, nil, nil, {
-                    message = localize("k_extinct_ex"),
-                    colour = G.C.BLACK,
-                    card = card,
-                })
-                if G.GAME.banned_keys.c_jen_soul_omega then
-                    G.GAME.ban_spawn_on_bala_soul = true
-                end
-            elseif Card.get_gameset(card) ~= "modest" then
-                card_eval_status_text(card, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = {
-                            number_format(to_big(card.ability.extra.Emult)),
-                        },
-                    }),
-                    colour = G.C.DARK_EDITION,
-                    card = card,
-                })
-            else
-                card_eval_status_text(card, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_xmult",
-                        vars = {
-                            number_format(to_big(card.ability.extra.x_mult)),
-                        },
-                    }),
-                    colour = G.C.MULT,
-                    card = card,
-                })
-            end 
-            if (card.ability.extra.commits_left >= 0 and not (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul))) then
-                White_lily_copy(card)
-            end
-		end
         --selling her will NOT clone her
         if context.selling_self and not context.repetition and not context.blueprint then
             card.ability.extra.sold = true
         end
     end,
 }
+
+local oldfunc = Card.start_dissolve
+function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+    if self.config.center.key == "j_unik_white_lily_cookie" then
+        self.ability.extra.copying = true
+        self.ability.extra.Emult = self.ability.extra.Emult + self.ability.extra.Emult_mod
+        self.ability.extra.x_mult = self.ability.extra.x_mult + self.ability.extra.x_mult_mod
+        --do not make multiple clones of her! AND DO NOT COPY IF THE SOUL IS BANNED!
+        if self.ability.extra.commits_left < 0 or (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul)) then
+            play_sound('cancel', 1, 0.7)
+            card_eval_status_text(self, "extra", nil, nil, nil, {
+                message = localize("k_extinct_ex"),
+                colour = G.C.BLACK,
+                card = self,
+            })
+            if G.GAME.banned_keys.c_jen_soul_omega then
+                G.GAME.ban_spawn_on_bala_soul = true
+            end
+        elseif Card.get_gameset(self) ~= "modest" then
+            card_eval_status_text(self, "extra", nil, nil, nil, {
+                message = localize({
+                    type = "variable",
+                    key = "a_powmult",
+                    vars = {
+                        number_format(to_big(self.ability.extra.Emult)),
+                    },
+                }),
+                colour = G.C.DARK_EDITION,
+                card = self,
+            })
+        else
+            card_eval_status_text(self, "extra", nil, nil, nil, {
+                message = localize({
+                    type = "variable",
+                    key = "a_xmult",
+                    vars = {
+                        number_format(to_big(self.ability.extra.x_mult)),
+                    },
+                }),
+                colour = G.C.MULT,
+                card = self,
+            })
+        end 
+        if (self.ability.extra.commits_left >= 0 and not (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul))) then
+            White_lily_copy(self)
+        end
+    end
+    local vars = oldfunc(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
+    return vars 
+end
 
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_white_lily_cookie"] = {

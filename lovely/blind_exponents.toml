@@ -48,9 +48,9 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = '''        ability_text[1] and {n=G.UIT.R, config={align = "cm", padding = 0.08, colour = mix_colours(blind.boss_colour, G.C.GREY, 0.4), r = 0.1, emboss = 0.05, minw = 2.5, minh = 0.9}, nodes=ability_text} or nil
-      }}'''
-position = "after"
+pattern = '''  else
+    blind_text[#blind_text + 1] ='''
+position = "before"
 payload = '''
 end
 '''

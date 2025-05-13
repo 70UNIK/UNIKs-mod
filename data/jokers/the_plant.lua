@@ -33,16 +33,19 @@ SMODS.Joker {
     end,
     immutable = true,
     add_to_deck = function(self, card, from_debuff)
+        local cards = 0
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v:is_face(true) then
+                    cards =  cards + 1 
+                end
+            end
+        end
+        card.ability.extra.minFaceCards = math.floor(cards/2)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
-                -- card.ability.extra.faceCards = G.GAME.unik_face_cards
-                -- if Card.get_gameset(card) ~= "modest" then
-                --     card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards/2)
-                -- else
-                --     card.ability.extra.minFaceCards = math.ceil(G.GAME.unik_face_cards*4/5)
-        
-                -- end
+
                 card.ability.extra.entered = true
                 return true
             end

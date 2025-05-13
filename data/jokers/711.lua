@@ -23,7 +23,7 @@ SMODS.Joker {
 	-- This card's position on the atlas, starting at {x=0,y=0} for the very top left.
 	pos = { x = 0, y = 0 },
 	-- Cost of card in shop.
-	cost = 7,
+	cost = 6,
 	blueprint_compat = true,
 	perishable_compat = true,
 	demicoloncompat = true,

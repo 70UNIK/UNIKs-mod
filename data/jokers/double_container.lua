@@ -1,0 +1,56 @@
+-- --Retrigger all held in consumeable effects (not using consumeables)
+-- --Observatory, moonlight cookie/celestial of chaos, scratch, maybe even color cards???????
+-- SMODS.Joker {
+-- 	-- How the code refers to the joker.
+-- 	key = 'unik_double_container',
+--     atlas = 'placeholders',
+--     rarity = 2,
+-- 	pos = { x = 1, y = 0 },
+-- 	-- Modest
+--     config = { 
+--         extra = { retriggers = 1},
+--         immutable = { max_retriggers = 50 },
+--     },
+--     cost = 6,
+--     blueprint_compat = true,
+-- 	perishable_compat = true,
+-- 	eternal_compat = true,
+--     loc_vars = function(self, info_queue, center)
+-- 		return { vars = {center.ability.extra.retriggers} }
+-- 	end,
+--     in_pool = function(self, args)
+--         if 
+--             #SMODS.find_card("j_unik_moonlight_cookie") > 0 or 
+--             #SMODS.find_card("j_unik_scratch") > 0 or 
+--             G.GAME.used_vouchers.v_observatory 
+--             then
+-- 			return true
+-- 		end
+-- 		return false
+--     end,
+--     calculate = function(self, card, context)
+-- 		if (context.joker_main) then
+--             for i,v in pairs(G.GAME.used_vouchers) do
+--                 if G.GAME.used_vouchers[i].
+--                 SMODS.calculate_effect({
+--                     message = localize({
+--                         type = "variable",
+--                         key = "a_powchips",
+--                         vars = { number_format(to_big(card.ability.extra.Echips)) },
+--                     }),
+--                     Echip_mod = card.ability.extra.Echips,
+--                     colour = G.C.DARK_EDITION,
+--                 }, G.GAME.used_vouchers[i])
+--             end
+-- 			return {
+--                 message = localize("k_again_ex"),
+--                 repetitions = to_number(
+--                     math.min(card.ability.immutable.max_retriggers, card.ability.extra.retriggers)
+--                 ),
+--                 card = card,
+--             }
+-- 		end
+-- 	end
+-- }
+
+--THIS IS TOO PAINFUL. ABORTING

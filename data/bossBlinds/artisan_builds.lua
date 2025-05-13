@@ -50,7 +50,9 @@ local rerollin = G.FUNCS.reroll_shop
 function G.FUNCS:reroll_shop()
     if G.GAME.unik_artisan_reroll_time then
         G.GAME.ante_rerolls = G.GAME.ante_rerolls + 1
-        
+        print(G.GAME.global_rerolls)
+        print(G.GAME.ante_rerolls)
+        print(G.GAME.global_rerolls_pause_val)
     end
     G.GAME.global_rerolls = G.GAME.global_rerolls + 1
     local vars = rerollin(self)

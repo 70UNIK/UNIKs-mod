@@ -25,6 +25,15 @@ SMODS.Joker {
     end,
     immutable = true,
     add_to_deck = function(self, card, from_debuff)
+        local cards = 0
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v:is_suit(card.ability.extra.suit, true, true) then
+                    cards =  cards + 1 
+                end
+            end
+        end
+        card.ability.extra.minCards = math.floor(cards/2)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
