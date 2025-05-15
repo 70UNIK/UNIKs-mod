@@ -2,7 +2,7 @@
 version = "0.0.1"
 dump_lua = true
 priority = 999
-### disposable/niko functionality
+### disposable/niko/bloated functionality
 ## stolen from cryptid code:
 
 # initiate variables
@@ -131,6 +131,26 @@ if self.ability.unik_disposable or self.ability.unik_niko then
                     colour = G.C.RED,
                })
             end
+            return true
+        end
+    end
+elseif self.edition and self.edition.unik_bloated then
+    if self.ability and not self.ability.will_pop then
+        if (pseudorandom('bloated_consumeable') < G.GAME.probabilities.normal/G.GAME.unik_consumeable_niko_death_odds) then
+            local gone = true
+            self.ability.extinct = true
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    self:bloated_pop()
+                    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+                        func = function()
+                            if self.area then self.area:remove_card(self) end
+                            
+                            self = nil
+                    return true; end}))
+                    return true
+                end
+            }))
             return true
         end
     end

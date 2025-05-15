@@ -1,0 +1,3 @@
+--fuzzy:
+-- -10 - 0 Mult, -50 - 0 Chips
+--Sound is literally from yoshis island

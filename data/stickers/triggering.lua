@@ -4,13 +4,24 @@
 --Vouchers: Immediately purchased when possible in shop (not implemented)
 --Jokers: Immediately sold when selected (when possible)
 --incompatible with eternal
+function Card:set_triggering(triggering)
+	self.ability.unik_triggering = triggering
+    self:set_cost()
+end
+local setCosta = Card.set_cost
+function Card:set_cost()
+    if self.ability.disposable then
+        self.cost = 0
+        self.sell_cost = 0
+    end
+    setCosta(self)
+end
 SMODS.Sticker{
     key="unik_triggering",
     badge_colour=HEX("db5700"),
     atlas = 'unik_stickers', 
     pos = { x = 2, y = 1 },
     rate = 0.0,
-    no_sticker_sheet = true,
     loc_vars = function(self, info_queue, card)
 		if card.ability.consumeable then
 			return { key = "unik_triggering_consumeable"}

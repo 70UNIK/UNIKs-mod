@@ -462,6 +462,21 @@ return {
                     "{C:red}#1#{} hand size",
                 },
             },
+            e_unik_bloated={
+                name="Bloated",
+                text={
+                    "{C:green}#1# in #2#{} chance card is",
+                    "{E:2,C:red}destroyed{} on trigger",
+                    "{C:attention}bypassing{} {C:purple}Eternals{}",
+                }
+            },
+            e_unik_bloated_consumeable={
+                name="Bloated",
+                text={
+                    "{C:green}#1# in #2#{} chance card",
+                    "does {E:2,C:red}nothing{} on use",
+                }
+            }
         },
         Enhanced={
             --ALMANAC + BUFFOONERY EXCLUSIVE ENHANCEMENTS--
@@ -1405,7 +1420,26 @@ return {
 				},
 			},
         },
-        Stake={},
+        Stake={
+            stake_unik_shitty = {
+				name = "Shitty Stake",
+				colour = "Shitty", --this is used for auto-generated sticker localization
+				text = {
+					"Jokers can be {C:attention}Disposable{}",
+					"{s:0.8,C:inactive}({s:0.8,C:red}Destroyed {s:0.8,C:inactive}after round){}",
+				},
+			},
+            stake_unik_persimmon = {
+				name = "Persimmon Stake",
+				colour = "Persimmon", --this is used for auto-generated sticker localization
+				text = {
+					"All cards can be {C:attention}Triggering{}",
+					"{s:0.8,C:inactive}({s:0.8,C:green}1 in 8{s:0.8,C:inactive} chance to {s:0.8,C:attention}play{s:0.8,C:inactive} cards when selected){}",
+                    "{s:0.8,C:inactive}(Consumeables automatically {s:0.8,C:attention}trigger{s:0.8,C:inactive} when possible){}",
+                    "{s:0.8,C:inactive}(Jokers automatically {s:0.8,C:red}sell {s:0.8,C:inactive}when selected){}",
+				},
+			},
+        },
         Tag={			
             --to even be remotely safe to use, you need yes nothing! Yes I am making more stuff that reles on yes nothing since there isnt enough stuff that needs it (wheel, tornado, glass cards,cavendish,banana tag)
             tag_unik_demon = {
@@ -1859,6 +1893,8 @@ return {
         high_scores={},
         labels={
             unik_positive="Positive",
+            unik_bloated="Bloated",
+            unik_fuzzy="Fuzzy",
             unik_depleted = "Depleted",
             unik_impounded = "Impounded",
             unik_niko = "Niko",

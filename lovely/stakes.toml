@@ -1,0 +1,59 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### Add to cryptid function
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''if
+				G.GAME.modifiers.enable_rentals_in_shop'''
+position = "before"
+payload = '''
+if G.GAME.modifiers.enable_disposable_in_shop then
+    local binning = pseudorandom("unik_shitty_sfff" .. (key_append or "") .. G.GAME.round_resets.ante)
+    if G.GAME.modifiers.cry_eternal_perishable_compat and binning > 0.7 then
+        card:set_disposable(true)
+    elseif not card.ability.perishable and not card.ability.eternal and binning > 0.7 then
+        card:set_disposable(true)
+    end
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''if (card.ability.set == "Code") and G.GAME.used_vouchers.v_cry_quantum_computing then'''
+position = "before"
+payload = '''
+if G.GAME.modifiers.enable_triggering_in_shop then
+    if (area == G.shop_jokers) or (area == G.shop_booster) or (area == G.pack_cards) then
+        local binning = pseudorandom("unik_triggering_sfff" .. (key_append or "") .. G.GAME.round_resets.ante)
+        if G.GAME.modifiers.cry_eternal_perishable_compat and binning > 0.7 then
+            card:set_triggering(true)
+        elseif not card.ability.eternal then
+            if binning > 0.7 then
+                card:set_triggering(true)
+            end
+        end
+    end
+
+end
+
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/stake.lua"]'''
+pattern = '''applied_stakes = { "gold" },
+	prefix_config = { applied_stakes = { mod = false } },'''
+position = "at"
+payload = '''
+applied_stakes = { "unik_persimmon" },
+above_stake = "unik_persimmon",
+prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+'''
+match_indent = true

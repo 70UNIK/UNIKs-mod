@@ -54,6 +54,18 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "unik_sticker_stakes",
+	path = "unik_sticker_stakes.png",
+	px = 71,
+	py = 95
+}
+SMODS.Atlas {
+	key = "unik_stakes",
+	path = "unik_stakes.png",
+	px = 29,
+	py = 29
+}
 --hooks--
 ---happiness is mandatory ---
 SMODS.Atlas({ 
@@ -205,9 +217,12 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+
+NFS.load(mod_path .. "data/stakes/shitty.lua")() 
+NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
 --Stakes
 --Persimmon Stake: All cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables
---Shitty Stake: All cards can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable 
+--Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable 
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
@@ -299,6 +314,7 @@ if unik_config.unik_legendary_blinds then
 end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
+NFS.load(mod_path .. "data/editions/bloated.lua")()
 -- ENHANCEMENTS --
 -- Requires both buffoonery and jen's almanac
 if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then

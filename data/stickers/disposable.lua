@@ -4,6 +4,14 @@
 --Consumables self destruct after 1 round and have 1 in 2 chance to do nothing on use
 --Cost is set to 0.
 --incompatible with eternal
+function Card:set_disposable(disposable)
+	self.ability.unik_disposable = nil
+    if self.config.center.perishable_compat then 
+        self.ability.disposable = disposable
+        self:set_cost()
+    end
+    
+end
 SMODS.Sticker{
     key="unik_disposable",
     badge_colour=HEX("ff0000"),
