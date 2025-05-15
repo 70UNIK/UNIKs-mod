@@ -12,7 +12,7 @@ SMODS.Edition({
 	order = 66666,
 	weight = 0, -- should not appear normally in stores as its a detrimental one
 	shader = "positive", --placeholder for now until I program one. It should have negative shine, but with a polychromesque shine from normal to overlay to a bit of negative, just to show its the opposite
-	extra_cost = -2, --Its a detrimental edition, hence lower cost
+	extra_cost = -4, --Its a detrimental edition, hence lower cost
     apply_to_float = true,
 	sound = {
 		sound = "unik_positive",
@@ -40,6 +40,7 @@ SMODS.DrawStep {
         if (self.edition and self.edition.unik_positive) then
             self.children.center:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
         end
+
     end,
     conditions = { vortex = false, facing = 'front' },
 }

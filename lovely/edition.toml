@@ -184,3 +184,12 @@ unik_disposable = { atlas = "unik_sticker_deck", pos = { x = 1, y = 0 } },
 unik_niko = { atlas = "unik_sticker_deck", pos = { x = 2, y = 0 } },
 unik_impounded = { atlas = "unik_sticker_deck", pos = { x = 0, y = 1 } },'''
 match_indent = true
+
+## https://discord.com/channels/1116389027176787968/1233186615086813277/1370611144997212230
+[[patches]]
+[patches.pattern]
+target = "engine/sprite.lua"
+pattern = '''G.SHADERS[_shader or 'dissolve']:send("time",123.33412*(_draw_major.ID/1.14212 or 12.5123152)%3000)'''
+position = "at"
+payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.TIMERS.REAL)'''
+match_indent = true

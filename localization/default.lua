@@ -476,7 +476,22 @@ return {
                     "{C:green}#1# in #2#{} chance card",
                     "does {E:2,C:red}nothing{} on use",
                 }
-            }
+            },
+            e_unik_fuzzy = {
+				name = "Fuzzy",
+				text = {
+					"{E:2,C:red}??????{}",
+				},
+			},
+            e_unik_corrupted = {
+				name = "Corrupted",
+				text = {
+					"All values on this card",
+					"are {C:dark_edition}randomized{}",
+					"between {C:red}X0.75{} and {C:red}X0.1{}",
+					"{C:inactive}(If possible){}",
+				},
+			},
         },
         Enhanced={
             --ALMANAC + BUFFOONERY EXCLUSIVE ENHANCEMENTS--
@@ -1895,6 +1910,7 @@ return {
             unik_positive="Positive",
             unik_bloated="Bloated",
             unik_fuzzy="Fuzzy",
+            unik_corrupted="Corrupted",
             unik_depleted = "Depleted",
             unik_impounded = "Impounded",
             unik_niko = "Niko",

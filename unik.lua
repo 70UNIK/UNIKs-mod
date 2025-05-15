@@ -315,6 +315,8 @@ end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/editions/bloated.lua")()
+NFS.load(mod_path .. "data/editions/fuzzy.lua")()
+NFS.load(mod_path .. "data/editions/corrupted.lua")()
 -- ENHANCEMENTS --
 -- Requires both buffoonery and jen's almanac
 if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
