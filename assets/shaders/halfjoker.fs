@@ -10,10 +10,10 @@
 // Values of this variable:
 // self.ARGS.send_to_shader[1] = math.min(self.VT.r*3, 1) + (math.sin(G.TIMERS.REAL/28) + 1) + (self.juice and self.juice.r*20 or 0) + self.tilt_var.amt
 // self.ARGS.send_to_shader[2] = G.TIMERS.REAL
-extern PRECISION vec2 corrupted;
+extern PRECISION vec2 halfjoker;
 
 extern PRECISION number dissolve;
-extern PRECISION float time;
+extern PRECISION number time;
 // [Note] sprite_pos_x _y is not a pixel position!
 //        To get pixel position, you need to multiply  
 //        it by sprite_width _height (look flipped.fs)
@@ -105,101 +105,54 @@ vec3 HueShift(vec3 colour,float shift)
     return ToRGB(yiq);
 }
 
-vec4 hash42(vec2 p)
-{
-	vec4 p4 = fract(vec4(p.xyxy) * vec4(.1031, .1030, .0973, .1099));
-    p4 += dot(p4, p4.wzxy+33.33);
-    return fract((p4.xxyz+p4.yzzw)*p4.zywx);
-}
-
-float qp(float x, float p)
-{
-    return floor((x)/(p))*(p);
-}
-// This is what actually changes the look of card
-
-//Pibbyesque effect:
-//https://www.shadertoy.com/view/ttBSDR
-//https://www.shadertoy.com/view/43cfWB
-//Shader by Samario
 float rand(vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
 }
+// extracted and adapted from "Lover" by wyatt. https://shadertoy.com/view/fsjyR3
+
+float H (vec2 p) {                             // hash
+	vec3 t  = fract(vec3(p.xyx) * .1031);
+    t += dot(t, t.yzx + 33.33);
+    return fract((t.x + t.y) * t.z);
+}
+
+float N (vec2 p) {                             // fbm noise
+    p *= .1;
+    float o,i;
+    for (; ++i < 9.; p *= 1.1 ) {
+        vec4 w = vec4( floor(p), ceil(p)  );  
+        vec2 f = fract(p);
+        o += mix(mix( H(w.xy), H(w.xw), f.y),
+                 mix( H(w.zy), H(w.zw), f.y), 
+                 f.x )                         // noise(p) 
+          + .2 / exp( 3.*abs(sin(.2*p.x+.1*p.y) ));
+    }
+    return o/4.;
+}
+
+// This is what actually changes the look of card
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
+    vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-    //copied from glitched code; only change is a floor function to make the glitchyness blockier
-    vec2 uv =  (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
-    //Variables
-    const vec2 z = vec2(1);
-    const float complexity =3.;
-    const float complexity2 =2.0;
-    const float density = 0.5;
-    const float speed = 10.;
+    float blocksize = 1.;
 
-    const float PI = atan(1.)*4.;
-    //varibles 2
+    vec4 img = Texel(texture, texture_coords);
+    float originalshape = img.a;
     
-    vec2 texCoordsR = texture_coords;
-    vec2 texCoordsG = texture_coords;
-    vec2 texCoordsB = texture_coords;
-
-    float iTime = tan(2. * time);
-    float block_size = 16.;
-    texCoordsR.x += (0.004 * rand(vec2(iTime, floor(uv.y * block_size)))) - 0.002 + (corrupted.x * 0.0000001);
-    texCoordsG.x += (0.007 * rand(vec2(iTime*2., floor(uv.y * block_size)))) - 0.0035 + (corrupted.x * 0.0000001);
-    texCoordsB.x += (0.010 * rand(vec2(iTime*3., floor(uv.y * block_size)))) - 0.005 + (corrupted.x * 0.0000001);
-
-    vec4 texR = Texel(texture, texCoordsR);
-    vec4 texG = Texel(texture, texCoordsG);
-    vec4 texB = Texel(texture, texCoordsB);
-
-    vec4 tex = vec4(texR.r, texG.g, texB.b, texR.a);
-    vec4 texToCorrupt = vec4(1.0,1.0,1.0,texR.a);
-
-    //PIBBY APOCALYPSE
-
-    float t = time+1e2;
-    uv *= z;
-    uv += floor(time*speed)*z;
-    float s = 1.;
-    for (float i = 1.;i <= complexity; ++ i) {
-        vec2 c = floor(uv+i);
-        vec4 h = hash42(c);
-        vec2 p = fract(uv+i+qp(t,h.z+1.)*h.y);
-        uv+= p*h.z*h.xy*vec2(s,2.);
-        uv *= 2.;
-        if (i < 2. || h.w > density) {
-            texToCorrupt = h / texToCorrupt;
-        }
-    }
-    for (float i = 1.;i <= complexity2; ++ i) {
-        vec2 c = floor(uv-i);
-        vec4 h = hash42(c);
-        vec2 p = fract(uv+i+qp(t,h.z+1.)*h.y);
-        uv+= p*h.z*h.xy*vec2(s,2.);
-        uv *= 2.;
-        if ((texToCorrupt.r <= 0.1 || texToCorrupt.g <= 0.1 || texToCorrupt.b <= 0.1) && (i < 2. || h.w > density)) {
-            texToCorrupt = h;
-
-        }
-    }
-    for (float i = 1.;i <= complexity; ++ i) {
-        vec2 c = floor(uv+i);
-        vec4 h = hash42(c);
-        vec2 p = fract(uv+i+qp(t,h.z+1.)*h.y);
-        uv+= p*h.z*h.xy*vec2(s,2.);
-        uv *= 2.;
-        if ((texToCorrupt.r <= 0.2 || texToCorrupt.g <= 0.1 || texToCorrupt.b <= 0.2) && (i < 2. || h.w > density)) {
-            texToCorrupt= texToCorrupt * 0.1;
-        }
-    }
+    float shred1 = (mod(uv.x*0.15,0.02) - mod(-uv.x*0.2,0.06) + mod(-uv.x*0.25,sin(uv.y)*0.1) - mod(floor(sin(uv.x)*2.5),0.9) + mod(uv.x*0.1,0.01)) + uv.x * 0.1 + 0.6 + halfjoker.x*0.00000000000001;
+    float shred2 = (mod(uv.x*0.1,0.01) - mod(-uv.x*0.1,0.04) + mod(-uv.x*0.5,sin(uv.y)*0.1) - mod(floor(sin(uv.x)*2.),0.23) + mod(uv.x*0.1,0.02)) + uv.x * 0.05 + 0.65;
     
-    if (texToCorrupt.r >= 0.4 && texToCorrupt.g  >= 0.4 && texToCorrupt.b  >= 0.4){
-        texToCorrupt = mod(tex,texToCorrupt*2.);
+    if (uv.y > shred1){
+        img = vec4(0.,0.,0.,0.);
     }
-    texToCorrupt.a = 1.0 * tex.a;
-	return dissolve_mask(texToCorrupt, texture_coords, uv);
+    else if (uv.y > shred2 - 0.2){ 
+        vec4 newShape = vec4( .8 +.3* ( N(texture_coords+vec2(1,0)) - N(texture_coords-vec2(1,0)) ) );
+        img = newShape*originalshape;
+        img.a = 1.0 *originalshape;
+    }
+	
+    return dissolve_mask(img, texture_coords, uv);
 
 }
 

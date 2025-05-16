@@ -193,3 +193,33 @@ pattern = '''G.SHADERS[_shader or 'dissolve']:send("time",123.33412*(_draw_major
 position = "at"
 payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.TIMERS.REAL)'''
 match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/card_draw.lua"]'''
+pattern = '''if self.edition then'''
+position = "before"
+payload = '''
+end
+'''
+match_indent = true
+##Half edition: Do not draw the base floating soul sprite if an edition is applied and apply_to_float is true
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/card_draw.lua"]'''
+pattern = '''if type(self.config.center.soul_pos.draw) == 'function' then'''
+position = "before"
+payload = '''
+local edition_soul_sprite = false
+if self.edition then 
+    for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+        if v.apply_to_float then
+            edition_soul_sprite = true
+        end
+    end
+end
+if not edition_soul_sprite then
+'''
+match_indent = true
+

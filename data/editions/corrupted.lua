@@ -19,7 +19,7 @@ SMODS.Edition({
     disable_base_shader = true,
     no_shadow = true,
 	sound = {
-		sound = "pibby_glitch",
+		sound = "unik_pibby_glitch",
 		per = 1,
 		vol = 2,
 	},

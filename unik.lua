@@ -315,6 +315,7 @@ end
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/editions/bloated.lua")()
+NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 -- ENHANCEMENTS --

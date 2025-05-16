@@ -492,6 +492,15 @@ return {
 					"{C:inactive}(If possible){}",
 				},
 			},
+            e_unik_halfjoker = {
+                name = "Half",
+                text = {
+                    "Card is {E:2,C:red}debuffed{}",
+                    "when {C:attention}4 or more{}",
+                    "cards are played",
+                    "or selected",
+                }
+            }
         },
         Enhanced={
             --ALMANAC + BUFFOONERY EXCLUSIVE ENHANCEMENTS--
@@ -1799,6 +1808,7 @@ return {
             k_unik_reed_part1 = "a",
             k_unik_reed_part2 = "or",
             k_unik_epic_sand_placeholder = "(Tags held)",
+            k_unik_half = "Half",
             
 
             --Godsmarble ramirez family members
@@ -1908,6 +1918,7 @@ return {
         high_scores={},
         labels={
             unik_positive="Positive",
+            unik_halfjoker = "Half",
             unik_bloated="Bloated",
             unik_fuzzy="Fuzzy",
             unik_corrupted="Corrupted",

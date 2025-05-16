@@ -74,14 +74,3 @@ SMODS.Consumable{
         )
     end
 }
-
-SMODS.DrawStep({
-	key = "lartceps_shader",
-	order = 5,
-	func = function(self)
-		if self.ability.set == "unik_lartceps" and (self.config.center.discovered or self.bypass_discovery_center) then
-            self.children.center:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
-        end
-	end,
-	conditions = { vortex = false, facing = "back" },
-})
