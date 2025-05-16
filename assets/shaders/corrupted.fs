@@ -130,6 +130,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 
     //copied from glitched code; only change is a floor function to make the glitchyness blockier
     vec2 uv =  (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
+    vec2 newuv = uv;
     //Variables
     const vec2 z = vec2(1);
     const float complexity =3.;
@@ -145,6 +146,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     vec2 texCoordsB = texture_coords;
 
     float iTime = tan(2. * time);
+    float totalTime = time;
     float block_size = 16.;
     texCoordsR.x += (0.004 * rand(vec2(iTime, floor(uv.y * block_size)))) - 0.002 + (corrupted.x * 0.0000001);
     texCoordsG.x += (0.007 * rand(vec2(iTime*2., floor(uv.y * block_size)))) - 0.0035 + (corrupted.x * 0.0000001);
@@ -159,37 +161,37 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 
     //PIBBY APOCALYPSE
 
-    float t = time+1e2;
-    uv *= z;
-    uv += floor(time*speed)*z;
+    float t = totalTime+100;
+    newuv = newuv * z;
+    newuv = newuv+ floor(totalTime*speed)*z;
     float s = 1.;
     for (float i = 1.;i <= complexity; ++ i) {
-        vec2 c = floor(uv+i);
+        vec2 c = floor(newuv+i);
         vec4 h = hash42(c);
-        vec2 p = fract(uv+i+qp(t,h.z+1.)*h.y);
-        uv+= p*h.z*h.xy*vec2(s,2.);
-        uv *= 2.;
+        vec2 p = fract(newuv+i+qp(t,h.z+1.)*h.y);
+        newuv+= p*h.z*h.xy*vec2(s,2.);
+        newuv *= 2.;
         if (i < 2. || h.w > density) {
             texToCorrupt = h / texToCorrupt;
         }
     }
     for (float i = 1.;i <= complexity2; ++ i) {
-        vec2 c = floor(uv-i);
+        vec2 c = floor(newuv-i);
         vec4 h = hash42(c);
-        vec2 p = fract(uv+i+qp(t,h.z+1.)*h.y);
-        uv+= p*h.z*h.xy*vec2(s,2.);
-        uv *= 2.;
+        vec2 p = fract(newuv+i+qp(t,h.z+1.)*h.y);
+        newuv+= p*h.z*h.xy*vec2(s,2.);
+        newuv *= 2.;
         if ((texToCorrupt.r <= 0.1 || texToCorrupt.g <= 0.1 || texToCorrupt.b <= 0.1) && (i < 2. || h.w > density)) {
             texToCorrupt = h;
 
         }
     }
     for (float i = 1.;i <= complexity; ++ i) {
-        vec2 c = floor(uv+i);
+        vec2 c = floor(newuv+i);
         vec4 h = hash42(c);
-        vec2 p = fract(uv+i+qp(t,h.z+1.)*h.y);
-        uv+= p*h.z*h.xy*vec2(s,2.);
-        uv *= 2.;
+        vec2 p = fract(newuv+i+qp(t,h.z+1.)*h.y);
+        newuv+= p*h.z*h.xy*vec2(s,2.);
+        newuv *= 2.;
         if ((texToCorrupt.r <= 0.2 || texToCorrupt.g <= 0.1 || texToCorrupt.b <= 0.2) && (i < 2. || h.w > density)) {
             texToCorrupt= texToCorrupt * 0.1;
         }

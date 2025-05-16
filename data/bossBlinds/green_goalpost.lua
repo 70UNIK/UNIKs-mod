@@ -43,7 +43,8 @@ function ease_victory_reqs(mod)
       func = function()
           local ante_UI = G.hand_text_area.ante
           mod = mod or 0
-          local text = '+'
+          if mod ~= 0 then
+            local text = '+'
           local col = G.C.UNIK_LARTCEPS_INVERSE
           if to_big(mod) < to_big(0) then
               text = '-'
@@ -67,6 +68,7 @@ function ease_victory_reqs(mod)
           --Play a chip sound
             play_sound('highlight2', 0.5, 0.2)
             play_sound('generic1')
+          end
           return true
       end
     }))

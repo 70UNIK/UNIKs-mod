@@ -114,15 +114,6 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
---placeholder boss icons
-SMODS.Atlas ({
-	key = "BlindChips",
-	atlas_table = "ANIMATION_ATLAS", 
-	path = "BlindChips.png",
-	px = 34,
-	py = 34,
-	frames = 21 })
-
 SMODS.Atlas {
 	key = "unik_tags",
 	path = "unik_tags.png",
@@ -263,6 +254,10 @@ NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 NFS.load(mod_path .. "data/bossBlinds/cookie.lua")()
+NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
+NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
+NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
+NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
 --The lily: Destroy all cards played after scoring
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()

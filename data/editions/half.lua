@@ -78,11 +78,14 @@ SMODS.Edition({
 local updateStickerHook2 = Card.update
 function Card:update(dt)
     local ret = updateStickerHook2(self,dt)
-        if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
-            self:set_debuff(true)
-        elseif not self.debuffed_by_blind then
-            self:set_debuff(nil)
+        if self.edition and self.edition.unik_halfjoker then
+            if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
+                self:set_debuff(true)
+            elseif not self.debuffed_by_blind then
+                self:set_debuff()
+            end
         end
+
         -- if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
         --     if G.playing_cards then
         --         for k, v in pairs(G.playing_cards) do

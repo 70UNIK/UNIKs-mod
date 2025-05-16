@@ -333,6 +333,45 @@ return {
 					"Destroy all played cards",
 				},
             },
+            --Edition related blinds
+            bl_unik_bloon={
+                name = "The Bloon",
+                text = {
+                    "Add Bloated to 2",
+                    "random played cards and",
+                    "leftmost Joker on play",
+                }
+            },
+            bl_unik_smiley={
+                name = "The Smiley",
+                text = {
+                    "First drawn hand",
+                    "becomes Positive",
+                }
+            },
+            bl_unik_halved={
+                name = "The Halved",
+                text = {
+                    "If hand contains >3 cards",
+                    "add Half to 2 random Jokers",
+                    "and played cards",
+                }
+            },
+            bl_unik_fuzzy={
+                name = "The Fuzzy",
+                text = {
+                    "#1# in #2# played", --3 in 5
+                    "cards become Fuzzy",
+                }
+            },
+            bl_unik_darkness={
+                name = "The Darkness", --All uneditioned drawn cards become Corrupted; All owned Jokers become corrupted. Only appears if at least 2 jokers are editioned and at least 5 cards are editioned and endless only
+                text = {
+                    "All uneditioned Jokers", --Has legendary blind glitch FX cause pibby
+                    "and drawn cards are Corrupted",
+                    "after play or discard",
+                }
+            },
             bl_unik_the_replay={
                 name = "The Replay",
 				text = {
@@ -1598,7 +1637,9 @@ return {
                 name = "Reeducation",
                 text = {
                     "{C:attention}All{} Jokers, Consumeables",
-                    "and cards become {C:unik_shitty_edition}Positive{}",
+                    "and cards become {C:unik_shitty_edition}Positive{},",
+                    "{C:unik_shitty_edition}Bloated{}, {C:unik_shitty_edition}Half{},",
+                    "{C:unik_shitty_edition}Fuzzy{} or {C:unik_shitty_edition}Corrupted{}",
                 }
             },
             c_unik_hellspawn = {
