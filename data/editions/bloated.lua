@@ -35,6 +35,9 @@ SMODS.Edition({
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,
 	config = { odds = 3},
+	get_weight = function(self)
+		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
+	end,
     loc_vars = function(self, info_queue, card)
 		local key = 'e_unik_bloated'
 		if card.ability and card.ability.consumeable then

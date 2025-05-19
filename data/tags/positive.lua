@@ -7,6 +7,12 @@ SMODS.Tag{
     loc_vars = function(self, info_queue)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
 	end,
+	in_pool = function()
+		if G.GAME.unik_enable_positives then
+			return true
+		end
+		return false
+	end,
 	apply = function(self, tag, context)
         if context.type == "store_joker_modify" then
 			local _applied = nil

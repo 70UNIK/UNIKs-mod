@@ -10,10 +10,10 @@
 // Values of this variable:
 // self.ARGS.send_to_shader[1] = math.min(self.VT.r*3, 1) + (math.sin(G.TIMERS.REAL/28) + 1) + (self.juice and self.juice.r*20 or 0) + self.tilt_var.amt
 // self.ARGS.send_to_shader[2] = G.TIMERS.REAL
-extern PRECISION vec2 corrupted;
+extern PRECISION vec2 steel;
 
 extern PRECISION number dissolve;
-extern PRECISION float time;
+extern PRECISION number time;
 // [Note] sprite_pos_x _y is not a pixel position!
 //        To get pixel position, you need to multiply  
 //        it by sprite_width _height (look flipped.fs)
@@ -24,6 +24,7 @@ extern PRECISION vec2 image_details;
 extern bool shadow;
 extern PRECISION vec4 burn_colour_1;
 extern PRECISION vec4 burn_colour_2;
+extern PRECISION float lines_offset;
 
 // [Required] 
 // Apply dissolve effect (when card is being "burnt", e.g. when consumable is used)
@@ -104,102 +105,89 @@ vec3 HueShift(vec3 colour,float shift)
  
     return ToRGB(yiq);
 }
+#define TWO_PI 6.28318530718
+vec4 steel_color = vec4(212., 222., 255., 255.) * 0.92 / 255.;
+bool line(vec2 uv, float offset, float width) {
+    uv.x = uv.x * texture_details.z / texture_details.w;
 
-vec4 hash42(vec2 p)
-{
-	vec4 p4 = fract(vec4(p.xyxy) * vec4(.1031, .1030, .0973, .1099));
-    p4 += dot(p4, p4.wzxy+33.33);
-    return fract((p4.xxyz+p4.yzzw)*p4.zywx);
-}
+    offset = offset + 0.35 * sin(steel.x + TWO_PI * lines_offset);
+    width = width + 0.005 * sin(steel.x);
 
-float qp(float x, float p)
-{
-    return floor((x)/(p))*(p);
+    float min_y = -uv.x + offset;
+    float max_y = -uv.x + offset + width;
+
+    return uv.y > min_y && uv.y < max_y;
 }
 // This is what actually changes the look of card
-
-
-//Shader by Samario
-float rand(vec2 co){
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
-}
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
+    // Take pixel color (rgba) from `texture` at `texture_coords`, equivalent of texture2D in GLSL
+    vec4 img = Texel(texture, texture_coords);
+    vec3 img2 = img.rgb;
+    float ogtrans = img.a;
+    // Position of a pixel within the sprite
+	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-    //copied from glitched code; only change is a floor function to make the glitchyness blockier
-    vec2 uv =  (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
-    vec2 newuv = uv;
-    //Variables
-    const vec2 z = vec2(1);
-    const float complexity =3.;
-    const float complexity2 =2.0;
-    const float density = 0.5;
-    const float speed = 10.;
+    vec4 tex = vec4(0.9, 0.9, 0.9, 0.1);
+    float avg = (img.r + img.g + img.b) / 3.;
 
-    const float PI = atan(1.)*4.;
-    //varibles 2
+    //Pixel basis, hopefully independent of card size
+    float shiftExact = 1.5;
+    float sprite_width = texture_details.z / image_details.x; // Normalized width
+    float sprite_height = texture_details.w / image_details.y; // Normalized height
+    float min_x = texture_details.x * sprite_width; // min X
+    float max_x = (texture_details.x + 1.) * sprite_width; // max X
+    float min_y = texture_details.y * sprite_height; // min Y
+    float max_y = (texture_details.y + 1.) * sprite_height; // max Y
+
+    float shiftX = 4.  / image_details.x; // shift X so normalize by X
+    float shiftY = 4.  / image_details.y; // shift Y so normalize by Y
+    float newX = min(max_x, max(min_x, texture_coords.x + shiftX));
+    float newY = min(max_y, max(min_y, texture_coords.y + shiftY));
+    float newX2 = min(max_x, max(min_x, texture_coords.x - shiftX));
+    float newY2 = min(max_y, max(min_y, texture_coords.y - shiftY));
+
+    float borderFactor = 0.0;
     
-    vec2 texCoordsR = texture_coords;
-    vec2 texCoordsG = texture_coords;
-    vec2 texCoordsB = texture_coords;
+    if (
 
-    float iTime = tan(2. * time);
-    float totalTime = time;
-    float block_size = 16.;
-    texCoordsR.x += (0.004 * rand(vec2(iTime, floor(uv.y * block_size)))) - 0.002 + (corrupted.x * 0.0000001);
-    texCoordsG.x += (0.007 * rand(vec2(iTime*2., floor(uv.y * block_size)))) - 0.0035 + (corrupted.x * 0.0000001);
-    texCoordsB.x += (0.010 * rand(vec2(iTime*3., floor(uv.y * block_size)))) - 0.005 + (corrupted.x * 0.0000001);
+        (Texel(texture,vec2(newX,newY)).a <= 0.2 )
 
-    vec4 texR = Texel(texture, texCoordsR);
-    vec4 texG = Texel(texture, texCoordsG);
-    vec4 texB = Texel(texture, texCoordsB);
-
-    vec4 tex = vec4(texR.r, texG.g, texB.b, texR.a);
-    vec4 texToCorrupt = vec4(1.0,1.0,1.0,texR.a);
-
-    //PIBBY APOCALYPSE
-
-    float t = totalTime+100;
-    newuv = newuv * z;
-    newuv = newuv+ floor(totalTime*speed)*z;
-    float s = 1.;
-    for (float i = 1.;i <= complexity; ++ i) {
-        vec2 c = floor(newuv+i);
-        vec4 h = hash42(c);
-        vec2 p = fract(newuv+i+qp(t,h.z+1.)*h.y);
-        newuv+= p*h.z*h.xy*vec2(s,2.);
-        newuv *= 2.;
-        if (i < 2. || h.w > density) {
-            texToCorrupt = h / texToCorrupt;
-        }
+    ){
+        tex = tex - 0.2;
+        borderFactor = borderFactor + 0.17;
+        tex.b = tex.b + 0.03;
     }
-    for (float i = 1.;i <= complexity2; ++ i) {
-        vec2 c = floor(newuv-i);
-        vec4 h = hash42(c);
-        vec2 p = fract(newuv+i+qp(t,h.z+1.)*h.y);
-        newuv+= p*h.z*h.xy*vec2(s,2.);
-        newuv *= 2.;
-        if ((texToCorrupt.r <= 0.1 || texToCorrupt.g <= 0.1 || texToCorrupt.b <= 0.1) && (i < 2. || h.w > density)) {
-            texToCorrupt = h;
+    if (
 
-        }
+        (Texel(texture,vec2(newX2,newY2)).a <= 0.2 )
+
+    ){
+        tex = tex + 0.1;
+        tex.b = tex.b + 0.01;
     }
-    for (float i = 1.;i <= complexity; ++ i) {
-        vec2 c = floor(newuv+i);
-        vec4 h = hash42(c);
-        vec2 p = fract(newuv+i+qp(t,h.z+1.)*h.y);
-        newuv+= p*h.z*h.xy*vec2(s,2.);
-        newuv *= 2.;
-        if ((texToCorrupt.r <= 0.2 || texToCorrupt.g <= 0.1 || texToCorrupt.b <= 0.2) && (i < 2. || h.w > density)) {
-            texToCorrupt= texToCorrupt * 0.1;
-        }
+
+    if (
+        lines_offset >  0. && (line(uv, 0.0, 0.07) || line(uv, 0.4, 0.1) || line(uv, 0.55, 0.1) || line(uv, 1.3, 0.05) || line(uv, 1.8, 0.1)) ||
+        lines_offset <= 0. && (line(uv, -0.2, 0.13) || line(uv, 0.3, 0.05) || line(uv, 0.8, 0.1) || line(uv, 1.3, 0.11) || line(uv, 1.7, 0.07))
+    ) {
+        tex = tex + 0.03;
+        tex.b = tex.b + 0.01;
+    } else if (
+        lines_offset >  0.02 && (line(uv, 0.0, 0.04) || line(uv, 0.4, 0.1) || line(uv, 0.55, 0.1) || line(uv, 1.3, 0.05) || line(uv, 1.8, 0.1)) ||
+        lines_offset <= 0.01 && (line(uv, -0.15, 0.25) || line(uv, 0.5, 0.4) || line(uv, 0.5, 0.05) || line(uv, 1.1, 0.001) || line(uv, 1.2, 0.9))
+    ) {
+        tex = tex + 0.02;
+        tex.b = tex.b + 0.01;
     }
     
-    if (texToCorrupt.r >= 0.4 && texToCorrupt.g  >= 0.4 && texToCorrupt.b  >= 0.4){
-        texToCorrupt = mod(tex,texToCorrupt*2.);
+    else {
+        tex = tex - 0.05;
+        tex.b = tex.b + 0.01;
     }
-    texToCorrupt.a = 1.0 * tex.a;
-	return dissolve_mask(texToCorrupt, texture_coords, uv);
+    img = vec4(steel_color.rgb * (pow(avg,0.5)) + tex.rgb * tex.a - borderFactor, ogtrans);
+
+	return dissolve_mask(img, texture_coords, uv);
 
 }
 

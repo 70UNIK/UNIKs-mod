@@ -23,7 +23,9 @@ SMODS.Edition({
 		per = 1,
 		vol = 2,
 	},
- 
+	get_weight = function(self)
+		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
+	end,
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,
 	on_apply = function(card)

@@ -170,7 +170,13 @@ target = '''=[SMODS Cryptid "items/enhanced.lua"]'''
 pattern = '''polychrome = { atlas = "cry_atlaseditiondeck", pos = { x = 2, y = 0 } },'''
 position = "after"
 payload = '''
-unik_positive = { atlas = "unik_edition_deck", pos = { x = 0, y = 0 } },'''
+unik_positive = { atlas = "unik_edition_deck", pos = { x = 0, y = 0 } },
+unik_bloated = { atlas = "unik_edition_deck", pos = { x = 1, y = 0 } },
+unik_halfjoker = { atlas = "unik_edition_deck", pos = { x = 2, y = 0 } },
+unik_fuzzy = { atlas = "unik_edition_deck", pos = { x = 0, y = 1 } },
+unik_corrupted = { atlas = "unik_edition_deck", pos = { x = 1, y = 1 } },
+unik_steel = { atlas = "unik_edition_deck", pos = { x = 2, y = 1 } },
+'''
 match_indent = true
 
 [[patches]]
@@ -214,12 +220,12 @@ payload = '''
 local edition_soul_sprite = false
 if self.edition then 
     for k, v in pairs(G.P_CENTER_POOLS.Edition) do
-        if v.apply_to_float then
+        if v.apply_to_float and v.apply_to_float == true and self.edition[v.key:sub(3)] then
             edition_soul_sprite = true
         end
     end
 end
-if not edition_soul_sprite then
+if edition_soul_sprite == false then
 '''
 match_indent = true
 

@@ -42,6 +42,9 @@ SMODS.Edition({
 	-- 		"{C:red}#1#{} #2#"
 	-- 	}
 	-- },
+	get_weight = function(self)
+		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
+	end,
     config = {
 		min_mult = fuzzy_stats.min.mult,
 		max_mult = fuzzy_stats.max.mult,

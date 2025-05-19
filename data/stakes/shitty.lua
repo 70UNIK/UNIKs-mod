@@ -2,9 +2,9 @@
 SMODS.Stake{ 
     key = 'unik_shitty',
 
-    unlocked_stake = 'gold',
-    applied_stakes = {'orange'},
-    above_stake = 'orange',
+    unlocked_stake = 'cry_pink',
+    applied_stakes = {'gold'},
+    above_stake = 'gold',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 
     modifiers = function()
@@ -18,3 +18,9 @@ SMODS.Stake{
     atlas = 'unik_stakes',
     sticker_atlas = 'unik_sticker_stakes'
 }
+
+SMODS.Stake:take_ownership('cry_pink', {
+    applied_stakes = { "unik_shitty" },
+    above_stake = "unik_shitty",
+    prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+})

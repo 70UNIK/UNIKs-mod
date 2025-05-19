@@ -2,9 +2,9 @@
 SMODS.Stake{ 
     key = 'unik_persimmon',
 
-    unlocked_stake = 'cry_pink',
-    applied_stakes = {'gold'},
-    above_stake = 'gold',
+    unlocked_stake = 'gold',
+    applied_stakes = {'orange'},
+    above_stake = 'orange',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 
     modifiers = function()
@@ -20,6 +20,6 @@ SMODS.Stake{
 }
 
 SMODS.Stake:take_ownership('gold', {
-    applied_stakes = {'unik_shitty'},
-    above_stake = 'unik_shitty'
+    applied_stakes = {'unik_persimmon'},
+    above_stake = 'unik_persimmon'
 })

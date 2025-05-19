@@ -32,6 +32,9 @@ SMODS.Edition({
     loc_vars = function(self)
         return { vars = { self.config.card_limit} }
     end,
+    get_weight = function(self)
+		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
+	end,
 })
 SMODS.DrawStep {
     key = 'edition',

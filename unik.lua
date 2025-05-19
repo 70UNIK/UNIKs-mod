@@ -212,8 +212,14 @@ NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")()
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
 --Stakes
---Persimmon Stake: All cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables
---Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable 
+--Persimmon Stake: Cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables (after orange)
+--Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable (after gold)
+--Fat Stake: Jokers can be bloated
+--Smiley Stake: Jokers can be Positive
+--Half Stake: Jokers can be half
+--Dizzy Stake: Jokers can be Fuzzy
+--Learning Stake: Jokers can be Corrupted
+--Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
@@ -258,6 +264,7 @@ NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
 NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
+NFS.load(mod_path .. "data/bossBlinds/darkness.lua")()
 --The lily: Destroy all cards played after scoring
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()
@@ -308,6 +315,7 @@ if unik_config.unik_legendary_blinds then
 	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
 -- EDITIONS --
+NFS.load(mod_path .. "data/editions/steel.lua")()
 NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/editions/bloated.lua")()
 NFS.load(mod_path .. "data/editions/half.lua")()
@@ -356,9 +364,12 @@ end
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
+-- Pibby: Gives Xmult equal to 1 + (Sum of scoring ranks) / 12.5 (/16.6 in modest). For instance, 5 kings give X4 Mult. 
+-- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
  --rare
 --- Epic ---
+-- Lone despot: ^1.2 Mult per card, if played hand only has a single King of Spades. (Shotgun king reference)
 NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
@@ -401,6 +412,7 @@ NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
 NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a vampire with a hammer, or candy apple cookie with her hammer, destroying a mult card.
+--Bun Bun? Hidden effect; all shop items become Corrupted; adds a random corrupted card on blind select. 9 in 10 chance to not self destruct after round end (decrease by 1 per failed chance)
 
 --- Devastating ---
 --- Catastrophic ---

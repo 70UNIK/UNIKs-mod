@@ -8,10 +8,9 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = { Xmult = 1.26} },
+    config = { extra = { Xmult = 1.3} },
     gameset_config = {
-		modest = { extra = { Xmult = 1.2} }, 
-		madness = { extra = { Xmult = 1.32} }, 
+		modest = { extra = { Xmult = 1.25} },  
 	},
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Xmult} }

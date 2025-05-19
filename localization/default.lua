@@ -368,7 +368,7 @@ return {
                 name = "The Darkness", --All uneditioned drawn cards become Corrupted; All owned Jokers become corrupted. Only appears if at least 2 jokers are editioned and at least 5 cards are editioned and endless only
                 text = {
                     "All uneditioned Jokers", --Has legendary blind glitch FX cause pibby
-                    "and drawn cards are Corrupted",
+                    "and cards in hand are Corrupted",
                     "after play or discard",
                 }
             },
@@ -539,7 +539,30 @@ return {
                     "cards are played",
                     "or selected",
                 }
-            }
+            },
+            e_unik_steel = {
+				name = "Steel",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"when held in hand",
+				},
+			},
+            e_unik_steel_consumeable = {
+				name = "Steel",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"when held in",
+                    "consumeables",
+				},
+			},
+            e_unik_steel_joker = {
+				name = "Steel",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+                    "then {X:mult,C:white}X#2#{} Mult",
+                    "if Joker has {C:attention}triggered{}",
+				},
+			},
         },
         Enhanced={
             --ALMANAC + BUFFOONERY EXCLUSIVE ENHANCEMENTS--
@@ -1958,6 +1981,7 @@ return {
         },
         high_scores={},
         labels={
+            unik_steel="Steel",
             unik_positive="Positive",
             unik_halfjoker = "Half",
             unik_bloated="Bloated",

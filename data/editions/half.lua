@@ -26,8 +26,11 @@ SMODS.Edition({
 		per = 1,
 		vol = 1,
 	},
+    get_weight = function(self)
+		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
+	end,
     on_apply = function(card)
-        if card.ability.set ~= "Default" then
+        if card.ability.set ~= "Default" and card.ability.set ~= "Enhanced" then
             local X, Y, W, H = card.T.x, card.T.y, card.T.w, card.T.h
             H = H/1.7
             card.T.h = H
@@ -35,7 +38,7 @@ SMODS.Edition({
         end
 	end,
 	on_remove = function(card)
-        if card.ability.set ~= "Default" then
+        if card.ability.set ~= "Default" and card.ability.set ~= "Enhanced" then
             local X, Y, W, H = card.T.x, card.T.y, card.T.w, card.T.h
             H = H*1.7
             card.T.h = H
@@ -43,7 +46,7 @@ SMODS.Edition({
         end
 	end,
     on_load = function(card)
-        if card.ability.set ~= "Default" then
+        if card.ability.set ~= "Default" and card.ability.set ~= "Enhanced"  then
             local X, Y, W, H = card.T.x, card.T.y, card.T.w, card.T.h
             H = H/1.7
             card.T.h = H
@@ -80,9 +83,13 @@ function Card:update(dt)
     local ret = updateStickerHook2(self,dt)
         if self.edition and self.edition.unik_halfjoker then
             if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
-                self:set_debuff(true)
+                if self.ability.set ~= "Voucher" then
+                    self:set_debuff(true)
+                end
             elseif not self.debuffed_by_blind then
-                self:set_debuff()
+                if self.ability.set ~= "Voucher" then
+                    self:set_debuff()
+                end
             end
         end
 
