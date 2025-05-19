@@ -66,6 +66,12 @@ SMODS.Atlas {
 	px = 29,
 	py = 29
 }
+SMODS.Atlas {
+	key = "unik_enhancements",
+	path = "unik_enhancements.png",
+	px = 71,
+	py = 95
+}
 --hooks--
 ---happiness is mandatory ---
 SMODS.Atlas({ 
@@ -208,6 +214,7 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+NFS.load(mod_path .. "data/stickers/baseless.lua")() 
 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
@@ -220,8 +227,12 @@ NFS.load(mod_path .. "data/stakes/persimmon.lua")()
 --Dizzy Stake: Jokers can be Fuzzy
 --Learning Stake: Jokers can be Corrupted
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake
+
+--Enhancements
+NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 -- consumables
-NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")() --no image
+NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
+NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --L A R T C E P S--
 if unik_config.unik_legendary_blinds then

@@ -588,6 +588,14 @@ return {
                     "when {C:attention}scored, then{}",
                     "{C:red,E:2}Self Destruct{}",
                 }
+            },
+            m_unik_pink = {
+                name = "Pink",
+                text = {
+                    "{X:chips,C:white}X#1#{} chips",
+                    "Considered a {C:attention}7{}",
+                    "and it's {C:attention}own suit{}",
+                }
             }
         },
         Joker={
@@ -865,7 +873,7 @@ return {
                 }
             },
             j_unik_unik = { --mainline: ^0.03 chips
-                name = 'UNIK',
+                name = '{C:unik_unik_color}UNIK',
                 text = {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
@@ -1209,9 +1217,9 @@ return {
                 name = 'Foundation',
                 text = {
                     "After playing {C:attention}#2#{} {C:attention}consecutive{} hands",
-                    "each containing at least 4 modified cards",
-                    "with different ranks and suits",
-                    "to cards in last hand,",
+                    "each containing at least {C:attention}4 modified{} cards",
+                    "{C:red}not identical{} in rank and suit",
+                    "to any cards in {C:attention}played{} and {C:attention}last hand{},",
                     "sell this card to create",
                     "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
 					"{C:inactive}(Currently #1#/#2#){}",
@@ -1313,7 +1321,7 @@ return {
                 name = "Lone Despot",
                 text = {
                     "Scored card gives {X:dark_edition,C:white}^#1#{} Mult",
-                    "if hand {C:attention}only contains{} a",
+                    "if played hand {C:attention}only contains{} a",
                     "single {C:attention}King{} of {C:spades}#2#",
                 }
             },
@@ -1612,6 +1620,14 @@ return {
                     "a {X:cry_cursed,C:white}Cursed{} Joker",
                     "otherwise apply {C:dark_edition}Negative{}, {C:dark_edition}Mosaic{},",
                     "or {C:dark_edition}Astral{} to a {C:attention}random{} Joker",
+                }
+            },
+            c_unik_crossdresser = {
+                name = "The Crossdresser",
+                text = {
+                    "Enhances {C:attention}#1#{} selected",
+                    "card into a",
+                    "{C:unik_unik_color}Pink Card"
                 }
             }
         },
@@ -2035,6 +2051,7 @@ return {
             unik_lartceps = "Lartceps",
             unik_triggering = "Triggering",
             unik_ultradebuffed = "Ultradebuffed",
+            unik_baseless = "Baseless",
         },
         poker_hand_descriptions={},
         poker_hands={},

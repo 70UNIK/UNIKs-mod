@@ -50,7 +50,15 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.forcetrigger then
             for k, v in ipairs(context.full_hand) do
-                if v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(card, "m_cry_abstract") then
+                if SMODS.has_enhancement(v, "m_unik_pink") then
+                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.extra.divisor)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            v:juice_up()
+                            return true
+                        end,
+                    }))
+                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
                     card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.extra.divisor)
                     G.E_MANAGER:add_event(Event({
                         func = function()
@@ -68,14 +76,22 @@ SMODS.Joker {
         if context.cardarea == G.jokers and context.before and not context.blueprint then
             local triggered = false
             for k, v in ipairs(context.scoring_hand) do
-                if v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(card, "m_cry_abstract") then
+                if SMODS.has_enhancement(v, "m_unik_pink") then
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             v:juice_up()
                             return true
                         end,
                     }))
-                    print(v.base.nominal)
+                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.extra.divisor)
+                    triggered = true
+                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            v:juice_up()
+                            return true
+                        end,
+                    }))
                     card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.extra.divisor)
                     triggered = true
                 end       
