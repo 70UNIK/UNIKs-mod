@@ -36,9 +36,9 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = { divisor = 100,x_mult = 1} },
+    config = { extra = { divisor = 60,x_mult = 1} },
     gameset_config = {
-		modest = { extra = { divisor = 125,x_mult = 1} },  
+		modest = { extra = { divisor = 100,x_mult = 1} },  
 	},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
