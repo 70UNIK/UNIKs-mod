@@ -1261,7 +1261,7 @@ return {
                 name = 'The Saint',
                 text = {
                     '{C:spectral}Gateway{} will {C:attention}not destroy Jokers{} when used',
-                    '{C:cry_epic}Foundation{} requires only {C:attention}5{} hands played to activate',
+                    '{C:cry_epic}Foundation{} is activated {C:attention}immediately{}',
                     'After using {C:attention}10 {C:spectral}Gateways{}, {C:jen_RGB}attune{} this Joker',
                     '{C:inactive,s:1.5}[{C:attention,s:1.5}#1#{C:inactive,s:1.5}/10]',
                     '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
@@ -1296,7 +1296,27 @@ return {
                     "consumable effects {C:attention}#1#{} time(s)",
                     "{C:inactive,s:0.7}(Does not count for using consumables)",
                 }
-            }
+            },
+            j_unik_pibby={
+                name = "Pibby",
+                text = {
+                    "This Joker gains {X:mult,C:white}Xmult{}",
+                    "equal to the {C:attention}sum of{}",
+                    "scoring ranks divided by {C:attention}#1#{},",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Learning with Pibby{}",
+                }
+            },
+            j_unik_lone_despot={
+                name = "Lone Despot",
+                text = {
+                    "Scored cards give {X:dark_edition,C:white}^#1#{} Mult",
+                    "if hand {C:attention}only contains{} a",
+                    "single {C:attention}King{} of {C:spades}#2#",
+                }
+            },
 
         },
         Other={			
@@ -1490,6 +1510,19 @@ return {
                     "{C:red}permanently{}, {C:attention}regardless{}",
                     "of Jokers or other modifiers",
 					"{C:red}Unremovable{}",
+                }
+            },
+            unik_baseless_playing_card = {
+                name = "Baseless",
+                text = {
+                    "If {C:attention}played{}, will",
+                    "{C:red}reset{} Foundation",
+                }
+            },
+            unik_baseless = {
+                name = "Baseless",
+                text = {
+                    "{C:inactive}Does nothing",
                 }
             }
 
@@ -1967,6 +2000,14 @@ return {
             k_unik_mutilated_mess3 = "*Sob* *Sob* *Sob* *Sob*",
             k_unik_mutilated_mess4 = "H.....H—hurts.....",
             k_unik_mutilated_mess5 = "(Nothing but uncontrollable crying)",
+
+            k_unik_pibby_normal1 = "Learning is so much fun!",
+            k_unik_pibby_normal2 = "Well what shall we learn today?",
+            k_unik_pibby_normal3 = "I believe it's counting time!",
+            k_unik_pibby_darkness1 = "Oh no... That thing is here!",
+            k_unik_pibby_darkness2 = "After all this time? How did it get here?...",
+            k_unik_pibby_scared1 = "Aah! Those numbers! Too much to learn!",
+            k_unik_pibby_scared2 = "Please, please be ok, it's getting too much!",
 
             --
             unik_plus_lartceps = "+1 Lartceps...",

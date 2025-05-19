@@ -354,6 +354,7 @@ NFS.load(mod_path .. "data/jokers/cube_joker.lua")()
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
+--Borg Cube: A cube joker. Other steel EDITION cards give 2x chips Uncommon since its literally an unconditional 2x mult from its edition.
 --banned in jen due to unredeem not working
 if not (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
@@ -364,6 +365,8 @@ end
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
+
+
 -- Pibby: Gives Xmult equal to 1 + (Sum of scoring ranks) / 12.5 (/16.6 in modest). For instance, 5 kings give X4 Mult. 
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
@@ -371,6 +374,8 @@ NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")()
 --- Epic ---
 -- Lone despot: ^1.2 Mult per card, if played hand only has a single King of Spades. (Shotgun king reference)
 NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
+NFS.load(mod_path .. "data/jokers/lone_despot.lua")() --no image
+NFS.load(mod_path .. "data/jokers/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
