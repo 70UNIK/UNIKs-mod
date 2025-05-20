@@ -91,6 +91,8 @@ position = "before"
 payload = '''
 if G.GAME.unik_force_epic_plus > 0 and not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.modifiers.cry_no_small_blind then
     G.GAME.round_resets.blind_choices.Small = get_new_boss()
+elseif not G.GAME.modifiers.cry_no_small_blind then
+     G.GAME.round_resets.blind_choices.Small = 'bl_small'
 end
 '''
 match_indent = true

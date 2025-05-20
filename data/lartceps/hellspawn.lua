@@ -45,5 +45,8 @@ SMODS.Consumable{
             return true end })) 
         return true end })) 
         
-    end 
+    end,
+    in_pool = function()
+		return lartcepsCheck()
+	end,
 }

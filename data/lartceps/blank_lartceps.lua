@@ -19,6 +19,9 @@ SMODS.Consumable {
             G.consumeables:emplace(card2)
         end
     end,
+    in_pool = function()
+		return lartcepsCheck()
+	end,
 }
 
 --Originated from Polterworx,

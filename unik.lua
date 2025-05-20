@@ -234,8 +234,15 @@ NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
+--Vouchers
+--Moonkisser (boykisser + moonlight???????) or more serious version: Interstellar travel: planet cards give ^1.04 (^1.02 in modest) mult according to your poker hand
+--Spectral searcher (Tier 1) Spectrals can appear in shop
+--Spectral Merchant (tier 2) Spectrals appear 2x as often
+--Spectral Tycoon (tier 3) Spectrals appear 4x as often and soul-type cards may also appear rarely.
+
 --L A R T C E P S--
 if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/lartceps/lartcep_spawn_disable.lua")() 
 	NFS.load(mod_path .. "data/lartceps/placard.lua")() 
 	NFS.load(mod_path .. "data/lartceps/powerdown.lua")() 
 	NFS.load(mod_path .. "data/lartceps/brethren_moon.lua")() 

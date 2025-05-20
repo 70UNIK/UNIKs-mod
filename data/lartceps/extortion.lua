@@ -25,5 +25,8 @@ SMODS.Consumable{
 			ease_dollars(math.floor(-G.GAME.dollars)-math.abs(card.ability.extra.money))
 			card:juice_up(0.3, 0.5)
 		return true end })) 
-    end
+    end,
+    in_pool = function()
+		return lartcepsCheck()
+	end,
 }

@@ -39,7 +39,7 @@ SMODS.Edition({
 		if card.ability and card.ability.consumeable and card.area ~= G.hand then
 			key = 'e_unik_steel_consumeable'
 			return { key = key, vars = {self.config.x_mult}, }
-		elseif card.area.config.type == 'joker' or card.area == G.jokers then
+		elseif card.area and (card.area.config.type == 'joker' or card.area == G.jokers) then
 			key = 'e_unik_steel_joker'
 			return { key = key, vars = {self.config.x_mult,self.config.joker_x_mult
 			}, }

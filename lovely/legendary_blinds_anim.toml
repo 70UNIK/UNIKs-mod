@@ -91,6 +91,8 @@ payload = '''
 if self.glitchy_anim then
 --print("GLITCH REGISTERED2")
     self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos,true)
+else
+    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos)
 end
 '''
 match_indent = true

@@ -126,5 +126,8 @@ SMODS.Consumable{
             { sound = "button", volume = 1.0, pitch = 0.8, delay = 0 },
             { mult = 0, chips = 0, handname = "", level = "" }
         )
-    end
+    end,
+    in_pool = function()
+		return lartcepsCheck()
+	end,
 }

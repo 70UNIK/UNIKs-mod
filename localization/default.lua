@@ -91,6 +91,7 @@ return {
                     "Blind requirements by ^#1#",
                     "#2#", --"If done < 10 rerolls this ante,",
                     "#3#", --"on Blind select, die",
+                    "(Currently #4#)",
 				},
             },
             bl_unik_epic_collapse={ --only appears if you have at least 5 stone cards in the deck
@@ -1810,7 +1811,7 @@ return {
             k_unik_artisan_builds_epic_line3="On Blind Select, die",
             k_unik_artisan_builds_epic_line2alt="If less than ", 
             k_unik_artisan_builds_epic_line2alt2=" rerolls are done this ante,", 
-            k_unik_artisan_builds_epic_placeholder="If less than (rerolls this run)^1.1 rerolls are done this ante,",
+            k_unik_artisan_builds_epic_placeholder="If less than (rerolls this run)^0.8 rerolls are done this ante,",
             k_unik_pentagram_start="Hell's Legion is coming...",
             k_unik_pentagram_purified="Sent to hell!",
             k_unik_batman_start='"You WILL ALL be forgotten, Jokers. Because of me."',

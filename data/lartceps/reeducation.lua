@@ -61,5 +61,8 @@ SMODS.Consumable{
             end
             card:juice_up(0.3, 0.5)
         return true end })) 
-    end 
+    end,
+    in_pool = function()
+		return lartcepsCheck()
+	end,
 }

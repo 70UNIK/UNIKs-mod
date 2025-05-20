@@ -65,5 +65,8 @@ SMODS.Consumable{
 			G.GAME.cry_banished_keys[c.config.center.key] = true
 
 		end
-    end
+    end,
+    in_pool = function()
+		return lartcepsCheck()
+	end,
 }

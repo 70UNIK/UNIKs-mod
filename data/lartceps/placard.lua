@@ -22,5 +22,8 @@ SMODS.Consumable{
                 v.ability.unik_ultradebuffed = true
             end
         return true end })) 
-    end
+    end,
+    in_pool = function()
+		return lartcepsCheck()
+	end,
 }
