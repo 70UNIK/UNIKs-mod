@@ -6,73 +6,43 @@ priority = 999
 ### Bigger Blind and Boring Blank functionality to emulate Small and Big Blinds in appearance and functionality, while still ""bosses""
 ### And also make them ineligable for reroll (but can appear naturally) and not enable chicot/luchador to function
 
-### Generic BG color
+# fixed 10% chance to replace a blind with a bigger blind/boring blank; will not appear for 16 antes afterwards
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
-pattern = '''elseif blindname == 'Small Blind' or blindname == 'Big Blind' or blindname == '' then'''
+pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
 position = "before"
 payload = '''
-elseif blindname == 'bl_unik_boring_blank' or blindname == 'bl_unik_bigger_blind' then
+    G.GAME.bigger_blind_blacklist = G.GAME.bigger_blind_blacklist or 0
+    G.GAME.boring_blank_blacklist = G.GAME.boring_blank_blacklist or 0
+    if not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and not G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BIGGER_BLIND")) < 0.05 then
+        G.GAME.bigger_blind_blacklist = 16
+        return 'bl_unik_bigger_blind'
+    elseif not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BORING_BLANK")) < 0.05 then
+        G.GAME.boring_blank_blacklist = 64
+        return 'bl_unik_boring_blank'
+    else
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
+position = "after"
+payload = '''
+    end
+'''
+match_indent = true
+
+### Bigger blind colors
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif blindname == 'Small Blind' or blindname == 'Big Blind' or blindname == '' then
+        ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}'''
+position = "after"
+payload = '''
+elseif blindname == 'bl_unik_bigger_blind' or blindname == 'bl_unik_boring_blank' then
     ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}
 '''
 match_indent = true
-
-### Standard music
-[[patches]]
-[patches.pattern]
-target = "functions/misc_functions.lua"
-pattern = '''(G.GAME.blind and G.GAME.blind.boss and 'music5') or'''
-position = "at"
-payload = '''
-(G.GAME.blind and G.GAME.blind.boss and G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank' and 'music5') or
-'''
-match_indent = true
-
-### Have luchador and Chicot sleep on these blinds
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''local disableable = G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss'))'''
-position = "at"
-payload = '''
-local disableable = G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss') and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank'))
-
-'''
-match_indent = true
-
-### sell luchador to do nothing
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss')) then'''
-position = "at"
-payload = '''
-if G.GAME.blind and ((not G.GAME.blind.disabled) and (G.GAME.blind:get_type() == 'Boss') and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank')) then
-
-'''
-match_indent = true
-
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''if self.ability.name == 'Chicot' and not context.blueprint'''
-position = "after"
-payload = '''
-and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank')
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''if self.ability.name == 'Chicot' and G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled then'''
-position = "at"
-payload = '''
-if self.ability.name == 'Chicot' and G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled and (G.GAME.blind.name ~= 'bl_unik_bigger_blind' and G.GAME.blind.name ~= 'bl_unik_boring_blank') then
-
-'''
-match_indent = true
-
-### Prevent them from showing up if boss is rerolled

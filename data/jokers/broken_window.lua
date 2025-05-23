@@ -42,6 +42,15 @@ SMODS.Joker {
             end
         }))
     end,
+    remove_from_Deck = function(self, card, from_debuff)
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v:is_suit(card.ability.extra.suit, true, true) then
+                    v:set_debuff()
+                end
+            end
+        end
+    end,
     --only appear if there are at least 2 diamonds
     in_pool = function(self)
         local cards = 0

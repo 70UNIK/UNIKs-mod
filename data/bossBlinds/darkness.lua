@@ -1,4 +1,4 @@
---All non editioned jokers and cards become corrupted after play or discard
+--All non editioned jokers and cards become corrupted after play
 SMODS.Atlas({ 
     key = "unik_darkness", 
     atlas_table = "ANIMATION_ATLAS", 
@@ -25,25 +25,25 @@ SMODS.Blind{
 		end
 	end,
     glitchy_anim = true,
-    calculate = function(self, blind, context)
-		if context.discard and not G.GAME.blind.disabled then
-			--visual cue to wiggle all jokers
-			for i,v in pairs(G.hand.cards) do
-                if (not v.edition)then
-                    v:set_edition({ unik_corrupted = true }, true,nil, true)
+    -- calculate = function(self, blind, context)
+	-- 	if context.discard and not G.GAME.blind.disabled then
+	-- 		--visual cue to wiggle all jokers
+	-- 		for i,v in pairs(G.hand.cards) do
+    --             if (not v.edition)then
+    --                 v:set_edition({ unik_corrupted = true }, true,nil, true)
 
-                end
-            end
+    --             end
+    --         end
 
-            for i,v in pairs(G.jokers.cards) do
-                if (not v.edition)then
-                    v:set_edition({ unik_corrupted = true }, true,nil, true)
-                end
-            end
-            G.GAME.blind.triggered = true
-            G.GAME.blind:wiggle()
-		end
-	end,
+    --         for i,v in pairs(G.jokers.cards) do
+    --             if (not v.edition)then
+    --                 v:set_edition({ unik_corrupted = true }, true,nil, true)
+    --             end
+    --         end
+    --         G.GAME.blind.triggered = true
+    --         G.GAME.blind:wiggle()
+	-- 	end
+	-- end,
     cry_before_play = function(self)
         for i,v in pairs(G.hand.cards) do
             if (not v.edition)then

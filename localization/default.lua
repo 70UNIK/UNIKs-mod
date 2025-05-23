@@ -172,7 +172,7 @@ return {
                 name = "Syövyttäväulkomaalainen", --Corrosive Alien
                 text = {
                     "#1# in #2# chance",
-                    "card is drawn permanently debuffed",
+                    "card is drawn debuffed",
                     "If played hand contains",
                     "undebuffed cards, die"
                 }
@@ -369,8 +369,8 @@ return {
                 name = "The Darkness", --All uneditioned drawn cards become Corrupted; All owned Jokers become corrupted. Only appears if at least 2 jokers are editioned and at least 5 cards are editioned and endless only
                 text = {
                     "All uneditioned Jokers", --Has legendary blind glitch FX cause pibby
-                    "and cards in hand are Corrupted",
-                    "after play or discard",
+                    "and cards in hand",
+                    "are Corrupted after play",
                 }
             },
             bl_unik_the_replay={
@@ -635,6 +635,8 @@ return {
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}~0 in 3{C:inactive})",
                 },
             },
+
+            
             j_unik_yes_nothing_modest = {
                 name = 'Yes! Nothing*',
                 text={
@@ -863,13 +865,15 @@ return {
             --         "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
             --     }
             -- },
-            j_unik_celestial_of_chaos = { --^same as modest, but with an extra consumable slot
+            j_unik_celestial_of_chaos = { --Omega planet cards give {0}1.05 Mult, increase operator by 1 every 20 triggers. It is limitless, easier to get than kosmos and stronger than the storm, but requires a lot of setup.
                 name = 'The Celestial of Chaos',
                 text = {
                     "{C:jen_RGB,E:1}Omega {C:planet}Planet{} cards {C:attention}in your consumable area{}", 
-                    "each give {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult",
-                    "{C:attention}+#2#{} Consumable Slot(s)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "each give {X:unik_void_color,C:jen_RGB}#1##2#{} Mult",
+                    "Increase operator by {C:jen_RGB,E:1}#3#{} for every {C:attention}#4#{} triggers",
+                    "{C:inactive,s:0.8}(Increase operator increase requirements by {X:dark_edition,s:0.8,C:white}X#5#{C:inactive,s:0.8})",
+                    "{C:inactive,s:0.8}(Resets after each played hand){}",
+                    "{C:unik_caption,s:0.7,E:1}#6#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                 }
             },
@@ -1326,6 +1330,33 @@ return {
                     "single {C:attention}King{} of {C:spades}#2#",
                 }
             },
+
+
+            ---OVERRIDES
+            -- j_cry_oil_lamp = {
+			-- 	name = "Oil Lamp",
+			-- 	text = {
+			-- 		"Increase values of {C:attention}Joker{} to the right",
+			-- 		"by {C:attention}+#1#x{} at end of round",
+			-- 	},
+			-- },
+            -- j_cry_tropical_smoothie = {
+			-- 	name = "Tropical Smoothie",
+			-- 	text = {
+			-- 		"Sell this card",
+			-- 		"to {C:attention}add to{} values",
+			-- 		"of owned jokers by {C:attention}+#1#x{}",
+			-- 	},
+			-- },
+            j_cry_jawbreaker = {
+				name = "Jawbreaker",
+				text = {
+					"When {C:attention}Boss Blind{} defeated,",
+					"increase values of",
+                    "adjacent Jokers by {C:attention}X#1#{}",
+					"{E:2,C:red}self destructs{}",
+				},
+			},
 
         },
         Other={			
@@ -2235,9 +2266,13 @@ return {
             a_EEchips = { "^^#1# Chips" },
             a_hyper_three_chips = { "^^^#1# Chips" },
             a_hyper_three_mult = { "^^^#1# Mult" },
+            a_hyper_four_mult = { "^^^^#1# Mult" },
+            a_hyper_five_mult = { "^^^^^#1# Mult" },
+            a_hyper_hyper_mult = { "#1##2# Mult" },
             a_unik_hands_1={"#1# hands"},
             a_unik_discards_1={"#1# discards"},
-            a_unik_reed_construct={"ranks #1# or #2#"}
+            a_unik_reed_construct={"ranks #1# or #2#"},
+            a_unik_celestial_triggers = {"#1# Triggers"}
         },
         v_text={			
             ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is {C:attention}set{} to {C:red}<=1{}" },

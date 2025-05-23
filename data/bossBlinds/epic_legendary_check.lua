@@ -16,8 +16,8 @@ function CanSpawnEpic()
     if (SMODS.Mods["jen"] or {}).can_load then
         return G.GAME.round > Jen.config.ante_threshold * 2
     elseif G.GAME.round >= 50 then
-        --Exotic, Entropic, oil lamp == guaranteed
-        if G.jokers and (next(find_joker("cry-Oil-Lamp")) or #Cryptid.advanced_find_joker(nil, "entr_reverse_legendary", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "entr_entropic", nil, nil, true) ~= 0) then
+        --Exotic, Entropic, 
+        if G.jokers and (#Cryptid.advanced_find_joker(nil, "entr_reverse_legendary", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "entr_entropic", nil, nil, true) ~= 0) then
             return true
         end
         --Cryptid legendaries/Epics == after consecutively scoring above ^2 reqs 6 times
@@ -29,7 +29,7 @@ function CanSpawnEpic()
                 end
             end
         end
-        if G.jokers and (next(find_joker("cry-Tropical Smoothie")) or #Cryptid.advanced_find_joker(nil, "cry_epic", nil, nil, true) ~= 0 or hasCryptidLegendary) and G.GAME.unik_scores_really_big > 6 then
+        if G.jokers and ( #Cryptid.advanced_find_joker(nil, "cry_epic", nil, nil, true) ~= 0 or hasCryptidLegendary) and G.GAME.unik_scores_really_big > 6 then
             return true
         end
         --Otherwise: == After consecutively scoring over ^2.6 reqs 10 times
@@ -55,8 +55,8 @@ function CanSpawnLegendary()
         if (SMODS.Mods["jen"] or {}).can_load then
             return true
         end
-        --Exotic, Entropic, oil lamp, trophical smoothie == guaranteed
-        if G.jokers and (next(find_joker("cry-Oil-Lamp")) or #Cryptid.advanced_find_joker(nil, "entr_reverse_legendary", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "entr_entropic", nil, nil, true) ~= 0) then
+        --Exotic, Entropic,
+        if G.jokers and ( #Cryptid.advanced_find_joker(nil, "entr_reverse_legendary", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "entr_entropic", nil, nil, true) ~= 0) then
             return true
         end
         --Cryptid legendaries/Epics == after consecutively scoring above ^2 reqs 6 times
@@ -68,7 +68,7 @@ function CanSpawnLegendary()
                 end
             end
         end
-        if G.jokers and (next(find_joker("cry-Tropical Smoothie")) or #Cryptid.advanced_find_joker(nil, "cry_epic", nil, nil, true) ~= 0 or hasCryptidLegendary) and G.GAME.unik_scores_really_big > 6 then
+        if G.jokers and (#Cryptid.advanced_find_joker(nil, "cry_epic", nil, nil, true) ~= 0 or hasCryptidLegendary) and G.GAME.unik_scores_really_big > 6 then
             return true
         end
         --Otherwise: == After consecutively scoring over ^2.6 reqs 10 times

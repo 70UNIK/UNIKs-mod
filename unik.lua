@@ -440,6 +440,9 @@ NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a v
 --- Devastating ---
 --- Catastrophic ---
 --- 
+---Overrides
+NFS.load(mod_path .. "data/jokers/overrides.lua")() 
+--- 
 --- 
 --- Challenges
 NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")()
@@ -501,7 +504,7 @@ if (SMODS.Mods["jen"] or {}).can_load then
 			-- for i,v in pairs(Jen.fusions) do
 			-- 	print(v)
 			-- end
-			Jen.add_fusion('Mutate Moonlight Cookie',1500,"j_unik_celestial_of_chaos",
+			Jen.add_fusion('Mutate Moonlight Cookie',5000,"j_unik_celestial_of_chaos",
 				'j_unik_moonlight_cookie',
 				'j_jen_godsmarble'
 			)

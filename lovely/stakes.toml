@@ -15,7 +15,7 @@ if G.GAME.modifiers.enable_disposable_in_shop then
     local binning = pseudorandom("unik_shitty_sfff" .. (key_append or "") .. G.GAME.round_resets.ante)
     if G.GAME.modifiers.cry_eternal_perishable_compat and binning > 0.9 then
         card:set_disposable(true)
-    elseif not card.ability.perishable and not card.ability.eternal and binning > 0.9 then
+    elseif not card.ability.perishable and not card.ability.eternal and binning > 0.85 then
         card:set_disposable(true)
     end
 end

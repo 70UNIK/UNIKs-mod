@@ -11,7 +11,7 @@ SMODS.Shader({
 })
 local fuzzy_stats = {
 	min = {
-		mult = -1,
+		mult = -3,
 		chips = -50,
         dollars = -1,
 	},
@@ -87,5 +87,202 @@ SMODS.Edition({
 		if context.after then
 			card.config.trigger = nil
 		end
+	end,
+generate_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
+		if not full_UI_table.name then
+			full_UI_table.name = localize({ type = "name", set = self.set, key = self.key, nodes = full_UI_table.name })
+		end
+		local r_mults = {}
+		for i = self.config.min_mult, self.config.max_mult do
+			r_mults[#r_mults + 1] = tostring(i)
+		end
+		local loc_mult = " " .. (localize("k_mult")) .. " "
+		local r_chips = {}
+		for i = self.config.min_chips, self.config.max_chips do
+			r_chips[#r_chips + 1] = tostring(i)
+		end
+		local r_cash = {}
+		for i = self.config.min_dollars, self.config.max_dollars do
+			r_cash[#r_cash + 1] = tostring(i)
+		end
+		local loc_chips = " Chips "
+		local loc_cash = " AUD"
+		local loc_cash2 = "    "
+		mult_ui = {
+			{ n = G.UIT.T, config = { text = "  ", colour = G.C.MULT, scale = 0.32 } },
+			{
+				n = G.UIT.O,
+				config = {
+					object = DynaText({
+						string = r_mults,
+						colours = { G.C.MULT },
+						pop_in_rate = 9999999,
+						silent = true,
+						random_element = true,
+						pop_delay = 0.5,
+						scale = 0.32,
+						min_cycle_time = 0,
+					}),
+				},
+			},
+			{
+				n = G.UIT.O,
+				config = {
+					object = DynaText({
+						string = {
+							{ string = "rand()", colour = G.C.JOKER_GREY },
+							{
+								string = "#@"
+									.. (G.deck and G.deck.cards[1] and G.deck.cards[#G.deck.cards].base.id or 11)
+									.. (
+										G.deck
+											and G.deck.cards[1]
+											and G.deck.cards[#G.deck.cards].base.suit
+											and G.deck.cards[#G.deck.cards].base.suit:sub(1, 1)
+										or "D"
+									),
+								colour = G.C.RED,
+							},
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+							loc_mult,
+						},
+						colours = { G.C.UI.TEXT_DARK },
+						pop_in_rate = 9999999,
+						silent = true,
+						random_element = true,
+						pop_delay = 0.2011,
+						scale = 0.32,
+						min_cycle_time = 0,
+					}),
+				},
+			},
+		}
+		chip_ui = {
+			{ n = G.UIT.T, config = { text = "  ", colour = G.C.CHIPS, scale = 0.32 } },
+			{
+				n = G.UIT.O,
+				config = {
+					object = DynaText({
+						string = r_chips,
+						colours = { G.C.CHIPS },
+						pop_in_rate = 9999999,
+						silent = true,
+						random_element = true,
+						pop_delay = 0.5,
+						scale = 0.32,
+						min_cycle_time = 0,
+					}),
+				},
+			},
+			{
+				n = G.UIT.O,
+				config = {
+					object = DynaText({
+						string = {
+							{ string = "rand()", colour = G.C.JOKER_GREY },
+							{
+								string = "@#"
+									.. (G.deck and G.deck.cards[1] and G.deck.cards[1].base.suit and G.deck.cards[1].base.suit:sub(
+										2,
+										2
+									) or "m")
+									.. (G.deck and G.deck.cards[1] and G.deck.cards[1].base.id or 7),
+								colour = G.C.BLUE,
+							},
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+							loc_chips,
+						},
+						colours = { G.C.UI.TEXT_DARK },
+						pop_in_rate = 9999999,
+						silent = true,
+						random_element = true,
+						pop_delay = 0.2011,
+						scale = 0.32,
+						min_cycle_time = 0,
+					}),
+				},
+			},
+		}
+		cash_ui = {
+			{ n = G.UIT.T, config = { text = "  $", colour = G.C.GOLD, scale = 0.32 } },
+			{
+				n = G.UIT.O,
+				config = {
+					object = DynaText({
+						string = r_cash,
+						colours = { G.C.GOLD },
+						pop_in_rate = 9999999,
+						silent = true,
+						random_element = true,
+						pop_delay = 0.5,
+						scale = 0.32,
+						min_cycle_time = 0,
+					}),
+				},
+			},
+			{
+				n = G.UIT.O,
+				config = {
+					object = DynaText({
+						string = {
+							{ string = "rand()", colour = G.C.JOKER_GREY },
+							{
+								string = "@#"
+									.. (G.deck and G.deck.cards[1] and G.deck.cards[1].base.suit and G.deck.cards[1].base.suit:sub(
+										2,
+										2
+									) or "m")
+									.. (G.deck and G.deck.cards[1] and G.deck.cards[1].base.id or 7),
+								colour = G.C.GOLD,
+							},
+							loc_cash,
+							loc_cash2,
+							loc_cash2,
+							loc_cash2,
+							loc_cash,
+							loc_cash2,
+							loc_cash2,
+							loc_cash2,
+							loc_cash,
+							loc_cash2,
+							loc_cash,
+							loc_cash2,
+						},
+						colours = { G.C.UI.TEXT_DARK },
+						pop_in_rate = 9999999,
+						silent = true,
+						random_element = true,
+						pop_delay = 0.2011,
+						scale = 0.32,
+						min_cycle_time = 0,
+					}),
+				},
+			},
+		}
+		desc_nodes[#desc_nodes + 1] = mult_ui
+		desc_nodes[#desc_nodes + 1] = chip_ui
+		desc_nodes[#desc_nodes + 1] = cash_ui
 	end,
 })

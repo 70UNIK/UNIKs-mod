@@ -28,6 +28,7 @@ SMODS.Joker {
 	eternal_compat = true,
     config = { extra = {EEchips = 1.0, EEchips_mod = 0.02} },
     no_doe = true,
+	debuff_immune = true,
 	loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
 		return { 
@@ -44,7 +45,7 @@ SMODS.Joker {
 					vars = { number_format(card.ability.extra.EEchips) },
 				}),
 				EEchip_mod = card.ability.extra.EEchips,
-				colour = G.C.jen_RGB
+				colour = G.C.DARK_EDITION
 			}
 		end
     end,

@@ -7,7 +7,7 @@
 function Card:set_disposable(disposable)
 	self.ability.unik_disposable = nil
     if self.config.center.perishable_compat then 
-        self.ability.disposable = disposable
+        self.ability.unik_disposable = disposable
         self:set_cost()
     end
     

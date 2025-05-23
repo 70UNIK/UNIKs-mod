@@ -76,6 +76,14 @@ function reset_blinds()
         --print( G.GAME.global_rerolls_pause_val)
         --If rerolls < 15, set to 15^1.1.
         SMODS.calculate_context({unik_blinds_refresh = true})
+        G.GAME.boring_blank_blacklist = G.GAME.boring_blank_blacklist or 0
+        G.GAME.bigger_blind_blacklist = G.GAME.bigger_blind_blacklist or 0
+        if G.GAME.boring_blank_blacklist > 0 then
+            G.GAME.boring_blank_blacklist = G.GAME.boring_blank_blacklist - 1
+        end
+        if G.GAME.bigger_blind_blacklist > 0 then
+            G.GAME.bigger_blind_blacklist = G.GAME.bigger_blind_blacklist - 1
+        end
     end
     resetReedRanks()
 end

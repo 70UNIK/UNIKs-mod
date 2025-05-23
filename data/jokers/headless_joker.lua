@@ -42,6 +42,15 @@ SMODS.Joker {
             end
         }))
     end,
+    remove_from_deck = function(self, card, from_debuff)
+        if G.playing_cards then
+            for k, v in pairs(G.playing_cards) do
+                if v:is_suit(card.ability.extra.suit, true, true) then
+                    v:set_debuff()
+                end
+            end
+        end
+    end,
     update = function(self,card,dt)
         if card.added_to_deck then
             local cards = 0

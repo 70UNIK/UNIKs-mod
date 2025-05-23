@@ -41,6 +41,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
     no_doe = true,
+    debuff_immune = true,
     config = { extra = {EEEchips_mod = 0.02, EEEchips = 1.0} }, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'

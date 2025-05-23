@@ -28,9 +28,16 @@ SMODS.Blind{
 			end
 		end
 	end,
+    stay_flipped = function(self, area, card)
+		if (pseudorandom(pseudoseed("xenomorph_debuff_chance")) < ((G.GAME.probabilities.normal) / 4)) then
+            card:set_debuff(true)
+            G.GAME.blind.triggered = true
+            G.GAME.blind:wiggle()
+        end
+	end,
     set_blind = function(self, reset, silent)
         if not reset then
-            G.GAME.unik_xenomorph_debuff = true
+            -- G.GAME.unik_xenomorph_debuff = true
             local text = localize('k_unik_xenomorph_start')
             attention_text({
                 scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = HEX("1c5607")
@@ -40,26 +47,26 @@ SMODS.Blind{
 	in_pool = function(self)
         return CanSpawnEpic()
 	end,
-    disable = function(self)
-        G.GAME.unik_xenomorph_debuff = nil
-    end,
-    defeat = function(self)
-        G.GAME.unik_xenomorph_debuff = nil
-    end,
+    -- disable = function(self)
+    --     G.GAME.unik_xenomorph_debuff = nil
+    -- end,
+    -- defeat = function(self)
+    --     G.GAME.unik_xenomorph_debuff = nil
+    -- end,
 }
 
---Only permanently debuff when drawn to hand
-local permaDebuffEmplace = CardArea.emplace
-function CardArea:emplace(card, location, stay_flipped)
-    local vars = permaDebuffEmplace(self,card,location,stay_flipped)
-    if G.GAME.unik_xenomorph_debuff then
-        if self == G.hand and (pseudorandom(pseudoseed("xenomorph_debuff_chance")) < ((G.GAME.probabilities.normal) / 4)) then
-            if G.GAME.blind and G.GAME.blind.in_blind and (G.GAME.blind.name == 'bl_unik_epic_xenomorph_queen' or G.GAME.blind.name == 'cry-Obsidian Orb') then
-                G.GAME.blind.triggered = true
-                G.GAME.blind:wiggle()
-            end
-            SMODS.debuff_card(card,true,"unik_xenomorph_debuff_perma")
-        end
-    end
-    return vars
-end
+-- --Only permanently debuff when drawn to hand
+-- local permaDebuffEmplace = CardArea.emplace
+-- function CardArea:emplace(card, location, stay_flipped)
+--     local vars = permaDebuffEmplace(self,card,location,stay_flipped)
+--     if G.GAME.unik_xenomorph_debuff then
+--         if self == G.hand and (pseudorandom(pseudoseed("xenomorph_debuff_chance")) < ((G.GAME.probabilities.normal) / 4)) then
+--             if G.GAME.blind and G.GAME.blind.in_blind and (G.GAME.blind.name == 'bl_unik_epic_xenomorph_queen' or G.GAME.blind.name == 'cry-Obsidian Orb') then
+                
+--             end
+--             -- SMODS.debuff_card(card,true,"unik_xenomorph_debuff_perma")
+            
+--         end
+--     end
+--     return vars
+-- end
