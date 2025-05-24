@@ -24,12 +24,12 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     pools = {["unik_cube"] = true },
-    config = { extra = {x_chips_scored = 0.4, x_chips_held = 0.08, family_x_bonus = 1.3} },
+    config = { extra = {x_chips_scored = 0.07, family_x_bonus = 1.3} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips_scored, center.ability.extra.x_chips_held, center.ability.extra.family_x_bonus} }
 	end,
     gameset_config = {
-		modest = {extra = {x_chips_scored = 0.2, x_chips_held = 0.05, family_x_bonus = 1.2}},
+		modest = {extra = {x_chips_scored = 0.03, family_x_bonus = 1.2}},
 	},
     calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
@@ -43,19 +43,19 @@ SMODS.Joker {
                 }
 
 		end
-        if context.cardarea == G.hand and context.individual and not context.end_of_round then
-                if context.other_card.debuff then
-                    card_eval_status_text(context.other_card, "debuff", nil, nil, nil, nil)
-                else
-                    context.other_card.ability["perma_x_chips"] = context.other_card.ability["perma_x_chips"] or 0
-                    context.other_card.ability["perma_x_chips"] = context.other_card.ability["perma_x_chips"] + card.ability.extra.x_chips_held
-                    return {
-                        extra = {message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
-                        colour = G.C.CHIPS,
-                        card = card
-                    }
-                end
-        end
+        -- if context.cardarea == G.hand and context.individual and not context.end_of_round then
+        --         if context.other_card.debuff then
+        --             card_eval_status_text(context.other_card, "debuff", nil, nil, nil, nil)
+        --         else
+        --             context.other_card.ability["perma_x_chips"] = context.other_card.ability["perma_x_chips"] or 0
+        --             context.other_card.ability["perma_x_chips"] = context.other_card.ability["perma_x_chips"] + card.ability.extra.x_chips_held
+        --             return {
+        --                 extra = {message = localize('k_upgrade_ex'), colour = G.C.CHIPS},
+        --                 colour = G.C.CHIPS,
+        --                 card = card
+        --             }
+        --         end
+        -- end
     end,
 }
 

@@ -383,7 +383,7 @@ end
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
-
+NFS.load(mod_path .. "data/jokers/clone_man.lua")()
 
 -- Pibby: Gives Xmult equal to 1 + (Sum of scoring ranks) / 12.5 (/16.6 in modest). For instance, 5 kings give X4 Mult. 
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?

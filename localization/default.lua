@@ -938,7 +938,6 @@ return {
                 name="{C:unik_maya_color}Maya Ramirez{}",
                 text={
                     "{C:attention}Scored{} cards permanently gain {X:chips,C:white}X#1#{} Chips", --values will be exponented by ^0.3
-                    "{C:attention}Held{} cards permanently gain {X:chips,C:white}X#2#{} Chips",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:unik_caption,s:0.7,E:1}I'm here to help, but PLEASE be careful.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
@@ -1357,7 +1356,128 @@ return {
 					"{E:2,C:red}self destructs{}",
 				},
 			},
+            j_unik_cloneman = {
+                name = "Clone man",
+				text = {
+					"Each owned {C:attention}Jokers{} and {C:attention}Consumables{}",
+					"appear multiple times at {C:attention}X#1#{}",
+                    "the usual rate for their rarity",
+					"{C:inactive}(Stacks additively)",
+                    "{C:inactive,s:0.8}(Clone man excluded)",
+				}, 
+            },
+            --cry about it
+            j_cry_googol_play = {
+				name = "Googol Play Card",
+				text = {
+					"{C:green}#1# in #2#{} chance for",
+					"{X:red,C:white} X#3# {} Mult",
+                    "{C:green}#4# in #5#{} chance to",
+					"{E:2,C:red}self destruct{} on trigger",
+				},
+				unlock = {
+					"Score {C:attention}1.0e100{} Chips",
+					"in a single hand",
+				},
+			},
 
+
+            --Proper depleted loc
+            --Clicked cookie
+            j_cry_clicked_cookie = {
+				name = "Clicked Cookie",
+				text = {
+					"{C:chips}#1##2#{} Chip#<s>2#",
+					"{C:chips}-#3#{} Chip#<s>3# when",
+					"you {C:attention}click",
+				},
+			},
+            j_cry_clicked_cookie_depleted = {
+				name = "Clicked Cookie",
+				text = {
+					"{C:chips}#1##2#{} Chip#<s>2#",
+					"{C:chips}-#3#{} Chip#<s>3# when",
+					"you {C:attention}click",
+                    "{E:2,C:red}Self destructs{} at",
+                    "{C:chips}#4#{} Chip#<s>4#",
+				},
+			},
+            --turtle bean
+            j_turtle_bean={
+                name="Turtle Bean",
+                text={
+                    "{C:attention}#3##1#{} hand size,",
+                    "reduces by",
+                    "{C:red}#2#{} every round",
+                },
+            },
+            j_turtle_bean_depleted = {
+                name="Turtle Bean",
+                text={
+                    "{C:attention}#3##1#{} hand size,",
+                    "reduces by",
+                    "{C:red}#2#{} every round",
+                    "{E:2,C:red}Self destructs{} at",
+                    "{C:attention}#4#{} hand size",
+                },
+            },
+            --Popcorn
+            j_popcorn={
+                name="Popcorn",
+                text={
+                    "{C:mult}#3##1#{} Mult",
+                    "{C:mult}-#2#{} Mult per",
+                    "round played",
+                },
+            },
+            j_popcorn_depleted={
+                name="Popcorn",
+                text={
+                    "{C:mult}#3##1#{} Mult",
+                    "{C:mult}-#2#{} Mult per",
+                    "round played",
+                    "{E:2,C:red}Self destructs{} at",
+                    "{C:mult}#4#{} Mult",
+                },
+            },
+            --Ice cream
+            j_ice_cream={
+                name="Ice Cream",
+                text={
+                    "{C:chips}#3##1#{} Chips",
+                    "{C:chips}-#2#{} Chips for",
+                    "every hand played",
+                },
+            },
+            j_ice_cream_depleted={
+                name="Ice Cream",
+                text={
+                    "{C:chips}#3##1#{} Chips",
+                    "{C:chips}-#2#{} Chips for",
+                    "every hand played",
+                    "{E:2,C:red}Self destructs{} at",
+                    "{C:chips}#4#{} Chips",
+                },
+            },
+            --Ramen
+            j_ramen={
+                name="Ramen",
+                text={
+                    "{X:mult,C:white} X#1# {} Mult,",
+                    "loses {X:mult,C:white} X#2# {} Mult",
+                    "per {C:attention}card{} discarded",
+                },
+            },
+            j_ramen_depleted={
+                name="Ramen",
+                text={
+                    "{X:mult,C:white} X#1# {} Mult,",
+                    "loses {X:mult,C:white} X#2# {} Mult",
+                    "per {C:attention}card{} discarded",
+                    "{E:2,C:red}Self destructs{} at",
+                    "{X:mult,C:white} X#3# {} Mult,",
+                },
+            },
         },
         Other={			
 			undiscovered_unik_lartceps = {
