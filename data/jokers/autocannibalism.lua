@@ -66,7 +66,7 @@ SMODS.Joker {
                 elseif  v.ability.name == "Ramen" then
                     v.ability.unik_depleted = true
                     v.ability.eternal = true            
-                    v.ability.x_mult = 1       
+                    v.ability.extra.Xmult = 1       
                 elseif v.ability.name == "Ice Cream" then
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
@@ -78,7 +78,7 @@ SMODS.Joker {
                 elseif v.ability.name == "Popcorn" then
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
-                    v.ability.mult = 0
+                    v.ability.extra.mult = 0
                 end
             end
         end

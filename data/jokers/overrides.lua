@@ -433,10 +433,10 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 		extra = {chips = 100, chip_mod = 5,depleted_threshold = -100}
 	},
 	loc_vars = function(self, info_queue, center)
-		local key = 'j_popcorn'
+		local key = 'j_ice_cream'
 		local sign = "+"
 		if center.ability.unik_depleted then
-			key = 'j_popcorn_depleted'
+			key = 'j_ice_cream_depleted'
 		end
 		if lenient_bignum(center.ability.extra.chips) <= lenient_bignum(0) then
 			sign = ""
@@ -518,8 +518,7 @@ SMODS.Joker:take_ownership("j_popcorn",{
 	end,
 	calculate = function(self, card, context)
 		if context.end_of_round 
-			and not context.blueprint
-			and not context.individual then
+			and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			-- adding depleted functionality for popcorn
 			if (card.ability.unik_depleted and card.ability.extra.mult - card.ability.extra.extra < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.mult - card.ability.extra.extra <= 0) then
 				G.E_MANAGER:add_event(Event({
@@ -632,7 +631,7 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 		if center.ability.unik_depleted then
 			key = 'j_turtle_bean_depleted'
 		end
-		if lenient_bignum(center.ability.extra.chips) <= lenient_bignum(0) then
+		if lenient_bignum(center.ability.extra.h_size) <= lenient_bignum(0) then
 			sign = ""
 		end 
 		return {

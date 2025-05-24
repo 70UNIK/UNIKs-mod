@@ -1493,8 +1493,7 @@ return {
                 text = {
                     "Decrementing values {C:red}do{}",
                     "{C:red}not{} cause {C:red}self destruction{}",
-                    "until at {C:attention}negative max{} value",
-                    "or {C:attention}0{} for {X:mult,C:white}XMult{}",
+                    "until at specified negative values",
                 },
             },
             unik_impounded = {
