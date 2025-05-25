@@ -14,26 +14,21 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
 	demicoloncompat = true,
-    config = { extra = {x_mult = 3.0, x_mult_mod = 0.05,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.07, shop_decay_mult = 0.06,message_produced = false,in_scoring = false} },
+    config = { extra = {x_mult = 3.0, x_mult_mod = 0.07,x_mult_initial = 3.0,selfDestruction = false,message_produced = false,in_scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		if Card.get_gameset(card) ~= "modest" then
 			info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded
 		end
 		return { 
 			key = Cryptid.gameset_loc(self, { modest = "modest"}),
-			vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.x_mult_initial,center.ability.extra.blind_decay_mult,center.ability.extra.shop_decay_mult},
+			vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.x_mult_initial},
     }
 	end,
 	gameset_config = {
-		modest = {extra = {x_mult = 3.0, x_mult_mod = 0.06,x_mult_initial = 3.0,selfDestruction = false,blind_decay_mult = 0.06, shop_decay_mult = 0.07,message_produced = false,in_scoring = false} },
+		modest = { extra = {x_mult = 2.5, x_mult_mod = 0.04,x_mult_initial = 2.5,selfDestruction = false,message_produced = false,in_scoring = false} },
 	},
     add_to_deck = function(self, card, from_debuff)
         card.ability.extra.x_mult = card.ability.extra.x_mult_initial
-		if G.GAME.blind.in_blind then
-			card.ability.extra.x_mult_mod = card.ability.extra.blind_decay_mult
-		else
-			card.ability.extra.x_mult_mod = card.ability.extra.shop_decay_mult
-		end
     end,
     update = function(self,card,dt)
         --update the dynamic text
@@ -141,7 +136,6 @@ SMODS.Joker {
             and not context.retrigger_joker
         then
             card.ability.extra.x_mult = card.ability.extra.x_mult_initial
-			card.ability.extra.x_mult_mod = card.ability.extra.shop_decay_mult
             return {
 				message = localize("k_reset"),
 				card = card,
@@ -155,7 +149,6 @@ SMODS.Joker {
 		and not context.retrigger_joker
 		then
             card.ability.extra.x_mult = card.ability.extra.x_mult_initial
-			card.ability.extra.x_mult_mod = card.ability.extra.blind_decay_mult
             return {
 				message = localize("k_reset"),
 				card = card,

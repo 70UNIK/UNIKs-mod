@@ -162,13 +162,13 @@ return {
                 }
             },
             bl_unik_epic_vader={ --Balatro goes kino
-                name = "Telekineettinentyranni", --Telikinetic Tyrant
+                name = "Telekineettinentyranni", --Telikinetic Tyrant (darth vader)
                 text = {
                     "Set all statistics",
                     "of all Jokers to 0",
                 } --Better get immutables going on.
             },
-            bl_unik_epic_xenomorph_queen={ --1 in 4 chance drawn card is permanently debuffed. If card contains undebuffed cards, die. --HARD COUNTERS DANDY --Balatro goes kino
+            bl_unik_epic_xenomorph_queen={ --1 in 4 chance drawn card is debuffed. If card contains undebuffed cards, die. --HARD COUNTERS DANDY --Balatro goes kino
                 name = "Syövyttäväulkomaalainen", --Corrosive Alien
                 text = {
                     "#1# in #2# chance",
@@ -241,9 +241,9 @@ return {
                 name = "Kiristysmaila", --Extortion Racket
 				text = {
                     "Scored hand capped at #1#", --50%
-					"Set money to -$66 per hand", --you gonna need lucky cards, wario or gold seals
+					"Set money to -$666 per hand", --you gonna need lucky cards, wario or gold seals
                     "Hand will not score if money is",
-                    "less than $#2#", --less than the amount you entered the blind in
+                    "less than $666",
                     "If in debt after a hand, die",
 				},
             },
@@ -311,7 +311,7 @@ return {
                 text ={
                     "Defeat this blind #1# time#2#",
                     "Set hands to 1, only replenish",
-                    "per blind defeat",
+                    "hand per blind defeat",
                     "Per defeat, rescale blind to",
                     "(best hand this run)#3#",
                     "If hands = 1, increase",
@@ -326,12 +326,6 @@ return {
 					"Only 1 Discard per Hand",
                     "Must play all cards, High cards are banned",
                     "Pairs must have scoring Jacks or better",
-				},
-            },
-            bl_unik_the_lily={ --rename to the consumer -- all consumeables are debuffed (only spawn if you have perkeo, moonlight, observatory, >15 consumeables (cough cough almanac) or >5 ccd cards)
-                name = "The Lily",
-				text = {
-					"Destroy all played cards",
 				},
             },
             --Edition related blinds
@@ -618,14 +612,6 @@ return {
                     "{C:attention}Lucky Cards{}",
                 }
             },
-            j_unik_holepunched_card = {
-                name = 'Holepunched Card',
-                text={
-                    "Retrigger {C:attention}last{} played",
-                    "card used in scoring",
-                    "{C:attention}#1#{} additional times",
-                },
-            },
             j_unik_yes_nothing = {
                 name = 'Yes! Nothing*',
                 text={
@@ -635,8 +621,6 @@ return {
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}~0 in 3{C:inactive})",
                 },
             },
-
-            
             j_unik_yes_nothing_modest = {
                 name = 'Yes! Nothing*',
                 text={
@@ -693,23 +677,9 @@ return {
                 text = {
                     "On spawn, turn the {C:attention}leftmost{} Joker", 
                     "and {C:attention}all{} equipped consumables {C:unik_shitty_edition}Positive{}", 
-                    "Each hand played creates a",
-                    "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Banana Smiley Face{}",
-                    "and turns a {C:attention} random{} played card {C:unik_shitty_edition}Positive{}", 
-                    "{C:red}Self destructs{} after maximum Joker slots becomes {C:attention}#1#{}" ,
-                    "{C:red}On destruction{}, remove {C:attention}Eternal{} from {C:attention}all Smiley Faces.{}" ,
-                    "{C:inactive,s:0.7,E:1}Happiness is mandatory. Failure to be happy is treason.{}",
-                }
-            },
-            j_unik_happiness_modest = {
-                name = 'Happiness is Mandatory',
-                text = {
-                    "On spawn, turn the {C:attention}leftmost{} Joker", 
-                    "and {C:attention}all{} equipped consumables {C:unik_shitty_edition}Positive{}", 
-                    "Each hand played creates a",
-                    "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Banana Smiley Face{}",
-                    "{C:red}Self destructs{} after maximum Joker slots becomes {C:attention}#1#{}" ,
-                    "{C:red}On destruction{}, remove {C:attention}Eternal{} from {C:attention}all Smiley Faces.{}" ,
+                    "Turns a {C:attention} random{} played card {C:unik_shitty_edition}Positive{} and creates a", 
+                    "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Banana Smiley Face{} every hand",   
+                    "{C:red}Self destructs{} after Joker slots becomes {C:attention}#1#{}" ,
                     "{C:inactive,s:0.7,E:1}Happiness is mandatory. Failure to be happy is treason.{}",
                 }
             },
@@ -854,17 +824,6 @@ return {
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
-            -- j_unik_moonlight_cookie_madness = { --^same as modest, but with an extra consumable slot
-            --     name = 'Moonlight Cookie',
-            --     text = {
-            --         "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
-            --         "each give {X:dark_edition,C:white}^#1#{} Mult",
-            --         "{C:attention}+#2#{} Consumable Slot(s)",
-            --         "{C:unik_caption,s:0.7,E:1}#3#{}",
-            --         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-            --         "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
-            --     }
-            -- },
             j_unik_celestial_of_chaos = { --Omega planet cards give {0}1.05 Mult, increase operator by 1 every 20 triggers. It is limitless, easier to get than kosmos and stronger than the storm, but requires a lot of setup.
                 name = 'The Celestial of Chaos',
                 text = {
@@ -889,22 +848,22 @@ return {
                 }
             },
             j_unik_cube_of_calamity = { --mainline: ^0.03 chips
-            name = 'The Cube of Calamity',
-            text = {
-                "This Joker gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", 
-                "for each {C:attention}7{} scored",
-                "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2#{C:inactive} Chips)",
-                "{C:unik_caption,s:0.7,E:1}#3#{}",
-                "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-            }
-        },
-            j_unik_unik_modest = { --modest: ^0.02 chips, ONLY once if a 7 is scored
+                name = 'The Cube of Calamity',
+                text = {
+                    "This Joker gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", 
+                    "for each {C:attention}7{} scored",
+                    "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2#{C:inactive} Chips)",
+                    "{C:unik_caption,s:0.7,E:1}#5#{}",
+                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                }
+            },
+            j_unik_unik_modest = { --modest: 7s give X0.7 Chips
                 name = '{C:unik_unik_color}UNIK',
                 text = {
-                    "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
+                    "This Joker gains {X:chips,C:white}X#3#{} Chips", 
                     "if played hand contains a scoring {C:attention}7{}",
-                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:inactive}(Currently {X:chips,C:white}^#4#{C:inactive} Chips)",
+                    "{C:unik_caption,s:0.7,E:1}#5#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -985,11 +944,11 @@ return {
                 text={
 					"This Joker {C:attention}captures{} all {X:cry_cursed,C:white}Cursed{} Jokers",
                     "and gains {X:mult,C:white}X#2#{} Mult per Joker captured",
-					"{C:red}Self destructs{} if exceeds {C:attention}#4#{} {X:cry_cursed,C:white}Cursed{} Jokers",
-					"and {C:red}releases all captured{} {X:cry_cursed,C:white}Cursed{} {C:red}Jokers{}",
-                    "{C:red}if sold or destroyed{}",   
+                    "{C:red}Releases all captured{} {X:cry_cursed,C:white}Cursed{} {C:red}Jokers{}",
+                    "{C:red}if sold or destroyed{}",
+					"{C:red}Self destructs{} when exceeding {C:attention}#4#{} {X:cry_cursed,C:white}Cursed{} Jokers",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult, {C:attention}#3# {X:cry_cursed,C:white}Cursed{C:inactive} Jokers){}",
-                    "{C:inactive,s:0.9}(The {C:attention}leftmost{C:inactive} Ghost Trap will capture first){}",
+                    "{C:inactive,s:0.8}(The {C:attention}leftmost{C:inactive} Ghost Trap will capture first){}",
                 },
             },
             j_unik_lily_sprunki = {
@@ -1026,25 +985,19 @@ return {
             j_unik_no_standing_zone = {
                 name="No Standing Zone",
                 text={
-                    "{X:mult,C:white}X#1#{} Mult, decreases by ",
-                    "{X:mult,C:white}X#4#{} every {C:attention}second{} in Blinds",
-                    "and {X:mult,C:white}X#5#{} every {C:attention}second{} elsewhere",
-                    "Turns into {C:red}Impound Notice{}",
-                    "if Mult becomes {X:mult,C:white}X1{} or {C:attention}sold{} in Blind",
-                    "Resets to {X:mult,C:white}X#3#{} Mult",
-                    "at the start and end of {C:attention}Round{}",
+                    "{X:mult,C:white}X#1#{} Mult, decreases by",
+                    "{X:mult,C:white}X#2#{} every {C:attention}second{}",
+                    "Becomes {C:red}Impound Notice{} at {X:mult,C:white}X1{} mult",
+                    "Resets at {X:mult,C:white}X#3#{} Mult at start and end of {C:attention}Round{}",
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
                 }, 
             },
             j_unik_no_standing_zone_modest = {
                 name="No Standing Zone",
                 text={
-                    "{X:mult,C:white}X#1#{} Mult, decreases by ",
-                    "{X:mult,C:white}X#4#{} every {C:attention}second{} in Blinds",
-                    "and {X:mult,C:white}X#5#{} every {C:attention}second{} elsewhere",
-                    "{C:red}Self destructs{} if Mult becomes {X:mult,C:white}X1{}.",
-                    "Resets to {X:mult,C:white}X#3#{} Mult",
-                    "at the start and end of {C:attention}Round{}",
+                    "{X:mult,C:white}X#1#{} Mult, decreases by",
+                    "{X:mult,C:white}X#2#{} every {C:attention}second{}",
+                    "Resets at {X:mult,C:white}X#3#{} Mult at start and end of {C:attention}Round{}",
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
                 }, 
             },
@@ -1053,22 +1006,20 @@ return {
                 name="Impound Notice",
                 text={
                     "{X:mult,C:white}X#1#{} Mult {C:attention}after scoring{}",
-                    "{C:red}Debuffs{} and adds {C:attention}Eternal and Rental{}",
-                    " to a random Joker on spawn",
-                    "{C:attention}Sell{} to remove debuff, Eternal and Rental",
+                    "{C:red}Impounds{} a random Joker on spawn",
+                    "{C:attention}Sell{} to Impounded from Joker",
                     "Selling costs {X:money,C:white}X#2#ln(x+1){} the total",
-                    "{C:attention}selling price{} of debuffed Joker",
+                    "{C:attention}selling price{} of Impounded Joker",
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
             },
             j_unik_impounded_modest = {
                 name="Impound Notice",
                 text={
-                    "{C:red}Debuffs{} and adds {C:attention}Eternal and Rental{}",
-                    " to a random Joker on spawn",
-                    "{C:attention}Sell{} to remove debuff, Eternal and Rental",
+                    "{C:red}Impounds{} a random Joker on spawn",
+                    "{C:attention}Sell{} to Impounded from Joker",
                     "Selling costs {X:money,C:white}X#2#{} the total",
-                    "{C:attention}selling price{} of debuffed Joker",
+                    "{C:attention}selling price{} of Impounded Joker",
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
             },
@@ -1137,11 +1088,9 @@ return {
                 text = {
                     "This Joker creates a copy with {X:dark_edition,C:white}",
                     "an additional {X:dark_edition,C:white}^#2#{} Mult on {E:2,C:red}destruction{}",
-                    "{E:2,C:red}Self destructs{} at the end of round",
+                    "{E:2,C:red}Self destructs{} at end of shop",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
-                    "{C:inactive,s:0.7}(Removes stickers from copy){}",
                     "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
-                    "{C:red,s:0.4}(Cannot exceed {X:dark_edition,C:white,s:0.4}^e300{C:red,s:0.4} due to bignum copy bug){}",   
                     "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
@@ -1152,9 +1101,8 @@ return {
                 text = {
                     "This Joker creates a copy with {X:mult,C:white}",
                     "an additional {X:mult,C:white}X#4#{} Mult on {E:2,C:red}destruction{}",
-                    "{E:2,C:red}Self destructs{} at the end of the {C:attention}shop{}",
+                    "{E:2,C:red}Self destructs{} at end of shop",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
-                    "{C:inactive,s:0.7}(Removes stickers from copy){}",
                     "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
                     "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
@@ -1183,7 +1131,7 @@ return {
                 name="Vessel Kiln",
                 text={
                     "{X:chips,C:white}X#1#{} Chips",
-                    "All future Tags",
+                    "All skip Tags",
                     "become {C:purple}Vessel Tags{}",
                 }    
             },
@@ -1475,8 +1423,30 @@ return {
                     "loses {X:mult,C:white} X#2# {} Mult",
                     "per {C:attention}card{} discarded",
                     "{E:2,C:red}Self destructs{} at",
-                    "{X:mult,C:white} X#3# {} Mult,",
+                    "{X:mult,C:white} X#3# {} Mult",
                 },
+            },
+            --Nachos
+            j_paperback_nachos_depleted = {
+                name = "Nachos",
+                text = {
+                    "{X:chips,C:white}X#1#{} Chips,",
+                    "loses {X:chips,C:white}X#2#{} Chips",
+                    "per {C:attention}card{} discarded",
+                    "{E:2,C:red}Self destructs{} at",
+                    "{X:chips,C:white}X#3#{} Chips",
+                },
+            },
+            --Lollipop
+            j_mf_lollipop_depleted = {
+                name = "Lollipop",
+                text = {
+                "{X:mult,C:white} X#1# {} Mult",
+                "{X:mult,C:white} -X#2# {} Mult per",
+                "round played",
+                "{E:2,C:red}Self destructs{} at",
+                "{X:mult,C:white} X#3# {} Mult",
+                }
             },
         },
         Other={			
@@ -1887,7 +1857,33 @@ return {
                 }
             }
         },
-        Voucher={},
+        Voucher={
+            v_unik_spectral_merchant = {
+				name = "Spectral Merchant",
+				text = {
+					"{C:spectral}Spectral{} cards",
+					"may appear",
+					"in the shop",
+				},
+			},
+            v_unik_spectral_tycoon = {
+				name = "Spectral Tycoon",
+				text = {
+					"{C:spectral}Spectral{} cards appear",
+					"{C:attention}X#1#{} more frequently",
+					"in the shop",
+				},
+			},
+            v_unik_spectral_acclimator = {
+				name = "Spectral Acclimator",
+				text = {
+					"{C:spectral}Spectral{} cards appear",
+					"{C:attention}X#1#{} more frequently",
+					"in the shop",
+				},
+			},
+
+        },
     },
     misc = {
         achievement_descriptions={

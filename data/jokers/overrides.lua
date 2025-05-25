@@ -684,7 +684,109 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 	end
 }, true)
 --TODO: lolipop, nachos
+--Lollipop
+SMODS.Joker:take_ownership("j_mf_lollipop",{
+	loc_vars = function(self, info_queue, center)
+		local key = 'j_mf_lollipop'
+		if center.ability.unik_depleted then
+			key = 'j_mf_lollipop_depleted'
+		end
+		return {
+		key = key,
+		vars = { center.ability.x_mult, center.ability.extra,0 }
+		}
+	end,
+	pools = { ["autocannibalism_food"] = true },
+	calculate = function(self, card, context)
+		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint and not context.retrigger_joker then
+		if (card.ability.x_mult - card.ability.extra <= 1.01 and not card.ability.unik_depleted) or (card.ability.x_mult - card.ability.extra <= 0 and card.ability.unik_depleted) then 
+			G.E_MANAGER:add_event(Event({
+			func = function()
+				play_sound('tarot1')
+				card.T.r = -0.2
+				card:juice_up(0.3, 0.4)
+				card.states.drag.is = true
+				card.children.center.pinch.x = true
+				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
+				func = function()
+					G.jokers:remove_card(card)
+					card:remove()
+					card = nil
+					return true; end})) 
+				return true
+			end
+			})) 
+			return {
+			message = localize('k_eaten_ex'),
+			colour = G.C.FILTER
+			}
+		else
+			card.ability.x_mult = card.ability.x_mult - card.ability.extra
+			return {
+			message = localize{type='variable',key='a_xmult_minus',vars={card.ability.extra}},
+			colour = G.C.RED
+			}
+		end
+		elseif context.forcetrigger or (context.cardarea == G.jokers and context.joker_main) then
+			return {
+			message = localize{type='variable',key='a_xmult',vars={card.ability.x_mult}},
+			Xmult_mod = card.ability.x_mult,
+			}
+		end
+	end
+}, true)
+--Nachos
+SMODS.Joker:take_ownership("j_paperback_nachos",{
+	loc_vars = function(self, info_queue, card)
+		local key = 'j_paperback_nachos'
+		if center.ability.unik_depleted then
+			key = 'j_paperback_nachos_depleted'
+		end
+		return {
+		key = key,
+			card.ability.extra.X_chips,
+			card.ability.extra.reduction_amount,
+			0,
+		}
+	end,
+	pools = { ["autocannibalism_food"] = true },
+	calculate = function(self, card, context)
+		-- Gives the xChips during play
+		if context.joker_main then
+		return {
+			x_chips = card.ability.extra.X_chips
+		}
+		end
 
+		-- Penalize discarding cards only when the current mult is higher than 1
+		if context.discard and not context.blueprint and card.ability.extra.X_chips > 1 then
+			-- Reduce the xChips value
+			card.ability.extra.X_chips = card.ability.extra.X_chips - card.ability.extra.reduction_amount
+
+			-- Destroy Nachos if the current value is <= 1
+			if (card.ability.extra.X_chips <= 1 and not card.ability.unik_depleted) or (card.ability.extra.X_chips <= 0 and card.ability.unik_depleted) then
+				PB_UTIL.destroy_joker(card)
+
+				return {
+				message = localize('k_eaten_ex'),
+				colour = G.C.FILTER,
+				card = card
+				}
+			else
+				return {
+				delay = 0.2,
+				message = localize {
+					type = 'variable',
+					key = 'a_xchips_minus',
+					vars = { card.ability.extra.reduction_amount }
+				},
+				colour = G.C.CHIPS,
+				card = card
+				}
+			end
+		end
+	end
+}, true)
 --Cube pools
 
 --ban hook, its too overpowered for mainline

@@ -66,7 +66,7 @@ function Card:remove_from_deck(from_debuff)
             --Autocannibalism: check if any turtle beans, ice cream, popcorn or ramen remain
             elseif v.ability.name == "j_unik_autocannibalism" then
                 autoCannibalExists = true
-            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
+            elseif v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
                 if self.config.center.rarity == "cry_cursed" and self.ability.extra.getting_captured then
@@ -124,6 +124,16 @@ function Card:remove_from_deck(from_debuff)
                         v.ability.unik_depleted = true
                         v.ability.eternal = true    
                         v.ability.mult = 0
+                    --Lollipop
+                    elseif v.config.center.key == "j_mf_lollipop" then
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true    
+                        v.ability.Xmult = 1
+                    --Nachos
+                    elseif v.config.center.key == "j_paperback_nachos" then
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true    
+                        v.ability.extra.X_chips = 1
                     end
                 end
             end
@@ -318,6 +328,16 @@ function CardArea:emplace(card, location, stay_flipped)
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
                     v.ability.extra.mult = 0
+                --Lollipop
+                elseif v.config.center.key == "j_mf_lollipop" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true    
+                    v.ability.Xmult = 1
+                --Nachos
+                elseif v.config.center.key == "j_paperback_nachos" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true    
+                    v.ability.extra.X_chips = 1
                 end
             end
         end

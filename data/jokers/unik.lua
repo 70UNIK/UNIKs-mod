@@ -51,10 +51,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
 	fusable = true,
-    config = { extra = {Echips_mod = 0.03, Echips = 1.0} }, --normally he should not be cappted in mainline+
-	gameset_config = {
-		modest = { extra = {Echips_mod = 0.02, Echips = 1.0} },
-	},
+    config = { extra = {Echips_mod = 0.03, Echips = 1.0,Xchips_mod = 0.7, Xchips = 1.0} }, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		if (SMODS.Mods["jen"] or {}).can_load then
@@ -62,14 +59,14 @@ SMODS.Joker {
 		end
 		return {
 		key = Cryptid.gameset_loc(self, {modest = "modest" }), 
-		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips
+		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips,center.ability.extra.Xchips_mod,center.ability.extra.Xchips
 	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. "")
 	} }
 	end,
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
 		local check = false
-		if context.forcetrigger then
+		if context.forcetrigger and Card.get_gameset(card) == "modest" then
 			card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
 			return {
                 message = localize({
@@ -83,7 +80,20 @@ SMODS.Joker {
                 colour = G.C.DARK_EDITION,
 			}
 		end
-		if (context.joker_main) and (to_big(card.ability.extra.Echips) > to_big(1)) then
+		if (context.joker_main)  then
+			if Card.get_gameset(card) == "modest" and (to_big(card.ability.extra.Xchips) > to_big(1)) then
+				return {
+					message = localize({
+						type = "variable",
+						key = "a_xchips",
+						vars = {
+							number_format(card.ability.extra.Xchips),
+						},
+					}),
+					Echip_mod = card.ability.extra.Xchips,
+					colour = G.C.DARK_EDITION,
+				}
+			elseif (to_big(card.ability.extra.Echips) > to_big(1)) then
 			return {
                 message = localize({
 					type = "variable",
@@ -95,48 +105,41 @@ SMODS.Joker {
 				Echip_mod = card.ability.extra.Echips,
                 colour = G.C.DARK_EDITION,
 			}
+			end
+			
 		end
-        if (context.individual and context.cardarea == G.play) and Card.get_gameset(card) ~= "modest" then
+        if (context.individual and context.cardarea == G.play)then
 			if context.other_card:get_id() == 7 and not context.blueprint  then
-				card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
-				return {
-					message = localize({
-						type = "variable",
-						key = "a_powchips",
-						vars = {
-							number_format(to_big(card.ability.extra.Echips)),
-						},
-					}),
-					colour = G.C.DARK_EDITION,
-					card = card
-				}
+				if Card.get_gameset(card) == "modest" then
+					card.ability.extra.Xchips = card.ability.extra.Xchips + card.ability.extra.Xchips_mod
+					return {
+						message = localize({
+							type = "variable",
+							key = "a_xchips",
+							vars = {
+								number_format(card.ability.extra.Xchips),
+							},
+						}),
+						colour = G.C.DARK_EDITION,
+						card = card
+					}
+				else
+					card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
+					return {
+						message = localize({
+							type = "variable",
+							key = "a_powchips",
+							vars = {
+								number_format(to_big(card.ability.extra.Echips)),
+							},
+						}),
+						colour = G.C.DARK_EDITION,
+						card = card
+					}
+				end
+				
 			end
 		end		
-		if (context.before and context.cardarea == G.jokers and not context.blueprint and Card.get_gameset(card) == "modest") then
-
-            --print("turn them happy")
-			for k, v in ipairs(context.full_hand) do
-				if
-					v:get_id() == 7
-				then
-					check = true
-				end
-			end
-			if check == true then
-				card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
-				return {
-					message = localize({
-						type = "variable",
-						key = "a_powchips",
-						vars = {
-							number_format(to_big(card.ability.extra.Echips)),
-						},
-					}),
-					colour = G.C.DARK_EDITION,
-					card = card
-				}
-			end
-        end
 
     end,
 }
@@ -146,15 +149,27 @@ if JokerDisplay then
 		text = {
 			{
 				border_nodes = {
-					{ text = "^" },
-					{
-						ref_table = "card.ability.extra",
-						ref_value = "Echips",
-						retrigger_type = "exp"
-					},
+					{ ref_table = "card.joker_display_values", ref_value = "Echips", retrigger_type = "exp" },
 				},
 				border_colour = G.C.DARK_EDITION,
 			},
+            {
+				border_nodes = {
+					{ ref_table = "card.joker_display_values", ref_value = "Xchips", retrigger_type = "exp" },
+				},
+				border_colour = G.C.CHIPS,
+			},
 		},
+        calc_function = function(card)
+            local Echips = ""
+            local Xchips = ""
+            if Card.get_gameset(card) ~= "modest" then
+                Echips = "^" .. card.ability.extra.Echips
+            else
+                Xchips = "X" .. card.ability.extra.Xchips
+            end
+            card.joker_display_values.Echips = Echips
+            card.joker_display_values.Xchips = Xchips
+        end
 	}
 end

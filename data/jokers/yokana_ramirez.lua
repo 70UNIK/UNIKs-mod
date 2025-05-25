@@ -25,7 +25,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
-    config = { extra = {x_chips = 1.35,family_x_bonus = 1.3,scoring = false} },
+    config = { extra = {x_chips = 1.3,family_x_bonus = 1.3,scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
 	end,

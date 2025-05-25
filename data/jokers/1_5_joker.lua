@@ -13,9 +13,6 @@ SMODS.Joker {
 	pos = { x = 0, y = 0 },
 	-- Modest
     config = { extra = { mult = 10, mult_mod = 8,hand_size = 5} },
-	gameset_config = {
-		modest = { extra = { mult = 8, mult_mod = 6,hand_size = 5} },
-	},
     cost = 4,
     blueprint_compat = true,
 	perishable_compat = true,

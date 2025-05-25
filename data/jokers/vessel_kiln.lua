@@ -5,7 +5,7 @@ SMODS.Joker {
     atlas = 'unik_uncommon',
     rarity = 2,
 	pos = { x = 3, y = 1 },
-    config = { extra = { x_chips = 3} }, 
+    config = { extra = { x_chips = 2.5} }, 
     cost = 7,
     blueprint_compat = true,
 	perishable_compat = true,
@@ -16,7 +16,7 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.x_chips} }
 	end,
 	gameset_config = {
-		modest = {extra = {x_chips = 2.5} },
+		modest = {extra = {x_chips = 2} },
 	},
     add_to_deck = function(self, card, from_debuff)
 		G.GAME.unik_vesselled = true

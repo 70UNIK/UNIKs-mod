@@ -72,6 +72,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "placeholder_voucher",
+	path = "placeholder_voucher.png",
+	px = 71,
+	py = 95
+}
 --hooks--
 ---happiness is mandatory ---
 SMODS.Atlas({ 
@@ -235,10 +241,12 @@ NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
---Moonkisser (boykisser + moonlight???????) or more serious version: Interstellar travel: planet cards give ^1.04 (^1.02 in modest) mult according to your poker hand
---Spectral searcher (Tier 1) Spectrals can appear in shop
---Spectral Merchant (tier 2) Spectrals appear 2x as often
---Spectral Tycoon (tier 3) Spectrals appear 4x as often and soul-type cards may also appear rarely.
+--Spectral Merchant (Tier 1) Spectrals can appear in shop
+--Spectral Tycoon (tier 2) Spectrals appear 2x as often
+--Spectral Acclimator (tier 3) Spectrals appear 6x as often
+NFS.load(mod_path .. "data/vouchers/spectral_merchant.lua")() 
+NFS.load(mod_path .. "data/vouchers/spectral_tycoon.lua")() 
+NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
 
 --L A R T C E P S--
 if unik_config.unik_legendary_blinds then
