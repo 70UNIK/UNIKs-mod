@@ -20,11 +20,9 @@ SMODS.Joker {
     in_pool = function(self)
         for i,v in pairs(G.playing_cards) do
             if v:is_suit("Spades") and v:get_id() == 13 then
-                print("truthg")
                 return true
             end
         end
-        print("FAUX")
         return false
     end,
     calculate = function(self, card, context)

@@ -20,6 +20,9 @@ SMODS.Enhancement {
         return false
     end,
 	calculate = function(self, card, context, effect)
+        if context.before then
+            G.GAME.unik_enable_lartcep_spawn = true
+        end
 		if context.cardarea == G.play and context.main_scoring then
             G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
 				local card2 = create_card("unik_lartceps", G.pack_cards, nil, nil, true, nil, nil, "namta")
@@ -46,6 +49,7 @@ SMODS.Enhancement {
             --     Xmult_mod = lenient_bignum(card.ability.extra.x_mult),
             --     colour = G.C.RED,
             -- } 
+            
             return {
                 message = localize('unik_plus_lartceps'),
                 colour = G.C.UNIK_LARTCEPS1,
@@ -73,7 +77,17 @@ SMODS.Enhancement {
                 card = card
             }
         end
+        if context.after then
+            G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+                G.GAME.unik_enable_lartcep_spawn = nil
+            				return true
+			end }))
+        end
         if context.destroy_card == card and context.cardarea == G.play then
+            G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+                G.GAME.unik_enable_lartcep_spawn = nil
+            				return true
+			end }))
 			return { remove = true }
 		end
 	end

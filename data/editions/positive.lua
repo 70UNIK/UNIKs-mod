@@ -29,8 +29,14 @@ SMODS.Edition({
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,
 	config = { card_limit = -1},
-    loc_vars = function(self)
-        return { vars = { self.config.card_limit} }
+    loc_vars = function(self, info_queue, card)
+        local key = 'e_unik_positive'
+        if card.ability and card.ability.consumeable and card.area ~= G.hand then
+			key = 'e_unik_positive_consumable'
+		elseif card.ability and (card.ability.set == "Default" or card.ability.set == "Enhanced" or (card.ability.consumeable and card.area and card.area == G.hand)) then
+			key = 'e_unik_positive_playing_card'
+		end
+        return { key = key ,vars = { self.config.card_limit} }
     end,
     get_weight = function(self)
 		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)

@@ -31,44 +31,6 @@ and (card.ability.name ~= "j_unik_foundation" and (#SMODS.find_card("j_jen_saint
 '''
 match_indent = true
 
-## POSITIVE consumable and playing card label logic
-
-### Badge
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = "if v == 'negative_consumable' or v == 'negative_playing_card' then v = 'negative' end"
-position = "after"
-payload = '''
-if v == 'unik_positive_consumable' or v == 'unik_positive_playing_card' then v = 'unik_positive' end
-'''
-match_indent = true
-
-### 
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''if v:sub(1,9) == 'negative_' then
-    info_queue[#info_queue+1] = {key = 'e_'..v, set = 'Edition', config = {extra = G.P_CENTERS['e_negative'].config.card_limit}}
-end'''
-position = "after"
-payload = '''if v:sub(1,14) == 'unik_positive_' then
-    info_queue[#info_queue+1] = {key = 'e_'..v, set = 'Edition', config = {extra = G.P_CENTERS['e_unik_positive'].config.card_limit}}
-end'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "badges[#badges + 1] = 'negative_playing_card'"
-position = "after"
-payload = """
-elseif self.edition.type == 'unik_positive' and self.ability.consumeable then
-    badges[#badges + 1] = 'unik_positive_consumable'
-elseif self.edition.type == 'unik_positive' and (self.ability.set == 'Enhanced' or self.ability.set == 'Default') then
-    badges[#badges + 1] = 'unik_positive_playing_card'"""
-match_indent = true
-
 ### Bad edition colors: Instead of a blueshift, its a redshift, just to show how shitty it is
 
 [[patches]]

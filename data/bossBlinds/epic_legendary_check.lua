@@ -15,7 +15,7 @@ function CanSpawnEpic()
     --always loads when jens mod is installed
     if (SMODS.Mods["jen"] or {}).can_load then
         return G.GAME.round > Jen.config.ante_threshold * 2
-    elseif G.GAME.round >= 50 then
+    elseif G.GAME.round >= 40 then
         --Exotic, Entropic, 
         if G.jokers and (#Cryptid.advanced_find_joker(nil, "entr_reverse_legendary", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "entr_entropic", nil, nil, true) ~= 0) then
             return true

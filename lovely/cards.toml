@@ -135,15 +135,6 @@ payload = '''pools = { ["unik_cube"] = true, ["Meme"] = true,  },
 	end,'''
 match_indent = true
 
-### wild card ability fix for cursed Jokers
-[[patches]]
-[patches.pattern]
-target = '''functions/common_events.lua'''
-pattern = '''new_card:set_ability(other.config.center)'''
-position = "at"
-payload = '''new_card:set_ability(other.config.center,nil,nil,true)'''
-match_indent = true
-
 ### vessel kiln, override cat tags and other tags to replace with vessel tags
 [[patches]]
 [patches.pattern]
