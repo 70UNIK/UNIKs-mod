@@ -739,14 +739,16 @@ SMODS.Joker:take_ownership("j_mf_lollipop",{
 SMODS.Joker:take_ownership("j_paperback_nachos",{
 	loc_vars = function(self, info_queue, card)
 		local key = 'j_paperback_nachos'
-		if center.ability.unik_depleted then
+		if card.ability.unik_depleted then
 			key = 'j_paperback_nachos_depleted'
 		end
 		return {
 		key = key,
+		vars = {
 			card.ability.extra.X_chips,
 			card.ability.extra.reduction_amount,
 			0,
+		}
 		}
 	end,
 	pools = { ["autocannibalism_food"] = true },
