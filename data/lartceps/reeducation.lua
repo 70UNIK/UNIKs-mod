@@ -2,6 +2,7 @@
 
 local function reeducation_edition(card)
     local random_result = pseudorandom(pseudoseed("unik_redducation_edition"))
+    G.GAME.force_bypass_edition_delay = true
     if random_result < 1/7 then
         card:set_edition({ unik_bloated = true }, true,nil, true)
     elseif random_result < 3/7 then
@@ -13,6 +14,7 @@ local function reeducation_edition(card)
     else
         card:set_edition({ unik_halfjoker = true }, true,nil, true)
     end
+    G.GAME.force_bypass_edition_delay = nil
 end
 
 SMODS.Consumable{
@@ -48,15 +50,37 @@ SMODS.Consumable{
 	use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             for i,v in pairs(G.playing_cards) do
-                reeducation_edition(v)
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.05,
+                    func = function()
+                        reeducation_edition(v)
+                        return true
+                    end,
+                }))
                 delay(0.1)
             end
             for i,v in pairs(G.jokers.cards) do
-                reeducation_edition(v)
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.05,
+                    func = function()
+                        reeducation_edition(v)
+                        return true
+                    end,
+                }))
                 delay(0.1)
             end
             for i = 1, #G.consumeables.cards do
-                reeducation_edition(G.consumeables.cards[i])
+                G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.05,
+                    func = function()
+                        reeducation_edition(G.consumeables.cards[i])
+                        return true
+                    end,
+                }))
+
                 delay(0.1)
             end
             card:juice_up(0.3, 0.5)

@@ -23,6 +23,8 @@ SMODS.Blind{
     jen_blind_exponent_resize = {2,2.1666},
     ignore_showdown_check = true,
     set_blind = function(self, reset, silent)
+        G.GAME.force_no_discards = true
+        G.GAME.force_one_hand = true
         G.GAME.unik_killed_by_sword_legendary = true
         --set blind size to ^2.666x
         G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
@@ -40,14 +42,10 @@ SMODS.Blind{
         ease_hands_played(-G.GAME.current_round.hands_left)
         ease_hands_played(-666)
 	end,
-    recalc_debuff = function(self, card, from_blind)
-        if (card.area == G.jokers) and (card.config.center.key == "j_burglar" or card.config.center.key == "j_cry_effarcire") then
-            return true
-        end
-        return false
-	end,
     --somehow if that happens, set the base to be 
     disable = function(self)
+        G.GAME.force_no_discards = nil
+        G.GAME.force_one_hand = nil
         G.GAME.unik_killed_by_sword_legendary = nil
         ease_discard(G.GAME.blind.discards_sub + 666)
         ease_hands_played(G.GAME.blind.hands_sub)
@@ -59,15 +57,13 @@ SMODS.Blind{
                 end
             end
         end
-        if(SMODS.Mods["jen"] or {}).can_load then
-            G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^2.1666)
-        else
-            G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^1.4666)
-        end
+        G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^1.4666)
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.HUD_blind:recalculate(true)
 	end,
 	defeat = function(self)
+        G.GAME.force_no_discards = nil
+        G.GAME.force_one_hand = nil
         G.GAME.unik_killed_by_sword_legendary = nil
         G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 1))
 	end,

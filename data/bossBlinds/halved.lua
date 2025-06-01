@@ -2,7 +2,7 @@ SMODS.Blind{
     key = 'unik_halved',
     config = {},
 	boss = {
-		min = 3,
+		min = 5,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 22},

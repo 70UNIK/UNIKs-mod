@@ -119,15 +119,23 @@ SMODS.Joker {
 --Hook to prevent selling Impounded if you're in debt.
 local sellPrevention = Card.can_sell_card
 function Card:can_sell_card(context)
+    local lockpick = next(find_joker("j_unik_lockpick"))
+    if (G.play and #G.play.cards > 0) or
+        (G.CONTROLLER.locked) or 
+        (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) --or 
+        --G.STATE == G.STATES.BLIND_SELECT 
+        then return false end
     if (G.SETTINGS.tutorial_complete or G.GAME.pseudorandom.seed ~= 'TUTORIAL' or G.GAME.round_resets.ante > 1) and
         self.area and
         self.area.config.type == 'joker' and
-        not self.ability.eternal then
+        (not self.ability.eternal or (self.ability.eternal and lockpick and not self.config.center.dissolve_immune and not self.ability.dissolve_immune)) then
             if self.config.center.key == "j_unik_impounded" then
                 --Takes in factor credit card
                 if to_big((G.GAME.dollars-G.GAME.bankrupt_at) + self.ability.extra.cost) < to_big(0) then
                     return false
                 end
+            else
+                return true
             end
     end
     

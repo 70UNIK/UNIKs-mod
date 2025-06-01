@@ -128,7 +128,7 @@ function Card:remove_from_deck(from_debuff)
                     elseif v.config.center.key == "j_mf_lollipop" then
                         v.ability.unik_depleted = true
                         v.ability.eternal = true    
-                        v.ability.Xmult = 1
+                        v.ability.x_mult = 1
                     --Nachos
                     elseif v.config.center.key == "j_paperback_nachos" then
                         v.ability.unik_depleted = true
@@ -252,7 +252,7 @@ function CardArea:emplace(card, location, stay_flipped)
                 end
             elseif v.ability.name == "j_unik_autocannibalism" then
                 autoCannibalExists = true
-            elseif v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
+            elseif v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             --ghost trap functionality
             elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
@@ -332,7 +332,7 @@ function CardArea:emplace(card, location, stay_flipped)
                 elseif v.config.center.key == "j_mf_lollipop" then
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
-                    v.ability.Xmult = 1
+                    v.ability.x_mult = 1
                 --Nachos
                 elseif v.config.center.key == "j_paperback_nachos" then
                     v.ability.unik_depleted = true

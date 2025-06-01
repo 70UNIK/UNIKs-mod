@@ -106,7 +106,7 @@ vec3 HueShift(vec3 colour,float shift)
     return ToRGB(yiq);
 }
 #define TWO_PI 6.28318530718
-vec4 steel_color = vec4(212., 222., 255., 255.) * 0.92 / 255.;
+vec4 steel_color = vec4(225., 238., 255., 255.)/ 255.;
 bool line(vec2 uv, float offset, float width) {
     uv.x = uv.x * texture_details.z / texture_details.w;
 
@@ -129,7 +129,6 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
     vec4 tex = vec4(0.9, 0.9, 0.9, 0.1);
-    float avg = (img.r + img.g + img.b) / 3.;
 
     //Pixel basis, hopefully independent of card size
     float shiftExact = 1.5;
@@ -142,10 +141,28 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 
     float shiftX = 4.  / image_details.x; // shift X so normalize by X
     float shiftY = 4.  / image_details.y; // shift Y so normalize by Y
+    float shiftX2 = 0.5  / image_details.x; // shift X so normalize by X
+    float shiftY2 = 0.5  / image_details.y; // shift Y so normalize by Y
     float newX = min(max_x, max(min_x, texture_coords.x + shiftX));
     float newY = min(max_y, max(min_y, texture_coords.y + shiftY));
     float newX2 = min(max_x, max(min_x, texture_coords.x - shiftX));
     float newY2 = min(max_y, max(min_y, texture_coords.y - shiftY));
+
+    float newX3 = min(max_x, max(min_x, texture_coords.x + shiftX2));
+    float newY3 = min(max_y, max(min_y, texture_coords.y + shiftY2));
+    float newX4 = min(max_x, max(min_x, texture_coords.x - shiftX2));
+    float newY4 = min(max_y, max(min_y, texture_coords.y - shiftY2));
+
+    
+    //Emboss texture to make it actually look convincingly like a steel card instead of a simple bezeled greyscale
+    float avg = (img.r + img.g + img.b) / 3.;
+    vec3 a = Texel(texture,vec2(newX3,newY3)).rgb;
+    vec3 b = Texel(texture,vec2(newX4,newY4)).rgb;
+    float avgA = (a.r + a.g + a.b) / 3.;
+    float avgB = (b.r + b.g + b.b) / 3.;
+    float differenceX = (avgA - avgB) * 3.5;
+    float lighting = differenceX * 0.2 + 0.8;
+    
 
     float borderFactor = 0.0;
     
@@ -154,9 +171,11 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
         (Texel(texture,vec2(newX,newY)).a <= 0.2 )
 
     ){
-        tex = tex - 0.2;
+        tex = tex - 0.25;
         borderFactor = borderFactor + 0.17;
-        tex.b = tex.b + 0.03;
+        tex.b = tex.b + 0.06;
+        tex.r = tex.r - 0.03;
+        lighting = 0.8;
     }
     if (
 
@@ -165,6 +184,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     ){
         tex = tex + 0.1;
         tex.b = tex.b + 0.01;
+        lighting = 0.8;
     }
 
     if (
@@ -182,10 +202,10 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     }
     
     else {
-        tex = tex - 0.05;
+        tex = tex - 0.025;
         tex.b = tex.b + 0.01;
     }
-    img = vec4(steel_color.rgb * (pow(avg,0.5)) + tex.rgb * tex.a - borderFactor, ogtrans);
+    img = vec4(steel_color.rgb * vec3(lighting) + 0.06 + tex.rgb * tex.a - borderFactor, ogtrans);
 
 	return dissolve_mask(img, texture_coords, uv);
 

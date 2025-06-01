@@ -1,6 +1,54 @@
 return {
     descriptions = {
         Back={},
+        BlindEdition={
+            ble_unik_steel={
+                name = "Steel",
+                text = {
+                    "Each held card increases",
+                    "blind size by #1#x",
+                }
+            },
+            ble_unik_positive={
+                name = "Positive",
+                text = {
+                    "+x#1# Requirements per",
+                    "Joker owned,",
+                    "x#2# Requirements per",
+                    "Joker above max slots"
+                }
+            },
+            ble_unik_fuzzy={
+                name = "Fuzzy",
+                text = {
+                    "Base chips and mult",
+                    "reduced by 25%",
+                }
+            },
+            ble_unik_corrupted={
+                name = "Corrupted",
+                text = {
+                    "Final chips and mult",
+                    "Set randomly between",
+                    "#1#x and #2#x",
+                }
+            },
+            ble_unik_half={
+                name = "Half",
+                text = {
+                    "Debuff #1# random played cards if",
+                    "more than #2# cards are played",
+                }
+            },
+            ble_unik_bloated={
+                name = "Bloated",
+                text = {
+                    "Each played card has a",
+                    "#1# in #2# chance to be",
+                    "destroyed before play",
+                }
+            }
+        },
         Blind={
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
@@ -80,6 +128,15 @@ return {
                     "will increase victory",
                     "requirements by 3 antes",
 				},
+            },
+            bl_unik_green_goalpost_anticheat={ --Only appears if you somehow managed to avoid activating straddle and you have not won yet for lots of rounds. Has a (number of Green goalpost encounters)/10 to replace green goalpost, regardless of current round.
+                name = "Pakotettumaaliviiva", --Forced finishline: Activates straddle, sets victory requirements every1 ante (aka all blinds become finisher blinds) and increases ante by ^(number of Green goalpost encounters).
+                text = {
+                    "Activates Straddle,",
+                    "set victory requirements",
+                    "to ante 1 and increases ante",
+                    "by ^#1#"
+                }
             },
             --Rework:
             --You need to be in tension 33 to survive
@@ -188,6 +245,25 @@ return {
                     "including eternals",
                 }
             },
+            bl_unik_epic_nostalgic_pillar_mark = {
+                name = "Epäpyhäsulautuma", --The unholy fusion
+                text = {
+                    "Played hand must",
+                    "contain a Straight Flush",
+                },
+            },
+            --finisher blinds based of the worst jokers in vanilla
+            bl_unik_drab_dumpster = {
+                name = "Drab Dumpster",
+                text = {
+					"Create an eternal Garbage Joker", 
+                    "on Blind Selection",
+                    "If hand is not a Straight Flush,",
+                    "convert adjacent non-Garbage",
+                    "Jokers into Garbage Jokers",
+				},
+            },
+
             bl_cry_cube={ --I don't like cube being worse than lemon trophy. So I'll just nerf it to reduce mult by ^0.5 and blind size to be ^0.33. Still severe, but can be brute forced 
                 name = "The Cube",
                 text = {
@@ -593,6 +669,101 @@ return {
                 }
             }
         },
+        jen_omegaconsumable={
+            --unik's consumables
+            c_unik_crossdresser_omega = {
+                name = 'The Crossdresser {C:dark_edition}Omega',
+                text = {
+                    'Select {C:attention}any number{} of cards to enhance to {C:unik_unik_color}Pink{} cards,',
+                    '{C:red}destroy all other cards{} and {C:attention}duplicate the selected cards #1# times', --19 times
+                }
+            },
+            c_unik_wheel_of_misfortune_omega = {
+                name = 'The Evocation {C:dark_edition}Omega',
+                text = {
+                    '{C:red}Destroy{} all {X:cry_cursed,C:white}Cursed{} Jokers and',
+                    'for each {X:cry_cursed,C:white}Cursed{} Joker destroyed',
+                    'create {C:attention}#1#{} random {C:red,E:1}Omega{} cards',
+                    '{C:inactive}(Excludes Balatro\'s Soul)',
+                }
+            },
+            --triple planet cards
+            c_unik_ruutu_omega={
+                name = 'Ruutu {C:dark_edition}Omega',
+                text = {
+                    '{C:jen_RGB,E:1}#1#,',
+                    '{C:jen_RGB,E:1}#2#,',
+                    '{C:jen_RGB,E:1}and #3#',
+                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{},',
+                    '{C:mult}Mult{}, and {C:mult}Level Mult{},',
+                    'and then {C:attention}doubles{} current {C:planet}levels'
+                }
+            },
+            c_unik_risti_omega={
+                name = 'Risti {C:dark_edition}Omega',
+                text = {
+                    '{C:jen_RGB,E:1}#1#,',
+                    '{C:jen_RGB,E:1}#2#,',
+                    '{C:jen_RGB,E:1}and #3#',
+                    ' ',
+                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
+                    'and then {C:attention}doubles{} current {C:planet}levels'
+                }
+            },
+            c_unik_hertta_omega={
+                name = 'Hertta {C:dark_edition}Omega',
+                text = {
+                    '{C:jen_RGB,E:1}#1#,',
+                    '{C:jen_RGB,E:1}#2#,',
+                    '{C:jen_RGB,E:1}and #3#',
+                    ' ',
+                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
+                    'and then {C:attention}doubles{} current {C:planet}levels'
+                }
+            },
+            c_unik_pata_omega={
+                name = 'Pata {C:dark_edition}Omega',
+                text = {
+                    '{C:jen_RGB,E:1}#1#,',
+                    '{C:jen_RGB,E:1}#2#,',
+                    '{C:jen_RGB,E:1}and #3#',
+                    ' ',
+                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
+                    'and then {C:attention}doubles{} current {C:planet}levels'
+                }
+            },
+            c_unik_kaikki_omega={
+                name = 'Kaikki {C:dark_edition}Omega',
+                text = {
+                    '{C:jen_RGB,E:1}#1#,',
+                    '{C:jen_RGB,E:1}#2#,',
+                    '{C:jen_RGB,E:1}and #3#',
+                    ' ',
+                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
+                    'and then {C:attention}doubles{} current {C:planet}levels'
+                }
+            },
+
+        },
+        Rotarot = {
+            c_unik_rot_crossdresser={
+                name = 'The Crossdresser!',
+                text = {
+                    'Select {C:attention}#1#{} cards to',
+                    'convert to {C:attention}7s{}',
+                },
+            },
+            c_unik_rot_wheel_of_misfortune={ --3 in 4 chance to add a detrimental edition and banana to a joker, otherwise add a random modded edition.
+                name = 'The Evocation!',
+                text = {
+                    "{C:green}#1# in #2#{} chance to add a",
+                    "{C:red}detrimental{} {C:unik_shitty_edition}edition{} to",
+                    "a random Joker",
+                    "otherwise apply a {C:attention}modded{}",
+                    "{C:edition}edition{} to a random Joker",
+                }
+            }
+        },
         Joker={
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
@@ -842,7 +1013,7 @@ return {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:unik_caption,s:0.7,E:1}#5#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 }
@@ -853,7 +1024,7 @@ return {
                     "This Joker gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#5#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                 }
             },
@@ -862,7 +1033,7 @@ return {
                 text = {
                     "This Joker gains {X:chips,C:white}X#3#{} Chips", 
                     "if played hand contains a scoring {C:attention}7{}",
-                    "{C:inactive}(Currently {X:chips,C:white}^#4#{C:inactive} Chips)",
+                    "{C:inactive}(Currently {X:chips,C:white}X#4#{C:inactive} Chips)",
                     "{C:unik_caption,s:0.7,E:1}#5#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
@@ -988,7 +1159,9 @@ return {
                     "{X:mult,C:white}X#1#{} Mult, decreases by",
                     "{X:mult,C:white}X#2#{} every {C:attention}second{}",
                     "Becomes {C:red}Impound Notice{} at {X:mult,C:white}X1{} mult",
-                    "Resets at {X:mult,C:white}X#3#{} Mult at start and end of {C:attention}Round{}",
+                    "or when {C:attention}sold{} in Blind",
+                    "Resets at {X:mult,C:white}X#3#{} Mult at",
+                    "start and end of {C:attention}Round{}",
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
                 }, 
             },
@@ -1198,6 +1371,27 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",
                 }
             },
+            j_unik_lockpick = {
+                name = 'Lockpick',
+                text = {
+                    "You can now {C:attention}sell",
+                    "{C:purple}Eternal{} Jokers",
+                    "{E:2,C:red}Self destructs{}",
+                    "after {C:attention}selling{} an",
+                    "{C:purple}Eternal{} Joker"
+                },
+            },
+            j_unik_lockpick_modest = {
+                name = 'Lockpick',
+                text = {
+                    "You can now {C:attention}banish",
+                    "{C:purple}Eternal{} Jokers for",
+                    "{E:2,C:red}negative{} sell value",
+                    "{E:2,C:red}Self destructs{}",
+                    "after {C:attention}selling{} an",
+                    "{C:purple}Eternal{} Joker"
+                },
+            },
 
             --Override hunter loc to include "Red Rot"
             j_jen_hunter = {
@@ -1277,6 +1471,30 @@ return {
                     "single {C:attention}King{} of {C:spades}#2#",
                 }
             },
+            j_unik_ghost_joker={ --rare or epic
+                name = "Ghost Joker",
+                text = {
+                    "Create a {C:spectral}Spectral{} card",
+                    "when {C:attention}Blind{} is selected",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            j_unik_weetomancer={ --rare
+                name = "Weetomancer",
+                text = {
+                    "Create a {C:paperback_minor_arcana}Minor Arcana{} card",
+                    "when {C:attention}Blind{} is selected",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            j_unik_hellspawner={ --cursed
+                name = "Hellspawner",
+                text = {
+                    "Create a {X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card",
+                    "when {C:attention}Blind{} is selected",
+                    "{E:2,C:red}Self destructs{}",
+                }
+            },
 
 
             ---OVERRIDES
@@ -1315,7 +1533,7 @@ return {
 				}, 
             },
             --cry about it
-            j_cry_googol_play = {
+            j_cry_googol_play_self_dest = {
 				name = "Googol Play Card",
 				text = {
 					"{C:green}#1# in #2#{} chance for",
@@ -2180,8 +2398,8 @@ return {
             k_unik_tag="tags",
             k_unik_epic_sand_almanac_1 = "Increase blind size",
             k_unik_epic_sand_almanac_2 = "by {Tags held}1.1",
-            k_unik_epic_vice_placeholder = "(5, increase by ^1.05 per Tukehtumisenpahe)"
-
+            k_unik_epic_vice_placeholder = "(5, increase by ^1.05 per Tukehtumisenpahe)",
+            ph_game_over="YOU ARE DEAD",
         },
         high_scores={},
         labels={

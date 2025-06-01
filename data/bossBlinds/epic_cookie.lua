@@ -132,6 +132,15 @@ SMODS.Blind{
 local pcfh = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
 	G.GAME.before_play_buffer = true
+
+    if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+        local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+        if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
+            edi:unik_before_play()
+        end
+    end
+    --Steel blind edition, each held card
+
     --Epic cookie: Deselect cards pending destruction
     for i=1, #G.hand.highlighted do
         if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.set_for_destruction then

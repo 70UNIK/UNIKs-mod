@@ -107,6 +107,25 @@ if G.jokers then
         end
     end
 end
+
+--Also blind edition before play
+if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+    local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+    if edi.press_play and edi.press_play() and (type(edi.press_play) == "function") then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = (function()
+                SMODS.juice_up_blind()
+                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
+                    play_sound('tarot2', 0.76, 0.4);return true end}))
+                play_sound('tarot2', 1, 0.4)
+                return true
+            end)
+        }))
+        delay(0.4)
+        edi:press_play(G.GAME.blind_on_deck)
+    end
+end
 '''
 
 ### cube content set: add cube and big cube to the cube sets (cannot do it manually, have to patch it in)

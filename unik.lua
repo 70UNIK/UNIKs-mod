@@ -99,6 +99,7 @@ NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 -- NFS.load(mod_path .. "data/hooks/debuff_jokers.lua")() --debuff jojkersare incredibly glitchy
 NFS.load(mod_path .. "data/hooks/godsmarbling_sprites.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
+NFS.load(mod_path .. "data/hooks/updater.lua")()
 SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
@@ -192,6 +193,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "unik_omegaplanets",
+	path = "unik_omegaplanets.png",
+	px = 71,
+	py = 95
+}
 
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
@@ -212,6 +219,13 @@ SMODS.ConsumableType {
     end
 }
 
+-- EDITIONS --
+NFS.load(mod_path .. "data/editions/steel.lua")()
+NFS.load(mod_path .. "data/editions/positive.lua")()
+NFS.load(mod_path .. "data/editions/bloated.lua")()
+NFS.load(mod_path .. "data/editions/half.lua")()
+NFS.load(mod_path .. "data/editions/fuzzy.lua")()
+NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
 -- stickers
 NFS.load(mod_path .. "data/stickers/triggering.lua")() 
@@ -265,6 +279,10 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
 	NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
 end
+--Omega cards
+if (SMODS.Mods["jen"] or {}).can_load then
+	NFS.load(mod_path .. "data/omegas/omega_ruutu.lua")() 
+end
 --boosters
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
@@ -313,6 +331,12 @@ end
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 
+--blind editions
+NFS.load(mod_path .. "data/blindeditions/steel.lua")()
+NFS.load(mod_path .. "data/blindeditions/bloated.lua")()
+NFS.load(mod_path .. "data/blindeditions/half.lua")()
+NFS.load(mod_path .. "data/blindeditions/positive.lua")()
+
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
@@ -340,13 +364,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")()
 	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
--- EDITIONS --
-NFS.load(mod_path .. "data/editions/steel.lua")()
-NFS.load(mod_path .. "data/editions/positive.lua")()
-NFS.load(mod_path .. "data/editions/bloated.lua")()
-NFS.load(mod_path .. "data/editions/half.lua")()
-NFS.load(mod_path .. "data/editions/fuzzy.lua")()
-NFS.load(mod_path .. "data/editions/corrupted.lua")()
+
 -- ENHANCEMENTS --
 -- Requires both buffoonery and jen's almanac
 if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
@@ -385,6 +403,7 @@ NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 if not (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 end
+NFS.load(mod_path .. "data/jokers/lockpick.lua")()
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
 -- NFS.load(mod_path .. "data/jokers/double_container.lua")()

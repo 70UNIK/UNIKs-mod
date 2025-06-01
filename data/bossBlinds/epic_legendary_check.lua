@@ -51,7 +51,7 @@ function CanSpawnLegendary()
     if G.GAME.modifiers.unik_legendary_at_any_time or (not (SMODS.Mods["jen"] or {}).can_load and G.jokers and #Cryptid.advanced_find_joker(nil, "k_entr_zenith", nil, nil, true) ~= 0) then
         return true
     end
-    if G.GAME.round >= 100 - (straddle*5)then
+    if G.GAME.round >= 90 - (straddle*5)then
         if (SMODS.Mods["jen"] or {}).can_load then
             return true
         end

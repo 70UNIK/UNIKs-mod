@@ -9,6 +9,11 @@ SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',
     config = { extra = { increase = 1.1 } },
+	--you can have your fun in madness (to an extent)
+	gameset_config = {
+		madness = { extra = { increase = 1.2 }, immutable = false },
+		modest = {disabled = true}
+	},
     -- calculate = function(self, card, context)
 	-- 	if
 	-- 		(context.end_of_round and not context.repetition and not context.individual and not context.blueprint)
@@ -113,7 +118,7 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 
 --JAWBUSTER
 SMODS.Joker:take_ownership("j_cry_jawbreaker", {
-    config = { extra = {increase = 1.6,self_destruct = false} },
+    config = { extra = {increase = 1.5,self_destruct = false} },
     loc_vars = function(self, info_queue, center)
 		return { vars = { number_format(center.ability.extra.increase) } }
 	end,
@@ -267,7 +272,7 @@ SMODS.Joker:take_ownership("j_cry_googol_play",{
 	config = {
 		extra = {
 			Xmult = 1e100,
-			odds = 16,
+			odds = 8,
 			oddsDestruction = 1e100,
 		},
 	},
@@ -276,6 +281,7 @@ SMODS.Joker:take_ownership("j_cry_googol_play",{
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
+			key = Cryptid.gameset_loc(self, { mainline = "self_dest", modest = "self_dest" }), 
 			vars = {
 				cry_prob(card.ability.cry_prob, card.ability.extra.odds, card.ability.cry_rigged),
 				card.ability.extra.odds,
@@ -291,7 +297,7 @@ SMODS.Joker:take_ownership("j_cry_googol_play",{
 			and pseudorandom("cry_googol_play")
 				< cry_prob(card.ability.cry_prob, card.ability.extra.odds, card.ability.cry_rigged) / card.ability.extra.odds
 		then
-			if pseudorandom("no_rigging_free_emult_your_way_out_muthafucker")
+			if  Card.get_gameset(card) ~= "madness" and pseudorandom("no_rigging_free_emult_your_way_out_muthafucker")
 				< math.min(cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged) or 1,1) / card.ability.extra.oddsDestruction then
 				G.E_MANAGER:add_event(Event({
 					trigger = 'after',
@@ -313,13 +319,15 @@ SMODS.Joker:take_ownership("j_cry_googol_play",{
 			}
 		end
 		if context.forcetrigger then
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				func = function()
-					selfDestruction_noMessage(card,false)
-					return true
-				end,
-			}))
+			if not Card.get_gameset(card) ~= "madness" then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					func = function()
+						selfDestruction_noMessage(card,false)
+						return true
+					end,
+				}))
+			end
 			return {
 				message = localize({
 					type = "variable",
@@ -379,7 +387,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 				colour = G.C.CHIPS,
 			}
 		end
-		if context.cry_press then
+		if context.cry_press  and not context.blueprint then
 			if (not card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(0))
 				or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(card.ability.extra.depleted_threshold))
 			then
@@ -759,9 +767,7 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 			x_chips = card.ability.extra.X_chips
 		}
 		end
-
-		-- Penalize discarding cards only when the current mult is higher than 1
-		if context.discard and not context.blueprint and card.ability.extra.X_chips > 1 then
+		if context.discard and not context.blueprint then
 			-- Reduce the xChips value
 			card.ability.extra.X_chips = card.ability.extra.X_chips - card.ability.extra.reduction_amount
 

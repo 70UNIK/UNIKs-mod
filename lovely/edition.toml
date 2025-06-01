@@ -191,3 +191,68 @@ if edition_soul_sprite == false then
 '''
 match_indent = true
 
+### Prevent delay when applying a lot of editions at once.
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/overrides.lua"]'''
+pattern = '''if self.edition and not silent then
+		local ed = G.P_CENTERS['e_' .. (self.edition.type)]
+		G.CONTROLLER.locks.edition = true
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = not immediate and 0.2 or 0,
+			blockable = not immediate,
+			func = function()
+				if self.edition then
+					self:juice_up(1, 0.5)
+					play_sound(ed.sound.sound, ed.sound.per, ed.sound.vol)
+				end
+				return true
+			end
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.1,
+			func = function()
+				G.CONTROLLER.locks.edition = false
+				return true
+			end
+		}))
+	end'''
+position = "at"
+payload = '''
+if self.edition and not silent and not G.GAME.force_bypass_edition_delay then
+    local ed = G.P_CENTERS['e_' .. (self.edition.type)]
+    G.CONTROLLER.locks.edition = true
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = not immediate and 0.2 or 0,
+        blockable = not immediate,
+        func = function()
+            if self.edition then
+                self:juice_up(1, 0.5)
+                play_sound(ed.sound.sound, ed.sound.per, ed.sound.vol)
+            end
+            return true
+        end
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.1,
+        func = function()
+            G.CONTROLLER.locks.edition = false
+            return true
+        end
+    }))
+elseif self.edition and not silent and G.GAME.force_bypass_edition_delay  then
+    
+    local ed = G.P_CENTERS['e_' .. (self.edition.type)]
+    if self.edition then
+        self:juice_up(1, 0.5)
+        play_sound(ed.sound.sound, ed.sound.per, ed.sound.vol)
+    end
+
+end
+'''
+match_indent = true

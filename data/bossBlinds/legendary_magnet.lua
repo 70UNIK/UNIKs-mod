@@ -52,7 +52,9 @@ SMODS.Blind{
                             card.ability.unik_niko = true
                         end
                          --Avoid permanent damage and lag
-                        --card:set_edition({ polychrome = true }, nil, nil, true) --too long
+                         G.GAME.force_bypass_edition_delay = true
+                        card:set_edition({ unik_steel = true }, nil, nil, true) --too long
+                        G.GAME.force_bypass_edition_delay = nil
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card)
 						G.deck:emplace(card)

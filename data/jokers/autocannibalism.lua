@@ -83,7 +83,7 @@ SMODS.Joker {
                 elseif v.config.center.key == "j_mf_lollipop" then
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
-                    v.ability.Xmult = 1
+                    v.ability.x_mult = 1
                 --Nachos
                 elseif v.config.center.key == "j_paperback_nachos" then
                     v.ability.unik_depleted = true

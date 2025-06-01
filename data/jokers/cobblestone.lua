@@ -1,0 +1,1 @@
+--rankless and suitless cards have a 1 in 2 chance to NOT give x1.5 chips

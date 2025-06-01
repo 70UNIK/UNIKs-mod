@@ -1,0 +1,2 @@
+--The Crossdresser!
+--Select 2 cards to convert into 7s (placeholder, will change into)

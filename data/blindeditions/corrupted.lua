@@ -1,0 +1,1 @@
+--final chips and mult randomly multiplied between 0.5x and 1x

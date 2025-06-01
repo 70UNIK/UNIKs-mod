@@ -335,6 +335,9 @@ local function BlindIncrement(penalty)
                 
 				
 				G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                G.HUD_blind:recalculate(true)
+                G.hand_text_area.blind_chips:juice_up()
+                play_sound('chips2')
 			end
 		end
 	end
