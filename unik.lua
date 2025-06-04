@@ -332,10 +332,12 @@ NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 
 --blind editions
-NFS.load(mod_path .. "data/blindeditions/steel.lua")()
-NFS.load(mod_path .. "data/blindeditions/bloated.lua")()
-NFS.load(mod_path .. "data/blindeditions/half.lua")()
-NFS.load(mod_path .. "data/blindeditions/positive.lua")()
+if (SMODS.Mods['ble'] or {}).can_load then
+	NFS.load(mod_path .. "data/blindeditions/steel.lua")()
+	NFS.load(mod_path .. "data/blindeditions/bloated.lua")()
+	NFS.load(mod_path .. "data/blindeditions/half.lua")()
+	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
+end
 
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
@@ -411,6 +413,7 @@ NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 NFS.load(mod_path .. "data/jokers/clone_man.lua")()
+NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
  --rare

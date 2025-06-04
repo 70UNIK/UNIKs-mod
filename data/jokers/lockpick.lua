@@ -3,10 +3,10 @@
 --Self destructs after selling an eternal joker
 SMODS.Joker {
     key = 'unik_lockpick',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
-    cost = 7,
+	pos = { x = 4, y = 1 },
+    cost = 5,
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = false,

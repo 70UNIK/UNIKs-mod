@@ -148,12 +148,11 @@ function G.FUNCS.play_cards_from_highlighted(e)
         end
     end
     --Only play if highlight cards are > 0
-    if #G.hand.highlighted > 0 then
-        pcfh(e)
-    elseif e and e.disable_button then
-        e.disable_button = nil
-       -- print("disble")
+    if #G.hand.highlighted == 0 then
+        G.PROFILES[G.SETTINGS.profile].cry_none = true
     end
+    --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
+    pcfh(e)
 	G.GAME.before_play_buffer = nil
 end
 

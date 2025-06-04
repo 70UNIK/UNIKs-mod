@@ -202,7 +202,7 @@ function DynamicOperator(card,context)
 		SMODS.calculate_effect({
 			message = localize({
 				type = "variable",
-				key = "a_EEchips",
+				key = "a_EEmult",
 				vars = {
 					number_format(card.ability.extra.hypermult),
 				},

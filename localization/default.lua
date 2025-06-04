@@ -1495,6 +1495,28 @@ return {
                     "{E:2,C:red}Self destructs{}",
                 }
             },
+            j_unik_epic_blind_sauce = {
+                name = "Epic Blind Sauce",
+                text = {
+                    "{X:dark_edition,C:white}^^#1#{} Mult after scoring",
+                    "If {C:attention}copied{}, {C:attention}retriggered{} or",
+                    "Blind beaten in {C:attention}1{} hand,",
+                    "{E:2,C:red}Self destruct{} and",
+                    "next blind becomes",
+                    "an {E:2,C:red}Epic Blind{}"
+                }
+            },
+            j_unik_epic_blind_sauce_no_epic = {
+                name = "Epic Blind Sauce",
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Mult after scoring",
+                    "If {C:attention}copied{}, {C:attention}retriggered{} or",
+                    "Blind beaten in {C:attention}1{} hand,",
+                    "{E:2,C:red}Self destruct{} and",
+                    "next blind becomes",
+                    "a {E:2,C:red}Finisher Blind{}"
+                }
+            },
 
 
             ---OVERRIDES
@@ -2287,6 +2309,7 @@ return {
             k_unik_reed_part2 = "or",
             k_unik_epic_sand_placeholder = "(Tags held)",
             k_unik_half = "Half",
+            k_defeated_by = "Killed By",
             
 
             --Godsmarble ramirez family members
@@ -2596,6 +2619,7 @@ return {
         tutorial={},
         v_dictionary={
             a_eblindsize = {"^#1# Blind Size"},
+            a_EEmult = {"^^#1# Mult"},
             a_EEchips = { "^^#1# Chips" },
             a_hyper_three_chips = { "^^^#1# Chips" },
             a_hyper_three_mult = { "^^^#1# Mult" },
