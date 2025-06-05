@@ -347,12 +347,14 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_shackle.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_decision.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_nostalgic_pillar_flint.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_vice.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Jen has plenty of immutable jokers, thus this would be extremely devastating outside of jens
 	if (SMODS.Mods["jen"] or {}).can_load then 

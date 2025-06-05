@@ -27,6 +27,7 @@ SMODS.Blind{
 				return true
 			end
 		end
+        return false
 	end,
     stay_flipped = function(self, area, card)
 		if (pseudorandom(pseudoseed("xenomorph_debuff_chance")) < ((G.GAME.probabilities.normal) / 4)) then

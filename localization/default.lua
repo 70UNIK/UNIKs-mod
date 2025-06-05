@@ -130,7 +130,7 @@ return {
 				},
             },
             bl_unik_green_goalpost_anticheat={ --Only appears if you somehow managed to avoid activating straddle and you have not won yet for lots of rounds. Has a (number of Green goalpost encounters)/10 to replace green goalpost, regardless of current round.
-                name = "Pakotettumaaliviiva", --Forced finishline: Activates straddle, sets victory requirements every1 ante (aka all blinds become finisher blinds) and increases ante by ^(number of Green goalpost encounters).
+                name = "Pakotettumaalilinja", --Forced finishline: Activates straddle, sets victory requirements every1 ante (aka all blinds become finisher blinds) and increases ante by ^(number of Green goalpost encounters).
                 text = {
                     "Activates Straddle,",
                     "set victory requirements",
@@ -142,7 +142,7 @@ return {
             --You need to be in tension 33 to survive
             --Or must reroll total rerolls done this run^1.05 before this ante
             bl_unik_epic_artisan={
-                name = "Arteesisetrakenteet", --literally artesian builds
+                name = "Artesialainenrakentaa", --literally artesian builds
 				text = {
                     "Shop rerolls this ante increase",
                     "Blind requirements by ^#1#",
@@ -152,7 +152,7 @@ return {
 				},
             },
             bl_unik_epic_collapse={ --only appears if you have at least 5 stone cards in the deck
-                name = "Kaatuvatorni", --the collapsing tower
+                name = "Romahtavatorni", --the collapsing tower
 				text = {
                     "If played hand",
                     "contains a suit",
@@ -179,14 +179,14 @@ return {
                 --maybe have a special interaction with White Lily Cookie (hmm dark enchantress)
             },
             bl_unik_epic_reed={
-                name = "Haitallinenruoko", --the infestive reed (the reed from ortalab)
+                name = "Tartunnanruoko", --Reed of infestation
 				text = {
                     "If hand does not contain",
                     "#1#, die", --2 random ranks accoring to your deck composition
 				},
             },
             bl_unik_epic_decision={ -- Mortoninhaarukka: Morton's Fork, cause no matter what, all choices are bad. Created last due to the effort needed to create the entire "lartceps" set (baneful spectrals)
-                name = "Mortoninhaarukka", --Epic Decision
+                name = "Mortoninhaarukka", -- Morton's Fork (Epic Decision)
                 text = {
                     "On Blind Select,",
                     "Open an unskippable", 
@@ -201,11 +201,11 @@ return {
                     "(Currently #3##4##5#)"
                 },
             },
-            bl_unik_epic_hannibal = { --Always draw 3 cards after play and discard. If any cards are held in hand after blind defeat, die
-                name = "Nälkäinenkannibaali", --The hungry cannibal
+            bl_unik_epic_hannibal = { --Always draw 4 cards after play and discard. If any cards are held in hand after blind defeat, die
+                name = "Nälkäinenkannibaali", --The hungry cannibal (Epic Hannibal)
                 text = {
                     "After Play or Discard,",
-                    "always draw 3 cards",
+                    "always draw #1# cards",
                     "If any card is held after",
                     "Blind Defeat, die"
                 },
@@ -226,7 +226,7 @@ return {
                 } --Better get immutables going on.
             },
             bl_unik_epic_xenomorph_queen={ --1 in 4 chance drawn card is debuffed. If card contains undebuffed cards, die. --HARD COUNTERS DANDY --Balatro goes kino
-                name = "Syövyttäväulkomaalainen", --Corrosive Alien
+                name = "Syövyttävämuukalainen", --Corrosive Alien
                 text = {
                     "#1# in #2# chance",
                     "card is drawn debuffed",
@@ -235,7 +235,7 @@ return {
                 }
             },
             bl_unik_epic_shackle={ --Reduce hand size by (number of empty joker slots x negative jokers owned) and destroy all negative jokers, cards and consumeables.
-                name = "Bifurkaationkahle", --Shackle of bifrication
+                name = "Kärsimyksenkahle", --Shackle of Suffering
                 text = {
                     "#1# hand size",
                     "and Joker slots by",
@@ -245,13 +245,33 @@ return {
                     "including eternals",
                 }
             },
-            bl_unik_epic_nostalgic_pillar_mark = {
-                name = "Epäpyhäsulautuma", --The unholy fusion
+            bl_unik_epic_nostalgic_pillar_flint = {
+                name = "Epäpyhäfuusio", --The unholy fusion
                 text = {
                     "Played hand must",
-                    "contain a Straight Flush",
+                    "contain a Straight Flush", --the hardest hand type to build, cannot force it as well.
                 },
             },
+            bl_unik_epic_confrontation = {
+                name = "Uhankohtaaminen", --Confronting the menace (Epic Confrontation)
+                text = {
+                    "If any card held in hand",
+                    "is not a face card, die",
+                }
+            },
+            bl_unik_epic_jollyless = {
+                name = "Ilotonmasennus",
+                text = {
+                    "Banish all Jolly and M", --that includes jolly edition cards
+                    "Jokers obtained this run",
+                    "then destroy all cards in deck",
+                    "that lack another with the",
+                    "same rank and suit",
+                    "(Rankless/Suitless will always be destroyed)",
+                }
+            },
+            
+
             --finisher blinds based of the worst jokers in vanilla
             bl_unik_drab_dumpster = {
                 name = "Drab Dumpster",
@@ -294,6 +314,15 @@ return {
 					"in deck to Steel cards",
                     "hand must not hold Steel cards",
 				},
+            },
+            bl_unik_legendary_chamber={
+                name = "Kidutuskammio", --The torture chamber (Legendary Chartreuse Chamber) (pokermon)
+                text = {
+                    "All scoring is added to",
+                    "ante instead of score for",
+                    "(number of Joker rarities owned) hands",
+                    "(Currently #1#)",
+                },
             },
             bl_unik_legendary_magnet={
                 name = "Murhaavamagneetti", --Murderous Magnet --nerfed to just not score to give more control
@@ -358,6 +387,7 @@ return {
             bl_unik_legendary_tornado={
                 name = "Ylihuomenna", --Day after tomorrow
 				text = {
+                    "None hand banned", --no cheesing
                     "Set hands to 66", -- set hands to 66, only 23 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
                     "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity. Maybe remove the pity in almanac!
                     "will score",
