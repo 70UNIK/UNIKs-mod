@@ -200,7 +200,7 @@ end
 local gfrb2 = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)
 	local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-	if obj.boss.legendary then
+	if obj.boss and obj.boss.legendary then
 		play_sound('cancel', 0.7 + 0.05, 0.7)
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
@@ -208,7 +208,7 @@ G.FUNCS.reroll_boss = function(e)
         })
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
-    elseif obj.boss.epic and not (SMODS.Mods["jen"] or {}).can_load then
+    elseif obj.boss and obj.boss.epic and not (SMODS.Mods["jen"] or {}).can_load then
         play_sound('cancel', 0.8, 1)
         local text = localize('k_nope_ex')
         attention_text({

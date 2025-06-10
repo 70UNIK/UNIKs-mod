@@ -68,7 +68,8 @@ return {
                 name = "Harlequin Hurricane",
 				text = {
 					"#1# in #2# chance for",
-					"scored hand to be negative,",
+					"scored hand to add to the",
+                    "blind size instead",
 				},
             },
             bl_unik_persimmon_placard={
@@ -248,8 +249,8 @@ return {
             bl_unik_epic_nostalgic_pillar_flint = {
                 name = "Epäpyhäfuusio", --The unholy fusion
                 text = {
-                    "Played hand must",
-                    "contain a Straight Flush", --the hardest hand type to build, cannot force it as well.
+                    "Must play Straight Flushes",
+                     --the hardest hand type to build, cannot force it as well.
                 },
             },
             bl_unik_epic_confrontation = {
@@ -262,25 +263,31 @@ return {
             bl_unik_epic_jollyless = {
                 name = "Ilotonmasennus",
                 text = {
-                    "Banish all Jolly and M", --that includes jolly edition cards
-                    "Jokers obtained this run",
+                    "Destroy all Jolly and M Jokers", --that includes jolly edition cards
                     "then destroy all cards in deck",
                     "that lack another with the",
                     "same rank and suit",
                     "(Rankless/Suitless will always be destroyed)",
                 }
             },
-            
-
-            --finisher blinds based of the worst jokers in vanilla
-            bl_unik_drab_dumpster = {
-                name = "Drab Dumpster",
+            bl_unik_jaundice_jack = {
+                name = "Jaundice Jack",
                 text = {
-					"Create an eternal Garbage Joker", 
+					"Create an eternal Hit the Road", 
+                    "on Blind Selection",
+                    "If a Jack is not discarded before hand,",
+                    "convert adjacent Jokers",
+                    "into Hit the Roads",
+				},
+            },
+            bl_unik_septic_seance = {
+                name = "Septic Seance",
+                text = {
+					"Create an eternal Seance", 
                     "on Blind Selection",
                     "If hand is not a Straight Flush,",
-                    "convert adjacent non-Garbage",
-                    "Jokers into Garbage Jokers",
+                    "convert adjacent Jokers",
+                    "into Seances",
 				},
             },
 
@@ -315,13 +322,16 @@ return {
                     "hand must not hold Steel cards",
 				},
             },
+            --All chips are added to ante for (Joker rarities owned)
             bl_unik_legendary_chamber={
                 name = "Kidutuskammio", --The torture chamber (Legendary Chartreuse Chamber) (pokermon)
                 text = {
+                    "Multiply ante by",
+                    "(Joker rarities owned)^0.5 per hand,",
                     "All scoring is added to",
-                    "ante instead of score for",
-                    "(number of Joker rarities owned) hands",
-                    "(Currently #1#)",
+                    "the Blind size instead of score",
+                    "for the next (Joker rarities owned) hands",
+                    "(Currently #1#, #2# hands)",
                 },
             },
             bl_unik_legendary_magnet={
@@ -387,10 +397,10 @@ return {
             bl_unik_legendary_tornado={
                 name = "Ylihuomenna", --Day after tomorrow
 				text = {
-                    "None hand banned", --no cheesing
                     "Set hands to 66", -- set hands to 66, only 23 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
                     "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity. Maybe remove the pity in almanac!
                     "will score",
+                    "If none hand played, die", --aka you must select at least 1 card.
 				},                  
             },
             bl_unik_legendary_leaf={
@@ -416,11 +426,11 @@ return {
                 name = "Korruptionkruunu", --Corrupted Crown
                 text ={
                     "Defeat this blind #1# time#2#",
-                    "Set hands to 1, only replenish",
-                    "hand per blind defeat",
+                    "Set hands to 1 per attempt",
+                    "Deck and discards not replenished",
                     "Per defeat, rescale blind to",
                     "(best hand this run)#3#",
-                    "If hands = 1, increase",
+                    "If starting hands = 1, increase",
                     "requirements by #4#",
                 }
             },
@@ -428,9 +438,9 @@ return {
             bl_unik_video_poker={
                 name = "Video Poker",
 				text = {
-                    "Hand Size fixed to 5 (Efficinare debuffed)",
+                    "Hand Size fixed to 5",
 					"Only 1 Discard per Hand",
-                    "Must play all cards, High cards are banned",
+                    "Must play all cards, High card is banned",
                     "Pairs must have scoring Jacks or better",
 				},
             },
@@ -470,7 +480,7 @@ return {
                 text = {
                     "All uneditioned Jokers", --Has legendary blind glitch FX cause pibby
                     "and cards in hand",
-                    "are Corrupted after play",
+                    "are Corrupted before play",
                 }
             },
             bl_unik_the_replay={
@@ -519,8 +529,7 @@ return {
             bl_unik_the_petard={
                 name = "The Petard",
 				text = {
-					"Disabling this blind",
-                    "causes instant death",
+					"If blind disabled, die",
 				},
             },
             bl_unik_the_jollyless={
@@ -575,13 +584,54 @@ return {
             bl_unik_the_gale={
                 name = "The Gale",
 				text = {
-					"#1# in #2# chance",
-                    "a single hand", --this means each hand has a set chance of fail, but once said hand fails, rest are free (a lenient version of tornado)
-					"will not score",
-                    "for this round",
+					"First hand will not score",
 				},
             }
             
+        },
+        --akioyoris shennanngians
+        DescriptionDummy={
+            dd_akyrs_unskippable_blind={
+                name = "Unskippable Blind",
+                text={
+                    "Cannot be skipped"
+                }
+            },
+            dd_akyrs_all_unskippable_blinds={
+                name = "Unskippable Ante",
+                text={
+                    "All blinds are",
+                    "unskippable",
+                }
+            },
+            dd_akyrs_epic_blind_no_almanac={
+                name = "Epic Blind",
+                text={
+                    "How did it escape from",
+                    "that mod????!!!!",
+                }
+            },
+            dd_akyrs_epic_blind={
+                name = "Epic Blind",
+                text={
+                    "Extremely hard blind",
+                    "with a 666% chance",
+                    "to die",
+                }
+            },
+           dd_akyrs_legendary_blind={
+                name = "Legendary Blind",
+                text = {
+                    "Hell is waiting for you...",
+                }
+            },
+            dd_akyrs_instant_death_risk={
+                name = "Instant Death Risk",
+                text = {
+                    "You could straight",
+                    "up die immediately",
+                }
+            }
         },
         Edition={            
             e_unik_positive={
@@ -1547,6 +1597,15 @@ return {
                     "a {E:2,C:red}Finisher Blind{}"
                 }
             },
+            j_unik_cobblestone = {
+                name = "Cobblestone",
+                text = {
+                    "{C:attention}Rankless and suitless",
+                    "cards have a {C:green}#1# in #2#{}",
+                    "chance to {C:red}not{}",
+                    "give {X:chips,C:white}X#3#{} Chips"
+                }
+            },
 
 
             ---OVERRIDES
@@ -1590,7 +1649,7 @@ return {
 				text = {
 					"{C:green}#1# in #2#{} chance for",
 					"{X:red,C:white} X#3# {} Mult",
-                    "{C:green}#4# in #5#{} chance to",
+                    "{C:green}#1# in #4#{} chance to",
 					"{E:2,C:red}self destruct{} on trigger",
 				},
 				unlock = {
@@ -1937,6 +1996,15 @@ return {
 					"other Jokers",
 				},
 			},
+            c_unik_foundry = {
+                name = "Foundry",
+                text = {
+                    "Add {C:dark_edition}Steel{} to a",
+                    "selected playing card",
+                    "{C:green}#1# in #2#{} chance to",
+                    "add {C:attention}#3#{} playing card(s)",
+                }
+            }
         },
         Stake={
             stake_unik_shitty = {
@@ -2340,8 +2408,15 @@ return {
             k_unik_epic_sand_placeholder = "(Tags held)",
             k_unik_half = "Half",
             k_defeated_by = "Killed By",
-            
-
+            k_unik_none_hand_banned = "None hand is banned",
+            k_unik_jaundice_jack = "If a Jack not discarded before hand, convert adjacent Jokers to Hit the Road",
+            k_unik_septic_seance = "If hand is not Straight Flush, convert adjacent Jokers to Seance",
+            k_unik_jackshit = "JACKSHIT!",
+            k_unik_seance_or_else="SEANCE OR ELSE!",
+            k_unik_chamber_placeholder="(Joker rarities owned)",
+            k_unik_chamber_placeholder2="(Joker rarities owned)",
+            k_unik_chamber_warning1="Next ",
+            k_unik_chamber_warning2=" hands will add to the blind size",
             --Godsmarble ramirez family members
             k_unik_family_disabled = "All abilities are disabled...",
             k_unik_family_disabled2 = "...you monster.",
@@ -2578,12 +2653,12 @@ return {
                 "^1.666 requirements...",
             },
             special_lose_unik_tornado_legendary={
-                "Keep your scoring consistent",
-                "and have a blank die next time...",
+                "Perhaps deck bloat",
+                "could help?",
             },
             special_lose_unik_sword_legendary={
-                "Maybe practice single",
-                "high card scoring...",
+                "Huh, your weapon",
+                "wasn't sharp enough.",
             },
             special_lose_unik_pentagram_legendary1={
                 "Some monsters",
@@ -2641,6 +2716,40 @@ return {
             special_lose_unik_epic_shackle={
                 "Better fill up your",
                 "Joker slots!",
+            },
+            special_lose_unik_jaundice_jack={
+                "YOU JACKSHIT!",
+            },
+            special_lose_unik_seance={
+                "Bruh, seance is the BEST",
+                "card, you shitass!",
+            },
+            special_lose_torture_chamber={
+                "Good luck in your eternal",
+                "stay at a CIA Black Site!",
+            },
+            special_lose_unik_fuzzy={
+                "Touch Fuzzy,",
+                "GET DIZZY!",
+            },
+            special_lose_unik_half={
+                "Too late to beg for",
+                "a half joker now!",
+            },
+            special_lose_unik_darkness={
+                "P L A Y",
+                "W I T H",
+                "M E",
+                "A S S H O L E",
+            },
+            special_lose_unik_bloon={
+                "You're leaking!",
+                "Oh wait, you've",
+                "already popped."
+            },
+            special_lose_unik_positive={
+                "Big brother is",
+                "always watching!",
             }
         },
         ranks={},

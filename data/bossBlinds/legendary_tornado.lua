@@ -39,6 +39,14 @@ SMODS.Blind{
     in_pool = function()
         return CanSpawnLegendary()
     end,
+    unik_kill_hand = function(self, cards, hand, handname, check)
+        if next(hand["cry_None"]) then	
+            G.GAME.blind.triggered = true
+			return true
+		end
+        
+		return false
+    end,
 	debuff_hand = function(self, cards, hand, handname, check)
 		-- --Phase 1: Check for 1 in 666 chance of instakill cause its funny
         -- if

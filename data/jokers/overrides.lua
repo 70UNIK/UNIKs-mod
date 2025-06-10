@@ -283,10 +283,9 @@ SMODS.Joker:take_ownership("j_cry_googol_play",{
 		return {
 			key = Cryptid.gameset_loc(self, { mainline = "self_dest", modest = "self_dest" }), 
 			vars = {
-				cry_prob(card.ability.cry_prob, card.ability.extra.odds, card.ability.cry_rigged),
+				cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged),
 				card.ability.extra.odds,
 				number_format(card.ability.extra.Xmult),
-				math.min(cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged) or 1,1),
 				card.ability.extra.oddsDestruction,
 			},
 		}
@@ -295,10 +294,10 @@ SMODS.Joker:take_ownership("j_cry_googol_play",{
 		if
 			context.joker_main
 			and pseudorandom("cry_googol_play")
-				< cry_prob(card.ability.cry_prob, card.ability.extra.odds, card.ability.cry_rigged) / card.ability.extra.odds
+				< cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged) / card.ability.extra.odds
 		then
 			if  Card.get_gameset(card) ~= "madness" and pseudorandom("no_rigging_free_emult_your_way_out_muthafucker")
-				< math.min(cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged) or 1,1) / card.ability.extra.oddsDestruction then
+				< cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged) / card.ability.extra.oddsDestruction then
 				G.E_MANAGER:add_event(Event({
 					trigger = 'after',
 					func = function()
@@ -825,7 +824,4 @@ SMODS.Joker:take_ownership("j_cry_membershipcardtwo",{
 SMODS.Joker:take_ownership("j_cry_membershipcard",{
 	config = { extra = { Xmult_mod = 0.001 } },
 }, true)
-
-
-
 

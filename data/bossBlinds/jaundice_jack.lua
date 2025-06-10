@@ -1,11 +1,9 @@
---todo:
--- if jens almanac is updated, this boss is banned
 SMODS.Blind{
-    key = 'unik_bigger_boo',
+    key = 'unik_jaundice_jack',
     boss = {min = 1, showdown = true}, 
     atlas = "unik_showdown_blinds",
-    pos = { x = 0, y = 4},
-    boss_colour= HEX("daeaee"),
+    pos = { x = 0, y = 24},
+    boss_colour= HEX("f3c851"),
     dollars = 8,
     mult = 2,
     config = {},
@@ -16,17 +14,19 @@ SMODS.Blind{
         end
         return true
 	end,
+    death_message = "special_lose_unik_jaundice_jack",
     get_loc_debuff_text = function(self)
-		return "Convert Jokers adjacent to Ghosts into Ghosts"
+		return localize("k_unik_jaundice_jack")
 	end,
-    death_message = 'special_lose_unik_bigger_boo',
     --Create an eternal ghost
     set_blind = function(self, reset, silent)
+        G.GAME.unik_jack_discarded = nil
         G.GAME.unik_pentagram_manager_fix = true
         if not reset then
             --print("vvvv")
-                    local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_cry_ghost")
+                    local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
                     card2.ability.eternal = true
+                    card2.ability.unik_jackshit = true
                     --destroy card2 if its jimbo
                     -- if (card2.ability.name ~= "Joker") then
                     card2:start_materialize()
@@ -39,52 +39,63 @@ SMODS.Blind{
                     -- else
                     --     card2:remove()
                     -- end
-            local text = localize('k_unik_boo_start')
-            attention_text({
-                scale = 0.8, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
-            })
             G.GAME.blind.triggered = true
             G.GAME.blind:wiggle()
         end
     end,
+    calculate = function(self, blind, context)
+		if context.discard and not G.GAME.blind.disabled then
+			--visual cue to wiggle all jokers
+			if context.other_card:get_id() == 11 then
+                G.GAME.unik_jack_discarded = true
+            end
+		end
+	end,
     --stolen from Cryptid, similar to vermillion virus, except it detects where each ghost is, check for adjacent non cursed jokers and convert them into MORE ghosts!
     --less strong than above but worse long term effects
     cry_before_play = function(self)
-        local ghostList = {}
-        --Get all ghosts 
-        for i=1,#G.jokers.cards do
-            --print("POSSESS")
-             if G.jokers.cards[i].ability.name == "j_cry_ghost" then
-                table.insert(ghostList,i)
-             end
-        end
-        -- for each ghost, convert adjacent jokers into ghosts
-        for i=1,#ghostList do
-            -- convert on left
-            if (ghostList[i] > 1) then
-                turnJokerIntoGhost(ghostList[i] - 1)
+        if not G.GAME.unik_jack_discarded then
+            local ghostList = {}
+            --Get all ghosts 
+            for i=1,#G.jokers.cards do
+                --print("POSSESS")
+                if G.jokers.cards[i].config.center.key == "j_hit_the_road" then
+                    table.insert(ghostList,i)
+                end
             end
-            -- convert on right
-            if (ghostList[i] < #G.jokers.cards) then
-                turnJokerIntoGhost(ghostList[i] + 1)
+            -- for each ghost, convert adjacent jokers into ghosts
+            for i=1,#ghostList do
+                -- convert on left
+                if (ghostList[i] > 1) then
+                    turnJokerIntoJack(ghostList[i] - 1,ghostList[i])
+                end
+                -- convert on right
+                if (ghostList[i] < #G.jokers.cards) then
+                    turnJokerIntoJack(ghostList[i] + 1,ghostList[i])
+                end
             end
+        else
+            G.GAME.unik_jack_discarded = nil
         end
 	end,
     --If disabled, kill ONLY the pinned ghost.
     disable = function(self)
-        killEternalGhosts()
+       killEternalJacks()
+        G.GAME.unik_pentagram_manager_fix = nil
+        G.GAME.unik_jack_discarded = nil
     end,
     defeat = function(self)
-        killEternalGhosts()
+        killEternalJacks()
         G.GAME.unik_pentagram_manager_fix = nil
+        G.GAME.unik_jack_discarded = nil
 	end,
 }
 
-function killEternalGhosts()
+function killEternalJacks()
     for _, v in pairs(G.jokers.cards) do
         --print("Joker in set:")
         --print(v.ability.name)
-        if (v.ability.name == "j_cry_ghost" and v.ability.eternal) or v.ability.cry_possessed then
+        if (v.config.center.key == "j_hit_the_road" and v.ability.unik_jackshit) then
             G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound('tarot1')
@@ -100,8 +111,8 @@ function killEternalGhosts()
                         func = function()
                             v:start_dissolve()
                             card_eval_status_text(v, "extra", nil, nil, nil, {
-                                message = localize("k_unik_boo_disabled"),
-                                colour = G.C.MULT,
+                                message = localize("k_extinct_ex"),
+                                colour = G.C.FILTER,
                             })
                             return true;
                         end
@@ -113,9 +124,9 @@ function killEternalGhosts()
         end
     end
 end
-function turnJokerIntoGhost(location)
+function turnJokerIntoJack(location,jack)
     --avoid cursed jokers and ghosts and absolute jokers
-    if (G.jokers.cards[location].config.center.rarity ~= "cry_cursed" and G.jokers.cards[location].ability.name ~= "j_cry_ghost" and not G.jokers.cards[location].ability.cry_absolute) then
+    if (G.jokers.cards[location].config.center.key ~= "j_hit_the_road" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then
             card_eval_status_text(
@@ -124,7 +135,7 @@ function turnJokerIntoGhost(location)
                 nil,
                 nil,
                 nil,
-                { message = localize("k_unik_boo_eternal_bypass"), colour = G.C.BLACK }
+                { message = localize("k_unik_boo_eternal_bypass"), colour = G.C.FILTER }
             )
         else
             card_eval_status_text(
@@ -133,15 +144,18 @@ function turnJokerIntoGhost(location)
                 nil,
                 nil,
                 nil,
-                { message = localize("k_unik_boo_possessed"), colour = G.C.BLACK }
+                { message = localize("k_unik_jackshit"), colour = G.C.FILTER }
             )            
         end
-        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_cry_ghost", "unik_ghost_spreader")
+        _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()
+        
         G.jokers.cards[location] = _card
         _card:set_card_area(G.jokers)
+        _card.ability.eternal = nil
+        _card.ability.unik_jackshit = nil
         G.jokers:set_ranks()
         G.jokers:align_cards()    
         G.GAME.blind.triggered = true

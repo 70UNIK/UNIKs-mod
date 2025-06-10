@@ -9,6 +9,11 @@ SMODS.Blind	{
     pos = {x = 0, y = 7},
     vars = {},
     dollars = 13,
+    debuff = { -- if you have aiko installed it gets more difficult lolollolol
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        unik_unskippable_blind = true,
+    },
     jen_dollars = 25, --dollar change with almanac
     mult = 2,
     jen_blind_resize = 1e9,

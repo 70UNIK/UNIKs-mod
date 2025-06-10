@@ -24,6 +24,7 @@ SMODS.Blind{
 			return false
 		end
 	end,
+    death_message = 'special_lose_unik_darkness',
     glitchy_anim = true,
     -- calculate = function(self, blind, context)
 	-- 	if context.discard and not G.GAME.blind.disabled then

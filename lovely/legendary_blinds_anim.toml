@@ -114,6 +114,34 @@ end
 '''
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''    if G.P_BLINDS[blindTable.config_blind] then'''
+position = "before"
+payload = '''
+self.glitchy_anim = blindTable and blindTable.glitchy_anim or nil
+if self.glitchy_anim then
+--print("GLITCH REGISTERED2")
+    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos,true)
+    self.children.animatedSprite.states.drag.can = true
+else
+    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos)
+    self.children.animatedSprite.states.drag.can = true
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''local blindTable = {'''
+position = "after"
+payload = '''
+glitchy_anim = self.glitchy_anim,
+death_message = self.death_message,
+'''
+match_indent = true
 
 ## Add animation 
 [[patches]]

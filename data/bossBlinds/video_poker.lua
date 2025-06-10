@@ -10,13 +10,13 @@ SMODS.Blind{
     boss_colour= HEX("0000ff"),
     dollars = 8,
     mult = 0.4,
+    death_message = "special_lose_unik_video_poker",
     set_blind = function(self, reset, silent)
         if not reset then
             if not next(SMODS.find_card('j_chicot')) then
                 G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
                 ease_discard(-G.GAME.current_round.discards_left)
                 ease_discard(1)
-                G.GAME.unik_killed_by_video_poker = true
                 G.GAME.unik_video_poker_rules = true
 
                 G.GAME.unik_original_hand_size = G.hand.config.card_limit
@@ -90,7 +90,6 @@ SMODS.Blind{
 	disable = function(self)
         --avoid chicot permanently depleting hand size to 0 by only triggering if the killed by magnet flag is true
         if G.GAME.unik_video_poker_rules then
-            G.GAME.unik_killed_by_video_poker = nil
             G.GAME.unik_video_poker_rules = nil
             --Formula:
             --5 (BASE) + unexpected modifiers (selling merry andy,juggler, handcuff self destruct) = original hand size (around 8)
@@ -109,9 +108,28 @@ SMODS.Blind{
 	end,
 	defeat = function(self)
         if G.GAME.unik_video_poker_rules then
-            G.GAME.unik_killed_by_video_poker = nil
             G.GAME.unik_video_poker_rules = nil
             G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 5))
         end
 	end,
 }
+
+--Infinite card selection limit, but force play all cards in hand
+
+local video_poker_play = G.FUNCS.can_play
+G.FUNCS.can_play = function(e)
+    if G.GAME.unik_video_poker_rules then
+        if
+			#G.hand.highlighted < #G.hand.cards
+			or G.GAME.blind.block_play
+		then
+			e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+			e.config.button = nil
+		else
+			e.config.colour = G.C.BLUE
+			e.config.button = "play_cards_from_highlighted"
+		end
+    else
+        video_poker_play(e)
+    end
+end

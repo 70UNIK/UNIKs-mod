@@ -14,22 +14,8 @@ payload = '''
 if G.GAME.unik_instant_death_hand then
     play_area_status_text("DIE.")
 
-    G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you
-    Event({
-        trigger = "after",
-        delay = 0.2,
-        func = function()
-            if G.STATE ~= G.STATES.SELECTING_HAND then
-                return false
-            end
-            G.STATE = G.STATES.HAND_PLAYED
-            G.STATE_COMPLETE = true
-            end_round()
-            return true
-        end,
-    }),
-    "other"
-)
+    G.STATE = G.STATES.GAME_OVER
+    G.STATE_COMPLETE = true
 else
     play_area_status_text("Not Allowed!")
 end

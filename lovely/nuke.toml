@@ -202,4 +202,14 @@ if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blin
 '''
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = 'blind.lua'
+pattern = '''function Blind:load(blindTable)'''
+position = 'after'
+payload = '''
+self.death_message = blindTable.death_message or nil
+'''
+match_indent = true
+
 ### Set blind sizes to be different if jen is installed; legendary blinds

@@ -78,6 +78,13 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas {
+	key = "unik_akio_icons",
+	path = "unik_akio_icons.png",
+    px = 34,
+    py = 34
+}
 --hooks--
 ---happiness is mandatory ---
 SMODS.Atlas({ 
@@ -246,13 +253,14 @@ NFS.load(mod_path .. "data/stakes/persimmon.lua")()
 --Half Stake: Jokers can be half
 --Dizzy Stake: Jokers can be Fuzzy
 --Learning Stake: Jokers can be Corrupted
---Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake
+--Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
+NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
 --Spectral Merchant (Tier 1) Spectrals can appear in shop
@@ -296,6 +304,9 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 --manacle tag: -1 hand size
 
 --BLINDS--
+if AKYRS then
+	NFS.load(mod_path .. "data/bossBlinds/aiko.lua")()
+end
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
@@ -318,6 +329,8 @@ NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
 NFS.load(mod_path .. "data/bossBlinds/raspberry_racket.lua")()
 NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
+NFS.load(mod_path .. "data/bossBlinds/jaundice_jack.lua")()
+NFS.load(mod_path .. "data/bossBlinds/septic_seance.lua")()
 --jens mod replacement: Red Rot (as ghost is banned, but the concept should be the same: a single detrimental joker spreads and replaces)
 if (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/bossBlinds/red_rot.lua")()
@@ -351,6 +364,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_jollyless.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_vice.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
@@ -360,11 +374,12 @@ if unik_config.unik_legendary_blinds then
 	if (SMODS.Mods["jen"] or {}).can_load then 
 		NFS.load(mod_path .. "data/bossBlinds/epic_vader.lua")()
 	end
-	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")()
 	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
@@ -408,6 +423,7 @@ if not (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 end
 NFS.load(mod_path .. "data/jokers/lockpick.lua")()
+NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
 -- NFS.load(mod_path .. "data/jokers/double_container.lua")()

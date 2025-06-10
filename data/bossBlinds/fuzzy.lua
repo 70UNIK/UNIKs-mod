@@ -9,6 +9,7 @@ SMODS.Blind{
     boss_colour= HEX("ff00e6"),
     dollars = 5,
     mult = 2,
+    death_message = "special_lose_unik_fuzzy",
     loc_vars = function(self)
 		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1) * 1), 4 } }
 	end,

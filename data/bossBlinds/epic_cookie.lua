@@ -148,11 +148,15 @@ function G.FUNCS.play_cards_from_highlighted(e)
         end
     end
     --Only play if highlight cards are > 0
-    if #G.hand.highlighted == 0 then
+    if #G.hand.highlighted == 0 and G.PROFILES[G.SETTINGS.profile].cry_none then
         G.PROFILES[G.SETTINGS.profile].cry_none = true
     end
     --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
-    pcfh(e)
+    if Cryptid.enabled("set_cry_poker_hand_stuff") ~= true and #G.hand.highlighted == 0 then
+        
+    else
+        pcfh(e)
+    end
 	G.GAME.before_play_buffer = nil
 end
 

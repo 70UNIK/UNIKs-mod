@@ -1,0 +1,26 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
+pattern = '''AKYRS.other_mods_blind_icons(blind,ability_text_table,extras)'''
+position = "before"
+payload = '''
+if blind.boss and blind.boss.epic then
+    if (pseudorandom(pseudoseed("funny_desc_no_almanac")) < ((G.GAME.probabilities.normal * 1) / 4)) then
+            AKYRS.generate_icon_blinds("epic_blind_no_almanac",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
+    else
+        AKYRS.generate_icon_blinds("epic_blind",{ table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons",info_queue = info_queue})
+    end
+end
+if blind.boss and blind.boss.legendary then
+    AKYRS.generate_icon_blinds("legendary_blind",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
+end
+if blind.debuff.unik_unskippable_blind then
+    AKYRS.generate_icon_blinds("unskippable_blind",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
+end
+'''
+match_indent = true

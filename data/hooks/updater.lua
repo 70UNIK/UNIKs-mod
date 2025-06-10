@@ -22,6 +22,9 @@ function Game:update(dt)
         G.GAME.unik_artisan_reroll_time = nil
         G.GAME.ante_rerolls = 0
     end
+    if G.GAME.unik_dynamic_text_realtime then
+		G.GAME.blind:set_text()
+    end
     local res = updateHook(self,dt)
     return res
 end

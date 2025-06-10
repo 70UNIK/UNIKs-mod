@@ -38,10 +38,13 @@ SMODS.Blind	{
                 end
             end
         end
-        --always be false if face cards are less than hand size - card selection limit (to avoid impossible situations)
-        if faceCards < (G.hand.config.card_limit - G.hand.config.highlighted_limit) and not (SMODS.Mods["jen"] or {}).can_load then
-            return false
+        if G.hand and G.hand.config then
+                --always be false if face cards are less than hand size - card selection limit (to avoid impossible situations)
+            if faceCards < (G.hand.config.card_limit - G.hand.config.highlighted_limit) and not (SMODS.Mods["jen"] or {}).can_load then
+                return false
+            end
         end
+        
         return CanSpawnEpic()
 	end,
 }

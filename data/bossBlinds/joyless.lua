@@ -34,10 +34,10 @@ SMODS.Blind{
 	recalc_debuff = function(self, card, from_blind)
 		if not G.GAME.blind.disabled and (Find_Jolly(card) or card.ability.name == "Jolly Joker"
         or (card.edition and card.edition.key == "e_cry_m")
-        or (safe_get(card, "pools", "M"))) then
+        or (Cryptid.safe_get(card, "pools", "M"))) then
 			return true
 		end
-        if not G.GAME.blind.disabled and (card.area == G.jokers) and (safe_get(card, "pools", "M") or Find_Jolly(card.config.center.key)) then
+        if not G.GAME.blind.disabled and (card.area == G.jokers) and (Cryptid.safe_get(card, "pools", "M") or Find_Jolly(card.config.center.key)) then
             return true   
         end
 		return false

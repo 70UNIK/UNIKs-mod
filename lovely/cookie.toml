@@ -35,5 +35,16 @@ payload = '''
 		end
 		return mod
 	end,
+	unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips)
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+			if s.unik_debuff_after_hand then
+				return s:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips)
+			end
+		end
+		return {
+            debuff = false,
+        }
+	end,
 '''
 match_indent = true
