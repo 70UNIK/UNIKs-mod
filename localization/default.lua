@@ -1205,20 +1205,23 @@ return {
             j_unik_lily_sprunki = {
                 name="Lily",
                 text={
-                    "{C:red}Destroy{} {C:attention}all{} played cards except the", 
-                    "{C:attention}leftmost{} played card after scoring",
-                    "{C:unik_caption,s:0.7,E:1}#1#{}",
+                    "{C:red,E:2}Destroy{} selected cards",
+                    "{C:attention}anytime{} {C:inactive}(once until next cashout)",
+                    "{C:inactive}#1#",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
                 },                
             },
+            --modest is a reusable hanged man
             j_unik_lily_sprunki_modest = {
                 name="Lily",
                 text={
-                    "{C:red}Destroy{} played cards except the", 
-                    "{C:attention}3 leftmost{} played cards after scoring",
-                    "{C:unik_caption,s:0.7,E:1}#1#{}",
+                    "{C:red,E:2}Destroy{} up to {C:attention}#3#{} selected cards",
+                    "{C:attention}anytime{} {C:inactive}(once until next cashout)",
+                    "{C:inactive}#1#",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
@@ -1601,9 +1604,25 @@ return {
                 name = "Cobblestone",
                 text = {
                     "{C:attention}Rankless and suitless",
-                    "cards have a {C:green}#1# in #2#{}",
-                    "chance to {C:red}not{}",
-                    "give {X:chips,C:white}X#3#{} Chips"
+                    "cards each give",
+                    "{X:chips,C:white}X#1#{} Chips"
+                }
+            },
+            j_unik_epic_riffin = {
+                name = "Epic Riffin'",
+                text = {
+                    "When {C:attention}Boss Blind{} is selected,",
+                    "create an {C:cry_epic}Epic{} {C:attention}Joker",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            j_unik_riff_rare = {
+                name = "Riff Rare",
+                text = {
+                    "When  {C:attention}Big Blind{} or",
+                    "{C:attention}Boss Blind{} is selected,",
+                    "create a {C:red}Rare{} {C:attention}Joker",
+                    "{C:inactive}(Must have room)",
                 }
             },
 
@@ -1657,7 +1676,7 @@ return {
 					"in a single hand",
 				},
 			},
-
+            
 
             --Proper depleted loc
             --Clicked cookie
@@ -2347,6 +2366,7 @@ return {
             k_unik_plasma_deck_fail="Not Balanced!",
             k_unik_lily_sprunki_normal="*Microwave Sounds* How did I get here?",
             k_unik_lily_sprunki_monster="RRRAGGRAAGRGRGRHHHH!!!",
+            k_unik_lily_sprunki_tired="I need to rest a while...",
             k_unik_white_lily_not_committed="(Not committed)",
             k_unik_white_lily_committed="(Committed)",
             k_unik_lily_sprunki_after="oh... oh... god...",
@@ -2421,6 +2441,7 @@ return {
             k_unik_family_disabled = "All abilities are disabled...",
             k_unik_family_disabled2 = "...you monster.",
             k_unik_family_disabled3 = "(They are no longer willing to help, after what you did.)",
+            b_unik_devour = "DEVOUR",
             --Almanac Quotes:
 
             --Moonlight Cookie: She will be the first Joker with full almanac functionality (has a fusion, different quotes)
@@ -2517,6 +2538,7 @@ return {
             k_unik_pibby_darkness2 = "After all this time? How did it get here?...",
             k_unik_pibby_scared1 = "Aah! Those numbers! Too much to learn!",
             k_unik_pibby_scared2 = "Please, please be ok, it's getting too much!",
+            k_inactive_ex = "Inactive",
 
             --
             unik_plus_lartceps = "+1 Lartceps...",

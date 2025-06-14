@@ -85,6 +85,18 @@ SMODS.Atlas {
     px = 34,
     py = 34
 }
+
+SMODS.ObjectType({
+	key = "riff_raff",
+	default = "j_riff_raff",
+	cards = {
+	},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		-- insert base game jokers
+		self:inject_card(G.P_CENTERS.j_riff_raff)
+	end,
+})
 --hooks--
 ---happiness is mandatory ---
 SMODS.Atlas({ 
@@ -430,8 +442,10 @@ NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
+NFS.load(mod_path .. "data/jokers/riff_rare.lua")() 
 NFS.load(mod_path .. "data/jokers/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
+NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
  --rare

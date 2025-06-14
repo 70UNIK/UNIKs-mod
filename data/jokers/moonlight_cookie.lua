@@ -46,9 +46,9 @@ SMODS.Joker {
 	-- Given moonlight is very difficult to scale without perkeo, especially on higher antes (you need chambered or azure seals):
 	--- 2 in 5 chance to not turn a random planet negative
 	--- In return, she will not add a consumeable slot (except when godsmarbled) and her Emult becomes ^1.25
-    config = { extra = { Emult = 1.25,odds = 5} },
+    config = { extra = { Emult = 1.2,odds = 5} },
 	gameset_config = {
-		modest = { extra = { Emult = 1.1,odds = 999999} },
+		modest = { extra = { Emult = 1.07,odds = 999999} },
 	},
 	loc_vars = function(self, info_queue, center)
 		--normal quotes only if not Jen

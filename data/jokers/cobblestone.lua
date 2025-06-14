@@ -9,11 +9,10 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {odds = 2,x_chips = 1.5} },
+    config = { extra = {x_chips = 2} },
     loc_vars = function(self, info_queue, center)
         return { 
-            vars = {center and cry_prob(center.ability.cry_prob,center.ability.extra.odds_money,center.ability.cry_rigged)or 1,center.ability.extra.odds, 
-        center.ability.extra.x_chips} }
+            vars = {center.ability.extra.x_chips} }
 	end,
     in_pool = function()
         local stoneCards = 0
@@ -32,25 +31,27 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                p_dollars = card.ability.extra.p_dollars,
-                mult = card.ability.extra.mult,
-                card = card,
+                    message = localize({
+                    type = "variable",
+                    key = "a_xchips",
+                    vars = { number_format(card.ability.extra.x_chips) },
+                }),
+                Xchip_mod = card.ability.extra.x_chips,
+                colour = G.C.CHIPS,
             }
         end
         if context.individual and context.cardarea == G.play then
             -- if a seven
             if SMODS.has_no_rank(context.other_card) and SMODS.has_no_suit(context.other_card) then
-                if not (pseudorandom('unik_cobblestone') < cry_prob(card.ability.cry_prob,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
-                    return {
-                         message = localize({
-                            type = "variable",
-                            key = "a_xchips",
-                            vars = { number_format(card.ability.extra.x_chips) },
-                        }),
-                        Xchip_mod = card.ability.extra.x_chips,
-                        colour = G.C.CHIPS,
-                    }
-                end
+                return {
+                        message = localize({
+                        type = "variable",
+                        key = "a_xchips",
+                        vars = { number_format(card.ability.extra.x_chips) },
+                    }),
+                    Xchip_mod = card.ability.extra.x_chips,
+                    colour = G.C.CHIPS,
+                }
 			end
         end
     end,

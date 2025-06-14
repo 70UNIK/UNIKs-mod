@@ -1,9 +1,23 @@
---destroy all but the rightmost card played after scoring
+--Turns out lily feels more like a blind than a benefit given how you have little control of card destruction.
+--Rework: Grants the option to destroy all selected cards, once per round (Active!/Inactive)
+--Has a dedicated button to do so
 SMODS.Atlas {
 	key = "unik_lily_sprunki",
 	path = "unik_lily_sprunki.png",
 	px = 71,
 	py = 95
+}
+
+local lily_quotes = {
+    normal = {
+        'k_unik_lily_sprunki_normal',
+    },
+    feral = {
+        'k_unik_lily_sprunki_monster',
+    },
+    tired = {
+        'k_unik_lily_sprunki_tired',
+    },
 }
 
 SMODS.Joker {
@@ -15,120 +29,114 @@ SMODS.Joker {
 	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
     cost = 8,
-    config = {extra = {triggered = false,feral = false}},
+    config = {extra = {active = true,quoteset = 'normal',limit = 2}},
     loc_vars = function(self, info_queue, center)
+        local quote = "k_active_ex"
+        if center.ability.extra.active then
+            quote = "k_active_ex"
+        else
+            quote = "k_inactive_ex"
+        end
         return { 
-            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
-            vars = { localize(G.GAME.sprunki_lily_quote) } }
+            key = Cryptid.gameset_loc(self, {modest = "modest" }), 
+            vars = {localize(quote) ,
+            localize(lily_quotes[center.ability.extra.quoteset][math.random(#lily_quotes[center.ability.extra.quoteset])] .. "")
+            ,center.ability.extra.limit
+        } }
     end,
     blueprint_compat = false,
 	perishable_compat = true,
 	eternal_compat = false,
+    triggering_blacklist = true,
     pools = {["unik_copyrighted"] = true },
     add_to_deck = function(self, card, context)
         --return to normal sprite
         card.children.center:set_sprite_pos({x = 0, y = 0})
         card.children.floating_sprite:set_sprite_pos({x = 1, y = 0})
-        G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_normal"
     end,
     calculate = function(self, card, context)
-        --destroy cards and have her "eat" cards
-		if
-			(context.cardarea == G.play or context.cardarea == "unscored")
-			and context.destroy_card ~= context.full_hand[1] and ((Card.get_gameset(card) ~= "modest") or (context.destroy_card ~= context.full_hand[2] and context.destroy_card ~= context.full_hand[3] and Card.get_gameset(card) == "modest"))
-			and ((#context.full_hand > 1 and Card.get_gameset(card) ~= "modest") or (#context.full_hand > 3 and Card.get_gameset(card) == "modest")) -- 3 cards in played hand
-			and not context.blueprint
-			and not context.retrigger_joker 
-            and card.ability.extra.feral == true
-        then
-           -- print("nom mom")
-            if (context.destroy_card) then
-                if not context.destroy_card.ability.eternal then
-                    context.destroy_card.ability.gore_6_destruction = true
-                end
-                return{
-                    remove = not context.destroy_card.ability.eternal,
-                    func = function()
-                        if card.ability.extra.triggered == false then
-                            card.ability.extra.triggered = true
-                            -- card_eval_status_text(card, "extra", nil, nil, nil, {
-                            --     message = localize("k_eaten_ex"),
-                            --     colour = HEX("d377dc"),
-                            --     card = card
-                            -- })
-                            G.E_MANAGER:add_event(Event({
-                                trigger='immediate',
-                                func = function()
-                                    card:juice_up(0.5, 0.5)
-                                    card.children.center:set_sprite_pos({x = 0, y = 1})
-                                    card.children.floating_sprite:set_sprite_pos({x = 2, y = 1})
-                                    G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_monster"
-                                    G.ROOM.jiggle = G.ROOM.jiggle + 5
-                                    --play_sound("unik_gore6") --thats funny
-                                    return not context.destroy_card.ability.eternal
-                                end
-                            }))
-                        end
-                    end
-                }
-            end
-        end
-        if context.after and context.cardarea == G.jokers and ((#context.full_hand > 1 and Card.get_gameset(card) ~= "modest") or (#context.full_hand > 3 and Card.get_gameset(card) == "modest")) and card.ability.extra.feral == true then
-            --return to normal sprite
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    card:juice_up(0.5, 0.5)
-                    card.children.center:set_sprite_pos({x = 0, y = 0})
-                    card.children.floating_sprite:set_sprite_pos({x = 1, y = 0})
-                    G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_normal"
-                    card.ability.extra.triggered = false
-                    card.ability.extra.feral = false
-                    return true
-                end
-            }))
-            return{
-                message = localize("k_unik_lily_sprunki_after"),
+
+        --Allows you to flip if doublesided
+        if context.after_cashout and context.cardarea == G.jokers then
+            card.ability.extra.active = true
+            card.ability.extra.quoteset = 'normal'
+            card_eval_status_text(card, "extra", nil, nil, nil, {
+                message = localize('k_reset'),
                 colour = HEX("d377dc"),
-            }
+                card=card,
+            })
+
         end
-        if context.before and context.cardarea == G.jokers and ((#context.full_hand > 1 and Card.get_gameset(card) ~= "modest") or (#context.full_hand > 3 and Card.get_gameset(card) == "modest")) then
-            --only turn feral if theres any valid card
-            for i, w in pairs(context.full_hand) do
-                if not w.ability.eternal then
-                    valid = true
-                end
-            end
-            if valid == true then
-                card.ability.extra.feral = true
-                --print("turn them happy")
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card:juice_up(0.5, 0.5)
-                        card.children.center:set_sprite_pos({x = 0, y = 1})
-                        card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
-                        G.GAME.sprunki_lily_quote = "k_unik_lily_sprunki_monster"
-                        return true
-                    end
-                }))
-                return{
-                    message = localize("k_unik_lily_sprunki_monster"),
-                    colour = HEX("d377dc"),
-                }
-            end
-        end
-	end
+	end,
 }
 
-local igo2 = Game.init_game_object
-function Game:init_game_object()
-	local ret = igo2(self)
-	ret.sprunki_lily_quote = "k_unik_lily_sprunki_normal"
-	return ret
-end
+-- local igo2 = Game.init_game_object
+-- function Game:init_game_object()
+-- 	local ret = igo2(self)
+-- 	ret.sprunki_lily_quote = "k_unik_lily_sprunki_normal"
+-- 	return ret
+-- end
 
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
     }
+end
+
+--cashout context
+local cashoutcontext = G.FUNCS.cash_out
+G.FUNCS.cash_out = function(e)
+    SMODS.calculate_context({after_cashout = true})
+    cashoutcontext(e)
+end
+
+--Add "devour" button on highlight
+  local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
+  function G.UIDEF.use_and_sell_buttons(card)
+    local tdc =  G_UIDEF_use_and_sell_buttons_ref(card)
+    if (card.area == G.jokers) and card.config.center.key == "j_unik_lily_sprunki" then --Add a devour button
+        local sell = nil
+        local use = nil
+        local devour = nil
+
+        sell = {n=G.UIT.C, config={align = "cr"}, nodes={
+            {n=G.UIT.C, config={ref_table = card, align = "cr",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'sell_card', func = 'can_sell_card'}, nodes={
+                {n=G.UIT.B, config = {w=0.1,h=0.6}},
+                {n=G.UIT.C, config={align = "tm"}, nodes={
+                {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
+                    {n=G.UIT.T, config={text = localize('b_sell'),colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
+                }},
+                {n=G.UIT.R, config={align = "cm"}, nodes={
+                    {n=G.UIT.T, config={text = localize('$'),colour = G.C.WHITE, scale = 0.4, shadow = true}},
+                    {n=G.UIT.T, config={ref_table = card, ref_value = 'sell_cost_label',colour = G.C.WHITE, scale = 0.55, shadow = true}}
+                }}
+                }}
+            }},
+        }}
+         devour = 
+            {n=G.UIT.C, config={align = "cr"}, nodes={
+            
+            {n=G.UIT.C, config={ref_table = card, align = "cr",maxw = 1.25, padding = 0.1, r=0.08, minw = 1.25, minh = (card.area and card.area.config.type == 'joker') and 0 or 1, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'unik_devour_fs', func = 'unik_can_devour_fs'}, nodes={
+                {n=G.UIT.B, config = {w=0.1,h=0.6}},
+                {n=G.UIT.T, config={text = localize('b_unik_devour'),colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
+            }}
+        }}
+        --overwriting usual buttons
+        tdc = {
+      n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
+        {n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
+          {n=G.UIT.R, config={align = 'cl'}, nodes={
+            sell
+          }},
+          {n=G.UIT.R, config={align = 'cl'}, nodes={
+            use
+          }},
+          {n=G.UIT.R, config={align = 'cl'}, nodes={
+            devour
+          }},
+        }},
+    }}
+    end
+    return tdc
 end
 
 --Gore6 (custom card destruction animation)
@@ -181,4 +189,142 @@ function Card:gore6_break()
         blockable = false,
         delay =  0.51*dissolve_time,
     }))
+end
+
+G.FUNCS.unik_devour_fs = function(e)
+    local card = e.config.ref_table
+    local eternals = 0
+    if G.hand and G.hand.highlighted and #G.hand.highlighted > 0 then
+        for i, v in pairs(G.hand.highlighted) do
+            if v.ability.eternal then
+                eternals = eternals + 1
+            end
+        end
+    end
+    if G.hand and G.hand.highlighted and #G.hand.highlighted - eternals > 0 then 
+        G.CONTROLLER.locks.unik_destroy_selected = true
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                 card:juice_up(0.5, 0.5)
+                 card.children.center:set_sprite_pos({x = 0, y = 1})
+                 card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
+                 card.ability.extra.quoteset = 'feral'
+                return true
+            end
+        }))
+        card_eval_status_text( card, "extra", nil, nil, nil, {
+            message = localize('k_unik_lily_sprunki_monster'),
+            colour = HEX("d377dc"),
+            card= card,
+        })
+        delay(0.5)
+        local destroyed_cards = {}
+        for i, v in pairs(G.hand.highlighted) do
+            if not v.ability.eternal then
+                destroyed_cards[#destroyed_cards+1] = v
+            end
+        end
+        local glass_shattered = {}
+        for k, v in ipairs(destroyed_cards) do
+            if SMODS.has_enhancement(v, 'm_glass') then glass_shattered[#glass_shattered+1] = v end
+        end
+
+        check_for_unlock{type = 'shatter', shattered = glass_shattered}
+        G.E_MANAGER:add_event(Event({
+            trigger='immediate',
+            func = function()
+                 card:juice_up(0.5, 0.5)
+                 card.children.center:set_sprite_pos({x = 0, y = 1})
+                 card.children.floating_sprite:set_sprite_pos({x = 2, y = 1})
+                G.ROOM.jiggle = G.ROOM.jiggle + 5
+                --play_sound("unik_gore6") --thats funny
+                return true
+            end
+        }))
+        for i=1, #destroyed_cards do
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    if SMODS.shatters(destroyed_cards[i]) then
+                        destroyed_cards[i]:shatter()
+                    else
+                        destroyed_cards[i]:gore6_break()
+                    end
+                  return true
+                end
+              }))
+        end
+        
+        delay(0.8)
+        SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                 card:juice_up(0.5, 0.5)
+                 card.children.center:set_sprite_pos({x = 0, y = 0})
+                 card.children.floating_sprite:set_sprite_pos({x = 1, y = 0})
+                 card.ability.extra.quoteset = 'tired'
+                  card.ability.extra.triggered = false
+                  card.ability.extra.feral = false
+                return true
+            end
+        }))
+        card_eval_status_text( card, "extra", nil, nil, nil, {
+            message = localize("k_unik_lily_sprunki_after"),
+            colour = HEX("d377dc"),
+            card= card,
+        })
+        delay(0.3)
+        G.E_MANAGER:add_event(Event({
+            delay=0.2,
+            func = function()
+                G.CONTROLLER.locks.unik_destroy_selected = nil
+                card.ability.extra.active = false
+                
+                G.E_MANAGER:add_event(Event({
+                    trigger='after',
+                        func = function()
+                            e.disable_button = nil
+                        return true
+                    end
+                }))
+                return true
+            end
+        }))
+    else
+        print("OOps error!")
+        e.disable_button = nil
+        
+    end
+end
+
+G.FUNCS.unik_can_devour_fs = function(e)
+    local card = e.config.ref_table
+    if G.hand and G.hand.highlighted then
+        if
+            not (G.CONTROLLER.locked or (G.GAME.STOP_USE and G.GAME.STOP_USE > 0))
+            and not G.SETTINGS.paused
+            and card.area.config.type ~= "shop" then
+            local eternals = 0
+            for i, v in pairs(G.hand.highlighted) do
+                if v.ability.eternal then
+                    eternals = eternals + 1
+                end
+            end
+            if #G.hand.highlighted - eternals > 0 and (card.ability and card.ability.extra and (card.ability.extra.active and 
+            ((#G.hand.highlighted - eternals <= card.ability.extra.limit and Card.get_gameset(card) == "modest") or (Card.get_gameset(card) ~= "modest"))
+        )) then
+                e.config.colour = G.C.UNIK_EYE_SEARING_RED
+                e.config.button = "unik_devour_fs"
+            else
+                e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+                e.config.button = nil
+            end
+        else
+            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+            e.config.button = nil
+        end
+    else
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    end
+        
 end
