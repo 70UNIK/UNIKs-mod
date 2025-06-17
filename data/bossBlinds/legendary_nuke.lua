@@ -21,6 +21,7 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    death_message = "special_lose_unik_nuke_legendary",
     --no jen resize to make it more painful in almanac
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
@@ -47,12 +48,11 @@ SMODS.Blind{
         attention_text({
             scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
         })
-        G.GAME.unik_nuke_activate = true
 	end,
-    disable = function(self)
-		G.GAME.unik_nuke_activate = nil
-	end,
-	defeat = function(self)
-		G.GAME.unik_nuke_activate = nil
-	end,
+    unik_after_defeat = function(self,chips,blind_size)
+        if to_big(chips) > to_big(blind_size^1.666) then
+            return true
+        end
+        return false
+    end
 }

@@ -11,63 +11,17 @@ priority = 9999
 target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
-payload = '''--legendary nuke will set chips and mult to 0 if exceeding 3x requirements before causing an instant game over.
---If you have panopicon, it disables this part of the violent vessel
-local cry_panopicon = false
-if G.jokers then
-        if G.jokers.cards then
-            for _, v in pairs(G.jokers.cards) do
-                if v.config.center.key == "j_cry_panopticon" and not v.debuff then
-                    cry_panopicon = true
-                end
-            end
-        end
-    end
-if ((G.GAME.blind and G.GAME.unik_nuke_activate) or (G.GAME.blind and G.GAME.unik_kill_player_before_last_hand and G.GAME.current_round.hands_left > 0 and not cry_panopicon)) and not (G.GAME.blind.disabled)then
-    local upper = G.GAME.chips
-    local ceiling = G.GAME.blind.chips^1.666
-    if to_big(upper) > to_big(ceiling) or G.GAME.unik_kill_player_before_last_hand then
-        G.GAME.chips = 0
-        game_over = true
-        local text = localize('k_unik_nuked')
-        ease_colour(G.C.UI_CHIPS, {0.0, 0.0, 0.0, 666666})
-        ease_colour(G.C.UI_MULT, {0.0, 0.0, 0.0, 666666})
-        G.ROOM.jiggle = G.ROOM.jiggle + 25
-        attention_text({
-            scale = 1.4, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
-        })
-        G.GAME.blind.triggered = true
-        G.GAME.blind:wiggle()
-        if G.GAME.unik_kill_player_before_last_hand then
-            G.GAME.unik_killed_by_legendary_vessel = true
-        else
-            G.GAME.unik_killed_by_nuke_legendary = true
-        end
-        
-    end
-end
--- Green goalpost: 
-if G.GAME.blind and G.GAME.unik_moving_the_goalposts and not (G.GAME.blind.disabled) then
-    ease_victory_reqs(3)
-    --increase by 2 then later decrease by amount if victory.
-    G.GAME.unik_goalpost_ante_win_increase = G.GAME.unik_goalpost_ante_win_increase + 3
-    G.GAME.unik_moving_the_goalposts = nil
-    G.GAME.blind.triggered = true
-    G.GAME.blind:wiggle()
-
-end
--- The Vice: Halve interval of blind = 
-local upper2 = G.GAME.chips
-local ceiling2 = G.GAME.blind.chips*2
-if G.GAME.blind and G.GAME.unik_vice_enabled and not (G.GAME.blind.disabled) and to_big(upper2) > to_big(ceiling2) then
-    G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze * 2
-    G.GAME.blind.triggered = true
-    G.GAME.blind:wiggle()
-    G.ROOM.jiggle = G.ROOM.jiggle + 3
-    local text = localize('k_unik_viced')
+payload = '''
+local instakill = G.GAME.blind:unik_after_defeat(G.GAME.chips,G.GAME.blind.chips)
+if instakill then
+    G.GAME.chips = 0
+    game_over = true
+    G.ROOM.jiggle = G.ROOM.jiggle + 25
     attention_text({
-        scale = 0.8, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
+        scale = 1.4, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
     })
+    G.GAME.blind.triggered = true
+    G.GAME.blind:wiggle()
 end
 -- legendary crown: force set new high score:
 G.GAME.round_scores['hand'].amt = G.GAME.chips

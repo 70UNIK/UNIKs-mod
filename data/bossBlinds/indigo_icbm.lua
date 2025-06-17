@@ -61,13 +61,3 @@ SMODS.Blind{
     end,
 }
 
---Debuffs after scoring.
-function Blind:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips)
-	if not self.disabled then
-		local obj = self.config.blind
-		if obj.unik_debuff_after_hand and type(obj.unik_debuff_after_hand) == "function" then
-			return obj:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips)
-		end
-	end
-	return nil
-end

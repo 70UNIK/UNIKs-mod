@@ -5,7 +5,7 @@
 --Jokers: Immediately sold when selected (when possible)
 --incompatible with eternal
 function Card:set_triggering(triggering)
-    if not Card.config.center.triggering_blacklist then
+    if not self.config.center.triggering_blacklist then
         self.ability.unik_triggering = triggering
         self:set_cost()
     end

@@ -19,8 +19,8 @@ SMODS.Blind{
 	},
     mult = 1,
     glitchy_anim = true,
-    exponent = {1,1.4666},
-    jen_blind_exponent_resize = {2,2.1666},
+    exponent = {1,3},
+    jen_blind_exponent_resize = {2,6},
     ignore_showdown_check = true,
     set_blind = function(self, reset, silent)
         G.GAME.force_no_discards = true

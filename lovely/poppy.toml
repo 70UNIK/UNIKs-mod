@@ -14,7 +14,8 @@ target = 'functions/state_events.lua'
 pattern = '''function evaluate_play_final_scoring(text, disp_text, poker_hands, scoring_hand, non_loc_disp_text, percent, percent_delta)'''
 position = 'after'
 payload = '''
-local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,mult,hand_chips)
+local temptotal = (math.floor(mult*hand_chips))
+local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,mult,hand_chips,total)
 local temporaryMult = mult
 local temporaryChips = hand_chips
 local debuff_hand = false
@@ -33,7 +34,7 @@ if checker and checker.debuff then
     }))
 end
 if checker and checker.add_to_blind then
-    add_to_blind = to_big(checker.add_to_blind) * to_big(hand_chips)*to_big(mult)
+    add_to_blind = to_big(checker.add_to_blind)
 end
 '''
 match_indent = true

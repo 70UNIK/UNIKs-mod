@@ -42,15 +42,6 @@ SMODS.Blind	{
 	end
 }
 
---Instead of merely debuffing a hand, it will KILL you if you play that hand
-function Blind:unik_kill_hand(cards, hand, handname, check)
-	if not self.disabled then
-		local obj = self.config.blind
-		if obj.unik_kill_hand and type(obj.unik_kill_hand) == "function" then
-			return obj:unik_kill_hand(cards, hand, handname, check)
-		end
-	end
-end
 
 local killHook = Blind.debuff_hand
 function Blind:debuff_hand(cards, hand, handname, check)

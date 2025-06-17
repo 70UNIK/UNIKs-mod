@@ -316,6 +316,7 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 --manacle tag: -1 hand size
 
 --BLINDS--
+NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 if AKYRS then
 	NFS.load(mod_path .. "data/bossBlinds/aiko.lua")()
 end
