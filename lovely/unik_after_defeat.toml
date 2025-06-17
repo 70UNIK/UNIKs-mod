@@ -17,9 +17,6 @@ if instakill then
     G.GAME.chips = 0
     game_over = true
     G.ROOM.jiggle = G.ROOM.jiggle + 25
-    attention_text({
-        scale = 1.4, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
-    })
     G.GAME.blind.triggered = true
     G.GAME.blind:wiggle()
 end

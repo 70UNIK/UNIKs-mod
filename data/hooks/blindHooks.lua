@@ -24,11 +24,11 @@ function Blind:unik_kill_hand(cards, hand, handname, check)
 end
 
 --Effects for after defeating a blind. Return true to kill the player. Return false to not do that
-function Blind:unik_after_defeat(score)
+function Blind:unik_after_defeat(score,blind_size)
     if not self.disabled then
 		local obj = self.config.blind
 		if obj.unik_after_defeat and type(obj.unik_after_defeat) == "function" then
-			return obj:unik_after_defeat(score)
+			return obj:unik_after_defeat(score,blind_size)
 		end
 	end
 end
