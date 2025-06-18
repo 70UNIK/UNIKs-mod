@@ -129,7 +129,7 @@ function Card:can_sell_card(context)
         self.area and
         self.area.config.type == 'joker' and
         (not self.ability.eternal or (self.ability.eternal and lockpick and not self.config.center.dissolve_immune and not self.ability.dissolve_immune)) then
-            if self.config.center.key == "j_unik_impounded" then
+            if self.config.center.key == "j_unik_impounded" or self.config.center.key == "j_buf_afan_spc"  then
                 --Takes in factor credit card
                 if to_big((G.GAME.dollars-G.GAME.bankrupt_at) + self.ability.extra.cost) < to_big(0) then
                     return false

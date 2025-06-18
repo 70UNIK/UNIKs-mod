@@ -31,3 +31,8 @@ SMODS.Stake:take_ownership('stake_cry_diamond', {
 		G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
 	end,
 })
+
+--Rejected fan becomes cursed Joker.
+SMODS.Joker:take_ownership('j_buf_afan_spc', {
+    rarity = 'cry_cursed',
+},true)

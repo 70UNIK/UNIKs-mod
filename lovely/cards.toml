@@ -12,7 +12,9 @@ pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
 payload = '''and card.config.center.key ~= "j_unik_impounded" 
 and card.config.center.key ~= "j_cry_astral_bottle" 
-and card.config.center.key ~= "j_unik_rancid_smoothie"'''
+and card.config.center.key ~= "j_unik_rancid_smoothie"
+and card.config.center.key ~= "j_buf_afan_spc" 
+'''
 match_indent = true
 
 ### Make impounded sellable (cryptid build dev)
@@ -24,7 +26,9 @@ pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
 payload = '''and card.config.center.key ~= "j_unik_impounded" 
 and card.config.center.key ~= "j_cry_astral_bottle" 
-and card.config.center.key ~= "j_unik_rancid_smoothie"'''
+and card.config.center.key ~= "j_unik_rancid_smoothie"
+and card.config.center.key ~= "j_buf_afan_spc" 
+'''
 match_indent = true
 
 ## Unsellable jokers for triggering
@@ -55,7 +59,7 @@ end
 target = '''=[SMODS Cryptid "items/spooky.lua"]'''
 pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### do not set impounded cost to 0
@@ -64,7 +68,7 @@ match_indent = true
 target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
 pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### Hook n discard, ensure cards are discarded BEFORE scoring (similar to the hook)
