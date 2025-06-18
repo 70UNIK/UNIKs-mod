@@ -428,9 +428,18 @@ NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
+NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
---Borg Cube: A cube joker. Other steel EDITION cards give 2x chips Uncommon since its literally an unconditional 2x mult from its edition.
+
+--Celestials:
+--Borg Cube (Uncommon): A cube joker. Other steel EDITION cards give 2.5x mult. Obvious star trek reference
+--HER (Cursed): Other positive Jokers reduce joker slots by 0.5. Self destructs if edition stripped from this Joker. FTL multiverse reference
+--Reality Tear (Cursed): If more than 3 cards are played, other Half Jokers give 0.5X mult. Cannot be debuffed. Self destructs if played at least X hands with 3 cards or less.
+--Red Giant (Cursed): If a bloated card is destroyed under it's own effect, destroy adjacent cards. [No self destruct condition (destroyed under it's own effect or edition)]
+--Event Horizon (Cursed): Other Fuzzy cards give -$1 - $0, -50 - 0 Chips, -10 - 0 Mult. Self destructs if score is positive and chips and mult are both negative.
+--The Warp (Cursed): Other Corrupted card values are multiplied by 0.9X at end of round. Self destructs after 6 rounds.
+
 --banned in jen due to unredeem not working
 if not (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
@@ -502,7 +511,10 @@ NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a v
 --- Catastrophic ---
 --- 
 ---Overrides
-NFS.load(mod_path .. "data/jokers/overrides.lua")() 
+NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
+NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
+NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
+
 --- 
 --- 
 --- Challenges

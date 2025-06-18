@@ -1,6 +1,24 @@
 return {
     descriptions = {
-        Back={},
+        Back={
+            b_cry_equilibrium = {
+				name = "Deck of Equilibrium",
+				text = {
+					"All cards have the",
+					"{C:attention}same chance{} of",
+					"appearing in shops,",
+					"start run with",
+					"{C:attention,T:v_overstock_plus}Overstock Plus",
+                    "{C:red}All blinds, including finishers", --and that includes EPIC and legendary blinds.
+                    "{C:red}can spawn anytime"
+				},
+				unlock = {
+					"Have {C:attention}100 Jokers",
+					"at the same time",
+				},
+			},
+
+        },
         BlindEdition={
             ble_unik_steel={
                 name = "Steel",
@@ -211,6 +229,18 @@ return {
                     "Blind Defeat, die"
                 },
             },
+            bl_unik_epic_beach_that_makes_you_old = {
+                name = "Tuhlaamisenranta", --beach of wasting
+                text = {
+                    "Increase requirements by",
+                    "2x per second spent this ante",
+                    "Skipping blinds are banned",
+                    "Every second, increase the rank of",
+                    "a random held card by 1,",
+                    "Aces are destroyed",
+                    "Must play only Aces",
+                }
+            },
             bl_unik_epic_vice={ --The next 5 boss blinds become Epic+ Blinds (Vice excluded legendary blind restrictions still apply), increases by ^1.1, rounded up per each epic vice encountered.
                 name = "Tukehtumisenpahe", --vice of suffocation
                 text = {
@@ -223,7 +253,8 @@ return {
                 name = "Telekineettinentyranni", --Telikinetic Tyrant (darth vader)
                 text = {
                     "Set all statistics",
-                    "of all Jokers to 0",
+                    "of all mutable",
+                    "Jokers to 0",
                 } --Better get immutables going on.
             },
             bl_unik_epic_xenomorph_queen={ --1 in 4 chance drawn card is debuffed. If card contains undebuffed cards, die. --HARD COUNTERS DANDY --Balatro goes kino
@@ -267,7 +298,6 @@ return {
                     "then destroy all cards in deck",
                     "that lack another with the",
                     "same rank and suit",
-                    "(Rankless/Suitless will always be destroyed)",
                 }
             },
             bl_unik_jaundice_jack = {
@@ -334,6 +364,15 @@ return {
                     "(Currently #1#, #2# hands)",
                 },
             },
+            bl_unik_legendary_horn = {
+                name = "Kauhujensarvi", --Horn of horrors
+                text = {
+                    "All cards are",
+                    "drawn face down",
+                    "Hand must contain",
+                    "a 3-of-a-Kind",
+                }
+            },
             bl_unik_legendary_magnet={
                 name = "Murhaavamagneetti", --Murderous Magnet --nerfed to just not score to give more control
 				text = {
@@ -378,9 +417,8 @@ return {
 				},  
             },            
             bl_unik_legendary_batman={
-                name = "Kostonhimoinenvartija", --Vengeful Vigilante
+                name = "Kostonhimoinenvartija", --Vengeful Vigilante, blind size = 1
 				text = {
-                    "^0.00666 blind size",
                     "Hand will not score until",
                     "no jokers remain",
 				},                  
@@ -450,14 +488,15 @@ return {
                 text = {
                     "Add Bloated to 2",
                     "random played cards and",
-                    "leftmost Joker on play",
+                    "rightmost Joker on play",
                 }
             },
             bl_unik_smiley={
                 name = "The Smiley",
                 text = {
-                    "First drawn hand",
-                    "becomes Positive",
+                    "All drawn cards",
+                    "after first hand",
+                    "become Positive",
                 }
             },
             bl_unik_halved={
@@ -480,7 +519,7 @@ return {
                 text = {
                     "All uneditioned Jokers", --Has legendary blind glitch FX cause pibby
                     "and cards in hand",
-                    "are Corrupted before play",
+                    "are Corrupted after discard",
                 }
             },
             bl_unik_the_replay={
@@ -880,22 +919,23 @@ return {
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}1 in 3{C:inactive})",
                 },
             },
+            --buffed it since I dont tend to use it due to spawn conditions and cost of cramming joker slots
             j_unik_711 = {
                 name = '7/11',
                 text = {
-                    "Once per round, if hand contains", 
+                    "If hand contains", 
                     "a scoring {C:attention}7{} and {C:attention}Ace{},",
-                    "create a {C:attention}random{} Food Joker",
-                    "{C:inactive}(Can overflow){}",
+                    "create a {C:attention}banana{}",
+                    "{C:dark_edition}negative{} Food Joker",
                 }
             },
             j_unik_711_modest = {
                 name = '7/11',
                 text = {
-                    "Once per round, if hand contains", 
+                    "If hand contains", 
                     "a scoring {C:attention}7{} and {C:attention}Ace{},",
-                    "create a {C:attention}random{} Food Joker",
-                    "{C:inactive}(Must have room){}",
+                    "create a {C:attention}banana{} Food Joker",
+                    "{C:inactive}(Can overflow){}",
                 }
             },
             j_unik_gt710 = {
@@ -1625,6 +1665,13 @@ return {
                     "{C:inactive}(Must have room)",
                 }
             },
+            j_unik_borg_cube = {
+                name = "Borg Cube",
+                text = {
+                    "Other {C:dark_edition}Steel Editioned",
+                    "cards give {X:mult,C:white}X#1#{} mult",
+                }
+            },
 
 
             ---OVERRIDES
@@ -1674,6 +1721,17 @@ return {
 				unlock = {
 					"Score {C:attention}1.0e100{} Chips",
 					"in a single hand",
+				},
+			},
+
+            j_cry_pirate_dagger = {
+				name = "Pirate Dagger",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+					"destroy Joker to the right",
+					"and gain {C:attention}one-fifth{} of",
+					"its sell value as {X:chips,C:white} XChips {}",
+					"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)",
 				},
 			},
             
@@ -2045,6 +2103,20 @@ return {
 				},
 			},
         },
+        Sleeve = {
+            sleeve_cry_equilibrium_sleeve = {
+				name = "Balanced Sleeve",
+				text = {
+					"All cards have the",
+					"{C:attention}same chance{} of",
+					"appearing in shops,",
+					"start run with",
+					"{C:attention,T:v_overstock_plus}+2 Shop Slots",
+                    "{C:red}All blinds, including finishers,",
+                    "{C:red}can spawn at anytime"
+				},
+			},
+        },
         Tag={			
             --to even be remotely safe to use, you need yes nothing! Yes I am making more stuff that reles on yes nothing since there isnt enough stuff that needs it (wheel, tornado, glass cards,cavendish,banana tag)
             tag_unik_demon = {
@@ -2299,7 +2371,7 @@ return {
         dictionary={
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
-            unik_legendary_blinds_option = "Legendary Blinds (Restart Required)",
+            unik_legendary_blinds_option = "Epic and Legendary Blinds outside Almanac (Restart Required)",
             unik_almanac_fusions_in_cryptid_option = "Enable Almanac Fusions in Base Cryptid (Restart Required)",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",

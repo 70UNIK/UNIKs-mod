@@ -14,9 +14,9 @@ SMODS.Blind{
     cry_before_play = function(self)
         --Add Half to 2 random cards selected and 2 random jokers that are not already have the edition
         local triggered = false
-        if G.jokers.cards and G.jokers.cards[1] then
-            if not G.jokers.cards[1].edition or (G.jokers.cards[1].edition and not G.jokers.cards[1].edition.unik_bloated) then
-                G.jokers.cards[1]:set_edition({ unik_bloated = true }, true,nil, true)
+        if G.jokers.cards and G.jokers.cards[#G.jokers.cards] then
+            if not G.jokers.cards[#G.jokers.cards].edition or (G.jokers.cards[#G.jokers.cards].edition and not G.jokers.cards[#G.jokers.cards].edition.unik_bloated) then
+                G.jokers.cards[#G.jokers.cards]:set_edition({ unik_bloated = true }, true,nil, true)
                 triggered = true
             end
         end

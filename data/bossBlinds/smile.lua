@@ -2,7 +2,7 @@ SMODS.Blind{
     key = 'unik_smiley',
     config = {},
 	boss = {
-		min = 9,
+		min = 5,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 21},

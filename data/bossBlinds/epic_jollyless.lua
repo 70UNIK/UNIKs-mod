@@ -46,15 +46,15 @@ SMODS.Blind{
                         SMODS.calculate_context({ remove_playing_cards = true, removed = v })
                     else
                         for l,w in ipairs(G.playing_cards) do
-                            if not SMODS.has_no_suit(w) and not SMODS.has_no_rank(w) then
-                                --abstract
-                                if SMODS.has_enhancement(v,"m_cry_abstract") and SMODS.has_enhancement(w,"m_cry_abstract") and v ~= w then
-                                    destroy = false
-                                elseif SMODS.has_enhancement(v,"m_unik_pink") and SMODS.has_enhancement(w,"m_unik_pink") and v ~= w then
-                                    destroy = false
-                                elseif v:get_id() == w:get_id() and v.base.suit == w.base.suit and v ~= w then
-                                    destroy = false
-                                end
+                            --abstract
+                            if SMODS.has_enhancement(v,"m_cry_abstract") and SMODS.has_enhancement(w,"m_cry_abstract") and v ~= w then
+                                destroy = false
+                            elseif SMODS.has_enhancement(v,"m_unik_pink") and SMODS.has_enhancement(w,"m_unik_pink") and v ~= w then
+                                destroy = false
+                            elseif v:get_id() == w:get_id() and v.base.suit == w.base.suit and v ~= w then
+                                destroy = false
+                            elseif SMODS.has_no_suit(w) and SMODS.has_no_rank(w) and SMODS.has_no_suit(v) and SMODS.has_no_rank(v) and v.config.center.key == w.config.center.key and v ~= w then
+                                destroy = false
                             end
                         end
                         if destroy then

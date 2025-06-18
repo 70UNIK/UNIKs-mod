@@ -15,10 +15,10 @@ position = "before"
 payload = '''
     G.GAME.bigger_blind_blacklist = G.GAME.bigger_blind_blacklist or 0
     G.GAME.boring_blank_blacklist = G.GAME.boring_blank_blacklist or 0
-    if not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and not G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BIGGER_BLIND")) < 0.05 then
+    if not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and G.P_BLINDS[boss].boss and not G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BIGGER_BLIND")) < 0.05 then
         G.GAME.bigger_blind_blacklist = 16
         return 'bl_unik_bigger_blind'
-    elseif not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BORING_BLANK")) < 0.05 then
+    elseif not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.boring_blank_blacklist == 0 and G.P_BLINDS[boss].boss and G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BORING_BLANK")) < 0.05 then
         G.GAME.boring_blank_blacklist = 64
         return 'bl_unik_boring_blank'
     else

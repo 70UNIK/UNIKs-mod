@@ -46,5 +46,15 @@ payload = '''
             debuff = false,
         }
 	end,
+	unik_after_defeat = function(self,chips,blind_size)
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+			if s.unik_after_defeat then
+				return s:unik_after_defeat(chips,blind_size)
+			end
+		end
+		return false
+	end,
+	
 '''
 match_indent = true

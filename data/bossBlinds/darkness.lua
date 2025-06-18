@@ -10,7 +10,7 @@ SMODS.Blind{
     key = 'unik_darkness',
     config = {},
 	boss = {
-		min = 8,
+		min = 9,
 	},
     atlas = "unik_darkness",
     pos = { x = 0, y = 0},
@@ -26,39 +26,39 @@ SMODS.Blind{
 	end,
     death_message = 'special_lose_unik_darkness',
     glitchy_anim = true,
-    -- calculate = function(self, blind, context)
-	-- 	if context.discard and not G.GAME.blind.disabled then
-	-- 		--visual cue to wiggle all jokers
-	-- 		for i,v in pairs(G.hand.cards) do
-    --             if (not v.edition)then
-    --                 v:set_edition({ unik_corrupted = true }, true,nil, true)
+    calculate = function(self, blind, context)
+		if context.discard and not G.GAME.blind.disabled then
+			--visual cue to wiggle all jokers
+			for i,v in pairs(G.hand.cards) do
+                if (not v.edition)then
+                    v:set_edition({ unik_corrupted = true }, true,nil, true)
 
-    --             end
-    --         end
-
-    --         for i,v in pairs(G.jokers.cards) do
-    --             if (not v.edition)then
-    --                 v:set_edition({ unik_corrupted = true }, true,nil, true)
-    --             end
-    --         end
-    --         G.GAME.blind.triggered = true
-    --         G.GAME.blind:wiggle()
-	-- 	end
-	-- end,
-    cry_before_play = function(self)
-        for i,v in pairs(G.hand.cards) do
-            if (not v.edition)then
-                v:set_edition({ unik_corrupted = true }, true,nil, true)
-
+                end
             end
-        end
 
-        for i,v in pairs(G.jokers.cards) do
-            if (not v.edition)then
-                v:set_edition({ unik_corrupted = true }, true,nil, true)
+            for i,v in pairs(G.jokers.cards) do
+                if (not v.edition)then
+                    v:set_edition({ unik_corrupted = true }, true,nil, true)
+                end
             end
-        end
-        G.GAME.blind.triggered = true
-        G.GAME.blind:wiggle()
+            G.GAME.blind.triggered = true
+            G.GAME.blind:wiggle()
+		end
 	end,
+    -- cry_before_play = function(self)
+    --     for i,v in pairs(G.hand.cards) do
+    --         if (not v.edition)then
+    --             v:set_edition({ unik_corrupted = true }, true,nil, true)
+
+    --         end
+    --     end
+
+    --     for i,v in pairs(G.jokers.cards) do
+    --         if (not v.edition)then
+    --             v:set_edition({ unik_corrupted = true }, true,nil, true)
+    --         end
+    --     end
+    --     G.GAME.blind.triggered = true
+    --     G.GAME.blind:wiggle()
+	-- end,
 }
