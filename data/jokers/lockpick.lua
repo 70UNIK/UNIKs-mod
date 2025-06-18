@@ -33,7 +33,6 @@ SMODS.Joker {
 		if G.GAME.modifiers.enable_eternals_in_shop then
 			return true
 		end
-        print("faux")
 		return false
 	end,
 }
