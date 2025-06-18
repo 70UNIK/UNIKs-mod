@@ -8,7 +8,7 @@ SMODS.Blind{
     dollars = 8,
 	--Stop him from appearing in obsidian orb
 	no_orb = true,
-    mult = 0.15,
+    mult = 0.1,
 	loc_vars = function(self, info_queue, card)
 		return { vars = { math.floor((#G.jokers.cards * 0.8))  } } -- no bignum?
 	end,

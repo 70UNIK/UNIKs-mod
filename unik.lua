@@ -257,6 +257,7 @@ NFS.load(mod_path .. "data/stickers/baseless.lua")()
 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
+NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
 --Stakes
 --Persimmon Stake: Cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables (after orange)
 --Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable (after gold)
@@ -351,7 +352,6 @@ else
 	--Disabled due to ghost being crash happy
 	--NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
 end
---MAYBE? Glop mod installed will replace bigger boo with "bigger banana", replacing ghosts with well ummm... bananas
 
 
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
@@ -387,21 +387,21 @@ if unik_config.unik_legendary_blinds then
 	if (SMODS.Mods["jen"] or {}).can_load then 
 		NFS.load(mod_path .. "data/bossBlinds/epic_vader.lua")()
 	end
-	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")() --panopicon. thats it
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")() --Uhhh, maybe I can add a joker that scales xmult but caps score at 0.75x and scale only if score is exactly 1.5x, but that breaks the consecutive scoring
+	NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")() --good high card score thats it.
+	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")() --may need to be reworked to be less annoying
+	NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")() --dont have too much rarities, have good amount of hands, blueprint(s) 
+	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")() --same as above, but dont have too much hands, maybe have higher ranked cards or planets on hand
 	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
 
--- ENHANCEMENTS --
--- Requires both buffoonery and jen's almanac
-if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
-	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
-end
+-- -- ENHANCEMENTS --
+-- -- Requires both buffoonery and jen's almanac
+-- if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
+-- 	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
+-- end
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
@@ -418,6 +418,7 @@ NFS.load(mod_path .. "data/jokers/1_5_joker.lua")()
 -- NFS.load(mod_path .. "data/jokers/dawn.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
+NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
 --- Uncommon ---
@@ -441,9 +442,7 @@ NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 --The Warp (Cursed): Other Corrupted card values are multiplied by 0.9X at end of round. Self destructs after 6 rounds.
 
 --banned in jen due to unredeem not working
-if not (SMODS.Mods["jen"] or {}).can_load then
-	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
-end
+NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/lockpick.lua")()
 NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
 --NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
@@ -458,9 +457,6 @@ NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
- --rare
---- Epic ---
--- Lone despot: ^1.2 Mult per card, if played hand only has a single King of Spades. (Shotgun king reference)
 NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lone_despot.lua")() --no image
 NFS.load(mod_path .. "data/jokers/pibby.lua")() 
@@ -468,13 +464,8 @@ NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
 NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
-if (SMODS.Mods["extracredit"] or {}).can_load then
-	NFS.load(mod_path .. "data/jokers/ALICE.lua")()
-end
-
+NFS.load(mod_path .. "data/jokers/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
-
----- this will be her moonflower faerie form
 --- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
@@ -495,7 +486,7 @@ NFS.load(mod_path .. "data/jokers/impounded.lua")()
 NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
 NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_scale.lua")()
-NFS.load(mod_path .. "data/jokers/the_plant.lua")() --Commented out since the debuff functionality is incredibly glitchy and somehow conflicfts with the existing card debuff blinds
+NFS.load(mod_path .. "data/jokers/the_plant.lua")() 
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
 NFS.load(mod_path .. "data/jokers/goading_joker.lua")() 
@@ -518,19 +509,19 @@ NFS.load(mod_path .. "data/overrides/crossmod.lua")()
 --- 
 --- 
 --- Challenges
-NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")()
-NFS.load(mod_path .. "data/challenges/chipzel.lua")()
-NFS.load(mod_path .. "data/challenges/multiplication.lua")()
+-- NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")()
+-- NFS.load(mod_path .. "data/challenges/chipzel.lua")() --rework needed: all mult goes into chips. Otherwise it will never work trying to ban all mult based jokers.
+-- NFS.load(mod_path .. "data/challenges/multiplication.lua")() --rework needed: all chips go into mult
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 if not (SMODS.Mods["jen"] or {}).can_load then
 	NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
 end
-NFS.load(mod_path .. "data/challenges/monsters.lua")()
+-- NFS.load(mod_path .. "data/challenges/monsters.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
-NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
-NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
+-- NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
+-- NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
 
 -- achievements
 NFS.load(mod_path .. "data/achievements/epic_fail.lua")()

@@ -17,18 +17,14 @@ SMODS.Blind{
                     delay = 0.5,
                     func = function()
                         local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_pentagram_curse")
+                        print(card2.config.center.key)
                         --destroy card2 if its jimbo
-                        if (card2.ability.name ~= "Joker") then
-                            card2:start_materialize()
-                            card2:add_to_deck() --This causes problems. Why?
-                            G.jokers:emplace(card2)
-                            G.GAME.blind.triggered = true
-                            G.GAME.blind:wiggle()
-                            G.ROOM.jiggle = G.ROOM.jiggle + 1
-                            delay(0.3)
-                        else
-                            card2:remove()
-                        end
+                        card2:start_materialize()
+                        card2:add_to_deck() --This causes problems. Why?
+                        G.jokers:emplace(card2)
+                        G.GAME.blind.triggered = true
+                        G.GAME.blind:wiggle()
+                        G.ROOM.jiggle = G.ROOM.jiggle + 1
                         return true
                     end
                 }))

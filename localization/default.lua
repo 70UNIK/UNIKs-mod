@@ -432,13 +432,15 @@ return {
 				},  
 
             },
+            --rework: Must only play the last (Current hands + 1) cards  from deck, none hand banned (currently 1), since turns out luck based tornado type is bad practice
             bl_unik_legendary_tornado={
                 name = "Ylihuomenna", --Day after tomorrow
 				text = {
-                    "Set hands to 66", -- set hands to 66, only 23 hands will score. This requires joker power, a lot of high card spam. Run out of scoring hands and you die instantly
-                    "only 2 random hands", --now there's a pity system that every 33 hands, 1 will score and the probabilities increases as it gets closer to pity. Maybe remove the pity in almanac!
-                    "will score",
-                    "If none hand played, die", --aka you must select at least 1 card.
+                    "Must only play the last",
+                    "(Current discards) cards", --+1 is a pity system designed to make it possible if you decide to do burgular. Very difficult but still possible.
+                    "drawn from deck",
+                    "Must play at least 1 card",
+                    "(Currently #1#)",
 				},                  
             },
             bl_unik_legendary_leaf={
@@ -782,9 +784,12 @@ return {
             m_unik_pink = {
                 name = "Pink",
                 text = {
-                    "{X:chips,C:white}X#1#{} chips",
+                    "{X:dark_edition,C:white}^#1#{} chips", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
                     "Considered a {C:attention}7{}",
                     "and it's {C:attention}own suit{}",
+                    "{C:red,E:2}Destroyed{} if played",
+                    "with anything",
+                    "other than {C:attention}7s{}",
                 }
             }
         },
@@ -1659,7 +1664,7 @@ return {
             j_unik_riff_rare = {
                 name = "Riff Rare",
                 text = {
-                    "When  {C:attention}Big Blind{} or",
+                    "When {C:attention}Big Blind{} or",
                     "{C:attention}Boss Blind{} is selected,",
                     "create a {C:red}Rare{} {C:attention}Joker",
                     "{C:inactive}(Must have room)",
@@ -1670,6 +1675,13 @@ return {
                 text = {
                     "Other {C:dark_edition}Steel Editioned",
                     "cards give {X:mult,C:white}X#1#{} mult",
+                }
+            },
+            j_unik_shitty_joker = {
+                name = "Shitty Joker",
+                text = {
+					"Gain {C:red}+#1#{} discard#<s>1# when",
+					"{C:attention}Blind{} is selected",
                 }
             },
 
@@ -2059,7 +2071,25 @@ return {
                 text = {
                     "{C:inactive}Does nothing",
                 }
-            }
+            },
+
+            --sticker stakes
+            unik_shitty_sticker = {
+                name = "Shitty Sticker",
+                text = {
+                    "Used this Joker",
+                    "to win on {C:attention}Shitty",
+                    '{C:attention}Stake{} difficulty',
+                }
+            },
+            unik_persimmon_sticker = {
+                name = "Persimmon Sticker",
+                text = {
+                    "Used this Joker",
+                    "to win on {C:attention}Persimmon",
+                    '{C:attention}Stake{} difficulty',
+                }
+            },
 
         },
         Planet={},
@@ -2100,6 +2130,13 @@ return {
 					"{s:0.8,C:inactive}({s:0.8,C:green}1 in 8{s:0.8,C:inactive} chance to {s:0.8,C:attention}play{s:0.8,C:inactive} cards when selected){}",
                     "{s:0.8,C:inactive}(Consumeables automatically {s:0.8,C:attention}trigger{s:0.8,C:inactive} when possible){}",
                     "{s:0.8,C:inactive}(Jokers automatically {s:0.8,C:red}sell {s:0.8,C:inactive}when selected){}",
+				},
+			},
+            stake_cry_diamond = {
+				name = "Diamond Stake",
+				colour = "Diamond",
+				text = {
+					"Ante victory requirements increased by {C:attention}X1.25{}",
 				},
 			},
         },
@@ -2622,6 +2659,9 @@ return {
             k_unik_epic_sand_almanac_2 = "by {Tags held}1.1",
             k_unik_epic_vice_placeholder = "(5, increase by ^1.05 per Tukehtumisenpahe)",
             ph_game_over="YOU ARE DEAD",
+            k_unik_leg_tornado_warn_1 = "Must only play the last ",
+            k_unik_leg_tornado_warn_2 = " cards in deck",
+            k_unik_tornado_placeholder = "(Current Discards)",
         },
         high_scores={},
         labels={
@@ -2747,8 +2787,8 @@ return {
                 "^1.666 requirements...",
             },
             special_lose_unik_tornado_legendary={
-                "Perhaps deck bloat",
-                "could help?",
+                "Maybe not having too",
+                "much cards could help?",
             },
             special_lose_unik_sword_legendary={
                 "Huh, your weapon",
@@ -2862,7 +2902,8 @@ return {
             a_unik_hands_1={"#1# hands"},
             a_unik_discards_1={"#1# discards"},
             a_unik_reed_construct={"ranks #1# or #2#"},
-            a_unik_celestial_triggers = {"#1# Triggers"}
+            a_unik_celestial_triggers = {"#1# Triggers"},
+            a_unik_discards = {"+#1# Discards"}
         },
         v_text={			
             ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is {C:attention}set{} to {C:red}<=1{}" },

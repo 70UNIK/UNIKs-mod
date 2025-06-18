@@ -40,7 +40,7 @@ end
 
 if G.jokers and G.jokers.cards and _type == 'Joker' and rarity2 ~= nil then
     for i,v in pairs(G.jokers.cards) do
-        if v.config.center.key ~= 'j_unik_cloneman' and v.config.center.rarity == rarity2 then
+        if v.config.center.key ~= 'j_unik_cloneman' and v.config.center.rarity == rarity2 and not v.config.center.unique and not v.config.center.hidden then
             for i = 1, #clonemen do
                 for j = 1, math.floor(clonemen[i]) do
                     _pool[#_pool + 1] = v.config.center.key
@@ -53,7 +53,7 @@ end
 if G.consumeables and G.consumeables.cards and _type ~= nil then
     for i,v in pairs(G.consumeables.cards) do
 
-        if v.ability.set == _type then
+        if v.ability.set == _type and not v.config.center.unique and not v.config.center.hidden then
             for i = 1, #clonemen do
                 for j = 1, math.floor(clonemen[i]) do
                     _pool[#_pool + 1] = v.config.center.key
@@ -66,7 +66,7 @@ end
 --Pools (meme, M, food)
 if G.consumeables and G.consumeables.cards and G.jokers and G.jokers.cards and _type ~= nil then
     for i,v in pairs(G.jokers.cards) do
-        if Cryptid.safe_get(v.config.center, "pools", _type) then
+        if Cryptid.safe_get(v.config.center, "pools", _type) and not v.config.center.unique and not v.config.center.hidden then
             for i = 1, #clonemen do
                 for j = 1, math.floor(clonemen[i]) do
                     _pool[#_pool + 1] = v.config.center.key
@@ -76,7 +76,7 @@ if G.consumeables and G.consumeables.cards and G.jokers and G.jokers.cards and _
         end
     end
     for i,v in pairs(G.consumeables.cards) do
-        if Cryptid.safe_get(v.config.center, "pools", _type) then
+        if Cryptid.safe_get(v.config.center, "pools", _type) and not v.config.center.unique and not v.config.center.hidden  then
             for i = 1, #clonemen do
                 for j = 1, math.floor(clonemen[i]) do
                     _pool[#_pool + 1] = v.config.center.key

@@ -11,6 +11,7 @@ target = '''=[SMODS Cryptid "items/spooky.lua"]'''
 pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
 payload = '''and card.config.center.key ~= "j_unik_impounded" 
+and card.config.center.key ~= "j_cry_astral_bottle" 
 and card.config.center.key ~= "j_unik_rancid_smoothie"'''
 match_indent = true
 
@@ -22,6 +23,7 @@ target = '''=[SMODS Cryptid "lib/ui.lua"]'''
 pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
 payload = '''and card.config.center.key ~= "j_unik_impounded" 
+and card.config.center.key ~= "j_cry_astral_bottle" 
 and card.config.center.key ~= "j_unik_rancid_smoothie"'''
 match_indent = true
 

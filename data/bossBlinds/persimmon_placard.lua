@@ -6,7 +6,7 @@ SMODS.Blind{
     pos = { x = 0, y = 3},
     boss_colour= HEX("EC5800"),
     dollars = 8,
-    mult = 0.75,
+    mult = 0.5,
     --Disable if doing Jokerless: or has no jokers
     in_pool = function()
         if (G.GAME.modifiers.no_shop_jokers)then

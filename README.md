@@ -1,21 +1,31 @@
 # UNIK's Mod!
-By: 70UNIK
-*An addon to Cryptid that may or may not help you.*
-
+An addon to Cryptid that adds a variety of features, some of which help and some of which are harmful.
+This is mainly balanced around the Mainline gameset of Cryptid.
+![50 Jokers, 1 enhanced, 3 vouchers, 6 editions, 5 boosters, 5 tags, 24 blinds 2 tarots, 2 spectrals and other stickers](image.png)
 ## Features (so far)
-- 5 Common Jokers
-- 7 Uncommon Jokers
-- 3 Rare Jokers
-- 4 Epic Jokers
-- 3 Exotic Jokers (4 if Extra Credit is installed)
-- 16 Cursed Jokers, 10 of which are Boss Blinds in Joker form
-- 4 Stickers
-- 1 "Edition"
-- 21 Blinds, some of which are very cruel (and if Almanac is installed, you cannot turn them off)
-- 1 Tarot based on the Wheel of Fortune that has a high chance of adding a cursed Joker
-- 5 Tags, some of which are detrimental
-- 2 Booster pack types
-- If Almanac is installed,  fusions as well.
-- Plenty of Challenges as well!
+- A total of 51 new Jokers are added, with 3 more fusions with a certain mod.
+- - 6 Common
+- - 12 Uncommon
+- - 5 Rare
+- - 10 Epic
+- - 4 Exotic
+- - 16 Cursed
+- 2 Tarots
+- 2 Spectrals
+- If Epic/Legendary Blinds are enabled (or playing a certain mod), enables Lartceps with 12 consumables, cards an Epic Blind forces you to choose.
+- 7 Stickers, 2 of which are featured in 2 Stakes
+- 2 Stakes:
+- - Persimmon Stake (Cards may be Triggering), comes after Orange Stake
+- - Shitty Stake (Jokers may be disposable), comes after Gold Stake
+- 5 Tags
+- 6 Editions, 5 of which are purely detrimental.
+- 24 Blinds, 
+- - 2 "normal" blinds
+- - 10 Finisher Blinds
+- - 12 Regular Blinds
+- - If enabled (or playing a certain mod), 13 - 14 Epic Blinds and 7 "Legendary" Blinds, extremely cruel blinds that are designed to make sure 
+- Mainline balancing changes for some Cryptid Jokers, such as the infamous Canvas (Now legendary) and Oil Lamp (Immutable and increases values by x1.075).
 
-I'll focus on fixing issues and making more fusions and fusion art.
+![Above but with Epic/Legendary blinds enabled](image-1.png)
+
+I'll focus on fixing some issues, adding more art and making more fusions and fusion art for that certain mod.

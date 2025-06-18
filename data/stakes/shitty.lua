@@ -1,8 +1,12 @@
 --jokers may be disposable (50% chance to replace perishing)
+local nextStake = 'cry_pink'
+if (SMODS.Mods["Buffoonery"] or {}).can_load then
+    nextStake = 'buf_palladium'
+end
 SMODS.Stake{ 
     key = 'unik_shitty',
 
-    unlocked_stake = 'cry_pink',
+    unlocked_stake =  nextStake ,
     applied_stakes = {'gold'},
     above_stake = 'gold',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
@@ -19,8 +23,10 @@ SMODS.Stake{
     sticker_atlas = 'unik_sticker_stakes'
 }
 
-SMODS.Stake:take_ownership('cry_pink', {
-    applied_stakes = { "unik_shitty" },
-    above_stake = "unik_shitty",
-    prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
-})
+if not (SMODS.Mods["Buffoonery"] or {}).can_load then
+    SMODS.Stake:take_ownership('cry_pink', {
+        applied_stakes = { "unik_shitty" },
+        above_stake = "unik_shitty",
+        prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+    })
+end

@@ -8,8 +8,8 @@ SMODS.Blind{
     boss_colour= HEX("1c5607"), 
     dollars = 13,
     jen_dollars = 25, --dollar change with almanac
-    mult = 2,
-    jen_blind_resize = 1e9,
+    mult = 0.5,
+    jen_blind_resize = 1e8,
     ignore_showdown_check = true,
 	loc_vars = function(self)
 		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 4 } }

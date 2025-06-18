@@ -2,7 +2,7 @@
 SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',
-    config = { extra = { increase = 1.1 } },
+    config = { extra = { increase = 1.075 } },
 	--you can have your fun in madness (to an extent)
 	gameset_config = {
 		madness = { extra = { increase = 1.2 }, immutable = false },
@@ -12,7 +12,7 @@ SMODS.Joker:take_ownership("cry_oil_lamp", {
 
 --TROFICAL SMOOTHER
 SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
-    config = { extra = {extra = 1.3, self_destruct = false}},
+    config = { extra = {extra = 1.25, self_destruct = false}},
     loc_vars = function(self, info_queue, center)
 		return { vars = { number_format(center.ability.extra.extra) } }
 	end,
@@ -220,11 +220,11 @@ SMODS.Joker:take_ownership("j_cry_loopy",{
 		end
 	end,
 }, true)
---small m becomes X6
+--small m becomes X7
 SMODS.Joker:take_ownership("j_cry_m",{
     config = {
 		extra = {
-			extra = 6,
+			extra = 7,
 			x_mult = 1,
 		},
 	},

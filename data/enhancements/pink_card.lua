@@ -6,7 +6,7 @@ SMODS.Enhancement {
 	not_stoned = true,
 	overrides_base_rank = true, --enhancement do not generate in grim, incantation, etc...
 	replace_base_card = true, --So no base chips and no image
-    config = { extra = { x_chips = 1.4} },
+    config = { extra = { Echips = 1.07} },
     weight = 0,
     immutable = true,
     shatters = true, --lefunny
@@ -16,7 +16,7 @@ SMODS.Enhancement {
 	specific_rank = 7,
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card.ability.extra.x_chips}
+            vars = { card.ability.extra.Echips}
         }
     end,
     in_pool = function(self)
@@ -27,12 +27,21 @@ SMODS.Enhancement {
             return {
                 message = localize({
 					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
+					key = "a_powchips",
+                    vars = {
+                        number_format(card.ability.extra.Echips),
+                    },
 				}),
-				Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
-                colour = G.C.CHIPS,
-            }
+				Echip_mod = card.ability.extra.Echips,
+                colour = G.C.DARK_EDITION,
+			}
+		end
+        if context.destroy_card == card and context.cardarea == G.play then
+            for i,v in pairs(G.play.cards) do
+                if v:get_id() ~= 7 then
+                    return { remove = true }
+                end
+            end
 		end
 	end,
 }
