@@ -31,6 +31,8 @@ Requires Talisman, Steamodded 1.0.0~BETA-0309c or higher, Lovely v0.7.1 and Cryp
 - - If enabled (or playing a certain mod), 13 - 14 **Epic Blinds** and 7 **"Legendary" Blinds**, extremely cruel blinds that are designed to make sure you *suffer*.
 - Mainline balancing changes for some Cryptid Jokers, such as the infamous Canvas (Now legendary) and Oil Lamp (Immutable and increases values by x1.075).
 
+![alt text](image-3.png)
+
 ![menu with epic/legendary blinds](image.png)
 
 I'll focus on fixing some issues that may arise, adding more art and making more fusions and fusion art for that certain mod.
