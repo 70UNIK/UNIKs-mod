@@ -119,6 +119,7 @@ NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/godsmarbling_sprites.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
+NFS.load(mod_path .. "data/misc/factorialCalc.lua")()
 SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
@@ -203,6 +204,18 @@ SMODS.Atlas {
 SMODS.Atlas {
 	key = "unik_tarots",
 	path = "unik_tarots.png",
+	px = 71,
+	py = 95
+}
+SMODS.Atlas {
+	key = "unik_spectrals",
+	path = "unik_spectrals.png",
+	px = 71,
+	py = 95
+}
+SMODS.Atlas {
+	key = "unik_vouchers",
+	path = "unik_vouchers.png",
 	px = 71,
 	py = 95
 }
@@ -458,6 +471,8 @@ NFS.load(mod_path .. "data/jokers/epic_riffin.lua")()
 
 NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lone_despot.lua")() --no image
+-- NFS.load(mod_path .. "data/jokers/factorialis.lua")() --not gonna do factorials, cannot be balanced AT ALL.
+
 NFS.load(mod_path .. "data/jokers/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()

@@ -2,7 +2,7 @@
 SMODS.Voucher{
     key = "unik_spectral_merchant",
 	config = { extra = {rate = 2} },
-	atlas = "placeholder_voucher",
+	atlas = "unik_vouchers",
 	pos = { x = 0, y = 0 },
 	redeem = function(self, card)
         G.E_MANAGER:add_event(Event({

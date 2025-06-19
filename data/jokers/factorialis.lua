@@ -1,2 +1,0 @@
---Factorialis, !Chips before scoring. Can be blueprinted or retriggered.
---equivalentish to ^^1.7.

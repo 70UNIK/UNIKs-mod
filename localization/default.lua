@@ -1696,6 +1696,15 @@ return {
                     "{C:inactive}(Currently {C:dark_edition}+#4#{C:inactive} slots)",
                 }
             },
+            j_unik_factorialis = {  
+                name = "Factorialis",
+                text = {
+                    "{X:dark_edition,C:white}!(Mult^0.2){} {C:attention}before{} scoring",
+                    "are {C:attention}Aces{}, {C:attention}2s{} or {C:attention}6s{}",
+                    "{C:red}Unretriggerable",
+                }
+            },
+
 
 
             ---OVERRIDES
@@ -2120,8 +2129,7 @@ return {
                 text = {
                     "Add {C:dark_edition}Steel{} to a",
                     "selected playing card",
-                    "{C:green}#1# in #2#{} chance to",
-                    "add {C:attention}#3#{} playing card(s)",
+                    "add {C:attention}#1#{} random card(s)",
                 }
             }
         },
@@ -2674,6 +2682,7 @@ return {
             k_unik_leg_tornado_warn_1 = "Must only play the last ",
             k_unik_leg_tornado_warn_2 = " cards in deck",
             k_unik_tornado_placeholder = "(Current Discards)",
+            k_chips = "Chips"
         },
         high_scores={},
         labels={
@@ -2915,7 +2924,9 @@ return {
             a_unik_discards_1={"#1# discards"},
             a_unik_reed_construct={"ranks #1# or #2#"},
             a_unik_celestial_triggers = {"#1# Triggers"},
-            a_unik_discards = {"+#1# Discards"}
+            a_unik_discards = {"+#1# Discards"},
+            a_factorial_mult = {"!Mult^#1#"},
+            a_factorial_chips = {"!Chips^#1#"},
         },
         v_text={			
             ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is {C:attention}set{} to {C:red}<=1{}" },
