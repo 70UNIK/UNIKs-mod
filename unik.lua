@@ -119,7 +119,6 @@ NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/godsmarbling_sprites.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
-NFS.load(mod_path .. "data/misc/factorialCalc.lua")()
 SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
