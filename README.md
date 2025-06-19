@@ -3,6 +3,8 @@
 # UNIK's Mod!
 An addon to Cryptid that adds a variety of features, some of which help and some of which are harmful.
 This is mainly balanced around the Mainline gameset of Cryptid, and around various vanilla (or vanilla adjacent modded decks), where some challenge is provided.
+
+Requires Talisman, Steamodded 1.0.0~BETA-0309c or higher, Lovely v0.7.1 and Cryptid v0.5.6 or higher.
 ![52 Jokers, 1 enhanced, 3 vouchers, 6 editions, 5 boosters, 5 tags, 24 blinds 2 tarots, 2 spectrals and other stickers](image-1.png)
 ## Features (so far)
 - A total of 52 new Jokers are added, with 3 more fusions with a certain mod.
