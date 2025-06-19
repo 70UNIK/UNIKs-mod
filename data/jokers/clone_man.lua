@@ -2,9 +2,9 @@
 --showman on steroids
 SMODS.Joker {
     key = 'unik_cloneman',
-    atlas = 'placeholders',
+    atlas = 'unik_epic',
     rarity = 'cry_epic', --Abstract cards make this rare now.
-	pos = { x = 3, y = 0 },
+	pos = { x = 2, y = 0 },
     cost = 12,
     blueprint_compat = false,
     perishable_compat = true,

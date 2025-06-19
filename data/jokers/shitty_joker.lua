@@ -2,9 +2,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_shitty_joker',
-    atlas = 'placeholders',
+    atlas = 'unik_common',
+	pos = { x = 0, y = 1 },
     rarity = 1,
-	pos = { x = 0, y = 0 },
 	-- Modest
     config = { extra = { discards = 1},immutable = { max_hand_size_mod = 1000 }, },
     cost = 4,
@@ -28,7 +28,7 @@ SMODS.Joker {
 							type = "variable",
 							key = "a_unik_discards",
 							vars = {
-								math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.extra_hands),
+								math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
 							},
 						}),
 					})

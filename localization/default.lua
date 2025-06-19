@@ -1252,7 +1252,7 @@ return {
                 text={
                     "{C:red,E:2}Destroy{} selected cards",
                     "{C:attention}anytime{} {C:inactive}(once until next cashout)",
-                    "{C:inactive}#1#",
+                    "{C:inactive}(#1#)",
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
@@ -1265,7 +1265,7 @@ return {
                 text={
                     "{C:red,E:2}Destroy{} up to {C:attention}#3#{} selected cards",
                     "{C:attention}anytime{} {C:inactive}(once until next cashout)",
-                    "{C:inactive}#1#",
+                    "{C:inactive}(#1#)",
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
@@ -1627,8 +1627,9 @@ return {
                 name = "Epic Blind Sauce",
                 text = {
                     "{X:dark_edition,C:white}^^#1#{} Mult after scoring",
-                    "If {C:attention}copied{}, {C:attention}retriggered{} or",
-                    "Blind beaten in {C:attention}1{} hand,",
+                    "If {C:attention}blueprinted{}, {C:attention}retriggered{} or",
+                    "Blind beaten in",
+                    "{C:attention}3{} hands or less,",
                     "{E:2,C:red}Self destruct{} and",
                     "next blind becomes",
                     "an {E:2,C:red}Epic Blind{}"
@@ -1639,7 +1640,8 @@ return {
                 text = {
                     "{X:dark_edition,C:white}^#1#{} Mult after scoring",
                     "If {C:attention}copied{}, {C:attention}retriggered{} or",
-                    "Blind beaten in {C:attention}1{} hand,",
+                    "Blind beaten in",
+                    "{C:attention}3{} hands or less,",
                     "{E:2,C:red}Self destruct{} and",
                     "next blind becomes",
                     "a {E:2,C:red}Finisher Blind{}"
@@ -1682,6 +1684,16 @@ return {
                 text = {
 					"Gain {C:red}+#1#{} discard#<s>1# when",
 					"{C:attention}Blind{} is selected",
+                }
+            },
+            j_unik_invisible_card = {
+                name = "Invisible Card",
+                text = {
+                    "{C:green}#1# in #2#{} chance to not",
+                    "gain {C:dark_edition}+#3#{} Joker slot#<s>3#",
+                    "when a {C:attention}booster pack{}",
+                    "is skipped",
+                    "{C:inactive}(Currently {C:dark_edition}+#4#{C:inactive} slots)",
                 }
             },
 

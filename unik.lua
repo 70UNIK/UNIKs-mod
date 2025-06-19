@@ -441,14 +441,13 @@ NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 --Event Horizon (Cursed): Other Fuzzy cards give -$1 - $0, -50 - 0 Chips, -10 - 0 Mult. Self destructs if score is positive and chips and mult are both negative.
 --The Warp (Cursed): Other Corrupted card values are multiplied by 0.9X at end of round. Self destructs after 6 rounds.
 
---banned in jen due to unredeem not working
 NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/lockpick.lua")()
 NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
---NFS.load(mod_path .. "data/jokers/big_alice.lua")() (unneeded and already in the form of big joker)
 --- Rare ---
 -- NFS.load(mod_path .. "data/jokers/double_container.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 NFS.load(mod_path .. "data/jokers/riff_rare.lua")() 

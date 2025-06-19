@@ -1,10 +1,10 @@
 --Borg cube: Other steel edition cards give X2 Mult. Uncommon since it always has steel and it's literally an unconditional x2 mult otherwise.
 SMODS.Joker {
     key = 'unik_borg_cube',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
+	pos = { x = 5, y = 0 },
     rarity = 2,
-	pos = { x = 1, y = 0 },
-    cost = 7,
+    cost = 5,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,

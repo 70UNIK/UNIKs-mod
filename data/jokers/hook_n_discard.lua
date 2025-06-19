@@ -9,7 +9,7 @@ SMODS.Joker {
     rarity = "cry_cursed",
 	pos = { x = 1, y = 2 },
     cost = 1,
-    config = { extra = { min_discards = 12, discarded_cards = 2, current_discards = 0,added = false} },
+    config = { extra = { min_discards = 12, discarded_cards = 2, current_discards = 0} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
@@ -31,15 +31,14 @@ SMODS.Joker {
         --avoid creating multiple hooks to avoid multiple hook bug
         if G.jokers and G.jokers.cards then
             for i,v in pairs(G.jokers.cards) do
-                if v.config.center.key == "j_unik_hook_n_discard" and not v.ability.extra.added then
+                if v.config.center.key == "j_unik_hook_n_discard" then
                     selfDestruction(card,"k_unik_weapon_destroyed",G.C.UNIK_THE_HOOK)
-                    -- local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_hook_replacement")
-                    -- card2:add_to_deck() --This causes problems. Why?
-                    -- G.jokers:emplace(card2)
+                    local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_hook_replacement")
+                    card2:add_to_deck()
+                    G.jokers:emplace(card2)
                 end
             end
         end
-        card.ability.extra.added = true
     end,
     calculate = function(self, card, context)
         --check discards

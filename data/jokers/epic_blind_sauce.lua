@@ -1,4 +1,4 @@
---^^1.2 Mult. If copied, retriggered or blind defeated in 1 hand, self destructs and the next blind becomes an epic blind.
+--^^1.2 Mult. If copied, retriggered or blind defeated in 3 hands, self destructs and the next blind becomes an epic blind.
 --EPIC
 function ForceEpicBlind()
     G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus or 0
@@ -18,21 +18,21 @@ SMODS.Joker {
 	pos = { x = 0, y = 1 },
     cost = 10,
     blueprint_compat = true,
-    perishable_compat = false,
+    perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
-    config = { extra = { EEmult = 1.1,destroyed = false,triggers = 2} },
+    config = { extra = { EEmult = 1.4,destroyed = false,triggers = 4,Emult = 2.5} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
         if not unik_config.unik_legendary_blinds then
             key = "j_unik_epic_blind_sauce_no_epic"
-            center.ability.extra.EEmult = 2
+            return { key = key, vars = {center.ability.extra.Emult} }
         else
-            center.ability.extra.EEmult = 1.1
+            return { key = key, vars = {center.ability.extra.EEmult} }
         end
         
-		return { key = key, vars = {center.ability.extra.EEmult} }
+		
 	end,
     --Only spawn if you have at least 1 king of spades in deck
     calculate = function(self, card, context)
@@ -53,16 +53,16 @@ SMODS.Joker {
                 if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
                     card.ability.extra.triggers = card.ability.extra.triggers - 1
                 end
-                if not unik_config.unik_legendary_blinds then
+                if (not unik_config.unik_legendary_blinds) then
                     return {
                         message = localize({
                             type = "variable",
                             key = "a_powmult",
                             vars = {
-                                number_format(card.ability.extra.EEmult),
+                                number_format(card.ability.extra.Emult),
                             },
                         }),
-                        Emult_mod = card.ability.extra.EEmult,
+                        Emult_mod = card.ability.extra.Emult,
                         colour = G.C.DARK_EDITION,
                     }
                 else
@@ -88,7 +88,7 @@ SMODS.Joker {
             end
 		end
         if context.setting_blind then
-			card.ability.extra.triggers = 2
+			card.ability.extra.triggers = 4
 		end
     end
 }

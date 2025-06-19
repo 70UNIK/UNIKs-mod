@@ -298,7 +298,7 @@ end
 
 G.FUNCS.unik_can_devour_fs = function(e)
     local card = e.config.ref_table
-    if G.hand and G.hand.highlighted then
+    if G.hand and G.hand.highlighted and not card.debuff then
         if
             not (G.CONTROLLER.locked or (G.GAME.STOP_USE and G.GAME.STOP_USE > 0))
             and not G.SETTINGS.paused

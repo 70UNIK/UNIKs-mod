@@ -33,7 +33,7 @@ SMODS.Joker {
 	drama = { x = 2, y = 0 }, 
     cost = 8,
     blueprint_compat = true,
-    perishable_compat = true,
+    perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = { divisor = 60,x_mult = 1} },
