@@ -2682,7 +2682,8 @@ return {
             k_unik_leg_tornado_warn_1 = "Must only play the last ",
             k_unik_leg_tornado_warn_2 = " cards in deck",
             k_unik_tornado_placeholder = "(Current Discards)",
-            k_chips = "Chips"
+            k_chips = "Chips",
+            k_unik_must_select_four="Must select at least 4 cards to skip",
         },
         high_scores={},
         labels={

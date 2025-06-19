@@ -41,6 +41,10 @@ SMODS.Booster{
 	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (almanac)
 	no_doe = true,
 	unskippable = function(self) --Always unskippable
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 0
+		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity >= 4 then
+			return false
+		end
 		return true
 	end,
 	create_card = function(self, card, i)

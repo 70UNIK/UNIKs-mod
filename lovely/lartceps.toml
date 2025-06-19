@@ -174,18 +174,13 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
-pattern = '''G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                func = function()
-                    G.STATE = G.STATES.DRAW_TO_HAND
-                    G.deck:shuffle('nr'..G.GAME.round_resets.ante)
-                    G.deck:hard_set_T()
-if G.SCORING_COROUTINE then return false end 
-                    G.STATE_COMPLETE = false
-                    return true
-                end
-            }))'''
-position = "after"
+pattern = '''            return true
+        end
+        }))
+end
+
+G.FUNCS.draw_from_hand_to_run = function(e)'''
+position = "before"
 payload = '''
 end'''
 match_indent = true
@@ -199,3 +194,14 @@ position = "at"
 payload = "if not G.GAME.modifiers.cry_conveyor and not G.GAME.cry_fastened then table.sort(self.cards, function (a, b) return a.T.x + a.T.w/2 - 100*((a.pinned and not a.ignore_pinned) and a.sort_id or 0) < b.T.x + b.T.w/2 - 100*((b.pinned and not b.ignore_pinned) and b.sort_id or 0) end) end"
 match_indent = true
 
+### antifrustriation feature of booster
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''G.GAME.pack_choices = G.GAME.pack_choices - 1'''
+position = "after"
+payload = '''
+G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 0
+G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity + 1
+'''
+match_indent = true
