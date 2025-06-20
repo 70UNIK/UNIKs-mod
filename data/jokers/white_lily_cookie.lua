@@ -214,7 +214,7 @@ SMODS.Joker {
 
 local oldfunc = Card.start_dissolve
 function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
-    if self.config.center.key == "j_unik_white_lily_cookie" then
+    if self.config.center.key == "j_unik_white_lily_cookie" and not self.ability.extra.sold then
         self.ability.extra.copying = true
         self.ability.extra.Emult = self.ability.extra.Emult + self.ability.extra.Emult_mod
         self.ability.extra.x_mult = self.ability.extra.x_mult + self.ability.extra.x_mult_mod
