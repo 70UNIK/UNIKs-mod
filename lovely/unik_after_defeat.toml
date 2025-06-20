@@ -66,76 +66,23 @@ position = 'at'
 payload = '''
 if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
     Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
-elseif G.GAME.unik_killed_by_nuke_legendary then
-    Jimbo:add_speech_bubble('special_lose_unik_nuke_legendary', nil, {quip = true})
-    G.GAME.unik_killed_by_nuke_legendary = nil
-    G.GAME.unik_nuke_activate = nil
-elseif G.GAME.unik_killed_by_legendary_vessel then
-    Jimbo:add_speech_bubble('special_lose_unik_vessel_legendary', nil, {quip = true})
-    G.GAME.unik_killed_by_legendary_vessel = nil
-elseif G.GAME.unik_killed_by_pentagram then
-    Jimbo:add_speech_bubble('special_lose_unik_killed_by_pentagram', nil, {quip = true})
-    G.GAME.unik_killed_by_pentagram = nil
-    G.GAME.unik_pentagram_manager_fix = nil
-elseif G.GAME.unik_killed_by_placard then
-    Jimbo:add_speech_bubble('special_lose_unik_killed_by_placard', nil, {quip = true})
-    G.GAME.unik_killed_by_placard = nil
-elseif G.GAME.unik_killed_by_joyless then
-    Jimbo:add_speech_bubble('special_lose_unik_jollyless', nil, {quip = true})
-    G.GAME.unik_killed_by_joyless = nil
-elseif G.GAME.unik_eaten_by_lily then
-    Jimbo:add_speech_bubble('special_lose_unik_sprunki_lily', nil, {quip = true})
-    G.GAME.unik_eaten_by_lily = nil
-elseif G.GAME.unik_killed_by_poppy then
-    Jimbo:add_speech_bubble('special_lose_unik_tall_poppy_syndrome', nil, {quip = true})
-    G.GAME.unik_killed_by_poppy = nil
-    G.GAME.unik_poppy_ceil = nil
-elseif G.GAME.unik_killed_by_boo then
-    Jimbo:add_speech_bubble('special_lose_unik_bigger_boo', nil, {quip = true})
-    G.GAME.unik_killed_by_boo = nil
-    G.GAME.unik_pentagram_manager_fix = nil
-elseif G.GAME.unik_killed_by_leak then
-    Jimbo:add_speech_bubble('special_lose_unik_the_leak', nil, {quip = true})
-    G.GAME.unik_killed_by_leak = nil
-elseif G.GAME.unik_killed_by_artisan_builds then
-    Jimbo:add_speech_bubble('special_lose_unik_artisan_builds', nil, {quip = true})
-    G.GAME.unik_killed_by_artisan_builds = nil
-elseif G.GAME.unik_killed_by_magnet then
-    Jimbo:add_speech_bubble('special_lose_unik_magnet', nil, {quip = true})
-    G.GAME.unik_killed_by_magnet = nil
-    G.GAME.unik_deathly_debuff_text = nil
-elseif G.GAME.unik_killed_by_racket then
-    Jimbo:add_speech_bubble('special_lose_unik_racket', nil, {quip = true})
-    G.GAME.unik_killed_by_racket = nil
-elseif G.GAME.unik_killed_by_video_poker then
-    Jimbo:add_speech_bubble('special_lose_unik_video_poker', nil, {quip = true})
-    G.GAME.unik_killed_by_video_poker = nil
-    G.GAME.unik_video_poker_rules = nil
-elseif G.GAME.unik_killed_by_magnet_legendary then
-    Jimbo:add_speech_bubble('special_lose_unik_magnet_legendary', nil, {quip = true})
-    G.GAME.unik_killed_by_magnet_legendary = nil
-        G.GAME.unik_pentagram_manager_fix = nil
-         G.GAME.unik_deathly_debuff_text = nil
-elseif G.GAME.unik_killed_by_sword_legendary then
-    Jimbo:add_speech_bubble('special_lose_unik_sword_legendary', nil, {quip = true})
-    G.GAME.unik_killed_by_sword_legendary = nil
-elseif G.GAME.unik_killed_by_tornado_legendary then
-    Jimbo:add_speech_bubble('special_lose_unik_tornado_legendary', nil, {quip = true})
-    G.GAME.unik_killed_by_tornado_legendary = nil
-    G.GAME.unik_deathly_debuff_text = nil
-elseif G.GAME.unik_killed_by_rot then
-    Jimbo:add_speech_bubble('special_lose_unik_red_rot', nil, {quip = true})
-    G.GAME.unik_killed_by_rot = nil
-        G.GAME.unik_pentagram_manager_fix = nil
-elseif G.GAME.unik_killed_by_bigger_blind then
-    Jimbo:add_speech_bubble('special_lose_bigger_blind', nil, {quip = true})
-    G.GAME.unik_killed_by_bigger_blind = nil
-elseif G.GAME.unik_killed_by_artisan_builds_epic then
-    Jimbo:add_speech_bubble('special_lose_unik_artisan_builds_epic', nil, {quip = true})
-    G.GAME.unik_killed_by_artisan_builds = nil
-else
-    Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
-    G.GAME.unik_deathly_debuff_text = nil
+end
+G.GAME.unik_prevent_killing_cursed_jokers2 = nil
+G.GAME.unik_deathly_debuff_text = nil
+'''
+match_indent = true
+
+###Entropy patch
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''local text = (G.GAME.EECardCharacter and 'lq_ee_' or 'lq_')..math.random(1,10)'''
+position = 'after'
+payload = '''
+--entropy workaround
+if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled and not G.GAME.EECardCharacter then
+    text = G.GAME.blind.death_message
 end
 G.GAME.unik_prevent_killing_cursed_jokers2 = nil
 G.GAME.unik_deathly_debuff_text = nil

@@ -964,7 +964,7 @@ return {
                 text={
 					"This Joker gains",
 					"{X:mult,C:white} X#2# {} Mult per",
-					"{C:attention}card{} discarded",
+					"card {C:attention}discarded{}",
 					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
                 },
             },
@@ -1585,7 +1585,7 @@ return {
                     "This Joker gains {X:mult,C:white}Xmult{}",
                     "equal to the {C:attention}sum of{}",
                     "scoring ranks divided by {C:attention}#1#{},",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Learning with Pibby{}",

@@ -9,7 +9,7 @@ SMODS.Blind{
     dollars = 13,
     jen_dollars = 25, --dollar change with almanac
     mult = 1,
-    exponent = {1,1},
+    unik_exponent = {1,1},
     jen_blind_exponent_resize = {1,1.3},
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
@@ -55,9 +55,9 @@ SMODS.Blind{
 		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.P_BLINDS.bl_unik_epic_cookie.mult = 0
         if (SMODS.Mods["jen"] or {}).can_load then
-            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1.3
+            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1.3
         else
-            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
+            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
         end
         G.GAME.epic_cookie_click_interval = -1
         G.hand:change_size(G.GAME.decrementer_hand)

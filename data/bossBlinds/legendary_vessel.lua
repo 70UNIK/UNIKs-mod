@@ -14,7 +14,7 @@ SMODS.Blind{
     boss_colour= HEX("8a71e1"), 
     dollars = 13,
     mult = 1,
-    exponent = {1,2.5},
+    unik_exponent = {1,2.5},
     glitchy_anim = true,
     death_message = "special_lose_unik_vessel_legendary",
     jen_blind_exponent_resize = {2,5}, --to align with epic blinds. ^9.666 that also kills you if you overshoot is worse than *e100

@@ -96,9 +96,9 @@ function Game:start_run(args)
     if G.P_BLINDS.bl_unik_epic_cookie then
         G.P_BLINDS.bl_unik_epic_cookie.mult = 1
         if (SMODS.Mods["jen"] or {}).can_load then
-            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1.3
+            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1.3
         else
-            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
+            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
         end
     end
 	if not G.GAME.defeated_blinds then
@@ -127,10 +127,10 @@ function Blind:set_blind(blind, y, z)
 	if string.sub(G.GAME.subhash or "", -1) == "B" then
 		c = "Big"
 	end
-	if G.GAME.CRY_BLINDS and G.GAME.CRY_BLINDS[c] and not y and blind and (blind.mult or blind.exponent) and blind.unik_clicky_click_mod then
+	if G.GAME.CRY_BLINDS and G.GAME.CRY_BLINDS[c] and not y and blind and (blind.mult or blind.unik_exponent) and blind.unik_clicky_click_mod then
 		blind.mult = G.GAME.CRY_BLINDS[c]
-        if blind.exponent and blind.exponent[2] > 0 then
-            blind.exponent[2] = G.GAME.CRY_BLINDS[c]
+        if blind.unik_exponent and blind.unik_exponent[2] > 0 then
+            blind.unik_exponent[2] = G.GAME.CRY_BLINDS[c]
         end
 	end
 	bsb2(self, blind, y, z)
@@ -145,9 +145,9 @@ function reset_blinds()
         end
         if G.P_BLINDS.bl_unik_epic_cookie then
             if (SMODS.Mods["jen"] or {}).can_load then
-                G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1.3
+                G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1.3
             else
-                G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
+                G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
             end
             G.P_BLINDS.bl_unik_epic_cookie.mult = 1
         end
@@ -180,10 +180,10 @@ local function BlindIncrement(penalty)
 				elseif  G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "bl_unik_epic_cookie" then
                     if (SMODS.Mods["jen"] or {}).can_load then
                         G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1.3
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1.3
                     else
                         G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
                     end
                 else
 					G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 0
@@ -195,10 +195,10 @@ local function BlindIncrement(penalty)
                     
                     if (SMODS.Mods["jen"] or {}).can_load then
                         G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1.3
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1.3
                     else
                         G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1
+                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
                     end
 
                 end
@@ -230,9 +230,9 @@ local function BlindIncrement(penalty)
                     --exponentiation, tetration, etc...
                     else
                         -- --The problem with this is that exponentiation doesnt work at x1 mult. So it has to be multiplied for used exponentiation
-                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult < 0 or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] == 0 then
+                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult < 0 or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] == 0 then
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] = 1
+                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
                         end
                         if G.GAME.CRY_BLINDS[c] and  G.GAME.CRY_BLINDS[c] < 1 then
                             if (SMODS.Mods["jen"] or {}).can_load then
@@ -242,12 +242,12 @@ local function BlindIncrement(penalty)
                             end
                         end
 
-                        G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2])
+                        G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2])
                         * (
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
                         )
 
-                        --print(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2])
+                        --print(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2])
                         -- G.GAME.CRY_BLINDS[c] = to_big(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult):arrow(
                         --     G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[2] or 1,
                         --     G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
@@ -278,19 +278,19 @@ local function BlindIncrement(penalty)
 						local chip_text_node = blind_UI.nodes[1].nodes[3].nodes[1].nodes[2].nodes[2].nodes[3]
 						if chip_text_node then
                             local exponent = false
-                            if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]] and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[2] > 0 then
+                            if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]] and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] > 0 then
                                 exponent = true
                             end
                             if exponent then
                                 --this registers as that but is not updating properly
                                 chip_text_node.config.text = number_format(
                                     to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
-                                        * G.GAME.starting_params.ante_scaling):arrow(G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[1],G.GAME.CRY_BLINDS[c])
+                                        * G.GAME.starting_params.ante_scaling):arrow(G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
                                 )
                                 chip_text_node.config.scale = score_number_scale(
                                     0.9,
                                     to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
-                                    * G.GAME.starting_params.ante_scaling):arrow(G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].exponent[1],G.GAME.CRY_BLINDS[c])
+                                    * G.GAME.starting_params.ante_scaling):arrow(G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
                                 )  
                             else
                                 --print("1")
