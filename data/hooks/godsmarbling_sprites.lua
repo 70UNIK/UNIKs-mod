@@ -6,7 +6,7 @@ function Card:draw(layer)
     if CEN then
 		self.was_in_pack_area = G.pack_cards and self.area and self.area == G.pack_cards
 		if (self.facing or '') == 'front' then
-			if self.config then
+			if self.config and (SMODS.Mods["jen"] or {}).can_load then
                 --Copied from Jen's, credit to him for original code
                 local godsmarble_fear = not CEN.cant_scare and ((Jen.gods() and CEN.fusable))
                 --print("22222")

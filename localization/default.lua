@@ -470,7 +470,7 @@ return {
                     "Deck and discards not replenished",
                     "Per defeat, rescale blind to",
                     "(best hand this run)#3#",
-                    "If starting hands = 1, increase",
+                    "If Max Hands = 1, increase",
                     "requirements by #4#",
                 }
             },
