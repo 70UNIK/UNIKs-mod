@@ -892,7 +892,7 @@ return {
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
                 text = {
-                    "{C:attention}Each played 7{} has a", 
+                    "Each played {C:attention}7{} has a", 
                     "{C:green}#1# in #3#{} chance",
                     "for {C:mult}+#2#{} Mult and a",
                     "{C:green}#1# in #5#{} chance",
@@ -1308,9 +1308,9 @@ return {
                 text={
                     "{X:mult,C:white}X#1#{} Mult {C:attention}after scoring{}",
                     "{C:red}Impounds{} a random Joker on spawn",
-                    "{C:attention}Sell{} to Impounded from Joker",
+                    "{C:attention}Sell{} to remove {C:red}Impounded{} from Joker",
                     "Selling costs {X:money,C:white}X#2#ln(x+1){} the total",
-                    "{C:attention}selling price{} of Impounded Joker",
+                    "{C:attention}selling price{} of {C:red}Impounded{} Joker",
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
             },
@@ -1318,7 +1318,7 @@ return {
                 name="Impound Notice",
                 text={
                     "{C:red}Impounds{} a random Joker on spawn",
-                    "{C:attention}Sell{} to Impounded from Joker",
+                    "{C:attention}Sell{} to remove Impounded from Joker",
                     "Selling costs {X:money,C:white}X#2#{} the total",
                     "{C:attention}selling price{} of Impounded Joker",
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
@@ -1682,7 +1682,7 @@ return {
             j_unik_shitty_joker = {
                 name = "Shitty Joker",
                 text = {
-					"Gain {C:red}+#1#{} discard#<s>1# when",
+					"Gain {C:red}+#1#{} Discard#<s>1# when",
 					"{C:attention}Blind{} is selected",
                 }
             },
@@ -2538,7 +2538,7 @@ return {
             k_unik_legendary_crown_start="",
             k_unik_legendary_crown_defeat_x_times1="Defeat this blind ",
             k_unik_legendary_crown_defeat_x_times2=" time(s)",
-            k_unik_legendary_crown_placeholder="(Current hands)",
+            k_unik_legendary_crown_placeholder="(Max Hands)",
             k_unik_odd_and_even = "(Scoring odd and even)",
             k_unik_cards="cards",
             k_unik_debuffed_card_only="Must only play debuffed cards",
