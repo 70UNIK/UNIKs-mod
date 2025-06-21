@@ -48,4 +48,4 @@ Pretty much all artwork is done by me and most of the code is mainly of my conce
 - CelesteCardCollection (Mod) - Inspiration for Legendary Golden Crown
 - Bunco (Mod) - Inspiration for Epic Sand
 - Ortalab (Shinku) - Inspiration for Epic Reed and Legendary Sword
-- Jen's Almanac -  Epic/Legendary Blinds inspiration + some code used for functionality such as Omegas and Blank Lartceps and shaders such as Dizzy and Bloated edition.
+- Jen's Almanac -  Epic/Legendary Blinds concept + some code used for functionality such as Omegas and Blank Lartceps and shaders such as Dizzy and Bloated edition.
