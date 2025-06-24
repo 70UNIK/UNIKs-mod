@@ -28,7 +28,7 @@ Requires Talisman, Steamodded 1.0.0~BETA-0309c or higher, Lovely v0.7.1 and Cryp
 - - 2 **"normal" blinds**
 - - 10 **Finisher Blinds**
 - - 12 **Regular Blinds**
-- - If enabled (or playing a certain mod), 13 - 14 **Epic Blinds** and 7 **"Legendary" Blinds**, extremely cruel blinds that are designed to make sure you *suffer*.
+- - If enabled, 13 - 14 **Epic Blinds** and 7 **"Legendary" Blinds**, extremely cruel blinds that are designed to make sure you *suffer*.
 - Mainline balancing changes for some Cryptid Jokers, such as the infamous Canvas (Now legendary) and Oil Lamp (Immutable and increases values by x1.075).
 
 ![alt text](image-3.png)
@@ -48,4 +48,4 @@ Pretty much all artwork is done by me and most of the code is mainly of my conce
 - CelesteCardCollection (Mod) - Inspiration for Legendary Golden Crown
 - Bunco (Mod) - Inspiration for Epic Sand
 - Ortalab (Shinku) - Inspiration for Epic Reed and Legendary Sword
-- Jen's Almanac -  Epic/Legendary Blinds concept + some code used for functionality such as Omegas and Blank Lartceps and shaders such as Dizzy and Bloated edition.
+- Jen's Almanac (Jenwalter666) -  Epic/Legendary Blinds concept + some code used for functionality such as Omegas and Blank Lartceps and shaders such as Dizzy and Bloated edition.
