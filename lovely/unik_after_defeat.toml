@@ -89,7 +89,6 @@ G.GAME.unik_deathly_debuff_text = nil
 '''
 match_indent = true
 
-### Set blind sizes to be different if jen is installed; legendary blinds
 [[patches]]
 [patches.pattern]
 target = 'game.lua'
@@ -110,4 +109,3 @@ self.death_message = blindTable.death_message or nil
 '''
 match_indent = true
 
-### Set blind sizes to be different if jen is installed; legendary blinds

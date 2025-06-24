@@ -246,10 +246,6 @@ for i = 1, #G.CHALLENGES do
             G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_neat_tabbycat'}
             G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_neat_wildcardcharlie'}
         end
-        -- When Jen's almanac is updated, also add them
-        if (SMODS.Mods["jen"] or {}).can_load then
-            
-        end
         -- Add justice, chariot, express, observatory and light cards to the list
 
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_justice'}

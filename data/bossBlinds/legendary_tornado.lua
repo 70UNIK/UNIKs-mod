@@ -15,7 +15,6 @@ SMODS.Blind{
     boss_colour= HEX("3dd9ca"), 
     dollars = 13,
     mult = 0.666,
-    jen_blind_resize = 1e16,
     glitchy_anim = true,
     gameset_config = {
 		modest = { disabled = true},

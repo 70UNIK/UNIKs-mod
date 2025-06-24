@@ -120,10 +120,6 @@ for i = 1, #G.CHALLENGES do
             G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_neat_unpaidintern'}
             G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_neat_sparecutoffs'}
         end
-        -- When Jen's almanac is updated, also add them
-        if (SMODS.Mods["jen"] or {}).can_load then
-            
-        end
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "c_heirophant" }
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "j_unik_jsab_maya" }
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = { id = "j_unik_vessel_kiln" }

@@ -8,9 +8,7 @@ SMODS.Blind{
     pos = {x = 0, y = 21},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
     in_pool = function(self)
         return  CanSpawnEpic()
 	end,

@@ -14,21 +14,20 @@ local pibby_quotes = {
 		'k_unik_pibby_normal2',
         'k_unik_pibby_normal3',
 	},
-	drama = {
-		'k_unik_pibby_scared1',
-		'k_unik_pibby_scared2',
-	},
-	darkness = {
-		'k_unik_pibby_darkness1',
-		'k_unik_pibby_darkness2',
-	}
+	-- drama = {
+	-- 	'k_unik_pibby_scared1',
+	-- 	'k_unik_pibby_scared2',
+	-- },
+	-- darkness = {
+	-- 	'k_unik_pibby_darkness1',
+	-- 	'k_unik_pibby_darkness2',
+	-- }
 }
 SMODS.Joker {
     key = 'unik_pibby',
     atlas = 'unik_pibby',
     rarity = 3,
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
 	drama = { x = 2, y = 0 }, 
     cost = 8,
@@ -42,9 +41,6 @@ SMODS.Joker {
 	},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
-		if (SMODS.Mods["jen"] or {}).can_load then
-			quoteset = Jen.gods() and 'gods' or Jen.dramatic and 'drama'  or 'normal'
-		end
 		return { vars = {center.ability.extra.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
 	end,
     calculate = function(self, card, context)

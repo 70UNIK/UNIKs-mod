@@ -165,9 +165,9 @@ return {
 				text = {
                     "Shop rerolls this ante increase",
                     "Blind requirements by ^#1#",
-                    "#2#", --"If done < 10 rerolls this ante,",
-                    "#3#", --"on Blind select, die",
-                    "(Currently #4#)",
+                    "If less than #2# rerolls are done this ante,", --"If done < 10 rerolls this ante,",
+                    "On Blind Select, die", --"on Blind select, die",
+                    "(Currently #3#)",
 				},
             },
             bl_unik_epic_collapse={ --only appears if you have at least 5 stone cards in the deck
@@ -215,9 +215,9 @@ return {
             bl_unik_epic_sand={
                 name = "Juoksuhiekka", --quicksand
                 text = {
-                    "#1#",
-                    "#2#", 
-                    "(Currently #3##4##5#)"
+                    "^2 Blind Size ",
+                    "per tag held", 
+                    "(Currently #1# Tag(s))"
                 },
             },
             bl_unik_epic_hannibal = { --Always draw 4 cards after play and discard. If any cards are held in hand after blind defeat, die
@@ -269,7 +269,7 @@ return {
             bl_unik_epic_shackle={ --Reduce hand size by (number of empty joker slots x negative jokers owned) and destroy all negative jokers, cards and consumeables.
                 name = "Kärsimyksenkahle", --Shackle of Suffering
                 text = {
-                    "#1# hand size",
+                    "Reduce hand size",
                     "and Joker slots by",
                     "(Empty Joker slots) x (Negative Jokers)",
                     "then destroy all negative",
@@ -311,16 +311,16 @@ return {
 				},
             },
             bl_unik_septic_seance = {
-                name = "Septic Seance",
+                name = "Septic Séance",
                 text = {
-					"Create an eternal Seance", 
+					"Create an eternal Séance", 
                     "on Blind Selection",
                     "If hand is not a Straight Flush,",
                     "convert adjacent Jokers",
-                    "into Seances",
+                    "into Séance",
 				},
             },
-
+            
             bl_cry_cube={ --I don't like cube being worse than lemon trophy. So I'll just nerf it to reduce mult by ^0.5 and blind size to be ^0.33. Still severe, but can be brute forced 
                 name = "The Cube",
                 text = {
@@ -612,22 +612,55 @@ return {
                     "by +1x",
 				},
             },
-            --weather themed blinds:
-            --Wind, Gale, Tornado, Typhoon, Hurricane ()
-            bl_unik_the_wind={
-                name = "The Wind",
-				text = {
-					"Each played card has",
-					"a #1# in #2# chance",
-                    "to be debuffed before scoring", --likely utilising cry_before_play
-				},
+ 
+            --beast blinds? Around epic blind difficulty, although the art will resemble, but become more distinct from epic blinds.
+            --Spawns same time as epic blinds.
+            bl_unik_beast_shadow_milk={
+                name = "Dreadful Deception", --if this appears, all blinds appear as big blinds.
+                text = {
+                    "Disguised as a random Blind", -- can occupy small, big or boss slot, but all blinds are unskippable/unrerollable.
+                    "On play, deselect and select",
+                    "(Number of selected cards)",
+                    "random cards in hand",
+                    "High card banned",
+                }
             },
-            bl_unik_the_gale={
-                name = "The Gale",
-				text = {
-					"First hand will not score",
-				},
-            }
+            bl_unik_beast_shadow_milk_fakeout={
+                name = "Big Blind?"
+            },
+            bl_unik_beast_burning_spice={
+                name = "Destroyer of worlds",
+                text = {
+                    "Destroy all cards",
+                    "in first drawn hand",
+                    "+#2# ante per card", --+1 ante
+                    "destroyed",
+                }
+            },
+            bl_unik_beast_mystic_flour={
+                name = "Dust of Decay",
+                text = {
+                    "Joker values are multiplied",
+                    "by 0.95x every second spent",
+                    "in this round", --excluding scoring, resets joker values upon defeat.. unless its almanac
+                }
+            },
+            bl_unik_beast_eternal_sugar={
+                name = "Eternal Abyss",
+                text = {
+                    "^1.1 Blind size",
+                    "per trigger",
+                }
+            },
+            bl_unik_beast_silent_salt = {
+                name = "Salt the Earth",
+                text = {
+                    'Add Namta Cards equal',
+                    'to your deck size',
+                    'Must hold at least 2', --at least not play them
+                    'Namta cards in hand',
+                }
+            },
             
         },
         --akioyoris shennanngians
@@ -757,27 +790,13 @@ return {
 			},
         },
         Enhanced={
-            --ALMANAC + BUFFOONERY EXCLUSIVE ENHANCEMENTS--
-            m_unik_buf_jen_tainted_ceramic = {
-                name = "Tainted Ceramic",
-				text = {
-						"{X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", --jen logic, complete with 6 ^s!
-						"{C:green}#2# in #3#{} chance card is", --glass card properties (4 in 6 chance)
-                        "{C:red,E:2}destroyed{} when scored",
-                        "{C:red,E:2}Guaranteed chance{} if",
-                        "not played with {C:attention}exactly{}", --porcelain card properties
-                        "{C:attention}#4#{} cards, {C:attention}held{} or {C:attention}unscored{}",
-                        "{C:inactive,s:0.7}(Numerator cannot fall below 3)",
-                        "{C:inactive,s:0.7}(Denominator cannot go above 6)",
-				}
-            },
             m_unik_namta = {
                 name = "Namta",
                 text = {
                     "Has no rank or suit",
                     "{X:unik_void_color,E:2,C:red}^#3#{} Blind Size if held",
                     "Create a {X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card",
-                    "when {C:attention}scored, then{}",
+                    "when scored, then",
                     "{C:red,E:2}Self Destruct{}",
                 }
             },
@@ -792,82 +811,6 @@ return {
                     "other than {C:attention}7s{}",
                 }
             }
-        },
-        jen_omegaconsumable={
-            --unik's consumables
-            c_unik_crossdresser_omega = {
-                name = 'The Crossdresser {C:dark_edition}Omega',
-                text = {
-                    'Select {C:attention}any number{} of cards to enhance to {C:unik_unik_color}Pink{} cards,',
-                    '{C:red}destroy all other cards{} and {C:attention}duplicate the selected cards #1# times', --19 times
-                }
-            },
-            c_unik_wheel_of_misfortune_omega = {
-                name = 'The Evocation {C:dark_edition}Omega',
-                text = {
-                    '{C:red}Destroy{} all {X:cry_cursed,C:white}Cursed{} Jokers and',
-                    'for each {X:cry_cursed,C:white}Cursed{} Joker destroyed',
-                    'create {C:attention}#1#{} random {C:red,E:1}Omega{} cards',
-                    '{C:inactive}(Excludes Balatro\'s Soul)',
-                }
-            },
-            --triple planet cards
-            c_unik_ruutu_omega={
-                name = 'Ruutu {C:dark_edition}Omega',
-                text = {
-                    '{C:jen_RGB,E:1}#1#,',
-                    '{C:jen_RGB,E:1}#2#,',
-                    '{C:jen_RGB,E:1}and #3#',
-                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{},',
-                    '{C:mult}Mult{}, and {C:mult}Level Mult{},',
-                    'and then {C:attention}doubles{} current {C:planet}levels'
-                }
-            },
-            c_unik_risti_omega={
-                name = 'Risti {C:dark_edition}Omega',
-                text = {
-                    '{C:jen_RGB,E:1}#1#,',
-                    '{C:jen_RGB,E:1}#2#,',
-                    '{C:jen_RGB,E:1}and #3#',
-                    ' ',
-                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
-                    'and then {C:attention}doubles{} current {C:planet}levels'
-                }
-            },
-            c_unik_hertta_omega={
-                name = 'Hertta {C:dark_edition}Omega',
-                text = {
-                    '{C:jen_RGB,E:1}#1#,',
-                    '{C:jen_RGB,E:1}#2#,',
-                    '{C:jen_RGB,E:1}and #3#',
-                    ' ',
-                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
-                    'and then {C:attention}doubles{} current {C:planet}levels'
-                }
-            },
-            c_unik_pata_omega={
-                name = 'Pata {C:dark_edition}Omega',
-                text = {
-                    '{C:jen_RGB,E:1}#1#,',
-                    '{C:jen_RGB,E:1}#2#,',
-                    '{C:jen_RGB,E:1}and #3#',
-                    ' ',
-                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
-                    'and then {C:attention}doubles{} current {C:planet}levels'
-                }
-            },
-            c_unik_kaikki_omega={
-                name = 'Kaikki {C:dark_edition}Omega',
-                text = {
-                    '{C:jen_RGB,E:1}#1#,',
-                    '{C:jen_RGB,E:1}#2#,',
-                    '{C:jen_RGB,E:1}and #3#',
-                    ' ',
-                    '{C:attention}Sextuples {C:chips}Chips{}, {C:chips}Level Chips{}, {C:mult}Mult{}, and {C:mult}Level Mult{},',
-                    'and then {C:attention}doubles{} current {C:planet}levels'
-                }
-            },
-
         },
         Rotarot = {
             c_unik_rot_crossdresser={
@@ -1120,18 +1063,6 @@ return {
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
             },
-            j_unik_celestial_of_chaos = { --Omega planet cards give {0}1.05 Mult, increase operator by 1 every 20 triggers. It is limitless, easier to get than kosmos and stronger than the storm, but requires a lot of setup.
-                name = 'The Celestial of Chaos',
-                text = {
-                    "{C:jen_RGB,E:1}Omega {C:planet}Planet{} cards {C:attention}in your consumable area{}", 
-                    "each give {X:unik_void_color,C:jen_RGB}#1##2#{} Mult",
-                    "Increase operator by {C:jen_RGB,E:1}#3#{} for every {C:attention}#4#{} triggers",
-                    "{C:inactive,s:0.8}(Increase operator increase requirements by {X:dark_edition,s:0.8,C:white}X#5#{C:inactive,s:0.8})",
-                    "{C:inactive,s:0.8}(Resets after each played hand){}",
-                    "{C:unik_caption,s:0.7,E:1}#6#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                }
-            },
             j_unik_unik = { --mainline: ^0.03 chips
                 name = '{C:unik_unik_color}UNIK',
                 text = {
@@ -1141,16 +1072,6 @@ return {
                     "{C:unik_caption,s:0.7,E:1}#5#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
-                }
-            },
-            j_unik_cube_of_calamity = { --mainline: ^0.03 chips
-                name = 'The Cube of Calamity',
-                text = {
-                    "This Joker gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Chips", 
-                    "for each {C:attention}7{} scored",
-                    "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                 }
             },
             j_unik_unik_modest = { --modest: 7s give X0.7 Chips
@@ -1220,18 +1141,6 @@ return {
                     "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
-                },
-            },
-            j_unik_mutilated_mess = { --epic: gains x0.07 chips for EVERY chips, xchips or ^chips trigger (pentationals and tettrati0onals included)
-            --Increases by 1.3x if maya and yokana are present
-                name="The Mutilated Mess",
-                text={
-                    "This Joker gains {X:jen_RGB,C:white}^^#2#{} Chips when", --gain will become exponented by ^0.4 (around Exponentia)
-                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
-                    --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
-                    "{C:inactive}(Currently {X:jen_RGB,C:white}^^#1#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                 },
             },
             --rare: x1.5x mult from destroying cursed jokers, but only up to 8, the 9th one will cause self destruciton and release ALL cursed jokers
@@ -1520,25 +1429,7 @@ return {
                     "{C:purple}Eternal{} Joker"
                 },
             },
-
-            --Override hunter loc to include "Red Rot"
-            j_jen_hunter = {
-                name = 'The Hunter',
-                text = {
-                    'Whenever {C:blue}current hands{} are below your {C:blue}maximum hands{},',
-                    '{C:attention}refill{} your {C:blue}hands{} to the maximum',
-                    '{C:red,s,E:1}Succumbs to the Rot after #1#, or selecting Red Rot Blind',
-                    'When this Joker {C:red}dies to the Rot{},',
-                    '{C:attention}create random {C:spectral}Spirits',
-                    'equal to the {C:attention}cumulative number of',
-                    '{C:blue}hands{} that this Joker has replenished',
-                    '{C:inactive}(Currently #2#)',
-                    '{C:inactive}(Selling this card at 7 rounds remaining creates Rot, but gives {C:red}no rewards{C:inactive})',
-                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
-                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
-                }
-            },
-            --override saint loc to allow foundations to produce exotics after 5 hands
+            --I'll override this still
             j_jen_saint = {
                 name = 'The Saint',
                 text = {
@@ -1559,16 +1450,6 @@ return {
                     '{X:black,C:red,s:3}^^^3{C:purple} Chips & Mult',
                     '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
                     '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
-                }
-            },
-            --override attuned saint loc to force foundations to be negative and to produce exotics immediately.
-
-            --ALMANAC + BUFFOONERY EXCLUSIVES--
-            j_unik_buf_jen_kosmos_tea = { --godsmarble dorkshire tea from buffoonery, cause thats funny
-                name = 'Kosmos\' Tea',
-                text = {
-                    "If hand contains exactly 6 cards",
-                    "All scored cards become Tainted Ceramic",
                 }
             },
             j_unik_double_container = {
@@ -2428,7 +2309,7 @@ return {
         dictionary={
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
-            unik_legendary_blinds_option = "Epic and Legendary Blinds outside Almanac (Restart Required)",
+            unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
             unik_almanac_fusions_in_cryptid_option = "Enable Almanac Fusions in Base Cryptid (Restart Required)",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
@@ -2549,8 +2430,6 @@ return {
             k_unik_ritualistic_placeholder = "Ritualistic",
             k_unik_hurry_up="IMPOUNDMENT SOON",
             k_unik_hurry_up2="IMPOUNDMENT IMMINENT",
-            k_unik_shackle1="Permanently reduce", --jen
-            k_unik_shackle2="Reduce", --jenless
             k_unik_reed_placeholder="(3 random ranks from deck)",
             k_unik_reed_part1 = "a",
             k_unik_reed_part2 = "or",
@@ -2578,16 +2457,6 @@ return {
             k_unik_moonlight_normal1 = "May I wish you happy dreams...",
             k_unik_moonlight_normal2 = "The stars dance and the dreams flow...",
             k_unik_moonlight_normal3 = "It will be nice to dream for a while...",
-            ---Scared:
-            k_unik_moonlight_scared1 = "Is this is what nightmares are made of...?",
-            ---Godsmarble Near:
-            k_unik_moonlight_godsmarble1 = "Oh god... What are those thoughts...?",
-            k_unik_moonlight_godsmarble2 = "Get this thing away from me...!",
-            k_unik_moonlight_godsmarble3 = "I... something is happening to me...!",
-            ---Godsmarbled: The Celesial of Chaos
-            k_unik_celestial_of_chaos1 = "DARKNESS SHALL COVER THE UNIVERSE...",
-            k_unik_celestial_of_chaos2 = "I'LL PLUNGE THE WORLD INTO THE VOID...",
-            k_unik_celestial_of_chaos3 = "IT DOESN'T MATTER DOESN'T IT?",
 
             --Unik
             ---Normal:
@@ -2597,28 +2466,6 @@ return {
             k_unik_unik_normal4 = "I can admittedly be a bit dreary at times...",
             k_unik_unik_normal5 = "Let me know what I can help out with.",
             k_unik_unik_normal6 = "Umm, hi... Can't believe I'm here now...",
-            ---Scared:
-            k_unik_unik_scared1 = "Wh... IT'S TOO MUCH!!!",
-            k_unik_unik_scared2 = "PLEASE STOP! I can't handle this!",
-            k_unik_unik_scared3 = "The fuck is all this?!",
-            ---Godsmarble Near:
-            k_unik_unik_godsmarble1 = "I... I... am.... F A L L I N G...",
-            k_unik_unik_godsmarble2 = "WHAT IS HAPPENING TO ME?!",
-            k_unik_unik_godsmarble3 = "That thing is doing... Something to me!...",
-            k_unik_unik_godsmarble4 = "WHY DID YOU PUT THAT HERE?! IT... MY MIND...!",
-            k_unik_unik_godsmarble5 = "IT HURTS SO MUCH... IT HURTS...",
-            k_unik_unik_godsmarble6 = "It hurts... Why are you... doing... this...",
-            k_unik_unik_godsmarble7 = "*sobbing* *sob*",
-            ---Godsmarbled: Cube of Calamity (basically I lose myself into mindlessness similar to Giygas)
-            k_unik_cube_of_calamity1 = "I   F E E L...    B A D...",
-            k_unik_cube_of_calamity2 = "I   C A N ' T...",
-            k_unik_cube_of_calamity3 = "F A L L I N G...",
-            k_unik_cube_of_calamity4 = "ITHURTSITHURTSITHURTSI T H U R T S...",
-            k_unik_cube_of_calamity5 = "G E T O U T G E T O U T...",
-            k_unik_cube_of_calamity6 = "I M S O R R Y I M S O R R Y...",
-            k_unik_cube_of_calamity7 = "Y O U...",
-            k_unik_cube_of_calamity8 = "A A A A A A A A A A A A A A A A A A...",
-            k_unik_cube_of_calamity9 = "N O T H I N G...   L E F T...",
             --Chelsea
             ---Normal:
             k_unik_chelsea_normal1 = "Hola! Maybe I can help out?",
@@ -2627,38 +2474,6 @@ return {
             k_unik_chelsea_normal4 = "I miss being with my family...",
             k_unik_chelsea_normal_1member = "Mom! It's nice to not be alone for once...",
             k_unik_chelsea_normal_family = "Oh! Maya, Yokana! I'm glad you two are here!",
-
-            --godsmarble maya
-            k_unik_chelsea_normal_maya_god1 = "Mom! Maya! What happened to you?!",
-            k_unik_chelsea_normal_maya_god2 = "Oh god… Why did you do this to her?!",
-            
-            --godsmarble yokana
-            k_unik_chelsea_normal_yokana_god1 = "Mom! Can you hear me? Please?!",
-            k_unik_chelsea_normal_yokana_god2 = "I don't want to hurt you… Please are you still here?...",
-
-            --both parents godsmarbled
-            k_unik_chelsea_normal_family_god1 = "You... Monster...",
-            k_unik_chelsea_normal_family_god2 = "Get... Out...",
-            k_unik_chelsea_normal_family_god3 = "*Sob* *Sob*",
-            k_unik_chelsea_normal_family_god4 = "Why did you do this to us...",
-            ---Scared:
-            k_unik_chelsea_scared1 = "It's getting too much for me!",
-            k_unik_chelsea_scared2 = "¡Dios mío! What is going on??!",
-            ---Godsmarble Near:
-            k_unik_chelsea_godsmarble1 = "My arms are pulling apart!... It hurts...!",
-            k_unik_chelsea_godsmarble2 = "I feel so tight... My body is burning up...!",
-            k_unik_chelsea_godsmarble3 = "AAAAaaaaAAAARRRGHHH!!",
-            k_unik_chelsea_godsmarble4 = "IT HURTS SO MUCH!!!!",
-            k_unik_chelsea_godsmarble5 = "WAAAHHH!... aaarrgghhh...",
-            k_unik_chelsea_godsmarble6 = "(Uncontrollable crying)",
-            k_unik_chelsea_godsmarble_parents = "Mommy! Please... Help... Me...",
-            k_unik_chelsea_godsmarble_parents_gods = "Why..........",
-            ---Godsmarbled: mutilated mess (chelsea gets her limbs, wings, ears ripped out, horrifically burned. Think like Curly from Mouthwashing)
-            k_unik_mutilated_mess1 = "AAAAAAAAAAAAAAAAAA…A.AA.A..A.A.A.AAAAAAAAHHHH...",
-            k_unik_mutilated_mess2 = "Uuurggh... aarrrghh... AAAAAAA...arrgghh...",
-            k_unik_mutilated_mess3 = "*Sob* *Sob* *Sob* *Sob*",
-            k_unik_mutilated_mess4 = "H.....H—hurts.....",
-            k_unik_mutilated_mess5 = "(Nothing but uncontrollable crying)",
 
             k_unik_pibby_normal1 = "Learning is so much fun!",
             k_unik_pibby_normal2 = "Well what shall we learn today?",
@@ -2677,7 +2492,7 @@ return {
             k_unik_tag="tags",
             k_unik_epic_sand_almanac_1 = "Increase blind size",
             k_unik_epic_sand_almanac_2 = "by {Tags held}1.1",
-            k_unik_epic_vice_placeholder = "(5, increase by ^1.05 per Tukehtumisenpahe)",
+            k_unik_epic_vice_placeholder = "(4, increase by ^1.05 per Tukehtumisenpahe)",
             ph_game_over="YOU ARE DEAD",
             k_unik_leg_tornado_warn_1 = "Must only play the last ",
             k_unik_leg_tornado_warn_2 = " cards in deck",

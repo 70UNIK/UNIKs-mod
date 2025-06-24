@@ -8,9 +8,7 @@ SMODS.Blind	{
     pos = {x = 0, y = 19},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
 	--must be localized
 	ignore_showdown_check = true,
 	debuff_hand = function(self, cards, hand, handname, check)

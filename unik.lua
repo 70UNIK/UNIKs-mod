@@ -1,30 +1,27 @@
 local mod_path = "" .. SMODS.current_mod.path
 unik_config = SMODS.current_mod.config
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
-if not (SMODS.Mods["jen"] or {}).can_load then
-	SMODS.current_mod.config_tab = function() --Config tab
-		
-		return {
-		n = G.UIT.ROOT,
-		config = {
-			align = "cm",
-			padding = 0.05,
-			colour = G.C.CLEAR,
-		},
-		nodes = {
-			create_toggle({
-				label = localize("unik_legendary_blinds_option"),
-				ref_table = unik_config,
-				ref_value = "unik_legendary_blinds",
-			}),
-		},
-		}
-	end
+SMODS.current_mod.config_tab = function() --Config tab
+	
+	return {
+	n = G.UIT.ROOT,
+	config = {
+		align = "cm",
+		padding = 0.05,
+		colour = G.C.CLEAR,
+	},
+	nodes = {
+		create_toggle({
+			label = localize("unik_legendary_blinds_option"),
+			ref_table = unik_config,
+			ref_value = "unik_legendary_blinds",
+		}),
+	},
+	}
 end
 Cryptid.cross_mod_names = {
 	CardSleeves = "Card Sleeves",
 	Cryptid = "Cryptid",
-	jen = "Jen's Almanac",
 	sdm0sstuff = "SDM_0's Stuff",
 	magic_the_jokering = "Magic the Jokering",
 	extracredit = "Extra Credit",
@@ -115,8 +112,6 @@ SMODS.Atlas({
 		frames = 21 })
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
--- NFS.load(mod_path .. "data/hooks/debuff_jokers.lua")() --debuff jojkersare incredibly glitchy
-NFS.load(mod_path .. "data/hooks/godsmarbling_sprites.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 SMODS.Sound({
@@ -312,10 +307,6 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
 	NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
 end
---Omega cards
-if (SMODS.Mods["jen"] or {}).can_load then
-	NFS.load(mod_path .. "data/omegas/omega_ruutu.lua")() 
-end
 --boosters
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
@@ -357,13 +348,6 @@ NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/jaundice_jack.lua")()
 NFS.load(mod_path .. "data/bossBlinds/septic_seance.lua")()
---jens mod replacement: Red Rot (as ghost is banned, but the concept should be the same: a single detrimental joker spreads and replaces)
-if (SMODS.Mods["jen"] or {}).can_load then
-	NFS.load(mod_path .. "data/bossBlinds/red_rot.lua")()
-else
-	--Disabled due to ghost being crash happy
-	--NFS.load(mod_path .. "data/bossBlinds/bigger_boo.lua")()
-end
 
 
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
@@ -381,6 +365,7 @@ end
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
 if unik_config.unik_legendary_blinds then
+	
 	NFS.load(mod_path .. "data/bossBlinds/epic_legendary_check.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_shackle.lua")()
@@ -395,10 +380,6 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
-	--Jen has plenty of immutable jokers, thus this would be extremely devastating outside of jens
-	if (SMODS.Mods["jen"] or {}).can_load then 
-		NFS.load(mod_path .. "data/bossBlinds/epic_vader.lua")()
-	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")() --panopicon. thats it
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")() --Uhhh, maybe I can add a joker that scales xmult but caps score at 0.75x and scale only if score is exactly 1.5x, but that breaks the consecutive scoring
@@ -409,11 +390,6 @@ if unik_config.unik_legendary_blinds then
 	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
 
--- -- ENHANCEMENTS --
--- -- Requires both buffoonery and jen's almanac
--- if ((SMODS.Mods["jen"] or {}).can_load) and (SMODS.Mods["Buffoonery"] or {}).can_load then
--- 	NFS.load(mod_path .. "data/enhancements/tainted_ceramic.lua")()	
--- end
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
@@ -482,13 +458,6 @@ NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
 --- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
-
---adding fusions and jen exclusives to the mix
-if (SMODS.Mods["jen"] or {}).can_load then
-	NFS.load(mod_path .. "data/jokers/mutilated_mess.lua")()
-	NFS.load(mod_path .. "data/jokers/celestial_of_chaos.lua")()
-	NFS.load(mod_path .. "data/jokers/cube_of_calamity.lua")()
-end
 --function for reference
 
 
@@ -526,9 +495,7 @@ NFS.load(mod_path .. "data/overrides/crossmod.lua")()
 -- NFS.load(mod_path .. "data/challenges/chipzel.lua")() --rework needed: all mult goes into chips. Otherwise it will never work trying to ban all mult based jokers.
 -- NFS.load(mod_path .. "data/challenges/multiplication.lua")() --rework needed: all chips go into mult
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
-if not (SMODS.Mods["jen"] or {}).can_load then
-	NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
-end
+NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
 -- NFS.load(mod_path .. "data/challenges/monsters.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
@@ -541,7 +508,7 @@ NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
 NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
 NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
 NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
-if unik_config.unik_legendary_blinds or (SMODS.Mods["jen"] or {}).can_load then
+if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
 --Future jokers to take ownership:
@@ -566,39 +533,3 @@ end
 -- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
 -- The Abyss - Die to a Legendary Blind
 -- 
-
---Finally adding myself to the main menu for some reason
-
---Multiplies the card's size by mod - solely for the main menu- code by jen 
---Only loads in cryptid by itself. It will not run with jens installed
---If Jen is enabled, replace existing sizes with jen sizes to make it more in line with Epic Blinds
-
-if (SMODS.Mods["jen"] or {}).can_load then
-	local mainmenuref2 = Game.main_menu
-	Game.main_menu = function(change_context)
-		if Jen and Jen.fusions then
-			-- local alreadyApplied = false
-			-- for i,v in pairs(Jen.fusions) do
-			-- 	print(v)
-			-- end
-			Jen.add_fusion('Mutate Moonlight Cookie',5000,"j_unik_celestial_of_chaos",
-				'j_unik_moonlight_cookie',
-				'j_jen_godsmarble'
-			)
-			Jen.add_fusion('Mutilate Chelsea',750,"j_unik_mutilated_mess",
-				'j_unik_jsab_chelsea',
-				'j_jen_godsmarble'
-			)
-			Jen.add_fusion('Corrupt UNIK',1777,"j_unik_cube_of_calamity",
-			'j_unik_unik',
-			'j_jen_godsmarble'
-		)
-			print("Fusions successfully applied!")
-		else
-			error("Fusions failed to be applied",1)
-		end
-		local ret = mainmenuref2(change_context)
-		return ret
-	end
-end
-

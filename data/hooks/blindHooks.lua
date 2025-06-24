@@ -32,3 +32,21 @@ function Blind:unik_after_defeat(score,blind_size)
 		end
 	end
 end
+
+
+
+local killHook = Blind.debuff_hand
+function Blind:debuff_hand(cards, hand, handname, check)
+	local instakill = self:unik_kill_hand(cards, hand, handname, check)
+	if killHook(self,cards, hand, handname, check) == true or instakill == true then
+		if instakill == true then
+			G.GAME.unik_instant_death_hand = true
+		else
+			G.GAME.unik_instant_death_hand = nil
+		end
+		return true
+	else
+		G.GAME.unik_instant_death_hand = nil
+		return false
+	end
+end

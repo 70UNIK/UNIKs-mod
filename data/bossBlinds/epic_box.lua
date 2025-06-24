@@ -14,9 +14,7 @@ SMODS.Blind	{
         akyrs_cannot_be_rerolled = true,
         unik_unskippable_blind = true,
     },
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
     death_message = "special_lose_unik_epic_box",
 	ignore_showdown_check = true,
 	in_pool = function(self)

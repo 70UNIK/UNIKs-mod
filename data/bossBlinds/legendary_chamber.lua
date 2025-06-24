@@ -19,12 +19,10 @@ SMODS.Blind{
     boss_colour= HEX("9bc117"),
     dollars = 13,
     mult = 0.1,
-    jen_blind_resize = 1e10,
     glitchy_anim = true,
     gameset_config = {
 		modest = { disabled = true},
 	},
-    --no jen resize to make it more painful in almanac
     death_message = "special_lose_torture_chamber",
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)

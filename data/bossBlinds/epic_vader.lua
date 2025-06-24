@@ -8,9 +8,7 @@ SMODS.Blind{
     pos = {x = 0, y = 13},
     boss_colour= HEX("2c313a"), 
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
     death_message = "special_lose_unik_epic_darth_vader",
     ignore_showdown_check = true,
     set_blind = function(self, reset, silent)

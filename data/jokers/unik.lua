@@ -13,20 +13,20 @@ local unik_quotes = {
 		'k_unik_unik_normal5',
 		'k_unik_unik_normal6',
 	},
-	drama = {
-		'k_unik_unik_scared1',
-		'k_unik_unik_scared2',
-		'k_unik_unik_scared3',
-	},
-	gods = {
-		'k_unik_unik_godsmarble1',
-		'k_unik_unik_godsmarble2',
-		'k_unik_unik_godsmarble3',
-		'k_unik_unik_godsmarble4',
-		'k_unik_unik_godsmarble5',
-		'k_unik_unik_godsmarble6',
-		'k_unik_unik_godsmarble7',
-	}
+	-- drama = {
+	-- 	'k_unik_unik_scared1',
+	-- 	'k_unik_unik_scared2',
+	-- 	'k_unik_unik_scared3',
+	-- },
+	-- gods = {
+	-- 	'k_unik_unik_godsmarble1',
+	-- 	'k_unik_unik_godsmarble2',
+	-- 	'k_unik_unik_godsmarble3',
+	-- 	'k_unik_unik_godsmarble4',
+	-- 	'k_unik_unik_godsmarble5',
+	-- 	'k_unik_unik_godsmarble6',
+	-- 	'k_unik_unik_godsmarble7',
+	-- }
 }
 
 SMODS.Joker {
@@ -40,11 +40,7 @@ SMODS.Joker {
     rarity = "cry_exotic",
 	
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
-	drama = { x = 2, y = 0 }, 
-	godsmarbling = {x = 1, y = 1 }, 
-	godsmarbling_back = { x = 0, y = 1 }, --used to change the backplate
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,
@@ -54,9 +50,6 @@ SMODS.Joker {
     config = { extra = {Echips_mod = 0.03, Echips = 1.0,Xchips_mod = 0.7, Xchips = 1.0} }, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
-		if (SMODS.Mods["jen"] or {}).can_load then
-			quoteset = Jen.gods() and 'gods' or Jen.dramatic and 'drama'  or 'normal'
-		end
 		return {
 		key = Cryptid.gameset_loc(self, {modest = "modest" }), 
 		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips,center.ability.extra.Xchips_mod,center.ability.extra.Xchips

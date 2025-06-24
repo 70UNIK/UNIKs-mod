@@ -8,9 +8,7 @@ SMODS.Blind	{
     pos = {x = 0, y = 8},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
 	get_loc_debuff_text = function(self)
 		return localize("k_unik_only_stone")
 	end,
@@ -27,7 +25,7 @@ SMODS.Blind	{
             end
         end
                 --in cryptid, at least it only spawns if yoy have at least 5 stone cards
-        if stoneCards < 5 and not (SMODS.Mods["jen"] or {}).can_load then
+        if stoneCards < 4 then
             return false
         end
         --maybe its funnier to have it spawn even without stone hands in deck in almanac
@@ -42,19 +40,3 @@ SMODS.Blind	{
 	end
 }
 
-
-local killHook = Blind.debuff_hand
-function Blind:debuff_hand(cards, hand, handname, check)
-	local instakill = self:unik_kill_hand(cards, hand, handname, check)
-	if killHook(self,cards, hand, handname, check) == true or instakill == true then
-		if instakill == true then
-			G.GAME.unik_instant_death_hand = true
-		else
-			G.GAME.unik_instant_death_hand = nil
-		end
-		return true
-	else
-		G.GAME.unik_instant_death_hand = nil
-		return false
-	end
-end

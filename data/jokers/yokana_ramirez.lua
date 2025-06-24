@@ -18,7 +18,6 @@ SMODS.Joker {
 		},
 	},
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
     cost = 12,
 	blueprint_compat = true,

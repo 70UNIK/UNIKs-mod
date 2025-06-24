@@ -8,9 +8,7 @@ SMODS.Blind	{
     pos = {x = 0, y = 20},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
 	--must be localized
 	ignore_showdown_check = true,
     unik_kill_hand = function(self, cards, hand, handname, check)
@@ -40,7 +38,7 @@ SMODS.Blind	{
         end
         if G.hand and G.hand.config then
                 --always be false if face cards are less than hand size - card selection limit (to avoid impossible situations)
-            if faceCards < (G.hand.config.card_limit - G.hand.config.highlighted_limit) and not (SMODS.Mods["jen"] or {}).can_load then
+            if faceCards < (G.hand.config.card_limit - G.hand.config.highlighted_limit) then
                 return false
             end
         end

@@ -9,9 +9,7 @@ SMODS.Blind	{
     pos = {x = 0, y = 18},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 0.25,
-    jen_blind_resize = 32,
 	--must be localized
 	ignore_showdown_check = true,
 	in_pool = function(self)

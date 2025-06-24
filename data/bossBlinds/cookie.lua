@@ -95,11 +95,7 @@ function Game:start_run(args)
     end
     if G.P_BLINDS.bl_unik_epic_cookie then
         G.P_BLINDS.bl_unik_epic_cookie.mult = 1
-        if (SMODS.Mods["jen"] or {}).can_load then
-            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1.3
-        else
-            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
-        end
+        G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
     end
 	if not G.GAME.defeated_blinds then
 		G.GAME.defeated_blinds = {}
@@ -144,11 +140,7 @@ function reset_blinds()
 			G.P_BLINDS.bl_unik_cookie.mult = 0
         end
         if G.P_BLINDS.bl_unik_epic_cookie then
-            if (SMODS.Mods["jen"] or {}).can_load then
-                G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1.3
-            else
-                G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
-            end
+            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
             G.P_BLINDS.bl_unik_epic_cookie.mult = 1
         end
 	end
@@ -178,13 +170,8 @@ local function BlindIncrement(penalty)
 							/ 2
 					end
 				elseif  G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "bl_unik_epic_cookie" then
-                    if (SMODS.Mods["jen"] or {}).can_load then
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1.3
-                    else
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
-                    end
+                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
+                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
                 else
 					G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 0
 				end
@@ -192,15 +179,8 @@ local function BlindIncrement(penalty)
 			elseif G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult == 0
             and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult_ante ~= G.GAME.round_resets.ante then
                 if  G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "bl_unik_epic_cookie" then
-                    
-                    if (SMODS.Mods["jen"] or {}).can_load then
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1.3
-                    else
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
-                    end
-
+                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
+                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
                 end
             end
 			if
@@ -235,11 +215,7 @@ local function BlindIncrement(penalty)
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
                         end
                         if G.GAME.CRY_BLINDS[c] and  G.GAME.CRY_BLINDS[c] < 1 then
-                            if (SMODS.Mods["jen"] or {}).can_load then
-                                G.GAME.CRY_BLINDS[c] = 1.3
-                            else
-                                G.GAME.CRY_BLINDS[c] = 1
-                            end
+                            G.GAME.CRY_BLINDS[c] = 1
                         end
 
                         G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2])

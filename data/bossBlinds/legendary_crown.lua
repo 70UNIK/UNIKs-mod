@@ -19,7 +19,7 @@ SMODS.Blind{
     boss = {min = 1,legendary = true,showdown = true, no_orb = true, hardcore = true}, 
     atlas = "unik_legendary_crown",
     pos = {x=0, y=0}, --This could shift with glitch FX (may use dandy code for this)
-    boss_colour= HEX("e0bc42"), --This blind will not be blood red and black every since the sneak peak of Jens legendary blinds
+    boss_colour= HEX("e0bc42"),
     dollars = 13,
     gameset_config = {
 		modest = { disabled = true},
@@ -35,19 +35,11 @@ SMODS.Blind{
     loc_vars = function(self)
         local exponent1 = "x1.5"
         local exponent2 = "^6.666"
-        if (SMODS.Mods["jen"] or {}).can_load then
-            exponent1 = "^1.1"
-            exponent2 = "^^6.666"
-        end
 		return { vars = { (G.GAME.unik_crown_progress or G.GAME.round_resets.hands), (G.GAME.unik_crown_progress or G.GAME.round_resets.hands) == 1 and '' or 's', exponent1,exponent2 } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
         local exponent1 = "x1.5"
         local exponent2 = "^6.666"
-        if (SMODS.Mods["jen"] or {}).can_load then
-            exponent1 = "^1.1"
-            exponent2 = "^^6.666"
-        end
 		return { vars = { localize('k_unik_legendary_crown_placeholder'), 's', exponent1,exponent2} } -- no bignum?
 	end,
     set_blind = function(self, reset, silent)
@@ -58,11 +50,7 @@ SMODS.Blind{
             })
             G.GAME.unik_crown_progress = G.GAME.round_resets.hands
             if G.GAME.round_resets.hands == 1 then
-                if (SMODS.Mods["jen"] or {}).can_load then
-                    G.GAME.blind.chips = to_big(G.GAME.round_scores['hand'].amt):arrow(2,6.666)
-                else
-                    G.GAME.blind.chips = G.GAME.round_scores['hand'].amt^6.666
-                end
+                G.GAME.blind.chips = G.GAME.round_scores['hand'].amt^6.666
             end
             G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
             ease_hands_played(-G.GAME.blind.hands_sub)

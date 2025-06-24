@@ -17,7 +17,6 @@ SMODS.Blind{
     unik_exponent = {1,2.5},
     glitchy_anim = true,
     death_message = "special_lose_unik_vessel_legendary",
-    jen_blind_exponent_resize = {2,5}, --to align with epic blinds. ^9.666 that also kills you if you overshoot is worse than *e100
     --Proof: Lets say you face epicWall at blind e300. THe epic wall already applies x e100, so becomes e400. Overshoot, and it adds e100, = e500.
     --If facing against this, 300 x 6.666 = ~e2000, which is way over what the wall can do most of the time.
     gameset_config = {
@@ -29,11 +28,7 @@ SMODS.Blind{
     end,
     --somehow if that happens, set the base to be 
     disable = function(self)
-        if(SMODS.Mods["jen"] or {}).can_load then
-            G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^16.666)
-        else
-            G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^2.666)
-        end
+        G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^2.5)
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.HUD_blind:recalculate(true)
 	end,

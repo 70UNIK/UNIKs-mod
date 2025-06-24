@@ -11,14 +11,14 @@ local moonlight_quotes = {
 		'k_unik_moonlight_normal2',
 		'k_unik_moonlight_normal3',
 	},
-	drama = {
-		'k_unik_moonlight_scared1',
-	},
-	gods = {
-		'k_unik_moonlight_godsmarble1',
-		'k_unik_moonlight_godsmarble2',
-		'k_unik_moonlight_godsmarble3',
-	}
+	-- drama = {
+	-- 	'k_unik_moonlight_scared1',
+	-- },
+	-- gods = {
+	-- 	'k_unik_moonlight_godsmarble1',
+	-- 	'k_unik_moonlight_godsmarble2',
+	-- 	'k_unik_moonlight_godsmarble3',
+	-- }
 }
 
 SMODS.Joker {
@@ -31,31 +31,19 @@ SMODS.Joker {
     atlas = 'unik_moonlight',
     rarity = "cry_exotic",
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
-	-- drama = { x = 1, y = 0 }, --WIP: Remains the same
-	-- godsmarbling = {x = 1, y = 0 }, --may remove once a seperate "godsmarbling" sprite function is made (Scared but exclusively when godsmarble is present)
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
 	fusable = true,
-	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
-	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
-	-- Given moonlight is very difficult to scale without perkeo, especially on higher antes (you need chambered or azure seals):
-	--- 2 in 5 chance to not turn a random planet negative
-	--- In return, she will not add a consumeable slot (except when godsmarbled) and her Emult becomes ^1.25
     config = { extra = { Emult = 1.2,odds = 5} },
 	gameset_config = {
 		modest = { extra = { Emult = 1.07,odds = 999999} },
 	},
 	loc_vars = function(self, info_queue, center)
-		--normal quotes only if not Jen
 		local quoteset = 'normal'
-		if (SMODS.Mods["jen"] or {}).can_load then
-			quoteset = Jen.dramatic and 'drama' or Jen.gods() and 'gods' or 'normal'
-		end
 		return { 
 			key = Cryptid.gameset_loc(self, { modest = "modest"  }), 
 			vars = {center.ability.extra.Emult, center and cry_prob(2 or center.ability.cry_prob*2,center.ability.extra.odds,center.ability.cry_rigged) or 2, 
@@ -74,24 +62,7 @@ SMODS.Joker {
 			if G.consumeables.cards[1] then
 				--Get valid cards
 				local validCards = {}
-				for i,v in pairs(G.consumeables.cards) do
-					if (v.ability.set == 'Planet' or 
-					v.config.center.key == 'c_jen_pluto_omega' or
-					v.config.center.key == 'c_jen_mercury_omega' or
-					v.config.center.key == 'c_jen_uranus_omega' or
-					v.config.center.key == 'c_jen_venus_omega' or
-					v.config.center.key == 'c_jen_saturn_omega' or
-					v.config.center.key == 'c_jen_jupiter_omega' or
-					v.config.center.key == 'c_jen_earth_omega' or
-					v.config.center.key == 'c_jen_mars_omega' or
-					v.config.center.key == 'c_jen_neptune_omega' or
-					v.config.center.key == 'c_jen_planet_x_omega' or
-					v.config.center.key == 'c_jen_ceres_omega' or
-					v.config.center.key == 'c_jen_eris_omega' or
-					v.config.center.key == 'c_jen_black_hole_omega') and not v.edition then
-						validCards[#validCards + 1] = v
-					end
-				end
+			
 				if #validCards > 0 then
 					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
 					--If incantation, automatically split 1 negative from a big pile
@@ -128,24 +99,6 @@ SMODS.Joker {
 			if G.consumeables.cards[1] then
 				--Get valid cards
 				local validCards = {}
-				for i,v in pairs(G.consumeables.cards) do
-					if (v.ability.set == 'Planet' or 
-					v.config.center.key == 'c_jen_pluto_omega' or
-					v.config.center.key == 'c_jen_mercury_omega' or
-					v.config.center.key == 'c_jen_uranus_omega' or
-					v.config.center.key == 'c_jen_venus_omega' or
-					v.config.center.key == 'c_jen_saturn_omega' or
-					v.config.center.key == 'c_jen_jupiter_omega' or
-					v.config.center.key == 'c_jen_earth_omega' or
-					v.config.center.key == 'c_jen_mars_omega' or
-					v.config.center.key == 'c_jen_neptune_omega' or
-					v.config.center.key == 'c_jen_planet_x_omega' or
-					v.config.center.key == 'c_jen_ceres_omega' or
-					v.config.center.key == 'c_jen_eris_omega' or
-					v.config.center.key == 'c_jen_black_hole_omega') and not v.edition then
-						validCards[#validCards + 1] = v
-					end
-				end
 				if #validCards > 0 then
 					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
 					--If incantation, automatically split 1 negative from a big pile
@@ -190,34 +143,12 @@ SMODS.Joker {
 		end
 
 
-        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' or 
-		(context.other_consumeable and context.other_consumeable.ability.set == 'jen_omegaconsumable')
+        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet'
 		then
 			local valid = false
-			--jen exclusive, check if omega consumable is a planet/black hole
-			if (SMODS.Mods["jen"] or {}).can_load and context.other_consumeable.ability.set == 'jen_omegaconsumable' then
-				if 
-				context.other_consumeable.config.center.key == 'c_jen_pluto_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_mercury_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_uranus_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_venus_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_saturn_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_jupiter_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_earth_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_mars_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_neptune_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_planet_x_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_ceres_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_eris_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_black_hole_omega'
-				then
-					valid = true
-				end
-				
-			end
 			
 			--automatically ignore hand type if its modest
-			if Card.get_gameset(card) ~= "modest" and context.other_consumeable.ability.set ~= 'jen_omegaconsumable' then
+			if Card.get_gameset(card) ~= "modest" then
 				valid = true
 			end
 			--check if its the right planet

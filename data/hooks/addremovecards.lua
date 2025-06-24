@@ -243,13 +243,6 @@ function CardArea:emplace(card, location, stay_flipped)
                 --print("checkSlots")
                 CheckSlots(v,v.ability.extra.slotLimit)
                 --Autocannibalism: forcibly apply eternal and depleted to all new and existing turtle beans, ice cream, popcorn and ramen Jokers
-            elseif v.config.center.key == "j_jen_saint_attuned" then
-                --Turn all foundations negative if attuned saint is spawned
-                for a, g in pairs(G.jokers.cards) do
-                    if g.config.center.key == "j_unik_foundation" then
-                        g:set_edition("e_negative", true, nil, true)
-                    end
-                end
             elseif v.ability.name == "j_unik_autocannibalism" then
                 autoCannibalExists = true
             elseif v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then

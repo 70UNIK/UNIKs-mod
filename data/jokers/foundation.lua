@@ -27,20 +27,6 @@ SMODS.Joker {
 	perishable_compat = false,
 	eternal_compat = false,
 	demicoloncompat = true, --NOPE!
-	add_to_deck = function(self, card, from_debuff)
-		if #SMODS.find_card("j_jen_saint_attuned") > 0 or #SMODS.find_card("j_jen_saint") > 0 then
-			card.ability.extra.threshold = 0
-			local eval = function(card)
-				return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
-			end
-			juice_card_until(card, eval, true)
-			card_eval_status_text(card, "extra", nil, nil, nil, {
-				message = localize("k_unik_active"),
-				colour = G.C.CRY_EXOTIC,
-			})
-			card.ability.extra.juiced_up = true
-		end
-	end,
 	remove_from_deck = function(self, card, from_debuff)
 		--Remove baseless stickers if removed and no other foundation exists
 		local foundationExists = false
@@ -61,18 +47,7 @@ SMODS.Joker {
 		end
 	end,
 	update = function(self,card,dt)
-		if #SMODS.find_card("j_jen_saint_attuned") > 0 or #SMODS.find_card("j_jen_saint") > 0 then
-			card.ability.extra.threshold = 0
-			if card.ability.extra.juiced_up == false then
-				local eval = function(card)
-					return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
-				end
-				juice_card_until(card, eval, true)
-				card.ability.extra.juiced_up = true
-			end
-		else
-			card.ability.extra.threshold = 150
-		end
+		card.ability.extra.threshold = 150
 		if card.ability.extra.hands < card.ability.extra.threshold then
 			card.ability.extra.juiced_up = false
 		end

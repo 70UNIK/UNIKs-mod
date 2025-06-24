@@ -7,17 +7,9 @@ SMODS.Blind{
     pos = {x = 0, y = 14},
     boss_colour= HEX("28285d"), 
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
     death_message = "special_lose_unik_epic_shackle",
     ignore_showdown_check = true,
-    loc_vars = function(self)
-		return { vars = { ((SMODS.Mods["jen"] or {}).can_load and localize('k_unik_shackle1')) or localize('k_unik_shackle2')} }
-	end,
-	collection_loc_vars = function(self)
-		return { vars = { ((SMODS.Mods["jen"] or {}).can_load and localize('k_unik_shackle1')) or localize('k_unik_shackle2')} }
-	end,
     set_blind = function(self, reset, silent)
         if not reset then
             if G.jokers and G.jokers.cards then
@@ -93,18 +85,14 @@ SMODS.Blind{
         end
     end,
 	disable = function(self)
-        if not (SMODS.Mods["jen"] or {}).can_load and G.GAME.unik_original_size then
-            G.hand:change_size(G.GAME.unik_original_size)
-            G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
-            G.GAME.unik_original_size = nil
-        end
+        G.hand:change_size(G.GAME.unik_original_size)
+        G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
+        G.GAME.unik_original_size = nil
 	end,
 	defeat = function(self)
-        if not (SMODS.Mods["jen"] or {}).can_load and G.GAME.unik_original_size then
-            G.hand:change_size(G.GAME.unik_original_size)
-            G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
-            G.GAME.unik_original_size = nil
-        end
+        G.hand:change_size(G.GAME.unik_original_size)
+        G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
+        G.GAME.unik_original_size = nil
 	end,
 	in_pool = function(self)
         if G.GAME.modifiers.cry_force_edition and G.GAME.modifiers.cry_force_edition == "negative" then

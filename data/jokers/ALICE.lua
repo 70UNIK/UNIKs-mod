@@ -22,15 +22,11 @@ SMODS.Joker {
 		items = {
 			"set_cry_exotic",
 		},
-        mods = {
-          "extracredit", --While she *can* work without Average Alice, its more fun to require the mod
-        }
     },
 	key = 'unik_extra_credit_alice',
     atlas = 'unik_alice',
     rarity = "cry_exotic",
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
 	blueprint_compat = true,

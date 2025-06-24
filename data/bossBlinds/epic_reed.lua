@@ -8,9 +8,7 @@ SMODS.Blind	{
     pos = {x = 0, y = 10},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
 	ignore_showdown_check = true,
     loc_vars = function(self)
 		return { vars = {G.GAME.unik_reed_ranks[1].rank .. 's, '  .. G.GAME.unik_reed_ranks[2].rank .. 's '.. localize('k_unik_reed_part2') .. ' ' .. G.GAME.unik_reed_ranks[3].rank .. 's'} }

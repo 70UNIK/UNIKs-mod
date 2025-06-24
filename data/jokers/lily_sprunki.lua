@@ -26,7 +26,6 @@ SMODS.Joker {
     atlas = 'unik_lily_sprunki',
     rarity = 3,
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
     cost = 8,
     config = {extra = {active = true,quoteset = 'normal',limit = 2}},

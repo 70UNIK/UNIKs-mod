@@ -7,27 +7,17 @@ SMODS.Blind{
     pos = {x = 0, y = 9},
     boss_colour= HEX("633b11"), 
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 1,
     unik_exponent = {1,1},
-    jen_blind_exponent_resize = {1,1.3},
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
         local string = ""
-        if (SMODS.Mods["jen"] or {}).can_load then
-            string = "" .. 1.01
-        else
-            string = "" .. 1.0025
-        end
+        string = "" .. 1.005
 		return { vars = { string } }
 	end,
 	collection_loc_vars = function(self)
         local string = ""
-        if (SMODS.Mods["jen"] or {}).can_load then
-            string = "" .. 1.01
-        else
-            string = "" .. 1.0025
-        end
+        string = "" .. 1.005
 		return { vars = { string } }
 	end,
     
@@ -54,11 +44,7 @@ SMODS.Blind{
         G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling * 2
 		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.P_BLINDS.bl_unik_epic_cookie.mult = 0
-        if (SMODS.Mods["jen"] or {}).can_load then
-            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1.3
-        else
-            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
-        end
+        G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
         G.GAME.epic_cookie_click_interval = -1
         G.hand:change_size(G.GAME.decrementer_hand)
         G.GAME.decrementer_hand = 0
@@ -111,19 +97,7 @@ SMODS.Blind{
                     G.ROOM.jiggle = G.ROOM.jiggle + 0.5
                 end
             end
-            --Syntax operators:
-            -- -1 = +Reqs
-            -- 0 = xReq
-            -- 1 = ^Req
-            -- 2 = ^^req, etc...
-            --{Amount,operator}
-            --For multiplication and exponentiation, ideally have it above 1.
-            if (SMODS.Mods["jen"] or {}).can_load then
-                return {1.01,1}
-            else--cryptid is a bit more lenient
-                return {1.001,1}
-            end
-			
+            return {1.005,1}
 		end
     end,
 }

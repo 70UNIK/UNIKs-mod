@@ -43,7 +43,6 @@ SMODS.Joker {
 		},
     },
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
 	blueprint_compat = true,
@@ -218,7 +217,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         self.ability.extra.copying = true
         self.ability.extra.Emult = self.ability.extra.Emult + self.ability.extra.Emult_mod
         self.ability.extra.x_mult = self.ability.extra.x_mult + self.ability.extra.x_mult_mod
-        --do not make multiple clones of her! AND DO NOT COPY IF THE SOUL IS BANNED!
+        --for technical purposes, i'll still keep jen functionality here
         if self.ability.extra.commits_left < 0 or (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul)) then
             play_sound('cancel', 1, 0.7)
             card_eval_status_text(self, "extra", nil, nil, nil, {
