@@ -42,6 +42,7 @@ elseif self.ability and self.area and self.ability.unik_triggering and self.area
     if self:can_sell_card() and not self.ability.unik_automatic_sold then
         self.ability.unik_automatic_sold = true
         self:sell_card()
+        SMODS.calculate_context({selling_card = true, card = self})
     end
 end
 
