@@ -407,6 +407,7 @@ NFS.load(mod_path .. "data/jokers/1_5_joker.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
+NFS.load(mod_path .. "data/jokers/notification.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
 --- Uncommon ---
@@ -420,6 +421,7 @@ NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
+NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
 
 --Celestials:
 --Borg Cube (Uncommon): A cube joker. Other steel EDITION cards give 2.5x mult. Obvious star trek reference
@@ -435,6 +437,7 @@ NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
 --- Rare ---
 -- NFS.load(mod_path .. "data/jokers/double_container.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/copycat.lua")()
 NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 

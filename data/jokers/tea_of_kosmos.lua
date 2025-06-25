@@ -1,2 +1,0 @@
---Dorkshire Tea crossmod godsmarble fusion: If hand contains exactly 6 cards, turn all scoring cards into "Tainted Ceramic" 
---(^^^1.16 Chips, but is porcelain and glass cards on crack, always breaks if not scored or held, 4 in 6 chance to break when scored, denominator cannot go above 6 and numerator cannot fall below 3.)

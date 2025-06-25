@@ -1,3 +1,0 @@
---Decorated joker:
---Add a random card (with random rank and suit), with a random enhancement, edition and seal in your hand.
---Rare

@@ -1558,16 +1558,16 @@ return {
                     "{C:inactive}(Currently {C:dark_edition}+#4#{C:inactive} slots)",
                 }
             },
-            --next batch of 8 jokers
-            j_unik_fat_joker = { --X0.0385 mult per card in your full deck, uncommon, essentially X3 mult on a full deck.
+            --next batch of 8 base jokers
+            j_unik_fat_joker = { --+2 Mult per card above (starting deck size*0.5) full deck (uncommon)
                 name = "Fat Joker",
                 text = {
-                    "{X:mult,C:white}X#1#{} Mult per",
-                    "card in your full deck",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+                    "{C:mult}+#1#{} Mult per",
+                    "card above {C:attention}#2#",
+                    "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
                 }
             },
-            j_unik_notifications = { --common or uncommon?
+            j_unik_notifications = { --common 
                 name = "Notifications",
                 text = {
                     "Gain {C:chips}+#1#{} Chip#<s>1#",
@@ -1597,15 +1597,16 @@ return {
                     "give {X:chips,C:white}X#1#{} Chips,",
                     "then increase this",
                     "by {X:chips,C:white}X#2#{}",
-                    "{C:inactive}(Resets after hand)"
+                    "{C:inactive}(Resets after hand)",
                 }
             },
-            j_unik_ghost_joker={ --epic
-                name = "Ghost Joker",
+            j_unik_minimized = { --rare 
+                name = "Minimized",
                 text = {
-                    "Create a {C:spectral}Spectral{} card",
-                    "when {C:attention}Blind{} is selected",
-                    "{C:inactive}(Must have room)",
+                    "All {C:attention}Face{} cards",
+                    "are considered {C:attention}Jacks",
+                    "All {C:attention}numbered{} cards",
+                    "are considered {C:attention}2s",
                 }
             },
             j_unik_joker_dollar = { --uncommon
@@ -1619,7 +1620,7 @@ return {
                 }
             },
             j_unik_poppy = {
-                name = "Poppy", --based off (+50% speed boost if hurt). Gains X0.1 mult for every hand that has not defeated the boss.
+                name = "Poppy", --based off (+50% speed boost if hurt). Gains X0.09 mult for every hand that has not defeated the boss. (Uncommon). Becomes X0.05 if modest
                 text = {
                     "This Joker gains",
                     "{X:mult,C:white}X#1#{} mult",
@@ -1642,7 +1643,7 @@ return {
                 name = "Factorialis",
                 text = {
                     "{X:dark_edition,C:white}!Mult{}",
-                    " if all played cards",
+                    "if all played cards",
                     "are {C:attention}Aces{}, {C:attention}2s{} or {C:attention}6s{}",
                 }
             },
@@ -2065,6 +2066,14 @@ return {
                 }
             },
 
+            unik_status_trigger={
+                name = "Status Trigger",
+                text = {
+                    "Messages that appear",
+                    "on trigger",
+                    "{C:inactive,s:0.75}({C:mult,s:0.75}+Mult{C:inactive,s:0.75}, {X:white,C:white,s:0.75}XChips{C:inactive,s:0.75}, {C:purple,s:0.75}Nope!{C:inactive,s:0.75}, {C:attention,s:0.75}Extinct!{C:inactive,s:0.75}, etc...)"
+                },
+            },
             --sticker stakes
             unik_shitty_sticker = {
                 name = "Shitty Sticker",
@@ -2081,7 +2090,7 @@ return {
                     "to win on {C:attention}Persimmon",
                     '{C:attention}Stake{} difficulty',
                 }
-            },
+            }
 
         },
         Planet={},

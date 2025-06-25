@@ -169,11 +169,13 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 
 --CHUD is literally 2 brainstorms in 1
 SMODS.Joker:take_ownership("j_cry_chad",{
-    rarity = 'cry_epic'
+    rarity = 'cry_epic',
+	cost = 14,
 }, true)
 --canfas is legendary and relies on unique rarities
 SMODS.Joker:take_ownership("j_cry_canvas",{
     rarity = 4,
+	cost = 20,
 	loc_vars = function(self, info_queue, center)
 		local num_retriggers = 0
 		local blacklistedRarities = {1}
@@ -257,7 +259,8 @@ function Card:jokerRaritiesDir(left,right,blacklistedrarities)
 end
 
 SMODS.Joker:take_ownership("j_cry_demicolon",{
-    rarity = 4
+    rarity = 4,
+	cost = 20,
 }, true)
 
 
