@@ -47,7 +47,7 @@ SMODS.Joker {
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.ability.name == "j_unik_yes_nothing" then
+            if v.ability.name == "j_unik_yes_nothing" and v ~= card then
                 --print("checkSlots")
                 --print("happyFound")
                 yesNothingExists = yesNothingExists + 1
@@ -71,7 +71,7 @@ SMODS.Joker {
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.ability.name == "j_unik_yes_nothing" then
+            if v.ability.name == "j_unik_yes_nothing" and v ~= card then
                 --print("checkSlots")
                 --print("happyFound")
                 yesNothingExists = yesNothingExists + 1

@@ -1622,20 +1622,38 @@ return {
                     "{C:inactive,s:0.8}(Clone man excluded)",
 				}, 
             },
-            --cry about it
-            j_cry_googol_play_self_dest = {
-				name = "Googol Play Card",
+
+            j_cry_canvas = {
+				name = "Canvas",
 				text = {
-					"{C:green}#1# in #2#{} chance for",
-					"{X:red,C:white} X#3# {} Mult",
-                    "{C:green}#1# in #4#{} chance to",
-					"{E:2,C:red}self destruct{} on trigger",
+					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
+					"once for {C:attention}every{} unique non-{C:blue}Common{C:attention} Joker{}",
+					"to the right of this Joker",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive})",
 				},
 				unlock = {
-					"Score {C:attention}1.0e100{} Chips",
-					"in a single hand",
+					"Retrigger a {C:attention}Joker",
+					"{C:attention}114{} times",
+					"in one hand",
 				},
 			},
+			j_cry_canvas_balanced = {
+				name = "Canvas",
+				text = {
+					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
+					"once for {C:attention}every{} unique non-{C:blue}Common{C:attention} Joker{}",
+					"to the right of this Joker",
+					"{C:inactive}(Up to 2 retriggers)",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive})",
+				},
+				unlock = {
+					"Retrigger a {C:attention}Joker",
+					"{C:attention}114{} times",
+					"in one hand",
+				},
+			},
+
+
 
             j_cry_pirate_dagger = {
 				name = "Pirate Dagger",
@@ -1767,6 +1785,16 @@ return {
                 "{X:mult,C:white} X#3# {} Mult",
                 }
             },
+            j_cry_starfruit_depleted = {
+				name = "Starfruit",
+				text = {
+					"{X:dark_edition,C:white}^#1#{} Mult,",
+					"loses {X:dark_edition,C:white}^#2#{} Mult per",
+					"{C:attention}reroll{} in the shop",
+                    "{E:2,C:red}Self destructs{} at",
+                    "{X:dark_edition,C:white}^0{} Mult",
+				},
+			},
         },
         Other={			
 			undiscovered_unik_lartceps = {
@@ -2011,7 +2039,17 @@ return {
                     "selected playing card",
                     "add {C:attention}#1#{} random card(s)",
                 }
-            }
+            },
+            c_cry_pointer_no_dupe = {
+				name = "POINTER://",
+				text = {
+					"Create a card",
+					"of {C:cry_code}your choice",
+					"{C:inactive,s:0.8}(Exotic Jokers excluded)",
+                    "{C:inactive,s:0.8}Becomes {{C:spectral,s:0.8}The Soul {C:inactive,s:0.8}if",
+                    "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
+				},
+			},
         },
         Stake={
             stake_unik_shitty = {

@@ -14,6 +14,7 @@ SMODS.Enhancement {
 	--NEW! specific_suit suit. Like abstracted!
 	specific_suit = "unik_pink",
 	specific_rank = 7,
+    specific_base_value = "7",
     loc_vars = function(self, info_queue, card)
         return {
             vars = { card.ability.extra.Echips}
@@ -70,4 +71,14 @@ function Card:get_id()
 	local vars = getIDenhance(self)
 
 	return vars
+end
+
+function Card:get_baseValOverride()
+    if Cryptid.cry_enhancement_has_specific_rank(self) and not self.vampired then
+		--Get the max value + 1, to always be the last at the list
+        if self.config.center.key == "m_unik_pink" then
+            return 7
+        end
+	end
+    return self.base.value
 end

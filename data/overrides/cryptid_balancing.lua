@@ -171,10 +171,91 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 SMODS.Joker:take_ownership("j_cry_chad",{
     rarity = 'cry_epic'
 }, true)
---canfas
+--canfas is legendary and relies on unique rarities
 SMODS.Joker:take_ownership("j_cry_canvas",{
-    rarity = 4
+    rarity = 4,
+	loc_vars = function(self, info_queue, center)
+		local num_retriggers = 0
+		local blacklistedRarities = {1}
+		num_retriggers = num_retriggers + center:jokerRaritiesDir(false,true,blacklistedRarities)
+		if Card.get_gameset(center) == "modest" then
+			num_retriggers = math.min(2,num_retriggers)
+		end
+		return { key = Cryptid.gameset_loc(self, { modest = "balanced" }),vars={num_retriggers} }
+	end,
+	calculate = function(self, card, context)
+		if context.retrigger_joker_check and not context.retrigger_joker then
+			local num_retriggers = 0
+			local blacklistedRarities = {1}
+			num_retriggers = num_retriggers + card:jokerRaritiesDir(false,true,blacklistedRarities)
+			-- for i = 1, #G.jokers.cards do
+			-- 	if
+			-- 		card.T.x + card.T.w / 2 < G.jokers.cards[i].T.x + G.jokers.cards[i].T.w / 2
+			-- 		and G.jokers.cards[i].config.center.rarity ~= 1
+			-- 		and (G.jokers.cards[i].config.center.rarity ~= "cry_candy" or Card.get_gameset(card) ~= "modest")
+			-- 	then
+			-- 		num_retriggers = num_retriggers + 1
+			-- 	end
+			-- end
+			if
+				card.T
+				and context.other_card.T
+				and (card.T.x + card.T.w / 2 > context.other_card.T.x + context.other_card.T.w / 2)
+			then
+				return {
+					message = localize("k_again_ex"),
+					repetitions = Card.get_gameset(card) ~= "modest" and num_retriggers or math.min(2, num_retriggers),
+					card = card,
+				}
+			end
+		end
+	end,
 }, true)
+
+function Card:jokerRaritiesDir(left,right,blacklistedrarities)
+    if G.jokers and G.jokers.cards then
+        local rarities = {}
+		local index = -1
+		for i=1, #G.jokers.cards do 
+			if G.jokers.cards[i] == self then
+				index = i
+				break
+			end
+		end
+		for i=1, #G.jokers.cards do
+			local card = G.jokers.cards[i]
+			local valid = true
+			if i ~= index then
+				if i < index and not left then
+					valid = false
+				end
+				if i > index and not right then
+					valid = false
+				end
+			else
+				valid = false
+			end
+			if blacklistedrarities then
+				for j = 1, #blacklistedrarities do
+					if blacklistedrarities[j] == card.config.center.rarity then
+						valid = false
+					end
+				end
+			end
+			for j = 1, #rarities do
+				if rarities[j] == card.config.center.rarity then
+					valid = false
+				end
+			end
+			if valid then
+				rarities[#rarities+1] = card.config.center.rarity
+			end
+		end
+        return #rarities
+    end
+	return 0 
+end
+
 SMODS.Joker:take_ownership("j_cry_demicolon",{
     rarity = 4
 }, true)
@@ -220,11 +301,10 @@ SMODS.Joker:take_ownership("j_cry_loopy",{
 		end
 	end,
 }, true)
---small m becomes X7
 SMODS.Joker:take_ownership("j_cry_m",{
     config = {
 		extra = {
-			extra = 7,
+			extra = 10,
 			x_mult = 1,
 		},
 	},
@@ -233,72 +313,10 @@ SMODS.Joker:take_ownership("j_cry_m",{
 SMODS.Joker:take_ownership("j_cry_googol_play",{
 	config = {
 		extra = {
-			Xmult = 1e100,
+			Xmult = 17,
 			odds = 8,
-			oddsDestruction = 1e100,
 		},
 	},
-	gameset_config = {
-		modest = { extra = { Xmult = 9, odds = 8, oddsDestruction = 1e100 } },
-	},
-	loc_vars = function(self, info_queue, card)
-		return {
-			key = Cryptid.gameset_loc(self, { mainline = "self_dest", modest = "self_dest" }), 
-			vars = {
-				cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged),
-				card.ability.extra.odds,
-				number_format(card.ability.extra.Xmult),
-				card.ability.extra.oddsDestruction,
-			},
-		}
-	end,
-	calculate = function(self, card, context)
-		if
-			context.joker_main
-			and pseudorandom("cry_googol_play")
-				< cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged) / card.ability.extra.odds
-		then
-			if  Card.get_gameset(card) ~= "madness" and pseudorandom("no_rigging_free_emult_your_way_out_muthafucker")
-				< cry_prob(card.ability.cry_prob, card.ability.extra.oddsDestruction, card.ability.cry_rigged) / card.ability.extra.oddsDestruction then
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					func = function()
-						selfDestruction_noMessage(card,false)
-						return true
-					end,
-				}))
-					
-			end
-			
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_xmult",
-					vars = { number_format(card.ability.extra.Xmult) },
-				}),
-				Xmult_mod = lenient_bignum(card.ability.extra.Xmult),
-			}
-		end
-		if context.forcetrigger then
-			if not Card.get_gameset(card) ~= "madness" then
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					func = function()
-						selfDestruction_noMessage(card,false)
-						return true
-					end,
-				}))
-			end
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_xmult",
-					vars = { number_format(card.ability.extra.Xmult) },
-				}),
-				Xmult_mod = lenient_bignum(card.ability.extra.Xmult),
-			}
-		end
-	end,
 }, true)
 --WAAAAAAHHHH
 SMODS.Joker:take_ownership("j_cry_waluigi",{
@@ -483,5 +501,104 @@ SMODS.Joker:take_ownership("j_cry_astral_bottle",{
 	},
 }, true)
 
---
+--Override perkeo, copy+paste and chambered to not work on Pointer. If pointer is somehow duped inside consumables. self destruct and create a SOUL in its place.
 
+SMODS.Consumable:take_ownership("c_cry_pointer",{
+	loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_soul
+		return{
+			key = Cryptid.gameset_loc(self, {modest = "no_dupe", mainline = "no_dupe"}), 
+		}
+	end,
+}, true)
+
+--starfruit should suicide itself if force triggered, starts at a much more reasonable ^1.5 emult and is immutable. Oh and it can be autocannibal food
+SMODS.Joker:take_ownership("j_cry_starfruit",{
+	config = { emult = 1.5, emult_mod = 0.1 },
+	immutable = true,
+	loc_vars = function(self, info_queue, center)
+		local key = 'j_cry_starfruit'
+		if center.ability.unik_depleted then
+			key = 'j_cry_starfruit_depleted'
+		end
+		return {
+			key = key,
+			vars = {
+				number_format(center.ability.emult),
+				number_format(center.ability.emult_mod),
+			},
+		}
+	end,
+	pools = { ["Food"] = true, ["autocannibalism_food"] = true},
+	calculate = function(self, card, context)
+		if context.joker_main then
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_powmult",
+					vars = {
+						number_format(card.ability.emult),
+					},
+				}),
+				Emult_mod = lenient_bignum(card.ability.emult),
+				colour = G.C.DARK_EDITION,
+			}
+		end
+		if context.force_trigger then
+			card.ability.emult = card.ability.emult - card.ability.emult_mod
+			if (to_number(card.ability.emult) <= 1.00000001 and not card.ability.unik_depleted) then
+				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
+			elseif (to_number(card.ability.emult) <= 0.00000001 and card.ability.unik_depleted) then
+				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
+			else
+				return {
+					message = localize({
+						type = "variable",
+						key = "a_powmult",
+						vars = {
+							number_format(card.ability.emult),
+						},
+					}),
+					Emult_mod = lenient_bignum(card.ability.emult),
+					colour = G.C.DARK_EDITION,
+				}
+			end
+		end
+		if context.reroll_shop then
+			card.ability.emult = card.ability.emult - card.ability.emult_mod
+			--floating point precision can kiss my ass istg
+			if (to_number(card.ability.emult) <= 1.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult) <= 0.00000001 and card.ability.unik_depleted) then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						play_sound("tarot1")
+						card.T.r = -0.2
+						card:juice_up(0.3, 0.4)
+						card.states.drag.is = true
+						card.children.center.pinch.x = true
+						G.E_MANAGER:add_event(Event({
+							trigger = "after",
+							delay = 0.3,
+							blockable = false,
+							func = function()
+								G.jokers:remove_card(card)
+								card:remove()
+								card = nil
+								return true
+							end,
+						}))
+						return true
+					end,
+				}))
+				return {
+					message = localize("k_eaten_ex"),
+					colour = G.C.DARK_EDITION,
+				}
+			else
+				return {
+					message = "-^" .. number_format(card.ability.emult_mod) .. " Mult",
+					colour = G.C.DARK_EDITION,
+				}
+			end
+		end
+	end,
+}, true)

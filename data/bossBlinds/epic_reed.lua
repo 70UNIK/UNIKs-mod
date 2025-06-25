@@ -30,6 +30,7 @@ SMODS.Blind	{
 }
 
 local function reset_ranks()
+    G.GAME.unik_reed_ranks = G.GAME.unik_reed_ranks or {{rank = "Ace", id = 14},{rank = "7", id = 7},{rank = "10", id = 10}}
     G.GAME.unik_reed_ranks[1].rank = 'Ace'
     G.GAME.unik_reed_ranks[2].rank = '7'
     G.GAME.unik_reed_ranks[3].rank = '10'
@@ -45,7 +46,7 @@ local function reset_ranks()
                 if not SMODS.has_no_rank(v) then
                     local alreadyExists = false
                     for j = 1, #usedRanks do
-                        if v.base.id == usedRanks[j] then
+                        if v:get_id() == usedRanks[j] then
                             alreadyExists = true
                         end
                     end
@@ -57,9 +58,9 @@ local function reset_ranks()
         end
         if valid_reed_cards[1] then 
             local reed_card = pseudorandom_element(valid_reed_cards, pseudoseed('the_reed'..G.GAME.round_resets.ante))
-            G.GAME.unik_reed_ranks[i].rank = reed_card.base.value
-            G.GAME.unik_reed_ranks[i].id = reed_card.base.id
-            usedRanks[#usedRanks + 1] = reed_card.base.id
+            G.GAME.unik_reed_ranks[i].rank = reed_card:get_baseValOverride()
+            G.GAME.unik_reed_ranks[i].id = reed_card:get_id() 
+            usedRanks[#usedRanks + 1] = reed_card:get_id() 
         end
         valid_reed_cards = {}
     end

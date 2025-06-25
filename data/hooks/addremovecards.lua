@@ -66,7 +66,7 @@ function Card:remove_from_deck(from_debuff)
             --Autocannibalism: check if any turtle beans, ice cream, popcorn or ramen remain
             elseif v.ability.name == "j_unik_autocannibalism" then
                 autoCannibalExists = true
-            elseif v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
+            elseif v.config.center.key =="j_cry_starfruit" or v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
                 if self.config.center.rarity == "cry_cursed" and self.ability.extra.getting_captured then
@@ -134,6 +134,11 @@ function Card:remove_from_deck(from_debuff)
                         v.ability.unik_depleted = true
                         v.ability.eternal = true    
                         v.ability.extra.X_chips = 1
+                    --starfruit
+                    elseif v.config.center.key == "j_cry_starfruit" then
+                        v.ability.unik_depleted = true
+                        v.ability.eternal = true    
+                        v.ability.emult = 1
                     end
                 end
             end
@@ -182,6 +187,33 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.unik_triggering = true
         card.ability.dissolve_immune = true
         card.ability.debuff_immune = true
+    end
+    --mainline:
+    if self and self == G.consumeables and card.config.center.key == "c_cry_pointer" and Card.get_gameset(card) ~= "madness" then
+        for i,v in pairs(G.consumeables.cards) do
+            if v.config.center.key == "c_cry_pointer" and v ~= card then
+                local edition = nil
+                if card.edition then
+                    edition = card.edition.key 
+                end
+                card:start_dissolve()
+                --fallback to soul.
+                 G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
+                        n_card.no_omega = true
+                        n_card:add_to_deck()
+                        if edition then
+                            n_card:set_edition(edition, true)
+                        end 
+                        G.consumeables:emplace(n_card)
+                        return true;
+                    end
+                }))
+                break
+            end
+        end
     end
     if card.ability.unik_triggering then
         G.E_MANAGER:add_event(Event({
@@ -245,7 +277,7 @@ function CardArea:emplace(card, location, stay_flipped)
                 --Autocannibalism: forcibly apply eternal and depleted to all new and existing turtle beans, ice cream, popcorn and ramen Jokers
             elseif v.ability.name == "j_unik_autocannibalism" then
                 autoCannibalExists = true
-            elseif v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
+            elseif v.config.center.key == "j_cry_starfruit" or v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             --ghost trap functionality
             elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
@@ -331,6 +363,10 @@ function CardArea:emplace(card, location, stay_flipped)
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
                     v.ability.extra.X_chips = 1
+                elseif v.config.center.key == "j_cry_starfruit" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true    
+                    v.ability.emult = 1
                 end
             end
         end

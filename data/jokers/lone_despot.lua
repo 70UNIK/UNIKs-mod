@@ -13,6 +13,7 @@ SMODS.Joker {
     gameset_config = {
 		modest = { extra = { Emult = 1.1} },  
 	},
+    immutable = true,
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult,localize('Spades', 'suits_plural')} }
 	end,

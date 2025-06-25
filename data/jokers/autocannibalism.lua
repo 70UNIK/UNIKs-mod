@@ -89,6 +89,10 @@ SMODS.Joker {
                     v.ability.unik_depleted = true
                     v.ability.eternal = true    
                     v.ability.extra.X_chips = 1
+                elseif v.config.center.key == "j_cry_starfruit" then
+                    v.ability.unik_depleted = true
+                    v.ability.eternal = true    
+                    v.ability.emult = 1
                 end
             end
         end
