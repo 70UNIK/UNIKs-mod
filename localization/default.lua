@@ -809,6 +809,12 @@ return {
                     "with anything",
                     "other than {C:attention}7s{}",
                 }
+            },
+            m_unik_dollar = { --dollar cards
+                name = "Dollar",
+                text = {
+                    "{C:money}+$1{} when scored"
+                }
             }
         },
         Rotarot = {
@@ -1479,30 +1485,6 @@ return {
                     "single {C:attention}King{} of {C:spades}#2#",
                 }
             },
-            j_unik_ghost_joker={ --rare or epic
-                name = "Ghost Joker",
-                text = {
-                    "Create a {C:spectral}Spectral{} card",
-                    "when {C:attention}Blind{} is selected",
-                    "{C:inactive}(Must have room)",
-                }
-            },
-            j_unik_weetomancer={ --rare
-                name = "Weetomancer",
-                text = {
-                    "Create a {C:paperback_minor_arcana}Minor Arcana{} card",
-                    "when {C:attention}Blind{} is selected",
-                    "{C:inactive}(Must have room)",
-                }
-            },
-            j_unik_hellspawner={ --cursed
-                name = "Hellspawner",
-                text = {
-                    "Create a {X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card",
-                    "when {C:attention}Blind{} is selected",
-                    "{E:2,C:red}Self destructs{}",
-                }
-            },
             j_unik_epic_blind_sauce = {
                 name = "Epic Blind Sauce",
                 text = {
@@ -1576,14 +1558,95 @@ return {
                     "{C:inactive}(Currently {C:dark_edition}+#4#{C:inactive} slots)",
                 }
             },
-            j_unik_factorialis = {  
-                name = "Factorialis",
+            --next batch of 8 jokers
+            j_unik_fat_joker = { --X0.0385 mult per card in your full deck, uncommon, essentially X3 mult on a full deck.
+                name = "Fat Joker",
                 text = {
-                    "{X:dark_edition,C:white}!(Mult^0.2){} {C:attention}before{} scoring",
-                    "are {C:attention}Aces{}, {C:attention}2s{} or {C:attention}6s{}",
-                    "{C:red}Unretriggerable",
+                    "{X:mult,C:white}X#1#{} Mult per",
+                    "card in your full deck",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
                 }
             },
+            j_unik_notifications = { --common or uncommon?
+                name = "Notifications",
+                text = {
+                    "Gain {C:chips}+#1#{} Chip#<s>1#",
+                    "per card {C:attention}status trigger{}",
+                    "(Currently {C:chips}+#2#{} Chips)"
+                }
+            },
+            j_unik_copycat = { --rare, immutable. Acts as a slightly buffed blueprint.
+                name = "Copycat",
+                text = {
+                    "Retrigger the {C:attention}Joker{}",
+                    "to the left"
+                }
+            },
+            j_unik_skipping_stones = { --skipping stones (common)
+                name = "Skipping Stones",
+                text = {
+                    "Retrigger all scored",
+                    "{C:attention}Rankless and",
+                    "{C:attention}Suitless{} cards",
+                }
+            },
+            j_unik_chipzel = { 
+                name = "Chipzel", --every bonus card triggered gives X1.2 chips, then increase this by 0.2 (Uncommon)
+                text = {
+                    "Scored Bonus Cards",
+                    "give {X:chips,C:white}X#1#{} Chips,",
+                    "then increase this",
+                    "by {X:chips,C:white}X#2#{}",
+                    "{C:inactive}(Resets after hand)"
+                }
+            },
+            j_unik_ghost_joker={ --epic
+                name = "Ghost Joker",
+                text = {
+                    "Create a {C:spectral}Spectral{} card",
+                    "when {C:attention}Blind{} is selected",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            j_unik_joker_dollar = { --uncommon
+                name = "Joker Dollar",
+                text = {
+                    "Earn {C:money}$#1#{} at end", --+1 dollar per dollar card in deck
+                    "of round for each",
+                    "{C:attention}Dollar Card{} in your",
+                    "{C:attention}full deck{}",
+                    "{C:inactive}(Currently {C:money}$#2#{C:inactive})",
+                }
+            },
+            j_unik_poppy = {
+                name = "Poppy", --based off (+50% speed boost if hurt). Gains X0.1 mult for every hand that has not defeated the boss.
+                text = {
+                    "This Joker gains",
+                    "{X:mult,C:white}X#1#{} mult",
+                    "if played hand {C:attention}does not{}",
+                    "defeat Blind",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
+                }
+            },
+
+            --crossmod
+            j_unik_weetomancer={ --rare, paperback
+                name = "Weetomancer",
+                text = {
+                    "Create a {C:paperback_minor_arcana}Minor Arcana{} card",
+                    "when {C:attention}Blind{} is selected",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            j_unik_factorialis = {  --entropic exclusive joker likely
+                name = "Factorialis",
+                text = {
+                    "{X:dark_edition,C:white}!Mult{}",
+                    " if all played cards",
+                    "are {C:attention}Aces{}, {C:attention}2s{} or {C:attention}6s{}",
+                }
+            },
+
 
 
 
@@ -2152,7 +2215,15 @@ return {
                 text = {
                     "Enhances {C:attention}#1#{} selected",
                     "card into a",
-                    "{C:unik_unik_color}Pink Card"
+                    "{C:unik_unik_color}Pink Card",
+                }
+            },
+            c_unik_oligarch = {
+                name = "The Oligarch",
+                text = {
+                    "Enhances {C:attention}#1#{} selected",
+                    "cards into",
+                    "{C:attention}Dollar Cards",
                 }
             }
         },
