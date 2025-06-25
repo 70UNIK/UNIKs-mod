@@ -20,6 +20,7 @@ SMODS.Consumable{
 	end,
 	use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+			local cardsCreated = {}
             for i = 1, card.ability.extra.size do
 				G.E_MANAGER:add_event(Event({
 					delay = 0.1,
@@ -38,11 +39,20 @@ SMODS.Consumable{
 						card_:start_materialize()
 						G.deck:emplace(card_)
 						card:juice_up(0.3, 0.5)
-                        playing_card_joker_effects({true})
+						cardsCreated[#cardsCreated+1] = card
 						return true
 					end
 				}))
 			end
+			delay(0.1)
+			G.E_MANAGER:add_event(Event({
+					delay = 0.1,
+					trigger= 'after',
+					func = function()
+						playing_card_joker_effects(cardsCreated)
+						return true
+					end
+			}))
         return true end })) 
     end,
     in_pool = function()
