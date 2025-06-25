@@ -61,9 +61,8 @@ return {
             ble_unik_bloated={
                 name = "Bloated",
                 text = {
-                    "Each played card has a",
-                    "#1# in #2# chance to be",
-                    "destroyed before play",
+                    "Destroy rightmost played",
+                    "card before play",
                 }
             }
         },

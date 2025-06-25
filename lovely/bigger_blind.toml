@@ -38,8 +38,19 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
-pattern = '''elseif blindname == 'Small Blind' or blindname == 'Big Blind' or blindname == '' then
-        ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}'''
+pattern = '''elseif blindname == 'Small Blind' or blindname == 'Big Blind' or blindname == '' then'''
+position = "before"
+payload = '''
+elseif blindname == 'bl_unik_bigger_blind' or blindname == 'bl_unik_boring_blank' then
+    ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif G.GAME.won then 
+        ease_background_colour{new_colour = G.C.BLIND.won, contrast = 1}'''
 position = "after"
 payload = '''
 elseif blindname == 'bl_unik_bigger_blind' or blindname == 'bl_unik_boring_blank' then
