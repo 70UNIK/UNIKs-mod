@@ -270,7 +270,7 @@ return {
                 text = {
                     "Reduce hand size",
                     "and Joker slots by",
-                    "(Empty Joker slots) x (Negative Jokers)",
+                    "(Empty Joker slots) + (Negative Jokers)", --LOLOLOLOLOLOL!
                     "then destroy all negative",
                     "Jokers and playing cards",
                     "including eternals",
