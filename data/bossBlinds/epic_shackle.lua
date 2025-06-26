@@ -45,24 +45,24 @@ SMODS.Blind{
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
                 end
-                for i,v in pairs(G.consumeables.cards) do
-                    if v.edition and v.edition.key == "e_negative" then
-                        v.ability.shackle_marked_for_destruction = true
-                    end
-                end
-                for i,v in pairs(G.consumeables.cards) do
-                    if v.ability.shackle_marked_for_destruction then
-                        G.E_MANAGER:add_event(Event({
-                            delay = 0.2,
-                            func = function()
-                                v:start_dissolve()
-                                G.GAME.blind.triggered = true
-                                G.GAME.blind:wiggle()
-                                return true
-                            end
-                        }))
-                    end
-                end
+                -- for i,v in pairs(G.consumeables.cards) do
+                --     if v.edition and v.edition.key == "e_negative" then
+                --         v.ability.shackle_marked_for_destruction = true
+                --     end
+                -- end
+                -- for i,v in pairs(G.consumeables.cards) do
+                --     if v.ability.shackle_marked_for_destruction then
+                --         G.E_MANAGER:add_event(Event({
+                --             delay = 0.2,
+                --             func = function()
+                --                 v:start_dissolve()
+                --                 G.GAME.blind.triggered = true
+                --                 G.GAME.blind:wiggle()
+                --                 return true
+                --             end
+                --         }))
+                --     end
+                -- end
                 for i,v in pairs(G.deck.cards) do
                     if v.edition and v.edition.key == "e_negative" then
                         v.ability.shackle_marked_for_destruction = true

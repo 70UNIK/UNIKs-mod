@@ -62,7 +62,12 @@ SMODS.Joker {
 			if G.consumeables.cards[1] then
 				--Get valid cards
 				local validCards = {}
-			
+				for i,v in pairs(G.consumeables.cards) do
+					if v.ability.set == 'Planet'
+					 and not v.edition then
+						validCards[#validCards + 1] = v
+					end
+				end
 				if #validCards > 0 then
 					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
 					--If incantation, automatically split 1 negative from a big pile

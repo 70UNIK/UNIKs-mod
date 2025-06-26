@@ -272,7 +272,7 @@ return {
                     "and Joker slots by",
                     "(Empty Joker slots) x (Negative Jokers)",
                     "then destroy all negative",
-                    "Jokers, cards and consumeables,",
+                    "Jokers and playing cards",
                     "including eternals",
                 }
             },
