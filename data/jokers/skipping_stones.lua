@@ -7,7 +7,6 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    demicoloncompat = true,
     config = { extra = {retriggers = 1},immutable = {max_retriggers = 50} },
     loc_vars = function(self, info_queue, center)
         return { 
@@ -34,13 +33,15 @@ SMODS.Joker {
             if (Card.get_gameset(card) == "modest" and context.poker_hands ~= nil and (not next(context.poker_hands["cry_Bulwark"]))) or Card.get_gameset(card) ~= "modest" then
                 if SMODS.has_no_rank(context.other_card) and SMODS.has_no_suit(context.other_card) then
                     local rep = Card.get_gameset(card) == "modest" and 1 or math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers)
-                    return {
-                        message = localize("k_again_ex"),
-                        repetitions = to_number(
-                            rep
-                        ),
-                        card = card,
-                    }
+                    if rep > 0 then
+                        return {
+                            message = localize("k_again_ex"),
+                            repetitions = to_number(
+                                rep
+                            ),
+                            card = card,
+                        }
+                    end  
                 end
             end
 		end

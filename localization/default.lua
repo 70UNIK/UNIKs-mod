@@ -1623,7 +1623,7 @@ return {
                     "{C:inactive}(Cancels out Maximized)",
                 }
             },
-            j_cry_maximized = {
+            j_cry_maximized = { 
 				name = "Maximized",
 				text = {
 					"All {C:attention}face{} cards",
@@ -1640,21 +1640,24 @@ return {
             j_unik_joker_dollar = { --uncommon
                 name = "Joker Dollar",
                 text = {
-                    "Earn {C:money}$#1#{} at end", --+1 dollar per dollar card in deck
-                    "of round for each",
-                    "{C:attention}Dollar Card{} in your",
-                    "{C:attention}full deck{}",
-                    "{C:inactive}(Currently {C:money}$#2#{C:inactive})",
+                    "Earn {C:money}$#1#{} at", --earn $0
+                    "end of round",
+                    "Increase payout by {C:money}$#2#{}", --+$3 per dollar card held.
+                    "for each {C:attention}Dollar Card",
+                    "held after round",
                 }
             },
             j_unik_poppy = {
-                name = "Poppy", --based off (+50% speed boost if hurt). Gains X0.09 mult for every hand that has not defeated the boss. (Uncommon). Becomes X0.05 if modest
+                name = "inverse_dusk", --Retrigger all cards if no discards remain and once again if no hands remain.
                 text = {
-                    "This Joker gains",
-                    "{X:mult,C:white}X#1#{} mult",
-                    "if played hand {C:attention}does not{}",
-                    "defeat Blind",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
+                    "Retrigger all played",
+                    "cards {C:attention}#1#{} time#<s>1# when",
+                    "{C:attention}0 {C:red}discards{} remaining",
+                    -- "{C:attention}#1#{} more time#<s>1# if", --so it can work even with blinds.
+                    -- "no {C:blue}hands{} remain",
+                    -- "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    -- "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    -- "{C:cry_exotic,s:0.7,E:2}Origin : Dandy's World{}",
                 }
             },
             j_unik_kouign_amann_cookie = { --Retrigger all light cards and reduce their requirements by 10% per trigger. (RARE)
@@ -1664,7 +1667,7 @@ return {
                     "{C:attention}Light Cards #1#{} time#<s>1#",
                     "and reduce all their",
                     "requirements by {X:dark_edition,C:white}^#2#",
-                    -- "{C:unik_caption,s:0.7,E:1}#4#{}",
+                    -- "{C:unik_caption,s:0.7,E:1}#3#{}",
                     -- "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     -- "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 }
@@ -2172,6 +2175,13 @@ return {
                     "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
 				},
 			},
+            c_unik_prism = { --polychrome deck exclusive.
+                name = "Prism",
+                text = {
+                     "Add {C:dark_edition}Polychrome{} to a",
+                    "selected playing card",
+                }
+            }
         },
         Stake={
             stake_unik_shitty = {
@@ -2281,8 +2291,8 @@ return {
                 name = "The Oligarch",
                 text = {
                     "Enhances {C:attention}#1#{} selected",
-                    "card#<s>1# into",
-                    "{C:attention}Dollar Cards",
+                    "card#<s>1# into a",
+                    "{C:attention}Dollar Card",
                 }
             }
         },

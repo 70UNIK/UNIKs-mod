@@ -1,0 +1,1 @@
+--Start with a special spectral ("Prism"), that guarantees a polychrome card. This card can never spawn anywhere else.

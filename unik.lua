@@ -277,9 +277,11 @@ NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")()
 
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
+NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
+NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
@@ -422,6 +424,7 @@ NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
+NFS.load(mod_path .. "data/jokers/joker_dollar.lua")()	
 
 --Celestials:
 --Borg Cube (Uncommon): A cube joker. Other steel EDITION cards give 2.5x mult. Obvious star trek reference
@@ -453,6 +456,7 @@ NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lone_despot.lua")() --no image
 -- NFS.load(mod_path .. "data/jokers/factorialis.lua")() --not gonna do factorials, cannot be balanced AT ALL.
 
+NFS.load(mod_path .. "data/jokers/poppy.lua")() 
 NFS.load(mod_path .. "data/jokers/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
