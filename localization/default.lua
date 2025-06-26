@@ -1475,7 +1475,6 @@ return {
                 text = {
                     "{C:attention}Retrigger{} all {C:attention}held{} in",
                     "consumable effects {C:attention}#1#{} time(s)",
-                    "{C:inactive,s:0.7}(Does not count for using consumables)",
                 }
             },
             j_unik_pibby={
@@ -1660,12 +1659,16 @@ return {
                     "held after round",
                 }
             },
+            --Alternate poppy:
+            --Retrigger rightmost card 1 time, increase by 1 when discards equal 0 once per round
             j_unik_poppy = {
-                name = "inverse_dusk", --Retrigger all cards if no discards remain and once again if no hands remain.
+                name = "scaling_great_wave", --Retrigger rightmost card for every hand or discard used
                 text = {
-                    "Retrigger all played",
-                    "cards {C:attention}#1#{} time#<s>1# when",
-                    "{C:attention}0 {C:red}discards{} remaining",
+                    "Retrigger {C:attention}rightmost",
+                    "scored card for",
+                    "every {C:blue}Hand{} or {C:red}discard{} ",
+                    "lost in round", --that means the needle and the water will give an instant (hands - 1 or discards) triggers.
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive} retriggers)", --#max 1000 retriggers.
                     -- "{C:attention}#1#{} more time#<s>1# if", --so it can work even with blinds.
                     -- "no {C:blue}hands{} remain",
                     -- "{C:unik_caption,s:0.7,E:1}#3#{}",

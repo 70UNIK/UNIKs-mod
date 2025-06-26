@@ -23,28 +23,82 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = {retriggers = 1},immutable = {max_retriggers = 50} },
+    immutable = true,
+    config = { extra = {retriggers = 0},immutable = { max_retriggers = 100 }},
     loc_vars = function(self, info_queue, center)
         return { 
             vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers)} 
         }
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.extra.triggered = false
+    end,
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
-            local reps = 0
-            if G.GAME.current_round.discards_left == 0 then
-                reps = reps + 1
-            end
-            if reps > 0 then
-                return {
-                    message = localize("k_again_ex"),
-                    repetitions = to_number(
-                        reps
-                    ),
-                    colour = HEX("ff8bcb"),
-                    card = card,
-                }
+            if card.ability.extra.retriggers > 0 then
+                if context.other_card == context.scoring_hand[#context.scoring_hand] then
+                    return {
+                        message = localize("k_again_ex"),
+                        repetitions = to_number(
+                            card.ability.extra.retriggers
+                        ),
+                        colour = HEX("ff8bcb"),
+                        card = card,
+                    }
+                end
             end
 		end
+        if context.hand_mod and context.hand_mod_val < 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
+            card.ability.extra.retriggers = card.ability.extra.retriggers + math.abs(context.hand_mod_val)
+            return {
+                message = localize({
+                    type = "variable",
+                    key = "a_unik_celestial_triggers",
+                    vars = {
+                        math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers)
+                    },
+                }),
+                colour = HEX("ff8bcb"),
+                card = card,
+            }
+        end
+        if context.discard_mod and context.discard_mod_val < 0 and not context.blueprint and not context.repetition and not context.retrigger_joker  then
+            card.ability.extra.retriggers = card.ability.extra.retriggers + math.abs(context.discard_mod_val)
+            return {
+                message = localize({
+                    type = "variable",
+                    key = "a_unik_celestial_triggers",
+                    vars = {
+                         card.ability.extra.retriggers,
+                    },
+                }),
+                colour = HEX("ff8bcb"),
+                card = card,
+            }
+        end
+        if context.end_of_round and context.cardarea == G.jokers and not context.blueprint and not context.repetition and not context.retrigger_joker then
+            card.ability.extra.retriggers = 0
+            return {
+                message = localize('k_reset'),
+                colour = HEX("ff8bcb"),
+                card = card,
+            }
+        end
     end,
 }
+local handyHook = ease_hands_played
+function ease_hands_played(mod, instant)
+    handyHook(mod,instant)
+    if G.GAME.blind and G.GAME.blind.in_blind then
+        SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod })
+    end
+    
+end
+
+local tossyHook = ease_discard
+function ease_discard(mod, instant, silent)
+    tossyHook(mod,instant,silent)
+    if G.GAME.blind and G.GAME.blind.in_blind then
+        SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod })
+    end
+end 

@@ -58,11 +58,17 @@ SMODS.Joker {
     calculate = function(self, card, context)
 
 		if (context.unik_blinds_refresh) and Card.get_gameset(card) ~= "modest" then
+			print("try")
 			--What if you decide to stack non negative consumeables (I prefer NOT to do that, but its a possibility. It should decrement the value and create one)
 			if G.consumeables.cards[1] then
 				--Get valid cards
 				local validCards = {}
-			
+				for i,v in pairs(G.consumeables.cards) do
+					if v.ability.set == 'Planet'
+					 and not v.edition then
+						validCards[#validCards + 1] = v
+					end
+				end
 				if #validCards > 0 then
 					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
 					--If incantation, automatically split 1 negative from a big pile
