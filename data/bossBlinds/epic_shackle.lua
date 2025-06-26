@@ -36,7 +36,7 @@ SMODS.Blind{
                 end
                 if (negativeJokers + emptySlots) > 0 then
                     G.GAME.unik_original_size = negativeJokers + emptySlots
-                    G.hand:change_size(-negativeJokers + emptySlots)
+                    G.hand:change_size(- (negativeJokers + emptySlots))
                     if G.jokers.change_size_absolute then
                         G.jokers:change_size_absolute(- (negativeJokers + emptySlots))
                     else
