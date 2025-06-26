@@ -810,10 +810,10 @@ return {
                     "other than {C:attention}7s{}",
                 }
             },
-            m_unik_dollar = { --dollar cards
+            m_unik_dollar = { --dollar cards. Earn +$2 when scored
                 name = "Dollar",
                 text = {
-                    "{C:money}+$1{} when scored"
+                    "{C:money}+$#1#{} when scored"
                 }
             }
         },
@@ -1559,44 +1559,57 @@ return {
                 }
             },
             --next batch of 8 base jokers
-            j_unik_fat_joker = { --+2 Mult per card above (starting deck size*0.5) full deck (uncommon)
+            j_unik_fat_joker = { --+2 Mult per card above (starting deck size*0.5) full deck (uncommon) [CODE DONE]
                 name = "Fat Joker",
                 text = {
                     "{C:mult}+#1#{} Mult per",
                     "card above {C:attention}#2#",
+                    "in your full deck",
                     "{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
                 }
             },
-            j_unik_notifications = { --common 
-                name = "Notifications",
-                text = {
-                    "Gain {C:chips}+#1#{} Chip#<s>1#",
-                    "per card {C:attention}status trigger{}",
-                    "(Currently {C:chips}+#2#{} Chips)"
-                }
-            },
-            j_unik_copycat = { --rare, immutable. Acts as a slightly buffed blueprint.
+            -- j_unik_notifications = { --common --too janky
+            --     name = "Notifications",
+            --     text = {
+            --         "Gain {C:chips}+#1#{} Chip#<s>1#",
+            --         "per card {C:attention}status trigger{}",
+            --         "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
+            --     }
+            -- },
+            j_unik_copycat = { --rare, immutable. Acts as a slightly buffed blueprint. [CODE DONE]
                 name = "Copycat",
                 text = {
-                    "Retrigger the {C:attention}Joker{}",
-                    "to the left"
+                    "Retrigger the",
+                    "rightmost {C:attention}Joker{}",
+                    "{C:inactive,s:0.7}(Cannot retrigger Joker retriggers)", --important notice
                 }
             },
-            j_unik_skipping_stones = { --skipping stones (common)
+            j_unik_skipping_stones = { --skipping stones (common) [CODE DONE]
                 name = "Skipping Stones",
                 text = {
                     "Retrigger all scored",
                     "{C:attention}Rankless and",
                     "{C:attention}Suitless{} cards",
+                    "{C:attention}#1#{} time#<s>1#",
                 }
             },
-            j_unik_chipzel = { 
-                name = "Chipzel", --every bonus card triggered gives X1.2 chips, then increase this by 0.2 (Uncommon)
+            j_unik_skipping_stones_modest = {
+                name = "Skipping Stones",
+                text = {
+                    "Retrigger all scored",
+                    "{C:attention}Rankless and",
+                    "{C:attention}Suitless{} cards",
+                    "if played hand is",
+                    "not a {C:attention}Bulwark",
+                }
+            },
+            j_unik_chipzel = {  -- [CODE DONE]
+                name = "Chipzel", --every bonus card triggered gives X1.15 chips, then increase this by 0.15 (Uncommon). Becomes rare and 0.1 in modest (literally chain lightning from extra credit)
                 text = {
                     "Scored Bonus Cards",
                     "give {X:chips,C:white}X#1#{} Chips,",
                     "then increase this",
-                    "by {X:chips,C:white}X#2#{}",
+                    "by {X:chips,C:white}X#2#{} Chips",
                     "{C:inactive}(Resets after hand)",
                 }
             },
@@ -1607,8 +1620,23 @@ return {
                     "are considered {C:attention}Jacks",
                     "All {C:attention}numbered{} cards",
                     "are considered {C:attention}2s",
+                    "{C:inactive}(Cancels out Maximized)",
                 }
             },
+            j_cry_maximized = {
+				name = "Maximized",
+				text = {
+					"All {C:attention}face{} cards",
+					"are considered {C:attention}Kings{},",
+					"all {C:attention}numbered{} cards",
+					"are considered {C:attention}10s{}",
+                    "{C:inactive}(Cancels out Minimized)",
+				},
+				unlock = {
+					"Play a {C:attention}Flush Five{}",
+					"of {C:attention}Kings",
+				},
+			},
             j_unik_joker_dollar = { --uncommon
                 name = "Joker Dollar",
                 text = {
@@ -1629,6 +1657,18 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
                 }
             },
+            j_unik_kouign_amann_cookie = { --Retrigger all light cards and reduce their requirements by 10% per trigger. (RARE)
+                name = "light_retrigger_joker",
+                text = {
+                    "Retrigger all",
+                    "{C:attention}Light Cards #1#{} time#<s>1#",
+                    "and reduce all their",
+                    "requirements by {X:dark_edition,C:white}^#2#",
+                    -- "{C:unik_caption,s:0.7,E:1}#4#{}",
+                    -- "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    -- "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
+                }
+            },
 
             --crossmod
             j_unik_weetomancer={ --rare, paperback
@@ -1637,6 +1677,16 @@ return {
                     "Create a {C:paperback_minor_arcana}Minor Arcana{} card",
                     "when {C:attention}Blind{} is selected",
                     "{C:inactive}(Must have room)",
+                }
+            },
+            --dichrome celestial
+            j_unik_binary_asteroid={
+                name = "Binary Asteroid",
+                text = {
+                    "When {C:attention}Blind{} is selected,",
+                    "other {C:dark_edition}Dichrome{} cards",
+                    "give {C:attention}+#1#{C:chips} Hand{} or {C:mult}Discard",
+                    "{C:inactive}(Whichever is lower)",
                 }
             },
             j_unik_factorialis = {  --entropic exclusive joker likely
@@ -2071,7 +2121,7 @@ return {
                 text = {
                     "Messages that appear",
                     "on trigger",
-                    "{C:inactive,s:0.75}({C:mult,s:0.75}+Mult{C:inactive,s:0.75}, {X:white,C:white,s:0.75}XChips{C:inactive,s:0.75}, {C:purple,s:0.75}Nope!{C:inactive,s:0.75}, {C:attention,s:0.75}Extinct!{C:inactive,s:0.75}, etc...)"
+                    "{C:inactive,s:0.75}({C:mult,s:0.75}+Mult{C:inactive,s:0.75}, {X:chips,C:white,s:0.75}XChips{C:inactive,s:0.75}, {C:purple,s:0.75}Nope!{C:inactive,s:0.75}, {C:attention,s:0.75}Extinct!{C:inactive,s:0.75}, etc...)"
                 },
             },
             --sticker stakes
@@ -2231,7 +2281,7 @@ return {
                 name = "The Oligarch",
                 text = {
                     "Enhances {C:attention}#1#{} selected",
-                    "cards into",
+                    "card#<s>1# into",
                     "{C:attention}Dollar Cards",
                 }
             }

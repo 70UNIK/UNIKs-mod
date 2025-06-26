@@ -407,7 +407,7 @@ NFS.load(mod_path .. "data/jokers/1_5_joker.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
-NFS.load(mod_path .. "data/jokers/notification.lua")()
+NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
 --- Uncommon ---
@@ -437,6 +437,8 @@ NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
 --- Rare ---
 -- NFS.load(mod_path .. "data/jokers/double_container.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/chipzel.lua")()
+NFS.load(mod_path .. "data/jokers/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/copycat.lua")()
 NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
@@ -451,6 +453,7 @@ NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lone_despot.lua")() --no image
 -- NFS.load(mod_path .. "data/jokers/factorialis.lua")() --not gonna do factorials, cannot be balanced AT ALL.
 
+NFS.load(mod_path .. "data/jokers/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()

@@ -8,12 +8,11 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+	immutable = true,
 	calculate = function(self, card, context)
-		if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= card then
+		if (context.retrigger_joker_check) and context.other_card ~= card then
             local otherone = nil
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] == card and i > 1 then otherone = G.jokers.cards[i-1] end
-            end
+            if G.jokers.cards[#G.jokers.cards] ~= card then otherone = G.jokers.cards[#G.jokers.cards] end
 			if otherone ~= nil and context.other_card == otherone then
 				return {
 					message = localize("k_again_ex"),
