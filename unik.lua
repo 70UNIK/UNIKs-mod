@@ -219,9 +219,15 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+-- SMODS.Atlas {
+-- 	key = "unik_omegaplanets",
+-- 	path = "unik_omegaplanets.png",
+-- 	px = 71,
+-- 	py = 95
+-- }
 SMODS.Atlas {
-	key = "unik_omegaplanets",
-	path = "unik_omegaplanets.png",
+	key = "unik_decks",
+	path = "unik_decks.png",
 	px = 71,
 	py = 95
 }
@@ -275,6 +281,10 @@ NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")()
 --Learning Stake: Jokers can be Corrupted
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
+--decks
+NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
+NFS.load(mod_path .. "data/decks/steel_deck.lua")()
+
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
@@ -283,6 +293,7 @@ NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
+NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
 --Spectral Merchant (Tier 1) Spectrals can appear in shop

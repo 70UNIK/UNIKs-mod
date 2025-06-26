@@ -17,7 +17,20 @@ return {
 					"at the same time",
 				},
 			},
-
+            b_unik_polychrome = {
+                name = "Polychrome Deck",
+                text = {
+                    "Start with a",
+                    "{C:dark_edition,T:c_unik_prism}Prism{} and {C:spectral,T:c_deja_vu}Deja Vu",
+                }
+            },
+            b_unik_steel = {
+                name = "Steel Deck",
+                text = {
+                    "Start with a",
+                    "{C:dark_edition,T:c_unik_foundry}Foundry{} and {C:spectral,T:c_deja_vu}Deja Vu",
+                }
+            },
         },
         BlindEdition={
             ble_unik_steel={
@@ -2160,9 +2173,9 @@ return {
             c_unik_foundry = {
                 name = "Foundry",
                 text = {
-                    "Add {C:dark_edition}Steel{} to a",
-                    "selected playing card",
-                    "add {C:attention}#1#{} random card(s)",
+                    "Add {C:dark_edition}Steel{} to {C:attention}#1#",
+                    "selected playing card#<s>1#",
+                    "add {C:attention}#2#{} random card(s)",
                 }
             },
             c_cry_pointer_no_dupe = {
@@ -2178,8 +2191,8 @@ return {
             c_unik_prism = { --polychrome deck exclusive.
                 name = "Prism",
                 text = {
-                     "Add {C:dark_edition}Polychrome{} to a",
-                    "selected playing card",
+                     "Add {C:dark_edition}Polychrome{} to {C:attention}#1#",
+                    "selected playing card#<s>1#",
                 }
             }
         },
