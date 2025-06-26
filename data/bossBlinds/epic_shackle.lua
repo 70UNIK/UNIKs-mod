@@ -34,35 +34,35 @@ SMODS.Blind{
                         }))
                     end
                 end
-                if (negativeJokers * emptySlots) > 0 then
-                    G.GAME.unik_original_size = negativeJokers * emptySlots
-                    G.hand:change_size(-negativeJokers * emptySlots)
+                if (negativeJokers + emptySlots) > 0 then
+                    G.GAME.unik_original_size = negativeJokers + emptySlots
+                    G.hand:change_size(-negativeJokers + emptySlots)
                     if G.jokers.change_size_absolute then
-                        G.jokers:change_size_absolute(- (negativeJokers * emptySlots))
+                        G.jokers:change_size_absolute(- (negativeJokers + emptySlots))
                     else
-                        G.jokers.config.card_limit = G.jokers.config.card_limit - (negativeJokers * emptySlots)
+                        G.jokers.config.card_limit = G.jokers.config.card_limit - (negativeJokers + emptySlots)
                     end
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
                 end
-                for i,v in pairs(G.consumeables.cards) do
-                    if v.edition and v.edition.key == "e_negative" then
-                        v.ability.shackle_marked_for_destruction = true
-                    end
-                end
-                for i,v in pairs(G.consumeables.cards) do
-                    if v.ability.shackle_marked_for_destruction then
-                        G.E_MANAGER:add_event(Event({
-                            delay = 0.2,
-                            func = function()
-                                v:start_dissolve()
-                                G.GAME.blind.triggered = true
-                                G.GAME.blind:wiggle()
-                                return true
-                            end
-                        }))
-                    end
-                end
+                -- for i,v in pairs(G.consumeables.cards) do
+                --     if v.edition and v.edition.key == "e_negative" then
+                --         v.ability.shackle_marked_for_destruction = true
+                --     end
+                -- end
+                -- for i,v in pairs(G.consumeables.cards) do
+                --     if v.ability.shackle_marked_for_destruction then
+                --         G.E_MANAGER:add_event(Event({
+                --             delay = 0.2,
+                --             func = function()
+                --                 v:start_dissolve()
+                --                 G.GAME.blind.triggered = true
+                --                 G.GAME.blind:wiggle()
+                --                 return true
+                --             end
+                --         }))
+                --     end
+                -- end
                 for i,v in pairs(G.deck.cards) do
                     if v.edition and v.edition.key == "e_negative" then
                         v.ability.shackle_marked_for_destruction = true
