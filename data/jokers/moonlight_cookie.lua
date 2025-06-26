@@ -58,7 +58,6 @@ SMODS.Joker {
     calculate = function(self, card, context)
 
 		if (context.unik_blinds_refresh) and Card.get_gameset(card) ~= "modest" then
-			print("try")
 			--What if you decide to stack non negative consumeables (I prefer NOT to do that, but its a possibility. It should decrement the value and create one)
 			if G.consumeables.cards[1] then
 				--Get valid cards
