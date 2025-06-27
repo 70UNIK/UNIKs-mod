@@ -23,6 +23,13 @@ SMODS.Joker {
 		}
 	end,
 	calculate = function(self, card, context)
+		if context.forcetrigger then
+			card.ability.extra.dollars = card.ability.extra.dollars + card.ability.extra.dollar_mod
+            return {
+				dollars = card.ability.extra.dollars,
+				card = card
+			}
+        end
 		if context.end_of_round and context.individual and context.cardarea == G.hand then
 			if SMODS.has_enhancement(context.other_card, "m_unik_dollar") then
 				card.ability.extra.dollars = card.ability.extra.dollars + card.ability.extra.dollar_mod

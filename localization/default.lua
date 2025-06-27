@@ -1662,7 +1662,7 @@ return {
             --Alternate poppy:
             --Retrigger rightmost card 1 time, increase by 1 when discards equal 0 once per round
             j_unik_poppy = {
-                name = "scaling_great_wave", --Retrigger rightmost card for every hand or discard used
+                name = "inverse_solemn_lament", --Retrigger rightmost card for every hand or discard used
                 text = {
                     "Retrigger {C:attention}rightmost",
                     "scored card for",
@@ -1704,18 +1704,18 @@ return {
                 text = {
                     "When {C:attention}Blind{} is selected,",
                     "other {C:dark_edition}Dichrome{} cards",
-                    "give {C:attention}+#1#{C:chips} Hand{} or {C:mult}Discard",
+                    "give {C:attention}+#1#{C:chips} Hand#<s>1#{} or {C:mult}Discard#<s>1#",
                     "{C:inactive}(Whichever is lower)",
                 }
             },
-            j_unik_factorialis = {  --entropic exclusive joker likely
-                name = "Factorialis",
-                text = {
-                    "{X:dark_edition,C:white}!Mult{}",
-                    "if all played cards",
-                    "are {C:attention}Aces{}, {C:attention}2s{} or {C:attention}6s{}",
-                }
-            },
+            -- j_unik_factorialis = {  --entropic exclusive joker likely
+            --     name = "Factorialis",
+            --     text = {
+            --         "{X:dark_edition,C:white}!Mult{}",
+            --         "if all played cards",
+            --         "are {C:attention}Aces{}, {C:attention}2s{} or {C:attention}6s{}",
+            --     }
+            -- },
 
 
 

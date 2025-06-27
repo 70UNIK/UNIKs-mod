@@ -374,6 +374,7 @@ if (SMODS.Mods['ble'] or {}).can_load then
 	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
 end
 
+
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
@@ -421,6 +422,9 @@ NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
+if (SMODS.Mods["paperback"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/binary_asteroid.lua")()
+end
 NFS.load(mod_path .. "data/jokers/double_container.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
@@ -433,6 +437,10 @@ NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
+if (SMODS.Mods["paperback"] or {}).can_load then
+	
+	NFS.load(mod_path .. "data/jokers/weetomancer.lua")() 
+end
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
@@ -462,6 +470,8 @@ NFS.load(mod_path .. "data/jokers/riff_rare.lua")()
 NFS.load(mod_path .. "data/jokers/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
+
+
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
 NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image

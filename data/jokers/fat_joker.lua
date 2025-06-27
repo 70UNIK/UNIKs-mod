@@ -7,6 +7,7 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+    demicolon_compat = true,
     config = {
 		extra = { card = 1 },
 	},

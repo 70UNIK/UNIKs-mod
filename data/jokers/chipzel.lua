@@ -16,6 +16,7 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
+    demicolon_compat = true,
     enhancement_gate = 'm_bonus',
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.x_chips, card.ability.extra.x_chip_mod}}
@@ -26,6 +27,18 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
     calculate = function(self, card, context)
         if context.before then
             card.ability.extra.x_chips = 1
+        end
+        if context.forcetrigger then
+            card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chip_mod
+            return {
+                message = localize({
+					type = "variable",
+					key = "a_xchips",
+					vars = { number_format(card.ability.extra.x_chips) },
+				}),
+				Xchip_mod = card.ability.extra.x_chips,
+				colour = G.C.CHIPS,
+			}
         end
         if context.cardarea == G.play and context.individual and SMODS.has_enhancement(context.other_card,'m_bonus') then
             card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chip_mod
