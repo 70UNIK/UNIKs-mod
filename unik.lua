@@ -543,11 +543,39 @@ NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
---Future jokers to take ownership:
---Popcorn, Ice Cream, Ramen, Turtle Bean, Clicked Cookie: Properly display negative values + state self destruct values when depleted
---Average Alice (Extra Credit): Godsmarble functionality + sprites
---Dorkshire Tea (Extra Credit): Godsmarble functionality + sprites
 
+--Future mechanics:
+--Overshoot mechanic (that will become the new name of the overscore mechanic). Designed to keep a challenge when overscoring.
+--Intervals:
+--Exceed ^2 reqs: Overshoot +1
+--Exceed ^4 reqs: Overshoot +2
+--Exceed ^10 reqs: Overshoot +4
+--Exceed ^100 reqs: (overshoot+1)X2 Overshoot
+--Exceed ^10000 reqs: (overshoot+2)^2 Overshoot (!)
+--Exceed ^^100 reqs: ^^2 Overshoot (!!!)
+
+--Overshoot effects:
+
+--How to decrease overshoot:
+--Score under requirements (mr bones): Overshoot = 0
+--Score under 1.19X requirements (below threshold of tax): Overshoot^0.5 - 1
+--Score between 1.2X and 5X requirements (at tax threshold): max(0,Overshoot - 1)/2
+--Score over 5X requirements but under ^1.5 reqs: max(0,Overshoot - 1)/1.4
+--Else if not exceeding ^2 reqs: Overshoot - 2.
+
+--Overshoot effects:
+--0 - 10: Nothing
+--10 - 15: Ante increase is added +1
+--15 - 20: Ante increase +1, Epic Blinds can spawn after round 40
+--20 - 25: Ante increase +2,
+--25 - 30: Ante increase +2, Legendary Blinds can spawn after round 90, doubled round increase
+--30 - 35: Ante increase +3, Epic and Legendary Blinds can replace any finishers.
+--30 - 40: Doubled ante increase, Finisher, Epic and Legendary Blinds can replace any Boss Blind. Cannot decrease ante by any means
+--40 - 45: Ante decreases will add to ante instead, All Blinds are Boss Blinds.
+--45 - 50: All Blinds are Finisher, Epic and Legendary Blinds. Ante is always tripled, tripled round increase.
+--50 >: All blinds are Epic/Legendary Blinds. Ante is always exponentiated by ^1.25 per modifier.
+--> 1000000: Well I hope you're prepared to die. All Small Blinds are Indigo ICBM or (Nameless Nadir), All Big Blinds are Indigo ICBM, All Boss Blinds are Legendary Nuke.
+--Normally incryptid, you shouldn't go up to 1000000 or so, but entropy exists.
 
 -- Jackpot! - Score a Royal Flush against Video Poker
 -- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once
