@@ -1,8 +1,8 @@
 --earn $0 at end of round, increase by $3 per dollar card held at end of round
 SMODS.Joker {
     key = 'unik_joker_dollar',
-    atlas = 'placeholders',
-	pos = { x = 1, y = 0 },
+    atlas = 'uncommon',
+	pos = { x = 7, y = 0 },
     rarity = 2,
     cost = 6,
 	config = {
@@ -11,6 +11,7 @@ SMODS.Joker {
 			dollar_mod = 2,
 		},
 	},
+	pixel_size = { w = 52, h = 95 },
 	enhancement_gate = "m_unik_dollar",
 	perishable_compat = false,
 	loc_vars = function(self, info_queue, center)
@@ -47,4 +48,17 @@ SMODS.Joker {
 			return bonus
 		end
 	end,
+	 draw = function(self, card, layer)
+        local notilt = nil
+        if card.area and card.area.config.type == "deck" then
+            notilt = true
+        end
+        card.children.center:draw_shader(
+            "voucher",
+            nil,
+            card.ARGS.send_to_shader,
+            notilt,
+            card.children.center
+        )
+    end,
 }

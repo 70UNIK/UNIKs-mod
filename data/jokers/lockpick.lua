@@ -10,20 +10,20 @@ SMODS.Joker {
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = false,
-    calculate = function(self, card, context)
-        if
-			context.selling_card and not context.blueprint
-		then
-			if context.card.ability.eternal then
-                G.E_MANAGER:add_event(Event({
-                    func = function() 
-                        selfDestruction(card,"k_unik_weapon_destroyed",G.C.PURPLE)
-                        return true
-                    end
-                }))
-            end
-		end
-    end,
+    -- calculate = function(self, card, context)
+    --     if
+	-- 		context.selling_card and not context.blueprint
+	-- 	then
+	-- 		if context.card.ability.eternal then
+    --             G.E_MANAGER:add_event(Event({
+    --                 func = function() 
+    --                     selfDestruction(card,"k_unik_weapon_destroyed",G.C.PURPLE)
+    --                     return true
+    --                 end
+    --             }))
+    --         end
+	-- 	end
+    -- end,
     in_pool = function(self)
         for i,v in pairs(G.jokers.cards) do 
             if v.ability.eternal then

@@ -19,9 +19,9 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
-    config = { extra = { mult = 20} },
+    config = { extra = { mult = 30} },
 	gameset_config = {
-		modest = { extra = { mult = 15} },
+		modest = { extra = { mult = 25} },
 	},
 	loc_vars = function(self, info_queue, center)
 		return { 
