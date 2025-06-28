@@ -1,13 +1,14 @@
 SMODS.Joker {
 	key = "unik_minimized",
-    atlas = "placeholders",
-	pos = { x = 2, y = 0 },
+    atlas = "unik_rare",
+	pos = { x = 4, y = 0 },
 	rarity = 3,
-	cost = 11,
+	cost = 8,
 	immutable = true,
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_cry_maximized
 	end,
+    pixel_size = { w = 71, h = 30 },
 }
 local cgi_ref = Card.get_id
 local override_minimized = false

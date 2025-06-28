@@ -1681,7 +1681,7 @@ return {
                 text = {
                     "Retrigger all",
                     "{C:attention}Light Cards #1#{} time#<s>1#",
-                    "and reduce all their",
+                    "and reduce their",
                     "requirements by {X:dark_edition,C:white}^#2#",
                     -- "{C:unik_caption,s:0.7,E:1}#3#{}",
                     -- "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",

@@ -42,7 +42,7 @@ SMODS.Joker {
                 if card2.ability.extra.current > card2.ability.extra.req then
                     card2.ability.extra.current = card2.ability.extra.req
                 end
-                card2.ability.extra.current = card2.ability.extra.current^decrease
+                -- card2.ability.extra.current = card2.ability.extra.current^decrease
                 if rep > 0 then
                     return {
                         message = localize("k_again_ex"),
