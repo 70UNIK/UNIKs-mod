@@ -42,16 +42,19 @@ SMODS.Joker {
         card.ability.extra.triggered = false
     end,
     calculate = function(self, card, context)
+        
         if context.repetition and context.cardarea == G.play then
             if card.ability.extra.retriggers > 0 then
                 if context.other_card == context.scoring_hand[#context.scoring_hand] then
-                    local quoteset = 'trigger'
+                    
                     if not context.blueprint_card then
+                        local quoteset = 'trigger'
                          return {
-                            message = localize(poppy_quotes[quoteset][math.random(#poppy_quotes[quoteset])] .. ""),
+                            message = localize(pseudorandom_element(poppy_quotes[quoteset], pseudoseed("poppy_quotes_trigger")) .. ""),
                             repetitions = to_number(
                                 card.ability.extra.retriggers
                             ),
+                            
                             colour = HEX("ff8bcb"),
                             card = card,
                         }
