@@ -66,6 +66,8 @@ position = 'at'
 payload = '''
 if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
     Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
+else
+    Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
 end
 G.GAME.unik_prevent_killing_cursed_jokers2 = nil
 G.GAME.unik_deathly_debuff_text = nil

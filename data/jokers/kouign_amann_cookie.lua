@@ -1,11 +1,17 @@
+
+SMODS.Atlas {
+	key = "unik_kouign_amann_cookie",
+	path = "unik_kouign_amann_cookie.png",
+	px = 71,
+	py = 95
+}
 local k_amann_quotes = {
 	normal = {
 		'k_k_amann_normal1',
 		'k_k_amann_normal2',
 		'k_k_amann_normal3',
 		'k_k_amann_normal4',
-		'k_k_amann_normal5',
-		'k_k_amann_normal6',
+        'k_k_amann_normal5',
 	},
     trigger = {
         'k_k_amann_trigger1',
@@ -16,8 +22,9 @@ local k_amann_quotes = {
 }
 SMODS.Joker {
     key = 'unik_kouign_amann_cookie',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_kouign_amann_cookie',
+	pos = { x = 0, y = 0 },
+    soul_pos = { x = 1, y = 0 },
     rarity = 3,
     cost = 8,
     blueprint_compat = true,
@@ -25,8 +32,11 @@ SMODS.Joker {
 	eternal_compat = true,
     config = { extra = {retriggers = 1,decrease = 0.1},immutable = {max_retriggers = 50, max_decrease = 0.5} },
     loc_vars = function(self, info_queue, center)
+        local quoteset = 'normal'
         return { 
-            vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers),1-math.min(center.ability.extra.decrease,center.ability.immutable.max_decrease)} 
+            vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers),1-math.min(center.ability.extra.decrease,center.ability.immutable.max_decrease)
+        ,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
+        } 
         }
 	end,
     enhancement_gate = 'm_cry_light',
@@ -44,14 +54,27 @@ SMODS.Joker {
                 end
                 -- card2.ability.extra.current = card2.ability.extra.current^decrease
                 if rep > 0 then
-                    return {
-                        message = localize("k_again_ex"),
-                        repetitions = to_number(
-                            rep
-                        ),
-                        colour = HEX("fa7aa6"),
-                        card = card,
-                    }
+                    --only do the quote if its specifically for her.
+                    if not context.blueprint_card then
+                        
+                        return {
+                            message = localize(k_amann_quotes['trigger'][math.random(#k_amann_quotes['trigger'])] .. ""),
+                            repetitions = to_number(
+                                rep
+                            ),
+                            colour = HEX("fa7aa6"),
+                            card = card,
+                        }
+                    else
+                        return {
+                            message = localize("k_again_ex"),
+                            repetitions = to_number(
+                                rep
+                            ),
+                            colour = HEX("fa7aa6"),
+                            card = card,
+                        }
+                    end
                 end
             end
         end

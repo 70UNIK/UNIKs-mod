@@ -1,11 +1,16 @@
+SMODS.Atlas {
+	key = "unik_poppy",
+	path = "unik_poppy.png",
+	px = 71,
+	py = 95
+}
 local poppy_quotes = {
 	normal = {
 		'k_poppy_normal1',
 		'k_poppy_normal2',
 		'k_poppy_normal3',
 		'k_poppy_normal4',
-		'k_poppy_normal5',
-		'k_poppy_normal6',
+        'k_poppy_normal5',
 	},
     trigger = {
         'k_poppy_trigger1',
@@ -16,8 +21,9 @@ local poppy_quotes = {
 }
 SMODS.Joker {
     key = 'unik_poppy',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_poppy',
+	pos = { x = 0, y = 0 },
+    soul_pos = { x = 1, y = 0 },
     rarity = 3,
     cost = 9,
     blueprint_compat = true,
@@ -26,8 +32,10 @@ SMODS.Joker {
     immutable = true,
     config = { extra = {retriggers = 0},immutable = { max_retriggers = 100 }},
     loc_vars = function(self, info_queue, center)
+        local quoteset = 'normal'
         return { 
-            vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers)} 
+            vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers),localize(poppy_quotes[quoteset][math.random(#poppy_quotes[quoteset])] .. "")} 
+            ,
         }
 	end,
     add_to_deck = function(self, card, from_debuff)
@@ -37,14 +45,27 @@ SMODS.Joker {
         if context.repetition and context.cardarea == G.play then
             if card.ability.extra.retriggers > 0 then
                 if context.other_card == context.scoring_hand[#context.scoring_hand] then
-                    return {
-                        message = localize("k_again_ex"),
-                        repetitions = to_number(
-                            card.ability.extra.retriggers
-                        ),
-                        colour = HEX("ff8bcb"),
-                        card = card,
-                    }
+                    local quoteset = 'trigger'
+                    if not context.blueprint_card then
+                         return {
+                            message = localize(poppy_quotes[quoteset][math.random(#poppy_quotes[quoteset])] .. ""),
+                            repetitions = to_number(
+                                card.ability.extra.retriggers
+                            ),
+                            colour = HEX("ff8bcb"),
+                            card = card,
+                        }
+                    else
+                        return {
+                            message = localize("k_again_ex"),
+                            repetitions = to_number(
+                                card.ability.extra.retriggers
+                            ),
+                            colour = HEX("ff8bcb"),
+                            card = card,
+                        }
+                    end
+                   
                 end
             end
 		end

@@ -1755,33 +1755,31 @@ return {
             --Alternate poppy:
             --Retrigger rightmost card 1 time, increase by 1 when discards equal 0 once per round
             j_unik_poppy = {
-                name = "inverse_solemn_lament", --Retrigger rightmost card for every hand or discard used
+                name = "Poppy", --Retrigger rightmost card for every hand or discard used
                 text = {
                     "Retrigger {C:attention}rightmost",
                     "scored card for",
-                    "every {C:blue}Hand{} or {C:red}discard{} ",
+                    "every {C:blue}Hand{} or {C:red}discard{}",
                     "lost in round", --that means the needle and the water will give an instant (hands - 1 or discards) triggers.
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive} retriggers)", --#max 1000 retriggers.
-                    -- "{C:attention}#1#{} more time#<s>1# if", --so it can work even with blinds.
-                    -- "no {C:blue}hands{} remain",
-                    -- "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    -- "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    -- "{C:cry_exotic,s:0.7,E:2}Origin : Dandy's World{}",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Dandy's World{}",
                 },
                 unlock = {
                     "Retrigger {C:attention}1{} card {C:attention}8{} times"
                 }
             },
             j_unik_kouign_amann_cookie = { --Retrigger all light cards and reduce their requirements by 10% per trigger. (RARE)
-                name = "light_retrigger_joker",
+                name = "Kouign Amann Cookie",
                 text = {
                     "Retrigger all",
                     "{C:attention}Light Cards #1#{} time#<s>1#",
                     "and reduce their",
                     "requirements by {X:dark_edition,C:white}^#2#",
-                    -- "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    -- "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    -- "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 },
                 unlock = {
                     "Play a {C:attention}Flush Five",
@@ -2741,10 +2739,6 @@ return {
             k_unik_chamber_placeholder2="(Joker rarities owned)",
             k_unik_chamber_warning1="Next ",
             k_unik_chamber_warning2=" hands will add to the blind size",
-            --Godsmarble ramirez family members
-            k_unik_family_disabled = "All abilities are disabled...",
-            k_unik_family_disabled2 = "...you monster.",
-            k_unik_family_disabled3 = "(They are no longer willing to help, after what you did.)",
             b_unik_devour = "DEVOUR",
             --Almanac Quotes:
 
@@ -2780,7 +2774,30 @@ return {
             k_unik_pibby_scared2 = "Please, please be ok, it's getting too much!",
             k_inactive_ex = "Inactive",
 
-            --
+            --Kouign amann cookie:
+            k_k_amann_normal1="I am reliable AND sweet!",
+            k_k_amann_normal2="I'm strong! That's what makes me so lovely!",
+            k_k_amann_normal3="I am cute as I am diligent!",
+            k_k_amann_normal4="The Light is in my dough!",
+            k_k_amann_normal5="Working hard makes a Cookie so much sweeter!",
+            
+            k_k_amann_trigger1="Justice be served!",
+            k_k_amann_trigger2="The light shall show the way!",
+            k_k_amann_trigger3="My Paladin's Spirit!",
+            k_k_amann_trigger4="Sweet and strong, here I come!",
+
+            --Poppy
+            k_poppy_normal1="Oh! It's nice seeing you here!",
+            k_poppy_normal2="Hi! HIIIII!!!",
+            k_poppy_normal3="Lets go hang out one day!",
+            k_poppy_normal4="Ooh! How's it going everyone?!",
+            k_poppy_normal5="I bet this run will go well!",
+            
+            k_poppy_trigger1="Yippee!",
+            k_poppy_trigger2="Let's go Poppy!",
+            k_poppy_trigger3="I did it!",
+            k_poppy_trigger4="Yay!",
+
             unik_plus_lartceps = "+1 Lartceps...",
             k_unik_copied = "Copied...",
             k_unik_epic_sand_cry_1 = "^2 Blind size",
