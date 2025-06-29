@@ -1688,7 +1688,7 @@ return {
             j_unik_chipzel = {  -- [CODE DONE]
                 name = "Chipzel", --every bonus card triggered gives X1.15 chips, then increase this by 0.15 (Uncommon). Becomes rare and 0.1 in modest (literally chain lightning from extra credit)
                 text = {
-                    "Scored Bonus Cards",
+                    "Scored {C:attention}Bonus Cards",
                     "give {X:chips,C:white}X#1#{} Chips,",
                     "then increase this",
                     "by {X:chips,C:white}X#2#{} Chips",

@@ -56,10 +56,8 @@ SMODS.Joker {
                 if rep > 0 then
                     --only do the quote if its specifically for her.
                     if not context.blueprint_card then
-                        local message = localize(pseudorandom_element(k_amann_quotes['trigger'], pseudoseed("k_amann_quotes_trigger")) .. "")
-                        
                         return {
-                            message = message,
+                            message = localize(pseudorandom_element(k_amann_quotes['trigger'], pseudoseed("k_amann_quotes_trigger")) .. ""),
                             repetitions = to_number(
                                 rep
                             ),
