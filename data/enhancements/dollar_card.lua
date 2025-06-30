@@ -1,5 +1,5 @@
 SMODS.Enhancement {
-	atlas = 'placeholders2',
+	atlas = 'unik_enhancements',
 	pos = {x = 1, y = 0},
 	key = 'unik_dollar',
     config = { extra = { money = 2} },
@@ -16,5 +16,25 @@ SMODS.Enhancement {
                 card = card,
             }
 		end
-	end
+	end,
+    draw = function(self, card, layer)
+      local notilt = nil
+      if card.area and card.area.config.type == "deck" then
+        notilt = true
+      end
+      -- card.children.center:draw_shader(
+      --   "negative",
+      --   nil,
+      --   card.ARGS.send_to_shader,
+      --   notilt,
+      --   card.children.center
+      -- )
+      card.children.center:draw_shader(
+        "voucher",
+        nil,
+        card.ARGS.send_to_shader,
+        notilt,
+        card.children.center
+      )
+    end,
 }
