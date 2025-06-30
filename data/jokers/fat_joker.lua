@@ -1,8 +1,8 @@
 SMODS.Joker {
     key = 'unik_fat_joker',
-    atlas = "placeholders",
+    atlas = "unik_uncommon",
     rarity = 2,
-    pos = {x = 1, y = 0},
+    pos = {x = 7, y = 1},
 	cost = 6,
     blueprint_compat = true,
     perishable_compat = true,

@@ -3,9 +3,9 @@
 if PB_UTIL and PB_UTIL.config.minor_arcana_enabled then
 SMODS.Joker {
     key = 'unik_weetomancer',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
+	pos = { x = 8, y = 1 },
     cost = 7,
     blueprint_compat = true,
     perishable_compat = true,

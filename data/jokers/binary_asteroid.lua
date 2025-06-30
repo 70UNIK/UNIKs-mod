@@ -1,9 +1,9 @@
 --on blind select, other dichrome cards gain +1 hand and discards
 SMODS.Joker {
     key = 'unik_binary_asteroid',
-    atlas = 'placeholders',
+    atlas = 'unik_common',
     rarity = 1,
-	pos = { x = 0, y = 0 },
+	pos = { x = 2, y = 1 },
     cost = 2,
     blueprint_compat = true,
     perishable_compat = true,
