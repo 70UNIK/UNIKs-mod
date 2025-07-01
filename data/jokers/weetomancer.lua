@@ -1,5 +1,4 @@
 --create a minor arcana card on blind select
---create an rare joker when selecting big or boss blind
 if PB_UTIL and PB_UTIL.config.minor_arcana_enabled then
 SMODS.Joker {
     key = 'unik_weetomancer',
@@ -12,6 +11,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
+    display_size = { w = 0.7 * 71, h = 0.7 * 95 },
     calculate = function(self, card, context)
         if (context.setting_blind or context.forcetrigger) and not (context.blueprint_card or self).getting_sliced then
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then

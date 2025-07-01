@@ -8,6 +8,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
+    pools = { ["Meme"] = true }, --that gumball meme
     config = {
 		extra = { card = 1 },
 	},

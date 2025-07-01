@@ -3,7 +3,7 @@ SMODS.Consumable{
     set = 'unik_lartceps', 
 	atlas = 'unik_lartceps',
     cost = 0,
-	pos = {x = 0, y = 0},
+	pos = {x = 5, y = 1},
 	key = 'unik_sauron',
     config = { extra = { odds = 4 } },
     can_use = function(self, card)

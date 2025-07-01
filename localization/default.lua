@@ -628,7 +628,7 @@ return {
             --beast blinds? Around epic blind difficulty, although the art will resemble, but become more distinct from epic blinds.
             --Spawns same time as epic blinds.
             bl_unik_beast_shadow_milk={
-                name = "Dreadful Deception", --if this appears, all blinds appear as big blinds.
+                name = "Kauheapetos", --Dreadful Deception if this appears, all blinds appear as big blinds.
                 text = {
                     "Disguised as a random Blind", -- can occupy small, big or boss slot, but all blinds are unskippable/unrerollable.
                     "On play, deselect and select",
@@ -641,7 +641,7 @@ return {
                 name = "Big Blind?"
             },
             bl_unik_beast_burning_spice={
-                name = "Destroyer of worlds",
+                name = "Maailmojentuhoaja", --Destroyer of worlds
                 text = {
                     "Destroy all cards",
                     "in first drawn hand",
@@ -650,7 +650,7 @@ return {
                 }
             },
             bl_unik_beast_mystic_flour={
-                name = "Dust of Decay",
+                name = "Rappeutumisenpöly", --Dust of Decay
                 text = {
                     "Joker values are multiplied",
                     "by 0.95x every second spent",
@@ -658,19 +658,19 @@ return {
                 }
             },
             bl_unik_beast_eternal_sugar={
-                name = "Eternal Abyss",
+                name = "Ikuinenkuilu", --Eternal Abyss
                 text = {
-                    "^1.1 Blind size",
+                    "^1.03 Blind size",
                     "per trigger",
                 }
             },
             bl_unik_beast_silent_salt = {
-                name = "Salt the Earth",
+                name = "Suolaamaa", --Salt the earth
                 text = {
                     'Add Namta Cards equal',
-                    'to your deck size',
+                    'to half your deck size',
                     'Must hold at least 2', --at least not play them
-                    'Namta cards in hand',
+                    'Namta cards in hand', --hidden interaction, white lily will permanently lose her self duping ability.
                 }
             },
             
@@ -2541,6 +2541,9 @@ return {
 					"{C:spectral}Spectral{} cards appear",
 					"{C:attention}X#1#{} more frequently",
 					"in the shop",
+                    "Allows control of the",
+					"shop's {C:spectral}Spectral Rate{}",
+					"{C:inactive}(Check {C:attention}Run Info{C:inactive})",
 				},
 			},
 
@@ -2740,6 +2743,7 @@ return {
             k_unik_chamber_warning1="Next ",
             k_unik_chamber_warning2=" hands will add to the blind size",
             b_unik_devour = "DEVOUR",
+            b_spectral_rate = "Spectral Rate",
             --Almanac Quotes:
 
             --Moonlight Cookie: She will be the first Joker with full almanac functionality (has a fusion, different quotes)

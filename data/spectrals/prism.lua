@@ -2,9 +2,9 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_prism",
-	pos = { x = 2, y = 2 },
+	pos = { x = 1, y = 0 },
 	cost = 4,
-	atlas = "placeholders",
+	atlas = "unik_spectrals",
 	order = 90,
     cloneman_blacklist = true,
     config = {
