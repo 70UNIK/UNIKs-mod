@@ -219,9 +219,15 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+-- SMODS.Atlas {
+-- 	key = "unik_omegaplanets",
+-- 	path = "unik_omegaplanets.png",
+-- 	px = 71,
+-- 	py = 95
+-- }
 SMODS.Atlas {
-	key = "unik_omegaplanets",
-	path = "unik_omegaplanets.png",
+	key = "unik_decks",
+	path = "unik_decks.png",
 	px = 71,
 	py = 95
 }
@@ -275,12 +281,19 @@ NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")()
 --Learning Stake: Jokers can be Corrupted
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
+--decks
+NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
+NFS.load(mod_path .. "data/decks/steel_deck.lua")()
+
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
+NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
+NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
+NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
 --Spectral Merchant (Tier 1) Spectrals can appear in shop
@@ -361,6 +374,7 @@ if (SMODS.Mods['ble'] or {}).can_load then
 	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
 end
 
+
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
@@ -407,6 +421,11 @@ NFS.load(mod_path .. "data/jokers/1_5_joker.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
+NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
+if (SMODS.Mods["paperback"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/binary_asteroid.lua")()
+end
+NFS.load(mod_path .. "data/jokers/double_container.lua")()
 -- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
 
 --- Uncommon ---
@@ -418,8 +437,14 @@ NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
+if (SMODS.Mods["paperback"] or {}).can_load then
+	
+	NFS.load(mod_path .. "data/jokers/weetomancer.lua")() 
+end
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
+NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
+NFS.load(mod_path .. "data/jokers/joker_dollar.lua")()	
 
 --Celestials:
 --Borg Cube (Uncommon): A cube joker. Other steel EDITION cards give 2.5x mult. Obvious star trek reference
@@ -435,6 +460,9 @@ NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
 --- Rare ---
 -- NFS.load(mod_path .. "data/jokers/double_container.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/chipzel.lua")()
+NFS.load(mod_path .. "data/jokers/minimized.lua")()
+NFS.load(mod_path .. "data/jokers/copycat.lua")()
 NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
@@ -442,12 +470,16 @@ NFS.load(mod_path .. "data/jokers/riff_rare.lua")()
 NFS.load(mod_path .. "data/jokers/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
+
+
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
 NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
 NFS.load(mod_path .. "data/jokers/lone_despot.lua")() --no image
 -- NFS.load(mod_path .. "data/jokers/factorialis.lua")() --not gonna do factorials, cannot be balanced AT ALL.
 
+NFS.load(mod_path .. "data/jokers/poppy.lua")() 
+NFS.load(mod_path .. "data/jokers/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
@@ -511,11 +543,39 @@ NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
---Future jokers to take ownership:
---Popcorn, Ice Cream, Ramen, Turtle Bean, Clicked Cookie: Properly display negative values + state self destruct values when depleted
---Average Alice (Extra Credit): Godsmarble functionality + sprites
---Dorkshire Tea (Extra Credit): Godsmarble functionality + sprites
 
+--Future mechanics:
+--Overshoot mechanic (that will become the new name of the overscore mechanic). Designed to keep a challenge when overscoring.
+--Intervals:
+--Exceed ^2 reqs: Overshoot +1
+--Exceed ^4 reqs: Overshoot +2
+--Exceed ^10 reqs: Overshoot +4
+--Exceed ^100 reqs: (overshoot+1)X2 Overshoot
+--Exceed ^10000 reqs: (overshoot+2)^2 Overshoot (!)
+--Exceed ^^100 reqs: ^^2 Overshoot (!!!)
+
+--Overshoot effects:
+
+--How to decrease overshoot:
+--Score under requirements (mr bones): Overshoot = 0
+--Score under 1.19X requirements (below threshold of tax): Overshoot^0.5 - 1
+--Score between 1.2X and 5X requirements (at tax threshold): max(0,Overshoot - 1)/2
+--Score over 5X requirements but under ^1.5 reqs: max(0,Overshoot - 1)/1.4
+--Else if not exceeding ^2 reqs: Overshoot - 2.
+
+--Overshoot effects:
+--0 - 10: Nothing
+--10 - 15: Ante increase is added +1
+--15 - 20: Ante increase +1, Epic Blinds can spawn after round 40
+--20 - 25: Ante increase +2,
+--25 - 30: Ante increase +2, Legendary Blinds can spawn after round 90, doubled round increase
+--30 - 35: Ante increase +3, Epic and Legendary Blinds can replace any finishers.
+--30 - 40: Doubled ante increase, Finisher, Epic and Legendary Blinds can replace any Boss Blind. Cannot decrease ante by any means
+--40 - 45: Ante decreases will add to ante instead, All Blinds are Boss Blinds.
+--45 - 50: All Blinds are Finisher, Epic and Legendary Blinds. Ante is always tripled, tripled round increase.
+--50 >: All blinds are Epic/Legendary Blinds. Ante is always exponentiated by ^1.25 per modifier.
+--> 1000000: Well I hope you're prepared to die. All Small Blinds are Indigo ICBM or (Nameless Nadir), All Big Blinds are Indigo ICBM, All Boss Blinds are Legendary Nuke.
+--Normally incryptid, you shouldn't go up to 1000000 or so, but entropy exists.
 
 -- Jackpot! - Score a Royal Flush against Video Poker
 -- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once

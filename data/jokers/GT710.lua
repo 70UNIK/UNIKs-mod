@@ -27,7 +27,7 @@ SMODS.Joker {
         if context.forcetrigger then
             return {
                     dollars = card.ability.extra.money,
-                    card = self
+                    card = card
                 }
         end
 		if context.joker_main then

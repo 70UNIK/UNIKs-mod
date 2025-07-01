@@ -40,7 +40,7 @@ end
 
 if G.jokers and G.jokers.cards and _type == 'Joker' and rarity2 ~= nil then
     for i,v in pairs(G.jokers.cards) do
-        if v.config.center.key ~= 'j_unik_cloneman' and v.config.center.rarity == rarity2 and not v.config.center.unique and not v.config.center.hidden then
+        if v.config.center.key ~= 'j_unik_cloneman' and v.config.center.rarity == rarity2 and not v.config.center.unique and not v.config.center.hidden and not v.config.center.cloneman_blacklist then
             for i = 1, #clonemen do
                 for j = 1, math.floor(clonemen[i]) do
                     _pool[#_pool + 1] = v.config.center.key

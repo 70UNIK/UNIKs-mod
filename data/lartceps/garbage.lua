@@ -2,7 +2,7 @@ SMODS.Consumable{
     set = 'unik_lartceps', 
 	atlas = 'unik_lartceps',
     cost = 0,
-	pos = {x = 0, y = 0},
+	pos = {x = 2, y = 1},
 	key = 'unik_garbage',
     config = {extra = {size = 100}},
     no_doe = true,

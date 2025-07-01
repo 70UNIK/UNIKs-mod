@@ -1,0 +1,20 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
+pattern = '''if next(find_joker("cry-Maximized")) and not override_maximized then'''
+position = "at"
+payload = '''if next(find_joker("cry-Maximized")) and not override_maximized and not next(find_joker("j_unik_minimized"))then'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
+pattern = '''if id == nil then'''
+position = "at"
+payload = '''if id == nil and not next(find_joker("j_unik_minimized")) then'''
+match_indent = true

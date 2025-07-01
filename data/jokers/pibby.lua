@@ -29,7 +29,6 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
-	drama = { x = 2, y = 0 }, 
     cost = 8,
     blueprint_compat = true,
     perishable_compat = false,

@@ -1,9 +1,8 @@
 --spectrals appear 6x times in shop
---No adjustable slider here
 SMODS.Voucher{
     key = "unik_spectral_acclimator",
-	config = { extra = {rate = 6} },
-	atlas = "placeholder_voucher",
+	config = { extra = {rate = 25} },
+	atlas = "unik_vouchers",
 	pos = { x = 2, y = 0 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { (card and card.ability.extra.rate or self.config.extra.rate) } }
@@ -30,3 +29,4 @@ SMODS.Voucher{
         return G.GAME.used_vouchers.v_unik_spectral_tycoon
     end
 }
+Cryptid.setup_voucher_rate_adjuster("v_unik_spectral_acclimator", "b_spectral_rate", "spectral", G.C.SECONDARY_SET.Spectral)

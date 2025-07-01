@@ -1,1 +1,0 @@
---Godsmarbled Maya, Scored cards permanently gain ^^0.05 Chips. Held cards have a 1 in 2 chance to permanently gain ^^0.01 Chips

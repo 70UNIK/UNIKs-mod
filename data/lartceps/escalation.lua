@@ -4,7 +4,7 @@ SMODS.Consumable{
     set = 'unik_lartceps', 
 	atlas = 'unik_lartceps',
     cost = 0,
-	pos = {x = 0, y = 0},
+	pos = {x = 4, y = 1},
 	key = 'unik_escalation',
     config = {extra = {cryptid_size = 1.5, almanac_size = 1.8}},
     immutable = true,

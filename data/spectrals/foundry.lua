@@ -19,7 +19,7 @@ SMODS.Consumable{
 				check = nil
 			end
 			for index, card in ipairs(G.hand.highlighted) do
-				if G.hand.highlighted[index].edition and not G.hand.highlighted[index].edition.unik_steel then
+				if G.hand.highlighted[index].edition and G.hand.highlighted[index].edition.unik_steel then
 					check = nil
 				end
 			end
@@ -28,7 +28,7 @@ SMODS.Consumable{
 			local idx = 1
 			local check = true
 			for index, card in ipairs(G.hand.highlighted) do
-				if G.hand.highlighted[index].edition and not G.hand.highlighted[index] == card then
+				if G.hand.highlighted[index].edition and not G.hand.highlighted[index] == card and G.hand.highlighted[index].edition.unik_steel then
 					check = nil
 				end
 			end
@@ -39,7 +39,7 @@ SMODS.Consumable{
 		if not center.edition or (center.edition and not center.edition.unik_steel) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_steel
 		end
-		return { vars = {center.ability.extra.cards_added } }
+		return { vars = {center.ability.max_highlighted, center.ability.extra.cards_added } }
 	end,
 	use = function(self, card, area, copier)
 				local used_consumable = copier or card

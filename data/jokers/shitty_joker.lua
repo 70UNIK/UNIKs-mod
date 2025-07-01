@@ -6,7 +6,7 @@ SMODS.Joker {
 	pos = { x = 0, y = 1 },
     rarity = 1,
 	-- Modest
-    config = { extra = { discards = 1},immutable = { max_hand_size_mod = 1000 }, },
+    config = { extra = { discards = 1},immutable = { max_hand_size_mod = 100 }, },
     cost = 4,
     blueprint_compat = true,
 	perishable_compat = true,
@@ -14,7 +14,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     pools = { ["Meme"] = true },
     loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.discards} }
+		return { vars = {math.min(center.ability.extra.discards,center.ability.immutable.max_hand_size_mod)} }
 	end,
 	calculate = function(self, card, context)
 		if (context.setting_blind and not (context.blueprint_card or card).getting_sliced) or context.forcetrigger then
@@ -35,6 +35,9 @@ SMODS.Joker {
 					return true
 				end,
 			}))
+			return {
+
+			}
 		end
 	end,
 }
