@@ -12,6 +12,13 @@ SMODS.Blind{
     in_pool = function(self)
         return  CanSpawnEpic()
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
     set_blind = function(self, reset, silent)
         G.GAME.unik_pentagram_manager_fix = true
         if not reset then

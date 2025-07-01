@@ -12,6 +12,13 @@ SMODS.Blind	{
 	get_loc_debuff_text = function(self)
 		return localize("k_unik_only_stone")
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
 	--must be localized
 	death_message = 'special_lose_unik_epic_collapse',
 	ignore_showdown_check = true,

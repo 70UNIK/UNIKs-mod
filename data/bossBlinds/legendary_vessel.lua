@@ -16,6 +16,13 @@ SMODS.Blind{
     mult = 1,
     unik_exponent = {1,2.5},
     glitchy_anim = true,
+    debuff = {
+        akyrs_blind_difficulty = "legendary",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
     death_message = "special_lose_unik_vessel_legendary",
     --Proof: Lets say you face epicWall at blind e300. THe epic wall already applies x e100, so becomes e400. Overshoot, and it adds e100, = e500.
     --If facing against this, 300 x 6.666 = ~e2000, which is way over what the wall can do most of the time.

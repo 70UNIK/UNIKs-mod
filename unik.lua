@@ -77,7 +77,7 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-	key = "unik_akio_icons",
+	key = "akio_icons",
 	path = "unik_akio_icons.png",
     px = 34,
     py = 34
@@ -340,9 +340,6 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 
 --BLINDS--
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
-if AKYRS then
-	NFS.load(mod_path .. "data/bossBlinds/aiko.lua")()
-end
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()

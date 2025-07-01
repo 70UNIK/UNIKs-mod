@@ -20,7 +20,14 @@ SMODS.Blind{
         string = "" .. 1.005
 		return { vars = { string } }
 	end,
-    
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+        akyrs_all_unskippable_blinds = true,
+    },
     death_message = "special_lose_unik_epic_cookie",
     set_blind = function(self, reset, silent)
         if not reset then
@@ -86,7 +93,7 @@ SMODS.Blind{
 
 
                     --decrease hand size by 1 
-                    if G.GAME.epic_cookie_click_interval % 8 == 0 then
+                    if G.GAME.epic_cookie_click_interval % 8 == 0 and G.hand.config.card_limit > 0 then
                         G.GAME.decrementer_hand = G.GAME.decrementer_hand + 1
                         G.hand:change_size(-1)
                     end

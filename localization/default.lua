@@ -686,38 +686,32 @@ return {
             dd_akyrs_all_unskippable_blinds={
                 name = "Unskippable Ante",
                 text={
-                    "All blinds are",
-                    "unskippable",
-                }
-            },
-            dd_akyrs_epic_blind_no_almanac={
-                name = "Epic Blind",
-                text={
-                    "How did it escape from",
-                    "that mod????!!!!",
+                    "All blinds this ante",
+                    "are unskippable",
                 }
             },
             dd_akyrs_epic_blind={
                 name = "Epic Blind",
                 text={
-                    "Extremely hard blind",
-                    "with a 666% chance",
-                    "to die",
+                    "{C:red}You've should not",
+                    "{C:red}have overscored...",
+                    "{C:red}It escaped Almanac...",
                 }
             },
            dd_akyrs_legendary_blind={
                 name = "Legendary Blind",
                 text = {
-                    "Hell is waiting for you...",
+                    "{C:red}The demons",
+                    "{C:red}await your demise..."
                 }
             },
-            dd_akyrs_instant_death_risk={
-                name = "Instant Death Risk",
-                text = {
-                    "You could straight",
-                    "up die immediately",
-                }
-            }
+            -- dd_akyrs_instant_death_risk={
+            --     name = "Instant Death Risk",
+            --     text = {
+            --         "{C:red}You could straight",
+            --         "{C:red}up die immediately",
+            --     }
+            -- }
         },
         Edition={            
             e_unik_positive={
@@ -2816,6 +2810,11 @@ return {
             k_unik_tornado_placeholder = "(Current Discards)",
             k_chips = "Chips",
             k_unik_must_select_four="Must select at least 4 cards to skip",
+
+            k_akyrs_all_unskippable_blinds = "All Blinds this Ante are unskippable",
+            k_akyrs_unskippable_blind = "Cannot be skipped",
+            k_akyrs_blind_difficult_epic = "Epic Blind",
+            k_akyrs_blind_difficult_legendary = "Legendary Blind",
         },
         high_scores={},
         labels={

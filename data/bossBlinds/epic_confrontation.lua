@@ -9,6 +9,13 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 2,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
 	--must be localized
 	ignore_showdown_check = true,
     unik_kill_hand = function(self, cards, hand, handname, check)
