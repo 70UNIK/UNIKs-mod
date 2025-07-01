@@ -11,28 +11,28 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 	},
 	pools = { ["autocannibalism_food"] = true },
 	loc_vars = function(self, info_queue, center)
-		local key = 'j_cry_clicked_cookie'
+		local key = 'j_cry_clicked_cookie2'
 		local sign = "+"
-		if center.ability.unik_depleted then
+		if center.ability and center.ability.unik_depleted then
 			key = 'j_cry_clicked_cookie_depleted'
 		end
-		if lenient_bignum(center.ability.extra.chips) <= lenient_bignum(0) then
+		if center.ability and center.ability.extra and center.ability.extra.chips and center.ability.extra.chips <= 0 then
 			sign = ""
 		end 
 		return {
 			key = key,
 			vars = {
 				sign,
-				number_format(center.ability.extra.chips),
-				number_format(center.ability.extra.chip_mod),
-				number_format(center.ability.extra.depleted_threshold),
+				center.ability.extra.chips,
+				center.ability.extra.chip_mod,
+				center.ability.extra.depleted_threshold,
 			},
 		}
 	end,
 	calculate = function(self, card, context)
 		if context.joker_main or context.forcetrigger then
 			local sign = "+"
-			if lenient_bignum(card.ability.extra.chips) <= lenient_bignum(0) then
+			if  to_big(card.ability.extra.chips) <=  to_big(0) then
 				sign = ""
 			end 
 			return {

@@ -281,6 +281,12 @@ NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")()
 --Learning Stake: Jokers can be Corrupted
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
+--todo:
+--Cookie crash fix
+--Emergency bunco half edition fix (done)
+--green goalpost doing nothing fix
+--shader positive fix??????? (cannot fix)
+
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()

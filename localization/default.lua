@@ -1903,7 +1903,7 @@ return {
 
             --Proper depleted loc
             --Clicked cookie
-            j_cry_clicked_cookie = {
+            j_cry_clicked_cookie2 = {
 				name = "Clicked Cookie",
 				text = {
 					"{C:chips}#1##2#{} Chip#<s>2#",

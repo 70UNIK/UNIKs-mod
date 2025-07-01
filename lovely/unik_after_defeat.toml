@@ -48,12 +48,27 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''G.GAME.win_notified = true'''
+pattern = '''win_game()'''
 position = 'before'
 payload = '''
 
     ease_victory_reqs(-G.GAME.unik_goalpost_ante_win_increase)
     G.GAME.unik_goalpost_ante_win_increase = 0
+'''
+match_indent = true
+
+###greengoalpost fix
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if game_won and not G.GAME.win_notified then'''
+position = 'before'
+payload = '''
+    if (game_won and G.GAME.round_resets.ante < G.GAME.win_ante) or G.GAME.unik_force_avoid_win then
+        game_won = false
+        G.GAME.won = false
+         G.GAME.unik_force_avoid_win = nil
+    end
 '''
 match_indent = true
 ### Custom boss blind death messages
