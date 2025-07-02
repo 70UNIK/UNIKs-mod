@@ -43,6 +43,20 @@ SMODS.Joker {
     cost = 70, 
 
     calculate = function(self, card, context)
+        if context.force_trigger then
+            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+            return {
+                message = localize({
+					type = "variable",
+					key = "a_powmult",
+                    vars = {
+                        number_format(card.ability.extra.Emult),
+                    },
+				}),
+				Emult_mod = card.ability.extra.Emult,
+                colour = G.C.DARK_EDITION,
+			}
+        end
         if context.after and not context.blueprint then
             if to_big(G.GAME.round_scores['hand'].amt) > to_big(0) and to_big(math.floor(hand_chips*mult)) >= to_big(G.GAME.round_scores['hand'].amt) then
                 card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
