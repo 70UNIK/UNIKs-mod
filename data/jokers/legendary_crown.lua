@@ -14,29 +14,14 @@ local madeline_quotes = {
 		'k_legendary_crown_normal4',
 	},
 }
-FinisherBossBlindStringMap["bl_unik_legendary_crown"] = {"j_unik_legendary_crown","Korruptionkruunu"}
 FinisherBossBlinddecksprites["bl_unik_legendary_crown"] = {"unik_finity_legendary_crown",{ x = 2, y = 0 }}
-FinisherBossBlindQuips["bl_unik_legendary_crown"] = {"unik_legendary_crown",4} 
-
-SMODS.Sound:take_ownership('music_exotic',{
-    key = "music_exotic",
-	path = "music_exotic.ogg",
-	volume = 0.4,
-	select_music_track = function()
-		return Cryptid_config.Cryptid
-			and Cryptid_config.Cryptid.exotic_music
-			and (#Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0 
-            or #Cryptid.advanced_find_joker(nil, "unik_legendary_blind", nil, nil, true) ~= 0
-            -- or #Cryptid.advanced_find_joker(nil, "unik_epic_blind", nil, nil, true) ~= 0
-        )
-	end,
-})
+FinisherBossBlindQuips["bl_unik_legendary_crown"] = {"legendary_crown",4} 
 
 SMODS.Joker {
     key = "unik_legendary_crown",
     atlas = 'unik_finity_legendary_crown',
     config = {
-      extra = {Emult = 1.0, Emult_mod = 0.75}
+      extra = {Emult = 1.0, Emult_mod = 0.4}
     },
     loc_vars = function(self, info_queue, center)
         local BlindSize = 0
@@ -52,14 +37,14 @@ SMODS.Joker {
     perishable_compat = false,
     demicolon_compat = true,
     blueprint_compat = true,
-    rarity = "unik_legendary_blind",
+    rarity = "unik_legendary_blind_finity",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0 },
     cost = 70, 
 
     calculate = function(self, card, context)
         if context.after and not context.blueprint then
-            if math.floor(hand_chips*mult) > to_big(G.GAME.round_scores['hand'].amt) then
+            if to_big(math.floor(hand_chips*mult)) >= to_big(G.GAME.round_scores['hand'].amt) then
                 card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
                 return {
                     message = localize({
@@ -92,6 +77,6 @@ SMODS.Joker {
     end,
 
     set_badges = function (self, card, badges)
-      SMODS.create_mod_badges({ mod = SMODS.find_mod("finity")[1] }, badges)
+        SMODS.create_mod_badges({ mod = SMODS.find_mod("finity")[1] }, badges)
     end,
 }

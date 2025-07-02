@@ -45,7 +45,6 @@ SMODS.Blind{
     end,
     --no fucking around this time
     cry_after_play = function(self)
-        ease_hands_played(-G.GAME.current_round.hands_left)
         ease_hands_played(-666)
 	end,
     --somehow if that happens, set the base to be 

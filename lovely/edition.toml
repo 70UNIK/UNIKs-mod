@@ -69,16 +69,7 @@ payload = """--self.C.UNIK_SYNC_CATALYST_FAIL[1] = 0.6+0.2*math.sin(self.TIMERS.
         self.C.UNIK_LARTCEPS_INVERSE[2] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
         self.C.UNIK_LARTCEPS_INVERSE[3] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
         self.C.SECONDARY_SET.unik_lartceps = self.C.UNIK_LARTCEPS1
-
-        local r, g, b = hsv(self.C.UNIK_RGB_HUE/ 360, .5, 1)
-
-		self.C.UNIK_RGB[1] = r
-		self.C.UNIK_RGB[3] = g
-		self.C.UNIK_RGB[2] = b
-
-		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.5) % 360
-		G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
-        
+        self.C.RARITY["unik_legendary_blind"] = self.C.UNIK_RGB
 """
 match_indent = true
 

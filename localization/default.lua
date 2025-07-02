@@ -1858,7 +1858,7 @@ return {
                 name = "Korruptionkruunu",
                 text = {
                     "Gains {X:dark_edition,C:white}^#1#{} Mult", --gains ^1 Mult.
-                    "if hand {C:attention}exceeds{}",
+                    "if hand is {C:attention}at least{}",
                     "your {C:attention}best hand{} this run",
                     "{C:inactive}({C:attention}#2#{C:inactive})",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Mult)",
@@ -2875,7 +2875,7 @@ return {
             k_akyrs_unskippable_blind = "Cannot be skipped",
             k_akyrs_blind_difficult_epic = "Epic Blind",
             k_akyrs_blind_difficult_legendary = "Legendary Blind",
-            k_unik_legendary_blind = "Legendary Blind",
+            k_unik_legendary_blind_finity = "Legendary Blind",
 
             k_legendary_crown_normal1 = "I tried to climb the mountain...",
             k_legendary_crown_normal2 = "I should've listened to her...",
@@ -3105,20 +3105,20 @@ return {
                 "always watching!",
             },
             --finity quips:
-            lq_unik_legendary_crown1={
+            lq_legendary_crown_1={
                 "Why did you",
                 "try to climb?...",
             },
-            lq_unik_legendary_crown2={
+            lq_legendary_crown_2={
                 "I cannot make it...",
                 "Why did you go still?..."
             },
-            lq_unik_legendary_crown3={
+            lq_legendary_crown_3={
                 "I was so foolish",
                 "trying to climb",
                 "that mountain...",
             },
-            lq_unik_legendary_crown4={
+            lq_legendary_crown_4={
                 "Don't make the same",
                 "mistake as I did...",
             },
