@@ -2766,7 +2766,7 @@ return {
             k_unik_lartceps_pack = "Lartceps Pack",
             k_unik_hands_remaining = " scoring hands remaining",
             k_unik_base = " base",
-            k_unik_high_score = " = Best hand in Run",
+            k_unik_high_score = "=Best hand in Run",
             k_unik_legendary_crown_start="",
             k_unik_legendary_crown_defeat_x_times1="Defeat this blind ",
             k_unik_legendary_crown_defeat_x_times2=" time(s)",
@@ -2875,6 +2875,12 @@ return {
             k_akyrs_unskippable_blind = "Cannot be skipped",
             k_akyrs_blind_difficult_epic = "Epic Blind",
             k_akyrs_blind_difficult_legendary = "Legendary Blind",
+            k_unik_legendary_blind = "Legendary Blind",
+
+            k_legendary_crown_normal1 = "I tried to climb the mountain...",
+            k_legendary_crown_normal2 = "I should've listened to her...",
+            k_legendary_crown_normal3 = "I should've known better...",
+            k_legendary_crown_normal4 = "Please don't make the same mistake as I did..."
         },
         high_scores={},
         labels={
@@ -3097,7 +3103,25 @@ return {
             special_lose_unik_positive={
                 "Big brother is",
                 "always watching!",
-            }
+            },
+            --finity quips:
+            lq_unik_legendary_crown1={
+                "Why did you",
+                "try to climb?...",
+            },
+            lq_unik_legendary_crown2={
+                "I cannot make it...",
+                "Why did you go still?..."
+            },
+            lq_unik_legendary_crown3={
+                "I was so foolish",
+                "trying to climb",
+                "that mountain...",
+            },
+            lq_unik_legendary_crown4={
+                "Don't make the same",
+                "mistake as I did...",
+            },
         },
         ranks={},
         suits_plural={},

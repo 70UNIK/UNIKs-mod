@@ -495,6 +495,17 @@ NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
 --function for reference
 
+--Finity Jokers
+if next(SMODS.find_mod("finity")) then
+	if unik_config.unik_legendary_blinds then
+		SMODS.Rarity({
+			key = "unik_legendary_blind",
+			badge_colour = G.C.UNIK_RGB,
+		})
+		NFS.load(mod_path .. "data/jokers/legendary_crown.lua")() 
+	
+	end
+end
 
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
@@ -546,6 +557,7 @@ NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
+
 
 --Future mechanics:
 --Overshoot mechanic (that will become the new name of the overscore mechanic). Designed to keep a challenge when overscoring.
