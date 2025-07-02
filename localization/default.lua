@@ -1800,14 +1800,74 @@ return {
                     "{C:inactive}(Whichever is lower)",
                 }
             },
-            -- j_unik_factorialis = {  --entropic exclusive joker likely
-            --     name = "Factorialis",
-            --     text = {
-            --         "{X:dark_edition,C:white}!Mult{}",
-            --         "if all played cards",
-            --         "are {C:attention}Aces{}, {C:attention}2s{} or {C:attention}6s{}",
-            --     }
-            -- },
+
+            --Finity boss blinds
+            j_unik_indigo_icbm={
+                name = "Indigo ICBM",
+                text = {
+                    "Gains {X:dark_edition,C:white}^#1# Mult{} when hand played", --gains 0.1
+                    "{C:red}Resets{} if hand score exceeds",
+                    "{C:attention}#1#", --3x requirements
+                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Mult)", --hard to use unless you spam the tax.
+                }
+            },
+            j_unik_maroon_magnet={
+                name = "Maroon Magnet",
+                text = {
+                    "Unenhanced cards become",
+                    "Steel Cards",
+                    "Held Steel Cards give",
+                    "{X:mult,C:white}X#1#{} Mult", --X2 mult
+                }
+            },
+            j_unik_green_goalpost={
+                name = "Green Goalpost",
+                text = {
+                    "Gains {X:mult,C:white}X#1#{} Mult if hand",
+                    "is {C:attention}not{} the winning hand",
+                    "{C:unik_caption,s:0.7,E:1}HEY! THAT'S A FOUL!{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                }
+            },
+            j_unik_septic_seance={
+                name = "Septic Seance",
+                text = {
+                    "Create a {C:dark_edition}negative {C:attention}Seance",
+                    "on Blind Select",
+                    "Seances can {C:attention}overflow",
+                    "Create a {C:dark_edition}negative {C:cry_code}://EXPLOIT",
+                    "If played hand is",
+                    "{C:red}not{} a {C:attention}Straight Flush",
+                    "{C:unik_caption,s:0.7,E:1}Here's your fucking Seance, dumbass.{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                }
+            },
+            j_unik_epic_xenomorph_queen={
+                name = "Syövyttävämuukalainen",
+                text = {
+                    "First drawn hand",
+                    "is {C:red}debuffed",
+                    "Scored {C:red}debuffed{} cards give",
+                    "{X:dark_edition,C:white}^#1#{} Mult", --^1.4 Mult
+                    "{C:unik_caption,s:0.7,E:1}SCRREEEEEECCHH!!!!! SCRAAAARRRCCHH!!!{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Alien{}",
+                },
+            },
+            j_unik_legendary_crown={
+                name = "Korruptionkruunu",
+                text = {
+                    "Gains {X:dark_edition,C:white}^#1#{} Mult", --gains ^1 Mult.
+                    "if hand {C:attention}exceeds{}",
+                    "your {C:attention}best hand{} this run",
+                    "{C:inactive}({C:attention}#2#{C:inactive})",
+                    "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Mult)",
+                    "{C:unik_caption,s:0.7,E:1}#4#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Celeste{}",
+                }
+            },
+
 
 
 
