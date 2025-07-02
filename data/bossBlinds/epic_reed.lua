@@ -19,6 +19,13 @@ SMODS.Blind	{
 	in_pool = function(self)
         return  CanSpawnEpic()
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
 	unik_kill_hand = function(self, cards, hand, handname, check)
 		for k, v in ipairs(cards) do
             if v:get_id() == G.GAME.unik_reed_ranks[1].id or v:get_id() == G.GAME.unik_reed_ranks[2].id or v:get_id() == G.GAME.unik_reed_ranks[3].id then

@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 99
 
 [[patches]]
 [patches.pattern]
@@ -9,18 +9,111 @@ target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
 pattern = '''AKYRS.other_mods_blind_icons(blind,ability_text_table,extras)'''
 position = "before"
 payload = '''
-if blind.boss and blind.boss.epic then
-    if (pseudorandom(pseudoseed("funny_desc_no_almanac")) < ((G.GAME.probabilities.normal * 1) / 4)) then
-            AKYRS.generate_icon_blinds("epic_blind_no_almanac",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
-    else
-        AKYRS.generate_icon_blinds("epic_blind",{ table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons",info_queue = info_queue})
-    end
-end
-if blind.boss and blind.boss.legendary then
-    AKYRS.generate_icon_blinds("legendary_blind",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
-end
-if blind.debuff.unik_unskippable_blind then
+if blind.debuff.akyrs_unskippable_blind then
     AKYRS.generate_icon_blinds("unskippable_blind",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
 end
+if blind.debuff.akyrs_all_unskippable_blinds then
+    AKYRS.generate_icon_blinds("all_unskippable_blinds",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
+pattern = '''G.ASSET_ATLAS["akyrs_aikoyoriMiscIcons"]'''
+position = "at"
+payload = '''G.ASSET_ATLAS[ aiko_blind_icons_atlas(blind.debuff.akyrs_blind_difficulty)]
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
+pattern = '''sprite = Sprite(0,0,1*icon_size,1*icon_size, G.ASSET_ATLAS["akyrs_aikoyoriMiscIcons"],AKYRS.blind_icons_pos(blind.debuff.akyrs_blind_difficulty))'''
+position = "at"
+payload = '''sprite = Sprite(0,0,1*icon_size,1*icon_size, G.ASSET_ATLAS[ AKYRS.blind_icons_atlas(blind.debuff.akyrs_blind_difficulty)],AKYRS.blind_icons_pos(blind.debuff.akyrs_blind_difficulty))
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
+pattern = '''AKYRS.icon_sprites[blind.debuff.akyrs_blind_difficulty] = AKYRS.icon_sprites[blind.debuff.akyrs_blind_difficulty] or Sprite(0,0,1*icon_size,1*icon_size, G.ASSET_ATLAS["akyrs_aikoyoriMiscIcons"],AKYRS.blind_icons_pos(blind.debuff.akyrs_blind_difficulty))'''
+position = "at"
+payload = '''AKYRS.icon_sprites[blind.debuff.akyrs_blind_difficulty] = AKYRS.icon_sprites[blind.debuff.akyrs_blind_difficulty] or Sprite(0,0,1*icon_size,1*icon_size, G.ASSET_ATLAS[ AKYRS.blind_icons_atlas(blind.debuff.akyrs_blind_difficulty)],AKYRS.blind_icons_pos(blind.debuff.akyrs_blind_difficulty))
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/desc.lua"]'''
+pattern = '''AKYRS.DescriptionDummy{
+    key = "expert_blind"
+}'''
+position = "before"
+payload = '''AKYRS.DescriptionDummy{
+    key = "epic_blind"
+}
+AKYRS.DescriptionDummy{
+    key = "legendary_blind"
+}
+AKYRS.DescriptionDummy{
+    key = "unskippable_blind"
+}
+AKYRS.DescriptionDummy{
+    key = "all_unskippable_blinds"
+}
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
+pattern = '''AKYRS.blind_icons_pos = function (key)'''
+position = "before"
+payload = '''
+AKYRS.other_mods_blind_icons_atlas = function(key)
+    if key == "epic" then         return  "unik_akio_icons" end
+    if key == "legendary" then      return  "unik_akio_icons" end
+    if key == "unskippable_blind" then         return  "unik_akio_icons" end
+    if key == "all_unskippable_blinds" then        return  "unik_akio_icons" end
+    return "akyrs_aikoyoriMiscIcons"
+end
+
+--adding to akio's to allow custom atlas
+AKYRS.blind_icons_atlas = function(key)
+    
+    if key == "expert" then          return  "akyrs_aikoyoriMiscIcons" end
+    if key == "master" then          return  "akyrs_aikoyoriMiscIcons" end
+    if key == "ultima" then          return  "akyrs_aikoyoriMiscIcons" end
+    if key == "remaster" then        return  "akyrs_aikoyoriMiscIcons" end
+    if key == "lunatic" then         return  "akyrs_aikoyoriMiscIcons" end
+    if key == "dx" then              return  "akyrs_aikoyoriMiscIcons" end
+    if key == "no_reroll" then       return  "akyrs_aikoyoriMiscIcons" end
+    if key == "no_disabling" then    return  "akyrs_aikoyoriMiscIcons" end
+    if key == "no_face" then         return  "akyrs_aikoyoriMiscIcons" end
+    if key == "forgotten_blind" then return  "akyrs_aikoyoriMiscIcons" end
+    if key == "word_blind" then      return  "akyrs_aikoyoriMiscIcons" end
+    if key == "puzzle_blind" then    return  "akyrs_aikoyoriMiscIcons" end
+    if key == "postwin_blind" then   return  "akyrs_aikoyoriMiscIcons" end
+    if key == "endless_blind" then   return  "akyrs_aikoyoriMiscIcons" end
+    if key == "no_overriding" then   return  "akyrs_aikoyoriMiscIcons" end
+    
+    return AKYRS.other_mods_blind_icons_atlas(key)
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
+pattern = '''if key == "no_overriding" then   return  { x = 1, y = 2} end'''
+position = "after"
+payload = '''
+if key == "epic" then         return  { x = 0, y = 0} end
+if key == "legendary" then         return  { x = 1, y = 0} end
+if key == "unskippable_blind" then       return  { x = 2, y = 0} end
+if key == "all_unskippable_blinds" then          return  { x = 3, y = 0} end
 '''
 match_indent = true

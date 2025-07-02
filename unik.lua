@@ -77,7 +77,7 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-	key = "unik_akio_icons",
+	key = "akio_icons",
 	path = "unik_akio_icons.png",
     px = 34,
     py = 34
@@ -281,6 +281,12 @@ NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")()
 --Learning Stake: Jokers can be Corrupted
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
+--todo:
+--Cookie crash fix
+--Emergency bunco half edition fix (done)
+--green goalpost doing nothing fix
+--shader positive fix??????? (cannot fix)
+
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()
@@ -334,9 +340,6 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 
 --BLINDS--
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
-if AKYRS then
-	NFS.load(mod_path .. "data/bossBlinds/aiko.lua")()
-end
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()

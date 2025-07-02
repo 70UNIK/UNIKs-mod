@@ -15,6 +15,13 @@ SMODS.Blind{
 	collection_loc_vars = function(self)
 		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 4 } }
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_debuffed_card_only")
 	end,

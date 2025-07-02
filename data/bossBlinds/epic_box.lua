@@ -9,14 +9,16 @@ SMODS.Blind	{
     pos = {x = 0, y = 7},
     vars = {},
     dollars = 13,
-    debuff = { -- if you have aiko installed it gets more difficult lolollolol
-        akyrs_cannot_be_disabled = true,
-        akyrs_cannot_be_rerolled = true,
-        unik_unskippable_blind = true,
-    },
     mult = 2,
     death_message = "special_lose_unik_epic_box",
 	ignore_showdown_check = true,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
 	in_pool = function(self)
         if (G.GAME.modifiers.no_shop_jokers or (G.jokers and G.jokers.config and G.jokers.config.card_limit < 4))then
             return false

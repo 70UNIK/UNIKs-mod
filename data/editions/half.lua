@@ -81,7 +81,7 @@ SMODS.Edition({
 local updateStickerHook2 = Card.update
 function Card:update(dt)
     local ret = updateStickerHook2(self,dt)
-        if self.edition and self.edition.unik_halfjoker then
+        if G.jokers and self.edition and self.edition.unik_halfjoker then
             if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
                 if self.ability.set ~= "Voucher" then
                     self:set_debuff(true)

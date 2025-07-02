@@ -23,6 +23,13 @@ SMODS.Blind	{
         return {vars = { localize('k_unik_epic_sand_placeholder')} }
 		
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
 	in_pool = function(self)
         if (G.HUD_tags and #G.HUD_tags < 2) then
             return false

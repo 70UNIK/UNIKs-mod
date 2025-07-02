@@ -19,6 +19,13 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    debuff = {
+        akyrs_blind_difficulty = "legendary",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
     loc_vars = function(self)
         local discards = 1
         if G.GAME.current_round.discards_left then

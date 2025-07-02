@@ -17,6 +17,13 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
+    debuff = {
+        akyrs_blind_difficulty = "legendary",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
     mult = 1,
     glitchy_anim = true,
     unik_exponent = {1,3},

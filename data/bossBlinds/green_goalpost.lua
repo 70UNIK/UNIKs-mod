@@ -27,7 +27,7 @@ SMODS.Blind{
       ease_victory_reqs(3)
       --increase by 2 then later decrease by amount if victory.
       G.GAME.unik_goalpost_ante_win_increase = G.GAME.unik_goalpost_ante_win_increase + 3
-      G.GAME.unik_moving_the_goalposts = nil
+      G.GAME.unik_force_avoid_win = true
       G.GAME.blind.triggered = true
       G.GAME.blind:wiggle()
       return false

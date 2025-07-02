@@ -35,6 +35,13 @@ SMODS.Blind	{
 	in_pool = function(self)
         return  CanSpawnEpic()
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
     loc_vars = function(self, info_queue, card)
         local exponent = 1.05
         local maxRerolls = G.GAME.global_rerolls_pause_val

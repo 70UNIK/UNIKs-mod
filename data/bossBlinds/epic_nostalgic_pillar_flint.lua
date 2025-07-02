@@ -11,6 +11,13 @@ SMODS.Blind	{
     mult = 2,
 	--must be localized
 	ignore_showdown_check = true,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_unskippable_blind = true,
+    },
 	debuff_hand = function(self, cards, hand, handname, check)
 		if next(hand["Straight Flush"]) then	
 			return false
