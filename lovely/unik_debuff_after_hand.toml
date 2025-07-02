@@ -15,6 +15,7 @@ pattern = '''function evaluate_play_final_scoring(text, disp_text, poker_hands, 
 position = 'after'
 payload = '''
 local temptotal = (math.floor(mult*hand_chips))
+G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,temptotal)
 local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,mult,hand_chips,total)
 local temporaryMult = mult
 local temporaryChips = hand_chips

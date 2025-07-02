@@ -21,7 +21,6 @@ if instakill then
     G.GAME.blind:wiggle()
 end
 -- legendary crown: force set new high score:
-G.GAME.round_scores['hand'].amt = G.GAME.chips
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
 local upper22 = G.GAME.chips
 local ceiling22 = G.GAME.blind.chips^2
