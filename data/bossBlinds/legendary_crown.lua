@@ -69,26 +69,6 @@ SMODS.Blind{
         end
 
 	end,
-    -- calculate = function(self, blind, context)
-	-- 	if to_big(G.GAME.chips) > to_big(G.GAME.blind.chips) then
-	-- 		G.GAME.chips = 0
-	-- 		G.GAME.round_resets.lost = true
-	-- 		G.E_MANAGER:add_event(Event({
-	-- 			func = function()
-	-- 				G.GAME.blind:set_blind(G.P_BLINDS["bl_unik_legendary_crown"])
-	-- 				ChangePhaseCrown()
-	-- 				G.GAME.blind:juice_up()
-	-- 				G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
-    --                 ease_hands_played(-G.GAME.blind.hands_sub)
-	-- 				-- ease_discard(
-	-- 				-- 	math.max(0, G.GAME.round_resets.discards + G.GAME.round_bonus.discards) - G.GAME.current_round.discards_left
-	-- 				-- )
-	-- 				-- G.FUNCS.draw_from_discard_to_deck()
-	-- 				return true
-	-- 			end
-	-- 		}))
-	-- 	end
-	-- end,
     in_pool = function()
         return CanSpawnLegendary()
     end,
@@ -129,6 +109,9 @@ function end_round()
                         G.GAME.blind:set_blind(G.P_BLINDS["bl_unik_legendary_crown"])
                         ChangePhaseCrown()
                         G.GAME.blind.chips = G.GAME.round_scores['hand'].amt*1.5
+                        if G.GAME.blind.chips < 0 then
+                            G.GAME.blind.chips = 1
+                        end
                         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                         G.HUD_blind:recalculate(true)
                         G.GAME.blind:set_text()

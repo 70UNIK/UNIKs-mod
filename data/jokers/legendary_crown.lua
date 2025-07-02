@@ -44,7 +44,7 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.after and not context.blueprint then
-            if to_big(math.floor(hand_chips*mult)) >= to_big(G.GAME.round_scores['hand'].amt) then
+            if G.GAME.round_scores['hand'].amt > 0 and to_big(math.floor(hand_chips*mult)) >= to_big(G.GAME.round_scores['hand'].amt) then
                 card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
                 return {
                     message = localize({
