@@ -51,11 +51,15 @@ SMODS.Blind{
 	end,
     set_blind = function(self, reset, silent)
         if not reset then
-            local text = localize('k_unik_legendary_crown_start')
-            attention_text({
-                scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
-            })
-            G.GAME.unik_crown_progress = G.GAME.round_resets.hands
+
+            if not G.GAME.unik_crown_activated then
+                G.GAME.unik_crown_progress = G.GAME.round_resets.hands
+                G.GAME.unik_crown_activated = true
+                local text = localize('k_unik_legendary_crown_start')
+                attention_text({
+                    scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+                })
+            end
             if G.GAME.round_resets.hands == 1 then
                 G.GAME.blind.chips = G.GAME.round_scores['hand'].amt^6.666
             end
@@ -65,12 +69,30 @@ SMODS.Blind{
         end
 
 	end,
+    -- calculate = function(self, blind, context)
+	-- 	if to_big(G.GAME.chips) > to_big(G.GAME.blind.chips) then
+	-- 		G.GAME.chips = 0
+	-- 		G.GAME.round_resets.lost = true
+	-- 		G.E_MANAGER:add_event(Event({
+	-- 			func = function()
+	-- 				G.GAME.blind:set_blind(G.P_BLINDS["bl_unik_legendary_crown"])
+	-- 				ChangePhaseCrown()
+	-- 				G.GAME.blind:juice_up()
+	-- 				G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
+    --                 ease_hands_played(-G.GAME.blind.hands_sub)
+	-- 				-- ease_discard(
+	-- 				-- 	math.max(0, G.GAME.round_resets.discards + G.GAME.round_bonus.discards) - G.GAME.current_round.discards_left
+	-- 				-- )
+	-- 				-- G.FUNCS.draw_from_discard_to_deck()
+	-- 				return true
+	-- 			end
+	-- 		}))
+	-- 	end
+	-- end,
     in_pool = function()
         return CanSpawnLegendary()
     end,
-    --no fucking around this time
     cry_after_play = function(self)
-        ease_hands_played(-G.GAME.current_round.hands_left)
         ease_hands_played(-666)
 	end,
     --i wont bother programming in a disable function since its not menant to be dsiabled
@@ -79,6 +101,102 @@ SMODS.Blind{
 	end,
 	defeat = function(self)
         G.GAME.unik_crown_progress = nil
+        G.GAME.unik_crown_activated = nil
 
 	end,
 }
+
+--Copied from entropy's endless entropy to make legendary crown much less janky
+function ChangePhaseCrown()
+    G.STATE = 1
+    G.STATE_COMPLETE = false
+    G.E_MANAGER:add_event(Event({func = function()
+        G.GAME.ChangingPhase = nil
+        return true
+    end}))
+end
+
+local end_roundref = end_round
+function end_round()
+    if not (G.GAME.blind and G.GAME.blind.config and G.GAME.blind.config.blind.key == "bl_entr_endless_entropy_phase_four") then
+        if to_big(G.GAME.chips) > to_big(G.GAME.blind.chips) then
+            if G.GAME.unik_crown_progress and G.GAME.unik_crown_progress > 1 then
+                G.GAME.chips = 0
+                G.GAME.round_resets.lost = true
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.GAME.unik_crown_progress = G.GAME.unik_crown_progress - 1
+                        G.GAME.blind:set_blind(G.P_BLINDS["bl_unik_legendary_crown"])
+                        ChangePhaseCrown()
+                        G.GAME.blind.chips = G.GAME.round_scores['hand'].amt*1.5
+                        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                        G.HUD_blind:recalculate(true)
+                        G.GAME.blind:set_text()
+                        G.GAME.blind.triggered = true
+                        G.GAME.blind:wiggle()
+                        G.GAME.blind:juice_up()
+                        ease_hands_played(G.GAME.round_resets.hands-G.GAME.current_round.hands_left )
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'immediate',
+                                func = function()
+                                    G.STATE = G.STATES.DRAW_TO_HAND
+                                    if G.SCORING_COROUTINE then return false end 
+                                    G.STATE_COMPLETE = false
+                                    return true
+                                end
+                            }))
+                        return true
+                    end
+                }))
+            else
+                end_roundref()
+            end
+		else
+            end_roundref()
+        end
+    else    
+        end_roundref()
+    end
+end
+
+-- --new rouind hook
+-- local newRoundHook = Game.update_new_round
+-- function Game:update_new_round(dt)
+--     if not (G.GAME.blind and G.GAME.blind.config and G.GAME.blind.config.blind.key == "bl_entr_endless_entropy_phase_four") then
+--         if G.GAME.unik_crown_progress and G.GAME.unik_crown_progress > 1 then
+--             if self.buttons then self.buttons:remove(); self.buttons = nil end
+--             if self.shop and not G.GAME.USING_CODE then self.shop:remove(); self.shop = nil end
+--             if not G.STATE_COMPLETE then
+--                 if G.GAME.unik_crown_progress > 1 then
+--                     G.GAME.unik_crown_progress = G.GAME.unik_crown_progress - 1
+--                     G.GAME.chips = 0
+--                     G.GAME.round_resets.lost = false
+--                     G.GAME.blind:set_blind(G.P_BLINDS["bl_unik_legendary_crown"])
+--                     ChangePhaseCrown()
+--                     G.GAME.blind.chips = G.GAME.round_scores['hand'].amt*1.5
+--                     G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+--                     G.HUD_blind:recalculate(true)
+--                     G.GAME.blind:set_text()
+--                     G.GAME.blind.triggered = true
+--                     G.GAME.blind:wiggle()
+--                     G.GAME.blind:juice_up()
+--                     G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
+--                     ease_hands_played(-G.GAME.blind.hands_sub)
+--                     G.STATE = 1
+--                     G.STATE_COMPLETE = false
+--                 else
+--                     G.STATE_COMPLETE = true
+--                     end_round()
+--                 end
+--             end
+--         end
+--     else
+--         local ref = newRoundHook(self,dt)
+--         return ref
+--     end
+    
+
+    
+    
+
+-- end

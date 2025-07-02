@@ -37,5 +37,8 @@ SMODS.Joker {
             }
          end
     end,
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("paperback")[1] }, badges)
+    end,
 }
 end

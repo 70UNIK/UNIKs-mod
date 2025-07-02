@@ -118,23 +118,8 @@ SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
 })
---Creates an atlas for cards to use
--- SMODS.Atlas {
--- 	-- Key for code to find it with
--- 	key = "unik_cursed",
--- 	-- The name of the file, for the code to pull the atlas from
--- 	path = "unik_cursed.png",
--- 	-- Width of each sprite in 1x size
--- 	px = 71,
--- 	-- Height of each sprite in 1x size
--- 	py = 95
--- }
--- SMODS.Atlas {
--- 	key = "unik_bossJokers",
--- 	path = "unik_bossJokers.png",
--- 	px = 71,
--- 	py = 95
--- }
+
+
 SMODS.Atlas {
 	key = "unik_stickers",
 	path = "unik_stickers.png",
@@ -493,8 +478,38 @@ NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
 --- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
---function for reference
+SMODS.Rarity({
+	key = "unik_legendary_blind_finity",
+	loc_txt = {},
+	badge_colour = G.C.UNIK_RGB,
+})
 
+local mainmenuref2 = Game.main_menu
+Game.main_menu = function(change_context)
+	if unik_config.unik_legendary_blinds then
+  	if next(SMODS.find_mod("finity")) then
+		local legendarybossblinds = {
+		["bl_unik_legendary_crown"] = {"j_unik_legendary_crown","Korruptionkruunu"},
+		}
+		for k, v in pairs(legendarybossblinds) do
+			FinisherBossBlindStringMap[k] = v
+		end
+	end
+
+
+  end
+  local ret = mainmenuref2(change_context)
+  return ret
+end
+
+--Finity Jokers
+if next(SMODS.find_mod("finity")) then
+	if unik_config.unik_legendary_blinds then
+		
+		NFS.load(mod_path .. "data/jokers/legendary_crown.lua")() 
+	
+	end
+end
 
 --- Cursed --- 15 of those
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
@@ -546,6 +561,7 @@ NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
+
 
 --Future mechanics:
 --Overshoot mechanic (that will become the new name of the overscore mechanic). Designed to keep a challenge when overscoring.
