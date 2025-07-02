@@ -2,7 +2,7 @@
 SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',
-    config = { extra = { increase = 1.075 } },
+    config = { extra = { increase = 1.1 } },
 	--you can have your fun in madness (to an extent)
 	gameset_config = {
 		madness = { extra = { increase = 1.2 }, immutable = false },
