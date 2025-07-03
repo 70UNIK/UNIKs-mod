@@ -1419,9 +1419,8 @@ return {
                 name = 'Foundation',
                 text = {
                     "After playing {C:attention}#2#{} {C:attention}consecutive{} hands",
-                    "each containing at least {C:attention}4 modified{} cards",
-                    "{C:red}not identical{} in rank and suit",
-                    "to any cards in {C:attention}played{} and {C:attention}last hand{},",
+                    "each containing at least {C:attention}4{} cards each",
+                    "with an {C:attention}enhancement{}, {C:dark_edition}edition{} and {C:attention}seal{},",
                     "sell this card to create",
                     "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
 					"{C:inactive}(Currently #1#/#2#){}",
@@ -1473,29 +1472,6 @@ return {
                 unlock = {
                     "Fill your Joker slots",
                     "with {C:purple}Eternal{} Jokers",
-                }
-            },
-            --I'll override this still
-            j_jen_saint = {
-                name = 'The Saint',
-                text = {
-                    '{C:spectral}Gateway{} will {C:attention}not destroy Jokers{} when used',
-                    '{C:cry_epic}Foundation{} is activated {C:attention}immediately{}',
-                    'After using {C:attention}10 {C:spectral}Gateways{}, {C:jen_RGB}attune{} this Joker',
-                    '{C:inactive,s:1.5}[{C:attention,s:1.5}#1#{C:inactive,s:1.5}/10]',
-                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
-                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
-                }
-            },
-            j_jen_saint_attuned = {
-                name = 'The Saint {C:jen_RGB}(Attuned)',
-                text = {
-                    '{C:spectral}Gateway{} will {C:attention}not destroy Jokers{} when used',
-                    '{C:cry_epic}Foundation{} is always {C:dark_edition}negative{} and activated {C:attention}immediately{}',
-                    '{C:cry_ascendant}Yawetag{} also has {C:attention}no negative effect{} when used',
-                    '{X:black,C:red,s:3}^^^3{C:purple} Chips & Mult',
-                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
-                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
                 }
             },
             j_unik_double_container = {

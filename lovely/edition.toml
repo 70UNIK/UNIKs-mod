@@ -21,9 +21,6 @@ end
 if card.ability.name == "j_unik_binary_asteroid" then
     card:set_edition("e_paperback_dichrome", true, nil, true)
 end
-if (card.ability.name == "j_unik_foundation" and (#SMODS.find_card("j_jen_saint_attuned")) > 0) then
-    card:set_edition("e_negative", true, nil, true)
-end
 '''
 match_indent = true
 
@@ -35,7 +32,6 @@ position = "after"
 payload = '''and card.ability.name ~= "j_unik_happiness"
 and card.ability.name ~= "j_unik_borg_cube"
 and card.ability.name ~= "j_unik_binary_asteroid"
-and (card.ability.name ~= "j_unik_foundation" and (#SMODS.find_card("j_jen_saint_attuned")) > 0)
 '''
 match_indent = true
 
