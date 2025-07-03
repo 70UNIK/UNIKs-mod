@@ -22,26 +22,7 @@ SMODS.Blind{
     set_blind = function(self, reset, silent)
         G.GAME.unik_jack_discarded = nil
         G.GAME.unik_pentagram_manager_fix = true
-        if not reset then
-            --print("vvvv")
-                    local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
-                    card2.ability.eternal = true
-                    card2.ability.unik_jackshit = true
-                    --destroy card2 if its jimbo
-                    -- if (card2.ability.name ~= "Joker") then
-                    card2:start_materialize()
-                    card2:add_to_deck() --This causes problems. Why?
-                    G.jokers:emplace(card2)
-                    G.GAME.blind.triggered = true
-                    G.GAME.blind:wiggle()
-                    delay(0.15)
-                    G.ROOM.jiggle = G.ROOM.jiggle + 1
-                    -- else
-                    --     card2:remove()
-                    -- end
-            G.GAME.blind.triggered = true
-            G.GAME.blind:wiggle()
-        end
+
     end,
     calculate = function(self, blind, context)
 		if context.discard and not G.GAME.blind.disabled then
@@ -51,79 +32,68 @@ SMODS.Blind{
             end
 		end
 	end,
-    --stolen from Cryptid, similar to vermillion virus, except it detects where each ghost is, check for adjacent non cursed jokers and convert them into MORE ghosts!
-    --less strong than above but worse long term effects
     cry_before_play = function(self)
         if not G.GAME.unik_jack_discarded then
-            local ghostList = {}
+            local validCards = {}
             --Get all ghosts 
             for i=1,#G.jokers.cards do
                 --print("POSSESS")
-                if G.jokers.cards[i].config.center.key == "j_hit_the_road" then
-                    table.insert(ghostList,i)
+                if G.jokers.cards[i].config.center.key ~= "j_hit_the_road" and not G.jokers.cards[i].ability.cry_absolute and not G.jokers.cards[i].config.center.immune_to_vermillion then
+                    validCards[#validCards+1] = G.jokers.cards[i]
                 end
             end
-            -- for each ghost, convert adjacent jokers into ghosts
-            for i=1,#ghostList do
-                -- convert on left
-                if (ghostList[i] > 1) then
-                    turnJokerIntoJack(ghostList[i] - 1,ghostList[i])
+            if #G.jokers.cards > 0 then
+                local jackshit = pseudorandom_element(validCards, pseudoseed("unik_jackshit_select"))
+                if jackshit.ability.eternal then
+                     card_eval_status_text(
+                        jackshit,
+                        "extra",
+                        nil,
+                        nil,
+                        nil,
+                        { message = localize("k_unik_boo_eternal_bypass"), colour = G.C.FILTER }
+                    )
+                else
+                    card_eval_status_text(
+                        jackshit,
+                        "extra",
+                        nil,
+                        nil,
+                        nil,
+                        { message = localize("k_unik_jackshit"), colour = G.C.FILTER }
+                    )  
                 end
-                -- convert on right
-                if (ghostList[i] < #G.jokers.cards) then
-                    turnJokerIntoJack(ghostList[i] + 1,ghostList[i])
-                end
+                local _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
+                jackshit:remove_from_deck()
+                _card:add_to_deck()
+                _card:start_materialize()
+                
+                jackshit = _card
+                _card:set_card_area(G.jokers)
+                _card.ability.eternal = nil
+                _card.ability.unik_jackshit = nil
+                G.jokers:set_ranks()
+                G.jokers:align_cards()    
+                G.GAME.blind.triggered = true
+                G.GAME.blind:wiggle()
+                G.ROOM.jiggle = G.ROOM.jiggle + 1
             end
+            
+
         else
             G.GAME.unik_jack_discarded = nil
         end
 	end,
     --If disabled, kill ONLY the pinned ghost.
     disable = function(self)
-       killEternalJacks()
         G.GAME.unik_pentagram_manager_fix = nil
         G.GAME.unik_jack_discarded = nil
     end,
     defeat = function(self)
-        killEternalJacks()
         G.GAME.unik_pentagram_manager_fix = nil
         G.GAME.unik_jack_discarded = nil
 	end,
 }
-
-function killEternalJacks()
-    for _, v in pairs(G.jokers.cards) do
-        --print("Joker in set:")
-        --print(v.ability.name)
-        if (v.config.center.key == "j_hit_the_road" and v.ability.unik_jackshit) then
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    play_sound('tarot1')
-                    v.T.r = -0.2
-                    v:juice_up(0.3, 0.4)
-                    v.states.drag.is = true
-                    v.children.center.pinch.x = true
-                    -- This part destroys the card.
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.3,
-                        blockable = false,
-                        func = function()
-                            v:start_dissolve()
-                            card_eval_status_text(v, "extra", nil, nil, nil, {
-                                message = localize("k_extinct_ex"),
-                                colour = G.C.FILTER,
-                            })
-                            return true;
-                        end
-                    }))
-                    return true
-                end
-            }))
-            break
-        end
-    end
-end
 function turnJokerIntoJack(location,jack)
     --avoid cursed jokers and ghosts and absolute jokers
     if (G.jokers.cards[location].config.center.key ~= "j_hit_the_road" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then

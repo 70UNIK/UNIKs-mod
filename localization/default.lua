@@ -80,6 +80,24 @@ return {
             }
         },
         Blind={
+            bl_cry_vermillion_virus = {
+				name = "Vermillion Virus",
+				text = {
+					"Leftmost Joker",
+					"replaced every hand,",
+                    "then next one to",
+                    "it's right per hand",
+				},
+			},
+            bl_cry_chromatic = {
+				name = "The Chromatic",
+				text = {
+					"Scoring is added",
+					"to blind size",
+                    "instead of score on",
+					"odd numbered hands",
+				},
+			},
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
@@ -315,11 +333,9 @@ return {
             bl_unik_jaundice_jack = {
                 name = "Jaundice Jack",
                 text = {
-					"Create an eternal Hit the Road", 
-                    "on Blind Selection",
                     "If a Jack is not discarded before hand,",
-                    "convert adjacent Jokers",
-                    "into Hit the Roads",
+                    "convert a random Joker",
+                    "into Hit the Road",
 				},
             },
             bl_unik_septic_seance = {
@@ -329,7 +345,7 @@ return {
                     "on Blind Selection",
                     "If hand is not a Straight Flush,",
                     "convert adjacent Jokers",
-                    "into Séance",
+                    "into Séances",
 				},
             },
             
@@ -2881,7 +2897,9 @@ return {
             k_legendary_crown_normal1 = "I tried to climb the mountain...",
             k_legendary_crown_normal2 = "I should've listened to her...",
             k_legendary_crown_normal3 = "I should've known better...",
-            k_legendary_crown_normal4 = "Please don't make the same mistake as I did..."
+            k_legendary_crown_normal4 = "Please don't make the same mistake as I did...",
+
+            cry_tax_placeholder = "(X0.75 blind requirement)",
         },
         high_scores={},
         labels={

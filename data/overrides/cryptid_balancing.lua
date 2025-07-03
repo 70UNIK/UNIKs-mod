@@ -870,4 +870,202 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 	end,
 }, true)
 
---
+--The Tax should cap score at 75% of blind size to make it less frustrating.
+SMODS.Blind:take_ownership("bl_cry_tax",{
+	dependencies = {
+		items = {
+			"set_cry_blind",
+		},
+	},
+	name = "cry-Tax",
+	key = "tax",
+	pos = { x = 0, y = 0 },
+	boss = {
+		min = 2,
+		max = 10,
+	},
+	atlas = "blinds",
+	order = 2,
+	boss_colour = HEX("40ff40"),
+	loc_vars = function(self, info_queue, card)
+		return { vars = { 0.75 * get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling } } -- no bignum?
+	end,
+	preview_ui = function(self)
+		local value = self:loc_vars().vars[1]
+		return {
+			n = G.UIT.C,
+			nodes = {
+				{
+					n = G.UIT.R,
+					nodes = {
+						{ n = G.UIT.O, config = { object = get_stake_sprite(G.GAME.stake, 0.25) } },
+						{
+							n = G.UIT.T,
+							config = {
+								text = number_format(value),
+								colour = G.C.RED,
+								scale = score_number_scale(0.5, value),
+							},
+						},
+					},
+				},
+			},
+		}
+	end,
+	collection_loc_vars = function(self)
+		return { vars = { localize("cry_tax_placeholder") } }
+	end,
+	cry_cap_score = function(self, score)
+		return math.floor(math.min(0.75 * G.GAME.blind.chips, score) + 0.5)
+	end,
+	in_pool = function()
+		return G.GAME.round_resets.hands >= 3
+	end,
+}, true)
+
+--Rental blind should be in min ante 4.
+SMODS.Blind:take_ownership("bl_cry_landlord",{
+	dependencies = {
+		items = {
+			"set_cry_blind",
+		},
+	},
+	mult = 2,
+	object_type = "Blind",
+	name = "cry-landlord",
+	key = "landlord",
+	pos = { x = 0, y = 2 },
+	dollars = 5,
+	boss = {
+		min = 5,
+		max = 666666,
+	},
+	atlas = "blinds_two",
+	order = 26,
+	boss_colour = HEX("c89f13"),
+	calculate = function(self, blind, context)
+		if context.after then
+			local jokers = {}
+			for i, v in pairs(G.jokers.cards) do
+				if not v.ability.rental then
+					jokers[#jokers + 1] = v
+				end
+			end
+			if #jokers > 0 then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						local joker = pseudorandom_element(jokers, pseudoseed("cry_landlord"))
+						joker.ability.rental = true
+						joker:juice_up()
+						return true
+					end,
+				}))
+			end
+			G.GAME.blind.triggered = true
+		end
+	end,
+}, true)
+
+--Chromatic blind should instead add to the blind size and have a blind size of 0.75X.
+
+SMODS.Blind:take_ownership("bl_cry_chromatic",{
+	dependencies = {
+		items = {
+			"set_cry_blind",
+		},
+	},
+	mult = 0.75,
+	object_type = "Blind",
+	name = "cry-chromatic",
+	key = "chromatic",
+	pos = { x = 0, y = 1 },
+	dollars = 5,
+	boss = {
+		min = 1,
+		max = 666666,
+	},
+	atlas = "blinds_two",
+	order = 25,
+	boss_colour = HEX("a34f98"),
+	-- cry_modify_score = function(self, score)
+	-- 	if math.floor(G.GAME.current_round.hands_played + 1) % 2 == 1 then
+	-- 		return score * -1
+	-- 	else
+	-- 		return score
+	-- 	end
+	-- end,
+	unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+		if math.floor(G.GAME.current_round.hands_played + 1) % 2 == 1 then
+			return {
+                debuff = true,
+                add_to_blind = sum,
+            }
+		else
+			return {
+            debuff = false,
+        }
+		end
+    end,
+}, true)
+
+--vermillion virus converts the leftmost joker, before moving rightwards
+
+SMODS.Blind:take_ownership("bl_cry_vermillion_virus",{
+	dependencies = {
+		items = {
+			"set_cry_blind",
+		},
+	},
+	name = "cry-Vermillion Virus",
+	key = "vermillion_virus",
+	pos = { x = 0, y = 5 },
+	dollars = 8,
+	boss = {
+		min = 3,
+		max = 10,
+		showdown = true,
+	},
+	atlas = "blinds",
+	order = 90,
+	boss_colour = HEX("f65d34"),
+	set_blind = function(self, reset, silent)
+		G.GAME.unik_vermillion_mover = 1
+	end,
+	disable = function(self)
+		G.GAME.unik_vermillion_mover = nil
+    end,
+    defeat = function(self)
+		G.GAME.unik_vermillion_mover = nil
+	end,
+	cry_before_play = function(self)
+		-- local eligible_cards = {}
+		local idx
+		--Check for eligible cards (not eternal and not immune)
+		local carder = nil
+		-- for i = 1, #G.jokers.cards do
+		if G.GAME.unik_vermillion_mover > #G.jokers.cards then
+			G.GAME.unik_vermillion_mover = 1
+		end
+		if #G.jokers.cards > 0 and not G.jokers.cards[G.GAME.unik_vermillion_mover].config.center.immune_to_vermillion and not G.jokers.cards[G.GAME.unik_vermillion_mover].ability.eternal then
+			carder = G.jokers.cards[G.GAME.unik_vermillion_mover]
+		end
+		-- end
+		if carder then
+			local _card = create_card("Joker", G.jokers, nil, nil, nil, nil, nil, "cry_vermillion_virus_gen")
+			carder:start_dissolve()
+			--G.jokers.cards[idx]:remove_from_deck()
+			_card:add_to_deck()
+			_card:start_materialize()
+			carder = _card
+			_card:set_card_area(G.jokers)
+			G.jokers:set_ranks()
+			G.jokers:align_cards()
+			G.GAME.blind.triggered = true
+        	G.GAME.blind:wiggle()
+		end
+		G.GAME.unik_vermillion_mover = G.GAME.unik_vermillion_mover + 1
+		if G.GAME.unik_vermillion_mover > #G.jokers.cards then
+			G.GAME.unik_vermillion_mover = 1
+		end
+	end,
+}, true)
