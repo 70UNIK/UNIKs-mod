@@ -80,6 +80,24 @@ return {
             }
         },
         Blind={
+            -- bl_cry_vermillion_virus = {
+			-- 	name = "Vermillion Virus",
+			-- 	text = {
+			-- 		"Leftmost Joker",
+			-- 		"replaced every hand,",
+            --         "then next one to",
+            --         "it's right per hand",
+			-- 	},
+			-- },
+            -- bl_cry_chromatic = {
+			-- 	name = "The Chromatic",
+			-- 	text = {
+			-- 		"Scoring is added",
+			-- 		"to blind size",
+            --         "instead of score on",
+			-- 		"odd numbered hands",
+			-- 	},
+			-- },
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
@@ -315,11 +333,10 @@ return {
             bl_unik_jaundice_jack = {
                 name = "Jaundice Jack",
                 text = {
-					"Create an eternal Hit the Road", 
-                    "on Blind Selection",
-                    "If a Jack is not discarded before hand,",
-                    "convert adjacent Jokers",
-                    "into Hit the Roads",
+                    "If a Jack is not",
+                    "discarded before hand,",
+                    "convert a random Joker",
+                    "into Hit the Road",
 				},
             },
             bl_unik_septic_seance = {
@@ -329,7 +346,7 @@ return {
                     "on Blind Selection",
                     "If hand is not a Straight Flush,",
                     "convert adjacent Jokers",
-                    "into Séance",
+                    "into Séances",
 				},
             },
             
@@ -1419,9 +1436,8 @@ return {
                 name = 'Foundation',
                 text = {
                     "After playing {C:attention}#2#{} {C:attention}consecutive{} hands",
-                    "each containing at least {C:attention}4 modified{} cards",
-                    "{C:red}not identical{} in rank and suit",
-                    "to any cards in {C:attention}played{} and {C:attention}last hand{},",
+                    "each containing at least {C:attention}4{} cards each",
+                    "with an {C:attention}enhancement{}, {C:dark_edition}edition{} and {C:attention}seal{},",
                     "sell this card to create",
                     "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
 					"{C:inactive}(Currently #1#/#2#){}",
@@ -1473,29 +1489,6 @@ return {
                 unlock = {
                     "Fill your Joker slots",
                     "with {C:purple}Eternal{} Jokers",
-                }
-            },
-            --I'll override this still
-            j_jen_saint = {
-                name = 'The Saint',
-                text = {
-                    '{C:spectral}Gateway{} will {C:attention}not destroy Jokers{} when used',
-                    '{C:cry_epic}Foundation{} is activated {C:attention}immediately{}',
-                    'After using {C:attention}10 {C:spectral}Gateways{}, {C:jen_RGB}attune{} this Joker',
-                    '{C:inactive,s:1.5}[{C:attention,s:1.5}#1#{C:inactive,s:1.5}/10]',
-                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
-                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
-                }
-            },
-            j_jen_saint_attuned = {
-                name = 'The Saint {C:jen_RGB}(Attuned)',
-                text = {
-                    '{C:spectral}Gateway{} will {C:attention}not destroy Jokers{} when used',
-                    '{C:cry_epic}Foundation{} is always {C:dark_edition}negative{} and activated {C:attention}immediately{}',
-                    '{C:cry_ascendant}Yawetag{} also has {C:attention}no negative effect{} when used',
-                    '{X:black,C:red,s:3}^^^3{C:purple} Chips & Mult',
-                    '{C:dark_edition,s:0.7,E:2}Floating sprite by : jenwalter666',
-                    '{C:cry_exotic,s:0.7,E:2}Origin : Rain World',
                 }
             },
             j_unik_double_container = {
@@ -1707,7 +1700,7 @@ return {
 					"of {C:attention}2s",
 				},
             },
-            j_cry_maximized = { 
+            j_cry_maximized_alt = { 
 				name = "Maximized",
 				text = {
 					"All {C:attention}face{} cards",
@@ -1888,12 +1881,12 @@ return {
 			-- 		"of owned jokers by {C:attention}+#1#x{}",
 			-- 	},
 			-- },
-            j_cry_jawbreaker = {
+            j_cry_jawbreaker_balanced = {
 				name = "Jawbreaker",
 				text = {
 					"When {C:attention}Boss Blind{} defeated,",
-					"increase values of",
-                    "adjacent Jokers by {C:attention}X#1#{}",
+					"increase values of {C:attention}Joker",
+                    "to the right by {C:attention}X#1#{}",
 					"{E:2,C:red}self destructs{}",
 				},
 			},
@@ -1911,7 +1904,7 @@ return {
                 }
             },
 
-            j_cry_canvas = {
+            j_cry_canvas_mainline = {
 				name = "Canvas",
 				text = {
 					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
@@ -1925,7 +1918,7 @@ return {
 					"in one hand",
 				},
 			},
-			j_cry_canvas_balanced = {
+			j_cry_canvas_modest = {
 				name = "Canvas",
 				text = {
 					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
@@ -1943,7 +1936,7 @@ return {
 
 
 
-            j_cry_pirate_dagger = {
+            j_cry_pirate_dagger_balanced = {
 				name = "Pirate Dagger",
 				text = {
 					"When {C:attention}Blind{} is selected,",
@@ -1954,7 +1947,32 @@ return {
 				},
 			},
             
-
+            --not banning it entirely like almanac, but removing all chip bonuses and making it purely reroll focused., And only 30 rerolls.
+            j_cry_crustulum_mainline = {
+				name = "Crustulum",
+				text = {
+					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
+					-- "per {C:attention}reroll{} in the shop",
+					"{C:attention}#1#{} free reroll#<s>1# per shop",
+					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
+				},
+			},
+            j_cry_crustulum_modest = {
+				name = "Crustulum",
+				text = {
+					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
+					-- "per {C:attention}reroll{} in the shop",
+					"{C:attention}#1#{} free reroll#<s>1# per shop",
+					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
+				},
+			},
+            j_cry_cotton_candy_balanced = {
+				name = "Cotton Candy",
+				text = {
+					"When sold,{C:attention}Joker{} to",
+					"it's right becomes {C:dark_edition}Negative{}",
+				},
+			},
             --Proper depleted loc
             --Clicked cookie
             j_cry_clicked_cookie2 = {
@@ -2880,7 +2898,9 @@ return {
             k_legendary_crown_normal1 = "I tried to climb the mountain...",
             k_legendary_crown_normal2 = "I should've listened to her...",
             k_legendary_crown_normal3 = "I should've known better...",
-            k_legendary_crown_normal4 = "Please don't make the same mistake as I did..."
+            k_legendary_crown_normal4 = "Please don't make the same mistake as I did...",
+
+            cry_tax_placeholder = "(X0.75 blind requirement)",
         },
         high_scores={},
         labels={

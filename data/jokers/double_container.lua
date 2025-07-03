@@ -26,21 +26,21 @@ SMODS.Joker {
 		return { vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers)} }
 	end,
     in_pool = function(self, args)
-        local hasColor = nil
-        if MoreFluff and G.consumeables and G.consumeables.cards then
-            for i=1, #G.consumeables.cards do
-                if G.consumeables.cards[i].ability.set == 'Colour' then
-                    hasColor = true
-                end
-            end
-        end
+        -- local hasColor = nil
+        -- if MoreFluff and G.consumeables and G.consumeables.cards then
+        --     for i=1, #G.consumeables.cards do
+        --         if G.consumeables.cards[i].ability.set == 'Colour' then
+        --             hasColor = true
+        --         end
+        --     end
+        -- end
         if 
-            #SMODS.find_card("j_unik_moonlight_cookie") > 0 or 
-            #SMODS.find_card("j_unik_scratch") > 0 or 
-            #SMODS.find_card("j_mf_rainbow_joker") or
+            next(find_joker("j_unik_moonlight_cookie")) or 
+            next(find_joker("j_unik_scratch")) or 
+            next(find_joker("j_mf_rainbow_joker")) or
 
             G.GAME.used_vouchers.v_observatory or
-            hasColor then
+            MoreFluff then
 			return true
 		end
 		return false

@@ -38,7 +38,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
 	fusable = true,
-    config = { extra = { Emult = 1.2,odds = 5} },
+    config = { extra = { Emult = 1.15,odds = 5} },
 	gameset_config = {
 		modest = { extra = { Emult = 1.07,odds = 999999} },
 	},
@@ -57,83 +57,83 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
 
-		if (context.unik_blinds_refresh) and Card.get_gameset(card) ~= "modest" then
-			--What if you decide to stack non negative consumeables (I prefer NOT to do that, but its a possibility. It should decrement the value and create one)
-			if G.consumeables.cards[1] then
-				--Get valid cards
-				local validCards = {}
-				for i,v in pairs(G.consumeables.cards) do
-					if v.ability.set == 'Planet'
-					 and not v.edition then
-						validCards[#validCards + 1] = v
-					end
-				end
-				if #validCards > 0 then
-					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
-					--If incantation, automatically split 1 negative from a big pile
-					if (SMODS.Mods["incantation"] or {}).can_load then
-						if card2.getQty then
-							local amount = card2:getQty()
-							if amount > 1 then
-								local newCard = card2:split(1)
-								newCard:set_edition('e_negative', true)
-								newCard:try_merge()
-								card:juice_up(0.5, 0.5)
-							else
-								card2:set_edition('e_negative', true)
-								card2:try_merge()
-								card:juice_up(0.5, 0.5)
-							end
-						else
-							card2:set_edition('e_negative', true)
-							card2:try_merge()
-							card:juice_up(0.5, 0.5)
-						end
-					else
-						card2:set_edition('e_negative', true)
-						card:juice_up(0.5, 0.5)
-					end
-				end
-			end
-		end
+		-- if (context.unik_blinds_refresh) and Card.get_gameset(card) ~= "modest" then
+		-- 	--What if you decide to stack non negative consumeables (I prefer NOT to do that, but its a possibility. It should decrement the value and create one)
+		-- 	if G.consumeables.cards[1] then
+		-- 		--Get valid cards
+		-- 		local validCards = {}
+		-- 		for i,v in pairs(G.consumeables.cards) do
+		-- 			if v.ability.set == 'Planet'
+		-- 			 and not v.edition then
+		-- 				validCards[#validCards + 1] = v
+		-- 			end
+		-- 		end
+		-- 		if #validCards > 0 then
+		-- 			local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
+		-- 			--If incantation, automatically split 1 negative from a big pile
+		-- 			if (SMODS.Mods["incantation"] or {}).can_load then
+		-- 				if card2.getQty then
+		-- 					local amount = card2:getQty()
+		-- 					if amount > 1 then
+		-- 						local newCard = card2:split(1)
+		-- 						newCard:set_edition('e_negative', true)
+		-- 						newCard:try_merge()
+		-- 						card:juice_up(0.5, 0.5)
+		-- 					else
+		-- 						card2:set_edition('e_negative', true)
+		-- 						card2:try_merge()
+		-- 						card:juice_up(0.5, 0.5)
+		-- 					end
+		-- 				else
+		-- 					card2:set_edition('e_negative', true)
+		-- 					card2:try_merge()
+		-- 					card:juice_up(0.5, 0.5)
+		-- 				end
+		-- 			else
+		-- 				card2:set_edition('e_negative', true)
+		-- 				card:juice_up(0.5, 0.5)
+		-- 			end
+		-- 		end
+		-- 	end
+		-- end
 		if context.forcetrigger then
-			G.E_MANAGER:add_event(Event({
-                trigger = "before",
-                delay = 0,
-                func = function()
-			if G.consumeables.cards[1] then
-				--Get valid cards
-				local validCards = {}
-				if #validCards > 0 then
-					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
-					--If incantation, automatically split 1 negative from a big pile
-					if (SMODS.Mods["incantation"] or {}).can_load then
-						if card2.getQty then
-							local amount = card2:getQty()
-							if amount > 1 then
-								local newCard = card2:split(1)
-								newCard:set_edition('e_negative', true)
-								newCard:try_merge()
-								card:juice_up(0.5, 0.5)
-							else
-								card2:set_edition('e_negative', true)
-								card2:try_merge()
-								card:juice_up(0.5, 0.5)
-							end
-						else
-							card2:set_edition('e_negative', true)
-							card2:try_merge()
-							card:juice_up(0.5, 0.5)
-						end
-					else
-						card2:set_edition('e_negative', true)
-						card:juice_up(0.5, 0.5)
-					end
-				end
-			end
-			        return true
-                end,
-            }))
+			-- G.E_MANAGER:add_event(Event({
+            --     trigger = "before",
+            --     delay = 0,
+            --     func = function()
+			-- if G.consumeables.cards[1] then
+			-- 	--Get valid cards
+			-- 	local validCards = {}
+			-- 	if #validCards > 0 then
+			-- 		local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
+			-- 		--If incantation, automatically split 1 negative from a big pile
+			-- 		if (SMODS.Mods["incantation"] or {}).can_load then
+			-- 			if card2.getQty then
+			-- 				local amount = card2:getQty()
+			-- 				if amount > 1 then
+			-- 					local newCard = card2:split(1)
+			-- 					newCard:set_edition('e_negative', true)
+			-- 					newCard:try_merge()
+			-- 					card:juice_up(0.5, 0.5)
+			-- 				else
+			-- 					card2:set_edition('e_negative', true)
+			-- 					card2:try_merge()
+			-- 					card:juice_up(0.5, 0.5)
+			-- 				end
+			-- 			else
+			-- 				card2:set_edition('e_negative', true)
+			-- 				card2:try_merge()
+			-- 				card:juice_up(0.5, 0.5)
+			-- 			end
+			-- 		else
+			-- 			card2:set_edition('e_negative', true)
+			-- 			card:juice_up(0.5, 0.5)
+			-- 		end
+			-- 	end
+			-- end
+			--         return true
+            --     end,
+            -- }))
 			return {
 				message = localize({
 					type = "variable",
