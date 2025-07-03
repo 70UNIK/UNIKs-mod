@@ -1971,7 +1971,7 @@ return {
             j_cry_cotton_candy_balanced = {
 				name = "Cotton Candy",
 				text = {
-					"When sold,{C:attention}Joker{} to",
+					"When sold, {C:attention}Joker{} to",
 					"it's right becomes {C:dark_edition}Negative{}",
 				},
 			},

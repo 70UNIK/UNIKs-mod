@@ -477,7 +477,7 @@ SMODS.Joker:take_ownership("j_cry_cotton_candy",{
 		then
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
-					if i > 1 and Card.get_gameset(card) ~= "madness" then
+					if i > 1 and Card.get_gameset(card) == "madness" then
 						G.jokers.cards[i - 1]:set_edition({ negative = true })
 					end
 					if i < #G.jokers.cards then
