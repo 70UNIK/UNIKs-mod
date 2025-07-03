@@ -44,39 +44,14 @@ SMODS.Blind{
             end
             if #G.jokers.cards > 0 then
                 local jackshit = pseudorandom_element(validCards, pseudoseed("unik_jackshit_select"))
-                if jackshit.ability.eternal then
-                     card_eval_status_text(
-                        jackshit,
-                        "extra",
-                        nil,
-                        nil,
-                        nil,
-                        { message = localize("k_unik_boo_eternal_bypass"), colour = G.C.FILTER }
-                    )
-                else
-                    card_eval_status_text(
-                        jackshit,
-                        "extra",
-                        nil,
-                        nil,
-                        nil,
-                        { message = localize("k_unik_jackshit"), colour = G.C.FILTER }
-                    )  
+                local index = -1
+                for i = 1,#G.jokers.cards do
+                    if G.jokers.cards[i] == jackshit then
+                        turnJokerIntoJack(i)
+                        break
+                    end
                 end
-                local _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
-                jackshit:remove_from_deck()
-                _card:add_to_deck()
-                _card:start_materialize()
                 
-                jackshit = _card
-                _card:set_card_area(G.jokers)
-                _card.ability.eternal = nil
-                _card.ability.unik_jackshit = nil
-                G.jokers:set_ranks()
-                G.jokers:align_cards()    
-                G.GAME.blind.triggered = true
-                G.GAME.blind:wiggle()
-                G.ROOM.jiggle = G.ROOM.jiggle + 1
             end
             
 
@@ -117,7 +92,7 @@ function turnJokerIntoJack(location,jack)
                 { message = localize("k_unik_jackshit"), colour = G.C.FILTER }
             )            
         end
-        _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
+        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()

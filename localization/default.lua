@@ -333,7 +333,8 @@ return {
             bl_unik_jaundice_jack = {
                 name = "Jaundice Jack",
                 text = {
-                    "If a Jack is not discarded before hand,",
+                    "If a Jack is not",
+                    "discarded before hand,",
                     "convert a random Joker",
                     "into Hit the Road",
 				},
