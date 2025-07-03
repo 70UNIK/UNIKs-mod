@@ -80,7 +80,7 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 SMODS.Joker:take_ownership("j_cry_jawbreaker", {
     config = { extra = {increase = 1.5,self_destruct = false} },
     loc_vars = function(self, info_queue, center)
-		return { vars = { number_format(center.ability.extra.increase) } }
+		return { key = Cryptid.gameset_loc(self, { mainline = "balanced" }), vars = { number_format(center.ability.extra.increase) } }
 	end,
     gameset_config = {
 		madness = { extra = {increase = 2, self_destruct = false} },
@@ -183,7 +183,7 @@ SMODS.Joker:take_ownership("j_cry_canvas",{
 		if Card.get_gameset(center) == "modest" then
 			num_retriggers = math.min(2,num_retriggers)
 		end
-		return { key = Cryptid.gameset_loc(self, { modest = "balanced" }),vars={num_retriggers} }
+		return { key = Cryptid.gameset_loc(self, { modest = "modest", mainline = "mainline" }),vars={num_retriggers} }
 	end,
 	calculate = function(self, card, context)
 		if context.retrigger_joker_check and not context.retrigger_joker then
@@ -455,11 +455,19 @@ SMODS.Joker:take_ownership("j_cry_altgoogol",{
 	end,
 }, true)
 
+SMODS.Joker:take_ownership("j_cry_maximized",{
+	loc_vars = function (self,info_queue,center)
+		return {
+			key = "j_cry_maximized_alt"
+		}
+	end,
+}, true)
+
 --Cotton candy only makes the joker on the right negative
 SMODS.Joker:take_ownership("j_cry_cotton_candy",{
 	loc_vars = function (self,info_queue,center)
 		return {
-			key = Cryptid.gameset_loc(self, {modest = "modest" })
+			key = Cryptid.gameset_loc(self, {modest = "balanced", mainline = "balanced" })
 		}
 	end,
 	calculate = function(self, card, context)
@@ -469,7 +477,7 @@ SMODS.Joker:take_ownership("j_cry_cotton_candy",{
 		then
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
-					if i > 1 and Card.get_gameset(card) ~= "modest" then
+					if i > 1 and Card.get_gameset(card) ~= "madness" then
 						G.jokers.cards[i - 1]:set_edition({ negative = true })
 					end
 					if i < #G.jokers.cards then
@@ -501,7 +509,7 @@ SMODS.Joker:take_ownership("j_cry_crustulum",{
 	},
 	gameset_config = {
 		modest = { extra = { free_rerolls = 16} ,center = { demicolon_compat = false, blueprint_compat = false}},
-		mainline = { extra = {free_rerolls = 40},center = { demicolon_compat = false, blueprint_compat = false}},
+		mainline = { extra = {free_rerolls = 30},center = { demicolon_compat = false, blueprint_compat = false}},
 	},
 	loc_vars = function (self,info_queue,center)
 		if Card.get_gameset(center) == "madness" then
@@ -622,6 +630,9 @@ SMODS.Joker:take_ownership("j_cry_membershipcard",{
 
 --Nerfing pirate dagger to exactly the same as xmult
 SMODS.Joker:take_ownership("j_cry_pirate_dagger",{
+	loc_vars = function (self,info_queue,center)
+		return {key = "j_cry_pirate_dagger_balanced",vars = { number_format(center.ability.extra.x_chips) }}
+	end,
 calculate = function(self, card, context)
 		if context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1)) then
 			return {

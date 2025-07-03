@@ -1700,7 +1700,7 @@ return {
 					"of {C:attention}2s",
 				},
             },
-            j_cry_maximized = { 
+            j_cry_maximized_alt = { 
 				name = "Maximized",
 				text = {
 					"All {C:attention}face{} cards",
@@ -1881,7 +1881,7 @@ return {
 			-- 		"of owned jokers by {C:attention}+#1#x{}",
 			-- 	},
 			-- },
-            j_cry_jawbreaker = {
+            j_cry_jawbreaker_balanced = {
 				name = "Jawbreaker",
 				text = {
 					"When {C:attention}Boss Blind{} defeated,",
@@ -1904,7 +1904,7 @@ return {
                 }
             },
 
-            j_cry_canvas = {
+            j_cry_canvas_mainline = {
 				name = "Canvas",
 				text = {
 					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
@@ -1918,7 +1918,7 @@ return {
 					"in one hand",
 				},
 			},
-			j_cry_canvas_balanced = {
+			j_cry_canvas_modest = {
 				name = "Canvas",
 				text = {
 					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
@@ -1936,7 +1936,7 @@ return {
 
 
 
-            j_cry_pirate_dagger = {
+            j_cry_pirate_dagger_balanced = {
 				name = "Pirate Dagger",
 				text = {
 					"When {C:attention}Blind{} is selected,",
@@ -1953,7 +1953,7 @@ return {
 				text = {
 					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
 					-- "per {C:attention}reroll{} in the shop",
-					"{C:attention}#1#{}free reroll#<s>1# per shop",
+					"{C:attention}#1#{} free reroll#<s>1# per shop",
 					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
 				},
 			},
@@ -1962,11 +1962,11 @@ return {
 				text = {
 					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
 					-- "per {C:attention}reroll{} in the shop",
-					"{C:attention}#1#{}free reroll#<s>1# per shop",
+					"{C:attention}#1#{} free reroll#<s>1# per shop",
 					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
 				},
 			},
-            j_cry_cotton_candy_modest = {
+            j_cry_cotton_candy_balanced = {
 				name = "Cotton Candy",
 				text = {
 					"When sold,{C:attention}Joker{} to",
