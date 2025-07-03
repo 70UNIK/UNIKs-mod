@@ -8,10 +8,10 @@
 	"priority": 9999999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.2.0-ALPHA",
+	"version": "0.2.2-ALPHA",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-0309c)",
-        "Cryptid (>=0.5.6)",
-		"Talisman (>=2.0.2)"
+        "Steamodded (>=1.0.0~BETA-0614a)",
+        "Cryptid (>=0.5.9)",
+		"Talisman (>=2.2.0)"
     ]
 }
