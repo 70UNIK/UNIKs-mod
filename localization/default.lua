@@ -80,24 +80,24 @@ return {
             }
         },
         Blind={
-            bl_cry_vermillion_virus = {
-				name = "Vermillion Virus",
-				text = {
-					"Leftmost Joker",
-					"replaced every hand,",
-                    "then next one to",
-                    "it's right per hand",
-				},
-			},
-            bl_cry_chromatic = {
-				name = "The Chromatic",
-				text = {
-					"Scoring is added",
-					"to blind size",
-                    "instead of score on",
-					"odd numbered hands",
-				},
-			},
+            -- bl_cry_vermillion_virus = {
+			-- 	name = "Vermillion Virus",
+			-- 	text = {
+			-- 		"Leftmost Joker",
+			-- 		"replaced every hand,",
+            --         "then next one to",
+            --         "it's right per hand",
+			-- 	},
+			-- },
+            -- bl_cry_chromatic = {
+			-- 	name = "The Chromatic",
+			-- 	text = {
+			-- 		"Scoring is added",
+			-- 		"to blind size",
+            --         "instead of score on",
+			-- 		"odd numbered hands",
+			-- 	},
+			-- },
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
