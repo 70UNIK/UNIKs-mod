@@ -327,7 +327,99 @@ SMODS.Joker:take_ownership("j_cry_waluigi",{
 }, true)
 
 --Nostalgic invisible Joker now STRIPS editions in mainline/modest, otherwise you can infinidupe negative jokers (I believe thats what roffle did)
+SMODS.Joker:take_ownership("j_cry_oldinvisible",{
+	loc_vars = function(self, info_queue, center)
+		--copied from book of vengence
+		local main_end
 
+		if G.jokers and Card.get_gameset(card) ~= "madness" then
+			for _, v in ipairs(G.jokers.cards) do
+				if v.edition and v.edition.negative then
+				main_end = {}
+				localize {
+					type = 'other',
+					key = 'remove_negative',
+					nodes = main_end
+				}
+				break
+				end
+			end
+		end
+		return { vars = { center.ability.extra },main_end = main_end and main_end[1] }
+	end,
+	calculate = function(self, card, context)
+
+		if
+			(
+				context.selling_card
+				and context.card.ability.set == "Joker"
+				and not context.blueprint
+				and not context.retrigger_joker
+			) or context.forcetrigger
+		then
+			if card.ability.extra >= 3 then
+				card.ability.extra = 0
+				local eligibleJokers = {}
+				for i = 1, #G.jokers.cards do
+					if G.jokers.cards[i].ability.name ~= card.ability.name and G.jokers.cards[i] ~= context.card then
+						eligibleJokers[#eligibleJokers + 1] = G.jokers.cards[i]
+					end
+				end
+				if #eligibleJokers > 0 then
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							local card2 = pseudorandom_element(eligibleJokers, pseudoseed("cry_oldinvis"))
+							local strip_edition = card2.edition and card2.edition.negative
+							local card3 = nil
+							if Card.get_gameset(card3) == "madness" then
+								card3 = copy_card(card2, nil, nil, nil, nil)
+							else
+								card3 = copy_card(card2, nil, nil, nil, strip_edition)
+							end
+							
+							card3:add_to_deck()
+							G.jokers:emplace(card3)
+							return true
+						end,
+					}))
+					card_eval_status_text(
+						context.blueprint_card or card,
+						"extra",
+						nil,
+						nil,
+						nil,
+						{ message = localize("k_duplicated_ex") }
+					)
+					return nil, true
+				else
+					card_eval_status_text(
+						context.blueprint_card or card,
+						"extra",
+						nil,
+						nil,
+						nil,
+						{ message = localize("k_no_other_jokers") }
+					)
+				end
+				return
+			else
+				card.ability.extra = card.ability.extra + 1
+				if card.ability.extra == 3 then
+					local eval = function(card)
+						return (card.ability.extra == 3)
+					end
+					juice_card_until(card, eval, true)
+				end
+				return {
+					card_eval_status_text(card, "extra", nil, nil, nil, {
+						message = card.ability.extra .. "/4",
+						colour = G.C.FILTER,
+					}),
+				}
+			end
+		end
+	end,
+}, true)
 --Nostalgic google play card will always copy 1 card in mainline and WILL strip edition in modest. Besides, its a much more controllable version of invisible Joker and an instantly usable version of Book of Vengence!
 SMODS.Joker:take_ownership("j_cry_altgoogol",{
 	config = { copies = 1 },
@@ -359,7 +451,7 @@ SMODS.Joker:take_ownership("j_cry_altgoogol",{
 				end
 			end
 		end
-		return { vars = { center.ability.copies } }
+		return { vars = { center.ability.copies } ,main_end = main_end and main_end[1]}
 	end,
 }, true)
 
