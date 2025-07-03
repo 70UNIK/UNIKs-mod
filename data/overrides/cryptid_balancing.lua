@@ -5,19 +5,19 @@ SMODS.Joker:take_ownership("cry_oil_lamp", {
     config = { extra = { increase = 1.1 } },
 	--you can have your fun in madness (to an extent)
 	gameset_config = {
-		madness = { extra = { increase = 1.2 }, immutable = false },
+		madness = { extra = { increase = 1.2 } },
 		modest = {disabled = true}
 	},
 }, true)
 
---TROFICAL SMOOTHER
+--TROFICAL SMOOTHER (also if you have cloneman and smoothie on hand, this could be an (albeit harder to get) duping method)
 SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
     config = { extra = {extra = 1.25, self_destruct = false}},
     loc_vars = function(self, info_queue, center)
 		return { vars = { number_format(center.ability.extra.extra) } }
 	end,
     gameset_config = {
-		madness = { extra = {extra = 1.5, self_destruct = false}, immutable = false },
+		madness = { extra = {extra = 1.5, self_destruct = false} },
 		modest = {disabled = true}
 	},
     rarity = 'cry_epic',
@@ -98,13 +98,13 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 		then
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
-					if i > 1 then
-						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
-							Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card2)
-								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-							end)
-						end
-					end
+					-- if i > 1 then
+					-- 	if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
+					-- 		Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card2)
+					-- 			Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
+					-- 		end)
+					-- 	end
+					-- end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
 							Cryptid.with_deck_effects(G.jokers.cards[i + 1], function(card2)
@@ -312,7 +312,7 @@ SMODS.Joker:take_ownership("j_cry_m",{
 		},
 	},
 }, true)
---Googol play card is much rarer and has a 1xe100 chance of self destructing to avoid rig abuse
+--Googol play card is X17.
 SMODS.Joker:take_ownership("j_cry_googol_play",{
 	config = {
 		extra = {
@@ -323,11 +323,183 @@ SMODS.Joker:take_ownership("j_cry_googol_play",{
 }, true)
 --WAAAAAAHHHH
 SMODS.Joker:take_ownership("j_cry_waluigi",{
-	config = { extra = { Xmult = 2 } },
+	config = { extra = { Xmult = 1.8 } },
+}, true)
+
+--Nostalgic invisible Joker now STRIPS editions in mainline/modest, otherwise you can infinidupe negative jokers (I believe thats what roffle did)
+
+--Nostalgic google play card will always copy 1 card in mainline and WILL strip edition in modest. Besides, its a much more controllable version of invisible Joker and an instantly usable version of Book of Vengence!
+SMODS.Joker:take_ownership("j_cry_altgoogol",{
+	config = { copies = 1 },
+	gameset_config = {
+		modest = {
+			cost = 15,
+			copies = 1,
+		},
+		mainline = { copies = 1 },
+		madness = {
+			center = { blueprint_compat = true },
+			copies = 2,
+		},
+	},
+	loc_vars = function(self, info_queue, center)
+		--copied from book of vengence
+		local main_end
+
+		if G.jokers and Card.get_gameset(card) == "modest" then
+			for _, v in ipairs(G.jokers.cards) do
+				if v.edition and v.edition.negative then
+				main_end = {}
+				localize {
+					type = 'other',
+					key = 'remove_negative',
+					nodes = main_end
+				}
+				break
+				end
+			end
+		end
+		return { vars = { center.ability.copies } }
+	end,
+}, true)
+
+--Cotton candy only makes the joker on the right negative
+SMODS.Joker:take_ownership("j_cry_cotton_candy",{
+	loc_vars = function (self,info_queue,center)
+		return {
+			key = Cryptid.gameset_loc(self, {modest = "modest" })
+		}
+	end,
+	calculate = function(self, card, context)
+		if
+			(context.selling_self and not context.retrigger_joker and not context.blueprint_card)
+			or context.forcetrigger
+		then
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] == card then
+					if i > 1 and Card.get_gameset(card) ~= "modest" then
+						G.jokers.cards[i - 1]:set_edition({ negative = true })
+					end
+					if i < #G.jokers.cards then
+						G.jokers.cards[i + 1]:set_edition({ negative = true })
+					end
+				end
+			end
+		end
+	end,
 }, true)
 
 
---ban hook, its too overpowered for mainline
+--Nostalgic candy only provides +2 hand size.
+SMODS.Joker:take_ownership("j_cry_oldcandy",{
+	gameset_config = {
+		modest = { extra = { hand_size = 1 } },
+		mainline = { extra = {hand_size = 2}},
+	},
+}, true)
+
+--Crustulum makes 30 rerolls fwee and has no chip bonus.
+SMODS.Joker:take_ownership("j_cry_crustulum",{
+	config = {
+		extra = {
+			chips = 0,
+			chip_mod = 4,
+			free_rerolls = 30,
+		},
+	},
+	gameset_config = {
+		modest = { extra = { free_rerolls = 16} ,center = { demicolon_compat = false, blueprint_compat = false}},
+		mainline = { extra = {free_rerolls = 30},center = { demicolon_compat = false, blueprint_compat = false}},
+	},
+	loc_vars = function (self,info_queue,center)
+		if Card.get_gameset(center) == "madness" then
+			return {
+				vars = {
+					number_format(center.ability.extra.chips),
+					number_format(center.ability.extra.chip_mod),
+				},
+			}
+		else
+			return {
+				key = Cryptid.gameset_loc(self, {modest = "modest",mainline= "mainline" }),
+				vars = {center.ability.extra.free_rerolls}
+			}
+		end
+		
+	end,
+	calculate = function(self, card, context)
+		if context.reroll_shop and not context.blueprint and Card.get_gameset(card) == "madness" then
+			card.ability.extra.chips = lenient_bignum(to_big(card.ability.extra.chips) + card.ability.extra.chip_mod)
+			card_eval_status_text(card, "extra", nil, nil, nil, {
+				message = localize({
+					type = "variable",
+					key = "a_chips",
+					vars = { number_format(card.ability.extra.chips) },
+				}),
+				colour = G.C.CHIPS,
+			})
+			return nil, true
+		end
+		if context.joker_main and to_big(card.ability.extra.chips) > to_big(0) and Card.get_gameset(card) == "madness" then
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_chips",
+					vars = { number_format(card.ability.extra.chips) },
+				}),
+				chip_mod = lenient_bignum(card.ability.extra.chips),
+			}
+		end
+		if context.forcetrigger and Card.get_gameset(card) == "madness" then
+			card.ability.extra.chips = lenient_bignum(to_big(card.ability.extra.chips) + card.ability.extra.chip_mod)
+			return {
+				message = localize({
+					type = "variable",
+					key = "a_chips",
+					vars = { number_format(card.ability.extra.chips) },
+				}),
+				chip_mod = lenient_bignum(card.ability.extra.chips),
+			}
+		end
+	end,
+	add_to_deck = function(self, card, from_debuff)
+		--This makes the reroll immediately after obtaining free because the game doesn't do that for some reason
+		if Card.get_gameset(card) == "madness" then
+			G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
+			calculate_reroll_cost(true)
+		else
+			SMODS.change_free_rerolls(card.ability.extra.free_rerolls)
+            calculate_reroll_cost(true)
+		end
+	end,
+	remove_from_deck = function(self, card, from_debuff)
+		if Card.get_gameset(card) == "madness" then
+			calculate_reroll_cost(true)
+		else
+			SMODS.change_free_rerolls(-card.ability.extra.free_rerolls)
+            calculate_reroll_cost(true)
+		end
+	end,
+}, true)
+
+--Tier 3 reroll voucher rework:
+--Rerolls increase price by $1 every 3 rerolls.
+
+--Compounding interest should increase by 1%.
+SMODS.Joker:take_ownership("j_cry_compound_interest",{
+	gameset_config = {
+		modest = { extra = { percent_mod = 0.75,
+			percent = 5, } },
+		mainline = { extra = {percent_mod = 1.15,
+			percent = 10,}},
+	},
+}, true)
+--
+
+
+
+
+--ban hook, its too overpowered for mainline cause you can hook something like oil lamp to yokana and it will transform into a fucking menace.
 SMODS.Consumable:take_ownership("c_cry_hook",{
 	gameset_config = {
 		modest = { disabled = true },
@@ -446,7 +618,7 @@ calculate = function(self, card, context)
 	end,
 },true)
 
---All non exotic emulters (except happy house and night) should be immutable. Cry about it, otherwise it becomes too OP.
+--All non exotic emulters (except happy house and night) should be immutable. Cry about it, otherwise it becomes too OP with value manip.
 SMODS.Joker:take_ownership("j_cry_universe",{
     config = { extra = { emult = 1.1 } },
     gameset_config = {
@@ -479,7 +651,7 @@ SMODS.Joker:take_ownership("j_cry_eternalflame",{
 	},
 }, true)
 
---garden of forking paths must be uncommon
+--garden of forking paths must be uncommon, its pretty bad for a rare.
 SMODS.Joker:take_ownership("j_cry_gardenfork",{
 	rarity = 2,
 }, true)
@@ -489,8 +661,8 @@ SMODS.Joker:take_ownership("j_cry_filler",{
     gameset_config = {
 		modest = { disabled = true },
 		mainline = { disabled = true },
-		madness = { disabled = false },
-		experimental = { disabled = false },
+		madness = { disabled = true },
+		experimental = { disabled = true },
 	},
 }, true)
 
@@ -605,3 +777,5 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 		end
 	end,
 }, true)
+
+--

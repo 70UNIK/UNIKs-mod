@@ -267,10 +267,16 @@ NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")()
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
 --todo:
---Cookie crash fix
---Emergency bunco half edition fix (done)
---green goalpost doing nothing fix
---shader positive fix??????? (cannot fix)
+--Pink card nerf: Should retain the rank, but have its own suit still, destroyed if played with any other rank. Requires a custom renderer to render a "fake" rank image on top of the enhancement. That way it wont be just "free 7s for UNIK". You need to actually create and use actual 7s to feed him
+--Moonlight nerf to ^1.15 maybe to avoid being too powerful until late game. She may get a total rework to instead exponentiate poker hand levelups by (number of planet cards with that poker hand)^0.5 of a poker hand held in hand to make her more distinct.
+--UNIK will remain the same, just the stuff around him, primarily pink cards
+--White Lily is the same, a scoring emult that just happens to be resistant to destruction (making it more powerful if paired with a dagger).
+--(Tax Robbery, may change name, rare): Sell to refund all lost $ from rental Jokers this run. Remove all rental stickers from all jokers, +1 ante per rental sticker removed.
+--For Sale (uncommon): Sell to remove all rental stickers, lose $6 per rental sticker, destroy joker if destroyed.
+--Ghost Joker, create a random spectral on blind select (rare, epic in modest).
+--Poppy exploit fix for legendary crown (add a buffer to prevent her scaling to 6666 hands lost).
+
+--Then finally, an "overshoot" mechanic that becomes harsher if you score too well, the "summon epic blinds" thing but expanded and with proper UI and more effects (faster ante scaling), kind of like straddle. 
 
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()

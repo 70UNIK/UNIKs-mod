@@ -1892,8 +1892,8 @@ return {
 				name = "Jawbreaker",
 				text = {
 					"When {C:attention}Boss Blind{} defeated,",
-					"increase values of",
-                    "adjacent Jokers by {C:attention}X#1#{}",
+					"increase values of {C:attention}Joker",
+                    "to the right by {C:attention}X#1#{}",
 					"{E:2,C:red}self destructs{}",
 				},
 			},
@@ -1954,7 +1954,32 @@ return {
 				},
 			},
             
-
+            --not banning it entirely like almanac, but removing all chip bonuses and making it purely reroll focused., And only 30 rerolls.
+            j_cry_crustulum_mainline = {
+				name = "Crustulum",
+				text = {
+					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
+					-- "per {C:attention}reroll{} in the shop",
+					"Provides {C:attention}#1# reroll#<s>1# per shop",
+					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
+				},
+			},
+            j_cry_crustulum_modest = {
+				name = "Crustulum",
+				text = {
+					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
+					-- "per {C:attention}reroll{} in the shop",
+					"Provides {C:attention}#1# reroll#<s>1# per shop",
+					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
+				},
+			},
+            j_cry_cotton_candy_modest = {
+				name = "Cotton Candy",
+				text = {
+					"When sold,{C:attention}Joker{} to",
+					"it's right becomes {C:dark_edition}Negative{}",
+				},
+			},
             --Proper depleted loc
             --Clicked cookie
             j_cry_clicked_cookie2 = {
