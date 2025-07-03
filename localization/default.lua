@@ -1953,7 +1953,7 @@ return {
 				text = {
 					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
 					-- "per {C:attention}reroll{} in the shop",
-					"Provides {C:attention}#1# reroll#<s>1# per shop",
+					"{C:attention}#1#{}free reroll#<s>1# per shop",
 					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
 				},
 			},
@@ -1962,7 +1962,7 @@ return {
 				text = {
 					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
 					-- "per {C:attention}reroll{} in the shop",
-					"Provides {C:attention}#1# reroll#<s>1# per shop",
+					"{C:attention}#1#{}free reroll#<s>1# per shop",
 					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
 				},
 			},

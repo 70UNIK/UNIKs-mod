@@ -501,7 +501,7 @@ SMODS.Joker:take_ownership("j_cry_crustulum",{
 	},
 	gameset_config = {
 		modest = { extra = { free_rerolls = 16} ,center = { demicolon_compat = false, blueprint_compat = false}},
-		mainline = { extra = {free_rerolls = 30},center = { demicolon_compat = false, blueprint_compat = false}},
+		mainline = { extra = {free_rerolls = 40},center = { demicolon_compat = false, blueprint_compat = false}},
 	},
 	loc_vars = function (self,info_queue,center)
 		if Card.get_gameset(center) == "madness" then
