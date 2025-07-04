@@ -25,7 +25,7 @@ end
 --The epic vice's effect
 --This will be the only thing left of crossmod functionality for Epic blind interactions
 if G.GAME.unik_force_epic_plus > 0 then
-    if unik_config.unik_legendary_blinds then
+    if unik_config.unik_legendary_blinds and Cryptid.gameset() ~= "modest" then
         if v.boss and v.boss.epic and string.sub(k,1,6) == "bl_jen" then
             eligible_bosses[k] = true
         elseif v.boss and (v.boss.epic or v.boss.legendary) then
@@ -86,7 +86,7 @@ target = "functions/common_events.lua"
 pattern = '''return boss'''
 position = "before"
 payload = '''
-if unik_config.unik_legendary_blinds then
+if unik_config.unik_legendary_blinds and Cryptid.gameset() ~= "modest" then
     if (G.P_BLINDS[boss].boss and (G.P_BLINDS[boss].boss.epic or G.P_BLINDS[boss].boss.legendary)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
         G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
         --print(G.GAME.unik_force_epic_plus)

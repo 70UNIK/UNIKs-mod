@@ -1073,37 +1073,20 @@ return {
             j_unik_moonlight_cookie = { --unconditional ^1.25 mult per planet
                 name = 'Moonlight Cookie',
                 text = {
-                    "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
-                    "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    -- "Add {C:dark_edition}Negative{} to a random {C:planet}planet{}",
-                    -- "in your possession per {C:attention}Blind Refresh{}", --Consistent while being a bit reasonable
-                    "{C:unik_caption,s:0.7,E:1}#4#{}",
+                    "{C:attention}Poker Hands{} give",
+                    "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
+                    "for their corresponding {C:planet}Planet{} card", 
+                    "{C:attention}in your consumable area{}",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 },
-                unlock = {
-                    "Own {C:legendary}Perkeo{} and {C:attention}Observatory",
-                }
             },
             j_unik_scratch = { 
                 name = 'Scratch',
                 text = {
                     "{C:cry_code}Code{} cards {C:attention}in your consumable area{}", 
                     "each give {C:mult}+#1#{} Mult",
-                }
-            },
-            j_unik_moonlight_cookie_modest = { --^1.15 mult for specified poker hand
-                name = 'Moonlight Cookie',
-                text = {
-                    "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
-                    "each give {X:dark_edition,C:white}^#1#{} Mult for",
-                    "their specified {C:attention}poker hand",
-                    "{C:unik_caption,s:0.7,E:1}#4#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
-                },
-                unlock = {
-                    "Own {C:legendary}Perkeo{} and {C:attention}Observatory",
                 }
             },
             j_unik_unik = { --mainline: ^0.03 chips
@@ -1343,15 +1326,16 @@ return {
                     "{C:inactive}(Can overflow){}",
                 }             
             },
-            -- Upgrades on self destruction and destruciton, making her very resilient and synegises with dagger, ankh and additional gateways
+            -- Upgrades on destruction, making her very resilient and synegises with dagger, ankh and additional gateways
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
-                    "This Joker creates a copy with {X:dark_edition,C:white}",
-                    "an additional {X:dark_edition,C:white}^#2#{} Mult on {E:2,C:red}destruction{}",
-                    "{E:2,C:red}Self destructs{} at end of shop",
+                    "Gains {X:dark_edition,C:white}^#2#{} Mult when a",
+                    "{C:attention}Joker{} is {C:red}destroyed {C:inactive}(itself included)",
+                    "Copies itself with {C:money}$0{}",
+                    "sell value if {C:red}destroyed",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
+                    "{C:red,s:0.7}(Cannot copy if destroyed by Disposable, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
                     "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
@@ -1363,11 +1347,12 @@ return {
             j_unik_white_lily_cookie_modest = { --instead of +^1.1 per destruction, becomes +x1.25 Mult 
                 name = 'White Lily Cookie',
                 text = {
-                    "This Joker creates a copy with {X:mult,C:white}",
-                    "an additional {X:mult,C:white}X#4#{} Mult on {E:2,C:red}destruction{}",
-                    "{E:2,C:red}Self destructs{} at end of shop",
+                    "Gains {X:mult,C:white}X#4#{} Mult when a",
+                    "{C:attention}Joker{} is {C:red}destroyed {C:inactive}(itself included)",
+                    "Copies itself with {C:money}$0{}",
+                    "sell value if {C:red}destroyed",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by sticker effects, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
+                    "{C:red,s:0.7}(Cannot copy if destroyed by Disposable, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
                     "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
@@ -1413,9 +1398,7 @@ return {
             j_unik_extra_credit_alice = { 
                 name = 'Alice',
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult and {X:dark_edition,C:white}^#2#{} Chips",
-                    "if hand contains a scoring",
-                    "{C:attention}Odd{} and {C:attention}Even{} card",
+
                     "{C:unik_caption,s:0.7,E:1}Teehee! It's time I join in on the fun!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : KittyKnight{}",
@@ -1528,7 +1511,7 @@ return {
                     "{X:dark_edition,C:white}^^#1#{} Mult after scoring",
                     "If {C:attention}blueprinted{}, {C:attention}retriggered{} or",
                     "Blind beaten in",
-                    "{C:attention}3{} hands or less,",
+                    "{C:attention}#2#{} hands or less,",
                     "{E:2,C:red}Self destruct{} and",
                     "next blind becomes",
                     "an {E:2,C:red}Epic Blind{}"
@@ -1543,7 +1526,7 @@ return {
                     "{X:dark_edition,C:white}^#1#{} Mult after scoring",
                     "If {C:attention}copied{}, {C:attention}retriggered{} or",
                     "Blind beaten in",
-                    "{C:attention}3{} hands or less,",
+                    "{C:attention}#2#{} hands or less,",
                     "{E:2,C:red}Self destruct{} and",
                     "next blind becomes",
                     "a {E:2,C:red}Finisher Blind{}"

@@ -34,19 +34,19 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = { divisor = 60,x_mult = 1} },
+    config = { extra = {x_mult = 1},immutable = {divisor = 60} },
     gameset_config = {
-		modest = { extra = { divisor = 100,x_mult = 1} },  
+		modest = { extra = {x_mult = 1},immutable = {divisor = 100} },  
 	},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
-		return { vars = {center.ability.extra.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
+		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
 	end,
     calculate = function(self, card, context)
         if context.forcetrigger then
             for k, v in ipairs(context.full_hand) do
                 if SMODS.has_enhancement(v, "m_unik_pink") then
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.extra.divisor)
+                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.immutable.divisor)
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             v:juice_up()
@@ -54,7 +54,7 @@ SMODS.Joker {
                         end,
                     }))
                 elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.extra.divisor)
+                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.immutable.divisor)
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             v:juice_up()
@@ -78,7 +78,7 @@ SMODS.Joker {
                             return true
                         end,
                     }))
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.extra.divisor)
+                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.immutable.divisor)
                     triggered = true
                 elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
                     G.E_MANAGER:add_event(Event({
@@ -87,7 +87,7 @@ SMODS.Joker {
                             return true
                         end,
                     }))
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.extra.divisor)
+                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.immutable.divisor)
                     triggered = true
                 end       
             end

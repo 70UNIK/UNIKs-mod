@@ -568,6 +568,13 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
 
+--partner ideas:
+--Microwave (Lily): Click to destroy up to 1 selected card once per ante. --> Click to destroy up to 1 selected card twice per ante.
+--Crossdress (UNIK): First scored 7 gives X1.57 Chips --> first scored 7 gives X2.7 Chips
+--Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
+--Stars (Moonlight): 4 in 5 chance to not retrigger levelups once. --> 2 in 3 chance to not retrigger levelups once.
+--Cube (Cube Joker): gains 5 chips if hand contains exactly 4 cards --> gains 9 chips if hand contains exactly 4 cards
+
 
 --Future mechanics:
 --Overshoot mechanic (that will become the new name of the overscore mechanic). Designed to keep a challenge when overscoring.

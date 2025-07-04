@@ -1,28 +1,46 @@
+--Rework: This joker gains ^0.2 Mult when a joker (itself included) is destroyed. Creates a copy of itself if destroyed. Strong but now requires effort, while not being too unbalanced with dagger.
+
+
 local function White_lily_copy(card)
     local _card = copy_card(card, nil, nil, nil, nil)
    --print(_card.ability.extra.initial)
-    _card.ability.extra.initial = true
+
     
     _card:add_to_deck()
     _card:start_materialize()
     G.jokers:emplace(_card)
-    _card.ability.banana = nil
-    _card.ability.perishable = nil -- Done manually to bypass perish compat
-    _card.ability.eternal = nil
-    _card.ability.cry_rigged = nil
-    _card.ability.cry_hooked = nil
-    _card.ability.unik_disposable = nil
-    _card.ability.unik_depleted = nil
-    _card.ability.pinned = nil
-    _card.ability.cry_flickering = nil
-    _card.ability.cry_possessed = nil
-    _card.ability.extra.copying = false
-    _card.ability.extra.sold = false
     --TODO: Double Scale and Scalae support for when she self destructs or gets destroyed
     --avoid permanently doubling her values to her copy so the multiply properties must transfer
     if card.config.cry_multiply then
         _card.config.cry_multiply = card.config.cry_multiply
     end
+    _card.ability.extra.Emult = _card.ability.extra.Emult + _card.ability.extra.Emult_mod
+    _card.ability.extra.x_mult = _card.ability.extra.x_mult + _card.ability.extra.x_mult_mod
+    if Card.get_gameset(_card) ~= "modest" then
+        card_eval_status_text(_card, "extra", nil, nil, nil, {
+            message = localize({
+                type = "variable",
+                key = "a_powmult",
+                vars = {
+                    number_format(to_big(_card.ability.extra.Emult)),
+                },
+            }),
+            colour = G.C.DARK_EDITION,
+            card = _card,
+        })
+    else
+        card_eval_status_text(_card, "extra", nil, nil, nil, {
+            message = localize({
+                type = "variable",
+                key = "a_xmult",
+                vars = {
+                    number_format(to_big(_card.ability.extra.x_mult)),
+                },
+            }),
+            colour = G.C.MULT,
+            card = _card,
+        })
+    end 
 
 end
 SMODS.Atlas {
@@ -52,83 +70,56 @@ SMODS.Joker {
     -- Mainline:
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
-    config = { extra = { commits_left = 1, commit_message = "(Not committed)",Emult = 1.0, Emult_mod = 0.1, x_mult = 1.0, x_mult_mod = 1.25, sold = false,copying = false,initial = false,true_Emult_mod = 0.1, true_x_mult_mod = 1.25} },
+    config = { extra = { Emult = 1.0, Emult_mod = 0.2, x_mult = 1.0, x_mult_mod = 1.25,cost = 0} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}), 
-            vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.commit_message} }
+            vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
 	end,
     add_to_deck = function(self, card, from_debuff)
-        if card.ability.extra.commits_left > 0 then
-            card.ability.extra.commit_message = localize("k_unik_white_lily_not_committed")
-        else
-            card.ability.extra.commit_message = localize("k_unik_white_lily_committed")
-        end
         
         card.ability.perishable = nil
         card.ability.extra.copying = false
         card.ability.extra.sold = false
-        --To keep misprint deck consistent, when initializing her in deck, have her true values be set to initial values
-        if card.ability.extra.initial == false then
-           --print("set initial variables!~")
-            card.ability.extra.true_Emult_mod = card.ability.extra.true_Emult_mod
-            card.ability.extra.true_x_mult_mod = card.ability.extra.x_mult_mod
-            card.ability.extra.initial = true
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if not  G.CONTROLLER.locks.selling_card and not card.ability.unik_disposable and not card.ability.unik_niko
+        and not card.ability.cry_committed and not card.ability.cry_reworked then
+            unik_set_sell_cost(card,0)
+            White_lily_copy(card)
         end
+         
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
         if context.forcetrigger then
-            if card.ability.extra.copying == false then
-                card.ability.extra.copying = true
-                card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-                card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-                --do not make multiple clones of her! 
-                if Card.get_gameset(card) ~= "modest" then
-                    card_eval_status_text(card, "extra", nil, nil, nil, {
-                        message = localize({
-                            type = "variable",
-                            key = "a_powmult",
-                            vars = {
-                                number_format(to_big(card.ability.extra.Emult)),
-                            },
-                        }),
-                        colour = G.C.DARK_EDITION,
-                        card = card,
-                    })
-                else
-                    card_eval_status_text(card, "extra", nil, nil, nil, {
-                        message = localize({
-                            type = "variable",
-                            key = "a_xmult",
-                            vars = {
-                                number_format(to_big(card.ability.extra.x_mult)),
-                            },
-                        }),
-                        colour = G.C.MULT,
-                        card = card,
-                    })
-                end 
-                selfDestruction(card,"k_unik_plant_no_face",HEX("bfb2f6"))
-                G.E_MANAGER:add_event(Event({
-                    trigger = "after",
-                    func = function()
-                        White_lily_copy(card)
-                        return true
-                    end,
-                }))
+            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
+            if Card.get_gameset(card) ~= "modest" then
+                return {
+                    message = localize({
+                        type = "variable",
+                        key = "a_powmult",
+                        vars = {
+                            number_format(card.ability.extra.Emult),
+                        },
+                    }),
+                    Emult_mod = card.ability.extra.Emult,
+                    colour = G.C.DARK_EDITION,
+                }
+            else
+                return {
+                    message = localize({
+                        type = "variable",
+                        key = "a_xmult",
+                        vars = {
+                            number_format(card.ability.extra.x_mult),
+                        },
+                    }),
+                    Xmult_mod = card.ability.extra.x_mult,
+                    colour = G.C.MULT,
+                }
             end
-            return {
-                message = localize({
-                    type = "variable",
-                    key = "a_powmult",
-                    vars = {
-                        number_format(card.ability.extra.Emult),
-                    },
-                }),
-                Emult_mod = card.ability.extra.Emult,
-                colour = G.C.DARK_EDITION,
-            }
         end
         if context.joker_main then
             if Card.get_gameset(card) ~= "modest" then
@@ -162,103 +153,58 @@ SMODS.Joker {
             end
 
 		end
-        if (context.ending_shop and not context.blueprint and not context.repetition and not context.retrigger_joker) then
-           --print(card.ability.extra.copying)
-            if card.ability.extra.copying == false then
-                card.ability.extra.copying = true
+        if not context.blueprint and context.unik_destroying_joker then
+            if context.unik_destroyed_joker ~= card then
                 card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
                 card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
-                --do not make multiple clones of her! 
                 if Card.get_gameset(card) ~= "modest" then
-                    card_eval_status_text(card, "extra", nil, nil, nil, {
+                    return {
                         message = localize({
                             type = "variable",
                             key = "a_powmult",
                             vars = {
-                                number_format(to_big(card.ability.extra.Emult)),
+                                number_format(card.ability.extra.Emult),
                             },
                         }),
-                        colour = G.C.DARK_EDITION,
                         card = card,
-                    })
+                        colour = G.C.DARK_EDITION,
+                    }
                 else
-                    card_eval_status_text(card, "extra", nil, nil, nil, {
+                    return {
                         message = localize({
                             type = "variable",
                             key = "a_xmult",
                             vars = {
-                                number_format(to_big(card.ability.extra.x_mult)),
+                                number_format(card.ability.extra.x_mult),
                             },
                         }),
-                        colour = G.C.MULT,
                         card = card,
-                    })
-                end 
-                selfDestruction(card,"k_unik_plant_no_face",HEX("bfb2f6"))
-                G.E_MANAGER:add_event(Event({
-                    trigger = "after",
-                    func = function()
-                        White_lily_copy(card)
-                        return true
-                    end,
-                }))
+                        colour = G.C.MULT,
+                    }
+                end
             end
-        end
-        --selling her will NOT clone her
-        if context.selling_self and not context.repetition and not context.blueprint then
-            card.ability.extra.sold = true
         end
     end,
 }
 
-local oldfunc = Card.start_dissolve
-function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
-    if self.config.center.key == "j_unik_white_lily_cookie" and not self.ability.extra.sold then
-        self.ability.extra.copying = true
-        self.ability.extra.Emult = self.ability.extra.Emult + self.ability.extra.Emult_mod
-        self.ability.extra.x_mult = self.ability.extra.x_mult + self.ability.extra.x_mult_mod
-        --for technical purposes, i'll still keep jen functionality here
-        if self.ability.extra.commits_left < 0 or (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul)) then
-            play_sound('cancel', 1, 0.7)
-            card_eval_status_text(self, "extra", nil, nil, nil, {
-                message = localize("k_extinct_ex"),
-                colour = G.C.BLACK,
-                card = self,
-            })
-            if G.GAME.banned_keys.c_jen_soul_omega then
-                G.GAME.ban_spawn_on_bala_soul = true
-            end
-        elseif Card.get_gameset(self) ~= "modest" then
-            card_eval_status_text(self, "extra", nil, nil, nil, {
-                message = localize({
-                    type = "variable",
-                    key = "a_powmult",
-                    vars = {
-                        number_format(to_big(self.ability.extra.Emult)),
-                    },
-                }),
-                colour = G.C.DARK_EDITION,
-                card = self,
-            })
-        else
-            card_eval_status_text(self, "extra", nil, nil, nil, {
-                message = localize({
-                    type = "variable",
-                    key = "a_xmult",
-                    vars = {
-                        number_format(to_big(self.ability.extra.x_mult)),
-                    },
-                }),
-                colour = G.C.MULT,
-                card = self,
-            })
-        end 
-        if (self.ability.extra.commits_left >= 0 and not (G.GAME.banned_keys.c_jen_soul_omega and (not G.GAME.ban_spawn_on_bala_soul))) then
-            White_lily_copy(self)
-        end
-    end
-    local vars = oldfunc(self, dissolve_colours, silent, dissolve_time_fac, no_juice)
-    return vars 
+function unik_set_sell_cost(card, amount)
+  if not card.set_cost then return end
+  -- This is called just so it calculates the cost of the card... a bit silly
+  card:set_cost()
+  card.ability.extra_value = amount - math.max(1, math.floor(card.cost / 2))
+  card:set_cost()
+end
+
+--Brand new! Context copied from paperback
+-- Add new context that happens after destroying jokers
+local remove_ref = Card.remove
+function Card.remove(self)
+  -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
+  if self.added_to_deck and self.ability.set == 'Joker' and not G.CONTROLLER.locks.selling_card then
+        SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
+  end
+
+  return remove_ref(self)
 end
 
 if JokerDisplay then

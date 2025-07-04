@@ -61,6 +61,13 @@ SMODS.Joker {
                 card = card
             }
         end
+        if context.unik_hand_level_consumeble then
+            return{
+                message = localize('k_again_ex'),
+                repetitions = math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers),
+                card = card
+            }
+        end
 	end
 }
 
