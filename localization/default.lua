@@ -1075,8 +1075,8 @@ return {
                 text = {
                     "{C:planet}Planet{} cards {C:attention}in your consumable area{}", 
                     "each give {X:dark_edition,C:white}^#1#{} Mult",
-                    "Add {C:dark_edition}Negative{} to a random {C:planet}planet{}",
-                    "in your possession per {C:attention}Blind Refresh{}", --Consistent while being a bit reasonable
+                    -- "Add {C:dark_edition}Negative{} to a random {C:planet}planet{}",
+                    -- "in your possession per {C:attention}Blind Refresh{}", --Consistent while being a bit reasonable
                     "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
