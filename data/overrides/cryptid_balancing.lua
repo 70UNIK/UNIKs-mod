@@ -1,4 +1,6 @@
 --OIL LUMP
+--Upcoming rework: for the next 6 rounds, give X1.15 values to the joker on the right. It then self destructs. all values are immutable. "Extinguished!"
+--Permanent value manip should be in exotic territory.
 SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',

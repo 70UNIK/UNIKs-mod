@@ -184,7 +184,7 @@ position = "after"
 payload = '''
 -- reduce commit limit by 1
 if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
-    G.jokers.highlighted[1].ability.extra.commits_left = G.jokers.highlighted[1].ability.extra.commits_left - 666
+    G.jokers.highlighted[1].ability.cry_reworked = true
 end
 '''
 match_indent = true
@@ -198,7 +198,7 @@ position = "after"
 payload = '''
 -- reduce commit limit by 666
 if jkr.config.center.key == "j_unik_white_lily_cookie" then
-    jkr.ability.extra.commits_left = jkr.ability.extra.commits_left - 666
+    jkr.ability.cry_committed = true
 end
 '''
 match_indent = true

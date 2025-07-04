@@ -29,6 +29,9 @@ local unik_quotes = {
 	-- }
 }
 
+--rework: instead of 7s, has to be pink cards to require more effort. As a result, there will be no enhancement gate.
+
+
 SMODS.Joker {
 	dependencies = {
 		items = {
@@ -47,7 +50,10 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
 	fusable = true,
-    config = { extra = {Echips_mod = 0.03, Echips = 1.0,Xchips_mod = 0.7, Xchips = 1.0} }, --normally he should not be cappted in mainline+
+	--Contra logos has ^0.01 chips per 7 or 4 contained in scoring hand (doesnt have to score), but unless you have joker retriggers, it cannot retrigger 7s.
+	--This has ^0.01 chips per scoring 7 (can be retriggered). You can retrgger scoring 7s, which makes this potentally stronger than contra logos.
+	--This is why I nerfed it to ^0.01
+    config = { extra = {Echips_mod = 0.01, Echips = 1.0,Xchips_mod = 0.2, Xchips = 1.0} }, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		return {

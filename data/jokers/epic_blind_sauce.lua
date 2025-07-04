@@ -22,18 +22,21 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
-    config = { extra = { EEmult = 1.4,destroyed = false,triggers = 4,Emult = 2.5} },
+    config = { extra = { EEmult = 1.4,destroyed = false,triggers = 5,Emult = 2.5,trigger_mod = 5} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
-        if not unik_config.unik_legendary_blinds then
+        if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest" then
             key = "j_unik_epic_blind_sauce_no_epic"
-            return { key = key, vars = {center.ability.extra.Emult} }
+            return { key = key, vars = {center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
         else
-            return { key = key, vars = {center.ability.extra.EEmult} }
+            return { key = key, vars = {center.ability.extra.EEmult,math.max(0,center.ability.extra.triggers-1)} }
         end
         
 		
 	end,
+     gameset_config = {
+        config = { extra = { EEmult = 1.01,destroyed = false,triggers = 5,Emult = 2,trigger_mod = 5} },
+	},
     --Only spawn if you have at least 1 king of spades in deck
     calculate = function(self, card, context)
         --dont try to force trigger it. It will self destruct and guarantee an epic blind.
@@ -53,7 +56,7 @@ SMODS.Joker {
                 if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
                     card.ability.extra.triggers = card.ability.extra.triggers - 1
                 end
-                if (not unik_config.unik_legendary_blinds) then
+                if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") then
                     return {
                         message = localize({
                             type = "variable",
@@ -88,7 +91,7 @@ SMODS.Joker {
             end
 		end
         if context.setting_blind then
-			card.ability.extra.triggers = 4
+			card.ability.extra.triggers = card.ability.extra.trigger_mod
 		end
     end
 }
