@@ -1953,7 +1953,8 @@ return {
 				text = {
 					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
 					-- "per {C:attention}reroll{} in the shop",
-					"{C:attention}#1#{} free reroll#<s>1# per shop",
+					"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
+                    "per shop",
 					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
 				},
 			},
@@ -1962,14 +1963,15 @@ return {
 				text = {
 					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
 					-- "per {C:attention}reroll{} in the shop",
-					"{C:attention}#1#{} free reroll#<s>1# per shop",
+					"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
+                    "per shop",
 					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
 				},
 			},
             j_cry_cotton_candy_balanced = {
 				name = "Cotton Candy",
 				text = {
-					"When sold,{C:attention}Joker{} to",
+					"When sold, {C:attention}Joker{} to",
 					"it's right becomes {C:dark_edition}Negative{}",
 				},
 			},

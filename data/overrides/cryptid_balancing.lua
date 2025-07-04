@@ -477,7 +477,7 @@ SMODS.Joker:take_ownership("j_cry_cotton_candy",{
 		then
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
-					if i > 1 and Card.get_gameset(card) ~= "madness" then
+					if i > 1 and Card.get_gameset(card) == "madness" then
 						G.jokers.cards[i - 1]:set_edition({ negative = true })
 					end
 					if i < #G.jokers.cards then
@@ -507,6 +507,7 @@ SMODS.Joker:take_ownership("j_cry_crustulum",{
 			free_rerolls = 30,
 		},
 	},
+	immutable = true,
 	gameset_config = {
 		modest = { extra = { free_rerolls = 16} ,center = { demicolon_compat = false, blueprint_compat = false}},
 		mainline = { extra = {free_rerolls = 30},center = { demicolon_compat = false, blueprint_compat = false}},
@@ -566,21 +567,46 @@ SMODS.Joker:take_ownership("j_cry_crustulum",{
 		--This makes the reroll immediately after obtaining free because the game doesn't do that for some reason
 		if Card.get_gameset(card) == "madness" then
 			G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
-			calculate_reroll_cost(true)
+			calculate_reroll_cost(true,true)
 		else
 			SMODS.change_free_rerolls(card.ability.extra.free_rerolls)
-            calculate_reroll_cost(true)
+            calculate_reroll_cost(true,nil)
 		end
 	end,
 	remove_from_deck = function(self, card, from_debuff)
 		if Card.get_gameset(card) == "madness" then
-			calculate_reroll_cost(true)
+			calculate_reroll_cost(true,true)
 		else
 			SMODS.change_free_rerolls(-card.ability.extra.free_rerolls)
-            calculate_reroll_cost(true)
+            calculate_reroll_cost(true,nil)
 		end
 	end,
 }, true)
+
+function calculate_reroll_cost(skip_increment,madness)
+	if not G.GAME.current_round.free_rerolls or G.GAME.current_round.free_rerolls < 0 then
+		G.GAME.current_round.free_rerolls = 0
+	end
+	if (madness and next(find_joker("cry-crustulum"))) or G.GAME.current_round.free_rerolls > 0 then
+		G.GAME.current_round.reroll_cost = 0
+		return
+	end
+	if next(find_joker("cry-candybuttons")) then
+		G.GAME.current_round.reroll_cost = 1
+		return
+	end
+	if G.GAME.used_vouchers.v_cry_rerollexchange then
+		G.GAME.current_round.reroll_cost = 2
+		return
+	end
+	G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase or 0
+	if not skip_increment then
+		G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase
+			+ (G.GAME.modifiers.cry_reroll_scaling or 1)
+	end
+	G.GAME.current_round.reroll_cost = (G.GAME.round_resets.temp_reroll_cost or G.GAME.round_resets.reroll_cost)
+		+ G.GAME.current_round.reroll_cost_increase
+end
 
 --Tier 3 reroll voucher rework:
 --Rerolls increase price by $1 every 3 rerolls.

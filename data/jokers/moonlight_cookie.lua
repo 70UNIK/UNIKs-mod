@@ -38,7 +38,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
 	fusable = true,
-    config = { extra = { Emult = 1.15,odds = 5} },
+    config = { extra = { Emult = 1.16,odds = 5} },
 	gameset_config = {
 		modest = { extra = { Emult = 1.07,odds = 999999} },
 	},
