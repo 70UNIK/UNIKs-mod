@@ -1,7 +1,7 @@
 --spectrals appear 6x times in shop
 SMODS.Voucher{
     key = "unik_spectral_acclimator",
-	config = { extra = {rate = 25} },
+	config = { extra = {rate = 6} },
 	atlas = "unik_vouchers",
 	pos = { x = 2, y = 0 },
 	loc_vars = function(self, info_queue, card)

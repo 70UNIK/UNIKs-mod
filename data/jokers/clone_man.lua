@@ -11,7 +11,7 @@ SMODS.Joker {
 	eternal_compat = true,
     --Not immutable hopefully
     config = { extra = { 
-        multiplier = 7},
+        multiplier = 6},
         immutable = { max_multiplier = 100 },
     },
 	loc_vars = function(self, info_queue, center)
