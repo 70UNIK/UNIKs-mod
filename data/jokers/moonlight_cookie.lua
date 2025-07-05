@@ -54,9 +54,9 @@ SMODS.Joker {
 	set_ability = function(self, card, initial, delay_sprites)
 	end,
     calculate = function(self, card, context)
-		if context.hand_levelup and ((context.levelup_amount and lenient_bignum(context.levelup_amount) > lenient_bignum(0)) or not context.levelup_amount) then
+		if context.hand_levelup_held_consume and ((context.levelup_amount and lenient_bignum(context.levelup_amount) > lenient_bignum(0)) or not context.levelup_amount) then
 			local upgrade = false
-			for i,v in pairs(G.consumeables.cards) do
+			local v = context.other_consumeable_lvlup
 				--individual planets
 				if v.ability.hand_type and v.ability.hand_type == context.levelup_poker_hand then
 					-- card_eval_status_text(card, "extra", nil, nil, nil, {
@@ -67,19 +67,6 @@ SMODS.Joker {
 					local hand = context.levelup_poker_hand
 					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
 					upgrade = true
-					for i = 1, #G.jokers.cards do
-						local eval = nil
-						eval = G.jokers.cards[i]:calculate_joker({unik_hand_level_consumeble = true})
-						if eval then
-							if eval.repetitions then
-								for _ = 1, eval.repetitions do
-								card_eval_status_text(G.jokers.cards[i], 'jokers', nil, nil, nil, eval)
-								exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-								end
-							end
-							
-						end
-					end
 					
 				end
 				--ruutu, etc...
@@ -88,20 +75,6 @@ SMODS.Joker {
 						if v.ability.hand_types[i] == context.levelup_poker_hand then
 							local hand = context.levelup_poker_hand
 							exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-							upgrade = true
-							for i = 1, #G.jokers.cards do
-								local eval = nil
-								eval = G.jokers.cards[i]:calculate_joker({unik_hand_level_consumeble = true})
-								if eval then
-									if eval.repetitions then
-										for _ = 1, eval.repetitions do
-										card_eval_status_text(G.jokers.cards[i], 'jokers', nil, nil, nil, eval)
-										exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-										end
-									end
-									
-								end
-							end
 							break
 						end
 					end
@@ -111,23 +84,7 @@ SMODS.Joker {
 					local hand = context.levelup_poker_hand
 					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
 					upgrade = true
-					for i = 1, #G.jokers.cards do
-						local eval = nil
-						eval = G.jokers.cards[i]:calculate_joker({unik_hand_level_consumeble = true})
-						if eval then
-							if eval.repetitions then
-								for _ = 1, eval.repetitions do
-								card_eval_status_text(G.jokers.cards[i], 'jokers', nil, nil, nil, eval)
-								exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-								end
-							end
-							
-						end
-					end
 				end
-				
-				
-			end
 			if upgrade then
 				return {
 					message = localize("k_upgrade_ex"),
@@ -186,7 +143,9 @@ function level_up_hand(card, hand, instant, amount)
 	levelUpHook(card, hand, instant, amount)
 	if not G.GAME.unik_level_up_buffer then
 		G.GAME.unik_level_up_buffer = true
-		SMODS.calculate_context({hand_levelup = true, levelup_poker_hand = hand, levelup_instant = instant, levelup_amount = amount})
+		for i,v in pairs(G.consumeables.cards) do
+			SMODS.calculate_context({hand_levelup_held_consume = true,other_consumeable_lvlup = v, levelup_poker_hand = hand, levelup_instant = instant, levelup_amount = amount})
+		end
 		G.GAME.unik_level_up_buffer = nil
 	end
 	

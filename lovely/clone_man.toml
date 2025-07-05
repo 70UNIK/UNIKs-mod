@@ -37,50 +37,90 @@ if G.jokers and G.jokers.cards then
         end
     end
 end
+local cloned_jokers = {}
 
 if G.jokers and G.jokers.cards and _type == 'Joker' and rarity2 ~= nil then
     for i,v in pairs(G.jokers.cards) do
         if v.config.center.key ~= 'j_unik_cloneman' and v.config.center.rarity == rarity2 and not v.config.center.unique and not v.config.center.hidden and not v.config.center.cloneman_blacklist then
-            for i = 1, #clonemen do
-                for j = 1, math.floor(clonemen[i]) do
-                    _pool[#_pool + 1] = v.config.center.key
-                    _pool_size = _pool_size + 1
+            local alreadyCloned = false
+            for z,w in pairs(cloned_jokers) do
+                if w == v.config.center.key then
+                    alreadyCloned = true
                 end
             end
+            if not alreadyCloned then
+                cloned_jokers[#cloned_jokers + 1] = v.config.center.key
+                for i = 1, #clonemen do
+                    for j = 1, math.floor(clonemen[i]) do
+                        _pool[#_pool + 1] = v.config.center.key
+                        _pool_size = _pool_size + 1
+                    end
+                end
+            end
+
         end
     end
 end
+local cloned_consumables = {}
 if G.consumeables and G.consumeables.cards and _type ~= nil then
     for i,v in pairs(G.consumeables.cards) do
 
         if v.ability.set == _type and not v.config.center.unique and not v.config.center.hidden then
-            for i = 1, #clonemen do
-                for j = 1, math.floor(clonemen[i]) do
-                    _pool[#_pool + 1] = v.config.center.key
-                    _pool_size = _pool_size + 1
+            local alreadyCloned = false
+            for z,w in pairs(cloned_consumables) do
+                if w == v.config.center.key then
+                    alreadyCloned = true
+                end
+            end
+            if not alreadyCloned then
+                cloned_consumables[#cloned_consumables + 1] = v.config.center.key
+                for i = 1, #clonemen do
+                    for j = 1, math.floor(clonemen[i]) do
+                        _pool[#_pool + 1] = v.config.center.key
+                        _pool_size = _pool_size + 1
+                    end
                 end
             end
         end
     end
 end
 --Pools (meme, M, food)
+local cloned_pool = {}
 if G.consumeables and G.consumeables.cards and G.jokers and G.jokers.cards and _type ~= nil then
     for i,v in pairs(G.jokers.cards) do
         if Cryptid.safe_get(v.config.center, "pools", _type) and not v.config.center.unique and not v.config.center.hidden then
-            for i = 1, #clonemen do
-                for j = 1, math.floor(clonemen[i]) do
-                    _pool[#_pool + 1] = v.config.center.key
-                    _pool_size = _pool_size + 1
+            local alreadyCloned = false
+            for z,w in pairs(cloned_pool) do
+                if w == v.config.center.key then
+                    alreadyCloned = true
+                end
+            end
+            if not alreadyCloned then
+                cloned_pool[#cloned_pool + 1] = v.config.center.key
+                for i = 1, #clonemen do
+                    for j = 1, math.floor(clonemen[i]) do
+                        _pool[#_pool + 1] = v.config.center.key
+                        _pool_size = _pool_size + 1
+                    end
                 end
             end
         end
     end
     for i,v in pairs(G.consumeables.cards) do
         if Cryptid.safe_get(v.config.center, "pools", _type) and not v.config.center.unique and not v.config.center.hidden  then
-            for i = 1, #clonemen do
-                for j = 1, math.floor(clonemen[i]) do
-                    _pool[#_pool + 1] = v.config.center.key
-                    _pool_size = _pool_size + 1
+            local alreadyCloned = false
+            for z,w in pairs(cloned_pool) do
+                if w == v.config.center.key then
+                    alreadyCloned = true
+                end
+            end
+            if not alreadyCloned then
+                cloned_pool[#cloned_pool + 1] = v.config.center.key
+                for i = 1, #clonemen do
+                    for j = 1, math.floor(clonemen[i]) do
+                        _pool[#_pool + 1] = v.config.center.key
+                        _pool_size = _pool_size + 1
+                    end
                 end
             end
         end
