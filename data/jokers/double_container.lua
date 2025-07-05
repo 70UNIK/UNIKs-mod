@@ -61,7 +61,7 @@ SMODS.Joker {
                 card = card
             }
         end
-        if context.unik_hand_level_consumeble then
+        if context.retrigger_joker_check and context.other_card ~= self and context.other_context and context.other_context.hand_levelup_held_consume then
             return{
                 message = localize('k_again_ex'),
                 repetitions = math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers),
