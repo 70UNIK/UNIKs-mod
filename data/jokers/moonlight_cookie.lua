@@ -57,6 +57,11 @@ SMODS.Joker {
 		if context.hand_levelup_held_consume and ((context.levelup_amount and lenient_bignum(context.levelup_amount) > lenient_bignum(0)) or not context.levelup_amount) then
 			local upgrade = false
 			local v = context.other_consumeable_lvlup
+				if v.debuff then
+					card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+					v:juice_up(0.8, 0.5)
+					return
+				end
 				--individual planets
 				if v.ability.hand_type and v.ability.hand_type == context.levelup_poker_hand then
 					-- card_eval_status_text(card, "extra", nil, nil, nil, {
@@ -75,6 +80,7 @@ SMODS.Joker {
 						if v.ability.hand_types[i] == context.levelup_poker_hand then
 							local hand = context.levelup_poker_hand
 							exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
+							upgrade = true
 							break
 						end
 					end
@@ -85,11 +91,30 @@ SMODS.Joker {
 					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
 					upgrade = true
 				end
+				--planetlua
+				if v.config.center.key == "c_cry_planetlua" then
+					if
+						pseudorandom("planetlua_moonlight")
+						< cry_prob(v.ability.cry_prob, v.ability.extra.odds, v.ability.cry_rigged)
+							/ v.ability.extra.odds
+					then
+						local hand = context.levelup_poker_hand
+						exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
+						upgrade = true
+					else
+						 card_eval_status_text(v, "extra", nil, nil, nil, {
+                                message = localize("k_nope_ex"),
+                                colour = G.C.SECONDARY_SET.Planet,
+                            })
+					end
+				end
 			if upgrade then
 				return {
 					message = localize("k_upgrade_ex"),
 					colour = G.C.DARK_EDITION,
 				}
+			else
+				return
 			end
 		end
 		
