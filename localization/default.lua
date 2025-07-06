@@ -1398,7 +1398,9 @@ return {
             j_unik_extra_credit_alice = { 
                 name = 'Alice',
                 text = {
-
+                    "{C:white,X:dark_edition}^#1#{} Mult if played",
+                    "hand contains a scoring",
+                    "{C:attention}Odd{} and {C:attention}Even{} card",
                     "{C:unik_caption,s:0.7,E:1}Teehee! It's time I join in on the fun!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : KittyKnight{}",
