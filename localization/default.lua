@@ -2791,7 +2791,7 @@ return {
             k_unik_half = "Half",
             k_defeated_by = "Killed By",
             k_unik_none_hand_banned = "None hand is banned",
-            k_unik_jaundice_jack = "If a Jack not discarded before hand, convert adjacent Jokers to Hit the Road",
+            k_unik_jaundice_jack = "If a Jack not discarded before hand, convert random Joker to Hit the Road",
             k_unik_septic_seance = "If hand is not Straight Flush, convert adjacent Jokers to Seance",
             k_unik_jackshit = "JACKSHIT!",
             k_unik_seance_or_else="SEANCE OR ELSE!",
@@ -2885,7 +2885,7 @@ return {
             k_legendary_crown_normal3 = "I should've known better...",
             k_legendary_crown_normal4 = "Please don't make the same mistake as I did...",
 
-            cry_tax_placeholder = "(X0.75 blind requirement)",
+            -- cry_tax_placeholder = "(X0.75 blind requirement)",
         },
         high_scores={},
         labels={

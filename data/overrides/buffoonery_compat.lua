@@ -2,7 +2,7 @@
 
 --Overriding buffoonery's stakes so it works with vice_squeeze and comes after shitty stake and before pink stake
 SMODS.Stake:take_ownership('stake_buf_spinel', {
-    unlocked_stake = 'cry_pink',
+    unlocked_stake = 'cry_ruby',
 })
 SMODS.Stake:take_ownership('cry_pink', {
     applied_stakes = { "buf_spinel" },
