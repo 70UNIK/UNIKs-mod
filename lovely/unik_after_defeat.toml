@@ -117,6 +117,16 @@ match_indent = true
 
 [[patches]]
 [patches.pattern]
+target = 'game.lua'
+pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
+position = 'at'
+payload = '''
+if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled) or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
 target = 'blind.lua'
 pattern = '''function Blind:load(blindTable)'''
 position = 'after'

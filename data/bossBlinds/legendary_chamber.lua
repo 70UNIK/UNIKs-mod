@@ -75,12 +75,13 @@ SMODS.Blind{
     unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
         if G.GAME.unik_blind_hands > 0 then
             G.GAME.unik_blind_hands = G.GAME.unik_blind_hands - 1
+            G.GAME.unik_blind_extra_excess = sum
             return {
                 debuff = true,
                 add_to_blind = sum,
             }
         end
-        G.GAME.unik_blind_extra_excess = sum
+        
         return {
             debuff = false,
         }

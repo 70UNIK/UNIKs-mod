@@ -14,8 +14,15 @@ local madeline_quotes = {
 		'k_legendary_crown_normal4',
 	},
 }
-FinisherBossBlinddecksprites["bl_unik_legendary_crown"] = {"unik_finity_legendary_crown",{ x = 2, y = 0 }}
-FinisherBossBlindQuips["bl_unik_legendary_crown"] = {"legendary_crown",4} 
+Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown")
+if FinisherBossBlinddecksprites then
+    FinisherBossBlinddecksprites["bl_unik_legendary_crown"] = {"unik_finity_legendary_crown",{ x = 2, y = 0 }}
+end
+
+if FinisherBossBlindQuips then
+    FinisherBossBlindQuips["bl_unik_legendary_crown"] = {"legendary_crown",4} 
+end
+
 
 SMODS.Joker {
     key = "unik_legendary_crown",
