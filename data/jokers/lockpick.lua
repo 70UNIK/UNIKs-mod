@@ -17,7 +17,7 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         if
-			context.selling_card and not context.blueprint and Card.get_gameset(card) == "modest"
+			Card.get_gameset(card) == "modest" and context.selling_card and not context.blueprint
 		then
 			if context.card.ability.eternal then
                 context.card.sell_cost = -context.card.sell_cost

@@ -47,7 +47,7 @@ SMODS.Joker {
                 local decrease = 1-math.min(card.ability.extra.decrease,card.ability.immutable.max_decrease)
                 local card2 = context.other_card
                 if decrease < 1 then
-                    card2.ability.extra.req = card2.ability.extra.req^decrease
+                    card2.ability.extra.req = card2.ability.extra.req*decrease
                 end
                 if card2.ability.extra.current > card2.ability.extra.req then
                     card2.ability.extra.current = card2.ability.extra.req
