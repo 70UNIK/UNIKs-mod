@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 9999
 
 ### Bigger Blind and Boring Blank functionality to emulate Small and Big Blinds in appearance and functionality, while still ""bosses""
 ### And also make them ineligable for reroll (but can appear naturally) and not enable chicot/luchador to function
@@ -61,8 +61,8 @@ match_indent = true
 ##Ease ante when defeating bigger/boss blinds
 [[patches]]
 [patches.regex]
-target = "functions/state_events.lua"
-pattern = '''G.GAME.blind:get_type() == 'Boss''''
+target = 'functions/state_events.lua'
+pattern = '''G\.GAME\.blind\:get\_type\(\) \=\= \'Boss\''''
 position = "at"
 line_prepend = '$indent'
 payload = '''(G.GAME.blind:get_type() == 'Boss' or G.GAME.blind.config.blind.key == 'bl_unik_bigger_blind' or G.GAME.blind.config.blind.key == 'bl_unik_boring_blank') '''

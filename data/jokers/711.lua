@@ -80,8 +80,9 @@ SMODS.Joker {
 							if Card.get_gameset(card) ~= "modest" then
 								card2:set_edition({ negative = true }, true)
 							else
-								card2.ability.banana = true
+								
 							end
+							card2.ability.banana = true
 							--If it can spawn, it should not spawn again (blueprint for instance, if you have 2 blueprints, and the blueprint does it first, then it should count as "created")
 							card.ability.extra.spawn = false
 						return true

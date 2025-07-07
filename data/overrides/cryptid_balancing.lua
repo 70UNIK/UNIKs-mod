@@ -732,15 +732,103 @@ end,
 
 
 --ban hook, its too overpowered for mainline cause you can hook something like oil lamp to yokana and it will transform into a fucking menace.
---hook rework: after 4 forcetriggers (on that joker), remove hook.
+--hook rework: after 4 forcetriggers (on that joker), remove hook. 
 SMODS.Consumable:take_ownership("c_cry_hook",{
 	gameset_config = {
 		modest = { disabled = true },
-		mainline = { disabled = true },
+		mainline = { disabled = false },
 		madness = { disabled = false },
 		experimental = { disabled = false },
 	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = { key = "cry_hooked_balanced", set = "Other", vars = { "hooked Joker" ,5} }
+	end,
+	use = function(self, card, area, copier)
+		local jokers = Cryptid.get_highlighted_cards({ G.jokers }, card, 2, 2)
+		local card1 = jokers[1]
+		local card2 = jokers[2]
+		if card1 and card2 then
+			if card1.ability.cry_hooked then
+				for _, v in ipairs(G.jokers.cards) do
+					if v.sort_id == card1.ability.cry_hook_id then
+						v.ability.cry_hooked = false
+					end
+				end
+			end
+			if card2.ability.cry_hooked then
+				for _, v in ipairs(G.jokers.cards) do
+					if v.sort_id == card2.ability.cry_hook_id then
+						v.ability.cry_hooked = false
+					end
+				end
+			end
+			card1.ability.cry_hooked = true
+			card2.ability.cry_hooked = true
+			card1.ability.cry_hook_limit = 5
+			card2.ability.cry_hook_limit = 5
+			card1.ability.cry_hook_id = card2.sort_id
+			card2.ability.cry_hook_id = card1.sort_id
+		end
+	end,
 	}, true)
+
+SMODS.Sticker:take_ownership("cry_hooked", {
+	loc_vars = function(self, info_queue, card)
+		local var
+		local limit
+		if not card or not card.ability.cry_hook_id then
+			var = "[" .. localize("k_joker") .. "]"
+		else
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].sort_id == card.ability.cry_hook_id then
+					var = localize({ type = "name_text", set = "Joker", key = G.jokers.cards[i].config.center_key })
+				end
+			end
+			var = var or ("[no joker found - " .. (card.ability.cry_hook_id or "nil") .. "]")
+		end
+		if not card or not card.ability.cry_hook_limit then
+			limit = '5'
+		else
+			limit = card.ability.cry_hook_limit
+		end
+		return { key = 'cry_hooked_balanced', vars = { var or "hooked Joker", limit } }
+	end,
+	calculate = function(self, card, context)
+		if
+			context.other_card == card
+			and context.post_trigger
+			and not context.forcetrigger
+			and not context.other_context.forcetrigger
+		then
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].sort_id == card.ability.cry_hook_id then
+					local results = Cryptid.forcetrigger(G.jokers.cards[i], context)
+					if results and results.jokers then
+						card.ability.cry_hook_limit = card.ability.cry_hook_limit or 5
+						card.ability.cry_hook_limit = card.ability.cry_hook_limit - 1
+						if G.jokers and card.ability.cry_hook_limit <= 0 then
+							for g,w in pairs(G.jokers.cards) do
+								if
+									(w.ability.cry_hook_id == card.sort_id)
+									or (w.sort_id == card.ability.cry_hook_id)
+								then
+									w.ability.cry_hooked = false
+									w.ability.cry_hook_id = nil
+								end
+							end
+							card.ability.cry_hooked = nil
+							card.ability.cry_hooked = nil
+						end
+						
+						return results.jokers
+					end
+				end
+			end
+		end
+	end,
+}, true)
+
+
 
 --Nerf membership cards, its way to powerful as its unconditional essentially
 SMODS.Joker:take_ownership("j_cry_membershipcardtwo",{
@@ -862,12 +950,6 @@ SMODS.Joker:take_ownership("j_cry_universe",{
 	},
     immutable = true,
 }, true)
-SMODS.Joker:take_ownership("j_cry_jtron",{
-    immutable = true,
-    gameset_config = {
-		madness = {immutable = false },
-	},
-}, true)
 
 --reduce values of stardust to x1.5 (especially since its a fucking common)
 SMODS.Joker:take_ownership("j_cry_stardust",{
@@ -905,8 +987,8 @@ SMODS.Joker:take_ownership("j_cry_filler",{
 --fuck astralbottle. outside of experimental or madness, its a CURSED joker.
 SMODS.Joker:take_ownership("j_cry_astral_bottle",{
     gameset_config = {
-		modest = { center = { rarity = 'cry_cursed'}},
-		mainline = { center = { rarity = 'cry_cursed'}},
+		modest = { disabled = true },
+		mainline = { disabled = true },
 		madness = {center = {  rarity = 2} },
 		experimental = {center = {  rarity = 2 }},
 	},
