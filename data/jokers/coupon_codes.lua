@@ -70,6 +70,9 @@ SMODS.Joker {
                     return true
                 end,
             }))
+            return {
+                
+            }
         end
         if (context.end_of_round and context.game_over == false) then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})

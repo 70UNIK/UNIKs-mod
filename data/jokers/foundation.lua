@@ -71,6 +71,9 @@ SMODS.Joker {
 				message = localize("k_nope"),
 				colour = G.C.BLACK,
 			})
+			return {
+				
+			}
 		end
         if
 			context.cardarea == G.jokers

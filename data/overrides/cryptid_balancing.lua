@@ -78,6 +78,9 @@ SMODS.Joker:take_ownership("cry_oil_lamp", {
 					{ message = localize("k_upgrade_ex"), colour = G.C.GREEN }
 				)
 			end
+			return {
+
+			}
 		end
 	end,
 }, true)
@@ -124,6 +127,9 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 				-- )
                 selfDestruction(card,"k_upgrade_ex",G.C.GREEN)
 			end
+			return {
+
+			}
         end
 		if context.selling_self and not card.ability.extra.self_destruct and not context.repetition and not context.individual and not context.blueprint then
 			local check = false
@@ -248,6 +254,9 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 				end
 			end
             selfDestruction(card,"k_eaten_ex",G.C.FILTER)
+			return {
+				
+			}
 		end
 	end,
 }, true)
@@ -571,6 +580,13 @@ SMODS.Joker:take_ownership("j_cry_cotton_candy",{
 					end
 				end
 			end
+			if context.forcetrigger then
+				selfDestruction(card,"k_eaten_ex",G.C.FILTER)
+				return {
+
+				}
+			end
+			
 		end
 	end,
 }, true)
@@ -786,11 +802,7 @@ SMODS.Sticker:take_ownership("cry_hooked", {
 			end
 			var = var or ("[no joker found - " .. (card.ability.cry_hook_id or "nil") .. "]")
 		end
-		if not card or not card.ability.cry_hook_limit then
-			limit = '5'
-		else
-			limit = card.ability.cry_hook_limit
-		end
+		limit = card.ability.cry_hook_limit or "[nope]"
 		return { key = 'cry_hooked_balanced', vars = { var or "hooked Joker", limit } }
 	end,
 	calculate = function(self, card, context)
@@ -805,7 +817,9 @@ SMODS.Sticker:take_ownership("cry_hooked", {
 					local results = Cryptid.forcetrigger(G.jokers.cards[i], context)
 					if results and results.jokers then
 						card.ability.cry_hook_limit = card.ability.cry_hook_limit or 5
+						
 						card.ability.cry_hook_limit = card.ability.cry_hook_limit - 1
+
 						if G.jokers and card.ability.cry_hook_limit <= 0 then
 							for g,w in pairs(G.jokers.cards) do
 								if

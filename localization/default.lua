@@ -2346,7 +2346,7 @@ return {
 					"trigger {C:cry_code}#1#",
 					"{C:inactive}Not all cards can be triggered this way{}",
 					"{C:inactive}but all Jokers can trigger the other{}",
-                    "{C:inactive}(Sticker removed after {C:cry_code}#2#{C:inactive} trigger#<s>2#{}",
+                    "{C:inactive}(Sticker removed after {C:cry_code}#2#{C:inactive} trigger#<s>2#){}",
 				},
 			},
 

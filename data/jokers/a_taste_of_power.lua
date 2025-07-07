@@ -36,7 +36,9 @@ SMODS.Joker {
                     return true
                 end,
             }))
-           -- return true
+            return{
+                
+            }
 		end
 	end,
 }

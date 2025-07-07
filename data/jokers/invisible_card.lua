@@ -66,6 +66,9 @@ SMODS.Joker{ --Yellow Card
                 card.ability.extra.increase = 0
             end
             G.jokers.config.card_limit = lenient_bignum(G.jokers.config.card_limit + math.floor(card.ability.extra.increase))
+            return {
+                
+            }
         end
     end,
     add_to_deck = function(self, card, from_debuff)

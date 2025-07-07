@@ -31,9 +31,12 @@ SMODS.Joker {
                     return true
                 end,
             }))
-		end
-        if context.forcetrigger then
-            selfDestruction_noMessage(card)
+            if context.forcetrigger then
+                selfDestruction_noMessage(card)
+            end
+            return {
+
+            }
         end
 	end,
 }

@@ -44,6 +44,9 @@ SMODS.Joker {
             card.ability.extra.destroyed = true
             selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR) 
             ForceEpicBlind()
+            return {
+                
+            }
         end
         if context.final_scoring_step and not card.ability.extra.destroyed then
             

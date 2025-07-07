@@ -108,6 +108,9 @@ SMODS.Joker {
 					end
 				}))
 			end
+			return {
+				s
+			}
 		end
 		--pause timer if scoring (to ease pain in lack of control in scoring and to avoid talisman animation exploit)
 		if context.before and not context.blueprint_card
