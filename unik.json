@@ -13,5 +13,8 @@
         "Steamodded (>=1.0.0~BETA-0614a)",
         "Cryptid (>=0.5.9)",
 		"Talisman (>=2.2.0)"
-    ]
+    ],
+	"conflicts": [
+		"Finity (< 1.3.4)"
+	]
 }
