@@ -2396,11 +2396,11 @@ return {
                     "{s:0.8,C:inactive}(Jokers automatically {s:0.8,C:red}sell {s:0.8,C:inactive}when selected){}",
 				},
 			},
-            stake_cry_diamond = {
-				name = "Diamond Stake",
-				colour = "Diamond",
+            stake_cry_ruby = {
+				name = "Ruby Stake",
+				colour = "Ruby",
 				text = {
-					"Ante victory requirements increased by {C:attention}X1.25{}",
+					"Ante victory requirements increased by {C:attention}X1.5{}",
 				},
 			},
         },

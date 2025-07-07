@@ -24,7 +24,7 @@ SMODS.Stake{
 }
 
 if not (SMODS.Mods["Buffoonery"] or {}).can_load then
-    SMODS.Stake:take_ownership('cry_ruby', {
+    SMODS.Stake:take_ownership('stake_cry_ruby', {
         applied_stakes = { "unik_shitty" },
         above_stake = "unik_shitty",
         prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },

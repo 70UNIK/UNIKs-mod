@@ -26,9 +26,9 @@ SMODS.Stake:take_ownership('stake_buf_palladium', {
 -- })
 
 --increase win ante by 1.25X
-SMODS.Stake:take_ownership('stake_cry_diamond', {
+SMODS.Stake:take_ownership('stake_cry_ruby', {
     modifiers = function()
-		G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
+		G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.5)
 	end,
 })
 

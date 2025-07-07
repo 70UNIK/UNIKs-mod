@@ -19,9 +19,6 @@ elseif not v.boss.showdown and (v.boss.min <= math.max(1, G.GAME.round_resets.an
 elseif v.boss.showdown and (((math.abs(G.GAME.round_resets.ante))%math.floor(G.GAME.win_ante/G.GAME.unik_vice_squeeze) == 0) or G.GAME.modifiers.cry_big_showdown ) then
     eligible_bosses[k] = true
 end
-if G.GAME.modifiers.cry_equilibrium and v.boss then
-    eligible_bosses[k] = true
-end
 --The epic vice's effect
 --This will be the only thing left of crossmod functionality for Epic blind interactions
 if G.GAME.unik_force_epic_plus > 0 then
@@ -110,8 +107,6 @@ position = "before"
 payload = '''
 elseif G.GAME.unik_force_epic_plus > 0 then
     G.GAME.round_resets.blind_choices.Big = get_new_boss()
-elseif G.GAME.modifiers.cry_equilibrium and pseudorandom('cry_equilibrium_punishment') > 0.6 then
-    G.GAME.round_resets.blind_choices.Big = get_new_boss()
 '''
 match_indent = true
 
@@ -122,8 +117,6 @@ pattern = '''if G.GAME.modifiers.cry_big_boss_rate and pseudorandom('cry_big_bos
 position = "before"
 payload = '''
 if (G.GAME.unik_force_epic_plus > 0 and not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.modifiers.cry_no_small_blind) then
-    G.GAME.round_resets.blind_choices.Small = get_new_boss()
-elseif G.GAME.modifiers.cry_equilibrium and pseudorandom('cry_equilibrium_punishment') > 0.6 then
     G.GAME.round_resets.blind_choices.Small = get_new_boss()
 elseif not G.GAME.modifiers.cry_no_small_blind then
      G.GAME.round_resets.blind_choices.Small = 'bl_small'
@@ -143,8 +136,6 @@ position = "before"
 payload = '''
 elseif G.GAME.unik_force_epic_plus > 0 then
     self.GAME.round_resets.blind_choices.Big = get_new_boss()
-elseif G.GAME.modifiers.cry_equilibrium and pseudorandom('cry_equilibrium_punishment') > 0.6 then
-    self.GAME.round_resets.blind_choices.Big = get_new_boss()
 '''
 match_indent = true
 
@@ -155,8 +146,6 @@ pattern = '''if G.GAME.modifiers.cry_big_boss_rate and pseudorandom('cry_big_bos
 position = "before"
 payload = '''
 if (G.GAME.unik_force_epic_plus > 0 and not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.modifiers.cry_no_small_blind) then
-    self.GAME.round_resets.blind_choices.Small = get_new_boss()
-elseif G.GAME.modifiers.cry_equilibrium and pseudorandom('cry_equilibrium_punishment') > 0.6 then
     self.GAME.round_resets.blind_choices.Small = get_new_boss()
 elseif not G.GAME.modifiers.cry_no_small_blind then
      self.GAME.round_resets.blind_choices.Small = 'bl_small'
