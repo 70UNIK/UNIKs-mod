@@ -33,7 +33,7 @@ target = 'functions/common_events.lua'
 pattern = '''G.GAME.win_ante'''
 position = 'at'
 line_prepend = '$indent'
-payload = '''vice_check()'''
+payload = ''' vice_check() '''
 
 [[patches]]
 [patches.pattern]
@@ -152,4 +152,3 @@ elseif not G.GAME.modifiers.cry_no_small_blind then
 end
 '''
 match_indent = true
-

@@ -39,3 +39,4 @@ SMODS.Blind{
 	end
 }
 --Epic vice: the next 8 boss blinds become epic+ blinds
+

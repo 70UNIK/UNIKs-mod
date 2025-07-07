@@ -1,5 +1,9 @@
 local mod_path = "" .. SMODS.current_mod.path
 unik_config = SMODS.current_mod.config
+
+if not unik then
+	unik = {}
+end
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -369,6 +373,7 @@ if (SMODS.Mods['ble'] or {}).can_load then
 end
 
 
+
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
 --Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
 --Both of above will lack boss music and chicot and luchador will not be active/trigger.
@@ -568,6 +573,17 @@ NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
+
+function vice_check()
+    if G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/G.GAME.unik_vice_squeeze) == 0 then
+        return 1
+    end
+    if G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
+        return 1
+    end
+    return G.GAME.win_ante
+end
+
 
 --partner ideas:
 --Microwave (Lily): Click to destroy up to 1 selected card once per ante. --> Click to destroy up to 1 selected card twice per ante.
