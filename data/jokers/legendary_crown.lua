@@ -14,6 +14,7 @@ local madeline_quotes = {
 		'k_legendary_crown_normal4',
 	},
 }
+Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown", nil)
 FinisherBossBlinddecksprites["bl_unik_legendary_crown"] = {"unik_finity_legendary_crown",{ x = 2, y = 0 }}
 FinisherBossBlindQuips["bl_unik_legendary_crown"] = {"legendary_crown",4} 
 
