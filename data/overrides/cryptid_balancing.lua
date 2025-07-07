@@ -1013,6 +1013,8 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 		end
 	end,
 }, true)
+--Gemini: Also temporary, but lasts for 10 rounds. The 10 is NOT immutable notably!
+
 
 -- --The Tax should cap score at 75% of blind size to make it less frustrating.
 -- SMODS.Blind:take_ownership("bl_cry_tax",{

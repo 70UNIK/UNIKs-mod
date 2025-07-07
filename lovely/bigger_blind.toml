@@ -57,3 +57,12 @@ elseif blindname == 'bl_unik_bigger_blind' or blindname == 'bl_unik_boring_blank
     ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}
 '''
 match_indent = true
+
+##Ease ante when defeating bigger/boss blinds
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''G.GAME.blind:get_type() == 'Boss''''
+position = "at"
+payload = '''(G.GAME.blind:get_type() == 'Boss' or G.GAME.blind.config.blind.key == 'bl_unik_bigger_blind' or G.GAME.blind.config.blind.key == 'bl_unik_boring_blank') '''
+match_indent = true
