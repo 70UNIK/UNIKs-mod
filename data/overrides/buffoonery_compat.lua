@@ -35,6 +35,12 @@ SMODS.Stake:take_ownership('stake_cry_ruby', {
 	end,
 })
 
+SMODS.Stake:take_ownership('stake_cry_horizon', {
+    modifiers = function()
+        G.GAME.unik_vice_squeeze = 4
+    end,
+})
+
 --Rejected fan becomes cursed Joker.
 SMODS.Joker:take_ownership('j_buf_afan_spc', {
     rarity = 'cry_cursed',
