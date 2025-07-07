@@ -1,4 +1,4 @@
---Sell to create a disposable eternal rental legendary joker
+--Sell to create a perishable legendary joker with $0 sell value
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_soul_fragment',
@@ -23,14 +23,17 @@ SMODS.Joker {
                     
                     play_sound("timpani")
                     local card2 = create_card("Joker", G.jokers, true, nil, nil, nil, nil, "unik_tech_demo")
-                    card2.ability.unik_disposable = true
-                    card2.ability.eternal = true
+                    card2.ability.perishable = true
                     card2:add_to_deck()
                     G.jokers:emplace(card2)
                     card2:juice_up(0.3, 0.5)
+                    unik_set_sell_cost(card2,0)
                     return true
                 end,
             }))
 		end
+        if context.forcetrigger then
+            selfDestruction_noMessage(card)
+        end
 	end,
 }

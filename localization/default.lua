@@ -845,7 +845,7 @@ return {
             c_unik_rot_crossdresser={
                 name = 'The Crossdresser!',
                 text = {
-                    'Select {C:attention}#1#{} cards to',
+                    'Select {C:attention}#1#{} card#<s>1# to',
                     'convert to {C:attention}7s{}',
                 },
             },
@@ -1311,8 +1311,8 @@ return {
                 name="Soul Fragment",
                 text={
                     "Sell this card to create a random",
-                    "{C:attention}Eternal Disposable{}", 
-                    "{C:legendary}Legendary{} Joker",
+                    "{C:perishable}Perishable{} {C:legendary}Legendary{} ", 
+                    "Joker with {C:money}$0{} sell value",
                     "{C:inactive}(Can overflow){}",
                 }               
             },
@@ -1321,7 +1321,7 @@ return {
                 name="A Taste of Power",
                 text={
                     "Sell this card to create a random",
-                    "{C:attention}Absolute Niko{}", 
+                    "{C:eternal}Absolute {C:red}Niko{}", 
                     "{C:cry_exotic}Exotic{} Joker",
                     "{C:inactive}(Can overflow){}",
                 }             
@@ -1457,18 +1457,18 @@ return {
                 name = 'Lockpick',
                 text = {
                     "You can now {C:attention}sell",
-                    "{C:purple}Eternal{} Jokers",
+                    "{C:eternal}Eternal{} Jokers",
                 },
                 unlock = {
                     "Fill your Joker slots",
-                    "with {C:purple}Eternal{} Jokers",
+                    "with {C:eternal}Eternal{} Jokers",
                 }
             },
             j_unik_lockpick_modest = {
                 name = 'Lockpick',
                 text = {
                     "You can now {C:red}banish",
-                    "{C:purple}Eternal{} Jokers for",
+                    "{C:eternal}Eternal{} Jokers for",
                     "{E:2,C:red}negative{} sell value",
                 },
                 unlock = {
@@ -1866,13 +1866,31 @@ return {
 			-- 		"of owned jokers by {C:attention}+#1#x{}",
 			-- 	},
 			-- },
+            j_cry_oil_lamp_reworked = {
+				name = "Oil Lamp",
+				text = {
+					"Increase values of {C:attention}Joker{} to the right",
+					"by {C:attention}X#1#{} at end of round",
+                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
+				},
+            },
             j_cry_jawbreaker_balanced = {
 				name = "Jawbreaker",
 				text = {
 					"When {C:attention}Boss Blind{} defeated,",
 					"increase values of {C:attention}Joker",
                     "to the right by {C:attention}X#1#{}",
-					"{E:2,C:red}self destructs{}",
+                    "{E:2,C:red}self destructs{}",
+                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
+				},
+			},
+            j_cry_tropical_smoothie_reworked = {
+				name = "Tropical Smoothie",
+				text = {
+					"Sell this card",
+					"to {C:attention}multiply{} values",
+					"of owned Jokers by {C:attention}X#1#{}",
+                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
 				},
 			},
             j_unik_cloneman = {

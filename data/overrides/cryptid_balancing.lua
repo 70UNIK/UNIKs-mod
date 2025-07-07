@@ -1,25 +1,95 @@
 --OIL LUMP
---Upcoming rework: for the next 6 rounds, give X1.15 values to the joker on the right. It then self destructs. all values are immutable. "Extinguished!"
---Permanent value manip should be in exotic territory.
+--Upcoming rework: multiplies values of jokers to the right by 1.15X. Values revert after 2 rounds, requiring you to "keep oiling" a joker if you want to keep its benefits.
 SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',
-    config = { extra = { increase = 1.1 } },
-	--you can have your fun in madness (to an extent)
+    config = { extra = { increase = 1.2, revert = 2 } },
 	gameset_config = {
-		madness = { extra = { increase = 1.2 } },
 		modest = {disabled = true}
 	},
+	loc_vars = function(self, info_queue, card)
+		card.ability.blueprint_compat_ui = card.ability.blueprint_compat_ui or ""
+		card.ability.blueprint_compat_check = nil
+		return {
+			key = "j_cry_oil_lamp_reworked",
+			vars = { number_format(card.ability.extra.increase),number_format(card.ability.extra.revert) },
+			main_end = (card.area and card.area == G.jokers) and {
+				{
+					n = G.UIT.C,
+					config = { align = "bm", minh = 0.4 },
+					nodes = {
+						{
+							n = G.UIT.C,
+							config = {
+								ref_table = card,
+								align = "m",
+								colour = G.C.JOKER_GREY,
+								r = 0.05,
+								padding = 0.06,
+								func = "blueprint_compat",
+							},
+							nodes = {
+								{
+									n = G.UIT.T,
+									config = {
+										ref_table = card.ability,
+										ref_value = "blueprint_compat_ui",
+										colour = G.C.UI.TEXT_LIGHT,
+										scale = 0.32 * 0.8,
+									},
+								},
+							},
+						},
+					},
+				},
+			} or nil,
+		}
+	end,
+	calculate = function(self, card, context)
+		if
+			(context.end_of_round and not context.repetition and not context.individual and not context.blueprint)
+			or context.forcetrigger
+		then
+			local check = false
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] == card then
+					if i < #G.jokers.cards then
+						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
+							check = true
+							Cryptid.manipulate(G.jokers.cards[i + 1], { value = card.ability.extra.increase })
+							local card6 = G.jokers.cards[i + 1]
+							card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							--How would it work?
+							--{multiplier,rounds left}
+							--{decrements by 1. If hits 0, then reverts values.}
+							card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert}
+
+						end
+					end
+				end
+			end
+			if check then
+				card_eval_status_text(
+					card,
+					"extra",
+					nil,
+					nil,
+					nil,
+					{ message = localize("k_upgrade_ex"), colour = G.C.GREEN }
+				)
+			end
+		end
+	end,
 }, true)
 
---TROFICAL SMOOTHER (also if you have cloneman and smoothie on hand, this could be an (albeit harder to get) duping method)
+--TROFICAL SMOOTHER: multiples values of all owned jokers by 1.35X. Values of jokers revert after 4 rounds
 SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
-    config = { extra = {extra = 1.25, self_destruct = false}},
+    config = { extra = {extra = 1.4, self_destruct = false, revert = 4}},
     loc_vars = function(self, info_queue, center)
-		return { vars = { number_format(center.ability.extra.extra) } }
+		return { key = "j_cry_tropical_smoothie_reworked", vars = { number_format(center.ability.extra.extra),number_format(center.ability.extra.revert) } }
 	end,
     gameset_config = {
-		madness = { extra = {extra = 1.5, self_destruct = false} },
+		madness = { extra = {extra = 1.5, self_destruct = false, revert = 5} },
 		modest = {disabled = true}
 	},
     rarity = 'cry_epic',
@@ -31,9 +101,12 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 			for i, v in pairs(G.jokers.cards) do
 				if v ~= card then
 					if not Card.no(v, "immutable", true) then
-						Cryptid.with_deck_effects(v, function(cards)
-                            Cryptid.misprintize(cards, { min = card.ability.extra.extra, max = card.ability.extra.extra }, nil, true)
-						end)
+						Cryptid.manipulate(v, { value = card.ability.extra.extra })
+						v.cry_valuemanip_reset = v.cry_valuemanip_reset or {}
+						--How would it work?
+						--{multiplier,rounds left}
+						--{decrements by 1. If hits 0, then reverts values.}
+						v.cry_valuemanip_reset[#v.cry_valuemanip_reset + 1] = {card.ability.extra.extra,card.ability.extra.revert - 1}
 						check = true
 					end
 				end
@@ -57,9 +130,12 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 			for i, v in pairs(G.jokers.cards) do
 				if v ~= card then
 					if not Card.no(v, "immutable", true) then
-						Cryptid.with_deck_effects(v, function(cards)
-                            Cryptid.misprintize(cards, { min = card.ability.extra.extra, max = card.ability.extra.extra }, nil, true)
-						end)
+						Cryptid.manipulate(v, { value = card.ability.extra.extra })
+						v.cry_valuemanip_reset = v.cry_valuemanip_reset or {}
+						--How would it work?
+						--{multiplier,rounds left}
+						--{decrements by 1. If hits 0, then reverts values.}
+						v.cry_valuemanip_reset[#v.cry_valuemanip_reset + 1] = {card.ability.extra.extra,card.ability.extra.revert - 1}
 						check = true
 					end
 				end
@@ -78,14 +154,14 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 	end,
 }, true)
 
---JAWBUSTER
+--JAWBUSTER:  1.6X values to joker on the right. Values revert after 5 rounds
 SMODS.Joker:take_ownership("j_cry_jawbreaker", {
-    config = { extra = {increase = 1.5,self_destruct = false} },
+    config = { extra = {increase = 1.7,self_destruct = false,revert = 5} },
     loc_vars = function(self, info_queue, center)
-		return { key = Cryptid.gameset_loc(self, { mainline = "balanced" }), vars = { number_format(center.ability.extra.increase) } }
+		return { key = "j_cry_jawbreaker_balanced", vars = { number_format(center.ability.extra.increase),number_format(center.ability.extra.revert) } }
 	end,
     gameset_config = {
-		madness = { extra = {increase = 2, self_destruct = false} },
+		madness = { extra = {increase = 2, self_destruct = false,revert = 5} },
 		modest = {disabled = true}
 	},
     immutable = true,
@@ -109,9 +185,13 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 					-- end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
-							Cryptid.with_deck_effects(G.jokers.cards[i + 1], function(card2)
-								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-							end)
+							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
+							local card6 = G.jokers.cards[i + 1]
+							card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							--How would it work?
+							--{multiplier,rounds left}
+							--{decrements by 1. If hits 0, then reverts values.}
+							card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 						end
 					end
 				end
@@ -147,18 +227,22 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
             card.ability.extra.self_destruct = true
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
-					if i > 1 then
-						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
-							Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card)
-								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-							end)
-						end
-					end
+					-- if i > 1 then
+					-- 	if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
+					-- 		Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card)
+					-- 			Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
+					-- 		end)
+					-- 	end
+					-- end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
-							Cryptid.with_deck_effects(G.jokers.cards[i + 1], function(card)
-								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-							end)
+							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
+							local card6 = G.jokers.cards[i + 1]
+							card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							--How would it work?
+							--{multiplier,rounds left}
+							--{decrements by 1. If hits 0, then reverts values.}
+							card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 						end
 					end
 				end
@@ -315,18 +399,18 @@ SMODS.Joker:take_ownership("j_cry_m",{
 	},
 }, true)
 --Googol play card is X17.
-SMODS.Joker:take_ownership("j_cry_googol_play",{
-	config = {
-		extra = {
-			Xmult = 17,
-			odds = 8,
-		},
-	},
-}, true)
+-- SMODS.Joker:take_ownership("j_cry_googol_play",{
+-- 	config = {
+-- 		extra = {
+-- 			Xmult = 17,
+-- 			odds = 8,
+-- 		},
+-- 	},
+-- }, true)
 --WAAAAAAHHHH
-SMODS.Joker:take_ownership("j_cry_waluigi",{
-	config = { extra = { Xmult = 1.8 } },
-}, true)
+-- SMODS.Joker:take_ownership("j_cry_waluigi",{
+-- 	config = { extra = { Xmult = 1.8 } },
+-- }, true)
 
 --Nostalgic invisible Joker now STRIPS editions in mainline/modest, otherwise you can infinidupe negative jokers (I believe thats what roffle did)
 SMODS.Joker:take_ownership("j_cry_oldinvisible",{
@@ -423,39 +507,39 @@ SMODS.Joker:take_ownership("j_cry_oldinvisible",{
 	end,
 }, true)
 --Nostalgic google play card will always copy 1 card in mainline and WILL strip edition in modest. Besides, its a much more controllable version of invisible Joker and an instantly usable version of Book of Vengence!
-SMODS.Joker:take_ownership("j_cry_altgoogol",{
-	config = { copies = 1 },
-	gameset_config = {
-		modest = {
-			cost = 15,
-			copies = 1,
-		},
-		mainline = { copies = 1 },
-		madness = {
-			center = { blueprint_compat = true },
-			copies = 2,
-		},
-	},
-	loc_vars = function(self, info_queue, center)
-		--copied from book of vengence
-		local main_end
+-- SMODS.Joker:take_ownership("j_cry_altgoogol",{
+-- 	config = { copies = 1 },
+-- 	gameset_config = {
+-- 		modest = {
+-- 			cost = 15,
+-- 			copies = 1,
+-- 		},
+-- 		mainline = { copies = 1 },
+-- 		madness = {
+-- 			center = { blueprint_compat = true },
+-- 			copies = 2,
+-- 		},
+-- 	},
+-- 	loc_vars = function(self, info_queue, center)
+-- 		--copied from book of vengence
+-- 		local main_end
 
-		if G.jokers and Card.get_gameset(card) == "modest" then
-			for _, v in ipairs(G.jokers.cards) do
-				if v.edition and v.edition.negative then
-				main_end = {}
-				localize {
-					type = 'other',
-					key = 'remove_negative',
-					nodes = main_end
-				}
-				break
-				end
-			end
-		end
-		return { vars = { center.ability.copies } ,main_end = main_end and main_end[1]}
-	end,
-}, true)
+-- 		if G.jokers and Card.get_gameset(card) == "modest" then
+-- 			for _, v in ipairs(G.jokers.cards) do
+-- 				if v.edition and v.edition.negative then
+-- 				main_end = {}
+-- 				localize {
+-- 					type = 'other',
+-- 					key = 'remove_negative',
+-- 					nodes = main_end
+-- 				}
+-- 				break
+-- 				end
+-- 			end
+-- 		end
+-- 		return { vars = { center.ability.copies } ,main_end = main_end and main_end[1]}
+-- 	end,
+-- }, true)
 
 SMODS.Joker:take_ownership("j_cry_maximized",{
 	loc_vars = function (self,info_queue,center)
@@ -622,12 +706,33 @@ SMODS.Joker:take_ownership("j_cry_compound_interest",{
 			percent = 10,}},
 	},
 }, true)
---
+--multiply fix
+SMODS.Consumable:take_ownership("c_cry_multiply",{
+use = function(self, card, area, copier)
+	local cards = Cryptid.get_highlighted_cards({ G.jokers }, card, 1, 1, function(card)
+		return not Card.no(card, "immutable", true)
+	end)
+	-- if cards[1] and not cards[1].config.cry_multiply then
+	-- 	cards[1].config.cry_multiply = 1
+	-- end
+	-- cards[1].config.cry_multiply = cards[1].config.cry_multiply * 2
+	Cryptid.manipulate(cards[1], { value = 2 })
+	local card6 = cards[1]
+	card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+	--How would it work?
+	--{multiplier,rounds left}
+	--{decrements by 1. If hits 0, then reverts values.}
+	card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {2,0}
+
+end,
+}, true)
+
 
 
 
 
 --ban hook, its too overpowered for mainline cause you can hook something like oil lamp to yokana and it will transform into a fucking menace.
+--hook rework: after 4 forcetriggers (on that joker), remove hook.
 SMODS.Consumable:take_ownership("c_cry_hook",{
 	gameset_config = {
 		modest = { disabled = true },
@@ -772,15 +877,15 @@ SMODS.Joker:take_ownership("j_cry_stardust",{
 	},
 }, true)
 
---eflame should be x0.1 or x0.12
-SMODS.Joker:take_ownership("j_cry_eternalflame",{
-	config = {
-		extra = {
-			extra = 0.1,
-			x_mult = 1,
-		},
-	},
-}, true)
+-- --eflame should be x0.1 or x0.12
+-- SMODS.Joker:take_ownership("j_cry_eternalflame",{
+-- 	config = {
+-- 		extra = {
+-- 			extra = 0.1,
+-- 			x_mult = 1,
+-- 		},
+-- 	},
+-- }, true)
 
 --garden of forking paths must be uncommon, its pretty bad for a rare.
 SMODS.Joker:take_ownership("j_cry_gardenfork",{
@@ -1108,3 +1213,22 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 -- 		end
 -- 	end,
 -- }, true)
+
+-- --temp value_manip = 
+-- local initHook = Card.init
+-- function Card:init(X, Y, W, H, card, center, params)
+-- 	initHook(self,X, Y, W, H, card, center, params)
+-- 	self.cry_valuemanip_reset = nil
+-- end
+
+-- local saveHook = Card.save
+-- function Card:save()
+-- 	local ret = saveHook(self)
+-- 	ret["cry_valuemanip_reset"] = self.cry_valuemanip_reset or nil
+-- 	return ret
+-- end
+
+-- local loadHook = Card.load
+-- function Card:load(cardTable, other_card)
+-- 	self.cry_valuemanip_reset = cardTable.cry_valuemanip_reset or nil
+-- end
