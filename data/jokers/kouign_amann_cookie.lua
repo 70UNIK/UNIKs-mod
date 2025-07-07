@@ -46,7 +46,7 @@ SMODS.Joker {
                 local rep = math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers)
                 local decrease = 1-math.min(card.ability.extra.decrease,card.ability.immutable.max_decrease)
                 local card2 = context.other_card
-                if decrease < 1 then
+                if decrease < 1 and not context.blueprint_card and not context.retrigger_joker then
                     card2.ability.extra.req = card2.ability.extra.req*decrease
                 end
                 if card2.ability.extra.current > card2.ability.extra.req then

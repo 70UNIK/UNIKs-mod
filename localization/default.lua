@@ -1749,6 +1749,7 @@ return {
                     "{C:attention}Light Cards #1#{} time#<s>1#",
                     "and reduce their",
                     "requirements by {X:dark_edition,C:white}X#2#",
+                    "{C:inactive,s:0.8}(Requirement reduction cannot be copied)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
