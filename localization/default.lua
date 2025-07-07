@@ -1321,7 +1321,7 @@ return {
                 name="A Taste of Power",
                 text={
                     "Sell this card to create a random",
-                    "{C:eternal}Absolute {C:red}Niko{}", 
+                    "{C:purple}Absolute {C:red}Niko{}", 
                     "{C:cry_exotic}Exotic{} Joker",
                     "{C:inactive}(Can overflow){}",
                 }             
@@ -1457,18 +1457,18 @@ return {
                 name = 'Lockpick',
                 text = {
                     "You can now {C:attention}sell",
-                    "{C:eternal}Eternal{} Jokers",
+                    "{C:purple}Eternal{} Jokers",
                 },
                 unlock = {
                     "Fill your Joker slots",
-                    "with {C:eternal}Eternal{} Jokers",
+                    "with {C:purple}Eternal{} Jokers",
                 }
             },
             j_unik_lockpick_modest = {
                 name = 'Lockpick',
                 text = {
                     "You can now {C:red}banish",
-                    "{C:eternal}Eternal{} Jokers for",
+                    "{C:purple}Eternal{} Jokers for",
                     "{E:2,C:red}negative{} sell value",
                 },
                 unlock = {
