@@ -33,7 +33,7 @@ target = 'functions/common_events.lua'
 pattern = '''G.GAME.win_ante'''
 position = 'at'
 line_prepend = '$indent'
-payload = '''math.floor(G.GAME.win_ante/G.GAME.unik_vice_squeeze)'''
+payload = '''vice_check()'''
 
 [[patches]]
 [patches.pattern]

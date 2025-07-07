@@ -29,3 +29,13 @@ function CanSpawnLegendary()
     end
     return false
 end
+
+function vice_check()
+    if G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/G.GAME.unik_vice_squeeze) == 0 then
+        return 1
+    end
+    if G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
+        return 1
+    end
+    return G.GAME.win_ante
+end
