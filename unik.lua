@@ -393,12 +393,19 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")() --panopicon. thats it
+	--Blinds below require talisman due to exponential requirements
+	if SMODS and SMODS.Mods and (SMODS.Mods.Talisman or SMODS.Mods.Talisman.can_load) then
+		NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")() --panopicon. thats it
+	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")() --Uhhh, maybe I can add a joker that scales xmult but caps score at 0.75x and scale only if score is exactly 1.5x, but that breaks the consecutive scoring
-	NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")() --good high card score thats it.
+	if SMODS and SMODS.Mods and (SMODS.Mods.Talisman or SMODS.Mods.Talisman.can_load) then
+		NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")() --Uhhh, maybe I can add a joker that scales xmult but caps score at 0.75x and scale only if score is exactly 1.5x, but that breaks the consecutive scoring
+		NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")() --good high card score thats it.
+	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")() --may need to be reworked to be less annoying
-	NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")() --dont have too much rarities, have good amount of hands, blueprint(s) 
+	if SMODS and SMODS.Mods and (SMODS.Mods.Talisman or SMODS.Mods.Talisman.can_load) then
+		NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")() --dont have too much rarities, have good amount of hands, blueprint(s) 
+	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")() --same as above, but dont have too much hands, maybe have higher ranked cards or planets on hand
 	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end

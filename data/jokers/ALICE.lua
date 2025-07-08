@@ -33,7 +33,7 @@ SMODS.Joker {
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 2.5}},
+    config = { extra = { Emult = 2}},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult,center.ability.extra.Echips} }
 	end,

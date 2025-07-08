@@ -1,4 +1,5 @@
 --^^1.2 Mult. If copied, retriggered or blind defeated in 3 hands, self destructs and the next blind becomes an epic blind.
+--Becomes ^2.5 mult without talisman due to the nature of tetration (outside of morefluff's)
 --EPIC
 function ForceEpicBlind()
     G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus or 0
@@ -25,7 +26,7 @@ SMODS.Joker {
     config = { extra = { EEmult = 1.4,destroyed = false,triggers = 5,Emult = 2.5,trigger_mod = 5} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
-        if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest" then
+        if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest" or (SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load))then
             key = "j_unik_epic_blind_sauce_no_epic"
             return { key = key, vars = {center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
         else
@@ -59,7 +60,7 @@ SMODS.Joker {
                 if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
                     card.ability.extra.triggers = card.ability.extra.triggers - 1
                 end
-                if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") then
+                if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") or (SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load)) then
                     return {
                         message = localize({
                             type = "variable",
