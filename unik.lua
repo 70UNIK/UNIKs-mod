@@ -605,7 +605,6 @@ if MoreFluff then
 	end
 	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
 end
-
 --partner ideas:
 --Microwave (Lily): Click to destroy up to 1 selected card once per ante. --> Click to destroy up to 1 selected card twice per ante.
 --Crossdress (UNIK): First scored 7 gives X1.57 Chips --> first scored 7 gives X2.7 Chips
