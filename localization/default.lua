@@ -871,8 +871,8 @@ return {
                 }
             },
             --uniks mod, morefluff and paperback
-            c_unik_gray={
-                name = "Gray",
+            c_unik_lavender={
+                name = "Lavender",
                 text = {
                     "Create a random {C:dark_edition}Negative{}",
                     "{C:paperback_minor_arcana}Minor Arcana{} card for every",
@@ -886,16 +886,17 @@ return {
                 text = {
                     "Create a random",
                     "{X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card after",
-                    "{C:attention}#4#{} rounds while held",
+                    "{C:attention}#4#{} rounds while held", --after 5 rounds
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
                 }
             },
-            c_unik_stone={
-                name = "Stone",
+            c_unik_stone_grey={
+                name = "Stone Gray",
                 text = {
                     "Create a random",
                     "{C:cry_exotic}Exotic{} joker after",
                     "{C:attention}#4#{} rounds while held", --after 200 rounds
+                    "{C:inactive}(Must have room)",
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
                 }
             },

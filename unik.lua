@@ -584,6 +584,20 @@ function vice_check()
     return G.GAME.win_ante
 end
 
+SMODS.Atlas({ 
+  key = "unik_colours", 
+  path = "unik_colours.png",
+  px = 71, 
+  py = 95 
+})
+--Color cards
+if MoreFluff then
+	NFS.load(mod_path .. "data/colours/spectral_blue.lua")()
+	if (SMODS.Mods["paperback"] or {}).can_load then
+		NFS.load(mod_path .. "data/colours/lavender.lua")()
+	end
+	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
+end
 
 --partner ideas:
 --Microwave (Lily): Click to destroy up to 1 selected card once per ante. --> Click to destroy up to 1 selected card twice per ante.
