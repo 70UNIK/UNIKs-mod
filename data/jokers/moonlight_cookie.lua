@@ -36,6 +36,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+	demicolon_compat = true,
 	fusable = true,
     config = { extra = { exp_levelup = 1.4} },
 	gameset_config = {
@@ -54,6 +55,24 @@ SMODS.Joker {
 	set_ability = function(self, card, initial, delay_sprites)
 	end,
     calculate = function(self, card, context)
+		--forcetrigger,
+		if context.forcetrigger then
+			local hand2 = context.scoring_name or G.FUNCS.get_poker_hand_info(G.play.cards) or nil
+			if hand2 then
+				for i,v in pairs(G.consumeables.cards) do
+					moonlightlevelStructure(hand2,v,card)
+				end
+			elseif #G.hand.highlighted > 0 then
+				local text, disp_text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+				--print(text)
+				for i,v in pairs(G.consumeables.cards) do
+					moonlightlevelStructure(text,v,card)
+				end
+			end
+			return {
+				
+			}
+		end
 		if context.hand_levelup_held_consume and ((context.levelup_amount and lenient_bignum(context.levelup_amount) > lenient_bignum(0)) or not context.levelup_amount) then
 			local upgrade = false
 			local v = context.other_consumeable_lvlup
@@ -122,7 +141,74 @@ SMODS.Joker {
 
 }
 
+function moonlightlevelStructure(hand,consumeble,card)
+	local upgrade = false
+	local v = consumeble
+		if v.debuff then
+			card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+			v:juice_up(0.8, 0.5)
+			return
+		end
+		--individual planets
+		if v.ability.hand_type then
+			--print(v.ability.hand_type)
+			--print(hand)
+		end
+		if v.ability.hand_type and v.ability.hand_type == hand then
+			-- card_eval_status_text(card, "extra", nil, nil, nil, {
+			-- 	message = localize("k_upgrade_ex"),
+			-- 	colour = G.C.DARK_EDITION,
+			-- 	card=card,
+			-- })
+			local hand = hand
+			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+			upgrade = true
+			
+		end
+		--ruutu, etc...
+		if v.ability.hand_types then
+			for i = 1,#v.ability.hand_types do
+				--print(v.ability.hand_types[i])
+				if v.ability.hand_types[i] == hand then
+					local hand = hand
+					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+					upgrade = true
+					break
+				end
+			end
+			--print(hand)
+		end
+		--Bhole
+		if v.config.center.key == "c_black_hole" then
+			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+			upgrade = true
+		end
+		--planetlua
+		if v.config.center.key == "c_cry_planetlua" then
+			if
+				pseudorandom("planetlua_moonlight")
+				< cry_prob(v.ability.cry_prob, v.ability.extra.odds, v.ability.cry_rigged)
+					/ v.ability.extra.odds
+			then
+				exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+				upgrade = true
+			else
+					card_eval_status_text(v, "extra", nil, nil, nil, {
+						message = localize("k_nope_ex"),
+						colour = G.C.SECONDARY_SET.Planet,
+					})
+			end
+		end
+	if upgrade then
+		card_eval_status_text(card, "extra", nil, nil, nil, {
+			message = localize("k_upgrade_ex"),
+			colour = G.C.DARK_EDITION,
+		})
+	end
+end
+
 function exponentLevelExtra(hand,exponent,v,instant)
+	--print("g")
 	if not instant and not Talisman.config_file.disable_anims then
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },

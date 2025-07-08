@@ -50,7 +50,7 @@ SMODS.Joker {
     cost = 70, 
 
     calculate = function(self, card, context)
-        if context.force_trigger then
+        if context.forcetrigger then
             card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
             return {
                 message = localize({

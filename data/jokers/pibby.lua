@@ -44,7 +44,8 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         if context.forcetrigger then
-            for k, v in ipairs(context.full_hand) do
+            local hand = context.full_hand or G.play.cards or G.hand.highlighted
+            for k, v in ipairs(hand) do
                 if SMODS.has_enhancement(v, "m_unik_pink") then
                     card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.immutable.divisor)
                     G.E_MANAGER:add_event(Event({

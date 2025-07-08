@@ -68,7 +68,7 @@ SMODS.Joker {
 		if context.forcetrigger then --NOPE! YOU ARE NOT GETTING A FREE EXOTIC!
 			card.ability.extra.hands = 0
 			card_eval_status_text(card, "extra", nil, nil, nil, {
-				message = localize("k_nope"),
+				message = localize("k_nope_ex"),
 				colour = G.C.BLACK,
 			})
 			return {

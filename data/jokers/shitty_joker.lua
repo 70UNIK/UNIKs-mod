@@ -17,7 +17,22 @@ SMODS.Joker {
 		return { vars = {math.min(center.ability.extra.discards,center.ability.immutable.max_hand_size_mod)} }
 	end,
 	calculate = function(self, card, context)
-		if (context.setting_blind and not (context.blueprint_card or card).getting_sliced) or context.forcetrigger then
+		if context.forcetrigger then
+			ease_discard(
+				math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards)
+			)
+			return{
+				message = localize({
+					type = "variable",
+					key = "a_unik_discards",
+					vars = {
+						math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
+					},
+				}),
+				colour = G.C.RED
+			}
+		end
+		if (context.setting_blind and not (context.blueprint_card or card).getting_sliced) then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					ease_discard(
@@ -31,6 +46,7 @@ SMODS.Joker {
 								math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
 							},
 						}),
+						colour = G.C.RED
 					})
 					return true
 				end,

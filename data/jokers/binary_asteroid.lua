@@ -23,14 +23,13 @@ SMODS.Joker {
                         -- Pick hands over discards
                         local func = res.hands and ease_hands_played or ease_discard
                         local message = res.hands and 'a_hands' or 'paperback_a_discards'
-
-                        func(card.edition.amount, true)
+                        func(card.ability.extra.hands, true)
 
                         SMODS.calculate_effect({
                             message = localize {
                             type = 'variable',
                             key = message .. (res.amt < 0 and '_minus' or ''),
-                            vars = { card.edition.amount }
+                            vars = { card.ability.extra.hands }
                             },
                             colour = res.hands and G.C.CHIPS or G.C.MULT,
                             instant = true
@@ -54,13 +53,13 @@ SMODS.Joker {
                         local func = res.hands and ease_hands_played or ease_discard
                         local message = res.hands and 'a_hands' or 'paperback_a_discards'
 
-                        func(card.edition.amount, true)
+                        func(card.ability.extra.hands, true)
 
                         SMODS.calculate_effect({
                             message = localize {
                             type = 'variable',
                             key = message .. (res.amt < 0 and '_minus' or ''),
-                            vars = { card.edition.amount }
+                            vars = { card.ability.extra.hands }
                             },
                             colour = res.hands and G.C.CHIPS or G.C.MULT,
                             instant = true

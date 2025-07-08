@@ -1063,7 +1063,7 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 				colour = G.C.DARK_EDITION,
 			}
 		end
-		if context.force_trigger then
+		if context.forcetrigger then
 			card.ability.emult = card.ability.emult - card.ability.emult_mod
 			if (to_number(card.ability.emult) <= 1.00000001 and not card.ability.unik_depleted) then
 				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)

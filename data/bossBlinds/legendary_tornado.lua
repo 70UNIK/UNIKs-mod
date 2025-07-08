@@ -68,14 +68,14 @@ SMODS.Blind{
                         v:juice_up(0.2,0.5)
                     end
                 end
-                print(w.ability.unik_valid_tornado_card)
+              --  print(w.ability.unik_valid_tornado_card)
                 G.GAME.blind.triggered = true
                 return true
             else
-                print(w.ability.unik_valid_tornado_card)
+              --  print(w.ability.unik_valid_tornado_card)
             end
         end
-        print("UH OH!")
+       -- print("UH OH!")
         return false
 	end,
     disable = function(self)
