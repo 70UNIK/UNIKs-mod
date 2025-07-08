@@ -860,6 +860,46 @@ return {
                 }
             }
         },
+        Colour = {
+            c_unik_spectral_blue={
+                name = "Spectral Blue",
+                text = {
+                    "Create a random {C:dark_edition}Negative{}",
+                    "{C:spectral}Spectral{} card for every",
+                    "{C:attention}#4#{} rounds this has been held",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
+                }
+            },
+            --uniks mod, morefluff and paperback
+            c_unik_gray={
+                name = "Gray",
+                text = {
+                    "Create a random {C:dark_edition}Negative{}",
+                    "{C:paperback_minor_arcana}Minor Arcana{} card for every",
+                    "{C:attention}#4#{} rounds this has been held",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
+                }
+            },
+            --Lartceps color card
+            c_unik_zzzzzz={
+                name = "#ZZZZZZ",
+                text = {
+                    "Create a random",
+                    "{X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card after",
+                    "{C:attention}#4#{} rounds while held",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
+                }
+            },
+            c_unik_stone={
+                name = "Stone",
+                text = {
+                    "Create a random",
+                    "{C:cry_exotic}Exotic{} joker after",
+                    "{C:attention}#4#{} rounds while held", --after 200 rounds
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
+                }
+            },
+        },
         Joker={
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
@@ -1311,7 +1351,7 @@ return {
                 name="Soul Fragment",
                 text={
                     "Sell this card to create a random",
-                    "{C:perishable}Perishable{} {C:legendary}Legendary{} ", 
+                    "{C:attention}Perishable{} {C:legendary}Legendary{} ", 
                     "Joker with {C:money}$0{} sell value",
                     "{C:inactive}(Can overflow){}",
                 }               
@@ -1726,6 +1766,7 @@ return {
             },
             --Alternate poppy:
             --Retrigger rightmost card 1 time, increase by 1 when discards equal 0 once per round
+            --Modest poppy: retrigger rightmost card based on hands lost.
             j_unik_poppy = {
                 name = "Poppy", --Retrigger rightmost card for every hand or discard used
                 text = {
@@ -1879,8 +1920,8 @@ return {
 				name = "Jawbreaker",
 				text = {
 					"When {C:attention}Boss Blind{} defeated,",
-					"increase values of {C:attention}Joker",
-                    "to the right by {C:attention}X#1#{}",
+					"increase values of ",
+                    "adjcent {C:attention}Jokers{} by {C:attention}X#1#{}",
                     "{E:2,C:red}self destructs{}",
                     "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
 				},

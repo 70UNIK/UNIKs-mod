@@ -159,15 +159,22 @@ unik_niko = { atlas = "unik_sticker_deck", pos = { x = 2, y = 0 } },
 unik_impounded = { atlas = "unik_sticker_deck", pos = { x = 0, y = 1 } },'''
 match_indent = true
 
-## https://discord.com/channels/1116389027176787968/1233186615086813277/1370611144997212230
+## Betmma real time shader method
+# Send real time to fs file in draw_shader function.
 [[patches]]
 [patches.pattern]
 target = "engine/sprite.lua"
-pattern = '''G.SHADERS[_shader or 'dissolve']:send("time",123.33412*(_draw_major.ID/1.14212 or 12.5123152)%3000)'''
-position = "at"
-payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.TIMERS.REAL)'''
+pattern = '''G.SHADERS[_shader or 'dissolve']:send("shadow",(not not _shadow_height))'''
+position = "after"
+payload = '''
+if _shader=='unik_corrupted' then
+    G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
+end
+if _shader=='unik_fuzzy' then
+    G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
+end
+'''
 match_indent = true
-
 
 [[patches]]
 [patches.pattern]

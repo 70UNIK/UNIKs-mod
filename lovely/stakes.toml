@@ -44,16 +44,3 @@ end
 
 '''
 match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/stake.lua"]'''
-pattern = '''applied_stakes = { "gold" },
-	prefix_config = { applied_stakes = { mod = false } },'''
-position = "at"
-payload = '''
-applied_stakes = { "unik_persimmon" },
-above_stake = "unik_persimmon",
-prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
-'''
-match_indent = true

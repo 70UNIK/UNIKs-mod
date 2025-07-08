@@ -14,6 +14,7 @@ extern PRECISION vec2 fuzzy;
 
 extern PRECISION number dissolve;
 extern PRECISION float time;
+extern float real_time;
 // [Note] sprite_pos_x _y is not a pixel position!
 //        To get pixel position, you need to multiply  
 //        it by sprite_width _height (look flipped.fs)
@@ -119,7 +120,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     float max_y = (texture_details.y + 1.) * sprite_height; // max Y
 
     float tilt_normalized = fuzzy.x;
-    float iTime = time;
+    float iTime = real_time;
 
     float shiftX = 1.5 * sin(uv.y * (10.16 + 3.55 ) + (4.*iTime) + tilt_normalized * 0.000000001) // sine shift + affected by card rotation
                                             / image_details.x; // shift X so normalize by X
@@ -130,13 +131,13 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     float newY = min(max_y, max(min_y, texture_coords.y + shiftY));
     
     vec4 pixel = Texel(texture, vec2(newX, newY));
-    pixel = vec4(HueShift(vec3(pixel.r,pixel.g,pixel.b),time),pixel.a);
+    pixel = vec4(HueShift(vec3(pixel.r,pixel.g,pixel.b),real_time),pixel.a);
 
     vec2 normalize_and_amp = (2.5 * (1. - length(uv - 0.5) - 0.4)) / image_details;
 
-    float r = Texel(texture, vec2(newX, newY) + (1.5 + sin(time * 3) + 0.5 * cos(1.5* time)) *  vec2(1.9) * normalize_and_amp).r;
+    float r = Texel(texture, vec2(newX, newY) + (1.5 + sin(real_time * 3) + 0.5 * cos(1.5* real_time)) *  vec2(1.9) * normalize_and_amp).r;
     float g = Texel(texture, vec2(newX, newY)).g;
-    float b = Texel(texture, vec2(newX, newY) + (1.5 + sin(time * 3) + 0.5 * cos(1.5 * time)) * vec2(1.9)  * normalize_and_amp).b;
+    float b = Texel(texture, vec2(newX, newY) + (1.5 + sin(real_time * 3) + 0.5 * cos(1.5 * real_time)) * vec2(1.9)  * normalize_and_amp).b;
     
 	return dissolve_mask(vec4(r, g, b, pixel.a) * pixel, texture_coords, uv);
 

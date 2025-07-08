@@ -160,7 +160,7 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 	end,
 }, true)
 
---JAWBUSTER:  1.6X values to joker on the right. Values revert after 5 rounds
+--JAWBUSTER:  1.6X values to adjacent jokers. Values revert after 5 rounds
 SMODS.Joker:take_ownership("j_cry_jawbreaker", {
     config = { extra = {increase = 1.7,self_destruct = false,revert = 5} },
     loc_vars = function(self, info_queue, center)
@@ -182,13 +182,19 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 		then
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
-					-- if i > 1 then
-					-- 	if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
-					-- 		Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card2)
-					-- 			Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-					-- 		end)
-					-- 	end
-					-- end
+					if i > 1 then
+						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
+							Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card2)
+								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
+								local card6 = card2
+								card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+								--How would it work?
+								--{multiplier,rounds left}
+								--{decrements by 1. If hits 0, then reverts values.}
+								card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+							end)
+						end
+					end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
@@ -233,13 +239,19 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
             card.ability.extra.self_destruct = true
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
-					-- if i > 1 then
-					-- 	if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
-					-- 		Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card)
-					-- 			Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-					-- 		end)
-					-- 	end
-					-- end
+					if i > 1 then
+						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
+							Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card2)
+								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
+								local card6 = card2
+								card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+								--How would it work?
+								--{multiplier,rounds left}
+								--{decrements by 1. If hits 0, then reverts values.}
+								card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+							end)
+						end
+					end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
@@ -1109,9 +1121,6 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 		end
 	end,
 }, true)
---Gemini: Also temporary, but lasts for 10 rounds. The 10 is NOT immutable notably!
-
-
 -- --The Tax should cap score at 75% of blind size to make it less frustrating.
 -- SMODS.Blind:take_ownership("bl_cry_tax",{
 -- 	dependencies = {
