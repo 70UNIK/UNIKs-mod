@@ -26,7 +26,11 @@ SMODS.Joker {
     config = { extra = { EEmult = 1.4,destroyed = false,triggers = 5,Emult = 2.5,trigger_mod = 5} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
-        if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest" or (SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load))then
+        if (not Talisman) then
+            key = "j_unik_epic_blind_sauce_notalisman"
+            return { key = key, vars = {center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
+        end
+        if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest"then
             key = "j_unik_epic_blind_sauce_no_epic"
             return { key = key, vars = {center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
         else
@@ -60,7 +64,7 @@ SMODS.Joker {
                 if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
                     card.ability.extra.triggers = card.ability.extra.triggers - 1
                 end
-                if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") or (SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load)) then
+                if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") or (not Talisman) then
                     return {
                         message = localize({
                             type = "variable",

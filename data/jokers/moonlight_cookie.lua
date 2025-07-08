@@ -209,7 +209,7 @@ end
 
 function exponentLevelExtra(hand,exponent,v,instant)
 	--print("g")
-	if not instant and not Talisman.config_file.disable_anims then
+	if not instant and (not Talisman or not  Talisman.config_file.disable_anims) then
 		update_hand_text(
 			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
 			{
@@ -222,7 +222,7 @@ function exponentLevelExtra(hand,exponent,v,instant)
 	end
 	G.GAME.hands[hand].mult = G.GAME.hands[hand].mult*exponent
 	G.GAME.hands[hand].chips = G.GAME.hands[hand].chips*exponent
-	if not instant and not Talisman.config_file.disable_anims then
+	if not instant and (not Talisman or not Talisman.config_file.disable_anims) then
 		delay(0.1)
 		update_hand_text({delay = 0}, {mult = Cryptid.ascend(G.GAME.hands[hand].mult), StatusText = true})
 		G.E_MANAGER:add_event(Event({

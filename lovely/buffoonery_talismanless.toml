@@ -1,0 +1,24 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Buffoonery "Buffoonery.lua"]'''
+pattern = '''NFS.load(Buffoonery.path .. 'notalisman.lua')()'''
+position = "before"
+payload = '''
+if not Cryptid then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Buffoonery "Buffoonery.lua"]'''
+pattern = '''NFS.load(Buffoonery.path .. 'notalisman.lua')()'''
+position = "after"
+payload = '''
+end
+'''
+match_indent = true

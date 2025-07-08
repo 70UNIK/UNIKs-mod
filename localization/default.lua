@@ -1563,6 +1563,21 @@ return {
                     "Die to an {C:red}Epic Blind"
                 }
             },
+            j_unik_epic_blind_sauce_notalisman = { --no talisman, yes epic blinds
+                name = "Epic Blind Sauce",
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Mult after scoring",
+                    "If {C:attention}copied{}, {C:attention}retriggered{} or",
+                    "Blind beaten in",
+                    "{C:attention}#2#{} hands or less,",
+                    "{E:2,C:red}Self destruct{} and",
+                    "next blind becomes",
+                    "an {E:2,C:red}Epic Blind{}"
+                },
+                unlock = {
+                    "Die to a {C:attention}Finisher Blind"
+                }
+            },
             j_unik_epic_blind_sauce_no_epic = {
                 name = "Epic Blind Sauce",
                 text = {

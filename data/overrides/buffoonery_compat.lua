@@ -149,3 +149,8 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 	
 	return ret
 end
+
+if not Talisman then
+	buf.compat.talisman = true
+end
+--Buffoonery Talismanless cryptid compat:
