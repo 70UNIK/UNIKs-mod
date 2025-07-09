@@ -31,12 +31,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                    message = localize({
-                    type = "variable",
-                    key = "a_xchips",
-                    vars = { number_format(card.ability.extra.x_chips) },
-                }),
-                Xchip_mod = card.ability.extra.x_chips,
+
+                x_chips = card.ability.extra.x_chips,
                 colour = G.C.CHIPS,
             }
         end
@@ -44,12 +40,8 @@ SMODS.Joker {
             -- if a seven
             if SMODS.has_no_rank(context.other_card) and SMODS.has_no_suit(context.other_card) then
                 return {
-                        message = localize({
-                        type = "variable",
-                        key = "a_xchips",
-                        vars = { number_format(card.ability.extra.x_chips) },
-                    }),
-                    Xchip_mod = card.ability.extra.x_chips,
+
+                    x_chips = card.ability.extra.x_chips,
                     colour = G.C.CHIPS,
                 }
 			end

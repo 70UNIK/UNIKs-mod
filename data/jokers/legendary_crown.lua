@@ -51,16 +51,8 @@ SMODS.Joker {
 
     calculate = function(self, card, context)
         if context.forcetrigger then
-            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
             return {
-                message = localize({
-					type = "variable",
-					key = "a_powmult",
-                    vars = {
-                        number_format(card.ability.extra.Emult),
-                    },
-				}),
-				Emult_mod = card.ability.extra.Emult,
+				e_mult = card.ability.extra.Emult,
                 colour = G.C.DARK_EDITION,
 			}
         end
@@ -83,14 +75,7 @@ SMODS.Joker {
         
 		if (context.joker_main) and to_big(card.ability.extra.Emult) ~= to_big(1) then
             return {
-                message = localize({
-					type = "variable",
-					key = "a_powmult",
-                    vars = {
-                        number_format(card.ability.extra.Emult),
-                    },
-				}),
-				Emult_mod = card.ability.extra.Emult,
+				e_mult = card.ability.extra.Emult,
                 colour = G.C.DARK_EDITION,
 			}
         end

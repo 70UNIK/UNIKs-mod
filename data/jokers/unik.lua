@@ -65,43 +65,29 @@ SMODS.Joker {
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
 		local check = false
-		if context.forcetrigger and Card.get_gameset(card) == "modest" then
-			card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
-			return {
-                message = localize({
-					type = "variable",
-					key = "a_powchips",
-                    vars = {
-                        number_format(card.ability.extra.Echips),
-                    },
-				}),
-				Echip_mod = card.ability.extra.Echips,
-                colour = G.C.DARK_EDITION,
-			}
+		if context.forcetrigger then
+			if Card.get_gameset(card) == "modest" then
+				return {
+					x_chips = card.ability.extra.Xchips,
+					colour = G.C.CHIPS,
+				}
+			else
+				return {
+					e_chips = card.ability.extra.Echips,
+					colour = G.C.DARK_EDITION,
+				}
+			end
+			
 		end
 		if (context.joker_main)  then
 			if Card.get_gameset(card) == "modest" and (to_big(card.ability.extra.Xchips) > to_big(1)) then
 				return {
-					message = localize({
-						type = "variable",
-						key = "a_xchips",
-						vars = {
-							number_format(card.ability.extra.Xchips),
-						},
-					}),
-					Echip_mod = card.ability.extra.Xchips,
-					colour = G.C.DARK_EDITION,
+					x_chips = card.ability.extra.Xchips,
+					colour = G.C.CHIPS,
 				}
 			elseif (to_big(card.ability.extra.Echips) > to_big(1)) then
 			return {
-                message = localize({
-					type = "variable",
-					key = "a_powchips",
-                    vars = {
-                        number_format(card.ability.extra.Echips),
-                    },
-				}),
-				Echip_mod = card.ability.extra.Echips,
+				e_chips = card.ability.extra.Echips,
                 colour = G.C.DARK_EDITION,
 			}
 			end

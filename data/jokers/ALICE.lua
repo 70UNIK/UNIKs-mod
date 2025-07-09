@@ -33,23 +33,18 @@ SMODS.Joker {
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 2}},
+    config = { extra = { Emult = 2.5}},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult,center.ability.extra.Echips} }
 	end,
     gameset_config = {
-		modest = {extra = {Emult = 1.5} }, --nu maggit is ^1.5 but requires 2 jokers so this is fair.
+		modest = {extra = {Emult = 1.6} }, 
 	},
     pools = {},
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                    Emult_mod = card.ability.extra.Emult,
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = { number_format(to_big(card.ability.extra.Emult)) },
-                    }),
+                    e_mult = card.ability.extra.Emult,
                     colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
                 }
         end
@@ -67,12 +62,7 @@ SMODS.Joker {
             end
             if (_odd and _even) then
                 return {
-                    Emult_mod = card.ability.extra.Emult,
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = { number_format(to_big(card.ability.extra.Emult)) },
-                    }),
+                    e_mult = card.ability.extra.Emult,
                     colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
                 }
             end

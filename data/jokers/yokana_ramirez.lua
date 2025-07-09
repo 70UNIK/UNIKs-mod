@@ -39,12 +39,7 @@ SMODS.Joker {
 		end
 		if context.forcetrigger then
 			return {
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				Xchip_mod = card.ability.extra.x_chips,
+				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
 		end
@@ -58,12 +53,7 @@ SMODS.Joker {
 			-- 	}))
 			-- end
 			return {
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				Xchip_mod = card.ability.extra.x_chips,
+				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 
 			}
@@ -85,7 +75,7 @@ SMODS.Joker {
 					vars = { number_format(card.ability.extra.x_chips) },
 				}),
 				card = card,
-				Xchip_mod = card.ability.extra.x_chips,
+				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
 		end

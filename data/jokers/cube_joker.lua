@@ -23,23 +23,15 @@ SMODS.Joker {
 		if context.forcetrigger then
 			card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
 			return {
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				Xchip_mod = card.ability.extra.x_chips,
+
+				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
 		end
 		if ((context.joker_main) and (to_big(card.ability.extra.x_chips) > to_big(1))) then
 			return {
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				Xchip_mod = card.ability.extra.x_chips,
+
+				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
 		end

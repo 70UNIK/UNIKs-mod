@@ -26,14 +26,7 @@ SMODS.Enhancement {
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then
             return {
-                message = localize({
-					type = "variable",
-					key = "a_powchips",
-                    vars = {
-                        number_format(card.ability.extra.Echips),
-                    },
-				}),
-				Echip_mod = card.ability.extra.Echips,
+				e_chips = card.ability.extra.Echips,
                 colour = G.C.DARK_EDITION,
 			}
 		end

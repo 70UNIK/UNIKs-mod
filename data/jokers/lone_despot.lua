@@ -29,28 +29,14 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.forcetrigger then
              return {
-                message = localize({
-                    type = "variable",
-                    key = "a_powmult",
-                    vars = {
-                        number_format(card.ability.extra.Emult),
-                    },
-                }),
-                Emult_mod = card.ability.extra.Emult,
+                e_mult = card.ability.extra.Emult,
                 colour = G.C.DARK_EDITION,
             }
         end
         if context.individual and context.cardarea == G.play and #context.full_hand == 1 then
             if context.full_hand[1]:is_suit("Spades") and context.full_hand[1]:get_id() == 13 then
                  return {
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = {
-                            number_format(card.ability.extra.Emult),
-                        },
-                    }),
-                    Emult_mod = card.ability.extra.Emult,
+                    e_mult = card.ability.extra.Emult,
                     colour = G.C.DARK_EDITION,
                 }
             end

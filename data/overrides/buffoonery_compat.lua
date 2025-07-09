@@ -101,7 +101,7 @@ calculate = function(self, card, context)
                         number_format(card.ability.extra.mult_amount),
                     },
 				}),
-				Echip_mod = card.ability.extra.mult_amount,
+				e_chips = card.ability.extra.mult_amount,
                 colour = G.C.DARK_EDITION,
 			}
         end

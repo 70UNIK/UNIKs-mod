@@ -28,8 +28,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
 		if context.joker_main or context.forcetrigger then
 			return {
-				message = localize({ type = "variable", key = "a_xchips", vars = { card.ability.extra.x_chips } }),
-				Xchip_mod = card.ability.extra.x_chips,
+				x_chips = card.ability.extra.x_chips,
                 colour = G.C.CHIPS,
 			}
 		end

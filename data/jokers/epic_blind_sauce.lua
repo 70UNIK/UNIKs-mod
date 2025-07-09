@@ -66,14 +66,7 @@ SMODS.Joker {
                 end
                 if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") or (not Talisman) then
                     return {
-                        message = localize({
-                            type = "variable",
-                            key = "a_powmult",
-                            vars = {
-                                number_format(card.ability.extra.Emult),
-                            },
-                        }),
-                        Emult_mod = card.ability.extra.Emult,
+                        e_mult = card.ability.extra.Emult,
                         colour = G.C.DARK_EDITION,
                     }
                 else

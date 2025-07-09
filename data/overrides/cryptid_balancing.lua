@@ -888,7 +888,7 @@ calculate = function(self, card, context)
 					key = "a_xchips",
 					vars = { number_format(card.ability.extra.x_chips) },
 				}),
-				Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
+				x_chips = lenient_bignum(card.ability.extra.x_chips),
 			}
 		end
 		local my_pos = nil
@@ -962,7 +962,7 @@ calculate = function(self, card, context)
 					key = "a_xchips",
 					vars = { number_format(card.ability.extra.x_chips) },
 				}),
-				Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
+				x_chips = lenient_bignum(card.ability.extra.x_chips),
 			}
 		end
 	end,
@@ -1052,14 +1052,7 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 	calculate = function(self, card, context)
 		if context.joker_main then
 			return {
-				message = localize({
-					type = "variable",
-					key = "a_powmult",
-					vars = {
-						number_format(card.ability.emult),
-					},
-				}),
-				Emult_mod = lenient_bignum(card.ability.emult),
+				e_mult = lenient_bignum(card.ability.emult),
 				colour = G.C.DARK_EDITION,
 			}
 		end
@@ -1071,14 +1064,7 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
 			else
 				return {
-					message = localize({
-						type = "variable",
-						key = "a_powmult",
-						vars = {
-							number_format(card.ability.emult),
-						},
-					}),
-					Emult_mod = lenient_bignum(card.ability.emult),
+					e_mult = lenient_bignum(card.ability.emult),
 					colour = G.C.DARK_EDITION,
 				}
 			end

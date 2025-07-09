@@ -37,7 +37,7 @@ SMODS.Enhancement {
 			-- 		key = "a_xchips",
 			-- 		vars = { number_format(card.ability.extra.x_chips) },
 			-- 	}),
-			-- 	Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
+			-- 	x_chips = lenient_bignum(card.ability.extra.x_chips),
             --     colour = G.C.CHIPS,
             -- }, card)
             -- return {

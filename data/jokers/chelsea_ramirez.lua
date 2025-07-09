@@ -86,23 +86,15 @@ SMODS.Joker {
         if context.forcetrigger then
             card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
             return {
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				Xchip_mod = card.ability.extra.x_chips,
+
+				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
         end
 		if (context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1))) and not card.ability.extra.unik_godsmarble_debuff then
 			return {
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				Xchip_mod = card.ability.extra.x_chips,
+
+				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
 		end
@@ -113,7 +105,7 @@ local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
     local ret = scie(effect, scored_card, key, amount, from_edition)
     --print("TEST")
-    if ((key == "x_chips" or key == "xchips" or key == "Xchips" or key == "x_chips_mod" or key == "Xchips_mod" or key == "Xchip_mod"
+    if ((key == "x_chips" or key == "xchips" or key == "Xchips" or key == "x_chips_mod" or key == "Xchips_mod" or key == "x_chips"
 or key == "Echips_mod" or key == "e_chips_mod" or key == "Echips" or key == "e_chips" or key == "echips" or key == "Echip_mod"
 or key == "EEchips_mod" or key == "ee_chips_mod" or key == "EEchips" or key == "ee_chips" or key == "eechips" or key == "EEchip_mod"
 or key == "EEEchips_mod" or key == "eee_chips_mod" or key == "EEEchips" or key == "eee_chips" or key == "eeechips" or key == "EEEchip_mod"
@@ -134,7 +126,7 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
         --                 key = "a_xchips",
         --                 vars = { number_format(to_big(v.ability.extra.x_chips)) },
         --             }),
-        --             Xchip_mod = v.ability.extra.x_chips,
+        --             x_chips = v.ability.extra.x_chips,
         --             colour = G.C.CHIPS,
         --         }, v)
         --      end

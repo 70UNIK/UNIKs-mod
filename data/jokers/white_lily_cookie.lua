@@ -70,6 +70,7 @@ SMODS.Joker {
     -- Mainline:
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
+    --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
     config = { extra = { Emult = 1.0, Emult_mod = 0.15, x_mult = 1.0, x_mult_mod = 1.25,cost = 0} },
 	loc_vars = function(self, info_queue, center)
 		return { 
@@ -97,14 +98,7 @@ SMODS.Joker {
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             if Card.get_gameset(card) ~= "modest" then
                 return {
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = {
-                            number_format(card.ability.extra.Emult),
-                        },
-                    }),
-                    Emult_mod = card.ability.extra.Emult,
+                    e_mult = card.ability.extra.Emult,
                     colour = G.C.DARK_EDITION,
                 }
             else
@@ -125,14 +119,7 @@ SMODS.Joker {
             if Card.get_gameset(card) ~= "modest" then
                 if (to_big(card.ability.extra.Emult) > to_big(1)) then
                     return {
-                        message = localize({
-                            type = "variable",
-                            key = "a_powmult",
-                            vars = {
-                                number_format(card.ability.extra.Emult),
-                            },
-                        }),
-                        Emult_mod = card.ability.extra.Emult,
+                        e_mult = card.ability.extra.Emult,
                         colour = G.C.DARK_EDITION,
                     }
                 end

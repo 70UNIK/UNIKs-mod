@@ -26,14 +26,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
 		if context.final_scoring_step and (to_big(card.ability.extra.Emult) < to_big(1)) then
             return {
-                message = localize({
-                    type = "variable",
-                    key = "a_powmult",
-                    vars = {
-                        number_format(card.ability.extra.Emult),
-                    },
-                }),
-                Emult_mod = card.ability.extra.Emult,
+                e_mult = card.ability.extra.Emult,
 				colour = G.C.DARK_EDITION,
             }
 		end
