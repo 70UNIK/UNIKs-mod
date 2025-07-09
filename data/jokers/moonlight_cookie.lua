@@ -38,7 +38,8 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicolon_compat = true,
 	fusable = true,
-    config = { extra = { exp_levelup = 1.4} },
+	--Why 1.25? Storing multiple planets will cause the value to compound MASSIVELY, plus retriggers.
+    config = { extra = { exp_levelup = 1.3} },
 	gameset_config = {
 		modest = { extra = { exp_levelup = 1.1} },
 	},

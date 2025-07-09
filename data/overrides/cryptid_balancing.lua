@@ -3,7 +3,7 @@
 SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',
-    config = { extra = { increase = 1.2, revert = 2 } },
+    config = { extra = { increase = 1.2, revert = 3 } },
 	gameset_config = {
 		modest = {disabled = true}
 	},
@@ -87,7 +87,7 @@ SMODS.Joker:take_ownership("cry_oil_lamp", {
 
 --TROFICAL SMOOTHER: multiples values of all owned jokers by 1.35X. Values of jokers revert after 4 rounds
 SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
-    config = { extra = {extra = 1.4, self_destruct = false, revert = 4}},
+    config = { extra = {extra = 1.4, self_destruct = false, revert = 5}},
     loc_vars = function(self, info_queue, center)
 		return { key = "j_cry_tropical_smoothie_reworked", vars = { number_format(center.ability.extra.extra),number_format(center.ability.extra.revert) } }
 	end,
