@@ -726,14 +726,6 @@ end
 --Rerolls increase price by $1 every 3 rerolls.
 
 --Compounding interest should increase by 1%.
-SMODS.Joker:take_ownership("j_cry_compound_interest",{
-	gameset_config = {
-		modest = { extra = { percent_mod = 0.75,
-			percent = 5, } },
-		mainline = { extra = {percent_mod = 1.15,
-			percent = 10,}},
-	},
-}, true)
 --multiply fix
 SMODS.Consumable:take_ownership("c_cry_multiply",{
 use = function(self, card, area, copier)

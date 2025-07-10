@@ -6,7 +6,8 @@ SMODS.Atlas {
 }
 --Used to trigger on any chips, Xchips and Echips trigger, but since that does not work out with blueprint
 --She should instead trigger 1.6x chips per scored card (less than caramel, which is 1.75x mult per card scored, less than tribolet, but more than ancient joker)
---she used to trigger 1.25x chips for joker triggered or card played but that could get wayy to op
+--x1.35 chips for every joker triggered instead. She can become OP, but you need to build her up. By comparison, waluigi is 1.4 (changed to 1.5)
+--
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_yokana',
@@ -25,12 +26,12 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
 	--1.25X chips nerf t
-    config = { extra = {x_chips = 1.25,family_x_bonus = 1.3,scoring = false} },
+    config = { extra = {x_chips = 1.35,family_x_bonus = 1.3,scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
 	end,
 	gameset_config = {
-		modest = { extra = {x_chips = 1.15,family_x_bonus = 1.3,scoring = false} },
+		modest = { extra = {x_chips = 1.17,family_x_bonus = 1.3,scoring = false} },
 	},
 	pools = {["unik_cube"] = true },
 	calculate = function(self, card, context)
@@ -43,21 +44,21 @@ SMODS.Joker {
 				colour = G.C.CHIPS,
 			}
 		end
-		if (context.individual and context.cardarea == G.play) then
-			-- if not Talisman.config_file.disable_anims then
-			-- 	G.E_MANAGER:add_event(Event({
-			-- 		func = function()
-			-- 			context.other_card:juice_up(0.5, 0.5)
-			-- 			return true
-			-- 		end,
-			-- 	}))
-			-- end
-			return {
-				x_chips = card.ability.extra.x_chips,
-				colour = G.C.CHIPS,
+		-- if (context.individual and context.cardarea == G.play) then
+		-- 	-- if not Talisman.config_file.disable_anims then
+		-- 	-- 	G.E_MANAGER:add_event(Event({
+		-- 	-- 		func = function()
+		-- 	-- 			context.other_card:juice_up(0.5, 0.5)
+		-- 	-- 			return true
+		-- 	-- 		end,
+		-- 	-- 	}))
+		-- 	-- end
+		-- 	return {
+		-- 		x_chips = card.ability.extra.x_chips,
+		-- 		colour = G.C.CHIPS,
 
-			}
-		end
+		-- 	}
+		-- end
 		if (context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card) then
 			if not Talisman or not Talisman.config_file.disable_anims then
 				G.E_MANAGER:add_event(Event({
