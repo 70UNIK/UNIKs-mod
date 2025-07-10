@@ -26,12 +26,12 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
 	--1.25X chips nerf t
-    config = { extra = {x_chips = 1.35,family_x_bonus = 1.3,scoring = false} },
+    config = { extra = {x_chips = 1.3,family_x_bonus = 1.3,scoring = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips, center.ability.extra.family_x_bonus} }
 	end,
 	gameset_config = {
-		modest = { extra = {x_chips = 1.17,family_x_bonus = 1.3,scoring = false} },
+		modest = { extra = {x_chips = 1.15,family_x_bonus = 1.3,scoring = false} },
 	},
 	pools = {["unik_cube"] = true },
 	calculate = function(self, card, context)
