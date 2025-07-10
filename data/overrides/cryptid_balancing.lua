@@ -4,7 +4,7 @@
 SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',
-    config = { extra = { increase = 1.1 } },
+    config = { extra = { increase = 1.1 }, },
 	--you can have your fun in madness (to an extent)
 	gameset_config = {
 		madness = { extra = { increase = 1.2 } },
@@ -39,7 +39,7 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 				end
 			end
             --dont try to repeat this! Oil lamp exists for a reason.
-			if check then
+			if check and Card.get_gameset(card) ~= "madness" then
                 card.ability.extra.self_destruct = true
 				-- card_eval_status_text(
 				-- 	card,
@@ -171,8 +171,10 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 
 --CHUD is literally 2 brainstorms in 1
 SMODS.Joker:take_ownership("j_cry_chad",{
-    rarity = 'cry_epic',
-	cost = 14,
+	gameset_config = {
+		modest = {center = {rarity = 'cry_epic',cost = 14,} },
+		mainline = {center = {rarity = 'cry_epic',cost = 14,} },
+	},
 }, true)
 --canfas is legendary and relies on unique rarities
 SMODS.Joker:take_ownership("j_cry_canvas",{
@@ -188,19 +190,33 @@ SMODS.Joker:take_ownership("j_cry_canvas",{
 		return { key = Cryptid.gameset_loc(self, { modest = "modest", mainline = "mainline" }),vars={num_retriggers} }
 	end,
 	calculate = function(self, card, context)
-		if context.retrigger_joker_check and not context.retrigger_joker then
+		if context.retrigger_joker_check and not context.retrigger_joker and Card.get_gameset(card) == "madness" then
+			local num_retriggers = 0
+			for i = 1, #G.jokers.cards do
+				if
+					card.T.x + card.T.w / 2 < G.jokers.cards[i].T.x + G.jokers.cards[i].T.w / 2
+					and G.jokers.cards[i].config.center.rarity ~= 1
+					and (G.jokers.cards[i].config.center.rarity ~= "cry_candy" or Card.get_gameset(card) ~= "modest")
+				then
+					num_retriggers = num_retriggers + 1
+				end
+			end
+			if
+				card.T
+				and context.other_card.T
+				and (card.T.x + card.T.w / 2 > context.other_card.T.x + context.other_card.T.w / 2)
+			then
+				return {
+					message = localize("k_again_ex"),
+					repetitions = Card.get_gameset(card) ~= "modest" and num_retriggers or math.min(2, num_retriggers),
+					card = card,
+				}
+			end
+		end
+		if context.retrigger_joker_check and not context.retrigger_joker and Card.get_gameset(card) ~= "madness" then
 			local num_retriggers = 0
 			local blacklistedRarities = {1}
 			num_retriggers = num_retriggers + card:jokerRaritiesDir(false,true,blacklistedRarities)
-			-- for i = 1, #G.jokers.cards do
-			-- 	if
-			-- 		card.T.x + card.T.w / 2 < G.jokers.cards[i].T.x + G.jokers.cards[i].T.w / 2
-			-- 		and G.jokers.cards[i].config.center.rarity ~= 1
-			-- 		and (G.jokers.cards[i].config.center.rarity ~= "cry_candy" or Card.get_gameset(card) ~= "modest")
-			-- 	then
-			-- 		num_retriggers = num_retriggers + 1
-			-- 	end
-			-- end
 			if
 				card.T
 				and context.other_card.T
@@ -260,12 +276,6 @@ function Card:jokerRaritiesDir(left,right,blacklistedrarities)
 	return 0 
 end
 
-SMODS.Joker:take_ownership("j_cry_demicolon",{
-    rarity = 4,
-	cost = 20,
-}, true)
-
-
 --Loopy fix
 SMODS.Joker:take_ownership("j_cry_loopy",{
     calculate = function(self, card, context)
@@ -307,25 +317,35 @@ SMODS.Joker:take_ownership("j_cry_loopy",{
 	end,
 }, true)
 SMODS.Joker:take_ownership("j_cry_m",{
-    config = {
-		extra = {
-			extra = 10,
-			x_mult = 1,
+	gameset_config = {
+		modest = {
+			extra = {
+				extra = 1,
+				x_mult = 1,
+			},
+		},
+		mainline = {
+			extra = {
+				extra = 10,
+				x_mult = 1,
+			},
 		},
 	},
 }, true)
 --Googol play card is X17.
 SMODS.Joker:take_ownership("j_cry_googol_play",{
-	config = {
-		extra = {
-			Xmult = 17,
-			odds = 8,
-		},
+	gameset_config = {
+		modest = { extra = { Xmult = 9, odds = 8 } },
+		mainline = { extra = { Xmult = 17, odds = 8 } },
 	},
 }, true)
 --WAAAAAAHHHH
+
 SMODS.Joker:take_ownership("j_cry_waluigi",{
-	config = { extra = { Xmult = 1.8 } },
+	gameset_config = {
+		modest = { extra = { Xmult = 1.5 } },
+		mainline = { extra = { Xmult = 1.8 } },
+	},
 }, true)
 
 --Nostalgic invisible Joker now STRIPS editions in mainline/modest, otherwise you can infinidupe negative jokers (I believe thats what roffle did)
@@ -457,6 +477,7 @@ SMODS.Joker:take_ownership("j_cry_altgoogol",{
 	end,
 }, true)
 
+--solely loc cause quantum ranks wll be a fucking nightare
 SMODS.Joker:take_ownership("j_cry_maximized",{
 	loc_vars = function (self,info_queue,center)
 		return {
@@ -627,7 +648,7 @@ SMODS.Joker:take_ownership("j_cry_compound_interest",{
 
 
 
---ban hook, its too overpowered for mainline cause you can hook something like oil lamp to yokana and it will transform into a fucking menace.
+--hook now lasts for 5 rounds
 SMODS.Consumable:take_ownership("c_cry_hook",{
 	gameset_config = {
 		modest = { disabled = true },
@@ -639,21 +660,24 @@ SMODS.Consumable:take_ownership("c_cry_hook",{
 
 --Nerf membership cards, its way to powerful as its unconditional essentially
 SMODS.Joker:take_ownership("j_cry_membershipcardtwo",{
-	config = {
-		extra = { chips = 1 },
-		immutable = { chips_mod = 8 },
-	},
 	gameset_config = {
 		modest = {
 			cost = 20,
 			center = { rarity = 4 },
 			immutable = { chips_mod = 16 },
 		},
+		mainline = {
+			cost = 17,
+			immutable = { chips_mod = 8 },
+		}
 	},
 }, true)
 --essentially a free X31 mult. OP, but eventually becomes a handicap into endless
 SMODS.Joker:take_ownership("j_cry_membershipcard",{
-	config = { extra = { Xmult_mod = 0.001 } },
+	gameset_config = {
+		modest = {extra = { Xmult_mod = 0.00075 }},
+		mainline = {extra = { Xmult_mod = 0.001 }}
+	},
 }, true)
 
 --Nerfing pirate dagger to exactly the same as xmult
@@ -692,12 +716,16 @@ calculate = function(self, card, context)
 			if sliced_card.config.center.rarity == "cry_exotic" then
 				check_for_unlock({ type = "what_have_you_done" })
 			end
+			local multiplier = 0.2
+			if Card.get_gameset(card) == "madness" then
+				multiplier = 0.25
+			end
 			G.GAME.joker_buffer = G.GAME.joker_buffer - 1
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					G.GAME.joker_buffer = 0
 					card.ability.extra.x_chips =
-						lenient_bignum(to_big(card.ability.extra.x_chips) + sliced_card.sell_cost * 0.2)
+						lenient_bignum(to_big(card.ability.extra.x_chips) + sliced_card.sell_cost * multiplier)
 					card:juice_up(0.8, 0.8)
 					sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
 					play_sound("slice1", 0.96 + math.random() * 0.08)
@@ -710,7 +738,7 @@ calculate = function(self, card, context)
 					key = "a_xchips",
 					vars = {
 						number_format(
-							lenient_bignum(to_big(card.ability.extra.x_chips) + 0.2 * sliced_card.sell_cost)
+							lenient_bignum(to_big(card.ability.extra.x_chips) + multiplier * sliced_card.sell_cost)
 						),
 					},
 				}),
@@ -720,6 +748,10 @@ calculate = function(self, card, context)
 			return nil, true
 		end
 		if context.forcetrigger and my_pos and G.jokers.cards[my_pos + 1] then
+			local multiplier = 0.2
+			if Card.get_gameset(card) == "madness" then
+				multiplier = 0.25
+			end
 			local sliced_card = G.jokers.cards[my_pos + 1]
 			sliced_card.getting_sliced = true
 			if sliced_card.config.center.rarity == "cry_exotic" then
@@ -730,7 +762,7 @@ calculate = function(self, card, context)
 				func = function()
 					G.GAME.joker_buffer = 0
 					card.ability.extra.x_chips =
-						lenient_bignum(to_big(card.ability.extra.x_chips) + sliced_card.sell_cost * 0.2)
+						lenient_bignum(to_big(card.ability.extra.x_chips) + sliced_card.sell_cost * multiplier)
 					card:juice_up(0.8, 0.8)
 					sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
 					play_sound("slice1", 0.96 + math.random() * 0.08)
@@ -753,14 +785,14 @@ calculate = function(self, card, context)
 SMODS.Joker:take_ownership("j_cry_universe",{
     config = { extra = { emult = 1.1 } },
     gameset_config = {
-		madness = { extra = { emult = 1.2 }, immutable = false },
+		madness = { extra = { emult = 1.2 }, immutable = false,center = {immutable = false} },
 	},
     immutable = true,
 }, true)
 SMODS.Joker:take_ownership("j_cry_jtron",{
     immutable = true,
     gameset_config = {
-		madness = {immutable = false },
+		madness = {immutable = false,center = {immutable = false} },
 	},
 }, true)
 
@@ -780,6 +812,9 @@ SMODS.Joker:take_ownership("j_cry_eternalflame",{
 			x_mult = 1,
 		},
 	},
+	 gameset_config = {
+		madness = { extra = { extra = 0.1, x_mult = 1} },
+	},
 }, true)
 
 --garden of forking paths must be uncommon, its pretty bad for a rare.
@@ -792,16 +827,16 @@ SMODS.Joker:take_ownership("j_cry_filler",{
     gameset_config = {
 		modest = { disabled = true },
 		mainline = { disabled = true },
-		madness = { disabled = true },
-		experimental = { disabled = true },
+		madness = { disabled = false },
+		experimental = { disabled = false },
 	},
 }, true)
 
 --fuck astralbottle. outside of experimental or madness, its a CURSED joker.
 SMODS.Joker:take_ownership("j_cry_astral_bottle",{
     gameset_config = {
-		modest = { center = { rarity = 'cry_cursed'}},
-		mainline = { center = { rarity = 'cry_cursed'}},
+		modest = { disabled = true},
+		mainline = { disabled = true},
 		madness = {center = {  rarity = 2} },
 		experimental = {center = {  rarity = 2 }},
 	},
@@ -821,6 +856,9 @@ SMODS.Consumable:take_ownership("c_cry_pointer",{
 --starfruit should suicide itself if force triggered, starts at a much more reasonable ^1.5 emult and is immutable. Oh and it can be autocannibal food
 SMODS.Joker:take_ownership("j_cry_starfruit",{
 	config = { emult = 1.5, emult_mod = 0.1 },
+	gameset_config = {
+		madness = {emult = 2, emult_mod = 0.2},
+	},
 	immutable = true,
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_cry_starfruit'
