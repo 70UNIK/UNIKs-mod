@@ -70,12 +70,6 @@ SMODS.Joker {
 			end
 			
 			return {
-                message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				card = card,
 				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
