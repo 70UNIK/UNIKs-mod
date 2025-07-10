@@ -31,7 +31,7 @@ SMODS.Stake:take_ownership('stake_cry_ruby', {
     above_stake = "buf_spinel",
     prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
     modifiers = function()
-		G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.5)
+		G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
 	end,
 })
 
