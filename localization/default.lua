@@ -1172,8 +1172,8 @@ return {
             --Increases by 1.3x chips if maya and chelsea are present
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
-                    "{X:chips,C:white}X#1#{} Chips for every {C:attention}scored{} Card",
-                    "or {C:attention}Joker{} triggered during play",
+                    "{X:chips,C:white}X#1#{} Chips for every",
+                    "or {C:attention}Joker{} triggered",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:unik_caption,s:0.7,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
