@@ -70,7 +70,7 @@ SMODS.Joker {
     -- Mainline:
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
-    config = { extra = { Emult = 1.0, Emult_mod = 0.2, x_mult = 1.0, x_mult_mod = 1.25,cost = 0} },
+    config = { extra = { Emult = 1.0, Emult_mod = 0.25, x_mult = 1.0, x_mult_mod = 1.25,cost = 0} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}), 
