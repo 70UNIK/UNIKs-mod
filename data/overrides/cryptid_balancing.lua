@@ -160,9 +160,9 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 	end,
 }, true)
 
---JAWBUSTER:  1.6X values to adjacent jokers. Values revert after 5 rounds
+--JAWBUSTER:  1.5X values to adjacent jokers. (cannot be applied multiple times)
 SMODS.Joker:take_ownership("j_cry_jawbreaker", {
-    config = { extra = {increase = 1.7,self_destruct = false,revert = 5} },
+    config = { extra = {increase = 1.6,self_destruct = false,revert = 5} },
     loc_vars = function(self, info_queue, center)
 		return { key = "j_cry_jawbreaker_balanced", vars = { number_format(center.ability.extra.increase),number_format(center.ability.extra.revert) } }
 	end,
@@ -183,27 +183,30 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
 					if i > 1 then
-						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
+						if not Card.no(G.jokers.cards[i - 1], "immutable", true) and not G.jokers.cards[i - 1].ability.jawbreakered then
 							Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card2)
 								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
 								local card6 = card2
-								card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
-								--How would it work?
-								--{multiplier,rounds left}
-								--{decrements by 1. If hits 0, then reverts values.}
-								card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+								card6.ability.jawbreakered = true
+								--jawbreakered would be a sticker that cannot be removed and just indicates that jawbreaker has already been used.
+								-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+								-- --How would it work?
+								-- --{multiplier,rounds left}
+								-- --{decrements by 1. If hits 0, then reverts values.}
+								-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 							end)
 						end
 					end
 					if i < #G.jokers.cards then
-						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
+						if not Card.no(G.jokers.cards[i + 1], "immutable", true) and not G.jokers.cards[i + 1].ability.jawbreakered then
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
 							local card6 = G.jokers.cards[i + 1]
-							card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
-							--How would it work?
-							--{multiplier,rounds left}
-							--{decrements by 1. If hits 0, then reverts values.}
-							card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+							card6.ability.jawbreakered = true
+							-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							-- --How would it work?
+							-- --{multiplier,rounds left}
+							-- --{decrements by 1. If hits 0, then reverts values.}
+							-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 						end
 					end
 				end
@@ -240,27 +243,29 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] == card then
 					if i > 1 then
-						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
+						if not Card.no(G.jokers.cards[i - 1], "immutable", true) and not G.jokers.cards[i - 1].ability.jawbreakered then
 							Cryptid.with_deck_effects(G.jokers.cards[i - 1], function(card2)
 								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
 								local card6 = card2
-								card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
-								--How would it work?
-								--{multiplier,rounds left}
-								--{decrements by 1. If hits 0, then reverts values.}
-								card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+								card6.ability.jawbreakered = true
+								-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+								-- --How would it work?
+								-- --{multiplier,rounds left}
+								-- --{decrements by 1. If hits 0, then reverts values.}
+								-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 							end)
 						end
 					end
 					if i < #G.jokers.cards then
-						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
+						if not Card.no(G.jokers.cards[i + 1], "immutable", true) and not G.jokers.cards[i + 1].ability.jawbreakered then
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
 							local card6 = G.jokers.cards[i + 1]
-							card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
-							--How would it work?
-							--{multiplier,rounds left}
-							--{decrements by 1. If hits 0, then reverts values.}
-							card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+							card6.ability.jawbreakered = true
+							-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							-- --How would it work?
+							-- --{multiplier,rounds left}
+							-- --{decrements by 1. If hits 0, then reverts values.}
+							-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 						end
 					end
 				end

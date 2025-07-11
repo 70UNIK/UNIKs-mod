@@ -1939,7 +1939,7 @@ return {
 					"increase values of ",
                     "adjcent {C:attention}Jokers{} by {C:attention}X#1#{}",
                     "{E:2,C:red}self destructs{}",
-                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
+                    "{C:inactive}(Cannot apply multiple times)",
 				},
 			},
             j_cry_tropical_smoothie_reworked = {
