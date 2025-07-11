@@ -295,6 +295,8 @@ NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
+NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
+--
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
 --Spectral Merchant (Tier 1) Spectrals can appear in shop
@@ -438,7 +440,7 @@ NFS.load(mod_path .. "data/jokers/double_container.lua")()
 --- Hacker: 3 in 4 chance to not create a code card when a 2, 3, 4 or 5 is played. (must have room)
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
-
+NFS.load(mod_path .. "data/jokers/hacker.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 

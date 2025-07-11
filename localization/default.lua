@@ -1816,6 +1816,15 @@ return {
                     "with only {C:attention}Light Cards",
                 }
             },
+            j_unik_hacker = {
+                name = "Hacker",
+                text = {
+                    "{C:green}#1# in #2#{} chance for each played",
+                    "{C:attention}2{}, {C:attention}3{}, {C:attention}4{} or {C:attention}5{} to not",
+                    "create a {C:cry_code}Code Card",
+                    "{C:inactive}(Must have room)"
+                }
+            },
 
             --crossmod
             j_unik_weetomancer={ --rare, paperback
@@ -1836,6 +1845,7 @@ return {
                     "{C:inactive}(Whichever is lower)",
                 }
             },
+
 
             --Finity boss blinds
             j_unik_indigo_icbm={
@@ -2425,7 +2435,8 @@ return {
                 text = {
                     "Add {C:dark_edition}Steel{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
-                    "add {C:attention}#2#{} random card(s)",
+                    "Add {C:attention}#2#{} random",
+                    "unmodified card#<s>2#",
                 }
             },
             c_cry_pointer_no_dupe = {
@@ -2443,8 +2454,18 @@ return {
                 text = {
                      "Add {C:dark_edition}Polychrome{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
+                    "Add {C:attention}#2#{} random",
+                    "unmodified card#<s>2#",
                 }
-            }
+            },
+            c_unik_bloater ={
+                name = "Bloater",
+                text = {
+                    "{C:attention}+#1#{} Hand Size",
+                    "Add {C:attention}#2#{} random",
+                    "unmodified card#<s>2#",
+                }
+            },
         },
         Stake={
             stake_unik_shitty = {
@@ -2973,6 +2994,8 @@ return {
             k_legendary_crown_normal2 = "I should've listened to her...",
             k_legendary_crown_normal3 = "I should've known better...",
             k_legendary_crown_normal4 = "Please don't make the same mistake as I did...",
+
+            k_plus_code = "+1 Code",
 
             -- cry_tax_placeholder = "(X0.75 blind requirement)",
         },

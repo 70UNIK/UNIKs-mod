@@ -1,31 +1,34 @@
+--Bloater: +1 Hand Size, add (Bloaters used + 1) * 10 random cards to your hand
 SMODS.Consumable{
-    set = 'unik_lartceps', 
-	atlas = 'unik_lartceps',
-    cost = 0,
-	pos = {x = 2, y = 1},
-	key = 'unik_garbage',
-    config = {extra = {size = 100}},
-    no_doe = true,
-    no_grc = true,
-	no_ccd = true,
-    can_use = function(self, card)
+    set = "Spectral",
+	key = "unik_bloater",
+	pos = { x = 2, y = 2 },
+	cost = 4,
+	atlas = "placeholders",
+	order = 90,
+    config = {
+		extra = {
+            hand_size = 1
+        }
+	},
+	can_use = function(self, card)
 		return true
 	end,
-    loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				center.ability.extra.size,
-			},
-		}
+	loc_vars = function(self, info_queue, center)
+        G.GAME.unik_bloater_bloat = G.GAME.unik_bloater_bloat or 0
+        local formula = (G.GAME.unik_bloater_bloat + 1) * 10
+		return { vars = {center.ability.extra.hand_size,formula } }
 	end,
 	use = function(self, card, area, copier)
+        G.GAME.unik_bloater_bloat  = G.GAME.unik_bloater_bloat  or 0
+        local formula = (G.GAME.unik_bloater_bloat + 1) * 10
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
 			local cardsCreated = {}
-            for i = 1, card.ability.extra.size do
+            for i = 1, formula do
 				G.E_MANAGER:add_event(Event({
 					delay = 0.1,
 					func = function()
-                        
+                        G.hand:change_size(card.ability.extra.hand_size)
 						G.playing_card = (G.playing_card and G.playing_card + 1) or 1
 						local edition = G.P_CENTERS.c_base
 						local card_ = Card(G.play.T.x + G.play.T.w/2, G.play.T.y, G.CARD_W, G.CARD_H, pseudorandom_element(G.P_CARDS, pseudoseed('garbage_random')), G.P_CENTERS.c_base, {playing_card = G.playing_card})
@@ -36,6 +39,7 @@ SMODS.Consumable{
 						end
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card_)
+
 						G.deck:emplace(card_)
 						card:juice_up(0.3, 0.5)
 						cardsCreated[#cardsCreated+1] = card
@@ -53,8 +57,5 @@ SMODS.Consumable{
 					end
 			}))
         return true end })) 
-    end,
-    in_pool = function()
-		return lartcepsCheck()
 	end,
 }
