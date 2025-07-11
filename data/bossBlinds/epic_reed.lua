@@ -53,7 +53,7 @@ local function reset_ranks()
                 if not SMODS.has_no_rank(v) then
                     local alreadyExists = false
                     for j = 1, #usedRanks do
-                        if v:get_id() == usedRanks[j] then
+                        if (v:get_id()) == (usedRanks[j]) then
                             alreadyExists = true
                         end
                     end
