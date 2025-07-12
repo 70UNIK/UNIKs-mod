@@ -1838,6 +1838,15 @@ return {
                     "{C:inactive}(Must have room)"
                 }
             },
+            j_unik_tax_haven={
+                name = "Tax Haven",
+                text = {
+                    "{C:attention}Remove{} all {C:attention}Rental{} Stickers",
+                    "on all owned",
+                    "Jokers and cards",
+                    "{C:red}Lose{} {C:money}$#1#{} per Sticker removed",
+                }
+            },
 
             --crossmod
             j_unik_weetomancer={ --rare, paperback
