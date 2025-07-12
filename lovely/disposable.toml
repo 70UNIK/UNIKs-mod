@@ -99,7 +99,7 @@ payload = '''
 local gone = false
 if self.ability.unik_disposable or self.ability.unik_niko then
     if not self.ability.unik_disposed then
-        if (pseudorandom('you_killed_niko') < G.GAME.probabilities.normal*2/G.GAME.unik_consumeable_niko_death_odds) then
+        if SMODS.pseudorandom_probability(self, 'unik_niko_consumable', 2, G.GAME.unik_consumeable_niko_death_odds, 'unik_niko_consumable') then
 	    local gone = true
             self.ability.extinct = true
             G.E_MANAGER:add_event(Event({
@@ -136,7 +136,7 @@ if self.ability.unik_disposable or self.ability.unik_niko then
     end
 elseif self.edition and self.edition.unik_bloated then
     if self.ability and not self.ability.will_pop then
-        if (pseudorandom('bloated_consumeable') < G.GAME.probabilities.normal/G.GAME.unik_consumeable_niko_death_odds) then
+        if SMODS.pseudorandom_probability(self, 'unik_bloated_edition', 1, 3, 'unik_bloated_edition') then
             local gone = true
             self.ability.extinct = true
             G.E_MANAGER:add_event(Event({

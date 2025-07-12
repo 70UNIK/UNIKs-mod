@@ -920,10 +920,10 @@ return {
                 name = 'Lucky 7',
                 text = {
                     "Each played {C:attention}7{} has a", 
-                    "{C:green}#1# in #3#{} chance",
-                    "for {C:mult}+#2#{} Mult and a",
-                    "{C:green}#1# in #5#{} chance",
-                    "to win {C:money}$#4#",
+                    "{C:green}#1# in #2#{} chance",
+                    "for {C:mult}+#3#{} Mult and a",
+                    "{C:green}#4# in #5#{} chance",
+                    "to win {C:money}$#6#",
                 }
             },
             --Disable if extracredit is installed
@@ -935,18 +935,17 @@ return {
                 }
             },
             j_unik_yes_nothing = {
-                name = 'Yes! Nothing*',
+                name = 'Yes! Nothing',
                 text={
-                    "Multiplies all {C:attention}listed{}",
-                    "{C:green,E:1,S:1.1}probabilities{} by {C:green}1e-100{}",
-                    "{C:inactive,s:0.6}(As low as possible to 0){}",
-                    "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}~0 in 3{C:inactive})",
+                    "Sets all {C:green,E:1,S:1.1}listed{}",
+                    "{C:green,E:1,S:1.1}probabilities{} to {C:attention}0{}",
+                    "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}0 in 3{C:inactive})",
                 },
             },
             j_unik_yes_nothing_modest = {
                 name = 'Yes! Nothing*',
                 text={
-                    "Halves all {C:attention}listed{}",
+                    "Halves all {C:green,E:1,S:1.1}listed{}",
                     "{C:green,E:1,S:1.1}probabilities{}",
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}1 in 3{C:inactive})",
                 },
@@ -1555,7 +1554,7 @@ return {
                 text = {
                     "Scored card gives {X:dark_edition,C:white}^#1#{} Mult",
                     "if played hand {C:attention}only contains{} a",
-                    "single {C:attention}King{} of {C:spades}#2#",
+                    "single {C:attention}King{}",
                 },
                 unlock = {
                     "Play {C:attention}High Card",

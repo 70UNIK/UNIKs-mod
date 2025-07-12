@@ -55,15 +55,15 @@ function Game:update_round_eval(dt)
         local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
         local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
         local obj3 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
-        print("-----------------")
-        print(obj.key)
-        print(obj2.key)
-        print(obj3.key)
-        print("-----------------")
-        print(G.GAME.blind_on_deck)
-        print(G.GAME.round_resets.blind)
-        print(G.GAME.round_resets.blind_states[G.GAME.blind_on_deck])
-        print(G.GAME.round_resets.blind)
+        -- print("-----------------")
+        -- print(obj.key)
+        -- print(obj2.key)
+        -- print(obj3.key)
+        -- print("-----------------")
+        -- print(G.GAME.blind_on_deck)
+        -- print(G.GAME.round_resets.blind)
+        -- print(G.GAME.round_resets.blind_states[G.GAME.blind_on_deck])
+        -- print(G.GAME.round_resets.blind)
         
         G.GAME.facing_blind = true
          G.GAME.chips = 0
@@ -73,7 +73,7 @@ function Game:update_round_eval(dt)
         not (G.GAME.round_resets.blind_states.Big == 'Defeated' or G.GAME.round_resets.blind_states.Big == 'Skipped'or G.GAME.round_resets.blind_states.Big == 'Hide') and 'Big' or 
         'Boss'
          ChangePhaseCrown()
-        G.GAME.blind:defeat(true)
+        G.GAME.blind:defeat()
         -- G.FUNCS.select_blind(e)
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',

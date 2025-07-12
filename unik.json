@@ -10,7 +10,7 @@
 	"badge_text_colour": "",
 	"version": "0.3.0c-ALPHA-BALANCE",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-0614a)",
+        "Steamodded (>=1.0.0~BETA-0711a)",
         "Cryptid (>=0.5.10~dev3)"
     ]
 }

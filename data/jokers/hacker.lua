@@ -13,9 +13,9 @@ SMODS.Joker {
 	demicoloncompat = true,
     config = { extra = {prob = 7, odds = 10} },
 	loc_vars = function(self, info_queue, center)
+		local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.prob, center.ability.extra.odds, 'unik_hacker')
 		return { vars = {
-			 center and cry_prob(center.ability.cry_prob * center.ability.extra.prob or center.ability.extra.prob, center.ability.extra.odds, center.ability.cry_rigged) or center.ability.extra.prob,
-			 center.ability.extra.odds,
+			 new_numerator, new_denominator
 		} }
 	end,
     calculate = function(self, card, context)
@@ -29,7 +29,7 @@ SMODS.Joker {
 							trigger = 'before',
 							delay = 0.0,
 							func = (function()
-									local card = create_card('Code',G.consumeables, nil, nil, nil, nil, nil, 'unik_hackersss')
+									local card = create_card('Code',G.consumeables, nil, nil, nil, nil, nil, 'unik_hackerssssss')
 									card:add_to_deck()
 									G.consumeables:emplace(card)
 									G.GAME.consumeable_buffer = 0
@@ -48,7 +48,7 @@ SMODS.Joker {
 				context.other_card:get_id() == 4 or 
 				context.other_card:get_id() == 5 
 				then
-					if not (pseudorandom(pseudoseed("unik_hacker")) < cry_prob(card.ability.cry_prob*card.ability.extra.prob or card.ability.extra.prob, card.ability.extra.odds, card.ability.cry_rigged) / card.ability.extra.odds) then
+					if not SMODS.pseudorandom_probability(card, 'unik_hacker', card.ability.extra.prob, card.ability.extra.odds, 'unik_hacker') then
 						G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 						G.E_MANAGER:add_event(Event({
 						trigger = 'after',

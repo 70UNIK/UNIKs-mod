@@ -20,8 +20,9 @@ SMODS.Sticker{
     rate = 0.0,
     
     loc_vars = function(self, info_queue, card)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 2,3, 'unik_disposable_consumable')
 		if card.ability.consumeable then
-			return { key = "unik_disposable_consumable", vars = { G.GAME.probabilities.normal*2 or 2, 3 } }
+			return { key = "unik_disposable_consumable", vars = { new_numerator, new_denominator } }
 		elseif card.ability.set == "Voucher" then
 			return { key = "unik_disposable_voucher" }
 		elseif card.ability.set == "Booster" then

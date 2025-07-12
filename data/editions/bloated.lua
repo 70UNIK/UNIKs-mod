@@ -34,7 +34,7 @@ SMODS.Edition({
 	-- },
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,
-	config = { odds = 3},
+	config = { prob = 1, odds = 3},
 	get_weight = function(self)
 		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
 	end,
@@ -43,9 +43,9 @@ SMODS.Edition({
 		if card.ability and card.ability.consumeable then
 			key = 'e_unik_bloated_consumeable'
 		end
+		local new_numerator, new_denominator = SMODS.get_probability_vars(card, self.config.prob,self.config.odds, 'unik_bloated_edition')
         return { key = key, vars = {
-				(G.GAME.probabilities.normal),
-				self.config.odds,
+				new_numerator, new_denominator
 			}, }
 		end,
 calculate = function(self, card, context)
@@ -55,7 +55,7 @@ calculate = function(self, card, context)
 			and context.other_card == card --animation-wise this looks weird sometimes
 		then
 			if
-                pseudorandom(pseudoseed("unik_bloated")) < G.GAME.probabilities.normal / self.config.odds
+                SMODS.pseudorandom_probability(card, 'unik_bloated_edition', self.config.prob,self.config.odds, 'unik_bloated_edition') 
 				
 			then
 				-- this event call might need to be pushed later to make more sense
@@ -81,7 +81,7 @@ calculate = function(self, card, context)
 		end
 		if context.main_scoring and context.cardarea == G.play then
 			if
-                pseudorandom(pseudoseed("unik_bloated")) < G.GAME.probabilities.normal / self.config.odds
+                SMODS.pseudorandom_probability(card, 'unik_bloated_edition', self.config.prob,self.config.odds, 'unik_bloated_edition') 
 			then
 				card.config.will_pop = true
 			end

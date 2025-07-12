@@ -10,9 +10,6 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = false,
     demicoloncompat = true,
-    loc_vars = function(self, info_queue, center)
-        info_queue[#info_queue + 1] = { set = "Other", key = "unik_disposable" }
-	end,
     calculate = function(self, card, context)
 		if (context.selling_self and not (context.retrigger_joker or context.blueprint)) or context.forcetrigger then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_unik_taste_of_power") ,colour = G.C.PURPLE})

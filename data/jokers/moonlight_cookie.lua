@@ -114,9 +114,12 @@ SMODS.Joker {
 				--planetlua
 				if v.config.center.key == "c_cry_planetlua" then
 					if
-						pseudorandom("planetlua_moonlight")
-						< cry_prob(v.ability.cry_prob, v.ability.extra.odds, v.ability.cry_rigged)
-							/ v.ability.extra.odds
+						SMODS.pseudorandom_probability(
+							v,
+							"planetlua",
+							1,
+							v and v.ability.extra.odds or 5
+						)
 					then
 						local hand = context.levelup_poker_hand
 						exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
@@ -187,9 +190,12 @@ function moonlightlevelStructure(hand,consumeble,card)
 		--planetlua
 		if v.config.center.key == "c_cry_planetlua" then
 			if
-				pseudorandom("planetlua_moonlight")
-				< cry_prob(v.ability.cry_prob, v.ability.extra.odds, v.ability.cry_rigged)
-					/ v.ability.extra.odds
+				SMODS.pseudorandom_probability(
+					v,
+					"planetlua",
+					1,
+					v and v.ability.extra.odds or 5
+				)
 			then
 				exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
 				upgrade = true

@@ -42,51 +42,11 @@ SMODS.Joker {
 			key = Cryptid.gameset_loc(self, { modest = "modest"}), 
 		}
 	end,
-    add_to_deck = function(self, card, from_debuff)
-        local yesNothingExists = 0
-        for _, v in pairs(G.jokers.cards) do
-            --print("Joker in set:")
-            --print(v.ability.name)
-            if v.ability.name == "j_unik_yes_nothing" and v ~= card then
-                --print("checkSlots")
-                --print("happyFound")
-                yesNothingExists = yesNothingExists + 1
-                --CheckSlots(v,v.ability.extra.slotLimit)
-            end
+    calculate = function(self, card, context)
+        if context.fix_probability then
+            return {
+                numerator = 0,
+            }
         end
-        if yesNothingExists <= 0 then
-            --print("reduce")
-            for k, v in pairs(G.GAME.probabilities) do 
-                if  Card.get_gameset(card) ~= "modest" then
-                    G.GAME.probabilities[k] = v/1e100
-                else
-                    G.GAME.probabilities[k] = v/2
-                end
-            end
-        end
-	end,
-	-- Inverse of above function.
-	remove_from_deck = function(self, card, from_debuff)
-        local yesNothingExists = 0
-        for _, v in pairs(G.jokers.cards) do
-            --print("Joker in set:")
-            --print(v.ability.name)
-            if v.ability.name == "j_unik_yes_nothing" and v ~= card then
-                --print("checkSlots")
-                --print("happyFound")
-                yesNothingExists = yesNothingExists + 1
-                --CheckSlots(v,v.ability.extra.slotLimit)
-            end
-        end
-        if yesNothingExists <= 0 then
-            --print("add")
-            for k, v in pairs(G.GAME.probabilities) do 
-                if  Card.get_gameset(card) ~= "modest" then
-                    G.GAME.probabilities[k] = v*1e100
-                else
-                    G.GAME.probabilities[k] = v*2
-                end
-            end
-        end
-	end,
+    end
 }

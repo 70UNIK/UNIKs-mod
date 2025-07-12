@@ -9,16 +9,18 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {odds = 1,mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
+    config = { extra = {odds1 = 1,odds2 = 1, mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
     --ONLY DISABLE if extracredit is installed
     gameset_config = {
 		modest = { disabled = (SMODS.Mods["extracredit"] or {}).can_load },
 	},
     loc_vars = function(self, info_queue, center)
+        local new_numerator1, new_denominator1 = SMODS.get_probability_vars(center, center.ability.extra.odds1, center.ability.extra.odds_mult, 'unik_lucky_seven_mult')
+        local new_numerator2, new_denominator2 = SMODS.get_probability_vars(center, center.ability.extra.odds2, center.ability.extra.odds_money, 'unik_lucky_seven_cash')
         return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}), 
-            vars = {center and cry_prob(center.ability.cry_prob,center.ability.extra.odds_money,center.ability.cry_rigged)or 1, 
-        center.ability.extra.mult,center.ability.extra.odds_mult,center.ability.extra.p_dollars,center.ability.extra.odds_money} }
+            vars = {new_numerator1, new_denominator1,center.ability.extra.mult,
+            new_numerator2, new_denominator2,center.ability.extra.p_dollars} }
 	end,
     
     pools = {["unik_seven"] = true },
@@ -35,11 +37,11 @@ SMODS.Joker {
             if context.other_card:get_id() == 7 then
                 local multTrue = false
                 local moneyTrue = false
-                if pseudorandom('unik_lucky_seven') < cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged)/card.ability.extra.odds_money then
-                    moneyTrue = true
-                end
-                if pseudorandom('unik_lucky_seven') < cry_prob(card.ability.cry_prob,card.ability.extra.odds_mult,card.ability.cry_rigged)/card.ability.extra.odds_mult then
+                if SMODS.pseudorandom_probability(card, 'unik_lucky_seven_mult', card.ability.extra.odds1, card.ability.extra.odds_mult, 'unik_lucky_seven_mult') then
                     multTrue = true
+                end
+                if SMODS.pseudorandom_probability(card, 'unik_lucky_seven_cash', card.ability.extra.odds2, card.ability.extra.odds_cash, 'unik_lucky_seven_cash') then
+                    moneyTrue = true
                 end
                 if multTrue and moneyTrue then
                     return {
@@ -67,34 +69,33 @@ SMODS.Joker {
         end
     end,
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_lucky_seven"] = {
-        text = {
-			{ text = "+", colour = G.C.MULT },
-			{ ref_table = "card.ability.extra", ref_value = "mult", colour = G.C.MULT, retrigger_type = "mult" },
-			{ text = " $", colour = G.C.GOLD },
-			{ ref_table = "card.ability.extra", ref_value = "p_dollars", colour = G.C.GOLD, retrigger_type = "mult" },
-        },
-        extra = {
-            {
-                {
-                    ref_table = "card.joker_display_values",
-                    ref_value = "odds1",
-                    colour = G.C.GREEN,
-                    scale = 0.3,
-                },		
-                {text = " "},
-                {
-                    ref_table = "card.joker_display_values",
-                    ref_value = "odds2",
-                    colour = G.C.GREEN,
-                    scale = 0.3,
-                },	
-			},
-		},
-        calc_function = function(card)
-            card.joker_display_values.odds1 = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(card.ability.cry_prob,card.ability.extra.odds_mult,card.ability.cry_rigged) or 1, card.ability.extra.odds_mult } }
-            card.joker_display_values.odds2 = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(card.ability.cry_prob,card.ability.extra.odds_money,card.ability.cry_rigged) or 1, card.ability.extra.odds_money } }
-        end
-	}
-end
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_lucky_seven"] = {
+--         text = {
+-- 			{ text = "+", colour = G.C.MULT },
+-- 			{ ref_table = "card.ability.extra", ref_value = "mult", colour = G.C.MULT, retrigger_type = "mult" },
+-- 			{ text = " $", colour = G.C.GOLD },
+-- 			{ ref_table = "card.ability.extra", ref_value = "p_dollars", colour = G.C.GOLD, retrigger_type = "mult" },
+--         },
+--         extra = {
+--             {
+--                 {
+--                     ref_table = "card.joker_display_values",
+--                     ref_value = "odds1",
+--                     colour = G.C.GREEN,
+--                     scale = 0.3,
+--                 },		
+--                 {text = " "},
+--                 {
+--                     ref_table = "card.joker_display_values",
+--                     ref_value = "odds2",
+--                     colour = G.C.GREEN,
+--                     scale = 0.3,
+--                 },	
+-- 			},
+-- 		},
+--         calc_function = function(card)
+--          
+--         end
+-- 	}
+-- end

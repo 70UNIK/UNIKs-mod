@@ -95,12 +95,12 @@ SMODS.Blind{
                 end
             end
             for k, v in pairs(G.hand.cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
             for k, v in ipairs(cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steelsPlayed = steelsPlayed + 1
                 end
             end
@@ -128,12 +128,12 @@ SMODS.Blind{
                 end
             end
             for k, v in pairs(G.hand.cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
             for k, v in ipairs(cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
