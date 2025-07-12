@@ -1,4 +1,4 @@
---^1.2 Mult, only if played hand only contains a single king of spades, sidegraded to now ^1.15 per single king (any type), easier to eactivate, but less crazier
+--^1.2 Mult, only if played hand only contains a single king of spades, sidegraded to ^1.15 per single king (any type)
 SMODS.Joker {
     key = 'unik_lone_despot',
     atlas = 'unik_epic',
@@ -9,9 +9,9 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = { Emult = 1.15} },
+    config = { extra = { Emult = 1.17} },
     gameset_config = {
-		modest = { extra = { Emult = 1.07} },  
+		modest = { extra = { Emult = 1.1} },  
 	},
     immutable = true,
     loc_vars = function(self, info_queue, center)

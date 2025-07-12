@@ -11,11 +11,8 @@ local function White_lily_copy(card)
     G.jokers:emplace(_card)
     --TODO: Double Scale and Scalae support for when she self destructs or gets destroyed
     --avoid permanently doubling her values to her copy so the multiply properties must transfer
-    if card.config.cry_multiply then
-        _card.config.cry_multiply = card.config.cry_multiply
-    end
-    _card.ability.extra.Emult = _card.ability.extra.Emult + _card.ability.extra.Emult_mod
-    _card.ability.extra.x_mult = _card.ability.extra.x_mult + _card.ability.extra.x_mult_mod
+    _card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+    _card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
     if Card.get_gameset(_card) ~= "modest" then
         card_eval_status_text(_card, "extra", nil, nil, nil, {
             message = localize({
