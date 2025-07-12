@@ -28,41 +28,27 @@ SMODS.Joker {
 		} }
 	end,
     update = function(self,card,dt)
-        for i,v in pairs(G.jokers.cards) do
-            if v.ability.rental then
-                v.ability.unik_remove_rental = true
+        if card.added_to_deck and G.jokers and G.playing_cards and G.consumeables then
+             for i,v in pairs(G.jokers.cards) do
+                if v.ability and v.ability.rental then
+                    v.ability.rental = nil
+                    ease_dollars(-card.ability.extra.cash_loss)
+                end
+            end
+            for i,v in pairs(G.playing_cards) do
+                if v.ability and v.ability.rental then
+                    v.ability.rental = nil
+                    ease_dollars(-card.ability.extra.cash_loss)
+                end
+            end
+            for i,v in pairs(G.consumeables.cards) do
+                if v.ability and v.ability.rental then
+                    v.ability.rental = nil
+                    ease_dollars(-card.ability.extra.cash_loss)
+                    
+                end
             end
         end
-        for i,v in pairs(G.jokers.cards) do
-            if v.ability.rental and v.ability.unik_remove_rental then
-                v.ability.rental = nil
-                v.ability.unik_remove_rental = nil
-                 ease_dollars(-card.ability.extra.cash_loss)
-            end
-        end
-        for i,v in pairs(G.playing_cards) do
-            if v.ability.rental then
-                v.ability.unik_remove_rental = true
-            end
-        end
-        for i,v in pairs(G.playing_cards) do
-            if v.ability.rental and v.ability.unik_remove_rental then
-                v.ability.rental = nil
-                v.ability.unik_remove_rental = nil
-                 ease_dollars(-card.ability.extra.cash_loss)
-            end
-        end
-        for i,v in pairs(G.consumeables) do
-            if v.ability.rental then
-                v.ability.unik_remove_rental = true
-            end
-        end
-        for i,v in pairs(G.consumeables) do
-            if v.ability.rental and v.ability.unik_remove_rental then
-                v.ability.rental = nil
-                v.ability.unik_remove_rental = nil
-                 ease_dollars(-card.ability.extra.cash_loss)
-            end
-        end
+       
     end
 }

@@ -444,6 +444,7 @@ NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/hacker.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
+NFS.load(mod_path .. "data/jokers/tax_haven.lua")()
 
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
