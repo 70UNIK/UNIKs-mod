@@ -1107,10 +1107,6 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 
 -- Abstract Cards seem like the next gateway to infinite shennanigans
 -- ^mult reduced to 1.08 and chance of destruction 1 in 3 when held.
-
-SMODS.Enhancement:take_ownership("m_cry_abstract",{
-	config = { extra = { Emult = 1.08, odds_after_play = 2, odds_after_round = 2, marked = false, survive = false } },
-}, true)
 -- --The Tax should cap score at 75% of blind size to make it less frustrating.
 -- SMODS.Blind:take_ownership("bl_cry_tax",{
 -- 	dependencies = {
