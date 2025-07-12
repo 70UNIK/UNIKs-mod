@@ -250,13 +250,27 @@ return {
                     "(Currently #1# Tag(s))"
                 },
             },
-            bl_unik_epic_hannibal = { --Always draw 4 cards after play and discard. If any cards are held in hand after blind defeat, die
-                name = "Nälkäinenkannibaali", --The hungry cannibal (Epic Hannibal)
+            bl_unik_epic_height = {
+                name = "Huipunkorkeus", --Height of the Summit
                 text = {
-                    "After Play or Discard,",
-                    "always draw #1# cards",
-                    "If any card is held after",
-                    "Blind Defeat, die"
+                    "All scoring is",
+                    "added to the Blind Size",
+                    "instead of Score until",
+                    "the final hand"
+                }
+            },
+            bl_unik_epic_miser={
+                name = "Loputonahne",
+                text = {
+                    "Next #1# Blinds must",
+                    "be beaten back-to-back"
+                }
+            },
+            bl_unik_epic_steel={
+                name = "Teräksinenterrori", --Steel Terror, exactly functions like the steel, but unrerollable. This is cause its one of the few bosses to greatly be detrimental in the long run which is why its unchanged.
+                text = {
+                    "Set Chips or Mult",
+                    "to lower value",
                 },
             },
             bl_unik_epic_beach_that_makes_you_old = {
@@ -1173,7 +1187,7 @@ return {
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
                     "{X:chips,C:white}X#1#{} Chips for every",
-                    "or {C:attention}Joker{} triggered",
+                    "{C:attention}Joker{} triggered",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:unik_caption,s:0.7,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
@@ -2998,6 +3012,9 @@ return {
             k_plus_code = "+1 Code",
 
             -- cry_tax_placeholder = "(X0.75 blind requirement)",
+            k_unik_back_to_back1="Must defeat ",
+            k_unik_back_to_back2="Blind(s) back-to-back",
+            k_unik_miser_placeholder="15 x (1+(Loputonahnes encountered x 0.1))",
         },
         high_scores={},
         labels={
