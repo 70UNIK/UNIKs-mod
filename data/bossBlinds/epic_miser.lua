@@ -29,7 +29,7 @@ SMODS.Blind{
 		return { vars = { math.ceil(G.GAME.unik_miser_blinds * (1+G.GAME.unik_miser_blind_interval*0.1)) } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
-		return { vars = { localize(' k_unik_miser_placeholder') }}
+		return { vars = { localize('k_unik_miser_placeholder') }}
 	end,
 	set_blind = function(self)
         G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval or 1

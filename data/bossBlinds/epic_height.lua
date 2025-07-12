@@ -34,7 +34,7 @@ SMODS.Blind{
         }
     end,
     debuff_hand = function(self, cards, hand, handname, check)
-        if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) then
+        if G.GAME.current_round.hands_left > 1 and not next(find_joker("j_cry_panopticon")) and check then
             G.GAME.blind.triggered = true
             return true
         end
