@@ -24,24 +24,28 @@ SMODS.Blind{
         akyrs_unskippable_blind = true,
     },
     loc_vars = function(self)
-        G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval or 1
-        G.GAME.unik_miser_blinds = G.GAME.unik_miser_blinds or 18
+        G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval or 0
+        G.GAME.unik_miser_blinds = G.GAME.unik_miser_blinds or 15
 		return { vars = { math.ceil(G.GAME.unik_miser_blinds * (1+G.GAME.unik_miser_blind_interval*0.1)) } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
 		return { vars = { localize('k_unik_miser_placeholder') }}
 	end,
 	set_blind = function(self)
-        G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval or 1
-        G.GAME.unik_miser_blinds = G.GAME.unik_miser_blinds or 18
+        G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval or 0
+        G.GAME.unik_miser_blinds = G.GAME.unik_miser_blinds or 15
         G.GAME.unik_miser_blinds = math.ceil(G.GAME.unik_miser_blinds * (1+G.GAME.unik_miser_blind_interval*0.1))
-        G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval + 0.1
+        
 	end,
+    defeat = function(self, blind_on_deck)
+        G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval + 0.1
+    end,
 }
 
 local evalOverride = Game.update_round_eval
 function Game:update_round_eval(dt)
     if G.GAME.unik_miser_blinds and G.GAME.unik_miser_blinds > 0 then
+        
         G.GAME.unik_miser_blinds = G.GAME.unik_miser_blinds - 1
         local text = localize('k_unik_back_to_back1') ..  G.GAME.unik_miser_blinds .. localize('k_unik_back_to_back2')
         attention_text({
@@ -69,6 +73,7 @@ function Game:update_round_eval(dt)
         not (G.GAME.round_resets.blind_states.Big == 'Defeated' or G.GAME.round_resets.blind_states.Big == 'Skipped'or G.GAME.round_resets.blind_states.Big == 'Hide') and 'Big' or 
         'Boss'
          ChangePhaseCrown()
+        G.GAME.blind:defeat(true)
         -- G.FUNCS.select_blind(e)
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',
