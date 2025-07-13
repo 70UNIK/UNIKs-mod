@@ -65,4 +65,4 @@ target = 'functions/state_events.lua'
 pattern = '''G\.GAME\.blind\:get\_type\(\) \=\= \'Boss\''''
 position = "at"
 line_prepend = '$indent'
-payload = '''(G.GAME.blind:get_type() == 'Boss' or G.GAME.blind.config.blind.key == 'bl_unik_bigger_blind' or G.GAME.blind.config.blind.key == 'bl_unik_boring_blank') '''
+payload = '''(G.GAME.blind_on_deck == 'Boss') '''

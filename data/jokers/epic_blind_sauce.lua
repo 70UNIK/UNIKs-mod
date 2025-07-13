@@ -10,6 +10,8 @@ function ForceEpicBlind()
         G.GAME.round_resets.blind_choices.Big = get_new_boss()
     elseif G.GAME.round_resets.blind_states.Boss == "Upcoming" then 
         G.GAME.round_resets.blind_choices.Boss = get_new_boss()
+    else
+        
     end
 end
 SMODS.Joker {

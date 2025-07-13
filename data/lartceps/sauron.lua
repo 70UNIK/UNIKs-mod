@@ -29,7 +29,7 @@ SMODS.Consumable{
             end
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
                 for i,v in pairs(G.playing_cards) do
-                    if not SMODS.pseudorandom_probability(card, 'unik_sauron', card.ability.extra.unluck, card.ability.extra.odds, 'unik_sauron') then
+                    if SMODS.pseudorandom_probability(card, 'unik_sauron', card.ability.extra.unluck, card.ability.extra.odds, 'unik_sauron') then
                         v:set_ability(G.P_CENTERS['m_unik_namta'])
                     end
                 end

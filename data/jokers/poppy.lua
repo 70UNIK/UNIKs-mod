@@ -128,11 +128,7 @@ function ease_hands_played(mod, instant)
     local initial_hands = G.GAME.current_round.hands_left
     handyHook(mod,instant)
     if G.GAME.blind and G.GAME.blind.in_blind then
-        local mod2 = initial_hands + mod
-        if mod2 < 0 then
-            mod2 = mod2 + (-mod)
-        end
-        SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod2 })
+        SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod })
     end
     
 end
@@ -142,11 +138,7 @@ function ease_discard(mod, instant, silent)
     local initial_discards = G.GAME.current_round.discards_left
     tossyHook(mod,instant,silent)
     if G.GAME.blind and G.GAME.blind.in_blind then
-        local mod2 = initial_discards + mod
-        if mod2 < 0 then
-            mod2 = mod2 + (-mod)
-        end
-        SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod2 })
+        SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod })
     end
 end 
 

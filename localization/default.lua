@@ -2481,7 +2481,7 @@ return {
                 }
             },
             c_unik_bloater ={
-                name = "Bloater",
+                name = "Overcapacity",
                 text = {
                     "{C:attention}+#1#{} Hand Size",
                     "Add {C:attention}#2#{} random",

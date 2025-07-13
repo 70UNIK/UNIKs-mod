@@ -35,6 +35,7 @@ SMODS.Blind{
         G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval or 0
         G.GAME.unik_miser_blinds = G.GAME.unik_miser_blinds or 15
         G.GAME.unik_miser_blinds = math.ceil(G.GAME.unik_miser_blinds * (1+G.GAME.unik_miser_blind_interval*0.1))
+        G.GAME.unik_miser_blinds_actual = G.GAME.unik_miser_blinds
         
 	end,
     defeat = function(self, blind_on_deck)
@@ -44,10 +45,10 @@ SMODS.Blind{
 
 local evalOverride = Game.update_round_eval
 function Game:update_round_eval(dt)
-    if G.GAME.unik_miser_blinds and G.GAME.unik_miser_blinds > 0 then
+    if G.GAME.unik_miser_blinds_actual and G.GAME.unik_miser_blinds_actual  > 0 then
         
-        G.GAME.unik_miser_blinds = G.GAME.unik_miser_blinds - 1
-        local text = localize('k_unik_back_to_back1') ..  G.GAME.unik_miser_blinds .. localize('k_unik_back_to_back2')
+        G.GAME.unik_miser_blinds_actual  = G.GAME.unik_miser_blinds_actual  - 1
+        local text = localize('k_unik_back_to_back1') ..  G.GAME.unik_miser_blinds_actual .. localize('k_unik_back_to_back2')
         attention_text({
             scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
         })

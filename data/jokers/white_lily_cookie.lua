@@ -81,12 +81,13 @@ SMODS.Joker {
         card.ability.extra.sold = false
     end,
     remove_from_deck = function(self, card, from_debuff)
-        if not  G.CONTROLLER.locks.selling_card and not card.ability.unik_disposable and not card.ability.unik_niko
-        and not card.ability.cry_committed and not card.ability.cry_reworked then
-            unik_set_sell_cost(card,0)
-            White_lily_copy(card)
+        if not from_debuff then
+            if not  G.CONTROLLER.locks.selling_card and not card.ability.unik_disposable and not card.ability.unik_niko
+            and not card.ability.cry_committed and not card.ability.cry_reworked then
+                unik_set_sell_cost(card,0)
+                White_lily_copy(card)
+            end
         end
-         
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
