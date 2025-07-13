@@ -2,9 +2,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_tax_haven',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
+	pos = { x = 0, y = 2 },
     cost = 5,
 	blueprint_compat = true,
     perishable_compat = true,

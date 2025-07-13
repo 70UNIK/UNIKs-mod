@@ -1799,7 +1799,7 @@ return {
             j_unik_poppy = {
                 name = "Poppy", --Retrigger rightmost card for every hand or discard used
                 text = {
-                    "Retrigger {C:attention}leftmost",
+                    "Retrigger {C:attention}rightmost",
                     "scored card for",
                     "every {C:blue}Hand{} or {C:attention}2{} {C:red}discards{}",
                     "lost in round", --that means the needle and the water will give an instant (hands - 1 or discards) triggers.

@@ -45,7 +45,7 @@ SMODS.Joker {
         
         if context.repetition and context.cardarea == G.play then
             if card.ability.extra.retriggers > 0 then
-                if context.other_card == context.scoring_hand[1] then
+                if context.other_card == context.scoring_hand[#context.scoring_hand] then
                     
                     if not context.blueprint_card then
                         local quoteset = 'trigger'
@@ -125,17 +125,32 @@ SMODS.Joker {
 }
 local handyHook = ease_hands_played
 function ease_hands_played(mod, instant)
+    local initial_hands = G.GAME.current_round.hands_left
     handyHook(mod,instant)
     if G.GAME.blind and G.GAME.blind.in_blind then
-        SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod })
+        local mod2 = initial_hands + mod
+        if mod2 < 0 then
+            mod2 = mod2 + (-mod)
+        end
+        SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod2 })
     end
     
 end
 
 local tossyHook = ease_discard
 function ease_discard(mod, instant, silent)
+    local initial_discards = G.GAME.current_round.discards_left
     tossyHook(mod,instant,silent)
     if G.GAME.blind and G.GAME.blind.in_blind then
-        SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod })
+        local mod2 = initial_discards + mod
+        if mod2 < 0 then
+            mod2 = mod2 + (-mod)
+        end
+        SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod2 })
     end
 end 
+
+---initial = 3 hands
+---final = -9999 hands
+---actually should be -3 hand change, not -10002.
+--- -10002 = -100002 + (9999)
