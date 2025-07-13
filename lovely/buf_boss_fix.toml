@@ -1,0 +1,14 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Buffoonery "Buffoonery.lua"]'''
+pattern = '''orig_get_new_boss = get_new_boss
+get_new_boss = buf_get_new_boss'''
+position = "at"
+payload = '''--NOPE'''
+match_indent = true

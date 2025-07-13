@@ -1,0 +1,30 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### first drawn hand is positive while respecting card limit
+[[patches]]
+[patches.pattern]
+target = '''functions/state_events.lua'''
+pattern = '''local card = G.deck.cards[#G.deck.cards-n]'''
+position = 'after'
+payload = '''
+if G.GAME.unik_positive_draw and G.GAME.current_round.hands_played > 0 and card then
+    local tempLimit = limit
+
+    tempLimit = tempLimit - 1 + (not card.debuff and card.edition and card.edition.card_limit or 0)
+    if tempLimit > 0 then
+        if card.edition and card.edition.key then
+            card.ability.original_edition = card.edition.key
+        end
+        if not card.edition then
+            card.ability.revert_positive_unik = true
+        end
+        card:set_edition({ unik_positive = true }, true,nil, true)
+        G.GAME.blind.triggered = true
+        G.GAME.blind:wiggle()
+    end
+end
+'''
+match_indent = true

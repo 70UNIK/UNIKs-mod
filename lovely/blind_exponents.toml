@@ -1,0 +1,136 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### Display exponential blind amount
+## exponent is 'unik_exponent' for compat with entropy
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling'''
+position = "before"
+payload = '''
+if ((not self.unik_exponent) or self.unik_exponent[2] <= 0) and ((not self.high_score_size))then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''self.mult = blind and blind.mult or 0'''
+position = "after"
+payload = '''
+self.unik_exponent = blind and blind.unik_exponent or {1,0}
+self.death_message = blind and blind.death_message or nil
+self.high_score_size = blind and blind.high_score_size or nil
+self.glitchy_anim = blind and blind.glitchy_anim or nil
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling'''
+position = "after"
+payload = '''
+elseif self.unik_exponent[2] > 0 then
+    local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
+    initial = initial:arrow(self.unik_exponent[1], self.unik_exponent[2])
+    self.chips = initial
+elseif self.high_score_size then
+    self.chips = G.GAME.round_scores['hand'].amt or 0
+end
+'''
+match_indent = true
+
+### display exponential blind 2
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''else
+    blind_text[#blind_text + 1] =
+      {n=G.UIT.R, config={align = "cm", emboss = 0.05, r = 0.1, minw = 2.5, padding = 0.1, colour = G.C.WHITE}, nodes={'''
+position = "before"
+payload = '''
+--END POINT
+end
+'''
+match_indent = true
+
+### display exponential blind 3
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''local blind_amt = get_blind_amount(G.GAME.round_resets.blind_ante)*blind_choice.config.mult*G.GAME.starting_params.ante_scaling'''
+position = "after"
+payload = '''
+if blind_choice.config.unik_exponent then
+      local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
+      initial = initial:arrow(blind_choice.config.unik_exponent[1], blind_choice.config.unik_exponent[2])
+      blind_amt = initial
+elseif blind_choice.config.high_score_size then
+    blind_amt = G.GAME.round_scores['hand'].amt or 0
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''local stake_sprite = get_stake_sprite(G.GAME.stake or 1, 0.4)'''
+position = "after"
+payload = '''
+--START_EXPONENT_THING
+if blind.unik_exponent then
+    local exponents = ""
+    local exponents2 = ""
+    for i = 1, blind.unik_exponent[1] do
+      exponents = exponents .. "^"
+    end
+    if blind.unik_exponent[1] > 5 then
+      exponents = ""
+      exponents2 = "{" .. blind.unik_exponent[1] .. "}"
+    end
+    blind_text[#blind_text + 1] =
+      {n=G.UIT.R, config={align = "cm", emboss = 0.05, r = 0.1, minw = 2.5, padding = 0.07, colour = G.C.WHITE}, nodes={
+        {n=G.UIT.R, config={align = "cm", maxw = 2.4}, nodes={
+          {n=G.UIT.T, config={text = localize('ph_blind_score_at_least'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},
+        }},
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+          {n=G.UIT.O, config={object = stake_sprite}},
+          {n=G.UIT.T, config={text = exponents .. blind.unik_exponent[2].. exponents2 .. localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
+        }},
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+          {n=G.UIT.T, config={text = localize('ph_blind_reward'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},
+          {n=G.UIT.O, config={object = DynaText({string = {_dollars and string.rep(localize('$'),_dollars) or '-'}, colours = {G.C.MONEY}, rotate = true, bump = true, silent = true, scale = 0.45})}},
+        }},
+        ability_text[1] and {n=G.UIT.R, config={align = "cm", padding = 0.08, colour = mix_colours(blind.boss_colour, G.C.GREY, 0.4), r = 0.1, emboss = 0.05, minw = 2.5, minh = 0.9}, nodes=ability_text} or nil
+      }}
+    if AKYRS then
+      AKYRS.add_blind_extra_info(blind,ability_text,{text_size = 0.25, difficulty_text_size = 0.3, full_ui = true, info_queue = info_queue})
+    end
+elseif blind.high_score_size then
+    blind_text[#blind_text + 1] =
+      {n=G.UIT.R, config={align = "cm", emboss = 0.05, r = 0.1, minw = 2.5, padding = 0.07, colour = G.C.WHITE}, nodes={
+        {n=G.UIT.R, config={align = "cm", maxw = 2.4}, nodes={
+          {n=G.UIT.T, config={text = localize('ph_blind_score_at_least'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},
+        }},
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+          {n=G.UIT.O, config={object = stake_sprite}},
+          {n=G.UIT.T, config={text = localize('k_unik_high_score'), scale = 0.4, colour = G.C.RED}},
+        }},
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+          {n=G.UIT.T, config={text = localize('ph_blind_reward'), scale = 0.35, colour = G.C.UI.TEXT_DARK}},
+          {n=G.UIT.O, config={object = DynaText({string = {_dollars and string.rep(localize('$'),_dollars) or '-'}, colours = {G.C.MONEY}, rotate = true, bump = true, silent = true, scale = 0.45})}},
+        }},
+        ability_text[1] and {n=G.UIT.R, config={align = "cm", padding = 0.08, colour = mix_colours(blind.boss_colour, G.C.GREY, 0.4), r = 0.1, emboss = 0.05, minw = 2.5, minh = 0.9}, nodes=ability_text} or nil
+      }}
+    if AKYRS then
+      AKYRS.add_blind_extra_info(blind,ability_text,{text_size = 0.25, difficulty_text_size = 0.3, full_ui = true, info_queue = info_queue})
+    end
+else
+--NORMAL STUFF
+'''
+match_indent = true

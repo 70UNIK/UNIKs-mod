@@ -1,0 +1,60 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+##The cookie: Obsidian orb compat
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/blind.lua"]'''
+pattern = '''cry_ante_base_mod = function(self, dt)
+		local mod = 0'''
+position = "before"
+payload = '''
+	unik_clicky_click_mod = function(self)
+		local mod = {0,-1}
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+			if s.unik_clicky_click_mod then
+				if s:unik_clicky_click_mod(true)[2] <= -1 then
+					mod[1] = mod[1] + s:unik_clicky_click_mod(false)[1]
+				elseif s:unik_clicky_click_mod(true)[2] <= 0 then
+					if mod[1] <= 0 then
+						mod[1] = 1
+					end
+					mod[1] = mod[1] * s:unik_clicky_click_mod(false)[1]
+				else
+					if mod[1] <= 0 then
+						mod[1] = 1
+					end
+					mod[1] = mod[1] * s:unik_clicky_click_mod(false)[1]
+					mod[2] = s:unik_clicky_click_mod(true)[2]
+				end
+			end
+		end
+		return mod
+	end,
+	unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips)
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+			if s.unik_debuff_after_hand then
+				return s:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips)
+			end
+		end
+		return {
+            debuff = false,
+        }
+	end,
+	unik_after_defeat = function(self,chips,blind_size)
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+			if s.unik_after_defeat then
+				return s:unik_after_defeat(chips,blind_size)
+			end
+		end
+		return false
+	end,
+	
+'''
+match_indent = true

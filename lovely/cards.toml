@@ -1,0 +1,241 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### Make impounded sellable
+# Patch into cryptid to force happiness to be positive in a reliable way
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/spooky.lua"]'''
+pattern = '''and card.ability.name ~= "cry-Monopoly"'''
+position = "after"
+payload = '''and card.config.center.key ~= "j_unik_impounded" 
+and card.config.center.key ~= "j_cry_astral_bottle" 
+and card.config.center.key ~= "j_unik_rancid_smoothie"
+and card.config.center.key ~= "j_buf_afan_spc" 
+'''
+match_indent = true
+
+### Make impounded sellable (cryptid build dev)
+# Patch into cryptid to force happiness to be positive in a reliable way
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/ui.lua"]'''
+pattern = '''and card.ability.name ~= "cry-Monopoly"'''
+position = "after"
+payload = '''and card.config.center.key ~= "j_unik_impounded" 
+and card.config.center.key ~= "j_cry_astral_bottle" 
+and card.config.center.key ~= "j_unik_rancid_smoothie"
+and card.config.center.key ~= "j_buf_afan_spc" 
+'''
+match_indent = true
+
+## Unsellable jokers for triggering
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/ui.lua"]'''
+pattern = '''table.remove(abc.nodes[1].nodes, 1)'''
+position = "after"
+payload = '''card.ability.unik_cursed_unsellable = true'''
+match_indent = true
+
+### allow modify cost of impounded
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'if self.area and self.ability.couponed and (self.area == G.shop_jokers or self.area == G.shop_booster) then self.cost = 0 end'
+position = 'after'
+match_indent = true
+payload = '''
+if self.config.center.key == 'j_unik_impounded' and self.added_to_deck then
+    self.sell_cost = self.ability.extra.cost + (self.ability.extra_value or 0)
+end
+'''
+
+### do not set impounded cost to 0
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/spooky.lua"]'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+position = "at"
+payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
+match_indent = true
+
+### do not set impounded cost to 0
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+position = "at"
+payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
+match_indent = true
+
+### Hook n discard, ensure cards are discarded BEFORE scoring (similar to the hook)
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.blind:press_play() then'''
+position = 'before'
+match_indent = true
+payload = '''
+if G.jokers then
+    for _, v in pairs(G.jokers.cards) do
+        if v.ability.name == "j_unik_hook_n_discard" then
+            --taken from the hook
+            G.E_MANAGER:add_event(Event({ 
+                func = function()
+                local any_selected = nil
+                local _cards = {}
+                for k, v in ipairs(G.hand.cards) do
+                    _cards[#_cards+1] = v
+                end
+                for i = 1, 2 do
+                    if G.hand.cards[i] then 
+                        local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('hook'))
+                        G.hand:add_to_highlighted(selected_card, true)
+                        table.remove(_cards, card_key)
+                        any_selected = true
+                        play_sound('card1', 1)
+                    end
+                end
+                if any_selected then G.FUNCS.discard_cards_from_highlighted(nil, true) end
+                if any_selected then
+                    v:juice_up(0.8, 0.8)
+                end
+                delay(0.7)
+            return true end })) 
+            card_eval_status_text(v, "extra", nil, nil, nil, {
+                message = localize("k_unik_hooked"),
+                colour = G.C.UNIK_THE_HOOK,
+                card=v,
+            })
+        end
+    end
+end
+
+--Also blind edition before play
+if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+    local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+    if edi.press_play and edi.press_play() and (type(edi.press_play) == "function") then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = (function()
+                SMODS.juice_up_blind()
+                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
+                    play_sound('tarot2', 0.76, 0.4);return true end}))
+                play_sound('tarot2', 1, 0.4)
+                return true
+            end)
+        }))
+        delay(0.4)
+        edi:press_play(G.GAME.blind_on_deck)
+    end
+end
+'''
+
+### cube content set: add cube and big cube to the cube sets (cannot do it manually, have to patch it in)
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
+pattern = '''local big_cube = {'''
+position = "after"
+payload = '''pools = { ["unik_cube"] = true },'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
+pattern = '''pools = { ["Meme"] = true },
+	source_gate = "sho",
+	loc_vars = function(self, info_queue, center)
+		return { vars = { center.ability.extra.chips } }
+	end,'''
+position = "at"
+payload = '''pools = { ["unik_cube"] = true, ["Meme"] = true,  },
+	source_gate = "sho",
+	loc_vars = function(self, info_queue, center)
+		return { vars = { center.ability.extra.chips } }
+	end,'''
+match_indent = true
+
+### vessel kiln, override cat tags and other tags to replace with vessel tags
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''if next(SMODS.find_card('j_cry_kittyprinter')) then
+	_tag = Tag('tag_cry_cat', nil, blind_choice)
+end'''
+position = "after"
+payload = '''
+if next(SMODS.find_card('j_unik_vessel_kiln')) then
+	_tag = Tag('tag_unik_vessel', nil, blind_choice)
+end
+'''
+match_indent = true
+
+### Commit: Exclusive to white lily, she should die immediately and not respawn to not clone infinite exotics, even with that single commit limit (what if you use invisible joker on an uncommitted white lily?)
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/code.lua"]'''
+pattern = '''local _first_dissolve = nil'''
+position = "after"
+payload = '''
+-- reduce commit limit by 1
+if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
+    G.jokers.highlighted[1].ability.cry_reworked = true
+end
+'''
+match_indent = true
+
+### REWORK: White Lily should immediately die without respawn if used REWORK on her:
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/code.lua"]'''
+pattern = '''tag.ability.rework_edition = G.P_CENTER_POOLS.Edition[found_index].key'''
+position = "after"
+payload = '''
+-- reduce commit limit by 666
+if jkr.config.center.key == "j_unik_white_lily_cookie" then
+    jkr.ability.cry_committed = true
+end
+'''
+match_indent = true
+
+### Custom card destruction anim thing (lily, possibly tainted ceramics)
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "cards_destroyed[i]:start_dissolve()"
+position = "before"
+payload = '''if cards_destroyed[i].ability.gore_6_destruction then
+    cards_destroyed[i]:gore6_break()
+else
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "cards_destroyed[i]:start_dissolve()"
+position = "after"
+payload = '''end
+'''
+match_indent = true
+
+### Multiply: no need for init
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/code.lua"]'''
+pattern = '''for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].config.cry_multiply then
+					m = G.jokers.cards[i].config.cry_multiply
+					Cryptid.manipulate(G.jokers.cards[i], { value = 1 / m })
+					G.jokers.cards[i].config.cry_multiply = nil
+				end
+			end'''
+position = "at"
+payload = '''
+--nope
+'''
+match_indent = true

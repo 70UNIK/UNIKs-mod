@@ -1,0 +1,4 @@
+--The start of the overshoot functionality/UI, where if you score too well, it punishes you overtime, wit hworse punishments for consecutive or bigger overshoots. This includes ante increase, epic/legendary blinds, etc...
+--It will have a UI and possibly a counter.
+--In the collection menu, you can see your current overshoot and the level, plus intervals that can increase/decrease it.
+--When you activate overshoot, it shows a UI similar to straddle (but actually refined like an actual UI screen). It has a meter for your score vs the actual score various intervals. Not activating overshoot while having overshoot will decrease it.

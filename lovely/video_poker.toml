@@ -1,0 +1,15 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+### video poker functions:
+### force playing all cards in hand
+
+### Always have infinite selection limit in video poker to avoid softlocking.
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "if to_big(#self.highlighted) >= to_big(self.config.highlighted_limit) then"
+position = "at"
+payload = "if to_big(#self.highlighted) >= to_big(self.config.highlighted_limit) and not G.GAME.unik_video_poker_rules then"
+match_indent = true

@@ -1,0 +1,30 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS finity "Finity.lua"]'''
+pattern = '''eligible_bosses[k] = true'''
+position = "before"
+payload = '''
+if v.in_pool and type(v.in_pool) == 'function' then
+    local res, options = v:in_pool()
+    if v.boss and v.boss.showdown then
+        eligible_bosses[k] = res and true or nil
+    end
+else
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS finity "Finity.lua"]'''
+pattern = '''eligible_bosses[k] = true'''
+position = "after"
+payload = '''
+end
+'''
+match_indent = true

@@ -1,0 +1,1 @@
+--Have a hologram spectral (apply holographic on up to 2 selected cards)

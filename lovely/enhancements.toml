@@ -1,0 +1,17 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+## Artificially add abstracted 'suits' to flush calculations without declaring them (sigil, familiar)
+## Also make sure to create a hard copy of suits and iterate, otherwise adding the artificial suit will add it to suit.obj_buffer for real!
+[[patches]]
+[patches.pattern]
+target = '''functions/misc_functions.lua'''
+pattern = '''      suits[#suits + 1] = 'cry_abstract''''
+position = "after"
+payload = '''
+    suits[#suits + 1] = 'unik_pink'
+
+'''
+match_indent = true

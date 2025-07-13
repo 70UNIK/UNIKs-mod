@@ -1,0 +1,1 @@
+--have a Film spectral (negative), apply foil on up to 3 cards
