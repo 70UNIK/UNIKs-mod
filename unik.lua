@@ -259,7 +259,14 @@ NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")()
 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
-NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
+if (SMODS.Mods["Buffoonery"] or {}).can_load then
+	NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
+end
+
+-- if (SMODS.Mods["Bunco"] or {}).can_load then
+-- 	print("bunco compat_fix")
+--     NFS.load(mod_path .. "data/overrides/bunco.lua")() 
+-- end
 --Stakes
 --Persimmon Stake: Cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables (after orange)
 --Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable (after gold)
@@ -295,6 +302,8 @@ NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
+NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
+--
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
 --Spectral Merchant (Tier 1) Spectrals can appear in shop
@@ -389,9 +398,13 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_jollyless.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_vice.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_sink.lua")() --hold for now until a more interesting effect is in place
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_miser.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_height.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Blinds below require talisman due to exponential requirements
 	if Talisman then
@@ -438,8 +451,9 @@ NFS.load(mod_path .. "data/jokers/double_container.lua")()
 --- Hacker: 3 in 4 chance to not create a code card when a 2, 3, 4 or 5 is played. (must have room)
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
-
+NFS.load(mod_path .. "data/jokers/hacker.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
+NFS.load(mod_path .. "data/jokers/tax_haven.lua")()
 
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()

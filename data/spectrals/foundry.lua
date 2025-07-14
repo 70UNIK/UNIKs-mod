@@ -7,7 +7,7 @@ SMODS.Consumable{
 	atlas = "unik_spectrals",
 	order = 90,
     config = {
-		max_highlighted = 1, extra = {odds = 3, cards_added = 2}
+		max_highlighted = 1, extra = {odds = 3, cards_added = 7}
 	},
 	can_use = function(self, card)
 		if card.area ~= G.hand then
@@ -87,18 +87,10 @@ SMODS.Consumable{
 									local _suit, _rank =
 										SMODS.Suits[pseudorandom_element(suit_list, pseudoseed("foundry_create"))].card_key,
 										pseudorandom_element(numbers, pseudoseed("foundry_create"))
-									local cen_pool = {}
-									for k, v in pairs(G.P_CENTER_POOLS["Enhanced"]) do
-										cen_pool[#cen_pool + 1] = v
-									end
 									local card2 = create_playing_card({
 										front = G.P_CARDS[_suit .. "_" .. _rank],
-										center = (pseudorandom(pseudoseed('foundry_enhancement_create')) > 0.6) and pseudorandom_element(cen_pool, pseudoseed('spec_foundry_enh_card')) or G.P_CENTERS.c_base,
+										center = G.P_CENTERS.c_base,
 									}, G.hand, nil, i ~= 1, { G.C.SECONDARY_SET.Spectral })
-									local edition_rate = 2
-									local edition = poll_edition('foundry_edition_create', edition_rate, true)
-									card2:set_edition(edition)
-									card2:set_seal(SMODS.poll_seal({mod = 10}))
 								end
 								playing_card_joker_effects(cards)
 								return true

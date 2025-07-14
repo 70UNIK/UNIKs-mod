@@ -8,11 +8,13 @@ SMODS.Blind{
     boss_colour= HEX("5c0007"),
     dollars = 8,
     mult = 2,
-	loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1) * 2), 3 } }
+    loc_vars = function(self)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(self, 2,3, 'unik_maroon_magnet')
+		return { vars = { new_numerator, new_denominator } }
 	end,
 	collection_loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1) * 2), 3 } }
+        local new_numerator, new_denominator = SMODS.get_probability_vars(self, 2,3, 'unik_maroon_magnet')
+		return { vars = { new_numerator, new_denominator } }
 	end,
 	set_blind = function(self)
 		G.GAME.unik_killed_by_magnet = true
@@ -23,7 +25,7 @@ SMODS.Blind{
                 scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
             })
             for i, w in pairs(G.deck.cards) do
-                if w.config.center == G.P_CENTERS.c_base and (pseudorandom(pseudoseed("magnet")) < ((G.GAME.probabilities.normal * 2) / 3))then
+                if w.config.center == G.P_CENTERS.c_base and (SMODS.pseudorandom_probability(self, pseudoseed('unik_maroon_magnet'), 2, 3, 'unik_maroon_magnet'))then
                     w:set_ability(G.P_CENTERS["m_steel"], nil, true)
                 end
             end
@@ -46,7 +48,7 @@ SMODS.Blind{
         end
         if G.deck then 
             for i, v in pairs(G.deck.cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
@@ -78,12 +80,12 @@ SMODS.Blind{
                 end
             end
             for k, v in pairs(G.hand.cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
             for k, v in ipairs(cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steelsPlayed = steelsPlayed + 1
                 end
             end
@@ -103,7 +105,7 @@ SMODS.Blind{
                 end
             end
             for k, v in pairs(G.hand.cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end

@@ -12,14 +12,7 @@ target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
 payload = '''
-local instakill = G.GAME.blind:unik_after_defeat(G.GAME.chips,G.GAME.blind.chips)
-if instakill then
-    G.GAME.chips = 0
-    game_over = true
-    G.ROOM.jiggle = G.ROOM.jiggle + 25
-    G.GAME.blind.triggered = true
-    G.GAME.blind:wiggle()
-end
+
 -- legendary crown: force set new high score:
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
 local upper22 = G.GAME.chips

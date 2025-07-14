@@ -28,7 +28,7 @@ SMODS.Joker {
     key = "unik_legendary_crown",
     atlas = 'unik_finity_legendary_crown',
     config = {
-      extra = {Emult = 1.0, Emult_mod = 0.1}
+      extra = {Emult = 1.0, Emult_mod = 0.15}
     },
     loc_vars = function(self, info_queue, center)
         local BlindSize = 0

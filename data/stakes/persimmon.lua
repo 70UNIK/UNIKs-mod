@@ -1,7 +1,7 @@
---Any cards may be triggering; 
+
 SMODS.Stake{ 
     key = 'unik_persimmon',
-
+    order = 1,
     unlocked_stake = 'gold',
     applied_stakes = {'orange'},
     above_stake = 'orange',
@@ -18,8 +18,8 @@ SMODS.Stake{
     atlas = 'unik_stakes',
     sticker_atlas = 'unik_sticker_stakes'
 }
-
 SMODS.Stake:take_ownership('gold', {
     applied_stakes = {'unik_persimmon'},
-    above_stake = 'unik_persimmon'
+    above_stake = 'unik_persimmon',
+    prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 })

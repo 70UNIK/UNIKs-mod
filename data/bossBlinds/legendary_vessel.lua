@@ -40,7 +40,7 @@ SMODS.Blind{
         G.HUD_blind:recalculate(true)
 	end,
 	unik_after_defeat = function(self,chips,blind_size)
-        if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) then
+        if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("j_paperback_the_world")) then
             return true
         end
         return false

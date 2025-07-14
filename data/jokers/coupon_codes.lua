@@ -11,15 +11,14 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {odds = 5} },
+    config = { extra = {prob = 3, odds = 5} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_disposable" }
-		return { vars = { 
-        center and cry_prob(3 or center.ability.cry_prob*3 ,center.ability.extra.odds,center.ability.cry_rigged)or 3, 
-        center.ability.extra.odds} }
+        local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.prob, center.ability.extra.odds, 'unik_coupon_codes')
+		return { vars = { new_numerator, new_denominator} }
 	end,
     gameset_config = {
-		modest = {extra = {odds = 30} },
+		modest = {extra = {prob = 4} },
 	},
     calculate = function(self, card, context)
         if context.forcetrigger then
@@ -77,7 +76,7 @@ SMODS.Joker {
         if (context.end_of_round and context.game_over == false) then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})
             local max = 1
-            if not(pseudorandom('unik_coupon_codes') < cry_prob(3 or card.ability.cry_prob*3 ,card.ability.extra.odds,card.ability.cry_rigged)/card.ability.extra.odds) then
+            if not SMODS.pseudorandom_probability(card, 'unik_coupon_codes', card.ability.extra.prob, card.ability.extra.odds, 'unik_coupon_codes') then
                 max = 2
             end
             for i = 1, max do
@@ -122,32 +121,32 @@ SMODS.Joker {
         end
     end,
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_coupon_codes"] = {
-        reminder_text = {
-            {
-                ref_table = "card.joker_display_values",
-                ref_value = "localized_text",
-                retrigger_type = "mult",
-            },	
-        },
-        extra = {
-            {
-                {
-                    ref_table = "card.joker_display_values",
-                    ref_value = "odds",
-                    colour = G.C.GREEN,
-                    scale = 0.3,
-                },		
-			},
-		},
-        calc_function = function(card)
-            local text = ""
-            local odds = ""
-            odds = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(3 or card.ability.cry_prob*3 ,card.ability.extra.odds,card.ability.cry_rigged), card.ability.extra.odds } }
-            text = "(" .. localize("k_voucher") .. ")"
-			card.joker_display_values.localized_text = text
-            card.joker_display_values.odds = odds
-        end
-	}
-end
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_coupon_codes"] = {
+--         reminder_text = {
+--             {
+--                 ref_table = "card.joker_display_values",
+--                 ref_value = "localized_text",
+--                 retrigger_type = "mult",
+--             },	
+--         },
+--         extra = {
+--             {
+--                 {
+--                     ref_table = "card.joker_display_values",
+--                     ref_value = "odds",
+--                     colour = G.C.GREEN,
+--                     scale = 0.3,
+--                 },		
+-- 			},
+-- 		},
+--         calc_function = function(card)
+--             local text = ""
+--             local odds = ""
+--            
+--             text = "(" .. localize("k_voucher") .. ")"
+-- 			card.joker_display_values.localized_text = text
+--             card.joker_display_values.odds = odds
+--         end
+-- 	}
+-- end

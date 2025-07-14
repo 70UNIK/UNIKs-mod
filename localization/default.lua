@@ -98,6 +98,7 @@ return {
 			-- 		"odd numbered hands",
 			-- 	},
 			-- },
+
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
@@ -250,13 +251,27 @@ return {
                     "(Currently #1# Tag(s))"
                 },
             },
-            bl_unik_epic_hannibal = { --Always draw 4 cards after play and discard. If any cards are held in hand after blind defeat, die
-                name = "Nälkäinenkannibaali", --The hungry cannibal (Epic Hannibal)
+            bl_unik_epic_height = {
+                name = "Huipunkorkeus", --Height of the Summit
                 text = {
-                    "After Play or Discard,",
-                    "always draw #1# cards",
-                    "If any card is held after",
-                    "Blind Defeat, die"
+                    "All scoring is",
+                    "added to the Blind Size",
+                    "instead of Score until",
+                    "the final hand"
+                }
+            },
+            bl_unik_epic_miser={
+                name = "Loputonahne",
+                text = {
+                    "Next #1# Blinds must",
+                    "be beaten back-to-back"
+                }
+            },
+            bl_unik_epic_steel={
+                name = "Teräksinenterrori", --Steel Terror, exactly functions like the steel, but unrerollable. This is cause its one of the few bosses to greatly be detrimental in the long run which is why its unchanged.
+                text = {
+                    "Set Chips or Mult",
+                    "to lower value",
                 },
             },
             bl_unik_epic_beach_that_makes_you_old = {
@@ -349,7 +364,30 @@ return {
                     "into Séances",
 				},
             },
-            
+            bl_unik_epic_whole = {
+                name = "Syödäänkokonaisena", --Eaten Whole
+                text = {
+                    "If a hand contains a",
+                    "rank not previously scored",
+                    "in last hand, die",
+                }
+            },
+            bl_unik_epic_sink={
+                name = "Uppokaivo", --Sinkhole
+                text = {
+                    "Half of Digits in Score is",
+                    "added to Ante instead of Score",
+                    "until #1# hand#<s>1# containing",
+                    "a Flush are discarded",
+                }
+            },
+            bl_unik_epic_bellows = {
+                name = "Karjuvakuilu", --+1 ante per card held in hand
+                text = {
+                    "+4 Hand Size",
+                    "+1 ante per card held",
+                },
+            },
             bl_cry_cube={ --I don't like cube being worse than lemon trophy. So I'll just nerf it to reduce mult by ^0.5 and blind size to be ^0.33. Still severe, but can be brute forced 
                 name = "The Cube",
                 text = {
@@ -906,10 +944,10 @@ return {
                 name = 'Lucky 7',
                 text = {
                     "Each played {C:attention}7{} has a", 
-                    "{C:green}#1# in #3#{} chance",
-                    "for {C:mult}+#2#{} Mult and a",
-                    "{C:green}#1# in #5#{} chance",
-                    "to win {C:money}$#4#",
+                    "{C:green}#1# in #2#{} chance",
+                    "for {C:mult}+#3#{} Mult and a",
+                    "{C:green}#4# in #5#{} chance",
+                    "to win {C:money}$#6#",
                 }
             },
             --Disable if extracredit is installed
@@ -921,18 +959,17 @@ return {
                 }
             },
             j_unik_yes_nothing = {
-                name = 'Yes! Nothing*',
+                name = 'Yes! Nothing',
                 text={
-                    "Multiplies all {C:attention}listed{}",
-                    "{C:green,E:1,S:1.1}probabilities{} by {C:green}1e-100{}",
-                    "{C:inactive,s:0.6}(As low as possible to 0){}",
-                    "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}~0 in 3{C:inactive})",
+                    "Sets all {C:green,E:1,S:1.1}listed{}",
+                    "{C:green,E:1,S:1.1}probabilities{} to {C:attention}0{}",
+                    "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}0 in 3{C:inactive})",
                 },
             },
             j_unik_yes_nothing_modest = {
                 name = 'Yes! Nothing*',
                 text={
-                    "Halves all {C:attention}listed{}",
+                    "Halves all {C:green,E:1,S:1.1}listed{}",
                     "{C:green,E:1,S:1.1}probabilities{}",
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}1 in 3{C:inactive})",
                 },
@@ -1173,7 +1210,7 @@ return {
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
                     "{X:chips,C:white}X#1#{} Chips for every",
-                    "or {C:attention}Joker{} triggered",
+                    "{C:attention}Joker{} triggered",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:unik_caption,s:0.7,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
@@ -1788,7 +1825,7 @@ return {
                 text = {
                     "Retrigger {C:attention}rightmost",
                     "scored card for",
-                    "every {C:blue}Hand{} or {C:red}discard{}",
+                    "every {C:blue}Hand{} or {C:attention}2{} {C:red}discards{}",
                     "lost in round", --that means the needle and the water will give an instant (hands - 1 or discards) triggers.
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive} retriggers)", --#max 1000 retriggers.
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
@@ -1816,6 +1853,24 @@ return {
                     "with only {C:attention}Light Cards",
                 }
             },
+            j_unik_hacker = {
+                name = "Hacker",
+                text = {
+                    "{C:green}#1# in #2#{} chance for each played",
+                    "{C:attention}2{}, {C:attention}3{}, {C:attention}4{} or {C:attention}5{} to not",
+                    "create a {C:cry_code}Code Card",
+                    "{C:inactive}(Must have room)"
+                }
+            },
+            j_unik_tax_haven={
+                name = "Tax Haven",
+                text = {
+                    "{C:attention}Remove{} all {C:attention}Rental{} Stickers",
+                    "on all owned",
+                    "Jokers and cards",
+                    "{C:red}Lose{} {C:money}$#1#{} per Sticker removed",
+                }
+            },
 
             --crossmod
             j_unik_weetomancer={ --rare, paperback
@@ -1836,6 +1891,7 @@ return {
                     "{C:inactive}(Whichever is lower)",
                 }
             },
+
 
             --Finity boss blinds
             j_unik_indigo_icbm={
@@ -2425,7 +2481,8 @@ return {
                 text = {
                     "Add {C:dark_edition}Steel{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
-                    "add {C:attention}#2#{} random card(s)",
+                    "Add {C:attention}#2#{} random",
+                    "unmodified card#<s>2#",
                 }
             },
             c_cry_pointer_no_dupe = {
@@ -2443,8 +2500,18 @@ return {
                 text = {
                      "Add {C:dark_edition}Polychrome{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
+                    "Add {C:attention}#2#{} random",
+                    "unmodified card#<s>2#",
                 }
-            }
+            },
+            c_unik_bloater ={
+                name = "Overcapacity",
+                text = {
+                    "{C:attention}+#1#{} Hand Size",
+                    "Add {C:attention}#2#{} random",
+                    "unmodified card#<s>2#",
+                }
+            },
         },
         Stake={
             stake_unik_shitty = {
@@ -2974,7 +3041,12 @@ return {
             k_legendary_crown_normal3 = "I should've known better...",
             k_legendary_crown_normal4 = "Please don't make the same mistake as I did...",
 
+            k_plus_code = "+1 Code",
+
             -- cry_tax_placeholder = "(X0.75 blind requirement)",
+            k_unik_back_to_back1="Must defeat ",
+            k_unik_back_to_back2=" Blind(s) back-to-back",
+            k_unik_miser_placeholder="15 x (1+(Loputonahnes encountered x 0.1))",
         },
         high_scores={},
         labels={
