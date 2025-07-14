@@ -21,7 +21,7 @@ SMODS.Blind{
         akyrs_unskippable_blind = true,
     },
     unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
-        if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) then
+        if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("j_paperback_the_world")) then
             G.GAME.unik_blind_extra_excess = sum
             return {
                 debuff = true,
@@ -34,9 +34,10 @@ SMODS.Blind{
         }
     end,
     debuff_hand = function(self, cards, hand, handname, check)
-        if G.GAME.current_round.hands_left > 1 and not next(find_joker("j_cry_panopticon")) and check then
+        if G.GAME.current_round.hands_left > 1 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("j_paperback_the_world")) and check then
             G.GAME.blind.triggered = true
             return true
         end
+        return false
     end,
 }

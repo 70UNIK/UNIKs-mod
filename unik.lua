@@ -259,7 +259,14 @@ NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")()
 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
-NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
+if (SMODS.Mods["Buffoonery"] or {}).can_load then
+	NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
+end
+
+if (SMODS.Mods["Bunco"] or {}).can_load then
+	print("bunco compat_fix")
+    NFS.load(mod_path .. "data/overrides/bunco.lua")() 
+end
 --Stakes
 --Persimmon Stake: Cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables (after orange)
 --Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable (after gold)

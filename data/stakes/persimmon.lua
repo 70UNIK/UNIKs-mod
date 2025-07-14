@@ -1,8 +1,16 @@
 --Any cards may be triggering; 
+local above = 'gold'
+local above2 = 'unik_persimmon'
+if (SMODS.Mods["Bunco"] or {}).can_load then
+    above = 'bunc_cyan'
+    above2 = 'bunc_magenta'
+end
+
+print(above)
 SMODS.Stake{ 
     key = 'unik_persimmon',
 
-    unlocked_stake = 'gold',
+    unlocked_stake = above,
     applied_stakes = {'orange'},
     above_stake = 'orange',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
@@ -18,8 +26,8 @@ SMODS.Stake{
     atlas = 'unik_stakes',
     sticker_atlas = 'unik_sticker_stakes'
 }
-
 SMODS.Stake:take_ownership('gold', {
-    applied_stakes = {'unik_persimmon'},
-    above_stake = 'unik_persimmon'
+    applied_stakes = {above2},
+    above_stake = above2,
+    prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 })
