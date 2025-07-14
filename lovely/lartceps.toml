@@ -148,8 +148,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
-pattern = '''    G.RESET_JIGGLES = nil
-    delay(0.4)
+pattern = '''delay(0.4)
     G.E_MANAGER:add_event(Event({
       trigger = 'immediate',
       func = function()'''
