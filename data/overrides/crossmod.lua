@@ -1,6 +1,6 @@
 --register hypercom
 SMODS.Joker:take_ownership("j_mf_unregisteredhypercam",{
-    rarity = 3
+    rarity = 2
 }, true)
 
 --apostle of wands: blacklist epic, exotics,legendary blinds,
