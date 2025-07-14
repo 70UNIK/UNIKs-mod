@@ -9,7 +9,7 @@ end
 print(above)
 SMODS.Stake{ 
     key = 'unik_persimmon',
-
+    order = 1,
     unlocked_stake = above,
     applied_stakes = {'orange'},
     above_stake = 'orange',
