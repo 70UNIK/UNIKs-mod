@@ -40,7 +40,7 @@ SMODS.Joker {
                 if SMODS.pseudorandom_probability(card, 'unik_lucky_seven_mult', card.ability.extra.odds1, card.ability.extra.odds_mult, 'unik_lucky_seven_mult') then
                     multTrue = true
                 end
-                if SMODS.pseudorandom_probability(card, 'unik_lucky_seven_cash', card.ability.extra.odds2, card.ability.extra.odds_cash, 'unik_lucky_seven_cash') then
+                if SMODS.pseudorandom_probability(card, 'unik_lucky_seven_cash', card.ability.extra.odds2, card.ability.extra.odds_money, 'unik_lucky_seven_cash') then
                     moneyTrue = true
                 end
                 if multTrue and moneyTrue then

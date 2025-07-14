@@ -98,6 +98,7 @@ return {
 			-- 		"odd numbered hands",
 			-- 	},
 			-- },
+
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
@@ -363,7 +364,30 @@ return {
                     "into Séances",
 				},
             },
-            
+            bl_unik_epic_whole = {
+                name = "Syödäänkokonaisena", --Eaten Whole
+                text = {
+                    "If a hand contains a",
+                    "rank not previously scored",
+                    "in last hand, die",
+                }
+            },
+            bl_unik_epic_sink={
+                name = "Uppokaivo", --Sinkhole
+                text = {
+                    "Half of Digits in Score is",
+                    "added to Ante instead of Score",
+                    "until #1# hand#<s>1# containing",
+                    "a Flush are discarded",
+                }
+            },
+            bl_unik_epic_bellows = {
+                name = "Karjuvakuilu", --+1 ante per card held in hand
+                text = {
+                    "+4 Hand Size",
+                    "+1 ante per card held",
+                },
+            },
             bl_cry_cube={ --I don't like cube being worse than lemon trophy. So I'll just nerf it to reduce mult by ^0.5 and blind size to be ^0.33. Still severe, but can be brute forced 
                 name = "The Cube",
                 text = {

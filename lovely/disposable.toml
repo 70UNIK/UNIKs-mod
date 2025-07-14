@@ -27,6 +27,7 @@ unik_hearts = 0,
 unik_diamonds = 0,
 unik_clubs = 0,
 unik_face_cards = 0,
+unik_ranks_scored_this_ante = {},
 '''
 match_indent = true
 

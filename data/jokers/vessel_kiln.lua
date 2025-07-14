@@ -34,18 +34,13 @@ SMODS.Joker {
 		end
 	end
 }
---override function to always generate vessel tags 
-local overrideTagHook = add_tag
-function add_tag(_tag)
-    local res
-    if G.GAME.unik_vesselled then
-        local emp = Tag("tag_unik_vessel")
-        emp.ability.shiny = Cryptid.is_shiny()
-        res = overrideTagHook(emp)
-    else
-        res = overrideTagHook(_tag)
-    end
-    return res
+local vessel_tagger = Cryptid.get_next_tag
+function Cryptid.get_next_tag(override)
+	if next(SMODS.find_card("j_unik_vessel_kiln")) then
+		return "tag_unik_vessel"
+	end
+	return vessel_tagger(override)
+	
 end
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_vessel_kiln"] = {
