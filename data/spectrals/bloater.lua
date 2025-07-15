@@ -49,6 +49,7 @@ SMODS.Consumable{
 				}))
 			end
 			delay(0.1)
+			G.GAME.unik_bloater_bloat = G.GAME.unik_bloater_bloat + 1
 			G.E_MANAGER:add_event(Event({
 					delay = 0.1,
 					trigger= 'after',
