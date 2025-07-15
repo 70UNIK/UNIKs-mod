@@ -4,7 +4,7 @@
 An addon to Cryptid that adds a variety of features, some of which help and some of which are harmful.
 This is mainly balanced around the Mainline gameset of Cryptid, and around various vanilla (or vanilla adjacent modded decks), where some challenge is provided.
 
-Requires Talisman, Steamodded 1.0.0~BETA-0309c or higher, Lovely v0.7.1 and Cryptid v0.5.6 or higher.
+Requires Steamodded smods-1.0.0-beta-0711a or higher, Lovely v0.7.1 and Cryptid v0.5.10~dev3 or higher.
 
 ![alt text](image-6.png)
 ## Features (so far)
