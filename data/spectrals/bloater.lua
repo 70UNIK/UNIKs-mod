@@ -22,13 +22,14 @@ SMODS.Consumable{
 	use = function(self, card, area, copier)
         G.GAME.unik_bloater_bloat  = G.GAME.unik_bloater_bloat  or 0
         local formula = (G.GAME.unik_bloater_bloat + 1) * 10
+		G.hand:change_size(card.ability.extra.hand_size)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
 			local cardsCreated = {}
             for i = 1, formula do
 				G.E_MANAGER:add_event(Event({
 					delay = 0.1,
 					func = function()
-                        G.hand:change_size(card.ability.extra.hand_size)
+                        
 						G.playing_card = (G.playing_card and G.playing_card + 1) or 1
 						local edition = G.P_CENTERS.c_base
 						local card_ = Card(G.play.T.x + G.play.T.w/2, G.play.T.y, G.CARD_W, G.CARD_H, pseudorandom_element(G.P_CARDS, pseudoseed('garbage_random')), G.P_CENTERS.c_base, {playing_card = G.playing_card})
