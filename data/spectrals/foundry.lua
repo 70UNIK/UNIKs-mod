@@ -7,7 +7,7 @@ SMODS.Consumable{
 	atlas = "unik_spectrals",
 	order = 90,
     config = {
-		max_highlighted = 1, extra = {odds = 3, cards_added = 7}
+		max_highlighted = 1, extra = {odds = 3, cards_added = 3}
 	},
 	can_use = function(self, card)
 		if card.area ~= G.hand then

@@ -18,7 +18,7 @@ SMODS.Blind{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
         if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("j_paperback_the_world")) then

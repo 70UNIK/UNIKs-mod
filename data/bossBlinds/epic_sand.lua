@@ -28,7 +28,7 @@ SMODS.Blind	{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
 	in_pool = function(self)
         if (G.HUD_tags and #G.HUD_tags < 2) then

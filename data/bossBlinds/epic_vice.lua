@@ -17,10 +17,9 @@ SMODS.Blind	{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
 	in_pool = function(self)
-        --maybe its funnier to have it spawn even without stone hands in deck in almanac
         if G.GAME.unik_force_epic_plus > 0 then
             return false
         end

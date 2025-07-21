@@ -16,12 +16,12 @@ SMODS.Consumable{
 	end,
 	loc_vars = function(self, info_queue, center)
         G.GAME.unik_bloater_bloat = G.GAME.unik_bloater_bloat or 0
-        local formula = (G.GAME.unik_bloater_bloat + 1) * 10
+        local formula = (G.GAME.unik_bloater_bloat + 1) * 4
 		return { vars = {center.ability.extra.hand_size,formula } }
 	end,
 	use = function(self, card, area, copier)
         G.GAME.unik_bloater_bloat  = G.GAME.unik_bloater_bloat  or 0
-        local formula = (G.GAME.unik_bloater_bloat + 1) * 10
+        local formula = (G.GAME.unik_bloater_bloat + 1) * 4
 		G.hand:change_size(card.ability.extra.hand_size)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
 			local cardsCreated = {}

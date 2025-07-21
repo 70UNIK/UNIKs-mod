@@ -21,7 +21,7 @@ SMODS.Blind{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     loc_vars = function(self)
         G.GAME.unik_miser_blind_interval =  G.GAME.unik_miser_blind_interval or 0
@@ -66,6 +66,7 @@ function Game:update_round_eval(dt)
         -- print(G.GAME.round_resets.blind_states[G.GAME.blind_on_deck])
         -- print(G.GAME.round_resets.blind)
         
+        
         G.GAME.facing_blind = true
          G.GAME.chips = 0
          G.GAME.round_resets.lost = true
@@ -88,6 +89,9 @@ function Game:update_round_eval(dt)
                 end
                 G.GAME.round_resets.blind = G.P_BLINDS[G.GAME.round_resets.blind_choices[G.GAME.blind_on_deck]]
                 G.GAME.round_resets.blind_states[G.GAME.blind_on_deck] = 'Current'
+                if AKYRS then
+                    recalculateBlindUI()
+                end 
                 return true
             end})) 
         G.E_MANAGER:add_event(Event({

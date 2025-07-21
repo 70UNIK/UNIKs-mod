@@ -22,7 +22,7 @@ SMODS.Blind{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_debuffed_card_only")

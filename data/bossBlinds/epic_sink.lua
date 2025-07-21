@@ -18,7 +18,7 @@ SMODS.Blind	{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     calculate = function(self, blind, context)
 		if context.discard and not G.GAME.blind.disabled and G.GAME.unik_sink_killswitch > 0 and not G.GAME.unik_discard_buffer then

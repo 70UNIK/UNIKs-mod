@@ -40,7 +40,7 @@ SMODS.Blind	{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     loc_vars = function(self, info_queue, card)
         local exponent = 1.05
