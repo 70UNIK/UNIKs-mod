@@ -199,7 +199,7 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 					end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) and not G.jokers.cards[i + 1].ability.jawbreakered then
-							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
+							Cryptid.manipulate(G.jokers.cards[i + 1], { value = card.ability.extra.increase })
 							local card6 = G.jokers.cards[i + 1]
 							card6.ability.jawbreakered = true
 							-- card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
