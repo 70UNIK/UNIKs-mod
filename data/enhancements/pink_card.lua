@@ -58,9 +58,9 @@ function Card:get_id()
 	--Force suit to be suit X if specified in enhancement, only if not vampired
 	if Cryptid.cry_enhancement_has_specific_rank(self) and not self.vampired then
 		--Get the max value + 1, to always be the last at the list
-        if self.config.center.key == "m_unik_pink" then
+        if SMODS.has_enhancement(self, "m_unik_pink") then
             return 7
-        elseif self.config.center.key == "m_cry_abstract" then
+        elseif SMODS.has_enhancement(self, "m_cry_abstract") then
             return SMODS.Rank.max_id.value + 1
         end
 	end
@@ -77,4 +77,24 @@ function Card:get_baseValOverride()
         end
 	end
     return self.base.value
+end
+
+--sorting
+local nominalGet = Card.get_nominal
+function Card:get_nominal(mod)
+    local mult = 1
+    local rank_mult = 1
+    local vars = nominalGet(self,mod)
+    if Cryptid.cry_enhancement_get_specific_rank(self) == 'cry_abstract' then
+        mult = 1
+        rank_mult = 0
+        return 10*self.base.nominal*rank_mult + self.base.suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
+    end
+    if SMODS.has_enhancement(self, "m_unik_pink") then
+        mult = 1
+        rank_mult = 1
+        return 10*7*rank_mult + self.base.suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
+    end
+
+    return vars
 end

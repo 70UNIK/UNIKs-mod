@@ -1960,7 +1960,17 @@ return {
                 }
             },
 
-
+            -- j_cry_oldinvisible = {
+			-- 	name = "Nostalgic Invisible Joker",
+			-- 	text = {
+			-- 		"{C:attention}Duplicate{} a random",
+			-- 		"{C:attention}Joker{} every {C:attention}4",
+			-- 		"Joker cards sold",
+			-- 		"{s:0.8}Nostalgic Invisible Joker and{}",
+            --         "{s:0.8}Joker slot adding Jokers Excluded{}", --Motebook, invisible card, negative joker
+			-- 		"{C:inactive}(Currently #1#/4){}",
+			-- 	},
+			-- },
 
 
 

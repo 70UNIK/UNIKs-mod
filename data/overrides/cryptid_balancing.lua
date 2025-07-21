@@ -58,11 +58,11 @@ SMODS.Joker:take_ownership("cry_oil_lamp", {
 							check = true
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = card.ability.extra.increase })
 							local card6 = G.jokers.cards[i + 1]
-							card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
 							--How would it work?
 							--{multiplier,rounds left}
 							--{decrements by 1. If hits 0, then reverts values.}
-							card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert}
+							card6.ability.cry_valuemanip_reset[#card6.ability.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert}
 
 						end
 					end
@@ -105,11 +105,11 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 				if v ~= card then
 					if not Card.no(v, "immutable", true) then
 						Cryptid.manipulate(v, { value = card.ability.extra.extra })
-						v.cry_valuemanip_reset = v.cry_valuemanip_reset or {}
+						v.ability.cry_valuemanip_reset = v.ability.cry_valuemanip_reset or {}
 						--How would it work?
 						--{multiplier,rounds left}
 						--{decrements by 1. If hits 0, then reverts values.}
-						v.cry_valuemanip_reset[#v.cry_valuemanip_reset + 1] = {card.ability.extra.extra,card.ability.extra.revert - 1}
+						v.ability.cry_valuemanip_reset[#v.ability.cry_valuemanip_reset + 1] = {card.ability.extra.extra,card.ability.extra.revert - 1}
 						check = true
 					end
 				end
@@ -137,11 +137,11 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 				if v ~= card then
 					if not Card.no(v, "immutable", true) then
 						Cryptid.manipulate(v, { value = card.ability.extra.extra })
-						v.cry_valuemanip_reset = v.cry_valuemanip_reset or {}
+						v.ability.cry_valuemanip_reset = v.ability.cry_valuemanip_reset or {}
 						--How would it work?
 						--{multiplier,rounds left}
 						--{decrements by 1. If hits 0, then reverts values.}
-						v.cry_valuemanip_reset[#v.cry_valuemanip_reset + 1] = {card.ability.extra.extra,card.ability.extra.revert - 1}
+						v.ability.cry_valuemanip_reset[#v.ability.cry_valuemanip_reset + 1] = {card.ability.extra.extra,card.ability.extra.revert - 1}
 						check = true
 					end
 				end
@@ -189,11 +189,11 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 								local card6 = card2
 								card6.ability.jawbreakered = true
 								--jawbreakered would be a sticker that cannot be removed and just indicates that jawbreaker has already been used.
-								-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+								-- card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
 								-- --How would it work?
 								-- --{multiplier,rounds left}
 								-- --{decrements by 1. If hits 0, then reverts values.}
-								-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+								-- card6.ability.cry_valuemanip_reset[#card6.ability.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 							end)
 						end
 					end
@@ -202,11 +202,11 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
 							local card6 = G.jokers.cards[i + 1]
 							card6.ability.jawbreakered = true
-							-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							-- card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
 							-- --How would it work?
 							-- --{multiplier,rounds left}
 							-- --{decrements by 1. If hits 0, then reverts values.}
-							-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+							-- card6.ability.cry_valuemanip_reset[#card6.ability.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 						end
 					end
 				end
@@ -248,11 +248,11 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 								Cryptid.misprintize(card2, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
 								local card6 = card2
 								card6.ability.jawbreakered = true
-								-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+								-- card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
 								-- --How would it work?
 								-- --{multiplier,rounds left}
 								-- --{decrements by 1. If hits 0, then reverts values.}
-								-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+								-- card6.ability.cry_valuemanip_reset[#card6.ability.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 							end)
 						end
 					end
@@ -261,11 +261,11 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = center.ability.extra.increase })
 							local card6 = G.jokers.cards[i + 1]
 							card6.ability.jawbreakered = true
-							-- card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+							-- card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
 							-- --How would it work?
 							-- --{multiplier,rounds left}
 							-- --{decrements by 1. If hits 0, then reverts values.}
-							-- card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
+							-- card6.ability.cry_valuemanip_reset[#card6.ability.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert - 1}
 						end
 					end
 				end
@@ -743,11 +743,11 @@ use = function(self, card, area, copier)
 	-- cards[1].config.cry_multiply = cards[1].config.cry_multiply * 2
 	Cryptid.manipulate(cards[1], { value = 2 })
 	local card6 = cards[1]
-	card6.cry_valuemanip_reset = card6.cry_valuemanip_reset or {}
+	card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
 	--How would it work?
 	--{multiplier,rounds left}
 	--{decrements by 1. If hits 0, then reverts values.}
-	card6.cry_valuemanip_reset[#card6.cry_valuemanip_reset + 1] = {2,0}
+	card6.ability.cry_valuemanip_reset[#card6.ability.cry_valuemanip_reset + 1] = {2,0}
 
 end,
 }, true)
@@ -1311,17 +1311,19 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 -- local initHook = Card.init
 -- function Card:init(X, Y, W, H, card, center, params)
 -- 	initHook(self,X, Y, W, H, card, center, params)
--- 	self.cry_valuemanip_reset = nil
+-- 	self.ability.cry_valuemanip_reset = nil
 -- end
 
 -- local saveHook = Card.save
 -- function Card:save()
 -- 	local ret = saveHook(self)
--- 	ret["cry_valuemanip_reset"] = self.cry_valuemanip_reset or nil
+-- 	ret["ability.cry_valuemanip_reset"] = self.ability.cry_valuemanip_reset or nil
 -- 	return ret
 -- end
 
 -- local loadHook = Card.load
 -- function Card:load(cardTable, other_card)
--- 	self.cry_valuemanip_reset = cardTable.cry_valuemanip_reset or nil
+-- 	self.ability.cry_valuemanip_reset = cardTable.ability.cry_valuemanip_reset or nil
 -- end
+
+Cryptid.misprintize_value_blacklist["cry_valuemanip_reset"] = false

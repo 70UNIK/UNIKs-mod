@@ -14,8 +14,9 @@ position = "before"
 payload = '''
     if G.jokers and G.jokers.cards then
         for i,v in pairs(G.jokers.cards) do
-            if v.cry_valuemanip_reset then
-                for j,w in pairs(v.cry_valuemanip_reset) do
+            print(v.config.center.key)
+            if v.ability.cry_valuemanip_reset then
+                for j,w in pairs(v.ability.cry_valuemanip_reset) do
                     if w then
                         if w[2] <= 0 and w[2] > -6666666 then
                             Cryptid.manipulate(v, { value = 1/w[1] })
@@ -25,10 +26,11 @@ payload = '''
                         end
                     end
                 end
-                if v.cry_valuemanip_reset then
-                    for j = #v.cry_valuemanip_reset, 1, -1  do
-                        if v.cry_valuemanip_reset[j][2] <= -6666666 then
-                            table.remove(v.cry_valuemanip_reset,j)
+                print(v.ability.cry_valuemanip_reset)
+                if v.ability.cry_valuemanip_reset then
+                    for j = #v.ability.cry_valuemanip_reset, 1, -1  do
+                        if v.ability.cry_valuemanip_reset[j][2] <= -6666666 then
+                            table.remove(v.ability.cry_valuemanip_reset,j)
                         end
                     end
                 end
@@ -36,38 +38,5 @@ payload = '''
             end
         end
     end
-'''
-match_indent = true
-
-# initialise decrementer
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "function Card:init(X, Y, W, H, card, center, params)"
-position = "after"
-payload = '''
-    self.cry_valuemanip_reset = nil
-'''
-match_indent = true
-
-# save decremeter
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "params = self.params,"
-position = "after"
-payload = '''
-    cry_valuemanip_reset = self.cry_valuemanip_reset or nil,
-'''
-match_indent = true
-
-# load decrementer
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "function Card:load(cardTable, other_card)"
-position = "after"
-payload = '''
-    self.cry_valuemanip_reset = cardTable.cry_valuemanip_reset or nil
 '''
 match_indent = true
