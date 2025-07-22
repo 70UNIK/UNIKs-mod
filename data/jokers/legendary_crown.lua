@@ -44,6 +44,8 @@ SMODS.Joker {
     perishable_compat = false,
     demicolon_compat = true,
     blueprint_compat = true,
+    unlocked = true,
+    discovered = true, --workaround:
     rarity = "unik_legendary_blind_finity",
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0 },

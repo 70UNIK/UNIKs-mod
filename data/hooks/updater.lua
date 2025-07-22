@@ -27,7 +27,7 @@ function Game:update(dt)
     end
     local res = updateHook(self,dt)
     if G.ARGS.LOC_COLOURS then
-
+        self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
 		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
 
 		self.C.UNIK_RGB[1] = r
