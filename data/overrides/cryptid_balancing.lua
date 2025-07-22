@@ -824,24 +824,24 @@ SMODS.Sticker:take_ownership("cry_hooked", {
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i].sort_id == card.ability.cry_hook_id then
 					local results = Cryptid.forcetrigger(G.jokers.cards[i], context)
-					if results and results.jokers then
-						card.ability.cry_hook_limit = card.ability.cry_hook_limit or 5
+					card.ability.cry_hook_limit = card.ability.cry_hook_limit or 5
 						
-						card.ability.cry_hook_limit = card.ability.cry_hook_limit - 1
+					card.ability.cry_hook_limit = card.ability.cry_hook_limit - 1
 
-						if G.jokers and card.ability.cry_hook_limit <= 0 then
-							for g,w in pairs(G.jokers.cards) do
-								if
-									(w.ability.cry_hook_id == card.sort_id)
-									or (w.sort_id == card.ability.cry_hook_id)
-								then
-									w.ability.cry_hooked = false
-									w.ability.cry_hook_id = nil
-								end
+					if G.jokers and card.ability.cry_hook_limit <= 0 then
+						for g,w in pairs(G.jokers.cards) do
+							if
+								(w.ability.cry_hook_id == card.sort_id)
+								or (w.sort_id == card.ability.cry_hook_id)
+							then
+								w.ability.cry_hooked = false
+								w.ability.cry_hook_id = nil
 							end
-							card.ability.cry_hooked = nil
-							card.ability.cry_hooked = nil
 						end
+						card.ability.cry_hooked = nil
+						card.ability.cry_hooked = nil
+					end
+					if results and results.jokers then
 						
 						return results.jokers
 					end

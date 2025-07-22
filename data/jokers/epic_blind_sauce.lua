@@ -25,18 +25,18 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
-    config = { extra = { EEmult = 1.4,destroyed = false,triggers = 5,Emult = 2.5,trigger_mod = 5} },
+    config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 2.5,trigger_mod = 5, Mult = 100, Chips = 50} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
         if (not Talisman) then
             key = "j_unik_epic_blind_sauce_notalisman"
-            return { key = key, vars = {center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
+            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
         end
         if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest"then
             key = "j_unik_epic_blind_sauce_no_epic"
-            return { key = key, vars = {center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
+            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
         else
-            return { key = key, vars = {center.ability.extra.EEmult,math.max(0,center.ability.extra.triggers-1)} }
+             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
         end
         
 		
@@ -55,7 +55,7 @@ SMODS.Joker {
                 
             }
         end
-        if context.final_scoring_step and not card.ability.extra.destroyed then
+        if context.joker_main and not card.ability.extra.destroyed then
             
             if (context.blueprint_card or context.retrigger_joker or context.repetition) and not card.ability.extra.destroyed then
                 card.ability.extra.destroyed = true
@@ -68,19 +68,16 @@ SMODS.Joker {
                 end
                 if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") or (not Talisman) then
                     return {
+                        mult = card.ability.extra.Mult,
+                        chips = card.ability.extra.Chips,
                         e_mult = card.ability.extra.Emult,
                         colour = G.C.DARK_EDITION,
                     }
                 else
                     return {
-                        message = localize({
-                            type = "variable",
-                            key = "a_EEmult",
-                            vars = {
-                                number_format(card.ability.extra.EEmult),
-                            },
-                        }),
-                        EEmult_mod = card.ability.extra.EEmult,
+                        mult = card.ability.extra.Mult,
+                        chips = card.ability.extra.Chips,
+                        e_mult = card.ability.extra.Emult,
                         colour = G.C.DARK_EDITION,
                     }
                 end   
