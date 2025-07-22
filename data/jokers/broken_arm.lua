@@ -10,14 +10,14 @@ SMODS.Joker {
     no_dbl = true,
 	pos = { x = 3, y = 2 },
     cost = 1,
-    config = { extra = { decrease = 1, maxLevel1 = 7, level1 = 0, selfDestruct = false,prob = 1,odds = 4} },
+    config = { extra = { decrease = 1, maxLevel1 = 7, level1 = 0, selfDestruct = false,probability = 1,odds = 4} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     immutable = true,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         -- info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
-        local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.prob, center.ability.extra.odds, 'unik_the_arm')
+        local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.probability, center.ability.extra.odds, 'unik_the_arm')
         return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}),
             vars = {center.ability.extra.decrease, center.ability.extra.maxLevel1,center.ability.extra.level1,
@@ -28,7 +28,7 @@ SMODS.Joker {
         card.ability.extra.level1 = 0
     end,
     gameset_config = {
-		modest = {extra = { decrease = 1, maxLevel1 = 4, level1 = 0, selfDestruct = false,odds = 4} },
+		modest = {extra = { decrease = 1, maxLevel1 = 4, level1 = 0, selfDestruct = false,probability = 1,odds = 4} },
 	},
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_arm'), G.C.UNIK_THE_ARM, G.C.WHITE, 1.0 )
@@ -37,7 +37,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
 
         if context.cardarea == G.jokers and context.before then
-            if to_big(G.GAME.hands[context.scoring_name].level) > to_big(1) and ((Card.get_gameset(card) ~= "modest") or (Card.get_gameset(card) == "modest" and SMODS.pseudorandom_probability(card, 'unik_the_arm', card.ability.extra.prob, card.ability.extra.odds, 'unik_the_arm'))) then
+            if to_big(G.GAME.hands[context.scoring_name].level) > to_big(1) and ((Card.get_gameset(card) ~= "modest") or (Card.get_gameset(card) == "modest" and SMODS.pseudorandom_probability(card, 'unik_the_arm', card.ability.extra.probability, card.ability.extra.odds, 'unik_the_arm'))) then
                 card_eval_status_text(card, "extra", nil, nil, nil, {
                     message = localize("k_unik_arm_downgrade"),
                     colour = G.C.UNIK_THE_ARM,

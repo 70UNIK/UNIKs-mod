@@ -18,7 +18,7 @@ SMODS.Joker {
 		return { vars = { new_numerator, new_denominator} }
 	end,
     gameset_config = {
-		modest = {extra = {prob = 4} },
+		modest = {extra = {prob = 4, odds = 5} },
 	},
     calculate = function(self, card, context)
         if context.forcetrigger then
