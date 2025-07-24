@@ -246,7 +246,6 @@ payload = '''
 '''
 match_indent = true
 
-
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/blind.lua"]'''
@@ -256,6 +255,60 @@ payload = '''
 return { vars = { localize("cry_tax_placeholder_fixed") } }
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/blind.lua"]'''
+pattern = '''debuff_hand = function(self, cards, hand, handname, check)
+		G.GAME.blind.triggered = false
+		local jokers = {}
+		for i, v in pairs(G.jokers.cards) do
+			if not v.ability.rental then
+				jokers[#jokers + 1] = v
+			end
+		end
+		if #jokers > 0 then
+			G.GAME.blind.triggered = true
+			if not check then
+				local joker = pseudorandom_element(jokers, pseudoseed("cry_landlord"))
+				joker:set_rental(true)
+				joker:juice_up()
+				G.GAME.blind:wiggle()
+			end
+		end
+	end,'''
+position = "at"
+payload = '''
+loc_vars = function(self, info_queue, card)
+	return { key = "bl_cry_landlord_fixed"  }
+end,
+collection_loc_vars = function(self)
+	return { key = "bl_cry_landlord_fixed" }
+end,
+press_play = function(self)
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0.2,
+		func = function()
+			for i = 1, #G.jokers.cards do
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						G.jokers.cards[i]:juice_up()
+						return true
+					end,
+				}))
+				ease_dollars(-1)
+				delay(0.23)
+			end
+			return true
+		end,
+	}))
+	G.GAME.blind:wiggle()
+	G.GAME.blind.triggered = true
+end,
+'''
+match_indent = true
+
 
 ###Chromatic rework
 [[patches]]
