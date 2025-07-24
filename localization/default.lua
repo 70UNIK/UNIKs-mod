@@ -80,24 +80,75 @@ return {
             }
         },
         Blind={
-            -- bl_cry_vermillion_virus = {
-			-- 	name = "Vermillion Virus",
-			-- 	text = {
-			-- 		"Leftmost Joker",
-			-- 		"replaced every hand,",
-            --         "then next one to",
-            --         "it's right per hand",
-			-- 	},
-			-- },
-            -- bl_cry_chromatic = {
-			-- 	name = "The Chromatic",
-			-- 	text = {
-			-- 		"Scoring is added",
-			-- 		"to blind size",
-            --         "instead of score on",
-			-- 		"odd numbered hands",
-			-- 	},
-			-- },
+
+            bl_cry_chromatic_fixed = {
+                name = "The Chromatic",
+                text = {
+                    "First hand is added",
+                    "to Blind Size",
+                    "instead of score",
+                }
+            },
+            bl_cry_vermillion_virus_fixed = {
+                name = "Vermillion Virus",
+                text = {
+                    "Leftmost Joker",
+                    "then next one to",
+                    "it's right",
+                    "replaced every hand",
+                },
+            },
+            bl_cry_box_fixed = {
+                name = "The Box",
+				text = {
+					"Leftmost Common Joker",
+					"is debuffed",
+				},
+            },
+            bl_cry_landlord_fixed = {
+				name = "The Landlord",
+				text = {
+					"Lose $1",
+					"per Joker owned",
+					"when hand played",
+				},
+			},
+            bl_cry_shackle_fixed = {
+				name = "The Shackle",
+				text = {
+					"Leftmost Negative Joker",
+					"is debuffed",
+				},
+			},
+            bl_cry_lavender_loop_fixed = {
+				name = "Lavender Loop",
+				text = {
+					"1.1X blind requirements every",
+					"6 seconds spent this round,",
+					"multiplied by game speed",
+				},
+			},
+            bl_cry_pin_fixed = {
+				name = "The Pin",
+				text = {
+					"Leftmost Joker with Epic",
+					"or higher rarity are debuffed",
+				},
+			},
+            bl_cry_windmill_fixed = {
+				name = "The Windmill",
+				text = {
+					"Leftmost Uncommon Joker",
+					"is debuffed",
+				},
+			},
+            bl_cry_striker_fixed = {
+				name = "The Striker",
+				text = {
+					"Leftmost Rare Joker",
+					"is debuffed",
+				},
+			},
 
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
@@ -111,14 +162,6 @@ return {
 				text = {
 					"Hands exceeding #1#",
                     "will not score",
-				},
-            },
-            bl_unik_harlequin_hurricane={
-                name = "Harlequin Hurricane",
-				text = {
-					"#1# in #2# chance for",
-					"scored hand to add to the",
-                    "blind size instead",
 				},
             },
             bl_unik_persimmon_placard={
@@ -363,6 +406,13 @@ return {
                     "convert adjacent Jokers",
                     "into Séances",
 				},
+            },
+            bl_unik_salmon_steps = { --literally the descending.
+                name = "Salmon Steps",
+                text = {
+                    "Mult is added to Chips",
+                    "then set to 1",
+                }
             },
             bl_unik_epic_whole = {
                 name = "Syödäänkokonaisena", --Eaten Whole
@@ -3053,7 +3103,7 @@ return {
 
             k_plus_code = "+1 Code",
 
-            -- cry_tax_placeholder = "(X0.75 blind requirement)",
+            cry_tax_placeholder_fixed = "(X0.8 blind requirements)",
             k_unik_back_to_back1="Must defeat ",
             k_unik_back_to_back2=" Blind(s) back-to-back",
             k_unik_miser_placeholder="15 x (1+(Loputonahnes encountered x 0.1))",

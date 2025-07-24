@@ -619,8 +619,51 @@ if MoreFluff then
 	end
 	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
 end
+--Grab Bag Boss Jokers:
+---The Poppy: Gain X0.25 Mult per hand played, resets if hand exceeds 2.5X requirements.
+---The Collapse: Destroy all played rankless and suitless cards. Gain 50 Chips per destroyed rankless/suitless card.
+---The Jollyless: Gains X0.15 Mult if played hand does not contain a pair, resets if contains a pair.
+---The Artesian: Gain X0.1 Mult per reroll in shop.
+---The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2 Mult, but are destroyed immediately.
+---The Halved: X4 Mult if played hand contains 3 or less cards.
+---The Fuzzy: Scored cards randomly give +-25-75 Chips, +-5-15 Mult and +$1-3
+--Finity Blind jokers:
+---Finishers:
+---
+---Indigo ICBM: Gain X1 Mult per hand played, resets if hand exceeds 3X requirements.
+---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
+---Raspberry Racket: If Money < $50 per hand, set money to $50. Increase this by $2 per Dollar Card scored.
+---Maroon Magnet: Convert all held cards to steel cards, scored Steel Cards give X2 mult
+---Jaundice Jack: Gain X0.5 Mult per discarded Jack.
+---Black Bat: All other Jokers (except Black Bat) are debuffed, ^1.2 Mult per debuffed Joker.
+---Septic Seance: Create a negative shortcut, seance, paved joker and/or four fingers if you don't already on blind select. Create an ://EXPLOIT if played hand is not a straight flush.
+---Purple Pentagram: Destroy all Cursed Jokers and gain X2 Mult per destroyed Cursed Joker.
+---Salmon Steps: ^1.75 Chips. All Mult is added to Chips instead. 
+---
+---Epic Blinds:
+---Epic Collapse: Rankless and suitless cards each give ^1.1 Mult.
+---Epic Xenomorph Queen: If all played cards are debuffed, gain ^0.05 Mult per debuffed card.
+---Epic Artesian: Gain ^Mult proportionate to X0.0001 the reroll cost per reroll. ($2 --> 0.0002, so it's encouraged to not have free rerolls))
+---Epic Jollyless: Destroy all Jolly and M jokers per blind select, gain ^0.1 Mult per destroyed Jolly/M Joker. Destroy all played cards if hand does not contain a pair.
+---Epic Box: Common Jokers each give ^1.1 Mult.
+---Epic Decision: Gain ^1 Mult per Lartceps card used this run. Lartceps packs may spawn.
+---Epic Reed: (3 randomly selected ranks) each give X3 Mult when scored
+---Epic Sand: Create a Quintuple Tag per discard.
+---Epic Miser: Gains ^0.2 Mult if the shop is not intereacted with.
+---Epic Sink: Gains ^0.1 Mult if discarded hand contains a flush.
+---Epic Confrontation: Held face cards give X3 Mult.
+---Epic Whole: Scored ranks previously played in last hand permanently gain X0.15 Mult.
+---
+---Beast Blinds:
+---
+---Legendary Blinds:
+---Legendary Vessel: All Boss Blinds become Legendary Vessel, gains ^Mult (capped at ^0.5) based on (Digits in score) x 0.001
+---Legendary Nuke: Gain ^^0.01 Chips if hand does not defeat the boss. Resets if score exceeds ^2 requirements.
+---Legendary Magnet: Convert played face cards into Steel Red Seal Steel Kings and these permanently gain ^0.01 Mult (when held).
+---Legendary Sword: If played hand contains only 1 card, scored card gives ^1.5 Mult.
+---Legendary Tornado: Mark the last 3 cards to be drawn from deck. Scored marked cards give ^1.5 Mult.
 --partner ideas:
---Microwave (Lily): Click to destroy up to 1 selected card once per ante. --> Click to destroy up to 1 selected card twice per ante.
+--Microwave (Lily): Click to destroy up to 1 selected card per ante. --> Click to destroy up to 1 selected card per round.
 --Crossdress (UNIK): First scored 7 gives X1.57 Chips --> first scored 7 gives X2.7 Chips
 --Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
 --Stars (Moonlight): 4 in 5 chance to not retrigger levelups once. --> 2 in 3 chance to not retrigger levelups once.

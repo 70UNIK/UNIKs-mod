@@ -1,0 +1,3 @@
+--Literally the descending.
+--Mult is added to Chips and set to 1.
+--X0.5 blind reqs.
