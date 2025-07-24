@@ -27,6 +27,7 @@ if checker and checker.debuff then
         trigger = 'immediate',
         func = (function()
             if SMODS.hand_debuff_source then SMODS.hand_debuff_source:juice_up(0.3,0) else SMODS.juice_up_blind() end
+            update_hand_text({delay = 0}, {mult = mult, chips = hand_chips})
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
                 play_sound('tarot2', 0.76, 0.4);return true end}))
             play_sound('tarot2', 1, 0.4)
@@ -36,6 +37,12 @@ if checker and checker.debuff then
 end
 if checker and checker.add_to_blind then
     add_to_blind = to_big(checker.add_to_blind)
+end
+if checker and checker.mod_mult then
+    mult = checker.mod_mult
+end
+if checker and checker.mod_chips then
+    hand_chips = checker.mod_chips
 end
 '''
 match_indent = true

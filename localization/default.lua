@@ -3107,6 +3107,7 @@ return {
             k_unik_back_to_back1="Must defeat ",
             k_unik_back_to_back2=" Blind(s) back-to-back",
             k_unik_miser_placeholder="15 x (1+(Loputonahnes encountered x 0.1))",
+            unik_the_descending = "The Descending",
         },
         high_scores={},
         labels={
@@ -3329,6 +3330,11 @@ return {
             special_lose_unik_positive={
                 "Big brother is",
                 "always watching!",
+            },
+            special_lose_salmon_steps={
+                "This seems familar...",
+                "Too bad you fell",
+                "down the stairs!"
             },
             --finity quips:
             lq_legendary_crown_1={

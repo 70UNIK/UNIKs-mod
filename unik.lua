@@ -368,7 +368,7 @@ NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/jaundice_jack.lua")()
 NFS.load(mod_path .. "data/bossBlinds/septic_seance.lua")()
-
+NFS.load(mod_path .. "data/bossBlinds/salmon_steps.lua")()
 
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
