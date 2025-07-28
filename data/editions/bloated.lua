@@ -126,16 +126,6 @@ calculate = function(self, card, context)
 	end,
 })
 
---prevent effect repeat if destroyed
-local scie = SMODS.calculate_individual_effect
-function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
-	if not scored_card.ability.unik_destroyed_mid_scoring then
-		local ret = scie(effect, scored_card, key, amount, from_edition)
-		return ret
-	end
-
-end
-
 --Gore6 (custom card destruction animation)
 function Card:bloated_pop()
     local dissolve_time = 0.4

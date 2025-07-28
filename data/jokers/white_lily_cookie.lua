@@ -19,7 +19,7 @@ local function White_lily_copy(card)
                 type = "variable",
                 key = "a_powmult",
                 vars = {
-                    number_format(to_big(_card.ability.extra.Emult)),
+                    number_format(to_big(_card.ability.extra.Emult + _card.ability.immutable.base_emult)),
                 },
             }),
             colour = G.C.DARK_EDITION,
@@ -113,7 +113,7 @@ SMODS.Joker {
         end
         if context.joker_main then
             if Card.get_gameset(card) ~= "modest" then
-                if (to_big(card.ability.extra.Emult) > to_big(1)) then
+                if (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
                     return {
                         e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                         colour = G.C.DARK_EDITION,
@@ -146,7 +146,7 @@ SMODS.Joker {
                             type = "variable",
                             key = "a_powmult",
                             vars = {
-                                number_format(card.ability.extra.Emult),
+                                number_format(card.ability.extra.Emult + _card.ability.immutable.base_emult),
                             },
                         }),
                         card = card,

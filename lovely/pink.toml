@@ -1,0 +1,21 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "valid_idol_cards[#valid_idol_cards+1] = v"
+position = "before"
+payload = '''if not SMODS.has_enhancement(v, "m_unik_pink") then
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "valid_idol_cards[#valid_idol_cards+1] = v"
+position = "after"
+payload = '''end
+'''
+match_indent = true

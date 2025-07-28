@@ -85,7 +85,7 @@ SMODS.Joker {
 					x_chips = card.ability.extra.Xchips,
 					colour = G.C.CHIPS,
 				}
-			elseif (to_big(card.ability.extra.Echips) > to_big(1)) then
+			elseif (to_big(card.ability.extra.Echips + card.ability.immutable.base_echips) > to_big(1)) then
 			return {
 				e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
                 colour = G.C.DARK_EDITION,
@@ -115,7 +115,7 @@ SMODS.Joker {
 							type = "variable",
 							key = "a_powchips",
 							vars = {
-								number_format(to_big(card.ability.extra.Echips)),
+								number_format(to_big(card.ability.extra.Echips + card.ability.immutable.base_echips)),
 							},
 						}),
 						colour = G.C.DARK_EDITION,

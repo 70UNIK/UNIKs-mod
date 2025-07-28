@@ -44,8 +44,7 @@ else
     G.GAME.unik_scores_really_big_back = G.GAME.unik_scores_really_big_back or 0
     G.GAME.unik_scores_really_big_back = math.max(G.GAME.unik_scores_really_big_back - 1,0)
 end
-print(G.GAME.unik_more_finishers)
-print(G.GAME.unik_vice_squeeze)
+
 --print(G.GAME.unik_scores_really_big)
 '''
 match_indent = true
