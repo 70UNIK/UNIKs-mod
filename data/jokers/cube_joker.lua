@@ -21,7 +21,6 @@ SMODS.Joker {
 	pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)
 		if context.forcetrigger then
-			card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
 			return {
 
 				x_chips = card.ability.extra.x_chips,

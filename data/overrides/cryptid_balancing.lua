@@ -1,5 +1,5 @@
 --OIL LUMP
---Upcoming rework: multiplies values of jokers to the right by 1.15X. Values revert after 2 rounds, requiring you to "keep oiling" a joker if you want to keep its benefits.
+--Upcoming rework: multiplies values of jokers to the right by 1.15X. Values revert after 2 rounds, requiring you to "keep oiling" a joker if you want to keep its benefits. The max it can go up to is 1.72X
 SMODS.Joker:take_ownership("cry_oil_lamp", {
     immutable = true,
     rarity = 'cry_epic',
@@ -85,9 +85,9 @@ SMODS.Joker:take_ownership("cry_oil_lamp", {
 	end,
 }, true)
 
---TROFICAL SMOOTHER: multiples values of all owned jokers by 1.35X. Values of jokers revert after 4 rounds
+--TROFICAL SMOOTHER: multiples values of all owned jokers by 1.35X. Values of jokers revert after 5 rounds
 SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
-    config = { extra = {extra = 1.4, self_destruct = false, revert = 5}},
+    config = { extra = {extra = 1.5, self_destruct = false, revert = 5}},
     loc_vars = function(self, info_queue, center)
 		return { key = "j_cry_tropical_smoothie_reworked", vars = { number_format(center.ability.extra.extra),number_format(center.ability.extra.revert) } }
 	end,
@@ -160,9 +160,14 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 	end,
 }, true)
 
---JAWBUSTER:  1.5X values to adjacent jokers. (cannot be applied multiple times)
+--After a test run with gemini and primus on wormhole, I can conclude that it NEEDS a bit of a nerf, something like the multiplier wearing out after 10 rounds 
+---(essentially capping at 20X for a single joker. Huge still, especially for the likes of exponents and you can blueprint it), 
+--forcing you to only apply it to the joker that will benefit you the most. Still will be 2X.
+
+
+--JAWBUSTER:  permanent 1.4X values to adjacent jokers. (cannot be applied multiple times)
 SMODS.Joker:take_ownership("j_cry_jawbreaker", {
-    config = { extra = {increase = 1.6,self_destruct = false,revert = 5} },
+    config = { extra = {increase = 1.4,self_destruct = false,revert = 5} },
     loc_vars = function(self, info_queue, center)
 		return { key = "j_cry_jawbreaker_balanced", vars = { number_format(center.ability.extra.increase),number_format(center.ability.extra.revert) } }
 	end,
@@ -617,90 +622,6 @@ SMODS.Joker:take_ownership("j_cry_oldcandy",{
 	},
 }, true)
 
---Crustulum makes 30 rerolls fwee and has no chip bonus.
-SMODS.Joker:take_ownership("j_cry_crustulum",{
-	config = {
-		extra = {
-			chips = 0,
-			chip_mod = 4,
-			free_rerolls = 30,
-		},
-	},
-	immutable = true,
-	gameset_config = {
-		modest = { extra = { free_rerolls = 16} ,center = { demicolon_compat = false, blueprint_compat = false}},
-		mainline = { extra = {free_rerolls = 30},center = { demicolon_compat = false, blueprint_compat = false}},
-	},
-	loc_vars = function (self,info_queue,center)
-		if Card.get_gameset(center) == "madness" then
-			return {
-				vars = {
-					number_format(center.ability.extra.chips),
-					number_format(center.ability.extra.chip_mod),
-				},
-			}
-		else
-			return {
-				key = Cryptid.gameset_loc(self, {modest = "modest",mainline= "mainline" }),
-				vars = {center.ability.extra.free_rerolls}
-			}
-		end
-		
-	end,
-	calculate = function(self, card, context)
-		if context.reroll_shop and not context.blueprint and Card.get_gameset(card) == "madness" then
-			card.ability.extra.chips = lenient_bignum(to_big(card.ability.extra.chips) + card.ability.extra.chip_mod)
-			card_eval_status_text(card, "extra", nil, nil, nil, {
-				message = localize({
-					type = "variable",
-					key = "a_chips",
-					vars = { number_format(card.ability.extra.chips) },
-				}),
-				colour = G.C.CHIPS,
-			})
-			return nil, true
-		end
-		if context.joker_main and to_big(card.ability.extra.chips) > to_big(0) and Card.get_gameset(card) == "madness" then
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_chips",
-					vars = { number_format(card.ability.extra.chips) },
-				}),
-				chip_mod = lenient_bignum(card.ability.extra.chips),
-			}
-		end
-		if context.forcetrigger and Card.get_gameset(card) == "madness" then
-			card.ability.extra.chips = lenient_bignum(to_big(card.ability.extra.chips) + card.ability.extra.chip_mod)
-			return {
-				message = localize({
-					type = "variable",
-					key = "a_chips",
-					vars = { number_format(card.ability.extra.chips) },
-				}),
-				chip_mod = lenient_bignum(card.ability.extra.chips),
-			}
-		end
-	end,
-	add_to_deck = function(self, card, from_debuff)
-		--This makes the reroll immediately after obtaining free because the game doesn't do that for some reason
-		if Card.get_gameset(card) == "madness" then
-			G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
-			calculate_reroll_cost(true,true)
-		else
-			SMODS.change_free_rerolls(card.ability.extra.free_rerolls)
-            calculate_reroll_cost(true,nil)
-		end
-	end,
-	remove_from_deck = function(self, card, from_debuff)
-		if Card.get_gameset(card) == "madness" then
-			calculate_reroll_cost(true,true)
-		else
-			SMODS.change_free_rerolls(-card.ability.extra.free_rerolls)
-            calculate_reroll_cost(true,nil)
-		end
-	end,
-}, true)
 
 function calculate_reroll_cost(skip_increment,madness)
 	if not G.GAME.current_round.free_rerolls or G.GAME.current_round.free_rerolls < 0 then
@@ -766,7 +687,7 @@ SMODS.Consumable:take_ownership("c_cry_hook",{
 		experimental = { disabled = false },
 	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = { key = "cry_hooked_balanced", set = "Other", vars = { "hooked Joker" ,5} }
+		info_queue[#info_queue + 1] = { key = "cry_hooked_balanced", set = "Other", vars = { "hooked Joker" ,4} }
 	end,
 	use = function(self, card, area, copier)
 		local jokers = Cryptid.get_highlighted_cards({ G.jokers }, card, 2, 2)
@@ -789,8 +710,8 @@ SMODS.Consumable:take_ownership("c_cry_hook",{
 			end
 			card1.ability.cry_hooked = true
 			card2.ability.cry_hooked = true
-			card1.ability.cry_hook_limit = 5
-			card2.ability.cry_hook_limit = 5
+			card1.ability.cry_hook_limit = 4
+			card2.ability.cry_hook_limit = 4
 			card1.ability.cry_hook_id = card2.sort_id
 			card2.ability.cry_hook_id = card1.sort_id
 		end
@@ -824,7 +745,7 @@ SMODS.Sticker:take_ownership("cry_hooked", {
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i].sort_id == card.ability.cry_hook_id then
 					local results = Cryptid.forcetrigger(G.jokers.cards[i], context)
-					card.ability.cry_hook_limit = card.ability.cry_hook_limit or 5
+					card.ability.cry_hook_limit = card.ability.cry_hook_limit or 4
 						
 					card.ability.cry_hook_limit = card.ability.cry_hook_limit - 1
 
@@ -965,15 +886,6 @@ calculate = function(self, card, context)
 	end,
 },true)
 
---All non exotic emulters (except happy house and night) should be immutable. Cry about it, otherwise it becomes too OP with value manip.
-SMODS.Joker:take_ownership("j_cry_universe",{
-    config = { extra = { emult = 1.1 } },
-    gameset_config = {
-		madness = { extra = { emult = 1.2 }, immutable = false },
-	},
-    immutable = true,
-}, true)
-
 --reduce values of stardust to x1.5 (especially since its a fucking common)
 SMODS.Joker:take_ownership("j_cry_stardust",{
     config = { extra = { xmult = 1.5 } },
@@ -1030,7 +942,7 @@ SMODS.Consumable:take_ownership("c_cry_pointer",{
 
 --starfruit should suicide itself if force triggered, starts at a much more reasonable ^1.5 emult and is immutable. Oh and it can be autocannibal food
 SMODS.Joker:take_ownership("j_cry_starfruit",{
-	config = { emult = 1.5, emult_mod = 0.1 },
+	config = { emult = 0.5, emult_mod = 0.1, immutable = {base_emult = 1} },
 	immutable = true,
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_cry_starfruit'
@@ -1040,7 +952,7 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 		return {
 			key = key,
 			vars = {
-				number_format(center.ability.emult),
+				number_format(center.ability.emult + center.ability.immutable.base_emult),
 				number_format(center.ability.emult_mod),
 			},
 		}
@@ -1055,13 +967,13 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 		end
 		if context.forcetrigger then
 			card.ability.emult = card.ability.emult - card.ability.emult_mod
-			if (to_number(card.ability.emult) <= 1.00000001 and not card.ability.unik_depleted) then
+			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) then
 				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
-			elseif (to_number(card.ability.emult) <= 0.00000001 and card.ability.unik_depleted) then
+			elseif (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
 				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
 			else
 				return {
-					e_mult = lenient_bignum(card.ability.emult),
+					e_mult = lenient_bignum(card.ability.emult + card.ability.immutable.base_emult),
 					colour = G.C.DARK_EDITION,
 				}
 			end
@@ -1069,7 +981,7 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 		if context.reroll_shop then
 			card.ability.emult = card.ability.emult - card.ability.emult_mod
 			--floating point precision can kiss my ass istg
-			if (to_number(card.ability.emult) <= 1.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult) <= 0.00000001 and card.ability.unik_depleted) then
+			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						play_sound("tarot1")
@@ -1101,6 +1013,110 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 					colour = G.C.DARK_EDITION,
 				}
 			end
+		end
+	end,
+}, true)
+
+SMODS.Joker:take_ownership("j_cry_magnet",{
+	loc_vars = function(self, info_queue, center)
+		return {
+			vars = {
+				number_format(center.ability.extra.money),
+				number_format(center.ability.extra.multiplier - (Card.get_gameset(card) == "modest" and 1 or 0)),
+				number_format(center.ability.extra.slots),
+			},
+		}
+	end,
+}, true)
+
+SMODS.Edition:take_ownership("e_cry_glass",{
+	config = { x_mult = 3, prob = 1, odds = 8, trigger = nil },
+	loc_vars = function(self, info_queue, card)
+		local prob = 1
+		local odds = 8
+		local new_numerator, new_denominator = SMODS.get_probability_vars(self, self.config.prob,self.config.odds, 'cry_fragile_destroy')
+		return {
+			key = 'e_cry_fragile_fixed',
+			vars = {
+				new_numerator,
+				new_denominator,
+				card and card.edition and card.edition.x_mult or self.config.x_mult,
+			},
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.edition and context.cardarea == G.jokers and card.config.trigger then
+			return { x_mult = card and card.edition and card.edition.x_mult or self.config.x_mult }
+		end
+
+		if
+			context.cardarea == G.jokers
+			and context.post_trigger
+			and context.other_card == card --animation-wise this looks weird sometimes
+		then
+			if
+				not SMODS.is_eternal(card)
+				and SMODS.pseudorandom_probability(self, pseudoseed('cry_fragile_destroy'), self.config.prob,self.config.odds, 'cry_fragile_destroy') 
+			then
+				card.ability.unik_destroyed_mid_scoring = true
+				-- this event call might need to be pushed later to make more sense
+				G.E_MANAGER:add_event(Event({
+				func = function()
+					card.states.drag.is = true
+					G.E_MANAGER:add_event(Event({
+						trigger = "after",
+						delay = 0.3,
+						blockable = false,
+						func = function()
+							card.debuff = true
+							G.jokers:remove_card(card)
+							card:shatter()
+							card = nil
+							return true
+						end,
+					}))
+					return true
+				end,
+			}))
+			end
+		end
+		if context.main_scoring and context.cardarea == G.play then
+			if
+				not SMODS.is_eternal(card)
+				and SMODS.pseudorandom_probability(self, pseudoseed('cry_fragile_destroy'), self.config.prob,self.config.odds, 'cry_fragile_destroy') 
+			then
+				card.config.will_shatter = true
+			end
+			return { x_mult = self.config.x_mult }
+		end
+
+		if context.joker_main then
+			card.config.trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)
+		end
+
+		if context.after then
+			card.config.trigger = nil
+		end
+
+		if context.destroy_card and context.destroy_card == card and card.config.will_shatter then
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					card.states.drag.is = true
+					G.E_MANAGER:add_event(Event({
+						trigger = "after",
+						delay = 0.3,
+						blockable = false,
+						func = function()
+							G.jokers:remove_card(card)
+							card:shatter()
+							card = nil
+							return true
+						end,
+					}))
+					return true
+				end,
+			}))
+			return { remove = true }
 		end
 	end,
 }, true)
@@ -1159,5 +1175,73 @@ function Card:getLeftmostJokerType(rarity,edition)
 	end
 	return false
 end
+
+--Fix cryptid's exponents by only allowing values - 1 to be manipulated.
+
+SMODS.Joker:take_ownership("j_cry_universe",{
+    config = { extra = { emult = 0.1 }, immutable = {base_emult = 1.0} },
+calculate = function(self, card, context)
+		if
+			context.other_joker
+			and context.other_joker.edition
+			and context.other_joker.edition.cry_astral == true
+			and card ~= context.other_joker
+		then
+			if Talisman and not Talisman.config_file.disable_anims then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						context.other_joker:juice_up(0.5, 0.5)
+						return true
+					end,
+				}))
+			end
+			return {
+				e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+				colour = G.C.DARK_EDITION,
+			}
+		end
+		if context.individual and context.cardarea == G.play then
+			if context.other_card.edition and context.other_card.edition.cry_astral == true then
+				return {
+					e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+					colour = G.C.DARK_EDITION,
+					card = card,
+				}
+			end
+		end
+		if
+			context.individual
+			and context.cardarea == G.hand
+			and context.other_card.edition
+			and context.other_card.edition.cry_astral == true
+			and not context.end_of_round
+		then
+			if context.other_card.debuff then
+				return {
+					message = localize("k_debuffed"),
+					colour = G.C.RED,
+					card = card,
+				}
+			else
+				return {
+					e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+					colour = G.C.DARK_EDITION,
+					card = card,
+				}
+			end
+		end
+		if context.forcetrigger then
+			return {
+				e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+				colour = G.C.DARK_EDITION,
+				card = card,
+			}
+		end
+	end,
+}, true)
+
+
+SMODS.Joker:take_ownership("j_cry_universe",{
+}, true)
 
 Cryptid.misprintize_value_blacklist["cry_valuemanip_reset"] = false

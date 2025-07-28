@@ -53,12 +53,12 @@ SMODS.Joker {
 	--Contra logos from ascensio has ^0.01 chips per 7 or 4 contained in scoring hand (doesnt have to score), but unless you have joker retriggers, it cannot retrigger 7s.
 	--This has ^0.01 chips per scoring 7 (can be retriggered). You can retrgger scoring 7s, which makes this potentally stronger than contra logos even if harder to use. Also pink cards.
 	--This is why I nerfed it to ^0.01
-    config = { extra = {Echips_mod = 0.01, Echips = 1.0,Xchips_mod = 0.2, Xchips = 1.0} }, --normally he should not be cappted in mainline+
+    config = { extra = {Echips_mod = 0.01, Echips = 0.0,Xchips_mod = 0.2, Xchips = 1.0}, immutable = {base_echips = 1.0}}, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		return {
 		key = Cryptid.gameset_loc(self, {modest = "modest" }), 
-		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips,center.ability.extra.Xchips_mod,center.ability.extra.Xchips
+		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips + center.ability.immutable.base_echips,center.ability.extra.Xchips_mod,center.ability.extra.Xchips
 	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. "")
 	} }
 	end,
@@ -73,7 +73,7 @@ SMODS.Joker {
 				}
 			else
 				return {
-					e_chips = card.ability.extra.Echips,
+					e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
 					colour = G.C.DARK_EDITION,
 				}
 			end
@@ -87,7 +87,7 @@ SMODS.Joker {
 				}
 			elseif (to_big(card.ability.extra.Echips) > to_big(1)) then
 			return {
-				e_chips = card.ability.extra.Echips,
+				e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
                 colour = G.C.DARK_EDITION,
 			}
 			end
@@ -128,33 +128,4 @@ SMODS.Joker {
 
     end,
 }
---Simple EChips display
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_unik"] = {
-		text = {
-			{
-				border_nodes = {
-					{ ref_table = "card.joker_display_values", ref_value = "Echips", retrigger_type = "exp" },
-				},
-				border_colour = G.C.DARK_EDITION,
-			},
-            {
-				border_nodes = {
-					{ ref_table = "card.joker_display_values", ref_value = "Xchips", retrigger_type = "exp" },
-				},
-				border_colour = G.C.CHIPS,
-			},
-		},
-        calc_function = function(card)
-            local Echips = ""
-            local Xchips = ""
-            if Card.get_gameset(card) ~= "modest" then
-                Echips = "^" .. card.ability.extra.Echips
-            else
-                Xchips = "X" .. card.ability.extra.Xchips
-            end
-            card.joker_display_values.Echips = Echips
-            card.joker_display_values.Xchips = Xchips
-        end
-	}
-end
+

@@ -257,6 +257,7 @@ NFS.load(mod_path .. "data/stickers/niko.lua")()
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
 -- NFS.load(mod_path .. "data/stickers/baseless.lua")() 
 
+NFS.load(mod_path .. "data/stakes/blue_stake_fix.lua")() 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
 if (SMODS.Mods["Buffoonery"] or {}).can_load then
@@ -596,7 +597,10 @@ if unik_config.unik_legendary_blinds then
 end
 
 function vice_check()
-    if G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/G.GAME.unik_vice_squeeze) == 0 then
+	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
+		return 1
+	end
+    if G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*10000)/10000)) == 0 then
         return 1
     end
     if G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
@@ -621,7 +625,7 @@ if MoreFluff then
 end
 --Grab Bag Boss Jokers:
 ---The Poppy: Gain X0.25 Mult per hand played, resets if hand exceeds 2.5X requirements.
----The Collapse: Destroy all played rankless and suitless cards. Gain 50 Chips per destroyed rankless/suitless card.
+---The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
 ---The Jollyless: Gains X0.15 Mult if played hand does not contain a pair, resets if contains a pair.
 ---The Artesian: Gain X0.1 Mult per reroll in shop.
 ---The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2 Mult, but are destroyed immediately.
@@ -634,15 +638,15 @@ end
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
 ---Raspberry Racket: If Money < $50 per hand, set money to $50. Increase this by $2 per Dollar Card scored.
 ---Maroon Magnet: Convert all held cards to steel cards, scored Steel Cards give X2 mult
----Jaundice Jack: Gain X0.5 Mult per discarded Jack.
----Black Bat: All other Jokers (except Black Bat) are debuffed, ^1.2 Mult per debuffed Joker.
+---Jaundice Jack: Gain X0.4 Mult per discarded Jack.
+---Black Bat: All other Jokers (except Black Bat) are debuffed, ^1.25 Mult per debuffed Joker.
 ---Septic Seance: Create a negative shortcut, seance, paved joker and/or four fingers if you don't already on blind select. Create an ://EXPLOIT if played hand is not a straight flush.
----Purple Pentagram: Destroy all Cursed Jokers and gain X2 Mult per destroyed Cursed Joker.
+---Purple Pentagram: All Boss Blinds are the Decision. Destroy all Cursed Jokers and gain X2 Mult per destroyed Cursed Joker.
 ---Salmon Steps: ^1.75 Chips. All Mult is added to Chips instead. 
 ---
 ---Epic Blinds:
 ---Epic Collapse: Rankless and suitless cards each give ^1.1 Mult.
----Epic Xenomorph Queen: If all played cards are debuffed, gain ^0.05 Mult per debuffed card.
+---Epic Xenomorph Queen: If all played cards are debuffed, gain ^0.05 Mult per played debuffed card.
 ---Epic Artesian: Gain ^Mult proportionate to X0.0001 the reroll cost per reroll. ($2 --> 0.0002, so it's encouraged to not have free rerolls))
 ---Epic Jollyless: Destroy all Jolly and M jokers per blind select, gain ^0.1 Mult per destroyed Jolly/M Joker. Destroy all played cards if hand does not contain a pair.
 ---Epic Box: Common Jokers each give ^1.1 Mult.
@@ -666,7 +670,7 @@ end
 --Microwave (Lily): Click to destroy up to 1 selected card per ante. --> Click to destroy up to 1 selected card per round.
 --Crossdress (UNIK): First scored 7 gives X1.57 Chips --> first scored 7 gives X2.7 Chips
 --Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
---Stars (Moonlight): 4 in 5 chance to not retrigger levelups once. --> 2 in 3 chance to not retrigger levelups once.
+--Stars (Moonlight): 3 in 4 chance to not retrigger levelups once. --> 1 in 2 chance to not retrigger levelups once.
 --Cube (Cube Joker): gains 5 chips if hand contains exactly 4 cards --> gains 9 chips if hand contains exactly 4 cards
 
 

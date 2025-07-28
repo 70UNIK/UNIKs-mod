@@ -1,0 +1,2 @@
+--Doctor
+--If a card or joker produces Xchips, Echips, etc... destroy it. Self destructs after 5 consecutive rounds without an Xchips, Echips, etc... trigger

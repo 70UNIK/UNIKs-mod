@@ -68,11 +68,11 @@ SMODS.Joker {
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
-    config = { extra = { Emult = 1.0, Emult_mod = 0.15, x_mult = 1.0, x_mult_mod = 1.25,cost = 0} },
+    config = { extra = { Emult = 0.0, Emult_mod = 0.15, x_mult = 1.0, x_mult_mod = 1.25,cost = 0}, immutable = {base_emult = 1.0} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}), 
-            vars = {center.ability.extra.Emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
+            vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
 	end,
     add_to_deck = function(self, card, from_debuff)
         
@@ -92,11 +92,9 @@ SMODS.Joker {
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
         if context.forcetrigger then
-            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
             if Card.get_gameset(card) ~= "modest" then
                 return {
-                    e_mult = card.ability.extra.Emult,
+                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                     colour = G.C.DARK_EDITION,
                 }
             else
@@ -117,7 +115,7 @@ SMODS.Joker {
             if Card.get_gameset(card) ~= "modest" then
                 if (to_big(card.ability.extra.Emult) > to_big(1)) then
                     return {
-                        e_mult = card.ability.extra.Emult,
+                        e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                         colour = G.C.DARK_EDITION,
                     }
                 end
@@ -190,34 +188,4 @@ function Card.remove(self)
   end
 
   return remove_ref(self)
-end
-
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_white_lily_cookie"] = {
-		text = {
-			{
-				border_nodes = {
-					{ ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
-				},
-				border_colour = G.C.DARK_EDITION,
-			},
-            {
-				border_nodes = {
-					{ ref_table = "card.joker_display_values", ref_value = "Xmult", retrigger_type = "exp" },
-				},
-				border_colour = G.C.MULT,
-			},
-		},
-        calc_function = function(card)
-            local Emult = ""
-            local Xmult = ""
-            if Card.get_gameset(card) ~= "modest" then
-                Emult = "^" .. card.ability.extra.Emult
-            else
-                Xmult = "X" .. card.ability.extra.x_mult
-            end
-            card.joker_display_values.Emult = Emult
-            card.joker_display_values.Xmult = Xmult
-        end
-	}
 end

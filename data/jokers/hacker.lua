@@ -11,7 +11,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
-    config = { extra = {prob = 7, odds = 10} },
+    config = { extra = {prob = 3, odds = 5} },
 	loc_vars = function(self, info_queue, center)
 		local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.prob, center.ability.extra.odds, 'unik_hacker')
 		return { vars = {

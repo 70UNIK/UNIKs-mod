@@ -899,6 +899,17 @@ return {
                     "if Joker has {C:attention}triggered{}",
 				},
 			},
+            e_cry_fragile_fixed = {
+				name = "Fragile",
+				label = "Fragile",
+				text = {
+					"{C:white,X:mult} X#3# {} Mult",
+					"{C:green}#1# in #2#{} chance this",
+					"card is {C:red}destroyed",
+					"when triggered",
+					"{C:inactive}Unriggable{}",
+				},
+			},
         },
         Enhanced={
             m_unik_namta = {
@@ -2055,7 +2066,7 @@ return {
 					"increase values of ",
                     "adjcent {C:attention}Jokers{} by {C:attention}X#1#{}",
                     "{E:2,C:red}self destructs{}",
-                    "{C:inactive}(Cannot apply multiple times)",
+                    "{C:inactive}(Only applys once per Joker)",
 				},
 			},
             j_cry_tropical_smoothie_reworked = {
@@ -2067,6 +2078,16 @@ return {
                     "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
 				},
 			},
+            j_cry_gemini_reworked= {
+                name = "Gemini",
+				text = {
+					"{C:attention}Double{} all values",
+					"of leftmost {C:attention}Joker",
+					"at end of round",
+                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
+				},
+            },
+
             j_unik_cloneman = {
                 name = "Clone man",
 				text = {
@@ -2578,8 +2599,9 @@ return {
 				name = "Shitty Stake",
 				colour = "Shitty", --this is used for auto-generated sticker localization
 				text = {
-					"Jokers can be {C:attention}Disposable{}",
+					"{C:attention}Perishable{} Jokers can be {C:attention}Disposable{}",
 					"{s:0.8,C:inactive}({s:0.8,C:red}Destroyed {s:0.8,C:inactive}after round){}",
+                    '{s:0.8}Applies all previous stakes',
 				},
 			},
             stake_unik_persimmon = {
@@ -2590,13 +2612,25 @@ return {
 					"{s:0.8,C:inactive}({s:0.8,C:green}1 in 8{s:0.8,C:inactive} chance to {s:0.8,C:attention}play{s:0.8,C:inactive} cards when selected){}",
                     "{s:0.8,C:inactive}(Consumeables automatically {s:0.8,C:attention}trigger{s:0.8,C:inactive} when possible){}",
                     "{s:0.8,C:inactive}(Jokers automatically {s:0.8,C:red}sell {s:0.8,C:inactive}when selected){}",
+                    '{s:0.8}Applies all previous stakes',
 				},
 			},
+            stake_blue = {
+                name = "Blue Stake",
+                colour = "Blue",
+                text = {
+                    "Ante victory requirements",
+                    "increased by {C:attention}X1.3",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
             stake_cry_ruby = {
 				name = "Ruby Stake",
 				colour = "Ruby",
 				text = {
-					"Ante victory requirements increased by {C:attention}X1.5{}",
+					"Ante victory requirements",
+                    "increased by {C:attention}X1.25{}",
+                    '{s:0.8}Applies all previous stakes',
 				},
 			},
         },

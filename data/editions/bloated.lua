@@ -63,6 +63,7 @@ calculate = function(self, card, context)
                 SMODS.pseudorandom_probability(self, pseudoseed('unik_bloated_edition'), self.config.prob,self.config.odds, 'unik_bloated_edition') 
 				
 			then
+				card.ability.unik_destroyed_mid_scoring = true
 				-- this event call might need to be pushed later to make more sense
 				G.E_MANAGER:add_event(Event({
 					func = function()
@@ -73,8 +74,9 @@ calculate = function(self, card, context)
 							delay = 0.3,
 							blockable = false,
 							func = function()
+								card.debuff = true
 								G.jokers:remove_card(card)
-								card:bloated_pop()
+								card:bloated_pop()					
 								card = nil
 								return true
 							end,
@@ -101,7 +103,7 @@ calculate = function(self, card, context)
 			card.config.trigger = nil
 		end
 
-		if context.destroying_card and card.config.will_pop and context.destroy_card == card then
+		if context.destroy_card and context.destroy_card == card and card.config.will_pop then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					card.states.drag.is = true
@@ -123,6 +125,16 @@ calculate = function(self, card, context)
 		end
 	end,
 })
+
+--prevent effect repeat if destroyed
+local scie = SMODS.calculate_individual_effect
+function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
+	if not scored_card.ability.unik_destroyed_mid_scoring then
+		local ret = scie(effect, scored_card, key, amount, from_edition)
+		return ret
+	end
+
+end
 
 --Gore6 (custom card destruction animation)
 function Card:bloated_pop()

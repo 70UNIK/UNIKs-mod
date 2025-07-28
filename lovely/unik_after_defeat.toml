@@ -25,13 +25,27 @@ if to_big(upper22) > to_big(ceiling22) then
 else
     G.GAME.unik_scores_really_big = math.max(0,G.GAME.unik_scores_really_big - 1)
 end
+G.GAME.unik_more_finishers = G.GAME.unik_more_finishers or 0
 if to_big(upper22) > to_big(ceiling222) then
     G.GAME.unik_scores_really_big_back = G.GAME.unik_scores_really_big_back or 0
     G.GAME.unik_scores_really_big_back = G.GAME.unik_scores_really_big_back + 1
+    G.GAME.unik_more_finishers = G.GAME.unik_more_finishers + 1
+    if G.GAME.unik_more_finishers > 10 then
+        G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze * 1.25
+    end
 else
+    if G.GAME.unik_more_finishers > 0 then
+        G.GAME.unik_more_finishers = G.GAME.unik_more_finishers - 1
+    end
+    if G.GAME.unik_more_finishers >= 10 then
+        G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze / 1.25
+    end
+
     G.GAME.unik_scores_really_big_back = G.GAME.unik_scores_really_big_back or 0
     G.GAME.unik_scores_really_big_back = math.max(G.GAME.unik_scores_really_big_back - 1,0)
 end
+print(G.GAME.unik_more_finishers)
+print(G.GAME.unik_vice_squeeze)
 --print(G.GAME.unik_scores_really_big)
 '''
 match_indent = true

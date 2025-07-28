@@ -28,7 +28,8 @@ SMODS.Joker {
     key = "unik_legendary_crown",
     atlas = 'unik_finity_legendary_crown',
     config = {
-      extra = {Emult = 1.0, Emult_mod = 0.15}
+      extra = {Emult = 0.0, Emult_mod = 0.15},
+      immutable = {base_emult = 1.0}
     },
     loc_vars = function(self, info_queue, center)
         local BlindSize = 0
@@ -37,7 +38,7 @@ SMODS.Joker {
             BlindSize = G.GAME.round_scores['hand'].amt
         end
         return {
-            vars = { center.ability.extra.Emult_mod,BlindSize,center.ability.extra.Emult,localize(madeline_quotes[quoteset][math.random(#madeline_quotes[quoteset])] .. "")}
+            vars = { center.ability.extra.Emult_mod,BlindSize,center.ability.extra.Emult + center.ability.immutable.base_emult,localize(madeline_quotes[quoteset][math.random(#madeline_quotes[quoteset])] .. "")}
         }
     end,
     eternal_compat = true,
@@ -54,7 +55,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-				e_mult = card.ability.extra.Emult,
+				e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                 colour = G.C.DARK_EDITION,
 			}
         end
@@ -77,7 +78,7 @@ SMODS.Joker {
         
 		if (context.joker_main) and to_big(card.ability.extra.Emult) ~= to_big(1) then
             return {
-				e_mult = card.ability.extra.Emult,
+				e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                 colour = G.C.DARK_EDITION,
 			}
         end
