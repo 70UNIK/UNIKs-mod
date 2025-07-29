@@ -75,7 +75,7 @@ function Card:update(dt)
         end
     --Ultradebuffed
     elseif self.ability and self.ability.unik_ultradebuffed then
-        if not self.debuff then
+        if not self.debuff and not self.area.config.collection then
             self.debuff = true
             self.perma_debuff = true
             if self.area == G.jokers then self:remove_from_deck(true) end

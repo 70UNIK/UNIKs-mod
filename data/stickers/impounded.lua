@@ -9,7 +9,7 @@ SMODS.Sticker{
         card.ability[self.key] = val
         card.ability.eternal = true
         card.ability.rental = true
-        SMODS.debuff_card(card,true,"unik_impounded")
+        
     end
 }
 -- This is a consmetic sticker, as it relies on specific functionality 
