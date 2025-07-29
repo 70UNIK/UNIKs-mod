@@ -3142,6 +3142,7 @@ return {
             k_unik_back_to_back2=" Blind(s) back-to-back",
             k_unik_miser_placeholder="15 x (1+(Loputonahnes encountered x 0.1))",
             unik_the_descending = "The Descending",
+
         },
         high_scores={},
         labels={
