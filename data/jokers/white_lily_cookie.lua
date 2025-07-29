@@ -146,7 +146,7 @@ SMODS.Joker {
                             type = "variable",
                             key = "a_powmult",
                             vars = {
-                                number_format(card.ability.extra.Emult + _card.ability.immutable.base_emult),
+                                number_format(card.ability.extra.Emult + card.ability.immutable.base_emult),
                             },
                         }),
                         card = card,
