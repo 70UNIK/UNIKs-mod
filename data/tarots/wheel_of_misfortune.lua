@@ -40,7 +40,7 @@ SMODS.Consumable{
     
 	use = function(self, card, area, copier)
         local used_consumable = copier or card
-        if not SMODS.pseudorandom_probability(card, 'unik_wheelmisfortune', card.ability.extra.mischance, card.ability.extra.odds, 'unik_wheelmisfortune')  then --bad
+        if SMODS.pseudorandom_probability(card, 'unik_wheelmisfortune', card.ability.extra.mischance, card.ability.extra.odds, 'unik_wheelmisfortune')  then --bad
 			--you rig it, its your fault.
 			if card.ability.cry_rigged then
 				check_for_unlock({ type = "unik_guaranteed_summon_cursed" })

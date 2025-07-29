@@ -575,7 +575,7 @@ NFS.load(mod_path .. "data/overrides/crossmod.lua")()
 --- 
 --- 
 --- Challenges
--- NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")() --rework needed: have 1 lily at hand, 4 random cards are added on blind select.
+-- NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")() --rework needed: have 1 lily at hand, 4 random cards are added on blind select, forcing you to use her to deckfix over time to counter the cards added.
 -- NFS.load(mod_path .. "data/challenges/chipzel.lua")() --rework needed: all mult goes into chips. Otherwise it will never work trying to ban all mult based jokers.
 -- NFS.load(mod_path .. "data/challenges/multiplication.lua")() --rework needed: all chips go into mult
 -- 
@@ -585,7 +585,12 @@ NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 -- Learning with pibby: Start with a golden joker and pibby . On blind select, leftmost joker and jokers adjacent to corrupted jokers become corrupted. If Pibby is corrupted, die. All future editions are corrupted.
--- Fragile 2: all jokers and cards are 
+-- Cardless: All Cards are Debuffed. Start with a Joker and Blue Joker.
+-- Finger Trigger: All playing cards are triggering. Start with a Half Joker.
+-- Cookie Clicker I: All blinds are clicked cookie and pimydenkekisi. Start with a negative Clicked Cookie.
+-- Cookie Clicker II: Cookie clicker I, but all blinds are boss blinds. Start with a negative Clicked Cookie.
+-- Cookie clicker III: Cookie Clicker II, but the cookie and pimydenkekisi scale twice as fast. All Common Jokers are replaced with Clicked Cookie. Start with 2 negative clicked cookies.
+
 
 -- achievements
 NFS.load(mod_path .. "data/achievements/epic_fail.lua")()

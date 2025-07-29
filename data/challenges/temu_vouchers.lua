@@ -13,7 +13,6 @@ SMODS.Challenge{
         { id = "j_unik_coupon_codes", stickers = { "cry_absolute" }, edition = "negative" },
         { id = "j_unik_coupon_codes", stickers = { "cry_absolute" }, edition = "negative" },
         { id = "j_unik_coupon_codes", stickers = { "cry_absolute" }, edition = "negative" },
-        { id = "j_unik_coupon_codes", stickers = { "cry_absolute" }, edition = "negative" },
     },
     consumeables = {
         {id = 'c_cry_keygen', edition = "negative"},

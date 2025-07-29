@@ -15,7 +15,7 @@ position = 'after'
 match_indent = true
 payload = '''
 --Playing cards
-if self.ability and self.ability.set and self.ability.unik_triggering and (self.ability.set == "Default" or self.area == G.hand) then
+if self.highlighted == true and self.ability and self.ability.set and self.ability.unik_triggering and (self.ability.set == "Default" or self.area == G.hand) then
     if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and SMODS.pseudorandom_probability(self, 'unik_triggering_playing_card', 1, 8, 'unik_triggering_playing_card') and not G.GAME.unik_using_automatic_consumeable then
         local cards = {}
         for i = 1, #G.hand.highlighted do
