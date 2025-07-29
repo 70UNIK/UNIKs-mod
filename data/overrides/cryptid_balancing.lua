@@ -1,88 +1,39 @@
 -- --OIL LUMP
---Upcoming rework: multiplies values of jokers to the right by 1.15X. Values revert after 2 rounds, requiring you to "keep oiling" a joker if you want to keep its benefits. The max it can go up to is 1.98X
+-- Now fixed:
 SMODS.Joker:take_ownership("cry_oil_lamp", {
-    immutable = true,
-    rarity = 'cry_epic',
-    -- config = { extra = { increase = 1.25, revert = 3 } },
-	-- gameset_config = {
-	-- 	modest = {disabled = true}
-	-- },
-	-- loc_vars = function(self, info_queue, card)
-	-- 	card.ability.blueprint_compat_ui = card.ability.blueprint_compat_ui or ""
-	-- 	card.ability.blueprint_compat_check = nil
-	-- 	return {
-	-- 		key = "j_cry_oil_lamp_reworked",
-	-- 		vars = { number_format(card.ability.extra.increase),number_format(card.ability.extra.revert) },
-	-- 		main_end = (card.area and card.area == G.jokers) and {
-	-- 			{
-	-- 				n = G.UIT.C,
-	-- 				config = { align = "bm", minh = 0.4 },
-	-- 				nodes = {
-	-- 					{
-	-- 						n = G.UIT.C,
-	-- 						config = {
-	-- 							ref_table = card,
-	-- 							align = "m",
-	-- 							colour = G.C.JOKER_GREY,
-	-- 							r = 0.05,
-	-- 							padding = 0.06,
-	-- 							func = "blueprint_compat",
-	-- 						},
-	-- 						nodes = {
-	-- 							{
-	-- 								n = G.UIT.T,
-	-- 								config = {
-	-- 									ref_table = card.ability,
-	-- 									ref_value = "blueprint_compat_ui",
-	-- 									colour = G.C.UI.TEXT_LIGHT,
-	-- 									scale = 0.32 * 0.8,
-	-- 								},
-	-- 							},
-	-- 						},
-	-- 					},
-	-- 				},
-	-- 			},
-	-- 		} or nil,
-	-- 	}
-	-- end,
-	-- calculate = function(self, card, context)
-	-- 	if
-	-- 		(context.end_of_round and not context.repetition and not context.individual and not context.blueprint)
-	-- 		or context.forcetrigger
-	-- 	then
-	-- 		local check = false
-	-- 		for i = 1, #G.jokers.cards do
-	-- 			if G.jokers.cards[i] == card then
-	-- 				if i < #G.jokers.cards then
-	-- 					if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
-	-- 						check = true
-	-- 						Cryptid.manipulate(G.jokers.cards[i + 1], { value = card.ability.extra.increase })
-	-- 						local card6 = G.jokers.cards[i + 1]
-	-- 						card6.ability.cry_valuemanip_reset = card6.ability.cry_valuemanip_reset or {}
-	-- 						--How would it work?
-	-- 						--{multiplier,rounds left}
-	-- 						--{decrements by 1. If hits 0, then reverts values.}
-	-- 						card6.ability.cry_valuemanip_reset[#card6.ability.cry_valuemanip_reset + 1] = {card.ability.extra.increase,card.ability.extra.revert}
-
-	-- 					end
-	-- 				end
-	-- 			end
-	-- 		end
-	-- 		if check then
-	-- 			card_eval_status_text(
-	-- 				card,
-	-- 				"extra",
-	-- 				nil,
-	-- 				nil,
-	-- 				nil,
-	-- 				{ message = localize("k_upgrade_ex"), colour = G.C.GREEN }
-	-- 			)
-	-- 		end
-	-- 		return {
-
-	-- 		}
-	-- 	end
-	-- end,
+	immutable = true,
+    calculate = function(self, card, context)
+		if
+			(context.end_of_round and not context.repetition and not context.individual and not context.blueprint)
+			or context.forcetrigger
+		then
+			local check = false
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] == card then
+					if i < #G.jokers.cards then
+						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
+							check = true
+							if G.jokers.cards[i + 1].ability.value_manip2 then
+								Cryptid.manipulate(G.jokers.cards[i + 1], { value = 1/G.jokers.cards[i + 1].ability.value_manip2})
+							end
+							Cryptid.manipulate(G.jokers.cards[i + 1], { value = card.ability.extra.increase })
+							G.jokers.cards[i + 1].ability.value_manip2 = card.ability.extra.increase
+						end
+					end
+				end
+			end
+			if check then
+				card_eval_status_text(
+					card,
+					"extra",
+					nil,
+					nil,
+					nil,
+					{ message = localize("k_upgrade_ex"), colour = G.C.GREEN }
+				)
+			end
+		end
+	end,
 }, true)
 
 --TROFICAL SMOOTHER: multiples values of all owned jokers by 1.25X. Values of jokers revert after 5 rounds
@@ -95,7 +46,6 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 	-- 	madness = { extra = {extra = 1.5, self_destruct = false, revert = 5} },
 	-- 	modest = {disabled = true}
 	-- },
-    rarity = 'cry_epic',
     immutable = true,
     calculate = function(self, card, context)
 		if context.selling_self or context.forcetrigger and not card.ability.drank_smoothie then
@@ -103,11 +53,11 @@ SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
 			for i, v in pairs(G.jokers.cards) do
 				if v ~= card then
 					if not Card.no(v, "immutable", true) then
-						if v.ability.value_manip then
-							Cryptid.manipulate(v)
+						if v.ability.value_manip2 then
+							Cryptid.manipulate(v, { value = 1/v.ability.value_manip2 })
 						end
 						Cryptid.manipulate(v, { value = card.ability.extra })
-						v.ability.value_manip = true
+						v.ability.value_manip2 = card.ability.extra
 						check = true
 					end
 				end
@@ -163,21 +113,21 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 					if i > 1 then
 						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
 							local card6 = G.jokers.cards[i - 1]
-							if G.jokers.cards[i - 1].ability.value_manip then
-								Cryptid.manipulate(G.jokers.cards[i - 1])
+							if G.jokers.cards[i - 1].ability.value_manip2 then
+								Cryptid.manipulate(G.jokers.cards[i - 1], {value = 1/G.jokers.cards[i - 1].ability.value_manip2})
 							end
-							Cryptid.misprintize(card6, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-							card6.ability.value_manip = true
+							Cryptid.manipulate(card6, { value = card.ability.extra.increase })
+							card6.ability.value_manip2 = card.ability.extra.increase
 						end
 					end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
 							local card6 = G.jokers.cards[i + 1]
-							if G.jokers.cards[i + 1].ability.value_manip then
-								Cryptid.manipulate(G.jokers.cards[i + 1])
+							if G.jokers.cards[i + 1].ability.value_manip2 then
+								Cryptid.manipulate(G.jokers.cards[i + 1], {value = 1/G.jokers.cards[i + 1].ability.value_manip2})
 							end
 							Cryptid.manipulate(G.jokers.cards[i + 1], { value = card.ability.extra.increase })
-							card6.ability.value_manip = true
+							card6.ability.value_manip2 = card.ability.extra.increase
 							
 						end
 					end
@@ -217,22 +167,21 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 					if i > 1 then
 						if not Card.no(G.jokers.cards[i - 1], "immutable", true) then
 							local card6 = G.jokers.cards[i - 1]
-							if G.jokers.cards[i - 1].ability.value_manip then
-								Cryptid.manipulate(G.jokers.cards[i - 1])
+							if card6.ability.value_manip2 then
+								Cryptid.manipulate(card6, {value = 1/card6.ability.value_manip2})
 							end
-							Cryptid.misprintize(card6, { min = card.ability.extra.increase, max = card.ability.extra.increase }, nil, true)
-							card6.ability.value_manip = true
+							Cryptid.manipulate(card6, { value = card.ability.extra.increase })
+							card6.ability.value_manip2 = card.ability.extra.increase
 						end
 					end
 					if i < #G.jokers.cards then
 						if not Card.no(G.jokers.cards[i + 1], "immutable", true) then
 							local card6 = G.jokers.cards[i + 1]
-							if G.jokers.cards[i + 1].ability.value_manip then
-								Cryptid.manipulate(G.jokers.cards[i + 1])
+							if card6.ability.value_manip2 then
+								Cryptid.manipulate(card6, {value = 1/card6.ability.value_manip2})
 							end
-							Cryptid.manipulate(G.jokers.cards[i + 1], { value = card.ability.extra.increase })
-							card6.ability.value_manip = true
-							
+							Cryptid.manipulate(card6, { value = card.ability.extra.increase })
+							card6.ability.value_manip2 = card.ability.extra.increase
 						end
 					end
 				end
@@ -1562,3 +1511,4 @@ calculate = function(self, card, context)
 
 
 Cryptid.misprintize_value_blacklist["cry_valuemanip_reset"] = false
+Cryptid.misprintize_value_blacklist["cry_valuemanip2"] = false
