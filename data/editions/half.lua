@@ -20,6 +20,7 @@ SMODS.Edition({
 	extra_cost = -3, --Its a detrimental edition, hence lower cost
     apply_to_float = true,
     disable_base_shader = true,
+    detrimental = true,
     no_shadow = true,
 	sound = {
 		sound = "unik_templerun_rip",

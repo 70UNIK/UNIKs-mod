@@ -67,7 +67,7 @@ return {
             ble_unik_half={
                 name = "Half",
                 text = {
-                    "Debuff #1# random played cards if",
+                    "Debuff a random played card if",
                     "more than #2# cards are played",
                 }
             },
@@ -622,8 +622,8 @@ return {
                 name = "The Halved",
                 text = {
                     "If hand contains >3 cards",
-                    "add Half to 2 random Jokers",
-                    "and played cards",
+                    "add Half to a random Joker",
+                    "and played card",
                 }
             },
             bl_unik_fuzzy={

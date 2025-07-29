@@ -1,4 +1,4 @@
---The inverse of Chipzel, this time Chips is set to 1!
+--The inverse of Chipzel, all chips triggers affect mult, chips = 1.
 SMODS.Challenge{
     key = "unik_mult_only",
 	rules = {

@@ -25,6 +25,7 @@ SMODS.Edition({
 	},
     disable_base_shader = true,
     no_shadow = true,
+	detrimental = true,
     -- loc_txt = {
 	-- 	name = 'Positive',
     --     label = 'Positive',
@@ -56,7 +57,7 @@ SMODS.Edition({
 calculate = function(self, card, context)
 		if
 			context.cardarea == G.jokers
-			and context.post_trigger
+			and context.post_trigger and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability
 			and context.other_card == card --animation-wise this looks weird sometimes
 		then
 			if

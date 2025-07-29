@@ -14,7 +14,7 @@ SMODS.Blind{
         --Add Half to 2 random cards selected and 2 random jokers that are not already have the edition
         if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
             local triggered = false
-            for g = 1, 2 do
+            for g = 1, 1 do
                 local eligible_cards = {}
                 for i,v in pairs(G.jokers.cards) do
                     if not v.edition or (v.edition and not v.edition.unik_halfjoker) then

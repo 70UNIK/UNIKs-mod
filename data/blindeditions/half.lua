@@ -13,7 +13,7 @@ SMODS.BlindEdition {
     press_play = function(self, blind_on_deck)
         if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
             local triggered = false
-            for g = 1, 2 do
+            for g = 1, 1 do
 
                 local eligible_cards2 = {}
                 for i,v in pairs(G.hand.highlighted) do

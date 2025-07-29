@@ -1,3 +1,4 @@
+--reworked chipzel challenge: all mult triggers affect chips, mult = 1.
 SMODS.Challenge{
     key = "unik_chips_only",
 	rules = {

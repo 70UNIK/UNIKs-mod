@@ -965,7 +965,8 @@ SMODS.Edition:take_ownership("e_cry_glass",{
 
 		if
 			context.cardarea == G.jokers
-			and context.post_trigger
+			and context.post_trigger 
+			and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability
 			and context.other_card == card --animation-wise this looks weird sometimes
 		then
 			if

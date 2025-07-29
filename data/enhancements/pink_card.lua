@@ -39,6 +39,13 @@ SMODS.Enhancement {
                 end
             end
 		end
+        if (context.cardarea == "unscored") and context.destroy_card == card then
+            for i,v in pairs(G.play.cards) do
+                if v:get_id() ~= 7 then
+                    return { remove = true }
+                end
+            end
+        end
 	end,
 }
 
