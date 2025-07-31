@@ -2546,6 +2546,86 @@ return {
 			},
 
         },
+        OvershootFX = {
+            overshoot_unik_0 = {
+                name = "Overshoot",
+                text = {
+                    "No effects",
+                    "{C:inactive}Ensure you score below",
+                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs at all times!",
+                    "Next effect at {C:red}6:",
+                    "{C:red}+1{} Ante per {C:attention}ante increase",
+                },
+            },
+            overshoot_unik_1 = {
+                name = "Overshoot",
+                text = {
+                    "{C:red}+1{} Ante per {C:attention}ante increase",
+                    "{C:inactive}Ensure you score below",
+                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
+                    "Next effect at {C:red}10:",
+                    "{C:red}Epic Blinds{} may appear",
+                    "after round {C:attention}40",
+                }
+            },
+            overshoot_unik_2 = {
+                name = "Overshoot",
+                text = {
+                    "{C:red}+1{} Ante per {C:attention}ante increase",
+                    "{C:red}Epic Blinds{} may appear",
+                    "after round {C:attention}40",
+                    "{C:inactive}Ensure you score below",
+                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
+                    "Next effect at {C:red}15:",
+                    "{C:red}Legendary Blinds{} may appear",
+                    "after round {C:attention}90",
+                }
+            },
+            overshoot_unik_3 = {
+                name = "Overshoot",
+                text = {
+                    "{C:red}+1{} Ante per {C:attention}ante increase",
+                    "{C:red}Epic Blinds{} may appear",
+                    "after round {C:attention}40",
+                    "{C:red}Legendary Blinds{} may appear",
+                    "after round {C:attention}90",
+                    "{C:inactive}Ensure you score below",
+                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
+                    "Next effect at {C:red}18:",
+                    "{C:red}+1{} Ante per {C:attention}ante increase",
+                }
+            },
+            overshoot_unik_4 = {
+                name = "Overshoot",
+                text = {
+                    "{C:red}+2{} Ante per {C:attention}ante increase",
+                    "{C:red}Epic Blinds{} may appear",
+                    "after round {C:attention}40",
+                    "{C:red}Legendary Blinds{} may appear",
+                    "after round {C:attention}90",
+                    "{C:inactive}Ensure you score below",
+                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
+                    "Next effect at {C:red}20:",
+                    "Finisher Blinds {C:red}replace{} {C:attention}Boss{} blinds",
+                    "When ante is increased,",
+                    "add ante equal to (overshoot - 20)",
+                }
+            },
+            overshoot_unik_5 = {
+                name = "Overshoot",
+                text = {
+                    "{C:red}+2{} Ante per {C:attention}ante increase",
+                    "{C:red}Epic Blinds{} may appear",
+                    "after round {C:attention}40",
+                    "{C:red}Legendary Blinds{} may appear",
+                    "after round {C:attention}90",
+                    "Finisher Blinds {C:red}replace{} {C:attention}Boss{} blinds",
+                    "When ante is {C:attention}increased,",
+                    "{C:red}add{} ante equal to {C:attention}(overshoot - 20)",
+                    "{C:red}Lower your score or suffer.",
+                }
+            },
+        },
         Planet={},
         Spectral={
             --only appears with a 0.3 chance in the cube booster pack. It's basically a gateway, but exclusively creating UNIK 
@@ -3142,6 +3222,7 @@ return {
             k_unik_back_to_back2=" Blind(s) back-to-back",
             k_unik_miser_placeholder="15 x (1+(Loputonahnes encountered x 0.1))",
             unik_the_descending = "The Descending",
+            k_overshoot = "Overshoot",
 
         },
         high_scores={},
@@ -3412,11 +3493,8 @@ return {
             a_factorial_chips = {"!Chips^#1#"},
         },
         v_text={			
-            ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is {C:attention}set{} to {C:red}<=1{}" },
-            ch_c_unik_mult_ban = { "Solely {C:mult}Mult{}, {X:mult,C:white}XMult{} and {X:dark_edition,C:white}^Mult{} Jokers and cards are {C:red}banned{}"},
-            ch_c_unik_mult_ban2 = {"{C:inactive}(As much as possible){}"},
-            ch_c_unik_chips_set_to_one = { "{C:chips}Chips{} are {C:attention}set{} to {C:red}<=1{}" },
-            ch_c_unik_chips_ban = { "Solely {C:chips}Chips{}, {X:chips,C:white}XChips{} and {X:dark_edition,C:white}^Chips{} Jokers and cards are {C:red}banned{}"},
+            ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is added to {C:chips}Chips{} and {C:attention}set{} to {C:red}<=1{}" },
+            ch_c_unik_chips_set_to_one = { "{C:chips}Chips{} are added to {C:mult}Mult{} and {C:attention}set{} to {C:red}<=1{}" },
             ch_c_unik_common_only = {"Only {C:Blue}Common{} Jokers can spawn"},
             ch_c_cry_big_showdown = {"{C:attention}Final{} Boss Blinds can appear in {C:attention}any{} Ante"},
             --DO YOU WANT TO SUFFER?

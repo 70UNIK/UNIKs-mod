@@ -1,0 +1,1 @@
+--Gain X0.7 Chips every time a Pink Card is destroyed. (uncommon)

@@ -1,0 +1,3 @@
+--Parasite:
+--Add and forcibly link 2 namta cards to 1/4 cards in your deck.
+--bunco exclusive.

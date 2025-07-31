@@ -1,9 +1,34 @@
 local mod_path = "" .. SMODS.current_mod.path
 unik_config = SMODS.current_mod.config
+UNIK = SMODS.current_mod
 
-if not unik then
-	unik = {}
+if not UNIK then
+	UNIK = {}
 end
+
+UNIK.OvershootFXs = {}
+
+UNIK.OvershootFX  = SMODS.Center:extend{
+    set = 'OvershootFX',
+    obj_buffer = {},
+    obj_table = UNIK.OvershootFXs,
+    class_prefix = 'overshoot',
+    required_params = {
+        'key',
+    },
+    pre_inject_class = function(self)
+        G.P_CENTER_POOLS[self.set] = {}
+    end,
+    inject = function(self)
+        SMODS.Center.inject(self)
+    end,
+    get_obj = function(self, key)
+        if key == nil then
+            return nil
+        end
+        return self.obj_table[key]
+    end
+}
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -240,6 +265,8 @@ SMODS.ConsumableType {
     end
 }
 
+
+
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/steel.lua")()
 NFS.load(mod_path .. "data/editions/positive.lua")()
@@ -287,6 +314,8 @@ end
 --For Sale (uncommon): Sell to remove all rental stickers, lose $6 per rental sticker, destroy joker if destroyed.
 --Ghost Joker, create a random spectral on blind select (rare, epic in modest).
 --Poppy exploit fix for legendary crown (add a buffer to prevent her scaling to 6666 hands lost).
+
+--Welfare Deck: Interest rate is Inverted (earn $5 interest at $0, earn no interest at $25)
 
 --Then finally, an "overshoot" mechanic that becomes harsher if you score too well, the "summon epic blinds" thing but expanded and with proper UI and more effects (faster ante scaling), kind of like straddle. 
 
@@ -382,6 +411,21 @@ if (SMODS.Mods['ble'] or {}).can_load then
 	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
 end
 
+--DX blinds:
+-- The Wall DX: Very Very Very Big Blind (15X)
+-- The Tooth DX: -$1 per card or joker triggered. Chips cannot exceed $.
+-- The Poppy DX: Reduce score by ^0.5 if score exceeds ^1.25 requirements. ^0.8 Blind Size.
+-- The Artesian DX: ^1.25 Blind size per reroll this ante.
+-- The Jollyless DX: Debuff all Jolly/M Jokers. Hand must not contain a pair.
+-- The Collapse DX: All non-rankless and suitless cards are debuffed
+-- The Cookie DX: X1.1 requirements per click this ante.
+-- The Vice DX: Increase Victory Requirements by 1, The Next 3 blinds become DX Blinds.
+-- The Leak DX: Chips and Mult set to the lower value.
+-- The Smiley DX: All uneditioned Jokers and cards become Positive.
+-- The Bloon DX: All uneditioned Jokers and cards become Bloated.
+-- The Halved DX: Must play less than 3 cards. Add Half to a random Joker per hand.
+-- The Fuzzy DX: All uneditioned Jokers and cards become Fuzzy.
+-- The Darkness DX: All uneditioned Jokers and cards become Corrupted.
 
 
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
@@ -585,11 +629,12 @@ NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 -- Learning with pibby: Start with a golden joker and pibby . On blind select, leftmost joker and jokers adjacent to corrupted jokers become corrupted. If Pibby is corrupted, die. All future editions are corrupted.
--- Cardless: All Cards are Debuffed. Start with a Joker and Blue Joker.
+-- Cardless: All Cards are Debuffed. Start with a Joker and Ice Cream.
 -- Finger Trigger: All playing cards are triggering. Start with a Half Joker.
+-- Finger Trigger II: All playing cards are triggering. Start with Finger Trigger and Half Joker. (Bunco only)
 -- Cookie Clicker I: All blinds are clicked cookie and pimydenkekisi. Start with a negative Clicked Cookie.
 -- Cookie Clicker II: Cookie clicker I, but all blinds are boss blinds. Start with a negative Clicked Cookie.
--- Cookie clicker III: Cookie Clicker II, but the cookie and pimydenkekisi scale twice as fast. All Common Jokers are replaced with Clicked Cookie. Start with 2 negative clicked cookies.
+-- 
 
 
 -- achievements
@@ -602,6 +647,9 @@ if unik_config.unik_legendary_blinds then
 end
 
 function vice_check()
+	if G.GAME.OvershootFXVal >= 5 then
+		return 1
+	end
 	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
 		return 1
 	end
@@ -628,6 +676,9 @@ if MoreFluff then
 	end
 	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
 end
+
+--UI
+NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Grab Bag Boss Jokers:
 ---The Poppy: Gain X0.25 Mult per hand played, resets if hand exceeds 2.5X requirements.
 ---The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
