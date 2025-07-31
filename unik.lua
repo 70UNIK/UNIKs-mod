@@ -647,6 +647,7 @@ if unik_config.unik_legendary_blinds then
 end
 
 function vice_check()
+	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
 	if G.GAME.OvershootFXVal >= 5 then
 		return 1
 	end
