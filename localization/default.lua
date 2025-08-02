@@ -1750,6 +1750,7 @@ return {
                     "when a {C:attention}booster pack{}",
                     "is skipped",
                     "{C:inactive}(Currently {C:dark_edition}+#4#{C:inactive} slots)",
+                    "{C:inactive,s:0.8s}(Capped at {C:dark_edition}+#5#{C:inactive} slots)",
                 },
                 unlock = {
 					"Skip {C:attention}30",
@@ -2087,6 +2088,19 @@ return {
                     "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
 				},
             },
+
+            j_cry_notebook_balnced = {
+				name = "Motebook",
+				text = {
+					"{C:green} #1# in #2#{} chance to gain {C:dark_edition}+#6#{} Joker",
+					"slot#<s>6# per {C:attention}reroll{} in the shop",
+					"{C:green}Always triggers{} if there are",
+					"{C:attention}#5#{} or more {C:attention}Jolly Jokers{}",
+					"{C:red}Works once per round{}",
+					"{C:inactive}(Currently {C:dark_edition}+#3#{}{C:inactive} and #4#){}",
+                    "{C:inactive}(Capped at {C:dark_edition}+#7#{}{C:inactive} slots){}",
+				},
+			},
 
             j_unik_cloneman = {
                 name = "Clone man",

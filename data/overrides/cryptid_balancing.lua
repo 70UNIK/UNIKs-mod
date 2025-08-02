@@ -943,6 +943,41 @@ SMODS.Joker:take_ownership("j_cry_magnet",{
 	end,
 }, true)
 
+--Notebook: Caps at 6 slots.
+SMODS.Joker:take_ownership("j_cry_notebook",{
+	config = {
+		extra = {
+			add = 1,
+			odds = 7,
+			jollies = 4,
+			check = true,
+			active = "Active",
+			inactive = "",
+		},
+		immutable = {
+			slots = 0,
+			max_slots = 6,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.j_jolly
+		local num, denom =
+			SMODS.get_probability_vars(card, 1, card and card.ability.extra.odds or self.config.extra.odds)
+		return {
+			key = "j_cry_notebook_balanced",
+			vars = {
+				num,
+				denom,
+				number_format(card.ability.immutable.slots),
+				number_format(card.ability.extra.active),
+				number_format(card.ability.extra.jollies),
+				number_format(card.ability.extra.add),
+				number_format(card.ability.immutable.max_slots),
+			},
+		}
+	end,
+}, true)
+
 SMODS.Edition:take_ownership("e_cry_glass",{
 	config = { x_mult = 3, prob = 1, odds = 8, trigger = nil },
 	loc_vars = function(self, info_queue, card)

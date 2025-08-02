@@ -9,7 +9,7 @@ SMODS.Joker{ --Yellow Card
         },
         immutable = {
 			slots = 0,
-			max_slots = 1000,
+			max_slots = 6,
 		},
     },
     pos = {
@@ -29,6 +29,7 @@ SMODS.Joker{ --Yellow Card
             new_numerator, new_denominator,
             math.floor(card.ability.extra.increase),
             card.ability.immutable.slots,
+            card.ability.immutable.max_slots,
         }}
     end,
     gameset_config = {
@@ -39,7 +40,7 @@ SMODS.Joker{ --Yellow Card
         },
         immutable = {
 			slots = 0,
-			max_slots = 1000,
+			max_slots = 5,
 		}, },
 	},
 
