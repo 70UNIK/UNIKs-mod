@@ -44,26 +44,6 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         if context.forcetrigger then
-            local hand = context.full_hand or G.play.cards or G.hand.highlighted
-            for k, v in ipairs(hand) do
-                if SMODS.has_enhancement(v, "m_unik_pink") then
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.immutable.divisor)
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
-                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.immutable.divisor)
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
-                end  
-            end
             return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,

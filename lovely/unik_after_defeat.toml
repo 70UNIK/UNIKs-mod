@@ -12,14 +12,7 @@ target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
 payload = '''
-local instakill = G.GAME.blind:unik_after_defeat(G.GAME.chips,G.GAME.blind.chips)
-if instakill then
-    G.GAME.chips = 0
-    game_over = true
-    G.ROOM.jiggle = G.ROOM.jiggle + 25
-    G.GAME.blind.triggered = true
-    G.GAME.blind:wiggle()
-end
+
 -- legendary crown: force set new high score:
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
 local upper22 = G.GAME.chips
@@ -33,12 +26,13 @@ else
     G.GAME.unik_scores_really_big = math.max(0,G.GAME.unik_scores_really_big - 1)
 end
 if to_big(upper22) > to_big(ceiling222) then
-    G.GAME.unik_scores_really_big_back = G.GAME.unik_scores_really_big_back or 0
-    G.GAME.unik_scores_really_big_back = G.GAME.unik_scores_really_big_back + 1
+    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    unik_ease_overshoot(1)
 else
-    G.GAME.unik_scores_really_big_back = G.GAME.unik_scores_really_big_back or 0
-    G.GAME.unik_scores_really_big_back = math.max(G.GAME.unik_scores_really_big_back - 1,0)
+    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    unik_ease_overshoot(-1)
 end
+
 --print(G.GAME.unik_scores_really_big)
 '''
 match_indent = true

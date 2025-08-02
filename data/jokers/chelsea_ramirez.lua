@@ -84,7 +84,6 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         if context.forcetrigger then
-            card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
             return {
 
 				x_chips = card.ability.extra.x_chips,

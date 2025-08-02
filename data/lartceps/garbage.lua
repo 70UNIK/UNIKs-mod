@@ -36,7 +36,6 @@ SMODS.Consumable{
 						end
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card_)
-						card_:start_materialize()
 						G.deck:emplace(card_)
 						card:juice_up(0.3, 0.5)
 						cardsCreated[#cardsCreated+1] = card

@@ -9,7 +9,7 @@ function CanSpawnEpic()
         return true
     end
     if G.GAME.round >= 40 then
-        if G.GAME.unik_scores_really_big_back > 10 then
+        if G.GAME.unik_overshoot > 10 then
             return true
         end
     end
@@ -23,7 +23,7 @@ function CanSpawnLegendary()
         return true
     end
     if G.GAME.round >= 90 then
-        if G.GAME.unik_scores_really_big_back > 15 then
+        if G.GAME.unik_overshoot > 15 then
             return true
         end
     end

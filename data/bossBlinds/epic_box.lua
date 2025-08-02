@@ -17,7 +17,7 @@ SMODS.Blind	{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
 	in_pool = function(self)
         if (G.GAME.modifiers.no_shop_jokers or (G.jokers and G.jokers.config and G.jokers.config.card_limit < 4))then

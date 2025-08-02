@@ -1,1 +1,0 @@
---Sell this card to remove rental from all jokers and cards; lose $6 per rental sticker removed, destroy card if in debt.

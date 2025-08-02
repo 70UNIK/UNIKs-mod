@@ -59,7 +59,7 @@ SMODS.Joker {
 
 		-- 	}
 		-- end
-		if (context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card) then
+		if (context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability) then
 			if not Talisman or not Talisman.config_file.disable_anims then
 				G.E_MANAGER:add_event(Event({
 					func = function()

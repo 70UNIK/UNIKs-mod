@@ -9,9 +9,6 @@ target = '''=[SMODS aikoyorisshenanigans "./modules/api.lua"]'''
 pattern = '''AKYRS.other_mods_blind_icons(blind,ability_text_table,extras)'''
 position = "before"
 payload = '''
-if blind.debuff.akyrs_unskippable_blind then
-    AKYRS.generate_icon_blinds("unskippable_blind",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
-end
 if blind.debuff.akyrs_all_unskippable_blinds then
     AKYRS.generate_icon_blinds("all_unskippable_blinds",{table = z,cache = cache,icon_size = icon_size,full_ui = full_ui,font_size = fsz,text_size_for_full = dfctysz, atlas = "unik_akio_icons", info_queue = info_queue})
 end
@@ -59,9 +56,6 @@ AKYRS.DescriptionDummy{
     key = "legendary_blind"
 }
 AKYRS.DescriptionDummy{
-    key = "unskippable_blind"
-}
-AKYRS.DescriptionDummy{
     key = "all_unskippable_blinds"
 }
 '''
@@ -76,7 +70,6 @@ payload = '''
 AKYRS.other_mods_blind_icons_atlas = function(key)
     if key == "epic" then         return  "unik_akio_icons" end
     if key == "legendary" then      return  "unik_akio_icons" end
-    if key == "unskippable_blind" then         return  "unik_akio_icons" end
     if key == "all_unskippable_blinds" then        return  "unik_akio_icons" end
     return "akyrs_aikoyoriMiscIcons"
 end
@@ -113,7 +106,18 @@ position = "after"
 payload = '''
 if key == "epic" then         return  { x = 0, y = 0} end
 if key == "legendary" then         return  { x = 1, y = 0} end
-if key == "unskippable_blind" then       return  { x = 2, y = 0} end
 if key == "all_unskippable_blinds" then          return  { x = 3, y = 0} end
+'''
+match_indent = true
+
+##avoid repeating blinds if generated through force_Epic_plus
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS aikoyorisshenanigans "./modules/hooks/general.lua"]'''
+pattern = '''return G.GAME.round_resets.blind_choices.Boss'''
+position = "at"
+payload = '''
+local x = getNewBossHook()
+return x
 '''
 match_indent = true

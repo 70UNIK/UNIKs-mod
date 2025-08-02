@@ -6,9 +6,8 @@ SMODS.Consumable{
 	cost = 4,
 	atlas = "unik_spectrals",
 	order = 90,
-    cloneman_blacklist = true,
     config = {
-		max_highlighted = 1
+		max_highlighted = 1, extra= {cards_added = 3}
 	},
 	can_use = function(self, card)
 		if card.area ~= G.hand then
@@ -40,7 +39,7 @@ SMODS.Consumable{
 		if not center.edition or (center.edition and not center.edition.polychrome) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_polychrome
 		end
-		return { vars = {center.ability.max_highlighted } }
+		return { vars = {center.ability.max_highlighted, center.ability.extra.cards_added } }
 	end,
     in_pool = function(self)
         return false
@@ -73,6 +72,33 @@ SMODS.Consumable{
 					delay = 0.2,
 					func = function()
 						G.hand:unhighlight_all()
+
+						G.E_MANAGER:add_event(Event({
+							func = function()
+								local cards = {}
+								for i = 1, card.ability.extra.cards_added do
+									cards[i] = true
+									local suit_list = {}
+									for i = #SMODS.Suit.obj_buffer, 1, -1 do
+										suit_list[#suit_list + 1] = SMODS.Suit.obj_buffer[i]
+									end
+									local numbers = {}
+									for _RELEASE_MODE, v in ipairs(SMODS.Rank.obj_buffer) do
+										local r = SMODS.Ranks[v]
+										table.insert(numbers, r.card_key)
+									end
+									local _suit, _rank =
+										SMODS.Suits[pseudorandom_element(suit_list, pseudoseed("prism_create"))].card_key,
+										pseudorandom_element(numbers, pseudoseed("prism_create"))
+									local card2 = create_playing_card({
+										front = G.P_CARDS[_suit .. "_" .. _rank],
+										center = G.P_CENTERS.c_base,
+									}, G.hand, nil, i ~= 1, { G.C.SECONDARY_SET.Spectral })
+								end
+								playing_card_joker_effects(cards)
+								return true
+							end,
+						}))
 						return true
 					end,
 				}))

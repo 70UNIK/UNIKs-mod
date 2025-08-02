@@ -239,3 +239,13 @@ payload = '''
 --nope
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''elseif _type == 'Planet' then _pool[#_pool + 1] = "c_pluto"'''
+position = "before"
+payload = '''
+elseif _type == 'Joker' and _rarity == 'cry_candy' then _pool[#_pool + 1] = "j_cry_wrapped"
+'''
+match_indent = true

@@ -1,2 +1,4 @@
 --The Crossdresser!
---Select 2 cards to convert into 7s (placeholder, will change into)
+--Add 3 random enhanced 7s (random suits)
+
+

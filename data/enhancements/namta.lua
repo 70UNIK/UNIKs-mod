@@ -83,7 +83,7 @@ SMODS.Enhancement {
             				return true
 			end }))
         end
-        if context.destroy_card == card and context.cardarea == G.play then
+        if context.destroy_card and context.destroy_card == card and context.cardarea == G.play then
             G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
                 G.GAME.unik_enable_lartcep_spawn = nil
             				return true

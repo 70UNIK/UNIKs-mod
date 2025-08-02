@@ -12,10 +12,23 @@ pattern = '''play_area_status_text("Not Allowed!")--localize('k_not_allowed_ex')
 position = 'at'
 payload = '''
 if G.GAME.unik_instant_death_hand then
-    play_area_status_text("DIE.")
+    G.GAME.chips = 0
+    G.E_MANAGER:add_event(
+        Event({
+            trigger = "immediate",
+            func = function()
+                if G.STATE ~= G.STATES.SELECTING_HAND then
+                    return false
+                end
+                G.STATE = G.STATES.HAND_PLAYED
+                G.STATE_COMPLETE = true
+                end_round()
+                return true
+            end,
+        }),
+        "other"
+    )
 
-    G.STATE = G.STATES.GAME_OVER
-    G.STATE_COMPLETE = true
 else
     play_area_status_text("Not Allowed!")
 end

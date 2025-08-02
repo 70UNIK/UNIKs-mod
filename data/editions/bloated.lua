@@ -25,6 +25,7 @@ SMODS.Edition({
 	},
     disable_base_shader = true,
     no_shadow = true,
+	detrimental = true,
     -- loc_txt = {
 	-- 	name = 'Positive',
     --     label = 'Positive',
@@ -34,7 +35,7 @@ SMODS.Edition({
 	-- },
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,
-	config = { odds = 3},
+	config = { prob = 1, odds = 3},
 	get_weight = function(self)
 		if G.GAME.unik_bad_editions_everywhere then
 			return G.GAME.edition_rate * 4
@@ -48,21 +49,22 @@ SMODS.Edition({
 		if card.ability and card.ability.consumeable then
 			key = 'e_unik_bloated_consumeable'
 		end
+		local new_numerator, new_denominator = SMODS.get_probability_vars(self, self.config.prob,self.config.odds, 'unik_bloated_edition')
         return { key = key, vars = {
-				(G.GAME.probabilities.normal),
-				self.config.odds,
+				new_numerator, new_denominator
 			}, }
 		end,
 calculate = function(self, card, context)
 		if
 			context.cardarea == G.jokers
-			and context.post_trigger
+			and context.post_trigger and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability
 			and context.other_card == card --animation-wise this looks weird sometimes
 		then
 			if
-                pseudorandom(pseudoseed("unik_bloated")) < G.GAME.probabilities.normal / self.config.odds
+                SMODS.pseudorandom_probability(self, pseudoseed('unik_bloated_edition'), self.config.prob,self.config.odds, 'unik_bloated_edition') 
 				
 			then
+				card.ability.unik_destroyed_mid_scoring = true
 				-- this event call might need to be pushed later to make more sense
 				G.E_MANAGER:add_event(Event({
 					func = function()
@@ -73,8 +75,9 @@ calculate = function(self, card, context)
 							delay = 0.3,
 							blockable = false,
 							func = function()
+								card.debuff = true
 								G.jokers:remove_card(card)
-								card:bloated_pop()
+								card:bloated_pop()					
 								card = nil
 								return true
 							end,
@@ -86,7 +89,7 @@ calculate = function(self, card, context)
 		end
 		if context.main_scoring and context.cardarea == G.play then
 			if
-                pseudorandom(pseudoseed("unik_bloated")) < G.GAME.probabilities.normal / self.config.odds
+                SMODS.pseudorandom_probability(card, pseudoseed('unik_bloated_edition'), self.config.prob,self.config.odds, 'unik_bloated_edition') 
 			then
 				card.config.will_pop = true
 			end
@@ -101,7 +104,7 @@ calculate = function(self, card, context)
 			card.config.trigger = nil
 		end
 
-		if context.destroying_card and card.config.will_pop and context.destroy_card == card then
+		if context.destroy_card and context.destroy_card == card and card.config.will_pop then
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					card.states.drag.is = true

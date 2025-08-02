@@ -1,9 +1,34 @@
 local mod_path = "" .. SMODS.current_mod.path
 unik_config = SMODS.current_mod.config
+UNIK = SMODS.current_mod
 
-if not unik then
-	unik = {}
+if not UNIK then
+	UNIK = {}
 end
+
+UNIK.OvershootFXs = {}
+
+UNIK.OvershootFX  = SMODS.Center:extend{
+    set = 'OvershootFX',
+    obj_buffer = {},
+    obj_table = UNIK.OvershootFXs,
+    class_prefix = 'overshoot',
+    required_params = {
+        'key',
+    },
+    pre_inject_class = function(self)
+        G.P_CENTER_POOLS[self.set] = {}
+    end,
+    inject = function(self)
+        SMODS.Center.inject(self)
+    end,
+    get_obj = function(self, key)
+        if key == nil then
+            return nil
+        end
+        return self.obj_table[key]
+    end
+}
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -240,6 +265,8 @@ SMODS.ConsumableType {
     end
 }
 
+
+
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/steel.lua")()
 NFS.load(mod_path .. "data/editions/positive.lua")()
@@ -257,9 +284,17 @@ NFS.load(mod_path .. "data/stickers/niko.lua")()
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
 -- NFS.load(mod_path .. "data/stickers/baseless.lua")() 
 
+NFS.load(mod_path .. "data/stakes/blue_stake_fix.lua")() 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
-NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
+if (SMODS.Mods["Buffoonery"] or {}).can_load then
+	NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
+end
+
+-- if (SMODS.Mods["Bunco"] or {}).can_load then
+-- 	print("bunco compat_fix")
+--     NFS.load(mod_path .. "data/overrides/bunco.lua")() 
+-- end
 --Stakes
 --Persimmon Stake: Cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables (after orange)
 --Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable (after gold)
@@ -280,6 +315,8 @@ NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")()
 --Ghost Joker, create a random spectral on blind select (rare, epic in modest).
 --Poppy exploit fix for legendary crown (add a buffer to prevent her scaling to 6666 hands lost).
 
+--Welfare Deck: Interest rate is Inverted (earn $5 interest at $0, earn no interest at $25)
+
 --Then finally, an "overshoot" mechanic that becomes harsher if you score too well, the "summon epic blinds" thing but expanded and with proper UI and more effects (faster ante scaling), kind of like straddle. 
 
 --decks
@@ -295,6 +332,8 @@ NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
+NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
+--
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
 --Vouchers
 --Spectral Merchant (Tier 1) Spectrals can appear in shop
@@ -359,7 +398,7 @@ NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/jaundice_jack.lua")()
 NFS.load(mod_path .. "data/bossBlinds/septic_seance.lua")()
-
+NFS.load(mod_path .. "data/bossBlinds/salmon_steps.lua")()
 
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
@@ -372,6 +411,21 @@ if (SMODS.Mods['ble'] or {}).can_load then
 	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
 end
 
+--DX blinds:
+-- The Wall DX: Very Very Very Big Blind (15X)
+-- The Tooth DX: -$1 per card or joker triggered. Chips cannot exceed $.
+-- The Poppy DX: Reduce score by ^0.5 if score exceeds ^1.25 requirements. ^0.8 Blind Size.
+-- The Artesian DX: ^1.25 Blind size per reroll this ante.
+-- The Jollyless DX: Debuff all Jolly/M Jokers. Hand must not contain a pair.
+-- The Collapse DX: All non-rankless and suitless cards are debuffed
+-- The Cookie DX: X1.1 requirements per click this ante.
+-- The Vice DX: Increase Victory Requirements by 1, The Next 3 blinds become DX Blinds.
+-- The Leak DX: Chips and Mult set to the lower value.
+-- The Smiley DX: All uneditioned Jokers and cards become Positive.
+-- The Bloon DX: All uneditioned Jokers and cards become Bloated.
+-- The Halved DX: Must play less than 3 cards. Add Half to a random Joker per hand.
+-- The Fuzzy DX: All uneditioned Jokers and cards become Fuzzy.
+-- The Darkness DX: All uneditioned Jokers and cards become Corrupted.
 
 
 --Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
@@ -389,9 +443,13 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_jollyless.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_vice.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_sink.lua")() --hold for now until a more interesting effect is in place
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_miser.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_height.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Blinds below require talisman due to exponential requirements
 	if Talisman then
@@ -438,8 +496,9 @@ NFS.load(mod_path .. "data/jokers/double_container.lua")()
 --- Hacker: 3 in 4 chance to not create a code card when a 2, 3, 4 or 5 is played. (must have room)
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
-
+NFS.load(mod_path .. "data/jokers/hacker.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
+NFS.load(mod_path .. "data/jokers/tax_haven.lua")()
 
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
@@ -560,17 +619,23 @@ NFS.load(mod_path .. "data/overrides/crossmod.lua")()
 --- 
 --- 
 --- Challenges
--- NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")()
+-- NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")() --rework needed: have 1 lily at hand, 4 random cards are added on blind select, forcing you to use her to deckfix over time to counter the cards added.
 -- NFS.load(mod_path .. "data/challenges/chipzel.lua")() --rework needed: all mult goes into chips. Otherwise it will never work trying to ban all mult based jokers.
 -- NFS.load(mod_path .. "data/challenges/multiplication.lua")() --rework needed: all chips go into mult
+-- 
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
--- NFS.load(mod_path .. "data/challenges/monsters.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
--- NFS.load(mod_path .. "data/challenges/boss_rush_2.lua")()
--- NFS.load(mod_path .. "data/challenges/rush_hour_4.lua")()
+-- Learning with pibby: Start with a golden joker and pibby . On blind select, leftmost joker and jokers adjacent to corrupted jokers become corrupted. If Pibby is corrupted, die. All future editions are corrupted.
+-- Cardless: All Cards are Debuffed. Start with a Joker and Ice Cream.
+-- Finger Trigger: All playing cards are triggering. Start with a Half Joker.
+-- Finger Trigger II: All playing cards are triggering. Start with Finger Trigger and Half Joker. (Bunco only)
+-- Cookie Clicker I: All blinds are clicked cookie and pimydenkekisi. Start with a negative Clicked Cookie.
+-- Cookie Clicker II: Cookie clicker I, but all blinds are boss blinds. Start with a negative Clicked Cookie.
+-- 
+
 
 -- achievements
 NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
@@ -582,7 +647,14 @@ if unik_config.unik_legendary_blinds then
 end
 
 function vice_check()
-    if G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/G.GAME.unik_vice_squeeze) == 0 then
+	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
+	if G.GAME.OvershootFXVal >= 5 then
+		return 1
+	end
+	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
+		return 1
+	end
+    if G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*10000)/10000)) == 0 then
         return 1
     end
     if G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
@@ -605,11 +677,57 @@ if MoreFluff then
 	end
 	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
 end
+
+--UI
+NFS.load(mod_path .. "data/ui/overshoot.lua")()
+--Grab Bag Boss Jokers:
+---The Poppy: Gain X0.25 Mult per hand played, resets if hand exceeds 2.5X requirements.
+---The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
+---The Jollyless: Gains X0.15 Mult if played hand does not contain a pair, resets if contains a pair.
+---The Artesian: Gain X0.1 Mult per reroll in shop.
+---The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2 Mult, but are destroyed immediately.
+---The Halved: X4 Mult if played hand contains 3 or less cards.
+---The Fuzzy: Scored cards randomly give +-25-75 Chips, +-5-15 Mult and +$1-3
+--Finity Blind jokers:
+---Finishers:
+---
+---Indigo ICBM: Gain X1 Mult per hand played, resets if hand exceeds 3X requirements.
+---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
+---Raspberry Racket: If Money < $50 per hand, set money to $50. Increase this by $2 per Dollar Card scored.
+---Maroon Magnet: Convert all held cards to steel cards, scored Steel Cards give X2 mult
+---Jaundice Jack: Gain X0.4 Mult per discarded Jack.
+---Black Bat: All other Jokers (except Black Bat) are debuffed, ^1.25 Mult per debuffed Joker.
+---Septic Seance: Create a negative shortcut, seance, paved joker and/or four fingers if you don't already on blind select. Create an ://EXPLOIT if played hand is not a straight flush.
+---Purple Pentagram: All Boss Blinds are the Decision. Destroy all Cursed Jokers and gain X2 Mult per destroyed Cursed Joker.
+---Salmon Steps: ^1.75 Chips. All Mult is added to Chips instead. 
+---
+---Epic Blinds:
+---Epic Collapse: Rankless and suitless cards each give ^1.1 Mult.
+---Epic Xenomorph Queen: If all played cards are debuffed, gain ^0.05 Mult per played debuffed card.
+---Epic Artesian: Gain ^Mult proportionate to X0.0001 the reroll cost per reroll. ($2 --> 0.0002, so it's encouraged to not have free rerolls))
+---Epic Jollyless: Destroy all Jolly and M jokers per blind select, gain ^0.1 Mult per destroyed Jolly/M Joker. Destroy all played cards if hand does not contain a pair.
+---Epic Box: Common Jokers each give ^1.1 Mult.
+---Epic Decision: Gain ^1 Mult per Lartceps card used this run. Lartceps packs may spawn.
+---Epic Reed: (3 randomly selected ranks) each give X3 Mult when scored
+---Epic Sand: Create a Quintuple Tag per discard.
+---Epic Miser: Gains ^0.2 Mult if the shop is not intereacted with.
+---Epic Sink: Gains ^0.1 Mult if discarded hand contains a flush.
+---Epic Confrontation: Held face cards give X3 Mult.
+---Epic Whole: Scored ranks previously played in last hand permanently gain X0.15 Mult.
+---
+---Beast Blinds:
+---
+---Legendary Blinds:
+---Legendary Vessel: All Boss Blinds become Legendary Vessel, gains ^Mult (capped at ^0.5) based on (Digits in score) x 0.001
+---Legendary Nuke: Gain ^^0.01 Chips if hand does not defeat the boss. Resets if score exceeds ^2 requirements.
+---Legendary Magnet: Convert played face cards into Steel Red Seal Steel Kings and these permanently gain ^0.01 Mult (when held).
+---Legendary Sword: If played hand contains only 1 card, scored card gives ^1.5 Mult.
+---Legendary Tornado: Mark the last 3 cards to be drawn from deck. Scored marked cards give ^1.5 Mult.
 --partner ideas:
---Microwave (Lily): Click to destroy up to 1 selected card once per ante. --> Click to destroy up to 1 selected card twice per ante.
+--Microwave (Lily): Click to destroy up to 1 selected card per ante. --> Click to destroy up to 1 selected card per round.
 --Crossdress (UNIK): First scored 7 gives X1.57 Chips --> first scored 7 gives X2.7 Chips
 --Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
---Stars (Moonlight): 4 in 5 chance to not retrigger levelups once. --> 2 in 3 chance to not retrigger levelups once.
+--Stars (Moonlight): 3 in 4 chance to not retrigger levelups once. --> 1 in 2 chance to not retrigger levelups once.
 --Cube (Cube Joker): gains 5 chips if hand contains exactly 4 cards --> gains 9 chips if hand contains exactly 4 cards
 
 

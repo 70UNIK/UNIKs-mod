@@ -10,17 +10,19 @@ SMODS.Blind{
     mult = 0.5,
     ignore_showdown_check = true,
 	loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 4 } }
+        local new_numerator, new_denominator = SMODS.get_probability_vars(self, 1,4, 'unik_xenomorph_queen')
+		return { vars = { new_numerator, new_denominator } }
 	end,
 	collection_loc_vars = function(self)
-		return { vars = { "" .. ((Cryptid.safe_get(G.GAME, "probabilities", "normal") or 1)), 4 } }
+         local new_numerator, new_denominator = SMODS.get_probability_vars(self, 1,4, 'unik_xenomorph_queen')
+		return { vars = { new_numerator, new_denominator } }
 	end,
     debuff = {
         akyrs_blind_difficulty = "epic",
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_debuffed_card_only")
@@ -35,10 +37,11 @@ SMODS.Blind{
         return false
 	end,
     stay_flipped = function(self, area, card)
-		if (pseudorandom(pseudoseed("xenomorph_debuff_chance")) < ((G.GAME.probabilities.normal) / 4)) then
+		if SMODS.pseudorandom_probability(self, pseudoseed('unik_xenomorph_queen'), 1, 4, 'unik_xenomorph_queen')  then
             card:set_debuff(true)
             G.GAME.blind.triggered = true
             G.GAME.blind:wiggle()
+            
         end
 	end,
     set_blind = function(self, reset, silent)
@@ -56,23 +59,5 @@ SMODS.Blind{
     -- disable = function(self)
     --     G.GAME.unik_xenomorph_debuff = nil
     -- end,
-    -- defeat = function(self)
-    --     G.GAME.unik_xenomorph_debuff = nil
-    -- end,
 }
 
--- --Only permanently debuff when drawn to hand
--- local permaDebuffEmplace = CardArea.emplace
--- function CardArea:emplace(card, location, stay_flipped)
---     local vars = permaDebuffEmplace(self,card,location,stay_flipped)
---     if G.GAME.unik_xenomorph_debuff then
---         if self == G.hand and (pseudorandom(pseudoseed("xenomorph_debuff_chance")) < ((G.GAME.probabilities.normal) / 4)) then
---             if G.GAME.blind and G.GAME.blind.in_blind and (G.GAME.blind.name == 'bl_unik_epic_xenomorph_queen' or G.GAME.blind.name == 'cry-Obsidian Orb') then
-                
---             end
---             -- SMODS.debuff_card(card,true,"unik_xenomorph_debuff_perma")
-            
---         end
---     end
---     return vars
--- end

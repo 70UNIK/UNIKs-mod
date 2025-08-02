@@ -15,7 +15,7 @@ SMODS.Blind{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     set_blind = function(self, reset, silent)
         if not reset then
@@ -92,14 +92,20 @@ SMODS.Blind{
         end
     end,
 	disable = function(self)
-        G.hand:change_size(G.GAME.unik_original_size)
-        G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
-        G.GAME.unik_original_size = nil
+
+        if G.GAME.unik_original_size then
+             G.hand:change_size(G.GAME.unik_original_size)
+            G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
+            G.GAME.unik_original_size = nil
+        end
 	end,
 	defeat = function(self)
-        G.hand:change_size(G.GAME.unik_original_size)
-        G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
-        G.GAME.unik_original_size = nil
+        if G.GAME.unik_original_size then
+            G.hand:change_size(G.GAME.unik_original_size)
+            G.jokers.config.card_limit = G.jokers.config.card_limit + G.GAME.unik_original_size
+            G.GAME.unik_original_size = nil
+        end
+        
 	end,
 	in_pool = function(self)
         if G.GAME.modifiers.cry_force_edition and G.GAME.modifiers.cry_force_edition == "negative" then

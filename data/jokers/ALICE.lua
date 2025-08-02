@@ -33,18 +33,18 @@ SMODS.Joker {
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 2.5}},
+    config = { extra = { Emult = 1.5},immutable = {base_emult = 1.0}},
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult,center.ability.extra.Echips} }
+		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
 	end,
     gameset_config = {
-		modest = {extra = {Emult = 1.6} }, 
+		modest = {extra = {Emult = 0.6} ,immutable = {base_emult = 1.0} }, 
 	},
     pools = {},
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                    e_mult = card.ability.extra.Emult,
+                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                     colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
                 }
         end
@@ -62,7 +62,7 @@ SMODS.Joker {
             end
             if (_odd and _even) then
                 return {
-                    e_mult = card.ability.extra.Emult,
+                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                     colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
                 }
             end
@@ -70,54 +70,3 @@ SMODS.Joker {
     end,
 
 }
-
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_extra_credit_alice"] = {
-        reminder_text = {
-            { ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.ORANGE },
-        },
-        extra = {
-            {
-                {
-                    border_nodes = {
-                        { text = "^" },
-                        { ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
-                    },
-                    border_colour = G.C.DARK_EDITION,
-                },
-                {
-                    border_nodes = {
-                        { text = "^" },
-                        { ref_table = "card.joker_display_values", ref_value = "Echips", retrigger_type = "exp" },
-                    },
-                    border_colour = G.C.DARK_EDITION,
-                },
-            },
-        },
-        calc_function = function(card)
-            local Emult = 1
-            local Echips = 1
-            local _, poker_hands, scoring_hand = JokerDisplay.evaluate_hand()
-            if text ~= 'Unknown' and text ~= 'NULL' then
-                local _odd, _even = false, false
-                for _, scoring_card in pairs(scoring_hand) do
-                    if not SMODS.has_no_rank(scoring_card) then
-                        if contains({14,3,5,7,9}, scoring_card:get_id()) then
-                            _odd = true
-                        end
-                        if contains({2,4,6,8,10}, scoring_card:get_id()) then
-                            _even = true
-                        end
-                    end
-                end
-                if _odd and _even then
-                    Emult = card.ability.extra.Emult
-                    Echips = card.ability.extra.Echips
-                end
-            end
-            card.joker_display_values.Emult = Emult
-            card.joker_display_values.Echips = Echips
-            card.joker_display_values.localized_text = localize('k_unik_odd_and_even') .. ""
-        end
-	}
-end

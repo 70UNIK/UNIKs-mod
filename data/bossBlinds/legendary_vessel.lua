@@ -21,7 +21,7 @@ SMODS.Blind{
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
-        akyrs_unskippable_blind = true,
+        akyrs_cannot_be_skipped = true,
     },
     death_message = "special_lose_unik_vessel_legendary",
     --Proof: Lets say you face epicWall at blind e300. THe epic wall already applies x e100, so becomes e400. Overshoot, and it adds e100, = e500.
@@ -40,7 +40,7 @@ SMODS.Blind{
         G.HUD_blind:recalculate(true)
 	end,
 	unik_after_defeat = function(self,chips,blind_size)
-        if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) then
+        if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("j_paperback_the_world")) then
             return true
         end
         return false

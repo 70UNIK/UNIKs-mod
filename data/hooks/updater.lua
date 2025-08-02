@@ -27,7 +27,7 @@ function Game:update(dt)
     end
     local res = updateHook(self,dt)
     if G.ARGS.LOC_COLOURS then
-
+        self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
 		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
 
 		self.C.UNIK_RGB[1] = r
@@ -38,6 +38,21 @@ function Game:update(dt)
 		G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
 		
 	end
+    G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
+    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    if G.GAME.unik_overshoot < 6 then
+        G.GAME.OvershootFXVal = 0
+    elseif G.GAME.unik_overshoot < 10 then
+        G.GAME.OvershootFXVal = 1
+    elseif G.GAME.unik_overshoot < 15 then
+        G.GAME.OvershootFXVal = 2
+    elseif G.GAME.unik_overshoot < 18 then
+        G.GAME.OvershootFXVal = 3
+    elseif G.GAME.unik_overshoot < 20 then
+        G.GAME.OvershootFXVal = 4
+    else
+         G.GAME.OvershootFXVal = 5
+    end
     return res
 end
 

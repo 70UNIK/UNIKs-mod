@@ -18,6 +18,7 @@ SMODS.Edition({
     apply_to_float = true,
     disable_base_shader = true,
     no_shadow = true,
+	detrimental = true,
 	sound = {
 		sound = "unik_pibby_glitch",
 		per = 1,

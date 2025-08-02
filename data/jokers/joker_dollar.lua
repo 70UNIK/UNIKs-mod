@@ -25,7 +25,6 @@ SMODS.Joker {
 	end,
 	calculate = function(self, card, context)
 		if context.forcetrigger then
-			card.ability.extra.dollars = card.ability.extra.dollars + card.ability.extra.dollar_mod
             return {
 				dollars = card.ability.extra.dollars,
 				card = card

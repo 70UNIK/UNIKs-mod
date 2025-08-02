@@ -14,6 +14,7 @@ SMODS.Edition({
 	shader = "positive", --placeholder for now until I program one. It should have negative shine, but with a polychromesque shine from normal to overlay to a bit of negative, just to show its the opposite
 	extra_cost = -4, --Its a detrimental edition, hence lower cost
     apply_to_float = true,
+	detrimental = true,
 	sound = {
 		sound = "unik_positive",
 		per = 1.5,

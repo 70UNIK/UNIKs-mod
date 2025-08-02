@@ -24,9 +24,9 @@ SMODS.Joker{ --Yellow Card
     demicoloncompat = true,
     atlas = 'unik_rare',
     loc_vars = function(self, info_queue, card)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, card.ability.extra.prob, card.ability.extra.odds, 'unik_invisible_card')
         return {vars = {
-            card and cry_prob(card.ability.extra.prob or card.ability.cry_prob * card.ability.extra.prob, card.ability.extra.odds, card.ability.cry_rigged) or card.ability.extra.prob,
-            card.ability.extra.odds,
+            new_numerator, new_denominator,
             math.floor(card.ability.extra.increase),
             card.ability.immutable.slots,
         }}
@@ -45,7 +45,7 @@ SMODS.Joker{ --Yellow Card
 
     calculate = function(self, card, context)
         if context.skipping_booster then
-            if not (pseudorandom(pseudoseed("unik_invisible_card")) < cry_prob(card.ability.extra.prob or card.ability.cry_prob*card.ability.extra.prob, card.ability.extra.odds, card.ability.cry_rigged) / card.ability.extra.odds) then
+            if not SMODS.pseudorandom_probability(card, 'unik_invisible_card', card.ability.extra.prob, card.ability.extra.odds, 'unik_invisible_card') then
                 
                 card.ability.immutable.slots = math.min(lenient_bignum(card.ability.immutable.slots + math.floor(card.ability.extra.increase)),card.ability.immutable.max_slots)
                 if card.ability.immutable.slots >= card.ability.immutable.max_slots then

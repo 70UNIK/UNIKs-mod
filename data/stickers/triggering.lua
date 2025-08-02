@@ -25,18 +25,19 @@ SMODS.Sticker{
     pos = { x = 2, y = 1 },
     rate = 0.0,
     loc_vars = function(self, info_queue, card)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1,8, 'unik_triggering_playing_card')
 		if card.ability.consumeable then
 			return { key = "unik_triggering_consumeable"}
         elseif card.ability.set == "Joker" then
             return { key = "unik_triggering_joker" }
         elseif card.ability.set == "Default" then
-            return { key = "unik_triggering_playing_card" , vars = { G.GAME.probabilities.normal, 8 }}
+            return { key = "unik_triggering_playing_card" , vars = { new_numerator, new_denominator }}
         elseif card.ability.set == "Voucher" then
 			return { key = "unik_triggering_voucher" }
 		elseif card.ability.set == "Booster" then
 			return { key = "unik_triggering_booster" }
 		else
-            return { key = "unik_triggering_playing_card", vars = { G.GAME.probabilities.normal, 8 } }
+            return { key = "unik_triggering_playing_card", vars = { new_numerator, new_denominator } }
 		end
 	end,
 }
@@ -74,7 +75,7 @@ function Card:update(dt)
         end
     --Ultradebuffed
     elseif self.ability and self.ability.unik_ultradebuffed then
-        if not self.debuff then
+        if not self.debuff and not self.area.config.collection then
             self.debuff = true
             self.perma_debuff = true
             if self.area == G.jokers then self:remove_from_deck(true) end

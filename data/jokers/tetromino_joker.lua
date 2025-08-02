@@ -1,0 +1,1 @@
+--Tetromino Joker: Create a polymino card on blind select (Rare, bunco only)

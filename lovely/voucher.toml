@@ -4,7 +4,7 @@ dump_lua = true
 priority = 999
 ### fix spectral acclimator
 
-### Always have infinite selection limit in video poker to avoid softlocking.
+### Enable rate adjustment for spectral acclimator.
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
