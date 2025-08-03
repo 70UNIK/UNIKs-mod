@@ -414,6 +414,13 @@ return {
                     "then set to 1",
                 }
             },
+            bl_unik_burgundy_brain = {
+                name = "Burgundy Brain",
+                text = {
+                    "Must play #1# cards",
+                    "All cards must score",
+                }
+            },
             bl_unik_epic_whole = {
                 name = "Syödäänkokonaisena", --Eaten Whole
                 text = {
@@ -432,10 +439,11 @@ return {
                 }
             },
             bl_unik_epic_bellows = {
-                name = "Karjuvakuilu", --+1 ante per card held in hand
+                name = "Karjuvakuilu", --Bellowing abyss --+1 ante per card held in hand
                 text = {
                     "+4 Hand Size",
-                    "+1 ante per card held",
+                    "+1 ante per card",
+                    "on play",
                 },
             },
             bl_cry_cube={ --I don't like cube being worse than lemon trophy. So I'll just nerf it to reduce mult by ^0.5 and blind size to be ^0.33. Still severe, but can be brute forced 

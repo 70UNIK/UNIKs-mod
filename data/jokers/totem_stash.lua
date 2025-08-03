@@ -1,0 +1,1 @@
+--Destroy the rightmost Joker to prevent death for the next 5 deaths. (EPIC - mutable)
