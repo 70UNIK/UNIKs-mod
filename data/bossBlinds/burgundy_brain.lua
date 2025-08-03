@@ -25,6 +25,6 @@ SMODS.Blind{
         return {vars = {math.min(G.hand.config.card_limit,G.hand.config.highlighted_limit)}}
     end,
     collection_loc_vars = function(self, blind_on_deck)
-        return {vars = {localaize("k_unik_brain_placeholder")}}
+        return {vars = {localize("k_unik_brain_placeholder")}}
     end,
 }

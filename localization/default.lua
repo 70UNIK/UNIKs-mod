@@ -3245,7 +3245,8 @@ return {
             k_unik_miser_placeholder="15 x (1+(Loputonahnes encountered x 0.1))",
             unik_the_descending = "The Descending",
             k_overshoot = "Overshoot",
-
+            k_unik_brain_placeholder = "math.min(Card Selection Limit,Hand Size)",
+                
         },
         high_scores={},
         labels={
