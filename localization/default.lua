@@ -2091,13 +2091,13 @@ return {
                 name = "Gemini",
 				text = {
 					"{C:attention}Double{} all values",
-					"of leftmost {C:attention}Joker",
+					"of leftmost {C:asttention}Joker",
 					"at end of round",
                     "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
 				},
             },
 
-            j_cry_notebook_balnced = {
+            j_cry_notebook_balanced = {
 				name = "Motebook",
 				text = {
 					"{C:green} #1# in #2#{} chance to gain {C:dark_edition}+#6#{} Joker",
