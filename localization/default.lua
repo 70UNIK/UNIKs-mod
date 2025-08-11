@@ -1,22 +1,6 @@
 return {
     descriptions = {
         Back={
-            b_cry_equilibrium = {
-				name = "Deck of Equilibrium",
-				text = {
-					"All cards have the",
-					"{C:attention}same chance{} of",
-					"appearing in shops,",
-					"start run with",
-					"{C:attention,T:v_overstock_plus}Overstock Plus",
-                    "{C:red}All blinds, including finishers", --and that includes EPIC and legendary blinds.
-                    "{C:red}can spawn anytime"
-				},
-				unlock = {
-					"Have {C:attention}100 Jokers",
-					"at the same time",
-				},
-			},
             b_unik_polychrome = {
                 name = "Polychrome Deck",
                 text = {
@@ -31,6 +15,40 @@ return {
                     "{C:dark_edition,T:c_unik_foundry}Foundry{} and {C:spectral,T:c_deja_vu}Deja Vu",
                 }
             },
+            --Earn $2 per hand lost, earn $1 per discard lost.
+            b_unik_greed = {
+                name = "Greed Deck",
+                text = {
+                    "{C:money}$#1#{s:0.85} per {C:blue}Hand lost",
+                    "{C:money}$#2#{s:0.85} per {C:red}Discard lost",
+                    "Earn no {C:attention}Interest",
+                }
+            },
+            --+3 hands, -1 joker slot
+            b_unik_white = {
+                name = "White Deck",
+                text = {
+                    "{C:blue}+#2#{} hands",
+                    "every round",
+                    "{C:attention}-#1#{} Joker slot",
+                }
+            },
+            b_unik_pink = {
+                name = "Pink Deck",
+                text = {
+                    "Start with two {C:purple,T:c_unik_crossdresser}Crossdressers{}",
+                    "All 7s are replaced with",
+                    "Pink Cards",
+                }                
+            },
+            -- +1 Hand Size
+            b_unik_tricolor = {
+                name = "Tricolor Deck",
+                text = {
+                    "{C:attention}+#1#{} Hand Size",
+                }
+            },
+            
         },
         BlindEdition={
             ble_unik_steel={
@@ -2090,11 +2108,18 @@ return {
             j_cry_gemini_reworked= {
                 name = "Gemini",
 				text = {
-					"{C:attention}Double{} all values",
-					"of leftmost {C:asttention}Joker",
-					"at end of round",
-                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
+					"{C:attention}Increase{} values",
+					"of leftmost {C:attention}Joker",
+					"by {C:attention}X#1#{} at end of round",
+                    "{C:inactive}(Capped at {C:attention}X#2#{}{C:inactive})",
 				},
+            },
+            j_paperback_deadringer = {
+                name = "Deadringer",
+                text = {
+                "Retrigger scored {C:attention}#1#s{} and {C:attention}#2#s",
+                "{C:attention}#4#{} time#<s>4#, and scored {C:attention}#3#s{} {C:attention}#5#{} time#<s>5#"
+                }
             },
 
             j_cry_notebook_balanced = {
@@ -2130,6 +2155,7 @@ return {
 					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
 					"once for {C:attention}every{} unique non-{C:blue}Common{C:attention} Joker{}",
 					"to the right of this Joker",
+                    "{C:inactive}(Up to #2# retrigger#<s>2#)",
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive})",
 				},
 				unlock = {
@@ -2144,7 +2170,7 @@ return {
 					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
 					"once for {C:attention}every{} unique non-{C:blue}Common{C:attention} Joker{}",
 					"to the right of this Joker",
-					"{C:inactive}(Up to 2 retriggers)",
+                    "{C:inactive}(Up to #2# retrigger#<s>2#)",
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive})",
 				},
 				unlock = {
@@ -2153,8 +2179,6 @@ return {
 					"in one hand",
 				},
 			},
-
-
 
             j_cry_pirate_dagger_balanced = {
 				name = "Pirate Dagger",
@@ -2167,27 +2191,27 @@ return {
 				},
 			},
             
-            --not banning it entirely like almanac, but removing all chip bonuses and making it purely reroll focused., And only 30 rerolls.
-            j_cry_crustulum_mainline = {
-				name = "Crustulum",
-				text = {
-					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
-					-- "per {C:attention}reroll{} in the shop",
-					"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
-                    "per shop",
-					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
-				},
-			},
-            j_cry_crustulum_modest = {
-				name = "Crustulum",
-				text = {
-					-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
-					-- "per {C:attention}reroll{} in the shop",
-					"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
-                    "per shop",
-					-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
-				},
-			},
+            -- --not banning it entirely like almanac, but removing all chip bonuses and making it purely reroll focused., And only 30 rerolls.
+            -- j_cry_crustulum_mainline = {
+			-- 	name = "Crustulum",
+			-- 	text = {
+			-- 		-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
+			-- 		-- "per {C:attention}reroll{} in the shop",
+			-- 		"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
+            --         "per shop",
+			-- 		-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
+			-- 	},
+			-- },
+            -- j_cry_crustulum_modest = {
+			-- 	name = "Crustulum",
+			-- 	text = {
+			-- 		-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
+			-- 		-- "per {C:attention}reroll{} in the shop",
+			-- 		"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
+            --         "per shop",
+			-- 		-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
+			-- 	},
+			-- },
             j_cry_cotton_candy_balanced = {
 				name = "Cotton Candy",
 				text = {
@@ -3010,6 +3034,7 @@ return {
             c_unik_rush_hour_4="Rush Hour IV",
             c_unik_coupon_codes_only="TEMU Vouchers", --No vouchers spawn, start with 4 negative absolute coupon codes and 2 negative KEYGENs. AKA: Vouchers become temporary powerups that cycle per round
             c_unik_monsters="Monsters",
+            c_unik_singleton="Singleton",
         },
         collabs={},
         dictionary={
@@ -3531,6 +3556,7 @@ return {
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
             ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
             ch_c_unik_cursed_only = {"All boss blinds are {C:attention}The Decision{} and {C:attention}Purple Pentagram{}"},
+            ch_c_unik_single_select_limit = {"{C:red}1{} Card {C:attention}Selection Limit"}
         },
     },
 }

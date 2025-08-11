@@ -306,18 +306,10 @@ end
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
 --todo:
---Pink card nerf: Should retain the rank, but have its own suit still, destroyed if played with any other rank. Requires a custom renderer to render a "fake" rank image on top of the enhancement. That way it wont be just "free 7s for UNIK". You need to actually create and use actual 7s to feed him
---Moonlight nerf to ^1.15 maybe to avoid being too powerful until late game. She may get a total rework to instead exponentiate poker hand levelups by (number of planet cards with that poker hand)^0.5 of a poker hand held in hand to make her more distinct.
---UNIK will remain the same, just the stuff around him, primarily pink cards
---White Lily is the same, a scoring emult that just happens to be resistant to destruction (making it more powerful if paired with a dagger).
---(Tax Robbery, may change name, rare): Sell to refund all lost $ from rental Jokers this run. Remove all rental stickers from all jokers, +1 ante per rental sticker removed.
---For Sale (uncommon): Sell to remove all rental stickers, lose $6 per rental sticker, destroy joker if destroyed.
 --Ghost Joker, create a random spectral on blind select (rare, epic in modest).
 --Poppy exploit fix for legendary crown (add a buffer to prevent her scaling to 6666 hands lost).
-
 --Welfare Deck: Interest rate is Inverted (earn $5 interest at $0, earn no interest at $25)
-
---Then finally, an "overshoot" mechanic that becomes harsher if you score too well, the "summon epic blinds" thing but expanded and with proper UI and more effects (faster ante scaling), kind of like straddle. 
+--Red Joker
 
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
@@ -486,6 +478,8 @@ NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
+--Instant gratification: earn $2 per discard used. Broken hourglass
+
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/binary_asteroid.lua")()
 end
@@ -494,6 +488,7 @@ NFS.load(mod_path .. "data/jokers/double_container.lua")()
 
 --- Uncommon ---
 --- Hacker: 3 in 4 chance to not create a code card when a 2, 3, 4 or 5 is played. (must have room)
+--- Trashed dress (gain X0.5 Mult whenever a pink card is destroyed, artwork is unik wearing cinderella's trashed dress
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/hacker.lua")()
@@ -625,8 +620,9 @@ NFS.load(mod_path .. "data/overrides/crossmod.lua")()
 -- 
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
+NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
-NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
+-- NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 -- Learning with pibby: Start with a golden joker and pibby . On blind select, leftmost joker and jokers adjacent to corrupted jokers become corrupted. If Pibby is corrupted, die. All future editions are corrupted.
 -- Cardless: All Cards are Debuffed. Start with a Joker and Ice Cream.
@@ -681,13 +677,15 @@ end
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Grab Bag Boss Jokers:
----The Poppy: Gain X0.25 Mult per hand played, resets if hand exceeds 2.5X requirements.
+---The Poppy: X4 mult then X0.03 mult if hand exceeds 3X requirements.
 ---The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
 ---The Jollyless: Gains X0.15 Mult if played hand does not contain a pair, resets if contains a pair.
 ---The Artesian: Gain X0.1 Mult per reroll in shop.
 ---The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2 Mult, but are destroyed immediately.
 ---The Halved: X4 Mult if played hand contains 3 or less cards.
 ---The Fuzzy: Scored cards randomly give +-25-75 Chips, +-5-15 Mult and +$1-3
+---The Smiley: First Played hand becomes positive, Scored positive cards give X3 mult, reduce by 1 per card held in hand.
+---The Darkness: 
 --Finity Blind jokers:
 ---Finishers:
 ---

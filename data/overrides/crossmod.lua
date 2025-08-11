@@ -123,3 +123,45 @@ SMODS.Consumable:take_ownership("c_mf_rot_wheel",{
 		} }
 	end
 }, true)
+
+--Deadringer: Fix for pink cards
+SMODS.Joker:take_ownership("j_paperback_deadringer",{
+    config = {
+		extra = {
+			ace_seven = 1, nines = 2,
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+    return {
+			vars = {
+				localize("Ace", 'ranks'),
+				localize("7", 'ranks'),
+				localize("9", 'ranks'),
+				card.ability.extra.ace_seven,
+				card.ability.extra.nines,
+			}
+		}
+	end,
+	calculate = function(self, card, context)
+        
+        if context.repetition and context.cardarea == G.play then
+            if context.other_card:get_id() == 7 or context.other_card:get_id() == 14 then
+                return {
+					message = localize("k_again_ex"),
+					repetitions = to_number(
+						card.ability.extra.ace_seven
+					),
+					card = card,
+				}
+            elseif context.other_card:get_id() == 9 then
+				return {
+					message = localize("k_again_ex"),
+					repetitions = to_number(
+						card.ability.extra.nines
+					),
+					card = card,
+				}
+			end
+		end
+    end,
+}, true)
