@@ -15,7 +15,7 @@ return {
                     "{C:dark_edition,T:c_unik_foundry}Foundry{} and {C:spectral,T:c_deja_vu}Deja Vu",
                 }
             },
-            --Earn $2 per hand lost, earn $1 per discard lost.
+            --Earn $2 per hand lost, earn $1 per discard lost. Earn no interest
             b_unik_greed = {
                 name = "Greed Deck",
                 text = {
@@ -1560,6 +1560,8 @@ return {
                     " or {C:attention}last{} hand",
                 }    
             },
+
+            
             j_unik_extra_credit_alice = { 
                 name = 'Alice',
                 text = {

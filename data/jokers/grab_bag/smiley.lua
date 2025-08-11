@@ -1,0 +1,1 @@
+--First played hand Becomes positive. Scored positive cards give X3 Mult, decrease by X0.5 per card held.

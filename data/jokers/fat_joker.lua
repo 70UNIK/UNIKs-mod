@@ -10,7 +10,7 @@ SMODS.Joker {
     demicolon_compat = true,
     pools = { ["Meme"] = true }, --that gumball meme
     config = {
-		extra = { card = 1 },
+		extra = { card = 1.5 },
 	},
     loc_vars = function(self, info_queue, center)
         local mult = 26 * center.ability.extra.card

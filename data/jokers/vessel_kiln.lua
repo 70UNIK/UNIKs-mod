@@ -42,6 +42,15 @@ function Cryptid.get_next_tag(override)
 	return vessel_tagger(override)
 	
 end
+
+local vessel2 = add_tag
+function add_tag(_tag)
+	local tag = _tag
+	if next(SMODS.find_card("j_unik_vessel_kiln")) then
+		tag = Tag("tag_unik_vessel")
+	end
+	return vessel2(tag)
+end
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_vessel_kiln"] = {
 		text = {

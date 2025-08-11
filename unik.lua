@@ -246,6 +246,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+	key = "unik_grab_bag_jokers",
+	path = "unik_grab_bag_jokers.png",
+	px = 34,
+	py = 34
+}
+
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
 	key = "unik_boss_blind_joker",
@@ -681,10 +688,10 @@ NFS.load(mod_path .. "data/ui/overshoot.lua")()
 ---The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
 ---The Jollyless: Gains X0.15 Mult if played hand does not contain a pair, resets if contains a pair.
 ---The Artesian: Gain X0.1 Mult per reroll in shop.
----The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2 Mult, but are destroyed immediately.
+---The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2.5 Mult
 ---The Halved: X4 Mult if played hand contains 3 or less cards.
 ---The Fuzzy: Scored cards randomly give +-25-75 Chips, +-5-15 Mult and +$1-3
----The Smiley: First Played hand becomes positive, Scored positive cards give X3 mult, reduce by 1 per card held in hand.
+---The Smiley: First Played hand becomes positive, Scored positive cards give X3 mult, reduce by 0.5X per card held in hand (caps at X1)
 ---The Darkness: 
 --Finity Blind jokers:
 ---Finishers:
