@@ -249,8 +249,8 @@ SMODS.Atlas {
 SMODS.Atlas {
 	key = "unik_grab_bag_jokers",
 	path = "unik_grab_bag_jokers.png",
-	px = 34,
-	py = 34
+	px = 71,
+	py = 95
 }
 
 -- Pool used by boss blind jokers
@@ -535,9 +535,22 @@ NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 NFS.load(mod_path .. "data/jokers/riff_rare.lua")() 
+
+if next(SMODS.find_mod("GrabBag")) then
+	NFS.load(mod_path .. "data/jokers/grab_bag/poppy.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/collapse.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/artesian.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/jollyless.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/bloon.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/smiley.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/halved.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/fuzzy.lua")() 
+end
 NFS.load(mod_path .. "data/jokers/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
+
+--Boss Jokers for grab bag crossmod
 
 
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
@@ -684,19 +697,15 @@ end
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Grab Bag Boss Jokers:
----The Poppy: X4 mult then X0.03 mult if hand exceeds 3X requirements.
+---The Poppy: Gain X0.5 Mult per hand, lose X0.25 mult instead if score exceeds 3X requirements.
 ---The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
----The Jollyless: Gains X0.15 Mult if played hand does not contain a pair, resets if contains a pair.
----The Artesian: Gain X0.1 Mult per reroll in shop.
+---The Jollyless: Gains X0.15 Mult per consecutive hand without a pair.
 ---The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2.5 Mult
----The Halved: X4 Mult if played hand contains 3 or less cards.
 ---The Fuzzy: Scored cards randomly give +-25-75 Chips, +-5-15 Mult and +$1-3
----The Smiley: First Played hand becomes positive, Scored positive cards give X3 mult, reduce by 0.5X per card held in hand (caps at X1)
----The Darkness: 
 --Finity Blind jokers:
 ---Finishers:
 ---
----Indigo ICBM: Gain X1 Mult per hand played, resets if hand exceeds 3X requirements.
+---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
 ---Raspberry Racket: If Money < $50 per hand, set money to $50. Increase this by $2 per Dollar Card scored.
 ---Maroon Magnet: Convert all held cards to steel cards, scored Steel Cards give X2 mult
@@ -734,40 +743,6 @@ NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
 --Stars (Moonlight): 3 in 4 chance to not retrigger levelups once. --> 1 in 2 chance to not retrigger levelups once.
 --Cube (Cube Joker): gains 5 chips if hand contains exactly 4 cards --> gains 9 chips if hand contains exactly 4 cards
-
-
---Future mechanics:
---Overshoot mechanic (that will become the new name of the overscore mechanic). Designed to keep a challenge when overscoring.
---Intervals:
---Exceed ^2 reqs: Overshoot +1
---Exceed ^4 reqs: Overshoot +2
---Exceed ^10 reqs: Overshoot +4
---Exceed ^100 reqs: (overshoot+1)X2 Overshoot
---Exceed ^10000 reqs: (overshoot+2)^2 Overshoot (!)
---Exceed ^^100 reqs: ^^2 Overshoot (!!!)
-
---Overshoot effects:
-
---How to decrease overshoot:
---Score under requirements (mr bones): Overshoot = 0
---Score under 1.19X requirements (below threshold of tax): Overshoot^0.5 - 1
---Score between 1.2X and 5X requirements (at tax threshold): max(0,Overshoot - 1)/2
---Score over 5X requirements but under ^1.5 reqs: max(0,Overshoot - 1)/1.4
---Else if not exceeding ^2 reqs: Overshoot - 2.
-
---Overshoot effects:
---0 - 10: Nothing
---10 - 15: Ante increase is added +1
---15 - 20: Ante increase +1, Epic Blinds can spawn after round 40
---20 - 25: Ante increase +2,
---25 - 30: Ante increase +2, Legendary Blinds can spawn after round 90, doubled round increase
---30 - 35: Ante increase +3, Epic and Legendary Blinds can replace any finishers.
---30 - 40: Doubled ante increase, Finisher, Epic and Legendary Blinds can replace any Boss Blind. Cannot decrease ante by any means
---40 - 45: Ante decreases will add to ante instead, All Blinds are Boss Blinds.
---45 - 50: All Blinds are Finisher, Epic and Legendary Blinds. Ante is always tripled, tripled round increase.
---50 >: All blinds are Epic/Legendary Blinds. Ante is always exponentiated by ^1.25 per modifier.
---> 1000000: Well I hope you're prepared to die. All Small Blinds are Indigo ICBM or (Nameless Nadir), All Big Blinds are Indigo ICBM, All Boss Blinds are Legendary Nuke.
---Normally incryptid, you shouldn't go up to 1000000 or so, but entropy exists.
 
 -- Jackpot! - Score a Royal Flush against Video Poker
 -- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once

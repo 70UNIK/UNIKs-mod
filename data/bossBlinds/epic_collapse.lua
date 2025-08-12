@@ -32,7 +32,7 @@ SMODS.Blind	{
             end
         end
                 --in cryptid, at least it only spawns if yoy have at least 5 stone cards
-        if stoneCards < 4 then
+        if stoneCards < 1 then
             return false
         end
         --maybe its funnier to have it spawn even without stone hands in deck in almanac

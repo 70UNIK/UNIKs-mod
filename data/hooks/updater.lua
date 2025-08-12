@@ -26,6 +26,12 @@ function Game:update(dt)
 		G.GAME.blind:set_text()
     end
     local res = updateHook(self,dt)
+    if  G.P_CENTERS and G.P_CENTERS.j_unik_fuzzy then
+        G.fuzzyAnim = G.fuzzyAnim or 0
+        G.P_CENTERS.j_unik_fuzzy.pos.x = math.fmod(math.floor(G.fuzzyAnim),12)
+        G.fuzzyAnim = G.fuzzyAnim + dt * 10
+    end
+
     if G.ARGS.LOC_COLOURS then
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
 		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)

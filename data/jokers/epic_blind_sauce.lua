@@ -22,7 +22,7 @@ SMODS.Joker {
     cost = 10,
     blueprint_compat = true,
     perishable_compat = true,
-	eternal_compat = true,
+	eternal_compat = false,
     demicoloncompat = true,
     immutable = true,
     config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 1.5,trigger_mod = 5, Mult = 100, Chips = 50}, immutable = {base_emult = 1.0} },
@@ -41,8 +41,9 @@ SMODS.Joker {
         
 		
 	end,
+    pools = { ["Food"] = true},
      gameset_config = {
-        config = { extra = { EEmult = 1.01,destroyed = false,triggers = 5,Emult = 2,trigger_mod = 5} },
+        config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 1,trigger_mod = 5, Mult = 50, Chips = 50}, immutable = {base_emult = 1.0} },
 	},
     --Only spawn if you have at least 1 king of spades in deck
     calculate = function(self, card, context)
