@@ -3,7 +3,7 @@ SMODS.Blind{
     key = 'unik_cookie',
     config = {},
 
-    boss = {min = 1, max = 6666666}, 
+    boss = {min = 1, max = 6666666,yes_orb = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 18},
     boss_colour= HEX("d58c4b"), 
@@ -26,6 +26,8 @@ SMODS.Blind{
                 if not prevent_rep or prevent_rep == false then
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
+                    G.hand_text_area.blind_chips:juice_up()
+                    play_sound('chips2')
                     G.ROOM.jiggle = G.ROOM.jiggle + 0.5
                 end
             else
@@ -312,8 +314,7 @@ local function BlindIncrement(penalty)
 				
 				G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                 G.HUD_blind:recalculate(true)
-                G.hand_text_area.blind_chips:juice_up()
-                play_sound('chips2')
+                
 			end
 		end
 	end

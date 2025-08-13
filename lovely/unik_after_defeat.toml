@@ -17,14 +17,9 @@ payload = '''
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
 local upper22 = G.GAME.chips
 local ceiling22 = G.GAME.blind.chips^2
-local ceiling222 = G.GAME.blind.chips^2.6
+local ceiling222 = G.GAME.blind.chips^2.5
 --print(upper22)
 --print(ceiling22)
-if to_big(upper22) > to_big(ceiling22) then
-     G.GAME.unik_scores_really_big = G.GAME.unik_scores_really_big + 1
-else
-    G.GAME.unik_scores_really_big = math.max(0,G.GAME.unik_scores_really_big - 1)
-end
 if to_big(upper22) > to_big(ceiling222) then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
     unik_ease_overshoot(1)

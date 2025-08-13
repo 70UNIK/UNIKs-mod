@@ -4,7 +4,7 @@
 
 SMODS.Blind{
     key = 'unik_salmon_steps',
-    boss = {min = 1, showdown = true}, 
+    boss = {min = 1, showdown = true, yes_orb = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 26},
     boss_colour= HEX("f27c6e"),

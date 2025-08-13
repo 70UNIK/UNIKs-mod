@@ -318,7 +318,8 @@ return {
                     "All scoring is",
                     "added to the Blind Size",
                     "instead of Score until",
-                    "the final hand"
+                    "the final hand",
+                    "+1 Hand if score is <= 0",
                 }
             },
             bl_unik_epic_miser={

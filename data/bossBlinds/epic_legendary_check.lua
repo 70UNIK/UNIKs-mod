@@ -13,6 +13,9 @@ function CanSpawnEpic()
             return true
         end
     end
+    if G.GAME.unik_overshoot and G.GAME.unik_overshoot > 15 then
+        return true
+    end
     return false
 end
 function CanSpawnLegendary()
@@ -26,6 +29,9 @@ function CanSpawnLegendary()
         if G.GAME.unik_overshoot > 15 then
             return true
         end
+    end
+    if G.GAME.unik_overshoot and G.GAME.unik_overshoot > 20 then
+        return true
     end
     return false
 end

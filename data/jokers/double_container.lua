@@ -78,17 +78,17 @@ if MoreFluff then
         colorHook(_card)
         --buffer to avoid recursion.
         if not isTriggered then
-            for i = 1, #G.jokers.cards do
-                local eval = nil
-                eval = G.jokers.cards[i]:calculate_joker({unik_mf_color_trigger = true})
-                if eval then
-                    if eval.repetitions and not isTriggered then
-                        for _ = 1, eval.repetitions do
-                        card_eval_status_text(G.jokers.cards[i], 'jokers', nil, nil, nil, eval)
-                        trigger_colour_end_of_round(_card,true)
+            local eval = {}
+            SMODS.calculate_context({unik_mf_color_trigger = true},eval)
+            for i = 1, #eval do
+                if eval[i].jokers then
+                    
+                    if eval[i].jokers.repetitions and not isTriggered then
+                        for _ = 1, eval[i].jokers.repetitions do
+                            card_eval_status_text(eval[i].jokers.card, 'jokers', nil, nil, nil, eval[i].jokers)
+                            trigger_colour_end_of_round(_card,true)
                         end
                     end
-                    
                 end
             end
         end

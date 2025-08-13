@@ -23,6 +23,9 @@ SMODS.Blind{
     unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
         if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("j_paperback_the_world")) then
             G.GAME.unik_blind_extra_excess = sum
+            if lenient_bignum(sum) <= lenient_bignum(0) then
+                 ease_hands_played(1)
+            end
             return {
                 debuff = true,
                 add_to_blind = sum,

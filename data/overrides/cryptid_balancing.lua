@@ -651,33 +651,6 @@ SMODS.Joker:take_ownership("j_cry_oldcandy",{
 		mainline = { extra = {hand_size = 2}},
 	},
 }, true)
-
-
-function calculate_reroll_cost(skip_increment,madness)
-	if not G.GAME.current_round.free_rerolls or G.GAME.current_round.free_rerolls < 0 then
-		G.GAME.current_round.free_rerolls = 0
-	end
-	if (madness and next(find_joker("cry-crustulum"))) or G.GAME.current_round.free_rerolls > 0 then
-		G.GAME.current_round.reroll_cost = 0
-		return
-	end
-	if next(find_joker("cry-candybuttons")) then
-		G.GAME.current_round.reroll_cost = 1
-		return
-	end
-	if G.GAME.used_vouchers.v_cry_rerollexchange then
-		G.GAME.current_round.reroll_cost = 2
-		return
-	end
-	G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase or 0
-	if not skip_increment then
-		G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase
-			+ (G.GAME.modifiers.cry_reroll_scaling or 1)
-	end
-	G.GAME.current_round.reroll_cost = (G.GAME.round_resets.temp_reroll_cost or G.GAME.round_resets.reroll_cost)
-		+ G.GAME.current_round.reroll_cost_increase
-end
-
 --Tier 3 reroll voucher rework:
 --Rerolls increase price by $1 every 3 rerolls.
 
@@ -1183,6 +1156,74 @@ SMODS.Edition:take_ownership("e_cry_glass",{
 				end,
 			}))
 			return { remove = true }
+		end
+	end,
+}, true)
+
+--crusty shit crash fix
+SMODS.Joker:take_ownership("j_cry_crustulum",{
+	calculate = function(self, center, context)
+		if context.reroll_shop and not context.blueprint then
+			center.ability.extra.rerolls_stored = center.ability.extra.rerolls_stored - 1
+			if to_big(center.ability.extra.rerolls_stored) < to_big(0) then
+				center.ability.extra.rerolls_stored = 0
+				calculate_reroll_cost(true)
+			else
+				calculate_reroll_cost(true)
+				return {
+					message = "-1",
+					colour = G.C.DARK_EDITION,
+				}
+			end
+		end
+		if
+			context.end_of_round
+			and not context.blueprint
+			and not context.repetition
+			and not context.retrigger_joker
+			and not context.individual
+		then
+			if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+				SMODS.add_card({
+					set = "Food",
+					area = G.jokers,
+				})
+			end
+		end
+		if context.food_joker_expired then
+			center.ability.extra.rerolls_stored = center.ability.extra.rerolls_stored + center.ability.extra.rerolls_per
+			local msg = SMODS.scale_card(center, {
+				ref_table = center.ability.extra,
+				ref_value = "rerolls_stored",
+				scalar_value = "rerolls_per",
+			})
+			if not msg or type(msg) == "string" then
+				return {
+					message = msg or localize("k_upgrade_ex"),
+					colour = G.C.DARK_EDITION,
+				}
+			end
+		end
+		if context.forcetrigger then
+			center.ability.extra.rerolls_stored = center.ability.extra.rerolls_stored
+				+ center.abilities.extra.rerolls_per
+			if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+				SMODS.add_card({
+					set = "Food",
+					area = G.jokers,
+				})
+			end
+			local msg = SMODS.scale_card(center, {
+				ref_table = center.ability.extra,
+				ref_value = "rerolls_stored",
+				scalar_value = "rerolls_per",
+			})
+			if not msg or type(msg) == "string" then
+				return {
+					message = msg or localize("k_upgrade_ex"),
+					colour = G.C.DARK_EDITION,
+				}
+			end
 		end
 	end,
 }, true)

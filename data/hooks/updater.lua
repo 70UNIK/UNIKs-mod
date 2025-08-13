@@ -46,7 +46,7 @@ function Game:update(dt)
 	end
     G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-    if G.GAME.unik_overshoot < 6 then
+    if G.GAME.unik_overshoot < 5 then
         G.GAME.OvershootFXVal = 0
     elseif G.GAME.unik_overshoot < 10 then
         G.GAME.OvershootFXVal = 1

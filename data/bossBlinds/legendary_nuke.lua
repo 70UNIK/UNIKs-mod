@@ -37,13 +37,10 @@ SMODS.Blind{
 		return { vars = { localize("k_unik_legendary_nuke_placeholder") } }
 	end,
     in_pool = function()
-        local straddle = 0
-        if G.GAME.straddle then
-            straddle = G.GAME.straddle
-        end
-        if G.GAME.unik_scores_really_big then
+        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        if G.GAME.unik_overshoot then
             --print(G.GAME.unik_scores_really_big)
-            if G.GAME.unik_scores_really_big > 6 - straddle then
+            if G.GAME.unik_overshoot > 3 then
                 return CanSpawnLegendary()
             end
         end

@@ -2,6 +2,21 @@
 SMODS.Joker:take_ownership("j_mf_unregisteredhypercam",{
     rarity = 2
 }, true)
+local abovestake = 'unik_shitty'
+if (SMODS.Mods["Buffoonery"] or {}).can_load then
+	abovestake = 'buf_spinel'
+end
+
+SMODS.Stake:take_ownership('stake_cry_ruby', {
+ 	applied_stakes = {abovestake},
+    above_stake = abovestake,
+    prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+    modifiers = function()
+		G.E_MANAGER:add_event(Event({trigger = 'before',func = function() 
+			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
+		return true end })) 
+	end,
+})
 
 --apostle of wands: blacklist epic, exotics,legendary blinds,
 
