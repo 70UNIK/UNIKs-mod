@@ -381,6 +381,7 @@ NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 NFS.load(mod_path .. "data/bossBlinds/cookie.lua")()
+NFS.load(mod_path .. "data/bossBlinds/xchips_hater.lua")()
 NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
@@ -514,6 +515,16 @@ NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
 NFS.load(mod_path .. "data/jokers/joker_dollar.lua")()	
 
+--3 normal jokers
+--Instant gratification: $2 per discard lost when 0 discards remain
+--Golden Glove: $2 per hand lost
+--infelicis: Gain Xmult equal to 0.5X the denominator whenever a probability fails (capped at X5 mult)
+--4 cursed jokers
+--Robert (The Wheel): 1 in 7 chance card is drawn face down. Destroy a random Joker if no face down cards are played. Self Destructs after playing a math.min(hand_size,card selection limit) card hand with all face down and scoring cards.
+--Abandoned House (The House): First hand drawn is face down. Self Destructs after playing a math.min(hand_size,card selection limit) card hand with all face down and scoring cards.
+--Decaying Tooth (The Tooth): Lose $1 per card played. Self destructs after losing at least $50 from this Joker.
+--Xchips is not vanilla!: All Xchips and higher operators will not trigger and triggered cards are destroyed instead. Self destructs after 7 consecutive rounds without Xchips or higher triggers.
+
 --Celestials:
 --Borg Cube (Uncommon): A cube joker. Other steel EDITION cards give 2.5x mult. Obvious star trek reference
 --HER (Cursed): Other positive Jokers reduce joker slots by 0.5. Self destructs if edition stripped from this Joker. FTL multiverse reference
@@ -646,8 +657,7 @@ NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 -- Learning with pibby: Start with a golden joker and pibby . On blind select, leftmost joker and jokers adjacent to corrupted jokers become corrupted. If Pibby is corrupted, die. All future editions are corrupted.
 -- Cardless: All Cards are Debuffed. Start with a Joker and Ice Cream.
--- Finger Trigger: All playing cards are triggering. Start with a Half Joker.
--- Finger Trigger II: All playing cards are triggering. Start with Finger Trigger and Half Joker. (Bunco only)
+-- Finger Trigger: All cards are triggering. Start with a Half Joker.
 -- Cookie Clicker I: All blinds are clicked cookie and pimydenkekisi. Start with a negative Clicked Cookie.
 -- Cookie Clicker II: Cookie clicker I, but all blinds are boss blinds. Start with a negative Clicked Cookie.
 -- 

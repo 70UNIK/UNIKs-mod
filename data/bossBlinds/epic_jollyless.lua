@@ -45,7 +45,7 @@ SMODS.Blind{
                             destroy = false
                         elseif SMODS.has_enhancement(v,"m_unik_pink") and SMODS.has_enhancement(w,"m_unik_pink") and v ~= w then
                             destroy = false
-                        elseif v:get_id() == w:get_id() and v.base.suit == w.base.suit and v ~= w then
+                        elseif v:get_id() == w:get_id() and (w:is_suit(v.base.suit,true) or  v:is_suit(w.base.suit,true)) and v ~= w then
                             destroy = false
                         elseif (SMODS.has_no_suit(w) or SMODS.has_no_rank(w)) and (SMODS.has_no_suit(v) or SMODS.has_no_rank(v)) and v.config.center.key == w.config.center.key and v ~= w then
                             destroy = false

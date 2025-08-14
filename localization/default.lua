@@ -98,6 +98,15 @@ return {
             }
         },
         Blind={
+            bl_unik_xchips_hater = {
+                name = "The Hater",
+                text = {
+                    "Xchips and higher operations",
+                    "become lower Mult operations", --in reference to "Xchips already exists, it's called mult", hence the effect.
+                    "(^chips becomes Xmult x 1.5)",
+                    "(Xchips becomex mult x 5)",
+                }
+            },
 
             bl_cry_chromatic_fixed = {
                 name = "The Chromatic",
@@ -171,7 +180,7 @@ return {
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
-					"Create 5 Cursed Jokers",
+					"Create 5 Disposable Cursed Jokers",
                     "on Blind Selection",
 				},
             },
@@ -407,6 +416,17 @@ return {
                     "same rank and suit",
                 }
             },
+            bl_unik_epic_nemesis = { 
+                name = "Äkillinen kuolema", --Sudden death; multiplayer exclusive "epic blind", only appears when both you and your opponent have 1 life each and it takes the place of Your Nemesis.
+                text = {
+                    "Play only 1 Hand",
+                    "with 0 Discards",
+                    "The loser dies",
+                }
+            },
+
+
+
             bl_unik_jaundice_jack = {
                 name = "Jaundice Jack",
                 text = {
@@ -1893,24 +1913,6 @@ return {
                     "held after round",
                 }
             },
-            j_unik_for_sale = { --this cause i hate rental
-                name = "For Sale",
-                text = {
-                    "Sell to Remove {C:attention}Rental{}",
-                    "from all cards and Jokers",
-                    "Lose {C:money}$#1#{} per {C:attention}Rental{}",
-                    "sticker removed, {C:red}destroy",
-                    "card instead if in debt",
-                    "{C:inactive}(Removes left to right)"
-                },
-                unlock = {
-                    "Lose {C:money}$15{} at once",
-                    "from {C:attention}Rental Jokers",
-                }
-            },
-            --Alternate poppy:
-            --Retrigger rightmost card 1 time, increase by 1 when discards equal 0 once per round
-            --Modest poppy: retrigger rightmost card based on hands lost.
             j_unik_poppy = {
                 name = "Poppy", --Retrigger rightmost card for every hand or discard used
                 text = {
@@ -1963,6 +1965,85 @@ return {
                 }
             },
 
+            j_unik_instant_gratification={
+                name = "Instant Gratification",
+                text = {
+                    "Earn {C:money}$#1#{} per {C:red}Discard",
+                    "lost at {C:attention}0{} {C:red}Discards"
+                },
+            },
+            j_unik_golden_glove={
+                name = "Golden Glove",
+                text = {
+                    "Earn {C:money}$#1#{} per {C:blue}hand",
+                    "lost in round",
+                }
+            },
+            j_unik_last_tile={
+                name = "Last Tile",
+                text = {
+                    "Add {C:dark_edition}Mosaic{} to scored cards",
+                    "on {C:attention}final{} hand",
+                    "{E:2,C:red}Self Destructs{}"
+                }
+            },
+            j_unik_xchips_hater={
+                name = "Xchips is not Vanilla!",
+                text = {
+                    "{X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... cards and Jokers",
+                    "will {C:red}not trigger{} and are {C:red}destroyed{} instead",
+                    "{C:red}Self destructs{} after {C:attention}#1#",
+                    "{C:attention}consecutive{} rounds without",
+                    "attempted {X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... triggers",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive})",
+                },
+            },
+            j_unik_robert={
+                name = "Robert",
+                text = {
+                    "{C:green}#1# in #2#{} chance card is",
+                    "drawn {C:red}face-down{}",
+                    "{C:red}Self destructs{} when a hand", 
+                    "containing {C:attention}#3# all scoring",
+                    "{C:red}face-down{} cards is played",
+                    "or {C:unik_wheel_color}The Wheel{} is triggered",
+                    "{C:inactive,s:0.7,E:2}It now targets you, for no reason.{}",   
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:cry_exotic,s:0.7,E:2}Origin : Rubber{}",   
+                }
+            },
+            j_unik_abandoned_house={
+                name = "Boarded-Up House",
+                text = {
+                    "{C:attention}First drawn{} hand is",
+                    "drawn {C:red}face-down{}",
+                    "{C:red}Self destructs{} when a hand", 
+                    "containing {C:attention}#3# all scoring",
+                    "{C:red}face-down{} cards is played",
+                    "or {C:unik_house_color}The House{} is triggered",
+                }
+            },
+            j_unik_decaying_tooth={
+                name = "Decaying Tooth",
+                text = {
+                    "{C:red}Lose {C:gold}$#1#{} per hand played",
+                    "{C:red}Self destructs{} after earning",
+                    "more than {C:gold}$#2#{} per hand or",
+                    "{C:unik_tooth_color}The Tooth{} is triggered",
+                }
+            },
+            
+
+            --Cult card crossmod
+            j_unik_cult_of_xmult = {
+                name = "Cult of Xmult",
+                text = {
+                    "Scored {C:attention}Cult Cards{} give",
+                    "{X:mult,C:white}Xmult{} equal to",
+                    "{C:attention}1 + level of played hand x 0.1{}",
+                }
+            },
+
             --crossmod
             j_unik_weetomancer={ --rare, paperback
                 name = "Weetomancer",
@@ -1982,6 +2063,8 @@ return {
                     "{C:inactive}(Whichever is lower)",
                 }
             },
+
+
 
 
             --Finity boss blinds
@@ -2050,6 +2133,8 @@ return {
                     "{C:cry_exotic,s:0.7,E:2}Origin : Celeste{}",
                 }
             },
+
+
             --Grab bag jokers
 
             j_unik_smiley = {
@@ -3119,6 +3204,7 @@ return {
             c_unik_coupon_codes_only="TEMU Vouchers", --No vouchers spawn, start with 4 negative absolute coupon codes and 2 negative KEYGENs. AKA: Vouchers become temporary powerups that cycle per round
             c_unik_monsters="Monsters",
             c_unik_singleton="Singleton",
+            c_unik_learning_with_pibby="Learning With Pibby",
         },
         collabs={},
         dictionary={
@@ -3162,6 +3248,9 @@ return {
             k_unik_plant_no_face="Wilted!",
             k_unik_blind_start_plant="The Plant",
             k_unik_blind_start_manacle="The Manacle",
+            k_unik_blind_start_tooth="The Tooth",
+            k_unik_blind_start_wheel="The Wheel",
+            k_unik_blind_start_house="The House",
             k_unik_manacle_small="Slipped out!",
             k_unik_manacle_big="Broken out!",    
             k_unik_blind_start_wall="The Wall",   
@@ -3585,6 +3674,10 @@ return {
                 "Too bad you fell",
                 "down the stairs!"
             },
+            special_lose_xchips_hater={
+                "XCHIPS. IS.",
+                "NOT. VANILLA!!!!!",
+            },
             --finity quips:
             lq_legendary_crown_1={
                 "Why did you",
@@ -3641,7 +3734,13 @@ return {
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
             ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
             ch_c_unik_cursed_only = {"All boss blinds are {C:attention}The Decision{} and {C:attention}Purple Pentagram{}"},
-            ch_c_unik_single_select_limit = {"{C:red}1{} Card {C:attention}Selection Limit"}
+            ch_c_unik_single_select_limit = {"{C:red}1{} Card {C:attention}Selection Limit"},
+            ch_c_unik_the_darkness_spreads1 = {"Leftmost Joker become {C:unik_shitty_edition}Corrupted{} on Blind Select"},
+            ch_c_unik_the_darkness_spreads2 = {"1 Random Card in Hand becomes {C:unik_shitty_edition}Corrupted{} on play"},
+            ch_c_unik_the_darkness_spreads3 = {"Adjacent Jokers to {C:unik_shitty_edition}Corrupted{} Jokers become {C:unik_shitty_edition}Corrupted{} on Blind Select"},
+            ch_c_unik_the_darkness_spreads4 = {"All Editions are {C:unik_shitty_edition}Corrupted"},
+            ch_c_unik_protect_pibby = {"If {C:attention}Pibby{} is {C:unik_shitty_edition}Corrupted{} or destroyed, {X:unik_void_Color, C:unik_eye_searing_red}Die"},
+
         },
     },
 }
