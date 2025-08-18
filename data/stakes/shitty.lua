@@ -39,7 +39,47 @@ function Card:cry_calculate_voucher_perishable()
 	end
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
         if self.ability.perish_tally == 1 then
-			self:unredeem()
+            local area
+            if G.STATE == G.STATES.HAND_PLAYED then
+                if not G.redeemed_vouchers_during_hand then
+                    G.redeemed_vouchers_during_hand = CardArea(
+                        G.play.T.x,
+                        G.play.T.y,
+                        G.play.T.w,
+                        G.play.T.h,
+                        { type = "play", card_limit = 5 }
+                    )
+                end
+                area = G.redeemed_vouchers_during_hand
+            else
+                area = G.play
+            end
+
+            local _card = copy_card(self)
+            _card.ability.extra = copy_table(self.ability.extra)
+            if _card.facing == "back" then
+                _card:flip()
+            end
+
+            _card:start_materialize()
+            area:emplace(_card)
+            _card.cost = 0
+            _card.shop_voucher = false
+            _card:unredeem()
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0,
+                func = function()
+                    _card:start_dissolve()
+                    self:start_dissolve()
+                    return true
+                end,
+            }))
+            card_eval_status_text(self, "jokers", nil, nil, nil, {
+                message = localize("k_unik_perished"),
+                delay = 0.1 ,
+                colour = G.C.PERISHABLE,
+            })
 		else
 			self.ability.perish_tally = self.ability.perish_tally - 1
 			card_eval_status_text(self, "extra", nil, nil, nil, {
