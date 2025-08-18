@@ -8,15 +8,15 @@ Requires Steamodded smods-1.0.0-beta-0711a or higher, Lovely v0.7.1 and Cryptid 
 
 ![alt text](image-6.png)
 ## Features (so far)
-- A total of 61 new Jokers are added, with 3 more fusions with a certain mod.
+- A total of 63 new Jokers are added, with 3 more fusions with a certain mod.
 - - 7-9 **Common** (Depending on Crossmod)
-- - 16-17 **Uncommon** (Depending on Crossmod)
+- - 18-19 **Uncommon** (Depending on Crossmod)
 - - 10 **Rare**
 - - 10 **Epic** (Cryptid)
 - - 4 **Exotic**
 - - 16 **Cursed** (Detrimental Jokers from Cryptid)
 - 3 **Tarots**
-- 3 **Spectrals** (1 exclusive to a deck)
+- 4 **Spectrals**
 - If **Epic/Legendary Blinds** are enabled (or playing a certain mod), enables **Lartceps** with 12 consumables, detrimental cards an Epic Blind forces you to choose.
 - 7 **Stickers**, 2 of which are featured in Stakes
 - 2 **Stakes:**
@@ -26,11 +26,11 @@ Requires Steamodded smods-1.0.0-beta-0711a or higher, Lovely v0.7.1 and Cryptid 
 - 6 **Editions**, 5 of which are purely detrimental.
 - 2 **Enhancements** (and "another" if **Epic/Legendary Blinds** are enabled)
 - 2 Edition based **Decks**, one of which is inspired by a beta deck.
-- 24 **Blinds**, 
+- 26 **Blinds**, 
 - - 2 **"normal" blinds**
-- - 10 **Finisher Blinds**
-- - 12 **Regular Blinds**
-- - If enabled, 13 - 14 **Epic Blinds** and 7 **"Legendary" Blinds**, extremely cruel blinds that are designed to make sure you *suffer*.
+- - 12 **Finisher Blinds**
+- - 13 **Regular Blinds**
+- - 13 - 14 **Epic Blinds** and 7 **"Legendary" Blinds**, extremely cruel blinds that are designed to make sure you *suffer*.
 - Mainline balancing changes for some Cryptid Jokers, such as the infamous Canvas (Now legendary) and Oil Lamp (Immutable and increases values by x1.075).
 
 ![alt text](image-3.png)
