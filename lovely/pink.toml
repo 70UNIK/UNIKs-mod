@@ -60,29 +60,49 @@ payload = '''
 '''
 match_indent = true
 
+## number blocks, consider 7s
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''local valid_castle_cards = {}'''
+position = "before"
+payload = '''
+    local valid_blocks_cards = {}
+    for k, v in ipairs(G.playing_cards) do
+		if not SMODS.has_no_suit(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
+			valid_blocks_cards[#valid_blocks_cards + 1] = v
+		end
+	end
+    if valid_blocks_cards[1] then
+        local block_card = pseudorandom_element(valid_blocks_cards, pseudoseed("cry_nb" .. G.GAME.round_resets.ante))
+        G.GAME.current_round.cry_nb_card.rank = block_card:get_baseValOverride()
+            G.GAME.current_round.cry_nb_card.id = block_card:get_id() 
+          
+    end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''G.GAME.current_round.cry_nb_card.rank = castle_card_two.base.value
+		G.GAME.current_round.cry_nb_card.id = castle_card_two.base.id'''
+position = "at"
+payload = '''
+
+'''
+match_indent = true
+
+
 ## mail in rebate: consider 7s.
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
 pattern = '''G.GAME.current_round.mail_card.rank = mail_card.base.value
         G.GAME.current_round.mail_card.id = mail_card.base.id'''
-position = "before"
+position = "at"
 payload = '''
-    if not SMODS.has_enhancement(mail_card, "m_unik_pink") then
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''G.GAME.current_round.mail_card.rank = mail_card.base.value
-        G.GAME.current_round.mail_card.id = mail_card.base.id'''
-position = "after"
-payload = '''
-    else
-        G.GAME.current_round.mail_card.rank = "7"
-        G.GAME.current_round.mail_card.id = 7
-    end
+G.GAME.current_round.mail_card.rank = mail_card:get_baseValOverride()
+        G.GAME.current_round.mail_card.id = mail_card:get_id()
 '''
 match_indent = true
 
@@ -94,19 +114,5 @@ pattern = '''G.GAME.current_round.cry_nb_card.rank = castle_card_two.base.value
 position = "before"
 payload = '''
     if not SMODS.has_enhancement(castle_card_two, "m_unik_pink") then
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "lib/overrides.lua]'''
-pattern = '''G.GAME.current_round.cry_nb_card.rank = castle_card_two.base.value
-		G.GAME.current_round.cry_nb_card.id = castle_card_two.base.id'''
-position = "after"
-payload = '''
-    else
-        G.GAME.current_round.mail_card.rank = "7"
-        G.GAME.current_round.mail_card.id = 7
-    end
 '''
 match_indent = true

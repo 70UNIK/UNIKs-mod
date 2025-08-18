@@ -79,7 +79,7 @@ function Card:get_baseValOverride()
     if Cryptid.cry_enhancement_has_specific_rank(self) and not self.vampired then
 		--Get the max value + 1, to always be the last at the list
         if self.config.center.key == "m_unik_pink" then
-            return 7
+            return '7'
         end
 	end
     return self.base.value
