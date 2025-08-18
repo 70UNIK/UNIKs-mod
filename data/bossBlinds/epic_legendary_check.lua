@@ -9,9 +9,12 @@ function CanSpawnEpic()
         return true
     end
     if G.GAME.round >= 40 then
-        if G.GAME.unik_overshoot > 10 then
+        if G.GAME.OvershootFXVal >= 2 then
             return true
         end
+    end
+    if G.GAME.unik_overshoot and G.GAME.OvershootFXVal >= 3 then
+        return true
     end
     return false
 end
@@ -23,9 +26,12 @@ function CanSpawnLegendary()
         return true
     end
     if G.GAME.round >= 90 then
-        if G.GAME.unik_overshoot > 15 then
+        if G.GAME.OvershootFXVal >= 3 then
             return true
         end
+    end
+    if G.GAME.unik_overshoot and G.GAME.OvershootFXVal >= 4 then
+        return true
     end
     return false
 end

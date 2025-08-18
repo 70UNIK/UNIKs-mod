@@ -26,6 +26,12 @@ function Game:update(dt)
 		G.GAME.blind:set_text()
     end
     local res = updateHook(self,dt)
+    if  G.P_CENTERS and G.P_CENTERS.j_unik_fuzzy then
+        G.fuzzyAnim = G.fuzzyAnim or 0
+        G.P_CENTERS.j_unik_fuzzy.pos.x = math.fmod(math.floor(G.fuzzyAnim),12)
+        G.fuzzyAnim = G.fuzzyAnim + dt * 10
+    end
+
     if G.ARGS.LOC_COLOURS then
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
 		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
@@ -40,18 +46,19 @@ function Game:update(dt)
 	end
     G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-    if G.GAME.unik_overshoot < 6 then
+    if G.GAME.unik_overshoot < 5 then
         G.GAME.OvershootFXVal = 0
     elseif G.GAME.unik_overshoot < 10 then
         G.GAME.OvershootFXVal = 1
     elseif G.GAME.unik_overshoot < 15 then
         G.GAME.OvershootFXVal = 2
-    elseif G.GAME.unik_overshoot < 18 then
-        G.GAME.OvershootFXVal = 3
     elseif G.GAME.unik_overshoot < 20 then
+        G.GAME.OvershootFXVal = 3
+    elseif G.GAME.unik_overshoot < 25 then
         G.GAME.OvershootFXVal = 4
     else
          G.GAME.OvershootFXVal = 5
+         
     end
     return res
 end

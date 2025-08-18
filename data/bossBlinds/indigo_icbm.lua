@@ -17,15 +17,11 @@ SMODS.Blind{
 	end,
     death_message = 'special_lose_unik_get_nuked',
     in_pool = function()
-        local straddle = 0
-        --if you increase straddle, these fuckers can spawn earlier!
-        if G.GAME.straddle then
-            straddle = straddle - G.GAME.straddle
-        end
         -- only appear if player scores above ^1.5 reqs 6 times consecutively
-        if G.GAME.unik_scores_really_big then
+        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        if G.GAME.unik_overshoot then
             --print(G.GAME.unik_scores_really_big)
-            if G.GAME.unik_scores_really_big >= 6 - straddle then
+            if G.GAME.unik_overshoot >= 3 then
                 return true
             end
         end

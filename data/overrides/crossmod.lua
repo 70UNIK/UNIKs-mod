@@ -2,6 +2,21 @@
 SMODS.Joker:take_ownership("j_mf_unregisteredhypercam",{
     rarity = 2
 }, true)
+local abovestake = 'unik_shitty'
+if (SMODS.Mods["Buffoonery"] or {}).can_load then
+	abovestake = 'buf_spinel'
+end
+
+SMODS.Stake:take_ownership('stake_cry_ruby', {
+ 	applied_stakes = {abovestake},
+    above_stake = abovestake,
+    prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+    modifiers = function()
+		G.E_MANAGER:add_event(Event({trigger = 'before',func = function() 
+			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
+		return true end })) 
+	end,
+})
 
 --apostle of wands: blacklist epic, exotics,legendary blinds,
 
@@ -122,4 +137,46 @@ SMODS.Consumable:take_ownership("c_mf_rot_wheel",{
 			card.ability.chance
 		} }
 	end
+}, true)
+
+--Deadringer: Fix for pink cards
+SMODS.Joker:take_ownership("j_paperback_deadringer",{
+    config = {
+		extra = {
+			ace_seven = 1, nines = 2,
+		}
+	},
+	loc_vars = function(self, info_queue, card)
+    return {
+			vars = {
+				localize("Ace", 'ranks'),
+				localize("7", 'ranks'),
+				localize("9", 'ranks'),
+				card.ability.extra.ace_seven,
+				card.ability.extra.nines,
+			}
+		}
+	end,
+	calculate = function(self, card, context)
+        
+        if context.repetition and context.cardarea == G.play then
+            if context.other_card:get_id() == 7 or context.other_card:get_id() == 14 then
+                return {
+					message = localize("k_again_ex"),
+					repetitions = to_number(
+						card.ability.extra.ace_seven
+					),
+					card = card,
+				}
+            elseif context.other_card:get_id() == 9 then
+				return {
+					message = localize("k_again_ex"),
+					repetitions = to_number(
+						card.ability.extra.nines
+					),
+					card = card,
+				}
+			end
+		end
+    end,
 }, true)

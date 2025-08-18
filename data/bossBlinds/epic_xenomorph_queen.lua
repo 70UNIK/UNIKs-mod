@@ -8,6 +8,7 @@ SMODS.Blind{
     boss_colour= HEX("1c5607"), 
     dollars = 13,
     mult = 0.5,
+    unik_exponent = {1,0.5},
     ignore_showdown_check = true,
 	loc_vars = function(self)
         local new_numerator, new_denominator = SMODS.get_probability_vars(self, 1,4, 'unik_xenomorph_queen')

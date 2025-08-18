@@ -246,6 +246,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+	key = "unik_grab_bag_jokers",
+	path = "unik_grab_bag_jokers.png",
+	px = 71,
+	py = 95
+}
+
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
 	key = "unik_boss_blind_joker",
@@ -306,18 +313,10 @@ end
 --Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
 
 --todo:
---Pink card nerf: Should retain the rank, but have its own suit still, destroyed if played with any other rank. Requires a custom renderer to render a "fake" rank image on top of the enhancement. That way it wont be just "free 7s for UNIK". You need to actually create and use actual 7s to feed him
---Moonlight nerf to ^1.15 maybe to avoid being too powerful until late game. She may get a total rework to instead exponentiate poker hand levelups by (number of planet cards with that poker hand)^0.5 of a poker hand held in hand to make her more distinct.
---UNIK will remain the same, just the stuff around him, primarily pink cards
---White Lily is the same, a scoring emult that just happens to be resistant to destruction (making it more powerful if paired with a dagger).
---(Tax Robbery, may change name, rare): Sell to refund all lost $ from rental Jokers this run. Remove all rental stickers from all jokers, +1 ante per rental sticker removed.
---For Sale (uncommon): Sell to remove all rental stickers, lose $6 per rental sticker, destroy joker if destroyed.
 --Ghost Joker, create a random spectral on blind select (rare, epic in modest).
 --Poppy exploit fix for legendary crown (add a buffer to prevent her scaling to 6666 hands lost).
-
 --Welfare Deck: Interest rate is Inverted (earn $5 interest at $0, earn no interest at $25)
-
---Then finally, an "overshoot" mechanic that becomes harsher if you score too well, the "summon epic blinds" thing but expanded and with proper UI and more effects (faster ante scaling), kind of like straddle. 
+--Red Joker
 
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
@@ -382,6 +381,7 @@ NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 NFS.load(mod_path .. "data/bossBlinds/cookie.lua")()
+NFS.load(mod_path .. "data/bossBlinds/xchips_hater.lua")()
 NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
@@ -399,7 +399,7 @@ NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/jaundice_jack.lua")()
 NFS.load(mod_path .. "data/bossBlinds/septic_seance.lua")()
 NFS.load(mod_path .. "data/bossBlinds/salmon_steps.lua")()
-
+NFS.load(mod_path .. "data/bossBlinds/burgundy_brain.lua")()
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 
@@ -486,6 +486,8 @@ NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
+--Instant gratification: earn $2 per discard used. Broken hourglass
+
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/binary_asteroid.lua")()
 end
@@ -494,6 +496,7 @@ NFS.load(mod_path .. "data/jokers/double_container.lua")()
 
 --- Uncommon ---
 --- Hacker: 3 in 4 chance to not create a code card when a 2, 3, 4 or 5 is played. (must have room)
+--- Trashed dress (gain X0.5 Mult whenever a pink card is destroyed, artwork is unik wearing cinderella's trashed dress
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
 NFS.load(mod_path .. "data/jokers/hacker.lua")()
@@ -511,6 +514,16 @@ NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
 NFS.load(mod_path .. "data/jokers/joker_dollar.lua")()	
+
+--3 normal jokers
+--Instant gratification: $2 per discard lost when 0 discards remain
+--Golden Glove: $2 per hand lost
+--infelicis: Gain Xmult equal to 0.5X the denominator whenever a probability fails (capped at X5 mult)
+--4 cursed jokers
+--Robert (The Wheel): 1 in 7 chance card is drawn face down. Destroy a random Joker if no face down cards are played. Self Destructs after playing a math.min(hand_size,card selection limit) card hand with all face down and scoring cards.
+--Abandoned House (The House): First hand drawn is face down. Self Destructs after playing a math.min(hand_size,card selection limit) card hand with all face down and scoring cards.
+--Decaying Tooth (The Tooth): Lose $1 per card played. Self destructs after losing at least $50 from this Joker.
+--Xchips is not vanilla!: All Xchips and higher operators will not trigger and triggered cards are destroyed instead. Self destructs after 7 consecutive rounds without Xchips or higher triggers.
 
 --Celestials:
 --Borg Cube (Uncommon): A cube joker. Other steel EDITION cards give 2.5x mult. Obvious star trek reference
@@ -533,9 +546,22 @@ NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 NFS.load(mod_path .. "data/jokers/riff_rare.lua")() 
+
+if next(SMODS.find_mod("GrabBag")) then
+	NFS.load(mod_path .. "data/jokers/grab_bag/poppy.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/collapse.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/artesian.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/jollyless.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/bloon.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/smiley.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/halved.lua")() 
+	NFS.load(mod_path .. "data/jokers/grab_bag/fuzzy.lua")() 
+end
 NFS.load(mod_path .. "data/jokers/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
+
+--Boss Jokers for grab bag crossmod
 
 
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
@@ -625,13 +651,13 @@ NFS.load(mod_path .. "data/overrides/crossmod.lua")()
 -- 
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
+NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
-NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
+-- NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 -- Learning with pibby: Start with a golden joker and pibby . On blind select, leftmost joker and jokers adjacent to corrupted jokers become corrupted. If Pibby is corrupted, die. All future editions are corrupted.
 -- Cardless: All Cards are Debuffed. Start with a Joker and Ice Cream.
--- Finger Trigger: All playing cards are triggering. Start with a Half Joker.
--- Finger Trigger II: All playing cards are triggering. Start with Finger Trigger and Half Joker. (Bunco only)
+-- Finger Trigger: All cards are triggering. Start with a Half Joker.
 -- Cookie Clicker I: All blinds are clicked cookie and pimydenkekisi. Start with a negative Clicked Cookie.
 -- Cookie Clicker II: Cookie clicker I, but all blinds are boss blinds. Start with a negative Clicked Cookie.
 -- 
@@ -648,7 +674,7 @@ end
 
 function vice_check()
 	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
-	if G.GAME.OvershootFXVal >= 5 then
+	if G.GAME.OvershootFXVal >= 4 then
 		return 1
 	end
 	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
@@ -681,17 +707,15 @@ end
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Grab Bag Boss Jokers:
----The Poppy: Gain X0.25 Mult per hand played, resets if hand exceeds 2.5X requirements.
+---The Poppy: Gain X0.5 Mult per hand, lose X0.25 mult instead if score exceeds 3X requirements.
 ---The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
----The Jollyless: Gains X0.15 Mult if played hand does not contain a pair, resets if contains a pair.
----The Artesian: Gain X0.1 Mult per reroll in shop.
----The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2 Mult, but are destroyed immediately.
----The Halved: X4 Mult if played hand contains 3 or less cards.
+---The Jollyless: Gains X0.15 Mult per consecutive hand without a pair.
+---The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2.5 Mult
 ---The Fuzzy: Scored cards randomly give +-25-75 Chips, +-5-15 Mult and +$1-3
 --Finity Blind jokers:
 ---Finishers:
 ---
----Indigo ICBM: Gain X1 Mult per hand played, resets if hand exceeds 3X requirements.
+---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
 ---Raspberry Racket: If Money < $50 per hand, set money to $50. Increase this by $2 per Dollar Card scored.
 ---Maroon Magnet: Convert all held cards to steel cards, scored Steel Cards give X2 mult
@@ -729,40 +753,6 @@ NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
 --Stars (Moonlight): 3 in 4 chance to not retrigger levelups once. --> 1 in 2 chance to not retrigger levelups once.
 --Cube (Cube Joker): gains 5 chips if hand contains exactly 4 cards --> gains 9 chips if hand contains exactly 4 cards
-
-
---Future mechanics:
---Overshoot mechanic (that will become the new name of the overscore mechanic). Designed to keep a challenge when overscoring.
---Intervals:
---Exceed ^2 reqs: Overshoot +1
---Exceed ^4 reqs: Overshoot +2
---Exceed ^10 reqs: Overshoot +4
---Exceed ^100 reqs: (overshoot+1)X2 Overshoot
---Exceed ^10000 reqs: (overshoot+2)^2 Overshoot (!)
---Exceed ^^100 reqs: ^^2 Overshoot (!!!)
-
---Overshoot effects:
-
---How to decrease overshoot:
---Score under requirements (mr bones): Overshoot = 0
---Score under 1.19X requirements (below threshold of tax): Overshoot^0.5 - 1
---Score between 1.2X and 5X requirements (at tax threshold): max(0,Overshoot - 1)/2
---Score over 5X requirements but under ^1.5 reqs: max(0,Overshoot - 1)/1.4
---Else if not exceeding ^2 reqs: Overshoot - 2.
-
---Overshoot effects:
---0 - 10: Nothing
---10 - 15: Ante increase is added +1
---15 - 20: Ante increase +1, Epic Blinds can spawn after round 40
---20 - 25: Ante increase +2,
---25 - 30: Ante increase +2, Legendary Blinds can spawn after round 90, doubled round increase
---30 - 35: Ante increase +3, Epic and Legendary Blinds can replace any finishers.
---30 - 40: Doubled ante increase, Finisher, Epic and Legendary Blinds can replace any Boss Blind. Cannot decrease ante by any means
---40 - 45: Ante decreases will add to ante instead, All Blinds are Boss Blinds.
---45 - 50: All Blinds are Finisher, Epic and Legendary Blinds. Ante is always tripled, tripled round increase.
---50 >: All blinds are Epic/Legendary Blinds. Ante is always exponentiated by ^1.25 per modifier.
---> 1000000: Well I hope you're prepared to die. All Small Blinds are Indigo ICBM or (Nameless Nadir), All Big Blinds are Indigo ICBM, All Boss Blinds are Legendary Nuke.
---Normally incryptid, you shouldn't go up to 1000000 or so, but entropy exists.
 
 -- Jackpot! - Score a Royal Flush against Video Poker
 -- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once

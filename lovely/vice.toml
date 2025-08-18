@@ -16,6 +16,9 @@ pattern = '''if
             then'''
 position = "at"
 payload = '''
+if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+    G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+end
             if
                 (
                     ((G.GAME.round_resets.ante)%(G.GAME.modifiers.cry_big_showdown or G.GAME.win_ante) == 0 and G.GAME.round_resets.ante >= 2) ==
@@ -92,6 +95,9 @@ else
         G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
     end
 end
+if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+    G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+end
 '''
 match_indent = true
 
@@ -102,6 +108,9 @@ target = "game.lua"
 pattern = '''self.GAME.round_resets.blind_choices.Boss = get_new_boss()'''
 position = "before"
 payload = '''
+if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+    G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+end
 if G.GAME.unik_force_epic_plus > 0 then
     self.GAME.round_resets.blind_choices.Small = get_new_boss()
 else
@@ -121,6 +130,9 @@ target = "functions/common_events.lua"
 pattern = '''if G.GAME.round_resets.blind_states.Boss == 'Defeated' then'''
 position = "after"
 payload = '''
+if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+    G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+end
 if G.GAME.unik_force_epic_plus > 0 then
     G.GAME.round_resets.blind_choices.Small = get_new_boss()
 else

@@ -6,9 +6,9 @@ SMODS.Enhancement {
 	not_stoned = true,
 	overrides_base_rank = true, --enhancement do not generate in grim, incantation, etc...
 	replace_base_card = true, --So no base chips and no image
-    config = { extra = { Echips = 0.05}, immutable = {base_echips = 1.0} },
+    config = { extra = { Echips = 0.06}, immutable = {base_echips = 1.0} },
     gameset_config = {
-		modest = { extra = {Echips = 0.02}, immutable = {base_echips = 1.0} },
+		modest = { extra = {Echips = 0.03}, immutable = {base_echips = 1.0} },
 	},
     weight = 0,
     shatters = true, --lefunny
@@ -79,7 +79,7 @@ function Card:get_baseValOverride()
     if Cryptid.cry_enhancement_has_specific_rank(self) and not self.vampired then
 		--Get the max value + 1, to always be the last at the list
         if self.config.center.key == "m_unik_pink" then
-            return 7
+            return '7'
         end
 	end
     return self.base.value

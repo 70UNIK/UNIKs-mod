@@ -1,6 +1,9 @@
 -- --OIL LUMP
 -- Now fixed:
-SMODS.Joker:take_ownership("cry_oil_lamp", {
+
+-- Based on:
+-- https://github.com/SpectralPack/Cryptid/tree/99df47a6f6c769ab7f1fdf81ebf3575f6bf2f1e3
+SMODS.Joker:take_ownership("j_cry_oil_lamp", {
 	immutable = true,
     calculate = function(self, card, context)
 		if
@@ -194,14 +197,128 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 	end,
 }, true)
 
--- --After a test run with gemini and primus on wormhole, I can conclude that it NEEDS a bit of a nerf, something like capping at X10 modifiers.
--- ---(essentially capping at 20X for a single joker. Huge still, especially for the likes of exponents and you can blueprint it), 
--- --forcing you to only apply it to the joker that will benefit you the most. Still will be 2X.
+-- --After a test run with gemini and primus on wormhole, I can conclude that it NEEDS a bit of a nerf, something like capping at X10.
+
+SMODS.Joker:take_ownership("j_cry_gemino", {
+	config = {extra = {multiplier = 1.5}},
+	immutable = true,
+	loc_vars = function(self, info_queue, card)
+		card.ability.blueprint_compat_ui = card.ability.blueprint_compat_ui or ""
+		card.ability.blueprint_compat_check = nil
+		return {
+			main_end = (card.area and card.area == G.jokers) and {
+				{
+					n = G.UIT.C,
+					config = { align = "bm", minh = 0.4 },
+					nodes = {
+						{
+							n = G.UIT.C,
+							config = {
+								ref_table = card,
+								align = "m",
+								colour = G.C.JOKER_GREY,
+								r = 0.05,
+								padding = 0.06,
+								func = "blueprint_compat",
+							},
+							nodes = {
+								{
+									n = G.UIT.T,
+									config = {
+										ref_table = card.ability,
+										ref_value = "blueprint_compat_ui",
+										colour = G.C.UI.TEXT_LIGHT,
+										scale = 0.32 * 0.8,
+									},
+								},
+							},
+						},
+					},
+				},
+			} or nil,
+			key = 'j_cry_gemini_reworked',
+			vars = {card.ability.extra.multiplier,card.ability.extra.multiplier * 7}
+		}
+	end,
+	update = function(self, card, front)
+		if G.STAGE == G.STAGES.RUN then
+			other_joker = G.jokers.cards[1]
+			if other_joker and other_joker ~= card and not (Card.no(other_joker, "immutable", true)) then
+				if not other_joker.ability.cry_gemini_times or other_joker.ability.cry_gemini_times < 7 then
+					card.ability.blueprint_compat = "compatible"
+				else
+					card.ability.blueprint_compat = "incompatible"
+				end
+			else
+				card.ability.blueprint_compat = "incompatible"
+			end
+		end
+	end,
+	calculate = function(self, card2, context)
+		if (context.end_of_round and not context.repetition and not context.individual) or context.forcetrigger then
+			local check = false
+			local card = G.jokers.cards[1]
+			card.ability.cry_gemini_times = card.ability.cry_gemini_times or 0
+			if card.ability.cry_gemini_times < 7 then
+				if not Card.no(G.jokers.cards[1], "immutable", true) then
+					Cryptid.manipulate(G.jokers.cards[1], { value = card2.ability.extra.multiplier })
+					check = true
+				end
+				card.ability.cry_gemini_times = card.ability.cry_gemini_times + 1
+				if check then
+					card_eval_status_text(
+						context.blueprint_card or card2,
+						"extra",
+						nil,
+						nil,
+						nil,
+						{ message = localize("k_upgrade_ex"), colour = G.C.GREEN }
+					)
+				end
+			end
+			return nil, true
+		end
+	end,
+}, true)
+
+--double scale fix(?)
+SMODS.Joker:take_ownership("j_cry_Double Scale",{
+	calc_scaling = function(self, card, other, current_scaling, current_scalar, args)
+		if to_big(card.ability.times_current) >= to_big(card.ability.times_needed) then
+			card.ability.times_current = card.ability.times_current - card.ability.times_needed
+		else
+			return {
+				message = number_format(card.ability.times_current) .. "/" .. number_format(card.ability.times_needed),
+			}
+		end
+		if not G.GAME.cryptid_base_scales then
+			G.GAME.cryptid_base_scales = {}
+		end
+		if not G.GAME.cryptid_base_scales[other.config.center.key] then
+			G.GAME.cryptid_base_scales[other.config.center.key] = {}
+		end
+		if not G.GAME.cryptid_base_scales[other.config.center.key][args.scalar_value] then
+			G.GAME.cryptid_base_scales[other.config.center.key][args.scalar_value] = current_scalar
+		end
+		local true_base = G.GAME.cryptid_base_scales[other.config.center.key][args.scalar_value]
+		local orig_scale_scale = current_scaling
+		if Cryptid.gameset(self) == "exp_modest" then
+			return {
+				scalar_value = lenient_bignum(to_big(true_base) * 2),
+				message = localize("k_upgrade_ex"),
+			}
+		end
+		return {
+			scalar_value = lenient_bignum(orig_scale_scale + to_big(true_base)),
+			message = localize("k_upgrade_ex"),
+		}
+	end,
+}, true)
 
 --CHUD is literally 2 brainstorms in 1
 SMODS.Joker:take_ownership("j_cry_chad",{
     rarity = 'cry_epic',
-	cost = 14,
+	cost = 16,
 }, true)
 --canfas is legendary and relies on unique rarities
 SMODS.Joker:take_ownership("j_cry_canvas",{
@@ -210,11 +327,13 @@ SMODS.Joker:take_ownership("j_cry_canvas",{
 	loc_vars = function(self, info_queue, center)
 		local num_retriggers = 0
 		local blacklistedRarities = {1}
+		local max_retriggers = 5
 		num_retriggers = num_retriggers + center:jokerRaritiesDir(false,true,blacklistedRarities)
 		if Card.get_gameset(center) == "modest" then
 			num_retriggers = math.min(2,num_retriggers)
+			max_retriggers = 2
 		end
-		return { key = Cryptid.gameset_loc(self, { modest = "modest", mainline = "mainline" }),vars={num_retriggers} }
+		return { key = Cryptid.gameset_loc(self, { modest = "modest", mainline = "mainline" }),vars={num_retriggers,max_retriggers} }
 	end,
 	calculate = function(self, card, context)
 		if context.retrigger_joker_check and not context.retrigger_joker then
@@ -237,7 +356,7 @@ SMODS.Joker:take_ownership("j_cry_canvas",{
 			then
 				return {
 					message = localize("k_again_ex"),
-					repetitions = Card.get_gameset(card) ~= "modest" and num_retriggers or math.min(2, num_retriggers),
+					repetitions = Card.get_gameset(card) ~= "modest" and math.min(5,num_retriggers) or math.min(2, num_retriggers),
 					card = card,
 				}
 			end
@@ -535,33 +654,6 @@ SMODS.Joker:take_ownership("j_cry_oldcandy",{
 		mainline = { extra = {hand_size = 2}},
 	},
 }, true)
-
-
-function calculate_reroll_cost(skip_increment,madness)
-	if not G.GAME.current_round.free_rerolls or G.GAME.current_round.free_rerolls < 0 then
-		G.GAME.current_round.free_rerolls = 0
-	end
-	if (madness and next(find_joker("cry-crustulum"))) or G.GAME.current_round.free_rerolls > 0 then
-		G.GAME.current_round.reroll_cost = 0
-		return
-	end
-	if next(find_joker("cry-candybuttons")) then
-		G.GAME.current_round.reroll_cost = 1
-		return
-	end
-	if G.GAME.used_vouchers.v_cry_rerollexchange then
-		G.GAME.current_round.reroll_cost = 2
-		return
-	end
-	G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase or 0
-	if not skip_increment then
-		G.GAME.current_round.reroll_cost_increase = G.GAME.current_round.reroll_cost_increase
-			+ (G.GAME.modifiers.cry_reroll_scaling or 1)
-	end
-	G.GAME.current_round.reroll_cost = (G.GAME.round_resets.temp_reroll_cost or G.GAME.round_resets.reroll_cost)
-		+ G.GAME.current_round.reroll_cost_increase
-end
-
 --Tier 3 reroll voucher rework:
 --Rerolls increase price by $1 every 3 rerolls.
 
@@ -852,7 +944,26 @@ SMODS.Consumable:take_ownership("c_cry_pointer",{
 			key = Cryptid.gameset_loc(self, {modest = "no_dupe", mainline = "no_dupe"}), 
 		}
 	end,
+	use = function(self, card, area, copier)
+		-- dont copy point
+		-- if not card.ability.cry_multiuse or to_big(card.ability.cry_multiuse) <= to_big(1) then
+		-- 	G.GAME.CODE_DESTROY_CARD = copy_card(card)
+		-- 	G.consumeables:emplace(G.GAME.CODE_DESTROY_CARD)
+		-- else
+		-- 	card.ability.cry_multiuse = card.ability.cry_multiuse + 1
+		-- end
+		G.GAME.USING_CODE = true
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				G.GAME.USING_POINTER = true
+				G.FUNCS.overlay_menu({ definition = create_UIBox_your_collection() })
+				return true
+			end,
+		}))
+		G.GAME.POINTER_SUBMENU = nil
+	end,
 }, true)
+
 
 --starfruit should suicide itself if force triggered, starts at a much more reasonable ^1.5 emult and is immutable. Oh and it can be autocannibal food
 SMODS.Joker:take_ownership("j_cry_starfruit",{
@@ -943,6 +1054,51 @@ SMODS.Joker:take_ownership("j_cry_magnet",{
 	end,
 }, true)
 
+--Notebook: Caps at 6 slots.
+SMODS.Joker:take_ownership("j_cry_notebook",{
+	config = {
+		extra = {
+			add = 1,
+			odds = 7,
+			jollies = 4,
+			check = true,
+			active = "Active",
+			inactive = "",
+		},
+		immutable = {
+			slots = 0,
+			max_slots = 6,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.j_jolly
+		local num, denom =
+			SMODS.get_probability_vars(card, 1, card and card.ability.extra.odds or self.config.extra.odds)
+		return {
+			key = "j_cry_notebook_balanced",
+			vars = {
+				num,
+				denom,
+				number_format(card.ability.immutable.slots),
+				number_format(card.ability.extra.active),
+				number_format(card.ability.extra.jollies),
+				number_format(card.ability.extra.add),
+				number_format(card.ability.immutable.max_slots),
+			},
+		}
+	end,
+}, true)
+
+SMODS.Edition:take_ownership("e_cry_astral",{
+	no_pointer = true,
+	no_code = true,
+}, true)
+
+SMODS.Edition:take_ownership("e_negative",{
+	no_pointer = true,
+	no_code = true,
+}, true)
+
 SMODS.Edition:take_ownership("e_cry_glass",{
 	config = { x_mult = 3, prob = 1, odds = 8, trigger = nil },
 	loc_vars = function(self, info_queue, card)
@@ -983,6 +1139,7 @@ SMODS.Edition:take_ownership("e_cry_glass",{
 						delay = 0.3,
 						blockable = false,
 						func = function()
+							card.ability.shattered = true
 							card.debuff = true
 							G.jokers:remove_card(card)
 							card:shatter()
@@ -1035,6 +1192,174 @@ SMODS.Edition:take_ownership("e_cry_glass",{
 		end
 	end,
 }, true)
+--M stack, because I created a broken run with this, I have to amend it to have increasing sell reqs, like 2 retriggers outclasses Exposed, 3 outclasses mask and NSNM and 4 is insane. 6 is beyond so its capped at such.
+
+SMODS.Joker:take_ownership("j_cry_mstack",{
+	config = {
+		extra = {
+			sell = 0,
+			sell_req = 3,
+			retriggers = 1,
+			check = false,
+		},
+		immutable = {
+			req_increase = 1.75,
+			max_retriggers = 6,
+		},
+	},
+	loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.j_jolly
+		return {
+			key = 'j_cry_mstack_balanced',
+			vars = {
+				number_format(math.min(center.ability.extra.retriggers, center.ability.immutable.max_retriggers)),
+				number_format(center.ability.extra.sell_req),
+				number_format(center.ability.extra.sell),
+				number_format(center.ability.immutable.req_increase),
+				number_format(center.ability.immutable.max_retriggers),
+			},
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.repetition then
+			if context.cardarea == G.play then
+				return {
+					message = localize("k_again_ex"),
+					repetitions = to_number(
+						math.min(card.ability.extra.retriggers, card.ability.immutable.max_retriggers)
+					),
+					card = card,
+				}
+			end
+		end
+
+		if
+			context.selling_card
+			and context.card:is_jolly()
+			and not context.blueprint
+			and not context.retrigger_joker
+		then
+			card.ability.extra.check = true
+			if to_big(card.ability.extra.sell) + 1 >= to_big(card.ability.extra.sell_req) then
+				if not context.blueprint or context.retrigger_joker then
+					card.ability.extra.retriggers = lenient_bignum(to_big(card.ability.extra.retriggers) + 1)
+					card.ability.extra.sell_req = math.ceil(card.ability.extra.sell_req * card.ability.immutable.req_increase)
+				end
+				card.ability.extra.sell = 0
+				return {
+					card_eval_status_text(card, "extra", nil, nil, nil, {
+						message = localize("k_upgrade_ex"),
+						colour = G.C.FILTER,
+					}),
+				}
+			else
+				card.ability.extra.sell = card.ability.extra.sell + 1
+				return {
+					card_eval_status_text(card, "extra", nil, nil, nil, {
+						message = number_format(card.ability.extra.sell) .. "/" .. number_format(
+							card.ability.extra.sell_req
+						),
+						colour = G.C.FILTER,
+					}),
+				}
+			end
+		end
+	end,
+}, true)
+
+--Speculo:
+--create negative niko copies of up to 4 random unique jokers.
+SMODS.Joker:take_ownership("j_cry_speculo",{
+	config = {
+		extra = {
+			jokers = 4,
+		},
+	},
+	immutable = true,
+	loc_vars = function(self, info_queue, center)
+		if not center.edition or (center.edition and not center.edition.negative) then
+			info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+		end
+		if not center.ability.niko then
+			info_queue[#info_queue + 1] = { set = "Other", key = "unik_niko" }
+		end
+		return {
+			key = 'j_cry_speculo_balanced',
+			vars = {
+				center.ability.extra.jokers;
+			}
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.ending_shop or context.forcetrigger then
+			for z = 1, card.ability.extra.jokers do
+				local eligibleJokers = {}
+				for i = 1, #G.jokers.cards do
+					if not G.jokers.cards[i].ability.spawned_from_speculo and G.jokers.cards[i].ability.name ~= card.ability.name and G.jokers.cards[i].ability.set == "Joker" then
+						eligibleJokers[#eligibleJokers + 1] = G.jokers.cards[i]
+					end
+				end
+				if #eligibleJokers > 0 then
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							local card = copy_card(pseudorandom_element(eligibleJokers, pseudoseed("cry_speculo")), nil)
+							card:set_edition({ negative = true }, true)
+							card:add_to_deck()
+							card.ability.unik_niko = true
+							card.ability.spawned_from_speculo = true
+							G.jokers:emplace(card)
+							return true
+						end,
+					}))
+					card_eval_status_text(
+						context.blueprint_card or card,
+						"extra",
+						nil,
+						nil,
+						nil,
+						{ message = localize("k_duplicated_ex") }
+					)
+					
+				end
+			end
+			return
+		end
+	end,
+}, true)
+--Ace auilibrium: jokers are not negative  and require room.
+SMODS.Joker:take_ownership("j_cry_equilib",{
+	loc_vars = function(self, info_queue, center)
+		local joker_generated = "???"
+		if G.GAME.aequilibriumkey and G.GAME.aequilibriumkey > 1 then
+			joker_generated = localize({
+				type = "name_text",
+				set = "Joker",
+				key = G.P_CENTER_POOLS["Joker"][math.floor(G.GAME.aequilibriumkey or 1) - 1].key,
+			})
+		end
+		return { key = 'j_cry_equilib_balanced',vars = { math.floor(math.min(25, center.ability.extra.jokers)), joker_generated } }
+	end,
+	--lready there but crash fix
+	calculate = function(self, card, context)
+		if
+			(context.cardarea == G.jokers and context.before and not context.retrigger_joker) or context.forcetrigger
+		then
+			for i = 1, math.floor(math.min(25, card.ability.extra.jokers)) do
+				if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+					local newcard = create_card("Joker", G.jokers, nil, nil, nil, nil, nil)
+					newcard:add_to_deck()
+					G.jokers:emplace(newcard)
+					G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+				end
+			end
+			G.GAME.joker_buffer = 0
+			return nil, true
+		end
+	end,
+}, true)
+
+--Google play card, yes otherwise X10 mult is OK, but thing is, it outclasses HUGE. So it should be X4 Mult with a chance of X100.
+
 
 function Card:getLeftmostJokerType(rarity,edition)
 	if rarity then
@@ -1095,6 +1420,12 @@ end
 
 SMODS.Joker:take_ownership("j_cry_universe",{
     config = { extra = { emult = 0.1 }, immutable = {base_emult = 1.0} },
+	loc_vars = function(self, info_queue, center)
+		if not center.edition or (center.edition and not center.edition.cry_astral) then
+			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral
+		end
+		return { vars = { number_format(center.ability.extra.emult + center.ability.immutable.base_emult) } }
+	end,
 calculate = function(self, card, context)
 		if
 			context.other_joker
@@ -1513,3 +1844,4 @@ calculate = function(self, card, context)
 
 Cryptid.misprintize_value_blacklist["cry_valuemanip_reset"] = false
 Cryptid.misprintize_value_blacklist["cry_valuemanip2"] = false
+Cryptid.misprintize_value_blacklist["cry_gemini_times"] = false

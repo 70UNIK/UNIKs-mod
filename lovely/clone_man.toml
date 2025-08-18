@@ -26,103 +26,57 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
-pattern = 'if add and not G.GAME.banned_keys[v.key] then'
-position = "after"
+pattern = 'if add and not G.GAME.banned_keys[v.key] then '
+position = "before"
 payload = '''
-local clonemen = {}
+local clonefactor = 0
 if G.jokers and G.jokers.cards then
-    for i,v in pairs(G.jokers.cards) do
-        if v.config.center.key == 'j_unik_cloneman' and not v.debuff then
-            clonemen[#clonemen + 1] = math.min(v.ability.immutable.max_multiplier, v.ability.extra.multiplier)
+    --local eval = {}
+    --SMODS.calculate_context({unik_cloneman = true},eval)
+    --for i = 1, #eval do
+    --    if eval[i].jokers then
+    --        if eval[i].jokers.clone_factor then
+    --            clonefactor = clonefactor + eval[i].jokers.clone_factor
+    --        end
+    --    end        
+    --end
+    for a,b in pairs(G.jokers.cards) do
+        if b.config.center.key == 'j_unik_cloneman' then
+            clonefactor = clonefactor + math.min(b.ability.extra.multiplier,b.ability.immutable.max_multiplier)
         end
     end
 end
-local cloned_jokers = {}
 
-if G.jokers and G.jokers.cards and _type == 'Joker' and rarity2 ~= nil then
-    for i,v in pairs(G.jokers.cards) do
-        if v.config.center.key ~= 'j_unik_cloneman' and v.config.center.rarity == rarity2 and not v.config.center.unique and not v.config.center.hidden and not v.config.center.cloneman_blacklist then
-            local alreadyCloned = false
-            for z,w in pairs(cloned_jokers) do
-                if w == v.config.center.key then
-                    alreadyCloned = true
-                end
-            end
-            if not alreadyCloned then
-                cloned_jokers[#cloned_jokers + 1] = v.config.center.key
-                for i = 1, #clonemen do
-                    for j = 1, math.floor(clonemen[i]) do
-                        _pool[#_pool + 1] = v.config.center.key
-                        _pool_size = _pool_size + 1
-                    end
-                end
-            end
-
-        end
-    end
-end
-local cloned_consumables = {}
-if G.consumeables and G.consumeables.cards and _type ~= nil then
-    for i,v in pairs(G.consumeables.cards) do
-
-        if v.ability.set == _type and not v.config.center.unique and not v.config.center.hidden then
-            local alreadyCloned = false
-            for z,w in pairs(cloned_consumables) do
-                if w == v.config.center.key then
-                    alreadyCloned = true
-                end
-            end
-            if not alreadyCloned then
-                cloned_consumables[#cloned_consumables + 1] = v.config.center.key
-                for i = 1, #clonemen do
-                    for j = 1, math.floor(clonemen[i]) do
-                        _pool[#_pool + 1] = v.config.center.key
-                        _pool_size = _pool_size + 1
-                    end
-                end
-            end
-        end
-    end
-end
 --Pools (meme, M, food)
-local cloned_pool = {}
-if G.consumeables and G.consumeables.cards and G.jokers and G.jokers.cards and _type ~= nil then
-    for i,v in pairs(G.jokers.cards) do
-        if Cryptid.safe_get(v.config.center, "pools", _type) and not v.config.center.unique and not v.config.center.hidden then
-            local alreadyCloned = false
-            for z,w in pairs(cloned_pool) do
-                if w == v.config.center.key then
-                    alreadyCloned = true
+
+local unik_cloned_pool = {}
+if G.jokers and G.jokers.cards and (_type ~= nil or rarity2 ~= nil) then
+    for a,b in pairs(G.jokers.cards) do
+        if v.key ~= 'j_unik_cloneman' and v.key == b.config.center.key and not unik_cloned_pool[v.key] and not b.config.center.unique and not b.config.center.hidden then
+         unik_cloned_pool[v.key] = true
+                for y = 1, clonefactor do
+                    _pool[#_pool + 1] = v.key
+                    _pool_size = _pool_size + 1
+                    --print(v.key .. y)
                 end
-            end
-            if not alreadyCloned then
-                cloned_pool[#cloned_pool + 1] = v.config.center.key
-                for i = 1, #clonemen do
-                    for j = 1, math.floor(clonemen[i]) do
-                        _pool[#_pool + 1] = v.config.center.key
-                        _pool_size = _pool_size + 1
-                    end
-                end
-            end
+            
+        elseif v.key == b.config.center.key and not b.config.center.unique and not b.config.center.hidden then
+            --print("already")
         end
     end
-    for i,v in pairs(G.consumeables.cards) do
-        if Cryptid.safe_get(v.config.center, "pools", _type) and not v.config.center.unique and not v.config.center.hidden  then
-            local alreadyCloned = false
-            for z,w in pairs(cloned_pool) do
-                if w == v.config.center.key then
-                    alreadyCloned = true
+end
+if G.consumeables and G.consumeables.cards and _type ~= nil then
+    for a,b in pairs(G.consumeables.cards) do
+        if v.key == b.config.center.key and not unik_cloned_pool[v.key] and not b.config.center.unique and not b.config.center.hidden then
+            unik_cloned_pool[v.key] = true
+                for y = 1, clonefactor do
+                    _pool[#_pool + 1] = v.key
+                    _pool_size = _pool_size + 1
+                    --print(v.key .. y)
                 end
-            end
-            if not alreadyCloned then
-                cloned_pool[#cloned_pool + 1] = v.config.center.key
-                for i = 1, #clonemen do
-                    for j = 1, math.floor(clonemen[i]) do
-                        _pool[#_pool + 1] = v.config.center.key
-                        _pool_size = _pool_size + 1
-                    end
-                end
-            end
+            
+        elseif v.key == b.config.center.key and not b.config.center.unique and not b.config.center.hidden then
+            --print("already")
         end
     end
 end

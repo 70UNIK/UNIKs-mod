@@ -1,1 +1,0 @@
---create a spectral card on blind select. (EPIC)

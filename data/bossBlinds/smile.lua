@@ -12,6 +12,7 @@ SMODS.Blind{
     set_blind = function(self, reset, silent)
         G.GAME.unik_positive_draw = true
     end,
+    death_message = "special_lose_unik_positive",
     --doesnt actually flip cards
     -- stay_flipped = function(self, area, card)
 	-- 	if

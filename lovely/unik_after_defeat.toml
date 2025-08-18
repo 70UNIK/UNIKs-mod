@@ -17,14 +17,9 @@ payload = '''
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
 local upper22 = G.GAME.chips
 local ceiling22 = G.GAME.blind.chips^2
-local ceiling222 = G.GAME.blind.chips^2.6
+local ceiling222 = G.GAME.blind.chips^2.5
 --print(upper22)
 --print(ceiling22)
-if to_big(upper22) > to_big(ceiling22) then
-     G.GAME.unik_scores_really_big = G.GAME.unik_scores_really_big + 1
-else
-    G.GAME.unik_scores_really_big = math.max(0,G.GAME.unik_scores_really_big - 1)
-end
 if to_big(upper22) > to_big(ceiling222) then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
     unik_ease_overshoot(1)
@@ -65,6 +60,33 @@ payload = '''
 '''
 match_indent = true
 ### Custom boss blind death messages
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''Jimbo:add_speech_bubble(quip, nil, {quip = true})'''
+position = 'before'
+payload = '''
+if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
+    Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
+else
+
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''Jimbo:add_speech_bubble(quip, nil, {quip = true})'''
+position = 'after'
+payload = '''
+end
+G.GAME.unik_prevent_killing_cursed_jokers2 = nil
+G.GAME.unik_deathly_debuff_text = nil
+'''
+match_indent = true
+
+
 
 [[patches]]
 [patches.pattern]

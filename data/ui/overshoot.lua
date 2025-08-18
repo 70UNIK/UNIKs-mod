@@ -64,20 +64,75 @@ local ante_modifier = ease_ante
 function ease_ante(mod)
     local newAnteMod = mod
     if newAnteMod > 0 then
-        if G.GAME.OvershootFXVal >= 5 then
-            newAnteMod = newAnteMod + math.max(0,G.GAME.unik_overshoot - 20)
-        elseif G.GAME.OvershootFXVal >= 4 then
-            newAnteMod = newAnteMod + 2
-        elseif G.GAME.OvershootFXVal >= 1 then
-            newAnteMod = newAnteMod + 1
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4 then
+            newAnteMod = newAnteMod + G.GAME.OvershootFXVal + math.max(0,math.floor((G.GAME.unik_overshoot - 20)/2))
+        elseif G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 1 then
+            newAnteMod = newAnteMod + G.GAME.OvershootFXVal
         end
     end
     
     ante_modifier(newAnteMod)
 end
-local function removeFormat(string_in)
-    return string.gsub(string_in, "{.-}", "")
+
+--Taken from VallKarri, this is to show how much you need for overshoot to increase so you wont have to hit in the dark
+local fakeupd = Game.update
+function Game:update(dt)
+    fakeupd(self, dt)
+
+    if (G.GAME.blind) then
+
+        if (G.GAME.blind.chips) then
+            local num = number_format(G.GAME.blind.chips^2.5)
+            G.GAME.blind.overshootUIchips = "Overshoot at " .. num
+        else
+            G.GAME.blind.overshootUIchips = ""
+        end
+    end
+
 end
+
+local _create_UIBox_HUD_blind = create_UIBox_HUD_blind
+function create_UIBox_HUD_blind()
+    local ret = _create_UIBox_HUD_blind()
+
+
+    -- if (not G.GAME.blind.boss) then
+    --     return ret
+    -- end
+
+    local node = ret.nodes[2]
+    node.nodes[#node.nodes + 1] = {
+        n = G.UIT.R,
+        config = { align = "cm", minh = 0.3, r = 0.1, emboss = 0.05, colour = G.C.DYN_UI.MAIN },
+        nodes = {
+            {
+                n = G.UIT.C,
+                config = { align = "cm", minw = 3 },
+                nodes = {
+                    {
+                        n = G.UIT.O,
+                        config = {
+                            object = DynaText({
+                                string = { { ref_table = G.GAME.blind, ref_value = "overshootUIchips"} },
+                                colours = { G.C.UI.TEXT_LIGHT },
+                                shadow = true,
+                                float = true,
+                                scale = 0.25,
+
+                            }),
+                            id = "overshoot_chips_UI",
+                        },
+                    },
+                },
+            },
+        },
+    }
+    return ret
+end
+
+-- local function removeFormat(string_in)
+--     return string.gsub(string_in, "{.-}", "")
+-- end
 
 --Taken from aikoyoris for overshoot hover FX
 -- UNIK.overshoot_ui_add = function(nodes, key, scale)

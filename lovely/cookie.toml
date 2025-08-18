@@ -35,25 +35,49 @@ payload = '''
 		end
 		return mod
 	end,
-	unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips)
+	unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+		local debuff2 = true
+		local add_to_blind2 = 0
+		local mult2 = mult
+		local chips2 = hand_chips
 		for k, _ in pairs(G.GAME.defeated_blinds) do
 			s = G.P_BLINDS[k]
 			if s.unik_debuff_after_hand then
-				return s:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips)
+				local struct = s:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+				if struct.debuff then
+					if struct.debuff == true then
+						debuff2 = true
+					end
+				end
+				if struct.add_to_blind then
+					add_to_blind2 = add_to_blind2 + struct.add_to_blind
+				end
+				if struct.mod_mult then
+					mult2 = struct.mod_mult 
+				end
+				if struct.mod_chips then
+					chips2 = struct.mod_chips
+				end
 			end
 		end
 		return {
-            debuff = false,
+            debuff = debuff2,
+			mod_mult = mult2,
+            mod_chips = hand_chips2,
+			add_to_blind = add_to_blind2,
         }
 	end,
 	unik_after_defeat = function(self,chips,blind_size)
+		local bool = false
 		for k, _ in pairs(G.GAME.defeated_blinds) do
 			s = G.P_BLINDS[k]
 			if s.unik_after_defeat then
-				return s:unik_after_defeat(chips,blind_size)
+				if s:unik_after_defeat(chips,blind_size) then
+					bool = true
+				end
 			end
 		end
-		return false
+		return bool
 	end,
 	
 '''

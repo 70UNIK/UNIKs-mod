@@ -2,6 +2,11 @@
 
 --Overriding buffoonery's stakes so it works with vice_squeeze and comes after shitty stake and before pink stake
 SMODS.Stake:take_ownership('stake_buf_spinel', {
+	modifiers = function()
+		G.E_MANAGER:add_event(Event({trigger = 'before',func = function() 
+			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.5)
+		return true end })) 
+    end,
     unlocked_stake = 'cry_ruby',
 })
 -- SMODS.Stake:take_ownership('cry_pink', {
@@ -26,14 +31,16 @@ SMODS.Stake:take_ownership('stake_buf_palladium', {
 -- })
 
 --increase win ante by 1.25X
-SMODS.Stake:take_ownership('stake_cry_ruby', {
- 	applied_stakes = { "buf_spinel" },
-    above_stake = "buf_spinel",
-    prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
-    modifiers = function()
-		G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
-	end,
-})
+-- SMODS.Stake:take_ownership('stake_cry_ruby', {
+--  	applied_stakes = { "buf_spinel" },
+--     above_stake = "buf_spinel",
+--     prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+--     modifiers = function()
+-- 		G.E_MANAGER:add_event(Event({func = function() 
+-- 			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
+-- 		return true end })) 
+-- 	end,
+-- })
 
 SMODS.Stake:take_ownership('stake_cry_horizon', {
     modifiers = function()

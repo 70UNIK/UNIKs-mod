@@ -68,6 +68,8 @@ SMODS.Blind{
                     end
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
+                    G.hand_text_area.blind_chips:juice_up()
+                    play_sound('chips2')
                     G.ROOM.jiggle = G.ROOM.jiggle + 0.5
                     --destroy a random card in hand. Make sure it's not eternal
                     local validCards = {}
