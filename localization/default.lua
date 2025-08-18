@@ -2894,6 +2894,7 @@ return {
 				text = {
 					"{C:attention}Perishable{} Jokers can be {C:attention}Disposable{}",
 					"{s:0.8,C:inactive}({s:0.8,C:red}Destroyed {s:0.8,C:inactive}after round){}",
+                    "{C:attention}Perishable{} Jokers are {C:red}destroyed{} instead of being {C:red}debuffed",
                     '{s:0.8}Applies all previous stakes',
 				},
 			},
@@ -3442,6 +3443,7 @@ return {
             unik_the_descending = "The Descending",
             k_overshoot = "Overshoot",
             k_unik_brain_placeholder = "math.min(Card Selection Limit,Hand Size)",
+            k_unik_perished="Perished!",
                 
         },
         high_scores={},
