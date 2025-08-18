@@ -64,9 +64,9 @@ local ante_modifier = ease_ante
 function ease_ante(mod)
     local newAnteMod = mod
     if newAnteMod > 0 then
-        if G.GAME.OvershootFXVal >= 5 then
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4 then
             newAnteMod = newAnteMod + G.GAME.OvershootFXVal + math.max(0,math.floor((G.GAME.unik_overshoot - 20)/2))
-        elseif G.GAME.OvershootFXVal >= 1 then
+        elseif G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 1 then
             newAnteMod = newAnteMod + G.GAME.OvershootFXVal
         end
     end

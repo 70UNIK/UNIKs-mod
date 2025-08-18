@@ -674,7 +674,7 @@ end
 
 function vice_check()
 	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
-	if G.GAME.OvershootFXVal >= 5 then
+	if G.GAME.OvershootFXVal >= 4 then
 		return 1
 	end
 	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then

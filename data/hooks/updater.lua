@@ -52,12 +52,13 @@ function Game:update(dt)
         G.GAME.OvershootFXVal = 1
     elseif G.GAME.unik_overshoot < 15 then
         G.GAME.OvershootFXVal = 2
-    elseif G.GAME.unik_overshoot < 18 then
-        G.GAME.OvershootFXVal = 3
     elseif G.GAME.unik_overshoot < 20 then
+        G.GAME.OvershootFXVal = 3
+    elseif G.GAME.unik_overshoot < 25 then
         G.GAME.OvershootFXVal = 4
     else
          G.GAME.OvershootFXVal = 5
+         
     end
     return res
 end

@@ -1215,8 +1215,8 @@ SMODS.Joker:take_ownership("j_cry_mstack",{
 				number_format(math.min(center.ability.extra.retriggers, center.ability.immutable.max_retriggers)),
 				number_format(center.ability.extra.sell_req),
 				number_format(center.ability.extra.sell),
-				number_foramt(center.ability.immutable.req_increase),
-				number_foramt(center.ability.immutable.max_retriggers),
+				number_format(center.ability.immutable.req_increase),
+				number_format(center.ability.immutable.max_retriggers),
 			},
 		}
 	end,
