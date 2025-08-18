@@ -40,6 +40,11 @@ function Card:cry_calculate_voucher_perishable()
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
         if self.ability.perish_tally == 1 then
 			self:unredeem()
+            card_eval_status_text(self, "jokers", nil, nil, nil, {
+                message = localize("k_unik_perished"),
+                delay = 0.1 ,
+                colour = G.C.PERISHABLE,
+            })
 		else
 			self.ability.perish_tally = self.ability.perish_tally - 1
 			card_eval_status_text(self, "extra", nil, nil, nil, {
