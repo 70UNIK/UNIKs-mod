@@ -32,12 +32,10 @@ local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
     if G.GAME.unik_xchips_becomes_mult then
         if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
-            amount = amount * 1.5
             key = 'x_mult'
         end
         
         if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
-            amount = amount * 5
             key = 'mult'
         end
         if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then

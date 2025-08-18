@@ -6,9 +6,9 @@ SMODS.Enhancement {
 	not_stoned = true,
 	overrides_base_rank = true, --enhancement do not generate in grim, incantation, etc...
 	replace_base_card = true, --So no base chips and no image
-    config = { extra = { Echips = 0.07}, immutable = {base_echips = 1.0} },
+    config = { extra = { Echips = 0.05}, immutable = {base_echips = 1.0} },
     gameset_config = {
-		modest = { extra = {Echips = 0.04}, immutable = {base_echips = 1.0} },
+		modest = { extra = {Echips = 0.03}, immutable = {base_echips = 1.0} },
 	},
     weight = 0,
     shatters = true, --lefunny

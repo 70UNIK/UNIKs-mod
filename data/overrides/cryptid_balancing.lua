@@ -1,5 +1,8 @@
 -- --OIL LUMP
 -- Now fixed:
+
+-- Based on:
+-- https://github.com/SpectralPack/Cryptid/tree/99df47a6f6c769ab7f1fdf81ebf3575f6bf2f1e3
 SMODS.Joker:take_ownership("j_cry_oil_lamp", {
 	immutable = true,
     calculate = function(self, card, context)
@@ -1159,74 +1162,7 @@ SMODS.Edition:take_ownership("e_cry_glass",{
 		end
 	end,
 }, true)
-
---crusty shit crash fix
-SMODS.Joker:take_ownership("j_cry_crustulum",{
-	calculate = function(self, center, context)
-		if context.reroll_shop and not context.blueprint then
-			center.ability.extra.rerolls_stored = center.ability.extra.rerolls_stored - 1
-			if to_big(center.ability.extra.rerolls_stored) < to_big(0) then
-				center.ability.extra.rerolls_stored = 0
-				calculate_reroll_cost(true)
-			else
-				calculate_reroll_cost(true)
-				return {
-					message = "-1",
-					colour = G.C.DARK_EDITION,
-				}
-			end
-		end
-		if
-			context.end_of_round
-			and not context.blueprint
-			and not context.repetition
-			and not context.retrigger_joker
-			and not context.individual
-		then
-			if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-				SMODS.add_card({
-					set = "Food",
-					area = G.jokers,
-				})
-			end
-		end
-		if context.food_joker_expired then
-			center.ability.extra.rerolls_stored = center.ability.extra.rerolls_stored + center.ability.extra.rerolls_per
-			local msg = SMODS.scale_card(center, {
-				ref_table = center.ability.extra,
-				ref_value = "rerolls_stored",
-				scalar_value = "rerolls_per",
-			})
-			if not msg or type(msg) == "string" then
-				return {
-					message = msg or localize("k_upgrade_ex"),
-					colour = G.C.DARK_EDITION,
-				}
-			end
-		end
-		if context.forcetrigger then
-			center.ability.extra.rerolls_stored = center.ability.extra.rerolls_stored
-				+ center.abilities.extra.rerolls_per
-			if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-				SMODS.add_card({
-					set = "Food",
-					area = G.jokers,
-				})
-			end
-			local msg = SMODS.scale_card(center, {
-				ref_table = center.ability.extra,
-				ref_value = "rerolls_stored",
-				scalar_value = "rerolls_per",
-			})
-			if not msg or type(msg) == "string" then
-				return {
-					message = msg or localize("k_upgrade_ex"),
-					colour = G.C.DARK_EDITION,
-				}
-			end
-		end
-	end,
-}, true)
+--M stack, because I created a broken run with this, I have to amend it to have starting reqs be 6, then increase by ^1.3, rounded up because otherwise it becomes utterly broken.
 
 function Card:getLeftmostJokerType(rarity,edition)
 	if rarity then

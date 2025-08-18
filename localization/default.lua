@@ -103,8 +103,6 @@ return {
                 text = {
                     "Xchips and higher operations",
                     "become lower Mult operations", --in reference to "Xchips already exists, it's called mult", hence the effect.
-                    "(^chips becomes Xmult x 1.5)",
-                    "(Xchips becomex mult x 5)",
                 }
             },
 
