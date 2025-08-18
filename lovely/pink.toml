@@ -43,8 +43,8 @@ match_indent = true
 ## castle2: ignore pink cards
 [[patches]]
 [patches.pattern]
-target = '''=[SMODS Cryptid "lib/overrides.lua]'''
-pattern = "valid_castle_cards[#valid_castle_cards + 1] = v"
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''valid_castle_cards[#valid_castle_cards + 1] = v'''
 position = "before"
 payload = '''
     if not SMODS.has_enhancement(v, "m_unik_pink") then
@@ -52,8 +52,8 @@ payload = '''
 match_indent = true
 [[patches]]
 [patches.pattern]
-target = '''=[SMODS Cryptid "lib/overrides.lua]'''
-pattern = "valid_castle_cards[#valid_castle_cards + 1] = v"
+target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
+pattern = '''valid_castle_cards[#valid_castle_cards + 1] = v'''
 position = "after"
 payload = '''
     end

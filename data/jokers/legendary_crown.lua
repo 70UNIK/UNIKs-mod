@@ -31,6 +31,8 @@ SMODS.Joker {
       extra = {Emult = 0.0, Emult_mod = 0.15},
       immutable = {base_emult = 1.0}
     },
+    no_pointer = true,
+    no_code = true,
     loc_vars = function(self, info_queue, center)
         local BlindSize = 0
         local quoteset = 'normal'

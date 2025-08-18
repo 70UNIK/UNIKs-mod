@@ -33,6 +33,7 @@ SMODS.Joker {
     config = { extra = {retriggers = 1,decrease = 0.1},immutable = {max_retriggers = 50, max_decrease = 0.5} },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_cry_light
         return { 
             vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers),1-math.min(center.ability.extra.decrease,center.ability.immutable.max_decrease)
         ,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),

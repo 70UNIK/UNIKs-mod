@@ -2357,28 +2357,8 @@ return {
 					"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)",
 				},
 			},
+
             
-            -- --not banning it entirely like almanac, but removing all chip bonuses and making it purely reroll focused., And only 30 rerolls.
-            -- j_cry_crustulum_mainline = {
-			-- 	name = "Crustulum",
-			-- 	text = {
-			-- 		-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
-			-- 		-- "per {C:attention}reroll{} in the shop",
-			-- 		"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
-            --         "per shop",
-			-- 		-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
-			-- 	},
-			-- },
-            -- j_cry_crustulum_modest = {
-			-- 	name = "Crustulum",
-			-- 	text = {
-			-- 		-- "This Joker gains {C:chips}+#2#{} Chip#<s>2#",
-			-- 		-- "per {C:attention}reroll{} in the shop",
-			-- 		"{C:attention}#1#{} free {C:green}reroll#<s>1#{}",
-            --         "per shop",
-			-- 		-- "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chip#<s>1#)",
-			-- 	},
-			-- },
             j_cry_cotton_candy_balanced = {
 				name = "Cotton Candy",
 				text = {
@@ -2386,6 +2366,41 @@ return {
 					"it's right becomes {C:dark_edition}Negative{}",
 				},
 			},
+
+            j_cry_mstack_balanced = {
+				name = "M Stack",
+				text = {
+					"Retrigger all cards played",
+					"once for every",
+					"{C:attention}#2#{} {C:inactive}[#3#]{} {C:attention}Jolly Joker#<s>2#{} sold",
+                    "{s:0.7,C:inactive}(Requirements increase by {s:0.7,X:red,C:white}X#4#{s:0.7,C:inactive} per upgrade){}",
+                    "{C:inactive}(Capped at {C:attention:}#5#{}{C:inactive} retriggers){}",
+					"{C:inactive}(Currently{}{C:attention:} #1#{}{C:inactive} retriggers){}",
+				},
+			},
+            --create 4 random disposable copies, randomly selecting a joker owned.
+            j_cry_speculo_balanced = {
+                name = "Speculo",
+				text = {
+					"Creates #1# {C:red}Niko{} {C:dark_edition}Negative{} copies",
+					"of any random {C:attention}Jokers{} owned",
+					"at the end of the {C:attention}shop",
+					"{C:inactive,s:0.8}Does not copy other Speculo{}",
+				},
+            },
+            j_cry_equilib_balanced = {
+				name = "Ace Aequilibrium",
+				text = {
+					"Jokers appear using the",
+					"order from the {C:attention}Collection{}",
+					"Create {C:attention}#1#{} Joker#<s>1#",
+					"when hand is played",
+                    "{C:inactive}(Must have room)",
+					"{C:cry_exotic,s:0.8}Exotic {C:inactive,s:0.8}or better Jokers cannot appear",
+					"{s:0.8}Last Joker Generated: {C:attention,s:0.8}#2#",
+				},
+			},
+
             --Proper depleted loc
             --Clicked cookie
             j_cry_clicked_cookie2 = {
