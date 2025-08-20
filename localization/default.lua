@@ -2213,6 +2213,14 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                 }
             },
+            j_cry_astral_in_a_bottle_but_not_cursed = {
+                name = "Astral in a Bottle",
+				text = {
+					"When sold, apply {C:dark_edition}Astral{}",
+					"and {C:purple}Limited Edition{} to",
+					"a random {C:attention}Joker{}",
+				},
+            },
             
 
             -- j_cry_oldinvisible = {
@@ -2735,7 +2743,14 @@ return {
                     "{C:inactive}Does nothing",
                 }
             },
-
+            unik_limited_edition = {
+                name = "Limited Edition",
+                text = {
+                    "Strips edition",
+                    "after {C:attention}#1#{} rounds",
+                    "{C:inactive}({C:attention}#2#{C:inactive} remaining)",
+                }
+            },
             unik_status_trigger={
                 name = "Status Trigger",
                 text = {
@@ -3477,6 +3492,7 @@ return {
             unik_triggering = "Triggering",
             unik_ultradebuffed = "Ultradebuffed",
             unik_baseless = "Baseless",
+            unik_limited_edition = "Limited Edition",
         },
         poker_hand_descriptions={},
         poker_hands={},
