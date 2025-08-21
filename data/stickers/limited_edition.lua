@@ -22,20 +22,24 @@ function Card:calculate_limited_edition()
         self.ability.limited_edition_tally = nil;
     else
         if self.ability.unik_limited_edition and not self.ability.limited_edition_tally then self.ability.limited_edition_tally = G.GAME.unik_limited_edition_rounds end
-        if self.ability.limited_edition_tally == 1 then
-            self.limited_edition_tally = 0
-            self:set_edition(nil, true);
-            self.ability.unik_limited_edition = nil;
-            self.ability.limited_edition_tally = nil;
-            card_eval_status_text(self, "jokers", nil, nil, nil, {
-                message = localize("k_unik_orta_hammer_stripped"),
-                delay = 0.25 ,
-                colour = HEX("9834eb"),
-            })
-        else
-            self.ability.limited_edition_tally = self.ability.limited_edition_tally - 1
-            card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={self.ability.limited_edition_tally}},colour = HEX("9834eb"), delay = 0.45})
+        if self.ability.unik_limited_edition then
+            if self.ability.limited_edition_tally == 1 then
+                self.ability.limited_edition_tally = 0
+                self:set_edition(nil, true);
+                self.ability.unik_limited_edition = nil;
+                self.ability.limited_edition_tally = nil;
+                card_eval_status_text(self, "jokers", nil, nil, nil, {
+                    message = localize("k_unik_orta_hammer_stripped"),
+                    delay = 0.25 ,
+                    colour = HEX("9834eb"),
+                })
+            else
+                self.ability.limited_edition_tally =  self.ability.limited_edition_tally or G.GAME.unik_limited_edition_rounds 
+                self.ability.limited_edition_tally = self.ability.limited_edition_tally - 1
+                card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={self.ability.limited_edition_tally}},colour = HEX("9834eb"), delay = 0.45})
+            end
         end
+        
     end
     
 end
