@@ -13,7 +13,7 @@ SMODS.Challenge{
 	},
 	jokers = {
         { id = "j_golden"},
-        { id = "j_unik_pibby", stickers = { "cry_absolute" }},
+        { id = "j_unik_poppy", stickers = { "cry_absolute" }},
         
     },
     consumeables = {
