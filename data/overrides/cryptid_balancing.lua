@@ -1288,11 +1288,11 @@ SMODS.Joker:take_ownership("j_cry_mstack",{
 }, true)
 
 --Speculo:
---create negative niko copies of up to 4 random unique jokers.
+--create negative niko copies of up to 3 random unique jokers.
 SMODS.Joker:take_ownership("j_cry_speculo",{
 	config = {
 		extra = {
-			jokers = 4,
+			jokers = 3,
 		},
 	},
 	immutable = true,

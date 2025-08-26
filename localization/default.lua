@@ -2787,87 +2787,18 @@ return {
                     "{C:inactive}(Sticker removed after {C:cry_code}#2#{C:inactive} trigger#<s>2#){}",
 				},
 			},
-
-        },
-        OvershootFX = {
-            overshoot_unik_0 = {
-                name = "Overshoot",
+            --To better inform people on poppy's mechanics.
+            unik_hands_lost = {
+                name = "Hands/Discards lost",
                 text = {
-                    "No effects",
-                    "{C:inactive}Ensure you score below",
-                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs at all times!",
-                    "Next effect at {C:red}6:",
-                    "{C:red}+1{} Ante per {C:attention}ante increase",
-                },
-            },
-            overshoot_unik_1 = {
-                name = "Overshoot",
-                text = {
-                    "{C:red}+1{} Ante per {C:attention}ante increase",
-                    "{C:inactive}Ensure you score below",
-                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
-                    "Next effect at {C:red}10:",
-                    "{C:red}Epic Blinds{} may appear",
-                    "after round {C:attention}40",
+                    "{C:blue}Hands{}/{C:red}Discards{C:attention} lost{} is",
+                    "almost the same as ",
+                    "{C:blue}Hands{}/{C:red}Discards {C:attention}used",
+                    "but also triggers when",
+                    "Blinds {C:attention}remove{} {C:blue}Hands{} or {C:red}Discards",
                 }
-            },
-            overshoot_unik_2 = {
-                name = "Overshoot",
-                text = {
-                    "{C:red}+1{} Ante per {C:attention}ante increase",
-                    "{C:red}Epic Blinds{} may appear",
-                    "after round {C:attention}40",
-                    "{C:inactive}Ensure you score below",
-                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
-                    "Next effect at {C:red}15:",
-                    "{C:red}Legendary Blinds{} may appear",
-                    "after round {C:attention}90",
-                }
-            },
-            overshoot_unik_3 = {
-                name = "Overshoot",
-                text = {
-                    "{C:red}+1{} Ante per {C:attention}ante increase",
-                    "{C:red}Epic Blinds{} may appear",
-                    "after round {C:attention}40",
-                    "{C:red}Legendary Blinds{} may appear",
-                    "after round {C:attention}90",
-                    "{C:inactive}Ensure you score below",
-                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
-                    "Next effect at {C:red}18:",
-                    "{C:red}+1{} Ante per {C:attention}ante increase",
-                }
-            },
-            overshoot_unik_4 = {
-                name = "Overshoot",
-                text = {
-                    "{C:red}+2{} Ante per {C:attention}ante increase",
-                    "{C:red}Epic Blinds{} may appear",
-                    "after round {C:attention}40",
-                    "{C:red}Legendary Blinds{} may appear",
-                    "after round {C:attention}90",
-                    "{C:inactive}Ensure you score below",
-                    "{X:dark_edition,C:white}^2.5{C:inactive} reqs to lower this!",
-                    "Next effect at {C:red}20:",
-                    "Finisher Blinds {C:red}replace{} {C:attention}Boss{} blinds",
-                    "When ante is increased,",
-                    "add ante equal to (overshoot - 20)",
-                }
-            },
-            overshoot_unik_5 = {
-                name = "Overshoot",
-                text = {
-                    "{C:red}+2{} Ante per {C:attention}ante increase",
-                    "{C:red}Epic Blinds{} may appear",
-                    "after round {C:attention}40",
-                    "{C:red}Legendary Blinds{} may appear",
-                    "after round {C:attention}90",
-                    "Finisher Blinds {C:red}replace{} {C:attention}Boss{} blinds",
-                    "When ante is {C:attention}increased,",
-                    "{C:red}add{} ante equal to {C:attention}(overshoot - 20)",
-                    "{C:red}Lower your score or suffer.",
-                }
-            },
+            }
+            
         },
         Planet={},
         Spectral={
@@ -3237,6 +3168,41 @@ return {
         },
         collabs={},
         dictionary={
+
+            overshoot_unik_0 = {
+                "No effects",
+                "Make sure to not score",
+                "too high too many times...",
+            },
+            overshoot_unik_1 = {
+                "+1 Ante every 5 Overshoot",
+            },
+            overshoot_unik_2 = {
+                "+1 Ante every 5 Overshoot",
+                "Epic Blinds can spawn",
+                "after round 40",
+            },
+            overshoot_unik_3 = {
+                "+1 Ante every 5 Overshoot",
+                "Epic Blinds can spawn anytime",
+                "Legendary Blinds can spawn",
+                "after round 40",
+            },
+            overshoot_unik_4 = {
+                "+1 Ante every 5 Overshoot",
+                "Epic Blinds can spawn anytime",
+                "Legendary Blinds can spawn anytime",
+                "+1 ante per overshoot over 20",
+                "All Boss Blinds are Finishers"
+            },
+            overshoot_unik_5 = {
+                "+1 Ante every 5 Overshoot",
+                "Epic Blinds can spawn anytime",
+                "Legendary Blinds can spawn anytime",
+                "+1 ante per overshoot over 20",
+                "All Blinds are Epic+ Blinds"
+            },
+
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",

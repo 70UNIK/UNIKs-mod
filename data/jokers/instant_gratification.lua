@@ -1,0 +1,1 @@
+--$2 per discard lost this round at 0 discards

@@ -1,0 +1,1 @@
+--Lose $1 per card played. Self destructs after gaining more than $10 in a hand.

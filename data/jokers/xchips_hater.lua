@@ -1,0 +1,1 @@
+--XCHIPS IS NOT VANILLA! - if an exchips joker+ is triggered, it is destroyed instead of scoring. self destructs if no xchips triggers occur for the next 6 consecutive rounds.

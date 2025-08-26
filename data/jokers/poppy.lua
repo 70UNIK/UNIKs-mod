@@ -33,6 +33,8 @@ SMODS.Joker {
     config = { extra = {retriggers = 0},immutable = { max_retriggers = 100,discarders = 0 }},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
+        --explaining her mechanics
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_hands_lost" }
         return { 
             vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers),localize(poppy_quotes[quoteset][math.random(#poppy_quotes[quoteset])] .. "")} 
             ,
