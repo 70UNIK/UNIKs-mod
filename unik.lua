@@ -481,12 +481,15 @@ end
 -- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
+NFS.load(mod_path .. "data/jokers/golden_glove.lua")()
+NFS.load(mod_path .. "data/jokers/instant_gratification.lua")()
 NFS.load(mod_path .. "data/jokers/1_5_joker.lua")() 
 -- NFS.load(mod_path .. "data/jokers/dawn.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
 NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
+NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
 --Instant gratification: earn $2 per discard used. Broken hourglass
 
 if (SMODS.Mods["paperback"] or {}).can_load then
@@ -539,7 +542,7 @@ NFS.load(mod_path .. "data/jokers/lockpick.lua")()
 NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
 --- Rare ---
 -- NFS.load(mod_path .. "data/jokers/double_container.lua")()
-NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+
 NFS.load(mod_path .. "data/jokers/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/copycat.lua")()
@@ -547,6 +550,7 @@ NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 NFS.load(mod_path .. "data/jokers/riff_rare.lua")() 
+NFS.load(mod_path .. "data/jokers/last_tile.lua")() 
 
 if next(SMODS.find_mod("GrabBag")) then
 	NFS.load(mod_path .. "data/jokers/grab_bag/poppy.lua")() 
@@ -623,6 +627,7 @@ NFS.load(mod_path .. "data/jokers/impounded.lua")()
 NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
 NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_scale.lua")()
+NFS.load(mod_path .. "data/jokers/nostalgic_astral_in_a_bottle.lua")()
 NFS.load(mod_path .. "data/jokers/the_plant.lua")() 
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()

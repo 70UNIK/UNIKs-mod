@@ -28,6 +28,7 @@ payload = '''and card.config.center.key ~= "j_unik_impounded"
 and card.config.center.key ~= "j_cry_astral_bottle" 
 and card.config.center.key ~= "j_unik_rancid_smoothie"
 and card.config.center.key ~= "j_buf_afan_spc" 
+and card.config.center.key ~= "j_unik_astral_bottle"
 '''
 match_indent = true
 

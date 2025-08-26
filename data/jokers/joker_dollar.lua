@@ -8,7 +8,7 @@ SMODS.Joker {
 	config = {
 		extra = {
 			dollars = 0,
-			dollar_mod = 2,
+			dollar_mod = 3,
 		},
 	},
 	pixel_size = { w = 52, h = 95 },

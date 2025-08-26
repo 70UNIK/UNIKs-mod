@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_yes_nothing',
     atlas = 'unik_uncommon',
-    rarity = 2, --Abstract cards make this rare now.
+    rarity = 1, --Abstract cards make this rare now.
     -- The wheel
     -- Turquoise tornado
     -- Maroon Magnet (unik)

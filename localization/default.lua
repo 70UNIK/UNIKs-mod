@@ -1967,7 +1967,7 @@ return {
                 name = "Instant Gratification",
                 text = {
                     "Earn {C:money}$#1#{} per {C:red}Discard",
-                    "lost at {C:attention}0{} {C:red}Discards"
+                    "lost in round",
                 },
             },
             j_unik_golden_glove={
@@ -2029,6 +2029,14 @@ return {
                     "more than {C:gold}$#2#{} per hand or",
                     "{C:unik_tooth_color}The Tooth{} is triggered",
                 }
+            },
+            j_unik_astral_bottle = {
+                name = "Nostalgic Astral in a Bottle",
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Mult after scoring",
+                    "Sell to add {C:dark_edition}Astral{} and",
+                    "{C:red}Perishable{} to a {C:attention}random{} Joker",
+                },
             },
             
 
@@ -3440,6 +3448,7 @@ return {
             k_overshoot = "Overshoot",
             k_unik_brain_placeholder = "math.min(Card Selection Limit,Hand Size)",
             k_unik_perished="Perished!",
+            k_unik_last_tile="LAST TILE 海底撈月",
                 
         },
         high_scores={},

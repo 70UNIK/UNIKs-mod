@@ -1,1 +1,67 @@
 --LAST TILE: Add Mosaic to all scored cards on final hand, self destructs.
+SMODS.Joker {
+    key = 'unik_last_tile',
+    atlas = 'placeholders',
+	pos = { x = 2, y = 0 },
+    rarity = 3,
+    cost = 8,
+    blueprint_compat = false,
+    perishable_compat = true,
+	eternal_compat = true,
+    immutable = true,
+    loc_vars = function(self, info_queue, center)
+        if not center.edition or (center.edition and not center.edition.cry_mosaic) then
+			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic
+		end
+	end,
+    calculate = function(self, card, context)
+        if context.joker_main and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
+            --print("turn them happy")
+            
+            G.E_MANAGER:add_event(Event({
+
+                func = function()
+                    
+                    for i,v in pairs(context.scoring_hand) do
+                        v:set_edition({ cry_mosaic = true }, true,nil, true)
+                    end
+                    return true
+                end
+            }))
+
+            return{
+                message = localize("k_unik_last_tile"),
+                colour = G.C.DARK_EDITION,
+            }
+        end
+        if context.after and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
+            G.E_MANAGER:add_event(Event({
+                trigger="immediate",
+
+                func = function()
+                    
+                    
+                    return true
+                end
+            }))
+            G.E_MANAGER:add_event(Event({
+                trigger="immediate",
+                func = function()
+                    --Dissolving
+                        play_sound('tarot1')
+                        card.T.r = -0.2
+                        card:juice_up(0.3, 0.4)
+                        card.states.drag.is = true
+                        card.children.center.pinch.x = true
+                        card:shatter()
+                    
+                    return true
+                end
+            }))
+            return{
+                message = localize("k_unik_weapon_destroyed"),
+                colour = G.C.DARK_EDITION,
+            }
+        end
+    end,
+}
