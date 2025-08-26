@@ -16,12 +16,12 @@ SMODS.Tag{
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_vessel
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_manacle
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
-        local new_numerator, new_denominator = SMODS.get_probability_vars(self, 4,5, 'unik_demon_tag')
+        local new_numerator, new_denominator = SMODS.get_probability_vars(self, 3,5, 'unik_demon_tag')
 		return { vars = { new_numerator, new_denominator } }
 	end,
 	apply = function(self, tag, context)
 		if context.type == "new_blind_choice" then
-			if SMODS.pseudorandom_probability(self, 'unik_demon_tag', 4, 5, 'unik_demon_tag') then
+			if SMODS.pseudorandom_probability(self, 'unik_demon_tag', 3, 5, 'unik_demon_tag') then
                 --cursed joker creation
                 --if owning OAS:
                 if #Cryptid.advanced_find_joker("Oops! All 6s", nil, nil, nil, true) > 0 then

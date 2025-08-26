@@ -7,7 +7,7 @@ SMODS.Joker {
 		If you want to change the static value, you'd only change this number, instead
 		of going through all your code to change each instance individually.
 		]]
-	config = { extra = { hasAce = false, has7 = false} },
+	config = {},
 	-- loc_vars gives your loc_text variables to work with, in the format of #n#, n being the variable in order.
 	-- #1# is the first variable in vars, #2# the second, #3# the third, and so on.
 	-- It's also where you'd add to the info_queue, which is where things like the negative tooltip are.
@@ -63,8 +63,18 @@ SMODS.Joker {
         end
 		-- After checking cards, create a food joker if conditions are met
 		if context.joker_main then
+			local has7 = false;
+			local has11 = false;
+			for i,v in pairs(context.scoring_hand) do
+				if v:get_id() == 7 and not v.debuff then
+					has7 = true;
+				end
+				if v:get_id() == 14 and not v.debuff then
+					has11 = true;
+				end
+			end
 			--if card.ability.extra.hasAce == true and not (context.blueprint_card or self).getting_sliced and card.ability.extra.has7 == true and card.ability.extra.spawn == true and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-			if card.ability.extra.hasAce == true and card.ability.extra.has7 == true then
+			if has7 and has11 then
 				-- Create a Food Joker according to Cryptid.
 				G.E_MANAGER:add_event(Event({
 					func = function()
@@ -83,8 +93,6 @@ SMODS.Joker {
 								
 							end
 							card2.ability.banana = true
-							--If it can spawn, it should not spawn again (blueprint for instance, if you have 2 blueprints, and the blueprint does it first, then it should count as "created")
-							card.ability.extra.spawn = false
 						return true
 					end
 				}))
@@ -93,42 +101,7 @@ SMODS.Joker {
 					colour = HEX("008161"),
 				}
 			end
-			--Reset variables to repeat in case an attempt fails; should not carry over to the next hand
-			card.ability.extra.hasAce = false
-			card.ability.extra.has7 = false
-		end
-		if context.individual and context.cardarea == G.play then
-			-- :get_id tests for the rank of the card. Other than 2-10, Jack is 11, Queen is 12, King is 13, and Ace is 14.
-			if context.other_card:get_id() == 14 then
-                card.ability.extra.hasAce = true
-            end
-            if context.other_card:get_id() == 7 then
-                card.ability.extra.has7 = true
-			end
 		end
 
 	end
 }
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_711"] = {
--- 		text = {
--- 			{
--- 				ref_table = "card.joker_display_values",
--- 				ref_value = "active",
--- 				colour = G.C.FILTER,
--- 			},		
--- 		},
--- 		reminder_text = {
--- 			{
--- 				ref_table = "card.joker_display_values",
--- 				ref_value = "localized_text_cards",
--- 				scale = 0.3,
--- 				colour = G.C.UI.TEXT_INACTIVE,
--- 			},		
--- 		},
---         calc_function = function(card)
--- 			card.joker_display_values.active = ((card.ability.extra.spawn) and localize("jdis_active") or localize("jdis_inactive"))
---             card.joker_display_values.localized_text_cards = "(" .. localize("Ace", "ranks") .. "+7)"
---         end
--- 	}
--- end
