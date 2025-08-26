@@ -283,6 +283,7 @@ NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
 -- stickers
+NFS.load(mod_path .. "data/stickers/limited_edition.lua")() 
 NFS.load(mod_path .. "data/stickers/triggering.lua")() 
 NFS.load(mod_path .. "data/stickers/depleted.lua")() 
 NFS.load(mod_path .. "data/stickers/impounded.lua")() 

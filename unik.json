@@ -5,10 +5,10 @@
 	"description": "An addon to Cryptid designed around the Mainline experience where I add what I want or can.",
 	"prefix": "unik",
 	"main_file": "unik.lua",
-	"priority": 9999999999999999999,
+	"priority": 99999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.3.3-ALPHA-BALANCE",
+	"version": "0.3.3d-ALPHA-BALANCE",
 	"dependencies": [
         "Steamodded (>=1.0.0~BETA-0711a)",
         "Cryptid (>=0.5.10~dev3)"

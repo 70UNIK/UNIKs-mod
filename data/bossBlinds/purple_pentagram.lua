@@ -21,6 +21,7 @@ SMODS.Blind{
                         --destroy card2 if its jimbo
                         card2:start_materialize()
                         card2:add_to_deck() --This causes problems. Why?
+                        card2.ability.unik_disposable = true
                         G.jokers:emplace(card2)
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
@@ -40,11 +41,10 @@ SMODS.Blind{
     --If disabled, destroy up to 4 cursed Jokers
     disable = function(self)
         G.GAME.unik_killed_by_pentagram = nil
-        local cursedDestroyed = 0
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.rarity == "cry_cursed" and cursedDestroyed < 4 then
+            if v.config.center.rarity == "cry_cursed" and v.ability.unik_disposable then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound('tarot1')
@@ -69,7 +69,6 @@ SMODS.Blind{
                         return true
                     end
                 }))
-                cursedDestroyed = cursedDestroyed + 1
             end
         end
     end,
