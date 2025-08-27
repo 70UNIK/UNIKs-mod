@@ -137,7 +137,7 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
                     ref_table =v.ability.extra,
                     ref_value = "x_chips",
                     scalar_value = "x_chips_mod",
-                    message = localize({
+                    scaling_message = localize({
                         type = "variable",
                         key = "a_xchips",
                         vars = { v.ability.extra.x_chips },

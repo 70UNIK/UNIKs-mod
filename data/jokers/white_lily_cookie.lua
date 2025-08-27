@@ -14,7 +14,7 @@ local function White_lily_copy(card)
             ref_table =_card.ability.extra,
             ref_value = "Emult",
             scalar_value = "Emult_mod",
-            message = localize({
+            scaling_message = localize({
                 type = "variable",
                 key = "a_powmult",
                 vars = {
@@ -28,7 +28,7 @@ local function White_lily_copy(card)
             ref_table =_card.ability.extra,
             ref_value = "x_mult",
             scalar_value = "x_mult_mod",
-            message = localize({
+            scaling_message = localize({
                 type = "variable",
                 key = "a_xmult",
                 vars = {
@@ -143,7 +143,7 @@ SMODS.Joker {
                         ref_table =_card.ability.extra,
                         ref_value = "x_mult",
                         scalar_value = "x_mult_mod",
-                        message = localize({
+                        scaling_message = localize({
                             type = "variable",
                             key = "a_xmult",
                             vars = {
@@ -157,7 +157,7 @@ SMODS.Joker {
                         ref_table =_card.ability.extra,
                         ref_value = "x_mult",
                         scalar_value = "x_mult_mod",
-                        message = localize({
+                        scaling_message = localize({
                             type = "variable",
                             key = "a_xmult",
                             vars = {
