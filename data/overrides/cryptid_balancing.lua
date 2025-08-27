@@ -200,7 +200,7 @@ SMODS.Joker:take_ownership("j_cry_jawbreaker", {
 -- --After a test run with gemini and primus on wormhole, I can conclude that it NEEDS a bit of a nerf, something like capping at X10.
 
 SMODS.Joker:take_ownership("j_cry_gemino", {
-	config = {extra = {multiplier = 1.5}},
+	config = {extra = {multiplier = 1.35}},
 	immutable = true,
 	loc_vars = function(self, info_queue, card)
 		card.ability.blueprint_compat_ui = card.ability.blueprint_compat_ui or ""
@@ -1403,455 +1403,455 @@ function Card:getLeftmostJokerType(rarity,edition)
 	return false
 end
 
---Fix cryptid's exponents by only allowing values - 1 to be manipulated.
+-- --Fix cryptid's exponents by only allowing values - 1 to be manipulated.
 
 SMODS.Joker:take_ownership("j_cry_universe",{
-    config = { extra = { emult = 0.1 }, immutable = {base_emult = 1.0} },
-	loc_vars = function(self, info_queue, center)
-		if not center.edition or (center.edition and not center.edition.cry_astral) then
-			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral
-		end
-		return { vars = { number_format(center.ability.extra.emult + center.ability.immutable.base_emult) } }
-	end,
-calculate = function(self, card, context)
-		if
-			context.other_joker
-			and context.other_joker.edition
-			and context.other_joker.edition.cry_astral == true
-			and card ~= context.other_joker
-		then
-			if Talisman and not Talisman.config_file.disable_anims then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_joker:juice_up(0.5, 0.5)
-						return true
-					end,
-				}))
-			end
-			return {
-				e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
-				colour = G.C.DARK_EDITION,
-			}
-		end
-		if context.individual and context.cardarea == G.play then
-			if context.other_card.edition and context.other_card.edition.cry_astral == true then
-				return {
-					e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
-					colour = G.C.DARK_EDITION,
-					card = card,
-				}
-			end
-		end
-		if
-			context.individual
-			and context.cardarea == G.hand
-			and context.other_card.edition
-			and context.other_card.edition.cry_astral == true
-			and not context.end_of_round
-		then
-			if context.other_card.debuff then
-				return {
-					message = localize("k_debuffed"),
-					colour = G.C.RED,
-					card = card,
-				}
-			else
-				return {
-					e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
-					colour = G.C.DARK_EDITION,
-					card = card,
-				}
-			end
-		end
-		if context.forcetrigger then
-			return {
-				e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
-				colour = G.C.DARK_EDITION,
-				card = card,
-			}
-		end
-	end,
+    config = { extra = { emult = 1.1 } },
+	-- loc_vars = function(self, info_queue, center)
+	-- 	if not center.edition or (center.edition and not center.edition.cry_astral) then
+	-- 		info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral
+	-- 	end
+	-- 	return { vars = { number_format(center.ability.extra.emult + center.ability.immutable.base_emult) } }
+	-- end,
+-- calculate = function(self, card, context)
+-- 		if
+-- 			context.other_joker
+-- 			and context.other_joker.edition
+-- 			and context.other_joker.edition.cry_astral == true
+-- 			and card ~= context.other_joker
+-- 		then
+-- 			if Talisman and not Talisman.config_file.disable_anims then
+-- 				G.E_MANAGER:add_event(Event({
+-- 					func = function()
+-- 						context.other_joker:juice_up(0.5, 0.5)
+-- 						return true
+-- 					end,
+-- 				}))
+-- 			end
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+-- 				colour = G.C.DARK_EDITION,
+-- 			}
+-- 		end
+-- 		if context.individual and context.cardarea == G.play then
+-- 			if context.other_card.edition and context.other_card.edition.cry_astral == true then
+-- 				return {
+-- 					e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+-- 					colour = G.C.DARK_EDITION,
+-- 					card = card,
+-- 				}
+-- 			end
+-- 		end
+-- 		if
+-- 			context.individual
+-- 			and context.cardarea == G.hand
+-- 			and context.other_card.edition
+-- 			and context.other_card.edition.cry_astral == true
+-- 			and not context.end_of_round
+-- 		then
+-- 			if context.other_card.debuff then
+-- 				return {
+-- 					message = localize("k_debuffed"),
+-- 					colour = G.C.RED,
+-- 					card = card,
+-- 				}
+-- 			else
+-- 				return {
+-- 					e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+-- 					colour = G.C.DARK_EDITION,
+-- 					card = card,
+-- 				}
+-- 			end
+-- 		end
+-- 		if context.forcetrigger then
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
+-- 				colour = G.C.DARK_EDITION,
+-- 				card = card,
+-- 			}
+-- 		end
+-- 	end,
 }, true)
 
 
-SMODS.Joker:take_ownership("j_cry_mprime",{
-	config = {
-		extra = {
-			mult = 0.05,
-			bonus = 0.04,
-		},
-		immutable = {
-			base_emult = 1.0
-		}
-	},
-	loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue + 1] = G.P_CENTERS.j_jolly
-		return {
-			vars = {
-				number_format(center.ability.extra.mult + center.ability.immutable.base_emult),
-				number_format(center.ability.extra.bonus),
-			},
-		}
-	end,
-	calculate = function(self, card, context)
-		-- if context.selling_card and (context.card:is_jolly()) then
-		-- 	if not context.blueprint then
-		-- 		card.ability.extra.mult = lenient_bignum(to_big(card.ability.extra.mult) + card.ability.extra.bonus)
-		-- 	end
-		-- 	if not context.retrigger_joker then
-		-- 		card_eval_status_text(
-		-- 			card,
-		-- 			"extra",
-		-- 			nil,
-		-- 			nil,
-		-- 			nil,
-		-- 			{ message = localize("cry_m_ex"), colour = G.C.DARK_EDITION }
-		-- 		)
-		-- 	end
-		if context.selling_card and (context.card:is_jolly()) then
-			if not context.blueprint then
-				SMODS.scale_card(card, {
-					ref_table = card.ability.extra,
-					ref_value = "mult",
-					scalar_value = "bonus",
-					scaling_message = {
-						message = localize("cry_m_ex"),
-						colour = G.C.DARK_EDITION,
-					},
-				})
-			end
-		elseif
-			context.end_of_round
-			and not context.individual
-			and not context.repetition
-			and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit
-			and not context.retrigger_joker
-		then
-			local mjoker = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
-			G.GAME.joker_buffer = G.GAME.joker_buffer + mjoker
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					if mjoker > 0 then
-						local card = create_card("M", G.jokers, nil, nil, nil, nil, nil, "mprime")
-						card:add_to_deck()
-						G.jokers:emplace(card)
-						card:start_materialize()
-						G.GAME.joker_buffer = 0
-					end
-					return true
-				end,
-			}))
-		elseif context.other_joker then
-			if
-				context.other_joker
-				and (
-					context.other_joker:is_jolly() or Cryptid.safe_get(context.other_joker.config.center, "pools", "M")
-				)
-			then
-				if Talisman and not Talisman.config_file.disable_anims then
-					G.E_MANAGER:add_event(Event({
-						func = function()
-							context.other_joker:juice_up(0.5, 0.5)
-							return true
-						end,
-					}))
-				end
-				return {
-					e_mult = lenient_bignum(card.ability.extra.mult + card.ability.immutable.base_emult),
-					card = card,
-				}
-			end
-		end
-		if context.forcetrigger then
-			-- card.ability.extra.mult = lenient_bignum(to_big(card.ability.extra.mult) + card.ability.extra.bonus)
-			local mjoker = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
-			G.GAME.joker_buffer = G.GAME.joker_buffer + mjoker
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					if mjoker > 0 then
-						local card = create_card("M", G.jokers, nil, nil, nil, nil, nil, "mprime")
-						card:add_to_deck()
-						G.jokers:emplace(card)
-						card:start_materialize()
-						G.GAME.joker_buffer = 0
-					end
-					return true
-				end,
-			}))
-			return {
-				e_mult = lenient_bignum(card.ability.extra.mult + card.ability.immutable.base_emult),
-			}
-		end
-	end,
-}, true)
+-- SMODS.Joker:take_ownership("j_cry_mprime",{
+-- 	config = {
+-- 		extra = {
+-- 			mult = 0.05,
+-- 			bonus = 0.04,
+-- 		},
+-- 		immutable = {
+-- 			base_emult = 1.0
+-- 		}
+-- 	},
+-- 	loc_vars = function(self, info_queue, center)
+-- 		info_queue[#info_queue + 1] = G.P_CENTERS.j_jolly
+-- 		return {
+-- 			vars = {
+-- 				number_format(center.ability.extra.mult + center.ability.immutable.base_emult),
+-- 				number_format(center.ability.extra.bonus),
+-- 			},
+-- 		}
+-- 	end,
+-- 	calculate = function(self, card, context)
+-- 		-- if context.selling_card and (context.card:is_jolly()) then
+-- 		-- 	if not context.blueprint then
+-- 		-- 		card.ability.extra.mult = lenient_bignum(to_big(card.ability.extra.mult) + card.ability.extra.bonus)
+-- 		-- 	end
+-- 		-- 	if not context.retrigger_joker then
+-- 		-- 		card_eval_status_text(
+-- 		-- 			card,
+-- 		-- 			"extra",
+-- 		-- 			nil,
+-- 		-- 			nil,
+-- 		-- 			nil,
+-- 		-- 			{ message = localize("cry_m_ex"), colour = G.C.DARK_EDITION }
+-- 		-- 		)
+-- 		-- 	end
+-- 		if context.selling_card and (context.card:is_jolly()) then
+-- 			if not context.blueprint then
+-- 				SMODS.scale_card(card, {
+-- 					ref_table = card.ability.extra,
+-- 					ref_value = "mult",
+-- 					scalar_value = "bonus",
+-- 					scaling_message = {
+-- 						message = localize("cry_m_ex"),
+-- 						colour = G.C.DARK_EDITION,
+-- 					},
+-- 				})
+-- 			end
+-- 		elseif
+-- 			context.end_of_round
+-- 			and not context.individual
+-- 			and not context.repetition
+-- 			and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit
+-- 			and not context.retrigger_joker
+-- 		then
+-- 			local mjoker = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
+-- 			G.GAME.joker_buffer = G.GAME.joker_buffer + mjoker
+-- 			G.E_MANAGER:add_event(Event({
+-- 				func = function()
+-- 					if mjoker > 0 then
+-- 						local card = create_card("M", G.jokers, nil, nil, nil, nil, nil, "mprime")
+-- 						card:add_to_deck()
+-- 						G.jokers:emplace(card)
+-- 						card:start_materialize()
+-- 						G.GAME.joker_buffer = 0
+-- 					end
+-- 					return true
+-- 				end,
+-- 			}))
+-- 		elseif context.other_joker then
+-- 			if
+-- 				context.other_joker
+-- 				and (
+-- 					context.other_joker:is_jolly() or Cryptid.safe_get(context.other_joker.config.center, "pools", "M")
+-- 				)
+-- 			then
+-- 				if Talisman and not Talisman.config_file.disable_anims then
+-- 					G.E_MANAGER:add_event(Event({
+-- 						func = function()
+-- 							context.other_joker:juice_up(0.5, 0.5)
+-- 							return true
+-- 						end,
+-- 					}))
+-- 				end
+-- 				return {
+-- 					e_mult = lenient_bignum(card.ability.extra.mult + card.ability.immutable.base_emult),
+-- 					card = card,
+-- 				}
+-- 			end
+-- 		end
+-- 		if context.forcetrigger then
+-- 			-- card.ability.extra.mult = lenient_bignum(to_big(card.ability.extra.mult) + card.ability.extra.bonus)
+-- 			local mjoker = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
+-- 			G.GAME.joker_buffer = G.GAME.joker_buffer + mjoker
+-- 			G.E_MANAGER:add_event(Event({
+-- 				func = function()
+-- 					if mjoker > 0 then
+-- 						local card = create_card("M", G.jokers, nil, nil, nil, nil, nil, "mprime")
+-- 						card:add_to_deck()
+-- 						G.jokers:emplace(card)
+-- 						card:start_materialize()
+-- 						G.GAME.joker_buffer = 0
+-- 					end
+-- 					return true
+-- 				end,
+-- 			}))
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.mult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 	end,
+-- }, true)
 
 
-SMODS.Joker:take_ownership("j_cry_exponentia",{
-	config = { extra = { Emult = 0, Emult_mod = 0.03 }, immutable = {base_emult = 1.0}},
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				number_format(center.ability.extra.Emult_mod),
-				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
-			},
-		}
-	end,
-	calculate = function(self, card, context)
-		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
-			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-			}
-		end
-		if context.forcetrigger then
-			-- card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-			}
-		end
-	end,
-}, true)
+-- SMODS.Joker:take_ownership("j_cry_exponentia",{
+-- 	config = { extra = { Emult = 0, Emult_mod = 0.03 }, immutable = {base_emult = 1.0}},
+-- 	loc_vars = function(self, info_queue, center)
+-- 		return {
+-- 			vars = {
+-- 				number_format(center.ability.extra.Emult_mod),
+-- 				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
+-- 			},
+-- 		}
+-- 	end,
+-- 	calculate = function(self, card, context)
+-- 		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 		if context.forcetrigger then
+-- 			-- card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 	end,
+-- }, true)
 
-SMODS.Joker:take_ownership("j_cry_primus",{
-	config = {
-		extra = {
-			Emult = 0,
-			Emult_mod = 0.11,
-		},
-		immutable = {
-			base_emult = 1.0
-		},
-	},
-	calculate = function(self, card, context)
-		local check = true
-		if context.cardarea == G.jokers and context.before and not context.blueprint then
-			if context.scoring_hand then
-				for k, v in ipairs(context.full_hand) do
-					if
-						v:get_id() == 4
-						or v:get_id() == 6
-						or v:get_id() == 8
-						or v:get_id() == 9
-						or v:get_id() == 10
-						or v:get_id() == 11
-						or v:get_id() == 12
-						or v:get_id() == 13
-					then
-						check = false
-					end
-				end
-			end
-			if check then
-				SMODS.scale_card(card, {
-					ref_table = card.ability.extra,
-					ref_value = "Emult",
-					scalar_value = "Emult_mod",
-					message_colour = G.C.DARK_EDITION,
-				})
-				card.children.floating_sprite:set_sprite_pos({ x = 8, y = 6 })
-			end
-		end
-		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
-			card.children.floating_sprite:set_sprite_pos({ x = 8, y = 6 })
-			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-			}
-		end
-		if context.end_of_round then
-			card.children.floating_sprite:set_sprite_pos({ x = 2, y = 4 })
-		end
-		if context.forcetrigger then
-			return {
-				Emult_mod = lenient_bignum(card.ability.extra.Emult),
-				colour = G.C.DARK_EDITION,
-			}
-		end
-	end,
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				number_format(center.ability.extra.Emult_mod),
-				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
-			},
-		}
-	end,
-}, true)
+-- SMODS.Joker:take_ownership("j_cry_primus",{
+-- 	config = {
+-- 		extra = {
+-- 			Emult = 0,
+-- 			Emult_mod = 0.11,
+-- 		},
+-- 		immutable = {
+-- 			base_emult = 1.0
+-- 		},
+-- 	},
+-- 	calculate = function(self, card, context)
+-- 		local check = true
+-- 		if context.cardarea == G.jokers and context.before and not context.blueprint then
+-- 			if context.scoring_hand then
+-- 				for k, v in ipairs(context.full_hand) do
+-- 					if
+-- 						v:get_id() == 4
+-- 						or v:get_id() == 6
+-- 						or v:get_id() == 8
+-- 						or v:get_id() == 9
+-- 						or v:get_id() == 10
+-- 						or v:get_id() == 11
+-- 						or v:get_id() == 12
+-- 						or v:get_id() == 13
+-- 					then
+-- 						check = false
+-- 					end
+-- 				end
+-- 			end
+-- 			if check then
+-- 				SMODS.scale_card(card, {
+-- 					ref_table = card.ability.extra,
+-- 					ref_value = "Emult",
+-- 					scalar_value = "Emult_mod",
+-- 					message_colour = G.C.DARK_EDITION,
+-- 				})
+-- 				card.children.floating_sprite:set_sprite_pos({ x = 8, y = 6 })
+-- 			end
+-- 		end
+-- 		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
+-- 			card.children.floating_sprite:set_sprite_pos({ x = 8, y = 6 })
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 		if context.end_of_round then
+-- 			card.children.floating_sprite:set_sprite_pos({ x = 2, y = 4 })
+-- 		end
+-- 		if context.forcetrigger then
+-- 			return {
+-- 				Emult_mod = lenient_bignum(card.ability.extra.Emult),
+-- 				colour = G.C.DARK_EDITION,
+-- 			}
+-- 		end
+-- 	end,
+-- 	loc_vars = function(self, info_queue, center)
+-- 		return {
+-- 			vars = {
+-- 				number_format(center.ability.extra.Emult_mod),
+-- 				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
+-- 			},
+-- 		}
+-- 	end,
+-- }, true)
 
 
-SMODS.Joker:take_ownership("j_cry_stella_mortis",{
-	config = {
-		extra = {
-			Emult = 0,
-			Emult_mod = 0.2,
-		},
-		immutable = {
-			base_emult = 1.0,
-		}
-	},
-	calculate = function(self, card, context)
-		if (context.ending_shop and not context.blueprint) or context.forcetrigger then
-			local destructable_planet = {}
-			local quota = 1
-			for i = 1, #G.consumeables.cards do
-				if
-					G.consumeables.cards[i].ability.set == "Planet"
-					and not G.consumeables.cards[i].getting_sliced
-					and not SMODS.is_eternal(G.consumeables.cards[i])
-				then
-					destructable_planet[#destructable_planet + 1] = G.consumeables.cards[i]
-				end
-			end
-			local planet_to_destroy = #destructable_planet > 0
-					and pseudorandom_element(destructable_planet, pseudoseed("stella_mortis"))
-				or nil
+-- SMODS.Joker:take_ownership("j_cry_stella_mortis",{
+-- 	config = {
+-- 		extra = {
+-- 			Emult = 0,
+-- 			Emult_mod = 0.2,
+-- 		},
+-- 		immutable = {
+-- 			base_emult = 1.0,
+-- 		}
+-- 	},
+-- 	calculate = function(self, card, context)
+-- 		if (context.ending_shop and not context.blueprint) or context.forcetrigger then
+-- 			local destructable_planet = {}
+-- 			local quota = 1
+-- 			for i = 1, #G.consumeables.cards do
+-- 				if
+-- 					G.consumeables.cards[i].ability.set == "Planet"
+-- 					and not G.consumeables.cards[i].getting_sliced
+-- 					and not SMODS.is_eternal(G.consumeables.cards[i])
+-- 				then
+-- 					destructable_planet[#destructable_planet + 1] = G.consumeables.cards[i]
+-- 				end
+-- 			end
+-- 			local planet_to_destroy = #destructable_planet > 0
+-- 					and pseudorandom_element(destructable_planet, pseudoseed("stella_mortis"))
+-- 				or nil
 
-			if planet_to_destroy then
-				if Incantation then
-					quota = planet_to_destroy:getEvalQty()
-				end
-				if Overflow then
-					quaota = planet_to_destroy.ability.immutable and planet_to_destroy.ability.immutable.overflow_amount
-				end
-				planet_to_destroy.getting_sliced = true
-				SMODS.scale_card(card, {
-					ref_table = card.ability.extra,
-					ref_value = "Emult",
-					scalar_value = "Emult_mod",
-					operation = function(ref_table, ref_value, initial, change)
-						ref_table[ref_value] = card.ability.immutable.base_emult + initial + change * quota
-					end,
-					message_key = "a_powmult",
-				})
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						(context.blueprint_card or card):juice_up(0.8, 0.8)
-						planet_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
-						return true
-					end,
-				}))
-				planet_to_destroy.dissolve = 0 --timing issues related to crossmod stuff
-				return nil, true
-			end
-		end
-		if (context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1))) or context.forcetrigger then
-			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-			}
-		end
-	end,
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				number_format(center.ability.extra.Emult_mod),
-				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
-			},
-		}
-	end,
-}, true)
+-- 			if planet_to_destroy then
+-- 				if Incantation then
+-- 					quota = planet_to_destroy:getEvalQty()
+-- 				end
+-- 				if Overflow then
+-- 					quaota = planet_to_destroy.ability.immutable and planet_to_destroy.ability.immutable.overflow_amount
+-- 				end
+-- 				planet_to_destroy.getting_sliced = true
+-- 				SMODS.scale_card(card, {
+-- 					ref_table = card.ability.extra,
+-- 					ref_value = "Emult",
+-- 					scalar_value = "Emult_mod",
+-- 					operation = function(ref_table, ref_value, initial, change)
+-- 						ref_table[ref_value] = card.ability.immutable.base_emult + initial + change * quota
+-- 					end,
+-- 					message_key = "a_powmult",
+-- 				})
+-- 				G.E_MANAGER:add_event(Event({
+-- 					func = function()
+-- 						(context.blueprint_card or card):juice_up(0.8, 0.8)
+-- 						planet_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
+-- 						return true
+-- 					end,
+-- 				}))
+-- 				planet_to_destroy.dissolve = 0 --timing issues related to crossmod stuff
+-- 				return nil, true
+-- 			end
+-- 		end
+-- 		if (context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1))) or context.forcetrigger then
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 	end,
+-- 	loc_vars = function(self, info_queue, center)
+-- 		return {
+-- 			vars = {
+-- 				number_format(center.ability.extra.Emult_mod),
+-- 				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
+-- 			},
+-- 		}
+-- 	end,
+-- }, true)
 
-SMODS.Joker:take_ownership("j_cry_facile",{
-	config = {
-		extra = {
-			Emult = 2,
-			check = 10,
-		},
-		immutable = {
-			check2 = 0,
-			base_emult = 1,
-		},
-	},
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
-				number_format(center.ability.extra.check),
-			},
-		}
-	end,
-	calculate = function(self, card, context)
-		if context.individual then
-			if context.cardarea == G.play then
-				card.ability.immutable.check2 = lenient_bignum(card.ability.immutable.check2 + 1)
-			end
-		end
-		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
-			if to_big(card.ability.immutable.check2) <= to_big(card.ability.extra.check) then
-				card.ability.immutable.check2 = 0
-				return {
-					e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-				}
-			else
-				card.ability.immutable.check2 = 0
-			end
-		end
-		if context.forcetrigger then
-			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-			}
-		end
-	end,
-}, true) 
+-- SMODS.Joker:take_ownership("j_cry_facile",{
+-- 	config = {
+-- 		extra = {
+-- 			Emult = 2,
+-- 			check = 10,
+-- 		},
+-- 		immutable = {
+-- 			check2 = 0,
+-- 			base_emult = 1,
+-- 		},
+-- 	},
+-- 	loc_vars = function(self, info_queue, center)
+-- 		return {
+-- 			vars = {
+-- 				number_format(center.ability.extra.Emult + center.ability.immutable.base_emult),
+-- 				number_format(center.ability.extra.check),
+-- 			},
+-- 		}
+-- 	end,
+-- 	calculate = function(self, card, context)
+-- 		if context.individual then
+-- 			if context.cardarea == G.play then
+-- 				card.ability.immutable.check2 = lenient_bignum(card.ability.immutable.check2 + 1)
+-- 			end
+-- 		end
+-- 		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
+-- 			if to_big(card.ability.immutable.check2) <= to_big(card.ability.extra.check) then
+-- 				card.ability.immutable.check2 = 0
+-- 				return {
+-- 					e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 				}
+-- 			else
+-- 				card.ability.immutable.check2 = 0
+-- 			end
+-- 		end
+-- 		if context.forcetrigger then
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 	end,
+-- }, true) 
 
-SMODS.Joker:take_ownership("j_cry_formidiulosus",{
-	config = {
-		extra = {
-			Emult_mod = 0.01,
-			Emult = 0,
-		},
-		immutable = {
-			num_candies = 3,
-			base_emult = 1,
-		},
-	},
-	update = function(self, card, front)
-		card.ability.extra.Emult = lenient_bignum(
-			card.ability.immutable.base_emult + (card.ability.extra.Emult_mod * #Cryptid.advanced_find_joker(nil, "cry_candy", nil, nil, true))
-		)
-	end,
-calculate = function(self, card, context)
-		if
-			(context.buying_card or context.cry_creating_card)
-			and context.card.ability.set == "Joker"
-			and context.card.config.center.rarity == "cry_cursed"
-			and not context.blueprint
-			and not (context.card == card)
-		then
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					context.card:start_dissolve()
-					card_eval_status_text(card, "extra", nil, nil, nil, {
-						message = localize("k_nope_ex"),
-						colour = G.C.BLACK,
-					})
-					return true
-				end,
-			}))
-		end
-		if context.ending_shop then
-			for i = 1, card.ability.immutable.num_candies do
-				local card = create_card("Joker", G.jokers, nil, "cry_candy", nil, nil, nil, "cry_trick_candy")
-				card:set_edition({ negative = true }, true)
-				card:add_to_deck()
-				G.jokers:emplace(card)
-			end
-		end
-		if context.cardarea == G.jokers and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) and context.joker_main then
-			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-			}
-		end
-		if context.forcetrigger then
-			for i = 1, card.ability.immutable.num_candies do
-				local card = create_card("Joker", G.jokers, nil, "cry_candy", nil, nil, nil, "cry_trick_candy")
-				card:set_edition({ negative = true }, true)
-				card:add_to_deck()
-				G.jokers:emplace(card)
-			end
-			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
-			}
-		end
-	end,
-}, true) 
+-- SMODS.Joker:take_ownership("j_cry_formidiulosus",{
+-- 	config = {
+-- 		extra = {
+-- 			Emult_mod = 0.01,
+-- 			Emult = 0,
+-- 		},
+-- 		immutable = {
+-- 			num_candies = 3,
+-- 			base_emult = 1,
+-- 		},
+-- 	},
+-- 	update = function(self, card, front)
+-- 		card.ability.extra.Emult = lenient_bignum(
+-- 			card.ability.immutable.base_emult + (card.ability.extra.Emult_mod * #Cryptid.advanced_find_joker(nil, "cry_candy", nil, nil, true))
+-- 		)
+-- 	end,
+-- calculate = function(self, card, context)
+-- 		if
+-- 			(context.buying_card or context.cry_creating_card)
+-- 			and context.card.ability.set == "Joker"
+-- 			and context.card.config.center.rarity == "cry_cursed"
+-- 			and not context.blueprint
+-- 			and not (context.card == card)
+-- 		then
+-- 			G.E_MANAGER:add_event(Event({
+-- 				func = function()
+-- 					context.card:start_dissolve()
+-- 					card_eval_status_text(card, "extra", nil, nil, nil, {
+-- 						message = localize("k_nope_ex"),
+-- 						colour = G.C.BLACK,
+-- 					})
+-- 					return true
+-- 				end,
+-- 			}))
+-- 		end
+-- 		if context.ending_shop then
+-- 			for i = 1, card.ability.immutable.num_candies do
+-- 				local card = create_card("Joker", G.jokers, nil, "cry_candy", nil, nil, nil, "cry_trick_candy")
+-- 				card:set_edition({ negative = true }, true)
+-- 				card:add_to_deck()
+-- 				G.jokers:emplace(card)
+-- 			end
+-- 		end
+-- 		if context.cardarea == G.jokers and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) and context.joker_main then
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 		if context.forcetrigger then
+-- 			for i = 1, card.ability.immutable.num_candies do
+-- 				local card = create_card("Joker", G.jokers, nil, "cry_candy", nil, nil, nil, "cry_trick_candy")
+-- 				card:set_edition({ negative = true }, true)
+-- 				card:add_to_deck()
+-- 				G.jokers:emplace(card)
+-- 			end
+-- 			return {
+-- 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+-- 			}
+-- 		end
+-- 	end,
+-- }, true) 
 
 
 Cryptid.misprintize_value_blacklist["cry_valuemanip_reset"] = false

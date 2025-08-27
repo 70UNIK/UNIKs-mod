@@ -26,14 +26,15 @@ SMODS.Joker {
 				ref_table =card.ability.extra,
 				ref_value = "Xmult",
 				scalar_value = "Xmult_mod",
-				scaling_message = {
-                    message = localize({
-                        type = "variable",
-                        key = "a_xmult",
-                        vars = { card.ability.extra.Xmult + card.ability.extra.Xmult_mod},
-                    }),
-                    colour = G.C.MULT,
-                },
+				-- scaling_message = {
+                --     message = localize({
+                --         type = "variable",
+                --         key = "a_xmult",
+                --         vars = { card.ability.extra.Xmult + card.ability.extra.Xmult_mod},
+                --     }),
+                --     colour = G.C.MULT,
+                -- },
+                message_key = "a_xmult",
 				message_colour = G.C.MULT,
 			})
         end
@@ -53,14 +54,15 @@ SMODS.Joker {
                     scalar_table = {
                         custom_scaler = card.ability.extra.Xmult_mod + card.ability.extra.bad_Xmult_mod,
                     },
-                    scaling_message = {
-                        message = localize({
-                            type = "variable",
-                            key = "a_xmult",
-                            vars = { card.ability.extra.Xmult - card.ability.extra.Xmult_mod },
-                        }),
-                        colour = G.C.MULT,
-                    },
+                    -- scaling_message = {
+                    --     message = localize({
+                    --         type = "variable",
+                    --         key = "a_xmult",
+                    --         vars = { card.ability.extra.Xmult - card.ability.extra.Xmult_mod },
+                    --     }),
+                    --     colour = G.C.MULT,
+                    -- },
+                    message_key = "a_xmult",
                     message_colour = G.C.MULT,
                 })
             end

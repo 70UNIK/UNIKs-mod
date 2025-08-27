@@ -33,19 +33,18 @@ SMODS.Joker {
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.5},immutable = {base_emult = 1.0}},
+    config = { extra = { Emult = 2.5}},
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
+		return { vars = {center.ability.extra.Emult} }
 	end,
     gameset_config = {
-		modest = {extra = {Emult = 0.6} ,immutable = {base_emult = 1.0} }, 
+		modest = {extra = {Emult = 1.6}}, 
 	},
     pools = {},
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                    colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
+                    e_mult = card.ability.extra.Emult,
                 }
         end
         if (context.cardarea == G.jokers and context.joker_main) then
@@ -62,8 +61,7 @@ SMODS.Joker {
             end
             if (_odd and _even) then
                 return {
-                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                    colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
+                    e_mult = card.ability.extra.Emult,
                 }
             end
 		end

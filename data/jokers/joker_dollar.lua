@@ -36,10 +36,10 @@ SMODS.Joker {
 					ref_table =card.ability.extra,
 					ref_value = "dollars",
 					scalar_value = "dollar_mod",
-					scaling_message = {
-						message = "+$" .. card.ability.extra.dollar_mod,
-						colour = G.C.GOLD,
-					},
+					-- scaling_message = {
+					-- 	message = "+$" .. card.ability.extra.dollar_mod,
+					-- 	colour = G.C.GOLD,
+					-- },
 					message_colour = G.C.GOLD,
 				})
 			end
