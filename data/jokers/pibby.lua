@@ -51,6 +51,7 @@ SMODS.Joker {
         end
         if context.cardarea == G.jokers and context.before and not context.blueprint then
             local triggered = false
+            local increase = 0
             for k, v in ipairs(context.scoring_hand) do
                 if SMODS.has_enhancement(v, "m_unik_pink") then
                     G.E_MANAGER:add_event(Event({
@@ -59,7 +60,7 @@ SMODS.Joker {
                             return true
                         end,
                     }))
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.immutable.divisor)
+                     increase =  increase  + (7 / card.ability.immutable.divisor)
                     triggered = true
                 elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
                     G.E_MANAGER:add_event(Event({
@@ -68,15 +69,25 @@ SMODS.Joker {
                             return true
                         end,
                     }))
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.immutable.divisor)
+                     increase  =  increase  + (v.base.nominal / card.ability.immutable.divisor)
                     triggered = true
                 end       
             end
             if triggered then
-                return {
-                    message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
-                    colour = G.C.MULT,
-                }
+                SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "x_mult",
+                    scalar_value = "custom_scaler",
+                    scalar_table = {
+                        custom_scaler =  increase ,
+                    },
+                    message = localize({
+                        type = "variable",
+                        key = "a_xmult",
+                        vars = { card.ability.extra.Xmult },
+                    }),
+                    message_colour = G.C.MULT,
+                })
             end
         end
         if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) then

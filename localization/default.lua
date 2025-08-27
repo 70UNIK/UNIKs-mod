@@ -1354,13 +1354,10 @@ return {
             j_unik_ghost_trap = {
                 name="Ghost Trap",
                 text={
-					"This Joker {C:attention}captures{} all {X:cry_cursed,C:white}Cursed{} Jokers",
-                    "and gains {X:mult,C:white}X#2#{} Mult per Joker captured",
-                    "{C:red}Releases all captured{} {X:cry_cursed,C:white}Cursed{} {C:red}Jokers{}",
-                    "{C:red}if sold or destroyed{}",
-					"{C:red}Self destructs{} when exceeding {C:attention}#4#{} {X:cry_cursed,C:white}Cursed{} Jokers",
-					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult, {C:attention}#3# {X:cry_cursed,C:white}Cursed{C:inactive} Jokers){}",
-                    "{C:inactive,s:0.8}(The {C:attention}leftmost{C:inactive} Ghost Trap will capture first){}",
+					"This Joker {C:red}destroys{} all {X:cry_cursed,C:white}Cursed{} Jokers",
+                    "and gains {X:mult,C:white}X#2#{} Mult per Joker",
+                    "destroyed that way",
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
                 },
             },
             j_unik_lily_sprunki = {

@@ -96,21 +96,34 @@ SMODS.Joker {
         if (context.individual and context.cardarea == G.play)then
 			if context.other_card:get_id() == 7 and not context.blueprint  then
 				if Card.get_gameset(card) == "modest" then
-					card.ability.extra.Xchips = card.ability.extra.Xchips + card.ability.extra.Xchips_mod
-					return {
+					-- card.ability.extra.Xchips = card.ability.extra.Xchips + card.ability.extra.Xchips_mod
+					-- return {
+					-- 	message = localize({
+					-- 		type = "variable",
+					-- 		key = "a_xchips",
+					-- 		vars = {
+					-- 			number_format(card.ability.extra.Xchips),
+					-- 		},
+					-- 	}),
+					-- 	colour = G.C.DARK_EDITION,
+					-- 	card = card
+					-- }
+					SMODS.scale_card(card, {
+						ref_table =card.ability.extra,
+						ref_value = "Xchips",
+						scalar_value = "Xchips_mod",
 						message = localize({
 							type = "variable",
 							key = "a_xchips",
-							vars = {
-								number_format(card.ability.extra.Xchips),
-							},
+							vars = { card.ability.extra.Xchips },
 						}),
-						colour = G.C.DARK_EDITION,
-						card = card
-					}
+						message_colour = G.C.CHIPS,
+					})
 				else
-					card.ability.extra.Echips = card.ability.extra.Echips + card.ability.extra.Echips_mod
-					return {
+					SMODS.scale_card(card, {
+						ref_table =card.ability.extra,
+						ref_value = "Echips",
+						scalar_value = "Echips_mod",
 						message = localize({
 							type = "variable",
 							key = "a_powchips",
@@ -118,9 +131,8 @@ SMODS.Joker {
 								number_format(to_big(card.ability.extra.Echips + card.ability.immutable.base_echips)),
 							},
 						}),
-						colour = G.C.DARK_EDITION,
-						card = card
-					}
+						message_colour = G.C.DARK_EDITION,
+					})
 				end
 				
 			end

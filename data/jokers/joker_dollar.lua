@@ -30,14 +30,15 @@ SMODS.Joker {
 				card = card
 			}
         end
-		if context.end_of_round and context.individual and context.cardarea == G.hand then
+		if context.end_of_round and context.individual and context.cardarea == G.hand and not context.blueprint then
 			if SMODS.has_enhancement(context.other_card, "m_unik_dollar") then
-				card.ability.extra.dollars = card.ability.extra.dollars + card.ability.extra.dollar_mod
-				return {
+				SMODS.scale_card(card, {
+					ref_table =card.ability.extra,
+					ref_value = "dollars",
+					scalar_value = "dollar_mod",
 					message = "+$" .. card.ability.extra.dollar_mod,
-					card = card,
-					colour = G.C.MONEY,
-				}
+					message_colour = G.C.GOLD,
+				})
 			end
 		end
 	end,

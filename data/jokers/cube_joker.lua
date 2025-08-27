@@ -35,18 +35,17 @@ SMODS.Joker {
 			}
 		end
         if (context.before and context.cardarea == G.jokers and #context.full_hand == 4 and not context.blueprint) then
-			card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chips_mod
-			return {
+			SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "x_chips",
+				scalar_value = "x_chips_mod",
 				message = localize({
-                    type = "variable",
-                    key = "a_xchips",
-                    vars = {
-                        number_format(to_big(card.ability.extra.x_chips)),
-                    },
-                }),
-				colour = G.C.CHIPS,
-				card = card
-			}
+					type = "variable",
+					key = "a_xchips",
+					vars = { card.ability.extra.x_chips },
+				}),
+				message_colour = G.C.CHIPS,
+			})
 		end
     end,
 }

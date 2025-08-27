@@ -9,12 +9,11 @@ local function White_lily_copy(card)
     _card:add_to_deck()
     _card:start_materialize()
     G.jokers:emplace(_card)
-    --TODO: Double Scale and Scalae support for when she self destructs or gets destroyed
-    --avoid permanently doubling her values to her copy so the multiply properties must transfer
-    _card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-    _card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
     if Card.get_gameset(_card) ~= "modest" then
-        card_eval_status_text(_card, "extra", nil, nil, nil, {
+        SMODS.scale_card(_card, {
+            ref_table =_card.ability.extra,
+            ref_value = "Emult",
+            scalar_value = "Emult_mod",
             message = localize({
                 type = "variable",
                 key = "a_powmult",
@@ -22,11 +21,13 @@ local function White_lily_copy(card)
                     number_format(to_big(_card.ability.extra.Emult + _card.ability.immutable.base_emult)),
                 },
             }),
-            colour = G.C.DARK_EDITION,
-            card = _card,
+            message_colour = G.C.DARK_EDITION,
         })
     else
-        card_eval_status_text(_card, "extra", nil, nil, nil, {
+        SMODS.scale_card(_card, {
+            ref_table =_card.ability.extra,
+            ref_value = "x_mult",
+            scalar_value = "x_mult_mod",
             message = localize({
                 type = "variable",
                 key = "a_xmult",
@@ -34,8 +35,7 @@ local function White_lily_copy(card)
                     number_format(to_big(_card.ability.extra.x_mult)),
                 },
             }),
-            colour = G.C.MULT,
-            card = _card,
+            message_colour = G.C.MULT,
         })
     end 
 
@@ -138,32 +138,34 @@ SMODS.Joker {
 		end
         if not context.blueprint and context.unik_destroying_joker then
             if context.unik_destroyed_joker ~= card then
-                card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-                card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_mod
                 if Card.get_gameset(card) ~= "modest" then
-                    return {
-                        message = localize({
-                            type = "variable",
-                            key = "a_powmult",
-                            vars = {
-                                number_format(card.ability.extra.Emult + card.ability.immutable.base_emult),
-                            },
-                        }),
-                        card = card,
-                        colour = G.C.DARK_EDITION,
-                    }
-                else
-                    return {
+                    SMODS.scale_card(_card, {
+                        ref_table =_card.ability.extra,
+                        ref_value = "x_mult",
+                        scalar_value = "x_mult_mod",
                         message = localize({
                             type = "variable",
                             key = "a_xmult",
                             vars = {
-                                number_format(card.ability.extra.x_mult),
+                                number_format(to_big(_card.ability.extra.x_mult)),
                             },
                         }),
-                        card = card,
-                        colour = G.C.MULT,
-                    }
+                        message_colour = G.C.MULT,
+                    })
+                else
+                    SMODS.scale_card(_card, {
+                        ref_table =_card.ability.extra,
+                        ref_value = "x_mult",
+                        scalar_value = "x_mult_mod",
+                        message = localize({
+                            type = "variable",
+                            key = "a_xmult",
+                            vars = {
+                                number_format(to_big(_card.ability.extra.x_mult)),
+                            },
+                        }),
+                        message_colour = G.C.MULT,
+                    })
                 end
             end
         end

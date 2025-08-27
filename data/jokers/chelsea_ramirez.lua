@@ -85,7 +85,6 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-
 				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,
 			}
@@ -99,7 +98,7 @@ SMODS.Joker {
 		end
     end,
 }
--- Hook is outside her and for yokana and chelsea's effects
+-- Hook is outside her for chelsea's effects
 local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
     local ret = scie(effect, scored_card, key, amount, from_edition)
@@ -113,6 +112,7 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
 ) and amount ~= 1) or
 
     key == "chips" or key == "chip_mod" or key == "chip" or key == "chips_mod" then
+       
         -- ----print("Chips triggered!")
         -- -- Yokana's effect
         -- for _,v in pairs(SMODS.find_card('j_unik_jsab_yokana')) do
@@ -133,14 +133,16 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
 
         for _, v in pairs(SMODS.find_card('j_unik_jsab_chelsea')) do
             if not v.ability.extra.unik_godsmarble_debuff then
-                v.ability.extra.x_chips = v.ability.extra.x_chips + v.ability.extra.x_chips_mod
-                card_eval_status_text(v, "extra", nil, nil, nil, {
+                SMODS.scale_card(v, {
+                    ref_table =v.ability.extra,
+                    ref_value = "x_chips",
+                    scalar_value = "x_chips_mod",
                     message = localize({
                         type = "variable",
                         key = "a_xchips",
-                        vars = { number_format(to_big(v.ability.extra.x_chips)) },
+                        vars = { v.ability.extra.x_chips },
                     }),
-                    colour = G.C.CHIPS,
+                    message_colour = G.C.CHIPS,
                 })
             end
         end

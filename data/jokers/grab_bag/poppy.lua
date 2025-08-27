@@ -22,18 +22,17 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
 		if context.before and context.cardarea == G.jokers then
-            card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
-			return {
+            SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "Xmult",
+				scalar_value = "Xmult_mod",
 				message = localize({
-                    type = "variable",
-                    key = "a_xmult",
-                    vars = {
-                        number_format(to_big(card.ability.extra.Xmult)),
-                    },
-                }),
-				colour = G.C.MULT,
-				card = card
-			}
+					type = "variable",
+					key = "a_xmult",
+					vars = { card.ability.extra.Xmult },
+				}),
+				message_colour = G.C.MULT,
+			})
         end
         if context.joker_main and to_big(card.ability.extra.Xmult) > to_big(1) then
 			return {
@@ -43,18 +42,20 @@ SMODS.Joker {
 		end
         if context.after and not context.blueprint then
             if to_big(math.floor(SMODS.calculate_round_score())) > to_big(G.GAME.blind.chips * 3) then
-                card.ability.extra.Xmult = math.max(1,card.ability.extra.Xmult - card.ability.extra.Xmult_mod - card.ability.extra.bad_Xmult_mod)
-			return {
-				message = localize({
-                    type = "variable",
-                    key = "a_xmult",
-                    vars = {
-                        number_format(to_big(card.ability.extra.Xmult)),
+                SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "Xmult",
+                    scalar_value = "custom_scaler",
+                    scalar_table = {
+                        custom_scaler = card.ability.extra.Xmult_mod + card.ability.extra.bad_Xmult_mod,
                     },
-                }),
-				colour = G.C.MULT,
-				card = card
-			}
+                    message = localize({
+                        type = "variable",
+                        key = "a_xmult",
+                        vars = { card.ability.extra.Xmult },
+                    }),
+                    message_colour = G.C.MULT,
+                })
             end
         end
 	end,

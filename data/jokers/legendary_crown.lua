@@ -63,18 +63,19 @@ SMODS.Joker {
         end
         if context.after and not context.blueprint then
             if to_big(G.GAME.round_scores['hand'].amt) > to_big(0) and to_big(SMODS.calculate_round_score()) >= to_big(G.GAME.round_scores['hand'].amt) then
-                card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-                return {
-                    message = localize({
+                SMODS.scale_card(card, {
+					ref_table =card.ability.extra,
+					ref_value = "Emult",
+					scalar_value = "Emult_mod",
+					message = localize({
                         type = "variable",
                         key = "a_powmult",
                         vars = {
-                            number_format(to_big(card.ability.extra.Emult)),
+                            number_format(card.ability.extra.Emult + card.ability.immutable.base_emult),
                         },
                     }),
-                    colour = G.C.DARK_EDITION,
-                    card = card
-                }
+					message_colour = G.C.DARK_EDITION,
+				})
             end
         end
         
