@@ -22,37 +22,21 @@ SMODS.Joker {
 	blueprint_compat = false,
     perishable_compat = false,
     immutable = true,
-    --mainline: scale down to 1/3.
-    --modest: scale down to 3/4
-	cry_scale_mod = function(self, card, joker, orig_scale_scale, true_base, orig_scale_base, new_scale_base)
-        if (Card.get_gameset(card) ~= "modest") then
-            return true_base/3
-        else
-            return true_base*3/4
-        end
-		
-	end,
 	calc_scaling = function(self, card, other_card, initial_value, scalar_value, args)
         if (Card.get_gameset(card) ~= "modest") then
             if scalar_value > 0 then
                 return {
                     override_scalar_value = {
-                        value = scaler_value/3, 
+                        value = scalar_value/3, 
                     },
-                    override_message = {
-                        message = localize('k_unik_arm_downgrade')
-                    }
                 }
             end
         else
             if scalar_value > 0 then
                 return {
                     override_scalar_value = { 
-                        value = scaler_value*3/4, 
+                        value = scalar_value*3/4, 
                     },
-                    override_message = {
-                        message = localize('k_unik_arm_downgrade')
-                    }
                 }
             end
         end
