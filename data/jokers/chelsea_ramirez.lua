@@ -141,7 +141,7 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
                         message = localize({
                             type = "variable",
                             key = "a_xchips",
-                            vars = { v.ability.extra.x_chips },
+                            vars = { v.ability.extra.x_chips + v.ability.extra.x_chips_mod },
                         }),
                         colour = G.C.CHIPS,
                     },

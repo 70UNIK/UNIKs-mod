@@ -80,7 +80,7 @@ function Card:remove_from_deck(from_debuff)
                             message = localize({
                                 type = "variable",
                                 key = "a_xmult",
-                                vars = { v.ability.extra.x_mult },
+                                vars = { v.ability.extra.x_mult + v.ability.extra.x_mult_mod },
                             }),
                         },
                         message_colour = G.C.MULT,

@@ -116,7 +116,7 @@ SMODS.Joker {
 							message = localize({
 								type = "variable",
 								key = "a_xchips",
-								vars = { card.ability.extra.Xchips },
+								vars = { card.ability.extra.Xchips + card.ability.extra.Xchips_mod},
 							}),
 							colour = G.C.CHIPS,
 						},
@@ -132,7 +132,7 @@ SMODS.Joker {
 								type = "variable",
 								key = "a_powchips",
 								vars = {
-									number_format(to_big(card.ability.extra.Echips + card.ability.immutable.base_echips)),
+									number_format(to_big(card.ability.extra.Echips + card.ability.immutable.base_echips + card.ability.extra.Echips_mod)),
 								},
 							}),
 							colour = G.C.DARK_EDITION,

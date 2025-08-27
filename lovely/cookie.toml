@@ -63,6 +63,18 @@ payload = '''
 			add_to_blind = add_to_blind2,
         }
 	end,
+	unik_cap_score = function(self,score)
+		local total = score
+		for k, _ in pairs(G.GAME.defeated_blinds) do
+			s = G.P_BLINDS[k]
+			if s.unik_cap_score then
+				if s:unik_cap_score(total) then
+					total = s:unik_after_defeat(total)
+				end
+			end
+		end
+		return total
+	end,
 	unik_after_defeat = function(self,chips,blind_size)
 		local bool = false
 		for k, _ in pairs(G.GAME.defeated_blinds) do

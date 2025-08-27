@@ -36,7 +36,7 @@ SMODS.Joker {
 					message = localize({
 						type = "variable",
 						key = "a_xmult",
-						vars = { card.ability.extra.x_mult },
+						vars = { card.ability.extra.x_mult + card.ability.extra.x_mult_mod },
 					}),
 					colour = G.C.MULT,
 					delay = 0.2,

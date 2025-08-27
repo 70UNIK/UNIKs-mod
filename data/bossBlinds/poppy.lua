@@ -26,16 +26,34 @@ SMODS.Blind{
 		G.GAME.unik_killed_by_poppy = nil
 		--G.GAME.unik_poppy_ceil = nil
 	end,
-	--The tax's functionality is used here instead. Pray it only activates if outside 2.5x reqs.
-	cry_cap_score = function(self, score)
-		if score > 2.5 * G.GAME.blind.chips then
-            G.GAME.blind.triggered = true
-            G.GAME.blind:wiggle()
-			return 0.03 * score
-		end
-	end,
+	-- --The tax's functionality is used here instead. Pray it only activates if outside 2.5x reqs.
+	-- cry_cap_score = function(self, score)
+	-- 	if score > 2.5 * G.GAME.blind.chips then
+    --         G.GAME.blind.triggered = true
+    --         G.GAME.blind:wiggle()
+	-- 		return 0.03 * score
+	-- 	end
+	-- end,
+	-- unik_cap_score = function(self,score)
+	-- 	if to_big(score) > to_big(2.5 * G.GAME.blind.chips) then
+    --         G.GAME.blind.triggered = true
+    --         G.GAME.blind:wiggle()
+	-- 		return 0.03 * score
+	-- 	end
+	-- end,
 	defeat = function(self)
 		G.GAME.unik_killed_by_poppy = nil
 		--G.GAME.unik_poppy_ceil = nil
 	end,
 }
+
+-- local capper = SMODS.calculate_round_score
+-- function SMODS.calculate_round_score()
+-- 	local ret = capper()
+-- 	if G.GAME and G.GAME.blind then
+-- 		return ret * (G.GAME.blind:unik_cap_score(ret) or 1)
+-- 	else
+-- 		return ret
+-- 	end
+	
+-- end

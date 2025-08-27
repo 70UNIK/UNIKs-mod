@@ -12,6 +12,16 @@ function Blind:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,sum
 	return nil
 end
 
+function Blind:unik_cap_score(score)
+	if not self.disabled then
+		local obj = self.config.blind
+		if obj.unik_cap_score and type(obj.unik_cap_score) == "function" then
+			return obj:unik_cap_score(score)
+		end
+	end
+	return nil
+end
+
 
 --Instead of merely debuffing a hand, it will KILL you if you play that hand
 function Blind:unik_kill_hand(cards, hand, handname, check)

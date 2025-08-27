@@ -412,7 +412,7 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 --BLINDS--
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
-NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
+-- NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/vice.lua")()

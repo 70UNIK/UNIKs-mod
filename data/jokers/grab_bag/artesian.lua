@@ -32,7 +32,7 @@ SMODS.Joker {
 				scaling_message = localize({
 					type = "variable",
 					key = "a_xmult",
-					vars = { card.ability.extra.Xmult },
+					vars = { card.ability.extra.Xmult + card.ability.extra.Xmult_mod},
 				}),
 				message_colour = G.C.MULT,
 			})
