@@ -32,18 +32,18 @@ SMODS.Challenge{
 
 }
 
--- Chipzel's effect
-local chipzel_mod_mult = mod_mult
-function mod_mult(_mult)
-	hand_chips = hand_chips or 0
-    --Trophy effect first
-	if G.GAME.trophymod then
-		_mult = math.min(_mult, math.max(hand_chips, 0))
-	end
-    --Then chipzel's effect
-    if G.GAME.modifiers.unik_mult_set_to_one then
-        mod_chips(_mult)
-        _mult = math.min(_mult, 1)
-    end
-	return chipzel_mod_mult(_mult)
-end
+-- -- Chipzel's effect
+-- local chipzel_mod_mult = mod_mult
+-- function mod_mult(_mult)
+-- 	hand_chips = hand_chips or 0
+--     --Trophy effect first
+-- 	if G.GAME.trophymod then
+-- 		_mult = math.min(_mult, math.max(hand_chips, 0))
+-- 	end
+--     --Then chipzel's effect
+--     if G.GAME.modifiers.unik_mult_set_to_one then
+--         mod_chips(_mult)
+--         _mult = math.min(_mult, 1)
+--     end
+-- 	return chipzel_mod_mult(_mult)
+-- end

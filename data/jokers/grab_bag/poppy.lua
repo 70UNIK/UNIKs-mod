@@ -42,7 +42,7 @@ SMODS.Joker {
             }
 		end
         if context.after and not context.blueprint then
-            if to_big(math.floor(hand_chips*mult)) > to_big(G.GAME.blind.chips * 3) then
+            if to_big(math.floor(SMODS.calculate_round_score())) > to_big(G.GAME.blind.chips * 3) then
                 card.ability.extra.Xmult = math.max(1,card.ability.extra.Xmult - card.ability.extra.Xmult_mod - card.ability.extra.bad_Xmult_mod)
 			return {
 				message = localize({
