@@ -665,6 +665,7 @@ NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
 NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_scale.lua")()
 NFS.load(mod_path .. "data/jokers/nostalgic_astral_in_a_bottle.lua")()
+NFS.load(mod_path .. "data/jokers/xchips_hater.lua")()
 NFS.load(mod_path .. "data/jokers/the_plant.lua")() 
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
@@ -674,6 +675,8 @@ NFS.load(mod_path .. "data/jokers/handcuffs.lua")()
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
+NFS.load(mod_path .. "data/jokers/decaying_tooth.lua")()
+NFS.load(mod_path .. "data/jokers/robert.lua")()
 NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a vampire with a hammer, or candy apple cookie with her hammer, destroying a mult card.
 --Bun Bun? Hidden effect; all shop items become Corrupted; adds a random corrupted card on blind select. 9 in 10 chance to not self destruct after round end (decrease by 1 per failed chance)
 

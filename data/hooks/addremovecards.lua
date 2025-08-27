@@ -11,12 +11,7 @@ function selfDestruction(card,message,color,dissolve)
     -- This part plays the animation.
     G.E_MANAGER:add_event(Event({
         func = function()
-            card_eval_status_text(card, "extra", nil, nil, nil, {
-                message = localize(message),
-                colour = color,
-                card=card,
-                delay = 0.5,
-            })
+            
             --Dissolving
             if (dissolve) then
                 card:start_dissolve()
@@ -43,6 +38,12 @@ function selfDestruction(card,message,color,dissolve)
             return true
         end
     }))
+    card_eval_status_text(card, "extra", nil, nil, nil, {
+        message = localize(message),
+        colour = color,
+        card=card,
+        delay = 0.5,
+    })
 end
 
 local removeHook = Card.remove_from_deck

@@ -1986,7 +1986,7 @@ return {
                 }
             },
             j_unik_xchips_hater={
-                name = "Xchips is not Vanilla!",
+                name = "XCHIPS IS NOT VANILLA!!!!!",
                 text = {
                     "{X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... cards and Jokers",
                     "will {C:red}not trigger{} and are {C:red}destroyed{} instead",
@@ -2002,7 +2002,7 @@ return {
                     "{C:green}#1# in #2#{} chance card is",
                     "drawn {C:red}face-down{}",
                     "{C:red}Self destructs{} when a hand", 
-                    "containing {C:attention}#3# all scoring",
+                    "containing {C:attention}#3#{} or more scoring",
                     "{C:red}face-down{} cards is played",
                     "or {C:unik_wheel_color}The Wheel{} is triggered",
                     "{C:inactive,s:0.7,E:2}It now targets you, for no reason.{}",   
@@ -2026,7 +2026,7 @@ return {
                 text = {
                     "{C:red}Lose {C:gold}$#1#{} per hand played",
                     "{C:red}Self destructs{} after earning",
-                    "more than {C:gold}$#2#{} per hand or",
+                    "at least {C:gold}$#2#{} per hand or",
                     "{C:unik_tooth_color}The Tooth{} is triggered",
                 }
             },
@@ -3449,7 +3449,11 @@ return {
             k_unik_brain_placeholder = "math.min(Card Selection Limit,Hand Size)",
             k_unik_perished="Perished!",
             k_unik_last_tile="LAST TILE 海底撈月",
-                
+            k_unik_wheel_burst="Bursted!",
+            k_unik_xchips_not_vanilla1="XCHIPS IS NOT VANILLA!1!!1!!",
+            k_unik_xchips_not_vanilla2="XCHIPS ALREADY EXISTS!!1!! IT'S CALLED MULT!1!!1",
+            k_unik_xchips_not_vanilla3="THINK! THINK! YOUR DEPENDENCE ON XCHIPS IS DISGUSTING!!11!!!",
+            k_unik_xchips_not_vanilla4="BUNCO IS NOT VANILLA CAUSE IT USES XCHIPS!!!!11!!!",
         },
         high_scores={},
         labels={

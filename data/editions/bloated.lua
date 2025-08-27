@@ -76,7 +76,7 @@ calculate = function(self, card, context)
 							blockable = false,
 							func = function()
 								card.debuff = true
-								card.ability.popped = true
+								card.ability.no_score = true
 								G.jokers:remove_card(card)
 								card:bloated_pop()					
 								card = nil

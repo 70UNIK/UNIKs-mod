@@ -37,7 +37,7 @@ SMODS.Joker {
         if to_big(card.ability.extra.Emult) > to_big(1) then
             card.ability.extra.Emult = 0.9
         end
-        if (context.selling_self and not context.retrigger_joker and not context.blueprint) or context.forcetrigger then
+        if (context.selling_self and not context.retrigger_joker and not context.blueprint) then
 			local jokers = {}
 			for i = 1, #G.jokers.cards do
 				if G.jokers.cards[i] ~= card and not G.jokers.cards[i].debuff and not G.jokers.cards[i].edition then

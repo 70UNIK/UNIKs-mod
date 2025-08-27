@@ -1159,7 +1159,7 @@ SMODS.Edition:take_ownership("e_cry_glass",{
 						delay = 0.3,
 						blockable = false,
 						func = function()
-							card.ability.shattered = true
+							card.ability.no_score = true
 							card.debuff = true
 							G.jokers:remove_card(card)
 							card:shatter()
