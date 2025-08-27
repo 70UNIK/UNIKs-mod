@@ -335,7 +335,7 @@ payload = '''
         end
         return false
     end,
-    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
 		if G.GAME.current_round.hands_played == 0 then
 			return {
                 debuff = true,

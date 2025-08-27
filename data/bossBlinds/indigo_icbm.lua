@@ -45,8 +45,8 @@ SMODS.Blind{
     --Return statement:
     -- {debuff = true [true = hand will not score], add_to_blind = floatX will be added to blind size}
     
-    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips)
-        if to_big(mult)*to_big(hand_chips) > to_big(G.GAME.blind.chips * 3) then
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
+        if to_big(sum) > to_big(G.GAME.blind.chips * 3) then
             return {
                 debuff = true,
             }

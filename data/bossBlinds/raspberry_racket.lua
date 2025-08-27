@@ -29,7 +29,7 @@ SMODS.Blind{
         end
         return false
     end,
-    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips)
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
         if to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 40) < to_big(0) then
             return {
                 debuff = true,

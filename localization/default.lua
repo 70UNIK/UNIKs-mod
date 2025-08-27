@@ -447,8 +447,8 @@ return {
             bl_unik_salmon_steps = { --literally the descending.
                 name = "Salmon Steps",
                 text = {
-                    "Mult is added to Chips",
-                    "then set to 1",
+                    "Set Chips and Mult",
+                    "operator to Addition",
                 }
             },
             bl_unik_burgundy_brain = {

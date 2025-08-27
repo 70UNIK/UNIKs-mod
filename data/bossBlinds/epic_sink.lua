@@ -60,7 +60,7 @@ SMODS.Blind	{
          end
          return false
     end,
-    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
         if G.GAME.unik_sink_killswitch > 0 then
             local sum2 = math.ceil(sum)
             local digits = math.ceil(#tostring(sum2) / 2)
