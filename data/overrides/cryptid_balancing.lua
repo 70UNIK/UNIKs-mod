@@ -281,40 +281,6 @@ SMODS.Joker:take_ownership("j_cry_gemino", {
 	end,
 }, true)
 
---double scale fix(?)
-SMODS.Joker:take_ownership("j_cry_Double Scale",{
-	calc_scaling = function(self, card, other, current_scaling, current_scalar, args)
-		if to_big(card.ability.times_current) >= to_big(card.ability.times_needed) then
-			card.ability.times_current = card.ability.times_current - card.ability.times_needed
-		else
-			return {
-				message = number_format(card.ability.times_current) .. "/" .. number_format(card.ability.times_needed),
-			}
-		end
-		if not G.GAME.cryptid_base_scales then
-			G.GAME.cryptid_base_scales = {}
-		end
-		if not G.GAME.cryptid_base_scales[other.config.center.key] then
-			G.GAME.cryptid_base_scales[other.config.center.key] = {}
-		end
-		if not G.GAME.cryptid_base_scales[other.config.center.key][args.scalar_value] then
-			G.GAME.cryptid_base_scales[other.config.center.key][args.scalar_value] = current_scalar
-		end
-		local true_base = G.GAME.cryptid_base_scales[other.config.center.key][args.scalar_value]
-		local orig_scale_scale = current_scaling
-		if Cryptid.gameset(self) == "exp_modest" then
-			return {
-				scalar_value = lenient_bignum(to_big(true_base) * 2),
-				message = localize("k_upgrade_ex"),
-			}
-		end
-		return {
-			scalar_value = lenient_bignum(orig_scale_scale + to_big(true_base)),
-			message = localize("k_upgrade_ex"),
-		}
-	end,
-}, true)
-
 --CHUD is literally 2 brainstorms in 1
 SMODS.Joker:take_ownership("j_cry_chad",{
     rarity = 'cry_epic',
@@ -462,21 +428,7 @@ SMODS.Joker:take_ownership("j_cry_m",{
 		},
 	},
 }, true)
---Googol play card is X17.
--- SMODS.Joker:take_ownership("j_cry_googol_play",{
--- 	config = {
--- 		extra = {
--- 			Xmult = 17,
--- 			odds = 8,
--- 		},
--- 	},
--- }, true)
---WAAAAAAHHHH
--- SMODS.Joker:take_ownership("j_cry_waluigi",{
--- 	config = { extra = { Xmult = 1.8 } },
--- }, true)
 
---Nostalgic invisible Joker now STRIPS editions in mainline/modest, otherwise you can infinidupe negative jokers (I believe thats what roffle did)
 SMODS.Joker:take_ownership("j_cry_oldinvisible",{
 	loc_vars = function(self, info_queue, center)
 		--copied from book of vengence
@@ -827,7 +779,7 @@ calculate = function(self, card, context)
 			and not (context.blueprint_card or self).getting_sliced
 			and my_pos
 			and G.jokers.cards[my_pos + 1]
-			and not G.jokers.cards[my_pos + 1].ability.eternal
+			and not SMODS.is_eternal(G.jokers.cards[my_pos + 1])
 			and not G.jokers.cards[my_pos + 1].getting_sliced
 		then
 			local sliced_card = G.jokers.cards[my_pos + 1]
@@ -847,18 +799,15 @@ calculate = function(self, card, context)
 					return true
 				end,
 			}))
-			card_eval_status_text(card, "extra", nil, nil, nil, {
-				message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = {
-						number_format(
-							lenient_bignum(to_big(card.ability.extra.x_chips) + 0.2 * sliced_card.sell_cost)
-						),
-					},
-				}),
-				colour = G.C.CHIPS,
-				no_juice = true,
+			SMODS.scale_card(card, {
+				ref_table = card.ability.extra,
+				ref_value = "x_chips",
+				scalar_table = {
+					sell_cost = sliced_card.sell_cost * 0.2,
+				},
+				scalar_value = "sell_cost",
+				message_key = "a_xchips",
+				message_colour = G.C.BLUE,
 			})
 			return nil, true
 		end
@@ -880,13 +829,18 @@ calculate = function(self, card, context)
 					return true
 				end,
 			}))
+			SMODS.scale_card(card, {
+				ref_table = card.ability.extra,
+				ref_value = "x_chips",
+				scalar_table = {
+					sell_cost = sliced_card.sell_cost * 0.2,
+				},
+				scalar_value = "sell_cost",
+				message_key = "a_xchips",
+				message_colour = G.C.BLUE,
+			})
 			return {
-				message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { number_format(card.ability.extra.x_chips) },
-				}),
-				x_chips = lenient_bignum(card.ability.extra.x_chips),
+				Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
 			}
 		end
 	end,
@@ -925,6 +879,7 @@ SMODS.Joker:take_ownership("j_cry_filler",{
 	},
 }, true)
 
+--actually making astral bottle good
 SMODS.Joker:take_ownership("j_cry_astral_bottle",{
 	loc_vars = function(self, info_queue, center)
 		if not center.edition or (center.edition and not center.edition.cry_astral) then
@@ -1011,7 +966,13 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 			}
 		end
 		if context.forcetrigger then
-			card.ability.emult = card.ability.emult - card.ability.emult_mod
+			SMODS.scale_card(card, {
+				ref_table = card.ability,
+				ref_value = "emult",
+				scalar_value = "emult_mod",
+				operation = "-",
+				no_message = true,
+			})
 			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) then
 				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
 			elseif (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
@@ -1024,7 +985,13 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 			end
 		end
 		if context.reroll_shop then
-			card.ability.emult = card.ability.emult - card.ability.emult_mod
+			SMODS.scale_card(card, {
+				ref_table = card.ability,
+				ref_value = "emult",
+				scalar_value = "emult_mod",
+				operation = "-",
+				no_message = true,
+			})
 			--floating point precision can kiss my ass istg
 			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
 				G.E_MANAGER:add_event(Event({
@@ -1527,19 +1494,31 @@ SMODS.Joker:take_ownership("j_cry_mprime",{
 		}
 	end,
 	calculate = function(self, card, context)
+		-- if context.selling_card and (context.card:is_jolly()) then
+		-- 	if not context.blueprint then
+		-- 		card.ability.extra.mult = lenient_bignum(to_big(card.ability.extra.mult) + card.ability.extra.bonus)
+		-- 	end
+		-- 	if not context.retrigger_joker then
+		-- 		card_eval_status_text(
+		-- 			card,
+		-- 			"extra",
+		-- 			nil,
+		-- 			nil,
+		-- 			nil,
+		-- 			{ message = localize("cry_m_ex"), colour = G.C.DARK_EDITION }
+		-- 		)
+		-- 	end
 		if context.selling_card and (context.card:is_jolly()) then
 			if not context.blueprint then
-				card.ability.extra.mult = lenient_bignum(to_big(card.ability.extra.mult) + card.ability.extra.bonus)
-			end
-			if not context.retrigger_joker then
-				card_eval_status_text(
-					card,
-					"extra",
-					nil,
-					nil,
-					nil,
-					{ message = localize("cry_m_ex"), colour = G.C.DARK_EDITION }
-				)
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "mult",
+					scalar_value = "bonus",
+					scaling_message = {
+						message = localize("cry_m_ex"),
+						colour = G.C.DARK_EDITION,
+					},
+				})
 			end
 		elseif
 			context.end_of_round
@@ -1662,15 +1641,13 @@ SMODS.Joker:take_ownership("j_cry_primus",{
 				end
 			end
 			if check then
-				card.ability.extra.Emult =
-					lenient_bignum(to_big(card.ability.extra.Emult) + card.ability.extra.Emult_mod)
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "Emult",
+					scalar_value = "Emult_mod",
+					message_colour = G.C.DARK_EDITION,
+				})
 				card.children.floating_sprite:set_sprite_pos({ x = 8, y = 6 })
-				return {
-					card_eval_status_text(card, "extra", nil, nil, nil, {
-						message = localize("k_upgrade_ex"),
-						colour = G.C.DARK_EDITION,
-					}),
-				}
 			end
 		end
 		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
@@ -1683,9 +1660,9 @@ SMODS.Joker:take_ownership("j_cry_primus",{
 			card.children.floating_sprite:set_sprite_pos({ x = 2, y = 4 })
 		end
 		if context.forcetrigger then
-			-- card.ability.extra.Emult = lenient_bignum(to_big(card.ability.extra.Emult) + card.ability.extra.Emult_mod)
 			return {
-				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),
+				Emult_mod = lenient_bignum(card.ability.extra.Emult),
+				colour = G.C.DARK_EDITION,
 			}
 		end
 	end,
@@ -1711,35 +1688,50 @@ SMODS.Joker:take_ownership("j_cry_stella_mortis",{
 		}
 	},
 	calculate = function(self, card, context)
-		if context.skipping_booster and not context.blueprint then
-			if SMODS.OPENED_BOOSTER.config.center.kind == "Celestial" then
-				for i = 1, G.GAME.pack_choices do
-					local new_card = pseudorandom_element(G.pack_cards.cards)
-					local tries = 10
-					while new_card.to_destroy and tries > 0 do
-						new_card = pseudorandom_element(G.pack_cards.cards)
-						tries = tries - 1
-					end
-					new_card.to_destroy = true
-					new_card:start_dissolve()
-					card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
+		if (context.ending_shop and not context.blueprint) or context.forcetrigger then
+			local destructable_planet = {}
+			local quota = 1
+			for i = 1, #G.consumeables.cards do
+				if
+					G.consumeables.cards[i].ability.set == "Planet"
+					and not G.consumeables.cards[i].getting_sliced
+					and not SMODS.is_eternal(G.consumeables.cards[i])
+				then
+					destructable_planet[#destructable_planet + 1] = G.consumeables.cards[i]
 				end
-				card_eval_status_text((context.blueprint_card or card), "extra", nil, nil, nil, {
-					message = localize({
-						type = "variable",
-						key = "a_powmult",
-						vars = {
-							number_format(lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult)),
-						},
-						colour = G.C.DARK_EDITION,
-					}),
+			end
+			local planet_to_destroy = #destructable_planet > 0
+					and pseudorandom_element(destructable_planet, pseudoseed("stella_mortis"))
+				or nil
+
+			if planet_to_destroy then
+				if Incantation then
+					quota = planet_to_destroy:getEvalQty()
+				end
+				if Overflow then
+					quaota = planet_to_destroy.ability.immutable and planet_to_destroy.ability.immutable.overflow_amount
+				end
+				planet_to_destroy.getting_sliced = true
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "Emult",
+					scalar_value = "Emult_mod",
+					operation = function(ref_table, ref_value, initial, change)
+						ref_table[ref_value] = card.ability.immutable.base_emult + initial + change * quota
+					end,
+					message_key = "a_powmult",
 				})
-				delay(2)
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						(context.blueprint_card or card):juice_up(0.8, 0.8)
+						planet_to_destroy:start_dissolve({ G.C.RED }, nil, 1.6)
+						return true
+					end,
+				}))
+				planet_to_destroy.dissolve = 0 --timing issues related to crossmod stuff
+				return nil, true
 			end
 		end
-		-- if context.forcetrigger then
-		-- 	card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_mod
-		-- end
 		if (context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1))) or context.forcetrigger then
 			return {
 				e_mult = lenient_bignum(card.ability.extra.Emult + card.ability.immutable.base_emult),

@@ -32,6 +32,34 @@ SMODS.Joker {
         end
 		
 	end,
+	calc_scaling = function(self, card, other_card, initial_value, scalar_value, args)
+        if (Card.get_gameset(card) ~= "modest") then
+            if scalar_value > 0 then
+                return {
+                    override_scalar_value = {
+                        value = scaler_value/3, 
+                    },
+                    override_message = {
+                        message = localize('k_unik_arm_downgrade')
+                    }
+                }
+            end
+        else
+            if scalar_value > 0 then
+                return {
+                    override_scalar_value = { 
+                        value = scaler_value*3/4, 
+                    },
+                    override_message = {
+                        message = localize('k_unik_arm_downgrade')
+                    }
+                }
+            end
+        end
+        if scalar_value > 0 then
+            
+        end
+    end,
     calculate = function(self, card, context)
 		if context.end_of_round and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
             card.ability.extra.rounds = card.ability.extra.rounds + 1
