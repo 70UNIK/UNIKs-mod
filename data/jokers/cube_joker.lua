@@ -39,11 +39,14 @@ SMODS.Joker {
 				ref_table =card.ability.extra,
 				ref_value = "x_chips",
 				scalar_value = "x_chips_mod",
-				scaling_message = localize({
-					type = "variable",
-					key = "a_xchips",
-					vars = { card.ability.extra.x_chips },
-				}),
+				scaling_message = {
+					message = localize({
+						type = "variable",
+						key = "a_xchips",
+						vars = { card.ability.extra.x_chips },
+					}),
+					colour = G.C.CHIPS,
+				},
 				message_colour = G.C.CHIPS,
 			})
 		end

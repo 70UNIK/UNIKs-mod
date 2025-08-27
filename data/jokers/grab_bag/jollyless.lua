@@ -5,7 +5,7 @@ SMODS.Joker {
     pos = { x = 3, y = 0 },
     rarity = "gb_boss",
 	-- Modest
-    config = { extra = { Xmult = 1, Xmult_mod = 1.5}},
+    config = { extra = { Xmult = 1, Xmult_mod = 2}},
     cost = 7,
     blueprint_compat = true,
 	perishable_compat = false,
@@ -72,11 +72,14 @@ SMODS.Joker {
 								scalar_table = {
 									custom_scaler = multiplier * card.ability.extra.Xmult_mod,
 								},
-								scaling_message = localize({
-									type = "variable",
-									key = "a_xmult",
-									vars = { card.ability.extra.Xmult },
-								}),
+								scaling_message = {
+									message = localize({
+										type = "variable",
+										key = "a_xmult",
+										vars = { card.ability.extra.Xmult },
+									}),
+									colour = G.C.MULT,
+								},
 								message_colour = G.C.MULT,
 							})
                         end

@@ -76,11 +76,13 @@ function Card:remove_from_deck(from_debuff)
                         ref_table =v.ability.extra,
                         ref_value = "x_mult",
                         scalar_value = "x_mult_mod",
-                        scaling_message = localize({
-                            type = "variable",
-                            key = "a_xmult",
-                            vars = { v.ability.extra.x_mult },
-                        }),
+                        scaling_message = {
+                            message = localize({
+                                type = "variable",
+                                key = "a_xmult",
+                                vars = { v.ability.extra.x_mult },
+                            }),
+                        },
                         message_colour = G.C.MULT,
                     })
                     -- v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.x_mult_mod

@@ -67,13 +67,16 @@ SMODS.Joker {
 					ref_table =card.ability.extra,
 					ref_value = "Emult",
 					scalar_value = "Emult_mod",
-					scaling_message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = {
-                            number_format(card.ability.extra.Emult + card.ability.immutable.base_emult),
-                        },
-                    }),
+					scaling_message = {
+                        message = localize({
+                            type = "variable",
+                            key = "a_powmult",
+                            vars = {
+                                number_format(card.ability.extra.Emult + card.ability.immutable.base_emult),
+                            },
+                        }),
+                        colour = G.C.DARK_EDITION,
+                    },
 					message_colour = G.C.DARK_EDITION,
 				})
             end

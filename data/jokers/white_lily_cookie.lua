@@ -14,13 +14,16 @@ local function White_lily_copy(card)
             ref_table =_card.ability.extra,
             ref_value = "Emult",
             scalar_value = "Emult_mod",
-            scaling_message = localize({
-                type = "variable",
-                key = "a_powmult",
-                vars = {
-                    number_format(to_big(_card.ability.extra.Emult + _card.ability.immutable.base_emult)),
-                },
-            }),
+            scaling_message = {
+                message = localize({
+                    type = "variable",
+                    key = "a_powmult",
+                    vars = {
+                        number_format(to_big(_card.ability.extra.Emult + _card.ability.immutable.base_emult)),
+                    },
+                }),
+                colour = G.C.DARK_EDITION,
+            },
             message_colour = G.C.DARK_EDITION,
         })
     else
@@ -28,13 +31,16 @@ local function White_lily_copy(card)
             ref_table =_card.ability.extra,
             ref_value = "x_mult",
             scalar_value = "x_mult_mod",
-            scaling_message = localize({
-                type = "variable",
-                key = "a_xmult",
-                vars = {
-                    number_format(to_big(_card.ability.extra.x_mult)),
-                },
-            }),
+            scaling_message = {
+                message = localize({
+                    type = "variable",
+                    key = "a_xmult",
+                    vars = {
+                        number_format(to_big(_card.ability.extra.x_mult)),
+                    },
+                }),
+                colour = G.C.MULT,
+            },
             message_colour = G.C.MULT,
         })
     end 
@@ -139,31 +145,37 @@ SMODS.Joker {
         if not context.blueprint and context.unik_destroying_joker then
             if context.unik_destroyed_joker ~= card then
                 if Card.get_gameset(card) ~= "modest" then
-                    SMODS.scale_card(_card, {
-                        ref_table =_card.ability.extra,
+                    SMODS.scale_card(card, {
+                        ref_table =card.ability.extra,
                         ref_value = "x_mult",
                         scalar_value = "x_mult_mod",
-                        scaling_message = localize({
-                            type = "variable",
-                            key = "a_xmult",
-                            vars = {
-                                number_format(to_big(_card.ability.extra.x_mult)),
-                            },
-                        }),
+                        scaling_message = {
+                            message = localize({
+                                type = "variable",
+                                key = "a_xmult",
+                                vars = {
+                                    number_format(to_big(card.ability.extra.x_mult)),
+                                },
+                            }),
+                            colour = G.C.MULT,
+                        },
                         message_colour = G.C.MULT,
                     })
                 else
-                    SMODS.scale_card(_card, {
-                        ref_table =_card.ability.extra,
+                    SMODS.scale_card(card, {
+                        ref_table =card.ability.extra,
                         ref_value = "x_mult",
                         scalar_value = "x_mult_mod",
-                        scaling_message = localize({
-                            type = "variable",
-                            key = "a_xmult",
-                            vars = {
-                                number_format(to_big(_card.ability.extra.x_mult)),
-                            },
-                        }),
+                        scaling_message = {
+                            message = localize({
+                                type = "variable",
+                                key = "a_xmult",
+                                vars = {
+                                    number_format(to_big(card.ability.extra.x_mult)),
+                                },
+                            }),
+                            colour = G.C.MULT,
+                        },
                         message_colour = G.C.MULT,
                     })
                 end

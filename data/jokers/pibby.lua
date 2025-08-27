@@ -81,11 +81,14 @@ SMODS.Joker {
                     scalar_table = {
                         custom_scaler =  increase ,
                     },
-                    scaling_message = localize({
-                        type = "variable",
-                        key = "a_xmult",
-                        vars = { card.ability.extra.Xmult },
-                    }),
+                    scaling_message = {
+                        message = localize({
+                            type = "variable",
+                            key = "a_xmult",
+                            vars = { card.ability.extra.Xmult },
+                        }),
+                        colour = G.C.MULT,
+                    },
                     message_colour = G.C.MULT,
                 })
             end

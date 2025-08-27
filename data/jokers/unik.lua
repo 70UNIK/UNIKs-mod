@@ -112,11 +112,14 @@ SMODS.Joker {
 						ref_table =card.ability.extra,
 						ref_value = "Xchips",
 						scalar_value = "Xchips_mod",
-						scaling_message = localize({
-							type = "variable",
-							key = "a_xchips",
-							vars = { card.ability.extra.Xchips },
-						}),
+						scaling_message = {
+							message = localize({
+								type = "variable",
+								key = "a_xchips",
+								vars = { card.ability.extra.Xchips },
+							}),
+							colour = G.C.CHIPS,
+						},
 						message_colour = G.C.CHIPS,
 					})
 				else
@@ -124,13 +127,16 @@ SMODS.Joker {
 						ref_table =card.ability.extra,
 						ref_value = "Echips",
 						scalar_value = "Echips_mod",
-						scaling_message = localize({
-							type = "variable",
-							key = "a_powchips",
-							vars = {
-								number_format(to_big(card.ability.extra.Echips + card.ability.immutable.base_echips)),
-							},
-						}),
+						scaling_message = {
+							message = localize({
+								type = "variable",
+								key = "a_powchips",
+								vars = {
+									number_format(to_big(card.ability.extra.Echips + card.ability.immutable.base_echips)),
+								},
+							}),
+							colour = G.C.DARK_EDITION,
+						},
 						message_colour = G.C.DARK_EDITION,
 					})
 				end
