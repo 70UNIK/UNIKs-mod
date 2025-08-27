@@ -11,7 +11,7 @@ pattern = """       elseif _c.name == "The World" then loc_vars = {cfg.max_highl
        localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = _c.vars or loc_vars}"""
 position = "after"
 payload = """    
-elseif _c.set == 'HoverFX' then
+elseif _c.set == 'MiscDesc' then
     localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = _c.vars or loc_vars}
 """
 overwrite = true

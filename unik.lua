@@ -6,29 +6,66 @@ if not UNIK then
 	UNIK = {}
 end
 
-UNIK.OvershootFXs = {}
+-- UNIK.MiscDescs = {}
 
-UNIK.OvershootFX  = SMODS.Center:extend{
-    set = 'OvershootFX',
-    obj_buffer = {},
-    obj_table = UNIK.OvershootFXs,
-    class_prefix = 'overshoot',
-    required_params = {
-        'key',
-    },
-    pre_inject_class = function(self)
-        G.P_CENTER_POOLS[self.set] = {}
-    end,
-    inject = function(self)
-        SMODS.Center.inject(self)
-    end,
-    get_obj = function(self, key)
-        if key == nil then
-            return nil
-        end
-        return self.obj_table[key]
-    end
-}
+-- UNIK.MiscDesc  = SMODS.Center:extend{
+--     set = 'MiscDesc',
+--     obj_buffer = {},
+--     obj_table = UNIK.MiscDescs,
+--     class_prefix = 'miscdesc',
+--     required_params = {
+--         'key',
+--     },
+--     pre_inject_class = function(self)
+--         G.P_CENTER_POOLS[self.set] = {}
+--     end,
+--     inject = function(self)
+--         SMODS.Center.inject(self)
+--     end,
+--     get_obj = function(self, key)
+--         if key == nil then
+--             return nil
+--         end
+--         return self.obj_table[key]
+--     end
+-- }
+-- --Aiko code for UI hover stuff
+-- UNIK.remove_formatting = function(string_in)
+--     return string.gsub(string_in, "{.-}", "")
+-- end
+-- UNIK.full_ui_add = function(nodes, key, scale)
+--     local m = G.localization.descriptions["MiscDesc"][key]
+--     local l = {
+--         {
+--             n = G.UIT.R,
+--             nodes = {
+--                 { n = G.UIT.T, config = { text = m.name, colour = G.C.UI.TEXT_LIGHT, scale = scale*1.2 }},
+--             }
+--         }
+--     }
+--     if m.text and false then
+--         for i, tx in ipairs(m.text) do
+--             table.insert(l, 
+--                 {
+--                     n = G.UIT.R,
+--                     nodes = {
+--                         { n = G.UIT.T, config = { text = UNIK.remove_formatting(tx), colour = G.C.UI.TEXT_LIGHT, scale = scale }},
+--                     }
+--                 }
+--             )
+--         end
+--     end
+    
+--     local x = {
+--         n = G.UIT.C,
+--         config = { align = "lm", padding = 0.1 },
+--         nodes = {
+--             { n = G.UIT.R, config = {}, nodes = l },
+            
+--         }
+--     }
+--     table.insert(nodes, x)
+-- end
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	

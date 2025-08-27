@@ -3176,7 +3176,7 @@ return {
         },
         collabs={},
         dictionary={
-
+            overshoot_unik = "Overshoot Effect",
             overshoot_unik_0 = {
                 "No effects",
                 "Make sure to not score",

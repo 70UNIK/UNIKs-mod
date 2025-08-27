@@ -47,7 +47,7 @@ function create_UIBox_HUD()
         hover = true, 
         can_collide = true,
         id = 'unik_overshoot_desc',
-        unik_fake_tooltip = {text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
+        unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
         },
      nodes={
         {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
@@ -59,11 +59,6 @@ function create_UIBox_HUD()
         }},
         }}
     return orig
-end
-
---overshoot hover effect update
-function set_hud_text()
-
 end
 
 local hover2 = UIElement.hover
@@ -83,7 +78,7 @@ function create_UIBox_detailed_tooltip_fake_unik(tooltip)
         local r = {n=G.UIT.R, config={align = "cm"}, nodes={
             {n=G.UIT.C, config={align = "cm"}, nodes={
                 {n=G.UIT.T, config={text = title,colour = G.C.UI.TEXT_DARK, scale = 0.2}}}}}}
-        table.insert(rows, r)
+        -- table.insert(rows, r)
     end
     for i = 1, #text do
       if type(text[i]) == 'table' then
@@ -101,7 +96,16 @@ function create_UIBox_detailed_tooltip_fake_unik(tooltip)
     end
     local t = {
         n=G.UIT.ROOT, config = {align = "cm", padding = 0.05, r=0.1, colour = G.C.UNIK_RGB, emboss = 0.05}, nodes=
-        {{n=G.UIT.C, config={align = "cm", padding = 0.05, r = 0.1, colour = G.C.WHITE, emboss = 0.05}, nodes=rows}}}
+        {
+            {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+              {n=G.UIT.T, config={text = tooltip.title, scale = 0.25, colour = G.C.UI.TEXT_LIGHT}}
+            }},
+            {n=G.UIT.R, config={align = "cm", padding = 0}, nodes={
+              {n=G.UIT.C, config={align = "cm", padding = 0.05, r = 0.1, colour = G.C.WHITE, emboss = 0.05}, nodes=rows},
+            }},
+            -- {n=G.UIT.C, config={align = "cm", padding = 0.05, r = 0.1, colour = G.C.WHITE, emboss = 0.05}, nodes=rows},
+            
+        }}
     return t
   end
 
