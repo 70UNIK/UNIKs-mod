@@ -5,7 +5,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 	config = {
 		extra = {
 			chips = 200,
-			chip_mod = 1,
+			chip_mod2 = 1,
 			depleted_threshold = -200,
 		},
 	},
@@ -24,7 +24,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 			vars = {
 				sign,
 				center.ability.extra.chips,
-				center.ability.extra.chip_mod,
+				center.ability.extra.chip_mod2,
 				center.ability.extra.depleted_threshold,
 			},
 		}
@@ -43,8 +43,8 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 			}
 		end
 		if context.cry_press  and not context.blueprint then
-			if (not card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(0))
-				or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod) <= to_big(card.ability.extra.depleted_threshold))
+			if (not card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod2) <= to_big(0))
+				or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod2) <= to_big(card.ability.extra.depleted_threshold))
 			then
 				G.E_MANAGER:add_event(Event({
 					func = function()
@@ -79,9 +79,9 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
 					ref_value = "chips",
-					scalar_value = "chip_mod",
+					scalar_value = "chip_mod2",
 					scaling_message = {
-						message = "-" .. number_format(card.ability.extra.chip_mod),
+						message = "-" .. number_format(card.ability.extra.chip_mod2),
 						colour = G.C.CHIPS,
 					},
 				})
@@ -92,7 +92,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 --Ice cream
 SMODS.Joker:take_ownership("j_ice_cream",{
 	config = {
-		extra = {chips = 100, chip_mod = 5,depleted_threshold = -100}
+		extra = {chips = 100, chip_mod2 = 5,depleted_threshold = -100}
 	},
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_ice_cream'
@@ -107,7 +107,7 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 			key = key,
 			vars = {
 				number_format(center.ability.extra.chips),
-				number_format(center.ability.extra.chip_mod),
+				number_format(center.ability.extra.chip_mod2),
 				sign,
 				number_format(center.ability.extra.depleted_threshold),
 			},
@@ -115,7 +115,7 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 	end,
 	calculate = function(self, card, context)
 		if context.after and not context.blueprint then
-			if (card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod <= 0) then
+			if (card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod2 < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod2 <= 0) then
 				G.E_MANAGER:add_event(Event({
 					func = function()
 						play_sound('tarot1')
@@ -140,7 +140,7 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 				 SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
 					ref_value = "chips",
-					scalar_value = "chip_mod",
+					scalar_value = "chip_mod2",
 					operation = "-",
 					message_key = 'a_chips_minus'
 				})
@@ -270,7 +270,7 @@ SMODS.Joker:take_ownership("j_ramen",{
 			else
 				 SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
-					ref_value = "x_mult",
+					ref_value = "Xmult",
 					scalar_value = "extra",
 					operation = "-",
 					message_key = 'a_xmult_minus',
