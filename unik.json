@@ -8,9 +8,9 @@
 	"priority": 99999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.3.3d-ALPHA-BALANCE",
+	"version": "0.4.0",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-0827)",
+        "Steamodded (>=1.0.0~BETA-0827c)",
         "Cryptid (>=0.5.10~dev3)"
     ]
 }

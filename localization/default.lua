@@ -2021,7 +2021,7 @@ return {
             j_unik_decaying_tooth={
                 name = "Decaying Tooth",
                 text = {
-                    "{C:red}Lose {C:gold}$#1#{} per hand played",
+                    "{C:red}Lose {C:gold}$#1#{} per card played",
                     "{C:red}Self destructs{} after earning",
                     "at least {C:gold}$#2#{} per hand or",
                     "{C:unik_tooth_color}The Tooth{} is triggered",

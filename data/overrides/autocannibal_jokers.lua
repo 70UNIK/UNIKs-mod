@@ -76,16 +76,15 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 					{ message = localize("k_eaten_ex"), colour = G.C.CHIPS }
 				)
 			else
-				card.ability.extra.chips =
-					lenient_bignum(to_big(card.ability.extra.chips) - card.ability.extra.chip_mod)
-				card_eval_status_text(
-					card,
-					"extra",
-					nil,
-					nil,
-					nil,
-					{ message = "-" .. number_format(card.ability.extra.chip_mod), colour = G.C.CHIPS }
-				)
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "chips",
+					scalar_value = "chip_mod",
+					scaling_message = {
+						message = "-" .. number_format(card.ability.extra.chip_mod),
+						colour = G.C.CHIPS,
+					},
+				})
 			end
 		end
 	end,
@@ -138,11 +137,13 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 					colour = G.C.CHIPS
 				}
 			else
-				card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chip_mod
-				return {
-					message = localize{type='variable',key='a_chips_minus',vars={card.ability.extra.chip_mod}},
-					colour = G.C.CHIPS
-				}
+				 SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "chips",
+					scalar_value = "chip_mod",
+					operation = "-",
+					message_key = 'a_chips_minus'
+				})
 			end
 		end
 		if context.joker_main then
@@ -205,11 +206,14 @@ SMODS.Joker:take_ownership("j_popcorn",{
 					colour = G.C.RED
 				}
 			else
-				card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.extra
-				return {
-					message = localize{type='variable',key='a_mult_minus',vars={card.ability.extra.extra}},
-					colour = G.C.MULT
-				}
+				SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+					ref_value = "mult",
+					scalar_value = "extra",
+					message_key = 'a_mult_minus',
+					colour = G.C.MULT,
+					operation = '-'
+				})
 			end
 		end
 		if context.joker_main then
@@ -264,13 +268,14 @@ SMODS.Joker:take_ownership("j_ramen",{
 					colour = G.C.FILTER
 				}
 			else
-				card.ability.extra.Xmult = card.ability.extra.Xmult -  card.ability.extra.extra
-				return {
-					delay = 0.2,
-					card = card,
-					message = localize{type='variable',key='a_xmult_minus',vars={ card.ability.extra.extra}},
+				 SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "x_mult",
+					scalar_value = "extra",
+					operation = "-",
+					message_key = 'a_xmult_minus',
 					colour = G.C.RED
-				}
+				})
 			end
 		end
 		if context.joker_main then
@@ -336,12 +341,16 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 					colour = G.C.FILTER
 				}
 			else
-				card.ability.extra.h_size = card.ability.extra.h_size - card.ability.extra.h_mod
-				G.hand:change_size(- card.ability.extra.h_mod)
-				return {
-					message = localize{type='variable',key='a_handsize_minus',vars={card.ability.extra.h_mod}},
-					colour = G.C.FILTER
-				}
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "h_size",
+					scalar_value = "h_mod",
+					message_key = 'a_handsize_minus',
+					operation = function(ref_table, ref_value, initial, change)
+						ref_table[ref_value] = initial - change
+						G.hand:change_size(- change)
+					end
+				})
 			end
 		end
 	end
@@ -384,11 +393,14 @@ SMODS.Joker:take_ownership("j_mf_lollipop",{
 			colour = G.C.FILTER
 			}
 		else
-			card.ability.x_mult = card.ability.x_mult - card.ability.extra
-			return {
-			message = localize{type='variable',key='a_xmult_minus',vars={card.ability.extra}},
-			colour = G.C.RED
-			}
+			SMODS.scale_card(card, {
+				ref_table = card.ability,
+				ref_value = "x_mult",
+				scalar_value = "extra",
+				operation = "-",
+				message_key = 'a_xmult_minus',
+				colour = G.C.RED
+			})
 		end
 		elseif context.forcetrigger or (context.cardarea == G.jokers and context.joker_main) then
 			return {
@@ -415,16 +427,25 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 		}
 	end,
 	pools = { ["autocannibalism_food"] = true },
+	demicolon_compat = true,
 	calculate = function(self, card, context)
 		-- Gives the xChips during play
-		if context.joker_main then
+		if context.joker_main or context.forcetrigger then
 		return {
 			x_chips = card.ability.extra.X_chips
 		}
 		end
 		if context.discard and not context.blueprint then
 			-- Reduce the xChips value
-			card.ability.extra.X_chips = card.ability.extra.X_chips - card.ability.extra.reduction_amount
+			SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "X_chips",
+				scalar_value = "reduction_amount",
+				message_key = "a_xchips_minus",
+				operation = "-",
+				message_colour = G.C.CHIPS,
+				delay = 0.2,
+			})
 
 			-- Destroy Nachos if the current value is <= 1
 			if (card.ability.extra.X_chips <= 1 and not card.ability.unik_depleted) or (card.ability.extra.X_chips <= 0 and card.ability.unik_depleted) then
@@ -435,17 +456,17 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 				colour = G.C.FILTER,
 				card = card
 				}
-			else
-				return {
-				delay = 0.2,
-				message = localize {
-					type = 'variable',
-					key = 'a_xchips_minus',
-					vars = { card.ability.extra.reduction_amount }
-				},
-				colour = G.C.CHIPS,
-				card = card
-				}
+			-- else
+			-- 	return {
+			-- 	delay = 0.2,
+			-- 	message = localize {
+			-- 		type = 'variable',
+			-- 		key = 'a_xchips_minus',
+			-- 		vars = { card.ability.extra.reduction_amount }
+			-- 	},
+			-- 	colour = G.C.CHIPS,
+			-- 	card = card
+			-- 	}
 			end
 		end
 	end

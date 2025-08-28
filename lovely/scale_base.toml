@@ -1,0 +1,37 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+### COsmetic base display that factors in immutable base for modified emult.
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''scaling_message = scaling_message or {
+        message = localize(args.message_key and {type='variable',key=args.message_key,vars={args.message_key =='a_xmult' and args.ref_table[args.ref_value] or scalar_value}} or 'k_upgrade_ex'),
+        colour = args.message_colour or G.C.FILTER
+    }'''
+position = 'at'
+payload = '''
+scaling_message = scaling_message or {
+    message = localize(args.message_key and {type='variable',key=args.message_key,vars={(args.message_key =='a_xmult' and (args.ref_table[args.ref_value] + args.base)) or (args.force_full_val and args.message_key and (args.ref_table[args.ref_value] + args.base)) or (scalar_value + args.base)}} or 'k_upgrade_ex'),
+    colour = args.message_colour or G.C.FILTER,
+    delay = args.delay or 1,
+
+}
+'''
+match_indent = true
+
+### COsmetic base display that factors in immutable base for modified emult.
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''if not args.operation then args.operation = "+" end'''
+position = 'after'
+payload = '''
+--Cosmetic addition to base 1 for special Emult operations that have the 1 shaved from it (otherwise valuemanip will go crazy)
+args.base = args.base or 0
+args.delay = args.delay or 1
+args.force_full_val = args.force_full_val or false
+'''
+match_indent = true

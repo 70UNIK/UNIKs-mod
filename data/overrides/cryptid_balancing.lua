@@ -808,6 +808,7 @@ calculate = function(self, card, context)
 				scalar_value = "sell_cost",
 				message_key = "a_xchips",
 				message_colour = G.C.BLUE,
+				force_full_val = true,
 			})
 			return nil, true
 		end
@@ -838,6 +839,7 @@ calculate = function(self, card, context)
 				scalar_value = "sell_cost",
 				message_key = "a_xchips",
 				message_colour = G.C.BLUE,
+				 force_full_val = true,
 			})
 			return {
 				Xchip_mod = lenient_bignum(card.ability.extra.x_chips),
@@ -972,6 +974,8 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 				scalar_value = "emult_mod",
 				operation = "-",
 				no_message = true,
+				 force_full_val = true,
+				 base = 1,
 			})
 			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) then
 				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
@@ -991,6 +995,8 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 				scalar_value = "emult_mod",
 				operation = "-",
 				no_message = true,
+				 force_full_val = true,
+				 base = 1,
 			})
 			--floating point precision can kiss my ass istg
 			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
@@ -1645,7 +1651,9 @@ SMODS.Joker:take_ownership("j_cry_primus",{
 					ref_table = card.ability.extra,
 					ref_value = "Emult",
 					scalar_value = "Emult_mod",
+					base = 1, --additional flag to support emult/echips that have an immutable base of 1.
 					message_colour = G.C.DARK_EDITION,
+					 force_full_val = true,
 				})
 				card.children.floating_sprite:set_sprite_pos({ x = 8, y = 6 })
 			end
@@ -1716,10 +1724,12 @@ SMODS.Joker:take_ownership("j_cry_stella_mortis",{
 					ref_table = card.ability.extra,
 					ref_value = "Emult",
 					scalar_value = "Emult_mod",
+				    base = 1, --additional flag to support emult/echips that have an immutable base of 1.
 					operation = function(ref_table, ref_value, initial, change)
 						ref_table[ref_value] = card.ability.immutable.base_emult + initial + change * quota
 					end,
 					message_key = "a_powmult",
+					 force_full_val = true,
 				})
 				G.E_MANAGER:add_event(Event({
 					func = function()

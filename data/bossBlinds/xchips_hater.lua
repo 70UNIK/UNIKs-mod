@@ -100,7 +100,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             }))
         end
     end
-    if scored_card.ability.no_score then
+    if scored_card and scored_card.ability and scored_card.ability.no_score then
         key = nil
     end
     local ret = scie(effect, scored_card, key, amount, from_edition)

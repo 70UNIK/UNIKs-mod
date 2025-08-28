@@ -137,15 +137,9 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
                     ref_table =v.ability.extra,
                     ref_value = "x_chips",
                     scalar_value = "x_chips_mod",
-                    scaling_message = {
-                        message = localize({
-                            type = "variable",
-                            key = "a_xchips",
-                            vars = { v.ability.extra.x_chips + v.ability.extra.x_chips_mod },
-                        }),
-                        colour = G.C.CHIPS,
-                    },
+                    message_key = "a_xchips",
                     message_colour = G.C.CHIPS,
+                    force_full_val = true,
                 })
             end
         end
