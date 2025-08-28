@@ -25,25 +25,25 @@ SMODS.Joker {
 	eternal_compat = false,
     demicoloncompat = true,
     immutable = true,
-    config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 2.5,trigger_mod = 5, Mult = 100, Chips = 50} },
+    config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 1.5,trigger_mod = 5, Mult = 100, Chips = 50}, immutable = {base_emult = 1.0} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
         if (not Talisman) then
             key = "j_unik_epic_blind_sauce_notalisman"
-            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
+            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
         end
         if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest"then
             key = "j_unik_epic_blind_sauce_no_epic"
-            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult,math.max(0,center.ability.extra.triggers-1)} }
+            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
         else
-             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult ,math.max(0,center.ability.extra.triggers-1)} }
+             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
         end
         
 		
 	end,
     -- pools = { ["Food"] = true}, //NOPE!
      gameset_config = {
-        config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 2,trigger_mod = 5, Mult = 50, Chips = 50} },
+        config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 1,trigger_mod = 5, Mult = 50, Chips = 50}, immutable = {base_emult = 1.0} },
 	},
     --Only spawn if you have at least 1 king of spades in deck
     calculate = function(self, card, context)
@@ -71,14 +71,14 @@ SMODS.Joker {
                     return {
                         mult = card.ability.extra.Mult,
                         chips = card.ability.extra.Chips,
-                        e_mult = card.ability.extra.Emult,
+                        e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                         colour = G.C.DARK_EDITION,
                     }
                 else
                     return {
                         mult = card.ability.extra.Mult,
                         chips = card.ability.extra.Chips,
-                        e_mult = card.ability.extra.Emult,
+                        e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                         colour = G.C.DARK_EDITION,
                     }
                 end   
