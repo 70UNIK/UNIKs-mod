@@ -32,6 +32,9 @@ SMODS.Joker {
 				message_key = "a_xmult",
 				message_colour = G.C.MULT,
 			})
+            				return {
+
+				}
         end
 		if context.forcetrigger then
 			return {

@@ -36,6 +36,9 @@ SMODS.Joker {
 				message_colour = G.C.MULT,
 				delay = 0.2,
 			})
+							return {
+
+				}
 		end
     end,
 }

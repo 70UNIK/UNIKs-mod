@@ -38,6 +38,9 @@ SMODS.Joker {
 					scalar_value = "dollar_mod",
 					message_colour = G.C.GOLD,
 				})
+				return {
+
+				}
 			end
 		end
 	end,

@@ -72,6 +72,9 @@ SMODS.Joker {
                     force_full_val = true,
                     base = 1,
 				})
+                				return {
+
+				}
             end
         end
         

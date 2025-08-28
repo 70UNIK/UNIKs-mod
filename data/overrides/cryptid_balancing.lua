@@ -1525,6 +1525,9 @@ SMODS.Joker:take_ownership("j_cry_mprime",{
 						colour = G.C.DARK_EDITION,
 					},
 				})
+								return {
+
+				}
 			end
 		elseif
 			context.end_of_round
@@ -1656,6 +1659,9 @@ SMODS.Joker:take_ownership("j_cry_primus",{
 					 force_full_val = true,
 				})
 				card.children.floating_sprite:set_sprite_pos({ x = 8, y = 6 })
+								return {
+
+				}
 			end
 		end
 		if context.joker_main and (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then

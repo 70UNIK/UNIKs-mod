@@ -179,44 +179,6 @@ function create_UIBox_HUD_blind()
     return ret
 end
 
--- local function removeFormat(string_in)
---     return string.gsub(string_in, "{.-}", "")
--- end
-
---Taken from aikoyoris for overshoot hover FX
--- UNIK.overshoot_ui_add = function(nodes, key, scale)
---     local m = G.localization.descriptions["OvershootFX"][key]
---     local l = {
---         {
---             n = G.UIT.R,
---             nodes = {
---                 { n = G.UIT.T, config = { text = m.name, colour = G.C.UI.TEXT_LIGHT, scale = scale*1.2 }},
---             }
---         }
---     }
---     if m.text and false then
---         for i, tx in ipairs(m.text) do
---             table.insert(l, 
---                 {
---                     n = G.UIT.R,
---                     nodes = {
---                         { n = G.UIT.T, config = { text = removeFormat(tx), colour = G.C.UI.TEXT_LIGHT, scale = scale }},
---                     }
---                 }
---             )
---         end
---     end
-    
---     local x = {
---         n = G.UIT.C,
---         config = { align = "lm", padding = 0.1 },
---         nodes = {
---             { n = G.UIT.R, config = {}, nodes = l },
-            
---         }
---     }
---     table.insert(nodes, x)
--- end
 
 function unik_ease_overshoot(mod)
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
@@ -252,7 +214,7 @@ function unik_ease_overshoot(mod)
                 
             end
             ante_UI.config.object:update()
-            ante_UI2.config.unik_fake_tooltip = {text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)}
+            ante_UI2.config.unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)}
             G.HUD:recalculate()
             --Popup text next to the chips in UI showing number of chips gained/lost
             attention_text({

@@ -43,6 +43,9 @@ SMODS.Joker {
 				message_colour = G.C.CHIPS,
 				force_full_val = true,
 			})
+			return {
+
+			}
 		end
     end,
 }

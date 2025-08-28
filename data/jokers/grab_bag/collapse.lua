@@ -53,6 +53,9 @@ SMODS.Joker {
 				message_key = "a_chips",
 				message_colour = G.C.CHIPS,
 			})
+            				return {
+
+				}
         end
 	end,
     in_pool = function(self, args)

@@ -85,6 +85,9 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 						colour = G.C.CHIPS,
 					},
 				})
+								return {
+
+				}
 			end
 		end
 	end,
@@ -142,8 +145,12 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 					ref_value = "chips",
 					scalar_value = "chip_mod2",
 					operation = "-",
-					message_key = 'a_chips_minus'
+					message_key = 'a_chips_minus',
+					message_colour = G.C.CHIPS,
 				})
+								return {
+
+				}
 			end
 		end
 		if context.joker_main then
@@ -211,9 +218,12 @@ SMODS.Joker:take_ownership("j_popcorn",{
 					ref_value = "mult",
 					scalar_value = "extra",
 					message_key = 'a_mult_minus',
-					colour = G.C.MULT,
+					message_colour = G.C.MULT,
 					operation = '-'
 				})
+								return {
+
+				}
 			end
 		end
 		if context.joker_main then
@@ -265,7 +275,7 @@ SMODS.Joker:take_ownership("j_ramen",{
 				return {
 					card = card,
 					message = localize('k_eaten_ex'),
-					colour = G.C.FILTER
+					colour = G.C.RED
 				}
 			else
 				 SMODS.scale_card(card, {
@@ -274,8 +284,12 @@ SMODS.Joker:take_ownership("j_ramen",{
 					scalar_value = "extra",
 					operation = "-",
 					message_key = 'a_xmult_minus',
-					colour = G.C.RED
+					message_colour = G.C.RED,
+					delay = 0.2,
 				})
+								return {
+
+				}
 			end
 		end
 		if context.joker_main then
@@ -351,6 +365,9 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 						G.hand:change_size(- change)
 					end
 				})
+								return {
+
+				}
 			end
 		end
 	end
@@ -399,8 +416,11 @@ SMODS.Joker:take_ownership("j_mf_lollipop",{
 				scalar_value = "extra",
 				operation = "-",
 				message_key = 'a_xmult_minus',
-				colour = G.C.RED
+				message_colour = G.C.RED
 			})
+							return {
+
+				}
 		end
 		elseif context.forcetrigger or (context.cardarea == G.jokers and context.joker_main) then
 			return {
@@ -468,6 +488,9 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 			-- 	card = card
 			-- 	}
 			end
+							return {
+
+				}
 		end
 	end
 }, true)

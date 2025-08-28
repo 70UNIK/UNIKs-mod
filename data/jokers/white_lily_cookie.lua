@@ -138,6 +138,9 @@ SMODS.Joker {
                         message_colour = G.C.DARK_EDITION,
                          force_full_val = true,
                     })
+                    				return {
+
+				}
                 else
                     SMODS.scale_card(card, {
                         ref_table =card.ability.extra,
@@ -146,6 +149,9 @@ SMODS.Joker {
                         message_key = "a_xmult",
                         message_colour = G.C.MULT,
                     })
+                    				return {
+
+				}
                 end
             end
         end
