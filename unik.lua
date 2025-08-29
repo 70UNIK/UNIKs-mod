@@ -292,12 +292,21 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/editions/bloated.lua")()
 NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
-NFS.load(mod_path .. "data/editions/corrupted.lua")()
+-- NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
--- consumables
-NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
+------------------------
+---CONSUMABLES
+--------------------------
+---
+---TAROTS
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
+
+if Cryptid then
+	NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
+end
+
+---SPECTRALS
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
@@ -325,8 +334,9 @@ end
 --Vouchers
 NFS.load(mod_path .. "data/vouchers/spectral_merchant.lua")() 
 NFS.load(mod_path .. "data/vouchers/spectral_tycoon.lua")() 
-NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
-
+if Cryptid then
+	NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
+end
 
 --MF color cards
 SMODS.Atlas({ 
@@ -361,7 +371,7 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 -- NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
-NFS.load(mod_path .. "data/bossBlinds/joyless.lua")() --Cryptid crossmod
+
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
@@ -372,7 +382,11 @@ NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
 NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
-NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
+-- NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
+if Cryptid then
+	NFS.load(mod_path .. "data/bossBlinds/cryptid/joyless.lua")() --Cryptid crossmod
+end
+
 --The lily: Destroy all cards played after scoring
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()
@@ -398,7 +412,6 @@ if (SMODS.Mods['ble'] or {}).can_load then
 end
 
 if unik_config.unik_legendary_blinds then
-	
 	NFS.load(mod_path .. "data/bossBlinds/epic_legendary_check.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_box.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_shackle.lua")()
@@ -407,8 +420,10 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_collapse.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
-	NFS.load(mod_path .. "data/bossBlinds/epic_jollyless.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_vice.lua")()
+	if Cryptid then
+		NFS.load(mod_path .. "data/bossBlinds/cryptid/epic_jollyless.lua")()
+	end
 	NFS.load(mod_path .. "data/bossBlinds/epic_sink.lua")() --hold for now until a more interesting effect is in place
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_miser.lua")()
@@ -423,10 +438,10 @@ if unik_config.unik_legendary_blinds then
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	if Talisman then
-		NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")() --Uhhh, maybe I can add a joker that scales xmult but caps score at 0.75x and scale only if score is exactly 1.5x, but that breaks the consecutive scoring
+		NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
 		NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")() --good high card score thats it.
 	end
-	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")() --may need to be reworked to be less annoying
+	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
 	if Talisman then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")() --dont have too much rarities, have good amount of hands, blueprint(s) 
 	end
@@ -438,76 +453,77 @@ end
 ----------------------------------------
 
 --Common
-NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
-NFS.load(mod_path .. "data/jokers/gt710.lua")()
-NFS.load(mod_path .. "data/jokers/golden_glove.lua")() --NoImage
-NFS.load(mod_path .. "data/jokers/instant_gratification.lua")() --NoImage
-NFS.load(mod_path .. "data/jokers/1_5_joker.lua")() 
-NFS.load(mod_path .. "data/jokers/noon.lua")()
-NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
-NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
-NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/lucky_seven.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/gt710.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/golden_glove.lua")() --NoImage
+NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")() --NoImage
+NFS.load(mod_path .. "data/jokers/unik/common/1_5_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/common/noon.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 
-NFS.load(mod_path .. "data/jokers/double_container.lua")() --Uncommon when morefluff installed
+NFS.load(mod_path .. "data/jokers/unik/common/double_container.lua")() --Uncommon when morefluff installed
 
 --Uncommon
-NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
-NFS.load(mod_path .. "data/jokers/711.lua")()
-NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
-NFS.load(mod_path .. "data/jokers/tax_haven.lua")()
-NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
-NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
-NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
-NFS.load(mod_path .. "data/jokers/recycler.lua")()
-NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
-NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
-NFS.load(mod_path .. "data/jokers/joker_dollar.lua")()	
-NFS.load(mod_path .. "data/jokers/lockpick.lua")()
-NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
-NFS.load(mod_path .. "data/jokers/chipzel.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/no_standing_zone.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/711.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/riif_roof.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/tax_haven.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/cube_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/vessel_kiln.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/borg_cube.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/recycler.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/soul_fragment.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/fat_joker.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/joker_dollar.lua")()	
+NFS.load(mod_path .. "data/jokers/unik/uncommon/lockpick.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/cobblestone.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 
 --Rare
-NFS.load(mod_path .. "data/jokers/minimized.lua")()
-NFS.load(mod_path .. "data/jokers/copycat.lua")()
-NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
-NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
-NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
-NFS.load(mod_path .. "data/jokers/riff_rare.lua")() 
-NFS.load(mod_path .. "data/jokers/clone_man.lua")()
-NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
-NFS.load(mod_path .. "data/jokers/foundation.lua")()
-NFS.load(mod_path .. "data/jokers/lone_despot.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/invisible_card.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/ghost_trap.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/a_taste_of_power.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/riff_rare.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/clone_man.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/epic_blind_sauce.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/foundation.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 
 --Rare (characters)
-NFS.load(mod_path .. "data/jokers/poppy.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")() 
 -- NFS.load(mod_path .. "data/jokers/kouign_amann_cookie.lua")() --FULL REWORK NEEDED
-NFS.load(mod_path .. "data/jokers/pibby.lua")() 
-NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
-NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
-NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")()
-NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/maya_ramirez.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")() 
 
 --Ancient
-NFS.load(mod_path .. "data/jokers/ALICE.lua")()
-NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/unik.lua")() 
 --NIKO
 --WORLD MACHINE
+NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()
+NFS.load(mod_path .. "data/jokers/unik/ancient/white_lily_cookie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/ancient/moonlight_cookie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")() 
+
 
 ---------------
 ---CROSSMOD (non cursed) JONKLERS
 ---------------
 if (SMODS.Mods["paperback"] or {}).can_load then
-	NFS.load(mod_path .. "data/jokers/binary_asteroid.lua")()
-	NFS.load(mod_path .. "data/jokers/weetomancer.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
+	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
 end
 if Cryptid then
-	NFS.load(mod_path .. "data/jokers/scratch.lua")()
-	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
-	NFS.load(mod_path .. "data/jokers/hacker.lua")()
+	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
+	NFS.load(mod_path .. "data/jokers/cryptid/coupon_codes.lua")()
+	NFS.load(mod_path .. "data/jokers/cryptid/hacker.lua")()
 	-- NFS.load(mod_path .. "data/jokers/last_tile.lua")() --May not program it in...
-	NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
+	NFS.load(mod_path .. "data/jokers/cryptid/epic_riffin.lua")() 
 end
 
 if next(SMODS.find_mod("GrabBag")) then
@@ -555,51 +571,54 @@ end
 ---------------
 ---CURSED JONKLERS
 ---------------
-NFS.load(mod_path .. "data/jokers/happiness.lua")()
-NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
-NFS.load(mod_path .. "data/jokers/impounded.lua")() 
-NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() 
-NFS.load(mod_path .. "data/jokers/broken_scale.lua")()
-NFS.load(mod_path .. "data/jokers/xchips_hater.lua")() --noimage
+NFS.load(mod_path .. "data/jokers/unik/detrimental/happiness.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/autocannibalism.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/impounded.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/detrimental/monster_spawner.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_scale.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/xchips_hater.lua")() --noimage
 if Cryptid then
-	NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
-	NFS.load(mod_path .. "data/jokers/nostalgic_astral_in_a_bottle.lua")() --noimage
+	NFS.load(mod_path .. "data/jokers/cryptid/rancid_smoothie.lua")()
+	NFS.load(mod_path .. "data/jokers/cryptid/nostalgic_astral_in_a_bottle.lua")() --noimage
 end
 
 --Blind based detrimental/cursed
-NFS.load(mod_path .. "data/jokers/the_plant.lua")() 
-NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
-NFS.load(mod_path .. "data/jokers/broken_window.lua")()
-NFS.load(mod_path .. "data/jokers/goading_joker.lua")() 
-NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
-NFS.load(mod_path .. "data/jokers/handcuffs.lua")() 
-NFS.load(mod_path .. "data/jokers/border_wall.lua")()
-NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")() 
-NFS.load(mod_path .. "data/jokers/broken_arm.lua")() 
-NFS.load(mod_path .. "data/jokers/decaying_tooth.lua")() --noimage
-NFS.load(mod_path .. "data/jokers/robert.lua")() --noimage
-NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/the_plant.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/detrimental/caveman_club.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_window.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/goading_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/detrimental/headless_joker.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/handcuffs.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/detrimental/border_wall.lua")()
+NFS.load(mod_path .. "data/jokers/unik/detrimental/hook_n_discard.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_arm.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/detrimental/decaying_tooth.lua")() --noimage
+NFS.load(mod_path .. "data/jokers/unik/detrimental/robert.lua")() --noimage
+NFS.load(mod_path .. "data/jokers/unik/detrimental/vampiric_hammer.lua")()
 --- 
 ---Overrides
-NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
+if Cryptid then
+	NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
+end
+
 NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
 
-
-NFS.load(mod_path .. "data/challenges/common_muck.lua")()
-NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
-NFS.load(mod_path .. "data/challenges/singleton.lua")()
-NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
--- NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
-NFS.load(mod_path .. "data/challenges/rng_2.lua")()
+--Challenges gone until I fix them to work with new API
+-- NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+-- NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
+-- NFS.load(mod_path .. "data/challenges/singleton.lua")()
+-- NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
+-- -- NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
+-- NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 
 
 
 -- achievements
-NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
-NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
-NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
-NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
+-- NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
+-- NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
+-- NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
+-- NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end

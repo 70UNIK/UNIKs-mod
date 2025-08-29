@@ -5,18 +5,12 @@
 -- be different to each card in last hand
 
 SMODS.Joker {
-	dependencies = {
-		items = {
-			"set_cry_exotic",
-			"set_cry_epic",
-		},
-    },
     key = 'unik_foundation',
     atlas = 'unik_epic',
-    rarity = 'cry_epic',
+    rarity = 3,
 	pos = { x = 0, y = 0 },
-    cost = 10,
-    config = {extra = {hands = 0,juiced_up = false,threshold = 125}},
+    cost = 1,
+    config = {extra = {hands = 0,juiced_up = false,threshold = 100}},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.hands,center.ability.extra.threshold} }
     end,
@@ -26,25 +20,6 @@ SMODS.Joker {
 	perishable_compat = false,
 	eternal_compat = false,
 	demicoloncompat = true, --NOPE!
-	-- remove_from_deck = function(self, card, from_debuff)
-	-- 	--Remove baseless stickers if removed and no other foundation exists
-	-- 	local foundationExists = false
-	-- 	if not from_debuff then
-	-- 		if G.jokers and G.jokers.cards and G.playing_cards then
-	-- 			for i,v in pairs(G.jokers.cards) do
-	-- 				if v.config.center.key == "j_unik_foundation" then
-	-- 					foundationExists = true
-	-- 					break
-	-- 				end
-	-- 			end
-	-- 			if not foundationExists then
-	-- 				for i,v in pairs(G.playing_cards) do
-	-- 					v.ability.unik_baseless = nil
-	-- 				end
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end,
 	update = function(self,card,dt)
 		card.ability.extra.threshold = 150
 		if card.ability.extra.hands < card.ability.extra.threshold then
@@ -88,7 +63,7 @@ SMODS.Joker {
 					return {
 						card_eval_status_text(card, "extra", nil, nil, nil, {
 							message = card.ability.extra.hands .. "/" .. card.ability.extra.threshold,
-							colour = G.C.CRY_EXOTIC,
+							colour = G.C.UNIK_ANCIENT,
 						}),
 					}
 				elseif card.ability.extra.hands >= card.ability.extra.threshold and card.ability.extra.juiced_up == false then
@@ -99,7 +74,7 @@ SMODS.Joker {
 					juice_card_until(card, eval, true)
 					card_eval_status_text(card, "extra", nil, nil, nil, {
 						message = localize("k_unik_active"),
-						colour = G.C.CRY_EXOTIC,
+						colour = G.C.UNIK_ANCIENT,
 					})
 					card.ability.extra.juiced_up = true
 				end
@@ -114,7 +89,7 @@ SMODS.Joker {
         end
         if context.selling_self and not context.blueprint and not context.retrigger_joker then
 			if card.ability.extra.hands >= card.ability.extra.threshold then
-				local card = create_card("Joker", G.jokers, nil, "cry_exotic", nil, nil, nil, "unik_foundation")
+				local card = create_card("Joker", G.jokers, nil, "unik_ancient", nil, nil, nil, "unik_foundation")
 				card:add_to_deck()
 				G.jokers:emplace(card)
 				card:start_materialize()
@@ -132,19 +107,6 @@ SMODS.Joker {
 		end
     end
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_foundation"] = {
-		reminder_text = {
-			{ ref_table = "card.joker_display_values", ref_value = "localized_text" },
-		},
-		calc_function = function(card)
-			local is_active = card.ability.extra.hands >= card.ability.extra.threshold
-			card.joker_display_values.localized_text = "("
-				.. (is_active and localize("k_active_ex") or (card.ability.extra.hands .. "/" .. card.ability.extra.threshold))
-				.. ")"
-		end,
-	}
-end
 
 function FoundationResetFunction(card,context)
 	if #G.play.cards < 4 then

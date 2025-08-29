@@ -3,7 +3,7 @@
 --permanently debuff a joker owned
 --make 2 jokers positive
 --create a vessel tag (next blind has 3x blind size)
---otherwise get an extended empowered tag (soul, gateway or foundation for those who are willing to take it slow and preserve their current build (mostly))
+--otherwise get an extended empowered tag (soul, awakening or foundation for those who are willing to take it slow and preserve their current build (mostly))
 
 SMODS.Tag{
     atlas = 'unik_tags',

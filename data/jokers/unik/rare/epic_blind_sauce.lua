@@ -17,15 +17,15 @@ end
 SMODS.Joker {
     key = 'unik_epic_blind_sauce',
     atlas = 'unik_epic',
-    rarity = 'cry_epic',
+    rarity = 3,
 	pos = { x = 0, y = 1 },
-    cost = 10,
+    cost = 8,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = false,
     demicoloncompat = true,
     immutable = true,
-    config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 1.5,trigger_mod = 5, Mult = 100, Chips = 50}, immutable = {base_emult = 1.0} },
+    config = { extra = { EEmult = 1,destroyed = false,triggers = 5,Emult = 1,trigger_mod = 5, Mult = 100, Chips = 50}, immutable = {base_emult = 1.0} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
         if (not Talisman) then

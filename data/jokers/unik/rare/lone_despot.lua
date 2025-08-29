@@ -2,17 +2,13 @@
 SMODS.Joker {
     key = 'unik_lone_despot',
     atlas = 'unik_epic',
-    rarity = 'cry_epic',
+    rarity = 3,
 	pos = { x = 1, y = 0 },
-    cost = 10,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = { Emult = 0.2}, immutable = {base_emult = 1.0} },
-    gameset_config = {
-		modest = { extra = { Emult = 0.1}, immutable = {base_emult = 1.0} },  
-	},
+    config = { extra = { Emult = 0.15}, immutable = {base_emult = 1.0} },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,localize('Spades', 'suits_plural')} }
 	end,

@@ -3,16 +3,15 @@
 SMODS.Joker {
     key = 'unik_cloneman',
     atlas = 'unik_epic',
-    rarity = 'cry_epic', --Abstract cards make this rare now.
+    rarity = 3,
 	pos = { x = 2, y = 0 },
-    cost = 12,
+    cost = 5,
     blueprint_compat = false, --sure I can make it copyable, but if you keep on cloning blueprints and endlessly stacking itself with this, this can still explode.
     perishable_compat = true,
 	eternal_compat = true,
-    --Not immutable hopefully
     immutable = true,
     config = { extra = { 
-        multiplier = 6}, --why 4X? well you can copy it, retrigger it, blueprint it
+        multiplier = 5}, --why 4X? well you can copy it, retrigger it, blueprint it
         immutable = { max_multiplier = 100 },
     },
 	loc_vars = function(self, info_queue, center)
