@@ -22,14 +22,9 @@ local moonlight_quotes = {
 }
 
 SMODS.Joker {
-	dependencies = {
-		items = {
-			"set_cry_exotic",
-		},
-    },
 	key = 'unik_moonlight_cookie',
     atlas = 'unik_moonlight',
-    rarity = "cry_exotic",
+    rarity = "unik_ancient",
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
@@ -37,12 +32,8 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	demicolon_compat = true,
-	fusable = true,
 	--Why 1.25? Storing multiple planets will cause the value to compound MASSIVELY, plus retriggers.
-    config = { extra = { exp_levelup = 1.3} },
-	gameset_config = {
-		modest = { extra = { exp_levelup = 1.1} },
-	},
+    config = { extra = { exp_levelup = 1.2} },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		return { 

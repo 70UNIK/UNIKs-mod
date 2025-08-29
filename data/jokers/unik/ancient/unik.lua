@@ -13,34 +13,12 @@ local unik_quotes = {
 		'k_unik_unik_normal5',
 		'k_unik_unik_normal6',
 	},
-	-- drama = {
-	-- 	'k_unik_unik_scared1',
-	-- 	'k_unik_unik_scared2',
-	-- 	'k_unik_unik_scared3',
-	-- },
-	-- gods = {
-	-- 	'k_unik_unik_godsmarble1',
-	-- 	'k_unik_unik_godsmarble2',
-	-- 	'k_unik_unik_godsmarble3',
-	-- 	'k_unik_unik_godsmarble4',
-	-- 	'k_unik_unik_godsmarble5',
-	-- 	'k_unik_unik_godsmarble6',
-	-- 	'k_unik_unik_godsmarble7',
-	-- }
 }
 
---rework: instead of 7s, has to be pink cards to require more effort. As a result, there will be no enhancement gate.
-
-
 SMODS.Joker {
-	dependencies = {
-		items = {
-			"set_cry_exotic",
-		},
-    },
 	key = 'unik_unik',
     atlas = 'unik_unik',
-    rarity = "cry_exotic",
+    rarity = "unik_ancient",
 	
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
@@ -49,16 +27,14 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
 	demicoloncompat = true,
-	fusable = true,
 	--Contra logos from ascensio has ^0.01 chips per 7 or 4 contained in scoring hand (doesnt have to score), but unless you have joker retriggers, it cannot retrigger 7s.
 	--This has ^0.01 chips per scoring 7 (can be retriggered). You can retrgger scoring 7s, which makes this potentally stronger than contra logos even if harder to use. Also pink cards.
 	--This is why I nerfed it to ^0.01
-    config = { extra = {Echips_mod = 0.01, Echips = 0.0,Xchips_mod = 0.2, Xchips = 1.0}, immutable = {base_echips = 1.0}}, --normally he should not be cappted in mainline+
+    config = { extra = {Echips_mod = 0.01, Echips = 0.0}, immutable = {base_echips = 1.0}}, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		return {
-		key = Cryptid.gameset_loc(self, {modest = "modest" }), 
-		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips + center.ability.immutable.base_echips,center.ability.extra.Xchips_mod,center.ability.extra.Xchips
+		vars = {center.ability.extra.Echips_mod,center.ability.extra.Echips + center.ability.immutable.base_echips
 	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. "")
 	} }
 	end,
@@ -66,74 +42,33 @@ SMODS.Joker {
     calculate = function(self, card, context)
 		local check = false
 		if context.forcetrigger then
-			if Card.get_gameset(card) == "modest" then
-				return {
-					x_chips = card.ability.extra.Xchips,
-					colour = G.C.CHIPS,
-				}
-			else
+			return {
+				e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
+				colour = G.C.DARK_EDITION,
+			}
+		end
+		if (context.joker_main)  then
+			if (to_big(card.ability.extra.Echips + card.ability.immutable.base_echips) > to_big(1)) then
 				return {
 					e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
 					colour = G.C.DARK_EDITION,
 				}
 			end
-			
-		end
-		if (context.joker_main)  then
-			if Card.get_gameset(card) == "modest" and (to_big(card.ability.extra.Xchips) > to_big(1)) then
-				return {
-					x_chips = card.ability.extra.Xchips,
-					colour = G.C.CHIPS,
-				}
-			elseif (to_big(card.ability.extra.Echips + card.ability.immutable.base_echips) > to_big(1)) then
-			return {
-				e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
-                colour = G.C.DARK_EDITION,
-			}
-			end
-			
 		end
         if (context.individual and context.cardarea == G.play)then
-			if context.other_card:get_id() == 7 and not context.blueprint  then
-				if Card.get_gameset(card) == "modest" then
-					-- card.ability.extra.Xchips = card.ability.extra.Xchips + card.ability.extra.Xchips_mod
-					-- return {
-					-- 	message = localize({
-					-- 		type = "variable",
-					-- 		key = "a_xchips",
-					-- 		vars = {
-					-- 			number_format(card.ability.extra.Xchips),
-					-- 		},
-					-- 	}),
-					-- 	colour = G.C.DARK_EDITION,
-					-- 	card = card
-					-- }
-					SMODS.scale_card(card, {
-						ref_table =card.ability.extra,
-						ref_value = "Xchips",
-						scalar_value = "Xchips_mod",
-						message_key = "a_xchips",
-						message_colour = G.C.CHIPS,
-					 	force_full_val = true,
-					})
-									return {
+			if context.other_card:get_id() == 7 and not context.blueprint  then		
+				SMODS.scale_card(card, {
+					ref_table =card.ability.extra,
+					ref_value = "Echips",
+					scalar_value = "Echips_mod",
+					base = 1,
+					message_key = "a_powchips",
+					message_colour = G.C.DARK_EDITION,
+					force_full_val = true,
+				})
+				return {
 
 				}
-				else
-					SMODS.scale_card(card, {
-						ref_table =card.ability.extra,
-						ref_value = "Echips",
-						scalar_value = "Echips_mod",
-						base = 1,
-						message_key = "a_powchips",
-						message_colour = G.C.DARK_EDITION,
-						force_full_val = true,
-					})
-									return {
-
-				}
-				end
-				
 			end
 		end		
 

@@ -1279,26 +1279,12 @@ return {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                     "for each {C:attention}7{} scored",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#5#{}",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
                 unlock = {
-                    "Play {C:attention}7 7s in a hand",
-                }
-            },
-            j_unik_unik_modest = { --modest: 7s give X0.7 Chips
-                name = '{C:unik_unik_color}UNIK',
-                text = {
-                    "This Joker gains {X:chips,C:white}X#3#{} Chips", 
-                    "if played hand contains a scoring {C:attention}7{}",
-                    "{C:inactive}(Currently {X:chips,C:white}X#4#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#5#{}",
-                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
-                },
-                unlock = {
-                    "Play {C:attention}7 7s in a hand",
+                    "Play {C:attention}5 7s in a hand",
                 }
             },
             --Cube jokers
@@ -1507,7 +1493,7 @@ return {
                     "{C:inactive}(Can overflow){}",
                 }             
             },
-            -- Upgrades on destruction, making her very resilient and synegises with dagger, ankh and additional gateways
+            -- Upgrades on destruction, making her very resilient and synegises with dagger, ankh
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
@@ -1516,25 +1502,8 @@ return {
                     "Copies itself with {C:money}$0{}",
                     "sell value if {C:red}destroyed",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by Disposable, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
+                    "{C:red,s:0.7}(Cannot copy if destroyed by Disposable)",        
                     "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
-                },
-                unlock = {
-                    "Destroy an {C:cry_exotic}Exotic{} Joker",
-                }
-            },
-            j_unik_white_lily_cookie_modest = { --instead of +^1.1 per destruction, becomes +x1.25 Mult 
-                name = 'White Lily Cookie',
-                text = {
-                    "Gains {X:mult,C:white}X#4#{} Mult when a",
-                    "{C:attention}Joker{} is {C:red}destroyed {C:inactive}(itself included)",
-                    "Copies itself with {C:money}$0{}",
-                    "sell value if {C:red}destroyed",
-                    "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by Disposable, {C:cry_code,s:0.7}://COMMIT{C:red,s:0.7} or {C:cry_code,s:0.7}://REWORK{C:red,s:0.7}){}",        
-                    "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
                 },
@@ -1552,14 +1521,6 @@ return {
                     "{C:attention}disposable{} Voucher",
                 }         
             },
-            -- there may already be a Dawn image in cryptid, so maybe dont add it?
-            -- j_unik_dawn = {
-            --     name="Dawn",
-            --     text={
-            --         "{X:mult,C:white}X#1#{} Mult",
-            --         "only on {C:attention}first hand{}",
-            --     }         
-            -- },
             j_unik_vessel_kiln = { --overrides get tag function to instead generate Violet vessel, negating the benefit of this Joker. It's chips cause ceramic.
                 name="Vessel Kiln",
                 text={

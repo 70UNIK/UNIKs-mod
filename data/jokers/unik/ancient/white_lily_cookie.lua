@@ -3,32 +3,18 @@
 
 local function White_lily_copy(card)
     local _card = copy_card(card, nil, nil, nil, nil)
-   --print(_card.ability.extra.initial)
-
-    
     _card:add_to_deck()
     _card:start_materialize()
     G.jokers:emplace(_card)
-    if Card.get_gameset(_card) ~= "modest" then
-        SMODS.scale_card(_card, {
-            ref_table =_card.ability.extra,
-            ref_value = "Emult",
-            scalar_value = "Emult_mod",
-            base = 1,
-            message_key = "a_powmult",
-            message_colour = G.C.DARK_EDITION,
-             force_full_val = true,
-        })
-    else
-        SMODS.scale_card(_card, {
-            ref_table =_card.ability.extra,
-            ref_value = "x_mult",
-            scalar_value = "x_mult_mod",
-            message_key = "a_xmult",
-            message_colour = G.C.MULT,
-        })
-    end 
-
+    SMODS.scale_card(_card, {
+        ref_table =_card.ability.extra,
+        ref_value = "Emult",
+        scalar_value = "Emult_mod",
+        base = 1,
+        message_key = "a_powmult",
+        message_colour = G.C.DARK_EDITION,
+            force_full_val = true,
+    })
 end
 SMODS.Atlas {
 	key = "unik_white_lily",
@@ -41,12 +27,7 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'unik_white_lily_cookie',
     atlas = 'unik_white_lily',
-    rarity = "cry_exotic",
-    dependencies = {
-		items = {
-			"set_cry_exotic",
-		},
-    },
+    rarity = "unik_ancient",
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
@@ -58,21 +39,14 @@ SMODS.Joker {
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
-    config = { extra = { Emult = 0.0, Emult_mod = 0.15, x_mult = 1.0, x_mult_mod = 1.25,cost = 0}, immutable = {base_emult = 1.0} },
+    config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0} },
 	loc_vars = function(self, info_queue, center)
 		return { 
-            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
-            vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,center.ability.extra.Emult_mod,center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
+            vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,center.ability.extra.Emult_mod} }
 	end,
-    add_to_deck = function(self, card, from_debuff)
-        
-        card.ability.perishable = nil
-        card.ability.extra.copying = false
-        card.ability.extra.sold = false
-    end,
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
-            if not  G.CONTROLLER.locks.selling_card and not card.ability.unik_disposable and not card.ability.unik_niko
+            if not  G.CONTROLLER.locks.selling_card and not card.ability.unik_disposable and not card.ability.unik_niko 
             and not card.ability.cry_committed and not card.ability.cry_reworked then
                 unik_set_sell_cost(card,0)
                 White_lily_copy(card)
@@ -82,54 +56,22 @@ SMODS.Joker {
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
         if context.forcetrigger then
-            if Card.get_gameset(card) ~= "modest" then
+            return {
+                e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
+                colour = G.C.DARK_EDITION,
+            }
+        end
+        if context.joker_main then
+            if (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
                 return {
                     e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                     colour = G.C.DARK_EDITION,
                 }
-            else
-                return {
-                    message = localize({
-                        type = "variable",
-                        key = "a_xmult",
-                        vars = {
-                            number_format(card.ability.extra.x_mult),
-                        },
-                    }),
-                    Xmult_mod = card.ability.extra.x_mult,
-                    colour = G.C.MULT,
-                }
             end
-        end
-        if context.joker_main then
-            if Card.get_gameset(card) ~= "modest" then
-                if (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
-                    return {
-                        e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                        colour = G.C.DARK_EDITION,
-                    }
-                end
-            else
-                if (to_big(card.ability.extra.x_mult) > to_big(1)) then
-                    return {
-                        message = localize({
-                            type = "variable",
-                            key = "a_xmult",
-                            vars = {
-                                number_format(card.ability.extra.x_mult),
-                            },
-                        }),
-                        Xmult_mod = card.ability.extra.x_mult,
-                        colour = G.C.MULT,
-                    }
-                end    
-            end
-
 		end
         if not context.blueprint and context.unik_destroying_joker then
             if context.unik_destroyed_joker ~= card then
-                if Card.get_gameset(card) ~= "modest" then
-                    SMODS.scale_card(card, {
+                SMODS.scale_card(card, {
                         ref_table =card.ability.extra,
                         ref_value = "Emult",
                         scalar_value = "Emult_mod",
@@ -141,18 +83,6 @@ SMODS.Joker {
                     				return {
 
 				}
-                else
-                    SMODS.scale_card(card, {
-                        ref_table =card.ability.extra,
-                        ref_value = "x_mult",
-                        scalar_value = "x_mult_mod",
-                        message_key = "a_xmult",
-                        message_colour = G.C.MULT,
-                    })
-                    				return {
-
-				}
-                end
             end
         end
     end,

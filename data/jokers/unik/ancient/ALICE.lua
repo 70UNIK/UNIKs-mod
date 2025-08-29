@@ -18,14 +18,9 @@ SMODS.Atlas {
 	py = 95
 }
 SMODS.Joker {
-    dependencies = {
-		items = {
-			"set_cry_exotic",
-		},
-    },
 	key = 'unik_extra_credit_alice',
     atlas = 'unik_alice',
-    rarity = "cry_exotic",
+    rarity = "unik_ancient",
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
@@ -33,13 +28,10 @@ SMODS.Joker {
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.5},immutable = {base_emult = 1.0}},
+    config = { extra = { Emult = 1},immutable = {base_emult = 1.0}},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
 	end,
-    gameset_config = {
-		modest = {extra = {Emult = 0.6} ,immutable = {base_emult = 1.0} }, 
-	},
     pools = {},
     calculate = function(self, card, context)
         if context.forcetrigger then
