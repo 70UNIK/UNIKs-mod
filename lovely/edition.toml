@@ -66,6 +66,7 @@ payload = """--self.C.UNIK_SYNC_CATALYST_FAIL[1] = 0.6+0.2*math.sin(self.TIMERS.
         self.C.UNIK_LARTCEPS_INVERSE[3] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
         self.C.SECONDARY_SET.unik_lartceps = self.C.UNIK_LARTCEPS1
         self.C.RARITY["unik_legendary_blind"] = self.C.UNIK_RGB
+        self.C.RARITY["unik_ancient"] = self.C.UNIK_ANCIENT
 """
 match_indent = true
 
@@ -78,6 +79,7 @@ position = "after"
 payload = """UNIK_SHITTY_EDITION = {0,0,0,1},
 UNIK_LARTCEPS1 = {1,0,0,1},
 UNIK_RGB = {0,0,0,1},
+UNIK_ANCIENT = {0,0,0,1},
 UNIK_RGB_HUE = 0,
 UNIK_LARTCEPS_INVERSE = {1,0,0,1},
 UNIK_THE_PLANT = HEX('709284'),

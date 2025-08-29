@@ -3429,6 +3429,8 @@ return {
             k_akyrs_blind_difficult_epic = "Epic Blind",
             k_akyrs_blind_difficult_legendary = "Legendary Blind",
             k_unik_legendary_blind_finity = "Legendary Blind",
+            k_unik_detrimental = "Detrimental",
+            k_unik_ancient = "Ancient",
 
             k_legendary_crown_normal1 = "I tried to climb the mountain...",
             k_legendary_crown_normal2 = "I should've listened to her...",

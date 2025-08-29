@@ -5,67 +5,6 @@ UNIK = SMODS.current_mod
 if not UNIK then
 	UNIK = {}
 end
-
--- UNIK.MiscDescs = {}
-
--- UNIK.MiscDesc  = SMODS.Center:extend{
---     set = 'MiscDesc',
---     obj_buffer = {},
---     obj_table = UNIK.MiscDescs,
---     class_prefix = 'miscdesc',
---     required_params = {
---         'key',
---     },
---     pre_inject_class = function(self)
---         G.P_CENTER_POOLS[self.set] = {}
---     end,
---     inject = function(self)
---         SMODS.Center.inject(self)
---     end,
---     get_obj = function(self, key)
---         if key == nil then
---             return nil
---         end
---         return self.obj_table[key]
---     end
--- }
--- --Aiko code for UI hover stuff
--- UNIK.remove_formatting = function(string_in)
---     return string.gsub(string_in, "{.-}", "")
--- end
--- UNIK.full_ui_add = function(nodes, key, scale)
---     local m = G.localization.descriptions["MiscDesc"][key]
---     local l = {
---         {
---             n = G.UIT.R,
---             nodes = {
---                 { n = G.UIT.T, config = { text = m.name, colour = G.C.UI.TEXT_LIGHT, scale = scale*1.2 }},
---             }
---         }
---     }
---     if m.text and false then
---         for i, tx in ipairs(m.text) do
---             table.insert(l, 
---                 {
---                     n = G.UIT.R,
---                     nodes = {
---                         { n = G.UIT.T, config = { text = UNIK.remove_formatting(tx), colour = G.C.UI.TEXT_LIGHT, scale = scale }},
---                     }
---                 }
---             )
---         end
---     end
-    
---     local x = {
---         n = G.UIT.C,
---         config = { align = "lm", padding = 0.1 },
---         nodes = {
---             { n = G.UIT.R, config = {}, nodes = l },
-            
---         }
---     }
---     table.insert(nodes, x)
--- end
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -85,14 +24,10 @@ SMODS.current_mod.config_tab = function() --Config tab
 	},
 	}
 end
-Cryptid.cross_mod_names = {
-	CardSleeves = "Card Sleeves",
-	Cryptid = "Cryptid",
-	sdm0sstuff = "SDM_0's Stuff",
-	magic_the_jokering = "Magic the Jokering",
-	extracredit = "Extra Credit",
-	Buffoonery = "Buffoonery",
-}
+NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
+NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
+NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
+NFS.load(mod_path .. "data/hooks/updater.lua")()
 SMODS.Atlas {
 	key = "modicon",
 	path = "modicon.png",
@@ -176,10 +111,6 @@ SMODS.Atlas({
 		px = 34, 
 		py = 34, 
 		frames = 21 })
-NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
-NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
-NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
-NFS.load(mod_path .. "data/hooks/updater.lua")()
 SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
@@ -309,6 +240,22 @@ SMODS.ConsumableType {
     end
 }
 
+--RARITIES--
+--Discount exotic
+SMODS.Rarity({
+	key = "unik_ancient",
+	loc_txt = {},
+	badge_colour = G.C.UNIK_ANCIENT,
+})
+
+NFS.load(mod_path .. "data/overrides/rarity_overrides.lua")()
+
+--Discount Cursed
+SMODS.Rarity({
+	key = "unik_detrimental",
+	loc_txt = {},
+	badge_colour = HEX("474931"),
+})
 
 
 -- EDITIONS --
@@ -510,11 +457,6 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
 
--- JOKERS --
---- Common ---
-
--- NFS.load(mod_path .. "data/jokers/holepunched_card.lua")() -- too unoriginal? Could have niche use in multi card hands, but is hanging chad with extra steps
-
 -- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
@@ -548,7 +490,6 @@ NFS.load(mod_path .. "data/jokers/cube_joker.lua")()
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
 if (SMODS.Mods["paperback"] or {}).can_load then
-	
 	NFS.load(mod_path .. "data/jokers/weetomancer.lua")() 
 end
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
@@ -556,29 +497,10 @@ NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
 NFS.load(mod_path .. "data/jokers/joker_dollar.lua")()	
 
---3 normal jokers
---Instant gratification: $2 per discard lost when 0 discards remain
---Golden Glove: $2 per hand lost
---infelicis: Gain Xmult equal to 0.5X the denominator whenever a probability fails (capped at X5 mult)
---4 cursed jokers
---Robert (The Wheel): 1 in 7 chance card is drawn face down. Destroy a random Joker if no face down cards are played. Self Destructs after playing a math.min(hand_size,card selection limit) card hand with all face down and scoring cards.
---Abandoned House (The House): First hand drawn is face down. Self Destructs after playing a math.min(hand_size,card selection limit) card hand with all face down and scoring cards.
---Decaying Tooth (The Tooth): Lose $1 per card played. Self destructs after losing at least $50 from this Joker.
---Xchips is not vanilla!: All Xchips and higher operators will not trigger and triggered cards are destroyed instead. Self destructs after 7 consecutive rounds without Xchips or higher triggers.
-
---Celestials:
---Borg Cube (Uncommon): A cube joker. Other steel EDITION cards give 2.5x mult. Obvious star trek reference
---HER (Cursed): Other positive Jokers reduce joker slots by 0.5. Self destructs if edition stripped from this Joker. FTL multiverse reference
---Reality Tear (Cursed): If more than 3 cards are played, other Half Jokers give 0.5X mult. Cannot be debuffed. Self destructs if played at least X hands with 3 cards or less.
---Red Giant (Cursed): If a bloated card is destroyed under it's own effect, destroy adjacent cards. [No self destruct condition (destroyed under it's own effect or edition)]
---Event Horizon (Cursed): Other Fuzzy cards give -$1 - $0, -50 - 0 Chips, -10 - 0 Mult. Self destructs if score is positive and chips and mult are both negative.
---The Warp (Cursed): Other Corrupted card values are multiplied by 0.9X at end of round. Self destructs after 6 rounds.
 
 NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/lockpick.lua")()
 NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
---- Rare ---
--- NFS.load(mod_path .. "data/jokers/double_container.lua")()
 
 NFS.load(mod_path .. "data/jokers/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/minimized.lua")()
@@ -603,8 +525,6 @@ NFS.load(mod_path .. "data/jokers/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
 
---Boss Jokers for grab bag crossmod
-
 
 -- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
 
@@ -624,11 +544,7 @@ NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
 --- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
 NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik.lua")() 
-SMODS.Rarity({
-	key = "unik_legendary_blind_finity",
-	loc_txt = {},
-	badge_colour = G.C.UNIK_RGB,
-})
+
 
 local mainmenuref2 = Game.main_menu
 Game.main_menu = function(change_context)
@@ -650,9 +566,14 @@ end
 
 --Finity Jokers
 if next(SMODS.find_mod("finity")) then
+
 	if unik_config.unik_legendary_blinds then
-		
-		NFS.load(mod_path .. "data/jokers/legendary_crown.lua")() 
+		SMODS.Rarity({
+			key = "unik_legendary_blind_finity",
+			loc_txt = {},
+			badge_colour = G.C.UNIK_RGB,
+		})
+		NFS.load(mod_path .. "data/jokers/finity/legendary_crown.lua")() 
 	
 	end
 end
