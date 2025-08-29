@@ -1,5 +1,3 @@
---Cryptid: ^2 Blind size per tag held
---Almanac: Increase blind size by {Tags Held}1.1
 SMODS.Blind	{
     key = 'unik_epic_sand',
     config = {},

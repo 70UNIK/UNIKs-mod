@@ -21,7 +21,7 @@ SMODS.Joker {
 	rarity = 2,
 	-- loc_txt = {set = 'Joker', key = 'j_unik_711'},
 	-- Which atlas key to pull from.
-	-- In cryptid, I think this should be uncapped; found myself not using it when I use up all my joker slots
+
 	atlas = 'unik_uncommon',
 	-- This card's position on the atlas, starting at {x=0,y=0} for the very top left.
 	pos = { x = 0, y = 0 },

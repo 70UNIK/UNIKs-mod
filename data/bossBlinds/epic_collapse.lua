@@ -31,7 +31,6 @@ SMODS.Blind	{
                 end
             end
         end
-                --in cryptid, at least it only spawns if yoy have at least 5 stone cards
         if stoneCards < 1 then
             return false
         end

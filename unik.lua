@@ -530,7 +530,9 @@ if next(SMODS.find_mod("GrabBag")) then
 	NFS.load(mod_path .. "data/jokers/grab_bag/poppy.lua")() 
 	NFS.load(mod_path .. "data/jokers/grab_bag/collapse.lua")() 
 	NFS.load(mod_path .. "data/jokers/grab_bag/artesian.lua")() 
-	NFS.load(mod_path .. "data/jokers/grab_bag/jollyless.lua")() 
+	if Cryptid then
+		NFS.load(mod_path .. "data/jokers/grab_bag/jollyless.lua")() 
+	end
 	NFS.load(mod_path .. "data/jokers/grab_bag/bloon.lua")() 
 	NFS.load(mod_path .. "data/jokers/grab_bag/smiley.lua")() 
 	NFS.load(mod_path .. "data/jokers/grab_bag/halved.lua")() 

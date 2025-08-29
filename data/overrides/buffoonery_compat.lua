@@ -160,4 +160,3 @@ end
 if not Talisman then
 	buf.compat.talisman = true
 end
---Buffoonery Talismanless cryptid compat:

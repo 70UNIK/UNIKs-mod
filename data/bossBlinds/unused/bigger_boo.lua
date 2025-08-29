@@ -46,7 +46,7 @@ SMODS.Blind{
             G.GAME.blind:wiggle()
         end
     end,
-    --stolen from Cryptid, similar to vermillion virus, except it detects where each ghost is, check for adjacent non cursed jokers and convert them into MORE ghosts!
+
     --less strong than above but worse long term effects
     cry_before_play = function(self)
         local ghostList = {}

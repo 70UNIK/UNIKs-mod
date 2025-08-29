@@ -195,7 +195,6 @@ return {
 					"All cards are debuffed",
 				},
             },
-            --In cryptid where jokers are key, debuffing all jokers is bound for disaster
             --So I'll nerf it to debuff 4/5 of all Jokers (and also have a min 1 Joker remaining)
             bl_unik_black_bat={
                 name = "Black Bat",
@@ -3152,7 +3151,6 @@ return {
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
-            unik_almanac_fusions_in_cryptid_option = "Enable Almanac Fusions in Base Cryptid (Restart Required)",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
             k_unik_happiness2="HAPPINESS IS MANDATORY.",

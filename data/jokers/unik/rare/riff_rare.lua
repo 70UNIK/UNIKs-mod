@@ -22,8 +22,6 @@ SMODS.Joker {
 				func = function()
                     if create > 0 then
                         card:juice_up(0.3, 0.4)
-                        --This will need to be updated when refactor branch is complete.
-                        -- local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, Cryptid.get_food("711"))
                         local card2 = create_card("Joker", G.jokers, nil, 0.99, nil, nil, nil, "unik_riff_rare")
                         card2:add_to_deck()
                         G.jokers:emplace(card2)
@@ -47,8 +45,6 @@ SMODS.Joker {
 				func = function()
                     if create > 0 then
                         card:juice_up(0.3, 0.4)
-                        --This will need to be updated when refactor branch is complete.
-                        -- local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, Cryptid.get_food("711"))
                         local card2 = create_card("Joker", G.jokers, nil, 0.99, nil, nil, nil, "unik_riff_rare")
                         card2:add_to_deck()
                         G.jokers:emplace(card2)

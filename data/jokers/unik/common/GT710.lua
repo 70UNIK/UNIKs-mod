@@ -31,9 +31,6 @@ SMODS.Joker {
         end
 		if context.joker_main then
 			if card.ability.extra.has10 == true and not (context.blueprint_card or self).getting_sliced and card.ability.extra.has7 == true then
-				-- Create a Food Joker according to Cryptid.
-				--local jokers_to_create = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
-				--G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
                 card.ability.extra.has10 = false
                 card.ability.extra.has7 = false
                 return {
