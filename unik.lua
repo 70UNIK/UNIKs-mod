@@ -274,7 +274,6 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
--- NFS.load(mod_path .. "data/stickers/baseless.lua")() 
 
 NFS.load(mod_path .. "data/stakes/blue_stake_fix.lua")() 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
@@ -282,26 +281,6 @@ NFS.load(mod_path .. "data/stakes/persimmon.lua")()
 if (SMODS.Mods["Buffoonery"] or {}).can_load then
 	NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
 end
-
--- if (SMODS.Mods["Bunco"] or {}).can_load then
--- 	print("bunco compat_fix")
---     NFS.load(mod_path .. "data/overrides/bunco.lua")() 
--- end
---Stakes
---Persimmon Stake: Cards can be Triggering (Automatically used when possible), goes after gold stake, incompatible with eternal for jokers and consumeables (after orange)
---Shitty Stake: Jokers can be Disposable (Self destructs at end of round), goes after orange stake, incompatible with eternal and perishable (after gold)
---Fat Stake: Jokers can be bloated
---Smiley Stake: Jokers can be Positive
---Half Stake: Jokers can be half
---Dizzy Stake: Jokers can be Fuzzy
---Learning Stake: Jokers can be Corrupted
---Steel Stake: All cards can gain Deditions (Bloated, Positive, Fuzzy, etc), after yellow stake (inside edition pool)
-
---todo:
---Ghost Joker, create a random spectral on blind select (rare, epic in modest).
---Poppy exploit fix for legendary crown (add a buffer to prevent her scaling to 6666 hands lost).
---Welfare Deck: Interest rate is Inverted (earn $5 interest at $0, earn no interest at $25)
---Red Joker
 
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
@@ -396,26 +375,6 @@ if (SMODS.Mods['ble'] or {}).can_load then
 	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
 end
 
---DX blinds:
--- The Wall DX: Very Very Very Big Blind (15X)
--- The Tooth DX: -$1 per card or joker triggered. Chips cannot exceed $.
--- The Poppy DX: Reduce score by ^0.5 if score exceeds ^1.25 requirements. ^0.8 Blind Size.
--- The Artesian DX: ^1.25 Blind size per reroll this ante.
--- The Jollyless DX: Debuff all Jolly/M Jokers. Hand must not contain a pair.
--- The Collapse DX: All non-rankless and suitless cards are debuffed
--- The Cookie DX: X1.1 requirements per click this ante.
--- The Vice DX: Increase Victory Requirements by 1, The Next 3 blinds become DX Blinds.
--- The Leak DX: Chips and Mult set to the lower value.
--- The Smiley DX: All uneditioned Jokers and cards become Positive.
--- The Bloon DX: All uneditioned Jokers and cards become Bloated.
--- The Halved DX: Must play less than 3 cards. Add Half to a random Joker per hand.
--- The Fuzzy DX: All uneditioned Jokers and cards become Fuzzy.
--- The Darkness DX: All uneditioned Jokers and cards become Corrupted.
-
-
---Bigger blind: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. Has normal background.
---Boring Blank: Does nothing and is not treated as a boss (but has a chance to replace it). Cannot appear in rerolls. A finisher "boss"
---Both of above will lack boss music and chicot and luchador will not be active/trigger.
 if unik_config.unik_legendary_blinds then
 	
 	NFS.load(mod_path .. "data/bossBlinds/epic_legendary_check.lua")()
@@ -601,21 +560,13 @@ NFS.load(mod_path .. "data/jokers/robert.lua")()
 NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a vampire with a hammer, or candy apple cookie with her hammer, destroying a mult card.
 --Bun Bun? Hidden effect; all shop items become Corrupted; adds a random corrupted card on blind select. 9 in 10 chance to not self destruct after round end (decrease by 1 per failed chance)
 
---- Devastating ---
---- Catastrophic ---
 --- 
 ---Overrides
 NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
 NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
 
---- 
---- 
---- Challenges
--- NFS.load(mod_path .. "data/challenges/lily_goes_fucking_berserk.lua")() --rework needed: have 1 lily at hand, 4 random cards are added on blind select, forcing you to use her to deckfix over time to counter the cards added.
--- NFS.load(mod_path .. "data/challenges/chipzel.lua")() --rework needed: all mult goes into chips. Otherwise it will never work trying to ban all mult based jokers.
--- NFS.load(mod_path .. "data/challenges/multiplication.lua")() --rework needed: all chips go into mult
--- 
+
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
 NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
 NFS.load(mod_path .. "data/challenges/singleton.lua")()
