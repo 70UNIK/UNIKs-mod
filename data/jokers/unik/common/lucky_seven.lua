@@ -11,14 +11,10 @@ SMODS.Joker {
     demicoloncompat = true,
     config = { extra = {odds1 = 1,odds2 = 1, mult=20,odds_mult = 5, p_dollars = 20, odds_money = 15} },
     --ONLY DISABLE if extracredit is installed
-    gameset_config = {
-		modest = { disabled = (SMODS.Mods["extracredit"] or {}).can_load },
-	},
     loc_vars = function(self, info_queue, center)
         local new_numerator1, new_denominator1 = SMODS.get_probability_vars(center, center.ability.extra.odds1, center.ability.extra.odds_mult, 'unik_lucky_seven_mult')
         local new_numerator2, new_denominator2 = SMODS.get_probability_vars(center, center.ability.extra.odds2, center.ability.extra.odds_money, 'unik_lucky_seven_cash')
         return { 
-            key = Cryptid.gameset_loc(self, { modest = "modest"}), 
             vars = {new_numerator1, new_denominator1,center.ability.extra.mult,
             new_numerator2, new_denominator2,center.ability.extra.p_dollars} }
 	end,
@@ -32,7 +28,7 @@ SMODS.Joker {
                 card = card,
             }
         end
-        if context.individual and context.cardarea == G.play and Card.get_gameset(card) ~= "modest" then
+        if context.individual and context.cardarea == G.play then
             -- if a seven
             if context.other_card:get_id() == 7 then
                 local multTrue = false
@@ -61,11 +57,6 @@ SMODS.Joker {
                     }
                 end
 			end
-        end
-        if context.check_enhancement and SMODS.Ranks[context.other_card.base.value].key == "7" and Card.get_gameset(card) == "modest" then
-            return{
-                m_lucky = true
-            }
         end
     end,
 }

@@ -1403,15 +1403,6 @@ return {
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
                 }, 
             },
-            j_unik_no_standing_zone_modest = {
-                name="No Standing Zone",
-                text={
-                    "{X:mult,C:white}X#1#{} Mult, decreases by",
-                    "{X:mult,C:white}X#2#{} every {C:attention}second{}",
-                    "Resets at {X:mult,C:white}X#3#{} Mult at start and end of {C:attention}Round{}",
-                    "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
-                }, 
-            },
             --0.5x Mult, Debuff up to 2 random non-cursed Jokers, sells for double the total of debuffed Jokers to remove debuff and itself. Destruction will remove debuffs. Selling Jokers wi
             j_unik_impounded = {
                 name="Impound Notice",
@@ -1598,17 +1589,6 @@ return {
                 }
             },
             j_unik_lockpick = {
-                name = 'Lockpick',
-                text = {
-                    "You can now {C:attention}sell",
-                    "{C:purple}Eternal{} Jokers",
-                },
-                unlock = {
-                    "Fill your Joker slots",
-                    "with {C:purple}Eternal{} Jokers",
-                }
-            },
-            j_unik_lockpick_modest = {
                 name = 'Lockpick',
                 text = {
                     "You can now {C:red}banish",

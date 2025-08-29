@@ -20,9 +20,6 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = { mult = 30} },
-	gameset_config = {
-		modest = { extra = { mult = 25} },
-	},
 	loc_vars = function(self, info_queue, center)
 		return { 
 			vars = {center.ability.extra.mult} 

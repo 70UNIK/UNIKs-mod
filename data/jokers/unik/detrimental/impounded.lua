@@ -25,6 +25,7 @@ SMODS.Joker {
 		modest = { extra = {x_mult = 1.0,multiplier = 2.5,cost = -15,fallback_cost = 10} },
 	},
     immutable = true,
+    sellable = true,
     --add debuffs
     add_to_deck = function(self, card, from_debuff)
         G.E_MANAGER:add_event(Event({

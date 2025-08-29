@@ -22,9 +22,7 @@ SMODS.Joker {
 		end
 		return { vars = {center.ability.extra.Emult} }
 	end,
-	gameset_config = {
-		modest = {extra = {Emult = 0.96} },
-	},
+	sellable = true,
     immutable = true,
     calculate = function(self, card, context)
 		if context.final_scoring_step and (to_big(card.ability.extra.Emult) < to_big(1)) then
