@@ -1,0 +1,40 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+
+# silently decrement any instances of value manip. revert if hits 0.
+# Double Down
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "G.FUNCS.draw_from_hand_to_discard()"
+position = "before"
+payload = '''
+    if G.jokers and G.jokers.cards then
+        for i,v in pairs(G.jokers.cards) do
+            if v.ability.cry_valuemanip_reset then
+                for j,w in pairs(v.ability.cry_valuemanip_reset) do
+                    if w then
+                        if w[2] <= 0 and w[2] > -6666666 then
+                            Cryptid.manipulate(v, { value = 1/w[1] })
+                            w[2] = -6666666
+                        elseif w[2] > -6666666 then
+                            w[2] = w[2] - 1
+                        end
+                    end
+                end
+                if v.ability.cry_valuemanip_reset then
+                    for j = #v.ability.cry_valuemanip_reset, 1, -1  do
+                        if v.ability.cry_valuemanip_reset[j][2] <= -6666666 then
+                            table.remove(v.ability.cry_valuemanip_reset,j)
+                        end
+                    end
+                end
+                
+            end
+        end
+    end
+'''
+match_indent = true

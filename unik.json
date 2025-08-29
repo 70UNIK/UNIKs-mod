@@ -2,16 +2,15 @@
 	"id": "unik",
 	"name": "UNIK's mod",
 	"author": ["70UNIK"],
-	"description": "An addon to Cryptid that may or may not help you.",
+	"description": "An addon to Cryptid designed around the Mainline experience where I add what I want or can.",
 	"prefix": "unik",
 	"main_file": "unik.lua",
-	"priority": 9999999999999999999,
+	"priority": 99999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.0.1-ALPHA",
+	"version": "0.4.0",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-0309c)",
-        "Cryptid (>=0.5.5)",
-		"Talisman (>=2.0.2)"
+        "Steamodded (>=1.0.0~BETA-0827c)",
+        "Cryptid (>=0.5.10~dev3)"
     ]
 }

@@ -1,7 +1,6 @@
 SMODS.Blind{
     key = 'unik_bigger_blind',
     config = {},
-
     -- boss = {min = 2, }, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 14},

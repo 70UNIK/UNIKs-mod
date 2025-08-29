@@ -11,7 +11,10 @@ target = '''=[SMODS Cryptid "items/spooky.lua"]'''
 pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
 payload = '''and card.config.center.key ~= "j_unik_impounded" 
-and card.config.center.key ~= "j_unik_rancid_smoothie"'''
+and card.config.center.key ~= "j_cry_astral_bottle" 
+and card.config.center.key ~= "j_unik_rancid_smoothie"
+and card.config.center.key ~= "j_buf_afan_spc" 
+'''
 match_indent = true
 
 ### Make impounded sellable (cryptid build dev)
@@ -22,7 +25,11 @@ target = '''=[SMODS Cryptid "lib/ui.lua"]'''
 pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
 payload = '''and card.config.center.key ~= "j_unik_impounded" 
-and card.config.center.key ~= "j_unik_rancid_smoothie"'''
+and card.config.center.key ~= "j_cry_astral_bottle" 
+and card.config.center.key ~= "j_unik_rancid_smoothie"
+and card.config.center.key ~= "j_buf_afan_spc" 
+and card.config.center.key ~= "j_unik_astral_bottle"
+'''
 match_indent = true
 
 ## Unsellable jokers for triggering
@@ -53,7 +60,7 @@ end
 target = '''=[SMODS Cryptid "items/spooky.lua"]'''
 pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### do not set impounded cost to 0
@@ -62,7 +69,7 @@ match_indent = true
 target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
 pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### Hook n discard, ensure cards are discarded BEFORE scoring (similar to the hook)
@@ -107,6 +114,25 @@ if G.jokers then
         end
     end
 end
+
+--Also blind edition before play
+if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+    local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+    if edi.press_play and edi.press_play() and (type(edi.press_play) == "function") then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = (function()
+                SMODS.juice_up_blind()
+                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
+                    play_sound('tarot2', 0.76, 0.4);return true end}))
+                play_sound('tarot2', 1, 0.4)
+                return true
+            end)
+        }))
+        delay(0.4)
+        edi:press_play(G.GAME.blind_on_deck)
+    end
+end
 '''
 
 ### cube content set: add cube and big cube to the cube sets (cannot do it manually, have to patch it in)
@@ -135,15 +161,6 @@ payload = '''pools = { ["unik_cube"] = true, ["Meme"] = true,  },
 	end,'''
 match_indent = true
 
-### wild card ability fix for cursed Jokers
-[[patches]]
-[patches.pattern]
-target = '''functions/common_events.lua'''
-pattern = '''new_card:set_ability(other.config.center)'''
-position = "at"
-payload = '''new_card:set_ability(other.config.center,nil,nil,true)'''
-match_indent = true
-
 ### vessel kiln, override cat tags and other tags to replace with vessel tags
 [[patches]]
 [patches.pattern]
@@ -168,7 +185,7 @@ position = "after"
 payload = '''
 -- reduce commit limit by 1
 if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
-    G.jokers.highlighted[1].ability.extra.commits_left = G.jokers.highlighted[1].ability.extra.commits_left - 666
+    G.jokers.highlighted[1].ability.cry_reworked = true
 end
 '''
 match_indent = true
@@ -182,7 +199,7 @@ position = "after"
 payload = '''
 -- reduce commit limit by 666
 if jkr.config.center.key == "j_unik_white_lily_cookie" then
-    jkr.ability.extra.commits_left = jkr.ability.extra.commits_left - 666
+    jkr.ability.cry_committed = true
 end
 '''
 match_indent = true
@@ -204,5 +221,32 @@ target = "functions/state_events.lua"
 pattern = "cards_destroyed[i]:start_dissolve()"
 position = "after"
 payload = '''end
+'''
+match_indent = true
+
+### Multiply: no need for init
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/code.lua"]'''
+pattern = '''for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i].config.cry_multiply then
+					m = G.jokers.cards[i].config.cry_multiply
+					Cryptid.manipulate(G.jokers.cards[i], { value = 1 / m })
+					G.jokers.cards[i].config.cry_multiply = nil
+				end
+			end'''
+position = "at"
+payload = '''
+--nope
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''elseif _type == 'Planet' then _pool[#_pool + 1] = "c_pluto"'''
+position = "before"
+payload = '''
+elseif _type == 'Joker' and _rarity == 'cry_candy' then _pool[#_pool + 1] = "j_cry_wrapped"
 '''
 match_indent = true

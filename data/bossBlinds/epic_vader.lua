@@ -8,11 +8,16 @@ SMODS.Blind{
     pos = {x = 0, y = 13},
     boss_colour= HEX("2c313a"), 
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
     death_message = "special_lose_unik_epic_darth_vader",
     ignore_showdown_check = true,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
     set_blind = function(self, reset, silent)
         if not reset then
             if G.jokers and G.jokers.cards then

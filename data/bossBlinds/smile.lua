@@ -2,7 +2,7 @@ SMODS.Blind{
     key = 'unik_smiley',
     config = {},
 	boss = {
-		min = 3,
+		min = 5,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 21},
@@ -12,6 +12,7 @@ SMODS.Blind{
     set_blind = function(self, reset, silent)
         G.GAME.unik_positive_draw = true
     end,
+    death_message = "special_lose_unik_positive",
     --doesnt actually flip cards
     -- stay_flipped = function(self, area, card)
 	-- 	if

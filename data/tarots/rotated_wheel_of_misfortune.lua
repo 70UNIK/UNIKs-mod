@@ -1,0 +1,2 @@
+--The Evocation!
+--3 in 5 chance to add a random detrimental edition. Otherwise add a random non-detrimental edition.

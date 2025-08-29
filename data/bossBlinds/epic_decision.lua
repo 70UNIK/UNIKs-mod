@@ -33,15 +33,20 @@ SMODS.Blind	{
     pos = {x = 0, y = 16},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
 	ignore_showdown_check = true,
 	in_pool = function(self)
         return  CanSpawnEpic()
 	end,
     unik_booster_before_blind = function(self)
     end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
     set_blind = function(self, reset, silent)
         if not reset then
             G.GAME.blind:wiggle()
@@ -49,6 +54,7 @@ SMODS.Blind	{
             G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering
             G.GAME.unik_halt_round = true
             G.GAME.cry_fastened = true
+            G.GAME.lartceps_pack_pity = 0
             if G.jokers.cards then
 				G.GAME.blind:wiggle()
 				G.GAME.blind.triggered = true
@@ -60,28 +66,10 @@ SMODS.Blind	{
             --Booster will contain:
             --4 cursed Jokers
             --1 "tarot" to banish the rightmost joker
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = G.SETTINGS.GAMESPEED*0.05,
-                blockable = false,
-                func = (function()
-                        play_sound('whoosh1', 0.55, 0.62)
-                        for i = 1, 4 do
-                            local wait_time = (0.1*(i-1))
-                            G.E_MANAGER:add_event(Event({ blockable = false, trigger = 'after', delay = G.SETTINGS.GAMESPEED*wait_time,
-                            func = function()
-                                if i == 1 then G.GAME.blind:juice_up() end
-                                play_sound('cancel', 0.7 + 0.05*i, 0.7)
-                                return true end }))  
-                        end
-                        local hold_time = G.SETTINGS.GAMESPEED*(#G.GAME.blind.loc_debuff_text*0.035 + 1.3)
-                        local disp_text = G.GAME.blind:get_loc_debuff_text()
-                        attention_text({
-                            scale = 0.7, text = disp_text, maxw = 12, hold = hold_time, align = 'cm', offset = {x = 0,y = -1},major = G.play
-                        })
-                    return true
-                end)
-            }))
+            local disp_text = localize("k_unik_must_select_four")
+            attention_text({
+                scale = 0.7, text = disp_text, maxw = 12, hold = 15, align = 'cm', offset = {x = 0,y = -1},major = G.play
+            })
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 func = function()
@@ -145,7 +133,7 @@ G.FUNCS.skip_booster = function(e)
 			G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
         end
-        if e.disable_button then
+        if e and e.disable_button then
             e.disable_button = nil
            -- print("disble")
         end

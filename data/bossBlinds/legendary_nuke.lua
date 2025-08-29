@@ -16,12 +16,19 @@ SMODS.Blind{
     boss_colour= HEX("250088"),
     dollars = 13,
     mult = 1,
-    exponent = {1,0.8},
+    unik_exponent = {1,0.8},
     glitchy_anim = true,
     gameset_config = {
 		modest = { disabled = true},
 	},
-    --no jen resize to make it more painful in almanac
+    debuff = {
+        akyrs_blind_difficulty = "legendary",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
+    death_message = "special_lose_unik_nuke_legendary",
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
 		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
@@ -30,13 +37,10 @@ SMODS.Blind{
 		return { vars = { localize("k_unik_legendary_nuke_placeholder") } }
 	end,
     in_pool = function()
-        local straddle = 0
-        if G.GAME.straddle then
-            straddle = G.GAME.straddle
-        end
-        if G.GAME.unik_scores_really_big then
+        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        if G.GAME.unik_overshoot then
             --print(G.GAME.unik_scores_really_big)
-            if G.GAME.unik_scores_really_big > 6 - straddle then
+            if G.GAME.unik_overshoot > 3 then
                 return CanSpawnLegendary()
             end
         end
@@ -47,12 +51,11 @@ SMODS.Blind{
         attention_text({
             scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
         })
-        G.GAME.unik_nuke_activate = true
 	end,
-    disable = function(self)
-		G.GAME.unik_nuke_activate = nil
-	end,
-	defeat = function(self)
-		G.GAME.unik_nuke_activate = nil
-	end,
+    unik_after_defeat = function(self,chips,blind_size)
+        if to_big(chips) > to_big(blind_size^1.666) then
+            return true
+        end
+        return false
+    end
 }

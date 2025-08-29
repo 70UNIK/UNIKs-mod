@@ -79,9 +79,9 @@ elseif blindname == "bl_unik_sync_catalyst_fail" then
     ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.PURPLE, tertiary_colour = G.C.RED, contrast = 3}
     return
 -- If the blind is a legendary
-elseif v.boss.legendary then
+elseif v.boss and v.boss.legendary then
     ease_background_colour{new_colour = G.C.UNIK_VOID_COLOR, special_colour = G.C.UNIK_EYE_SEARING_RED, tertiary_colour = G.C.UNIK_VOID_COLOR, contrast = 3}
     return
 -- If the blind is a showdown
-elseif v.boss.showdown then'''
+elseif v.boss and v.boss.showdown then'''
 match_indent = true

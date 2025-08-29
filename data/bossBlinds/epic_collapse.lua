@@ -8,12 +8,17 @@ SMODS.Blind	{
     pos = {x = 0, y = 8},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
 	get_loc_debuff_text = function(self)
 		return localize("k_unik_only_stone")
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
 	--must be localized
 	death_message = 'special_lose_unik_epic_collapse',
 	ignore_showdown_check = true,
@@ -27,7 +32,7 @@ SMODS.Blind	{
             end
         end
                 --in cryptid, at least it only spawns if yoy have at least 5 stone cards
-        if stoneCards < 5 and not (SMODS.Mods["jen"] or {}).can_load then
+        if stoneCards < 1 then
             return false
         end
         --maybe its funnier to have it spawn even without stone hands in deck in almanac
@@ -42,28 +47,3 @@ SMODS.Blind	{
 	end
 }
 
---Instead of merely debuffing a hand, it will KILL you if you play that hand
-function Blind:unik_kill_hand(cards, hand, handname, check)
-	if not self.disabled then
-		local obj = self.config.blind
-		if obj.unik_kill_hand and type(obj.unik_kill_hand) == "function" then
-			return obj:unik_kill_hand(cards, hand, handname, check)
-		end
-	end
-end
-
-local killHook = Blind.debuff_hand
-function Blind:debuff_hand(cards, hand, handname, check)
-	local instakill = self:unik_kill_hand(cards, hand, handname, check)
-	if killHook(self,cards, hand, handname, check) == true or instakill == true then
-		if instakill == true then
-			G.GAME.unik_instant_death_hand = true
-		else
-			G.GAME.unik_instant_death_hand = nil
-		end
-		return true
-	else
-		G.GAME.unik_instant_death_hand = nil
-		return false
-	end
-end

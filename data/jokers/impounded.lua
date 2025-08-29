@@ -15,7 +15,7 @@ SMODS.Joker {
     no_dbl = true,
     perishable_compat = false,
 	eternal_compat = false,
-    config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20} },
+    config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20,impoundedSeed = ""} },
     loc_vars = function(self, info_queue, center)
         return { 
             key = Cryptid.gameset_loc(self, { modest = "modest"}),
@@ -33,11 +33,11 @@ SMODS.Joker {
                 local validEntries = {}
                 local ghostTrap = false
                 --Stop impounding if it detects a ghost trap to avoid infinite loops
-                for i = 1,#G.jokers.cards do
-                    if G.jokers.cards[i].config.center.rarity ~= "cry_cursed" and G.jokers.cards[i].config.center.key ~= "j_unik_impounded" and not G.jokers.cards[i].ability.unik_impounded then
-                        table.insert(validEntries,i)
+                for i,v in pairs(G.jokers.cards) do
+                    if v.config.center.rarity ~= "cry_cursed" and v.config.center.key ~= "j_unik_impounded" and not v.ability.unik_impounded then
+                        validEntries[#validEntries + 1] = v
                     end
-                    if G.jokers.cards[i].config.center.key == "j_unik_ghost_trap" or G.jokers.cards[i].config.center.key == "j_cry_formidiulosus" then
+                    if v.config.center.key == "j_unik_ghost_trap" or v.config.center.key == "j_cry_formidiulosus" then
                         ghostTrap = true
                         validEntries = {}
                         break
@@ -46,55 +46,36 @@ SMODS.Joker {
                 if #validEntries > 0 and not ghostTrap == true then
 
 
-                    local select = pseudorandom(pseudoseed("unik_impoundSelect"), 1, #validEntries)
+                    local select = pseudorandom_element(validEntries, pseudoseed("unik_impoundSelect"))
                     --If its targeting itself, then retry until it hits a non-cursed Joker or no non-cursed jokers exist
-                    local retry = false
                     local successful = true
                     --Fallback: If it happened to target a cursed joker, retry until it hits another one or no non cursed exist to avoid debuffing a non cursed joker or itself
-                    if G.jokers.cards[select].config.center.rarity == "cry_cursed" then
+                    if select.config.center.rarity == "cry_cursed" then
                         print(#validEntries) 
-                        retry = true
                         successful = false
-                    print("Uh oh, looks like it tried to debuff a cursed joker or itself... fallback")
-                        -- while retry == true do
-                        --     validEntries = {}
-                        --     for i = 1,#G.jokers.cards do
-                        --         if G.jokers.cards[i].config.center.rarity ~= "cry_cursed" and G.jokers.cards[i].config.center.key ~= "j_unik_impounded" then
-                        --             table.insert(validEntries,i)
-                        --            print(i)
-                        --         end
-                        --     end
-                        --     if #validEntries > 0 then
-                        --         local select = pseudorandom(pseudoseed("unik_impoundSelect"), 1, #validEntries)
-                        --         if G.jokers.cards[select].config.center.rarity ~= "cry_cursed" then
-                        --             retry = false
-                        --             successful = true
-                        --             break
-                        --         end
-                        --     else
-                        --         --No valid jokers exist (somehow at this point)
-                        --         successful = false
-                        --         retry = false
-                        --         break
-                        --     end
-                        -- end
+                        print("Uh oh, looks like it tried to debuff a cursed joker or itself... fallback")
                     end
                     if successful == true and not ghostTrap == true then
-                        card_eval_status_text(G.jokers.cards[select], 'extra', nil, nil, nil, {message = localize('k_unik_impounded'), colour = G.C.BLACK})
+                        card.ability.extra.impoundedSeed = pseudoseed('impounded_ID_unik') --used to track which joker is impounded, in case of multiple impound notices
+                        card_eval_status_text(select, 'extra', nil, nil, nil, {message = localize('k_unik_impounded'), colour = G.C.BLACK})
                         G.E_MANAGER:add_event(Event({
                             func = function() 
 
-                                G.jokers.cards[select].ability.unik_impounded = true
+                                select.ability.unik_impounded = true
                                 --Scale logarithmically, so cheaper jokers would proportionately cost more, while exotics proportinately cost less, but still always increasing.
                                 if Card.get_gameset(card) ~= "modest" then
-                                    card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(G.jokers.cards[select].sell_cost+1))/100
+                                    card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(select.sell_cost+1))/100
                                 else
-                                    card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * G.jokers.cards[select].sell_cost)/100
+                                    card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * select.sell_cost)/100
                                 end
-                                G.jokers.cards[select].sell_cost = 0
-                                G.jokers.cards[select].ability.eternal = true
-                                G.jokers.cards[select].ability.rental = true
-                                SMODS.debuff_card(G.jokers.cards[select],true,"unik_impounded")
+                                if select.sell_cost <= 1 then
+                                    card.ability.extra.cost = -1 * card.ability.extra.fallback_cost
+                                end
+                                select.sell_cost = 0
+                                select.ability.eternal = true
+                                select.ability.rental = true
+                                select.ability.unik_impounded_seed = card.ability.extra.impoundedSeed
+                                SMODS.debuff_card(select,true,card.ability.extra.impoundedSeed)
                                 card:set_cost()
                                 return true
                             end
@@ -113,13 +94,15 @@ SMODS.Joker {
     end,
     --remove debuffs
     remove_from_deck = function(self, card, from_debuff)
-        for i = 1,#G.jokers.cards do
-            if G.jokers.cards[i].ability.unik_impounded then
+        for i,v in pairs(G.jokers.cards) do
+            
+            if v.ability.unik_impounded and v.ability.unik_impounded_seed == card.ability.extra.impoundedSeed then
                 --avoid softlock if it debuffs itself (somehow)
-                SMODS.debuff_card(G.jokers.cards[i],false,"unik_impounded")
-                G.jokers.cards[i].ability.unik_impounded = false
-                G.jokers.cards[i].ability.eternal = false
-                G.jokers.cards[i].ability.rental= false
+                SMODS.debuff_card(v,false,card.ability.extra.impoundedSeed)
+                v.ability.unik_impounded = false
+                v.ability.unik_impounded_seed = nil
+                v.ability.eternal = false
+                v.ability.rental= false
             end
         end
     end,
@@ -136,15 +119,23 @@ SMODS.Joker {
 --Hook to prevent selling Impounded if you're in debt.
 local sellPrevention = Card.can_sell_card
 function Card:can_sell_card(context)
+    local lockpick = next(find_joker("j_unik_lockpick"))
+    if (G.play and #G.play.cards > 0) or
+        (G.CONTROLLER.locked) or 
+        (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) --or 
+        --G.STATE == G.STATES.BLIND_SELECT 
+        then return false end
     if (G.SETTINGS.tutorial_complete or G.GAME.pseudorandom.seed ~= 'TUTORIAL' or G.GAME.round_resets.ante > 1) and
         self.area and
         self.area.config.type == 'joker' and
-        not self.ability.eternal then
-            if self.config.center.key == "j_unik_impounded" then
+        (not self.ability.eternal or (self.ability.eternal and lockpick and not self.config.center.dissolve_immune and not self.ability.dissolve_immune)) then
+            if self.config.center.key == "j_unik_impounded" or self.config.center.key == "j_buf_afan_spc"  then
                 --Takes in factor credit card
                 if to_big((G.GAME.dollars-G.GAME.bankrupt_at) + self.ability.extra.cost) < to_big(0) then
                     return false
                 end
+            else
+                return true
             end
     end
     

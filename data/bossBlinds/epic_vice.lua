@@ -9,13 +9,17 @@ SMODS.Blind	{
     pos = {x = 0, y = 18},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 0.25,
-    jen_blind_resize = 32,
 	--must be localized
 	ignore_showdown_check = true,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
 	in_pool = function(self)
-        --maybe its funnier to have it spawn even without stone hands in deck in almanac
         if G.GAME.unik_force_epic_plus > 0 then
             return false
         end

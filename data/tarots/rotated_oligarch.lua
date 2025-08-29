@@ -1,0 +1,2 @@
+--The Oligarch!
+--Enhance 3 cards to bill cards. Bill cards give $1 when scored, increase by $1 per bill card in scored hand.

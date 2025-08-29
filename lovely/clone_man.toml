@@ -1,0 +1,84 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+# initial rarity initializer
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.ARGS.TEMP_POOL = EMPTY(G.ARGS.TEMP_POOL)'''
+position = "after"
+payload = '''
+local rarity2 = nil
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''local rarity = _rarity or SMODS.poll_rarity("Joker", 'rarity'..G.GAME.round_resets.ante..(_append or ''))'''
+position = "after"
+payload = '''
+rarity2 = rarity
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = 'if add and not G.GAME.banned_keys[v.key] then '
+position = "before"
+payload = '''
+local clonefactor = 0
+if G.jokers and G.jokers.cards then
+    --local eval = {}
+    --SMODS.calculate_context({unik_cloneman = true},eval)
+    --for i = 1, #eval do
+    --    if eval[i].jokers then
+    --        if eval[i].jokers.clone_factor then
+    --            clonefactor = clonefactor + eval[i].jokers.clone_factor
+    --        end
+    --    end        
+    --end
+    for a,b in pairs(G.jokers.cards) do
+        if b.config.center.key == 'j_unik_cloneman' then
+            clonefactor = clonefactor + math.min(b.ability.extra.multiplier,b.ability.immutable.max_multiplier)
+        end
+    end
+end
+
+--Pools (meme, M, food)
+
+local unik_cloned_pool = {}
+if G.jokers and G.jokers.cards and (_type ~= nil or rarity2 ~= nil) then
+    for a,b in pairs(G.jokers.cards) do
+        if v.key ~= 'j_unik_cloneman' and v.key == b.config.center.key and not unik_cloned_pool[v.key] and not b.config.center.unique and not b.config.center.hidden then
+         unik_cloned_pool[v.key] = true
+                for y = 1, clonefactor do
+                    _pool[#_pool + 1] = v.key
+                    _pool_size = _pool_size + 1
+                    --print(v.key .. y)
+                end
+            
+        elseif v.key == b.config.center.key and not b.config.center.unique and not b.config.center.hidden then
+            --print("already")
+        end
+    end
+end
+if G.consumeables and G.consumeables.cards and _type ~= nil then
+    for a,b in pairs(G.consumeables.cards) do
+        if v.key == b.config.center.key and not unik_cloned_pool[v.key] and not b.config.center.unique and not b.config.center.hidden then
+            unik_cloned_pool[v.key] = true
+                for y = 1, clonefactor do
+                    _pool[#_pool + 1] = v.key
+                    _pool_size = _pool_size + 1
+                    --print(v.key .. y)
+                end
+            
+        elseif v.key == b.config.center.key and not b.config.center.unique and not b.config.center.hidden then
+            --print("already")
+        end
+    end
+end
+'''
+match_indent = true

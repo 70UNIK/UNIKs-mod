@@ -15,7 +15,6 @@ SMODS.Joker {
     atlas = 'unik_the_plant',
     rarity = "cry_cursed",
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 2, y = 0,extra = { x = 1, y = 0 } },
     cost = 1,
     experimental = true, --requires a complex function for iterating per card so this is appropriate

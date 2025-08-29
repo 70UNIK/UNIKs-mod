@@ -16,7 +16,7 @@ SMODS.Booster{
 	pos = { x = 1, y = 1 },
     cost = 0,
     weight = 0, 
-    config = { extra = 10, choose = 5 },
+    config = { extra = 10, choose = 4 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = lartceps_digital_hallucinations_compat,
 	generate_lartceps = true,
@@ -41,6 +41,10 @@ SMODS.Booster{
 	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (almanac)
 	no_doe = true,
 	unskippable = function(self) --Always unskippable
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 0
+		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity >= 4 then
+			return false
+		end
 		return true
 	end,
 	create_card = function(self, card, i)

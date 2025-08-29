@@ -1,0 +1,2 @@
+--Considered a club and it's own rank.
+--Gain X0.3 Mult if played and unscoring. Destroyed if discarded.

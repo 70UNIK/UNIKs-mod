@@ -14,60 +14,36 @@ local pibby_quotes = {
 		'k_unik_pibby_normal2',
         'k_unik_pibby_normal3',
 	},
-	drama = {
-		'k_unik_pibby_scared1',
-		'k_unik_pibby_scared2',
-	},
-	darkness = {
-		'k_unik_pibby_darkness1',
-		'k_unik_pibby_darkness2',
-	}
+	-- drama = {
+	-- 	'k_unik_pibby_scared1',
+	-- 	'k_unik_pibby_scared2',
+	-- },
+	-- darkness = {
+	-- 	'k_unik_pibby_darkness1',
+	-- 	'k_unik_pibby_darkness2',
+	-- }
 }
 SMODS.Joker {
     key = 'unik_pibby',
     atlas = 'unik_pibby',
     rarity = 3,
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
-	drama = { x = 2, y = 0 }, 
     cost = 8,
     blueprint_compat = true,
-    perishable_compat = true,
+    perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = { divisor = 60,x_mult = 1} },
+    config = { extra = {x_mult = 1},immutable = {divisor = 85} },
     gameset_config = {
-		modest = { extra = { divisor = 100,x_mult = 1} },  
+		modest = { extra = {x_mult = 1},immutable = {divisor = 140} },  
 	},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
-		if (SMODS.Mods["jen"] or {}).can_load then
-			quoteset = Jen.gods() and 'gods' or Jen.dramatic and 'drama'  or 'normal'
-		end
-		return { vars = {center.ability.extra.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
+		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
 	end,
     calculate = function(self, card, context)
         if context.forcetrigger then
-            for k, v in ipairs(context.full_hand) do
-                if SMODS.has_enhancement(v, "m_unik_pink") then
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.extra.divisor)
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
-                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.extra.divisor)
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
-                end  
-            end
             return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,
@@ -75,6 +51,7 @@ SMODS.Joker {
         end
         if context.cardarea == G.jokers and context.before and not context.blueprint then
             local triggered = false
+            local increase = 0
             for k, v in ipairs(context.scoring_hand) do
                 if SMODS.has_enhancement(v, "m_unik_pink") then
                     G.E_MANAGER:add_event(Event({
@@ -83,7 +60,7 @@ SMODS.Joker {
                             return true
                         end,
                     }))
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (7 / card.ability.extra.divisor)
+                     increase =  increase  + (7 / card.ability.immutable.divisor)
                     triggered = true
                 elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
                     G.E_MANAGER:add_event(Event({
@@ -92,15 +69,24 @@ SMODS.Joker {
                             return true
                         end,
                     }))
-                    card.ability.extra.x_mult = card.ability.extra.x_mult + (v.base.nominal / card.ability.extra.divisor)
+                     increase  =  increase  + (v.base.nominal / card.ability.immutable.divisor)
                     triggered = true
                 end       
             end
             if triggered then
-                return {
-                    message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
-                    colour = G.C.MULT,
-                }
+                SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "x_mult",
+                    scalar_value = "custom_scaler",
+                    scalar_table = {
+                        custom_scaler =  increase ,
+                    },
+                    message_key = "a_xmult",
+                    message_colour = G.C.MULT,
+                })
+                				return {
+
+				}
             end
         end
         if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) then

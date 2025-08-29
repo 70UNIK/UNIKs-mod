@@ -1,5 +1,4 @@
---todo:
--- if jens almanac is updated, this boss is banned
+
 SMODS.Blind{
     key = 'unik_bigger_boo',
     boss = {min = 1, showdown = true}, 
@@ -19,12 +18,12 @@ SMODS.Blind{
     get_loc_debuff_text = function(self)
 		return "Convert Jokers adjacent to Ghosts into Ghosts"
 	end,
+    death_message = 'special_lose_unik_bigger_boo',
     --Create an eternal ghost
     set_blind = function(self, reset, silent)
         G.GAME.unik_pentagram_manager_fix = true
         if not reset then
             --print("vvvv")
-            G.GAME.unik_killed_by_boo = true
                     local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_cry_ghost")
                     card2.ability.eternal = true
                     --destroy card2 if its jimbo
@@ -73,11 +72,9 @@ SMODS.Blind{
     --If disabled, kill ONLY the pinned ghost.
     disable = function(self)
         killEternalGhosts()
-        G.GAME.unik_killed_by_boo = nil
     end,
     defeat = function(self)
         killEternalGhosts()
-		G.GAME.unik_killed_by_boo = nil
         G.GAME.unik_pentagram_manager_fix = nil
 	end,
 }

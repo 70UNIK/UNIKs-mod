@@ -12,7 +12,7 @@
 local function ShouldBeDebuffed(card,suit,faceCard,debuffed,ignore_debuff)
     if not card.removed and not ignore_debuff and ((suit and card:is_suit(suit,true)) or (faceCard == true and card:is_face(true))) then
         SMODS.debuff_card(card,debuffed,"unik_cursed_debuff")
-        print("d")
+        --print("d")
         return true
     end
     return false

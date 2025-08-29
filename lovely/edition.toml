@@ -15,8 +15,11 @@ payload = '''
 if card.ability.name == "j_unik_happiness" then
     card:set_edition("e_unik_positive", true, nil, true)
 end
-if (card.ability.name == "j_unik_foundation" and (#SMODS.find_card("j_jen_saint_attuned")) > 0) then
-    card:set_edition("e_negative", true, nil, true)
+if card.ability.name == "j_unik_borg_cube" then
+    card:set_edition("e_unik_steel", true, nil, true)
+end
+if card.ability.name == "j_unik_binary_asteroid" then
+    card:set_edition("e_paperback_dichrome", true, nil, true)
 end
 '''
 match_indent = true
@@ -27,46 +30,9 @@ target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
 pattern = '''and card.ability.name ~= "cry-universe"'''
 position = "after"
 payload = '''and card.ability.name ~= "j_unik_happiness"
-and (card.ability.name ~= "j_unik_foundation" and (#SMODS.find_card("j_jen_saint_attuned")) > 0)
+and card.ability.name ~= "j_unik_borg_cube"
+and card.ability.name ~= "j_unik_binary_asteroid"
 '''
-match_indent = true
-
-## POSITIVE consumable and playing card label logic
-
-### Badge
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = "if v == 'negative_consumable' or v == 'negative_playing_card' then v = 'negative' end"
-position = "after"
-payload = '''
-if v == 'unik_positive_consumable' or v == 'unik_positive_playing_card' then v = 'unik_positive' end
-'''
-match_indent = true
-
-### 
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''if v:sub(1,9) == 'negative_' then
-    info_queue[#info_queue+1] = {key = 'e_'..v, set = 'Edition', config = {extra = G.P_CENTERS['e_negative'].config.card_limit}}
-end'''
-position = "after"
-payload = '''if v:sub(1,14) == 'unik_positive_' then
-    info_queue[#info_queue+1] = {key = 'e_'..v, set = 'Edition', config = {extra = G.P_CENTERS['e_unik_positive'].config.card_limit}}
-end'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = "badges[#badges + 1] = 'negative_playing_card'"
-position = "after"
-payload = """
-elseif self.edition.type == 'unik_positive' and self.ability.consumeable then
-    badges[#badges + 1] = 'unik_positive_consumable'
-elseif self.edition.type == 'unik_positive' and (self.ability.set == 'Enhanced' or self.ability.set == 'Default') then
-    badges[#badges + 1] = 'unik_positive_playing_card'"""
 match_indent = true
 
 ### Bad edition colors: Instead of a blueshift, its a redshift, just to show how shitty it is
@@ -99,7 +65,7 @@ payload = """--self.C.UNIK_SYNC_CATALYST_FAIL[1] = 0.6+0.2*math.sin(self.TIMERS.
         self.C.UNIK_LARTCEPS_INVERSE[2] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
         self.C.UNIK_LARTCEPS_INVERSE[3] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
         self.C.SECONDARY_SET.unik_lartceps = self.C.UNIK_LARTCEPS1
-        
+        self.C.RARITY["unik_legendary_blind"] = self.C.UNIK_RGB
 """
 match_indent = true
 
@@ -111,8 +77,13 @@ pattern = "DARK_EDITION = {0,0,0,1},"
 position = "after"
 payload = """UNIK_SHITTY_EDITION = {0,0,0,1},
 UNIK_LARTCEPS1 = {1,0,0,1},
+UNIK_RGB = {0,0,0,1},
+UNIK_RGB_HUE = 0,
 UNIK_LARTCEPS_INVERSE = {1,0,0,1},
 UNIK_THE_PLANT = HEX('709284'),
+UNIK_THE_WHEEL = HEX('50bf7c'),
+UNIK_THE_HOUSE = HEX('5186a8'),
+UNIK_THE_TOOTH = HEX('b52d2d'),
 UNIK_THE_MANACLE = HEX('575757'),
 UNIK_THE_WALL = HEX('8a59a5'),
 UNIK_THE_GOAD = HEX('b95c96'),
@@ -161,6 +132,9 @@ unik_unik_color = G.C.UNIK_UNIK,
 unik_caption = G.C.UNIK_CAPTION,
 unik_lartceps1 = G.C.UNIK_LARTCEPS1,
 unik_lartceps_inverse = G.C.UNIK_LARTCEPS_INVERSE,
+unik_wheel_color = G.C.UNIK_THE_WHEEL,
+unik_house_color = G.C.UNIK_THE_HOUSE,
+unik_tooth_color = G.C.UNIK_THE_TOOTH,
 """
 match_indent = true
 
@@ -191,15 +165,22 @@ unik_niko = { atlas = "unik_sticker_deck", pos = { x = 2, y = 0 } },
 unik_impounded = { atlas = "unik_sticker_deck", pos = { x = 0, y = 1 } },'''
 match_indent = true
 
-## https://discord.com/channels/1116389027176787968/1233186615086813277/1370611144997212230
+## Betmma real time shader method
+# Send real time to fs file in draw_shader function.
 [[patches]]
 [patches.pattern]
 target = "engine/sprite.lua"
-pattern = '''G.SHADERS[_shader or 'dissolve']:send("time",123.33412*(_draw_major.ID/1.14212 or 12.5123152)%3000)'''
-position = "at"
-payload = '''G.SHADERS[_shader or 'dissolve']:send("time", G.TIMERS.REAL)'''
+pattern = '''G.SHADERS[_shader or 'dissolve']:send("shadow",(not not _shadow_height))'''
+position = "after"
+payload = '''
+if _shader=='unik_corrupted' then
+    G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
+end
+if _shader=='unik_fuzzy' then
+    G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
+end
+'''
 match_indent = true
-
 
 [[patches]]
 [patches.pattern]
@@ -229,3 +210,82 @@ if edition_soul_sprite == false then
 '''
 match_indent = true
 
+### Prevent delay when applying a lot of editions at once.
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/overrides.lua"]'''
+pattern = '''if self.edition and not silent then
+		local ed = G.P_CENTERS['e_' .. (self.edition.type)]
+		G.CONTROLLER.locks.edition = true
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = not immediate and 0.2 or 0,
+			blockable = not immediate,
+			func = function()
+				if self.edition then
+					self:juice_up(1, 0.5)
+					play_sound(ed.sound.sound, ed.sound.per, ed.sound.vol)
+				end
+				return true
+			end
+		}))
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			delay = 0.1,
+			func = function()
+				G.CONTROLLER.locks.edition = false
+				return true
+			end
+		}))
+	end'''
+position = "at"
+payload = '''
+if self.edition and not silent and not G.GAME.force_bypass_edition_delay then
+    local ed = G.P_CENTERS['e_' .. (self.edition.type)]
+    G.CONTROLLER.locks.edition = true
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = not immediate and 0.2 or 0,
+        blockable = not immediate,
+        func = function()
+            if self.edition then
+                self:juice_up(1, 0.5)
+                play_sound(ed.sound.sound, ed.sound.per, ed.sound.vol)
+            end
+            return true
+        end
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.1,
+        func = function()
+            G.CONTROLLER.locks.edition = false
+            return true
+        end
+    }))
+elseif self.edition and not silent and G.GAME.force_bypass_edition_delay  then
+    
+    local ed = G.P_CENTERS['e_' .. (self.edition.type)]
+    if self.edition then
+        self:juice_up(1, 0.5)
+        play_sound(ed.sound.sound, ed.sound.per, ed.sound.vol)
+    end
+
+end
+'''
+match_indent = true
+
+###Edeck backs
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/ui.lua"]'''
+pattern = '''if currentBack.effect.center.edeck_type then'''
+position = "before"
+payload = '''
+if currentBack.effect.center.edition_back_shader then
+    self.children.back:draw_shader(currentBack.effect.center.edition_back_shader, nil, self.ARGS.send_to_shader, true)
+end
+'''
+match_indent = true

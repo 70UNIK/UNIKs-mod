@@ -12,7 +12,7 @@ SMODS.Joker {
 	pos = { x = 1, y = 0 },
     cost = 6,
 	blueprint_compat = false,
-    perishable_compat = false,
+    perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = false,
     loc_vars = function(self, info_queue, center)
@@ -36,7 +36,9 @@ SMODS.Joker {
                     return true
                 end,
             }))
-           -- return true
+            return{
+                
+            }
 		end
 	end,
 }

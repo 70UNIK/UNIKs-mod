@@ -11,14 +11,14 @@ local moonlight_quotes = {
 		'k_unik_moonlight_normal2',
 		'k_unik_moonlight_normal3',
 	},
-	drama = {
-		'k_unik_moonlight_scared1',
-	},
-	gods = {
-		'k_unik_moonlight_godsmarble1',
-		'k_unik_moonlight_godsmarble2',
-		'k_unik_moonlight_godsmarble3',
-	}
+	-- drama = {
+	-- 	'k_unik_moonlight_scared1',
+	-- },
+	-- gods = {
+	-- 	'k_unik_moonlight_godsmarble1',
+	-- 	'k_unik_moonlight_godsmarble2',
+	-- 	'k_unik_moonlight_godsmarble3',
+	-- }
 }
 
 SMODS.Joker {
@@ -31,35 +31,23 @@ SMODS.Joker {
     atlas = 'unik_moonlight',
     rarity = "cry_exotic",
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
-	-- drama = { x = 1, y = 0 }, --WIP: Remains the same
-	-- godsmarbling = {x = 1, y = 0 }, --may remove once a seperate "godsmarbling" sprite function is made (Scared but exclusively when godsmarble is present)
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-	demicoloncompat = true,
+	demicolon_compat = true,
 	fusable = true,
-	-- did some fine tuning using desmos; Assuming Stellar mortis (MASSIVE anti synergy with her) eats 3 planets vs her keeping 3 planets, ^1.3 makes them even for that number of planets. 
-	-- Moonlight is harder to scale vs stellar due to consumeable limit, but with the right setup, she can exceed it (Perkeo anyone?)
-	-- Given moonlight is very difficult to scale without perkeo, especially on higher antes (you need chambered or azure seals):
-	--- 2 in 5 chance to not turn a random planet negative
-	--- In return, she will not add a consumeable slot (except when godsmarbled) and her Emult becomes ^1.25
-    config = { extra = { Emult = 1.25,odds = 5} },
+	--Why 1.25? Storing multiple planets will cause the value to compound MASSIVELY, plus retriggers.
+    config = { extra = { exp_levelup = 1.3} },
 	gameset_config = {
-		modest = { extra = { Emult = 1.1,odds = 999999} },
+		modest = { extra = { exp_levelup = 1.1} },
 	},
 	loc_vars = function(self, info_queue, center)
-		--normal quotes only if not Jen
 		local quoteset = 'normal'
-		if (SMODS.Mods["jen"] or {}).can_load then
-			quoteset = Jen.dramatic and 'drama' or Jen.gods() and 'gods' or 'normal'
-		end
 		return { 
-			key = Cryptid.gameset_loc(self, { modest = "modest"  }), 
-			vars = {center.ability.extra.Emult, center and cry_prob(2 or center.ability.cry_prob*2,center.ability.extra.odds,center.ability.cry_rigged) or 2, 
-			center.ability.extra.odds,
+			-- key = Cryptid.gameset_loc(self, { modest = "modest"  }), 
+			vars = {center.ability.extra.exp_levelup,
 			localize(moonlight_quotes[quoteset][math.random(#moonlight_quotes[quoteset])] .. "")
 		} 
 		}
@@ -68,346 +56,217 @@ SMODS.Joker {
 	set_ability = function(self, card, initial, delay_sprites)
 	end,
     calculate = function(self, card, context)
-
-		if (context.unik_blinds_refresh) and Card.get_gameset(card) ~= "modest" then
-			--What if you decide to stack non negative consumeables (I prefer NOT to do that, but its a possibility. It should decrement the value and create one)
-			if G.consumeables.cards[1] then
-				--Get valid cards
-				local validCards = {}
-				for i,v in pairs(G.consumeables.cards) do
-					if (v.ability.set == 'Planet' or 
-					v.config.center.key == 'c_jen_pluto_omega' or
-					v.config.center.key == 'c_jen_mercury_omega' or
-					v.config.center.key == 'c_jen_uranus_omega' or
-					v.config.center.key == 'c_jen_venus_omega' or
-					v.config.center.key == 'c_jen_saturn_omega' or
-					v.config.center.key == 'c_jen_jupiter_omega' or
-					v.config.center.key == 'c_jen_earth_omega' or
-					v.config.center.key == 'c_jen_mars_omega' or
-					v.config.center.key == 'c_jen_neptune_omega' or
-					v.config.center.key == 'c_jen_planet_x_omega' or
-					v.config.center.key == 'c_jen_ceres_omega' or
-					v.config.center.key == 'c_jen_eris_omega' or
-					v.config.center.key == 'c_jen_black_hole_omega') and not v.edition then
-						validCards[#validCards + 1] = v
-					end
-				end
-				if #validCards > 0 then
-					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
-					--If incantation, automatically split 1 negative from a big pile
-					if (SMODS.Mods["incantation"] or {}).can_load then
-						if card2.getQty then
-							local amount = card2:getQty()
-							if amount > 1 then
-								local newCard = card2:split(1)
-								newCard:set_edition('e_negative', true)
-								newCard:try_merge()
-								card:juice_up(0.5, 0.5)
-							else
-								card2:set_edition('e_negative', true)
-								card2:try_merge()
-								card:juice_up(0.5, 0.5)
-							end
-						else
-							card2:set_edition('e_negative', true)
-							card2:try_merge()
-							card:juice_up(0.5, 0.5)
-						end
-					else
-						card2:set_edition('e_negative', true)
-						card:juice_up(0.5, 0.5)
-					end
-				end
-			end
-		end
+		--forcetrigger,
 		if context.forcetrigger then
-			G.E_MANAGER:add_event(Event({
-                trigger = "before",
-                delay = 0,
-                func = function()
-			if G.consumeables.cards[1] then
-				--Get valid cards
-				local validCards = {}
+			local hand2 = context.scoring_name or G.FUNCS.get_poker_hand_info(G.play.cards) or nil
+			if hand2 then
 				for i,v in pairs(G.consumeables.cards) do
-					if (v.ability.set == 'Planet' or 
-					v.config.center.key == 'c_jen_pluto_omega' or
-					v.config.center.key == 'c_jen_mercury_omega' or
-					v.config.center.key == 'c_jen_uranus_omega' or
-					v.config.center.key == 'c_jen_venus_omega' or
-					v.config.center.key == 'c_jen_saturn_omega' or
-					v.config.center.key == 'c_jen_jupiter_omega' or
-					v.config.center.key == 'c_jen_earth_omega' or
-					v.config.center.key == 'c_jen_mars_omega' or
-					v.config.center.key == 'c_jen_neptune_omega' or
-					v.config.center.key == 'c_jen_planet_x_omega' or
-					v.config.center.key == 'c_jen_ceres_omega' or
-					v.config.center.key == 'c_jen_eris_omega' or
-					v.config.center.key == 'c_jen_black_hole_omega') and not v.edition then
-						validCards[#validCards + 1] = v
-					end
+					moonlightlevelStructure(hand2,v,card)
 				end
-				if #validCards > 0 then
-					local card2 = pseudorandom_element(validCards, pseudoseed('moonlight_negative'), nil)
-					--If incantation, automatically split 1 negative from a big pile
-					if (SMODS.Mods["incantation"] or {}).can_load then
-						if card2.getQty then
-							local amount = card2:getQty()
-							if amount > 1 then
-								local newCard = card2:split(1)
-								newCard:set_edition('e_negative', true)
-								newCard:try_merge()
-								card:juice_up(0.5, 0.5)
-							else
-								card2:set_edition('e_negative', true)
-								card2:try_merge()
-								card:juice_up(0.5, 0.5)
-							end
-						else
-							card2:set_edition('e_negative', true)
-							card2:try_merge()
-							card:juice_up(0.5, 0.5)
-						end
-					else
-						card2:set_edition('e_negative', true)
-						card:juice_up(0.5, 0.5)
-					end
+			elseif #G.hand.highlighted > 0 then
+				local text, disp_text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+				--print(text)
+				for i,v in pairs(G.consumeables.cards) do
+					moonlightlevelStructure(text,v,card)
 				end
 			end
-			        return true
-                end,
-            }))
 			return {
-				message = localize({
-					type = "variable",
-					key = "a_powmult",
-					vars = {
-						number_format(card.ability.extra.Emult),
-					},
-				}),
-				Emult_mod = card.ability.extra.Emult,
-				colour = G.C.DARK_EDITION,
+				
 			}
 		end
-
-
-        if context.other_consumeable and context.other_consumeable.ability.set == 'Planet' or 
-		(context.other_consumeable and context.other_consumeable.ability.set == 'jen_omegaconsumable')
-		then
-			local valid = false
-			--jen exclusive, check if omega consumable is a planet/black hole
-			if (SMODS.Mods["jen"] or {}).can_load and context.other_consumeable.ability.set == 'jen_omegaconsumable' then
-				if 
-				context.other_consumeable.config.center.key == 'c_jen_pluto_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_mercury_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_uranus_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_venus_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_saturn_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_jupiter_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_earth_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_mars_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_neptune_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_planet_x_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_ceres_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_eris_omega' or
-				context.other_consumeable.config.center.key == 'c_jen_black_hole_omega'
-				then
-					valid = true
+		if context.hand_levelup_held_consume and ((context.levelup_amount and lenient_bignum(context.levelup_amount) > lenient_bignum(0)) or not context.levelup_amount) then
+			local upgrade = false
+			local v = context.other_consumeable_lvlup
+				if v.debuff then
+					card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+					v:juice_up(0.8, 0.5)
+					return
 				end
-				
-			end
-			
-			--automatically ignore hand type if its modest
-			if Card.get_gameset(card) ~= "modest" and context.other_consumeable.ability.set ~= 'jen_omegaconsumable' then
-				valid = true
-			end
-			--check if its the right planet
-			if context.other_consumeable.ability.hand_type and valid == false then
-				if context.other_consumeable.ability.hand_type == context.scoring_name then
-
-					--print(context.other_consumeable.ability.hand_type)
-					valid = true
+				--individual planets
+				if v.ability.hand_type and v.ability.hand_type == context.levelup_poker_hand then
+					-- card_eval_status_text(card, "extra", nil, nil, nil, {
+					-- 	message = localize("k_upgrade_ex"),
+					-- 	colour = G.C.DARK_EDITION,
+					-- 	card=card,
+					-- })
+					local hand = context.levelup_poker_hand
+					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
+					upgrade = true
+					
 				end
-			end
-			--for loop if it has hand_types for compatibility with 3 planet cards
-			if context.other_consumeable.ability.hand_types and valid == false then
-				if context.other_consumeable.ability.hand_types then
-					for i = 1,#context.other_consumeable.ability.hand_types do
-						if context.other_consumeable.ability.hand_types[i] == context.scoring_name then
-							valid = true
-							--print(context.other_consumeable.ability.hand_types[i])
+				--ruutu, etc...
+				if v.ability.hand_types then
+					for i = 1,#v.ability.hand_types do
+						if v.ability.hand_types[i] == context.levelup_poker_hand then
+							local hand = context.levelup_poker_hand
+							exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
+							upgrade = true
 							break
 						end
 					end
 				end
-			end
-			if not Talisman.config_file.disable_anims and valid == true then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_consumeable:juice_up(0.5, 0.5)
-						return true
-					end,
-				}))
-			end
-			if context.other_consumeable.debuff and valid == true then
-				if
-				G.HUD_blind
-				and G.HUD_blind:get_UIE_by_ID("HUD_blind_debuff_1")
-				then
-					G.HUD_blind:get_UIE_by_ID("HUD_blind_debuff_1"):juice_up(0.3, 0)
+				--Bhole
+				if v.config.center.key == "c_black_hole" then
+					local hand = context.levelup_poker_hand
+					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
+					upgrade = true
 				end
-				card_eval_status_text(card, "debuff", nil, nil, nil, nil)
-				--return true
-			elseif valid == true then
-				--if using incantation, she should exponent over and over for x quantity.
-				
-				if (SMODS.Mods["incantation"] or {}).can_load then
-					--hmm maybe this could work?
-					if context.other_consumeable.ability.qty and context.other_consumeable.ability.qty > 1 then
-						for i = 1, context.other_consumeable.ability.qty-1 do
-							SMODS.calculate_effect({
-								message = localize({
-									type = "variable",
-									key = "a_powmult",
-									vars = {
-										number_format(card.ability.extra.Emult),
-									},
-								}),
-								Emult_mod = card.ability.extra.Emult,
-								colour = G.C.DARK_EDITION,
-							}, (card or context.blueprint_card or context.retrigger_joker or context.repetition))
-						end
+				--planetlua
+				if v.config.center.key == "c_cry_planetlua" then
+					if
+						SMODS.pseudorandom_probability(
+							v,
+							"planetlua",
+							1,
+							v and v.ability.extra.odds or 5
+						)
+					then
+						local hand = context.levelup_poker_hand
+						exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
+						upgrade = true
+					else
+						 card_eval_status_text(v, "extra", nil, nil, nil, {
+                                message = localize("k_nope_ex"),
+                                colour = G.C.SECONDARY_SET.Planet,
+                            })
 					end
-					return {
-						message = localize({
-							type = "variable",
-							key = "a_powmult",
-							vars = {
-								number_format(card.ability.extra.Emult),
-							},
-						}),
-						Emult_mod = card.ability.extra.Emult,
-						colour = G.C.DARK_EDITION,
-					}
-				else
-					return {
-						message = localize({
-							type = "variable",
-							key = "a_powmult",
-							vars = {
-								number_format(card.ability.extra.Emult),
-							},
-						}),
-						Emult_mod = card.ability.extra.Emult,
-						colour = G.C.DARK_EDITION,
-
-					}
-
 				end
-
+			if upgrade then
+				return {
+					message = localize("k_upgrade_ex"),
+					colour = G.C.DARK_EDITION,
+				}
+			else
+				return
 			end
-        end
+		end
+		
     end,
 
 }
---So how she will work:
---^Emult (multiplied by number of planets and triggers, which... is painful. Have to build this on my own)
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_moonlight_cookie"] = {
-		text = {
-			{
-				border_nodes = {
-					{ text = "^" },
-					{ ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
-				},
-				border_colour = G.C.DARK_EDITION,
-			},
-		},
-		reminder_text = {
-			{
-				ref_table = "card.joker_display_values",
-				ref_value = "localized_text_poker_hand",
-				colour = G.C.FILTER,
-				scale = 0.3,
-			},		
-			{
-				ref_table = "card.joker_display_values",
-				ref_value = "localized_text",
-				colour = G.C.SECONDARY_SET.Planet,
-			},
-		},
-		-- extra = {
-        --     {
-        --         {
-        --             ref_table = "card.joker_display_values",
-        --             ref_value = "odds",
-        --             colour = G.C.GREEN,
-        --             scale = 0.3,
-        --         },		
-		-- 	},
-		-- },
-		calc_function = function(card)
-			local Emult = 1
-			local odds = ""
-			local text, _, scoring_hand = JokerDisplay.evaluate_hand() --get poker hand
-			if Card.get_gameset(card) ~= "modest" or (text ~= 'Unknown' and text ~= 'NULL' and Card.get_gameset(card) == "modest") then
-				--Iterate through each consumeable, checking for poker hand type (if modest)
-				for i,v in pairs(G.consumeables.cards) do
-					local valid = false
-					if v.ability.set == "Planet" and not v.debuff then
-						--Indiscriminate if not modest
-						if Card.get_gameset(card) ~= "modest" then
-							valid = true
-						end
-						--Otherwise check poker hand type
-						--check if its the right planet
-						if v.ability.hand_type and valid == false then
-							--print(v.ability.hand_type .. text)
-							if v.ability.hand_type == text then
-								--print(context.other_consumeable.ability.hand_type)
-								valid = true
-							end
-						end
-						--for loop if it has hand_types for compatibility with 3 planet cards
-						if v.ability.hand_types and valid == false then
-							if v.ability.hand_types then
-								for i = 1,#v.ability.hand_types do
-									--print(v.ability.hand_types[i] .. text)
-									if v.ability.hand_types[i] == text then
-										valid = true
-										--print(context.other_consumeable.ability.hand_types[i])
-										break
-									end
-								end
-							end
-						end
-						if valid then
-							if (SMODS.Mods["incantation"] or {}).can_load then
-								if v.ability.qty and v.ability.qty > 1 then
-									Emult = (Emult * card.ability.extra.Emult)^v.ability.qty
-								else
-									Emult = (Emult * card.ability.extra.Emult)
-								end				
-							else
-								Emult = (Emult * card.ability.extra.Emult)
-							end
-							
-						end
-					end			
+
+function moonlightlevelStructure(hand,consumeble,card)
+	local upgrade = false
+	local v = consumeble
+		if v.debuff then
+			card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+			v:juice_up(0.8, 0.5)
+			return
+		end
+		--individual planets
+		if v.ability.hand_type then
+			--print(v.ability.hand_type)
+			--print(hand)
+		end
+		if v.ability.hand_type and v.ability.hand_type == hand then
+			-- card_eval_status_text(card, "extra", nil, nil, nil, {
+			-- 	message = localize("k_upgrade_ex"),
+			-- 	colour = G.C.DARK_EDITION,
+			-- 	card=card,
+			-- })
+			local hand = hand
+			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+			upgrade = true
+			
+		end
+		--ruutu, etc...
+		if v.ability.hand_types then
+			for i = 1,#v.ability.hand_types do
+				--print(v.ability.hand_types[i])
+				if v.ability.hand_types[i] == hand then
+					local hand = hand
+					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+					upgrade = true
+					break
 				end
 			end
-			card.joker_display_values.Emult = Emult
-			card.joker_display_values.localized_text = "(" .. localize("k_planet") .. ")"
-			-- if Card.get_gameset(card) ~= "modest" then
-            --     odds = localize { type = 'variable', key = "jdis_odds", vars = { cry_prob(2 or card.ability.cry_prob * 2,card.ability.extra.odds,card.ability.cry_rigged) or 2, card.ability.extra.odds } }
-            -- end
-			-- card.joker_display_values.odds = odds
-			--Only display poker hand if in modest
-			if text ~= 'Unknown' and text ~= 'NULL' and Card.get_gameset(card) == "modest" then
-				card.joker_display_values.localized_text_poker_hand = text .. ' '
+			--print(hand)
+		end
+		--Bhole
+		if v.config.center.key == "c_black_hole" then
+			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+			upgrade = true
+		end
+		--planetlua
+		if v.config.center.key == "c_cry_planetlua" then
+			if
+				SMODS.pseudorandom_probability(
+					v,
+					"planetlua",
+					1,
+					v and v.ability.extra.odds or 5
+				)
+			then
+				exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+				upgrade = true
 			else
-				card.joker_display_values.localized_text_poker_hand = " "
+					card_eval_status_text(v, "extra", nil, nil, nil, {
+						message = localize("k_nope_ex"),
+						colour = G.C.SECONDARY_SET.Planet,
+					})
 			end
-			
-		end,
-	}
+		end
+	if upgrade then
+		card_eval_status_text(card, "extra", nil, nil, nil, {
+			message = localize("k_upgrade_ex"),
+			colour = G.C.DARK_EDITION,
+		})
+	end
+end
+
+function exponentLevelExtra(hand,exponent,v,instant)
+	--print("g")
+	if not instant and (not Talisman or not  Talisman.config_file.disable_anims) then
+		update_hand_text(
+			{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },
+			{
+				handname = localize(hand, 'poker_hands'),
+				chips = G.GAME.hands[hand].chips,
+				mult = G.GAME.hands[hand].mult,
+				level = G.GAME.hands[hand].level
+			}
+		)
+	end
+	G.GAME.hands[hand].mult = G.GAME.hands[hand].mult*exponent
+	G.GAME.hands[hand].chips = G.GAME.hands[hand].chips*exponent
+	if not instant and (not Talisman or not Talisman.config_file.disable_anims) then
+		delay(0.1)
+		update_hand_text({delay = 0}, {mult = Cryptid.ascend(G.GAME.hands[hand].mult), StatusText = true})
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.9,
+			func = function()
+				play_sound("multhit2")
+				v:juice_up(0.8, 0.5)
+				return true
+			end,
+		}))
+		delay(0.5)
+		update_hand_text({delay = 0}, {chips = Cryptid.ascend(G.GAME.hands[hand].chips), StatusText = true})
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.9,
+			func = function()
+				play_sound("xchips")
+				v:juice_up(0.8, 0.5)
+				return true
+			end,
+		}))
+		delay(0.5)
+	end
+end
+
+local levelUpHook = level_up_hand
+function level_up_hand(card, hand, instant, amount)
+	levelUpHook(card, hand, instant, amount)
+	if not G.GAME.unik_level_up_buffer then
+		G.GAME.unik_level_up_buffer = true
+		for i,v in pairs(G.consumeables.cards) do
+			SMODS.calculate_context({hand_levelup_held_consume = true,other_consumeable_lvlup = v, levelup_poker_hand = hand, levelup_instant = instant, levelup_amount = amount})
+		end
+		G.GAME.unik_level_up_buffer = nil
+	end
+	
+	
+
 end

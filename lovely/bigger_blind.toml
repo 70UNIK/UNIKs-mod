@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 9999
 
 ### Bigger Blind and Boring Blank functionality to emulate Small and Big Blinds in appearance and functionality, while still ""bosses""
 ### And also make them ineligable for reroll (but can appear naturally) and not enable chicot/luchador to function
@@ -15,10 +15,10 @@ position = "before"
 payload = '''
     G.GAME.bigger_blind_blacklist = G.GAME.bigger_blind_blacklist or 0
     G.GAME.boring_blank_blacklist = G.GAME.boring_blank_blacklist or 0
-    if not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and not G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BIGGER_BLIND")) < 0.05 then
+    if not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and G.P_BLINDS[boss].boss and not G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BIGGER_BLIND")) < 0.05 then
         G.GAME.bigger_blind_blacklist = 16
         return 'bl_unik_bigger_blind'
-    elseif not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BORING_BLANK")) < 0.05 then
+    elseif not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.boring_blank_blacklist == 0 and G.P_BLINDS[boss].boss and G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BORING_BLANK")) < 0.05 then
         G.GAME.boring_blank_blacklist = 64
         return 'bl_unik_boring_blank'
     else
@@ -38,11 +38,31 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
-pattern = '''elseif blindname == 'Small Blind' or blindname == 'Big Blind' or blindname == '' then
-        ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}'''
+pattern = '''elseif blindname == 'Small Blind' or blindname == 'Big Blind' or blindname == '' then'''
+position = "before"
+payload = '''
+elseif blindname == 'bl_unik_bigger_blind' or blindname == 'bl_unik_boring_blank' then
+    ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''elseif G.GAME.won then 
+        ease_background_colour{new_colour = G.C.BLIND.won, contrast = 1}'''
 position = "after"
 payload = '''
 elseif blindname == 'bl_unik_bigger_blind' or blindname == 'bl_unik_boring_blank' then
     ease_background_colour{new_colour = G.C.BLIND['Small'], contrast = 1}
 '''
 match_indent = true
+
+##Ease ante when defeating bigger/boss blinds
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''G\.GAME\.blind\:get\_type\(\) \=\= \'Boss\''''
+position = "at"
+line_prepend = '$indent'
+payload = '''(G.GAME.blind_on_deck == 'Boss') '''

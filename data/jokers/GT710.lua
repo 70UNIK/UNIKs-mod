@@ -27,7 +27,6 @@ SMODS.Joker {
         if context.forcetrigger then
             return {
                     dollars = card.ability.extra.money,
-                    card = self
                 }
         end
 		if context.joker_main then
@@ -35,13 +34,10 @@ SMODS.Joker {
 				-- Create a Food Joker according to Cryptid.
 				--local jokers_to_create = math.min(1, G.jokers.config.card_limit - (#G.jokers.cards + G.GAME.joker_buffer))
 				--G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
-                G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.money
-                G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
                 card.ability.extra.has10 = false
                 card.ability.extra.has7 = false
                 return {
                     dollars = card.ability.extra.money,
-                    card = self
                 }
 			end
             card.ability.extra.has10 = false

@@ -3,9 +3,9 @@ SMODS.Consumable{
     set = 'unik_lartceps', 
 	atlas = 'unik_lartceps',
     cost = 0,
-	pos = {x = 0, y = 0},
+	pos = {x = 5, y = 1},
 	key = 'unik_sauron',
-    config = { extra = { odds = 4 } },
+    config = { extra = { unluck = 1, odds = 4 } },
     can_use = function(self, card)
 		return true
 	end,
@@ -14,10 +14,10 @@ SMODS.Consumable{
 	no_ccd = true,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_namta
+        local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.unluck, center.ability.extra.odds, 'unik_sauron')
 		return {
             vars = {
-				card and cry_prob(1 or card.ability.cry_prob * 1, card.ability.extra.odds, card.ability.cry_rigged) or 1,
-				card and card.ability.extra.odds or self.config.extra.odds,
+				new_numerator, new_denominator
 			},
 		}
 	end,
@@ -29,8 +29,7 @@ SMODS.Consumable{
             end
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
                 for i,v in pairs(G.playing_cards) do
-                    if pseudorandom(pseudoseed("unik_sauron")) < cry_prob(1 or card.ability.cry_prob*1, card.ability.extra.odds, card.ability.cry_rigged)
-                    / card.ability.extra.odds then
+                    if SMODS.pseudorandom_probability(card, 'unik_sauron', card.ability.extra.unluck, card.ability.extra.odds, 'unik_sauron') then
                         v:set_ability(G.P_CENTERS['m_unik_namta'])
                     end
                 end

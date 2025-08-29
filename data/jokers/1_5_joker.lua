@@ -12,10 +12,7 @@ SMODS.Joker {
     rarity = 1,
 	pos = { x = 0, y = 0 },
 	-- Modest
-    config = { extra = { mult = 10, mult_mod = 8,hand_size = 5} },
-	gameset_config = {
-		modest = { extra = { mult = 8, mult_mod = 6,hand_size = 5} },
-	},
+    config = { extra = { mult = 10, mult_mod = 8}, immutable = {hand_size = 5}, },
     cost = 4,
     blueprint_compat = true,
 	perishable_compat = true,
@@ -23,20 +20,24 @@ SMODS.Joker {
 	demicoloncompat = true,
 	display_size = { w = 71, h = 144 },
     loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.extra.hand_size} }
+		return { vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.immutable.hand_size} }
 	end,
     calculate = function(self, card, context)
 		if context.joker_main then
-			if #context.full_hand >= card.ability.extra.hand_size then
+			if #context.full_hand >= card.ability.immutable.hand_size then
                 return {
-                    message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult + card.ability.extra.mult_mod * (#context.full_hand - card.ability.extra.hand_size)}},
+                    message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult + card.ability.extra.mult_mod * (#context.full_hand - card.ability.immutable.hand_size)}},
                     mult_mod = card.ability.extra.mult
                 }
 			end
 		end
 		if context.forcetrigger then
+			local handsize = 5
+			if context.full_hand then
+				handsize = math.max(#context.full_hand,5)
+			end
 			return {
-				message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult + (#context.full_hand > 0 and card.ability.extra.mult_mod * (#context.full_hand - card.ability.extra.hand_size) or 0)}},
+				message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult + card.ability.extra.mult_mod * (handsize - card.ability.immutable.hand_size)}},
 				mult_mod = card.ability.extra.mult
 			}
 		end

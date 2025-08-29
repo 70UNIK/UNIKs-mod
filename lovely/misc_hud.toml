@@ -1,0 +1,18 @@
+[manifest]
+version = "1.2"
+dump_lua = true
+priority = 99999999
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = """       elseif _c.name == "The World" then loc_vars = {cfg.max_highlighted, localize(cfg.suit_conv, 'suits_plural'), colours = {G.C.SUITS[cfg.suit_conv]}}
+       end
+       localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = _c.vars or loc_vars}"""
+position = "after"
+payload = """    
+elseif _c.set == 'MiscDesc' then
+    localize{type = 'descriptions', key = _c.key, set = _c.set, nodes = desc_nodes, vars = _c.vars or loc_vars}
+"""
+overwrite = true
+match_indent = true

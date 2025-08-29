@@ -1,7 +1,7 @@
 --Average alice but souped up
---If hand contains a scoring odd or even card, X4 Chips and ^2 mult until the end of the round
---Exotic, fixed 0.6% chance to replace Alice if obtained, only avaliable if Extra Credit is installed
---Code partly taken from ExtraCredit
+
+--Alice rework:
+--^2.5 Mult if card contains a scoring odd and even card. Why? Becomes an ascensio ascension version of average alice (crossmod).
 local function contains(table_, value)
     for _, v in pairs(table_) do
         if v == value then
@@ -22,39 +22,29 @@ SMODS.Joker {
 		items = {
 			"set_cry_exotic",
 		},
-        mods = {
-          "extracredit", --While she *can* work without Average Alice, its more fun to require the mod
-        }
     },
 	key = 'unik_extra_credit_alice',
     atlas = 'unik_alice',
     rarity = "cry_exotic",
 	pos = { x = 0, y = 0 },
-	-- soul_pos sets the soul sprite, used for legendary jokers and basically all of Jen's Jokers
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 1.8, Echips = 1.8}},
+    config = { extra = { Emult = 1.5},immutable = {base_emult = 1.0}},
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult,center.ability.extra.Echips} }
+		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
 	end,
     gameset_config = {
-		modest = {extra = {Emult = 1.4, Echips = 1.4} },
+		modest = {extra = {Emult = 0.6} ,immutable = {base_emult = 1.0} }, 
 	},
     pools = {},
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                    Echip_mod = card.ability.extra.Echips,
-                    Emult_mod = card.ability.extra.Emult,
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmultchips",
-                        vars = { number_format(to_big(card.ability.extra.Echips)) },
-                    }),
+                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                     colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
                 }
         end
@@ -71,33 +61,8 @@ SMODS.Joker {
                 end
             end
             if (_odd and _even) then
-                --This does NOT work with retrigger jokers (chad, for instance) so sadly, it had to be the one from circulus pistoris...
-                -- SMODS.calculate_effect({
-                --     message = localize({
-                --         type = "variable",
-                --         key = "a_powchips",
-                --         vars = { number_format(to_big(card.ability.extra.Echips)) },
-                --     }),
-                --     Echip_mod = card.ability.extra.Echips,
-                --     colour = G.C.DARK_EDITION,
-                -- }, context.blueprint_card or context.retrigger_joker or card)
-                -- SMODS.calculate_effect({
-                --     message = localize({
-                --         type = "variable",
-                --         key = "a_powmult",
-                --         vars = { number_format(to_big(card.ability.extra.Emult)) },
-                --     }),
-                --     Emult_mod = card.ability.extra.Emult,
-                --     colour = G.C.DARK_EDITION,
-                -- }, context.blueprint_card or context.retrigger_joker or card)
                 return {
-                    Echip_mod = card.ability.extra.Echips,
-                    Emult_mod = card.ability.extra.Emult,
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmultchips",
-                        vars = { number_format(to_big(card.ability.extra.Echips)) },
-                    }),
+                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                     colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
                 }
             end
@@ -105,54 +70,3 @@ SMODS.Joker {
     end,
 
 }
-
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_extra_credit_alice"] = {
-        reminder_text = {
-            { ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.ORANGE },
-        },
-        extra = {
-            {
-                {
-                    border_nodes = {
-                        { text = "^" },
-                        { ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" },
-                    },
-                    border_colour = G.C.DARK_EDITION,
-                },
-                {
-                    border_nodes = {
-                        { text = "^" },
-                        { ref_table = "card.joker_display_values", ref_value = "Echips", retrigger_type = "exp" },
-                    },
-                    border_colour = G.C.DARK_EDITION,
-                },
-            },
-        },
-        calc_function = function(card)
-            local Emult = 1
-            local Echips = 1
-            local _, poker_hands, scoring_hand = JokerDisplay.evaluate_hand()
-            if text ~= 'Unknown' and text ~= 'NULL' then
-                local _odd, _even = false, false
-                for _, scoring_card in pairs(scoring_hand) do
-                    if not SMODS.has_no_rank(scoring_card) then
-                        if contains({14,3,5,7,9}, scoring_card:get_id()) then
-                            _odd = true
-                        end
-                        if contains({2,4,6,8,10}, scoring_card:get_id()) then
-                            _even = true
-                        end
-                    end
-                end
-                if _odd and _even then
-                    Emult = card.ability.extra.Emult
-                    Echips = card.ability.extra.Echips
-                end
-            end
-            card.joker_display_values.Emult = Emult
-            card.joker_display_values.Echips = Echips
-            card.joker_display_values.localized_text = localize('k_unik_odd_and_even') .. ""
-        end
-	}
-end

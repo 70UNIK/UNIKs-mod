@@ -7,30 +7,27 @@ SMODS.Blind{
     pos = {x = 0, y = 9},
     boss_colour= HEX("633b11"), 
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 1,
-    exponent = {1,1},
-    jen_blind_exponent_resize = {1,1.3},
+    unik_exponent = {1,1},
     ignore_showdown_check = true,
     loc_vars = function(self, info_queue, card)
         local string = ""
-        if (SMODS.Mods["jen"] or {}).can_load then
-            string = "" .. 1.01
-        else
-            string = "" .. 1.0025
-        end
+        string = "" .. 1.005
 		return { vars = { string } }
 	end,
 	collection_loc_vars = function(self)
         local string = ""
-        if (SMODS.Mods["jen"] or {}).can_load then
-            string = "" .. 1.01
-        else
-            string = "" .. 1.0025
-        end
+        string = "" .. 1.005
 		return { vars = { string } }
 	end,
-    
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+        akyrs_all_unskippable_blinds = true,
+    },
     death_message = "special_lose_unik_epic_cookie",
     set_blind = function(self, reset, silent)
         if not reset then
@@ -54,11 +51,7 @@ SMODS.Blind{
         G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling * 2
 		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.P_BLINDS.bl_unik_epic_cookie.mult = 0
-        if (SMODS.Mods["jen"] or {}).can_load then
-            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1.3
-        else
-            G.P_BLINDS.bl_unik_epic_cookie.exponent[2] = 1
-        end
+        G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
         G.GAME.epic_cookie_click_interval = -1
         G.hand:change_size(G.GAME.decrementer_hand)
         G.GAME.decrementer_hand = 0
@@ -75,6 +68,8 @@ SMODS.Blind{
                     end
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
+                    G.hand_text_area.blind_chips:juice_up()
+                    play_sound('chips2')
                     G.ROOM.jiggle = G.ROOM.jiggle + 0.5
                     --destroy a random card in hand. Make sure it's not eternal
                     local validCards = {}
@@ -100,7 +95,7 @@ SMODS.Blind{
 
 
                     --decrease hand size by 1 
-                    if G.GAME.epic_cookie_click_interval % 8 == 0 then
+                    if G.GAME.epic_cookie_click_interval % 8 == 0 and G.hand.config.card_limit > 0 then
                         G.GAME.decrementer_hand = G.GAME.decrementer_hand + 1
                         G.hand:change_size(-1)
                     end
@@ -111,19 +106,7 @@ SMODS.Blind{
                     G.ROOM.jiggle = G.ROOM.jiggle + 0.5
                 end
             end
-            --Syntax operators:
-            -- -1 = +Reqs
-            -- 0 = xReq
-            -- 1 = ^Req
-            -- 2 = ^^req, etc...
-            --{Amount,operator}
-            --For multiplication and exponentiation, ideally have it above 1.
-            if (SMODS.Mods["jen"] or {}).can_load then
-                return {1.01,1}
-            else--cryptid is a bit more lenient
-                return {1.001,1}
-            end
-			
+            return {1.005,1}
 		end
     end,
 }
@@ -132,6 +115,15 @@ SMODS.Blind{
 local pcfh = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
 	G.GAME.before_play_buffer = true
+
+    if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+        local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+        if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
+            edi:unik_before_play()
+        end
+    end
+    --Steel blind edition, each held card
+
     --Epic cookie: Deselect cards pending destruction
     for i=1, #G.hand.highlighted do
         if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.set_for_destruction then
@@ -139,11 +131,14 @@ function G.FUNCS.play_cards_from_highlighted(e)
         end
     end
     --Only play if highlight cards are > 0
-    if #G.hand.highlighted > 0 then
+    if #G.hand.highlighted == 0 and G.PROFILES[G.SETTINGS.profile].cry_none then
+        G.PROFILES[G.SETTINGS.profile].cry_none = true
+    end
+    --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
+    if Cryptid.enabled("set_cry_poker_hand_stuff") ~= true and #G.hand.highlighted == 0 then
+        
+    else
         pcfh(e)
-    elseif e and e.disable_button then
-        e.disable_button = nil
-       -- print("disble")
     end
 	G.GAME.before_play_buffer = nil
 end

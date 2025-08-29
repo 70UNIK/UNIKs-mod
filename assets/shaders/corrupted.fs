@@ -14,6 +14,7 @@ extern PRECISION vec2 corrupted;
 
 extern PRECISION number dissolve;
 extern PRECISION float time;
+extern float real_time;
 // [Note] sprite_pos_x _y is not a pixel position!
 //        To get pixel position, you need to multiply  
 //        it by sprite_width _height (look flipped.fs)
@@ -143,8 +144,8 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     vec2 texCoordsG = texture_coords;
     vec2 texCoordsB = texture_coords;
 
-    float iTime = tan(2. * time);
-    float totalTime = time;
+    float iTime = tan(2. * real_time);
+    float totalTime = real_time;
     float block_size = 16.;
     texCoordsR.x += (0.004 * rand(vec2(iTime, floor(uv.y * block_size)))) - 0.002 + (corrupted.x * 0.0000001);
     texCoordsG.x += (0.007 * rand(vec2(iTime*2., floor(uv.y * block_size)))) - 0.0035 + (corrupted.x * 0.0000001);

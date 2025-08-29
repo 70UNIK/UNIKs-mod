@@ -18,13 +18,18 @@ SMODS.Edition({
     apply_to_float = true,
     disable_base_shader = true,
     no_shadow = true,
+	detrimental = true,
 	sound = {
 		sound = "unik_pibby_glitch",
 		per = 1,
 		vol = 2,
 	},
 	get_weight = function(self)
-		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
+		if G.GAME.unik_bad_editions_everywhere then
+			return G.GAME.edition_rate * 4
+		else
+			return 0
+		end
 	end,
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,

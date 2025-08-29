@@ -22,16 +22,28 @@ SMODS.Joker {
 	blueprint_compat = false,
     perishable_compat = false,
     immutable = true,
-    --mainline: scale down to 1/3.
-    --modest: scale down to 3/4
-	cry_scale_mod = function(self, card, joker, orig_scale_scale, true_base, orig_scale_base, new_scale_base)
+	calc_scaling = function(self, card, other_card, initial_value, scalar_value, args)
         if (Card.get_gameset(card) ~= "modest") then
-            return true_base/3
+            if scalar_value > 0 then
+                return {
+                    override_scalar_value = {
+                        value = scalar_value/3, 
+                    },
+                }
+            end
         else
-            return true_base*3/4
+            if scalar_value > 0 then
+                return {
+                    override_scalar_value = { 
+                        value = scalar_value*3/4, 
+                    },
+                }
+            end
         end
-		
-	end,
+        if scalar_value > 0 then
+            
+        end
+    end,
     calculate = function(self, card, context)
 		if context.end_of_round and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
             card.ability.extra.rounds = card.ability.extra.rounds + 1

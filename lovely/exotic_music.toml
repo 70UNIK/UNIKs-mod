@@ -1,0 +1,15 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+# Patch into cryptid to force happiness to be positive in a reliable way
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "lib/content.lua"]'''
+pattern = '''and #Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0'''
+position = "at"
+payload = '''
+and (#Cryptid.advanced_find_joker(nil, "cry_exotic", nil, nil, true) ~= 0 or #Cryptid.advanced_find_joker(nil, "unik_legendary_blind", nil, nil, true) ~= 0)
+'''
+match_indent = true

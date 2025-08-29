@@ -21,7 +21,13 @@ SMODS.Blind{
     gameset_config = {
 		modest = { disabled = true},
 	},
-    jen_blind_resize = 1e16,
+    debuff = {
+        akyrs_blind_difficulty = "legendary",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
     ignore_showdown_check = true,
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
@@ -47,12 +53,11 @@ SMODS.Blind{
                         G.P_CENTERS.m_steel, 
                         {playing_card = G.playing_card})
                         card:set_seal('Red',nil, true)
-                        --only niko if not jens mod (for balance),
-                        if not (SMODS.Mods["jen"] or {}).can_load then
-                            card.ability.unik_niko = true
-                        end
+                        card.ability.unik_niko = true
                          --Avoid permanent damage and lag
-                        --card:set_edition({ polychrome = true }, nil, nil, true) --too long
+                         G.GAME.force_bypass_edition_delay = true
+                        card:set_edition({ unik_steel = true }, nil, nil, true) --too long
+                        G.GAME.force_bypass_edition_delay = nil
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card)
 						G.deck:emplace(card)
@@ -90,12 +95,12 @@ SMODS.Blind{
                 end
             end
             for k, v in pairs(G.hand.cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
             for k, v in ipairs(cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steelsPlayed = steelsPlayed + 1
                 end
             end
@@ -123,12 +128,12 @@ SMODS.Blind{
                 end
             end
             for k, v in pairs(G.hand.cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
             for k, v in ipairs(cards) do
-                if v.config.center == G.P_CENTERS.m_steel or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
                     steels = steels + 1
                 end
             end
@@ -198,7 +203,7 @@ end
 local gfrb2 = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)
 	local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-	if obj.boss.legendary then
+	if obj.boss and obj.boss.legendary then
 		play_sound('cancel', 0.7 + 0.05, 0.7)
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
@@ -206,7 +211,7 @@ G.FUNCS.reroll_boss = function(e)
         })
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
-    elseif obj.boss.epic and not (SMODS.Mods["jen"] or {}).can_load then
+    elseif obj.boss and obj.boss.epic then
         play_sound('cancel', 0.8, 1)
         local text = localize('k_nope_ex')
         attention_text({

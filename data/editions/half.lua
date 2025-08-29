@@ -20,6 +20,7 @@ SMODS.Edition({
 	extra_cost = -3, --Its a detrimental edition, hence lower cost
     apply_to_float = true,
     disable_base_shader = true,
+    detrimental = true,
     no_shadow = true,
 	sound = {
 		sound = "unik_templerun_rip",
@@ -27,7 +28,11 @@ SMODS.Edition({
 		vol = 1,
 	},
     get_weight = function(self)
-		return G.GAME.edition_rate * (G.GAME.unik_bad_editions_everywhere and 4)
+		if G.GAME.unik_bad_editions_everywhere then
+			return G.GAME.edition_rate * 4
+		else
+			return 0
+		end
 	end,
     on_apply = function(card)
         if card.ability.set ~= "Default" and card.ability.set ~= "Enhanced" then
@@ -81,13 +86,13 @@ SMODS.Edition({
 local updateStickerHook2 = Card.update
 function Card:update(dt)
     local ret = updateStickerHook2(self,dt)
-        if self.edition and self.edition.unik_halfjoker then
-            if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
+        if G.jokers and self.edition and self.edition.unik_halfjoker then
+            if ((G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) ) and (not self.area or (self.area and not self.area.config.collection)) then
                 if self.ability.set ~= "Voucher" then
                     self:set_debuff(true)
                 end
             elseif not self.debuffed_by_blind then
-                if self.ability.set ~= "Voucher" then
+                if self.ability.set ~= "Voucher" and (not self.area or (self.area and not self.area.config.collection)) then
                     self:set_debuff()
                 end
             end

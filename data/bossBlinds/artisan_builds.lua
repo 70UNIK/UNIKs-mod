@@ -11,10 +11,10 @@ SMODS.Blind{
     boss_colour= HEX("152c54"),
     dollars = 5,
     mult = 2,
+    death_message = 'special_lose_unik_artisan_builds',
 	--Only appear if you have at least 5 stone cardsSMODS.has_no_suit(v)
     set_blind = function(self, reset, silent)
         if not reset then
-            G.GAME.unik_killed_by_artisan_builds = true
             G.GAME.unik_original_chips_artisan = G.GAME.blind.chips
             if G.GAME.ante_rerolls and G.GAME.ante_rerolls > 0 then
                 for i = 1,G.GAME.ante_rerolls do
@@ -34,13 +34,11 @@ SMODS.Blind{
         end
     end,
     disable = function()
-        G.GAME.unik_killed_by_artisan_builds = nil
         G.GAME.blind.chips = G.GAME.unik_original_chips_artisan
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.HUD_blind:recalculate(true)
     end,
     defeat = function()
-        G.GAME.unik_killed_by_artisan_builds = nil
         G.GAME.ante_rerolls = 0
     end
 }

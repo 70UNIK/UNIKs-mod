@@ -1,0 +1,107 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 9999
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Ramen' and not context.blueprint then
+                if to_big(self.ability.x_mult) - to_big(self.ability.extra) <= to_big(1) then 
+                    SMODS.destroy_cards(self, nil, nil, true)
+                    return {
+                        card = self,
+                        message = localize('k_eaten_ex'),
+                        colour = G.C.FILTER
+                    }
+                else
+                    SMODS.scale_card(self, {
+                        ref_table = self.ability,
+                        ref_value = "x_mult",
+                        scalar_value = "extra",
+                        operation = "-",
+                        message_key = 'a_xmult_minus',
+                        colour = G.C.RED
+                    })
+                end
+            end'''
+position = "at"
+payload = '--NOPE overridden'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Ice Cream' and not context.blueprint then
+                        if self.ability.extra.chips - self.ability.extra.chip_mod <= 0 then 
+                            SMODS.destroy_cards(self, nil, nil, true)
+                            return {
+                                message = localize('k_melted_ex'),
+                                colour = G.C.CHIPS
+                            }
+                        else
+                            SMODS.scale_card(self, {
+                                ref_table = self.ability.extra,
+                                ref_value = "chips",
+                                scalar_value = "chip_mod",
+                                operation = "-",
+                                message_key = 'a_chips_minus'
+                            })
+                        end
+                    end'''
+position = "at"
+payload = '''--NOPE overridden'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Turtle Bean' and not context.blueprint then
+                    if self.ability.extra.h_size - self.ability.extra.h_mod <= 0 then 
+                        SMODS.destroy_cards(self, nil, nil, true)
+                        return {
+                            card = self,
+                            message = localize('k_eaten_ex'),
+                            colour = G.C.FILTER
+                        }
+                    else
+                        SMODS.scale_card(self, {
+                            ref_table = self.ability.extra,
+                            ref_value = "h_size",
+                            scalar_value = "h_mod",
+                            message_key = 'a_handsize_minus',
+                            operation = function(ref_table, ref_value, initial, change)
+                                ref_table[ref_value] = initial - change
+                                G.hand:change_size(- change)
+                            end
+                        })
+                    end
+                end'''
+position = "at"
+payload = '''--NOPE overridden'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''if self.ability.name == 'Popcorn' and not context.blueprint then
+                    if self.ability.mult - self.ability.extra <= 0 then 
+                        SMODS.destroy_cards(self, nil, nil, true)
+                        return {
+                            message = localize('k_eaten_ex'),
+                            colour = G.C.RED
+                        }
+                    else
+                        SMODS.scale_card(self, {
+                            ref_table = self.ability,
+                            ref_value = "mult",
+                            scalar_value = "extra",
+                            message_key = 'a_mult_minus',
+                            colour = G.C.MULT,
+                            operation = '-'
+                        })
+                    end
+                end'''
+position = "at"
+payload = '''--NOPE overridden'''
+match_indent = true

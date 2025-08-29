@@ -17,15 +17,11 @@ SMODS.Blind{
 	end,
     death_message = 'special_lose_unik_get_nuked',
     in_pool = function()
-        local straddle = 0
-        --if you increase straddle, these fuckers can spawn earlier!
-        if G.GAME.straddle then
-            straddle = straddle - G.GAME.straddle
-        end
         -- only appear if player scores above ^1.5 reqs 6 times consecutively
-        if G.GAME.unik_scores_really_big then
+        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        if G.GAME.unik_overshoot then
             --print(G.GAME.unik_scores_really_big)
-            if G.GAME.unik_scores_really_big >= 6 - straddle then
+            if G.GAME.unik_overshoot >= 3 then
                 return true
             end
         end
@@ -45,4 +41,19 @@ SMODS.Blind{
 	defeat = function(self)
 		G.GAME.unik_nuke_ceil = nil
 	end,
+    --Debuff_after_hand:
+    --Return statement:
+    -- {debuff = true [true = hand will not score], add_to_blind = floatX will be added to blind size}
+    
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
+        if to_big(sum) > to_big(G.GAME.blind.chips * 3) then
+            return {
+                debuff = true,
+            }
+        end
+        return {
+            debuff = false,
+        }
+    end,
 }
+

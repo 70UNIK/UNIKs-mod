@@ -34,7 +34,7 @@ SMODS.Joker {
                 if v.config.center.key == "j_unik_hook_n_discard" then
                     selfDestruction(card,"k_unik_weapon_destroyed",G.C.UNIK_THE_HOOK)
                     local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_hook_replacement")
-                    card2:add_to_deck() --This causes problems. Why?
+                    card2:add_to_deck()
                     G.jokers:emplace(card2)
                 end
             end

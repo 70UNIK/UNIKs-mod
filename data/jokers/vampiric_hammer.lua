@@ -12,7 +12,7 @@ SMODS.Joker {
     no_dbl = true,
     cost = 1,
     --will not be changed in modest
-    config = { extra = { selfDestruct = false,min_enhanced_cards = 2, enhanced_cards = 1} },
+    config = { extra = { selfDestruct = false,min_enhanced_cards = 2, enhanced_cards = 4} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,

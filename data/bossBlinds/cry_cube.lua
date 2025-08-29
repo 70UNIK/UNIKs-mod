@@ -7,7 +7,7 @@ SMODS.Blind:take_ownership('blind', -- object key (class prefix not required)
         order = 23,
         boss_colour = G.C.CHIPS,
         mult = 0.1,
-        exponent = {1,0.33},
+        unik_exponent = {1,0.33},
         pos = { x = 0, y = 21 },
         dollars = 5,
         boss = {

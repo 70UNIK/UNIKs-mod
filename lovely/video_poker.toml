@@ -3,22 +3,13 @@ version = "0.0.1"
 dump_lua = true
 priority = 999
 ### video poker functions:
-### force playing all cards in deck
+### force playing all cards in hand
 
-[[patches]]
-[patches.pattern]
-target = "functions/button_callbacks.lua"
-pattern = "if #G.hand.highlighted <= (G.GAME.stamp_mod and 1 or 0) or G.GAME.blind.block_play then"
-position = "at"
-payload = "if #G.hand.highlighted <= (not G.GAME.unik_video_poker_rules and G.GAME.stamp_mod and 1 or 0) or (#G.hand.highlighted < #G.hand.cards and G.GAME.unik_video_poker_rules) or G.GAME.blind.block_play then"
-match_indent = true
-
-### Always have infinite hand size in video poker to avoid softlocking.
+### Always have infinite selection limit in video poker to avoid softlocking.
 [[patches]]
 [patches.pattern]
 target = "cardarea.lua"
-pattern = "if #self.highlighted >= self.config.highlighted_limit then"
+pattern = "if to_big(#self.highlighted) >= to_big(self.config.highlighted_limit) then"
 position = "at"
-payload = "if #self.highlighted >= self.config.highlighted_limit and not G.GAME.unik_video_poker_rules then"
+payload = "if to_big(#self.highlighted) >= to_big(self.config.highlighted_limit) and not G.GAME.unik_video_poker_rules then"
 match_indent = true
-

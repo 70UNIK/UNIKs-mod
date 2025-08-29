@@ -21,7 +21,7 @@ SMODS.Blind{
                 end
             end
         end
-        if stoneCards >= 5 then
+        if stoneCards >= 1 then
             return true
         end
         return false

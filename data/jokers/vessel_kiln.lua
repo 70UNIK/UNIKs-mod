@@ -5,7 +5,7 @@ SMODS.Joker {
     atlas = 'unik_uncommon',
     rarity = 2,
 	pos = { x = 3, y = 1 },
-    config = { extra = { x_chips = 3} }, 
+    config = { extra = { x_chips = 2.5} }, 
     cost = 7,
     blueprint_compat = true,
 	perishable_compat = true,
@@ -16,7 +16,7 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.x_chips} }
 	end,
 	gameset_config = {
-		modest = {extra = {x_chips = 2.5} },
+		modest = {extra = {x_chips = 2} },
 	},
     add_to_deck = function(self, card, from_debuff)
 		G.GAME.unik_vesselled = true
@@ -28,25 +28,28 @@ SMODS.Joker {
     calculate = function(self, card, context)
 		if context.joker_main or context.forcetrigger then
 			return {
-				message = localize({ type = "variable", key = "a_xchips", vars = { card.ability.extra.x_chips } }),
-				Xchip_mod = card.ability.extra.x_chips,
+				x_chips = card.ability.extra.x_chips,
                 colour = G.C.CHIPS,
 			}
 		end
 	end
 }
---override function to always generate vessel tags 
-local overrideTagHook = add_tag
+local vessel_tagger = Cryptid.get_next_tag
+function Cryptid.get_next_tag(override)
+	if next(SMODS.find_card("j_unik_vessel_kiln")) then
+		return "tag_unik_vessel"
+	end
+	return vessel_tagger(override)
+	
+end
+
+local vessel2 = add_tag
 function add_tag(_tag)
-    local res
-    if G.GAME.unik_vesselled then
-        local emp = Tag("tag_unik_vessel")
-        emp.ability.shiny = Cryptid.is_shiny()
-        res = overrideTagHook(emp)
-    else
-        res = overrideTagHook(_tag)
-    end
-    return res
+	local tag = _tag
+	if next(SMODS.find_card("j_unik_vessel_kiln")) then
+		tag = Tag("tag_unik_vessel")
+	end
+	return vessel2(tag)
 end
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_vessel_kiln"] = {

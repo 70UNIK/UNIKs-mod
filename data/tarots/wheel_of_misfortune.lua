@@ -21,7 +21,7 @@ SMODS.Consumable{
     can_use = function(self, card)
         if next(card.eligible_strength_jokers2) then return true end
 	end,
-    config = { extra = { odds = 5 } },
+    config = { extra = { mischance = 3, odds = 5 } },
     loc_vars = function(self, info_queue, card)
         if not card.edition or (card.edition and not card.edition.cry_mosaic) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic
@@ -32,18 +32,15 @@ SMODS.Consumable{
 		if not card.edition or (card.edition and not card.edition.cry_astral) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral
 		end
+		local new_numerator, new_denominator = SMODS.get_probability_vars(card, card.ability.extra.mischance, card.ability.extra.odds, 'unik_wheelmisfortune')
 		return {
-			vars = {
-				card and cry_prob(4 or card.ability.cry_prob * 4, card.ability.extra.odds, card.ability.cry_rigged) or 4,
-				card and card.ability.extra.odds or self.config.extra.odds,
-			},
+			vars = {new_numerator, new_denominator},
 		}
 	end,
     
 	use = function(self, card, area, copier)
         local used_consumable = copier or card
-        if pseudorandom(pseudoseed("unik_wheelmisfortune")) < cry_prob(4 or card.ability.cry_prob*4, card.ability.extra.odds, card.ability.cry_rigged)
-		/ card.ability.extra.odds then --bad
+        if SMODS.pseudorandom_probability(card, 'unik_wheelmisfortune', card.ability.extra.mischance, card.ability.extra.odds, 'unik_wheelmisfortune')  then --bad
 			--you rig it, its your fault.
 			if card.ability.cry_rigged then
 				check_for_unlock({ type = "unik_guaranteed_summon_cursed" })

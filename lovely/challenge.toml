@@ -30,6 +30,66 @@ for i = 1, #G.CHALLENGES do
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_cry_gateway'}
         G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_cry_summoning'}
     end
+
+    --Adding banned planets and jokers for singleton
+    if G.CHALLENGES[i].id == 'c_unik_singleton' and #G.CHALLENGES[i].restrictions.banned_cards <= 5 then
+
+        for k, v in pairs(G.P_CENTERS) do
+            -- Check if its a joker
+            --also nil check to avoid registring banned jokers (almanac)
+            if v.set == "Joker" and v ~= nil then
+                --ban all but high card and none type jokers
+                if k ~= 'j_cry_giggly' and k ~= 'j_cry_dubious' and k ~= 'j_cry_undefined' and k ~= 'j_cry_nebulous' then
+                    if G.P_CENTERS[k].effect and (G.P_CENTERS[k].effect == "Cry Type Mult" or G.P_CENTERS[k].effect == "Cry Type Chips") then
+                        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = k}
+                    end
+                end
+            end
+            if v.set == "Planet" and v ~= nil then
+                if k ~= 'c_pluto' and k ~= 'c_cry_nibiru' and k ~= 'c_cry_Timantti' and k ~= 'c_cry_ruutu' and k ~= 'c_cry_voxel' then
+                    G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = k}
+                end
+            end
+        end
+
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_biggestm'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_effarcire'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_huntingseason'}
+
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_jolly'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_zany'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_mad'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_crazy'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_droll'}
+
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_sly'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_wily'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_clever'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_devious'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_crafty'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_trousers'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_square'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_unik_cube_joker'}
+
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_duo'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_trio'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_family'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_order'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_tribe'}
+
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_duos'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_nuts'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_quintet'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_unity'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_swarm'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_stronghold'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_wtf'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_clash'}
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'j_cry_annihalation'}
+
+        G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = 'c_death'}
+
+    end
 end
 '''
 match_indent = true
@@ -120,39 +180,6 @@ end
 '''
 match_indent = true
 
-# adjust blind size to jen sizes
-
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = "boot_timer('prep stage', 'splash prep',1)"
-position = "before"
-payload = '''
-if (SMODS.Mods["jen"] or {}).can_load then
-    for k, v in pairs(G.P_BLINDS) do
-        if v.jen_blind_resize and v.boss then
-            v.mult = v.jen_blind_resize
-        end
-        if v.exponent and v.jen_blind_exponent_resize and v.boss then
-            v.exponent = v.jen_blind_exponent_resize
-        end
-        if v.boss and v.boss.showdown and v.boss.legendary then
-            v.dollars = 66.6
-        elseif v.boss and v.boss.showdown and v.boss.epic and v.jen_dollars then
-            v.dollars = v.jen_dollars
-        end
-    end
-    for k, v in pairs(G.P_CENTERS) do
-        if v.rarity == "unik_transcendent_placeholder" then
-            v.rarity = "jen_transcendent"
-        elseif v.rarity == "unik_ritualistic_placeholder" then
-            v.rarity = "jen_ritualistic"
-        end
-    end
-end
-'''
-match_indent = true
-
 # Register banned bosses for video poker
 # Also initializes disabled/enabled cards
 [[patches]]
@@ -183,6 +210,7 @@ match_indent = true
 
 
 # legendaries and epic blinds can spawn anytime, including almanac ones (ignores spawn check)
+# This will be the only thing left of crossmod functionality for Epic blind interactions
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"
@@ -203,3 +231,24 @@ end
 '''
 match_indent = true
 
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "delay(0.5)"
+position = "before"
+payload = '''
+if not saveTable and G.GAME.modifiers.unik_single_select_limit then
+    G.E_MANAGER:add_event(Event({
+        trigger = "after",
+        delay = 0.7,
+        func = function()
+            SMODS.change_play_limit(1 - G.GAME.starting_params.play_limit)
+            SMODS.change_discard_limit(1 - G.GAME.starting_params.discard_limit)
+            G.hand.config.highlighted_limit = 1
+            return true
+        end,
+    }))
+    
+end
+'''
+match_indent = true

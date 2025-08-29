@@ -1,0 +1,153 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+### legendary nuke - Trigger player death - AFTER cryptid
+### Also includes green goalpost functionality;
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''G.GAME.blind.in_blind = false'''
+position = 'before'
+payload = '''
+
+-- legendary crown: force set new high score:
+-- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
+local upper22 = G.GAME.chips
+local ceiling22 = G.GAME.blind.chips^2
+local ceiling222 = G.GAME.blind.chips^2.5
+--print(upper22)
+--print(ceiling22)
+if to_big(upper22) > to_big(ceiling222) then
+    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    unik_ease_overshoot(1)
+else
+    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    unik_ease_overshoot(-1)
+end
+
+--print(G.GAME.unik_scores_really_big)
+'''
+match_indent = true
+
+### Green goalpost: reset ante victory reqs after victory:
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''win_game()'''
+position = 'before'
+payload = '''
+
+    ease_victory_reqs(-G.GAME.unik_goalpost_ante_win_increase)
+    G.GAME.unik_goalpost_ante_win_increase = 0
+'''
+match_indent = true
+
+###greengoalpost fix
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if game_won and not G.GAME.win_notified then'''
+position = 'before'
+payload = '''
+    if (game_won and G.GAME.round_resets.ante < G.GAME.win_ante) or G.GAME.unik_force_avoid_win then
+        game_won = false
+        G.GAME.won = false
+         G.GAME.unik_force_avoid_win = nil
+    end
+'''
+match_indent = true
+### Custom boss blind death messages
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''Jimbo:add_speech_bubble(quip, nil, {quip = true})'''
+position = 'before'
+payload = '''
+if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
+    Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
+else
+
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''Jimbo:add_speech_bubble(quip, nil, {quip = true})'''
+position = 'after'
+payload = '''
+end
+G.GAME.unik_prevent_killing_cursed_jokers2 = nil
+G.GAME.unik_deathly_debuff_text = nil
+'''
+match_indent = true
+
+
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})'''
+position = 'at'
+payload = '''
+if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
+    Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
+else
+    Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
+end
+G.GAME.unik_prevent_killing_cursed_jokers2 = nil
+G.GAME.unik_deathly_debuff_text = nil
+'''
+match_indent = true
+
+###Entropy patch
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''local text = (G.GAME.EECardCharacter and 'lq_ee_' or 'lq_')..math.random(1,10)'''
+position = 'after'
+payload = '''
+--entropy workaround
+if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled and not G.GAME.EECardCharacter then
+    text = G.GAME.blind.death_message
+end
+G.GAME.unik_prevent_killing_cursed_jokers2 = nil
+G.GAME.unik_deathly_debuff_text = nil
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
+position = 'at'
+payload = '''
+if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled) then --Only add Jimbo to say a quip if the game over happens when the run is lost
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
+position = 'at'
+payload = '''
+if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled) or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'blind.lua'
+pattern = '''function Blind:load(blindTable)'''
+position = 'after'
+payload = '''
+self.death_message = blindTable.death_message or nil
+'''
+match_indent = true
+

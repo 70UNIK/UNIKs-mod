@@ -9,11 +9,16 @@ SMODS.Blind	{
     pos = {x = 0, y = 7},
     vars = {},
     dollars = 13,
-    jen_dollars = 25, --dollar change with almanac
     mult = 2,
-    jen_blind_resize = 1e9,
     death_message = "special_lose_unik_epic_box",
 	ignore_showdown_check = true,
+    debuff = {
+        akyrs_blind_difficulty = "epic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
 	in_pool = function(self)
         if (G.GAME.modifiers.no_shop_jokers or (G.jokers and G.jokers.config and G.jokers.config.card_limit < 4))then
             return false

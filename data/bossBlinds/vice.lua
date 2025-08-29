@@ -24,14 +24,19 @@ SMODS.Blind{
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_vice_placeholder2"), localize("k_unik_vice_placeholder") } }
 	end,
-    set_blind = function(self)
-		G.GAME.unik_vice_enabled = true
-	end,
-	disable = function(self)
-		G.GAME.unik_vice_enabled = nil
-	end,
-	defeat = function(self)
-		G.GAME.unik_vice_enabled = nil
-	end,
+	unik_after_defeat = function(self,chips,blind_size)
+		if to_big(chips) > to_big(blind_size * 2) then
+			G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze * 2
+			G.GAME.blind.triggered = true
+			G.GAME.blind:wiggle()
+			G.ROOM.jiggle = G.ROOM.jiggle + 3
+			local text = localize('k_unik_viced')
+			attention_text({
+				scale = 0.8, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
+			})
+		end
+		return false
+	end
 }
 --Epic vice: the next 8 boss blinds become epic+ blinds
+

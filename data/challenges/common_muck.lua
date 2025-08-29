@@ -21,6 +21,8 @@ SMODS.Challenge{
             --Ban empowered and gamblers tag, as well as rare, uncommon and epic tags
             {id = 'tag_cry_gambler'},
             {id = 'tag_cry_empowered'},
+            {id = 'tag_unik_demon'},
+            {id = 'tag_unik_extended_empowered'},
             {id = 'tag_rare'},
             {id = 'tag_uncommon'},
             {id = 'tag_cry_epic'},
