@@ -26,9 +26,6 @@ SMODS.Blind{
     death_message = "special_lose_unik_vessel_legendary",
     --Proof: Lets say you face epicWall at blind e300. THe epic wall already applies x e100, so becomes e400. Overshoot, and it adds e100, = e500.
     --If facing against this, 300 x 6.666 = ~e2000, which is way over what the wall can do most of the time.
-    gameset_config = {
-		modest = { disabled = true},
-	},
     ignore_showdown_check = true,
     in_pool = function()
         return CanSpawnLegendary()

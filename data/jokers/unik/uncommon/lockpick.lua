@@ -10,11 +10,6 @@ SMODS.Joker {
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = false,
-    loc_vars = function(self, info_queue, center)
-		return {
-			key = Cryptid.gameset_loc(self, {modest = "modest" }), 
-		}
-	end,
     calculate = function(self, card, context)
         if
 			context.selling_card and not context.blueprint

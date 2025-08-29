@@ -15,7 +15,6 @@ SMODS.Joker {
     config = { extra = {rounds = 0,round_limit = 8} },
     loc_vars = function(self, info_queue, center)
         return { 
-            key = Cryptid.gameset_loc(self, { modest = "modest"}),
             vars = { center.ability.extra.rounds,center.ability.extra.round_limit } }
     end,
     pools = { ["unik_boss_blind_joker"] = true},
@@ -23,25 +22,12 @@ SMODS.Joker {
     perishable_compat = false,
     immutable = true,
 	calc_scaling = function(self, card, other_card, initial_value, scalar_value, args)
-        if (Card.get_gameset(card) ~= "modest") then
-            if scalar_value > 0 then
-                return {
-                    override_scalar_value = {
-                        value = scalar_value/3, 
-                    },
-                }
-            end
-        else
-            if scalar_value > 0 then
-                return {
-                    override_scalar_value = { 
-                        value = scalar_value*3/4, 
-                    },
-                }
-            end
-        end
         if scalar_value > 0 then
-            
+            return {
+                override_scalar_value = {
+                    value = scalar_value/3, 
+                },
+            }
         end
     end,
     calculate = function(self, card, context)
@@ -58,15 +44,15 @@ SMODS.Joker {
         end
     end
 } 
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_broken_scale"] = {
-		text = {
-			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER},
-		},
-        calc_function = function(card)
-            local text = ""
-            text = "(" .. card.ability.extra.rounds .. "/" .. card.ability.extra.round_limit .. ")"
-			card.joker_display_values.localized_text = text
-        end
-	}
-end
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_broken_scale"] = {
+-- 		text = {
+-- 			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER},
+-- 		},
+--         calc_function = function(card)
+--             local text = ""
+--             text = "(" .. card.ability.extra.rounds .. "/" .. card.ability.extra.round_limit .. ")"
+-- 			card.joker_display_values.localized_text = text
+--         end
+-- 	}
+-- end

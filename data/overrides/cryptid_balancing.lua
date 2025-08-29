@@ -41,14 +41,6 @@ SMODS.Joker:take_ownership("j_cry_oil_lamp", {
 
 --TROFICAL SMOOTHER: multiples values of all owned jokers by 1.25X. Values of jokers revert after 5 rounds
 SMODS.Joker:take_ownership("j_cry_tropical_smoothie", {
-    -- config = { extra = {extra = 1.25, self_destruct = false, revert = 5}},
-    -- loc_vars = function(self, info_queue, center)
-	-- 	return { key = "j_cry_tropical_smoothie_reworked", vars = { number_format(center.ability.extra.extra),number_format(center.ability.extra.revert) } }
-	-- end,
-    -- gameset_config = {
-	-- 	madness = { extra = {extra = 1.5, self_destruct = false, revert = 5} },
-	-- 	modest = {disabled = true}
-	-- },
     immutable = true,
     calculate = function(self, card, context)
 		if context.selling_self or context.forcetrigger and not card.ability.drank_smoothie then
@@ -918,7 +910,7 @@ SMODS.Consumable:take_ownership("c_cry_pointer",{
 	loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.c_soul
 		return{
-			key = Cryptid.gameset_loc(self, {modest = "no_dupe", mainline = "no_dupe"}), 
+			key = 'c_cry_pointer_no_dupe'
 		}
 	end,
 	use = function(self, card, area, copier)

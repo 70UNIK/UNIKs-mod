@@ -18,9 +18,6 @@ SMODS.Joker {
     experimental = true,
     no_dbl = true,
     immutable = true,
-    gameset_config = {
-		modest = {extra = { min_discards = 6, discarded_cards = 2, current_discards = 0} },
-	},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.min_discards, center.ability.extra.discarded_cards, center.ability.extra.current_discards} }
 	end,

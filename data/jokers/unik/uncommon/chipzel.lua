@@ -22,9 +22,6 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
         info_queue[#info_queue + 1] = G.P_CENTERS.m_bonus
         return {vars = {card.ability.extra.x_chips, card.ability.extra.x_chip_mod}}
     end,
-    gameset_config = {
-		modest = { center = {  rarity = 3, cost = 9} },
-	},
     calculate = function(self, card, context)
         if context.before then
             card.ability.extra.x_chips = 1

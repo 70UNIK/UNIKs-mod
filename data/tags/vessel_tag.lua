@@ -11,9 +11,6 @@ SMODS.Tag{
     in_pool = function()
 		return false
 	end,
-    gameset_config = {
-		modest = {type = "round_start_bonus", extra = {size = 1.75} },
-	},
 	apply = function(self, tag, context)
         if context.type == "round_start_bonus" then
             tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()

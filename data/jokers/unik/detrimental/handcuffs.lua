@@ -26,13 +26,8 @@ SMODS.Joker {
 		-- Changes a G.GAME variable, which is usually a global value that's specific to the current run.
 		-- These are initialized in game.lua under the Game:init_game_object() function, and you can look through them to get an idea of the things you can change.
 		G.hand:change_size(card.ability.extra.hand_size)
-        if Card.get_gameset(card) ~= "modest" then
-            card.ability.extra.max = G.hand.config.card_limit
-            card.ability.extra.min = G.hand.config.card_limit - 2
-        else
-            card.ability.extra.max = G.hand.config.card_limit - 1
-            card.ability.extra.min = G.hand.config.card_limit - 1
-        end
+        card.ability.extra.max = G.hand.config.card_limit
+        card.ability.extra.min = G.hand.config.card_limit - 2
         
 	end,
 	-- Inverse of above function.

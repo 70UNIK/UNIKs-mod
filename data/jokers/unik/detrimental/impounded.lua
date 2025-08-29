@@ -18,12 +18,8 @@ SMODS.Joker {
     config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20,impoundedSeed = ""} },
     loc_vars = function(self, info_queue, center)
         return { 
-            key = Cryptid.gameset_loc(self, { modest = "modest"}),
             vars = { center.ability.extra.x_mult,center.ability.extra.multiplier,center.ability.extra.fallback_cost} }
 	end,
-    gameset_config = {
-		modest = { extra = {x_mult = 1.0,multiplier = 2.5,cost = -15,fallback_cost = 10} },
-	},
     immutable = true,
     sellable = true,
     --add debuffs
@@ -64,11 +60,7 @@ SMODS.Joker {
 
                                 select.ability.unik_impounded = true
                                 --Scale logarithmically, so cheaper jokers would proportionately cost more, while exotics proportinately cost less, but still always increasing.
-                                if Card.get_gameset(card) ~= "modest" then
-                                    card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(select.sell_cost+1))/100
-                                else
-                                    card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * select.sell_cost)/100
-                                end
+                                card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(select.sell_cost+1))/100
                                 if select.sell_cost <= 1 then
                                     card.ability.extra.cost = -1 * card.ability.extra.fallback_cost
                                 end
@@ -109,7 +101,7 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         --calculate Xmult
-		if context.final_scoring_step and Card.get_gameset(card) ~= "modest" then
+		if context.final_scoring_step then
 			return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,

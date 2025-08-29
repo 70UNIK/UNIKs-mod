@@ -32,17 +32,6 @@ SMODS.Joker{ --Yellow Card
             card.ability.immutable.max_slots,
         }}
     end,
-    gameset_config = {
-		modest = { extra = {
-            prob = 6,
-            odds = 7,
-            increase = 1,
-        },
-        immutable = {
-			slots = 0,
-			max_slots = 5,
-		}, },
-	},
 
     calculate = function(self, card, context)
         if context.skipping_booster then

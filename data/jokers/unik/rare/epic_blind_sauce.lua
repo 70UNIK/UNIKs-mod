@@ -32,7 +32,7 @@ SMODS.Joker {
             key = "j_unik_epic_blind_sauce_notalisman"
             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
         end
-        if not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest"then
+        if not unik_config.unik_legendary_blinds then
             key = "j_unik_epic_blind_sauce_no_epic"
             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
         else
@@ -41,10 +41,6 @@ SMODS.Joker {
         
 		
 	end,
-    -- pools = { ["Food"] = true}, //NOPE!
-     gameset_config = {
-        config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 1,trigger_mod = 5, Mult = 50, Chips = 50}, immutable = {base_emult = 1.0} },
-	},
     --Only spawn if you have at least 1 king of spades in deck
     calculate = function(self, card, context)
         --dont try to force trigger it. It will self destruct and guarantee an epic blind.
@@ -67,7 +63,7 @@ SMODS.Joker {
                 if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
                     card.ability.extra.triggers = card.ability.extra.triggers - 1
                 end
-                if (not unik_config.unik_legendary_blinds or Card.get_gameset(_card) == "modest") or (not Talisman) then
+                if (not unik_config.unik_legendary_blinds) or (not Talisman) then
                     return {
                         mult = card.ability.extra.Mult,
                         chips = card.ability.extra.Chips,

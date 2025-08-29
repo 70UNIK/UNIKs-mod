@@ -36,8 +36,7 @@ SMODS.Joker {
     config = { extra = { exp_levelup = 1.2} },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
-		return { 
-			-- key = Cryptid.gameset_loc(self, { modest = "modest"  }), 
+		return {  
 			vars = {center.ability.extra.exp_levelup,
 			localize(moonlight_quotes[quoteset][math.random(#moonlight_quotes[quoteset])] .. "")
 		} 

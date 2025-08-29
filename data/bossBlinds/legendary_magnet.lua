@@ -18,9 +18,6 @@ SMODS.Blind{
     dollars = 13,
     mult = 0.666,
     glitchy_anim = true,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,

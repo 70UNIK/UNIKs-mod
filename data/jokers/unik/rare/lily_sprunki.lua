@@ -37,7 +37,6 @@ SMODS.Joker {
             quote = "k_inactive_ex"
         end
         return { 
-            key = Cryptid.gameset_loc(self, {modest = "modest" }), 
             vars = {localize(quote) ,
             localize(lily_quotes[center.ability.extra.quoteset][math.random(#lily_quotes[center.ability.extra.quoteset])] .. "")
             ,center.ability.extra.limit
@@ -308,9 +307,7 @@ G.FUNCS.unik_can_devour_fs = function(e)
                     eternals = eternals + 1
                 end
             end
-            if #G.hand.highlighted - eternals > 0 and (card.ability and card.ability.extra and (card.ability.extra.active and 
-            ((#G.hand.highlighted - eternals <= card.ability.extra.limit and Card.get_gameset(card) == "modest") or (Card.get_gameset(card) ~= "modest"))
-        )) then
+            if #G.hand.highlighted - eternals > 0 and (card.ability and card.ability.extra and (card.ability.extra.active)) then
                 e.config.colour = G.C.UNIK_EYE_SEARING_RED
                 e.config.button = "unik_devour_fs"
             else

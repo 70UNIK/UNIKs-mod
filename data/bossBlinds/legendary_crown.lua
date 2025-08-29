@@ -21,9 +21,6 @@ SMODS.Blind{
     pos = {x=0, y=0}, --This could shift with glitch FX (may use dandy code for this)
     boss_colour= HEX("e0bc42"),
     dollars = 13,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,

@@ -13,9 +13,6 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult} }
 	end,
-	gameset_config = {
-		modest = {extra = {x_mult = 1.5} }, 
-	},
     calculate = function(self, card, context)
 		if (context.joker_main and G.GAME.current_round.hands_played ~= 0 and G.GAME.current_round.hands_left > 0) or context.forcetrigger then
 			return {

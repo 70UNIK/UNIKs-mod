@@ -14,9 +14,6 @@ SMODS.Blind{
     pos = {x=0, y=0},
     boss_colour= HEX("9bafcf"), --all legendary blinds will be blood red and black.
     dollars = 13,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,

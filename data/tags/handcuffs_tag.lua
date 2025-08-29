@@ -7,9 +7,6 @@ SMODS.Tag{
     loc_vars = function(self, info_queue)
 		return { vars = {self.config.extra.h_size } }
 	end,
-    gameset_config = {
-		modest = {type = "round_start_bonus", extra = {h_size = -0.5} },
-	},
     in_pool = function()
 		return false
 	end,

@@ -14,9 +14,6 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.max_size} }
 	end,
-	gameset_config = {
-		modest = {extra = {x_chips = 1.0, x_chips_mod = 0.05} },
-	},
 	pools = {["unik_cube"] = true },
 	pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)

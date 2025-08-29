@@ -15,9 +15,6 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_vessel
 		return { vars = {center.ability.extra.x_chips} }
 	end,
-	gameset_config = {
-		modest = {extra = {x_chips = 2} },
-	},
     add_to_deck = function(self, card, from_debuff)
 		G.GAME.unik_vesselled = true
 	end,

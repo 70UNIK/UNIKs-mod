@@ -17,9 +17,6 @@ SMODS.Joker {
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.prob, center.ability.extra.odds, 'unik_coupon_codes')
 		return { vars = { new_numerator, new_denominator} }
 	end,
-    gameset_config = {
-		modest = {extra = {prob = 4, odds = 5} },
-	},
     calculate = function(self, card, context)
         if context.forcetrigger then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})

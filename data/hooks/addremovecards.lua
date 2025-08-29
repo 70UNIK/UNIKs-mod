@@ -197,7 +197,7 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.debuff_immune = true
     end
     --mainline:
-    if self and self == G.consumeables and card.config.center.key == "c_cry_pointer" and Card.get_gameset(card) ~= "madness" then
+    if self and self == G.consumeables and card.config.center.key == "c_cry_pointer" then
         for i,v in pairs(G.consumeables.cards) do
             if v.config.center.key == "c_cry_pointer" and v ~= card then
                 local edition = nil

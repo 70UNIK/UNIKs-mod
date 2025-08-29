@@ -1,3 +1,6 @@
+--TOTAL REWRK NEEDED:
+--Aces and 7s each give X1.5 Chips
+
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_711',

@@ -1,11 +1,9 @@
 
 ![alt text](image-2.png)
 # UNIK's Mod!
-An addon to Cryptid that adds a variety of features, some of which help and some of which are harmful.
-This is mainly balanced around the Mainline gameset of Cryptid, and around various vanilla (or vanilla adjacent modded decks), where some challenge is provided.
+A standalone mod that adds what I want. It is unbalanced compared to Vanilla though much more tame compared with Cryptid.
 
-Requires Steamodded smods-1.0.0-beta-0711a or higher, Lovely v0.7.1 and Cryptid v0.5.10~dev3 or higher. Talisman can be used to increase the scoring cap but isnt necessarily required.
-It is recommended though to use smods-1.0.0-beta-0711a and Cryptid Balanced Branch, more specifically https://github.com/SpectralPack/Cryptid/tree/99df47a6f6c769ab7f1fdf81ebf3575f6bf2f1e3.
+Requires Steamodded smods-1.0.0-beta-0827c or higher, Lovely v0.7.1 or higher. Talisman can be used to increase the scoring cap but isnt necessarily required.
 
 ![alt text](image-6.png)
 ## Features (so far)

@@ -34,10 +34,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {x_mult = 1},immutable = {divisor = 85} },
-    gameset_config = {
-		modest = { extra = {x_mult = 1},immutable = {divisor = 140} },  
-	},
+    config = { extra = {x_mult = 1},immutable = {divisor = 100} },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
 		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }

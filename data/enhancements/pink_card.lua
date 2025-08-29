@@ -6,10 +6,7 @@ SMODS.Enhancement {
 	not_stoned = true,
 	overrides_base_rank = true, --enhancement do not generate in grim, incantation, etc...
 	replace_base_card = true, --So no base chips and no image
-    config = { extra = { Echips = 0.06}, immutable = {base_echips = 1.0} },
-    gameset_config = {
-		modest = { extra = {Echips = 0.03}, immutable = {base_echips = 1.0} },
-	},
+    config = { extra = { Echips = 0.05}, immutable = {base_echips = 1.0} },
     weight = 0,
     shatters = true, --lefunny
     force_no_face = true, --true = always face, false = always face
@@ -58,6 +55,7 @@ function Card:is_face(from_boss)
     local ret = faceHook(self,from_boss)
     return ret
 end
+--TODO: remove dependency on cryptid functions
 --Add a hook to getID for abstracts (and to conditionally enable the check)
 local getIDenhance = Card.get_id
 function Card:get_id()
