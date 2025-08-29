@@ -697,7 +697,7 @@ SMODS.Atlas({
   py = 95 
 })
 --Color cards
-if MoreFluff then
+if MoreFluff and mf_config and mf_config["Colour Cards"] and mf_config["Colour Cards"] == true then
 	NFS.load(mod_path .. "data/colours/spectral_blue.lua")()
 	if (SMODS.Mods["paperback"] or {}).can_load then
 		NFS.load(mod_path .. "data/colours/lavender.lua")()

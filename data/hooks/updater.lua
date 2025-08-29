@@ -36,10 +36,15 @@ function Game:update(dt)
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
 		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
 
-		self.C.UNIK_RGB[1] = r
-		self.C.UNIK_RGB[3] = g
-		self.C.UNIK_RGB[2] = b
-
+        --backup again... 
+        self.c.UNIK_RGB = self.c.UNIK_RGB or {0,0,0,1}
+        if self.c.UNIK_RGB then
+            self.C.UNIK_RGB[1] = r
+            self.C.UNIK_RGB[3] = g
+            self.C.UNIK_RGB[2] = b
+        else
+            self.c.UNIK_RGB = self.c.UNIK_RGB or {0,0,0,1}
+        end
 		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.5) % 360
 		G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
 		
