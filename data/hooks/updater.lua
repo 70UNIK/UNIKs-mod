@@ -39,7 +39,7 @@ function Game:update(dt)
         --backup again... 
         
         self.C.UNIK_RGB = self.C.UNIK_RGB or {0,0,0,1}
-        if self.c.UNIK_RGB then
+        if self.C.UNIK_RGB then
             self.C.UNIK_RGB[1] = r
             self.C.UNIK_RGB[3] = g
             self.C.UNIK_RGB[2] = b
