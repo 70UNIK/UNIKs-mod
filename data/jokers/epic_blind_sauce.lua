@@ -41,7 +41,7 @@ SMODS.Joker {
         
 		
 	end,
-    pools = { ["Food"] = true},
+    -- pools = { ["Food"] = true}, //NOPE!
      gameset_config = {
         config = { extra = { EEmult = 1.5,destroyed = false,triggers = 5,Emult = 1,trigger_mod = 5, Mult = 50, Chips = 50}, immutable = {base_emult = 1.0} },
 	},

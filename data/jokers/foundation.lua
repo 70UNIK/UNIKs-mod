@@ -16,7 +16,7 @@ SMODS.Joker {
     rarity = 'cry_epic',
 	pos = { x = 0, y = 0 },
     cost = 10,
-    config = {extra = {hands = 0,juiced_up = false,threshold = 150}},
+    config = {extra = {hands = 0,juiced_up = false,threshold = 125}},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.hands,center.ability.extra.threshold} }
     end,

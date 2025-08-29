@@ -1,0 +1,1 @@
+--Literally old astral in the bottle. ^0.9 Mult, Apply astral and perishable to a random joker when sold.

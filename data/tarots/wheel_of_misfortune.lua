@@ -21,7 +21,7 @@ SMODS.Consumable{
     can_use = function(self, card)
         if next(card.eligible_strength_jokers2) then return true end
 	end,
-    config = { extra = { mischance = 4, odds = 5 } },
+    config = { extra = { mischance = 3, odds = 5 } },
     loc_vars = function(self, info_queue, card)
         if not card.edition or (card.edition and not card.edition.cry_mosaic) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic
