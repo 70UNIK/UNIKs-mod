@@ -258,14 +258,6 @@ SMODS.Rarity({
 })
 
 
--- EDITIONS --
-NFS.load(mod_path .. "data/editions/steel.lua")()
-NFS.load(mod_path .. "data/editions/positive.lua")()
-NFS.load(mod_path .. "data/editions/bloated.lua")()
-NFS.load(mod_path .. "data/editions/half.lua")()
-NFS.load(mod_path .. "data/editions/fuzzy.lua")()
-NFS.load(mod_path .. "data/editions/corrupted.lua")()
-
 -- stickers
 NFS.load(mod_path .. "data/stickers/limited_edition.lua")() 
 NFS.load(mod_path .. "data/stickers/triggering.lua")() 
@@ -275,6 +267,7 @@ NFS.load(mod_path .. "data/stickers/disposable.lua")()
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
 
+-- STAKES --
 NFS.load(mod_path .. "data/stakes/blue_stake_fix.lua")() 
 NFS.load(mod_path .. "data/stakes/shitty.lua")() 
 NFS.load(mod_path .. "data/stakes/persimmon.lua")() 
@@ -289,6 +282,18 @@ NFS.load(mod_path .. "data/decks/steel_deck.lua")()
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
+if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
+end
+
+-- EDITIONS --
+NFS.load(mod_path .. "data/editions/steel.lua")()
+NFS.load(mod_path .. "data/editions/positive.lua")()
+NFS.load(mod_path .. "data/editions/bloated.lua")()
+NFS.load(mod_path .. "data/editions/half.lua")()
+NFS.load(mod_path .. "data/editions/fuzzy.lua")()
+NFS.load(mod_path .. "data/editions/corrupted.lua")()
+
 -- consumables
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
@@ -297,14 +302,7 @@ NFS.load(mod_path .. "data/spectrals/foundry.lua")()
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 --
-NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() 
---Vouchers
---Spectral Merchant (Tier 1) Spectrals can appear in shop
---Spectral Tycoon (tier 2) Spectrals appear 2x as often
---Spectral Acclimator (tier 3) Spectrals appear 6x as often
-NFS.load(mod_path .. "data/vouchers/spectral_merchant.lua")() 
-NFS.load(mod_path .. "data/vouchers/spectral_tycoon.lua")() 
-NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
+NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 leftmost non eternals, create an ancient.
 
 --L A R T C E P S--
 if unik_config.unik_legendary_blinds then
@@ -323,6 +321,30 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
 	NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
 end
+
+--Vouchers
+NFS.load(mod_path .. "data/vouchers/spectral_merchant.lua")() 
+NFS.load(mod_path .. "data/vouchers/spectral_tycoon.lua")() 
+NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
+
+
+--MF color cards
+SMODS.Atlas({ 
+  key = "unik_colours", 
+  path = "unik_colours.png",
+  px = 71, 
+  py = 95 
+})
+--Color cards
+if MoreFluff and mf_config and mf_config["Colour Cards"] == true then
+	NFS.load(mod_path .. "data/colours/spectral_blue.lua")()
+	if (SMODS.Mods["paperback"] or {}).can_load then
+		NFS.load(mod_path .. "data/colours/lavender.lua")()
+	end
+	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
+end
+
+
 --boosters
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
@@ -339,7 +361,7 @@ NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 -- NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
-NFS.load(mod_path .. "data/bossBlinds/joyless.lua")()
+NFS.load(mod_path .. "data/bossBlinds/joyless.lua")() --Cryptid crossmod
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
@@ -350,7 +372,7 @@ NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
 NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
-NFS.load(mod_path .. "data/bossBlinds/darkness.lua")()
+NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
 --The lily: Destroy all cards played after scoring
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()
@@ -409,66 +431,84 @@ if unik_config.unik_legendary_blinds then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")() --dont have too much rarities, have good amount of hands, blueprint(s) 
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")() --same as above, but dont have too much hands, maybe have higher ranked cards or planets on hand
-	--NFS.load(mod_path .. "data/bossBlinds/legendary_pentagram.lua")() --BUGGY AND GLITCHY
 end
 
-if unik_config.unik_legendary_blinds then
-	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
-end
+----------------------------------------
+---JONKLERS
+----------------------------------------
 
--- not redundant with extra credit, as it instead can stack ON top of the existing lucky enhancement. You just need some more //SEEDS
+--Common
 NFS.load(mod_path .. "data/jokers/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/gt710.lua")()
-NFS.load(mod_path .. "data/jokers/golden_glove.lua")()
-NFS.load(mod_path .. "data/jokers/instant_gratification.lua")()
+NFS.load(mod_path .. "data/jokers/golden_glove.lua")() --NoImage
+NFS.load(mod_path .. "data/jokers/instant_gratification.lua")() --NoImage
 NFS.load(mod_path .. "data/jokers/1_5_joker.lua")() 
--- NFS.load(mod_path .. "data/jokers/dawn.lua")()
 NFS.load(mod_path .. "data/jokers/noon.lua")()
-NFS.load(mod_path .. "data/jokers/scratch.lua")()
 NFS.load(mod_path .. "data/jokers/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/yes_nothing.lua")()
---Instant gratification: earn $2 per discard used. Broken hourglass
 
-if (SMODS.Mods["paperback"] or {}).can_load then
-	NFS.load(mod_path .. "data/jokers/binary_asteroid.lua")()
-end
-NFS.load(mod_path .. "data/jokers/double_container.lua")()
--- Noon: X2 mult ONLY on the first hand: WIll be an environment in the daytime. It's common as Dusk is uncommon and Night is rare.
+NFS.load(mod_path .. "data/jokers/double_container.lua")() --Uncommon when morefluff installed
 
---- Uncommon ---
---- Hacker: 3 in 4 chance to not create a code card when a 2, 3, 4 or 5 is played. (must have room)
---- Trashed dress (gain X0.5 Mult whenever a pink card is destroyed, artwork is unik wearing cinderella's trashed dress
+--Uncommon
 NFS.load(mod_path .. "data/jokers/no_standing_zone.lua")()
 NFS.load(mod_path .. "data/jokers/711.lua")()
-NFS.load(mod_path .. "data/jokers/hacker.lua")()
 NFS.load(mod_path .. "data/jokers/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/tax_haven.lua")()
-
 NFS.load(mod_path .. "data/jokers/cube_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/vessel_kiln.lua")()
 NFS.load(mod_path .. "data/jokers/borg_cube.lua")()
-if (SMODS.Mods["paperback"] or {}).can_load then
-	NFS.load(mod_path .. "data/jokers/weetomancer.lua")() 
-end
 NFS.load(mod_path .. "data/jokers/recycler.lua")()
 NFS.load(mod_path .. "data/jokers/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/fat_joker.lua")()
 NFS.load(mod_path .. "data/jokers/joker_dollar.lua")()	
-
-
-NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/lockpick.lua")()
 NFS.load(mod_path .. "data/jokers/cobblestone.lua")()
-
 NFS.load(mod_path .. "data/jokers/chipzel.lua")()
+
+--Rare
 NFS.load(mod_path .. "data/jokers/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/copycat.lua")()
 NFS.load(mod_path .. "data/jokers/invisible_card.lua")()
 NFS.load(mod_path .. "data/jokers/ghost_trap.lua")() 
 NFS.load(mod_path .. "data/jokers/a_taste_of_power.lua")() 
 NFS.load(mod_path .. "data/jokers/riff_rare.lua")() 
-NFS.load(mod_path .. "data/jokers/last_tile.lua")() 
+NFS.load(mod_path .. "data/jokers/clone_man.lua")()
+NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
+NFS.load(mod_path .. "data/jokers/foundation.lua")()
+NFS.load(mod_path .. "data/jokers/lone_despot.lua")() 
+
+--Rare (characters)
+NFS.load(mod_path .. "data/jokers/poppy.lua")() 
+-- NFS.load(mod_path .. "data/jokers/kouign_amann_cookie.lua")() --FULL REWORK NEEDED
+NFS.load(mod_path .. "data/jokers/pibby.lua")() 
+NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
+NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
+NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")()
+NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
+
+--Ancient
+NFS.load(mod_path .. "data/jokers/ALICE.lua")()
+NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
+NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
+NFS.load(mod_path .. "data/jokers/unik.lua")() 
+--NIKO
+--WORLD MACHINE
+
+---------------
+---CROSSMOD (non cursed) JONKLERS
+---------------
+if (SMODS.Mods["paperback"] or {}).can_load then
+	NFS.load(mod_path .. "data/jokers/binary_asteroid.lua")()
+	NFS.load(mod_path .. "data/jokers/weetomancer.lua")() 
+end
+if Cryptid then
+	NFS.load(mod_path .. "data/jokers/scratch.lua")()
+	NFS.load(mod_path .. "data/jokers/coupon_codes.lua")()
+	NFS.load(mod_path .. "data/jokers/hacker.lua")()
+	-- NFS.load(mod_path .. "data/jokers/last_tile.lua")() --May not program it in...
+	NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
+end
 
 if next(SMODS.find_mod("GrabBag")) then
 	NFS.load(mod_path .. "data/jokers/grab_bag/poppy.lua")() 
@@ -480,31 +520,6 @@ if next(SMODS.find_mod("GrabBag")) then
 	NFS.load(mod_path .. "data/jokers/grab_bag/halved.lua")() 
 	NFS.load(mod_path .. "data/jokers/grab_bag/fuzzy.lua")() 
 end
-NFS.load(mod_path .. "data/jokers/clone_man.lua")()
-NFS.load(mod_path .. "data/jokers/epic_blind_sauce.lua")()
-NFS.load(mod_path .. "data/jokers/epic_riffin.lua")() 
-
-
--- Bun Bun: +X0.2 mult per each card or joker in possession with an edition. If gained corrupted edition, transforms into Bun Bun?
-
-NFS.load(mod_path .. "data/jokers/foundation.lua")() --no image
-NFS.load(mod_path .. "data/jokers/lone_despot.lua")() --no image
--- NFS.load(mod_path .. "data/jokers/factorialis.lua")() --not gonna do factorials, cannot be balanced AT ALL.
-
-NFS.load(mod_path .. "data/jokers/poppy.lua")() 
-NFS.load(mod_path .. "data/jokers/kouign_amann_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/pibby.lua")() 
-NFS.load(mod_path .. "data/jokers/lily_sprunki.lua")()
-NFS.load(mod_path .. "data/jokers/chelsea_ramirez.lua")()
-NFS.load(mod_path .. "data/jokers/maya_ramirez.lua")() --broken until smods fix perma_x_chips --no image: the titular character
-NFS.load(mod_path .. "data/jokers/yokana_ramirez.lua")() 
-NFS.load(mod_path .. "data/jokers/ALICE.lua")()
-NFS.load(mod_path .. "data/jokers/white_lily_cookie.lua")()
---- Pure Vanilla Cookie: Removes all detrimental stickers (except for unremovable ones) from ALL jokers, vouchers, consumables and cards while he is present. Only appears in black stake or higher.
-NFS.load(mod_path .. "data/jokers/moonlight_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/unik.lua")() 
-
-
 local mainmenuref2 = Game.main_menu
 Game.main_menu = function(change_context)
 	if unik_config.unik_legendary_blinds then
@@ -537,15 +552,21 @@ if next(SMODS.find_mod("finity")) then
 	end
 end
 
---- Cursed --- 15 of those
+---------------
+---CURSED JONKLERS
+---------------
 NFS.load(mod_path .. "data/jokers/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/impounded.lua")() 
-NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
 NFS.load(mod_path .. "data/jokers/monster_spawner.lua")() 
 NFS.load(mod_path .. "data/jokers/broken_scale.lua")()
-NFS.load(mod_path .. "data/jokers/nostalgic_astral_in_a_bottle.lua")()
-NFS.load(mod_path .. "data/jokers/xchips_hater.lua")()
+NFS.load(mod_path .. "data/jokers/xchips_hater.lua")() --noimage
+if Cryptid then
+	NFS.load(mod_path .. "data/jokers/rancid_smoothie.lua")()
+	NFS.load(mod_path .. "data/jokers/nostalgic_astral_in_a_bottle.lua")() --noimage
+end
+
+--Blind based detrimental/cursed
 NFS.load(mod_path .. "data/jokers/the_plant.lua")() 
 NFS.load(mod_path .. "data/jokers/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/broken_window.lua")()
@@ -554,12 +575,10 @@ NFS.load(mod_path .. "data/jokers/headless_joker.lua")()
 NFS.load(mod_path .. "data/jokers/handcuffs.lua")() 
 NFS.load(mod_path .. "data/jokers/border_wall.lua")()
 NFS.load(mod_path .. "data/jokers/hook_n_discard.lua")() 
-NFS.load(mod_path .. "data/jokers/broken_arm.lua")() --no image, the space joker with a br0ken arm
-NFS.load(mod_path .. "data/jokers/decaying_tooth.lua")()
-NFS.load(mod_path .. "data/jokers/robert.lua")()
-NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")() --no image, either a vampire with a hammer, or candy apple cookie with her hammer, destroying a mult card.
---Bun Bun? Hidden effect; all shop items become Corrupted; adds a random corrupted card on blind select. 9 in 10 chance to not self destruct after round end (decrease by 1 per failed chance)
-
+NFS.load(mod_path .. "data/jokers/broken_arm.lua")() 
+NFS.load(mod_path .. "data/jokers/decaying_tooth.lua")() --noimage
+NFS.load(mod_path .. "data/jokers/robert.lua")() --noimage
+NFS.load(mod_path .. "data/jokers/vampiric_hammer.lua")()
 --- 
 ---Overrides
 NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
@@ -573,12 +592,7 @@ NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 -- NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
 NFS.load(mod_path .. "data/challenges/rng_2.lua")()
--- Learning with pibby: Start with a golden joker and pibby . On blind select, leftmost joker and jokers adjacent to corrupted jokers become corrupted. If Pibby is corrupted, die. All future editions are corrupted.
--- Cardless: All Cards are Debuffed. Start with a Joker and Ice Cream.
--- Finger Trigger: All cards are triggering. Start with a Half Joker.
--- Cookie Clicker I: All blinds are clicked cookie and pimydenkekisi. Start with a negative Clicked Cookie.
--- Cookie Clicker II: Cookie clicker I, but all blinds are boss blinds. Start with a negative Clicked Cookie.
--- 
+
 
 
 -- achievements
@@ -607,31 +621,8 @@ function vice_check()
     return G.GAME.win_ante
 end
 
-SMODS.Atlas({ 
-  key = "unik_colours", 
-  path = "unik_colours.png",
-  px = 71, 
-  py = 95 
-})
---Color cards
-if MoreFluff then
-	NFS.load(mod_path .. "data/colours/spectral_blue.lua")()
-	if (SMODS.Mods["paperback"] or {}).can_load then
-		NFS.load(mod_path .. "data/colours/lavender.lua")()
-	end
-	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
-end
-
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
---Grab Bag Boss Jokers:
----The Poppy: Gain X0.5 Mult per hand, lose X0.25 mult instead if score exceeds 3X requirements.
----The Collapse: Destroy all played rankless and suitless cards. Gain 60 Chips per destroyed rankless/suitless card.
----The Jollyless: Gains X0.15 Mult per consecutive hand without a pair.
----The Bloon: First Played Hand becomes Bloated. Scored Bloated cards give X2.5 Mult
----The Fuzzy: Scored cards randomly give +-25-75 Chips, +-5-15 Mult and +$1-3
---Finity Blind jokers:
----Finishers:
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
@@ -671,20 +662,3 @@ NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
 --Stars (Moonlight): 3 in 4 chance to not retrigger levelups once. --> 1 in 2 chance to not retrigger levelups once.
 --Cube (Cube Joker): gains 5 chips if hand contains exactly 4 cards --> gains 9 chips if hand contains exactly 4 cards
-
--- Jackpot! - Score a Royal Flush against Video Poker
--- Spacefarer - Own Observatory, Perkeo, Satelite, Space Joker and Moonlight Cookie all at once
--- Big Hand, Iron Fist - Win against the Maroon Magnet while you have Efficinare
--- Self Insert - Get UNIK from a gateway (or hypercube)
--- Dicey - Complete the RNG II challenge
--- Alice in Wonderland - Get Alice from obtaining Average Alice
--- Dante's Inferno - Survive a Legendary Blind
--- the other family - Own Yokana, Maya and Chelsea at the same time
-
--- Vessel Printer - Own Energia and gain 40 Vessel tags at once
--- Hell Invasion - Own every Cursed Joker in the collection.
--- Debuffs, Debuffs everywhere - Have all your Jokers and your entire deck debuffed.
--- Beaned - Die from having zero hand size from depleted Turtle Beans
--- Royal Fuck - Score a Royal Flush against Video Poker and die anyway
--- The Abyss - Die to a Legendary Blind
--- 
