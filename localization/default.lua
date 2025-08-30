@@ -1037,7 +1037,7 @@ return {
                 name = "Stone Gray",
                 text = {
                     "Create a random",
-                    "{C:cry_exotic}Exotic{} joker after",
+                    "{C:unik_ancient}Ancient{} joker after",
                     "{C:attention}#4#{} rounds while held", --after 200 rounds
                     "{C:inactive}(Must have room)",
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
@@ -1152,7 +1152,7 @@ return {
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} Face Card(s))",
                     "{C:unik_caption,s:0.7,E:1}Grawr Charble Grawr!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Super Mario Bros.{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Super Mario Bros.{}",
                 }                
             },
             j_unik_handcuffs = {
@@ -1262,7 +1262,7 @@ return {
                     "{C:attention}in your consumable area{}",
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
                 },
             },
             j_unik_scratch = { 
@@ -1280,7 +1280,7 @@ return {
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
                 unlock = {
                     "Play {C:attention}5 7s in a hand",
@@ -1305,7 +1305,7 @@ return {
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
                     "{C:unik_caption,s:0.7,E:1}I'll always be there for you and my family.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
             j_unik_jsab_maya = { --epic: each non-face card played gains 0.75x chips, each non-face card held gains 0.25x chips
@@ -1318,7 +1318,7 @@ return {
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
                     "{C:unik_caption,s:0.7,E:1}I'm here to help, but PLEASE be careful.{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
             
@@ -1332,7 +1332,7 @@ return {
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
             j_unik_ghost_trap = {
@@ -1353,7 +1353,7 @@ return {
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI{}",
                 },    
                 unlock = {
                     "Have {C:attention}100{} cards in your deck",
@@ -1369,7 +1369,7 @@ return {
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : SPRUNKI{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI{}",
                 },    
                 unlock = {
                     "Have {C:attention}100{} cards in your deck",
@@ -1492,7 +1492,7 @@ return {
                     "{C:red,s:0.7}(Cannot copy if destroyed by Disposable)",        
                     "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
                 },
                 unlock = {
                     "Destroy an {C:cry_exotic}Exotic{} Joker",
@@ -1535,7 +1535,7 @@ return {
                     "{C:unik_caption,s:0.7,E:1}Teehee! It's time I join in on the fun!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:dark_edition,s:0.7,E:2}Character by : KittyKnight{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Balatro - Extra Credit{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Balatro - Extra Credit{}",
                 }
             }, 
             j_ExtraCredit_averagealice = { --overriding loc to include a 0.6% chance to get Alice on purchase
@@ -1545,7 +1545,7 @@ return {
                     "hand contains a scoring",
                     "{C:attention}Odd{} and {C:attention}Even{} card",
                     "{C:inactive,s:0.7}If obtained, fixed {C:green,s:0.7}0.8%{C:inactive,s:0.7} chance",
-                    "{C:inactive,s:0.7}to obtain {C:cry_exotic,s:0.7,E:1}Alice {C:inactive,s:0.7}instead",
+                    "{C:inactive,s:0.7}to obtain {C:unik_ancient,s:0.7,E:1}Alice {C:inactive,s:0.7}instead",
                 }
             },
             j_unik_foundation = {
@@ -1612,7 +1612,7 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Learning with Pibby{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Learning with Pibby{}",
                 }
             },
             j_unik_lone_despot={
@@ -1855,7 +1855,7 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive} retriggers)", --#max 1000 retriggers.
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Dandy's World{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Dandy's World{}",
                 },
                 unlock = {
                     "Retrigger {C:attention}1{} card {C:attention}8{} times"
@@ -1871,7 +1871,7 @@ return {
                     "{C:inactive,s:0.8}(Requirement reduction cannot be copied)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Cookie Run{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
                 },
                 unlock = {
                     "Play a {C:attention}Flush Five",
@@ -1941,7 +1941,7 @@ return {
                     "or {C:unik_wheel_color}The Wheel{} is triggered",
                     "{C:inactive,s:0.7,E:2}It now targets you, for no reason.{}",   
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Rubber{}",   
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Rubber{}",   
                 }
             },
             j_unik_abandoned_house={
@@ -2057,7 +2057,7 @@ return {
                     "{X:dark_edition,C:white}^#1#{} Mult", --^1.4 Mult
                     "{C:unik_caption,s:0.7,E:1}SCRREEEEEECCHH!!!!! SCRAAAARRRCCHH!!!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Alien{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Alien{}",
                 },
             },
             j_unik_legendary_crown={
@@ -2070,7 +2070,7 @@ return {
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Mult)",
                     "{C:unik_caption,s:0.7,E:1}#4#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:cry_exotic,s:0.7,E:2}Origin : Celeste{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Celeste{}",
                 }
             },
 
@@ -2745,10 +2745,11 @@ return {
         Planet={},
         Spectral={
             --only appears with a 0.3 chance in the cube booster pack. It's basically a gateway, but exclusively creating UNIK 
+            --THIS SHALL BE REPLACED WITH AWAKENING: Destroy 2 leftmost non eternals, create an ancient joker. The ancient will be created FIRST before the jokers are destroyed, for WL synergy.
             c_unik_gateway = {
 				name = "Hypercube",
 				text = {
-					"Create {C:cry_exotic,E:1}UNIK{}",
+					"Create {C:unik_ancient,E:1}UNIK{}",
 					"{C:red}destroy{} all",
 					"other Jokers",
 				},
