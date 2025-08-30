@@ -94,7 +94,7 @@ function get_new_boss()
         G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
     end
     local eligible_bosses = {}
-    local force_override = vice_check()
+    local force_override = (vice_check() == 1)
     if G.GAME.unik_force_epic_plus > 0 then
         force_override = true
     end
