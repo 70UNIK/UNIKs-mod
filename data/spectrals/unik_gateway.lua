@@ -41,7 +41,7 @@ SMODS.Consumable{
 			end
 		end
 		print(validJokers)
-		if G.jokers.cards and to_big(#G.jokers.cards - totalJokers) < to_big(G.jokers.config.card_limit - totalJokers + totalJokers) then
+		if G.jokers.cards and to_big(#G.jokers.cards - totalJokers) < to_big(G.jokers.config.card_limit - totalJokers + validJokers) then
 			return true
 		end
 		return false
