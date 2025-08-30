@@ -1976,6 +1976,26 @@ return {
             },
             
 
+            --NEW JOKERS
+            j_unik_earthmover = {
+                name = "1000-THR \"Earthmover\"",
+                 text = {
+                    "When {C:attention}Boss Blind{} is selected",
+                    "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size",
+                    "After defeat, create an",
+                    "{C:unik_ancient}Awakening{} and {C:red,E:2}Self Destruct",
+                },
+            },
+            j_unik_euclid = {
+                name = "Euclid",
+                text = {
+                    "Each scored {C:attention}2{}, {C:attention}3{}, {C:attention}5{}, {C:attention}7{} or {C:attention}Ace{}",
+                    "gives {C:chips}+#1#{}",
+                }
+            },
+
+
+
             --Cult card crossmod
             j_unik_cult_of_xmult = {
                 name = "Cult of Xmult",
@@ -1985,6 +2005,8 @@ return {
                     "{C:attention}1 + level of played hand x 0.1{}",
                 }
             },
+
+            --END NEW
 
             --crossmod
             j_unik_weetomancer={ --rare, paperback
@@ -3284,6 +3306,7 @@ return {
             k_unik_chamber_warning2=" hands will add to the blind size",
             b_unik_devour = "DEVOUR",
             b_spectral_rate = "Spectral Rate",
+            cry_good_luck_ex = "Good luck!",
             --Almanac Quotes:
 
             --Moonlight Cookie: She will be the first Joker with full almanac functionality (has a fusion, different quotes)

@@ -491,6 +491,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/joker_dollar.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/lockpick.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/cobblestone.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/euclid.lua")()
 
 --Rare
 -- NFS.load(mod_path .. "data/jokers/unik/uncommon/711.lua")()
@@ -503,6 +504,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/riff_rare.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/foundation.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 
 --Rare (characters)
