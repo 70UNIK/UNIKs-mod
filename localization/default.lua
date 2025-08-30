@@ -1460,7 +1460,6 @@ return {
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} {X:unik_detrimental,C:white}Detrimental{C:inactive} Joker(s))",
                 }               
             },
-            --almanac version will create exotics
             j_unik_soul_fragment = {
                 name="Soul Fragment",
                 text={
@@ -1476,7 +1475,7 @@ return {
                 text={
                     "Sell this card to create a random",
                     "{C:purple}Absolute {C:red}Niko{}", 
-                    "{C:cry_exotic}Exotic{} Joker",
+                    "{C:unik_ancient}Ancient{} Joker",
                     "{C:inactive}(Can overflow){}",
                 }             
             },
@@ -1495,7 +1494,7 @@ return {
                     "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
                 },
                 unlock = {
-                    "Destroy an {C:cry_exotic}Exotic{} Joker",
+                    "Destroy an {C:unik_ancient}Ancient{} Joker",
                 }
             },
             --banned in almanac due to persistent voucher bug when unredeeming
@@ -1551,11 +1550,9 @@ return {
             j_unik_foundation = {
                 name = 'Foundation',
                 text = {
-                    "After playing {C:attention}#2#{} {C:attention}consecutive{} hands",
-                    "each containing at least {C:attention}4{} cards each",
-                    "with an {C:attention}enhancement{}, {C:dark_edition}edition{} and {C:attention}seal{},",
+                    "After playing {C:attention}#2#{}hands",
                     "sell this card to create",
-                    "a {C:attention}random{} {C:cry_exotic,E:1}Exotic{} Joker",
+                    "a {C:attention}random{} {C:unik_ancient}Ancient{} Joker",
 					"{C:inactive}(Currently #1#/#2#){}",
                     "{C:inactive,E:1,s:0.7}It will be worth it in the end!{}",
                 },
@@ -2747,11 +2744,11 @@ return {
             --only appears with a 0.3 chance in the cube booster pack. It's basically a gateway, but exclusively creating UNIK 
             --THIS SHALL BE REPLACED WITH AWAKENING: Destroy 2 leftmost non eternals, create an ancient joker. The ancient will be created FIRST before the jokers are destroyed, for WL synergy.
             c_unik_gateway = {
-				name = "Hypercube",
+				name = "Awakening",
 				text = {
-					"Create {C:unik_ancient,E:1}UNIK{}",
-					"{C:red}destroy{} all",
-					"other Jokers",
+					"Create an {C:unik_ancient,E:1}Ancient{} Joker",
+					"{C:red}destroy{} the {C:attention}#1#",
+					"leftmost Jokers",
 				},
 			},
             c_unik_foundry = {
@@ -2822,15 +2819,6 @@ return {
                     '{s:0.8}Applies all previous stakes',
                 }
             },
-            stake_cry_ruby = {
-				name = "Ruby Stake",
-				colour = "Ruby",
-				text = {
-					"Ante victory requirements",
-                    "increased by {C:attention}X1.25{}",
-                    '{s:0.8}Applies all previous stakes',
-				},
-			},
         },
         Sleeve = {
             sleeve_cry_equilibrium_sleeve = {
@@ -2858,7 +2846,7 @@ return {
                     "add {C:unik_shitty_edition}Positive{} to a {C:attention}random{} Joker,",
                     "or create a {C:purple}Vessel Tag",
                     "Otherwise, create an",
-                    "{C:cry_exotic,E:1}Extended Empowered Tag",
+                    "{C:cry_ancient,E:1}Extended Empowered Tag",
                 },
             },
             tag_unik_vessel = {
@@ -2887,7 +2875,7 @@ return {
 				name = "Extended Empowered Tag",
 				text = {
 					"Gives a free {C:spectral}Spectral Pack",
-					"with {C:legendary,E:1}The Soul{}, {C:cry_epic,E:1}Foundation{} and {C:cry_exotic,E:1}Gateway{}",
+					"with {C:legendary,E:1}The Soul{}, {C:cry_epic,E:1}Foundation{} and {C:unik_ancient,E:1}Awakening{}",
 				},
 			},
         },

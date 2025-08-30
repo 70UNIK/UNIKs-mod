@@ -10,32 +10,54 @@ SMODS.Atlas({
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_gateway",
-	pos = { x = 0, y = 0 },
+	pos = { x = 2, y = 2 },
 	cost = 4,
-	atlas = "unik_gateway",
+	 atlas = 'placeholders',
 	order = 90,
-	no_doe = true, --cause gateway exists
+	no_doe = true,
 	hidden = true,
-	soul_rate = 0.003,
-	soul_set = "unik_cube", --only appear in the cube booster packs
+	config = {extra = {jokers = 3}},
+    loc_vars = function(self, info_queue, center)
+        return { vars = { center.ability.extra.jokers} }
+    end,
 	can_use = function(self, card)
-		if (#SMODS.find_card("j_jen_saint") + #SMODS.find_card("j_jen_saint_attuned")) > 0 then
-			return #G.jokers.cards < G.jokers.config.card_limit
-		else
-			--Don't allow use if everything is eternal and there is no room
-			return #Cryptid.advanced_find_joker(nil, nil, nil, { "eternal" }, true, "j") < G.jokers.config.card_limit
+		local eternals = 0
+		if G.jokers.cards then
+			for i,v in pairs(G.jokers.cards) do
+				if SMODS.is_eternal(v,self) then
+					eternals = eternals + 1
+				end
+			end
+		end
+
+		if eternals < G.jokers.config.card_limit then
+			return true
 		end
 	end,
-	pixel_size = { w = 71, h = 71 }, --hopefully THAT works
-	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_unik
-	end,
+	-- pixel_size = { w = 71, h = 71 }, --hopefully THAT works
+	-- loc_vars = function(self, info_queue, card)
+	-- 	info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_unik
+	-- end,
 	use = function(self, card, area, copier)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function()
+				play_sound("timpani")
+				local card = create_card("Joker", G.jokers, nil, "unik_ancient", nil, nil, nil, "unik_gateway")
+				card:add_to_deck()
+				G.jokers:emplace(card)
+				card:juice_up(0.3, 0.5)
+				return true
+			end,
+		}))
 		if (#SMODS.find_card("j_jen_saint") + #SMODS.find_card("j_jen_saint_attuned")) <= 0 then
 			local deletable_jokers = {}
-			for k, v in pairs(G.jokers.cards) do
-				if not v.ability.eternal then
-					deletable_jokers[#deletable_jokers + 1] = v
+			for i = 1, #G.jokers.cards do
+				if #deletable_jokers < card.ability.extra.jokers then
+					if not SMODS.is_eternal(G.jokers.cards[i],self) then
+						deletable_jokers[#deletable_jokers + 1] = G.jokers.cards[i]
+					end
 				end
 			end
 			local _first_dissolve = nil
@@ -44,9 +66,6 @@ SMODS.Consumable{
 				delay = 0.75,
 				func = function()
 					for k, v in pairs(deletable_jokers) do
-						if v.config.center.rarity == "cry_exotic" then
-							check_for_unlock({ type = "what_have_you_done" })
-						end
 						v:start_dissolve(nil, _first_dissolve)
 						_first_dissolve = true
 					end
@@ -54,18 +73,6 @@ SMODS.Consumable{
 				end,
 			}))
 		end
-		G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			delay = 0.4,
-			func = function()
-				play_sound("timpani")
-				local card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_unik")
-				card:add_to_deck()
-				G.jokers:emplace(card)
-				card:juice_up(0.3, 0.5)
-				return true
-			end,
-		}))
 		delay(0.6)
 	end,
 }

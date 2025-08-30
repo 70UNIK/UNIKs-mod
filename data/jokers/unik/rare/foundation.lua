@@ -10,7 +10,7 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 0, y = 0 },
     cost = 1,
-    config = {extra = {hands = 0,juiced_up = false,threshold = 100}},
+    config = {extra = {hands = 0,juiced_up = false,threshold = 77}},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.hands,center.ability.extra.threshold} }
     end,
@@ -21,7 +21,7 @@ SMODS.Joker {
 	eternal_compat = false,
 	demicoloncompat = true, --NOPE!
 	update = function(self,card,dt)
-		card.ability.extra.threshold = 150
+		card.ability.extra.threshold = 70
 		if card.ability.extra.hands < card.ability.extra.threshold then
 			card.ability.extra.juiced_up = false
 		end
@@ -56,36 +56,25 @@ SMODS.Joker {
 			and not context.blueprint
 			and not context.retrigger_joker
 		then
-			local reset = FoundationResetFunction(card,context)
-			if not reset then
-				card.ability.extra.hands = card.ability.extra.hands + 1
-				if card.ability.extra.hands < card.ability.extra.threshold then 
-					return {
-						card_eval_status_text(card, "extra", nil, nil, nil, {
-							message = card.ability.extra.hands .. "/" .. card.ability.extra.threshold,
-							colour = G.C.UNIK_ANCIENT,
-						}),
-					}
-				elseif card.ability.extra.hands >= card.ability.extra.threshold and card.ability.extra.juiced_up == false then
-					
-					local eval = function(card)
-						return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
-					end
-					juice_card_until(card, eval, true)
+			if card.ability.extra.hands < card.ability.extra.threshold then 
+				return {
 					card_eval_status_text(card, "extra", nil, nil, nil, {
-						message = localize("k_unik_active"),
+						message = card.ability.extra.hands .. "/" .. card.ability.extra.threshold,
 						colour = G.C.UNIK_ANCIENT,
-					})
-					card.ability.extra.juiced_up = true
+					}),
+				}
+			elseif card.ability.extra.hands >= card.ability.extra.threshold and card.ability.extra.juiced_up == false then
+				
+				local eval = function(card)
+					return not card.REMOVED and card.ability.extra.hands >= card.ability.extra.threshold
 				end
-			elseif card.ability.extra.hands > 0 then
-				card.ability.extra.hands = 0
+				juice_card_until(card, eval, true)
 				card_eval_status_text(card, "extra", nil, nil, nil, {
-					message = localize("k_reset"),
-					colour = G.C.BLACK,
+					message = localize("k_unik_active"),
+					colour = G.C.UNIK_ANCIENT,
 				})
+				card.ability.extra.juiced_up = true
 			end
-
         end
         if context.selling_self and not context.blueprint and not context.retrigger_joker then
 			if card.ability.extra.hands >= card.ability.extra.threshold then
@@ -107,16 +96,4 @@ SMODS.Joker {
 		end
     end
 }
-
-function FoundationResetFunction(card,context)
-	if #G.play.cards < 4 then
-		return true
-	end
-	for i,v in pairs(G.play.cards) do
-		if not v.edition or (not v.seal or v.seal == "" or v.seal == "base") or v.config.center == G.P_CENTERS.c_base then
-			return true
-		end
-	end
-	return false
-end
 

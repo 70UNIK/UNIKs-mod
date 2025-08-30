@@ -14,7 +14,6 @@ SMODS.Joker {
 	blueprint_compat = false,
     perishable_compat = false,
     eternal_compat = false,
-    unique = true,
     experimental = true,
     no_dbl = true,
     immutable = true,
@@ -24,19 +23,19 @@ SMODS.Joker {
     set_badges = function(self, card, badges)
         badges[#badges+1] = create_badge(localize('k_unik_blind_start_hook'), G.C.UNIK_THE_HOOK, G.C.WHITE, 1.0 )
     end,
-    add_to_deck = function(self, card, from_debuff)
-        --avoid creating multiple hooks to avoid multiple hook bug
-        if G.jokers and G.jokers.cards then
-            for i,v in pairs(G.jokers.cards) do
-                if v.config.center.key == "j_unik_hook_n_discard" then
-                    selfDestruction(card,"k_unik_weapon_destroyed",G.C.UNIK_THE_HOOK)
-                    local card2 = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_hook_replacement")
-                    card2:add_to_deck()
-                    G.jokers:emplace(card2)
-                end
-            end
-        end
-    end,
+    -- add_to_deck = function(self, card, from_debuff)
+    --     --avoid creating multiple hooks to avoid multiple hook bug
+    --     if G.jokers and G.jokers.cards then
+    --         for i,v in pairs(G.jokers.cards) do
+    --             if v.config.center.key == "j_unik_hook_n_discard" then
+    --                 selfDestruction(card,"k_unik_weapon_destroyed",G.C.UNIK_THE_HOOK)
+    --                 local card2 = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_hook_replacement")
+    --                 card2:add_to_deck()
+    --                 G.jokers:emplace(card2)
+    --             end
+    --         end
+    --     end
+    -- end,
     calculate = function(self, card, context)
         --check discards
         if context.discard and context.other_card == context.full_hand[#context.full_hand] then

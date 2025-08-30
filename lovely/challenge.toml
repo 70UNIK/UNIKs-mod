@@ -127,59 +127,6 @@ end
 '''
 match_indent = true
 
-# Force the last blind of ante 8 (or higher) to become Obsidian Orb
-# alternatively, force all last blinds to become obsidian orb
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''G.GAME.round_resets.blind_choices.Boss = get_new_boss()'''
-position = "at"
-payload = '''if (G.GAME.round_resets.ante)%G.GAME.win_ante == 0 and G.GAME.round_resets.ante >= 2 and G.GAME.modifiers.unik_obsidian_showdown then
-    G.GAME.unik_its_orbin_time = true
-    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
-    G.GAME.unik_its_orbin_time = nil
-elseif G.GAME.modifiers.unik_obsidian_swarm then
-    G.GAME.unik_its_orbin_time = true
-    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
-    G.GAME.unik_its_orbin_time = nil
-else
-    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
-end'''
-match_indent = true
-
-# Force the first boss blind to be obsidian orb
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''G.GAME.round_resets.blind_states = G.GAME.round_resets.blind_states or {Small = 'Select', Big = 'Upcoming', Boss = 'Upcoming'}'''
-position = "after"
-payload = '''if G.GAME.modifiers.unik_obsidian_swarm then
-    G.GAME.unik_its_orbin_time = true
-    G.GAME.round_resets.blind_choices.Boss = get_new_boss()
-    G.GAME.unik_its_orbin_time = nil
-end'''
-match_indent = true
-
-# Register banned bosses for rush hour
-# Also initializes disabled/enabled cards
-[[patches]]
-[patches.pattern]
-target = "game.lua"
-pattern = "set_profile_progress()"
-position = "before"
-payload = '''
-for i = 1, #G.CHALLENGES do
-    if (G.CHALLENGES[i].id == 'c_unik_rush_hour_4') and #G.CHALLENGES[i].restrictions.banned_other == 0 then
-        for k, v in pairs(G.P_BLINDS) do
-            if k ~= "bl_cry_clock" and k ~= "bl_cry_lavender_loop" and v.boss then
-                G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = k, type = 'blind'}
-            end
-        end
-    end
-end
-'''
-match_indent = true
-
 # Register banned bosses for video poker
 # Also initializes disabled/enabled cards
 [[patches]]
@@ -195,37 +142,6 @@ for i = 1, #G.CHALLENGES do
                 G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = k, type = 'blind'}
             end
         end
-    end
-    if (G.CHALLENGES[i].id == 'c_unik_monsters') and #G.CHALLENGES[i].restrictions.banned_other == 0 then
-        for k, v in pairs(G.P_BLINDS) do
-            if k ~= "bl_cry_decision" and k ~= "bl_unik_purple_pentagram" and v.boss then
-                G.CHALLENGES[i].restrictions.banned_other[#G.CHALLENGES[i].restrictions.banned_other+1] = {id = k, type = 'blind'}
-            end
-        end
-    end
-end
-'''
-match_indent = true
-
-
-
-# legendaries and epic blinds can spawn anytime, including almanac ones (ignores spawn check)
-# This will be the only thing left of crossmod functionality for Epic blind interactions
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''eligible_bosses[k] = res and true or nil
-            end'''
-position = "after"
-payload = '''
-if
-    (v.boss and (v.boss.epic or v.boss.legendary) and G.GAME.modifiers.unik_legendary_at_any_time)
-then
-    if v.boss.epic and string.sub(k,1,6) == "bl_jen" then
-        eligible_bosses[k] = true
-    elseif (v.boss.epic or v.boss.legendary) then
-        local res, options = v:in_pool()
-        eligible_bosses[k] = res and true or nil
     end
 end
 '''

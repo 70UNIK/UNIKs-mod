@@ -89,7 +89,9 @@ if G.jokers then
                 local any_selected = nil
                 local _cards = {}
                 for k, v in ipairs(G.hand.cards) do
-                    _cards[#_cards+1] = v
+                    if not v.highlighted then
+                        _cards[#_cards+1] = v
+                    end
                 end
                 for i = 1, 2 do
                     if G.hand.cards[i] then 

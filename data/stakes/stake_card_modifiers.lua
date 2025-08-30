@@ -1,6 +1,15 @@
 local createHook = create_card
 function create_card(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
     local card = createHook(_type, area, legendary, _rarity, skip_materialize, soulable, forced_key, key_append)
+    if G.jokers ~= nil then
+        if G.GAME.modifiers.unik_common_only then
+            if _rarity == nil
+            or ((type(_rarity) == 'number') and (_rarity > 0))
+            or ((type(_rarity) == 'string') and (_rarity ~= 'Common')) then
+                _rarity = 0
+            end
+        end
+    end
     --Forced edition cards
     if card.ability.name == "j_unik_happiness" then
         card:set_edition("e_unik_positive", true, nil, true)
