@@ -22,7 +22,7 @@ SMODS.Voucher{
 	end,
 }
 --Ghost Deck: start with spectral merchant
-SMODS.Deck:take_ownership("ghost", {
+SMODS.Back:take_ownership("ghost", {
     config = { consumables = {'c_hex'}, vouchers = { "v_unik_spectral_merchant" } },
 },true)
 --Cardsleeves: modify it to now have spectral merchant/tycoon.

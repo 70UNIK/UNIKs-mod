@@ -31,24 +31,26 @@ function reset_blinds()
     if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
         G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
     end
-    if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
-        G.GAME.round_resets.blind_choices.Small = get_new_boss()
-    else
-        G.GAME.round_resets.blind_choices.Small = "bl_small"
+    if G.GAME.round_resets.blind_states.Boss == 'Defeated' then
+        if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
+            G.GAME.round_resets.blind_choices.Small = get_new_boss()
+        else
+            G.GAME.round_resets.blind_choices.Small = "bl_small"
+        end
+        if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
+            G.GAME.round_resets.blind_choices.Big = get_new_boss()
+        else
+            G.GAME.round_resets.blind_choices.Big = "bl_big"
+        end
+        G.GAME.round_resets.blind_states.Small = 'Upcoming'
+        G.GAME.round_resets.blind_states.Big = 'Upcoming'
+        G.GAME.round_resets.blind_states.Boss = 'Upcoming'
+        G.GAME.blind_on_deck = 'Small'
+        if vice_check() == 1 then
+            G.GAME.round_resets.blind_choices.Boss = get_new_boss()
+        end
+        G.GAME.round_resets.boss_rerolled = false
     end
-    if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
-        G.GAME.round_resets.blind_choices.Big = get_new_boss()
-    else
-        G.GAME.round_resets.blind_choices.Big = "bl_big"
-    end
-    G.GAME.round_resets.blind_states.Small = 'Upcoming'
-    G.GAME.round_resets.blind_states.Big = 'Upcoming'
-    G.GAME.round_resets.blind_states.Boss = 'Upcoming'
-    G.GAME.blind_on_deck = 'Small'
-    if vice_check() == 1 then
-        G.GAME.round_resets.blind_choices.Boss = get_new_boss()
-    end
-    G.GAME.round_resets.boss_rerolled = false
 end
 
 --Blind refresh
@@ -181,16 +183,27 @@ function get_new_boss()
         --Revert
         G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] - 1
         G.GAME.bosses_used[forceNewBoss] = G.GAME.bosses_used[forceNewBoss] + 1
-    end
-    if unik_config.unik_legendary_blinds then
-        if (G.P_BLINDS[forceNewBoss].boss and (G.P_BLINDS[forceNewBoss].boss.epic or G.P_BLINDS[forceNewBoss].boss.legendary)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
-            G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+        if unik_config.unik_legendary_blinds and G.P_BLINDS[forceNewBoss] and G.P_BLINDS[forceNewBoss].boss then
+            if ((G.P_BLINDS[forceNewBoss].boss.epic or G.P_BLINDS[forceNewBoss].boss.legendary)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+            end
+        else
+            if ((G.P_BLINDS[forceNewBoss].boss.showdown)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+            end
         end
     else
-        if (G.P_BLINDS[forceNewBoss].boss and (G.P_BLINDS[forceNewBoss].boss.showdown)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
-            G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+        if unik_config.unik_legendary_blinds and G.P_BLINDS[boss] and G.P_BLINDS[boss].boss then
+            if ((G.P_BLINDS[boss].boss.epic or G.P_BLINDS[boss].boss.legendary)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+            end
+        else
+            if ((G.P_BLINDS[boss].boss.showdown)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+            end
         end
     end
+    
     if forceNewBoss then
         return forceNewBoss
     end

@@ -632,6 +632,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
 end
 
+NFS.load(mod_path .. "data/overrides/blind_spawn.lua")()
 function vice_check()
 	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
 	if G.GAME.OvershootFXVal >= 4 then

@@ -1,4 +1,5 @@
 function CanSpawnEpic()
+    G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
     if G.GAME.unik_force_epic_plus > 0 then
         return true
     end
@@ -16,6 +17,7 @@ function CanSpawnEpic()
     return false
 end
 function CanSpawnLegendary()
+    G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
     if G.GAME.modifiers.unik_legendary_at_any_time then
         return true
     end

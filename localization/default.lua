@@ -477,7 +477,7 @@ return {
                 text = {
                     "Half of Digits in Score is",
                     "added to Ante instead of Score",
-                    "until #1# hand#<s>1# containing",
+                    "until #1# hand#2# containing",
                     "a Flush are discarded",
                 }
             },
@@ -2830,7 +2830,10 @@ return {
         Sleeve = {
             sleeve_casl_ghost = {
                 name = "Ghost Sleeve",
-                text = G.localization.descriptions.Back["b_ghost"].text
+                text = {
+                    "Start with {C:dark_edition,T:v_unik_spectral_merchant}Spectral Merchant",
+                    "and a {C:spectral,T:c_hex}Hex{} card",
+                    }
             },
             sleeve_casl_ghost_alt = {
                 name = "Ghost Sleeve",
