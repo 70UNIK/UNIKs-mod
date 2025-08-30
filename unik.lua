@@ -467,7 +467,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/double_container.lua")() --Uncommo
 
 --Uncommon
 NFS.load(mod_path .. "data/jokers/unik/uncommon/no_standing_zone.lua")()
-NFS.load(mod_path .. "data/jokers/unik/uncommon/711.lua")()
+
 NFS.load(mod_path .. "data/jokers/unik/uncommon/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/tax_haven.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/cube_joker.lua")() 
@@ -482,6 +482,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/cobblestone.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 
 --Rare
+-- NFS.load(mod_path .. "data/jokers/unik/uncommon/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/invisible_card.lua")()

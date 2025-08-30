@@ -32,7 +32,7 @@ SMODS.Tag{
                     local lock = tag.ID
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
-                        local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
+                        local card = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_demon")
                         card:add_to_deck()
                         G.jokers:emplace(card)
                         G.CONTROLLER.locks[lock] = nil
@@ -44,7 +44,7 @@ SMODS.Tag{
 
                             local deletable_jokers = {}
                             for k, v in pairs(G.jokers.cards) do
-                                if not v.ability.eternal and v.config.center.rarity ~= "cry_cursed" then
+                                if not v.ability.eternal and v.config.center.rarity ~= UnikDetrimentalRarity() then
                                     deletable_jokers[#deletable_jokers + 1] = v
                                 end
                             end
@@ -65,7 +65,7 @@ SMODS.Tag{
                                 local lock = tag.ID
                                 G.CONTROLLER.locks[lock] = true
                                 tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
-                                    local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
+                                    local card = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_demon")
                                     card:add_to_deck()
                                     G.jokers:emplace(card)
                                     G.CONTROLLER.locks[lock] = nil

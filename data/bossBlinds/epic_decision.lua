@@ -1,4 +1,4 @@
-sSMODS.Blind	{
+SMODS.Blind	{
     key = 'unik_epic_decision',
     config = {},
 	showdown = true,

@@ -27,7 +27,7 @@ SMODS.Blind{
                 -- G.E_MANAGER:add_event(Event({
 				-- 	delay = 0.5,
 				-- 	func = function()
-                        local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_pentagram_curse")
+                        local card2 = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_pentagram_curse")
                         --destroy card2 if its jimbo
                         if (card2.ability.name ~= "Joker") then
                             card2:start_materialize()
@@ -54,7 +54,7 @@ SMODS.Blind{
             local cloneList = {}
             for _, v in pairs(G.jokers.cards) do
                 --crashes with double broken scale
-                if v.config.center.key ~= "j_unik_broken_scale" and v.config.center.rarity == "cry_cursed" then
+                if v.config.center.key ~= "j_unik_broken_scale" and v.config.center.rarity == UnikDetrimentalRarity() then
                     v.ability.cry_absolute = true
                     cloneList[#cloneList + 1] = v
                 elseif v.config.center.key == "j_unik_broken_scale" then
@@ -95,7 +95,7 @@ SMODS.Blind{
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.rarity == "cry_cursed" then
+            if v.config.center.rarity == UnikDetrimentalRarity() then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound('tarot1')

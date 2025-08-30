@@ -178,7 +178,7 @@ return {
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
-					"Create 5 Disposable Cursed Jokers",
+					"Create 5 Disposable Detrimental Jokers",
                     "on Blind Selection",
 				},
             },
@@ -1335,11 +1335,10 @@ return {
                     "{C:cry_exotic,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            --rare: x1.5x mult from destroying cursed jokers, but only up to 8, the 9th one will cause self destruciton and release ALL cursed jokers
             j_unik_ghost_trap = {
                 name="Ghost Trap",
                 text={
-					"This Joker {C:red}destroys{} all {X:cry_cursed,C:white}Cursed{} Jokers",
+					"This Joker {C:red}destroys{} all {X:unik_detrimental,C:white}Detrimental{} Jokers",
                     "and gains {X:mult,C:white}X#2#{} Mult per Joker",
                     "destroyed that way",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
@@ -1402,7 +1401,6 @@ return {
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
                 }, 
             },
-            --0.5x Mult, Debuff up to 2 random non-cursed Jokers, sells for double the total of debuffed Jokers to remove debuff and itself. Destruction will remove debuffs. Selling Jokers wi
             j_unik_impounded = {
                 name="Impound Notice",
                 text={
@@ -1424,7 +1422,6 @@ return {
                     "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
                 }
             },
-            --this will not be disabled in almanac, since its a cursed joker that permanently makes values WORSE
             j_unik_rancid_smoothie = {
                 name="Rancid Smoothie",
                 text={
@@ -1456,11 +1453,11 @@ return {
             j_unik_monster_spawner = {
                 name="Monster Spawner",
                 text={
-                    "Create {C:attention}1{} {X:cry_cursed,C:white}Cursed{} Joker",
+                    "Create {C:attention}1{} {X:unik_detrimental,C:white}Detrimental{} Joker",
                     "at end of Boss Blind", 
                     "{C:red}Self destructs{} after",
-                    "creating {C:attention}#1#{} {X:cry_cursed,C:white}Cursed{} Jokers",
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {X:cry_cursed,C:white}Cursed{C:inactive} Joker(s))",
+                    "creating {C:attention}#1#{} {X:unik_detrimental,C:white}Detrimental{} Jokers",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {X:unik_detrimental,C:white}Detrimental{C:inactive} Joker(s))",
                 }               
             },
             --almanac version will create exotics
@@ -2854,7 +2851,7 @@ return {
                 name = "Demon Tag",
                 text = {
                     "{C:green}#1# in #2#{} chance to either",
-                    "create a {X:cry_cursed,C:white}Cursed{} Joker,",
+                    "create a {X:unik_detrimental,C:white}Detrimental{} Joker,",
                     "{C:red}destroy{} a {C:attention}random{} Joker,",
                     "create a {C:unik_manacle_color}Handcuffs Tag{},",
                     "add {C:unik_shitty_edition}Positive{} to a {C:attention}random{} Joker,",
@@ -2898,7 +2895,7 @@ return {
                 name = "The Evocation",
                 text = {
                     "{C:green}#1# in #2#{} chance to create ",
-                    "a {X:cry_cursed,C:white}Cursed{} Joker",
+                    "a {X:unik_detrimental,C:white}Detrimental{} Joker",
                     "otherwise apply {C:dark_edition}Negative{}, {C:dark_edition}Mosaic{},",
                     "or {C:dark_edition}Astral{} to a {C:attention}random{} Joker",
                 }
@@ -3006,7 +3003,7 @@ return {
             c_unik_hellspawn = {
                 name = "Hellspawn", -- DEFAULT
                 text = {
-                    "{E:2,C:red}Add #1#{} {X:cry_cursed,C:white}Cursed{} Jokers",
+                    "{E:2,C:red}Add #1#{} {X:unik_detrimental,C:white}Detrimental{} Jokers",
                     "{C:inactive,s:0.5}(Temporarily create a showman in the process)", 
                 }
             },
@@ -3681,7 +3678,6 @@ return {
             ch_c_unik_all_video_poker = {"All Boss Blinds are {X:unik_eye_searing_blue,C:money}Video {X:unik_eye_searing_blue,C:money}Poker{}"},
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
             ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
-            ch_c_unik_cursed_only = {"All boss blinds are {C:attention}The Decision{} and {C:attention}Purple Pentagram{}"},
             ch_c_unik_single_select_limit = {"{C:red}1{} Card {C:attention}Selection Limit"},
             ch_c_unik_the_darkness_spreads1 = {"Leftmost Joker become {C:unik_shitty_edition}Corrupted{} on Blind Select"},
             ch_c_unik_the_darkness_spreads2 = {"1 Random Card in Hand becomes {C:unik_shitty_edition}Corrupted{} on play"},

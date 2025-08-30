@@ -58,18 +58,18 @@ end
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/spooky.lua"]'''
-pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == UnikDetrimentalRarity() then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == UnikDetrimentalRarity() or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### do not set impounded cost to 0
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
-pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == UnikDetrimentalRarity() then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == UnikDetrimentalRarity() or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### Hook n discard, ensure cards are discarded BEFORE scoring (similar to the hook)

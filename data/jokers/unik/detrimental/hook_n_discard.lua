@@ -6,7 +6,7 @@ SMODS.Joker {
 	},
 	key = 'unik_hook_n_discard',
     atlas = 'unik_cursed',
-    rarity = "cry_cursed",
+    rarity = UnikDetrimentalRarity(),
 	pos = { x = 1, y = 2 },
     cost = 1,
     config = { extra = { min_discards = 12, discarded_cards = 2, current_discards = 0} },
@@ -30,7 +30,7 @@ SMODS.Joker {
             for i,v in pairs(G.jokers.cards) do
                 if v.config.center.key == "j_unik_hook_n_discard" then
                     selfDestruction(card,"k_unik_weapon_destroyed",G.C.UNIK_THE_HOOK)
-                    local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_hook_replacement")
+                    local card2 = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_hook_replacement")
                     card2:add_to_deck()
                     G.jokers:emplace(card2)
                 end

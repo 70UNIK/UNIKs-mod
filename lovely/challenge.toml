@@ -19,7 +19,7 @@ for i = 1, #G.CHALLENGES do
             --also nil check to avoid registring banned jokers (almanac)
             if v.set == "Joker" and v ~= nil then
                 --check if its not a common (cursed jokers will still appear, cause Bigger Boo and Purple Pentagram)
-                if v.rarity ~= 1 and v.rarity ~= "cry_cursed" then
+                if v.rarity ~= 1 and v.rarity ~= UnikDetrimentalRarity() then
                     G.CHALLENGES[i].restrictions.banned_cards[#G.CHALLENGES[i].restrictions.banned_cards+1] = {id = k}
                 end
             end

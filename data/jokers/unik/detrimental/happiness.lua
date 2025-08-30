@@ -42,7 +42,7 @@ SMODS.Joker {
 	},
 	key = 'unik_happiness',
     atlas = 'unik_cursed',
-    rarity = "cry_cursed",
+    rarity = UnikDetrimentalRarity(),
 	pos = { x = 0, y = 0 },
     cost = 0,
 	blueprint_compat = false,

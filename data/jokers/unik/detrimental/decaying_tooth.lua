@@ -8,7 +8,7 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_decaying_tooth',
     atlas = 'placeholders',
-    rarity = "cry_cursed",
+    rarity = UnikDetrimentalRarity(),
 	no_dbl = true,
 	pos = { x = 3, y = 1 },
     cost = 0,

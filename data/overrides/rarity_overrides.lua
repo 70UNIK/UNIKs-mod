@@ -1,6 +1,6 @@
 function UnikDetrimentalRarity()
     if Cryptid then
-        return "cry_cursed"
+        return UnikDetrimentalRarity()
     end
     return "unik_detrimental"
 end

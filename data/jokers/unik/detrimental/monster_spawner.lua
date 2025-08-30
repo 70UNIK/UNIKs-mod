@@ -5,7 +5,7 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_monster_spawner',
     atlas = 'unik_cursed',
-    rarity = "cry_cursed",
+    rarity = UnikDetrimentalRarity(),
 	pos = { x = 3, y = 1 },
     cost = 1,
 	blueprint_compat = false,
@@ -28,7 +28,7 @@ SMODS.Joker {
     then
         G.E_MANAGER:add_event(Event({
             func = function()
-                local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_monster_spawner")
+                local card2 = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_monster_spawner")
                 --destroy card2 if its jimbo
                 if (card2.ability.name ~= "Joker") then
                     card:juice_up(0.8, 0.8)

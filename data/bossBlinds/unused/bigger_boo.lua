@@ -114,7 +114,7 @@ function killEternalGhosts()
 end
 function turnJokerIntoGhost(location)
     --avoid cursed jokers and ghosts and absolute jokers
-    if (G.jokers.cards[location].config.center.rarity ~= "cry_cursed" and G.jokers.cards[location].ability.name ~= "j_cry_ghost" and not G.jokers.cards[location].ability.cry_absolute) then
+    if (G.jokers.cards[location].config.center.rarity ~= UnikDetrimentalRarity() and G.jokers.cards[location].ability.name ~= "j_cry_ghost" and not G.jokers.cards[location].ability.cry_absolute) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then
             card_eval_status_text(

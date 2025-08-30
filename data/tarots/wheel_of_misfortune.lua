@@ -86,7 +86,7 @@ SMODS.Consumable{
 					}))
 					play_sound("tarot2", 1, 0.4)
 					used_consumable:juice_up(0.3, 0.5)
-                    local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_wheel_curse")
+                    local card2 = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_wheel_curse")
                     card2:add_to_deck()
                     G.jokers:emplace(card2)
                     card2:start_materialize()
