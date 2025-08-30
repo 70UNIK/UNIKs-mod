@@ -15,7 +15,7 @@ SMODS.Joker {
     atlas = 'unik_the_plant',
     rarity = UnikDetrimentalRarity(),
 	pos = { x = 0, y = 0 },
-	soul_pos = { x = 2, y = 0,extra = { x = 1, y = 0 } },
+	soul_pos = { x = 2, y = 0 },
     cost = 1,
     experimental = true, --requires a complex function for iterating per card so this is appropriate
     config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false,debuff_name = "unik_plant",entered = false} },
