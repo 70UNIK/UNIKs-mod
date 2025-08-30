@@ -3,8 +3,18 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999999
 
-## Artificially add abstracted 'suits' to flush calculations without declaring them (sigil, familiar)
-## Also make sure to create a hard copy of suits and iterate, otherwise adding the artificial suit will add it to suit.obj_buffer for real!
+## Initializer
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "set_profile_progress()"
+position = "before"
+payload = '''
+self:unik_initialize_stuff()
+'''
+match_indent = true
+
 [[patches]]
 [patches.pattern]
 target = '''functions/misc_functions.lua'''

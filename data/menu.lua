@@ -11,7 +11,7 @@ local oldfunc = Game.main_menu
 			G.P_CENTERS.m_unik_pink,
 			{ bypass_discovery_center = true }
 		)
-        newcard:set_edition(G.P_CENTERS.e_unik_half and 'e_unik_half' or 'e_polychrome',true,true)
+        newcard:set_edition(G.P_CENTERS.e_unik_halfjoker and 'e_unik_halfjoker' or 'e_polychrome',true,true)
 		-- recenter the title
 		G.title_top.T.w = G.title_top.T.w * 1.7675
 		G.title_top.T.x = G.title_top.T.x - 0.8
@@ -21,19 +21,6 @@ local oldfunc = Game.main_menu
 		newcard.T.h = newcard.T.h * 1.1 * 1.2
 		newcard.no_ui = true
 		newcard.states.visible = false
-
-		-- make the title screen use different background colors
-		G.SPLASH_BACK:define_draw_steps({
-			{
-				shader = "splash",
-				send = {
-					{ name = "time", ref_table = G.TIMERS, ref_value = "REAL_SHADER" },
-					{ name = "vort_speed", val = 0.4 },
-					{ name = "colour_1", ref_table = G.C, ref_value = "UNIK_ANCIENT" },
-					{ name = "colour_2", ref_table = G.C, ref_value = "UNIK_UNIK" },
-				},
-			},
-		})
 
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
@@ -51,7 +38,5 @@ local oldfunc = Game.main_menu
 				return true
 			end,
 		}))
-        print(G.ENHANCEMENT_OVERRIDE_SUITS)
-        print(G.ENHANCEMENT_OVERRIDE_RANKS)
 		return ret
 	end

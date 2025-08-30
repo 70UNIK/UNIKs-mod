@@ -53,9 +53,7 @@ SMODS.Enhancement {
 -- function Card:is_suit(suit, bypass_debuff, flush_calc)
 --     return enhancementOverrideSuit(self, bypass_debuff, flush_calc)
 -- end
-local initializeOverrideSuitsAndRanks = Game.init_item_prototypes
-function Game:init_item_prototypes()
-    initializeOverrideSuitsAndRanks(self)
+function Game:unik_initialize_stuff()
     self.ENHANCEMENT_OVERRIDE_RANKS = {
 
     }
@@ -74,8 +72,6 @@ function Game:init_item_prototypes()
             end
         end
     end
-    print(self.ENHANCEMENT_OVERRIDE_RANKS)
-    print(self.ENHANCEMENT_OVERRIDE_SUITS)
 end
 
 local faceHook = Card.is_face

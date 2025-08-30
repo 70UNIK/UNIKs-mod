@@ -651,6 +651,7 @@ end
 
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
+NFS.load(mod_path .. "data/menu.lua")()
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
