@@ -107,4 +107,21 @@ if SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.
 	to_big = to_big or function(x) return x end
 	to_number = to_number or function(x) return x end
 	lenient_bignum = lenient_bignum or function(x) return x end
+	
+	--exponent blind size replacement, can only do exponents.
+	
+end
+function portable_exp(initial,exponent,value)
+	if (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) then
+		if exponent == 0 then
+			return initial*value
+		end
+		if exponent == -1 then
+			return initial+value
+		end
+		return initial^value
+	else
+		local bigNum = to_big(initial)
+		return bigNum:arrow(exponent,value)
+	end
 end

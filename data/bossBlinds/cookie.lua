@@ -224,25 +224,8 @@ local function BlindIncrement(penalty)
                         * (
                             G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
                         )
-
-                        --print(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2])
-                        -- G.GAME.CRY_BLINDS[c] = to_big(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult):arrow(
-                        --     G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[2] or 1,
-                        --     G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
-                        -- )
-                        -- print(to_big(G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult):arrow(
-                        --     G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[2] or 1,
-                        --     G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
-                        -- ))
                     end
                 end
-				-- G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult)
-				-- 	+ (
-				-- 		G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod()[0] or 0
-                --         + penalty
-				-- 	)
-				--Update UI
-				--todo: in blinds screen, too
 				if G.blind_select_opts then
 					if (SMODS.Mods["StrangeLib"] or {}).can_load then
 						StrangeLib.dynablind.blind_choice_scores[c] = get_blind_amount(G.GAME.round_resets.blind_ante)
@@ -262,13 +245,13 @@ local function BlindIncrement(penalty)
                             if exponent then
                                 --this registers as that but is not updating properly
                                 chip_text_node.config.text = number_format(
-                                    to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
-                                        * G.GAME.starting_params.ante_scaling):arrow(G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
+                                    portable_exp(to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
+                                        * G.GAME.starting_params.ante_scaling),G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
                                 )
                                 chip_text_node.config.scale = score_number_scale(
                                     0.9,
-                                    to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
-                                    * G.GAME.starting_params.ante_scaling):arrow(G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
+                                    portable_exp(to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
+                                    * G.GAME.starting_params.ante_scaling),G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
                                 )  
                             else
                                 --print("1")
@@ -307,7 +290,7 @@ local function BlindIncrement(penalty)
                             * get_blind_amount(G.GAME.round_resets.ante)
                             * G.GAME.starting_params.ante_scaling
                     else
-                        G.GAME.blind.chips = to_big(G.GAME.blind.chips):arrow(G.GAME.blind:unik_clicky_click_mod(true)[2],G.GAME.blind:unik_clicky_click_mod(true)[1])
+                        G.GAME.blind.chips = portable_exp(to_big(G.GAME.blind.chips),G.GAME.blind:unik_clicky_click_mod(true)[2],G.GAME.blind:unik_clicky_click_mod(true)[1])
                     end
                 end
                 

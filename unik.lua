@@ -277,7 +277,7 @@ NFS.load(mod_path .. "data/stakes/persimmon.lua")()
 if (SMODS.Mods["Buffoonery"] or {}).can_load then
 	NFS.load(mod_path .. "data/overrides/buffoonery_compat.lua")() 
 end
-
+NFS.load(mod_path .. "data/stakes/stake_card_modifiers.lua")() 
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()
