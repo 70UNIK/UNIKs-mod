@@ -22,6 +22,7 @@ SMODS.Joker {
 	end,
     immutable = true,
     sellable = true,
+    override_cursed_cost = true,
     --add debuffs
     add_to_deck = function(self, card, from_debuff)
         G.E_MANAGER:add_event(Event({
@@ -118,6 +119,10 @@ function Card:can_sell_card(context)
         (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) --or 
         --G.STATE == G.STATES.BLIND_SELECT 
         then return false end
+    --ALWAYS make it unsellable if detrimental.
+    if self.config.center.rarity == 'unik_detrimental' and not self.config.center.sellable then
+        return false
+    end
     if (G.SETTINGS.tutorial_complete or G.GAME.pseudorandom.seed ~= 'TUTORIAL' or G.GAME.round_resets.ante > 1) and
         self.area and
         self.area.config.type == 'joker' and
