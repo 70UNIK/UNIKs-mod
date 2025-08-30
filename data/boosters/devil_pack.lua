@@ -7,7 +7,7 @@ SMODS.Tag{
 		info_queue[#info_queue + 1] = G.P_CENTERS.p_spectral_normal_1
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_soul" }
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_foundation
-		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_cry_gateway" }
+		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway" }
 		return { vars = {} }
 	end,
 
@@ -100,11 +100,10 @@ SMODS.Booster{
 	create_card = function(self, card, i)
 		if
 			i % 2 == 1
-			and Cryptid.enabled("c_cry_gateway") == true
-			and not G.GAME.used_jokers["c_cry_gateway"]
+			and not G.GAME.used_jokers["c_unik_gateway"]
 			and not next(find_joker("Showman"))
 		then
-			return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_cry_gateway")
+			return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_unik_gateway")
 		elseif not G.GAME.used_jokers["c_soul"] and not next(find_joker("Showman")) then
 			return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_soul")
         elseif not G.GAME.used_jokers["j_unik_foundation"] and not next(find_joker("Showman")) then

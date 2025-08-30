@@ -18,7 +18,7 @@ SMODS.Consumable{
 	hidden = true,
 	config = {extra = {jokers = 3}},
     loc_vars = function(self, info_queue, center)
-        return { vars = { center.ability.extra.jokers} }
+        return { vars = { center.ability.extra.jokers or 3} }
     end,
 	can_use = function(self, card)
 		local eternals = 0
