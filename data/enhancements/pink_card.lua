@@ -13,8 +13,8 @@ SMODS.Enhancement {
 	--NEW! specific_suit suit. Like abstracted!
 
 	unik_specific_suit = "unik_pink",
-	unik_specific_rank = 7,
-    unik_specific_base_value = "7",
+	unik_specific_rank = 7, --Corresponds to normal get_id value. MUST BE NUMERICAL is not unik_is_custom_rank
+    unik_specific_base_value = "7", --corresponds to normal base_value
     unik_is_custom_rank = false, 
 
     loc_vars = function(self, info_queue, card)
@@ -49,6 +49,7 @@ SMODS.Enhancement {
 	end,
 }
 
+
 -- local enhancementOverrideSuit = Card.is_suit
 -- function Card:is_suit(suit, bypass_debuff, flush_calc)
 --     return enhancementOverrideSuit(self, bypass_debuff, flush_calc)
@@ -77,7 +78,7 @@ end
 local faceHook = Card.is_face
 function Card:is_face(from_boss)
     if self.debuff and not from_boss then return end
-    if G.P_CENTERS[self.config.center.key].set == "enhancement" and G.P_CENTERS[self.config.center.key].force_no_face then
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and G.P_CENTERS[self.config.center.key].force_no_face then
         return false
     end
     local ret = faceHook(self,from_boss)
@@ -88,33 +89,37 @@ end
 --Add a hook to getID for abstracts (and to conditionally enable the check)
 local getIDenhance = Card.get_id
 function Card:get_id()
-	--Force suit to be suit X if specified in enhancement, only if not vampired
-    if G.P_CENTERS[self.config.center.key].set == "enhancement" and 
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
         G.P_CENTERS[self.config.center.key].unik_specific_rank and
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
         if G.P_CENTERS[self.config.center.key].unik_is_custom_rank then
             return G.ENHANCEMENT_OVERRIDE_RANKS[self.config.center.key][3]
         else
-            return G.ENHANCEMENT_OVERRIDE_RANKS[self.config.center.key][1]
+            return G.P_CENTERS[self.config.center.key].unik_specific_rank
         end
     end
-    -- if SMODS.has_enhancement(self, "m_unik_pink") then
-    --     return 7
-    -- elseif SMODS.has_enhancement(self, "m_cry_abstract") then
-    --     return SMODS.Rank.max_id.value + 1
-    -- end
 	local vars = getIDenhance(self)
 
 	return vars
 end
 
+local suit_hook = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
+    G.P_CENTERS[self.config.center.key].unik_specific_suit
+    then
+        return suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
+    end
+    return suit_hook(self,suit, bypass_debuff, flush_calc)
+end
+
 function Card:get_baseValOverride()
-    if G.P_CENTERS[self.config.center.key].set == "enhancement" and 
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
         G.P_CENTERS[self.config.center.key].unik_specific_rank and
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
-        return G.ENHANCEMENT_OVERRIDE_RANKS[self.config.center.key][2]
+        return G.P_CENTERS[self.config.center.key].unik_specific_base_value
     end
     return self.base.value
 end
@@ -128,7 +133,7 @@ function Card:get_nominal(mod)
     local specific_suit_nominal = self.base.suit_nominal
     if mod == 'suit' then mult = 10000 end
     local vars = nominalGet(self,mod)
-    if G.P_CENTERS[self.config.center.key].set == "enhancement" and 
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
         G.P_CENTERS[self.config.center.key].unik_specific_rank and
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
@@ -140,7 +145,7 @@ function Card:get_nominal(mod)
             vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
         end
     end
-    if G.P_CENTERS[self.config.center.key].set == "enhancement" and 
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
     G.P_CENTERS[self.config.center.key].unik_specific_suit
     then
         if SMODS.Suits[G.P_CENTERS[self.config.center.key].unik_specific_suit] then
@@ -150,16 +155,5 @@ function Card:get_nominal(mod)
         mult = 1
         vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
     end
-    -- if SMODS.has_enhancement(self, "m_cry_abstract") then
-    --     mult = 1
-    --     rank_mult = 0
-    --     return 10*self.base.nominal*rank_mult + self.base.suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
-    -- end
-    -- if SMODS.has_enhancement(self, "m_unik_pink") then
-    --     mult = 1
-    --     rank_mult = 1
-    --     return 10*7*rank_mult + self.base.suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
-    -- end
-
     return vars
 end
