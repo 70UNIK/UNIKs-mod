@@ -20,11 +20,27 @@ SMODS.Voucher{
 			end,
 		}))
 	end,
-    --Dont Spawn if in ghost deck/sleeve
-    in_pool = function(self)
-        if G.GAME.selected_sleeve == 'sleeve_casl_ghost' or G.GAME.selected_back.name == "Ghost Deck" then
-            return false
-        end
-        return true
-    end
 }
+--Ghost Deck: start with spectral merchant
+SMODS.Deck:take_ownership("ghost", {
+    config = { consumables = {'c_hex'}, vouchers = { "v_unik_spectral_merchant" } },
+},true)
+--Cardsleeves: modify it to now have spectral merchant/tycoon.
+if CardSleeves then
+    local ghostSleeve = CardSleeves.Sleeve:get_obj('sleeve_casl_ghost')
+    local ghostSleeveRef = ghostSleeve.loc_vars
+    ghostSleeve.loc_vars = function(self)
+        local key
+        local vars = {}
+        if self.get_current_deck_key() == "b_ghost" then
+            key = self.key .. "_alt"
+            self.config = { vouchers = { "v_unik_spectral_merchant" , "v_unik_spectral_tycoon"}, spectral_more_options = 2 }
+            vars[#vars+1] = self.config.spectral_more_options
+        else
+            key = self.key
+            self.config = { vouchers = { "v_unik_spectral_merchant" }, consumables = { 'c_hex' } }
+            vars[#vars+1] = localize{type = 'name_text', key = self.config.consumables[1], set = 'Tarot'}
+        end
+        return { key = key, vars = vars }
+    end
+end

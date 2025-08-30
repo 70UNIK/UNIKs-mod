@@ -1,6 +1,13 @@
 return {
     descriptions = {
         Back={
+            b_ghost = {
+                name="Ghost Deck",
+                text={
+                    "Start with {C:dark_edition,T:v_unik_spectral_merchant}Spectral Merchant",
+                    "and a {C:spectral,T:c_hex}Hex{} card",
+                },
+            },
             b_unik_polychrome = {
                 name = "Polychrome Deck",
                 text = {
@@ -2821,18 +2828,18 @@ return {
             },
         },
         Sleeve = {
-            sleeve_cry_equilibrium_sleeve = {
-				name = "Balanced Sleeve",
-				text = {
-					"All cards have the",
-					"{C:attention}same chance{} of",
-					"appearing in shops,",
-					"start run with",
-					"{C:attention,T:v_overstock_plus}+2 Shop Slots",
-                    "{C:red}All blinds, including finishers,",
-                    "{C:red}can spawn at anytime"
-				},
-			},
+            sleeve_casl_ghost = {
+                name = "Ghost Sleeve",
+                text = G.localization.descriptions.Back["b_ghost"].text
+            },
+            sleeve_casl_ghost_alt = {
+                name = "Ghost Sleeve",
+                text = {
+                    "Start with {C:dark_edition,T:v_unik_spectral_tycoon}Spectral Tycoon",
+                    "{C:spectral}Spectral Packs{} have {C:attention}#1#{}",
+                    "extra options to choose from",
+                }
+            },
         },
         Tag={			
             --to even be remotely safe to use, you need yes nothing! Yes I am making more stuff that reles on yes nothing since there isnt enough stuff that needs it (wheel, tornado, glass cards,cavendish,banana tag)
