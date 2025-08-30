@@ -1990,7 +1990,7 @@ return {
                 name = "Euclid",
                 text = {
                     "Each scored {C:attention}2{}, {C:attention}3{}, {C:attention}5{}, {C:attention}7{} or {C:attention}Ace{}",
-                    "gives {C:chips}+#1#{}",
+                    "gives {C:chips}+#1#{} Chips",
                 }
             },
 

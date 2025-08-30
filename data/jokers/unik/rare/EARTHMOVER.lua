@@ -13,7 +13,7 @@ SMODS.Joker {
 		if not center.edition or (center.edition and not center.edition.negative) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
 		end
-		return { vars = { center.ability.extra.boss_size } }
+		return { vars = { center.ability.extra.exponent } }
 	end,
     	calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and context.blind.boss and not card.getting_sliced and not context.retrigger_joker and not context.repetition then
