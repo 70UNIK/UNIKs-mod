@@ -26,15 +26,22 @@ SMODS.Consumable{
     end,
 	can_use = function(self, card)
 		local validJokers = 0
+		local totalJokers = 0
 		if G.jokers.cards then
-			for i,v in pairs(G.jokers.cards) do
-				if not SMODS.is_eternal(v,self) and (not v.edition or (v.edition and not v.edition.negative)) then
-					validJokers = validJokers + 1
+			for i = 1, #G.jokers.cards do
+				if totalJokers < card.ability.extra.jokers then
+					local v = G.jokers.cards[i]
+					if not SMODS.is_eternal(v,self) then
+						totalJokers = totalJokers + 1
+						if ((v.edition and not v.edition.negative) or not v.edition) then
+							validJokers = validJokers + 1
+						end
+					end
 				end
 			end
 		end
-
-		if G.jokers.cards and to_big(#G.jokers.cards - validJokers) < to_big(G.jokers.config.card_limit) then
+		print(validJokers)
+		if G.jokers.cards and to_big(#G.jokers.cards - totalJokers) < to_big(G.jokers.config.card_limit - totalJokers + totalJokers) then
 			return true
 		end
 		return false
