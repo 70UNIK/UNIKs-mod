@@ -125,9 +125,9 @@ SMODS.Blind{
             return false
         end
         --TODO: FIX THIS, replace with dedicated function!
-        if #Cryptid.advanced_find_joker(nil, nil, "e_negative", nil, true) ~= 0 or G.jokers.config.card_limit - #G.jokers.cards > 0 then
-            return CanSpawnEpic()
-        end
+        -- if #Cryptid.advanced_find_joker(nil, nil, "e_negative", nil, true) ~= 0 or G.jokers.config.card_limit - #G.jokers.cards > 0 then
+        --     return CanSpawnEpic()
+        -- end
         return false
 	end,
 }

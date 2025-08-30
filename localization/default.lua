@@ -2775,7 +2775,8 @@ return {
 				text = {
 					"Create an {C:unik_ancient,E:1}Ancient{} Joker",
 					"{C:red}destroy{} the {C:attention}#1#",
-					"leftmost (non-eternal) Joker#<s>1#",
+					"leftmost Joker#<s>1#",
+                    "{C:inactive}(Eternals skipped){}"
 				},
 			},
             c_unik_foundry = {

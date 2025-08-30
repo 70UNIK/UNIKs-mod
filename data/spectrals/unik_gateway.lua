@@ -18,21 +18,26 @@ SMODS.Consumable{
 	hidden = true,
 	config = {extra = {jokers = 3}},
     loc_vars = function(self, info_queue, center)
-        return { vars = { center.ability.extra.jokers or 3} }
+		local size = center.ability.extra.jokers
+		if not center.ability.extra.jokers or center.ability.extra.jokers == nil then
+			size = 3
+		end
+        return { vars = { size} }
     end,
 	can_use = function(self, card)
-		local eternals = 0
+		local validJokers = 0
 		if G.jokers.cards then
 			for i,v in pairs(G.jokers.cards) do
-				if SMODS.is_eternal(v,self) then
-					eternals = eternals + 1
+				if not SMODS.is_eternal(v,self) and (not v.edition or (v.edition and not v.edition.negative)) then
+					validJokers = validJokers + 1
 				end
 			end
 		end
 
-		if eternals < G.jokers.config.card_limit then
+		if G.jokers.cards and to_big(#G.jokers.cards - validJokers) < to_big(G.jokers.config.card_limit) then
 			return true
 		end
+		return false
 	end,
 	-- pixel_size = { w = 71, h = 71 }, --hopefully THAT works
 	-- loc_vars = function(self, info_queue, card)
