@@ -47,6 +47,8 @@ NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
+NFS.load(mod_path .. "data/misc/voucher_unredeem.lua")()
+NFS.load(mod_path .. "data/misc/plurals.lua")()
 SMODS.Atlas {
 	key = "modicon",
 	path = "modicon.png",
@@ -173,12 +175,6 @@ SMODS.Atlas {
 	py = 95
 }
 SMODS.Atlas {
-	key = "placeholders2",
-	path = "placeholders2.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
 	key = "unik_rare",
 	path = "unik_rare.png",
 	px = 71,
@@ -220,12 +216,6 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
--- SMODS.Atlas {
--- 	key = "unik_omegaplanets",
--- 	path = "unik_omegaplanets.png",
--- 	px = 71,
--- 	py = 95
--- }
 SMODS.Atlas {
 	key = "unik_decks",
 	path = "unik_decks.png",
@@ -488,7 +478,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/double_container.lua")() --Uncommo
 
 --Uncommon
 NFS.load(mod_path .. "data/jokers/unik/uncommon/no_standing_zone.lua")()
-
+NFS.load(mod_path .. "data/jokers/unik/uncommon/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/tax_haven.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/cube_joker.lua")() 
@@ -542,7 +532,6 @@ if (SMODS.Mods["paperback"] or {}).can_load then
 end
 if Cryptid then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
-	NFS.load(mod_path .. "data/jokers/cryptid/coupon_codes.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/hacker.lua")()
 	-- NFS.load(mod_path .. "data/jokers/last_tile.lua")() --May not program it in...
 	NFS.load(mod_path .. "data/jokers/cryptid/epic_riffin.lua")() 

@@ -477,7 +477,7 @@ return {
                 text = {
                     "Half of Digits in Score is",
                     "added to Ante instead of Score",
-                    "until #1# hand#2# containing",
+                    "until #1# hand#<s>1# containing",
                     "a Flush are discarded",
                 }
             },
@@ -1504,14 +1504,12 @@ return {
                     "Destroy an {C:unik_ancient}Ancient{} Joker",
                 }
             },
-            --banned in almanac due to persistent voucher bug when unredeeming
             j_unik_coupon_codes = {
                 name="Coupon Codes",
                 text={
-                    "Redeem a {C:attention}random{} {C:attention}disposable{} Voucher",
+                    "Redeem {C:attention}#1#{} random",
+                    "{C:attention}disposable{} Voucher#<s>1#",
                     "at the end of round",
-                    "{C:green}#1# in #2#{} chance not to redeem another", 
-                    "{C:attention}disposable{} Voucher",
                 }         
             },
             j_unik_vessel_kiln = { --overrides get tag function to instead generate Violet vessel, negating the benefit of this Joker. It's chips cause ceramic.
@@ -3388,6 +3386,7 @@ return {
             k_unik_xchips_not_vanilla2="XCHIPS ALREADY EXISTS!!1!! IT'S CALLED MULT!1!!1",
             k_unik_xchips_not_vanilla3="THINK! THINK! YOUR DEPENDENCE ON XCHIPS IS DISGUSTING!!11!!!",
             k_unik_xchips_not_vanilla4="BUNCO IS NOT VANILLA CAUSE IT USES XCHIPS!!!!11!!!",
+            cry_unredeemed = "Unredeemed...",
         },
         high_scores={},
         labels={

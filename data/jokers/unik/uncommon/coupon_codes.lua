@@ -11,11 +11,10 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {prob = 3, odds = 5} },
+    config = { extra = {coupons = 2} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_disposable" }
-        local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.prob, center.ability.extra.odds, 'unik_coupon_codes')
-		return { vars = { new_numerator, new_denominator} }
+		return { vars = { center.ability.extra.coupons} }
 	end,
     calculate = function(self, card, context)
         if context.forcetrigger then
@@ -24,7 +23,7 @@ SMODS.Joker {
                     trigger = "before",
                     delay = 0,
                     func = function()
-                        local max = 2
+                        local max = card.ability.extra.coupons
                         for i = 1, max do
                             local area
                             if G.STATE == G.STATES.HAND_PLAYED then
@@ -72,11 +71,7 @@ SMODS.Joker {
         end
         if (context.end_of_round and context.game_over == false) then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})
-            local max = 1
-            if not SMODS.pseudorandom_probability(card, 'unik_coupon_codes', card.ability.extra.prob, card.ability.extra.odds, 'unik_coupon_codes') then
-                max = 2
-            end
-            for i = 1, max do
+            for i = 1, card.ability.extra.coupons do
                 local area
                 if G.STATE == G.STATES.HAND_PLAYED then
                     if not G.redeemed_vouchers_during_hand then
