@@ -103,7 +103,10 @@ SMODS.Tag{
                                 G.CONTROLLER.locks[lock] = true
                                 tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                                     local emp = Tag("tag_unik_manacle")
-                                    	emp.ability.shiny = Cryptid.is_shiny()
+                                    if Cryptid then
+                                        emp.ability.shiny = Cryptid.is_shiny()
+                                    end
+                                    	
                                     add_tag(emp)
                                     G.CONTROLLER.locks[lock] = nil   
                                     return true
@@ -117,7 +120,9 @@ SMODS.Tag{
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_manacle")
+                        if Cryptid then
                             emp.ability.shiny = Cryptid.is_shiny()
+                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -130,7 +135,9 @@ SMODS.Tag{
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_vessel")
+                        if Cryptid then
                             emp.ability.shiny = Cryptid.is_shiny()
+                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -150,8 +157,10 @@ SMODS.Tag{
 				G.CONTROLLER.locks[lock] = true
 				tag:yep("+", G.C.SECONDARY_SET.Spectral, function()
 					local emp = Tag("tag_unik_extended_empowered")
-                    if tag.ability.shiny then -- good fucking luck
-                        emp.ability.shiny = Cryptid.is_shiny()
+                    if Cryptid then
+                        if tag.ability.shiny then -- good fucking luck
+                            emp.ability.shiny = Cryptid.is_shiny()
+                        end
                     end
 					add_tag(emp)
 					tag.triggered = true

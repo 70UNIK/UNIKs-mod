@@ -138,7 +138,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
     end
 
     --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
-    if not Cryptid or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true) and #G.hand.highlighted == 0 then
+    if (not Cryptid or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
         
     else
         pcfh(e)

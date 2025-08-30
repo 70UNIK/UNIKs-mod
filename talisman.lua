@@ -1,6 +1,6 @@
 --cryptlib copying emult/echips.
 --TALISMANLESS AS WELL!
-if SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) and (SMODS.Mods["Cryptlib"] or {}).can_load then
+if SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) and not (SMODS.Mods["Cryptlib"] or {}).can_load then
 	local smods_xchips = false
 	for _, v in pairs(SMODS.scoring_parameter_keys) do
 		if v == "x_chips" then
