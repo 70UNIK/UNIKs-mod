@@ -135,32 +135,6 @@ if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not r
 end
 '''
 
-### cube content set: add cube and big cube to the cube sets (cannot do it manually, have to patch it in)
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
-pattern = '''local big_cube = {'''
-position = "after"
-payload = '''pools = { ["unik_cube"] = true },'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
-pattern = '''pools = { ["Meme"] = true },
-	source_gate = "sho",
-	loc_vars = function(self, info_queue, center)
-		return { vars = { center.ability.extra.chips } }
-	end,'''
-position = "at"
-payload = '''pools = { ["unik_cube"] = true, ["Meme"] = true,  },
-	source_gate = "sho",
-	loc_vars = function(self, info_queue, center)
-		return { vars = { center.ability.extra.chips } }
-	end,'''
-match_indent = true
-
 ### vessel kiln, override cat tags and other tags to replace with vessel tags
 [[patches]]
 [patches.pattern]
@@ -186,20 +160,6 @@ payload = '''
 -- reduce commit limit by 1
 if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
     G.jokers.highlighted[1].ability.cry_reworked = true
-end
-'''
-match_indent = true
-
-### REWORK: White Lily should immediately die without respawn if used REWORK on her:
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/code.lua"]'''
-pattern = '''tag.ability.rework_edition = G.P_CENTER_POOLS.Edition[found_index].key'''
-position = "after"
-payload = '''
--- reduce commit limit by 666
-if jkr.config.center.key == "j_unik_white_lily_cookie" then
-    jkr.ability.cry_committed = true
 end
 '''
 match_indent = true
@@ -238,15 +198,5 @@ pattern = '''for i = 1, #G.jokers.cards do
 position = "at"
 payload = '''
 --nope
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''functions/common_events.lua'''
-pattern = '''elseif _type == 'Planet' then _pool[#_pool + 1] = "c_pluto"'''
-position = "before"
-payload = '''
-elseif _type == 'Joker' and _rarity == 'cry_candy' then _pool[#_pool + 1] = "j_cry_wrapped"
 '''
 match_indent = true

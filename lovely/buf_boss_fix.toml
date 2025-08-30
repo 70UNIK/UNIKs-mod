@@ -3,7 +3,7 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999
 
-
+### Fixing buffoonery's buffoonish blind bug
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Buffoonery "Buffoonery.lua"]'''

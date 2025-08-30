@@ -3,10 +3,7 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999
 
-### old poppy, now its INDIGO ICBM's function
-### ALso triger matador if you have one
-### WIll also have functionality for the Raspberry Racket
-### Todo: refactor into debuff_after_hand
+### Debuff after hand, either for blind functionality after a hand is played, add to blind size or outright having it not score.
 
 [[patches]]
 [patches.pattern]

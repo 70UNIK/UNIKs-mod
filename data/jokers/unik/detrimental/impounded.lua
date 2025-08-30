@@ -126,7 +126,7 @@ function Card:can_sell_card(context)
     if (G.SETTINGS.tutorial_complete or G.GAME.pseudorandom.seed ~= 'TUTORIAL' or G.GAME.round_resets.ante > 1) and
         self.area and
         self.area.config.type == 'joker' and
-        (not self.ability.eternal or (self.ability.eternal and lockpick and not self.config.center.dissolve_immune and not self.ability.dissolve_immune)) then
+        (not SMODS.is_eternal(self, {from_sell = true}) or ( SMODS.is_eternal(self, {from_sell = true}) and lockpick and not self.config.center.dissolve_immune and not self.ability.dissolve_immune)) then
             if self.config.center.key == "j_unik_impounded" or self.config.center.key == "j_buf_afan_spc"  then
                 --Takes in factor credit card
                 if to_big((G.GAME.dollars-G.GAME.bankrupt_at) + self.ability.extra.cost) < to_big(0) then

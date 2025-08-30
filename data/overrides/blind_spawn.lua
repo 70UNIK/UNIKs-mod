@@ -1,1 +1,2 @@
 --My very own customized blind spawning system.
+--Takes in account The Vice (Faster Finisher Blind spawn rates), Epic Blind Sauce, Epic Vice (Force Epic Blinds)

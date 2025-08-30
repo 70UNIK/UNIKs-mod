@@ -3,8 +3,7 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999
 
-### legendary nuke - Trigger player death - AFTER cryptid
-### Also includes green goalpost functionality;
+### Debuff after defeat, either for green goalpost or nuke
 
 [[patches]]
 [patches.pattern]

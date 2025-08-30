@@ -194,7 +194,7 @@ G.FUNCS.unik_devour_fs = function(e)
     local eternals = 0
     if G.hand and G.hand.highlighted and #G.hand.highlighted > 0 then
         for i, v in pairs(G.hand.highlighted) do
-            if v.ability.eternal then
+            if  SMODS.is_eternal(v, card) then
                 eternals = eternals + 1
             end
         end
@@ -218,7 +218,7 @@ G.FUNCS.unik_devour_fs = function(e)
         delay(0.5)
         local destroyed_cards = {}
         for i, v in pairs(G.hand.highlighted) do
-            if not v.ability.eternal then
+            if not SMODS.is_eternal(v, card) then
                 destroyed_cards[#destroyed_cards+1] = v
             end
         end
@@ -303,7 +303,7 @@ G.FUNCS.unik_can_devour_fs = function(e)
             and card.area.config.type ~= "shop" then
             local eternals = 0
             for i, v in pairs(G.hand.highlighted) do
-                if v.ability.eternal then
+                if SMODS.is_eternal(v, card) then
                     eternals = eternals + 1
                 end
             end

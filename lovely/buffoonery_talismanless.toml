@@ -3,6 +3,7 @@ version = "0.0.1"
 dump_lua = true
 priority = -1
 
+##Another buffoonery fix, without talisman, buff likes to do this, causing very buffed values for emult/echips. This fixes this.
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Buffoonery "Buffoonery.lua"]'''

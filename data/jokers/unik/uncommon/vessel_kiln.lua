@@ -31,15 +31,6 @@ SMODS.Joker {
 		end
 	end
 }
---TODO: Ensure this properly works
--- local vessel_tagger = Cryptid.get_next_tag
--- function Cryptid.get_next_tag(override)
--- 	if next(SMODS.find_card("j_unik_vessel_kiln")) then
--- 		return "tag_unik_vessel"
--- 	end
--- 	return vessel_tagger(override)
-	
--- end
 
 local vessel2 = add_tag
 function add_tag(_tag)

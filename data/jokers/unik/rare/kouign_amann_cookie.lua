@@ -1,4 +1,6 @@
-
+--TOTAL REWORK NEEDED:
+--Light suits do... ???
+--
 SMODS.Atlas {
 	key = "unik_kouign_amann_cookie",
 	path = "unik_kouign_amann_cookie.png",

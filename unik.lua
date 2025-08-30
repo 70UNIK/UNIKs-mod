@@ -248,7 +248,9 @@ SMODS.Rarity({
 	loc_txt = {},
 	badge_colour = G.C.UNIK_ANCIENT,
 })
-
+if Cryptid then
+    Cryptid.pointerblistifytype("rarity", "unik_ancient")
+end
 NFS.load(mod_path .. "data/overrides/rarity_overrides.lua")()
 
 --Discount Cursed
@@ -562,6 +564,9 @@ end
 if next(SMODS.find_mod("finity")) then
 
 	if unik_config.unik_legendary_blinds then
+		if Cryptid then
+			Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown")
+		end
 		SMODS.Rarity({
 			key = "unik_legendary_blind_finity",
 			loc_txt = {},
