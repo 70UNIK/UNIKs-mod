@@ -127,7 +127,9 @@ SMODS.Joker {
 					colour = G.C.DARK_EDITION,
 				}
 			else
-				return
+				return{
+
+				}
 			end
 		end
 		
@@ -222,28 +224,25 @@ function exponentLevelExtra(hand,exponent,v,instant)
 	G.GAME.hands[hand].chips = G.GAME.hands[hand].chips*exponent
 	if not instant and (not Talisman or not Talisman.config_file.disable_anims) then
 		delay(0.1)
-		update_hand_text({delay = 0}, {mult = Cryptid.ascend(G.GAME.hands[hand].mult), StatusText = true})
+		update_hand_text({delay = 0}, {mult = G.GAME.hands[hand].mult, StatusText = true})
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
-			delay = 0.9,
 			func = function()
 				play_sound("multhit2")
 				v:juice_up(0.8, 0.5)
 				return true
 			end,
 		}))
-		delay(0.5)
-		update_hand_text({delay = 0}, {chips = Cryptid.ascend(G.GAME.hands[hand].chips), StatusText = true})
+		delay(0.1)
+		update_hand_text({delay = 0}, {chips = G.GAME.hands[hand].chips, StatusText = true})
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
-			delay = 0.9,
 			func = function()
 				play_sound("xchips")
 				v:juice_up(0.8, 0.5)
 				return true
 			end,
 		}))
-		delay(0.5)
 	end
 end
 

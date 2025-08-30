@@ -41,7 +41,7 @@ SMODS.Blind{
         return CanSpawnLegendary()
     end,
     --no fucking around this time
-    cry_after_play = function(self)
+    unik_after_play = function(self)
         ease_hands_played(-666)
 	end,
     --somehow if that happens, set the base to be 

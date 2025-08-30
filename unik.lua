@@ -5,6 +5,24 @@ UNIK = SMODS.current_mod
 if not UNIK then
 	UNIK = {}
 end
+
+-- Enable optional features
+SMODS.current_mod.optional_features = {
+	retrigger_joker = true,
+	post_trigger = true,
+	quantum_enhancements = false,
+	-- Here are some other ones Steamodded has
+	-- Cryptid doesn't use them YET, but these should be uncommented if Cryptid uses them
+	-- These ones add new card areas that Steamodded will calculate through
+	-- Might already be useful for sticker calc
+
+	-- Cryptid uses cardarea deck now
+	cardareas = {
+		deck = true,
+		discard = true, -- used by scorch
+	},
+}
+
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	

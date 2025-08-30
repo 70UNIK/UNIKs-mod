@@ -32,7 +32,7 @@ SMODS.Blind{
             end
 		end
 	end,
-    cry_before_play = function(self)
+    unik_before_play = function(self)
         if not G.GAME.unik_jack_discarded then
             local validCards = {}
             --Get all ghosts 

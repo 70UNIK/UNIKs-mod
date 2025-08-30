@@ -18,7 +18,7 @@ SMODS.Blind{
         local new_numerator, new_denominator = SMODS.get_probability_vars(self, 1,4, 'unik_fuzzy')
 		return { vars = { new_numerator, new_denominator } }
 	end,
-    cry_before_play = function(self)
+    unik_before_play = function(self)
         for i,v in pairs(G.hand.highlighted) do
             if (not v.edition or (v.edition and not v.edition.unik_fuzzy)) and SMODS.pseudorandom_probability(self, pseudoseed('unik_fuzzy'), 1, 4, 'unik_fuzzy') then
                 v:set_edition({ unik_fuzzy = true }, true,nil, true)

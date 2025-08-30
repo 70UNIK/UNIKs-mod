@@ -114,7 +114,7 @@ SMODS.Blind{
 --Add context for Just before cards are played
 local pcfh = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
-	G.GAME.before_play_buffer = true
+	G.GAME.before_play_buffer2 = true
 
     if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
         local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
@@ -141,9 +141,10 @@ function G.FUNCS.play_cards_from_highlighted(e)
     if (not Cryptid or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
         
     else
+        G.GAME.blind:unik_before_play()
         pcfh(e)
     end
-	G.GAME.before_play_buffer = nil
+	G.GAME.before_play_buffer2 = nil
 end
 
 --As playing a hand is one_click, it means if lets say a card being played just happened to be disabled, then

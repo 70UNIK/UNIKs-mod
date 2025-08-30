@@ -50,7 +50,7 @@ SMODS.Blind{
         G.GAME.unik_dynamic_text_realtime = true
         
 	end,
-    cry_before_play = function (self)
+    unik_before_play = function (self)
         G.GAME.unik_blind_extra_excess = G.GAME.unik_blind_extra_excess or 0
         local count = jokerRaritiesCount()
         if count > 1 then

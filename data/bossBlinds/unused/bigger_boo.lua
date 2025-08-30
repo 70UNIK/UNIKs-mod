@@ -48,7 +48,7 @@ SMODS.Blind{
     end,
 
     --less strong than above but worse long term effects
-    cry_before_play = function(self)
+    unik_before_play = function(self)
         local ghostList = {}
         --Get all ghosts 
         for i=1,#G.jokers.cards do

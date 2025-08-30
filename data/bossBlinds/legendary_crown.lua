@@ -69,7 +69,7 @@ SMODS.Blind{
     in_pool = function()
         return CanSpawnLegendary()
     end,
-    cry_after_play = function(self)
+    unik_after_play = function(self)
         ease_hands_played(-666)
 	end,
     --i wont bother programming in a disable function since its not menant to be dsiabled
