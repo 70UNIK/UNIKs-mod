@@ -19,8 +19,12 @@ match_indent = true
 [patches.pattern]
 target = '''functions/misc_functions.lua'''
 pattern = '''local suits = SMODS.Suit.obj_buffer'''
-position = "after"
+position = "at"
 payload = '''
+local suits = {}
+for i = 1, #SMODS.Suit.obj_buffer do
+    suits[#suits + 1] = SMODS.Suit.obj_buffer[i]
+end
 for i = 1, #G.ENHANCEMENT_OVERRIDE_SUITS do
     suits[#suits + 1] = G.ENHANCEMENT_OVERRIDE_SUITS[i]
 end
