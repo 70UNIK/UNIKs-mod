@@ -128,6 +128,8 @@ local nominalGet = Card.get_nominal
 function Card:get_nominal(mod)
     local mult = 1
     local rank_mult = 1
+    local specific_rank_nominal = self.base.nominal
+    local specific_suit_nominal = self.base.suit_nominal
     if mod == 'suit' then mult = 10000 end
     local vars = nominalGet(self,mod)
     if G.P_CENTERS[self.config.center.key].set == "enhancement" and 
@@ -138,20 +140,19 @@ function Card:get_nominal(mod)
             rank_mult = 0
             vars = 10*self.base.nominal*rank_mult + self.base.suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
         else
-            local specific_rank_nominal = G.P_CENTERS[self.config.center.key].unik_specific_rank
-            vars = 10*specific_rank_nominal*rank_mult + self.base.suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
+            specific_rank_nominal = G.P_CENTERS[self.config.center.key].unik_specific_rank
+            vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
         end
     end
     if G.P_CENTERS[self.config.center.key].set == "enhancement" and 
     G.P_CENTERS[self.config.center.key].unik_specific_suit
     then
-        local nominal = 0
         if SMODS.Suits[G.P_CENTERS[self.config.center.key].unik_specific_suit] then
             -- print(SMODS.Suits[G.P_CENTERS[self.config.center.key].unik_specific_suit].max_nominal.value)
-            nominal = SMODS.Suits[G.P_CENTERS[self.config.center.key].unik_specific_suit].suit_nominal
+            specific_suit_nominal = SMODS.Suits[G.P_CENTERS[self.config.center.key].unik_specific_suit].suit_nominal
         end
         mult = 1
-        vars = 10*self.base.nominal*rank_mult + nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
+        vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
     end
     -- if SMODS.has_enhancement(self, "m_cry_abstract") then
     --     mult = 1
