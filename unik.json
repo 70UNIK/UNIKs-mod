@@ -2,7 +2,7 @@
 	"id": "unik",
 	"name": "UNIK's mod",
 	"author": ["70UNIK"],
-	"description": "An addon to Cryptid designed around the Mainline experience where I add what I want or can.",
+	"description": "Addon turned unbalanced standalone where I add what I want or can.",
 	"prefix": "unik",
 	"main_file": "unik.lua",
 	"priority": 99999999999999999,

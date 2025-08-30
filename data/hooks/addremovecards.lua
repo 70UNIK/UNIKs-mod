@@ -195,6 +195,7 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.unik_triggering = true
         card.ability.dissolve_immune = true
         card.ability.debuff_immune = true
+        unik_set_sell_cost(card,-666)
     end
     --mainline:
     if self and self == G.consumeables and card.config.center.key == "c_cry_pointer" then

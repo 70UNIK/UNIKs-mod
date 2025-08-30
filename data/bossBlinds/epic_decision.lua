@@ -26,9 +26,7 @@ sSMODS.Blind	{
         if not reset then
             G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
-            G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering
-            G.GAME.unik_halt_round = true
-            G.GAME.cry_fastened = true
+            G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering and draw cards afterwards if in blind.
             G.GAME.lartceps_pack_pity = 0
             if G.jokers.cards then
 				G.GAME.blind:wiggle()
@@ -37,10 +35,6 @@ sSMODS.Blind	{
 					v:juice_up(0,0.25)
 				end
 			end
-            --PLACEHOLDER: Will open a random booster pack for now
-            --Booster will contain:
-            --4 cursed Jokers
-            --1 "tarot" to banish the rightmost joker
             local disp_text = localize("k_unik_must_select_four")
             attention_text({
                 scale = 0.7, text = disp_text, maxw = 12, hold = 15, align = 'cm', offset = {x = 0,y = -1},major = G.play
@@ -114,5 +108,32 @@ G.FUNCS.skip_booster = function(e)
         end
     else
         almanac_no_skip(e)
+        --Draw cards after the booster pack has been skipped/finished
+        
+    end
+end
+
+local end_consumable_hook =   G.FUNCS.end_consumeable
+G.FUNCS.end_consumeable = function(e, delayfac)
+    end_consumable_hook(e,delayfac)
+    if G.GAME.unik_mortons_fork then
+        G.GAME.unik_mortons_fork = nil
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.STATE = G.STATES.DRAW_TO_HAND
+                G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+                G.deck:hard_set_T()
+                G.STATE_COMPLETE = false
+                return true
+            end
+        }))
+    end
+end
+
+local saveHook = save_run
+function save_run()
+    if not G.GAME.unik_mortons_fork then
+        saveHook()
     end
 end

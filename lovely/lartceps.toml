@@ -38,7 +38,6 @@ end
 '''
 match_indent = true
 
-
 ###shader
 [[patches]]
 [patches.pattern]
@@ -49,35 +48,6 @@ payload = '''
 if self.ability.set == 'unik_lartceps' then
     self.children.center:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
 end
-'''
-match_indent = true
-
-###stolen from the decision, but adapted for when entering the blind
-
-## Get back into blind and complete it after using the pack
-[[patches]]
-[patches.pattern]
-target = '''functions/button_callbacks.lua'''
-pattern = '''G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.2*delayfac,
-          func = function()
-            save_run()
-            return true
-      end}))'''
-position = "at"
-payload = '''
-G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.2*delayfac,
-      func = function()
-      if G.GAME.unik_mortons_fork then
-            G.GAME.unik_halt_round = nil
-            G.GAME.cry_fastened = nil
-            new_round()
-      else
-            save_run()
-      end
-      
-      return true
-end}))
-
 '''
 match_indent = true
 
@@ -144,54 +114,30 @@ position = "at"
 payload = '''(G.booster_pack and not G.booster_pack.REMOVED and not disable_booster_music and 'music2') or'''
 match_indent = true
 
-### Part 1 of hardcoding: If mortons fork is present, skip the first part beyond the setting blind
+### Part 1 of hardcoding: If mortons fork is present, skip drawing cards
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
-pattern = '''delay(0.4)
-    G.E_MANAGER:add_event(Event({
-      trigger = 'immediate',
-      func = function()'''
-position = "after"
+pattern = '''G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    G.STATE = G.STATES.DRAW_TO_HAND'''
+position = "before"
 payload = '''if not G.GAME.unik_mortons_fork then'''
 match_indent = true
 
-### Part 2 of hardcoding: After blind set, do not proceed further if inside a booster context. Part 3 of hardcoding: If in a booster and mortons fork is enabled after ending the booster, then mortons fork should be disabled
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
-pattern = '''G.GAME.blind:set_blind(G.GAME.round_resets.blind)'''
+pattern = '''                    G.deck:hard_set_T()
+                    G.STATE_COMPLETE = false
+                    return true
+                end
+            }))'''
 position = "after"
-payload = '''
-end
-if not G.GAME.unik_halt_round then
-G.GAME.unik_mortons_fork = nil
-'''
+payload = '''end'''
 match_indent = true
 
-### end of abo0ve
-[[patches]]
-[patches.pattern]
-target = '''functions/state_events.lua'''
-pattern = '''            return true
-        end
-        }))
-end
-
-G.FUNCS.draw_from_hand_to_run = function(e)'''
-position = "before"
-payload = '''
-end'''
-match_indent = true
-
-# Conveyor Deck and the decision - Don't sort cards
-[[patches]]
-[patches.pattern]
-target = "cardarea.lua"
-pattern = "table.sort(self.cards, function (a, b) return a.T.x + a.T.w/2 - 100*((a.pinned and not a.ignore_pinned) and a.sort_id or 0) < b.T.x + b.T.w/2 - 100*((b.pinned and not b.ignore_pinned) and b.sort_id or 0) end)"
-position = "at"
-payload = "if not G.GAME.modifiers.cry_conveyor and not G.GAME.cry_fastened then table.sort(self.cards, function (a, b) return a.T.x + a.T.w/2 - 100*((a.pinned and not a.ignore_pinned) and a.sort_id or 0) < b.T.x + b.T.w/2 - 100*((b.pinned and not b.ignore_pinned) and b.sort_id or 0) end) end"
-match_indent = true
 
 ### antifrustriation feature of booster
 [[patches]]

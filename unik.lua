@@ -683,3 +683,9 @@ NFS.load(mod_path .. "data/ui/overshoot.lua")()
 --Pop (Poppy): Retrigger rightmost card at 0 discards --> retrigger rightmost card 2 times at 0 discards
 --Stars (Moonlight): 3 in 4 chance to not retrigger levelups once. --> 1 in 2 chance to not retrigger levelups once.
 --Cube (Cube Joker): gains 5 chips if hand contains exactly 4 cards --> gains 9 chips if hand contains exactly 4 cards
+
+--TODO:
+--Blind fixes:
+--Epic Decision (open booster pack when selecting blind, but make it much less janky)
+--The Vice/Epic Vice (Dedicated boss blind spawn system)
+--
