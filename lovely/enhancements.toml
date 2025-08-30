@@ -40,6 +40,8 @@ pattern = '''for i = 1, SMODS.Rank.max_id.value do
   end'''
 position = "after"
 payload = '''
-    vals[#vals + 1] = {}
+    for i = 1, #G.ENHANCEMENT_OVERRIDE_RANKS do
+        vals[#vals + 1] = {}
+    end
 '''
 match_indent = true
