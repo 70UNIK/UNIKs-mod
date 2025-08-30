@@ -3,40 +3,6 @@ version = "0.0.1"
 dump_lua = true
 priority = 999
 
-# Patch into cryptid to force happiness to be positive in a reliable way
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
-pattern = '''if card.ability.name == "cry-universe" then
-		card:set_edition("e_cry_astral", true, nil, true)
-	end'''
-position = "after"
-payload = '''
-if card.ability.name == "j_unik_happiness" then
-    card:set_edition("e_unik_positive", true, nil, true)
-end
-if card.ability.name == "j_unik_borg_cube" then
-    card:set_edition("e_unik_steel", true, nil, true)
-end
-if card.ability.name == "j_unik_binary_asteroid" then
-    card:set_edition("e_paperback_dichrome", true, nil, true)
-end
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
-pattern = '''and card.ability.name ~= "cry-universe"'''
-position = "after"
-payload = '''and card.ability.name ~= "j_unik_happiness"
-and card.ability.name ~= "j_unik_borg_cube"
-and card.ability.name ~= "j_unik_binary_asteroid"
-'''
-match_indent = true
-
-### Bad edition colors: Instead of a blueshift, its a redshift, just to show how shitty it is
-
 [[patches]]
 [patches.pattern]
 target = "game.lua"

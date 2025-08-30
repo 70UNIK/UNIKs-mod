@@ -3,7 +3,7 @@ SMODS.Blind{
     key = 'unik_cookie',
     config = {},
 
-    boss = {min = 1, max = 6666666,yes_orb = true}, 
+    boss = {min = 1, max = 6666666}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 18},
     boss_colour= HEX("d58c4b"), 

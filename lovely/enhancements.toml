@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = -1000
+priority = 9999999
 
 ## Artificially add abstracted 'suits' to flush calculations without declaring them (sigil, familiar)
 ## Also make sure to create a hard copy of suits and iterate, otherwise adding the artificial suit will add it to suit.obj_buffer for real!
@@ -12,7 +12,7 @@ pattern = '''local suits = SMODS.Suit.obj_buffer'''
 position = "after"
 payload = '''
     for i = 1, #G.ENHANCEMENT_OVERRIDE_SUITS do
-        [#suits + 1] = G.ENHANCEMENT_OVERRIDE_SUITS[i]
+        suits[#suits + 1] = G.ENHANCEMENT_OVERRIDE_SUITS[i]
     end
 '''
 match_indent = true
@@ -25,7 +25,7 @@ pattern = '''local suits = {}'''
 position = "after"
 payload = '''
     for i = 1, #G.ENHANCEMENT_OVERRIDE_SUITS do
-        [#suits + 1] = G.ENHANCEMENT_OVERRIDE_SUITS[i]
+        suits[#suits + 1] = G.ENHANCEMENT_OVERRIDE_SUITS[i]
     end
 '''
 match_indent = true
@@ -35,10 +35,8 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "functions/misc_functions.lua"
-pattern = '''for i = 1, SMODS.Rank.max_id.value do
-      vals[i] = {}
-  end'''
-position = "after"
+pattern = '''for i=#hand, 1, -1 do'''
+position = "before"
 payload = '''
     for i = 1, #G.ENHANCEMENT_OVERRIDE_RANKS do
         vals[#vals + 1] = {}
