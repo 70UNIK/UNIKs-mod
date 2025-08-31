@@ -19,7 +19,7 @@ SMODS.Joker {
                  if not G.GAME.banned_keys then
                     G.GAME.banned_keys = {}
                 end
-                if not G.GAME.banned_keys then
+                if not G.GAME.cry_banished_keys then
                     G.GAME.cry_banished_keys = {}
                 end
                 G.GAME.cry_banished_keys[context.card.config.center.key] = true

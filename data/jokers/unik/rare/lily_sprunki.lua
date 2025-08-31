@@ -68,13 +68,6 @@ SMODS.Joker {
 	end,
 }
 
--- local igo2 = Game.init_game_object
--- function Game:init_game_object()
--- 	local ret = igo2(self)
--- 	ret.sprunki_lily_quote = "k_unik_lily_sprunki_normal"
--- 	return ret
--- end
-
 if JokerDisplay then
 	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
     }
