@@ -14,10 +14,8 @@ SMODS.Joker {
 	eternal_compat = true,
 	config = {extra = {x_chips = 1.5}},
 	loc_vars = function(self, info_queue, center)
-		
-		info_queue[#info_queue + 1] = { set = "Other", key = "food_jokers" }
 		return {
-			key = Cryptid.gameset_loc(self, {modest = "modest" }), 
+			vars = {center.ability.extra.x_chips}
 		}
 	end,
 	pools = {["unik_copyrighted"] = true ,["unik_seven"] = true },
@@ -25,13 +23,10 @@ SMODS.Joker {
     calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play then
             if (
-                context.other_card:get_id() == 2 or 
-                context.other_card:get_id() == 3 or 
-                context.other_card:get_id() == 5 or 
                 context.other_card:get_id() == 7 or 
                 context.other_card:get_id() == 14) then
                 return {
-                    chips = card.ability.extra.chips,
+                    x_chips = card.ability.extra.x_chips,
                     card = card
                 }
             end

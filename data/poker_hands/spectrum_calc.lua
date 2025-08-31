@@ -8,7 +8,7 @@ SMODS.PokerHandPart { -- Spectrum base (Referenced from SixSuits)
 }
 --Override paperback's implementation of suit count
 if PB_UTIL and PB_UTIL.config.suits_enabled then
-    function UNIK.get_unique_suits(scoring_hand, bypass_debuff, flush_calc)
+    function PB_UTIL.get_unique_suits(scoring_hand, bypass_debuff, flush_calc)
         -- Set each suit's count to 0
         local suits = {}
 

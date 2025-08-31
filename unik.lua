@@ -331,7 +331,7 @@ if not Cryptid then
 	--planets
 	NFS.load(mod_path .. "data/planets/asteroid_belt.lua")()
 end
-if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
+if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) and not next(SMODS.find_mod("SixSuits")) then
 	NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
 	NFS.load(mod_path .. "data/poker_hands/straight_spectrum.lua")()
 	NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
@@ -342,7 +342,12 @@ if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next
 	NFS.load(mod_path .. "data/planets/sedna.lua")()
 	NFS.load(mod_path .. "data/planets/makemake.lua")()
 end
-
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/poker_hands/bunco_override.lua")()
+end
+if next(SMODS.find_mod("SixSuits")) then
+	NFS.load(mod_path .. "data/poker_hands/six_suits_override.lua")()
+end
 ------------------------
 ---CONSUMABLES
 --------------------------
@@ -540,7 +545,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/euclid.lua")()
 
 --Rare
--- NFS.load(mod_path .. "data/jokers/unik/uncommon/711.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/invisible_card.lua")()

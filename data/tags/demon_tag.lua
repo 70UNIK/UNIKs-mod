@@ -24,8 +24,10 @@ SMODS.Tag{
 			if SMODS.pseudorandom_probability(self, 'unik_demon_tag', 3, 5, 'unik_demon_tag') then
                 --cursed joker creation
                 --if owning OAS:
-                if #Cryptid.advanced_find_joker("Oops! All 6s", nil, nil, nil, true) > 0 then
-                    check_for_unlock({ type = "unik_bloodbath" })
+                for i,v in pairs(G.jokers.cards) do
+                    if v.config.center.key == 'j_oops' then
+                        check_for_unlock({ type = "unik_bloodbath" })
+                    end
                 end
                 if pseudorandom("unik_get_demoned") < 0.2 then
                     
