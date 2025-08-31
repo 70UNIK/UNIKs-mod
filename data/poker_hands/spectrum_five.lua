@@ -1,5 +1,5 @@
 SMODS.PokerHand { -- Spectrum Five (Referenced from SixSuits)
-  key = 'unik_spectrum_five',
+  key = 'spectrum_five',
   above_hand = 'Flush Five',
   visible = false,
   chips = 180,

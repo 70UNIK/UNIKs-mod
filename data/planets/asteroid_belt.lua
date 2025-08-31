@@ -6,7 +6,7 @@ SMODS.Consumable{
 	config = { hand_type = "unik_bulwark", softlock = true },
 	aurinko = true,
 	set_card_type_badge = function(self, card, badges)
-		badges[1] = create_badge(localize("k_dwarf_planet"), get_type_colour(self or card.config, card), nil, 1.2)
+		badges[1] = create_badge(localize("k_planet_disc"), get_type_colour(self or card.config, card), nil, 1.2)
 	end,
 	loc_vars = function(self, info_queue, center)
 		return {

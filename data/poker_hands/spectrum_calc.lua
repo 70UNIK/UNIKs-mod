@@ -1,5 +1,5 @@
 SMODS.PokerHandPart { -- Spectrum base (Referenced from SixSuits)
-  key = 'unik_spectrum',
+  key = 'spectrum',
   func = function(hand)
     if #hand < 5 then return {} end
     local unique_suits = UNIK.get_unique_suits(hand, nil, true)

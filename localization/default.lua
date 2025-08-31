@@ -2798,8 +2798,8 @@ return {
             c_unik_asteroid_belt = {
 				name = "Asteroid Belt",
 				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-					"{C:attention}#2#",
+					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+					"{C:attention}#1#",
 					"{C:mult}+#3#{} Mult and",
 					"{C:chips}+#4#{} chip#<s>4#",
 				},
@@ -2807,8 +2807,8 @@ return {
             c_unik_quaoar = {
 				name = "Quaoar",
 				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-					"{C:attention}#2#",
+					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+					"{C:attention}#1#",
 					"{C:mult}+#3#{} Mult and",
 					"{C:chips}+#4#{} chip#<s>4#",
 				},
@@ -2816,26 +2816,26 @@ return {
             c_unik_haumea = {
 				name = "Haumea",
 				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-					"{C:attention}#2#",
+					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+					"{C:attention}#1#",
 					"{C:mult}+#3#{} Mult and",
 					"{C:chips}+#4#{} chip#<s>4#",
 				},
 			},
             c_unik_sedna = {
-				name = "Asteroid Belt",
+				name = "Sedna",
 				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-					"{C:attention}#2#",
+					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+					"{C:attention}#1#",
 					"{C:mult}+#3#{} Mult and",
 					"{C:chips}+#4#{} chip#<s>4#",
 				},
 			},
             c_unik_makemake = {
-				name = "Asteroid Belt",
+				name = "Makemake",
 				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
-					"{C:attention}#2#",
+					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+					"{C:attention}#1#",
 					"{C:mult}+#3#{} Mult and",
 					"{C:chips}+#4#{} chip#<s>4#",
 				},
@@ -3234,12 +3234,12 @@ return {
         collabs={},
         dictionary={
             k_planet_disc = "Circumstellar Disc",
-            unik_hand_bulwark = "Bulwark",
-            unik_hand_spectrum = "Spectrum",
-            unik_hand_straight_spectrum = "Straight Spectrum",
-            unik_hand_spectrumfuck = "Spectrumfuck",
-            unik_hand_spectrum_house = "Spectrum House",
-            unik_hand_spectrum_five = "Spectrum Five",
+            unik_bulwark = "Bulwark",
+            unik_spectrum = "Spectrum",
+            unik_straight_spectrum = "Straight Spectrum",
+            unik_spectrumfuck = "Spectrumfuck",
+            unik_spectrum_house = "Spectrum House",
+            unik_spectrum_five = "Spectrum Five",
 
 
             overshoot_unik = "Overshoot Effect",

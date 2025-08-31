@@ -1,5 +1,5 @@
 SMODS.PokerHand { -- Spectrum House (Referenced from SixSuits)
-  key = 'unik_spectrum_house',
+  key = 'spectrum_house',
   above_hand = 'Flush House',
   visible = false,
   chips = 150,

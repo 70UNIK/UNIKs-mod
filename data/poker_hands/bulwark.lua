@@ -1,5 +1,5 @@
 SMODS.PokerHand({
-	key = "unik_bulwark",
+	key = "bulwark",
 	visible = false,
 	chips = 70,
 	mult = 7,

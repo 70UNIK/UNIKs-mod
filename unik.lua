@@ -321,7 +321,7 @@ NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
 
 SMODS.Atlas {
 	key = "unik_poker_hand_shit",
-	path = "unik_poker_hand_shit.png",
+	path = "poker_hand_shit.png",
 	px = 71,
 	py = 95
 }
@@ -515,8 +515,8 @@ NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
-	NFS.load(mod_path .. "data/jokers/unik/pokerhands/zealous_joker.lua")()
-	NFS.load(mod_path .. "data/jokers/unik/pokerhands/lurid_joker.lua")()
+	NFS.load(mod_path .. "data/jokers/unik/poker_hands/zealous_joker.lua")()
+	NFS.load(mod_path .. "data/jokers/unik/poker_hands/lurid_joker.lua")()
 end
 
 NFS.load(mod_path .. "data/jokers/unik/common/double_container.lua")() --Uncommon when morefluff installed
@@ -553,7 +553,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
-	NFS.load(mod_path .. "data/jokers/unik/pokerhands/the_dynasty.lua")()
+	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()
 end
 
 --Rare (characters)

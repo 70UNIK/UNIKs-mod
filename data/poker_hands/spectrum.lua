@@ -1,6 +1,6 @@
 
     SMODS.PokerHand { -- Spectrum (Referenced from SixSuits)
-    key = 'unik_spectrum',
+    key = 'spectrum',
     visible = false,
     chips = 50,
     mult = 6,

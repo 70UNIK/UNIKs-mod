@@ -1,5 +1,5 @@
 SMODS.PokerHand { -- Straight Spectrum (Referenced from SixSuits)
-  key = 'unik_straight_spectrum',
+  key = 'straight_spectrum',
   visible = false,
   chips = 120,
   mult = 10,
