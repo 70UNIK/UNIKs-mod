@@ -58,68 +58,27 @@ payload = '''
     end
 '''
 match_indent = true
-### Custom boss blind death messages
 
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''Jimbo:add_speech_bubble(quip, nil, {quip = true})'''
-position = 'before'
-payload = '''
-if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
-    Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
-else
-
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''Jimbo:add_speech_bubble(quip, nil, {quip = true})'''
-position = 'after'
-payload = '''
-end
-G.GAME.unik_prevent_killing_cursed_jokers2 = nil
-G.GAME.unik_deathly_debuff_text = nil
-'''
-match_indent = true
-
-
-
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})'''
-position = 'at'
-payload = '''
-if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled then
-    Jimbo:add_speech_bubble(G.GAME.blind.death_message, nil, {quip = true})
-else
-    Jimbo:add_speech_bubble('lq_'..math.random(1,10), nil, {quip = true})
-end
-G.GAME.unik_prevent_killing_cursed_jokers2 = nil
-G.GAME.unik_deathly_debuff_text = nil
-'''
-match_indent = true
+###BOSS BLIND DEATH MESSAGES
 
 ###Entropy patch
 
 [[patches]]
 [patches.pattern]
 target = 'game.lua'
-pattern = '''local text = (G.GAME.EECardCharacter and 'lq_ee_' or 'lq_')..math.random(1,10)'''
+pattern = '''local quip, extra = SMODS.quip("loss")'''
 position = 'after'
 payload = '''
 --entropy workaround
 if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled and not G.GAME.EECardCharacter then
-    text = G.GAME.blind.death_message
+    quip = G.GAME.blind.death_message
 end
 G.GAME.unik_prevent_killing_cursed_jokers2 = nil
 G.GAME.unik_deathly_debuff_text = nil
 '''
 match_indent = true
 
+##STANDARD
 [[patches]]
 [patches.pattern]
 target = 'game.lua'
@@ -130,6 +89,7 @@ if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blin
 '''
 match_indent = true
 
+##FINITY
 [[patches]]
 [patches.pattern]
 target = 'game.lua'
@@ -140,6 +100,7 @@ if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blin
 '''
 match_indent = true
 
+##LOAD DEATH MESSAGE
 [[patches]]
 [patches.pattern]
 target = 'blind.lua'
