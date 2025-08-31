@@ -22,12 +22,7 @@ pattern = '''local suits = SMODS.Suit.obj_buffer'''
 position = "at"
 payload = '''
 local suits = {}
-for i = 1, #SMODS.Suit.obj_buffer do
-    suits[#suits + 1] = SMODS.Suit.obj_buffer[i]
-end
-for i = 1, #G.ENHANCEMENT_OVERRIDE_SUITS do
-    suits[#suits + 1] = G.ENHANCEMENT_OVERRIDE_SUITS[i]
-end
+suits = unik_get_all_suits()
 '''
 match_indent = true
 
@@ -38,9 +33,7 @@ target = '''functions/misc_functions.lua'''
 pattern = '''local suits = {}'''
 position = "after"
 payload = '''
-    for i = 1, #G.ENHANCEMENT_OVERRIDE_SUITS do
-        suits[#suits + 1] = G.ENHANCEMENT_OVERRIDE_SUITS[i]
-    end
+    suits = unik_get_all_suits()
 '''
 match_indent = true
 

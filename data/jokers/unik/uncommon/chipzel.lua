@@ -27,7 +27,15 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
             card.ability.extra.x_chips = 1
         end
         if context.forcetrigger then
-            card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chip_mod
+            SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "x_chips",
+				scalar_value = "x_chip_mod",
+				message_key = "a_xchips",
+				message_colour = G.C.MULT,
+				force_full_val = true,
+                no_message = true,
+			})
             return {
 
 				x_chips = card.ability.extra.x_chips,
@@ -35,7 +43,15 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
 			}
         end
         if context.cardarea == G.play and context.individual and SMODS.has_enhancement(context.other_card,'m_bonus') then
-            card.ability.extra.x_chips = card.ability.extra.x_chips + card.ability.extra.x_chip_mod
+            SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "x_chips",
+				scalar_value = "x_chip_mod",
+				message_key = "a_xchips",
+				message_colour = G.C.MULT,
+				force_full_val = true,
+                no_message = true,
+			})
             return {
 				x_chips = card.ability.extra.x_chips,
 				colour = G.C.CHIPS,

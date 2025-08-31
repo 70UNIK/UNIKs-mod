@@ -9,6 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     immutable = true,
+    demicoloncompat = true,
     config = { extra = {cash = 1.5}},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_hands_lost" }
@@ -17,7 +18,7 @@ SMODS.Joker {
         }
 	end,
     calculate = function(self, card, context)
-        if context.discard_mod and context.discard_mod_val < 0 then
+        if (context.discard_mod and context.discard_mod_val < 0) or context.force_trigger then
             return {
                 dollars = card.ability.extra.cash * math.abs(context.discard_mod_val)
             }

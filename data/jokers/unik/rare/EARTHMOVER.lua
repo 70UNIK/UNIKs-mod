@@ -7,6 +7,7 @@ SMODS.Joker {
     cost = 6,
     immutable = true,
     eternal_compat = false,
+	demicoloncompat = true,
     config = { extra = { exponent = 1.1 } },
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway" }
@@ -15,7 +16,7 @@ SMODS.Joker {
 		end
 		return { vars = { center.ability.extra.exponent } }
 	end,
-    	calculate = function(self, card, context)
+    calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and context.blind.boss and not card.getting_sliced and not context.retrigger_joker and not context.repetition then
 			local eval = function(card)
 				return not card.REMOVED and not G.RESET_JIGGLES
@@ -40,12 +41,13 @@ SMODS.Joker {
 			}))
 		end
 		if
-			context.end_of_round
+			((context.end_of_round
 			and not context.individual
 			and not context.repetition
             and not context.retrigger_joker
 			and not context.blueprint
-			and G.GAME.blind.boss
+			and G.GAME.blind.boss)
+			or context.force_trigger)
 			and not card.gone
 		then
 			G.E_MANAGER:add_event(Event({

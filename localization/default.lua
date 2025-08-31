@@ -1090,19 +1090,8 @@ return {
             j_unik_711 = {
                 name = '7/11',
                 text = {
-                    "If hand contains", 
-                    "a scoring {C:attention}7{} and {C:attention}Ace{},",
-                    "create a {C:attention}banana{}",
-                    "{C:dark_edition}negative{} Food Joker",
-                }
-            },
-            j_unik_711_modest = {
-                name = '7/11',
-                text = {
-                    "If hand contains", 
-                    "a scoring {C:attention}7{} and {C:attention}Ace{},",
-                    "create a {C:attention}banana{} Food Joker",
-                    "{C:inactive}(Can overflow){}",
+                    "Scored {C:attention}7s{} and {C:attention}Aces{}", 
+                    "give {X:chips,C:white}X#1#{} Chips",
                 }
             },
             j_unik_gt710 = {
@@ -1994,6 +1983,32 @@ return {
                 }
             },
 
+            --spectrum shit
+            j_unik_the_dynasty = {
+                name = "The Dynasty",
+                text = {
+                "{X:mult,C:white}X#1#{} Mult if played",
+                "hand contains",
+                "a {C:attention}#2#"
+                }
+            },
+            j_unik_lurid_joker = {
+                name = "Lurid Joker",
+                text = {
+                "{C:chips}+#1#{} Chips if played",
+                "hand contains",
+                "a {C:attention}#2#"
+                }
+            },
+            j_unik_zealous_joker = {
+                name = "Zealous Joker",
+                text = {
+                "{C:mult}+#1#{} Mult if played",
+                "hand contains",
+                "a {C:attention}#2#"
+                }
+            },
+
 
 
             --Cult card crossmod
@@ -2763,10 +2778,69 @@ return {
                     "but also triggers when",
                     "Blinds {C:attention}remove{} {C:blue}Hands{} or {C:red}Discards",
                 }
-            }
+            },
+
+            unik_light_suits = {
+                name = "Light Suits",
+                text = {
+                "{C:diamonds}Diamonds{}, {C:hearts}Hearts{}"
+                }
+            },
+            unik_dark_suits = {
+                name = "Dark Suits",
+                text = {
+                "{C:spades}Spades{}, {C:clubs}Clubs{}"
+                }
+            },
             
         },
-        Planet={},
+        Planet={
+            c_unik_asteroid_belt = {
+				name = "Asteroid Belt",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chip#<s>4#",
+				},
+			},
+            c_unik_quaoar = {
+				name = "Quaoar",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chip#<s>4#",
+				},
+			},
+            c_unik_haumea = {
+				name = "Haumea",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chip#<s>4#",
+				},
+			},
+            c_unik_sedna = {
+				name = "Asteroid Belt",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chip#<s>4#",
+				},
+			},
+            c_unik_makemake = {
+				name = "Asteroid Belt",
+				text = {
+					"{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chip#<s>4#",
+				},
+			},
+        },
         Spectral={
             --only appears with a 0.3 chance in the cube booster pack. It's basically a gateway, but exclusively creating UNIK 
             --THIS SHALL BE REPLACED WITH AWAKENING: Destroy 2 leftmost non eternals, create an ancient joker. The ancient will be created FIRST before the jokers are destroyed, for WL synergy.
@@ -3074,6 +3148,35 @@ return {
         },
     },
     misc = {
+        poker_hands = {
+        ['unik_spectrum'] = "Spectrum",
+        ['unik_straight_spectrum'] = "Straight Spectrum",
+        ['unik_spectrumfuck'] = "Spectrumfuck",
+        ['unik_straight_spectrum_royal'] = "Royal Spectrum",
+        ['unik_spectrum_house'] = "Spectrum House",
+        ['unik_spectrum-five'] = "Spectrum Five",
+        },
+        poker_hand_descriptions = {
+        ['unik_spectrum'] = {
+            "5 cards with different suits"
+        },
+        ['unik_spectrumfuck'] = {
+            "8 cards with different suits and ranks",
+            "without containing a Straight",
+        },
+        ['unik_straight_spectrum'] = {
+            "5 cards in a row (consecutive ranks),",
+            "each with a different suit"
+        },
+        ['unik_spectrum_house'] = {
+            "A Three of a Kind and a Pair with",
+            "each card having a different suit"
+        },
+        ['unik_spectrum_five'] = {
+            "5 cards with the same rank,",
+            "each with a different suit"
+        },
+        },
         achievement_descriptions={
 
             ach_unik_royal_poker="Score a Royal Flush against Video Poker",
@@ -3130,6 +3233,15 @@ return {
         },
         collabs={},
         dictionary={
+            k_planet_disc = "Circumstellar Disc",
+            unik_hand_bulwark = "Bulwark",
+            unik_hand_spectrum = "Spectrum",
+            unik_hand_straight_spectrum = "Straight Spectrum",
+            unik_hand_spectrumfuck = "Spectrumfuck",
+            unik_hand_spectrum_house = "Spectrum House",
+            unik_hand_spectrum_five = "Spectrum Five",
+
+
             overshoot_unik = "Overshoot Effect",
             overshoot_unik_0 = {
                 "No effects",
@@ -3430,8 +3542,6 @@ return {
             unik_baseless = "Baseless",
             unik_limited_edition = "Limited Edition",
         },
-        poker_hand_descriptions={},
-        poker_hands={},
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM
             special_lose_unik_get_nuked={

@@ -1,5 +1,4 @@
---TOTAL REWORK NEEDED:
---Light suits do... ???
+--X1.075 Mult per light suit scored, increases this by X0.075 Mult per light suit scored
 --
 SMODS.Atlas {
 	key = "unik_kouign_amann_cookie",
@@ -32,54 +31,37 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    config = { extra = {retriggers = 1,decrease = 0.1},immutable = {max_retriggers = 50, max_decrease = 0.5} },
+    demicolon_compat = true,
+    config = { extra = {x_mult = 1.075,x_mult_mod = 0.075,x_mult_base = 1.075} },
     loc_vars = function(self, info_queue, center)
+        info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
         local quoteset = 'normal'
-        info_queue[#info_queue + 1] = G.P_CENTERS.m_cry_light
         return { 
-            vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers),1-math.min(center.ability.extra.decrease,center.ability.immutable.max_decrease)
-        ,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
+            vars = {tostring(math.floor(center.ability.extra.initial*300)/300),tostring(math.floor(center.ability.extra.increase*300)/300),localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
         } 
         }
 	end,
-    enhancement_gate = 'm_cry_light',
     calculate = function(self, card, context)
-        if context.repetition and context.cardarea == G.play then
-            if SMODS.has_enhancement(context.other_card,'m_cry_light') then
-                local rep = math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers)
-                local decrease = 1-math.min(card.ability.extra.decrease,card.ability.immutable.max_decrease)
-                local card2 = context.other_card
-                if decrease < 1 and not context.blueprint_card and not context.retrigger_joker then
-                    card2.ability.extra.req = card2.ability.extra.req*decrease
-                end
-                if card2.ability.extra.current > card2.ability.extra.req then
-                    card2.ability.extra.current = card2.ability.extra.req
-                end
-                -- card2.ability.extra.current = card2.ability.extra.current^decrease
-                if rep > 0 then
-                    --only do the quote if its specifically for her.
-                    if not context.blueprint_card then
-                        return {
-                            -- message = localize(pseudorandom_element(k_amann_quotes['trigger'], pseudoseed("k_amann_quotes_trigger")) .. ""),
-                            message = localize("k_again_ex"),
-                            repetitions = to_number(
-                                rep
-                            ),
-                            colour = HEX("fa7aa6"),
-                            card = card,
-                        }
-                    else
-                        return {
-                            message = localize("k_again_ex"),
-                            repetitions = to_number(
-                                rep
-                            ),
-                            colour = HEX("fa7aa6"),
-                            card = card,
-                        }
-                    end
-                end
+        if context.individual and context.cardarea == G.play then
+            -- Give the xMult if the current card is the required suit
+            if UNIK.is_suit_type(context.other_card,'light') then
+                SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "x_mult",
+                    scalar_value = "x_mult_mod",
+                    message_key = "a_xmult",
+                    message_colour = G.C.MULT,
+                    no_message = true,
+                })
+            return {
+                x_mult = card.ability.extra.x_mult,
+                card = card
+            }
             end
+        end
+        -- Quietly reset the xMult for the card at the end of played hand
+        if context.after and not context.blueprint then
+            card.ability.extra.x_mult = card.ability.extra.x_mult_base
         end
     end,
 }

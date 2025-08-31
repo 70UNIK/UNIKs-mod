@@ -15,7 +15,7 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.chips} }
 	end,
     calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if (context.individual and context.cardarea == G.play) then
             if (
                 context.other_card:get_id() == 2 or 
                 context.other_card:get_id() == 3 or 
@@ -28,5 +28,11 @@ SMODS.Joker {
                 }
             end
 		end
+        if context.force_trigger then
+            return {
+                chips = card.ability.extra.chips,
+                card = card
+            }
+        end
 	end,
 }

@@ -42,6 +42,7 @@ SMODS.current_mod.config_tab = function() --Config tab
 	},
 	}
 end
+
 NFS.load(mod_path .. "talisman.lua")()
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
@@ -305,6 +306,42 @@ NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 -- NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
+
+
+--Load suit types
+
+UNIK.light_suits = { 'Diamonds', 'Hearts' }
+UNIK.dark_suits = { 'Spades', 'Clubs' }
+NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
+NFS.load(mod_path .. "data/suit_shennannigans/light_dark_suits.lua")()
+
+
+NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
+--HANDS
+
+SMODS.Atlas {
+	key = "unik_poker_hand_shit",
+	path = "unik_poker_hand_shit.png",
+	px = 71,
+	py = 95
+}
+if not Cryptid then
+	NFS.load(mod_path .. "data/poker_hands/bulwark.lua")()
+	--planets
+	NFS.load(mod_path .. "data/planets/asteroid_belt.lua")()
+end
+if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
+	NFS.load(mod_path .. "data/poker_hands/straight_spectrum.lua")()
+	NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
+	NFS.load(mod_path .. "data/poker_hands/spectrum_five.lua")()
+	--planets
+	NFS.load(mod_path .. "data/planets/quaoar.lua")()
+	NFS.load(mod_path .. "data/planets/haumea.lua")()
+	NFS.load(mod_path .. "data/planets/sedna.lua")()
+	NFS.load(mod_path .. "data/planets/makemake.lua")()
+end
+
 ------------------------
 ---CONSUMABLES
 --------------------------
@@ -323,6 +360,9 @@ NFS.load(mod_path .. "data/spectrals/prism.lua")()
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 --
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 leftmost non eternals, create an ancient.
+
+--PLANETS
+
 
 --L A R T C E P S--
 if unik_config.unik_legendary_blinds then
@@ -474,6 +514,11 @@ NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 
+if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/jokers/unik/pokerhands/zealous_joker.lua")()
+	NFS.load(mod_path .. "data/jokers/unik/pokerhands/lurid_joker.lua")()
+end
+
 NFS.load(mod_path .. "data/jokers/unik/common/double_container.lua")() --Uncommon when morefluff installed
 
 --Uncommon
@@ -506,6 +551,10 @@ NFS.load(mod_path .. "data/jokers/unik/rare/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/foundation.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
+
+if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/jokers/unik/pokerhands/the_dynasty.lua")()
+end
 
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")() 
