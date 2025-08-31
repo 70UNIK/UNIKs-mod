@@ -344,7 +344,7 @@ if not Cryptid then
 	--planets
 	NFS.load(mod_path .. "data/planets/asteroid_belt.lua")()
 end
-if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) and not next(SMODS.find_mod("SixSuits")) then
+if UNIK.can_load_spectrums() then
 	NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
 	NFS.load(mod_path .. "data/poker_hands/straight_spectrum.lua")()
 	NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
@@ -560,6 +560,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/cobblestone.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/euclid.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")() 
 
 --Rare
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()

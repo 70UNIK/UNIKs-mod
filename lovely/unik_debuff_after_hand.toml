@@ -8,8 +8,8 @@ priority = 9999
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''function evaluate_play_final_scoring(text, disp_text, poker_hands, scoring_hand, non_loc_disp_text, percent, percent_delta)'''
-position = 'after'
+pattern = '''if  SMODS.calculate_round_score()  > 0 then '''
+position = 'before'
 payload = '''
 local temptotal = SMODS.calculate_round_score()
 G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,temptotal)
@@ -43,25 +43,30 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''if  SMODS.calculate_round_score()  > to_big(0) then
-        delay(0.8)
-        G.E_MANAGER:add_event(Event({
-        trigger = 'immediate',
-        func = (function() play_sound('chips2');return true end)
+pattern = '''        func = (function() play_sound('chips2');return true end)
         }))
     end'''
 position = 'after'
 payload = '''
 if to_big(add_to_blind) > to_big(0) then
-G.E_MANAGER:add_event(Event({
-    trigger = 'ease',
-    blocking = false,
-    ref_table = G.GAME.blind,
-    ref_value = 'chips',
-    ease_to = G.GAME.blind.chips + add_to_blind,
-    delay =  1.0,
-    func = (function(t) return math.floor(t) end)
-}))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blocking = false,
+        ref_table = G.GAME.blind,
+        ref_value = 'chips',
+        ease_to = G.GAME.blind.chips + add_to_blind,
+        delay =  1.0,
+        func = (function(t) return math.floor(t) end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blocking = false,
+        ref_table = G.GAME.blind,
+        ref_value = 'chip_text',
+        ease_to = G.GAME.blind.chips + add_to_blind,
+        delay =  1.0,
+        func = (function(t) return math.floor(t) end)
+    }))
 end
 if debuff_hand then
     play_area_status_text("Not Allowed!")

@@ -29,7 +29,7 @@ SMODS.Joker {
                     play_sound("timpani")
                     local card2 = create_card("Joker", G.jokers, nil, "cry_exotic", nil, nil, nil, "unik_a_taste_of_power")
                     card2.ability.unik_niko = true
-                    card2.ability.cry_absolute = true
+                    card2.ability.eternal = true
                     card2:add_to_deck()
                     G.jokers:emplace(card2)
                     card2:juice_up(0.3, 0.5)

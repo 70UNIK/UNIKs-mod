@@ -8,7 +8,7 @@ SMODS.Challenge{
         }
 	},
 	jokers = {
-        { id = "j_unik_pibby", stickers = { "cry_absolute" }},
+        { id = "j_unik_pibby", stickers = { "eternal" }},
     },
     consumeables = {
     },

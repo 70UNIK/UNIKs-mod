@@ -10,13 +10,11 @@ SMODS.Challenge{
         },
 	},
 	jokers = {
-        { id = "j_unik_coupon_codes", stickers = { "cry_absolute" }, edition = "negative" },
-        { id = "j_unik_coupon_codes", stickers = { "cry_absolute" }, edition = "negative" },
-        { id = "j_unik_coupon_codes", stickers = { "cry_absolute" }, edition = "negative" },
+        { id = "j_unik_coupon_codes", stickers = { "eternal" }, edition = "negative" },
+        { id = "j_unik_coupon_codes", stickers = { "eternal" }, edition = "negative" },
+        { id = "j_unik_coupon_codes", stickers = { "eternal" }, edition = "negative" },
     },
     consumeables = {
-        {id = 'c_cry_keygen', edition = "negative"},
-        {id = 'c_cry_keygen', edition = "negative"},
     },
 	deck = {
 		type = "Challenge Deck",

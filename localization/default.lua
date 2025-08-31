@@ -1470,7 +1470,7 @@ return {
                 name="A Taste of Power",
                 text={
                     "Sell this card to create a random",
-                    "{C:purple}Absolute {C:red}Niko{}", 
+                    "{C:purple}Eternal {C:red}Niko{}", 
                     "{C:unik_ancient}Ancient{} Joker",
                     "{C:inactive}(Can overflow){}",
                 }             
@@ -2015,6 +2015,13 @@ return {
                     "cards can fill gaps up to {C:attention}1{} in",
                     "{C:attention}Straights{}, {C:attention}Flushes{}, {C:attention}Spectrums",
                     "and {C:attention}of a Kind{} hands"
+                }
+            },
+            j_unik_uniku = {
+                name = "Uniku",
+                text = {
+                    "{C:attention}Retrigger{} all scored",
+                    "{C:attention}7s{} #1# time#<s>1#"
                 }
             },
 
@@ -3033,7 +3040,7 @@ return {
             c_unik_placard = {
                 name = "Placard",
                 text = {
-                    "Add {C:purple}Absolute{} and {E:2,C:red}Ultradebuffed{}", --Brute force counters dandy (through update functions) and patch
+                    "Add {E:2,C:red}Ultradebuffed{}", --Brute force counters dandy (through update functions) and patch
                     "to all cards in deck",
                 }
             },

@@ -189,7 +189,7 @@ function CardArea:emplace(card, location, stay_flipped)
     local cannibalCards = 0
     local autoCannibalExists = false
     if card.ability.set == "unik_lartceps" then
-        card.ability.cry_absolute = true
+        card.ability.eternal = true
         card.ability.perishable = nil
         card.ability.rental = true
         card.ability.unik_triggering = true
