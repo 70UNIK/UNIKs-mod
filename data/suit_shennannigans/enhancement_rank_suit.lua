@@ -118,3 +118,13 @@ function unik_get_all_suits()
     end
     return suits
 end
+function unik_get_all_suits2()
+    local suits = {}
+    for i = 1, #SMODS.Suit.obj_buffer do
+        suits[SMODS.Suit.obj_buffer[i]] = true
+    end
+    for i = 1, #G.ENHANCEMENT_OVERRIDE_SUITS do
+        suits[G.ENHANCEMENT_OVERRIDE_SUITS[i]] = true
+    end
+    return suits
+end

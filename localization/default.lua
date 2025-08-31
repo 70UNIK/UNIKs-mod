@@ -3154,7 +3154,8 @@ return {
         ['unik_spectrumfuck'] = "Spectrumfuck",
         ['unik_straight_spectrum_royal'] = "Royal Spectrum",
         ['unik_spectrum_house'] = "Spectrum House",
-        ['unik_spectrum-five'] = "Spectrum Five",
+        ['unik_spectrum_five'] = "Spectrum Five",
+        ['unik_bulwark'] = "Bulwark",
         },
         poker_hand_descriptions = {
         ['unik_spectrum'] = {
@@ -3175,6 +3176,9 @@ return {
         ['unik_spectrum_five'] = {
             "5 cards with the same rank,",
             "each with a different suit"
+        },
+        ['unik_bulwark'] = {
+            "5 rankless, suitless cards",
         },
         },
         achievement_descriptions={
