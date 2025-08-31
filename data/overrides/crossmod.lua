@@ -30,7 +30,7 @@ SMODS.Consumable:take_ownership("c_paperback_apostle_of_wands",{
 
 			for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
 			-- Only shows discovered non-legendary and non-owned jokers
-			if v.discovered and v.rarity ~= 4 and v.rarity ~= 'cry_epic' and v.rarity ~= 'cry_exotic' and v.rarity ~="unik_legendary_blind_finity" and not Cryptid.pin_debuff[v.rarity] and not next(SMODS.find_card(v.key)) then
+			if v.discovered and v.rarity ~= 4 and v.rarity ~= 'unik_ancient' and v.rarity ~= 'cry_epic' and v.rarity ~= 'cry_exotic' and v.rarity ~="unik_legendary_blind_finity" and not Cryptid.pin_debuff[v.rarity] and not next(SMODS.find_card(v.key)) then
 				selectable_jokers[#selectable_jokers + 1] = v
 			end
 			end

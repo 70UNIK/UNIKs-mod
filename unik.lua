@@ -51,6 +51,18 @@ NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/misc/voucher_unredeem.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
+
+--Custom spectrum stuff
+function UNIK.can_load_spectrums()
+	if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled))
+	 and not next(SMODS.find_mod("Bunco"))
+	  and not next(SMODS.find_mod("SixSuits")) 
+	  and not next(SMODS.find_mod("SpectrumFramework"))
+	  then
+		return true
+	end
+	return false
+end
 SMODS.Atlas {
 	key = "modicon",
 	path = "modicon.png",
@@ -348,6 +360,9 @@ if next(SMODS.find_mod("Bunco")) then
 end
 if next(SMODS.find_mod("SixSuits")) then
 	NFS.load(mod_path .. "data/poker_hands/six_suits_override.lua")()
+end
+if next(SMODS.find_mod("SpectrumFramework")) then
+	NFS.load(mod_path .. "data/poker_hands/framework_override.lua")()
 end
 ------------------------
 ---CONSUMABLES
