@@ -32,16 +32,19 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
-    config = { extra = {x_mult = 1.075,x_mult_mod = 0.075,x_mult_base = 1.075} },
+    config = { extra = {x_mult = 1.0,x_mult_mod = 0.075,x_mult_base = 1.075} },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
         local quoteset = 'normal'
         return { 
-            vars = {tostring(math.floor(center.ability.extra.initial*300)/300),tostring(math.floor(center.ability.extra.increase*300)/300),localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
+            vars = {tostring(math.floor(center.ability.extra.x_mult_base*1000)/1000),tostring(math.floor(center.ability.extra.x_mult_mod*1000)/1000),localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
         } 
         }
 	end,
     calculate = function(self, card, context)
+        if context.before then
+            card.ability.extra.x_mult = 1
+        end
         if context.individual and context.cardarea == G.play then
             -- Give the xMult if the current card is the required suit
             if UNIK.is_suit_type(context.other_card,'light') then
@@ -61,7 +64,7 @@ SMODS.Joker {
         end
         -- Quietly reset the xMult for the card at the end of played hand
         if context.after and not context.blueprint then
-            card.ability.extra.x_mult = card.ability.extra.x_mult_base
+            card.ability.extra.x_mult = 1
         end
     end,
 }

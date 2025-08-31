@@ -1855,11 +1855,11 @@ return {
             j_unik_kouign_amann_cookie = { --Retrigger all light cards and reduce their requirements by 10% per trigger. (RARE)
                 name = "Kouign Amann Cookie",
                 text = {
-                    "Retrigger all",
-                    "{C:attention}Light Cards #1#{} time#<s>1#",
-                    "and reduce their",
-                    "requirements by {X:dark_edition,C:white}X#2#",
-                    "{C:inactive,s:0.8}(Requirement reduction cannot be copied)",
+                    "Scored {C:attention}Light Suits",
+                    "give {X:mult,C:white}X#1#{} Mult",
+                    "and increase this by",
+                    "{X:mult,C:white}X#2#{} Mult",
+                    "{C:inactive}(Resets after hand)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
@@ -2006,6 +2006,15 @@ return {
                 "{C:mult}+#1#{} Mult if played",
                 "hand contains",
                 "a {C:attention}#2#"
+                }
+            },
+            j_unik_pavement_joker = {
+                name = "Pavement Joker",
+                text = {
+                    "{C:attention}Rankless{} and {C:attention}Suitless",
+                    "cards can fill gaps up to {C:attention}1{} in",
+                    "{C:attention}Straights{}, {C:attention}Flushes{}, {C:attention}Spectrums",
+                    "and {C:attention}of a Kind{} hands"
                 }
             },
 

@@ -544,9 +544,10 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/lockpick.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/cobblestone.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/euclid.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")() 
 
 --Rare
-NFS.load(mod_path .. "data/jokers/unik/uncommon/711.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/invisible_card.lua")()
@@ -565,7 +566,7 @@ end
 
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")() 
--- NFS.load(mod_path .. "data/jokers/kouign_amann_cookie.lua")() --FULL REWORK NEEDED
+NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")() --FULL REWORK NEEDED
 NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()

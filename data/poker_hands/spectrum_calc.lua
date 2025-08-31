@@ -1,9 +1,10 @@
 SMODS.PokerHandPart { -- Spectrum base (Referenced from SixSuits)
   key = 'spectrum',
   func = function(hand)
-    if #hand < 5 then return {} end
+    local requiredCards = 5 - UNIK.paved_calc()
+    if #hand < requiredCards then return {} end
     local unique_suits = UNIK.get_unique_suits(hand, nil, true)
-    return (unique_suits >= 5) and { hand } or {}
+    return (unique_suits >= requiredCards) and { hand } or {}
   end
 }
 --Override paperback's implementation of suit count
