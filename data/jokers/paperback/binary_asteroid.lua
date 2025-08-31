@@ -14,7 +14,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
 		return { vars = {math.min(center.ability.extra.hands,center.ability.immutable.max_hand_size_mod),math.min(center.ability.extra.discards,center.ability.immutable.max_hand_size_mod)} }
 	end,
-
+    discovered = true,
     calculate = function(self, card, context)
         if context.forcetrigger then
             G.E_MANAGER:add_event(Event({

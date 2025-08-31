@@ -11,6 +11,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
+    discovered = true,
     display_size = { w = 0.7 * 71, h = 0.7 * 95 },
     calculate = function(self, card, context)
         if (context.setting_blind or context.forcetrigger) and not (context.blueprint_card or self).getting_sliced then
