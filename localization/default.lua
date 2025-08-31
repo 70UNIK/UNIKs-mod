@@ -2774,6 +2774,22 @@ return {
                 }
             },
 
+            -- TODO fix typo
+			cry_perishable_consumeable = {
+				name = "Perishable",
+				text = {
+					"Debuffed at",
+					"end of round",
+				},
+			},
+			cry_rental_consumeable = {
+				name = "Rental",
+				text = {
+					"Lose {C:money}$#1#{} at end of",
+					"round, and on use",
+				},
+			},
+
             cry_hooked_balanced = {
 				name = "Hooked",
 				text = {

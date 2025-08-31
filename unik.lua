@@ -291,6 +291,10 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+if not Cryptid then
+	NFS.load(mod_path .. "data/stickers/cryptidless_sticker_logic.lua")() 
+end
+
 
 -- STAKES --
 NFS.load(mod_path .. "data/stakes/blue_stake_fix.lua")() 
