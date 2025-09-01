@@ -862,15 +862,14 @@ return {
                 name = "Epic Blind",
                 text={
                     "{C:red}You've should not",
-                    "{C:red}have overscored...",
+                    "{C:red}have overshot...",
                     "{C:red}It escaped Almanac...",
                 }
             },
            dd_akyrs_legendary_blind={
                 name = "Legendary Blind",
                 text = {
-                    "{C:red}The demons",
-                    "{C:red}await your demise..."
+                    "{C:red}HELL AWAITS YOU...",
                 }
             },
             -- dd_akyrs_instant_death_risk={
@@ -3061,7 +3060,7 @@ return {
 				name = "Extended Empowered Tag",
 				text = {
 					"Gives a free {C:spectral}Spectral Pack",
-					"with {C:legendary,E:1}The Soul{}, {C:cry_epic,E:1}Foundation{} and {C:unik_ancient,E:1}Awakening{}",
+					"with {C:legendary,E:1}The Soul{}, {C:rare,E:1}Foundation{} and {C:unik_ancient,E:1}Awakening{}",
 				},
 			},
         },
@@ -3909,6 +3908,8 @@ return {
             ch_c_unik_ante_13_victory = {"Must beat Ante {C:attention}13{} to win"},
             ch_c_unik_vermillion_pandemic = {"One {C:attention}random{} Joker {C:red}replaced{} after every hand"},
             ch_c_unik_all_video_poker = {"All Boss Blinds are {X:unik_eye_searing_blue,C:money}Video {X:unik_eye_searing_blue,C:money}Poker{}"},
+            ch_c_cry_rush_hour_ii = {"All Blinds are {C:attention}Boss Blinds"},
+            ch_c_unik_no_skipping = {"Skipping Blinds are {C:red}banned"},
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
             ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
             ch_c_unik_single_select_limit = {"{C:red}1{} Card {C:attention}Selection Limit"},

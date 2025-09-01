@@ -223,8 +223,7 @@ function exponentLevelExtra(hand,exponent,v,instant)
 	G.GAME.hands[hand].mult = G.GAME.hands[hand].mult*exponent
 	G.GAME.hands[hand].chips = G.GAME.hands[hand].chips*exponent
 	if not instant and (not Talisman or not Talisman.config_file.disable_anims) then
-		delay(0.1)
-		update_hand_text({delay = 0}, {mult = G.GAME.hands[hand].mult, StatusText = true})
+		update_hand_text({delay = 0}, {mult = tostring("X"..exponent), StatusText = true})
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
 			func = function()
@@ -234,7 +233,7 @@ function exponentLevelExtra(hand,exponent,v,instant)
 			end,
 		}))
 		delay(0.1)
-		update_hand_text({delay = 0}, {chips = G.GAME.hands[hand].chips, StatusText = true})
+		update_hand_text({delay = 0}, {chips = tostring("X"..exponent), StatusText = true})
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
 			func = function()
@@ -243,6 +242,7 @@ function exponentLevelExtra(hand,exponent,v,instant)
 				return true
 			end,
 		}))
+		delay(0.1)
 	end
 end
 

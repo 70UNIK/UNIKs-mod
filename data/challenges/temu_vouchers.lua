@@ -20,10 +20,14 @@ SMODS.Challenge{
 		type = "Challenge Deck",
 	},
 	restrictions = {
-		banned_tags = {
-            { id = 'tag_voucher'},
-            { id = 'tag_cry_better_voucher'}
-		},
+		banned_tags = function(self)
+			local banlist = {}
+            banlist[#banlist + 1] = { id = 'tag_voucher'}
+			if Cryptid then
+				banlist[#banlist + 1] = { id = 'tag_cry_better_voucher'}
+			end
+             return banlist
+		end,
 		banned_cards = {
 		},
         banned_other = {

@@ -55,7 +55,7 @@ G.FUNCS.skip_blind = function(e)
     local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
     local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
     local obj3 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
-	if obj.key == 'bl_unik_epic_cookie' then
+	if obj.key == 'bl_unik_epic_cookie' or G.GAME.modifiers.unik_no_skipping then
         play_sound('cancel', 0.8, 1)
         local text = localize('k_nope_ex')
         attention_text({

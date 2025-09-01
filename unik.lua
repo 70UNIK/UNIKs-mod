@@ -706,12 +706,11 @@ NFS.load(mod_path .. "data/overrides/crossmod.lua")()
 NFS.load(mod_path .. "data/overrides/last_hand.lua")() 
 
 
---Challenges gone until I fix them to work with new API
--- NFS.load(mod_path .. "data/challenges/common_muck.lua")()
--- NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
--- NFS.load(mod_path .. "data/challenges/singleton.lua")()
--- NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
--- -- NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
+--Challenges gone until I fix them to work with new API NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
+ NFS.load(mod_path .. "data/challenges/singleton.lua")()
+NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
+NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
 -- NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 
 
@@ -740,6 +739,9 @@ function vice_check()
     if G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
         return 1
     end
+	if G.GAME.all_finishers then
+		return 1
+	end
     return G.GAME.win_ante
 end
 

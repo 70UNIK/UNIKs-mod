@@ -38,3 +38,25 @@ pattern = '''G\.GAME\.blind\:get\_type\(\) \=\= \'Boss\''''
 position = "at"
 line_prepend = '$indent'
 payload = '''(G.GAME.blind_on_deck == 'Boss') '''
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
+position = "before"
+payload = '''
+if boss then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
+position = "after"
+payload = '''
+else --fallback
+    boss = 'bl_hook'
+end
+'''
+match_indent = true
