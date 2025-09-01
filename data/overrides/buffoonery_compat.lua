@@ -7,7 +7,6 @@ SMODS.Stake:take_ownership('stake_buf_spinel', {
 			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.5)
 		return true end })) 
     end,
-    unlocked_stake = 'cry_ruby',
 })
 -- SMODS.Stake:take_ownership('cry_pink', {
 --     applied_stakes = { "buf_spinel" },
@@ -42,15 +41,10 @@ SMODS.Stake:take_ownership('stake_buf_palladium', {
 -- 	end,
 -- })
 
-SMODS.Stake:take_ownership('stake_cry_horizon', {
-    modifiers = function()
-        G.GAME.unik_vice_squeeze = 4
-    end,
-})
-
 --Rejected fan becomes cursed Joker.
 SMODS.Joker:take_ownership('j_buf_afan_spc', {
-    rarity = 'cry_cursed',
+    rarity = 'unik_detrimental',
+	override_cursed_cost = true,
 },true)
 
 --Jokergebra and integral override fixes

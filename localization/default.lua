@@ -1557,7 +1557,7 @@ return {
             j_unik_foundation = {
                 name = 'Foundation',
                 text = {
-                    "After playing {C:attention}#2#{}hands",
+                    "After playing {C:attention}#2#{} hands",
                     "sell this card to create",
                     "a {C:attention}random{} {C:unik_ancient}Ancient{} Joker",
 					"{C:inactive}(Currently #1#/#2#){}",
@@ -2035,6 +2035,14 @@ return {
                 text = {
                     "{C:attention}Retrigger{} all scored",
                     "{C:attention}7s{} #1# time#<s>1#"
+                }
+            },
+            j_unik_ghost_joker = {
+                name = "Ghost Joker",
+                text = {
+                    "Create a {C:spectral}Spectral{} card",
+                    "when {C:attention}Blind{} is selected",
+                    "{C:inactive}(Must have room)",
                 }
             },
 

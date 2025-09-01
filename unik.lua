@@ -579,6 +579,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/foundation.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/last_tile.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
