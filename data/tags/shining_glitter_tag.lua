@@ -1,7 +1,7 @@
 SMODS.Tag{
     atlas = 'unik_tags',
     key = 'unik_shining_glitter',
-    pos = { x = 2, y = 2 },
+    pos = { x = 2, y = 1 },
     config = {type = "store_joker_modify",edition = "unik_shining_glitter" },
     loc_vars = function(self, info_queue)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_shining_glitter

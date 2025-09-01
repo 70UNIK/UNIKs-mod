@@ -2,7 +2,7 @@
 SMODS.Tag{
     atlas = 'unik_tags',
     key = 'unik_steel',
-    pos = { x = 2, y = 1 },
+    pos = { x = 2, y = 2 },
     config = {type = "store_joker_modify",edition = "unik_steel" },
     loc_vars = function(self, info_queue)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_steel

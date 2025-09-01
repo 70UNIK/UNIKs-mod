@@ -1918,7 +1918,7 @@ return {
             j_unik_last_tile={
                 name = "Last Tile",
                 text = {
-                    "Add {C:dark_edition}Mosaic{} to scored cards",
+                    "Add {C:dark_edition}Glittergrid{} to scored cards",
                     "on {C:attention}final{} hand",
                     "{E:2,C:red}Self Destructs{}"
                 }

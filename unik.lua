@@ -273,7 +273,6 @@ SMODS.Rarity({
 if Cryptid then
     Cryptid.pointerblistifytype("rarity", "unik_ancient")
 end
-NFS.load(mod_path .. "data/overrides/rarity_overrides.lua")()
 
 --Discount Cursed
 SMODS.Rarity({
@@ -435,11 +434,11 @@ end
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 
 --tags
-NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
 NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
 NFS.load(mod_path .. "data/tags/shining_glitter_tag.lua")()
 NFS.load(mod_path .. "data/tags/steel_tag.lua")()
 NFS.load(mod_path .. "data/tags/demon_tag.lua")()
+NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
 NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
 NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 NFS.load(mod_path .. "data/tags/positive.lua")()
@@ -579,6 +578,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/clone_man.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/epic_blind_sauce.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/foundation.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/last_tile.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
@@ -613,7 +613,6 @@ end
 if Cryptid then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/hacker.lua")()
-	-- NFS.load(mod_path .. "data/jokers/last_tile.lua")() --May not program it in...
 	NFS.load(mod_path .. "data/jokers/cryptid/epic_riffin.lua")() 
 end
 
@@ -699,6 +698,8 @@ end
 
 NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
+NFS.load(mod_path .. "data/overrides/last_hand.lua")() 
+
 
 --Challenges gone until I fix them to work with new API
 -- NFS.load(mod_path .. "data/challenges/common_muck.lua")()

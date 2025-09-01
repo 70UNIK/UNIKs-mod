@@ -1,6 +1,7 @@
 -- --OIL LUMP
 -- Now fixed:
 
+
 -- Based on:
 -- https://github.com/SpectralPack/Cryptid/tree/99df47a6f6c769ab7f1fdf81ebf3575f6bf2f1e3
 SMODS.Joker:take_ownership("j_cry_oil_lamp", {

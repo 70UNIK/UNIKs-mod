@@ -142,6 +142,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
         
     else
         G.GAME.blind:unik_before_play()
+        SMODS.calculate_context({on_select_play = true})
         pcfh(e)
     end
 	G.GAME.before_play_buffer2 = nil
