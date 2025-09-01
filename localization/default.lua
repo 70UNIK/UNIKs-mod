@@ -2048,6 +2048,17 @@ return {
                     "{C:inactive}(Must have room)",
                 }
             },
+            j_unik_rainbow_river = {
+                name = "Rainbow River",
+                text = {
+                    "Add random {C:dark_edition}Editions",
+                    "to all scoring cards",
+                    "if played hand",
+                    "contains a {C:attention}Spectrum",        
+                    "{C:red,E:2}Self destructs{} after",
+                    "{C:attention}#1#{} trigger#<s>1#"
+                }
+            },
 
 
 
@@ -3609,6 +3620,7 @@ return {
             k_unik_xchips_not_vanilla3="THINK! THINK! YOUR DEPENDENCE ON XCHIPS IS DISGUSTING!!11!!!",
             k_unik_xchips_not_vanilla4="BUNCO IS NOT VANILLA CAUSE IT USES XCHIPS!!!!11!!!",
             cry_unredeemed = "Unredeemed...",
+            k_unik_dried_up = "Dried Up!",
         },
         high_scores={},
         labels={

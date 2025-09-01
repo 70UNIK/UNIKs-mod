@@ -39,7 +39,7 @@ SMODS.Joker {
 		end
 	end,
 	in_pool = function(self)
-		if G.GAME.hands["unik_spectrum"].played > 0 then
+		if UNIK.spectrum_played() then
 			return true
 		end
 		return false

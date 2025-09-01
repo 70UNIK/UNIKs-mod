@@ -7,6 +7,7 @@ SMODS.PokerHandPart { -- Spectrum base (Referenced from SixSuits)
     return (unique_suits >= requiredCards) and { hand } or {}
   end
 }
+
 --Override paperback's implementation of suit count
 if PB_UTIL and PB_UTIL.config.suits_enabled then
     function PB_UTIL.get_unique_suits(scoring_hand, bypass_debuff, flush_calc)
@@ -51,6 +52,33 @@ if PB_UTIL and PB_UTIL.config.suits_enabled then
 
         return num_suits
     end
+end
+
+function UNIK.spectrum_played()
+  local spectrum_played = false
+  if G and G.GAME and G.GAME.hands then
+    for k, v in pairs(G.GAME.hands) do
+      if string.find(k, "Spectrum", nil, true) then
+        if G.GAME.hands[k].played > 0 then
+          spectrum_played = true
+          break
+        end
+      end
+    end
+  end
+
+  return spectrum_played
+end
+
+function UNIK.contains_spectrum(hands)
+  if PB_UTIL and PB_UTIL.config.suits_enabled then
+    return  PB_UTIL.contains_spectrum(hands)
+  end
+  for k, v in pairs(hands) do
+    if (k:find('Spectrum', nil, true) or k:find('spectrum', nil, true) or k:find('unik_spectrum', nil, true)) and #v > 0 then
+      return true
+    end
+  end
 end
 
 --stolen from paperback again

@@ -39,14 +39,14 @@ SMODS.Joker {
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
-    config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0} },
+    config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0,sold = false} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,center.ability.extra.Emult_mod} }
 	end,
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
-            if not  G.CONTROLLER.locks.selling_card and not card.ability.unik_disposable and not card.ability.unik_niko 
+            if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko 
             and not card.ability.cry_committed and not card.ability.cry_reworked then
                 unik_set_sell_cost(card,0)
                 White_lily_copy(card)
@@ -84,6 +84,9 @@ SMODS.Joker {
 
 				}
             end
+        end
+        if context.selling_self then
+            card.ability.immutable.sold = true
         end
     end,
 }

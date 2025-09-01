@@ -218,3 +218,62 @@ G.FUNCS.reroll_boss = function(e)
 		return gfrb2(e)
 	end
 end
+
+local bunco_hook = G.FUNCS.use_blind_card
+G.FUNCS.use_blind_card = function(e)
+    local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
+    if obj.boss and obj.boss.legendary then
+		play_sound('cancel', 0.7 + 0.05, 0.7)
+        local text = localize('k_unik_boss_reroll_nope')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+        })
+        G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+		    local card = e.config.ref_table
+
+        local boss = card.ability.blind_card.blind.key
+        -- G.GAME.round_resets.blind_choices.Boss = boss
+
+        -- play_sound('other1')
+
+        e.config.button = nil
+
+        -- if G.blind_select_opts.boss then
+        --     bunc_refresh_boss_blind()
+        -- end
+
+        G.PROFILES[G.SETTINGS.profile].blind_cards_used = (G.PROFILES[G.SETTINGS.profile].blind_cards_used or 0) + 1
+        if G.PROFILES[G.SETTINGS.profile].blind_cards_used then
+            check_for_unlock({type = 'use_blind_card', blinds_total = G.PROFILES[G.SETTINGS.profile].blind_cards_used})
+        end
+
+        G.FUNCS.end_consumeable(nil, 0.2)
+    elseif obj.boss and obj.boss.epic then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+        })
+            local card = e.config.ref_table
+
+        local boss = card.ability.blind_card.blind.key
+        -- G.GAME.round_resets.blind_choices.Boss = boss
+
+        -- play_sound('other1')
+
+        e.config.button = nil
+
+        -- if G.blind_select_opts.boss then
+        --     bunc_refresh_boss_blind()
+        -- end
+
+        G.PROFILES[G.SETTINGS.profile].blind_cards_used = (G.PROFILES[G.SETTINGS.profile].blind_cards_used or 0) + 1
+        if G.PROFILES[G.SETTINGS.profile].blind_cards_used then
+            check_for_unlock({type = 'use_blind_card', blinds_total = G.PROFILES[G.SETTINGS.profile].blind_cards_used})
+        end
+
+        G.FUNCS.end_consumeable(nil, 0.2)
+	else
+		return bunco_hook(e)
+	end
+end

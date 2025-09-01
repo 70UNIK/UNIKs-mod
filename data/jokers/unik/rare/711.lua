@@ -21,7 +21,7 @@ SMODS.Joker {
 	pools = {["unik_copyrighted"] = true ,["unik_seven"] = true },
 	-- The functioning part of the joker, looks at context to decide what step of scoring the game is on, and then gives a 'return' value if something activates.
     calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play then
+		if context.individual and context.cardarea == G.play or context.force_trigger then
             if (
                 context.other_card:get_id() == 7 or 
                 context.other_card:get_id() == 14) then

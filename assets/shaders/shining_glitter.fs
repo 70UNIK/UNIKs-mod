@@ -180,7 +180,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 	vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
     vec3 greyScale = vec3(.34, .34, .34);
-    float progress = (uv.y + (sin((shining_glitter.x) * 2.0*3.14)/2. + 1.0))/2.;
+    float progress = (uv.y + (sin((shining_glitter.x) * 2.0*3.14)/2. + 0.5))/2.;
     vec3 color1 = vec3(0.96078431,0.06274509803921569,0.7725490196078432);
     vec3 color2 = vec3(0.7411764705882353,0.4470588235294118,0.9372549019607843);
     vec3 mixTure = mix(color1, color2, progress);

@@ -27,30 +27,29 @@ end
 
 local reset_override = reset_blinds
 function reset_blinds()
+    --default state
+    if G.GAME.round_resets.blind_states.Boss == 'Defeated' then
+        G.GAME.round_resets.blind_choices.Small = "bl_small"
+        G.GAME.round_resets.blind_choices.Big = "bl_big"
+    end
     reset_override()
     if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
         G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
     end
-    if G.GAME.round_resets.blind_states.Boss == 'Defeated' then
+    if G.GAME.round_resets.blind_states.Small == 'Upcoming' and
+        G.GAME.round_resets.blind_states.Big == 'Upcoming' and
+        G.GAME.round_resets.blind_states.Boss == 'Upcoming' then
+
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
             G.GAME.round_resets.blind_choices.Small = get_new_boss()
-        else
-            G.GAME.round_resets.blind_choices.Small = "bl_small"
         end
-        if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
+        if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii or G.GAME.superboss_active then
             G.GAME.round_resets.blind_choices.Big = get_new_boss()
-        else
-            G.GAME.round_resets.blind_choices.Big = "bl_big"
         end
-        G.GAME.round_resets.blind_states.Small = 'Upcoming'
-        G.GAME.round_resets.blind_states.Big = 'Upcoming'
-        G.GAME.round_resets.blind_states.Boss = 'Upcoming'
         G.GAME.blind_on_deck = 'Small'
-        if vice_check() == 1 then
-            G.GAME.round_resets.blind_choices.Boss = get_new_boss()
-        end
         G.GAME.round_resets.boss_rerolled = false
     end
+    
 end
 
 --Blind refresh

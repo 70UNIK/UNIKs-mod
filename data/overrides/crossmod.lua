@@ -164,3 +164,9 @@ SMODS.Joker:take_ownership("j_paperback_deadringer",{
 		end
     end,
 }, true)
+
+if next(SMODS.find_mod("Bunco")) then
+	SMODS.Stake:take_ownership('bunc_magenta', {
+		unlocked_stake = 'unik_persimmon',
+	})
+end
