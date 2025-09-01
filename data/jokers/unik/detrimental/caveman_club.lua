@@ -7,7 +7,7 @@ SMODS.Joker {
 	},
 	key = 'unik_caveman_club',
     atlas = 'unik_cursed',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
     no_dbl = true,
 	pos = { x = 1, y = 1 },
     cost = 1,

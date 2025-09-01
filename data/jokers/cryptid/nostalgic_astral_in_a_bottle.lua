@@ -8,7 +8,7 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_astral_bottle',
     atlas = 'placeholders',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'cry_cursed',
 	no_dbl = true,
 	pos = { x = 3, y = 1 },
     cost = 0,

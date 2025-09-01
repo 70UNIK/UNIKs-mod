@@ -13,7 +13,7 @@ SMODS.Joker {
 	key = 'unik_the_plant',
     no_dbl = true,
     atlas = 'unik_the_plant',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 2, y = 0 },
     cost = 1,

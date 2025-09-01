@@ -6,7 +6,7 @@ SMODS.Joker {
 	},
 	key = 'unik_border_wall',
     atlas = 'unik_cursed',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
     no_dbl = true,
 	pos = { x = 1, y = 0 },
     cost = 1,

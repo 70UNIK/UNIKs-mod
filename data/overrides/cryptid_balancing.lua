@@ -1819,7 +1819,7 @@ calculate = function(self, card, context)
 		if
 			(context.buying_card or context.cry_creating_card)
 			and context.card.ability.set == "Joker"
-			and context.card.config.center.rarity == UnikDetrimentalRarity()
+			and context.card.config.center.rarity == 'unik_detrimental'
 			and not context.blueprint
 			and not (context.card == card)
 		then

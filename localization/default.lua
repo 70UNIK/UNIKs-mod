@@ -350,7 +350,7 @@ return {
                 }
             },
             bl_unik_epic_steel={
-                name = "Teräksinenterrori", --Steel Terror, exactly functions like the steel, but unrerollable. This is cause its one of the few bosses to greatly be detrimental in the long run which is why its unchanged.
+                name = "Teräksinenterrori",
                 text = {
                     "Set Chips or Mult",
                     "to lower value",
@@ -3026,8 +3026,23 @@ return {
                 name = "Positive Tag",
                 text = {
                     "Next base edition shop",
-                    "Joker is free and",
                     "becomes {C:unik_shitty_edition}Positive",
+                }
+            },
+            tag_unik_steel = {
+                name = "Steel Tag",
+                text = {
+                    "Next base edition shop",
+                    "Joker is free and",
+                    "becomes {C:dark_edition}Steel",
+                }
+            },
+            tag_unik_shining_glitter = {
+                name = "Glittergrid Tag",
+                text = {
+                    "Next base edition shop",
+                    "Joker is free and",
+                    "becomes {C:dark_edition}Glittergrid",
                 }
             },
 			tag_unik_extended_empowered = {

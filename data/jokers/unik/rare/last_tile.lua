@@ -4,26 +4,28 @@ SMODS.Joker {
     atlas = 'placeholders',
 	pos = { x = 2, y = 0 },
     rarity = 3,
-    cost = 8,
+    cost = 7,
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = true,
     immutable = true,
+    config = {extra = {to_be_destroyed = false}},
     loc_vars = function(self, info_queue, center)
-        if not center.edition or (center.edition and not center.edition.cry_mosaic) then
-			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic
+        if not center.edition or (center.edition and not center.edition.unik_shining_glitter) then
+			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_shining_glitter
 		end
 	end,
     calculate = function(self, card, context)
-        if context.joker_main and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
+        if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
             --print("turn them happy")
+            card.ability.extra.to_be_destroyed = true
             
             G.E_MANAGER:add_event(Event({
 
                 func = function()
                     
                     for i,v in pairs(context.scoring_hand) do
-                        v:set_edition({ cry_mosaic = true }, true,nil, true)
+                        v:set_edition({ unik_shining_glitter = true }, true,nil, true)
                     end
                     return true
                 end
@@ -34,7 +36,7 @@ SMODS.Joker {
                 colour = G.C.DARK_EDITION,
             }
         end
-        if context.after and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
+        if context.after and card.ability.extra.to_be_destroyed and not context.blueprint and not context.repetition and not context.retrigger_joker then
             G.E_MANAGER:add_event(Event({
                 trigger="immediate",
 

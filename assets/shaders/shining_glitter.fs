@@ -193,7 +193,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     uv2 = floor(uv2) + shining_glitter.x*3.0 + shining_glitter.y *0.2;
     
     float coll = perlin(uv2);
-    coll = ((coll - 0.8) * max(8.0,0.0)) + 0.8;
+    coll = ((coll - 0.4) * max(3.5,0.0));
     finalColors = screen(vec3(coll)*0.2,finalColors);
 
     vec4 finale = vec4(finalColors,OGtrans);

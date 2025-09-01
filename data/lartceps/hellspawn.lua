@@ -31,7 +31,7 @@ SMODS.Consumable{
 					delay = 0.1,
 					func = function()
                         play_sound("timpani")
-                        local card_ = create_card("Joker", G.jokers, nil, UnikDetrimentalRarity(), nil, nil, nil, "unik_hellspawn")
+                        local card_ = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_hellspawn")
                         card_:start_materialize()
                         card_:add_to_deck()
                         G.jokers:emplace(card_)

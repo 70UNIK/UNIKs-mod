@@ -437,10 +437,12 @@ NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 --tags
 NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
 NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
-NFS.load(mod_path .. "data/tags/positive.lua")()
+NFS.load(mod_path .. "data/tags/shining_glitter_tag.lua")()
+NFS.load(mod_path .. "data/tags/steel_tag.lua")()
 NFS.load(mod_path .. "data/tags/demon_tag.lua")()
 NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
 NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
+NFS.load(mod_path .. "data/tags/positive.lua")()
 --manacle tag: -1 hand size
 
 --BLINDS--

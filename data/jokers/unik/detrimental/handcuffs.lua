@@ -6,7 +6,7 @@ SMODS.Joker {
 	},
 	key = 'unik_handcuffs',
     atlas = 'unik_cursed',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
 	pos = { x = 4, y = 0 },
     no_dbl = true,
     cost = 1,

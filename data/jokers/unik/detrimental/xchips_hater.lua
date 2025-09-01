@@ -2,7 +2,7 @@
 SMODS.Joker {
     key = 'unik_xchips_hater',
     atlas = 'placeholders',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
 	no_dbl = true,
 	pos = { x = 3, y = 1 },
     cost = 0,

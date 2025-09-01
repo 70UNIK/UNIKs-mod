@@ -7,7 +7,7 @@ SMODS.Joker {
 	},
 	key = 'unik_vampiric_hammer',
     atlas = 'unik_cursed',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
 	pos = { x = 4, y = 2 },
     no_dbl = true,
     cost = 1,

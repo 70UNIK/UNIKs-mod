@@ -26,7 +26,6 @@ SMODS.Tag{
                 tag:too_bad("TOO BAD", G.C.UNIK_VOID_COLOR, function()
 					context.card:set_edition({ unik_positive = true }, true)
 					context.card.ability.couponed = true
-					context.card:set_cost()
 					context.card.temp_edition = nil
 					G.CONTROLLER.locks[lock] = nil
 					return true

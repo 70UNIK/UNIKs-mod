@@ -8,7 +8,7 @@ SMODS.Joker {
 	},
 	key = 'unik_broken_scale',
     atlas = 'unik_cursed',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
     no_dbl = true,
 	pos = { x = 0, y = 2 },
     cost = 1,

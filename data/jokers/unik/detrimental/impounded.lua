@@ -8,7 +8,7 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_impounded',
     atlas = 'unik_cursed',
-    rarity = UnikDetrimentalRarity(),
+    rarity = 'unik_detrimental',
 	pos = { x = 4, y = 1 },
     cost = 0,
 	blueprint_compat = false,
@@ -32,7 +32,7 @@ SMODS.Joker {
                 local ghostTrap = false
                 --Stop impounding if it detects a ghost trap to avoid infinite loops
                 for i,v in pairs(G.jokers.cards) do
-                    if v.config.center.rarity ~= UnikDetrimentalRarity() and v.config.center.key ~= "j_unik_impounded" and not v.ability.unik_impounded then
+                    if v.config.center.rarity ~= 'unik_detrimental' and v.config.center.key ~= "j_unik_impounded" and not v.ability.unik_impounded then
                         validEntries[#validEntries + 1] = v
                     end
                     if v.config.center.key == "j_unik_ghost_trap" or v.config.center.key == "j_cry_formidiulosus" then
@@ -48,7 +48,7 @@ SMODS.Joker {
                     --If its targeting itself, then retry until it hits a non-cursed Joker or no non-cursed jokers exist
                     local successful = true
                     --Fallback: If it happened to target a cursed joker, retry until it hits another one or no non cursed exist to avoid debuffing a non cursed joker or itself
-                    if select.config.center.rarity == UnikDetrimentalRarity() then
+                    if select.config.center.rarity == 'unik_detrimental' then
                         print(#validEntries) 
                         successful = false
                         print("Uh oh, looks like it tried to debuff a cursed joker or itself... fallback")
