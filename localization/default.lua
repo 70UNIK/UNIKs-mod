@@ -3329,6 +3329,12 @@ return {
         },
         collabs={},
         dictionary={
+            suits_singular = {
+                unik_pink = 'Pink Card',
+            },
+            suits_plural = {
+                unik_pink = 'Pink Cards',
+            },
             k_planet_disc = "Circumstellar Disc",
             unik_bulwark = "Bulwark",
             unik_spectrum = "Spectrum",
