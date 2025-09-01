@@ -182,7 +182,8 @@ end
 
 function unik_ease_overshoot(mod)
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-    if G.GAME.unik_overshoot + mod >= 0 then
+    G.GAME.overshoot_floor = G.GAME.overshoot_floor or 0
+    if G.GAME.unik_overshoot + mod >= G.GAME.overshoot_floor then
         G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
         func = function()

@@ -3314,6 +3314,8 @@ return {
             c_unik_monsters="Monsters",
             c_unik_singleton="Singleton",
             c_unik_learning_with_pibby="Learning With Pibby",
+            c_unik_cookie_clicker_1 = "Cookie Clicker I",
+            c_unik_cookie_clicker_2 = "Cookie Clicker II",
         },
         collabs={},
         dictionary={
@@ -3911,14 +3913,15 @@ return {
             ch_c_cry_rush_hour_ii = {"All Blinds are {C:attention}Boss Blinds"},
             ch_c_unik_no_skipping = {"Skipping Blinds are {C:red}banned"},
             ch_c_unik_purple_scaling = {"Required score {C:attention}scales{} fast as {C:purple}Purple Stake{}"},
-            ch_c_unik_legendary_at_any_time = {"{X:unik_void_color,C:unik_eye_searing_red}LEGENDARY{X:unik_void_color,C:unik_eye_searing_red} BLINDS{X:unik_void_color,C:unik_eye_searing_red} {X:unik_void_color,C:unik_eye_searing_red}CAN {X:unik_void_color,C:unik_eye_searing_red}SPAWN {X:unik_void_color,C:unik_eye_searing_red}ANY {X:unik_void_color,C:unik_eye_searing_red}TIME.{}"},
             ch_c_unik_single_select_limit = {"{C:red}1{} Card {C:attention}Selection Limit"},
             ch_c_unik_the_darkness_spreads1 = {"Leftmost Joker become {C:unik_shitty_edition}Corrupted{} on Blind Select"},
             ch_c_unik_the_darkness_spreads2 = {"1 Random Card in Hand becomes {C:unik_shitty_edition}Corrupted{} on play"},
             ch_c_unik_the_darkness_spreads3 = {"Adjacent Jokers to {C:unik_shitty_edition}Corrupted{} Jokers become {C:unik_shitty_edition}Corrupted{} on Blind Select"},
             ch_c_unik_the_darkness_spreads4 = {"All Editions are {C:unik_shitty_edition}Corrupted"},
             ch_c_unik_protect_pibby = {"If {C:attention}Pibby{} is {C:unik_shitty_edition}Corrupted{} or destroyed, {X:unik_void_Color, C:unik_eye_searing_red}Die"},
-
+            ch_c_unik_all_cookie = {"All Boss Blinds are {C:attention}The Cookie{} and {X:unik_void_color,C:red}Pimeydenkeksi"},
+            ch_c_unik_overshoot_15 = {"Minimum {C:red}Overshoot{} is {X:unik_void_color,C:red}15"},
+            ch_c_unik_legendary_at_any_time = {"{C:red}Epic Blinds{} can spawn {X:unik_void_color,C:red}anytime"}
         },
     },
 }

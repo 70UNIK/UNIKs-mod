@@ -20,20 +20,11 @@ SMODS.Joker {
             --print("turn them happy")
             card.ability.extra.to_be_destroyed = true
             
-            G.E_MANAGER:add_event(Event({
-
-                func = function()
-                    
-                    for i,v in pairs(context.scoring_hand) do
-                        v:set_edition({ unik_shining_glitter = true }, true,nil, true)
-                    end
-                    return true
-                end
-            }))
-
+            for i,v in pairs(context.scoring_hand) do
+                v:set_edition({ unik_shining_glitter = true }, true,nil, true)
+            end
             return{
-                message = localize("k_unik_last_tile"),
-                colour = G.C.DARK_EDITION,
+               
             }
         end
         if context.after and card.ability.extra.to_be_destroyed and not context.blueprint and not context.repetition and not context.retrigger_joker then

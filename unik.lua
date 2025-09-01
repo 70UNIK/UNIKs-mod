@@ -710,7 +710,11 @@ NFS.load(mod_path .. "data/overrides/last_hand.lua")()
 NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
-NFS.load(mod_path .. "data/challenges/video_poker_2.lua")() --broken
+NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
+if unik_config.unik_legendary_blinds then
+	NFS.load(mod_path .. "data/challenges/cookie_clicker.lua")()
+	NFS.load(mod_path .. "data/challenges/cookie_clicker_2.lua")()
+end
 -- NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 
 

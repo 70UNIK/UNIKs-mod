@@ -76,7 +76,7 @@ SMODS.Blind{
                     local selectedDest1 = nil
                     if G.hand then
                         for i,v in pairs(G.hand.cards) do
-                            if (SMODS.is_eternal(v, self)) and (not v.ability.set_for_destruction) then
+                            if (not SMODS.is_eternal(v, self)) and (not v.ability.set_for_destruction) then
                                 validCards[#validCards + 1] = v
                             end
                         end
