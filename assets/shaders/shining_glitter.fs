@@ -190,7 +190,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     float sprite_width = texture_details.z / image_details.x; // Normalized width
     vec2 uv2 = uv*10.0;
 	
-    uv2 = floor(uv2) + shining_glitter.x*3.0 + shining_glitter.y *0.2;
+    uv2 = floor(uv2) + shining_glitter.x*2.0 + shining_glitter.y * 0.2 ;
     
     float coll = perlin(uv2);
     coll = ((coll - 0.4) * max(3.5,0.0));
