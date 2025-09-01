@@ -4,7 +4,7 @@
 --TODO:
 --Overhaul into "Xchips booster", where all jokers are Xchips based. Relies in a script to add them in.
 local cube_digital_hallucinations = {
-	colour = G.C.CRY_ASCENDANT,
+	colour = G.C.DARK_EDITION,
 	loc_key = "k_plus_joker",
 	create = function()
 		local ccard = create_card("unik_cube", G.jokers, nil, nil, true, true, nil, "unik_cube_2")

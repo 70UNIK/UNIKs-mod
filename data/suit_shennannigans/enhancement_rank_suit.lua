@@ -35,8 +35,6 @@ function Card:is_face(from_boss)
     return ret
 end
 
---TODO: remove dependency on cryptid functions
---Add a hook to getID for abstracts (and to conditionally enable the check)
 local getIDenhance = Card.get_id
 function Card:get_id()
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 

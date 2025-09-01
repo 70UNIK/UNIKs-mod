@@ -2809,7 +2809,6 @@ return {
                 }
             },
 
-            -- TODO fix typo
 			cry_perishable_consumeable = {
 				name = "Perishable",
 				text = {

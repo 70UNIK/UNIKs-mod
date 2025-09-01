@@ -164,6 +164,20 @@ end
 '''
 match_indent = true
 
+### REWORK: White Lily should immediately die without respawn if used REWORK on her:
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Cryptid "items/code.lua"]'''
+pattern = '''jkr:start_dissolve()'''
+position = "before"
+payload = '''
+-- reduce commit limit by 666
+if jkr.config.center.key == "j_unik_white_lily_cookie" then
+    jkr.ability.cry_committed = true
+end
+'''
+match_indent = true
+
 ### Custom card destruction anim thing (lily, possibly tainted ceramics)
 [[patches]]
 [patches.pattern]

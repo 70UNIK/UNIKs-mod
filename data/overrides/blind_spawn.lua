@@ -46,6 +46,10 @@ function reset_blinds()
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii or G.GAME.superboss_active then
             G.GAME.round_resets.blind_choices.Big = get_new_boss()
         end
+        --Override superboss if forcing epic blinds
+        if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
+            G.GAME.round_resets.blind_choices.Boss = get_new_boss()
+        end
         G.GAME.blind_on_deck = 'Small'
         G.GAME.round_resets.boss_rerolled = false
     end

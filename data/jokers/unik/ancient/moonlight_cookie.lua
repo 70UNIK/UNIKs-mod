@@ -206,7 +206,6 @@ function moonlightlevelStructure(hand,consumeble,card)
 	end
 end
 
---TODO: Remove cryptid dependency
 function exponentLevelExtra(hand,exponent,v,instant)
 	--print("g")
 	if not instant and (not Talisman or not  Talisman.config_file.disable_anims) then

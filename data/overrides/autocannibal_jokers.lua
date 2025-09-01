@@ -372,7 +372,6 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 		end
 	end
 }, true)
---TODO: lolipop, nachos
 --Lollipop
 SMODS.Joker:take_ownership("j_mf_lollipop",{
 	loc_vars = function(self, info_queue, center)

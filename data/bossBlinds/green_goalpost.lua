@@ -33,12 +33,7 @@ SMODS.Blind{
       return false
   end
 }
---TODO: Legendary Goalpost/ pakotettumaaliviiva (Forced Finish line): sets ante to 666, rounds to 100 and victory requirements to 1 (aka all blinds are finishers). 
--- Never spawns naturally, but after getting two Green Goalposts,
---has a 10% chance to replace Green Goalpost whenever it is pointered in, rerolled to or it spawns naturally, 
---increases by 15% every time green goalpost is obtained.
---Primarily designed to punish goalpost abuse to not trigger straddle (by extending victory reqs to unnatural values)
---Will never spawn in endless
+
 function ease_victory_reqs(mod)
      G.E_MANAGER:add_event(Event({
       trigger = 'immediate',
