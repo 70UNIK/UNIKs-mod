@@ -10,9 +10,9 @@ SMODS.Challenge{
         },
 	},
 	jokers = {
-        { id = "j_unik_coupon_codes", stickers = { "eternal" }, edition = "negative" },
-        { id = "j_unik_coupon_codes", stickers = { "eternal" }, edition = "negative" },
-        { id = "j_unik_coupon_codes", stickers = { "eternal" }, edition = "negative" },
+        { id = "j_unik_coupon_codes", eternal = true, edition = "negative" },
+        { id = "j_unik_coupon_codes", eternal = true, edition = "negative" },
+        { id = "j_unik_coupon_codes", eternal = true, edition = "negative" },
     },
     consumeables = {
     },
