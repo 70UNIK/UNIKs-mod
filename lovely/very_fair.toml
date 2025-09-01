@@ -10,8 +10,10 @@ target = "game.lua"
 pattern = "self.GAME.current_round.voucher = forced_voucher and {forced_voucher, spawn = {[forced_voucher] = true }} or SMODS.get_next_vouchers()"
 position = "after"
 payload = '''
-if self.GAME.modifiers.cry_no_vouchers then
-    very_fair_quip = pseudorandom_element(G.localization.misc.very_fair_quips, pseudoseed("cry_very_fair"))
+if not Cryptid then
+    if self.GAME.modifiers.cry_no_vouchers then
+        very_fair_quip = pseudorandom_element(G.localization.misc.very_fair_quips, pseudoseed("cry_very_fair"))
+    end
 end
 '''
 match_indent = true
@@ -24,8 +26,10 @@ target = "functions/state_events.lua"
 pattern = "G.GAME.current_round.voucher = SMODS.get_next_vouchers()"
 position = "after"
 payload = '''
-if G.GAME.modifiers.cry_no_vouchers then
-    very_fair_quip = pseudorandom_element(G.localization.misc.very_fair_quips, pseudoseed("cry_very_fair"))
+if not Cryptid then
+    if G.GAME.modifiers.cry_no_vouchers then
+        very_fair_quip = pseudorandom_element(G.localization.misc.very_fair_quips, pseudoseed("cry_very_fair"))
+    end
 end
 '''
 match_indent = true

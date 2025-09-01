@@ -717,7 +717,9 @@ if unik_config.unik_legendary_blinds then
 end
 -- NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 
-
+if not Cryptid then
+	very_fair_quip = {}
+end
 
 -- achievements
 -- NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
