@@ -432,10 +432,13 @@ end
 
 
 --boosters
+--TODO: Replace "cube pack" with "UNIK's pack" in the next update, basically an icon pack of sorts
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
+NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
 
 --tags
-NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
+
+
 NFS.load(mod_path .. "data/tags/shining_glitter_tag.lua")()
 NFS.load(mod_path .. "data/tags/steel_tag.lua")()
 NFS.load(mod_path .. "data/tags/demon_tag.lua")()
@@ -515,8 +518,8 @@ if unik_config.unik_legendary_blinds then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")() --panopicon. thats it
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
 	if Talisman then
-		NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
 		NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")() --good high card score thats it.
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
