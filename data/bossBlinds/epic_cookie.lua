@@ -9,7 +9,7 @@ SMODS.Blind{
     dollars = 13,
     mult = 1,
     unik_exponent = {1,1},
-    ignore_showdown_check = true,
+    
     loc_vars = function(self, info_queue, card)
         local string = ""
         string = "" .. 1.005

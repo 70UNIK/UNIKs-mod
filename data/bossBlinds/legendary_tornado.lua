@@ -36,7 +36,7 @@ SMODS.Blind{
     get_loc_debuff_text = function(self)
 		return localize("k_unik_leg_tornado_warn_1") .. (G.GAME.current_round.discards_left) .. localize("k_unik_leg_tornado_warn_2")
 	end,
-    ignore_showdown_check = true,
+    
     set_blind = function(self, reset, silent)
 		if not reset then
              G.GAME.unik_dynamic_text_realtime = true

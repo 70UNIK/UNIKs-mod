@@ -25,7 +25,7 @@ SMODS.Blind{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
-    ignore_showdown_check = true,
+    
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
 		G.GAME.unik_killed_by_magnet_legendary = true

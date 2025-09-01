@@ -9,7 +9,7 @@ SMODS.Blind{
     dollars = 13,
     mult = 2,
     death_message = "special_lose_unik_epic_shackle",
-    ignore_showdown_check = true,
+    
     debuff = {
         akyrs_blind_difficulty = "epic",
         akyrs_cannot_be_overridden = true,
@@ -126,7 +126,7 @@ SMODS.Blind{
         end
         for i,v in pairs(G.jokers.cards) do
             if v.edition and v.edition.negative then
-                return true
+                return CanSpawnEpic()
             end
         end
         return false

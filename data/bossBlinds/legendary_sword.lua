@@ -24,7 +24,7 @@ SMODS.Blind{
     mult = 1,
     glitchy_anim = true,
     unik_exponent = {1,3},
-    ignore_showdown_check = true,
+    
     set_blind = function(self, reset, silent)
         G.GAME.force_no_discards = true
         G.GAME.force_one_hand = true

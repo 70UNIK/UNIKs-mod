@@ -21,7 +21,7 @@ SMODS.Blind	{
     },
 	--must be localized
 	death_message = 'special_lose_unik_epic_collapse',
-	ignore_showdown_check = true,
+	
 	in_pool = function(self)
 		local stoneCards = 0
         if G.deck then 

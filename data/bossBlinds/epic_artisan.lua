@@ -30,7 +30,7 @@ SMODS.Blind	{
     dollars = 13,
     mult = 2,
     death_message = "special_lose_unik_artisan_builds_epic",
-	ignore_showdown_check = true,
+	
 	in_pool = function(self)
         return  CanSpawnEpic()
 	end,

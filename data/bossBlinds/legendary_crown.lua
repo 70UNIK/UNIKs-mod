@@ -35,7 +35,7 @@ SMODS.Blind{
 		return localize("k_unik_legendary_crown_defeat_x_times1") .. (G.GAME.unik_crown_progress or G.GAME.round_resets.hands) .. localize("k_unik_legendary_crown_defeat_x_times2")
 	end,
     high_score_size = true, --force high score
-    ignore_showdown_check = true,
+    
     loc_vars = function(self)
         local exponent1 = "x1.5"
         local exponent2 = "^6.666"

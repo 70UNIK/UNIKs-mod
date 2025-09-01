@@ -9,7 +9,7 @@ SMODS.Blind {
     vars = {},
     dollars = 13,
     mult = 2,
-    ignore_showdown_check = true,
+    
     debuff = {
         akyrs_blind_difficulty = "epic",
         akyrs_cannot_be_overridden = true,

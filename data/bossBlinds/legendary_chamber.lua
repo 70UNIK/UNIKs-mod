@@ -28,7 +28,7 @@ SMODS.Blind{
         akyrs_cannot_be_skipped = true,
     },
     death_message = "special_lose_torture_chamber",
-    ignore_showdown_check = true,
+    
     loc_vars = function(self, info_queue, card)
         local count = jokerRaritiesCount()
         if not G.GAME.unik_blind_hands then

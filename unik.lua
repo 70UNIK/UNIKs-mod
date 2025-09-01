@@ -49,7 +49,6 @@ NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
-NFS.load(mod_path .. "data/misc/voucher_unredeem.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
 
 --Custom spectrum stuff
@@ -553,7 +552,6 @@ NFS.load(mod_path .. "data/jokers/unik/common/double_container.lua")() --Uncommo
 
 --Uncommon
 NFS.load(mod_path .. "data/jokers/unik/uncommon/no_standing_zone.lua")()
-NFS.load(mod_path .. "data/jokers/unik/uncommon/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/riif_roof.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/tax_haven.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/cube_joker.lua")() 
@@ -569,6 +567,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/euclid.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
 
 --Rare
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
@@ -618,6 +617,7 @@ end
 if Cryptid then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/hacker.lua")()
+	NFS.load(mod_path .. "data/jokers/cryptid/coupon_codes.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/epic_riffin.lua")() 
 end
 
@@ -707,7 +707,6 @@ NFS.load(mod_path .. "data/overrides/last_hand.lua")()
 
 
 --Challenges gone until I fix them to work with new API NFS.load(mod_path .. "data/challenges/common_muck.lua")()
-NFS.load(mod_path .. "data/challenges/temu_vouchers.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()

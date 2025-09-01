@@ -26,7 +26,7 @@ SMODS.Blind{
         akyrs_cannot_be_skipped = true,
     },
     death_message = "special_lose_unik_nuke_legendary",
-    ignore_showdown_check = true,
+    
     loc_vars = function(self, info_queue, card)
 		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
 	end,
