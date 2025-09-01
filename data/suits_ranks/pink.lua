@@ -7,7 +7,7 @@ SMODS.Suit{ -- Halberds
     hidden = true,
 
     lc_ui_atlas = 'enhancement_suits',
-    hc_ui_atlas = 'enhancement_suits_hc',
+    hc_ui_atlas = 'enhancement_suits_HC',
     ui_pos = { x = 0, y = 0 },
 
     lc_colour = G.C.UNIK_UNIK,
