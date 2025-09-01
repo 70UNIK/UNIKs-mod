@@ -123,7 +123,8 @@ if not Cryptid then
         if center_table.name == "Overstock" or center_table.name == "Overstock Plus" then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    change_shop_size(-center_table.extra)
+                    change_shop_size(-1)
+                    
                     return true
                 end,
             }))
@@ -163,7 +164,7 @@ if not Cryptid then
         if center_table.name == "Crystal Ball" then
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    G.consumeables.config.card_limit = G.consumeables.config.card_limit - center_table.extra
+                    G.consumeables.config.card_limit = G.consumeables.config.card_limit - 1
                     return true
                 end,
             }))
@@ -246,17 +247,17 @@ if not Cryptid then
             }))
         end
         if center_table.name == "Hieroglyph" or center_table.name == "Petroglyph" then
-            ease_ante(center_table.extra)
+            ease_ante(center_table.extra or 1)
             G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante or G.GAME.round_resets.ante
             G.GAME.round_resets.blind_ante = G.GAME.round_resets.blind_ante + center_table.extra
 
             if center_table.name == "Hieroglyph" then
                 G.GAME.round_resets.hands = G.GAME.round_resets.hands + center_table.extra
-                ease_hands_played(center_table.extra)
+                ease_hands_played(center_table.extra or 1)
             end
             if center_table.name == "Petroglyph" then
                 G.GAME.round_resets.discards = G.GAME.round_resets.discards + center_table.extra
-                ease_discard(center_table.extra)
+                ease_discard(center_table.extra or 1)
             end
         end
     end

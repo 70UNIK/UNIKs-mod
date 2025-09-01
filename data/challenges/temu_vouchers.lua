@@ -12,7 +12,6 @@ SMODS.Challenge{
 	jokers = {
         { id = "j_unik_coupon_codes", eternal = true, edition = "negative" },
         { id = "j_unik_coupon_codes", eternal = true, edition = "negative" },
-        { id = "j_unik_coupon_codes", eternal = true, edition = "negative" },
     },
     consumeables = {
     },
@@ -35,3 +34,10 @@ SMODS.Challenge{
 	},
 
 }
+local avts = SMODS.add_voucher_to_shop
+function SMODS.add_voucher_to_shop(...)
+	if G.GAME.modifiers.cry_no_vouchers then
+		return
+	end
+	return avts(...)
+end
