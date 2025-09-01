@@ -11,7 +11,7 @@ local oldfunc = Game.main_menu
 			G.P_CENTERS.m_unik_pink,
 			{ bypass_discovery_center = true }
 		)
-        newcard:set_edition(G.P_CENTERS.e_unik_halfjoker and 'e_unik_halfjoker' or 'e_polychrome',true,true)
+        newcard:set_edition(G.P_CENTERS.e_unik_shining_glitter and 'e_unik_shining_glitter' or 'e_polychrome',true,true)
 		-- recenter the title
 		G.title_top.T.w = G.title_top.T.w * 1.7675
 		G.title_top.T.x = G.title_top.T.x - 0.8

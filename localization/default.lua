@@ -22,6 +22,13 @@ return {
                     "{C:dark_edition,T:c_unik_foundry}Foundry{} and {C:spectral,T:c_deja_vu}Deja Vu",
                 }
             },
+            b_unik_shining_glitter = {
+                name = "Glittergrid Deck",
+                text = {
+                    "Start with a",
+                    "{C:dark_edition,T:c_unik_sparkle}Sparkle{} and {C:spectral,T:c_deja_vu}Deja Vu",
+                }
+            },
             --Earn $2 per hand lost, earn $1 per discard lost. Earn no interest
             b_unik_greed = {
                 name = "Greed Deck",
@@ -2910,7 +2917,7 @@ return {
                     "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
 				},
 			},
-            c_unik_prism = { --polychrome deck exclusive.
+            c_unik_prism = {
                 name = "Prism",
                 text = {
                      "Add {C:dark_edition}Polychrome{} to {C:attention}#1#",
@@ -2927,6 +2934,15 @@ return {
                     "unmodified card#<s>2#",
                 }
             },
+            c_unik_sparkle = {
+                name = "Sparkle",
+                text = {
+                     "Add {C:dark_edition}Glittergrid{} to {C:attention}#1#",
+                    "selected playing card#<s>1#",
+                    "Add {C:attention}#2#{} random",
+                    "unmodified card#<s>2#",
+                } 
+            }
         },
         Stake={
             stake_unik_shitty = {
@@ -3028,8 +3044,8 @@ return {
                 text = {
                     "{C:green}#1# in #2#{} chance to create ",
                     "a {X:unik_detrimental,C:white}Detrimental{} Joker",
-                    "otherwise apply {C:dark_edition}Negative{}, {C:dark_edition}Mosaic{},",
-                    "or {C:dark_edition}Astral{} to a {C:attention}random{} Joker",
+                    "otherwise apply {C:dark_edition}Steel{}, {C:dark_edition}Glittergrid{},",
+                    "or {C:dark_edition}Negative{} to a {C:attention}random{} Joker",
                 }
             },
             c_unik_crossdresser = {
@@ -3568,6 +3584,7 @@ return {
         },
         high_scores={},
         labels={
+            unik_shining_glitter="Glittergrid",
             unik_steel="Steel",
             unik_positive="Positive",
             unik_halfjoker = "Half",

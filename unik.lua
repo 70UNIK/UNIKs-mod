@@ -376,13 +376,11 @@ end
 ---TAROTS
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
-
-if Cryptid then
-	NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
-end
+NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 
 ---SPECTRALS
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
+NFS.load(mod_path .. "data/spectrals/sparkle.lua")() 
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 --
