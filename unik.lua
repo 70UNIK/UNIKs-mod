@@ -316,6 +316,7 @@ if unik_config.unik_legendary_blinds then
 end
 
 -- EDITIONS --
+NFS.load(mod_path .. "data/editions/shining_glitter.lua")()
 NFS.load(mod_path .. "data/editions/steel.lua")()
 NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/editions/bloated.lua")()

@@ -950,6 +950,12 @@ return {
                     "if Joker has {C:attention}triggered{}",
 				},
 			},
+            e_unik_shining_glitter = {
+                name = "Glittergrid",
+				text = {
+					"{X:chips,C:white}X#1#{} Chips",
+				},
+            },
             e_cry_fragile_fixed = {
 				name = "Fragile",
 				label = "Fragile",
