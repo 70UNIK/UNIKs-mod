@@ -15,8 +15,6 @@ SMODS.Edition({
 	shader = "shining_glitter", 
 	extra_cost = 4, 
     apply_to_float = true,
-    disable_base_shader = true,
-    no_shadow = true,
 	sound = {
 		sound = "unik_glitter",
 		per = 1,

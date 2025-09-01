@@ -322,7 +322,7 @@ NFS.load(mod_path .. "data/editions/positive.lua")()
 NFS.load(mod_path .. "data/editions/bloated.lua")()
 NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
--- NFS.load(mod_path .. "data/editions/corrupted.lua")()
+NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
 
 
@@ -448,7 +448,7 @@ NFS.load(mod_path .. "data/tags/positive.lua")()
 --BLINDS--
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
--- NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
+NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
@@ -460,7 +460,7 @@ NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
 NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
--- NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
+NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
 if Cryptid then
 	NFS.load(mod_path .. "data/bossBlinds/cryptid/joyless.lua")() --Cryptid crossmod
 end

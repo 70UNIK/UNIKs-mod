@@ -924,10 +924,9 @@ return {
             e_unik_corrupted = {
 				name = "Corrupted",
 				text = {
-					"All values on this card",
-					"are {C:dark_edition}randomized{}",
-					"between {C:red}X0.75{} and {C:red}X0.1{}",
-					"{C:inactive}(If possible){}",
+					"{X:dark_edition,C:white}^#1#{} Mult",
+                    "{X:dark_edition,C:white}^#2#{} Chips",
+                    "when triggered or held",
 				},
 			},
             e_unik_halfjoker = {
