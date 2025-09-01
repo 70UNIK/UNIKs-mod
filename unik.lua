@@ -306,6 +306,7 @@ NFS.load(mod_path .. "data/stakes/stake_card_modifiers.lua")()
 --decks
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()
+NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
 
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()

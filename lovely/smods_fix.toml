@@ -15,6 +15,13 @@ match_indent = true
 [patches.pattern]
 target = '''=[SMODS _ "src/utils.lua"]'''
 pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
-position = "at"
-payload = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite or nil } end'''
+position = "before"
+payload = '''if G.GAME.blind and G.GAME.blind.children.animatedSprite and G.GAME.blind.children.animatedSprite then'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
+position = "after"
+payload = '''end'''
 match_indent = true

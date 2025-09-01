@@ -29,6 +29,11 @@ return {
                     "{C:dark_edition,T:c_unik_sparkle}Sparkle{} and {C:spectral,T:c_deja_vu}Deja Vu",
                 }
             },
+            --Foil deck:
+            --add foil to 3 selected cards
+            --Holographic deck:
+            --Add Holographic to 2 selected cards
+            
             --Earn $2 per hand lost, earn $1 per discard lost. Earn no interest
             b_unik_greed = {
                 name = "Greed Deck",

@@ -243,17 +243,3 @@ elseif self.edition and not silent and G.GAME.force_bypass_edition_delay  then
 end
 '''
 match_indent = true
-
-###Edeck backs
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "lib/ui.lua"]'''
-pattern = '''if currentBack.effect.center.edeck_type then'''
-position = "before"
-payload = '''
-if currentBack.effect.center.edition_back_shader then
-    self.children.back:draw_shader(currentBack.effect.center.edition_back_shader, nil, self.ARGS.send_to_shader, true)
-end
-'''
-match_indent = true
