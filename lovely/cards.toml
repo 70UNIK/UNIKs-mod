@@ -141,10 +141,8 @@ end
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = '''if next(SMODS.find_card('j_cry_kittyprinter')) then
-	_tag = Tag('tag_cry_cat', nil, blind_choice)
-end'''
-position = "after"
+pattern = '''local _tag_ui, _tag_sprite = _tag:generate_UI()'''
+position = "before"
 payload = '''
 if next(SMODS.find_card('j_unik_vessel_kiln')) then
 	_tag = Tag('tag_unik_vessel', nil, blind_choice)
