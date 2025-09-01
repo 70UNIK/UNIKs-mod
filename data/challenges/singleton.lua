@@ -12,7 +12,7 @@ SMODS.Challenge{
         }
 	},
 	jokers = {
-        { id = "j_golden"},
+        { id = "j_hanging_chad"},
         { id = "j_unik_poppy", stickers = { "eternal" }},
         
     },
