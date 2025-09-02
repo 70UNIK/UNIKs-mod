@@ -1873,9 +1873,9 @@ return {
                 text = {
                     "Scored {C:attention}Light Suits",
                     "give {X:mult,C:white}X#1#{} Mult",
-                    "and increase this by",
-                    "{X:mult,C:white}X#2#{} Mult",
-                    "{C:inactive}(Resets after hand)",
+                    "Increases by {X:mult,C:white}X#2#{} Mult",
+                    "for each {C:attention}Light Suit",
+                    "in scoring hand",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
