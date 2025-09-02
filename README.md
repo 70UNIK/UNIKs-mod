@@ -11,7 +11,7 @@ Requires Steamodded smods-1.0.0-beta-0827c or higher, Lovely v0.7.1 or higher. T
 ## Features (so far)
 - A total of 73 new Jokers are added in the base mod.
 - - 12 **Common**
-- - 17 **Uncommon** (Depending on Crossmod)
+- - 17 **Uncommon** 
 - - 22 **Rare**
 - - 4 **Ancient**, an Exotic equivalent rarity featuring powerful Jokers.
 - - 4 **Exotic**

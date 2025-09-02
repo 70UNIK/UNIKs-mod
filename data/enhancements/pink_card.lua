@@ -13,7 +13,6 @@ SMODS.Enhancement {
 	--NEW! specific_suit suit. Like abstracted!
 
 	unik_specific_suit = "unik_pink",
-	unik_specific_rank = 7, --Corresponds to normal get_id value. MUST BE NUMERICAL is not unik_is_custom_rank
     unik_specific_base_value = "7", --corresponds to normal base_value
     unik_is_custom_rank = false, 
 

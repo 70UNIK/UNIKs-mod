@@ -16,10 +16,11 @@ function Game:unik_initialize_stuff()
             if v.unik_specific_suit then
                 self.ENHANCEMENT_OVERRIDE_SUITS[#self.ENHANCEMENT_OVERRIDE_SUITS + 1] = v.unik_specific_suit
             end
-            if v.unik_specific_rank and v.unik_specific_base_value and v.unik_is_custom_rank and SMODS.Rank.max_id.value then
-                --USAGE: unik_specific_rank, unik_specific_base_value, unik_specific_max_id
-                SMODS.Rank.max_id.value = SMODS.Rank.max_id.value + 1
-                self.ENHANCEMENT_OVERRIDE_RANKS[i] = {v.unik_specific_rank,v.unik_specific_base_value,SMODS.Rank.max_id.value}
+            if v.unik_specific_base_value and SMODS.Rank.max_id.value then
+                if not SMODS.Ranks[v.unik_specific_base_value] then
+                    SMODS.Rank.max_id.value = SMODS.Rank.max_id.value + 1
+                    self.ENHANCEMENT_OVERRIDE_RANKS[i] = {v.unik_specific_base_value,SMODS.Rank.max_id.value}
+                end
             end
         end
     end
@@ -38,13 +39,12 @@ end
 local getIDenhance = Card.get_id
 function Card:get_id()
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
-        G.P_CENTERS[self.config.center.key].unik_specific_rank and
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
-        if G.P_CENTERS[self.config.center.key].unik_is_custom_rank then
-            return G.ENHANCEMENT_OVERRIDE_RANKS[self.config.center.key][3]
+        if not SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value] then
+            return G.ENHANCEMENT_OVERRIDE_RANKS[self.config.center.key][2]
         else
-            return G.P_CENTERS[self.config.center.key].unik_specific_rank
+            return SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].id
         end
     end
 	local vars = getIDenhance(self)
@@ -64,7 +64,6 @@ end
 
 function Card:get_baseValOverride()
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
-        G.P_CENTERS[self.config.center.key].unik_specific_rank and
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
         return G.P_CENTERS[self.config.center.key].unik_specific_base_value
@@ -82,16 +81,19 @@ function Card:get_nominal(mod)
     if mod == 'suit' then mult = 10000 end
     local vars = nominalGet(self,mod)
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
-        G.P_CENTERS[self.config.center.key].unik_specific_rank and
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
         if G.P_CENTERS[self.config.center.key].unik_is_custom_rank then
             rank_mult = 0
             vars = 10*self.base.nominal*rank_mult + self.base.suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
-        else
-            specific_rank_nominal = G.P_CENTERS[self.config.center.key].unik_specific_rank
-            vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
         end
+        if not SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value] then
+            rank_mult = 0
+            specific_rank_nominal = 0
+        else
+            specific_rank_nominal = SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].nominal
+        end
+        vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
     end
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
     G.P_CENTERS[self.config.center.key].unik_specific_suit
