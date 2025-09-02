@@ -32,29 +32,31 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
-    config = { extra = {x_mult = 1.0,x_mult_mod = 0.2} },
+    config = { extra = {x_mult = 1.0,x_mult_mod = 0.15}, immutable = {x_mult_display = 1.0} },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 
-        local dispMult = center.ability.extra.x_mult
-        if G.hand and G.hand.cards and G.hand.highlighted then
-            for i,v in pairs(G.hand.highlighted) do
+        center.ability.immutable.x_mult_display = center.ability.extra.x_mult
+        
+        if G.hand and G.hand.cards and G.hand.highlighted and #G.hand.highlighted > 0 then
+            local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+            for i,v in pairs(scoring_hand) do
                 if UNIK.is_suit_type(v,'light') then
-                    dispMult = dispMult + center.ability.extra.x_mult_mod
+                    center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
                 end
             end
-        end
-        if G.play and G.play.cards then
-            dispMult = center.ability.extra.x_mult
-            for i,v in pairs(G.hand.highlighted) do
+        elseif G.play and G.play.cards then
+            center.ability.immutable.x_mult_display = center.ability.extra.x_mult
+           local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.play.cards)
+            for i,v in pairs(scoring_hand) do
                 if UNIK.is_suit_type(v,'light') then
-                    dispMult = dispMult + center.ability.extra.x_mult_mod
+                    center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
                 end
             end
         end
         local quoteset = 'normal'
         return { 
-            vars = {dispMult,center.ability.extra.x_mult_mod,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
+            vars = {center.ability.immutable.x_mult_display,center.ability.extra.x_mult_mod,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
         } 
         }
 	end,
@@ -69,7 +71,7 @@ SMODS.Joker {
                     dispMult = dispMult + card.ability.extra.x_mult_mod
                 end
             end
-            if UNIK.is_suit_type(v,'light') then
+            if UNIK.is_suit_type(context.other_card,'light') then
                 return {
                     x_mult = dispMult,
                     card = card
