@@ -76,45 +76,47 @@ function Card:get_nominal(mod)
 end
 
 --If a mod somehow generates enhancement_exclusive_ranks/suits, override it.
-local playing_card_hook = create_playing_card
-function create_playing_card(card_init, area, skip_materialize, silent, colours, skip_emplace)
-    local card = playing_card_hook(card_init, area, skip_materialize, silent, colours, skip_emplace)
-
-    local suit_prefix = string.sub(card.base.suit, 1, 1)
-    local rank_suffix = card.base.id
-    print('suit: ' .. card.base.suit)
-    print('id: ' .. card.base.id)
-    print('val: '..card.base.value)
-    for i,v in pairs(SMODS.Suits) do
-        if SMODS.Suits[i].backup_suit and i == card.base.suit then
-             local newSuit = SMODS.Suits[i].backup_suit
-             if SMODS.Suits[SMODS.Suits[i].backup_suit] then
-                
-             else
-                newSuit = 'Spades'
-                print("none exist, change to spades")
-             end             
-             card:change_suit(newSuit)
-             print("WHOOPS! ILLEGAL ENHANCEMENT_ONLY SUIT DETECTED! Reverting to " .. newSuit)
-             break
+local playing_card_hook = Card.init
+function Card:init(X, Y, W, H, card, center, params)
+    local ret = playing_card_hook(self,X,Y,W,H,card,center,params)
+    
+    if self and self.base and self.base.suit and self.base.id and G and G.GAME and G.GAME.blind then
+        local suit_prefix = string.sub(self.base.suit, 1, 1)
+        local rank_suffix = self.base.id
+        print('suit: ' .. self.base.suit)
+        print('id: ' .. self.base.id)
+        print('val: '..self.base.value)
+        for i,v in pairs(SMODS.Suits) do
+            if SMODS.Suits[i].backup_suit and i == self.base.suit then
+                local newSuit = SMODS.Suits[i].backup_suit
+                if SMODS.Suits[SMODS.Suits[i].backup_suit] then
+                    
+                else
+                    newSuit = 'Spades'
+                    print("none exist, change to spades")
+                end             
+                self:change_suit(newSuit)
+                print("WHOOPS! ILLEGAL ENHANCEMENT_ONLY SUIT DETECTED! Reverting to " .. newSuit)
+                break
+            end
+        end
+        suit_prefix = string.sub(self.base.suit, 1, 1)..'_'
+        for i,v in pairs(SMODS.Ranks) do
+            if SMODS.Ranks[i].backup_rank and (SMODS.Ranks[i].id == self.base.id) then
+                local newRank = SMODS.Ranks[i].backup_rank
+                for i,v in pairs(SMODS.Ranks) do
+                    print(i.. " --> "..v.id)
+                end
+                if not SMODS.Ranks[SMODS.Ranks[i].backup_rank] then
+                    newRank = '2'
+                    print("none exist, change to 2")
+                end
+                self:set_base(G.P_CARDS[suit_prefix..'_'..SMODS.Ranks[newRank].id],true)
+                print("WHOOPS! ILLEGAL ENHANCEMENT_ONLY RANK DETECTED! Reverting to " .. newRank)
+                break
+            end
         end
     end
-    suit_prefix = string.sub(card.base.suit, 1, 1)..'_'
-    for i,v in pairs(SMODS.Ranks) do
-        if SMODS.Ranks[i].backup_rank and (i == card.base.id) then
-            local newRank = SMODS.Ranks[i].backup_rank
-            for i,v in pairs(SMODS.Ranks) do
-                print(i.. " --> "..v.id)
-            end
-            if not SMODS.Ranks[SMODS.Ranks[i].backup_rank] then
-                newRank = '2'
-                print("none exist, change to 2")
-            end
-            card:set_base(suit_prefix..'_'..SMODS.Ranks[newRank].id)
-            print("WHOOPS! ILLEGAL ENHANCEMENT_ONLY RANK DETECTED! Reverting to " .. newRank)
-            break
-        end
-    end
 
-    return card
+    return ret
 end
