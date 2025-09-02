@@ -32,12 +32,29 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
-    config = { extra = {x_mult = 1.0,x_mult_mod = 0.075,x_mult_base = 1.075} },
+    config = { extra = {x_mult = 1.0,x_mult_mod = 0.2} },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
+
+        local dispMult = center.ability.extra.x_mult
+        if G.hand and G.hand.cards and G.hand.highlighted then
+            for i,v in pairs(G.hand.highlighted) do
+                if UNIK.is_suit_type(v,'light') then
+                    dispMult = dispMult + center.ability.extra.x_mult_mod
+                end
+            end
+        end
+        if G.play and G.play.cards then
+            dispMult = center.ability.extra.x_mult
+            for i,v in pairs(G.hand.highlighted) do
+                if UNIK.is_suit_type(v,'light') then
+                    dispMult = dispMult + center.ability.extra.x_mult_mod
+                end
+            end
+        end
         local quoteset = 'normal'
         return { 
-            vars = {tostring(math.floor(center.ability.extra.x_mult_base*1000)/1000),tostring(math.floor(center.ability.extra.x_mult_mod*1000)/1000),localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
+            vars = {dispMult,center.ability.extra.x_mult_mod,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
         } 
         }
 	end,
@@ -46,23 +63,19 @@ SMODS.Joker {
             card.ability.extra.x_mult = 1
         end
         if context.individual and context.cardarea == G.play then
-            -- Give the xMult if the current card is the required suit
-            if UNIK.is_suit_type(context.other_card,'light') then
-                SMODS.scale_card(card, {
-                    ref_table =card.ability.extra,
-                    ref_value = "x_mult",
-                    scalar_value = "x_mult_mod",
-                    message_key = "a_xmult",
-                    message_colour = G.C.MULT,
-                    no_message = true,
-                })
-            return {
-                x_mult = card.ability.extra.x_mult,
-                card = card
-            }
+            local dispMult = card.ability.extra.x_mult
+            for i,v in pairs(context.scoring_hand) do
+                if UNIK.is_suit_type(v,'light') then
+                    dispMult = dispMult + card.ability.extra.x_mult_mod
+                end
+            end
+            if UNIK.is_suit_type(v,'light') then
+                return {
+                    x_mult = dispMult,
+                    card = card
+                }
             end
         end
-        -- Quietly reset the xMult for the card at the end of played hand
         if context.after and not context.blueprint then
             card.ability.extra.x_mult = 1
         end
