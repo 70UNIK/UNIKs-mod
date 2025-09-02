@@ -24,7 +24,7 @@ SMODS.Sticker:take_ownership("rental", {
 			card:calculate_rental()
 		end
 	end,
-})
+},true)
 
 -- Calculates Rental sticker for Consumables
 function Card:cry_calculate_consumeable_rental()

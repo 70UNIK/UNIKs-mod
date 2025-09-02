@@ -7,7 +7,7 @@ Right now it is in a WIP stage of becoming a standalone, so expect placeholder a
 
 Requires Steamodded smods-1.0.0-beta-0827c or higher, Lovely v0.7.1 or higher. Talisman can be used to increase the scoring cap but isnt necessarily required.
 
-![alt text](image-6.png)
+![alt text](image-3.png)
 ## Features (so far)
 - A total of 73 new Jokers are added in the base mod.
 - - 12 **Common**
@@ -44,8 +44,9 @@ This mod also contains many crossmod content such as for:
 - Paperback
 - Grab Bag
 - Finity
-- Cryptid, which includes balancing changes for some Cryptid Jokers, such as the infamous Canvas (Now legendary and nerfed) and Oil Lamp (Immutable and increases values by X1.2 onces)
+- Cryptid, which includes balancing changes for some Cryptid Jokers, such as the infamous Canvas (Now legendary and nerfed) and Oil Lamp (Immutable and increases values by X1.2 onces). They are still WIP and a carryover from the Balanced Branch so they may be unbalanced or buggy.
 
+![alt text](image-1.png)
 ------
 While most of my artwork is done by me, art for the Spectrum-based Jokers and Planets are from Bunco and most of the code is mainly of my conception, although various ideas on Blinds, Characters and code are derived from others
 

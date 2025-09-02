@@ -1033,18 +1033,6 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 	end,
 }, true)
 
-SMODS.Joker:take_ownership("j_cry_magnet",{
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				number_format(center.ability.extra.money),
-				number_format(center.ability.extra.multiplier - (Card.get_gameset(card) == "modest" and 1 or 0)),
-				number_format(center.ability.extra.slots),
-			},
-		}
-	end,
-}, true)
-
 --Notebook: Caps at 6 slots.
 SMODS.Joker:take_ownership("j_cry_notebook",{
 	config = {
@@ -1317,41 +1305,6 @@ SMODS.Joker:take_ownership("j_cry_speculo",{
 		end
 	end,
 }, true)
---Ace auilibrium: jokers are not negative  and require room.
-SMODS.Joker:take_ownership("j_cry_equilib",{
-	loc_vars = function(self, info_queue, center)
-		local joker_generated = "???"
-		if G.GAME.aequilibriumkey and G.GAME.aequilibriumkey > 1 then
-			joker_generated = localize({
-				type = "name_text",
-				set = "Joker",
-				key = G.P_CENTER_POOLS["Joker"][math.floor(G.GAME.aequilibriumkey or 1) - 1].key,
-			})
-		end
-		return { key = 'j_cry_equilib_balanced',vars = { math.floor(math.min(25, center.ability.extra.jokers)), joker_generated } }
-	end,
-	--lready there but crash fix
-	calculate = function(self, card, context)
-		if
-			(context.cardarea == G.jokers and context.before and not context.retrigger_joker) or context.forcetrigger
-		then
-			for i = 1, math.floor(math.min(25, card.ability.extra.jokers)) do
-				if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
-					local newcard = create_card("Joker", G.jokers, nil, nil, nil, nil, nil)
-					newcard:add_to_deck()
-					G.jokers:emplace(newcard)
-					G.GAME.joker_buffer = G.GAME.joker_buffer + 1
-				end
-			end
-			G.GAME.joker_buffer = 0
-			return nil, true
-		end
-	end,
-}, true)
-
---Google play card, yes otherwise X10 mult is OK, but thing is, it outclasses HUGE. So it should be X4 Mult with a chance of X100.
-
-
 function Card:getLeftmostJokerType(rarity,edition)
 	if rarity then
 		if type(rarity) == "table" then
