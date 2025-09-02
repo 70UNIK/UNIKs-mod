@@ -411,7 +411,9 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/powerdown.lua")() 
 	NFS.load(mod_path .. "data/lartceps/brethren_moon.lua")() 
 	NFS.load(mod_path .. "data/lartceps/trim.lua")() 
-	NFS.load(mod_path .. "data/lartceps/expiry.lua")() 
+	if Cryptid then
+		NFS.load(mod_path .. "data/lartceps/expiry.lua")() 
+	end
 	NFS.load(mod_path .. "data/lartceps/extortion.lua")() 
 
 	NFS.load(mod_path .. "data/lartceps/reeducation.lua")() 
