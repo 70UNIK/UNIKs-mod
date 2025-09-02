@@ -11,12 +11,7 @@ function selfDestruction(card,message,color,dissolve)
     -- This part plays the animation.
     G.E_MANAGER:add_event(Event({
         func = function()
-            card_eval_status_text(card, "extra", nil, nil, nil, {
-                message = localize(message),
-                colour = color,
-                card=card,
-                delay = 0.5,
-            })
+            
             --Dissolving
             if (dissolve) then
                 card:start_dissolve()
@@ -43,6 +38,12 @@ function selfDestruction(card,message,color,dissolve)
             return true
         end
     }))
+    card_eval_status_text(card, "extra", nil, nil, nil, {
+        message = localize(message),
+        colour = color,
+        card=card,
+        delay = 0.5,
+    })
 end
 
 local removeHook = Card.remove_from_deck
@@ -69,29 +70,36 @@ function Card:remove_from_deck(from_debuff)
             elseif v.config.center.key =="j_cry_starfruit" or v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
-                if self.config.center.rarity == "cry_cursed" and self.ability.extra.getting_captured then
+                if (self.config.center.rarity == 'unik_detrimental' or self.config.center.rarity == 'cry_cursed' ) and self.ability.extra.getting_captured then
                     self.ability.extra.getting_captured = nil
-                    v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.x_mult_mod
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.0,
-                        blockable = false,
-                        func = function()
-                            card_eval_status_text(v, "extra", nil, nil, nil, {
-                                message = localize({
-                                    type = "variable",
-                                    key = "a_xmult",
-                                    vars = {
-                                        number_format(to_big(v.ability.extra.x_mult)),
-                                    },
-                                }),
-                                colour = G.C.MULT,
-                                card = v,
-                                delay = 0.5
-                            })
-                            return true;
-                        end
-                    }))
+                    SMODS.scale_card(v, {
+                        ref_table =v.ability.extra,
+                        ref_value = "x_mult",
+                        scalar_value = "x_mult_mod",
+                        message_key = "a_xmult",
+                        message_colour = G.C.MULT,
+                    })
+                    -- v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.x_mult_mod
+                    -- G.E_MANAGER:add_event(Event({
+                    --     trigger = 'after',
+                    --     delay = 0.0,
+                    --     blockable = false,
+                    --     func = function()
+                    --         card_eval_status_text(v, "extra", nil, nil, nil, {
+                    --             message = localize({
+                    --                 type = "variable",
+                    --                 key = "a_xmult",
+                    --                 vars = {
+                    --                     number_format(to_big(v.ability.extra.x_mult)),
+                    --                 },
+                    --             }),
+                    --             colour = G.C.MULT,
+                    --             card = v,
+                    --             delay = 0.5
+                    --         })
+                    --         return true;
+                    --     end
+                    -- }))
                 end
             end
 
@@ -181,15 +189,16 @@ function CardArea:emplace(card, location, stay_flipped)
     local cannibalCards = 0
     local autoCannibalExists = false
     if card.ability.set == "unik_lartceps" then
-        card.ability.cry_absolute = true
+        card.ability.eternal = true
         card.ability.perishable = nil
         card.ability.rental = true
         card.ability.unik_triggering = true
         card.ability.dissolve_immune = true
         card.ability.debuff_immune = true
+        unik_set_sell_cost(card,-666)
     end
     --mainline:
-    if self and self == G.consumeables and card.config.center.key == "c_cry_pointer" and Card.get_gameset(card) ~= "madness" then
+    if self and self == G.consumeables and card.config.center.key == "c_cry_pointer" then
         for i,v in pairs(G.consumeables.cards) do
             if v.config.center.key == "c_cry_pointer" and v ~= card then
                 local edition = nil
@@ -285,7 +294,7 @@ function CardArea:emplace(card, location, stay_flipped)
             --Formidicus fix, now constantly destroys cursed jokers
             elseif v.config.center.key == "j_cry_formidiulosus" then
                 for x, w in pairs(G.jokers.cards) do
-                    if w.config.center.rarity == "cry_cursed" and not w.ability.extra.getting_captured then
+                    if (w.config.center.rarity == 'unik_detrimental' or w.config.center.rarity == 'cry_cursed') and not w.ability.extra.getting_captured then
                         --destory ghost
                         selfDestruction(w,"k_unik_pentagram_purified",G.C.MULT)
                         card_eval_status_text(v, "extra", nil, nil, nil, {
@@ -384,18 +393,10 @@ end
 
 function GhostTrap1(self)
     for x, w in pairs(G.jokers.cards) do
-        if w.config.center.rarity == "cry_cursed" and not w.ability.extra.getting_captured then
+        if (w.config.center.rarity == 'unik_detrimental' and w.config.center.rarity == 'cry_cursed' ) and not w.ability.extra.getting_captured then
             --Add to value
-            table.insert(self.ability.extra.cursed_joker_list,w.config.center.key)
-            --set to list amount
-            self.ability.extra.cursed_jokers = #self.ability.extra.cursed_joker_list
             w.ability.extra.getting_captured = true
-            --destory ghost
-            selfDestruction(w,"k_unik_ghost_trap_captured",G.C.MULT,true)
-            --If too much
-            if (self.ability.extra.cursed_jokers > self.ability.extra.cursed_joker_limit) then
-                selfDestruction(self,"k_unik_ghost_trap_explode",G.C.BLACK)
-            end
+            selfDestruction(w,"k_unik_pentagram_purified",G.C.MULT)
             if G.GAME.unik_prevent_killing_cursed_jokers and not G.GAME.unik_prevent_killing_cursed_jokers2 then
                 --die
                 selfDestruction(self,"k_extinct_ex",G.C.BLACK)

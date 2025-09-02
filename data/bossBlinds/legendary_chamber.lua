@@ -20,9 +20,6 @@ SMODS.Blind{
     dollars = 13,
     mult = 0.1,
     glitchy_anim = true,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,
@@ -31,7 +28,7 @@ SMODS.Blind{
         akyrs_cannot_be_skipped = true,
     },
     death_message = "special_lose_torture_chamber",
-    ignore_showdown_check = true,
+    
     loc_vars = function(self, info_queue, card)
         local count = jokerRaritiesCount()
         if not G.GAME.unik_blind_hands then
@@ -53,7 +50,7 @@ SMODS.Blind{
         G.GAME.unik_dynamic_text_realtime = true
         
 	end,
-    cry_before_play = function (self)
+    unik_before_play = function (self)
         G.GAME.unik_blind_extra_excess = G.GAME.unik_blind_extra_excess or 0
         local count = jokerRaritiesCount()
         if count > 1 then
@@ -72,7 +69,7 @@ SMODS.Blind{
             }))
         end
     end,
-    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
         if G.GAME.unik_blind_hands > 0 then
             G.GAME.unik_blind_hands = G.GAME.unik_blind_hands - 1
             G.GAME.unik_blind_extra_excess = sum

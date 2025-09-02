@@ -21,7 +21,7 @@ SMODS.Blind	{
     },
 	--must be localized
 	death_message = 'special_lose_unik_epic_collapse',
-	ignore_showdown_check = true,
+	
 	in_pool = function(self)
 		local stoneCards = 0
         if G.deck then 
@@ -31,7 +31,6 @@ SMODS.Blind	{
                 end
             end
         end
-                --in cryptid, at least it only spawns if yoy have at least 5 stone cards
         if stoneCards < 1 then
             return false
         end

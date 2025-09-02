@@ -17,7 +17,7 @@ SMODS.Blind	{
         akyrs_cannot_be_skipped = true,
     },
 	--must be localized
-	ignore_showdown_check = true,
+	
     unik_kill_hand = function(self, cards, hand, handname, check)
 		for k, v in pairs(G.hand.cards) do
 			if not v:is_face(true) then

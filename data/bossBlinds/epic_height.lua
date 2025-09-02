@@ -20,7 +20,7 @@ SMODS.Blind{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
-    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
         if G.GAME.current_round.hands_left > 0 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("cry-panopticon")) and not next(find_joker("j_paperback_the_world")) then
             G.GAME.unik_blind_extra_excess = sum
             if lenient_bignum(sum) <= lenient_bignum(0) and ((G.deck.cards and #G.deck.cards > 0) or (G.hand.cards and #G.hand.cards > 0)) then

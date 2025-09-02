@@ -36,18 +36,22 @@ function Game:update(dt)
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
 		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
 
-        --backup again... 
-        
         self.C.UNIK_RGB = self.C.UNIK_RGB or {0,0,0,1}
         if self.C.UNIK_RGB then
             self.C.UNIK_RGB[1] = r
             self.C.UNIK_RGB[3] = g
             self.C.UNIK_RGB[2] = b
-        else
-            self.C.UNIK_RGB = self.C.UNIK_RGB or {0,0,0,1}
         end
 		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.5) % 360
 		G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
+
+        self.C.UNIK_ANCIENT = self.C.UNIK_ANCIENT or {0.5411764705882353,0.20784313725490197,0.6823529411764706,1}
+        --R = 0.3 diff, G = 0.15 diff, B = 0.31 diff
+        if self.C.UNIK_ANCIENT then
+            self.C.UNIK_ANCIENT[1] = 0.5411764705882353 + 0.3*math.sin(self.TIMERS.REAL*1.3)
+            self.C.UNIK_ANCIENT[2] = 0.20784313725490197 + 0.15*math.sin(self.TIMERS.REAL*1.3)
+            self.C.UNIK_ANCIENT[3] = 0.6823529411764706 + 0.31*math.sin(self.TIMERS.REAL*1.3)
+        end
 		
 	end
     G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
@@ -66,6 +70,7 @@ function Game:update(dt)
          G.GAME.OvershootFXVal = 5
          
     end
+    
     return res
 end
 

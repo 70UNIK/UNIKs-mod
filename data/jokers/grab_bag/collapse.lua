@@ -43,14 +43,19 @@ SMODS.Joker {
                     validcards = validcards + 1
                 end
             end
-            card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_mod*validcards
-            if validcards > 0 then
-                return {
-                    card = card,
-                    message = localize{type='variable',key='a_chips',vars={card.ability.extra.chips}},
-                    colour = G.C.CHIPS
-                }
-            end
+            SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "chips",
+				scalar_value = "custom_scaler",
+                scalar_table = {
+                    custom_scaler = validcards * card.ability.extra.chip_mod,
+                },
+				message_key = "a_chips",
+				message_colour = G.C.CHIPS,
+			})
+            				return {
+
+				}
         end
 	end,
     in_pool = function(self, args)

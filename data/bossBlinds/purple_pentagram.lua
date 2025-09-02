@@ -16,7 +16,7 @@ SMODS.Blind{
                 G.E_MANAGER:add_event(Event({
                     delay = 0.5,
                     func = function()
-                        local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_pentagram_curse")
+                        local card2 = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_pentagram_curse")
                         print(card2.config.center.key)
                         --destroy card2 if its jimbo
                         card2:start_materialize()
@@ -44,7 +44,7 @@ SMODS.Blind{
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.rarity == "cry_cursed" and v.ability.unik_disposable then
+            if v.config.center.rarity == 'unik_detrimental' and v.ability.unik_disposable then
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         play_sound('tarot1')

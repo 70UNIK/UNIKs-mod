@@ -3,31 +3,29 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999
 
-### old poppy, now its INDIGO ICBM's function
-### ALso triger matador if you have one
-### WIll also have functionality for the Raspberry Racket
-### Todo: refactor into debuff_after_hand
+### Debuff after hand, either for blind functionality after a hand is played, add to blind size or outright having it not score.
 
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''function evaluate_play_final_scoring(text, disp_text, poker_hands, scoring_hand, non_loc_disp_text, percent, percent_delta)'''
-position = 'after'
+pattern = '''if  SMODS.calculate_round_score()  > 0 then '''
+position = 'before'
 payload = '''
-local temptotal = (math.floor(mult*hand_chips))
+local temptotal = SMODS.calculate_round_score()
 G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,temptotal)
-local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,mult,hand_chips,temptotal)
-local temporaryMult = mult
-local temporaryChips = hand_chips
+local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,temptotal)
 local debuff_hand = false
 local add_to_blind = 0
+
+if debuff_hand then
+
+end
 if checker and checker.debuff then
     debuff_hand = true
     G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
         func = (function()
             if SMODS.hand_debuff_source then SMODS.hand_debuff_source:juice_up(0.3,0) else SMODS.juice_up_blind() end
-            update_hand_text({delay = 0}, {mult = mult, chips = hand_chips})
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
                 play_sound('tarot2', 0.76, 0.4);return true end}))
             play_sound('tarot2', 1, 0.4)
@@ -38,11 +36,22 @@ end
 if checker and checker.add_to_blind then
     add_to_blind = to_big(checker.add_to_blind)
 end
-if checker and checker.mod_mult then
-    mult = checker.mod_mult
-end
-if checker and checker.mod_chips then
-    hand_chips = checker.mod_chips
+if checker and checker.mod_score then
+    temptotal = SMODS.calculate_round_score() + checker.mod_score
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = (function()
+            if SMODS.hand_debuff_source then SMODS.hand_debuff_source:juice_up(0.3,0) else SMODS.juice_up_blind() end
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
+                play_sound('tarot2', 0.76, 0.4);return true end}))
+            play_sound('tarot2', 1, 0.4)
+            return true
+        end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',delay = 0.4,
+        func = (function()  update_hand_text({delay = 0, immediate = true}, {mult = 0, chips = 0, chip_total = math.floor( temptotal ), level = '', handname = ''});play_sound('button', 0.9, 0.6);return true end)
+    }))
 end
 '''
 match_indent = true
@@ -51,33 +60,114 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''if to_big(hand_chips)*mult > to_big(0) then
-        delay(0.8)
-        G.E_MANAGER:add_event(Event({
-        trigger = 'immediate',
-        func = (function() play_sound('chips2');return true end)
+pattern = '''        func = (function() play_sound('chips2');return true end)
         }))
     end'''
 position = 'after'
 payload = '''
 if to_big(add_to_blind) > to_big(0) then
-G.E_MANAGER:add_event(Event({
-    trigger = 'ease',
-    blocking = false,
-    ref_table = G.GAME.blind,
-    ref_value = 'chips',
-    ease_to = G.GAME.blind.chips + (math.floor(mult*hand_chips)),
-    delay =  1.0,
-    func = (function(t) return math.floor(t) end)
-}))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blocking = false,
+        ref_table = G.GAME.blind,
+        ref_value = 'chips',
+        ease_to = G.GAME.blind.chips + add_to_blind,
+        delay =  1.0,
+        func = (function(t) return math.floor(t) end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blocking = false,
+        ref_table = G.GAME.blind,
+        ref_value = 'chip_text',
+        ease_to = G.GAME.blind.chips + add_to_blind,
+        delay =  1.0,
+        func = (function(t) return math.floor(t) end)
+    }))
 end
 if debuff_hand then
-    mult = mod_mult(0)
-    hand_chips = mod_chips(0)
     play_area_status_text("Not Allowed!")
+
     SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, debuffed_hand = true})
 end
 
 '''
 match_indent = true
 
+### display the fake score before not allowing the hand and/or adding to blind
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''G.E_MANAGER:add_event(Event({
+      trigger = 'ease',
+      blocking = false,
+      ref_table = G.GAME,
+      ref_value = 'chips',
+      ease_to = G.GAME.chips + math.floor( SMODS.calculate_round_score() ),
+      delay =  0.5,
+      func = (function(t) return math.floor(t) end)
+    }))'''
+position = 'before'
+payload = '''
+if not debuff_hand then
+'''
+match_indent = true
+
+### display the fake score before not allowing the hand and/or adding to blind
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''G.E_MANAGER:add_event(Event({
+      trigger = 'ease',
+      blocking = false,
+      ref_table = G.GAME,
+      ref_value = 'chips',
+      ease_to = G.GAME.chips + math.floor( SMODS.calculate_round_score() ),
+      delay =  0.5,
+      func = (function(t) return math.floor(t) end)
+    }))'''
+position = 'after'
+payload = '''
+end
+
+'''
+match_indent = true
+
+##blind_mod
+### display the fake score before not allowing the hand and/or adding to blind
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''G.E_MANAGER:add_event(Event({
+      trigger = 'ease',
+      blocking = false,
+      ref_table = G.GAME,
+      ref_value = 'chips',
+      ease_to = G.GAME.chips + math.floor( SMODS.calculate_round_score() ),
+      delay =  0.5,
+      func = (function(t) return math.floor(t) end)
+    }))'''
+position = 'at'
+payload = '''
+G.E_MANAGER:add_event(Event({
+      trigger = 'ease',
+      blocking = false,
+      ref_table = G.GAME,
+      ref_value = 'chips',
+      ease_to = G.GAME.chips + math.floor( temptotal ),
+      delay =  0.5,
+      func = (function(t) return math.floor(t) end)
+    }))
+'''
+match_indent = true
+
+### unik_afterplay
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true})'''
+position = 'after'
+payload = '''
+G.GAME.blind:unik_after_play()
+'''
+match_indent = true

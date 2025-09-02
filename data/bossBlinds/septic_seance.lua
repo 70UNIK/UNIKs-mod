@@ -50,9 +50,7 @@ SMODS.Blind{
             end
 		end
 	end,
-    --stolen from Cryptid, similar to vermillion virus, except it detects where each ghost is, check for adjacent non cursed jokers and convert them into MORE ghosts!
-    --less strong than above but worse long term effects
-    cry_before_play = function(self)
+    unik_before_play = function(self)
         local hand = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
         if hand ~= localize("Royal Flush", "poker_hands") and hand ~= localize("Straight Flush", "poker_hands") then
             local ghostList = {}

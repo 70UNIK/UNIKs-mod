@@ -12,7 +12,7 @@ SMODS.Blind	{
     dollars = 13,
     mult = 1,
 	--must be localized
-	ignore_showdown_check = true,
+	
     debuff = {
         akyrs_blind_difficulty = "epic",
         akyrs_cannot_be_overridden = true,
@@ -45,13 +45,17 @@ SMODS.Blind	{
 	end,
     loc_vars = function(self)
         local var = 2
+        local char = ""
         if G.GAME.unik_sink_killswitch then
             var = G.GAME.unik_sink_killswitch
         end
-        return {vars = { var} }
+        if var ~= 1 then
+            char = "s"
+        end
+        return {vars = { var,char} }
 	end,
 	collection_loc_vars = function(self)
-        return {vars = { 2} }
+        return {vars = { 2,"s"} }
 		
 	end,
     debuff_hand = function(self, cards, hand, handname, check)
@@ -60,7 +64,7 @@ SMODS.Blind	{
          end
          return false
     end,
-    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+    unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
         if G.GAME.unik_sink_killswitch > 0 then
             local sum2 = math.ceil(sum)
             local digits = math.ceil(#tostring(sum2) / 2)

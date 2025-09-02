@@ -18,7 +18,6 @@ SMODS.Consumable{
 	use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             for i,v in pairs(G.playing_cards) do
-                v.ability.cry_absolute = true
                 v.ability.unik_ultradebuffed = true
             end
         return true end })) 

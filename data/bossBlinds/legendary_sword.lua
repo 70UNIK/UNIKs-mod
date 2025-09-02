@@ -14,9 +14,6 @@ SMODS.Blind{
     pos = {x=0, y=0},
     boss_colour= HEX("9bafcf"), --all legendary blinds will be blood red and black.
     dollars = 13,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,
@@ -27,7 +24,7 @@ SMODS.Blind{
     mult = 1,
     glitchy_anim = true,
     unik_exponent = {1,3},
-    ignore_showdown_check = true,
+    
     set_blind = function(self, reset, silent)
         G.GAME.force_no_discards = true
         G.GAME.force_one_hand = true
@@ -44,7 +41,7 @@ SMODS.Blind{
         return CanSpawnLegendary()
     end,
     --no fucking around this time
-    cry_after_play = function(self)
+    unik_after_play = function(self)
         ease_hands_played(-666)
 	end,
     --somehow if that happens, set the base to be 

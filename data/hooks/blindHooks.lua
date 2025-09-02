@@ -2,16 +2,45 @@
 
 
 --Debuffs after scoring.
-function Blind:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+function Blind:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,sum)
 	if not self.disabled then
 		local obj = self.config.blind
 		if obj.unik_debuff_after_hand and type(obj.unik_debuff_after_hand) == "function" then
-			return obj:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,mult,hand_chips,sum)
+			return obj:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,sum)
 		end
 	end
 	return nil
 end
 
+function Blind:unik_cap_score(score)
+	if not self.disabled then
+		local obj = self.config.blind
+		if obj.unik_cap_score and type(obj.unik_cap_score) == "function" then
+			return obj:unik_cap_score(score)
+		end
+	end
+	return nil
+end
+
+--Context before play
+function Blind:unik_before_play()
+	if not self.disabled then
+		local obj = self.config.blind
+		if obj.unik_before_play and type(obj.unik_before_play) == "function" then
+			return obj:unik_before_play()
+		end
+	end
+end
+
+--context after play
+function Blind:unik_after_play()
+	if not self.disabled then
+		local obj = self.config.blind
+		if obj.unik_after_play and type(obj.unik_after_play) == "function" then
+			return obj:unik_after_play()
+		end
+	end
+end
 
 --Instead of merely debuffing a hand, it will KILL you if you play that hand
 function Blind:unik_kill_hand(cards, hand, handname, check)

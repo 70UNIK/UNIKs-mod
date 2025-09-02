@@ -64,20 +64,17 @@ SMODS.Joker {
 						card:juice_up(0.8, 0.8)
 						play_sound("slice1", 0.96 + math.random() * 0.08)
                         if multiplier > 0 then
-                            card.ability.extra.Xmult = card.ability.extra.Xmult + multiplier * card.ability.extra.Xmult_mod
-                            card_eval_status_text(card, "extra", nil, nil, nil, {
-                                message = localize({
-                                    type = "variable",
-                                    key = "a_xmult",
-                                    vars = {
-                                        number_format(
-                                            lenient_bignum(card.ability.extra.Xmult)
-                                        ),
-                                    },
-                                }),
-                                colour = G.C.MULT,
-                                no_juice = true,
-                            })
+                            --card.ability.extra.Xmult = card.ability.extra.Xmult + multiplier * card.ability.extra.Xmult_mod
+							SMODS.scale_card(card, {
+								ref_table =card.ability.extra,
+								ref_value = "Xmult",
+								scalar_value = "custom_scaler",
+								scalar_table = {
+									custom_scaler = multiplier * card.ability.extra.Xmult_mod,
+								},
+								message_key = "a_xmult",
+								message_colour = G.C.MULT,
+							})
                         end
 					end
 					return true

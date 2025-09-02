@@ -9,7 +9,7 @@ SMODS.Blind{
     dollars = 13,
     mult = 1,
     unik_exponent = {1,1},
-    ignore_showdown_check = true,
+    
     loc_vars = function(self, info_queue, card)
         local string = ""
         string = "" .. 1.005
@@ -76,7 +76,7 @@ SMODS.Blind{
                     local selectedDest1 = nil
                     if G.hand then
                         for i,v in pairs(G.hand.cards) do
-                            if (not v.ability.eternal) and (not v.ability.set_for_destruction) then
+                            if (not SMODS.is_eternal(v, self)) and (not v.ability.set_for_destruction) then
                                 validCards[#validCards + 1] = v
                             end
                         end
@@ -114,7 +114,7 @@ SMODS.Blind{
 --Add context for Just before cards are played
 local pcfh = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
-	G.GAME.before_play_buffer = true
+	G.GAME.before_play_buffer2 = true
 
     if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
         local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
@@ -131,16 +131,21 @@ function G.FUNCS.play_cards_from_highlighted(e)
         end
     end
     --Only play if highlight cards are > 0
-    if #G.hand.highlighted == 0 and G.PROFILES[G.SETTINGS.profile].cry_none then
-        G.PROFILES[G.SETTINGS.profile].cry_none = true
+    if Cryptid then
+        if #G.hand.highlighted == 0 and (Cryptid.enabled("set_cry_poker_hand_stuff") == true) and G.PROFILES[G.SETTINGS.profile].cry_none then
+            G.PROFILES[G.SETTINGS.profile].cry_none = true
+        end
     end
+
     --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
-    if Cryptid.enabled("set_cry_poker_hand_stuff") ~= true and #G.hand.highlighted == 0 then
+    if (not Cryptid or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
         
     else
+        G.GAME.blind:unik_before_play()
+        SMODS.calculate_context({on_select_play = true})
         pcfh(e)
     end
-	G.GAME.before_play_buffer = nil
+	G.GAME.before_play_buffer2 = nil
 end
 
 --As playing a hand is one_click, it means if lets say a card being played just happened to be disabled, then

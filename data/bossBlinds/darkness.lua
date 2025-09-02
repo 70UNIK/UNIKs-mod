@@ -45,7 +45,7 @@ SMODS.Blind{
             G.GAME.blind:wiggle()
 		end
 	end,
-    -- cry_before_play = function(self)
+    -- unik_before_play = function(self)
     --     for i,v in pairs(G.hand.cards) do
     --         if (not v.edition)then
     --             v:set_edition({ unik_corrupted = true }, true,nil, true)

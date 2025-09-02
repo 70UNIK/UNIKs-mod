@@ -52,7 +52,7 @@ end
 local unik_cloned_pool = {}
 if G.jokers and G.jokers.cards and (_type ~= nil or rarity2 ~= nil) then
     for a,b in pairs(G.jokers.cards) do
-        if v.key ~= 'j_unik_cloneman' and v.key == b.config.center.key and not unik_cloned_pool[v.key] and not b.config.center.unique and not b.config.center.hidden then
+        if v.key ~= 'j_unik_cloneman' and v.key == b.config.center.key and not unik_cloned_pool[v.key] and not G.GAME.cry_banished_keys[v.key] and not b.config.center.unique and not b.config.center.hidden then
          unik_cloned_pool[v.key] = true
                 for y = 1, clonefactor do
                     _pool[#_pool + 1] = v.key
@@ -67,7 +67,7 @@ if G.jokers and G.jokers.cards and (_type ~= nil or rarity2 ~= nil) then
 end
 if G.consumeables and G.consumeables.cards and _type ~= nil then
     for a,b in pairs(G.consumeables.cards) do
-        if v.key == b.config.center.key and not unik_cloned_pool[v.key] and not b.config.center.unique and not b.config.center.hidden then
+        if v.key == b.config.center.key and not unik_cloned_pool[v.key] and not G.GAME.cry_banished_keys[v.key] and not b.config.center.unique and not b.config.center.hidden then
             unik_cloned_pool[v.key] = true
                 for y = 1, clonefactor do
                     _pool[#_pool + 1] = v.key

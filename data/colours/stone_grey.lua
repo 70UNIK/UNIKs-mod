@@ -6,7 +6,7 @@
     config = {
       val = 0,
       partial_rounds = 0,
-      upgrade_rounds = 150,
+      upgrade_rounds = 50,
     },
     cost = 4,
     hidden = true,
@@ -22,7 +22,7 @@
         if card.ability.val >= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 play_sound('timpani')
-                local card2 = create_card("Joker", G.jokers, nil, "cry_exotic", nil, nil, nil, "unik_foundation_color")
+                local card2 = create_card("Joker", G.jokers, nil, "unik_ancient", nil, nil, nil, "unik_foundation_color")
                 card2:add_to_deck()
                 G.jokers:emplace(card2)
                 card2:start_materialize()

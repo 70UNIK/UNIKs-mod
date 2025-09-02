@@ -16,9 +16,6 @@ SMODS.Blind{
     dollars = 13,
     mult = 0.666,
     glitchy_anim = true,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,
@@ -39,7 +36,7 @@ SMODS.Blind{
     get_loc_debuff_text = function(self)
 		return localize("k_unik_leg_tornado_warn_1") .. (G.GAME.current_round.discards_left) .. localize("k_unik_leg_tornado_warn_2")
 	end,
-    ignore_showdown_check = true,
+    
     set_blind = function(self, reset, silent)
 		if not reset then
              G.GAME.unik_dynamic_text_realtime = true

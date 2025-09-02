@@ -28,6 +28,7 @@ payload = '''and card.config.center.key ~= "j_unik_impounded"
 and card.config.center.key ~= "j_cry_astral_bottle" 
 and card.config.center.key ~= "j_unik_rancid_smoothie"
 and card.config.center.key ~= "j_buf_afan_spc" 
+and card.config.center.key ~= "j_unik_astral_bottle"
 '''
 match_indent = true
 
@@ -57,18 +58,18 @@ end
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/spooky.lua"]'''
-pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == 'unik_detrimental' then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == 'unik_detrimental' or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### do not set impounded cost to 0
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
-pattern = '''if self.config and self.config.center and self.config.center.rarity == "cry_cursed" then'''
+pattern = '''if self.config and self.config.center and self.config.center.rarity == 'unik_detrimental' then'''
 position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == "cry_cursed" or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
+payload = '''if self.config and self.config.center and (self.config.center.rarity == 'unik_detrimental' or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
 match_indent = true
 
 ### Hook n discard, ensure cards are discarded BEFORE scoring (similar to the hook)
@@ -88,7 +89,9 @@ if G.jokers then
                 local any_selected = nil
                 local _cards = {}
                 for k, v in ipairs(G.hand.cards) do
-                    _cards[#_cards+1] = v
+                    if not v.highlighted then
+                        _cards[#_cards+1] = v
+                    end
                 end
                 for i = 1, 2 do
                     if G.hand.cards[i] then 
@@ -134,40 +137,12 @@ if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not r
 end
 '''
 
-### cube content set: add cube and big cube to the cube sets (cannot do it manually, have to patch it in)
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
-pattern = '''local big_cube = {'''
-position = "after"
-payload = '''pools = { ["unik_cube"] = true },'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''
-pattern = '''pools = { ["Meme"] = true },
-	source_gate = "sho",
-	loc_vars = function(self, info_queue, center)
-		return { vars = { center.ability.extra.chips } }
-	end,'''
-position = "at"
-payload = '''pools = { ["unik_cube"] = true, ["Meme"] = true,  },
-	source_gate = "sho",
-	loc_vars = function(self, info_queue, center)
-		return { vars = { center.ability.extra.chips } }
-	end,'''
-match_indent = true
-
 ### vessel kiln, override cat tags and other tags to replace with vessel tags
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = '''if next(SMODS.find_card('j_cry_kittyprinter')) then
-	_tag = Tag('tag_cry_cat', nil, blind_choice)
-end'''
-position = "after"
+pattern = '''local _tag_ui, _tag_sprite = _tag:generate_UI()'''
+position = "before"
 payload = '''
 if next(SMODS.find_card('j_unik_vessel_kiln')) then
 	_tag = Tag('tag_unik_vessel', nil, blind_choice)
@@ -193,8 +168,8 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/code.lua"]'''
-pattern = '''tag.ability.rework_edition = G.P_CENTER_POOLS.Edition[found_index].key'''
-position = "after"
+pattern = '''jkr:start_dissolve()'''
+position = "before"
 payload = '''
 -- reduce commit limit by 666
 if jkr.config.center.key == "j_unik_white_lily_cookie" then
@@ -237,15 +212,5 @@ pattern = '''for i = 1, #G.jokers.cards do
 position = "at"
 payload = '''
 --nope
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''functions/common_events.lua'''
-pattern = '''elseif _type == 'Planet' then _pool[#_pool + 1] = "c_pluto"'''
-position = "before"
-payload = '''
-elseif _type == 'Joker' and _rarity == 'cry_candy' then _pool[#_pool + 1] = "j_cry_wrapped"
 '''
 match_indent = true

@@ -32,7 +32,6 @@ SMODS.Blind{
                 return true
             end
         end
-        --TODO: plasma sleeve
 
         return false
 	end,

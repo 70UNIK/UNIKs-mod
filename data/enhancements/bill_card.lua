@@ -1,0 +1,2 @@
+--Earn $1 per bill card played, increase this by $1 per bill card in scoring hand.
+--The US dollar bill this time

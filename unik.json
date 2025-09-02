@@ -2,15 +2,14 @@
 	"id": "unik",
 	"name": "UNIK's mod",
 	"author": ["70UNIK"],
-	"description": "An addon to Cryptid designed around the Mainline experience where I add what I want or can.",
+	"description": "Addon turned unbalanced standalone where I add what I want or can.",
 	"prefix": "unik",
 	"main_file": "unik.lua",
 	"priority": 99999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.3.3e-ALPHA-BALANCE",
+	"version": "0.4.0-CRYPTIDLESS",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-0711a)",
-        "Cryptid (>=0.5.10~dev3)"
+        "Steamodded (>=1.0.0~BETA-0827c)"
     ]
 }

@@ -24,7 +24,6 @@ SMODS.Edition({
 		vol = 1.3,
 	},
     disable_base_shader = true,
-    no_shadow = true,
 	detrimental = true,
     -- loc_txt = {
 	-- 	name = 'Positive',
@@ -76,7 +75,7 @@ calculate = function(self, card, context)
 							blockable = false,
 							func = function()
 								card.debuff = true
-								card.ability.popped = true
+								card.ability.no_score = true
 								G.jokers:remove_card(card)
 								card:bloated_pop()					
 								card = nil

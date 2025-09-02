@@ -10,5 +10,5 @@ priority = 999
 target = "functions/UI_definitions.lua"
 pattern = "{type = 'Spectral', val = G.GAME.spectral_rate},"
 position = "at"
-payload = "{type = 'Spectral', val = G.GAME.spectral_rate*(G.GAME.cry_percrate.spectral/100)},"
+payload = "{type = 'Spectral', val = G.GAME.spectral_rate*((Cryptid and G.GAME.cry_percrate.spectral or 100)/100)},"
 match_indent = true

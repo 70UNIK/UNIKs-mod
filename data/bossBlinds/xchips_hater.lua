@@ -67,25 +67,41 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
         end
     end
     if next(find_joker('j_unik_xchips_hater')) then
+        local marked_for_destruction = false
         if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
             key = nil
+            marked_for_destruction = true
         end
         
         if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
             key = nil
+             marked_for_destruction = true
         end
         if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
             key = nil
+             marked_for_destruction = true
         end
         if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') then
             key = nil
+             marked_for_destruction = true
         end
         if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') then
             key = nil
+             marked_for_destruction = true
         end
-        scored_card:start_dissolve()
-        SMODS.calculate_context({ xchips_hater = true })
-        return
+        if  marked_for_destruction then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    scored_card.ability.no_score = true
+                    scored_card:gore6_break()
+                    SMODS.calculate_context({ xchips_hater = true})
+                    return true
+                end,
+            }))
+        end
+    end
+    if scored_card and scored_card.ability and scored_card.ability.no_score then
+        key = nil
     end
     local ret = scie(effect, scored_card, key, amount, from_edition)
     if ret then

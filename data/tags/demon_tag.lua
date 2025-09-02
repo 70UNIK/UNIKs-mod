@@ -3,36 +3,38 @@
 --permanently debuff a joker owned
 --make 2 jokers positive
 --create a vessel tag (next blind has 3x blind size)
---otherwise get an extended empowered tag (soul, gateway or foundation for those who are willing to take it slow and preserve their current build (mostly))
+--otherwise get an extended empowered tag (soul, awakening or foundation for those who are willing to take it slow and preserve their current build (mostly))
 
 SMODS.Tag{
     atlas = 'unik_tags',
     key = 'unik_demon',
     pos = { x = 0, y = 0 },
-    config = { type = "round_start_bonus", odds = 5 },
+    config = { type = "round_start_bonus", odds = 4 },
     min_ante = 2,
     loc_vars = function(self, info_queue)
 		info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_extended_empowered
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_vessel
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_manacle
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
-        local new_numerator, new_denominator = SMODS.get_probability_vars(self, 3,5, 'unik_demon_tag')
+        local new_numerator, new_denominator = SMODS.get_probability_vars(self, 3,4, 'unik_demon_tag')
 		return { vars = { new_numerator, new_denominator } }
 	end,
 	apply = function(self, tag, context)
 		if context.type == "new_blind_choice" then
-			if SMODS.pseudorandom_probability(self, 'unik_demon_tag', 3, 5, 'unik_demon_tag') then
+			if SMODS.pseudorandom_probability(self, 'unik_demon_tag', 3, 4, 'unik_demon_tag') then
                 --cursed joker creation
                 --if owning OAS:
-                if #Cryptid.advanced_find_joker("Oops! All 6s", nil, nil, nil, true) > 0 then
-                    check_for_unlock({ type = "unik_bloodbath" })
+                for i,v in pairs(G.jokers.cards) do
+                    if v.config.center.key == 'j_oops' then
+                        check_for_unlock({ type = "unik_bloodbath" })
+                    end
                 end
                 if pseudorandom("unik_get_demoned") < 0.2 then
                     
                     local lock = tag.ID
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
-                        local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
+                        local card = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_demon")
                         card:add_to_deck()
                         G.jokers:emplace(card)
                         G.CONTROLLER.locks[lock] = nil
@@ -44,7 +46,7 @@ SMODS.Tag{
 
                             local deletable_jokers = {}
                             for k, v in pairs(G.jokers.cards) do
-                                if not v.ability.eternal and v.config.center.rarity ~= "cry_cursed" then
+                                if not v.ability.eternal and v.config.center.rarity ~= 'unik_detrimental' then
                                     deletable_jokers[#deletable_jokers + 1] = v
                                 end
                             end
@@ -65,7 +67,7 @@ SMODS.Tag{
                                 local lock = tag.ID
                                 G.CONTROLLER.locks[lock] = true
                                 tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
-                                    local card = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_demon")
+                                    local card = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_demon")
                                     card:add_to_deck()
                                     G.jokers:emplace(card)
                                     G.CONTROLLER.locks[lock] = nil
@@ -103,7 +105,10 @@ SMODS.Tag{
                                 G.CONTROLLER.locks[lock] = true
                                 tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                                     local emp = Tag("tag_unik_manacle")
-                                    	emp.ability.shiny = Cryptid.is_shiny()
+                                    if Cryptid then
+                                        emp.ability.shiny = Cryptid.is_shiny()
+                                    end
+                                    	
                                     add_tag(emp)
                                     G.CONTROLLER.locks[lock] = nil   
                                     return true
@@ -117,7 +122,9 @@ SMODS.Tag{
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_manacle")
+                        if Cryptid then
                             emp.ability.shiny = Cryptid.is_shiny()
+                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -130,7 +137,9 @@ SMODS.Tag{
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
                         local emp = Tag("tag_unik_vessel")
+                        if Cryptid then
                             emp.ability.shiny = Cryptid.is_shiny()
+                        end
                         add_tag(emp)
                         G.CONTROLLER.locks[lock] = nil   
                         return true
@@ -150,8 +159,10 @@ SMODS.Tag{
 				G.CONTROLLER.locks[lock] = true
 				tag:yep("+", G.C.SECONDARY_SET.Spectral, function()
 					local emp = Tag("tag_unik_extended_empowered")
-                    if tag.ability.shiny then -- good fucking luck
-                        emp.ability.shiny = Cryptid.is_shiny()
+                    if Cryptid then
+                        if tag.ability.shiny then -- good fucking luck
+                            emp.ability.shiny = Cryptid.is_shiny()
+                        end
                     end
 					add_tag(emp)
 					tag.triggered = true

@@ -26,16 +26,33 @@ SMODS.Blind{
 		G.GAME.unik_killed_by_poppy = nil
 		--G.GAME.unik_poppy_ceil = nil
 	end,
-	--The tax's functionality is used here instead. Pray it only activates if outside 2.5x reqs.
-	cry_cap_score = function(self, score)
-		if score > 2.5 * G.GAME.blind.chips then
-            G.GAME.blind.triggered = true
-            G.GAME.blind:wiggle()
-			return 0.03 * score
+	unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
+		if to_big(sum) > to_big(G.GAME.blind.chips * 2.5) then
+			local newScore = sum * 0.03
+			local subtractor = sum - newScore
+			
+			return {
+				debuff = false,
+				mod_score = -subtractor,
+			}
 		end
+		return {
+            debuff = false,
+        }
 	end,
 	defeat = function(self)
 		G.GAME.unik_killed_by_poppy = nil
 		--G.GAME.unik_poppy_ceil = nil
 	end,
 }
+
+-- local capper = SMODS.calculate_round_score
+-- function SMODS.calculate_round_score()
+-- 	local ret = capper()
+-- 	if G.GAME and G.GAME.blind then
+-- 		return ret * (G.GAME.blind:unik_cap_score(ret) or 1)
+-- 	else
+-- 		return ret
+-- 	end
+	
+-- end

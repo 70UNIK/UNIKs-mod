@@ -1,1 +1,0 @@
---LAST TILE: Add Mosaic to all scored cards on final hand, self destructs.

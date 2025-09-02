@@ -25,13 +25,16 @@ SMODS.Joker {
             }
 		end
         if context.reroll_shop and not context.blueprint then
-            card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
-            return {
-                delay = 0.5,
-                card = card,
-                message = localize{type='variable',key='a_xmult',vars={card.ability.extra.Xmult}},
-                colour = G.C.MULT
-            }
+           	SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "Xmult",
+				scalar_value = "Xmult_mod",
+				message_key = "a_xmult",
+				message_colour = G.C.MULT,
+			})
+            				return {
+
+				}
         end
 		if context.forcetrigger then
 			return {

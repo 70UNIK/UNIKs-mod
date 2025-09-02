@@ -21,16 +21,16 @@ SMODS.Consumable{
     can_use = function(self, card)
         if next(card.eligible_strength_jokers2) then return true end
 	end,
-    config = { extra = { mischance = 3, odds = 5 } },
+    config = { extra = { mischance = 3, odds = 4 } },
     loc_vars = function(self, info_queue, card)
-        if not card.edition or (card.edition and not card.edition.cry_mosaic) then
-			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_mosaic
+        if not card.edition or (card.edition and not card.edition.unik_steel) then
+			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_steel
 		end
 		if not card.edition or (card.edition and not card.edition.negative) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
 		end
-		if not card.edition or (card.edition and not card.edition.cry_astral) then
-			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral
+		if not card.edition or (card.edition and not card.edition.unik_shining_glitter) then
+			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_shining_glitter
 		end
 		local new_numerator, new_denominator = SMODS.get_probability_vars(card, card.ability.extra.mischance, card.ability.extra.odds, 'unik_wheelmisfortune')
 		return {
@@ -86,7 +86,7 @@ SMODS.Consumable{
 					}))
 					play_sound("tarot2", 1, 0.4)
 					used_consumable:juice_up(0.3, 0.5)
-                    local card2 = create_card("Joker", G.jokers, nil, "cry_cursed", nil, nil, nil, "unik_wheel_curse")
+                    local card2 = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_wheel_curse")
                     card2:add_to_deck()
                     G.jokers:emplace(card2)
                     card2:start_materialize()
@@ -100,14 +100,14 @@ SMODS.Consumable{
 					trigger = "after",
 					func = function()
 						if eligible_card then
-							local random_result = pseudorandom(pseudoseed("cry-Ritual"))
+							local random_result = pseudorandom(pseudoseed("unik_misfortune"))
 							if random_result >= 5 / 6 then
-								eligible_card:set_edition({ cry_astral = true })
+								eligible_card:set_edition({ negative = true })
 							else
 								if random_result >= 1 / 2 then
-									eligible_card:set_edition({ cry_mosaic = true })
+									eligible_card:set_edition({ unik_shining_glitter = true })
 								else
-									eligible_card:set_edition({ negative = true })
+									eligible_card:set_edition({ unik_steel = true })
 								end
 							end
 						end

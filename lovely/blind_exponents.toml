@@ -37,7 +37,7 @@ position = "after"
 payload = '''
 elseif self.unik_exponent[2] > 0 then
     local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
-    initial = initial:arrow(self.unik_exponent[1], self.unik_exponent[2])
+    initial = portable_exp(initial,self.unik_exponent[1], self.unik_exponent[2])
     self.chips = initial
 elseif self.high_score_size then
     self.chips = G.GAME.round_scores['hand'].amt or 0
@@ -68,7 +68,7 @@ position = "after"
 payload = '''
 if blind_choice.config.unik_exponent then
       local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
-      initial = initial:arrow(blind_choice.config.unik_exponent[1], blind_choice.config.unik_exponent[2])
+      initial = portable_exp(initial,blind_choice.config.unik_exponent[1], blind_choice.config.unik_exponent[2])
       blind_amt = initial
 elseif blind_choice.config.high_score_size then
     blind_amt = G.GAME.round_scores['hand'].amt or 0

@@ -10,7 +10,7 @@ SMODS.Blind{
     dollars = 5,
     mult = 2,
     death_message = "special_lose_unik_half",
-    cry_before_play = function(self)
+    unik_before_play = function(self)
         --Add Half to 2 random cards selected and 2 random jokers that are not already have the edition
         if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
             local triggered = false

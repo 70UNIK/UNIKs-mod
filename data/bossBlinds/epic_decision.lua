@@ -1,28 +1,3 @@
---EPIC DECISION:
---Upon entering the blind:
---Open a Lartceps Bundle pack (choose 5 from 10):
---Cannot be skipped at all.
---- Hellspawn: Add 20 Cursed Jokers. Temporarily create a Showman in the process. (Default)
---- Placard: All cards are permenantly debuffed then destroy all undebuffed cards
---- Wipe (styled as a code card): Destroy all but 1 card in the deck
---- Garbage: Add random cards equal to 2x your deck size
---- Sinners: The next 4 Boss Blinds will become Epic+ Blinds. 
---- Trim (styled as a code card): Set Joker slots to 0 (Almanac)/Remove empty joker slots then halve joker slots (Cryptid)
---- Reeducation: All your Jokers, Cards and Consumeables become Positive.
---- Expulsion: Randomly banish 66% of owned Jokers, eternals included
---- ://BACKDOOR: For the next 5 rounds, 1 in 4 chance for a purchasable item to become a Cursed Joker instead
---- Extortion: Set money to -$666.
---- Escalation: Ante^1.5, tension^1.5, straddle^1.5, rounded up.
---- Summit: Increases next blind/current blind size by ^^2.
---- The Single (Styled as a tarot): Set hand size to 1.
---- Bretheren Moon (Styled as a planet): Remove all bonuses and set all hand levels to 0. 
---- Powerdown: Destroy 50% of jokers, cards, consumeables and halve all levels (rounded down). Art is MX ripping GF in 2
---- The Sauron: Add "matla" unhancement to 3 in 4 cards in deck (create a lartceps on trigger, then self destructs)
---- Expiry: Unredeem all vouchers
---- Blank Larceps (almanac exclusive): copies the last lartceps used
--- Likewise, Lartceps are always eternal and rental and always have the positive edition (reservia counter). They will also have a "triggering" sticker (1 in 2 chance to be used at the start of blind)
---TODO:
---Ponpon: Enable skipping of booster if 
 SMODS.Blind	{
     key = 'unik_epic_decision',
     config = {},
@@ -34,7 +9,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 2,
-	ignore_showdown_check = true,
+	
 	in_pool = function(self)
         return  CanSpawnEpic()
 	end,
@@ -51,9 +26,7 @@ SMODS.Blind	{
         if not reset then
             G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
-            G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering
-            G.GAME.unik_halt_round = true
-            G.GAME.cry_fastened = true
+            G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering and draw cards afterwards if in blind.
             G.GAME.lartceps_pack_pity = 0
             if G.jokers.cards then
 				G.GAME.blind:wiggle()
@@ -62,10 +35,6 @@ SMODS.Blind	{
 					v:juice_up(0,0.25)
 				end
 			end
-            --PLACEHOLDER: Will open a random booster pack for now
-            --Booster will contain:
-            --4 cursed Jokers
-            --1 "tarot" to banish the rightmost joker
             local disp_text = localize("k_unik_must_select_four")
             attention_text({
                 scale = 0.7, text = disp_text, maxw = 12, hold = 15, align = 'cm', offset = {x = 0,y = -1},major = G.play
@@ -139,5 +108,32 @@ G.FUNCS.skip_booster = function(e)
         end
     else
         almanac_no_skip(e)
+        --Draw cards after the booster pack has been skipped/finished
+        
+    end
+end
+
+local end_consumable_hook =   G.FUNCS.end_consumeable
+G.FUNCS.end_consumeable = function(e, delayfac)
+    end_consumable_hook(e,delayfac)
+    if G.GAME.unik_mortons_fork then
+        G.GAME.unik_mortons_fork = nil
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.STATE = G.STATES.DRAW_TO_HAND
+                G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+                G.deck:hard_set_T()
+                G.STATE_COMPLETE = false
+                return true
+            end
+        }))
+    end
+end
+
+local saveHook = save_run
+function save_run()
+    if not G.GAME.unik_mortons_fork then
+        saveHook()
     end
 end
