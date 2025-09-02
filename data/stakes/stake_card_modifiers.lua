@@ -39,5 +39,11 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
             card.ability.perishable = nil
         end
     end
+
+    if card.base and card.base.suit and card.base.id then
+        print(card.base.suit)
+        print(card.base.id)
+    end
+
     return card
 end

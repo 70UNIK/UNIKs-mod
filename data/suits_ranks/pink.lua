@@ -5,6 +5,7 @@ SMODS.Suit{ -- Halberds
     key = 'pink',
     card_key = 'PINK',
     hidden = true,
+    backup_suit = 'Hearts',
 
     lc_ui_atlas = 'enhancement_suits',
     hc_ui_atlas = 'enhancement_suits_HC',
@@ -15,6 +16,6 @@ SMODS.Suit{ -- Halberds
     hc_colour = G.C.UNIK_UNIK,
 
     in_pool = function(self, args)
-        return false
+        return true
     end
 }

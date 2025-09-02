@@ -330,6 +330,7 @@ NFS.load(mod_path .. "data/editions/corrupted.lua")()
 UNIK.light_suits = { 'Diamonds', 'Hearts' }
 UNIK.dark_suits = { 'Spades', 'Clubs' }
 NFS.load(mod_path .. "data/suits_ranks/pink.lua")()
+NFS.load(mod_path .. "data/suits_ranks/abstract.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/light_dark_suits.lua")()
 
