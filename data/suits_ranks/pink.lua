@@ -8,6 +8,7 @@ SMODS.Suit{ -- Halberds
 
     lc_ui_atlas = 'enhancement_suits',
     hc_ui_atlas = 'enhancement_suits_HC',
+    pos = { x = 0, y = 0 },
     ui_pos = { x = 0, y = 0 },
 
     lc_colour = G.C.UNIK_UNIK,

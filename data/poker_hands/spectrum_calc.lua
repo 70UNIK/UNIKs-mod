@@ -15,7 +15,7 @@ if PB_UTIL and PB_UTIL.config.suits_enabled then
         local suits = {}
 
         --for all regular and enhancement based suits...
-        for k, _ in pairs(unik_get_all_suits2()) do
+        for k, _ in pairs(SMODS.Suits) do
             suits[k] = 0
         end
 
@@ -87,7 +87,7 @@ function UNIK.get_unique_suits(scoring_hand, bypass_debuff, flush_calc)
   local suits = {}
 
   --for all regular and enhancement based suits...
-  for k, _ in pairs(unik_get_all_suits2()) do
+  for k, _ in pairs(SMODS.Suits) do
     suits[k] = 0
   end
 
