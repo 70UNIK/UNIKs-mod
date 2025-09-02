@@ -34,10 +34,10 @@ Requires Steamodded smods-1.0.0-beta-0827c or higher, Lovely v0.7.1 or higher. T
 - 7 **Editions**, 5 of which are purely detrimental.
 - 3 **Enhancements**
 - 3 Edition based **Decks**, one of which is inspired by a beta deck.
-- 45 **Blinds**, 
+- 46 **Blinds**, 
 - - 2 **"normal" blinds**
 - - 12 **Finisher Blinds**
-- - 12 **Regular Blinds**
+- - 13 **Regular Blinds**
 - - 16 **Epic Blinds** and 4 **"Legendary" Blinds** (7 with Talisman), extremely cruel blinds that are designed to make sure you *suffer*.
 
 This mod also contains many crossmod content such as for:
