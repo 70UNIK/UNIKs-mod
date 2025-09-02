@@ -57,6 +57,17 @@ position = "at"
 payload = "elseif G.GAME.blind_on_deck == 'Big' then"
 match_indent = true
 
+# MoreFluff fix
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''elseif G.GAME.superboss_active and 
+  (G.GAME.blind:get_type() == 'Boss' and not G.GAME.blind.debuff.superboss and G.GAME.blind.debuff.akyrs_blind_difficulty ~= "expert") then
+    G.GAME.round_resets.blind_states.Big = 'Defeated''''
+position = "at"
+payload = '''--nope'''
+match_indent = true
+
 [[patches]]
 [patches.pattern]
 target = "functions/common_events.lua"

@@ -59,10 +59,18 @@ if Entropy then
 }, true)
 end
 
+SMODS.Edition:take_ownership("e_gb_temporary",{
+	detrimental = true,
+}, true)
+SMODS.Edition:take_ownership("e_Bakery_Carbon",{
+	detrimental = true,
+}, true)
+
 local blacklisted_editions = {
     "e_base", -- oops
     "e_jen_bloodfoil", "e_jen_blood", "e_jen_moire", -- "e_jen_unreal"
 	"e_unik_bloated","e_unik_positive","e_unik_fuzzy","e_unik_halfjoker","e_unik_corrupted",
+	"e_gb_temporary","e_Bakery_Carbon",
   }
 
 SMODS.Consumable:take_ownership("c_mf_rot_wheel",{

@@ -60,6 +60,7 @@ return {
                     "Pink Cards",
                 }                
             },
+            
             -- +1 Hand Size
             b_unik_tricolor = {
                 name = "Tricolor Deck",
@@ -992,12 +993,23 @@ return {
             m_unik_pink = {
                 name = "Pink",
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} chips", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
+                    "{X:dark_edition,C:white}^#1#{} Chips", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
                     "Considered a {C:attention}7{}",
                     "and it's {C:attention}own suit{}",
                     "{C:red,E:2}Destroyed{} if played",
                     "with anything",
                     "other than {C:attention}7s{}",
+                }
+            },
+            m_unik_green = {
+                name = "Green",
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} Mult", 
+                    "Considered a {C:clubs}#2#{}",
+                    "and it's {C:attention}own rank{}",
+                    "{C:red,E:2}Destroyed{} if played",
+                    "with anything",
+                    "other than {C:clubs}#3#{}",
                 }
             },
             m_unik_dollar = { --dollar cards. Earn +$2 when scored
@@ -1009,20 +1021,22 @@ return {
         },
         Rotarot = {
             c_unik_rot_crossdresser={
-                name = 'The Crossdresser!',
+                name = "The Crossdresser!",
                 text = {
-                    'Select {C:attention}#1#{} card#<s>1# to',
-                    'convert to {C:attention}7s{}',
-                },
+                    "Enhances {C:attention}#1#{} selected",
+                    "card into a",
+                    "{C:attention}Green Card",
+                }
             },
             c_unik_rot_wheel_of_misfortune={ --3 in 4 chance to add a detrimental edition and banana to a joker, otherwise add a random modded edition.
                 name = 'The Evocation!',
                 text = {
                     "{C:green}#1# in #2#{} chance to add a",
-                    "{C:red}detrimental{} {C:unik_shitty_edition}edition{} to",
+                    "random {C:red}detrimental{} {C:unik_shitty_edition}edition{} to",
                     "a random Joker",
-                    "otherwise apply a {C:attention}modded{}",
-                    "{C:edition}edition{} to a random Joker",
+                    "otherwise apply a random",
+                    "{C:attention}modded{} {C:dark_edition}edition{} to a random Joker",
+                    "{C:inactive}All editions are weighted equally...{}"
                 }
             }
         },

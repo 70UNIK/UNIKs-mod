@@ -8,7 +8,7 @@ priority = 999
 target = "functions/common_events.lua"
 pattern = "valid_idol_cards[#valid_idol_cards+1] = v"
 position = "before"
-payload = '''if not SMODS.has_enhancement(v, "m_unik_pink") then
+payload = '''if not SMODS.has_enhancement(v, "m_unik_pink") and not SMODS.has_enhancement(v, "m_unik_green") then
 '''
 match_indent = true
 [[patches]]
@@ -27,7 +27,7 @@ target = "functions/common_events.lua"
 pattern = "valid_castle_cards[#valid_castle_cards+1] = v"
 position = "before"
 payload = '''
-    if not SMODS.has_enhancement(v, "m_unik_pink") then
+    if not SMODS.has_enhancement(v, "m_unik_pink") and not SMODS.has_enhancement(v, "m_unik_green") then
 '''
 match_indent = true
 [[patches]]
@@ -47,7 +47,7 @@ target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
 pattern = '''valid_castle_cards[#valid_castle_cards + 1] = v'''
 position = "before"
 payload = '''
-    if not SMODS.has_enhancement(v, "m_unik_pink") then
+    if not SMODS.has_enhancement(v, "m_unik_pink") and not SMODS.has_enhancement(v, "m_unik_green") then
 '''
 match_indent = true
 [[patches]]
@@ -69,7 +69,7 @@ position = "before"
 payload = '''
     local valid_blocks_cards = {}
     for k, v in ipairs(G.playing_cards) do
-		if not SMODS.has_no_suit(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
+		if not SMODS.has_no_suit(v) and not SMODS.has_enhancement(v, "m_cry_abstract") and not SMODS.has_enhancement(v, "m_unik_green") then
 			valid_blocks_cards[#valid_blocks_cards + 1] = v
 		end
 	end

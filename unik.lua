@@ -236,6 +236,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas({ 
+  key = "unik_rotarots", 
+  path = "unik_rotarots2.png", 
+  px = 107, 
+  py = 107
+})
+
 SMODS.Atlas {
 	key = "unik_grab_bag_jokers",
 	path = "unik_grab_bag_jokers.png",
@@ -309,6 +316,9 @@ NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
 
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
+if MoreFluff then
+	NFS.load(mod_path .. "data/enhancements/green_card.lua")()
+end
 NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
@@ -388,6 +398,12 @@ NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 le
 --PLANETS
 
 
+
+--rotarots
+if MoreFluff then
+	NFS.load(mod_path .. "data/tarots/rotated_crossdresser.lua")() 
+	NFS.load(mod_path .. "data/tarots/rotated_wheel_of_misfortune.lua")() 
+end
 --L A R T C E P S--
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/lartcep_spawn_disable.lua")() 

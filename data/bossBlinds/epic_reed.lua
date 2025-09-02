@@ -49,7 +49,7 @@ local function reset_ranks()
     --print("d")
     for i = 1, 3 do
         for k, v in ipairs(G.playing_cards) do
-            if v.ability.effect ~= 'Stone Card' and v.config.center.key ~= 'm_cry_abstract' then
+            if v.ability.effect ~= 'Stone Card' and v.config.center.key ~= 'm_cry_abstract' and not SMODS.has_enhancement(v, "m_unik_green") then
                 if not SMODS.has_no_rank(v) then
                     local alreadyExists = false
                     for j = 1, #usedRanks do

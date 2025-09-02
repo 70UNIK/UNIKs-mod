@@ -7,7 +7,7 @@ SMODS.Enhancement {
 	overrides_base_rank = true, --enhancement do not generate in grim, incantation, etc...
 	replace_base_card = true, --So no base chips and no image
     config = { extra = { Echips = 0.05}, immutable = {base_echips = 1.0} },
-    weight = 0,
+    weight = 1,
     shatters = true, --lefunny
     force_no_face = true, --true = always face, false = always face
 	--NEW! specific_suit suit. Like abstracted!
@@ -20,9 +20,6 @@ SMODS.Enhancement {
         return {
             vars = { card.ability.extra.Echips + card.ability.immutable.base_echips}
         }
-    end,
-    in_pool = function(self)
-        return false
     end,
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then

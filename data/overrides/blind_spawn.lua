@@ -10,15 +10,11 @@ function Game:start_run(args)
         end
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
             self.GAME.round_resets.blind_choices.Small = get_new_boss()
-        else
-            self.GAME.round_resets.blind_choices.Small = "bl_small"
         end
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
             self.GAME.round_resets.blind_choices.Big = get_new_boss()
-        else
-            self.GAME.round_resets.blind_choices.Big = "bl_big"
         end
-        if vice_check() == 1 then
+        if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
             self.GAME.round_resets.blind_choices.Boss = get_new_boss()
         end
         

@@ -59,7 +59,7 @@ SMODS.Joker {
                     }))
                      increase =  increase  + (7 / card.ability.immutable.divisor)
                     triggered = true
-                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") then
+                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") and not SMODS.has_enhancement(v, "m_unik_green") then
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             v:juice_up()
