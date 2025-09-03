@@ -16,7 +16,7 @@ match_indent = true
 target = '''=[SMODS _ "src/utils.lua"]'''
 pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
 position = "before"
-payload = '''if G.GAME.blind and G.GAME.blind.children.animatedSprite and G.GAME.blind.children.animatedSprite then'''
+payload = '''if G.GAME.blind and G.GAME.blind.children and G.GAME.blind.children.animatedSprite and G.GAME.blind.children.animatedSprite then'''
 match_indent = true
 [[patches]]
 [patches.pattern]
