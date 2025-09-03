@@ -33,7 +33,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicolon_compat = true,
 	--Why 1.25? Storing multiple planets will cause the value to compound MASSIVELY, plus retriggers.
-    config = { extra = { exp_levelup = 1.2} },
+    config = { extra = { exp_levelup = 1.25} },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		return {  
