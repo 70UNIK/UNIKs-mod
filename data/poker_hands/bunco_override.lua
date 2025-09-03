@@ -19,7 +19,7 @@ SMODS.PokerHand:take_ownership("bunc_Spectrum",{
     end,
  })
 
-SMODS.PokerHand:take_ownership("bunc_Straight Five",{
+SMODS.PokerHand:take_ownership("bunc_Spectrum Five",{
    evaluate = function(parts)
     if not next(parts._5) or not next(parts.unik_spectrum) then return {} end
     return { SMODS.merge_lists(parts._5, parts.unik_spectrum) }
