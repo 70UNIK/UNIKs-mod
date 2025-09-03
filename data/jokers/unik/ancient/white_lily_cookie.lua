@@ -6,15 +6,15 @@ local function White_lily_copy(card)
     _card:add_to_deck()
     _card:start_materialize()
     G.jokers:emplace(_card)
-    SMODS.scale_card(_card, {
-        ref_table =_card.ability.extra,
-        ref_value = "Emult",
-        scalar_value = "Emult_mod",
-        base = 1,
-        message_key = "a_powmult",
-        message_colour = G.C.DARK_EDITION,
-            force_full_val = true,
-    })
+    -- SMODS.scale_card(_card, {
+    --     ref_table =_card.ability.extra,
+    --     ref_value = "Emult",
+    --     scalar_value = "Emult_mod",
+    --     base = 1,
+    --     message_key = "a_powmult",
+    --     message_colour = G.C.DARK_EDITION,
+    --         force_full_val = true,
+    -- })
 end
 SMODS.Atlas {
 	key = "unik_white_lily",
@@ -39,7 +39,7 @@ SMODS.Joker {
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
-    config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0,sold = false} },
+    config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0,sold = false,destroyed_joker_buffer = 0} },
 	loc_vars = function(self, info_queue, center)
 		return { 
             vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,center.ability.extra.Emult_mod} }
@@ -49,6 +49,24 @@ SMODS.Joker {
             if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko 
             and not card.ability.cry_committed and not card.ability.cry_reworked then
                 unik_set_sell_cost(card,0)
+                G.GAME.Destroyed_Joker_buffer = G.GAME.Destroyed_Joker_buffer or 0
+                if G.GAME.Destroyed_Joker_buffer > 0 then
+                    SMODS.scale_card(card, {
+                        ref_table =card.ability.extra,
+                        ref_value = "Emult",
+                        scalar_value = "custom_scaler",
+                        scalar_table = {
+                            custom_scaler = G.GAME.Destroyed_Joker_buffer * card.ability.extra.Emult_mod,
+                        },
+                        base = 1,
+                        message_key = "a_powmult",
+                        message_colour = G.C.DARK_EDITION,
+                        force_full_val = true,
+                    })
+                end
+                
+
+
                 White_lily_copy(card)
             end
         end
@@ -104,9 +122,26 @@ end
 local remove_ref = Card.remove
 function Card.remove(self)
   -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
+  G.GAME.Destroyed_Joker_buffer = G.GAME.Destroyed_Joker_buffer or 0
+  local removed = false
   if self.added_to_deck and self.ability.set == 'Joker' and not G.CONTROLLER.locks.selling_card then
+        G.GAME.Destroyed_Joker_buffer = G.GAME.Destroyed_Joker_buffer + 1
+        removed = true
         SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
+            
   end
 
-  return remove_ref(self)
+  local ret = remove_ref(self)
+  if removed then
+    G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			func = function()
+				G.GAME.Destroyed_Joker_buffer = math.max(G.GAME.Destroyed_Joker_buffer - 1,0)
+                --print(G.GAME.Destroyed_Joker_buffer)
+				return true
+			end,
+		}))
+    
+  end
+  return ret
 end
