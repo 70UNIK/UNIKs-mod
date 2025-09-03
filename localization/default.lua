@@ -1163,7 +1163,7 @@ return {
                     "On spawn, turn the {C:attention}leftmost{} Joker", 
                     "and {C:attention}all{} equipped consumables {C:unik_shitty_edition}Positive{}", 
                     "Turns a {C:attention} random{} played card {C:unik_shitty_edition}Positive{} and creates a", 
-                    "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Banana Smiley Face{} every hand",   
+                    "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Smiley Face{} every hand",   
                     "{C:red}Self destructs{} after Joker slots becomes {C:attention}#1#{}" ,
                     "{C:inactive,s:0.7,E:1}Happiness is mandatory. Failure to be happy is treason.{}",
                 }
@@ -3040,7 +3040,7 @@ return {
                     "add {C:unik_shitty_edition}Positive{} to a {C:attention}random{} Joker,",
                     "or create a {C:purple}Vessel Tag",
                     "Otherwise, create an",
-                    "{C:cry_ancient,E:1}Extended Empowered Tag",
+                    "{C:unik_ancient,E:1}Extended Empowered Tag",
                 },
             },
             tag_unik_vessel = {

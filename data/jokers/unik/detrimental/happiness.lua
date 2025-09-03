@@ -145,7 +145,6 @@ SMODS.Joker {
                     --force the edition over another
                     card2:set_edition({ unik_positive = true }, true, nil, true)
                     card2.ability.eternal = true
-                    card2.ability.banana = true
                     card2:add_to_deck()
                     G.jokers:emplace(card2)
                     card2:start_materialize()

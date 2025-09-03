@@ -393,7 +393,7 @@ end
 
 function GhostTrap1(self)
     for x, w in pairs(G.jokers.cards) do
-        if (w.config.center.rarity == 'unik_detrimental' and w.config.center.rarity == 'cry_cursed' ) and not w.ability.extra.getting_captured then
+        if (w.config.center.rarity == 'unik_detrimental' or w.config.center.rarity == 'cry_cursed' ) and not w.ability.extra.getting_captured then
             --Add to value
             w.ability.extra.getting_captured = true
             selfDestruction(w,"k_unik_pentagram_purified",G.C.MULT)
