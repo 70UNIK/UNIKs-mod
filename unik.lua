@@ -341,7 +341,9 @@ UNIK.light_suits = { 'Diamonds', 'Hearts' }
 UNIK.dark_suits = { 'Spades', 'Clubs' }
 NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/light_dark_suits.lua")()
-
+if Cryptid then
+	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
+end
 
 NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
 --HANDS

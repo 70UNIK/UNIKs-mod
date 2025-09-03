@@ -14,7 +14,9 @@ function Game:unik_initialize_stuff()
     for i,v in pairs(self.P_CENTERS) do
         if v.set == "Enhanced" then
             if v.unik_specific_suit then
-                self.ENHANCEMENT_OVERRIDE_SUITS[#self.ENHANCEMENT_OVERRIDE_SUITS + 1] = v.unik_specific_suit
+                if not SMODS.Suits[v.unik_specific_suit] then
+                    self.ENHANCEMENT_OVERRIDE_SUITS[#self.ENHANCEMENT_OVERRIDE_SUITS + 1] = v.unik_specific_suit
+                end
             end
             if v.unik_specific_base_value and SMODS.Rank.max_id.value then
                 if not SMODS.Ranks[v.unik_specific_base_value] then
