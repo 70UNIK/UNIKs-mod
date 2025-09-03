@@ -8,6 +8,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
+    cost = 8,
     config = { extra = { Emult = 0.15}, immutable = {base_emult = 1.0} },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,localize('Spades', 'suits_plural')} }

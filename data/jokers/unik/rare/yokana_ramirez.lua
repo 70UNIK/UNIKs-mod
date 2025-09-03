@@ -12,7 +12,7 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
-    cost = 10,
+    cost = 8,
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,

@@ -21,7 +21,7 @@ SMODS.Joker {
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
     godsmarble_family_trauma = { x = 1, y = 0 },
-    cost = 10,
+    cost = 8,
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
