@@ -1035,7 +1035,7 @@ return {
                     "random {C:red}detrimental{} {C:unik_shitty_edition}edition{} to",
                     "a random Joker",
                     "otherwise apply a random",
-                    "{C:attention}modded{} {C:dark_edition}edition{} to a random Joker",
+                    "{C:dark_edition}edition{} to a random Joker",
                     "{C:inactive}All editions are weighted equally...{}"
                 }
             }
