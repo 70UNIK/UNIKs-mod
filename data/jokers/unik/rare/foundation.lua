@@ -57,6 +57,7 @@ SMODS.Joker {
 			and not context.retrigger_joker
 		then
 			if card.ability.extra.hands < card.ability.extra.threshold then 
+				card.ability.extra.hands = card.ability.extra.hands + 1
 				return {
 					card_eval_status_text(card, "extra", nil, nil, nil, {
 						message = card.ability.extra.hands .. "/" .. card.ability.extra.threshold,
