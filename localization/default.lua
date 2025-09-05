@@ -97,9 +97,7 @@ return {
             ble_unik_corrupted={
                 name = "Corrupted",
                 text = {
-                    "Final chips and mult",
-                    "Set randomly between",
-                    "#1#x and #2#x",
+                    "^1.05 Blind Size",
                 }
             },
             ble_unik_half={
@@ -112,8 +110,16 @@ return {
             ble_unik_bloated={
                 name = "Bloated",
                 text = {
-                    "Destroy rightmost played",
-                    "card before play",
+                    "Destroy a random played",
+                    "card after play",
+                }
+            },
+            ble_unik_shining_glitter={
+                name = "Glittergrid",
+                text = {
+                    "+0.1x Blind Size",
+                    "when Xchips or higher",
+                    "operators are triggered",
                 }
             }
         },
@@ -123,6 +129,43 @@ return {
                 text = {
                     "Xchips and higher operations",
                     "become lower Mult operations", --in reference to "Xchips already exists, it's called mult", hence the effect.
+                }
+            },
+            bl_unik_fuck_magic_trick = {
+                name = "The Magician",
+                text = {
+                    "If score exceeds #1#",
+                    "redeem Magic Trick",
+                }
+            },
+            bl_unik_fuck_eternal_egg = {
+                name = "The Egg",
+                text = {
+                    "Open a Booster containing only",
+                    "Eternal Eggs after defeat",
+                    "Skip it to Banish",
+                    "rightmost Joker",
+                }
+            },
+            bl_unik_epic_magic_trick = {
+                name = "Pahataikuri", --Evil magician
+                text = {
+                    "If Magic Trick is not",
+                    "redeemed, on Blind select, die", --will forcibly introdce magic trick voucher in store when blind is active.
+                    "Magic Trick's card pool",
+                    "is permanently multiplied",
+                    "by X66 and voucher becomes Eternal",
+                }
+            },
+            bl_unik_epic_egg = {
+                name = "Mädäntynytmuna", --Rotten egg
+                text = {
+                    "Add Rental Eternal Eggs equal",
+                    "to your number of cards in deck",
+                    "then increase Blind Size by",
+                    "^(1+Number of Jokers*0.05)",
+                    "Replace a random Joker with an",
+                    "Eternal Egg per card discarded",
                 }
             },
 
@@ -349,18 +392,31 @@ return {
                 }
             },
             bl_unik_epic_miser={
-                name = "Loputonahne",
+                name = "Loputonahne", --endless miser
                 text = {
                     "Next #1# Blinds must",
                     "be beaten back-to-back"
                 }
             },
             bl_unik_epic_steel={
-                name = "Teräksinenterrori",
+                name = "Teräksinenterrori", --steel terror
                 text = {
                     "Set Chips or Mult",
                     "to lower value",
                 },
+            },
+            bl_unik_epic_greed={ --
+                name = "Ahneudenkirous", --Curse of greed
+                text = {
+                    "+1 Ante per $5 owned",
+                }
+            },
+            bl_unik_epic_envy={
+                name = "Kateellinenkuolema", --envious demise
+                text = {
+                    "^1.05 Blind Size per",
+                    "Joker triggered",
+                }
             },
             bl_unik_epic_beach_that_makes_you_old = {
                 name = "Tuhlaamisenranta", --beach of wasting
@@ -593,8 +649,7 @@ return {
                 name = "Häpeänpalkinto", --Trophy of Dishonor
 				text = {
                     "If Mult, XMult or ^Mult",
-					"is triggered during scoring",
-                    "hand will not score",
+					"is triggered during scoring, die",
 				},  
             },            
             bl_unik_legendary_batman={

@@ -74,10 +74,10 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
-pattern = '''G.E_MANAGER:add_event(Event({
-                trigger = 'immediate',
-                func = function()
-                    G.STATE = G.STATES.DRAW_TO_HAND'''
+pattern = '''G.STATE = G.STATES.DRAW_TO_HAND
+                    G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+                    G.deck:hard_set_T()
+                    G.STATE_COMPLETE = false'''
 position = "before"
 payload = '''if not G.GAME.unik_mortons_fork then'''
 match_indent = true
@@ -86,11 +86,10 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
-pattern = '''                    G.deck:hard_set_T()
-                    G.STATE_COMPLETE = false
-                    return true
-                end
-            }))'''
+pattern = '''G.STATE = G.STATES.DRAW_TO_HAND
+                    G.deck:shuffle('nr'..G.GAME.round_resets.ante)
+                    G.deck:hard_set_T()
+                    G.STATE_COMPLETE = false'''
 position = "after"
 payload = '''end'''
 match_indent = true
