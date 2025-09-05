@@ -3,8 +3,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_uniku',
-    atlas = 'placeholders',
-	pos = { x = 1, y = 0 },
+    atlas = 'unik_uncommon',
+	pos = { x = 3, y = 2 },
     rarity = 2,
     config = { extra = { repetitions = 2 } },
     cost = 5,

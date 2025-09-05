@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_ghost_joker',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_rare',
+	pos = { x = 1, y = 1 },
     rarity = 3,
     cost = 9,
     blueprint_compat = true,
@@ -32,5 +32,18 @@ SMODS.Joker {
 
             }
          end
+    end,
+    draw = function(self, card, layer)
+        local notilt = nil
+        if card.area and card.area.config.type == "deck" then
+            notilt = true
+        end
+        card.children.center:draw_shader(
+            "negative_shine",
+            nil,
+            card.ARGS.send_to_shader,
+            notilt,
+            card.children.center
+        )
     end,
 }
