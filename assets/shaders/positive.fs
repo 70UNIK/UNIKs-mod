@@ -120,7 +120,7 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     // // .a is last parameter for vec4 (usually the alpha channel - transparency)
     float shift = 3.1415926535897932384626433832795;
     if (positive.g > 0.0 || positive.g < 0.0) {
-		shift = 3.1415926535897932384626433832795;
+		shift = 3.1415926535897932384626433832795 + positive.x * 0.000000001;
 	}
     tex = vec4(HueShift(vec3(tex.r,tex.g,tex.b),shift),tex.a);
 
