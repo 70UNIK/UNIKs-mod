@@ -24,7 +24,6 @@ SMODS.Edition({
 		vol = 1.3,
 	},
     disable_base_shader = true,
-    no_shadow = true,
 	detrimental = true,
     -- loc_txt = {
 	-- 	name = 'Positive',

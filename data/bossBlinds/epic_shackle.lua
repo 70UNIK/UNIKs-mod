@@ -9,7 +9,7 @@ SMODS.Blind{
     dollars = 13,
     mult = 2,
     death_message = "special_lose_unik_epic_shackle",
-    ignore_showdown_check = true,
+    
     debuff = {
         akyrs_blind_difficulty = "epic",
         akyrs_cannot_be_overridden = true,
@@ -124,8 +124,10 @@ SMODS.Blind{
         if not G.jokers or not G.jokers.cards then
             return false
         end
-        if #Cryptid.advanced_find_joker(nil, nil, "e_negative", nil, true) ~= 0 or G.jokers.config.card_limit - #G.jokers.cards > 0 then
-            return CanSpawnEpic()
+        for i,v in pairs(G.jokers.cards) do
+            if v.edition and v.edition.negative then
+                return CanSpawnEpic()
+            end
         end
         return false
 	end,

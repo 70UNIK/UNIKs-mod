@@ -14,8 +14,6 @@ SMODS.Edition({
 	shader = "steel", 
 	extra_cost = 4, 
     apply_to_float = true,
-    disable_base_shader = true,
-    no_shadow = true,
 	sound = {
 		sound = "unik_steel",
 		per = 0.8,

@@ -3,6 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 999
 
+##Minimized: Cancel out maximized or else we have issues
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/misc_joker.lua"]'''

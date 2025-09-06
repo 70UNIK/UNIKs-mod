@@ -6,34 +6,6 @@ priority = 9999
 ### Bigger Blind and Boring Blank functionality to emulate Small and Big Blinds in appearance and functionality, while still ""bosses""
 ### And also make them ineligable for reroll (but can appear naturally) and not enable chicot/luchador to function
 
-# fixed 10% chance to replace a blind with a bigger blind/boring blank; will not appear for 16 antes afterwards
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
-position = "before"
-payload = '''
-    G.GAME.bigger_blind_blacklist = G.GAME.bigger_blind_blacklist or 0
-    G.GAME.boring_blank_blacklist = G.GAME.boring_blank_blacklist or 0
-    if not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.bigger_blind_blacklist == 0 and G.P_BLINDS[boss].boss and not G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BIGGER_BLIND")) < 0.05 then
-        G.GAME.bigger_blind_blacklist = 16
-        return 'bl_unik_bigger_blind'
-    elseif not G.GAME.modifiers.cry_rush_hour_ii and not G.GAME.round_resets.boss_rerolled and G.GAME.boring_blank_blacklist == 0 and G.P_BLINDS[boss].boss and G.P_BLINDS[boss].boss.showdown and not (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) and pseudorandom(pseudoseed("BORING_BLANK")) < 0.05 then
-        G.GAME.boring_blank_blacklist = 64
-        return 'bl_unik_boring_blank'
-    else
-'''
-match_indent = true
-[[patches]]
-[patches.pattern]
-target = "functions/common_events.lua"
-pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
-position = "after"
-payload = '''
-    end
-'''
-match_indent = true
-
 ### Bigger blind colors
 [[patches]]
 [patches.pattern]
@@ -66,3 +38,54 @@ pattern = '''G\.GAME\.blind\:get\_type\(\) \=\= \'Boss\''''
 position = "at"
 line_prepend = '$indent'
 payload = '''(G.GAME.blind_on_deck == 'Boss') '''
+
+# Rush Hour - mark small blind as defeated
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then"
+position = "at"
+payload = "if G.GAME.blind_on_deck == 'Small' then"
+match_indent = true
+
+# Ruby Stake - mark big blind as defeated
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = "elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then"
+position = "at"
+payload = "elseif G.GAME.blind_on_deck == 'Big' then"
+match_indent = true
+
+# MoreFluff fix
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''elseif G.GAME.superboss_active and 
+  (G.GAME.blind:get_type() == 'Boss' and not G.GAME.blind.debuff.superboss and G.GAME.blind.debuff.akyrs_blind_difficulty ~= "expert") then
+    G.GAME.round_resets.blind_states.Big = 'Defeated''''
+position = "at"
+payload = '''--nope'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
+position = "before"
+payload = '''
+if boss then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = '''G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1'''
+position = "after"
+payload = '''
+else --fallback
+    boss = 'bl_hook'
+end
+'''
+match_indent = true

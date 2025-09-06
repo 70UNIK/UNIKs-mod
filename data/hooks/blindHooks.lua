@@ -22,6 +22,25 @@ function Blind:unik_cap_score(score)
 	return nil
 end
 
+--Context before play
+function Blind:unik_before_play()
+	if not self.disabled then
+		local obj = self.config.blind
+		if obj.unik_before_play and type(obj.unik_before_play) == "function" then
+			return obj:unik_before_play()
+		end
+	end
+end
+
+--context after play
+function Blind:unik_after_play()
+	if not self.disabled then
+		local obj = self.config.blind
+		if obj.unik_after_play and type(obj.unik_after_play) == "function" then
+			return obj:unik_after_play()
+		end
+	end
+end
 
 --Instead of merely debuffing a hand, it will KILL you if you play that hand
 function Blind:unik_kill_hand(cards, hand, handname, check)

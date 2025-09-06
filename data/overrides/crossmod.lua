@@ -2,22 +2,6 @@
 SMODS.Joker:take_ownership("j_mf_unregisteredhypercam",{
     rarity = 2
 }, true)
-local abovestake = 'unik_shitty'
-if (SMODS.Mods["Buffoonery"] or {}).can_load then
-	abovestake = 'buf_spinel'
-end
-
-SMODS.Stake:take_ownership('stake_cry_ruby', {
- 	applied_stakes = {abovestake},
-    above_stake = abovestake,
-    prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
-    modifiers = function()
-		G.E_MANAGER:add_event(Event({trigger = 'before',func = function() 
-			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
-		return true end })) 
-	end,
-})
-
 --apostle of wands: blacklist epic, exotics,legendary blinds,
 
 SMODS.Consumable:take_ownership("c_paperback_apostle_of_wands",{
@@ -30,7 +14,7 @@ SMODS.Consumable:take_ownership("c_paperback_apostle_of_wands",{
 
 			for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
 			-- Only shows discovered non-legendary and non-owned jokers
-			if v.discovered and v.rarity ~= 4 and v.rarity ~= 'cry_epic' and v.rarity ~= 'cry_exotic' and v.rarity ~="unik_legendary_blind_finity" and not Cryptid.pin_debuff[v.rarity] and not next(SMODS.find_card(v.key)) then
+			if v.discovered and v.rarity ~= 4 and v.rarity ~= 'unik_ancient' and v.rarity ~= 'cry_epic' and v.rarity ~= 'cry_exotic' and v.rarity ~="unik_legendary_blind_finity" and (not Cryptid or (Cryptid and not Cryptid.pin_debuff[v.rarity])) and not next(SMODS.find_card(v.key)) then
 				selectable_jokers[#selectable_jokers + 1] = v
 			end
 			end
@@ -75,10 +59,18 @@ if Entropy then
 }, true)
 end
 
+SMODS.Edition:take_ownership("e_gb_temporary",{
+	detrimental = true,
+}, true)
+SMODS.Edition:take_ownership("e_Bakery_Carbon",{
+	detrimental = true,
+}, true)
+
 local blacklisted_editions = {
     "e_base", -- oops
     "e_jen_bloodfoil", "e_jen_blood", "e_jen_moire", -- "e_jen_unreal"
 	"e_unik_bloated","e_unik_positive","e_unik_fuzzy","e_unik_halfjoker","e_unik_corrupted",
+	"e_gb_temporary","e_Bakery_Carbon",
   }
 
 SMODS.Consumable:take_ownership("c_mf_rot_wheel",{
@@ -180,3 +172,9 @@ SMODS.Joker:take_ownership("j_paperback_deadringer",{
 		end
     end,
 }, true)
+
+if next(SMODS.find_mod("Bunco")) then
+	SMODS.Stake:take_ownership('bunc_magenta', {
+		unlocked_stake = 'unik_persimmon',
+	})
+end

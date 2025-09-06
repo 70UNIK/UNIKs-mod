@@ -21,9 +21,6 @@ SMODS.Blind{
     pos = {x=0, y=0}, --This could shift with glitch FX (may use dandy code for this)
     boss_colour= HEX("e0bc42"),
     dollars = 13,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,
@@ -38,7 +35,7 @@ SMODS.Blind{
 		return localize("k_unik_legendary_crown_defeat_x_times1") .. (G.GAME.unik_crown_progress or G.GAME.round_resets.hands) .. localize("k_unik_legendary_crown_defeat_x_times2")
 	end,
     high_score_size = true, --force high score
-    ignore_showdown_check = true,
+    
     loc_vars = function(self)
         local exponent1 = "x1.5"
         local exponent2 = "^6.666"
@@ -72,7 +69,7 @@ SMODS.Blind{
     in_pool = function()
         return CanSpawnLegendary()
     end,
-    cry_after_play = function(self)
+    unik_after_play = function(self)
         ease_hands_played(-666)
 	end,
     --i wont bother programming in a disable function since its not menant to be dsiabled

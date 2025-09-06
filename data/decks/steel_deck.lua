@@ -21,3 +21,23 @@
     end,
     edition_back_shader = 'unik_steel'
   }
+
+SMODS.DrawStep {
+	key = "back_edition",
+	order = 5,
+    func = function(self)
+      if self.area and self.area.config and self.area.config.type and self.area.config.type == 'deck' then
+        local currentBack = not self.params.galdur_selector
+					and ((Galdur and Galdur.config.use and type(self.params.galdur_back) == "table" and self.params.galdur_back) or type(
+						self.params.viewed_back
+					) == "table" and self.params.viewed_back or (self.params.viewed_back and G.GAME.viewed_back or G.GAME.selected_back))
+				or Back(G.P_CENTERS["b_red"])
+
+        if currentBack.effect.center.edition_back_shader then
+            self.children.back:draw_shader(currentBack.effect.center.edition_back_shader, nil, self.ARGS.send_to_shader, true)
+        end
+      end
+
+    end,
+    conditions = { vortex = false, facing = 'back' },
+} 

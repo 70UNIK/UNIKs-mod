@@ -97,6 +97,9 @@ function Card:update(dt)
                 end
             end
         end
+        if self.config.center.rarity == 'unik_detrimental' and not self.config.center.override_cursed_cost then
+            unik_set_sell_cost(self,0)
+        end
 
         -- if (G.hand and G.hand.highlighted and #G.hand.highlighted > 3) or (G.play and G.play.cards and #G.play.cards > 3) then
         --     if G.playing_cards then

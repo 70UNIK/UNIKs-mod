@@ -1,17 +1,52 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 9999999
 
-## Artificially add abstracted 'suits' to flush calculations without declaring them (sigil, familiar)
-## Also make sure to create a hard copy of suits and iterate, otherwise adding the artificial suit will add it to suit.obj_buffer for real!
+## Initializer
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "set_profile_progress()"
+position = "before"
+payload = '''
+self:unik_initialize_stuff()
+'''
+match_indent = true
+
 [[patches]]
 [patches.pattern]
 target = '''functions/misc_functions.lua'''
-pattern = '''      suits[#suits + 1] = 'cry_abstract''''
+pattern = '''local suits = SMODS.Suit.obj_buffer'''
+position = "at"
+payload = '''
+local suits = {}
+suits = unik_get_all_suits()
+'''
+match_indent = true
+
+## My mistake, should've made them more compat. Now I have to deal with this.
+[[patches]]
+[patches.pattern]
+target = '''functions/misc_functions.lua'''
+pattern = '''local suits = {}'''
 position = "after"
 payload = '''
-    suits[#suits + 1] = 'unik_pink'
+    suits = unik_get_all_suits()
+'''
+match_indent = true
 
+## suits
+## Artificially add abstracted 'rank' to X of a kind calculations
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''for i=#hand, 1, -1 do'''
+position = "before"
+payload = '''
+    for i = 1, #G.ENHANCEMENT_OVERRIDE_RANKS do
+        vals[#vals + 1] = {}
+    end
 '''
 match_indent = true

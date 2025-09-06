@@ -1,0 +1,19 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+# plural handler (annoyingly fragile overwrite)
+# also i pass the whole vars here, even though it's inefficient, just because it looks better
+# whatever
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = '''
+assembled_string = assembled_string..(type(subpart) == 'string' and subpart or format_ui_value(args.vars[tonumber(subpart[1])]) or 'ERROR')
+'''
+position = "at"
+payload = '''
+assembled_string = assembled_string..(type(subpart) == 'string' and subpart or (cry_pluralize and cry_pluralize(subpart[1], args.vars)) or format_ui_value(args.vars[tonumber(subpart[1])]) or 'ERROR')
+'''
+match_indent = true

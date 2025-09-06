@@ -355,7 +355,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/blind.lua"]'''
-pattern = '''cry_before_play = function(self)
+pattern = '''unik_before_play = function(self)
 		local eligible_cards = {}
 		local idx
 		--Check for eligible cards (not eternal and not immune)
@@ -403,7 +403,7 @@ payload = '''
     defeat = function(self)
 		G.GAME.unik_vermillion_mover = nil
 	end,
-	cry_before_play = function(self)
+	unik_before_play = function(self)
 		-- local eligible_cards = {}
 		local idx
 		--Check for eligible cards (not eternal and not immune)

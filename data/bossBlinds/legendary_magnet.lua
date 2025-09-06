@@ -18,9 +18,6 @@ SMODS.Blind{
     dollars = 13,
     mult = 0.666,
     glitchy_anim = true,
-    gameset_config = {
-		modest = { disabled = true},
-	},
     debuff = {
         akyrs_blind_difficulty = "legendary",
         akyrs_cannot_be_overridden = true,
@@ -28,7 +25,7 @@ SMODS.Blind{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
-    ignore_showdown_check = true,
+    
 	set_blind = function(self)
         G.GAME.unik_pentagram_manager_fix = true
 		G.GAME.unik_killed_by_magnet_legendary = true
@@ -219,5 +216,64 @@ G.FUNCS.reroll_boss = function(e)
         })
 	else
 		return gfrb2(e)
+	end
+end
+
+local bunco_hook = G.FUNCS.use_blind_card
+G.FUNCS.use_blind_card = function(e)
+    local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
+    if obj.boss and obj.boss.legendary then
+		play_sound('cancel', 0.7 + 0.05, 0.7)
+        local text = localize('k_unik_boss_reroll_nope')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+        })
+        G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+		    local card = e.config.ref_table
+
+        local boss = card.ability.blind_card.blind.key
+        -- G.GAME.round_resets.blind_choices.Boss = boss
+
+        -- play_sound('other1')
+
+        e.config.button = nil
+
+        -- if G.blind_select_opts.boss then
+        --     bunc_refresh_boss_blind()
+        -- end
+
+        G.PROFILES[G.SETTINGS.profile].blind_cards_used = (G.PROFILES[G.SETTINGS.profile].blind_cards_used or 0) + 1
+        if G.PROFILES[G.SETTINGS.profile].blind_cards_used then
+            check_for_unlock({type = 'use_blind_card', blinds_total = G.PROFILES[G.SETTINGS.profile].blind_cards_used})
+        end
+
+        G.FUNCS.end_consumeable(nil, 0.2)
+    elseif obj.boss and obj.boss.epic then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+        })
+            local card = e.config.ref_table
+
+        local boss = card.ability.blind_card.blind.key
+        -- G.GAME.round_resets.blind_choices.Boss = boss
+
+        -- play_sound('other1')
+
+        e.config.button = nil
+
+        -- if G.blind_select_opts.boss then
+        --     bunc_refresh_boss_blind()
+        -- end
+
+        G.PROFILES[G.SETTINGS.profile].blind_cards_used = (G.PROFILES[G.SETTINGS.profile].blind_cards_used or 0) + 1
+        if G.PROFILES[G.SETTINGS.profile].blind_cards_used then
+            check_for_unlock({type = 'use_blind_card', blinds_total = G.PROFILES[G.SETTINGS.profile].blind_cards_used})
+        end
+
+        G.FUNCS.end_consumeable(nil, 0.2)
+	else
+		return bunco_hook(e)
 	end
 end

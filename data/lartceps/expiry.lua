@@ -56,7 +56,7 @@ SMODS.Consumable{
             if not G.GAME.banned_keys then
 				G.GAME.banned_keys = {}
 			end
-            if not G.GAME.banned_keys then
+            if not G.GAME.cry_banished_keys then
 				G.GAME.cry_banished_keys = {}
 			end
 			local c = nil

@@ -1,7 +1,10 @@
 --JUMBO = 9
 --MEGA = 16 (yes its pricey)
+
+--TODO:
+--Overhaul into "Xchips booster", where all jokers are Xchips based. Relies in a script to add them in.
 local cube_digital_hallucinations = {
-	colour = G.C.CRY_ASCENDANT,
+	colour = G.C.DARK_EDITION,
 	loc_key = "k_plus_joker",
 	create = function()
 		local ccard = create_card("unik_cube", G.jokers, nil, nil, true, true, nil, "unik_cube_2")
@@ -26,12 +29,6 @@ SMODS.Booster{
     config = { extra = 4, choose = 1 },
     cry_digital_hallucinations = cube_digital_hallucinations,
     create_card = function(self, card)
-		-- if
-		-- 	Cryptid.enabled("j_cry_waluigi")
-		-- 	and not (G.GAME.used_jokers["j_cry_waluigi"] and not next(find_joker("Showman")))
-		-- then
-
-		-- end
 		return create_card("unik_cube", G.pack_cards, nil, nil, true, true, nil, "unik_cube")
 	end,
 	ease_background_colour = function(self)
@@ -63,12 +60,6 @@ SMODS.Booster{
     config = { extra = 4, choose = 1 },
     cry_digital_hallucinations = cube_digital_hallucinations,
     create_card = function(self, card)
-		-- if
-		-- 	Cryptid.enabled("j_cry_waluigi")
-		-- 	and not (G.GAME.used_jokers["j_cry_waluigi"] and not next(find_joker("Showman")))
-		-- then
-
-		-- end
 		return create_card("unik_cube", G.pack_cards, nil, nil, true, true, nil, "unik_cube")
 	end,
 	ease_background_colour = function(self)
@@ -100,12 +91,6 @@ SMODS.Booster{
     config = { extra = 4, choose = 2 },
     cry_digital_hallucinations = cube_digital_hallucinations,
     create_card = function(self, card)
-		-- if
-		-- 	Cryptid.enabled("j_cry_waluigi")
-		-- 	and not (G.GAME.used_jokers["j_cry_waluigi"] and not next(find_joker("Showman")))
-		-- then
-
-		-- end
 		return create_card("unik_cube", G.pack_cards, nil, nil, true, true, nil, "unik_cube")
 	end,
 	ease_background_colour = function(self)

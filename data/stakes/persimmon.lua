@@ -1,10 +1,13 @@
-
+local prev_stake = 'orange'
+if next(SMODS.find_mod("Bunco")) then
+    prev_stake = 'bunc_magenta'
+end
 SMODS.Stake{ 
     key = 'unik_persimmon',
     order = 1,
     unlocked_stake = 'gold',
-    applied_stakes = {'orange'},
-    above_stake = 'orange',
+    applied_stakes = {prev_stake},
+    above_stake = prev_stake,
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 
     modifiers = function()

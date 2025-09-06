@@ -13,3 +13,13 @@ pattern = "if to_big(#self.highlighted) >= to_big(self.config.highlighted_limit)
 position = "at"
 payload = "if to_big(#self.highlighted) >= to_big(self.config.highlighted_limit) and not G.GAME.unik_video_poker_rules then"
 match_indent = true
+
+
+### Always have infinite selection limit in video poker to avoid softlocking.
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "if #self.highlighted >= self.config.highlighted_limit then"
+position = "at"
+payload = "if to_big(#self.highlighted) >= to_big(self.config.highlighted_limit) and not G.GAME.unik_video_poker_rules then"
+match_indent = true

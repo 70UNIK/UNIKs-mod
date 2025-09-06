@@ -3,7 +3,7 @@ version = "0.0.1"
 dump_lua = true
 priority = 9999
 
-### legendary magnet - Trigger player death
+### Instadeath effect
 
 [[patches]]
 [patches.pattern]

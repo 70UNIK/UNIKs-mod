@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''
+hand[self.key] = math.max(hand['s_'..self.key] + hand['l_'..self.key]*(hand.level - 1), 0)
+'''
+position = "at"
+payload = '''
+hand[self.key] = math.max(hand[self.key] + hand['l_'..self.key]*amount)
+'''
+match_indent = true

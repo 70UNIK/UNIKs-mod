@@ -1,1 +1,0 @@
---Open a mega standard booster pack with all cards inside being steel

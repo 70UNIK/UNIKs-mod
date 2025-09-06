@@ -1,0 +1,101 @@
+#define _PerlinPrecision 1.6
+#define _PerlinOctaves 100.0
+#define _PerlinSeed 1.0
+
+
+float overlay( float s, float d )
+{
+	return (d < 0.5) ? 2.0 * s * d : 1.0 - 2.0 * (1.0 - s) * (1.0 - d);
+}
+
+vec3 overlay( vec3 s, vec3 d )
+{
+	vec3 c;
+	c.x = overlay(s.x,d.x);
+	c.y = overlay(s.y,d.y);
+	c.z = overlay(s.z,d.z);
+	return c;
+}
+
+vec3 multiply (vec3 target, vec3 blend){
+    return target*blend;
+}
+vec3 screen (vec3 target, vec3 blend){
+    return 1.0 - (1.0 - target) * (1.0 - blend);
+}
+
+
+float rnd(vec2 xy)
+{
+    return fract(sin(dot(xy, vec2(12.9898-_PerlinSeed, 78.233+_PerlinSeed)))* (43758.5453+_PerlinSeed));
+}
+float inter(float a, float b, float x)
+{
+    //return a*(1.0-x) + b*x; // Linear interpolation
+
+    float f = (1.0 - cos(x * 3.1415927)) * 0.5; // Cosine interpolation
+    return a*(1.0-f) + b*f;
+}
+float perlin(vec2 uv)
+{
+    float a,b,c,d, coef1,coef2, t, p;
+
+    t = _PerlinPrecision;					// Precision
+    p = 0.0;			
+
+    for(float i=0.0; i<_PerlinOctaves; i++)
+    {
+        a = rnd(vec2(floor(t*uv.x)/t, floor(t*uv.y)/t));	//	a---b
+        b = rnd(vec2(ceil(t*uv.x)/t, floor(t*uv.y)/t));		//	|   |
+        c = rnd(vec2(floor(t*uv.x)/t, ceil(t*uv.y)/t));		//	c---d
+        d = rnd(vec2(ceil(t*uv.x)/t, ceil(t*uv.y)/t));
+
+        if((ceil(t*uv.x)/t) == 1.0)
+        {
+            b = rnd(vec2(0.0, floor(t*uv.y)/t));
+            d = rnd(vec2(0.0, ceil(t*uv.y)/t));
+        }
+
+        coef1 = fract(t*uv.x);
+        coef2 = fract(t*uv.y);
+        p += inter(inter(a,b,coef1), inter(c,d,coef1), coef2) * (1.0/pow(2.0,(i+0.6)));
+        t *= 2.0;
+    }
+    return p;
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.xy;
+    
+    vec4 img = texture(iChannel0,uv);
+    
+    float moveX = 1.;
+    float moveY = 1.;
+    
+    
+    vec3 greyScale = vec3(.34, .34, .34);
+    
+    float progress = (uv.y + (sin((iTime/2.) * 2.0*3.14)/2. + 1.0))/2.;
+    vec3 color1 = vec3(0.96078431,0.06274509803921569,0.7725490196078432);
+    vec3 color2 = vec3(0.7411764705882353,0.4470588235294118,0.9372549019607843);
+    vec3 mixTure = mix(color1, color2, progress);
+    vec3 greyscaleImage = vec3(dot( img.rgb, greyScale));
+    
+    vec3 finalColors = overlay ( mixTure,  greyscaleImage*0.9);
+    
+    
+    vec2 uv2 = uv*10.0;
+	
+    uv2 = floor(uv2) + iTime;
+    
+    float coll = perlin(uv2);
+
+    coll = ((coll - 0.8) * max(8.0,0.0)) + 0.8;
+    finalColors = screen(vec3(coll)*0.15,finalColors);
+
+    // Output to screen
+    fragColor = vec4( finalColors, img.a);
+
+}

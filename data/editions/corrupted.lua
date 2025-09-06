@@ -1,5 +1,5 @@
---Corrupted:
---Misprint all values between -0.8x and 0.8x
+--NEW! Corrupted:
+---10 Mult, X0.5 Mult
 
 SMODS.Shader({
     key = "corrupted",
@@ -17,7 +17,6 @@ SMODS.Edition({
 	extra_cost = -5, --Its a detrimental edition, hence lower cost
     apply_to_float = true,
     disable_base_shader = true,
-    no_shadow = true,
 	detrimental = true,
 	sound = {
 		sound = "unik_pibby_glitch",
@@ -31,32 +30,40 @@ SMODS.Edition({
 			return 0
 		end
 	end,
+	config = {
+		emult = 0.9,
+		echips = 0.9, trigger = nil
+	},
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,
-	on_apply = function(card)
-		if not card.ability.unik_corrupted then
-			Cryptid.with_deck_effects(card, function(card)
-				Cryptid.misprintize(card, {
-					min = 0.1,
-					max = 0.75,
-				}, nil, true)
-			end)
-			if card.config.center.unik_corrupted then
-				card.config.center:apply_corrupted(card, function(val)
-					return Cryptid.misprintize_val(val, {
-						min =  0.1 * (G.GAME.modifiers.cry_misprint_min or 1),
-						max = 0.75 * (G.GAME.modifiers.cry_misprint_max or 1),
-					}, Cryptid.is_card_big(card))
-				end)
-			end
-		end
-		card.ability.unik_corrupted = true
+	loc_vars = function(self, info_queue, card)
+	return {vars = {
+			self.config.emult,
+			self.config.echips
+		}, }
 	end,
-	on_remove = function(card)
-		Cryptid.with_deck_effects(card, function(card)
-			Cryptid.misprintize(card, { min = 1, max = 1 }, true)
-			Cryptid.misprintize(card) -- Correct me if i'm wrong but this is for misprint deck. or atleast it is after this patch
-		end)
-		card.ability.unik_corrupted = nil
+	calculate = function(self, card, context)
+		if
+			(
+				context.edition -- for when on jonklers
+				and context.cardarea == G.jokers -- checks if should trigger
+				and card.config.trigger -- fixes double trigger
+			) or (
+				context.main_scoring -- for when on playing cards
+				and (context.cardarea == G.play or context.cardarea == G.hand)
+			)
+		then
+			return {
+				e_mult = self.config.emult,
+				e_chips = self.config.echips,
+			}
+		end
+		if context.joker_main then
+			card.config.trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)
+		end
+
+		if context.after then
+			card.config.trigger = nil
+		end
 	end,
 })

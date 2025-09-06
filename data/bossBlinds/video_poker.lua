@@ -38,12 +38,12 @@ SMODS.Blind{
         return false
 	end,
     --add 1 discard after a hand.
-    cry_after_play = function(self)
+    unik_after_play = function(self)
         ease_discard(-G.GAME.current_round.discards_left)
         ease_discard(1)
     end,
     --if discards left, remove them
-    cry_before_play = function(self)
+    unik_before_play = function(self)
         ease_discard(-G.GAME.current_round.discards_left)
     end,
     get_loc_debuff_text = function(self)

@@ -9,7 +9,7 @@ priority = 999
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = "rental_rate = 3,"
+pattern = "won = false,"
 position = "after"
 payload = '''
 unik_consumeable_niko_death_odds = 3,
@@ -113,6 +113,19 @@ target = "card.lua"
 pattern = "local used_tarot = copier or self"
 position = "after"
 payload = '''
+if not Cryptid then
+    G.GAME.cry_consumeable_rental_rate = G.GAME.cry_consumeable_rental_rate or 2
+    if self.ability.rental then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            blocking = false,
+            blockable = false,
+            func = (function()
+                ease_dollars(-G.GAME.cry_consumeable_rental_rate)
+            return true
+        end)}))
+    end
+end
 local gone = false
 if self.ability.unik_disposable or self.ability.unik_niko then
     if not self.ability.unik_disposed then
