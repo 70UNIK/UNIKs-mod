@@ -9,7 +9,7 @@ priority = 999
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = "rental_rate = 3,"
+pattern = "won = false,"
 position = "after"
 payload = '''
 unik_consumeable_niko_death_odds = 3,

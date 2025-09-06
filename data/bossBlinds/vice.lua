@@ -13,6 +13,7 @@ SMODS.Blind{
     mult = 2,
     loc_vars = function(self, info_queue, card)
         local string = ""
+		G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1
         if math.ceil(G.GAME.win_ante/(G.GAME.unik_vice_squeeze*2)) > 1 then
             string = "" .. tostring(math.ceil(G.GAME.win_ante/(G.GAME.unik_vice_squeeze*2))) .. " antes"
         else
@@ -26,6 +27,7 @@ SMODS.Blind{
 	end,
 	unik_after_defeat = function(self,chips,blind_size)
 		if to_big(chips) > to_big(blind_size * 2) then
+			G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1
 			G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze * 2
 			G.GAME.blind.triggered = true
 			G.GAME.blind:wiggle()

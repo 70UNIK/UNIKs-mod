@@ -751,6 +751,7 @@ end
 
 NFS.load(mod_path .. "data/overrides/blind_spawn.lua")()
 function vice_check()
+	G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1
 	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
 	if G.GAME.OvershootFXVal >= 4 then
 		return 1
@@ -758,10 +759,10 @@ function vice_check()
 	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
 		return 1
 	end
-    if G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*10000)/10000)) == 0 then
+    if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*10000)/10000)) == 0 then
         return 1
     end
-    if G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
+    if G.GAME.round_resets.ante and G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
         return 1
     end
 	if G.GAME.all_finishers then
