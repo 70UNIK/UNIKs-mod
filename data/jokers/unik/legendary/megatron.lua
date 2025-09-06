@@ -1,0 +1,2 @@
+--Megatron:
+--X2 Mult when a probability fails. Destroy a random Joker whenever a probability succeeds, otherwise ^1.05 Blind Size if it cannot destroy a joker.

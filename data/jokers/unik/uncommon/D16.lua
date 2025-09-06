@@ -1,0 +1,3 @@
+--gains X0.1 Mult every time a probability FAILS.
+--Secret: If reaching X8 Mult, transform into Eterbal Megatron.
+--After becoming megatron, all D16 instances become Eternal Megatrons and D16 is ba
