@@ -112,7 +112,7 @@ if SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.
 	
 end
 function portable_exp(initial,exponent,value)
-	if (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) or exponent <= 1 then
+	if (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) or to_big(exponent) <= to_big(1) then
 		if exponent == 0 then
 			return initial*value
 		end
