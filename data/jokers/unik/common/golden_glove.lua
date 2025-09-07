@@ -1,8 +1,8 @@
 -- $2 per hand lost this round.
 SMODS.Joker {
     key = 'unik_golden_glove',
-    atlas = 'placeholders',
-	pos = { x = 0, y = 0 },
+    atlas = 'unik_common',
+	pos = { x = 3, y = 1 },
     rarity = 1,
     cost = 6,
     blueprint_compat = true,

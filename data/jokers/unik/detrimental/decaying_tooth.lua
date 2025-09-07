@@ -7,10 +7,10 @@ SMODS.Joker {
 	},
 	-- How the code refers to the joker.
 	key = 'unik_decaying_tooth',
-    atlas = 'placeholders',
+    atlas = 'unik_cursed',
     rarity = 'unik_detrimental',
 	no_dbl = true,
-	pos = { x = 3, y = 1 },
+	pos = { x = 0, y = 3 },
     cost = 0,
 	blueprint_compat = false,
     perishable_compat = false,

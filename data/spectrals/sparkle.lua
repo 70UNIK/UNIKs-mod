@@ -1,8 +1,8 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_sparkle",
-	atlas = 'placeholders',
-	pos = { x = 2, y = 2 },
+	atlas = "unik_spectrals",
+	pos = { x = 1, y = 1 },
 	cost = 4,
 	order = 90,
     config = {

@@ -1,8 +1,8 @@
 --literally flesh panopicon
 SMODS.Joker {
     key = 'earthmover',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_rare',
+	pos = { x = 3, y = 1 },
     rarity = 3,
     cost = 6,
     immutable = true,
