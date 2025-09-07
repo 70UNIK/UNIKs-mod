@@ -16,7 +16,7 @@ SMODS.Blind	{
     unik_booster_before_blind = function(self)
     end,
     debuff = {
-        akyrs_blind_difficulty = "epic",
+        akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,

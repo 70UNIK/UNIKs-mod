@@ -13,7 +13,7 @@ SMODS.Blind	{
 		return localize("k_unik_only_stone")
 	end,
     debuff = {
-        akyrs_blind_difficulty = "epic",
+        akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,

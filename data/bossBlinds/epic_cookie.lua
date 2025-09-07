@@ -21,12 +21,12 @@ SMODS.Blind{
 		return { vars = { string } }
 	end,
     debuff = {
-        akyrs_blind_difficulty = "epic",
+        akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
-        akyrs_all_unskippable_blinds = true,
+        unik_all_unskippable_blinds = true,
     },
     death_message = "special_lose_unik_epic_cookie",
     set_blind = function(self, reset, silent)

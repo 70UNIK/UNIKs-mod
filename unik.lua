@@ -112,7 +112,7 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-	key = "akio_icons",
+	key = "unik_akio_icons",
 	path = "unik_akio_icons.png",
     px = 34,
     py = 34
@@ -773,6 +773,10 @@ end
 
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
+NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
+if AKYRS then
+	NFS.load(mod_path .. "data/ui/aiko_icons.lua")()
+end
 NFS.load(mod_path .. "data/menu.lua")()
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.

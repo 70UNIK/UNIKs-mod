@@ -901,20 +901,14 @@ return {
         },
         --akioyoris shennanngians
         DescriptionDummy={
-            dd_akyrs_unskippable_blind={
-                name = "Unskippable Blind",
-                text={
-                    "Cannot be skipped"
-                }
-            },
-            dd_akyrs_all_unskippable_blinds={
+            dd_unik_all_unskippable_blinds={
                 name = "Unskippable Ante",
                 text={
                     "All blinds this ante",
                     "are unskippable",
                 }
             },
-            dd_akyrs_epic_blind={
+            dd_unik_epic_blind={
                 name = "Epic Blind",
                 text={
                     "{C:red}You've should not",
@@ -922,7 +916,7 @@ return {
                     "{C:red}It escaped Almanac...",
                 }
             },
-           dd_akyrs_legendary_blind={
+           dd_unik_legendary_blind={
                 name = "Legendary Blind",
                 text = {
                     "{C:red}HELL AWAITS YOU...",
