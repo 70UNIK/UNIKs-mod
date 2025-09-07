@@ -46,7 +46,7 @@ SMODS.Tag{
 
                             local deletable_jokers = {}
                             for k, v in pairs(G.jokers.cards) do
-                                if not v.ability.eternal and v.config.center.rarity ~= 'unik_detrimental' then
+                                if not SMODS.is_eternal(v,self) and v.config.center.rarity ~= 'unik_detrimental' then
                                     deletable_jokers[#deletable_jokers + 1] = v
                                 end
                             end

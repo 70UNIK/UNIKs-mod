@@ -2062,6 +2062,30 @@ return {
                 }
             },
 
+            j_unik_D16 = {
+                name = "D-16",
+                text = {
+                    "Gain {X:mult,C:white}X#1#{} Mult whenever",
+                    "a {C:green}probability {C:attention}fails",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
+                    "{C:inactive}(#3#/#4# consecutive fails...)",
+                }
+            },
+            j_unik_megatron = {
+                name = "Megatron",
+                text= {
+                    "{X:mult,C:white}X#1#{} Mult whenever",
+                    "a {C:green}probability {C:attention}fails",
+                    "{C:red}Destroy{} a random Joker",
+                    "or {X:unik_void_color,E:2,C:red}^#2#{} Blind Size if no",
+                    "destroyable Jokers owned when",
+                    "a {C:green}probability {C:attention}succeeds",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
+                }
+            },
+
             --spectrum shit
             j_unik_the_dynasty = {
                 name = "The Dynasty",
@@ -3683,6 +3707,15 @@ return {
             k_unik_xchips_not_vanilla4="BUNCO IS NOT VANILLA CAUSE IT USES XCHIPS!!!!11!!!",
             cry_unredeemed = "Unredeemed...",
             k_unik_dried_up = "Dried Up!",
+            k_unik_D16_boom = "B O O M !",
+            k_unik_megatron_rage1 = "DIE!",
+            k_unik_megatron_rage2 = "BURN IT ALL!",
+            k_unik_megatron_rage3 = "ITS NOT OVER TIL I SAY IT IS!",
+            k_unik_megatron_rage4 = "IACON CITY IS MINE!",
+            k_unik_megatron1 = "THE PRIMES ARE NOTHING BUT A FUCKING FARCE!",
+            k_unik_megatron2 = "DECEPTICONS, RISE UP!",
+            k_unik_megatron3 = "PRIMUS IS THE REAL ENEMY!",
+            k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!"
         },
         high_scores={},
         labels={

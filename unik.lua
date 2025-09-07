@@ -149,6 +149,11 @@ SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
 })
+SMODS.Sound({
+	key = "explosion1",
+	path = "explosion1.ogg",
+})
+
 
 
 SMODS.Atlas {
@@ -587,6 +592,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/euclid.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/D16.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
 
 --Rare
@@ -617,6 +623,8 @@ NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/maya_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")() 
+
+NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
 
 --Ancient
 --NIKO

@@ -6,6 +6,7 @@ local function White_lily_copy(card)
     _card:add_to_deck()
     _card:start_materialize()
     G.jokers:emplace(_card)
+    _card.ability.destroyed_by_megatron = nil
     -- SMODS.scale_card(_card, {
     --     ref_table =_card.ability.extra,
     --     ref_value = "Emult",
