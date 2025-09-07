@@ -773,6 +773,7 @@ end
 
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
+NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 NFS.load(mod_path .. "data/menu.lua")()
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
