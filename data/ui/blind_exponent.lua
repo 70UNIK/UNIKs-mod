@@ -4,6 +4,11 @@ local blindPopupUIHook = create_UIBox_blind_popup
 function create_UIBox_blind_popup(blind, discovered, vars)
     local ret = blindPopupUIHook(blind,discovered,vars)
     if discovered then 
+        local info_queue = {}
+        if AKYRS then
+            AKYRS.add_blind_extra_info(blind,nil,{text_size = 0.25, difficulty_text_size = 0.3, full_ui = true, info_queue = info_queue})
+        end
+        
   
         local _dollars = blind.dollars
         local target = {type = 'raw_descriptions', key = blind.key, set = 'Blind', vars = vars or blind.vars}
@@ -31,8 +36,8 @@ function create_UIBox_blind_popup(blind, discovered, vars)
             exponents = ""
             exponents2 = "{" .. blind.unik_exponent[1] .. "}"
             end
-            if AKYRS or not  ret.nodes[2] then
-                ret.nodes[#ret.nodes].nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
+            if AKYRS and #info_queue > 0 then
+                ret.nodes[1].nodes[1].nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
                     {n=G.UIT.O, config={object = stake_sprite}},
                     {n=G.UIT.T, config={text = exponents .. blind.unik_exponent[2].. exponents2 .. localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
                 }}
@@ -44,8 +49,8 @@ function create_UIBox_blind_popup(blind, discovered, vars)
             end
 
          elseif blind.high_score_size then
-            if AKYRS or not  ret.nodes[2] then
-                ret.nodes[#ret.nodes].nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
+            if AKYRS and #info_queue > 0 then
+                ret.nodes[1].nodes[1].nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
                     {n=G.UIT.O, config={object = stake_sprite}},
                     {n=G.UIT.T, config={text = localize('k_unik_high_score'), scale = 0.4, colour = G.C.RED}},
                 }}
