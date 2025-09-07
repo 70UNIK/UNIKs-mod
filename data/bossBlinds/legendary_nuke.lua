@@ -19,7 +19,7 @@ SMODS.Blind{
     unik_exponent = {1,0.8},
     glitchy_anim = true,
     debuff = {
-        akyrs_blind_difficulty = "legendary",
+        akyrs_blind_difficulty = "unik_legendary",
         akyrs_cannot_be_overridden = true,
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
