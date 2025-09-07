@@ -112,7 +112,7 @@ if SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.
 	
 end
 function portable_exp(initial,exponent,value)
-	if (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) then
+	if (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) or exponent <= 1 then
 		if exponent == 0 then
 			return initial*value
 		end
@@ -122,6 +122,8 @@ function portable_exp(initial,exponent,value)
 		return initial^value
 	else
 		local bigNum = to_big(initial)
-		return bigNum:arrow(exponent,value)
+		print(bigNum .. " " .. exponent .. " " .. value)
+		print (bigNum:arrow(to_big(exponent),to_big(value)))
+		return bigNum:arrow(to_big(exponent),to_big(value))
 	end
 end
