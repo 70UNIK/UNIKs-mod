@@ -41,9 +41,6 @@ SMODS.Consumable{
 		end
 		return { vars = {center.ability.max_highlighted, center.ability.extra.cards_added } }
 	end,
-    in_pool = function(self)
-        return false
-    end,
 	use = function(self, card, area, copier)
 				local used_consumable = copier or card
 		for i = 1, #G.hand.highlighted do
