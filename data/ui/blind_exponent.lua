@@ -31,15 +31,31 @@ function create_UIBox_blind_popup(blind, discovered, vars)
             exponents = ""
             exponents2 = "{" .. blind.unik_exponent[1] .. "}"
             end
-            ret.nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
-              {n=G.UIT.O, config={object = stake_sprite}},
-              {n=G.UIT.T, config={text = exponents .. blind.unik_exponent[2].. exponents2 .. localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
-            }}
+            if AKYRS or not  ret.nodes[2] then
+                ret.nodes[#ret.nodes].nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
+                    {n=G.UIT.O, config={object = stake_sprite}},
+                    {n=G.UIT.T, config={text = exponents .. blind.unik_exponent[2].. exponents2 .. localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
+                }}
+            else
+                ret.nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
+                    {n=G.UIT.O, config={object = stake_sprite}},
+                    {n=G.UIT.T, config={text = exponents .. blind.unik_exponent[2].. exponents2 .. localize('k_unik_base'), scale = 0.4, colour = G.C.RED}},
+                }}
+            end
+
          elseif blind.high_score_size then
-            ret.nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
-              {n=G.UIT.O, config={object = stake_sprite}},
-              {n=G.UIT.T, config={text = localize('k_unik_high_score'), scale = 0.4, colour = G.C.RED}},
-            }}
+            if AKYRS or not  ret.nodes[2] then
+                ret.nodes[#ret.nodes].nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
+                    {n=G.UIT.O, config={object = stake_sprite}},
+                    {n=G.UIT.T, config={text = localize('k_unik_high_score'), scale = 0.4, colour = G.C.RED}},
+                }}
+            else
+                ret.nodes[2].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm"}, nodes={
+                    {n=G.UIT.O, config={object = stake_sprite}},
+                    {n=G.UIT.T, config={text = localize('k_unik_high_score'), scale = 0.4, colour = G.C.RED}},
+                }}
+            end
+            
          end
     end
     return ret
