@@ -8,18 +8,14 @@ priority = 9999
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''if  SMODS.calculate_round_score()  > 0 then '''
-position = 'before'
+pattern = '''check_for_unlock({type = 'chip_score', chips = math.floor( SMODS.calculate_round_score() )})'''
+position = 'after'
 payload = '''
 local temptotal = SMODS.calculate_round_score()
 G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,temptotal)
 local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,temptotal)
 local debuff_hand = false
 local add_to_blind = 0
-
-if debuff_hand then
-
-end
 if checker and checker.debuff then
     debuff_hand = true
     G.E_MANAGER:add_event(Event({
