@@ -1,8 +1,8 @@
 --$2 per discard lost this round at 0 discards
 SMODS.Joker {
     key = 'unik_instant_gratification',
-    atlas = 'placeholders',
-	pos = { x = 0, y = 0 },
+    atlas = 'unik_common',
+	pos = { x = 4, y = 1 },
     rarity = 1,
     cost = 6,
     blueprint_compat = true,
