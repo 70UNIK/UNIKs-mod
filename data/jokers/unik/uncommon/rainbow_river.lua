@@ -1,8 +1,8 @@
 --LAST TILE: Add Mosaic to all scored cards on final hand, self destructs.
 SMODS.Joker {
     key = 'unik_rainbow_river',
-    atlas = 'placeholders',
-	pos = { x = 1, y = 0 },
+    atlas = 'unik_uncommon',
+	pos = { x = 6, y = 2 },
     rarity = 2,
     cost = 6,
     blueprint_compat = false,
