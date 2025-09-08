@@ -107,6 +107,9 @@ G.FUNCS.skip_booster = function(e)
            -- print("disble")
         end
     else
+        if obj.skip_effect and type(obj.skip_effect) == "function" then
+            obj:skip_effect()
+        end
         almanac_no_skip(e)
         --Draw cards after the booster pack has been skipped/finished
         
@@ -117,7 +120,6 @@ local end_consumable_hook =   G.FUNCS.end_consumeable
 G.FUNCS.end_consumeable = function(e, delayfac)
     end_consumable_hook(e,delayfac)
     if G.GAME.unik_mortons_fork then
-        G.GAME.unik_mortons_fork = nil
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()
@@ -129,6 +131,13 @@ G.FUNCS.end_consumeable = function(e, delayfac)
             end
         }))
     end
+end
+local draw_hook = Game.update_selecting_hand
+function Game:update_selecting_hand(dt)
+    G.GAME.unik_mortons_fork = nil
+    local ret = draw_hook(self,dt)
+
+    return ret
 end
 
 local saveHook = save_run

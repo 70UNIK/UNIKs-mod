@@ -57,11 +57,13 @@ SMODS.Joker {
             end
             if #validJokers >= 1 then
                 local select = pseudorandom_element(validJokers, pseudoseed("unik_megatron_rage"))
+                    select.ability.destroyed_by_megatron = true
                     G.E_MANAGER:add_event(Event({
                         trigger="immediate",
                         func = function()
-                        select.ability.destroyed_by_megatron = true
+                        
                         select:gore6_break()
+                        card:juice_up(2.5, 0.4)
                     return true end }))
                 return {
                         message = localize("k_unik_megatron_rage" .. math.random(1,4)),

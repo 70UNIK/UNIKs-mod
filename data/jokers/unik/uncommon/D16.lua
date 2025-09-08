@@ -37,7 +37,7 @@ SMODS.Joker {
                     func = function()
                         --Dissolving
                             card.T.r = -0.2
-                            card:juice_up(0.3, 0.4)
+                            card:juice_up(2, 0.4)
                             card.states.drag.is = true
                             card.children.center.pinch.x = true
                             card:boom_break()

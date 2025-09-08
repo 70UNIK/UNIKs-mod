@@ -8,7 +8,7 @@
 	"priority": 99999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.4.0j-CRYPTIDLESS",
+	"version": "0.4.1-CRYPTIDLESS",
 	"dependencies": [
         "Steamodded (>=1.0.0~BETA-0827c)"
     ]

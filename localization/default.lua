@@ -131,7 +131,7 @@ return {
                     "become lower Mult operations", --in reference to "Xchips already exists, it's called mult", hence the effect.
                 }
             },
-            bl_unik_fuck_magic_trick = {
+            bl_unik_magician = {
                 name = "The Magician",
                 text = {
                     "If score exceeds #1#",
@@ -139,12 +139,21 @@ return {
                 }
             },
             bl_unik_fuck_eternal_egg = {
-                name = "The Egg",
+                name = "Eternal Egg",
                 text = {
                     "Open a Booster containing only",
-                    "Eternal Eggs after defeat",
+                    "Eternal Rental Eggs on Blind Select",
                     "Skip it to Banish",
-                    "rightmost Joker",
+                    "a random Joker",
+                }
+            },
+            bl_unik_fuck_eight_ball = {
+                name = "H8 Ball",
+                text = {
+                    "If an 8 is not in",
+                    "scoring hand,",
+                    "convert a random",
+                    "Joker to 8 Ball",
                 }
             },
             bl_unik_epic_magic_trick = {
@@ -1030,7 +1039,7 @@ return {
         },
         Enhanced={
             m_unik_namta = {
-                name = "Namta",
+                name = "Namta Card",
                 text = {
                     "Has no rank or suit",
                     "{X:unik_void_color,E:2,C:red}^#3#{} Blind Size if held",
@@ -1040,7 +1049,7 @@ return {
                 }
             },
             m_unik_pink = {
-                name = "Pink",
+                name = "Pink Card",
                 text = {
                     "{X:dark_edition,C:white}^#1#{} Chips", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
                     "Considered a {C:attention}7{}",
@@ -1051,7 +1060,7 @@ return {
                 }
             },
             m_unik_green = {
-                name = "Green",
+                name = "Green Card",
                 text = {
                     "{X:dark_edition,C:white}^#1#{} Mult", 
                     "Considered a {C:clubs}#2#{}",
@@ -1062,9 +1071,18 @@ return {
                 }
             },
             m_unik_dollar = { --dollar cards. Earn +$2 when scored
-                name = "Dollar",
+                name = "Dollar Card",
                 text = {
                     "{C:money}+$#1#{} when scored"
+                }
+            },
+            m_unik_bill = {
+                name = "Bill Card",
+                text = {
+                    "{C:money}+$#1#{} when scored",
+                    "Increase this by {C:money}+$#2#{}",
+                    "per {C:attention}Bill Card{} in",
+                    "scoring hand",
                 }
             }
         },
@@ -1075,6 +1093,14 @@ return {
                     "Enhances {C:attention}#1#{} selected",
                     "card into a",
                     "{C:attention}Green Card",
+                }
+            },
+            c_unik_rot_oligarch={
+                name = "The Oligarch!",
+                text = {
+                    "Enhances {C:attention}#1#{} selected",
+                    "card#<s>1# into",
+                    "{C:attention}Bill Cards",
                 }
             },
             c_unik_rot_wheel_of_misfortune={ --3 in 4 chance to add a detrimental edition and banana to a joker, otherwise add a random modded edition.
@@ -2720,6 +2746,15 @@ return {
 					"{C:red}Unskippable{}",
 				},
             },
+            p_unik_egg_pack = {
+                name = "Eggcellent Buffoon Pack",
+                text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# Eternal Rental Egg#<s>2#{}",
+					"{C:red}Skipping will Banish{}",
+                    "{C:red} a random Joker{}"
+                }
+            },
             unik_decrementing_food_jokers = {
 				name = "Decrementing Food Jokers",
 				text = {
@@ -3463,6 +3498,7 @@ return {
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
+            k_unik_egg_pack = "Eggcellent Pack",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
             k_unik_happiness2="HAPPINESS IS MANDATORY.",
@@ -3715,7 +3751,8 @@ return {
             k_unik_megatron1 = "THE PRIMES ARE NOTHING BUT A FUCKING FARCE!",
             k_unik_megatron2 = "DECEPTICONS, RISE UP!",
             k_unik_megatron3 = "PRIMUS IS THE REAL ENEMY!",
-            k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!"
+            k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!",
+            k_unik_magiced = "Hope you enjoy permanent shop bloat...",
         },
         high_scores={},
         labels={

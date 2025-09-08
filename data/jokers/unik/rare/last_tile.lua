@@ -15,6 +15,7 @@ SMODS.Joker {
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_shining_glitter
 		end
 	end,
+    pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
             --print("turn them happy")

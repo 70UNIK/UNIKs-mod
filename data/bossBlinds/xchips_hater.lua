@@ -89,16 +89,6 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             key = nil
              marked_for_destruction = true
         end
-        if  marked_for_destruction then
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    scored_card.ability.no_score = true
-                    scored_card:gore6_break()
-                    SMODS.calculate_context({ xchips_hater = true})
-                    return true
-                end,
-            }))
-        end
     end
     if scored_card and scored_card.ability and scored_card.ability.no_score then
         key = nil

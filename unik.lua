@@ -323,6 +323,7 @@ NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 if MoreFluff then
 	NFS.load(mod_path .. "data/enhancements/green_card.lua")()
+	NFS.load(mod_path .. "data/enhancements/bill_card.lua")()
 end
 NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 if unik_config.unik_legendary_blinds then
@@ -409,6 +410,7 @@ NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 le
 --rotarots
 if MoreFluff then
 	NFS.load(mod_path .. "data/tarots/rotated_crossdresser.lua")() 
+	NFS.load(mod_path .. "data/tarots/rotated_oligarch.lua")() 
 	NFS.load(mod_path .. "data/tarots/rotated_wheel_of_misfortune.lua")() 
 end
 --L A R T C E P S--
@@ -459,6 +461,7 @@ end
 --TODO: Replace "cube pack" with "UNIK's pack" in the next update, basically an icon pack of sorts
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
+NFS.load(mod_path .. "data/boosters/egg_pack.lua")()
 
 --tags
 
@@ -483,6 +486,7 @@ NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 NFS.load(mod_path .. "data/bossBlinds/cookie.lua")()
 NFS.load(mod_path .. "data/bossBlinds/xchips_hater.lua")()
+NFS.load(mod_path .. "data/bossBlinds/magician.lua")()
 NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
@@ -503,6 +507,7 @@ NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
 NFS.load(mod_path .. "data/bossBlinds/jaundice_jack.lua")()
 NFS.load(mod_path .. "data/bossBlinds/septic_seance.lua")()
+NFS.load(mod_path .. "data/bossBlinds/eternal_egg.lua")()
 NFS.load(mod_path .. "data/bossBlinds/salmon_steps.lua")()
 NFS.load(mod_path .. "data/bossBlinds/burgundy_brain.lua")()
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
@@ -614,6 +619,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")()
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()
 end
+NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
 
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")() 
@@ -623,8 +629,6 @@ NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/maya_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")() 
-
-NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
 
 --Ancient
 --NIKO
