@@ -2095,7 +2095,7 @@ return {
                 text = {
                     "Gain {X:mult,C:white}X#1#{} Mult whenever",
                     "a {C:green}probability {C:attention}fails",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive})",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                     "{C:inactive}(#3#/#4# consecutive fails...)",
                 }
             },
