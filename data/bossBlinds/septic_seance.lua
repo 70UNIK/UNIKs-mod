@@ -93,30 +93,7 @@ function killEternalSeances()
         --print("Joker in set:")
         --print(v.ability.name)
         if (v.config.center.key == "j_seance" and v.ability.unik_septic_seance) then
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    play_sound('tarot1')
-                    v.T.r = -0.2
-                    v:juice_up(0.3, 0.4)
-                    v.states.drag.is = true
-                    v.children.center.pinch.x = true
-                    -- This part destroys the card.
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.3,
-                        blockable = false,
-                        func = function()
-                            v:start_dissolve()
-                            card_eval_status_text(v, "extra", nil, nil, nil, {
-                                message = localize("k_extinct_ex"),
-                                colour = HEX('424e54'),
-                            })
-                            return true;
-                        end
-                    }))
-                    return true
-                end
-            }))
+            selfDestruction(v,"k_extinct_ex",HEX('424e54'))
             break
         end
     end

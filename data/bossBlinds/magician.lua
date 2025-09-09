@@ -4,7 +4,7 @@ SMODS.Blind{
     key = 'unik_magician',
     config = {},
 	boss = {
-		min = 2,
+		min = 3,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 29},
@@ -55,7 +55,7 @@ SMODS.Blind{
                                 delay = 0,
                                 func = function()
                                     card:start_dissolve()
-                                    
+                                    G.GAME.playing_card_rate = G.GAME.playing_card_rate * 3
                                     return true
                                 end,
                             }))
@@ -63,6 +63,7 @@ SMODS.Blind{
                 end,
             }))
             end
+            
 		end
 		return false
 	end,

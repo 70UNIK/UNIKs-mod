@@ -195,17 +195,19 @@ function Blind:disable()
 		end
 	end
     local ret = disblref2(self)
-    local obj2 = SMODS.OPENED_BOOSTER.config.center
-    if obj2 and obj2.unik_disablable and obj2.unik_disablable == true then
-         G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                func = function()
-                G.GAME.disable_banish_FX = true
-                G.FUNCS.end_consumeable()
-                G.GAME.disable_banish_FX = nil
-                             return true
-                end,
-            }))
+    if SMODS and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config and SMODS.OPENED_BOOSTER.config.center then
+        local obj2 = SMODS.OPENED_BOOSTER.config.center
+        if obj2 and obj2.unik_disablable and obj2.unik_disablable == true then
+            G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                    G.GAME.disable_banish_FX = true
+                    G.FUNCS.end_consumeable()
+                    G.GAME.disable_banish_FX = nil
+                                return true
+                    end,
+                }))
+        end
     end
     return ret
 end

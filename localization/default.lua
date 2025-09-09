@@ -135,7 +135,9 @@ return {
                 name = "The Magician",
                 text = {
                     "If score exceeds #1#",
-                    "redeem Magic Trick",
+                    "redeem Magic Trick and",
+                    "increase Playing Card",
+                    "shop spawn rate by 3X"
                 }
             },
             bl_unik_fuck_eternal_egg = {
@@ -147,8 +149,8 @@ return {
                     "a random Joker",
                 }
             },
-            bl_unik_fuck_eight_ball = {
-                name = "H8 Ball",
+            bl_unik_hate_ball = {
+                name = "Hate Ball",
                 text = {
                     "If an 8 is not in",
                     "scoring hand,",
@@ -3629,6 +3631,8 @@ return {
             k_defeated_by = "Killed By",
             k_unik_none_hand_banned = "None hand is banned",
             k_unik_jaundice_jack = "If a Jack not discarded before hand, convert random Joker to Hit the Road",
+            k_unik_hate_ball = "If an 8 is not in scoring hand, convert random Joker to 8 Ball",
+            k_unik_hate_8 = "I H8 U! U H8 ME!",
             k_unik_septic_seance = "If hand is not Straight Flush, convert adjacent Jokers to Seance",
             k_unik_jackshit = "JACKSHIT!",
             k_unik_seance_or_else="SEANCE OR ELSE!",
