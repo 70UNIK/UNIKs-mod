@@ -1086,7 +1086,22 @@ return {
                     "per {C:attention}Bill Card{} in",
                     "scoring hand",
                 }
-            }
+            },
+            m_unik_timber = {
+                name = "Timber Card",
+                text = {
+                    "Mult {X:mult,C:white}Xlog_#1#(Mult){}",
+                    "{C:red,E:2}Destroyed{} if not played",
+                    "in a {C:attention}Straight",
+                }
+            },
+            m_unik_concrete = {
+                name = "Concrete Card",
+                text = {
+                    "{X:Chips}X#1#{} Chips",
+                    "No Rank or Suit",
+                }
+            },
         },
         Rotarot = {
             c_unik_rot_crossdresser={
@@ -2112,6 +2127,25 @@ return {
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
                 }
+            },
+            j_unik_exclamation={
+                name = "!",
+                text = {
+                    "After {C:attention}#1#{} Rounds, enables",
+                    "option to {C:attention}Activate{} Joker",
+                    "{C:unik_rgb}!Mult{} on {C:attention}Final Hand",
+                    "once activated",
+                    "{C:red,E:5}Self Banishes",
+                    "including {C:attention}all copies",
+                    "of this Joker after trigger",
+                }
+            },
+            j_unik_beaver = {
+                name = "Beaver",
+                text = {
+                    "Convert all Face Cards",
+                    "to Wooden"
+                },
             },
 
             --spectrum shit
@@ -4038,13 +4072,15 @@ return {
             a_hyper_four_mult = { "^^^^#1# Mult" },
             a_hyper_five_mult = { "^^^^^#1# Mult" },
             a_hyper_hyper_mult = { "#1##2# Mult" },
+            a_Xlog_mult = {"Mult Xlog_#1#(Mult)"},
+            a_Xlog_chips = {"Chips Xlog_#1#(Chips)"},
             a_unik_hands_1={"#1# hands"},
             a_unik_discards_1={"#1# discards"},
             a_unik_reed_construct={"ranks #1# or #2#"},
             a_unik_celestial_triggers = {"#1# Triggers"},
             a_unik_discards = {"+#1# Discards"},
-            a_factorial_mult = {"!Mult^#1#"},
-            a_factorial_chips = {"!Chips^#1#"},
+            a_factorial_mult = {"!Mult"},
+            a_factorial_chips = {"!Chips"},
             --Cryptlib borrowing
             a_xchips = { "X#1# Chips" },
 			a_powmult = { "^#1# Mult" },

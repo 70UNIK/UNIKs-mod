@@ -31,5 +31,31 @@ elseif eval_type == 'e_mult' and not (SMODS.Mods["Talisman"] or {}).can_load and
     colour = G.C.DARK_EDITION
     config.type = 'fade'
     config.scale = 0.7
+elseif eval_type == 'xlog_mult' then
+    sound = 'multhit2'
+    volume = 0.7
+    percent = extra.pitch * 0.75 or percent
+    amt = amt
+    text = localize{type='variable',key='a_Xlog_mult',vars={math.abs(amt)}}
+    colour = G.C.MULT
+    config.type = 'fade'
+    config.scale = 0.7
+elseif eval_type == 'xlog_chips' then
+    sound = 'unik_echips'
+    volume = 0.7
+    percent = extra.pitch * 0.75 or percent
+    amt = amt
+    text = localize{type='variable',key='a_Xlog_chips',vars={math.abs(amt)}}
+    colour = G.C.CHIPS
+    config.type = 'fade'
+    config.scale = 0.7
+elseif eval_type == 'fact_mult' then
+    sound = 'unik_eemult'
+    volume = 0.7
+    amt = amt
+    text = localize({type='variable',key='a_factorial_mult',vars={math.abs(amt)}})
+    colour = G.C.UNIK_RGB
+    config.type = 'fade'
+    config.scale = 0.7
 '''
 match_indent = true

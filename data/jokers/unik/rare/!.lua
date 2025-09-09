@@ -1,0 +1,5 @@
+--After 3 rounds, select to activate it.
+--Once activated, !Mult on final hand,
+--All copies of this Joker are banished
+--after at least 1 triggers.
+--Think of it like a "last hurrah" type thing.
