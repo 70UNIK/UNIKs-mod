@@ -1,8 +1,8 @@
 --LAST TILE: Add Mosaic to all scored cards on final hand, self destructs.
 SMODS.Joker {
     key = 'unik_last_tile',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_rare',
+	pos = { x = 2, y = 1 },
     rarity = 3,
     cost = 7,
     blueprint_compat = false,
@@ -15,6 +15,7 @@ SMODS.Joker {
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_shining_glitter
 		end
 	end,
+    pixel_size = { w = 71, h = 71 },
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
             --print("turn them happy")

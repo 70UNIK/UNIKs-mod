@@ -131,20 +131,31 @@ return {
                     "become lower Mult operations", --in reference to "Xchips already exists, it's called mult", hence the effect.
                 }
             },
-            bl_unik_fuck_magic_trick = {
+            bl_unik_magician = {
                 name = "The Magician",
                 text = {
                     "If score exceeds #1#",
-                    "redeem Magic Trick",
+                    "redeem Magic Trick and",
+                    "increase Playing Card",
+                    "shop spawn rate by 3X"
                 }
             },
             bl_unik_fuck_eternal_egg = {
-                name = "The Egg",
+                name = "Eternal Egg",
                 text = {
                     "Open a Booster containing only",
-                    "Eternal Eggs after defeat",
+                    "Eternal Rental Eggs on Blind Select",
                     "Skip it to Banish",
-                    "rightmost Joker",
+                    "a random Joker",
+                }
+            },
+            bl_unik_hate_ball = {
+                name = "Hate Ball",
+                text = {
+                    "If an 8 is not in",
+                    "scoring hand,",
+                    "convert a random",
+                    "Joker to 8 Ball",
                 }
             },
             bl_unik_epic_magic_trick = {
@@ -1030,7 +1041,7 @@ return {
         },
         Enhanced={
             m_unik_namta = {
-                name = "Namta",
+                name = "Namta Card",
                 text = {
                     "Has no rank or suit",
                     "{X:unik_void_color,E:2,C:red}^#3#{} Blind Size if held",
@@ -1040,7 +1051,7 @@ return {
                 }
             },
             m_unik_pink = {
-                name = "Pink",
+                name = "Pink Card",
                 text = {
                     "{X:dark_edition,C:white}^#1#{} Chips", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
                     "Considered a {C:attention}7{}",
@@ -1051,7 +1062,7 @@ return {
                 }
             },
             m_unik_green = {
-                name = "Green",
+                name = "Green Card",
                 text = {
                     "{X:dark_edition,C:white}^#1#{} Mult", 
                     "Considered a {C:clubs}#2#{}",
@@ -1062,9 +1073,18 @@ return {
                 }
             },
             m_unik_dollar = { --dollar cards. Earn +$2 when scored
-                name = "Dollar",
+                name = "Dollar Card",
                 text = {
                     "{C:money}+$#1#{} when scored"
+                }
+            },
+            m_unik_bill = {
+                name = "Bill Card",
+                text = {
+                    "{C:money}+$#1#{} when scored",
+                    "Increase this by {C:money}+$#2#{}",
+                    "per {C:attention}Bill Card{} in",
+                    "scoring hand",
                 }
             }
         },
@@ -1075,6 +1095,14 @@ return {
                     "Enhances {C:attention}#1#{} selected",
                     "card into a",
                     "{C:attention}Green Card",
+                }
+            },
+            c_unik_rot_oligarch={
+                name = "The Oligarch!",
+                text = {
+                    "Enhances {C:attention}#1#{} selected",
+                    "card#<s>1# into",
+                    "{C:attention}Bill Cards",
                 }
             },
             c_unik_rot_wheel_of_misfortune={ --3 in 4 chance to add a detrimental edition and banana to a joker, otherwise add a random modded edition.
@@ -2062,6 +2090,30 @@ return {
                 }
             },
 
+            j_unik_D16 = {
+                name = "D-16",
+                text = {
+                    "Gain {X:mult,C:white}X#1#{} Mult whenever",
+                    "a {C:green}probability {C:attention}fails",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                    "{C:inactive}(#3#/#4# consecutive fails...)",
+                }
+            },
+            j_unik_megatron = {
+                name = "Megatron",
+                text= {
+                    "{X:mult,C:white}X#1#{} Mult whenever",
+                    "a {C:green}probability {C:attention}fails",
+                    "{C:red}Destroy{} a random Joker",
+                    "or {X:unik_void_color,E:2,C:red}^#2#{} Blind Size if no",
+                    "destroyable Jokers owned when",
+                    "a {C:green}probability {C:attention}succeeds",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
+                }
+            },
+
             --spectrum shit
             j_unik_the_dynasty = {
                 name = "The Dynasty",
@@ -2695,6 +2747,15 @@ return {
 					"up to {C:attention}#2# {X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} Card#<s>2#{}",
 					"{C:red}Unskippable{}",
 				},
+            },
+            p_unik_egg_pack = {
+                name = "Eggcellent Buffoon Pack",
+                text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# Eternal Rental Egg#<s>2#{}",
+					"{C:red}Skipping will Banish{}",
+                    "{C:red} a random Joker{}"
+                }
             },
             unik_decrementing_food_jokers = {
 				name = "Decrementing Food Jokers",
@@ -3439,6 +3500,7 @@ return {
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
+            k_unik_egg_pack = "Eggcellent Pack",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
             k_unik_happiness2="HAPPINESS IS MANDATORY.",
@@ -3569,6 +3631,8 @@ return {
             k_defeated_by = "Killed By",
             k_unik_none_hand_banned = "None hand is banned",
             k_unik_jaundice_jack = "If a Jack not discarded before hand, convert random Joker to Hit the Road",
+            k_unik_hate_ball = "If an 8 is not in scoring hand, convert random Joker to 8 Ball",
+            k_unik_hate_8 = "I H8 U! U H8 ME!",
             k_unik_septic_seance = "If hand is not Straight Flush, convert adjacent Jokers to Seance",
             k_unik_jackshit = "JACKSHIT!",
             k_unik_seance_or_else="SEANCE OR ELSE!",
@@ -3683,6 +3747,16 @@ return {
             k_unik_xchips_not_vanilla4="BUNCO IS NOT VANILLA CAUSE IT USES XCHIPS!!!!11!!!",
             cry_unredeemed = "Unredeemed...",
             k_unik_dried_up = "Dried Up!",
+            k_unik_D16_boom = "B O O M !",
+            k_unik_megatron_rage1 = "DIE!",
+            k_unik_megatron_rage2 = "BURN IT ALL!",
+            k_unik_megatron_rage3 = "ITS NOT OVER TIL I SAY IT IS!",
+            k_unik_megatron_rage4 = "IACON CITY IS MINE!",
+            k_unik_megatron1 = "THE PRIMES ARE NOTHING BUT A FUCKING FARCE!",
+            k_unik_megatron2 = "DECEPTICONS, RISE UP!",
+            k_unik_megatron3 = "PRIMUS IS THE REAL ENEMY!",
+            k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!",
+            k_unik_magiced = "Hope you enjoy permanent shop bloat...",
         },
         high_scores={},
         labels={
@@ -3916,6 +3990,22 @@ return {
                 "XCHIPS. IS.",
                 "NOT. VANILLA!!!!!",
             },
+            special_lose_magician={
+                "WHO'S AFRAID OF",
+                "THE BIG BAD",
+                "MAGIC TRIK??!!",
+            },
+            special_lose_eternal_egg={
+                "ETERNAL EGG IS USEFUL",
+                "WITH TEMPERANCE AND",
+                "SWASHBUCKLER!!!!!!!!",
+            },
+            special_lose_hate_ball = {
+                "I H8 YOU!",
+                "YOU H8 ME!",
+                "WE ALL GIVE YOU",
+                "A BIG FUCK YOU!",
+            },
             --finity quips:
             lq_legendary_crown_1={
                 "Why did you",
@@ -3970,6 +4060,7 @@ return {
 			a_tags_minus = { "-#1# Tags" },
 			a_tag = { "+#1# Tag" },
 			a_tags = { "+#1# Tags" },
+            poppy_hand = { "Score reduced by X#1# if exceeding #2#" },
         },
         very_fair_quips = {
             { "FUCK YOU", "", "" },

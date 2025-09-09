@@ -1,8 +1,8 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_sparkle",
-	atlas = 'placeholders',
-	pos = { x = 2, y = 2 },
+	atlas = "unik_spectrals",
+	pos = { x = 1, y = 1 },
 	cost = 4,
 	order = 90,
     config = {
@@ -40,9 +40,6 @@ SMODS.Consumable{
 		end
 		return { vars = {center.ability.max_highlighted, center.ability.extra.cards_added } }
 	end,
-    in_pool = function(self)
-        return false
-    end,
 	use = function(self, card, area, copier)
 				local used_consumable = copier or card
 		for i = 1, #G.hand.highlighted do

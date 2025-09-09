@@ -16,6 +16,7 @@ SMODS.Blind{
     dollars = 13,
     mult = 0.666,
     glitchy_anim = true,
+    death_message = 'special_lose_unik_tornado_legendary',
     debuff = {
         akyrs_blind_difficulty = "unik_legendary",
         akyrs_cannot_be_overridden = true,

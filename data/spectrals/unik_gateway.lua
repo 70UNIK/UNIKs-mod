@@ -10,9 +10,9 @@ SMODS.Atlas({
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_gateway",
-	pos = { x = 2, y = 2 },
+	atlas = "unik_spectrals",
+	pos = { x = 0, y = 2},
 	cost = 4,
-	 atlas = 'placeholders',
 	order = 90,
 	no_doe = true,
 	hidden = true,
@@ -86,6 +86,39 @@ SMODS.Consumable{
 		end
 		delay(0.6)
 	end,
+}
+
+
+SMODS.DrawStep {
+    key = 'floating_sprite',
+    order = 60,
+    func = function(self)
+       if self.ability.name == 'c_unik_gateway' and (self.config.center.discovered or self.bypass_discovery_center) then
+			local edition_soul_sprite = false
+			local edition = nil;
+            if self.edition then 
+                for k, v in pairs(G.P_CENTER_POOLS.Edition) do
+                    if v.apply_to_float and v.apply_to_float == true and self.edition[v.key:sub(3)] then
+                        edition_soul_sprite = true
+                    end
+                end
+            end
+			if self.edition then 
+				local edition2 = G.P_CENTERS[self.edition.key]
+				if edition2.apply_to_float and self.children.floating_sprite then
+				edition = edition2
+				end
+			end
+            local scale_mod = 0.05 + 0.05*math.sin(1.8*G.TIMERS.REAL) + 0.07*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+            local rotate_mod = 0.1*math.sin(1.219*G.TIMERS.REAL) + 0.07*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+			if self.children.floating_sprite then
+				self.children.floating_sprite.role.draw_major = self
+				self.children.floating_sprite:draw_shader((edition_soul_sprite and edition) or 'dissolve',0, nil, nil, self.children.center,scale_mod, rotate_mod,nil, 0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL),nil, 0.6)
+				self.children.floating_sprite:draw_shader((edition_soul_sprite and edition) or 'dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+			end
+		end
+    end,
+    conditions = { vortex = false, facing = 'front' },
 }
 
 -- --copied from cryptid's gateway, hoperfully it plays nice
@@ -188,32 +221,21 @@ SMODS.Consumable{
 -- })
 -- SMODS.draw_ignore_keys.floating_sprite2 = true
 
--- -- Midground sprites - used for Exotic Jokers and Gateway. Copied from gateway as well
--- local set_spritesref2 = Card.set_sprites
--- function Card:set_sprites(_center, _front)
--- 	set_spritesref2(self, _center, _front)
--- 	if _center and _center.name == "c_unik_gateway" then
--- 		self.children.floating_sprite = Sprite(
--- 			self.T.x,
--- 			self.T.y,
--- 			self.T.w,
--- 			self.T.h,
--- 			G.ASSET_ATLAS[_center.atlas or _center.set],
--- 			{ x = 2, y = 0 }
--- 		)
--- 		self.children.floating_sprite.role.draw_major = self
--- 		self.children.floating_sprite.states.hover.can = false
--- 		self.children.floating_sprite.states.click.can = false
--- 		self.children.floating_sprite2 = Sprite(
--- 			self.T.x,
--- 			self.T.y,
--- 			self.T.w,
--- 			self.T.h,
--- 			G.ASSET_ATLAS[_center.atlas or _center.set],
--- 			{ x = 1, y = 0 }
--- 		)
--- 		self.children.floating_sprite2.role.draw_major = self
--- 		self.children.floating_sprite2.states.hover.can = false
--- 		self.children.floating_sprite2.states.click.can = false
--- 	end
--- end
+-- Midground sprites - used for Exotic Jokers and Gateway. Copied from gateway as well
+local set_spritesref2 = Card.set_sprites
+function Card:set_sprites(_center, _front)
+	set_spritesref2(self, _center, _front)
+	if _center and _center.name == "c_unik_gateway" then
+		self.children.floating_sprite = Sprite(
+			self.T.x,
+			self.T.y,
+			self.T.w,
+			self.T.h,
+			G.ASSET_ATLAS[_center.atlas or _center.set],
+			{ x = 1, y = 2 }
+		)
+		self.children.floating_sprite.role.draw_major = self
+		self.children.floating_sprite.states.hover.can = false
+		self.children.floating_sprite.states.click.can = false
+	end
+end

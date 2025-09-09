@@ -7,6 +7,7 @@ SMODS.Blind{
     dollars = 8,
     mult = 2,
     config = {},
+        death_message="special_lose_unik_killed_by_pentagram",
     set_blind = function(self, reset, silent)
         G.GAME.unik_pentagram_manager_fix = true
         if not reset then
@@ -45,30 +46,7 @@ SMODS.Blind{
             --print("Joker in set:")
             --print(v.ability.name)
             if v.config.center.rarity == 'unik_detrimental' and v.ability.unik_disposable then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        play_sound('tarot1')
-                        v.T.r = -0.2
-                        v:juice_up(0.3, 0.4)
-                        v.states.drag.is = true
-                        v.children.center.pinch.x = true
-                        -- This part destroys the card.
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'after',
-                            delay = 0.0,
-                            blockable = false,
-                            func = function()
-                                v:start_dissolve()
-                                card_eval_status_text(v, "extra", nil, nil, nil, {
-                                    message = localize("k_unik_pentagram_purified"),
-                                    colour = G.C.MULT,
-                                })
-                                return true;
-                            end
-                        }))
-                        return true
-                    end
-                }))
+                selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
             end
         end
     end,
