@@ -11,9 +11,8 @@ target = 'functions/state_events.lua'
 pattern = '''check_for_unlock({type = 'chip_score', chips = math.floor( SMODS.calculate_round_score() )})'''
 position = 'after'
 payload = '''
-local temptotal = SMODS.calculate_round_score()
-G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,temptotal)
-local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,temptotal)
+G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
+local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,SMODS.calculate_round_score())
 local debuff_hand = false
 local add_to_blind = 0
 if checker and checker.debuff then
@@ -32,23 +31,6 @@ end
 if checker and checker.add_to_blind then
     add_to_blind = to_big(checker.add_to_blind)
 end
-if checker and checker.mod_score then
-    temptotal = SMODS.calculate_round_score() + checker.mod_score
-    G.E_MANAGER:add_event(Event({
-        trigger = 'immediate',
-        func = (function()
-            if SMODS.hand_debuff_source then SMODS.hand_debuff_source:juice_up(0.3,0) else SMODS.juice_up_blind() end
-            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
-                play_sound('tarot2', 0.76, 0.4);return true end}))
-            play_sound('tarot2', 1, 0.4)
-            return true
-        end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',delay = 0.4,
-        func = (function()  update_hand_text({delay = 0, immediate = true}, {mult = 0, chips = 0, chip_total = math.floor( temptotal ), level = '', handname = ''});play_sound('button', 0.9, 0.6);return true end)
-    }))
-end
 '''
 match_indent = true
 
@@ -63,23 +45,15 @@ position = 'after'
 payload = '''
 if to_big(add_to_blind) > to_big(0) then
     G.E_MANAGER:add_event(Event({
-        trigger = 'ease',
-        blocking = false,
-        ref_table = G.GAME.blind,
-        ref_value = 'chips',
-        ease_to = G.GAME.blind.chips + add_to_blind,
-        delay =  1.0,
-        func = (function(t) return math.floor(t) end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'ease',
-        blocking = false,
-        ref_table = G.GAME.blind,
-        ref_value = 'chip_text',
-        ease_to = G.GAME.blind.chips + add_to_blind,
-        delay =  1.0,
-        func = (function(t) return math.floor(t) end)
-    }))
+        trigger = 'after',
+        func = (function() 
+            G.GAME.blind.chips = G.GAME.blind.chips + add_to_blind
+            G.GAME.blind.chip_text = number_format(G.GAME.blind.chips + add_to_blind)
+            G.HUD_blind:recalculate(true)
+            G.hand_text_area.blind_chips:juice_up()
+        
+        return true end)
+        }))
 end
 if debuff_hand then
     play_area_status_text("Not Allowed!")
@@ -90,72 +64,41 @@ end
 '''
 match_indent = true
 
-### display the fake score before not allowing the hand and/or adding to blind
+### display the fake score before not allowing the hand and/or adding to blind, now with bunco compat.
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = 'functions/state_events.lua'
-pattern = '''G.E_MANAGER:add_event(Event({
+pattern = '''G.E_MANAGER\:add_event\(Event\(\{
       trigger = 'ease',
       blocking = false,
       ref_table = G.GAME,
       ref_value = 'chips',
-      ease_to = G.GAME.chips + math.floor( SMODS.calculate_round_score() ),
+      ease_to = (.*),
       delay =  0.5,
-      func = (function(t) return math.floor(t) end)
-    }))'''
+      func = (.*)
+    }\)\)'''
 position = 'before'
 payload = '''
 if not debuff_hand then
 '''
-match_indent = true
 
-### display the fake score before not allowing the hand and/or adding to blind
+### display the fake score before not allowing the hand and/or adding to blind part 2
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = 'functions/state_events.lua'
-pattern = '''G.E_MANAGER:add_event(Event({
+pattern = '''G.E_MANAGER\:add_event\(Event\(\{
       trigger = 'ease',
       blocking = false,
       ref_table = G.GAME,
       ref_value = 'chips',
-      ease_to = G.GAME.chips + math.floor( SMODS.calculate_round_score() ),
+      ease_to = (.*),
       delay =  0.5,
-      func = (function(t) return math.floor(t) end)
-    }))'''
+      func = (.*)
+    }\)\)'''
 position = 'after'
 payload = '''
 end
-
 '''
-match_indent = true
-
-##blind_mod
-### display the fake score before not allowing the hand and/or adding to blind
-[[patches]]
-[patches.pattern]
-target = 'functions/state_events.lua'
-pattern = '''G.E_MANAGER:add_event(Event({
-      trigger = 'ease',
-      blocking = false,
-      ref_table = G.GAME,
-      ref_value = 'chips',
-      ease_to = G.GAME.chips + math.floor( SMODS.calculate_round_score() ),
-      delay =  0.5,
-      func = (function(t) return math.floor(t) end)
-    }))'''
-position = 'at'
-payload = '''
-G.E_MANAGER:add_event(Event({
-      trigger = 'ease',
-      blocking = false,
-      ref_table = G.GAME,
-      ref_value = 'chips',
-      ease_to = G.GAME.chips + math.floor( temptotal ),
-      delay =  0.5,
-      func = (function(t) return math.floor(t) end)
-    }))
-'''
-match_indent = true
 
 ### unik_afterplay
 [[patches]]

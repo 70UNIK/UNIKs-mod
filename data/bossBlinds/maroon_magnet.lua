@@ -8,6 +8,7 @@ SMODS.Blind{
     boss_colour= HEX("5c0007"),
     dollars = 8,
     mult = 2,
+    death_message = 'special_lose_unik_magnet',
     loc_vars = function(self)
         local new_numerator, new_denominator = SMODS.get_probability_vars(self, 2,3, 'unik_maroon_magnet')
 		return { vars = { new_numerator, new_denominator } }

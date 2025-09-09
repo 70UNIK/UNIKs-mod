@@ -18,31 +18,17 @@ SMODS.Blind{
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_poppy_placeholder") } }
 	end,
+	death_message="special_lose_unik_tall_poppy_syndrome",
 	set_blind = function(self)
-		G.GAME.unik_killed_by_poppy = true
+		SMODS.set_scoring_calculation("unik_poppy")
 		--G.GAME.unik_poppy_ceil = true
 	end,
 	disable = function(self)
-		G.GAME.unik_killed_by_poppy = nil
+		SMODS.set_scoring_calculation("multiply")
 		--G.GAME.unik_poppy_ceil = nil
 	end,
-	unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
-		if to_big(sum) > to_big(G.GAME.blind.chips * 2.5) then
-			local newScore = sum * 0.03
-			local subtractor = sum - newScore
-			
-			return {
-				debuff = false,
-				mod_score = -subtractor,
-			}
-		end
-		return {
-            debuff = false,
-        }
-	end,
-	defeat = function(self)
-		G.GAME.unik_killed_by_poppy = nil
-		--G.GAME.unik_poppy_ceil = nil
+	defeat = function(self, silent)
+		SMODS.set_scoring_calculation("multiply")
 	end,
 }
 
@@ -56,3 +42,76 @@ SMODS.Blind{
 -- 	end
 	
 -- end
+
+--stolen from the tax
+SMODS.Scoring_Calculation({
+	key = 'unik_poppy',
+	func = function(self, chips, mult, flames)
+		if (chips * mult) > (2.5 * G.GAME.blind.chips) then
+			return (chips * mult)*0.03
+		end
+		return chips * mult
+	end,
+	replace_ui = function(self)
+		local aaa = 0.03
+		local zzz = (2.5 * G.GAME.blind.chips) 
+		local bbb = localize({ type = "variable", key = "poppy_hand", vars = { aaa,zzz } })[1]
+		-- rebuild the ui to change colours and add text and stuff
+		-- SMODS made some stuff for this so that's kinda convienient ig
+		return {
+			n = G.UIT.R,
+			config = { minh = 1.2, align = "cm" },
+			nodes = {
+				{
+					n = G.UIT.C,
+					config = { align = "cm" },
+					nodes = {
+						{
+							n = G.UIT.R,
+							config = { align = "cm", minh = 1, padding = 0.1 },
+							nodes = {
+								-- Chips box
+								{
+									n = G.UIT.C,
+									config = { align = "cm", id = "hand_chips_container" },
+									nodes = {
+										SMODS.GUI.score_container({
+											type = "chips",
+											text = "chip_text",
+											align = "cr",
+											colour = G.C.CHIPS,
+										}),
+									},
+								},
+								-- Operator thingy (Stays the same)
+								SMODS.GUI.operator(0.4),
+								-- Mult box
+								{
+									n = G.UIT.C,
+									config = { align = "cm", id = "hand_mult_container" },
+									nodes = {
+										SMODS.GUI.score_container({
+											type = "mult",
+											colour = G.C.MULT,
+										}),
+									},
+								},
+							},
+						},
+						-- Text
+						{
+							n = G.UIT.R,
+							config = { align = "cm" },
+							nodes = {
+								{
+									n = G.UIT.T,
+									config = { text = bbb, scale = 0.25, colour = G.C.IMPORTANT },
+								},
+							},
+						},
+					},
+				},
+			},
+		}
+	end,
+})

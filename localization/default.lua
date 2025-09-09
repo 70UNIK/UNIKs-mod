@@ -3986,6 +3986,22 @@ return {
                 "XCHIPS. IS.",
                 "NOT. VANILLA!!!!!",
             },
+            special_lose_magician={
+                "WHO'S AFRAID OF",
+                "THE BIG BAD",
+                "MAGIC TRIK??!!",
+            },
+            special_lose_eternal_egg={
+                "ETERNAL EGG IS USEFUL",
+                "WITH TEMPERANCE AND",
+                "SWASHBUCKLER!!!!!!!!",
+            },
+            special_lose_hate_ball = {
+                "I H8 YOU!",
+                "YOU H8 ME!",
+                "WE ALL GIVE YOU",
+                "A BIG FUCK YOU!",
+            },
             --finity quips:
             lq_legendary_crown_1={
                 "Why did you",
@@ -4040,6 +4056,7 @@ return {
 			a_tags_minus = { "-#1# Tags" },
 			a_tag = { "+#1# Tag" },
 			a_tags = { "+#1# Tags" },
+            poppy_hand = { "Score reduced by X#1# if exceeding #2#" },
         },
         very_fair_quips = {
             { "FUCK YOU", "", "" },
