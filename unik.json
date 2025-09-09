@@ -2,13 +2,13 @@
 	"id": "unik",
 	"name": "UNIK's mod",
 	"author": ["70UNIK"],
-	"description": "Addon turned unbalanced standalone where I add what I want or can.",
+	"description": "An unbalanced standalone mod where I add what I want or can.",
 	"prefix": "unik",
 	"main_file": "unik.lua",
 	"priority": 99999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.4.1-CRYPTIDLESS",
+	"version": "0.4.1",
 	"dependencies": [
         "Steamodded (>=1.0.0~BETA-0827c)"
     ]

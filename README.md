@@ -3,8 +3,6 @@
 # UNIK's Mod!
 A standalone mod that adds what I want. It is unbalanced compared to Vanilla though more tame compared with Cryptid.
 
-Right now it is in a WIP stage of becoming a standalone, so expect placeholder art as well as potential bugs.
-
 Requires Steamodded smods-1.0.0-beta-0827c or higher, Lovely v0.7.1 or higher. Talisman can be used to increase the scoring cap but isnt necessarily required.
 
 ![alt text](image-3.png)
