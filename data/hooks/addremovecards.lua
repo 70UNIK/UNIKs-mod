@@ -71,14 +71,21 @@ function Card:remove_from_deck(from_debuff)
                 cannibalCards = cannibalCards + 1
             elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
                 if (self.config.center.rarity == 'unik_detrimental' or self.config.center.rarity == 'cry_cursed' ) and self.ability.extra.getting_captured then
-                    self.ability.extra.getting_captured = nil
-                    SMODS.scale_card(v, {
-                        ref_table =v.ability.extra,
-                        ref_value = "x_mult",
-                        scalar_value = "x_mult_mod",
-                        message_key = "a_xmult",
-                        message_colour = G.C.MULT,
-                    })
+                    if v.ability.extra.limit > 0 then
+                        self.ability.extra.getting_captured = nil
+                        SMODS.scale_card(v, {
+                            ref_table =v.ability.extra,
+                            ref_value = "x_mult",
+                            scalar_value = "x_mult_mod",
+                            message_key = "a_xmult",
+                            message_colour = G.C.MULT,
+                        })
+                        v.ability.extra.limit = v.ability.extra.limit - 1
+                    elseif not v.ability.extra.destroyed  then
+                        v.ability.extra.destroyed = true
+                        selfDestruction(v,'k_unik_ghost_trap_explode',G.C.MULT)
+                    end
+                    
                     -- v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.x_mult_mod
                     -- G.E_MANAGER:add_event(Event({
                     --     trigger = 'after',
@@ -172,7 +179,7 @@ function Card:add_to_deck(from_debuff)
     if G.jokers then
         if G.jokers.cards then
             for _, v in pairs(G.jokers.cards) do
-                if v.ability.name == "j_unik_ghost_trap" and not v.debuff then
+                if v.ability.name == "j_unik_ghost_trap" and not v.debuff and v.ability.extra.limit > -1 then
                     GhostTrap1(v)
                 end
             end
@@ -289,7 +296,7 @@ function CardArea:emplace(card, location, stay_flipped)
             elseif v.config.center.key == "j_cry_starfruit" or v.config.center.key == "j_mf_lollipop" or v.config.center.key == "j_paperback_nachos" or v.ability.name == "Turtle Bean" or v.ability.name == "Ramen" or v.ability.name == "Ice Cream" or v.ability.name == "Popcorn" or v.config.center.key == "j_cry_clicked_cookie" then
                 cannibalCards = cannibalCards + 1
             --ghost trap functionality
-            elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
+            elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff and v.ability.extra.limit > -1 then
                 GhostTrap1(v)
             --Formidicus fix, now constantly destroys cursed jokers
             elseif v.config.center.key == "j_cry_formidiulosus" then

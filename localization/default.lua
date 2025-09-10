@@ -1460,7 +1460,7 @@ return {
                     "and gains {X:mult,C:white}X#2#{} Mult per Joker",
                     "destroyed that way",
                     "{C:red}Self destructs{} after",
-                    "destroying #3# Joker#<s>3#",
+                    "destroying {C:attention}#3#{} Joker#<s>3#",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
                 },
             },

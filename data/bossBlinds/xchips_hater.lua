@@ -66,8 +66,9 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             G.GAME.unik_xchips_triggers =  G.GAME.unik_xchips_triggers + 1
         end
     end
+    local marked_for_destruction = false
     if next(find_joker('j_unik_xchips_hater')) then
-        local marked_for_destruction = false
+        
         if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
             key = nil
             marked_for_destruction = true
@@ -89,6 +90,9 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             key = nil
              marked_for_destruction = true
         end
+    end
+    if marked_for_destruction then
+        scored_card.ability.fuck_xchips = true
     end
     if scored_card and scored_card.ability and scored_card.ability.no_score then
         key = nil

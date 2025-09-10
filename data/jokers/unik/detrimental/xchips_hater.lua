@@ -33,10 +33,12 @@ SMODS.Joker {
             end
         end
         if context.destroy_card and context.destroy_card.ability.fuck_xchips then
-            context.destroy_card.gore_6_destruction = true
+            context.destroy_card.ability.gore_6_destruction = true
             card.ability.extra.xchips_triggered = true
 			return { 
                 remove = true,
+                 message = localize('k_unik_xchips_not_vanilla' .. math.random(1,4)),
+                colour = G.C.RED,
             }
 		end
         if context.post_trigger and context.other_ret and context.other_card then

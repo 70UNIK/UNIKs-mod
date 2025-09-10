@@ -3,8 +3,6 @@
 # UNIK's Mod!
 A standalone mod that adds what I want. It is unbalanced compared to Vanilla though more tame compared with Cryptid.
 
-Right now it is in a WIP stage of becoming a standalone, so expect placeholder art as well as potential bugs.
-
 Requires Steamodded smods-1.0.0-beta-0827c or higher, Lovely v0.7.1 or higher. Talisman can be used to increase the scoring cap but isnt necessarily required.
 
 ![alt text](image-3.png)
@@ -34,10 +32,10 @@ Requires Steamodded smods-1.0.0-beta-0827c or higher, Lovely v0.7.1 or higher. T
 - 7 **Editions**, 5 of which are purely detrimental.
 - 3 **Enhancements**
 - 3 Edition based **Decks**, one of which is inspired by a beta deck.
-- 46 **Blinds**, 
+- 49 **Blinds**, 
 - - 2 **"normal" blinds**
-- - 12 **Finisher Blinds**
-- - 13 **Regular Blinds**
+- - 14 **Finisher Blinds**
+- - 14 **Regular Blinds**
 - - 16 **Epic Blinds** and 4 **"Legendary" Blinds** (7 with Talisman), extremely cruel blinds that are designed to make sure you *suffer*.
 
 This mod also contains many crossmod content such as for:
