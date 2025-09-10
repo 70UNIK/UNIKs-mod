@@ -94,7 +94,7 @@ SMODS.Joker {
             end
             
         end
-        if context.pseudorandom_result and not context.result and card.ability.extra.scoring then
+        if ((context.pseudorandom_result and not context.result) or context.forcetrigger) and card.ability.extra.scoring then
             return {
                 x_mult = card.ability.extra.x_mult,
                 card = card,

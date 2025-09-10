@@ -1444,6 +1444,8 @@ return {
 					"This Joker {C:red}destroys{} all {X:unik_detrimental,C:white}Detrimental{} Jokers",
                     "and gains {X:mult,C:white}X#2#{} Mult per Joker",
                     "destroyed that way",
+                    "{C:red}Self destructs{} after",
+                    "destroying {C:attention}#3#{} Joker#<s>3#",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
                 },
             },

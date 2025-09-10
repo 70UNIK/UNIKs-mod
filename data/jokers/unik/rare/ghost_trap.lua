@@ -14,9 +14,9 @@ SMODS.Joker {
 	eternal_compat = true,
 	experimental = true,
 	demicoloncompat = true,
-    config = { extra = {x_mult = 1.0, x_mult_mod = 1.5} },
+    config = { extra = {x_mult = 1.0, x_mult_mod = 1.5,limit = 10,destroyed = false} },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
+		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.limit} }
 	end,
 	-- on self destruction, release all cursed jokers
 
