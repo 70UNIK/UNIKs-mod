@@ -34,7 +34,6 @@ elseif eval_type == 'e_mult' and not (SMODS.Mods["Talisman"] or {}).can_load and
 elseif eval_type == 'xlog_mult' then
     sound = 'multhit2'
     volume = 0.7
-    percent = extra.pitch * 0.75 or percent
     amt = amt
     text = localize{type='variable',key='a_Xlog_mult',vars={math.abs(amt)}}
     colour = G.C.MULT
@@ -43,7 +42,6 @@ elseif eval_type == 'xlog_mult' then
 elseif eval_type == 'xlog_chips' then
     sound = 'unik_echips'
     volume = 0.7
-    percent = extra.pitch * 0.75 or percent
     amt = amt
     text = localize{type='variable',key='a_Xlog_chips',vars={math.abs(amt)}}
     colour = G.C.CHIPS

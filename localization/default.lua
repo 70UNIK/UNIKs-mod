@@ -1091,8 +1091,8 @@ return {
                 name = "Timber Card",
                 text = {
                     "Mult {X:mult,C:white}Xlog_#1#(Mult){}", --Xlog_50 Mult
-                    "{C:green}#1# in #2#{} chance card", --1 in 4 chance
-                    "is destroyed when scored",
+                    "{C:green}#2# in #3#{} chance card", --1 in 4 chance
+                    "is {C:red,E:2}destroyed{} after scoring",
                 }
             },
             m_unik_concrete = {
@@ -3384,6 +3384,14 @@ return {
                     "{C:attention}Dollar Card",
                 }
             },
+            c_unik_carpenter = {
+                name = "The Carpenter",
+                text = {
+                    "Enhances {C:attention}#1#{} selected",
+                    "card#<s>1# into a",
+                    "{C:attention}Timber Card",
+                }
+            }
 
         },
         unik_lartceps = {

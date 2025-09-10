@@ -153,6 +153,10 @@ SMODS.Sound({
 	key = "explosion1",
 	path = "explosion1.ogg",
 })
+SMODS.Sound({
+	key = "woodBreak",
+	path = "woodBreak.ogg",
+})
 
 
 
@@ -321,14 +325,16 @@ NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
 
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
+NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
+NFS.load(mod_path .. "data/enhancements/timber_card.lua")()	
 if MoreFluff then
 	NFS.load(mod_path .. "data/enhancements/green_card.lua")()
 	NFS.load(mod_path .. "data/enhancements/bill_card.lua")()
 end
-NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
+
 
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/shining_glitter.lua")()
@@ -393,6 +399,7 @@ end
 ---TAROTS
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
+NFS.load(mod_path .. "data/tarots/carpenter.lua")()
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 
 ---SPECTRALS

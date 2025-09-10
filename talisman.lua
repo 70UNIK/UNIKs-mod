@@ -119,7 +119,7 @@ end
 
 local scie2 = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
-	local ret = scie(effect, scored_card, key, amount, from_edition)
+	local ret = scie2(effect, scored_card, key, amount, from_edition)
 	if ret then
 		return ret
 	end
@@ -189,13 +189,13 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 			end
 			return true
 		end
-		for _, v in ipairs({
-		"fact_mult", "factmult", "fact_mult_mod", --oneshot joker
-		"xlog_mult", "xlogmult", "xlog_mult_mod",
-		"xlog_chips", "xlogchips", "xlog_chips_mod",
-	}) do
-		table.insert(SMODS.scoring_parameter_keys, v)
-	end
+end
+for _, v in ipairs({
+	"fact_mult", "factmult", "fact_mult_mod", --oneshot joker
+	"xlog_mult", "xlogmult", "xlog_mult_mod",
+	"xlog_chips", "xlogchips", "xlog_chips_mod",
+}) do
+	table.insert(SMODS.scoring_parameter_keys, v)
 end
 
 function portable_exp(initial,exponent,value)
