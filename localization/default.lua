@@ -1090,9 +1090,9 @@ return {
             m_unik_timber = {
                 name = "Timber Card",
                 text = {
-                    "Mult {X:mult,C:white}Xlog_#1#(Mult){}",
-                    "{C:red,E:2}Destroyed{} if not played",
-                    "in a {C:attention}Straight",
+                    "Mult {X:mult,C:white}Xlog_#1#(Mult){}", --Xlog_50 Mult
+                    "{C:green}#1# in #2#{} chance card", --1 in 4 chance
+                    "is destroyed when scored",
                 }
             },
             m_unik_concrete = {
@@ -1459,6 +1459,8 @@ return {
 					"This Joker {C:red}destroys{} all {X:unik_detrimental,C:white}Detrimental{} Jokers",
                     "and gains {X:mult,C:white}X#2#{} Mult per Joker",
                     "destroyed that way",
+                    "{C:red}Self destructs{} after",
+                    "destroying #3# Joker#<s>3#",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
                 },
             },
@@ -2128,6 +2130,7 @@ return {
                     "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
                 }
             },
+            --V0.5
             j_unik_exclamation={
                 name = "!",
                 text = {
@@ -2140,13 +2143,118 @@ return {
                     "of this Joker after trigger",
                 }
             },
+            j_unik_torn_dress = {
+                name = "Torn Dress",
+                text = {
+                    "Gain {X:mult,C:white}X#1#{} Mult",
+                    "whenever a {C:unik_unik}Pink Card",
+                    "has been {C:attention}destroyed",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                }
+            },
             j_unik_beaver = {
                 name = "Beaver",
                 text = {
-                    "Convert all Face Cards",
-                    "to Wooden"
+                    "Held Timber cards",
+                    "each give",
+                    "Mult {X:mult,C:white}Xlog_#1#(Mult)",
                 },
             },
+            j_unik_niko = {
+                name = "Niko",
+                text = {
+                    "#1# give {X:mult,C:white}X#1#{} Mult",
+                    "when scored",
+                    "Suit changes after round",
+                    "(Selects a Light Suit from deck)",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
+                }
+            },
+            j_unik_world_machine = {
+                name = "World Machine",
+                text = {
+                    "#1# give {X:mult,C:white}X#1#{} Mult",
+                    "when scored",
+                    "Suit changes after round",
+                    "(Selects a Dark Suit from deck)",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
+                }
+            },            
+            j_unik_night_skyline = {
+                name = "Night Skyline",
+                text = {
+                    "Scored {C:attention}Dark Suits",
+                    "give {X:mult,C:white}X#1#{} Mult",
+                    "Increases by {X:mult,C:white}X#2#{} Mult",
+                    "for each {C:attention}Dark Suit",
+                    "in scoring hand",
+                }
+            },
+            j_unik_it_prints_money = {
+                name = "IT PRINTS MONEY!!!", --meme joker cause of that meme
+                text = {
+                    "Played and {C:attention}unscoring",
+                    "cards become {C:attention}Dollar Cards",
+                }
+            },
+            j_unik_brownie = {
+                name = "Brownie",
+                text = {
+                    "Scored Cards each give",
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "loses {X:mult,C:white}X#1#{} Mult",
+                    "when triggered",
+                }
+            },
+            j_unik_brownie_depleted = {
+                name = "Brownie",
+                text = {
+                    "Scored Cards each give",
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "loses {X:mult,C:white}X#1#{} Mult",
+                    "when triggered",
+                    "Self Destructs at",
+                    "{X:mult,C:white}X#1#{} Mult"
+                }
+            },
+            j_unik_up_n_go = {
+                name = "Up n' Go",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "for the next #2# Round#<s>2#"
+                }
+            },
+            j_unik_better_riffin = {
+                name = "Better Riffin'",
+                text = {
+                    "Create an Uncommon Joker",
+                    "when Blind is selected",
+                    "(Must have room)",
+                }
+            },
+            j_unik_double_up = {
+                name = "Double Up",
+                text = {
+                    "Create a Double Tag",
+                    "when a Tag is obtained",
+                }
+            },
+            --11
+            j_unik_lobotomy_needle = {
+                name = "Lobotomy Needle",
+                text = {
+                    "X#1# Blind Size and",
+                    "set Hands to 1",
+                    "Self destructs after",
+                    "playing #1# Hands",
+                    "or {C:unik_needle_color}The Needle{} is triggered",
+                }
+            },
+            
 
             --spectrum shit
             j_unik_the_dynasty = {
@@ -3121,6 +3229,24 @@ return {
                     "Add {C:attention}#2#{} random",
                     "unmodified card#<s>2#",
                 } 
+            },
+            c_unik_celeste = {
+                name = "Celeste",
+                text = {
+                    "Permanently add {X:dark_edition,C:white}^#1#{} Chips",
+                    "to {C:attention}#2#{} selected card#<s>2#", 
+                    "{C:inactive,s:0.8}Becomes {{C:spectral,s:0.8}The Soul {C:inactive,s:0.8}if",
+                    "{C:spectral,s:0.8}Celeste {C:inactive,s:0.8}is already held"
+                }
+            },
+            c_unik_ebott = {
+                name = "Ebott",
+                text = {
+                    "Permanently add {X:dark_edition,C:white}^#1#{} Mult",
+                    "to {C:attention}#2#{} selected card#<s>2#", 
+                    "{C:inactive,s:0.8}Becomes {{C:spectral,s:0.8}The Soul {C:inactive,s:0.8}if",
+                    "{C:spectral,s:0.8}Ebott {C:inactive,s:0.8}is already held"
+                }
             }
         },
         Stake={
@@ -3257,7 +3383,8 @@ return {
                     "card#<s>1# into a",
                     "{C:attention}Dollar Card",
                 }
-            }
+            },
+
         },
         unik_lartceps = {
             c_unik_rip_girlfriend = {
@@ -3362,7 +3489,79 @@ return {
                     "Convert {C:green}#1# in #2#{} cards",
                     "in deck to {X:unik_lartceps_inverse,C:unik_lartceps1}Namta{} cards", 
                 }
+            },
+            c_unik_mount_doom = {
+                name = "Doom",
+                text = {
+                    --All cards lose perma bonuses and permanently lose -4 Mult, -30 Chips and X0.5 Mult
+                }
             }
+        },
+        unik_summit = {
+            --Perma Xmult, Perma Xchips, Perma Chips, Perma Mult, Perma Held Xmult, perma held Xchips, perma held Mult, perma held Chips, perma held $, perma $, ^Mult, ^Chips
+            --4 of the 7 summits
+            --Why summits? well hiker theming
+            c_unik_everest = {
+                name = "Everest",
+                text = {
+                    "Permanently add {X:mult,C:white}X#1#{} Mult",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            c_unik_denali = {
+                name = "Denali",
+                text = {
+                    "Permanently add {X:chips,C:white}X#1#{} Chips",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            c_unik_aconcagua = {
+                name = "Aconcagua",
+                text = {
+                    "Permanently add",
+                    "held {X:mult,C:white}X#1#{} Mult",
+                    "to {C:attention}#2#{} selected card#<s>2#",                 
+                }
+            },
+            c_unik_elbrus = {
+                name = "Elbrus",
+                text = {
+                    "Permanently add",
+                    "held {X:chips,C:white}X#1#{} Chips",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            c_unik_kosciuszko = {
+                name = "Kosciuszko",
+                text = {
+                    "Permanently add {C:mult}+#1#{} Mult",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                },
+            },
+            c_unik_elbert = {
+                name = "Elbert",
+                text = {
+                    "Permanently add {C:chips}+#1#{} Chips",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                },
+            },
+            c_unik_mitchell = {
+                name = "Mitchell",
+                text = {
+                    "Permanently add",
+                    "held {C:chips}+#1#{} Chips",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            c_unik_narodnaya = {
+                name = "Narodnaya",
+                text = {
+                    "Permanently add",
+                    "held {C:mult}+#1#{} Mult",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            }
+
         },
         Voucher={
             v_unik_spectral_merchant = {

@@ -32,7 +32,7 @@ SMODS.Enhancement {
             local suits = unik_get_all_suits()
             for i,v in pairs(G.play.cards) do
                 for i = 0, #suits do
-                    if v:is_suit(suits[i]) and suits[i] ~= 'Clubs' then
+                    if v:is_suit(suits[i]) and suits[i] ~= 'Clubs' or SMODS.has_no_suit(v) then
                         return { remove = true }
                     end
                 end
@@ -42,7 +42,7 @@ SMODS.Enhancement {
             local suits = unik_get_all_suits()
             for i,v in pairs(G.play.cards) do
                 for i = 0, #suits do
-                    if v:is_suit(suits[i]) and suits[i] ~= 'Clubs' then
+                    if v:is_suit(suits[i]) and suits[i] ~= 'Clubs' or SMODS.has_no_suit(v) then
                         return { remove = true }
                     end
                 end
