@@ -3125,6 +3125,27 @@ return {
                 }
             },
             
+
+            card_e_chips = {
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} chips"
+                }
+            },
+            card_extra_e_chips = {
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} extra chips"
+                }
+            },
+            card_e_mult = {
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} mult"
+                }
+            },
+            card_extra_e_mult = {
+                text = {
+                    "{X:dark_edition,C:white}^#1#{} extra mult"
+                }
+            },
         },
         Planet={
             c_unik_asteroid_belt = {

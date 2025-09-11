@@ -1,0 +1,43 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''perma_bonus = self.ability and self.ability.perma_bonus or 0,'''
+position = 'after'
+payload = '''
+perma_e_mult = self.ability and self.ability.perma_e_mult or 0,
+perma_e_chips = self.ability and self.ability.perma_e_chips or 0,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''bonus_chips = bonus_chips ~= 0 and bonus_chips or nil,'''
+position = 'before'
+payload = '''
+bonus_e_mult = self.ability.perma_e_mult ~= 0 and (self.ability.perma_e_mult + 1) or nil,
+bonus_e_chips = self.ability.perma_e_chips ~= 0 and (self.ability.perma_e_chips + 1) or nil,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''-- TARGET: main scoring on played cards'''
+position = 'after'
+payload = '''
+local e_mult = card:get_mult_e_bonus()
+if e_mult > 0 then
+    ret.playing_card.e_mult = e_mult
+end
+local e_chips = card:get_chip_e_bonus()
+if chips > 0 then
+    ret.playing_card.chips = chips
+end
+'''
+match_indent = true
