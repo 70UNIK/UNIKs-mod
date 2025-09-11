@@ -36,8 +36,8 @@ if e_mult > 0 then
     ret.playing_card.e_mult = e_mult
 end
 local e_chips = card:get_chip_e_bonus()
-if chips > 0 then
-    ret.playing_card.chips = chips
+if e_chips > 0 then
+    ret.playing_card.e_chips = e_chips
 end
 '''
 match_indent = true

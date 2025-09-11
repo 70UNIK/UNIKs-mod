@@ -277,9 +277,16 @@ SMODS.ConsumableType {
         return false
     end
 }
+SMODS.Atlas {
+	key = "unik_summits",
+	path = "unik_summits.png",
+	px = 71,
+	py = 95
+}
+
 
 SMODS.ConsumableType {
-	key = "summit",
+	key = "unik_summit",
 	prefix_config = { key = true },
 	primary_colour = HEX("6f859e"),
 	secondary_colour = HEX("6f859e"),
@@ -288,12 +295,25 @@ SMODS.ConsumableType {
 	default = "c_unik_everest", 
 }
 
-SMODS.Atlas {
-	key = "unik_summits",
+SMODS.UndiscoveredSprite({
+	key = "unik_summit",
+	atlas = "unik_summits",
 	path = "unik_summits.png",
+	pos = { x = 2, y = 2 },
 	px = 71,
-	py = 95
-}
+	py = 95,
+})
+
+SMODS.UndiscoveredSprite({
+	key = "unik_lartceps",
+	atlas = "unik_lartceps",
+	path = "unik_lartceps.png",
+	pos = { x = 0, y = 2 },
+	px = 71,
+	py = 95,
+})
+
+
 
 --RARITIES--
 --Discount exotic
@@ -425,12 +445,21 @@ NFS.load(mod_path .. "data/spectrals/sparkle.lua")()
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 --
+--hidden summits
+NFS.load(mod_path .. "data/summits/ebott.lua")() 
+NFS.load(mod_path .. "data/summits/celeste.lua")() 
+
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 leftmost non eternals, create an ancient.
 
 --PLANETS
 
 --SUMMITS--
+NFS.load(mod_path .. "data/summits/bonus_exponentials.lua")() 
+NFS.load(mod_path .. "data/summits/aconcagua.lua")() 
+NFS.load(mod_path .. "data/summits/elbrus.lua")() 
 NFS.load(mod_path .. "data/summits/everest.lua")() 
+NFS.load(mod_path .. "data/summits/denali.lua")() 
+
 
 --rotarots
 if MoreFluff then

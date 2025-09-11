@@ -2836,6 +2836,14 @@ return {
 					"learn what it does",
 				},
 			},
+            undiscovered_unik_summit = {
+                name = "Not Discovered",
+                text = {
+                    "Purchase or use this",
+                    "card in an unseeded run",
+                    "to learn what it does",
+                }
+            },
             unik_depleted = {
                 name = "Depleted",
                 text = {

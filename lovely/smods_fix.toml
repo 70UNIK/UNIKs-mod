@@ -25,3 +25,12 @@ pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_ca
 position = "after"
 payload = '''end'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''if specific_vars and specific_vars.bonus_x_chips then'''
+position = "at"
+payload = '''if specific_vars and specific_vars.bonus_h_x_chips then'''
+match_indent = true
+[[patches]]

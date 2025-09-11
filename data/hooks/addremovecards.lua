@@ -231,6 +231,58 @@ function CardArea:emplace(card, location, stay_flipped)
             end
         end
     end
+    if self and self == G.consumeables and card.config.center.key == "c_unik_celeste" then
+        for i,v in pairs(G.consumeables.cards) do
+            if v.config.center.key == "c_unik_celeste" and v ~= card then
+                local edition = nil
+                if card.edition then
+                    edition = card.edition.key 
+                end
+                card:start_dissolve()
+                --fallback to soul.
+                 G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
+                        n_card.no_omega = true
+                        n_card:add_to_deck()
+                        if edition then
+                            n_card:set_edition(edition, true)
+                        end 
+                        G.consumeables:emplace(n_card)
+                        return true;
+                    end
+                }))
+                break
+            end
+        end
+    end
+        if self and self == G.consumeables and card.config.center.key == "c_unik_ebott" then
+        for i,v in pairs(G.consumeables.cards) do
+            if v.config.center.key == "c_unik_ebott" and v ~= card then
+                local edition = nil
+                if card.edition then
+                    edition = card.edition.key 
+                end
+                card:start_dissolve()
+                --fallback to soul.
+                 G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
+                        n_card.no_omega = true
+                        n_card:add_to_deck()
+                        if edition then
+                            n_card:set_edition(edition, true)
+                        end 
+                        G.consumeables:emplace(n_card)
+                        return true;
+                    end
+                }))
+                break
+            end
+        end
+    end
     if card.ability.unik_triggering then
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
