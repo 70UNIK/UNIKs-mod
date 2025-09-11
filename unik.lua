@@ -278,6 +278,16 @@ SMODS.ConsumableType {
     end
 }
 
+SMODS.ConsumableType {
+	key = "summit",
+	prefix_config = { key = true },
+	primary_colour = HEX("6f859e"),
+	secondary_colour = HEX("6f859e"),
+	shop_rate = 0.0,
+	loc_txt = {},
+	default = "c_unik_everest", 
+}
+
 --RARITIES--
 --Discount exotic
 SMODS.Rarity({

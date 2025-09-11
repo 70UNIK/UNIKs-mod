@@ -3,7 +3,7 @@ SMODS.Enhancement {
 	pos = {x = 2, y = 0},
 	key = 'unik_timber',
 	not_stoned = true,
-    config = { extra = { Xlogmultbase = 75,base_odds = 1, break_odds = 3}},
+    config = { extra = { Xlogmultbase = 75,base_odds = 1, break_odds = 4}},
     weight = 1,
     woodbreak = true,
     loc_vars = function(self, info_queue, card)

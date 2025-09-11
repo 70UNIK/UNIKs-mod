@@ -3542,14 +3542,14 @@ return {
             c_unik_kosciuszko = {
                 name = "Kosciuszko",
                 text = {
-                    "Permanently add {C:mult}+#1#{} Mult",
+                    "Permanently add {C:chips}+#1#{} Chips",
                     "to {C:attention}#2#{} selected card#<s>2#",
                 },
             },
             c_unik_elbert = {
                 name = "Elbert",
                 text = {
-                    "Permanently add {C:chips}+#1#{} Chips",
+                    "Permanently add {C:mult}+#1#{} Mult",
                     "to {C:attention}#2#{} selected card#<s>2#",
                 },
             },
