@@ -3761,6 +3761,8 @@ return {
 
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
+            k_unik_summit = "Summit",
+            b_unik_summit_cards = "Summit Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
             k_unik_egg_pack = "Eggcellent Pack",
             k_unik_711="7-Eleven!",
@@ -4034,6 +4036,7 @@ return {
             unik_niko = "Niko",
             unik_disposable = "Disposable",
             unik_lartceps = "Lartceps",
+            unik_summit = "Summit",
             unik_triggering = "Triggering",
             unik_ultradebuffed = "Ultradebuffed",
             unik_baseless = "Baseless",

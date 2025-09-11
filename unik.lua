@@ -288,6 +288,13 @@ SMODS.ConsumableType {
 	default = "c_unik_everest", 
 }
 
+SMODS.Atlas {
+	key = "unik_summits",
+	path = "unik_summits.png",
+	px = 71,
+	py = 95
+}
+
 --RARITIES--
 --Discount exotic
 SMODS.Rarity({
@@ -422,7 +429,8 @@ NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 le
 
 --PLANETS
 
-
+--SUMMITS--
+NFS.load(mod_path .. "data/summits/everest.lua")() 
 
 --rotarots
 if MoreFluff then
