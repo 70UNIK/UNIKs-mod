@@ -32,7 +32,7 @@ SMODS.Consumable{
                     message = localize({
                         type = "variable",
                         key = "a_powmult",
-                        vars = { number_format(highlighted.ability["perma_e_mult"]) },
+                        vars = { number_format(1+highlighted.ability["perma_e_mult"]) },
                     }),
                     colour = G.C.DARK_EDITION,
                     card=highlighted,

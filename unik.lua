@@ -288,11 +288,11 @@ SMODS.Atlas {
 SMODS.ConsumableType {
 	key = "unik_summit",
 	prefix_config = { key = true },
-	primary_colour = HEX("6f859e"),
-	secondary_colour = HEX("6f859e"),
+	primary_colour = G.C.UNIK_SUMMIT,
+	secondary_colour = G.C.UNIK_SUMMIT,
 	shop_rate = 0.0,
 	loc_txt = {},
-	default = "c_unik_everest", 
+	default = "c_unik_elbert", 
 }
 
 SMODS.UndiscoveredSprite({
@@ -455,6 +455,12 @@ NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 le
 
 --SUMMITS--
 NFS.load(mod_path .. "data/summits/bonus_exponentials.lua")() 
+NFS.load(mod_path .. "data/summits/elbert.lua")() 
+NFS.load(mod_path .. "data/summits/kosciuszko.lua")() 
+NFS.load(mod_path .. "data/summits/narodnaya.lua")() 
+NFS.load(mod_path .. "data/summits/mitchell.lua")() 
+NFS.load(mod_path .. "data/summits/charleston.lua")() 
+NFS.load(mod_path .. "data/summits/whitney.lua")() 
 NFS.load(mod_path .. "data/summits/aconcagua.lua")() 
 NFS.load(mod_path .. "data/summits/elbrus.lua")() 
 NFS.load(mod_path .. "data/summits/everest.lua")() 

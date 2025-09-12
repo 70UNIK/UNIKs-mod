@@ -70,6 +70,7 @@ UNIK_VOID_COLOR = HEX('000000'),
 UNIK_EYE_SEARING_RED= HEX('ff0000'),
 UNIK_UNIK = HEX('fe90ff'),
 UNIK_CAPTION = HEX('009A9A'),
+UNIK_SUMMIT = HEX("6f859e"),
 """
 match_indent = true
 
@@ -104,6 +105,7 @@ unik_wheel_color = G.C.UNIK_THE_WHEEL,
 unik_house_color = G.C.UNIK_THE_HOUSE,
 unik_tooth_color = G.C.UNIK_THE_TOOTH,
 unik_rgb = G.C.UNIK_RGB,
+unik_summit = G.C.UNIK_SUMMIT,
 """
 match_indent = true
 

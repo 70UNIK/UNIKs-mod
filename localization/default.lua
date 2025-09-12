@@ -168,17 +168,6 @@ return {
                     "by X66 and voucher becomes Eternal",
                 }
             },
-            bl_unik_epic_egg = {
-                name = "Mädäntynytmuna", --Rotten egg
-                text = {
-                    "Add Rental Eternal Eggs equal",
-                    "to your number of cards in deck",
-                    "then increase Blind Size by",
-                    "^(1+Number of Jokers*0.05)",
-                    "Replace a random Joker with an",
-                    "Eternal Egg per card discarded",
-                }
-            },
 
             bl_cry_chromatic_fixed = {
                 name = "The Chromatic",
@@ -3136,22 +3125,22 @@ return {
 
             card_e_chips = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} chips"
+                    "{X:dark_edition,C:white}^#1#{} Chips"
                 }
             },
             card_extra_e_chips = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} extra chips"
+                    "{X:dark_edition,C:white}^#1#{} extra Chips"
                 }
             },
             card_e_mult = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} mult"
+                    "{X:dark_edition,C:white}^#1#{} Mult"
                 }
             },
             card_extra_e_mult = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} extra mult"
+                    "{X:dark_edition,C:white}^#1#{} extra Mult"
                 }
             },
         },
@@ -3595,6 +3584,21 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:mult}+#1#{} Mult",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+
+            c_unik_charleston = { --near vegas, which gambling
+                name = "Charleston",
+                text = {
+                    "Permanently add {C:money}$#1#{}",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            c_unik_whitney = { ---sierra nevada
+                name = "Whitney",
+                text = {
+                    "Permanently add held {C:money}$#1#{}",
                     "to {C:attention}#2#{} selected card#<s>2#",
                 }
             }

@@ -30,7 +30,7 @@ SMODS.Consumable{
                     message = localize({
                         type = "variable",
                         key = "a_xchips",
-                        vars = { number_format(highlighted.ability["perma_h_x_chips"]) },
+                        vars = { number_format(1+highlighted.ability["perma_h_x_chips"]) },
                     }),
                     colour = G.C.CHIPS,
                     card=highlighted,
