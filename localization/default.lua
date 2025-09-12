@@ -2879,6 +2879,27 @@ return {
 					"up to {C:attention}#2# Cube/Square Jokers{}",
 				},
 			},
+            p_unik_summit_1 = {
+                name = "Summit Pack",
+                text = {
+					"Choose {C:attention}#1#{} of",
+					"up to {C:attention}#2# {C:unik_summit}Summit Card#<s>2#{}",
+				},
+            },
+            p_unik_summit_2 = {
+                name = "Jumbo Summit Pack",
+                text = {
+					"Choose {C:attention}#1#{} of",
+					"up to {C:attention}#2# {C:unik_summit}Summit Card#<s>2#{}",
+				},
+            },
+            p_unik_summit_3 = {
+                name = "Mega Summit Pack",
+                text = {
+					"Choose {C:attention}#1#{} of",
+					"up to {C:attention}#2# {C:unik_summit}Summit Card#<s>2#{}",
+				},
+            },
             p_unik_lartceps_bundle = {
                 name = "Lartceps Bundle",
 				text = {
@@ -3978,6 +3999,7 @@ return {
             k_poppy_trigger4="Yay!",
 
             unik_plus_lartceps = "+1 Lartceps...",
+            unik_plus_summit = "+1 Summit",
             k_unik_copied = "Copied...",
             k_unik_epic_sand_cry_1 = "^2 Blind size",
             k_unik_epic_sand_cry_2 = "per tag held",
@@ -4033,6 +4055,9 @@ return {
             k_unik_megatron3 = "PRIMUS IS THE REAL ENEMY!",
             k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!",
             k_unik_magiced = "Hope you enjoy permanent shop bloat...",
+
+            k_unik_summit_pack = "Summit Pack",
+
         },
         high_scores={},
         labels={

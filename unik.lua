@@ -519,6 +519,7 @@ end
 
 --boosters
 --TODO: Replace "cube pack" with "UNIK's pack" in the next update, basically an icon pack of sorts
+NFS.load(mod_path .. "data/boosters/summit_pack.lua")()
 NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
 NFS.load(mod_path .. "data/boosters/egg_pack.lua")()
