@@ -32,11 +32,6 @@ SMODS.Booster{
       ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_SUMMIT)
       ease_background_colour { new_colour = G.C.UNIK_SUMMIT, special_colour = G.C.BLACK, contrast = 2 }
 	end,
-    update_pack = function(self, dt)
-		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_SUMMIT)
-      ease_background_colour { new_colour = G.C.UNIK_SUMMIT, special_colour = G.C.BLACK, contrast = 2 }
-		SMODS.Booster.update_pack(self, dt)
-	end,
 	create_card = function(self, card, i)
         return create_card("unik_summit", G.pack_cards, nil, nil, true, nil, nil, "unik_summit_pack")
 	end,
@@ -65,11 +60,6 @@ SMODS.Booster{
       ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_SUMMIT)
       ease_background_colour { new_colour = G.C.UNIK_SUMMIT, special_colour = G.C.BLACK, contrast = 2 }
 	end,
-    update_pack = function(self, dt)
-		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_SUMMIT)
-      ease_background_colour { new_colour = G.C.UNIK_SUMMIT, special_colour = G.C.BLACK, contrast = 2 }
-		SMODS.Booster.update_pack(self, dt)
-	end,
 	create_card = function(self, card, i)
         return create_card("unik_summit", G.pack_cards, nil, nil, true, nil, nil, "unik_summit_pack")
 	end,
@@ -97,11 +87,6 @@ SMODS.Booster{
 	ease_background_colour = function(self)
       ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_SUMMIT)
       ease_background_colour { new_colour = G.C.UNIK_SUMMIT, special_colour = G.C.BLACK, contrast = 2 }
-	end,
-    update_pack = function(self, dt)
-		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_SUMMIT)
-      ease_background_colour { new_colour = G.C.UNIK_SUMMIT, special_colour = G.C.BLACK, contrast = 2 }
-		SMODS.Booster.update_pack(self, dt)
 	end,
 	create_card = function(self, card, i)
         return create_card("unik_summit", G.pack_cards, nil, nil, true, nil, nil, "unik_summit_pack")
