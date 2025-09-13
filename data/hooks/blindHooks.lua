@@ -12,16 +12,6 @@ function Blind:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,sum
 	return nil
 end
 
-function Blind:unik_cap_score(score)
-	if not self.disabled then
-		local obj = self.config.blind
-		if obj.unik_cap_score and type(obj.unik_cap_score) == "function" then
-			return obj:unik_cap_score(score)
-		end
-	end
-	return nil
-end
-
 --Context before play
 function Blind:unik_before_play()
 	if not self.disabled then

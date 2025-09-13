@@ -44,7 +44,7 @@ SMODS.Joker {
     end,
     blueprint_compat = false,
 	perishable_compat = true,
-	eternal_compat = false,
+	eternal_compat = true,
     triggering_blacklist = true,
     pools = {["unik_copyrighted"] = true },
     add_to_deck = function(self, card, context)

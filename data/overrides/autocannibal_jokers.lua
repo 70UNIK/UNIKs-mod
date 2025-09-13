@@ -494,3 +494,11 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 	end
 }, true)
 --Cube pools
+
+--Force incompatible eternal jokers to be unsellable anyways
+local eternalOverride = SMODS.is_eternal
+function SMODS.is_eternal(card, trigger)
+	local ret = eternalOverride(card,trigger)
+	if card.ability.eternal then return true end
+	return ret
+end
