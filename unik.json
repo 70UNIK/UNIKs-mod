@@ -11,5 +11,8 @@
 	"version": "0.4.1a",
 	"dependencies": [
         "Steamodded (>=1.0.0~BETA-0827c)"
+    ],
+	"conflicts": [
+		"Talisman (<=2.4)"
     ]
 }
