@@ -54,7 +54,7 @@ function Game:update(dt)
             self.C.UNIK_ANCIENT[3] = 0.6823529411764706 + 0.31*math.sin(self.TIMERS.REAL*1.3)
         end
         self.C.UNIK_SHITTY_EDITION = self.C.UNIK_SHITTY_EDITION or {0,0,0,1}
-        self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)
+        --self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)
         self.C.UNIK_SHITTY_EDITION[1] = 0.6+0.2*(1- math.sin(self.TIMERS.REAL*1.3))
         --self.C.UNIK_SHITTY_EDITION[4] = 0.6-0.2*(1- math.sin(self.TIMERS.REAL*1.3))
         self.C.UNIK_SHITTY_EDITION[2] = math.min(self.C.DARK_EDITION[1], self.C.DARK_EDITION[2])
