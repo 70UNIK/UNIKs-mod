@@ -32,7 +32,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
-    config = { extra = {x_mult = 1.0,x_mult_mod = 0.15}, immutable = {x_mult_display = 1.0} },
+    config = { extra = {x_mult = 1.0,x_mult_mod = 0.1}, immutable = {x_mult_display = 1.0} },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 

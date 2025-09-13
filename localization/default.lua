@@ -855,10 +855,10 @@ return {
                 name = "Kauheapetos", --Dreadful Deception if this appears, all blinds appear as big blinds.
                 text = {
                     "Disguised as a random Blind", -- can occupy small, big or boss slot, but all blinds are unskippable/unrerollable.
-                    "On play, deselect and select",
-                    "(Number of selected cards)",
-                    "random cards in hand",
-                    "High card banned",
+                    "Flip and shuffle all cards",
+                    "and Jokers per hand",
+                    "Must play #1# cards",
+                    "all cards must score",
                 }
             },
             bl_unik_beast_shadow_milk_fakeout={
@@ -2119,17 +2119,13 @@ return {
                     "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
                 }
             },
+
             --V0.5
             j_unik_exclamation={
                 name = "!",
                 text = {
-                    "After {C:attention}#1#{} Rounds, enables",
-                    "option to {C:attention}Activate{} Joker",
                     "{C:unik_rgb}!Mult{} on {C:attention}Final Hand",
-                    "once activated",
                     "{C:red,E:5}Self Banishes",
-                    "including {C:attention}all copies",
-                    "of this Joker after trigger",
                 }
             },
             j_unik_torn_dress = {
@@ -2302,6 +2298,78 @@ return {
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
                     "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult, {X:dark_edition,C:white}^#6#{C:inactive} chips)",
                     "{C:inactive,s:0.8}(Exponentials are X1)",
+                }
+            },
+            --13 (12 usable)
+            j_unik_kings_court = {
+                name = "The King's Court",
+                text = {
+                    "After {C:attention}#1#{} round#<s>1#,",
+                    "sell this card to",
+                    "gain {C:attention}Baron{}} and {C:attention}Mime",
+                    "{C:inactive}(Must have room)",
+                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#{C:inactive})",
+                }
+            },
+            j_unik_welfare_payment = {
+                name = "Welfare Payment",
+                text = {
+                    "Earn {C:gold}$#1#{} every",
+                    "{C:gold}$#2#{} below the",
+                    "Interest Limit at",
+                    "the end of round",
+                }
+            },
+            j_unik_preservatives = {
+                name = "Preservatives",
+                text = {
+                    "Replace all Perishable",
+                    "stickers with",
+                    "Eternal Stickers",
+                    "{C:inactive,s:0.8}(Removes debuffs if present)"
+                }
+            },  
+            j_unik_stamp_spam = {
+                name = "Stamp Spam",
+                text = {
+                    "Add random {C:attention}Seals",
+                    "to all scoring cards",
+                    "if played hand",
+                    "contains a {C:attention}Spectrum",        
+                    "{C:red,E:2}Self destructs{} after",
+                    "{C:attention}#1#{} trigger#<s>1#"
+                }
+            },
+            j_unik_bun_bun = {
+                name = "Bun Bun",
+                text = {
+                    "Gives {X:mult,C:white}Xmult{} equal to", --X1 + 11 x 0.05
+                    "{C:attention}(1+Scoring Card's rank x #1#)",
+                    "when a card is scored",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Learning with Pibby{}",
+                }
+            },
+            j_unik_compounding_interest = {
+                name = "Compounding Interest",
+                text = {
+                    "Earn {X:money,C:white}$X#1# of your", --X0.15 of your current money, lower than to the moon, but with a MUCH HIGHER cap.
+                    "{C:attention}current money{} at the",
+                    "end of round",
+                    "{C:inactive}(Capped at {C:money}$#2#{C:inactive})", --capped at $200, aka at $2000
+                }
+            },
+            --That's 18 non cursed jokers for the next update!!
+
+            j_unik_bun_bun_corrupted = {
+                name = "B?N 3UN?",
+                text = {
+                    --misprint/Error type shit
+                    --All cards in shops are corrupted,
+                    --only becomes sellable after 1-10 rounds
+                    --A random card played becomes corrupted
+                    -- when sold, create 3 corrupted detrimental jokers.
                 }
             },
             
@@ -4118,6 +4186,7 @@ return {
             k_unik_magiced = "Hope you enjoy permanent shop bloat...",
 
             k_unik_summit_pack = "Summit Pack",
+            k_unik_magician_placeholder = "(^1.15 requirements)"
 
         },
         high_scores={},

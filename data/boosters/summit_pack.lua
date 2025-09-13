@@ -15,7 +15,7 @@ SMODS.Booster{
     atlas = "unik_cube_boosters",
 	pos = { x = 2, y = 2 },
     cost = 4,
-    weight = 0.65, 
+    weight = 0.6, 
     config = { extra = 2, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -43,7 +43,7 @@ SMODS.Booster{
     atlas = "unik_cube_boosters",
 	pos = { x = 1, y = 2 },
     cost = 6,
-    weight = 0.65, 
+    weight = 0.6, 
     config = { extra = 4, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -71,7 +71,7 @@ SMODS.Booster{
     atlas = "unik_cube_boosters",
 	pos = { x = 0, y = 2 },
     cost = 8,
-    weight = 0.13, 
+    weight = 0.14, 
     config = { extra = 4, choose = 2 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,

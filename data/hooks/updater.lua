@@ -32,7 +32,7 @@ function Game:update(dt)
         G.fuzzyAnim = G.fuzzyAnim + dt * 10
     end
 
-    if G.ARGS.LOC_COLOURS then
+    if G.ARGS.LOC_COLOURS or self.C then
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
 		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
 
@@ -43,7 +43,9 @@ function Game:update(dt)
             self.C.UNIK_RGB[2] = b
         end
 		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.5) % 360
-		G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
+        if G.ARGS.LOC_COLOURS then
+            G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
+        end
 
         self.C.UNIK_ANCIENT = self.C.UNIK_ANCIENT or {0.5411764705882353,0.20784313725490197,0.6823529411764706,1}
         --R = 0.3 diff, G = 0.15 diff, B = 0.31 diff

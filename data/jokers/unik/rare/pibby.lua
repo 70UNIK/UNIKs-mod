@@ -50,16 +50,7 @@ SMODS.Joker {
             local triggered = false
             local increase = 0
             for k, v in ipairs(context.scoring_hand) do
-                if SMODS.has_enhancement(v, "m_unik_pink") then
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
-                     increase =  increase  + (7 / card.ability.immutable.divisor)
-                    triggered = true
-                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") and not SMODS.has_enhancement(v, "m_unik_green") then
+                if v:get_rank_value() > 0 then
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             v:juice_up()
