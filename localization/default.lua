@@ -3759,6 +3759,7 @@ return {
             k_unik_megatron3 = "PRIMUS IS THE REAL ENEMY!",
             k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!",
             k_unik_magiced = "Hope you enjoy permanent shop bloat...",
+            k_unik_magician_placeholder = "(^1.15 requirements)"
         },
         high_scores={},
         labels={
