@@ -4,7 +4,7 @@ SMODS.Blind{
     key = 'unik_magician',
     config = {},
 	boss = {
-		min = 4,
+		min = 3,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 29},
@@ -68,6 +68,6 @@ SMODS.Blind{
 		return false
 	end,
     in_pool = function()
-        return not G.GAME.used_vouchers.v_magic_trick
+        return (not G.GAME.used_vouchers.v_magic_trick and G.GAME.round_resets.ante >= 3)
     end
 }

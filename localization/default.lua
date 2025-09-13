@@ -3899,12 +3899,16 @@ return {
                 "+1 Ante every 5 Overshoot",
                 "Epic Blinds can spawn",
                 "after round 40",
+                "Finisher Blinds spawn",
+                "twice as often"
             },
             overshoot_unik_3 = {
                 "+1 Ante every 5 Overshoot",
                 "Epic Blinds can spawn anytime",
                 "Legendary Blinds can spawn",
                 "after round 40",
+                "Finisher Blinds spawn",
+                "4X as often"
             },
             overshoot_unik_4 = {
                 "+1 Ante every 5 Overshoot",
