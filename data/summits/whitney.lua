@@ -18,10 +18,12 @@ SMODS.Consumable{
 	end,
     
 	use = function(self, card, area, copier)
+        UNIK.add_bonus('dollars',card.ability.extra.money)
         for i = 1, #G.hand.highlighted do
             local highlighted = G.hand.highlighted[i]
                 highlighted.ability["perma_h_dollars"] = highlighted.ability["perma_h_dollars"] or 0
                 highlighted.ability["perma_h_dollars"] = highlighted.ability["perma_h_dollars"] + card.ability.extra.money
+                
             G.E_MANAGER:add_event(Event({
                 trigger = 'after', 
                 delay = 0.1, 

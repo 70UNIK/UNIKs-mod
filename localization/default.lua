@@ -2206,7 +2206,7 @@ return {
                     "{X:mult,C:white}X#1#{} Mult",
                     "loses {X:mult,C:white}X#1#{} Mult",
                     "when triggered",
-                    "Self Destructs at",
+                    "{C:red,E:2}Self Destructs{} at",
                     "{X:mult,C:white}X#1#{} Mult"
                 }
             },
@@ -2220,8 +2220,8 @@ return {
             j_unik_better_riffin = {
                 name = "Better Riffin'",
                 text = {
-                    "Create an Uncommon Joker",
-                    "when Blind is selected",
+                    "Create an {C:uncommon}Uncommon Joker",
+                    "when {C:attention}Blind{} is selected",
                     "(Must have room)",
                 }
             },
@@ -2236,11 +2236,72 @@ return {
             j_unik_lobotomy_needle = {
                 name = "Lobotomy Needle",
                 text = {
-                    "X#1# Blind Size and",
-                    "set Hands to 1",
-                    "Self destructs after",
-                    "playing #1# Hands",
+                    "{C:attention}X#1#{} Blind Size and",
+                    "set {C:blue}Hands{} to {C:red}1{}",
+                    "{C:red,E:2}Self destructs{} after",
+                    "playing {C:attention}#1#{} Hands",
                     "or {C:unik_needle_color}The Needle{} is triggered",
+                }
+            },
+             j_unik_base_camp = {
+                name = "Base Camp",
+                text = {
+                    "Gains {C:attention}triple{} the bonuses of",
+                    "all {C:unik_summit}Summit{} cards",
+                    "used this run",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
+                    "{C:inactive}{C:gold}$#7#{C:inactive} after round)",
+                }
+            },
+            j_unik_base_camp1 = {
+                name = "Base Camp",
+                text = {
+                    "Gains {C:attention}triple{} the bonuses of",
+                    "all {C:unik_summit}Summit{} cards",
+                    "used this run",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
+                    "{C:inactive}{C:gold}$#7#{C:inactive} after round)",
+                }
+            },
+            j_unik_base_camp2 = {
+                name = "Base Camp",
+                text = {
+                    "Gains {C:attention}triple{} the bonuses of",
+                    "all {C:unik_summit}Summit{} cards",
+                    "used this run",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
+                    "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
+                    "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult)",
+                    "{C:inactive,s:0.8}(Exponentials are X1)",
+                }
+            },
+            j_unik_base_camp3 = {
+                name = "Base Camp",
+                text = {
+                    "Gains {C:attention}triple{} the bonuses of",
+                    "all {C:unik_summit}Summit{} cards",
+                    "used this run",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
+                    "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
+                    "{C:inactive}{X:dark_edition,C:white}^#6#{C:inactive} chips)",
+                    "{C:inactive,s:0.8}(Exponentials are X1)",
+                }
+            },  
+            j_unik_base_camp4 = {
+                name = "Base Camp",
+                text = {
+                    "Gains {C:attention}triple{} the bonuses of",
+                    "all {C:unik_summit}Summit{} cards",
+                    "used this run",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
+                    "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
+                    "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult, {X:dark_edition,C:white}^#6#{C:inactive} chips)",
+                    "{C:inactive,s:0.8}(Exponentials are X1)",
                 }
             },
             

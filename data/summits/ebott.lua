@@ -19,10 +19,12 @@ SMODS.Consumable{
     hidden = true,
     soul_set = 'unik_summit',
 	use = function(self, card, area, copier)
+        UNIK.add_bonus('e_mult',card.ability.extra.e_mult)
         for i = 1, #G.hand.highlighted do
             local highlighted = G.hand.highlighted[i]
             highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] or 0
             highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] + card.ability.extra.e_mult
+            
             G.E_MANAGER:add_event(Event({
                 trigger = 'after', 
                 delay = 0.1, 

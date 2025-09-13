@@ -22,3 +22,28 @@ function SMODS.localize_perma_bonuses(specific_vars, desc_nodes)
         localize{type = 'other', key = 'card_extra_e_mult', nodes = desc_nodes, vars = {specific_vars.bonus_e_mult}}
     end
 end
+
+function UNIK.add_bonus(type,value)
+    if not G.GAME.unik_base_camp_bonus then
+        G.GAME.unik_base_camp_bonus = {
+            e_mult = 0,
+            e_chips = 0,
+            chips = 0,
+            mult = 0,
+            dollars = 0,
+            x_mult = 0,
+            x_chips = 0,
+        }
+    end
+    if G.GAME.unik_base_camp_bonus[type] then
+        if type == 'e_mult' or type == 'e_chips' then
+            G.GAME.unik_base_camp_bonus[type] = G.GAME.unik_base_camp_bonus[type] + value
+        else
+            G.GAME.unik_base_camp_bonus[type] = G.GAME.unik_base_camp_bonus[type] + value * 3
+        end
+        
+        return true
+    end
+    print("ADDING BONUS GLOBALLY FAILED!")
+    return false
+end

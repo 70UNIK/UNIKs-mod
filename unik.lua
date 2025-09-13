@@ -661,6 +661,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/D16.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")() 
 
 --Rare
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
