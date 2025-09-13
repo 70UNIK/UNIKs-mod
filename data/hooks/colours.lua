@@ -3,7 +3,6 @@ function loc_colour(_c, _default)
     if not G.ARGS.LOC_COLOURS then
 		locHook()
 	end
-    local ret = locHook(c,default)
     G.ARGS.LOC_COLOURS.UNIK_SHITTY_EDITION =G.ARGS.LOC_COLOURS.UNIK_SHITTY_EDITION or {0,0,0,1}
     G.ARGS.LOC_COLOURS.UNIK_LARTCEPS1 = G.ARGS.LOC_COLOURS.UNIK_LARTCEPS1 or {1,0,0,1}
     G.ARGS.LOC_COLOURS.UNIK_RGB = G.ARGS.LOC_COLOURS.UNIK_RGB or {0,0,0,1}
@@ -56,5 +55,5 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_wheel_color = G.C.UNIK_THE_WHEEL
     G.ARGS.LOC_COLOURS.unik_house_color = G.C.UNIK_THE_HOUSE
     G.ARGS.LOC_COLOURS.unik_tooth_color = G.C.UNIK_THE_TOOTH
-    return ret
+    return locHook(_c,_default)
 end
