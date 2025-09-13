@@ -764,6 +764,9 @@ end
 
 NFS.load(mod_path .. "data/overrides/blind_spawn.lua")()
 function vice_check()
+	if G.GAME.round_resets.ante >= 0 or G.GAME.round_resets.ante < 2 then
+		return G.GAME.win_ante
+	end
 	G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1
 	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
 	if G.GAME.OvershootFXVal >= 4 then
