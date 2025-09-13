@@ -1,0 +1,40 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = "globals.lua"
+pattern = "DARK_EDITION = {0,0,0,1},"
+position = "after"
+payload = """UNIK_SHITTY_EDITION = {0,0,0,1},
+UNIK_LARTCEPS1 = {1,0,0,1},
+UNIK_RGB = {0,0,0,1},
+UNIK_ANCIENT = {0,0,0,1},
+UNIK_RGB_HUE = 0,
+UNIK_LARTCEPS_INVERSE = {1,0,0,1},
+UNIK_THE_PLANT = HEX('709284'),
+UNIK_THE_WHEEL = HEX('50bf7c'),
+UNIK_THE_HOUSE = HEX('5186a8'),
+UNIK_THE_TOOTH = HEX('b52d2d'),
+UNIK_THE_MANACLE = HEX('575757'),
+UNIK_THE_WALL = HEX('8a59a5'),
+UNIK_THE_GOAD = HEX('b95c96'),
+UNIK_THE_WINDOW = HEX('a9a295'),
+UNIK_THE_CLUB = HEX('b9cb92'),
+UNIK_THE_HEAD = HEX('ac9db4'),
+UNIK_THE_ARM = HEX('6865f3'),
+UNIK_THE_HOOK = HEX('a84024'),
+UNIK_ORTA_THE_HAMMER = HEX('6a3847'),
+UNIK_MAYA = HEX('ff00ab'),
+UNIK_YOKANA = HEX('86cafe'),
+UNIK_CHELSEA = HEX('d298fd'),
+UNIK_EYE_SEARING_BLUE = HEX('0000ff'),
+UNIK_SYNC_CATALYST_FAIL = {0,0,0,1},
+UNIK_VOID_COLOR = HEX('000000'),
+UNIK_EYE_SEARING_RED= HEX('ff0000'),
+UNIK_UNIK = HEX('fe90ff'),
+UNIK_CAPTION = HEX('009A9A'),
+"""
+match_indent = true
