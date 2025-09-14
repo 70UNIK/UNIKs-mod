@@ -9,7 +9,7 @@ SMODS.Blind {
     vars = {},
     dollars = 13,
     mult = 2,
-    
+    pronouns = "it_its",
     debuff = {
         akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,

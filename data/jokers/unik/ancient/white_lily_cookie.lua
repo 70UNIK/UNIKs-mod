@@ -36,6 +36,7 @@ SMODS.Joker {
     perishable_compat = false,
     demicoloncompat = true,
 	eternal_compat = true,
+    pronouns = "she_her",
     -- Mainline:
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics

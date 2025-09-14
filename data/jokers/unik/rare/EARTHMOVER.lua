@@ -16,6 +16,7 @@ SMODS.Joker {
 		end
 		return { vars = { center.ability.extra.exponent } }
 	end,
+	pronouns = "it_its",
     calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and context.blind.boss and not card.getting_sliced and not context.retrigger_joker and not context.repetition then
 			local eval = function(card)

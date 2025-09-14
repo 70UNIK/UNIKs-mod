@@ -10,6 +10,7 @@ SMODS.Blind{
     boss_colour= G.C.DARK_EDITION,
     dollars = 5,
     mult = 1.5,
+    pronouns = "it_its",
 	--Only appear if you have at least 5 stone cardsSMODS.has_no_suit(v)
     death_message = 'special_lose_unik_the_leak',
 	in_pool = function()

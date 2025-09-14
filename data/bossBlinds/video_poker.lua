@@ -10,6 +10,7 @@ SMODS.Blind{
     boss_colour= HEX("0000ff"),
     dollars = 8,
     mult = 0.4,
+    pronouns = "he_him",
     death_message = "special_lose_unik_video_poker",
     set_blind = function(self, reset, silent)
         if not reset then

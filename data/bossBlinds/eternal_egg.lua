@@ -9,6 +9,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 8,
     mult = 2,
+    pronouns = "he_him",
 	death_message = 'special_lose_eternal_egg',
     set_blind = function(self, reset, silent)
         if not reset then

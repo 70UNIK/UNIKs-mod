@@ -6,6 +6,7 @@ SMODS.Blind{
 	boss = {
 		min = 1,
 	},
+    pronouns = "he_him",
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 10},
     boss_colour= HEX("152c54"),

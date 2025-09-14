@@ -11,7 +11,7 @@ SMODS.Blind	{
     dollars = 13,
     mult = 0.25,
 	--must be localized
-	
+	pronouns = "it_its",
     debuff = {
         akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,

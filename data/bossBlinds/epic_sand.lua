@@ -9,7 +9,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 2,
-	
+	pronouns = "he_him",
     loc_vars = function(self)
         local tags = 0
         if #G.HUD_tags ~= 0 then

@@ -9,6 +9,7 @@ SMODS.Blind{
     boss_colour= HEX("d58c4b"), 
     dollars = 5,
     mult = 0,
+    pronouns = "he_him",
     death_message = "special_lose_unik_cookie",
 	defeat = function(self, silent)
 		G.P_BLINDS.bl_unik_cookie.mult = 0

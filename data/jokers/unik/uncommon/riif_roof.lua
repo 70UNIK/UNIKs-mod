@@ -12,6 +12,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Xmult} }
 	end,
+    pronouns = "he_him",
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {

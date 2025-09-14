@@ -18,6 +18,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.immutable.funny, center.ability.immutable.funny_limit} }
 	end,
+    pronouns = "it_its",
     calculate = function(self, card, context)
 		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed then
             SMODS.scale_card(card, {
