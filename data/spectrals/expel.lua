@@ -1,0 +1,1 @@
+--Banish all selected Jokers, bypasses eternal.

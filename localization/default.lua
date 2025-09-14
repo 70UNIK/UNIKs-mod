@@ -68,6 +68,21 @@ return {
                     "{C:attention}+#1#{} Hand Size",
                 }
             },
+            b_unik_mountain_deck = {
+                name = "Mountain Deck",
+                text = {
+                    "Start with {C:attention,T:v_unik_summit_merchant}Summit Merchant",
+                    "and {C:attention}#1#{} {C:unik_summit,T:c_hex}Everest#<s>1#{}",
+                }
+            },
+            b_unik_haunted_deck = {
+                name = "Haunted Deck",
+                text = {
+                    "Arcana Packs no longer appear in the shop",
+                    "Spectral Packs appear at 3X the usual rate",
+                }
+            },
+            
             
         },
         BlindEdition={
@@ -2352,6 +2367,15 @@ return {
                     "{C:attention}current money{} at the",
                     "end of round",
                     "{C:inactive}(Capped at {C:money}$#2#{C:inactive})", --capped at $200, aka at $2000
+                }
+            },
+            j_unik_card_bufferer = {
+                name = "Card Bufferer",
+                text = {
+                    "Scored cards",
+                    "gives X#1# Mult",
+                    "Increase this by X#2#", --0.25
+                    "per played unscoring card",
                 }
             },
             --That's 18 non cursed jokers for the next update!!

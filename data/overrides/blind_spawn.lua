@@ -23,7 +23,6 @@ function Game:start_run(args)
         if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
             self.GAME.round_resets.blind_choices.Boss = get_new_boss()
         end
-        unik_ease_overshoot(25)
     end
 end
 
