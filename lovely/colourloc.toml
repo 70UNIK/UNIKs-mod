@@ -36,5 +36,6 @@ UNIK_VOID_COLOR = HEX('000000'),
 UNIK_EYE_SEARING_RED= HEX('ff0000'),
 UNIK_UNIK = HEX('fe90ff'),
 UNIK_CAPTION = HEX('009A9A'),
+UNIK_SUMMIT = HEX("6f859e"),
 """
 match_indent = true
