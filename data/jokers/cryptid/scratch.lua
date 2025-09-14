@@ -57,64 +57,25 @@ SMODS.Joker {
 				card_eval_status_text(card, "debuff", nil, nil, nil, nil)
 				--return true
 			else
-				if (SMODS.Mods["incantation"] or {}).can_load then
-						return {
-							message = localize({
-								type = "variable",
-								key = "a_mult",
-								vars = {
-									number_format(card.ability.extra.mult),
-								},
-							}),
-							mult_mod = card.ability.extra.mult*(context.other_consumeable.ability.qty or 1),
-							colour = G.C.MULT,
-
-						}
-				-- end
-				else
-					return {
-						message = localize({
-							type = "variable",
-							key = "a_mult",
-							vars = {
-								number_format(card.ability.extra.mult),
-							},
-						}),
-						mult_mod = card.ability.extra.mult,
-						colour = G.C.MULT,
-
-					}
+				local amount = 1
+				if context.other_consumeable.ability.immutable and context.other_consumeable.ability.immutable.overflow_amount then
+					amount = context.other_consumeable.ability.immutable.overflow_amount or 1
 				end
+				return {
+					message = localize({
+						type = "variable",
+						key = "a_mult",
+						vars = {
+							number_format(card.ability.extra.mult*amount),
+						},
+					}),
+					mult_mod = card.ability.extra.mult,
+					colour = G.C.MULT,
+
+				}
 
 			end
         end
     end,
 
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_scratch"] = {
-		text = {
-			{ text = "+", colour = G.C.MULT},
-			{ ref_table = "card.joker_display_values", ref_value = "mult", retrigger_type = "mult" , colour = G.C.MULT},
-			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = HEX("14b341")}
-		},
-		calc_function = function(card)
-			local mult = 0
-			for i,v in pairs(G.consumeables.cards) do
-				if v.ability.set == "Code" and not v.debuff then
-					if (SMODS.Mods["incantation"] or {}).can_load then
-						if v.ability.qty and v.ability.qty > 1 then
-							mult = mult + card.ability.extra.mult*v.ability.qty
-						else
-							mult = mult + card.ability.extra.mult
-						end				
-					else
-						mult = mult + card.ability.extra.mult
-					end
-				end			
-			end
-			card.joker_display_values.mult = mult
-			card.joker_display_values.localized_text = " (" .. localize("k_code") .. ")"
-		end,
-	}
-end
