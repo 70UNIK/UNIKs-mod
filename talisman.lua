@@ -151,7 +151,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 							effect.emult_message
 						)
 					else
-						card_eval_status_text(scored_card or effect.card or effect.focus, "a_factorial_mult", amount, percent)
+						card_eval_status_text(scored_card or effect.card or effect.focus, "fact_mult", amount, percent)
 					end
 				end
 			end
@@ -255,6 +255,6 @@ function whole_num_factorial(n)
     if val == 0 then
         return 1
     else
-        return val * factorial(val - 1)
+        return val * whole_num_factorial(val - 1)
     end
 end
