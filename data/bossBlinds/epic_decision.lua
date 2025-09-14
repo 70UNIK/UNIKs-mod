@@ -9,7 +9,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 2,
-	
+	pronouns = "he_him",
 	in_pool = function(self)
         return  CanSpawnEpic()
 	end,

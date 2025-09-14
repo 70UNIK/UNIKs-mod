@@ -50,15 +50,6 @@ function UNIK.paved_calc()
 			maxStones = maxStones + v.ability.extra.stones
 		end
 	end
-    local eval = {}
-    SMODS.calculate_context({unik_pavement = true},eval)
-    for i = 1, #eval do
-       if eval[i].jokers then
-           if eval[i].jokers.req_reduction_max then
-                maxStones = maxStones + eval[i].jokers.req_reduction_max
-           end
-       end        
-    end
     for i, v in pairs(G.hand.highlighted or {}) do
         if SMODS.has_no_rank(v) and SMODS.has_no_suit(v) then
             stones = stones + 1
@@ -73,7 +64,7 @@ function UNIK.paved_calc()
 end
 
 --StraightCalc
-get_straight_ref = get_straight
+local get_straight_ref = get_straight
 function get_straight(hand, min_length, skip, wrap)
 	local permutations = {}
 	local ranks = {}
@@ -202,9 +193,40 @@ function UNIK.create_dummy_from_stone(rank)
 	}
 end
 
+--Problematic cause sometimes the hook for get_
 local XsameHook = get_X_same
 function get_X_same(num, hand, or_more)
-local newNum = num
-    newNum = newNum - UNIK.paved_calc()
-    return XsameHook(newNum , hand, or_more)
+	local stones = UNIK.paved_calc()
+	if stones > 0 then
+		local vals = {}
+		for i = 1, SMODS.Rank.max_id.value do
+			vals[i] = {}
+		end
+		for i = 1, #G.ENHANCEMENT_OVERRIDE_RANKS do
+			vals[#vals + 1] = {}
+		end
+		for i=#hand, 1, -1 do
+			local curr = {}
+			table.insert(curr, hand[i])
+			local tempstones = stones
+			for j=1, #hand do
+				if (hand[i]:get_id() == hand[j]:get_id()) and i ~= j then
+					table.insert(curr, hand[j])
+				end
+				if (tempstones > 0 and (SMODS.has_no_rank(hand[i]) or SMODS.has_no_rank(hand[j]) )) and i ~= j then
+					table.insert(curr, hand[j])
+					tempstones = tempstones - 1
+				end
+			end
+			if or_more and (#curr >= num) or (#curr == num) then
+			vals[curr[1]:get_id()] = curr
+			end
+		end
+		local ret = {}
+		for i=#vals, 1, -1 do
+			if next(vals[i]) then table.insert(ret, vals[i]) end
+		end
+		return ret
+	end
+    return XsameHook(num, hand, or_more)
 end

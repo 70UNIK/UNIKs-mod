@@ -6,6 +6,7 @@ SMODS.Blind{
     pos = { x = 0, y = 2},
     boss_colour= HEX("0a0a0a"),
     dollars = 8,
+	pronouns = "he_him",
 	--Stop him from appearing in obsidian orb
 	no_orb = true,
     mult = 1,

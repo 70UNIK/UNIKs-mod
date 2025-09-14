@@ -19,6 +19,7 @@ local function KillPlayerOnSelect()
 )
 end
 SMODS.Blind	{
+    pronouns = "he_him",
     key = 'unik_epic_artisan',
     config = {},
 	showdown = true,

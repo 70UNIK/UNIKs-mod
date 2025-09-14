@@ -4190,8 +4190,8 @@ return {
             k_unik_magiced = "Hope you enjoy permanent shop bloat...",
 
             k_unik_summit_pack = "Summit Pack",
-            k_unik_magician_placeholder = "(^1.15 requirements)"
 
+            k_unik_magician_placeholder = "(^1.1 requirements)",
         },
         high_scores={},
         labels={

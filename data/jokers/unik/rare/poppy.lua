@@ -40,6 +40,7 @@ SMODS.Joker {
             ,
         }
 	end,
+    pronouns = "she_her",
     add_to_deck = function(self, card, from_debuff)
         card.ability.extra.triggered = false
     end,

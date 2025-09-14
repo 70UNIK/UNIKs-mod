@@ -11,6 +11,7 @@ SMODS.Blind{
     dollars = 5,
     mult = 2,
     death_message = 'special_lose_unik_bloon',
+    pronouns = "it_its",
     unik_before_play = function(self)
         --Add Half to 2 random cards selected and 2 random jokers that are not already have the edition
         local triggered = false

@@ -9,6 +9,8 @@ target = "game.lua"
 pattern = "delay(0.5)"
 position = "before"
 payload = '''
+G.jokers.config.highlighted_limit = 1e10
+G.consumeables.config.highlighted_limit = 1e10
 if not saveTable and G.GAME.modifiers.unik_single_select_limit then
     G.E_MANAGER:add_event(Event({
         trigger = "after",

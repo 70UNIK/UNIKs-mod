@@ -48,6 +48,7 @@ NFS.load(mod_path .. "data/hooks/startup.lua")()
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
+NFS.load(mod_path .. "data/hooks/colours.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
 

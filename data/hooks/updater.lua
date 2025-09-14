@@ -46,13 +46,41 @@ function Game:update(dt)
         if G.ARGS.LOC_COLOURS then
             G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
         end
-
         self.C.UNIK_ANCIENT = self.C.UNIK_ANCIENT or {0.5411764705882353,0.20784313725490197,0.6823529411764706,1}
         --R = 0.3 diff, G = 0.15 diff, B = 0.31 diff
         if self.C.UNIK_ANCIENT then
             self.C.UNIK_ANCIENT[1] = 0.5411764705882353 + 0.3*math.sin(self.TIMERS.REAL*1.3)
             self.C.UNIK_ANCIENT[2] = 0.20784313725490197 + 0.15*math.sin(self.TIMERS.REAL*1.3)
             self.C.UNIK_ANCIENT[3] = 0.6823529411764706 + 0.31*math.sin(self.TIMERS.REAL*1.3)
+        end
+        self.C.UNIK_SHITTY_EDITION = self.C.UNIK_SHITTY_EDITION or {0,0,0,1}
+        --self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)
+        self.C.UNIK_SHITTY_EDITION[1] = 0.6+0.2*(1- math.sin(self.TIMERS.REAL*1.3))
+        --self.C.UNIK_SHITTY_EDITION[4] = 0.6-0.2*(1- math.sin(self.TIMERS.REAL*1.3))
+        self.C.UNIK_SHITTY_EDITION[2] = math.min(self.C.DARK_EDITION[1], self.C.DARK_EDITION[2])
+
+         self.C.UNIK_SYNC_CATALYST_FAIL =  self.C.UNIK_SYNC_CATALYST_FAIL or {0,0,0,1}
+        --self.C.UNIK_SYNC_CATALYST_FAIL[1] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)
+        self.C.UNIK_SYNC_CATALYST_FAIL[3] = 0.6+0.2*(1- math.sin(self.TIMERS.REAL*1.3))
+        self.C.UNIK_SYNC_CATALYST_FAIL[2] = math.min(self.C.UNIK_SYNC_CATALYST_FAIL[1], self.C.UNIK_SYNC_CATALYST_FAIL[3])
+        
+        self.C.UNIK_LARTCEPS1 = self.C.UNIK_LARTCEPS1 or {0,0,0,1}
+        self.C.UNIK_LARTCEPS1[1] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
+        self.C.UNIK_LARTCEPS1[2] = 0.5+0.6*math.sin(self.TIMERS.REAL*5)
+        self.C.UNIK_LARTCEPS1[3] = 0.5+0.6*math.sin(self.TIMERS.REAL*5)
+
+        self.C.UNIK_LARTCEPS_INVERSE = self.C.UNIK_LARTCEPS_INVERSE or {0,0,0,1}
+        self.C.UNIK_LARTCEPS_INVERSE[1] = 0.5+0.6*math.sin(self.TIMERS.REAL*5)
+        self.C.UNIK_LARTCEPS_INVERSE[2] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
+        self.C.UNIK_LARTCEPS_INVERSE[3] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
+        if self.C.SECONDARY_SET then
+            self.C.SECONDARY_SET.unik_lartceps = self.C.UNIK_LARTCEPS1
+        end
+        if self.C.RARITY then
+            if self.C.RARITY["unik_legendary_blind"] then
+                self.C.RARITY["unik_legendary_blind"] = self.C.UNIK_RGB
+            end
+            self.C.RARITY["unik_ancient"] = self.C.UNIK_ANCIENT
         end
 		
 	end

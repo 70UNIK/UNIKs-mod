@@ -10,7 +10,7 @@ SMODS.Blind{
     boss_colour= HEX("666666"),
     dollars = 5,
     mult = 2,
-    
+    pronouns = "it_its",
 	--Only appear if you have at least 5 stone cardsSMODS.has_no_suit(v)
 	in_pool = function()
         local stoneCards = 0

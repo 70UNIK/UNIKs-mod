@@ -8,6 +8,7 @@ SMODS.Blind{
     dollars = 5,
     mult = 2,
     death_message = 'special_lose_bigger_blind',
+    pronouns = "it_its",
 	in_pool = function()
         --stop retcon abuse
         -- if G.GAME.round_resets.boss_rerolled then

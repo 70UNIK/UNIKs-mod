@@ -9,7 +9,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 2,
-	
+	pronouns = "he_him",
     loc_vars = function(self)
 		return { vars = {G.GAME.unik_reed_ranks[1].rank .. 's, '  .. G.GAME.unik_reed_ranks[2].rank .. 's '.. localize('k_unik_reed_part2') .. ' ' .. G.GAME.unik_reed_ranks[3].rank .. 's'} }
 	end,

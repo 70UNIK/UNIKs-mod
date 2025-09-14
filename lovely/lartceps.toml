@@ -70,28 +70,15 @@ position = "at"
 payload = '''(G.booster_pack and not G.booster_pack.REMOVED and not disable_booster_music and 'music2') or'''
 match_indent = true
 
-### Part 1 of hardcoding: If mortons fork is present, skip drawing cards
 [[patches]]
 [patches.pattern]
 target = '''functions/state_events.lua'''
-pattern = '''G.STATE = G.STATES.DRAW_TO_HAND
-                    G.deck:shuffle('nr'..G.GAME.round_resets.ante)
-                    G.deck:hard_set_T()
-                    G.STATE_COMPLETE = false'''
-position = "before"
-payload = '''if not G.GAME.unik_mortons_fork then'''
-match_indent = true
-
-##Wrapper (part 2)
-[[patches]]
-[patches.pattern]
-target = '''functions/state_events.lua'''
-pattern = '''G.STATE = G.STATES.DRAW_TO_HAND
-                    G.deck:shuffle('nr'..G.GAME.round_resets.ante)
-                    G.deck:hard_set_T()
-                    G.STATE_COMPLETE = false'''
+pattern = '''-- TARGET: setting_blind effects'''
 position = "after"
-payload = '''end'''
+payload = '''if G.GAME.unik_mortons_fork then
+    return true
+end
+'''
 match_indent = true
 
 

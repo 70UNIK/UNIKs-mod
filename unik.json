@@ -8,8 +8,11 @@
 	"priority": 99999999999999999,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
-	"version": "0.5.0",
+	"version": "0.4.1c",
 	"dependencies": [
         "Steamodded (>=1.0.0~BETA-0827c)"
+    ],
+	"conflicts": [
+		"Talisman (<=2.4)"
     ]
 }

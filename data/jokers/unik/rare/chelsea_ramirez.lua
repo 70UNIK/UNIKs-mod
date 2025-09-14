@@ -36,6 +36,7 @@ SMODS.Joker {
             ,localize(chelsea_quotes[quoteset][math.random(#chelsea_quotes[quoteset])] .. "")
         } }
 	end,
+	pronouns = "she_her",
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {

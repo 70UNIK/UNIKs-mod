@@ -32,6 +32,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	demicolon_compat = true,
+	pronouns = "she_her",
 	--Why 1.25? Storing multiple planets will cause the value to compound MASSIVELY, plus retriggers.
     config = { extra = { exp_levelup = 1.25} },
 	loc_vars = function(self, info_queue, center)
@@ -51,13 +52,13 @@ SMODS.Joker {
 			local hand2 = context.scoring_name or G.FUNCS.get_poker_hand_info(G.play.cards) or nil
 			if hand2 then
 				for i,v in pairs(G.consumeables.cards) do
-					moonlightlevelStructure(hand2,v,card)
+					moonlightlevelStructure(hand2,v,card,context.levelup_instant)
 				end
 			elseif #G.hand.highlighted > 0 then
 				local text, disp_text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
 				--print(text)
 				for i,v in pairs(G.consumeables.cards) do
-					moonlightlevelStructure(text,v,card)
+					moonlightlevelStructure(text,v,card,context.levelup_instant)
 				end
 			end
 			return {
@@ -65,79 +66,18 @@ SMODS.Joker {
 			}
 		end
 		if context.hand_levelup_held_consume and ((context.levelup_amount and lenient_bignum(context.levelup_amount) > lenient_bignum(0)) or not context.levelup_amount) then
-			local upgrade = false
 			local v = context.other_consumeable_lvlup
-				if v.debuff then
-					card_eval_status_text(card, "debuff", nil, nil, nil, nil)
-					v:juice_up(0.8, 0.5)
-					return
-				end
-				--individual planets
-				if v.ability.hand_type and v.ability.hand_type == context.levelup_poker_hand then
-					-- card_eval_status_text(card, "extra", nil, nil, nil, {
-					-- 	message = localize("k_upgrade_ex"),
-					-- 	colour = G.C.DARK_EDITION,
-					-- 	card=card,
-					-- })
-					local hand = context.levelup_poker_hand
-					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-					upgrade = true
-					
-				end
-				--ruutu, etc...
-				if v.ability.hand_types then
-					for i = 1,#v.ability.hand_types do
-						if v.ability.hand_types[i] == context.levelup_poker_hand then
-							local hand = context.levelup_poker_hand
-							exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-							upgrade = true
-							break
-						end
-					end
-				end
-				--Bhole
-				if v.config.center.key == "c_black_hole" then
-					local hand = context.levelup_poker_hand
-					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-					upgrade = true
-				end
-				--planetlua
-				if v.config.center.key == "c_cry_planetlua" then
-					if
-						SMODS.pseudorandom_probability(
-							v,
-							"planetlua",
-							1,
-							v and v.ability.extra.odds or 5
-						)
-					then
-						local hand = context.levelup_poker_hand
-						exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,context.levelup_instant)
-						upgrade = true
-					else
-						 card_eval_status_text(v, "extra", nil, nil, nil, {
-                                message = localize("k_nope_ex"),
-                                colour = G.C.SECONDARY_SET.Planet,
-                            })
-					end
-				end
-			if upgrade then
-				return {
-					message = localize("k_upgrade_ex"),
-					colour = G.C.DARK_EDITION,
-				}
-			else
+			moonlightlevelStructure(context.levelup_poker_hand,v,card,context.levelup_instant)
 				return{
 
 				}
-			end
 		end
 		
     end,
 
 }
 
-function moonlightlevelStructure(hand,consumeble,card)
+function moonlightlevelStructure(hand,consumeble,card,instant)
 	local upgrade = false
 	local v = consumeble
 		if v.debuff then
@@ -157,7 +97,7 @@ function moonlightlevelStructure(hand,consumeble,card)
 			-- 	card=card,
 			-- })
 			local hand = hand
-			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,instant)
 			upgrade = true
 			
 		end
@@ -167,7 +107,7 @@ function moonlightlevelStructure(hand,consumeble,card)
 				--print(v.ability.hand_types[i])
 				if v.ability.hand_types[i] == hand then
 					local hand = hand
-					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+					exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,instant)
 					upgrade = true
 					break
 				end
@@ -176,37 +116,83 @@ function moonlightlevelStructure(hand,consumeble,card)
 		end
 		--Bhole
 		if v.config.center.key == "c_black_hole" then
-			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
+			exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,instant)
 			upgrade = true
 		end
 		--planetlua
 		if v.config.center.key == "c_cry_planetlua" then
-			if
-				SMODS.pseudorandom_probability(
-					v,
-					"planetlua",
-					1,
-					v and v.ability.extra.odds or 5
-				)
-			then
-				exponentLevelExtra(hand,card.ability.extra.exp_levelup,v)
-				upgrade = true
+			if v.ability.immutable and v.ability.immutable.overflow_amount then
+				for i = 1, v.ability.immutable.overflow_amount do
+					if
+						SMODS.pseudorandom_probability(
+							v,
+							"planetlua",
+							1,
+							v and v.ability.extra.odds or 5
+						)
+					then
+						exponentLevelExtra(hand,card.ability.extra.exp_levelup,v,instant,true)
+						upgrade = true
+					else
+						if not instant then
+							card_eval_status_text(v, "extra", nil, nil, nil, {
+								message = localize("k_nope_ex"),
+								colour = G.C.SECONDARY_SET.Planet,
+							})
+						else
+							card_eval_status_text(v, "extra", nil, nil, nil, {
+								message = localize("k_nope_ex"),
+								colour = G.C.SECONDARY_SET.Planet,
+								delay = 0.1,
+							})
+						end
+					end
+				end
 			else
-					card_eval_status_text(v, "extra", nil, nil, nil, {
-						message = localize("k_nope_ex"),
-						colour = G.C.SECONDARY_SET.Planet,
-					})
+				if
+					SMODS.pseudorandom_probability(
+						v,
+						"planetlua",
+						1,
+						v and v.ability.extra.odds or 5
+					)
+				then
+					exponentLevelExtra(hand,card.ability.extra.exp_levelup,instant,v)
+					upgrade = true
+				else
+					if not instant then
+						card_eval_status_text(v, "extra", nil, nil, nil, {
+							message = localize("k_nope_ex"),
+							colour = G.C.SECONDARY_SET.Planet,
+						})
+					else
+						card_eval_status_text(v, "extra", nil, nil, nil, {
+							message = localize("k_nope_ex"),
+							colour = G.C.SECONDARY_SET.Planet,
+							delay = 0.1,
+						})
+					end
+				end
 			end
 		end
 	if upgrade then
-		card_eval_status_text(card, "extra", nil, nil, nil, {
-			message = localize("k_upgrade_ex"),
-			colour = G.C.DARK_EDITION,
-		})
+		if not instant then
+			card_eval_status_text(card, "extra", nil, nil, nil, {
+				message = localize("k_upgrade_ex"),
+				colour = G.C.DARK_EDITION,
+			})
+		else
+			card_eval_status_text(card, "extra", nil, nil, nil, {
+				message = localize("k_upgrade_ex"),
+				colour = G.C.DARK_EDITION,
+				delay = 0.1,
+			})
+		end
+		
 	end
 end
 
-function exponentLevelExtra(hand,exponent,v,instant)
+function exponentLevelExtra(hand,exponent,v,instant,no_exp)
 	--print("g")
 	if not instant and (not Talisman or not  Talisman.config_file.disable_anims) then
 		update_hand_text(
@@ -219,10 +205,14 @@ function exponentLevelExtra(hand,exponent,v,instant)
 			}
 		)
 	end
-	G.GAME.hands[hand].mult = G.GAME.hands[hand].mult*exponent
-	G.GAME.hands[hand].chips = G.GAME.hands[hand].chips*exponent
+	local repetitions = 1
+	if v.ability.immutable and v.ability.immutable.overflow_amount and not no_exp then
+		repetitions = v.ability.immutable.overflow_amount or 1
+	end
+	G.GAME.hands[hand].mult = G.GAME.hands[hand].mult*exponent^ repetitions
+	G.GAME.hands[hand].chips = G.GAME.hands[hand].chips*exponent^ repetitions
 	if not instant and (not Talisman or not Talisman.config_file.disable_anims) then
-		update_hand_text({delay = 0}, {mult = tostring("X"..exponent), StatusText = true})
+		update_hand_text({delay = 0}, {mult = tostring("X"..math.ceil((exponent^ repetitions)*100)/100), StatusText = true})
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
 			func = function()
@@ -232,7 +222,7 @@ function exponentLevelExtra(hand,exponent,v,instant)
 			end,
 		}))
 		delay(0.1)
-		update_hand_text({delay = 0}, {chips = tostring("X"..exponent), StatusText = true})
+		update_hand_text({delay = 0}, {chips = tostring("X"..math.ceil((exponent^ repetitions)*100)/100), StatusText = true})
 		G.E_MANAGER:add_event(Event({
 			trigger = "after",
 			func = function()

@@ -14,6 +14,7 @@ SMODS.Blind{
         end
         return true
 	end,
+    pronouns = "he_him",
     death_message = "special_lose_hate_ball",
     get_loc_debuff_text = function(self)
 		return localize("k_unik_hate_ball")
