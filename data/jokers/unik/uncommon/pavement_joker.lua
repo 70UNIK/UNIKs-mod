@@ -50,15 +50,6 @@ function UNIK.paved_calc()
 			maxStones = maxStones + v.ability.extra.stones
 		end
 	end
-    local eval = {}
-    SMODS.calculate_context({unik_pavement = true},eval)
-    for i = 1, #eval do
-       if eval[i].jokers then
-           if eval[i].jokers.req_reduction_max then
-                maxStones = maxStones + eval[i].jokers.req_reduction_max
-           end
-       end        
-    end
     for i, v in pairs(G.hand.highlighted or {}) do
         if SMODS.has_no_rank(v) and SMODS.has_no_suit(v) then
             stones = stones + 1
@@ -72,65 +63,65 @@ function UNIK.paved_calc()
     return math.floor(math.min(stones,maxStones))
 end
 
--- --StraightCalc
--- get_straight_ref = get_straight
--- function get_straight(hand, min_length, skip, wrap)
--- 	local permutations = {}
--- 	local ranks = {}
--- 	local cards = {}
--- 	local stones = UNIK.paved_calc()
--- 	if stones > 0 then
--- 		for i, v in pairs(hand) do
--- 			if not SMODS.has_no_suit(v) and SMODS.has_no_rank(v) then
--- 				cards[#cards + 1] = v
--- 				for i, v in pairs(UNIK.next_ranks(v:get_id(), nil, stones)) do --this means its inaccurate in some situations like K S S S S but its fine there isnt a better way
--- 					ranks[v] = true
--- 				end
--- 			end
--- 			if v:get_id() >= 11 then
--- 				new_ranks = {
--- 					"Ace",
--- 					"King",
--- 					"Queen",
--- 					"Jack",
--- 					10,
--- 				}
--- 				for i, v in pairs(new_ranks) do
--- 					ranks[v] = true
--- 				end
--- 			end
--- 		end
--- 		local rranks = {}
--- 		for i, v in pairs(ranks) do
--- 			rranks[#rranks + 1] = i
--- 		end
--- 		for i, v in UNIK.unique_combinations(rranks) do
--- 			if #i == stones then
--- 				permutations[#permutations + 1] = i
--- 			end
--- 		end
--- 		for i, v in ipairs(permutations) do
--- 			local actual = {}
--- 			local ranks = {}
--- 			for i, v in pairs(cards) do
--- 				actual[#actual + 1] = v
--- 				ranks[v:get_id()] = true
--- 			end
--- 			for i, p in pairs(v) do
--- 				local d = UNIK.create_dummy_from_stone(p)
--- 				if not ranks[d:get_id()] then
--- 					actual[#actual + 1] = d
--- 				end
--- 			end
--- 			local ret = get_straight_ref(actual, min_length + stones, skip, true)
--- 			if ret and #ret > 0 then
--- 				return ret
--- 			end
--- 		end
--- 	end
+--StraightCalc
+local get_straight_ref = get_straight
+function get_straight(hand, min_length, skip, wrap)
+	local permutations = {}
+	local ranks = {}
+	local cards = {}
+	local stones = UNIK.paved_calc()
+	if stones > 0 then
+		for i, v in pairs(hand) do
+			if not SMODS.has_no_suit(v) and SMODS.has_no_rank(v) then
+				cards[#cards + 1] = v
+				for i, v in pairs(UNIK.next_ranks(v:get_id(), nil, stones)) do --this means its inaccurate in some situations like K S S S S but its fine there isnt a better way
+					ranks[v] = true
+				end
+			end
+			if v:get_id() >= 11 then
+				new_ranks = {
+					"Ace",
+					"King",
+					"Queen",
+					"Jack",
+					10,
+				}
+				for i, v in pairs(new_ranks) do
+					ranks[v] = true
+				end
+			end
+		end
+		local rranks = {}
+		for i, v in pairs(ranks) do
+			rranks[#rranks + 1] = i
+		end
+		for i, v in UNIK.unique_combinations(rranks) do
+			if #i == stones then
+				permutations[#permutations + 1] = i
+			end
+		end
+		for i, v in ipairs(permutations) do
+			local actual = {}
+			local ranks = {}
+			for i, v in pairs(cards) do
+				actual[#actual + 1] = v
+				ranks[v:get_id()] = true
+			end
+			for i, p in pairs(v) do
+				local d = UNIK.create_dummy_from_stone(p)
+				if not ranks[d:get_id()] then
+					actual[#actual + 1] = d
+				end
+			end
+			local ret = get_straight_ref(actual, min_length + stones, skip, true)
+			if ret and #ret > 0 then
+				return ret
+			end
+		end
+	end
 
--- 	return get_straight_ref(hand, min_length + stones, skip, wrap)
--- end
+	return get_straight_ref(hand, min_length + stones, skip, wrap)
+end
 --Nextranks
 function UNIK.next_ranks(key, start, recurse)
 	key = ({
@@ -202,9 +193,40 @@ function UNIK.create_dummy_from_stone(rank)
 	}
 end
 
+--Problematic cause sometimes the hook for get_
 local XsameHook = get_X_same
 function get_X_same(num, hand, or_more)
-local newNum = num
-    newNum = newNum - UNIK.paved_calc()
-    return XsameHook(newNum , hand, or_more)
+	local stones = UNIK.paved_calc()
+	if stones > 0 then
+		local vals = {}
+		for i = 1, SMODS.Rank.max_id.value do
+			vals[i] = {}
+		end
+		for i = 1, #G.ENHANCEMENT_OVERRIDE_RANKS do
+			vals[#vals + 1] = {}
+		end
+		for i=#hand, 1, -1 do
+			local curr = {}
+			table.insert(curr, hand[i])
+			local tempstones = stones
+			for j=1, #hand do
+				if (hand[i]:get_id() == hand[j]:get_id()) and i ~= j then
+					table.insert(curr, hand[j])
+				end
+				if (tempstones > 0 and (SMODS.has_no_rank(hand[i]) or SMODS.has_no_rank(hand[j]) )) and i ~= j then
+					table.insert(curr, hand[j])
+					tempstones = tempstones - 1
+				end
+			end
+			if or_more and (#curr >= num) or (#curr == num) then
+			vals[curr[1]:get_id()] = curr
+			end
+		end
+		local ret = {}
+		for i=#vals, 1, -1 do
+			if next(vals[i]) then table.insert(ret, vals[i]) end
+		end
+		return ret
+	end
+    return XsameHook(num, hand, or_more)
 end
