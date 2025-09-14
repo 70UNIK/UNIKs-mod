@@ -9,6 +9,7 @@ SMODS.Blind{
     boss_colour= G.C.CHIPS,
     dollars = 5,
     mult = 2,
+    pronouns = "he_him",
     death_message = "special_lose_xchips_hater",
     set_blind = function(self, reset, silent)
         G.GAME.unik_xchips_becomes_mult = true

@@ -7,6 +7,7 @@ SMODS.Blind{
     boss_colour= HEX("EC5800"),
     dollars = 8,
     unik_exponent = {1,0.9},
+    pronouns = "he_him",
     --Disable if doing Jokerless: or has no jokers
             death_message="special_lose_unik_killed_by_placard",
     in_pool = function()

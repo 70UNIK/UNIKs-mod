@@ -33,6 +33,7 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
 	end,
     pools = {},
+    pronouns = "she_her",
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {

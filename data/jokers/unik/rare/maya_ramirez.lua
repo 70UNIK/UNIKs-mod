@@ -22,6 +22,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips_scored, center.ability.extra.x_chips_held, center.ability.extra.family_x_bonus} }
 	end,
+	pronouns = "she_her",
     calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
                 context.other_card.ability["perma_x_chips"] = context.other_card.ability["perma_x_chips"] or 0

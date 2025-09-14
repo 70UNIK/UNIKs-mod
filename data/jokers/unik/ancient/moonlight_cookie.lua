@@ -32,6 +32,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	demicolon_compat = true,
+	pronouns = "she_her",
 	--Why 1.25? Storing multiple planets will cause the value to compound MASSIVELY, plus retriggers.
     config = { extra = { exp_levelup = 1.25} },
 	loc_vars = function(self, info_queue, center)

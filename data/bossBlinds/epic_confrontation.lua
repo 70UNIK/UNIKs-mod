@@ -16,6 +16,7 @@ SMODS.Blind	{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
+    pronouns = "any_all",
 	--must be localized
 	
     unik_kill_hand = function(self, cards, hand, handname, check)

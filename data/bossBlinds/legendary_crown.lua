@@ -28,6 +28,7 @@ SMODS.Blind{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
+    pronouns = "she_her",
     mult = 1,
     glitchy_anim = true,
     death_message = "special_lose_unik_legendary_crown",

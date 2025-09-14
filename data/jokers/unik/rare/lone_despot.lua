@@ -22,6 +22,7 @@ SMODS.Joker {
         end
         return false
     end,
+    pronouns = "he_him",
     calculate = function(self, card, context)
         if context.forcetrigger then
              return {

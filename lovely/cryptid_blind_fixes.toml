@@ -226,20 +226,10 @@ payload = '''
 '''
 match_indent = true
 
-### tax
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/blind.lua"]'''
-pattern = '''return math.floor(math.min(0.4 * G.GAME.blind.chips, score) + 0.5)'''
-position = "at"
-payload = '''
-    return math.floor(math.min(0.8 * G.GAME.blind.chips, score) + 0.5)
-'''
-match_indent = true
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/blind.lua"]'''
-pattern = '''return { vars = { 0.4 * get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling } } -- no bignum?'''
+pattern = '''return { vars = { 0.4 * get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling } }'''
 position = "at"
 payload = '''
     return { vars = { 0.8 * get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling } } -- no bignum?
@@ -355,7 +345,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''=[SMODS Cryptid "items/blind.lua"]'''
-pattern = '''unik_before_play = function(self)
+pattern = '''cry_before_play = function(self)
 		local eligible_cards = {}
 		local idx
 		--Check for eligible cards (not eternal and not immune)

@@ -19,6 +19,7 @@ SMODS.Joker {
         end
 		return { vars = {center.ability.extra.card,math.ceil(G.GAME.starting_deck_size/2),mult} }
 	end,
+    pronouns = "he_him",
     calculate = function(self, card, context)
 		if (context.joker_main or context.forcetrigger) and #G.playing_cards -math.ceil(G.GAME.starting_deck_size/2) > 0 then
             local mult = math.max(0,(#G.playing_cards - math.ceil(G.GAME.starting_deck_size/2)) * card.ability.extra.card)

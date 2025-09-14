@@ -11,6 +11,7 @@ SMODS.Blind{
     boss_colour= HEX("404040"),
     dollars = 5,
     mult = 2,
+	pronouns = "it_its",
     loc_vars = function(self, info_queue, card)
         local string = ""
 		G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1

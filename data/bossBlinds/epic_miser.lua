@@ -16,6 +16,7 @@ SMODS.Blind{
     in_pool = function(self)
         return  CanSpawnEpic()
 	end,
+    pronouns = "he_him",
     debuff = {
         akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,

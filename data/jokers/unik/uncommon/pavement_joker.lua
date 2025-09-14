@@ -72,65 +72,65 @@ function UNIK.paved_calc()
     return math.floor(math.min(stones,maxStones))
 end
 
---StraightCalc
-get_straight_ref = get_straight
-function get_straight(hand, min_length, skip, wrap)
-	local permutations = {}
-	local ranks = {}
-	local cards = {}
-	local stones = UNIK.paved_calc()
-	if stones > 0 then
-		for i, v in pairs(hand) do
-			if not SMODS.has_no_suit(v) and SMODS.has_no_rank(v) then
-				cards[#cards + 1] = v
-				for i, v in pairs(UNIK.next_ranks(v:get_id(), nil, stones)) do --this means its inaccurate in some situations like K S S S S but its fine there isnt a better way
-					ranks[v] = true
-				end
-			end
-			if v:get_id() >= 11 then
-				new_ranks = {
-					"Ace",
-					"King",
-					"Queen",
-					"Jack",
-					10,
-				}
-				for i, v in pairs(new_ranks) do
-					ranks[v] = true
-				end
-			end
-		end
-		local rranks = {}
-		for i, v in pairs(ranks) do
-			rranks[#rranks + 1] = i
-		end
-		for i, v in UNIK.unique_combinations(rranks) do
-			if #i == stones then
-				permutations[#permutations + 1] = i
-			end
-		end
-		for i, v in ipairs(permutations) do
-			local actual = {}
-			local ranks = {}
-			for i, v in pairs(cards) do
-				actual[#actual + 1] = v
-				ranks[v:get_id()] = true
-			end
-			for i, p in pairs(v) do
-				local d = UNIK.create_dummy_from_stone(p)
-				if not ranks[d:get_id()] then
-					actual[#actual + 1] = d
-				end
-			end
-			local ret = get_straight_ref(actual, min_length + stones, skip, true)
-			if ret and #ret > 0 then
-				return ret
-			end
-		end
-	end
+-- --StraightCalc
+-- get_straight_ref = get_straight
+-- function get_straight(hand, min_length, skip, wrap)
+-- 	local permutations = {}
+-- 	local ranks = {}
+-- 	local cards = {}
+-- 	local stones = UNIK.paved_calc()
+-- 	if stones > 0 then
+-- 		for i, v in pairs(hand) do
+-- 			if not SMODS.has_no_suit(v) and SMODS.has_no_rank(v) then
+-- 				cards[#cards + 1] = v
+-- 				for i, v in pairs(UNIK.next_ranks(v:get_id(), nil, stones)) do --this means its inaccurate in some situations like K S S S S but its fine there isnt a better way
+-- 					ranks[v] = true
+-- 				end
+-- 			end
+-- 			if v:get_id() >= 11 then
+-- 				new_ranks = {
+-- 					"Ace",
+-- 					"King",
+-- 					"Queen",
+-- 					"Jack",
+-- 					10,
+-- 				}
+-- 				for i, v in pairs(new_ranks) do
+-- 					ranks[v] = true
+-- 				end
+-- 			end
+-- 		end
+-- 		local rranks = {}
+-- 		for i, v in pairs(ranks) do
+-- 			rranks[#rranks + 1] = i
+-- 		end
+-- 		for i, v in UNIK.unique_combinations(rranks) do
+-- 			if #i == stones then
+-- 				permutations[#permutations + 1] = i
+-- 			end
+-- 		end
+-- 		for i, v in ipairs(permutations) do
+-- 			local actual = {}
+-- 			local ranks = {}
+-- 			for i, v in pairs(cards) do
+-- 				actual[#actual + 1] = v
+-- 				ranks[v:get_id()] = true
+-- 			end
+-- 			for i, p in pairs(v) do
+-- 				local d = UNIK.create_dummy_from_stone(p)
+-- 				if not ranks[d:get_id()] then
+-- 					actual[#actual + 1] = d
+-- 				end
+-- 			end
+-- 			local ret = get_straight_ref(actual, min_length + stones, skip, true)
+-- 			if ret and #ret > 0 then
+-- 				return ret
+-- 			end
+-- 		end
+-- 	end
 
-	return get_straight_ref(hand, min_length + stones, skip, wrap)
-end
+-- 	return get_straight_ref(hand, min_length + stones, skip, wrap)
+-- end
 --Nextranks
 function UNIK.next_ranks(key, start, recurse)
 	key = ({

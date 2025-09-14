@@ -9,6 +9,7 @@ SMODS.Blind{
     dollars = 8,
     mult = 2,
     config = {},
+    pronouns = "he_him",
     debuff_hand = function(self, cards, hand, handname, check)
         local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(cards)
         local always_scores_count = 0

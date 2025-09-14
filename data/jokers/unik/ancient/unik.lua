@@ -38,6 +38,7 @@ SMODS.Joker {
 	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. "")
 	} }
 	end,
+	pronouns = "he_him",
     pools = {["unik_seven"] = true },
     calculate = function(self, card, context)
 		local check = false

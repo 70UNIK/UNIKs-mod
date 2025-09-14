@@ -32,16 +32,6 @@ SMODS.Blind{
 	end,
 }
 
--- local capper = SMODS.calculate_round_score
--- function SMODS.calculate_round_score()
--- 	local ret = capper()
--- 	if G.GAME and G.GAME.blind then
--- 		return ret * (G.GAME.blind:unik_cap_score(ret) or 1)
--- 	else
--- 		return ret
--- 	end
-	
--- end
 
 --stolen from the tax
 SMODS.Scoring_Calculation({

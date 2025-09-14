@@ -22,6 +22,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips} }
 	end,
+	pronouns = "she_her",
 	pools = {["unik_cube"] = true },
 	calculate = function(self, card, context)
 		if context.before and not context.blueprint_card and not context.retrigger_joker  then

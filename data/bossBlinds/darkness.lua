@@ -17,6 +17,7 @@ SMODS.Blind{
     boss_colour= HEX("222222"),
     dollars = 5,
     mult = 2,
+    pronouns = "he_him",
     in_pool = function()
         if G.GAME.round_resets.blind_ante > G.GAME.win_ante then
 			return true

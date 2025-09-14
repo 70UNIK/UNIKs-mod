@@ -16,6 +16,7 @@ SMODS.Joker {
 		end
 	end,
     pixel_size = { w = 71, h = 71 },
+    pronouns = "he_him",
     calculate = function(self, card, context)
         if context.before and G.GAME.current_round.hands_left == 0 and not context.blueprint and not context.repetition and not context.retrigger_joker then
             --print("turn them happy")
