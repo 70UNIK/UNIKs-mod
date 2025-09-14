@@ -11,8 +11,14 @@ function Game:start_run(args)
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
             self.GAME.round_resets.blind_choices.Small = get_new_boss()
         end
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+            G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+        end
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
             self.GAME.round_resets.blind_choices.Big = get_new_boss()
+        end
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+            G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
         end
         if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
             self.GAME.round_resets.blind_choices.Boss = get_new_boss()
@@ -39,8 +45,14 @@ function reset_blinds()
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
             G.GAME.round_resets.blind_choices.Small = get_new_boss()
         end
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+            G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+        end
         if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii or G.GAME.superboss_active then
             G.GAME.round_resets.blind_choices.Big = get_new_boss()
+        end
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+            G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
         end
         --Override superboss if forcing epic blinds
         if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
