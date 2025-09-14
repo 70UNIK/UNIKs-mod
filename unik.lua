@@ -635,6 +635,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/noon.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/zealous_joker.lua")()
@@ -678,7 +679,10 @@ NFS.load(mod_path .. "data/jokers/unik/rare/foundation.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/last_tile.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/!.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()

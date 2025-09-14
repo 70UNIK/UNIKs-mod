@@ -2224,7 +2224,7 @@ return {
             j_unik_double_up = {
                 name = "Double Up",
                 text = {
-                    "Create a Double Tag",
+                    "Create {C:attention}#1# Double Tag",
                     "when a Tag is obtained",
                 }
             },
@@ -2316,7 +2316,7 @@ return {
                 text = {
                     "Earn {C:gold}$#1#{} every",
                     "{C:gold}$#2#{} below the",
-                    "Interest Limit at",
+                    "{C:attention}Interest Limit{} at",
                     "the end of round",
                 }
             },
@@ -2354,7 +2354,7 @@ return {
             j_unik_compounding_interest = {
                 name = "Compounding Interest",
                 text = {
-                    "Earn {X:money,C:white}$X#1# of your", --X0.15 of your current money, lower than to the moon, but with a MUCH HIGHER cap.
+                    "Earn {X:money,C:white}$X#1#{} of your", --X0.15 of your current money, lower than to the moon, but with a MUCH HIGHER cap.
                     "{C:attention}current money{} at the",
                     "end of round",
                     "{C:inactive}(Capped at {C:money}$#2#{C:inactive})", --capped at $200, aka at $2000
@@ -4192,6 +4192,8 @@ return {
             k_unik_summit_pack = "Summit Pack",
 
             k_unik_magician_placeholder = "(^1.1 requirements)",
+            k_unik_double_up = "Double Up!",
+            k_unik_banished = "Banished!",
         },
         high_scores={},
         labels={
