@@ -62,14 +62,7 @@ SMODS.Joker {
 					amount = context.other_consumeable.ability.immutable.overflow_amount or 1
 				end
 				return {
-					message = localize({
-						type = "variable",
-						key = "a_mult",
-						vars = {
-							number_format(card.ability.extra.mult*amount),
-						},
-					}),
-					mult_mod = card.ability.extra.mult,
+					mult = card.ability.extra.mult*amount,
 					colour = G.C.MULT,
 
 				}
