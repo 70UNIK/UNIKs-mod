@@ -2121,13 +2121,7 @@ return {
             },
 
             --V0.5
-            j_unik_exclamation={
-                name = "!",
-                text = {
-                    "{X:unik_rgb,C:white}!Mult{} on {C:attention}Final Hand",
-                    "{C:red,E:5}Self Banishes",
-                }
-            },
+            
             j_unik_torn_dress = {
                 name = "Torn Dress",
                 text = {
@@ -2207,10 +2201,10 @@ return {
                 }
             },
             j_unik_up_n_go = {
-                name = "Up n' Go",
+                name = "Up & Go",
                 text = {
-                    "{X:mult,C:white}X#1#{} Mult",
-                    "for the next #2# Round#<s>2#"
+                    "{X:mult,C:white}X#1#{} Mult for",
+                    "the next {C:attention}#2#{} Round#<s>2#"
                 }
             },
             j_unik_better_riffin = {

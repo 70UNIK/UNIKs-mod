@@ -636,6 +636,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/zealous_joker.lua")()
@@ -830,7 +831,7 @@ end
 
 NFS.load(mod_path .. "data/overrides/blind_spawn.lua")()
 function vice_check()
-	if G.GAME.round_resets.ante >= 0 or G.GAME.round_resets.ante < 2 then
+	if G.GAME.round_resets.ante >= 0 and G.GAME.round_resets.ante < 2 then
 		return G.GAME.win_ante
 	end
 	G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1
@@ -848,6 +849,7 @@ function vice_check()
 	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
 		return 1
 	end
+	
     if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*multiplier*10000)/10000)) == 0 then
         return 1
     end
