@@ -123,41 +123,6 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 	if ret then
 		return ret
 	end
-
-		if (key == "fact_mult" or key == "factmult" or key == "fact_mult_mod") then
-			if effect.card then
-				juice_card(effect.card)
-			end
-			local mult = SMODS.Scoring_Parameters["mult"]
-			mult:modify(whole_num_factorial(mult.current))
-			if not effect.remove_default_message then
-				if from_edition then
-					card_eval_status_text(
-						scored_card,
-						"jokers",
-						nil,
-						percent,
-						nil,
-						{ message = "!"..localize("k_mult"), colour = G.C.EDITION, edition = true }
-					)
-				elseif key ~= "xlog_mult_mod" then
-					if effect.emult_message then
-						card_eval_status_text(
-							scored_card or effect.card or effect.focus,
-							"extra",
-							nil,
-							percent,
-							nil,
-							effect.emult_message
-						)
-					else
-						card_eval_status_text(scored_card or effect.card or effect.focus, "fact_mult", amount, percent)
-					end
-				end
-			end
-			return true
-		end
-
 		if (key == "xlog_mult" or key == "xlogmult" or key == "xlog_mult_mod") and amount ~= 1 then
 			if effect.card then
 				juice_card(effect.card)
@@ -226,7 +191,6 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 		end
 end
 for _, v in ipairs({
-	"fact_mult", "factmult", "fact_mult_mod", --oneshot joker
 	"xlog_mult", "xlogmult", "xlog_mult_mod",
 	"xlog_chips", "xlogchips", "xlog_chips_mod",
 }) do
@@ -248,13 +212,4 @@ function portable_exp(initial,exponent,value)
 		print (bigNum:arrow(to_big(exponent),to_big(value)))
 		return bigNum:arrow(to_big(exponent),to_big(value))
 	end
-end
-
-function whole_num_factorial(n)
-	local val = math.ceil(n)
-    if val == 0 then
-        return 1
-    else
-        return val * whole_num_factorial(val - 1)
-    end
 end
