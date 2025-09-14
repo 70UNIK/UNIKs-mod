@@ -2124,7 +2124,7 @@ return {
             j_unik_exclamation={
                 name = "!",
                 text = {
-                    "{C:unik_rgb}!Mult{} on {C:attention}Final Hand",
+                    "{X:unik_rgb,C:white}!Mult{} on {C:attention}Final Hand",
                     "{C:red,E:5}Self Banishes",
                 }
             },
