@@ -43,7 +43,7 @@ SMODS.current_mod.config_tab = function() --Config tab
 	}
 end
 
-NFS.load(mod_path .. "talisman.lua")()
+NFS.load(mod_path .. "talismanless.lua")()
 NFS.load(mod_path .. "data/hooks/startup.lua")()
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
