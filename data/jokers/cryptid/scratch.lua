@@ -25,6 +25,11 @@ SMODS.Joker {
 			vars = {center.ability.extra.mult} 
 		}
 	end,
+	    discovered = true,
+    unlocked = true,
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("cry")[1] }, badges)
+    end,
     pools = {["unik_copyrighted"] = true },
     calculate = function(self, card, context)
 		--Known issue: does not work with retriggers.

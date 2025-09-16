@@ -8,6 +8,8 @@ SMODS.Consumable{ -- The 8
     config = {
 		max_highlighted = 2
 	},
+    discovered = true,
+    unlocked = true,
     can_use = function(self, card)
         local cards = G.hand.highlighted
         -- Group check:
@@ -23,5 +25,8 @@ SMODS.Consumable{ -- The 8
         link_cards(G.hand.highlighted, self.key)
         card:juice_up(0.3, 0.5)
     end,
-    pos = {x = 2, y = 0,}
+    pos = {x = 2, y = 0,},
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
+    end,
 }

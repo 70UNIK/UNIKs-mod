@@ -29,6 +29,9 @@ SMODS.Consumable{
         end
         return false
     end,
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
+    end,
 }
 
 --Ban discarding while selecting excommunicaiton

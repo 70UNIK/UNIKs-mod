@@ -24,6 +24,11 @@ SMODS.Joker {
 	end,
 	sellable = true,
     immutable = true,
+	    discovered = true,
+    unlocked = true,
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("cry")[1] }, badges)
+    end,
     calculate = function(self, card, context)
 		if context.final_scoring_step and (to_big(card.ability.extra.Emult) < to_big(1)) then
             return {
