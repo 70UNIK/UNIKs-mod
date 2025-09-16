@@ -6,6 +6,7 @@ SMODS.Consumable{
 	atlas = "placeholders",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
+        return {vars = {card and card.ability.max_highlighted or self.config.max_highlighted}}
 	end,
     config = {
         max_highlighted = 2,
@@ -53,16 +54,18 @@ SMODS.Consumable{
     end,
     --rightmost card must be a linked group
     can_use = function(self, card)
-        local cards = UNIK.get_sorted_by_position(G.hand)
-        local rightmostCard = cards[#cards]
-        local id = nil
-        local source = nil
-        if rightmostCard.ability and rightmostCard.ability.group then
-            id = rightmostCard.ability.group.id
-            source = rightmostCard.ability.group.source
-        end
-        if id and #G.hand.highlighted <= card.ability.max_highlighted then
-            return true
+        if G.hand then
+            local cards = UNIK.get_sorted_by_position(G.hand)
+            local rightmostCard = cards[#cards]
+            local id = nil
+            local source = nil
+            if rightmostCard.ability and rightmostCard.ability.group then
+                id = rightmostCard.ability.group.id
+                source = rightmostCard.ability.group.source
+            end
+            if id and #G.hand.highlighted <= card.ability.max_highlighted then
+                return true
+            end
         end
         return false
     end,

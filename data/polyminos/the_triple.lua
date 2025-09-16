@@ -2,22 +2,25 @@ SMODS.Consumable{ -- The 8
     set = 'Polymino', 
     atlas = 'unik_polyminos',
     key = 'unik_the_triple',
-    loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
-    end,
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
+        return {vars = {card and card.ability.max_highlighted or self.config.max_highlighted}}
+	end,
     config = {
 		max_highlighted = 3
 	},
     discovered = true,
     unlocked = true,
     can_use = function(self, card)
-        local cards = G.hand.highlighted
-        -- Group check:
-        for i = 1, #cards do
-            if cards[i].ability.group then return false end
-        end
-        if #cards > 1 and cards <= card.ability.max_highlighted then
-            return true
+        if G.hand then
+            local cards = G.hand.highlighted
+            -- Group check:
+            for i = 1, #cards do
+                if cards[i].ability.group then return false end
+            end
+            if #cards > 1 and cards <= card.ability.max_highlighted then
+                return true
+            end
         end
         return false
     end,
