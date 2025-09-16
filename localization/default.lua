@@ -3591,17 +3591,17 @@ return {
                 name = "The Divorce",
                 text = {
                     "Removes a selected",
-                    "{C:attention}Linked Group{} and",
-                    "earn {C:money}$#1#"
+                    "{C:attention}Linked Group{}",
                 }
             },
             c_unik_exile = {
-                name = "The Exiled",
+                name = "The Excommunicated",
                 text = {
                     "Removes {C:attention}#2#{} cards from",
                     "Linked Groups and",
                     "{C:red}destroy{} them {C:attention}seperately",
-                    "{C:inactive,s:0.6}(Can select multiple groups while selected)"
+                    "{C:inactive,s:0.6}(Can select multiple groups while selected)",
+                    "{C:red,s:0.6}(Cannot Play or Discard while selected)",
                 }
             },
             c_unik_chains = {
@@ -3611,6 +3611,8 @@ return {
                     "Add the {C:attention}Rightmost",
                     "Group Link to cards",
                     "to it's left",
+                    "{C:inactive,s:0.6}(Can select multiple groups while selected)",
+                    "{C:red,s:0.6}(Cannot Play or Discard while selected)",
                 }
             },
 

@@ -15,7 +15,7 @@ local highlightHook = CardArea.can_highlight
 function CardArea:can_highlight(card)
     -- Anything is selectable with The 8 active
 
-    if card and self == G.hand and G.GAME and G.GAME.THE_8_BYPASS then
+    if card and self == G.hand and G.GAME and (G.GAME.THE_8_BYPASS or G.GAME.unik_excommunication) then
         return true
     end
     
@@ -60,11 +60,6 @@ function CardArea:can_highlight(card)
     else
         cardsAdded = 1
     end
-    --Finally calculate if cards can be highlighted
-    -- print("TGrouped cards'" .. #highlightedGroupedList )
-    -- print("TOTAL EXISTING CARDS 'to be played'" .. #nonGroupedList + #highlightedGroupedList )
-    -- print("TOTAL NEXT CARDS 'to be played'" .. cardsAdded  + #nonGroupedList + #highlightedGroupedList )
-    -- print("LIMIT " ..  self.config.highlighted_limit )
     if not card.highlighted and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > self.config.highlighted_limit then
         return false
     end
@@ -123,11 +118,11 @@ G.FUNCS.discard_cards_from_highlighted = function(e, hook)
     return ret
 end
 
-
-function unlink_cards(cards)
+--Unlink cards and gro
+function unlink_cards_and_groups(cards)
     for i = 1, #cards do
         local card = cards[i]
-        if card.ability.group then
+        if card.ability and card.ability.group then
             local id = card.ability.group.id
             local source = card.ability.group.source
             for i,v in pairs(G.playing_cards) do
@@ -137,6 +132,16 @@ function unlink_cards(cards)
                     v.ability.group = nil
                 end
             end
+            card.ability.group = nil
+        end
+
+    end
+end
+
+function unlink_cards(cards)
+    for i = 1, #cards do
+        local card = cards[i]
+        if card.ability and card.ability.group then
             card.ability.group = nil
         end
 

@@ -439,6 +439,26 @@ NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/tarots/carpenter.lua")()
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
+--Bunco polymino tarots
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/tarots/the_chains.lua")()
+	NFS.load(mod_path .. "data/tarots/the_divorce.lua")()
+	NFS.load(mod_path .. "data/tarots/the_excommunicated.lua")()
+end
+
+SMODS.Atlas {
+	key = "unik_polyminos",
+	path = "unik_polyminos.png",
+	px = 71,
+	py = 95
+}
+
+--Polyminos
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/polyminos/the_double.lua")()
+	NFS.load(mod_path .. "data/polyminos/the_triple.lua")()
+	NFS.load(mod_path .. "data/polyminos/the_quadruple.lua")()
+end
 
 ---SPECTRALS
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
