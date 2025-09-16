@@ -3315,7 +3315,7 @@ return {
                 name = 'Linked group',
                 text = {
                     'Linked cards in group',
-                    'are drawn, played',
+                    'are drawn, played, discarded',
                     'and destroyed {C:attention}together'
                 }
             },
@@ -3586,12 +3586,31 @@ return {
                     "{C:attention}Timber Card",
                 }
             },
+            --Linked group specific tarots
             c_unik_divorce = {
                 name = "The Divorce",
                 text = {
                     "Removes a selected",
                     "{C:attention}Linked Group{} and",
                     "earn {C:money}$#1#"
+                }
+            },
+            c_unik_exile = {
+                name = "The Exiled",
+                text = {
+                    "Removes {C:attention}#2#{} cards from",
+                    "Linked Groups and",
+                    "{C:red}destroy{} them {C:attention}seperately",
+                    "{C:inactive,s:0.6}(Can select multiple groups while selected)"
+                }
+            },
+            c_unik_chains = {
+                name = "The Chains",
+                text = {
+                    "Select {C:attention}#2#{} Cards",
+                    "Add the {C:attention}Rightmost",
+                    "Group Link to cards",
+                    "to it's left",
                 }
             },
 
@@ -3624,7 +3643,8 @@ return {
                     "{C:attention}Copies{} the last used",
                     "Polymino{} card", 
                 }
-            }
+            },
+            
          },
         unik_lartceps = {
             c_unik_rip_girlfriend = {
