@@ -1,0 +1,2 @@
+--Bunco exclusive tarot, removes a linked group and earn $20.
+--tarot for better accessibility.

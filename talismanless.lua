@@ -208,8 +208,8 @@ function portable_exp(initial,exponent,value)
 		return initial^value
 	else
 		local bigNum = to_big(initial)
-		print(bigNum .. " " .. exponent .. " " .. value)
-		print (bigNum:arrow(to_big(exponent),to_big(value)))
+		--print(bigNum .. " " .. exponent .. " " .. value)
+		--print (bigNum:arrow(to_big(exponent),to_big(value)))
 		return bigNum:arrow(to_big(exponent),to_big(value))
 	end
 end

@@ -3311,6 +3311,14 @@ return {
                     "{X:dark_edition,C:white}^#1#{} extra Mult"
                 }
             },
+            bunc_linked_group = {
+                name = 'Linked group',
+                text = {
+                    'Linked cards in group',
+                    'are drawn, played',
+                    'and destroyed {C:attention}together'
+                }
+            },
         },
         Planet={
             c_unik_asteroid_belt = {
@@ -3577,9 +3585,47 @@ return {
                     "card#<s>1# into a",
                     "{C:attention}Timber Card",
                 }
-            }
+            },
+            c_unik_divorce = {
+                name = "The Divorce",
+                text = {
+                    "Removes a selected",
+                    "{C:attention}Linked Group{} and",
+                    "earn {C:money}$#1#"
+                }
+            },
 
         },
+         Polymino = {
+            c_unik_the_double = {
+                name = "The Double",
+                text = {
+                    '{C:attention}Link together{} any',
+                    '#1# selected cards'
+                }
+            },
+            c_unik_the_triple = {
+                name = "The Triple",
+                text = {
+                    '{C:attention}Link together{} any',
+                    '#1# selected cards'
+                }
+            },
+            c_unik_the_quadruple = {
+                name = "The Quadruple",
+                text = {
+                    '{C:attention}Link together{} any',
+                    '#1# selected cards'
+                }   
+            },
+            c_unik_blank_polymino = {
+                name = "Blank Polymino",
+                text = {
+                    "{C:attention}Copies{} the last used",
+                    "Polymino{} card", 
+                }
+            }
+         },
         unik_lartceps = {
             c_unik_rip_girlfriend = {
                 name = "Powerdown",
@@ -3689,6 +3735,14 @@ return {
                 text = {
                     --All cards lose perma bonuses and permanently lose -4 Mult, -30 Chips and X0.5 Mult
                 }
+            },
+            c_unik_parasite = {
+                name = "The Parasite",
+                text = {
+                    "Link #1# Namta Cards",
+                    "to #1# in #2# cards",
+                    "in deck",
+                }
             }
         },
         unik_summit = {
@@ -3768,6 +3822,13 @@ return {
                 text = {
                     "Permanently add held {C:money}$#1#{}",
                     "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            c_unik_blank_summit = {
+                name = "Blank Summit",
+                text = {
+                    "{C:attention}Copies{} the last used",
+                    "{C:unik_summit}Summit{} card", 
                 }
             }
 

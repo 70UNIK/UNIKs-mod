@@ -1,0 +1,1 @@
+--If hand contains a spectrum, convert all played cards into the leftmost scoring card.

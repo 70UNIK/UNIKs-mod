@@ -804,6 +804,9 @@ end
 NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
 NFS.load(mod_path .. "data/overrides/last_hand.lua")() 
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/overrides/polyminos_rework.lua")() 
+end
 
 
 --Challenges gone until I fix them to work with new API NFS.load(mod_path .. "data/challenges/common_muck.lua")()
