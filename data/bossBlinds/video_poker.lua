@@ -134,6 +134,11 @@ G.FUNCS.can_play = function(e)
 			e.config.button = "play_cards_from_highlighted"
 		end
     else
-        video_poker_play(e)
+        if not can_play_multilink() then
+            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+            e.config.button = nil
+        else
+            video_poker_play(e)
+        end
     end
 end

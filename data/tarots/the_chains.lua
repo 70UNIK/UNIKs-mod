@@ -42,10 +42,7 @@ SMODS.Consumable{
         end
     end,
     in_pool = function(self)
-        if G.GAME.last_card_group then
-            return true
-        end
-        return false
+        return hasLinks()
     end,
      update = function(self, card)
         if card.highlighted then
@@ -58,16 +55,19 @@ SMODS.Consumable{
     can_use = function(self, card)
         if G.hand then
             local cards = UNIK.get_sorted_by_position(G.hand)
-            local rightmostCard = cards[#cards]
-            local id = nil
-            local source = nil
-            if rightmostCard.ability and rightmostCard.ability.group then
-                id = rightmostCard.ability.group.id
-                source = rightmostCard.ability.group.source
+            if cards and #cards > 0 then
+                local rightmostCard = cards[#cards]
+                local id = nil
+                local source = nil
+                if rightmostCard.ability and rightmostCard.ability.group then
+                    id = rightmostCard.ability.group.id
+                    source = rightmostCard.ability.group.source
+                end
+                if id and #G.hand.highlighted <= card.ability.max_highlighted then
+                    return true
+                end
             end
-            if id and #G.hand.highlighted <= card.ability.max_highlighted then
-                return true
-            end
+            
         end
         return false
     end,

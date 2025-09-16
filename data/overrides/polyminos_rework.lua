@@ -11,19 +11,27 @@
 ---Properly add linked cards to highlighted when played or discarded
 -- Allows for a group of over 5 cards to be played/discarded
 
-local highlightHook = CardArea.can_highlight
-function CardArea:can_highlight(card)
-    -- Anything is selectable with The 8 active
-
-    if card and self == G.hand and G.GAME and (G.GAME.THE_8_BYPASS or G.GAME.unik_excommunication) then
-        return true
+--Ban discarding while selecting excommunicaiton
+local excommunicationHighlight = G.FUNCS.can_discard
+G.FUNCS.can_discard = function(e)
+    if G.GAME.unik_excommunication then
+        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+    else
+        if not can_play_multilink() then
+            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+            e.config.button = nil
+        else
+            excommunicationHighlight(e)
+        end
     end
-    
-    --How this works:
-    --Gathers all highlighted cards with groups and adds potentially unhighlighted cards.
-    --Gathers all groupless cards
-    --Checks if selected card is in a group.
+end
 
+---Portable function
+---Similar to below but:
+---If 1 link exceeds 5, it can play
+---If a sum of 2 links exceed 5, cannot be played
+function can_play_multilink(card)
     local highlightedGroupedList = {}
     local highlightedGroups = {}
     local nonGroupedList = {}
@@ -46,24 +54,70 @@ function CardArea:can_highlight(card)
         end
     end
     local cardsAdded = 0
+    local inGroup = false
     --If highlighted card is in a group...
     if card  and card.ability and card.ability.group then
         --If inside a group already, then always return true (it assumes that it already fulfils limits prior)
         if highlightedGroups[card.ability.group.id] then
-            return true
+            inGroup = true
         end
         for j,w in pairs(G.hand.cards) do
             if w.ability and w.ability.group and w.ability.group.id == card.ability.group.id then
                 cardsAdded = cardsAdded + 1
             end
         end
-    else
+        cardsAdded = 1
+    elseif card then
         cardsAdded = 1
     end
-    if not card.highlighted and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > self.config.highlighted_limit then
-        return false
+    if card then
+        print("existing cards:" .. #nonGroupedList + #highlightedGroupedList)
+        print("new cards:" ..cardsAdded + #nonGroupedList + #highlightedGroupedList)
+        print("groups:".. #highlightedGroups)
+        print("groupless cards:" .. #nonGroupedList)
+        print(inGroup)
+        print("limit:" ..G.hand.config.highlighted_limit)
     end
 
+    --Only check if highlighted groups are greater than 1 and no other non grouped items are inside.
+    if #nonGroupedList > 0 or #highlightedGroups > 1 or inGroup == false then
+        if card then
+             if G.hand and not card.highlighted and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > G.hand.config.highlighted_limit then
+                return false
+            end
+        elseif #nonGroupedList > 0 or #highlightedGroups > 1 then
+             if G.hand and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > G.hand.config.highlighted_limit then
+                return false
+            end
+        end
+       
+    end
+    
+    if inGroup then
+        return true
+    end
+    if card then
+        return 'bypass'
+    else
+        return true
+    end
+    
+end
+
+local highlightHook = CardArea.can_highlight
+function CardArea:can_highlight(card)
+    -- Anything is selectable with The 8 active
+
+    if card and self == G.hand and G.GAME and (G.GAME.THE_8_BYPASS or G.GAME.unik_excommunication) then
+        return true
+    end
+
+    if self == G.hand then
+        local val = can_play_multilink(card)
+        if type(val) ~= 'string' then
+            return val
+        end
+    end
 
     return highlightHook(self,card)
 end

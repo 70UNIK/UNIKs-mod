@@ -3592,6 +3592,8 @@ return {
                 text = {
                     "Removes a selected",
                     "{C:attention}Linked Group{}",
+                    "{C:inactive,s:0.6}(Can select multiple groups while selected)",
+                    "{C:red,s:0.6}(Cannot Play or Discard while selected)",
                 }
             },
             c_unik_excommunicated = {

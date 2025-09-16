@@ -26,23 +26,19 @@ SMODS.Consumable{
         end
     end,
     in_pool = function(self)
-        if G.GAME.last_card_group then
-            return true
-        end
-        return false
+        return hasLinks()
     end,
     set_badges = function (self, card, badges)
       SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
     end,
 }
 
---Ban discarding while selecting excommunicaiton
-local excommunicationHighlight = G.FUNCS.can_discard
-G.FUNCS.can_discard = function(e)
-    if G.GAME.unik_excommunication then
-        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-        e.config.button = nil
-    else
-        excommunicationHighlight(e)
+
+function hasLinks()
+    for i,v in pairs(G.playing_cards) do
+        if v.ability and v.ability.group then
+            return true
+        end
     end
+    return false
 end

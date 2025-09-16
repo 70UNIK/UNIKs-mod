@@ -18,11 +18,23 @@ SMODS.Consumable{
             card:juice_up(0.3, 0.5)
         return true end }))
      end,
-    in_pool = function(self)
-        if G.GAME.last_card_group then
-            return true
+    update = function(self, card)
+        if card.highlighted then
+            if G.GAME then G.GAME.unik_excommunication = true end
+        end
+    end,
+     can_use = function(self, card)
+        if G.hand then
+            local cards = G.hand.highlighted
+            -- Group check:
+            for i = 1, #cards do
+                if cards[i].ability.group then return true end
+            end
         end
         return false
+    end,
+    in_pool = function(self)
+        return hasLinks()
     end,
         set_badges = function (self, card, badges)
       SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
