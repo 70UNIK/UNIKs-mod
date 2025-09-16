@@ -3594,10 +3594,10 @@ return {
                     "{C:attention}Linked Group{}",
                 }
             },
-            c_unik_exile = {
+            c_unik_excommunicated = {
                 name = "The Excommunicated",
                 text = {
-                    "Removes {C:attention}#2#{} cards from",
+                    "Removes {C:attention}#1#{} cards from",
                     "Linked Groups and",
                     "{C:red}destroy{} them {C:attention}seperately",
                     "{C:inactive,s:0.6}(Can select multiple groups while selected)",
@@ -3607,7 +3607,7 @@ return {
             c_unik_chains = {
                 name = "The Chains",
                 text = {
-                    "Select {C:attention}#2#{} Cards",
+                    "Select {C:attention}#1#{} Cards",
                     "Add the {C:attention}Rightmost",
                     "Group Link to cards",
                     "to it's left",

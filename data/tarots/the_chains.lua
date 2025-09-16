@@ -52,6 +52,8 @@ SMODS.Consumable{
             if G.GAME then G.GAME.unik_excommunication = true end
         end
     end,
+    	    unlocked = true,
+    discovered = true,
     --rightmost card must be a linked group
     can_use = function(self, card)
         if G.hand then

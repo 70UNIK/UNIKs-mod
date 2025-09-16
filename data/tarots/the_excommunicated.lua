@@ -10,6 +10,8 @@ SMODS.Consumable{
 
 		return { vars = { card and card.ability.max_highlighted or self.config.max_highlighted } }
 	end,
+    	    unlocked = true,
+    discovered = true,
      use = function(self, card)
         local cards = G.hand.highlighted
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
