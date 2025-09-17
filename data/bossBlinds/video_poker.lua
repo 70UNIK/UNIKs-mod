@@ -119,10 +119,7 @@ SMODS.Blind{
 
 local video_poker_play = G.FUNCS.can_play
 G.FUNCS.can_play = function(e)
-    if G.GAME.unik_excommunication then
-        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-		e.config.button = nil
-    elseif G.GAME.unik_video_poker_rules then
+    if G.GAME.unik_video_poker_rules then
         if
 			#G.hand.highlighted < #G.hand.cards
 			or G.GAME.blind.block_play

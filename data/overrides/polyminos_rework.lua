@@ -14,16 +14,11 @@
 --Ban discarding while selecting excommunicaiton
 local excommunicationHighlight = G.FUNCS.can_discard
 G.FUNCS.can_discard = function(e)
-    if G.GAME.unik_excommunication then
+    if not can_play_multilink() then
         e.config.colour = G.C.UI.BACKGROUND_INACTIVE
         e.config.button = nil
     else
-        if not can_play_multilink() then
-            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-            e.config.button = nil
-        else
-            excommunicationHighlight(e)
-        end
+        excommunicationHighlight(e)
     end
 end
 
@@ -59,13 +54,11 @@ function can_play_multilink(card)
         end
     end
     local realGroups = 0
-    if card then
-        for k,v in pairs(highlightedGroups) do
-            realGroups = realGroups + 1
-        end
+    for k,v in pairs(highlightedGroups) do
+        realGroups = realGroups + 1
     end
     local realForcedGroups = 0
-    if not card and checkForceSelect then
+    if not card then
         for k,v in pairs(forcedGroups) do
             realForcedGroups = realForcedGroups + 1
         end
@@ -90,14 +83,24 @@ function can_play_multilink(card)
         cardsAdded = 1
     end
 
-    if card then
-        -- print("existing cards:" .. #nonGroupedList + #highlightedGroupedList)
-        -- print("new cards:" ..cardsAdded + #nonGroupedList + #highlightedGroupedList)
-        -- print("groups:".. realGroups)
-        -- print("groupless cards:" .. #nonGroupedList)
-        -- print(inGroup)
-        -- print("limit:" ..G.hand.config.highlighted_limit)
-    end
+    -- if card then
+    --     print("existing cards:" .. #nonGroupedList + #highlightedGroupedList)
+    --     print("new cards:" ..cardsAdded + #nonGroupedList + #highlightedGroupedList)
+    --     print("groups:".. realGroups)
+    --     print("groupless cards:" .. #nonGroupedList)
+    --     print(inGroup)
+    --     print("limit:" ..G.hand.config.highlighted_limit)
+    -- else
+    --     print("22222existing cards:" .. #nonGroupedList + #highlightedGroupedList)
+    --     print("22222groups:".. realGroups)
+    --     print("22222groupless cards:" .. #nonGroupedList)
+    --     print("groups:".. realGroups)
+    --     print("groupless cards:" .. #nonGroupedList)
+    --     print(inGroup)
+    --     print("limit:" ..G.hand.config.highlighted_limit)
+    --     print("FORCED cards:" .. realForcedGroups)
+    --     print("-----------------------------------")
+    -- end
 
     --Only check if highlighted groups are greater than 1 and no other non grouped items are inside.
     if #nonGroupedList > 0 or realGroups > 1 or inGroup == false then
@@ -129,8 +132,28 @@ local highlightHook = CardArea.can_highlight
 function CardArea:can_highlight(card)
     -- Anything is selectable with The 8 active
 
-    if card and self == G.hand and G.GAME and (G.GAME.THE_8_BYPASS or G.GAME.unik_excommunication) then
+    if card and self == G.hand and G.GAME and (G.GAME.THE_8_BYPASS) then
         return true
+    end
+    --normal selection if a consumable is highlighted
+    if (G.consumeables and G.consumeables.highlighted) or (G.pack_cards and G.pack_cards.highlighted) then
+        if (G.consumeables and #G.consumeables.highlighted > 0) or (G.pack_cards and #G.pack_cards.highlighted > 0) then
+            if G.CONTROLLER.HID.controller then 
+                if  self.config.type == 'hand'
+                then
+                        return true
+                end
+            else
+                if  self.config.type == 'hand' or
+                    self.config.type == 'joker' or
+                    self.config.type == 'consumeable' or
+                    (self.config.type == 'shop' and self.config.highlighted_limit > 0)
+                then
+                        return true
+                end
+            end
+            return false
+        end
     end
 
     if self == G.hand then
