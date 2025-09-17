@@ -144,22 +144,22 @@ function G.FUNCS.play_cards_from_highlighted(e)
         G.GAME.blind:unik_before_play()
         SMODS.calculate_context({on_select_play = true})
 
-        --Polymino autoselect
-        local id = nil
-        local source = nil
+        --Polymino autoselect all cards in selected group
+        local id = {}
 
         if G.hand and G.hand.highlighted then
             for i = 1, #G.hand.highlighted do
                 if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group then
-                    id = G.hand.highlighted[i].ability.group.id
-                    source = G.hand.highlighted[i].ability.group.source
+                    id[G.hand.highlighted[i].ability.group.id] = true
                 end
             end
         end
-        if id  then
+        if id and #id > 0 then
             for i,v in pairs(G.hand.cards) do
-                if v and v.ability and v.ability.group and v.ability.group.id == id and not v.highlighted then
-                    G.hand:brute_force_highlight(v)
+                for j,x in pairs(id) do
+                    if v and v.ability and v.ability.group and v.ability.group.id == j and not v.highlighted then
+                        G.hand:brute_force_highlight(v)
+                    end
                 end
             end
         end

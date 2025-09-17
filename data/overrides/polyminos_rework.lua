@@ -31,9 +31,11 @@ end
 ---Similar to below but:
 ---If 1 link exceeds 5, it can play
 ---If a sum of 2 links exceed 5, cannot be played
+---If all highlighted cards are forced and its across 2 groups (cerulean bell DX), allow cards to be played regardless.
 function can_play_multilink(card)
     local highlightedGroupedList = {}
     local highlightedGroups = {}
+    local forcedGroups = {}
     local nonGroupedList = {}
     for i,v in pairs(G.hand.highlighted) do
         if v and v.ability and v.ability.group then
@@ -44,6 +46,9 @@ function can_play_multilink(card)
                 for j,w in pairs(G.hand.cards) do
                     if w.ability and w.ability.group and w.ability.group.id == id then
                         highlightedGroupedList[#highlightedGroupedList+1] = {card = w, id = id}
+                        if w.ability.forced_selection then
+                            forcedGroups[id] = true
+                        end
                         
                     end
                     highlightedGroups[id] = true
@@ -57,6 +62,12 @@ function can_play_multilink(card)
     if card then
         for k,v in pairs(highlightedGroups) do
             realGroups = realGroups + 1
+        end
+    end
+    local realForcedGroups = 0
+    if not card and checkForceSelect then
+        for k,v in pairs(forcedGroups) do
+            realForcedGroups = realForcedGroups + 1
         end
     end
     
@@ -94,7 +105,8 @@ function can_play_multilink(card)
              if G.hand and not card.highlighted and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > G.hand.config.highlighted_limit then
                 return false
             end
-        elseif #nonGroupedList > 0 or realGroups > 1 then
+        --Still allow play if forced groups equal (or somehow succeed) selected groups, to avoid softlock in blinds such as cerulean DX
+        elseif (#nonGroupedList > 0 or realGroups > 1) and realForcedGroups < realGroups then
              if G.hand and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > G.hand.config.highlighted_limit then
                 return false
             end
@@ -155,24 +167,21 @@ end
 local linked_discarded = G.FUNCS.discard_cards_from_highlighted
 G.FUNCS.discard_cards_from_highlighted = function(e, hook)
     --Polymino autoselect
-    local id = nil
-    local source = nil
+    local id = {}
 
     if G.hand and G.hand.highlighted then
         for i = 1, #G.hand.highlighted do
             if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group then
-                id = G.hand.highlighted[i].ability.group.id
-                source = G.hand.highlighted[i].ability.group.source
+                id[G.hand.highlighted[i].ability.group.id] = true
             end
         end
     end
-    -- print(id)
-    -- print(source)
-    if id then
+    if id and #id > 0 then
         for i,v in pairs(G.hand.cards) do
-            if v and v.ability and v.ability.group and v.ability.group.id == id and not v.highlighted then
-                -- print("LINK IT!!")
-                G.hand:brute_force_highlight(v)
+            for j,x in pairs(id) do
+                if v and v.ability and v.ability.group and v.ability.group.id == j and not v.highlighted then
+                    G.hand:brute_force_highlight(v)
+                end
             end
         end
     end
