@@ -44,15 +44,22 @@ function can_play_multilink(card)
                 for j,w in pairs(G.hand.cards) do
                     if w.ability and w.ability.group and w.ability.group.id == id then
                         highlightedGroupedList[#highlightedGroupedList+1] = {card = w, id = id}
-                        highlightedGroups[id] = true
+                        
                     end
-                    
+                    highlightedGroups[id] = true
                 end
             end
         else
             nonGroupedList[#nonGroupedList+1] = {card = v}
         end
     end
+    local realGroups = 0
+    if card then
+        for k,v in pairs(highlightedGroups) do
+            realGroups = realGroups + 1
+        end
+    end
+    
     local cardsAdded = 0
     local inGroup = false
     --If highlighted card is in a group...
@@ -71,22 +78,23 @@ function can_play_multilink(card)
     elseif card then
         cardsAdded = 1
     end
-    -- if card then
-    --     print("existing cards:" .. #nonGroupedList + #highlightedGroupedList)
-    --     print("new cards:" ..cardsAdded + #nonGroupedList + #highlightedGroupedList)
-    --     print("groups:".. #highlightedGroups)
-    --     print("groupless cards:" .. #nonGroupedList)
-    --     print(inGroup)
-    --     print("limit:" ..G.hand.config.highlighted_limit)
-    -- end
+
+    if card then
+        -- print("existing cards:" .. #nonGroupedList + #highlightedGroupedList)
+        -- print("new cards:" ..cardsAdded + #nonGroupedList + #highlightedGroupedList)
+        -- print("groups:".. realGroups)
+        -- print("groupless cards:" .. #nonGroupedList)
+        -- print(inGroup)
+        -- print("limit:" ..G.hand.config.highlighted_limit)
+    end
 
     --Only check if highlighted groups are greater than 1 and no other non grouped items are inside.
-    if #nonGroupedList > 0 or #highlightedGroups > 1 or inGroup == false then
+    if #nonGroupedList > 0 or realGroups > 1 or inGroup == false then
         if card then
              if G.hand and not card.highlighted and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > G.hand.config.highlighted_limit then
                 return false
             end
-        elseif #nonGroupedList > 0 or #highlightedGroups > 1 then
+        elseif #nonGroupedList > 0 or realGroups > 1 then
              if G.hand and not G.GAME.unik_video_poker_rules and #nonGroupedList + #highlightedGroupedList > 0 and cardsAdded + #nonGroupedList + #highlightedGroupedList > G.hand.config.highlighted_limit then
                 return false
             end
