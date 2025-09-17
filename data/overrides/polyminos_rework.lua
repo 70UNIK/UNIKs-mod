@@ -58,26 +58,27 @@ function can_play_multilink(card)
     --If highlighted card is in a group...
     if card  and card.ability and card.ability.group then
         --If inside a group already, then always return true (it assumes that it already fulfils limits prior)
+        
         if highlightedGroups[card.ability.group.id] then
             inGroup = true
-        end
-        for j,w in pairs(G.hand.cards) do
-            if w.ability and w.ability.group and w.ability.group.id == card.ability.group.id then
-                cardsAdded = cardsAdded + 1
+        else
+            for j,w in pairs(G.hand.cards) do
+                if w.ability and w.ability.group and w.ability.group.id == card.ability.group.id then
+                    cardsAdded = cardsAdded + 1
+                end
             end
         end
-        cardsAdded = 1
     elseif card then
         cardsAdded = 1
     end
-    if card then
-        print("existing cards:" .. #nonGroupedList + #highlightedGroupedList)
-        print("new cards:" ..cardsAdded + #nonGroupedList + #highlightedGroupedList)
-        print("groups:".. #highlightedGroups)
-        print("groupless cards:" .. #nonGroupedList)
-        print(inGroup)
-        print("limit:" ..G.hand.config.highlighted_limit)
-    end
+    -- if card then
+    --     print("existing cards:" .. #nonGroupedList + #highlightedGroupedList)
+    --     print("new cards:" ..cardsAdded + #nonGroupedList + #highlightedGroupedList)
+    --     print("groups:".. #highlightedGroups)
+    --     print("groupless cards:" .. #nonGroupedList)
+    --     print(inGroup)
+    --     print("limit:" ..G.hand.config.highlighted_limit)
+    -- end
 
     --Only check if highlighted groups are greater than 1 and no other non grouped items are inside.
     if #nonGroupedList > 0 or #highlightedGroups > 1 or inGroup == false then
