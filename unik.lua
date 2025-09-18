@@ -289,8 +289,8 @@ SMODS.Atlas {
 SMODS.ConsumableType {
 	key = "unik_summit",
 	prefix_config = { key = true },
-	primary_colour = G.C.UNIK_SUMMIT,
-	secondary_colour = G.C.UNIK_SUMMIT,
+	primary_colour = HEX("000000"),
+	secondary_colour = HEX("000000"),
 	shop_rate = 0.0,
 	loc_txt = {},
 	default = "c_unik_elbert", 

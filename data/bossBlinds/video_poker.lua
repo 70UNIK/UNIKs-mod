@@ -131,7 +131,7 @@ G.FUNCS.can_play = function(e)
 			e.config.button = "play_cards_from_highlighted"
 		end
     else
-        if not can_play_multilink() then
+        if next(SMODS.find_mod("Bunco")) and not can_play_multilink() then
             e.config.colour = G.C.UI.BACKGROUND_INACTIVE
             e.config.button = nil
         else
