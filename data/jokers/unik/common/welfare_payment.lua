@@ -7,7 +7,7 @@ SMODS.Joker {
 	config = {
 		extra = {
 			dollars = 1,
-            dollar_mod = 3,
+            dollar_mod = 2.5,
 		},
 	},
 	perishable_compat = true,

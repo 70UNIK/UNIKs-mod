@@ -2149,9 +2149,8 @@ return {
             j_unik_beaver = {
                 name = "Beaver",
                 text = {
-                    "Held Timber cards",
-                    "each give",
-                    "Mult {X:mult,C:white}Xlog_#1#(Mult)",
+                    "Held {C:attention}Timber{} cards",
+                    "each give Mult {X:mult,C:white}Xlog_#1#(Mult)", --Xlog_100(Mult)
                 },
             },
             j_unik_niko = {
@@ -2233,7 +2232,7 @@ return {
             j_unik_double_up = {
                 name = "Double Up",
                 text = {
-                    "Create {C:attention}#1# Double Tag",
+                    "Create {C:attention}#1# Double Tag#<s>1#",
                     "when a Tag is obtained",
                 }
             },
@@ -2310,14 +2309,26 @@ return {
                 }
             },
             --13 (12 usable)
-            j_unik_kings_court = {
-                name = "The King's Court",
+            j_unik_multesers = { --scored cards give +10 Mult, loses 1 Mult when +chips is triggered from Jokers, immediately eaten if Xchips or higher is triggered
+                name = "Multesers",
                 text = {
-                    "After {C:attention}#1#{} round#<s>1#,",
-                    "sell this card to",
-                    "gain {C:attention}Baron{}} and {C:attention}Mime",
-                    "{C:inactive}(Must have room)",
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive}/#1#{C:inactive})",
+                    "Scored cards give",
+                    "{C:mult}#4##1#{} Mult, loses",
+                    "{C:mult}-#2#{} Mult when {C:chips}+Chips{}",
+                    "is triggered by {C:attention}Jokers",
+                    "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
+                    "are triggered",
+                }
+            },
+            j_unik_multesers_depleted = { --scored cards give +10 Mult, loses 1 Mult when +chips is triggered from Jokers, immediately eaten if Xchips or higher is triggered
+                name = "Multesers",
+                text = {
+                    "Scored cards give",
+                    "{C:mult}#4##1#{} Mult, loses",
+                    "{C:mult}-#2#{} Mult when {C:chips}+Chips{}",
+                    "is triggered by {C:attention}Jokers",
+                    "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
+                    "are triggered or at {C:mult}#3#{} Mult",
                 }
             },
             j_unik_welfare_payment = {
@@ -2332,9 +2343,9 @@ return {
             j_unik_preservatives = {
                 name = "Preservatives",
                 text = {
-                    "Replace all Perishable",
+                    "Replace all {C:red}Perishable",
                     "stickers with",
-                    "Eternal Stickers",
+                    "{C:purple}Eternal{} Stickers",
                     "{C:inactive,s:0.8}(Removes debuffs if present)"
                 }
             },  
@@ -2369,13 +2380,14 @@ return {
                     "{C:inactive}(Capped at {C:money}$#2#{C:inactive})", --capped at $200, aka at $2000
                 }
             },
-            j_unik_card_bufferer = {
-                name = "Card Bufferer",
+            j_unik_rocky_road = {
+                name = "Rocky Road",
                 text = {
-                    "Scored cards",
-                    "gives X#1# Mult",
-                    "Increase this by X#2#", --0.25
-                    "per played unscoring card",
+                    "Create a {C:unik_summit}Summit Card", 
+                    "when a {C:attention}Bulwark",
+                    "is played",
+                    "{C:red,E:2}Destroyed{} if a {C:attention}suit",
+                    "or a {C:attention}rank{} is played",
                 }
             },
             --That's 18 non cursed jokers for the next update!!
@@ -2388,6 +2400,52 @@ return {
                     --only becomes sellable after 1-10 rounds
                     --A random card played becomes corrupted
                     -- when sold, create 3 corrupted detrimental jokers.
+                }
+            },
+
+            --Bunco crossmod Jokers
+            j_unik_bunc_king_minos = {
+                name =  "The Corpse of King Minos", --Poly mino... gettit?
+                 text = {
+                    "When {C:attention}Boss Blind{} is selected",
+                    "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size", -- ^1.1 Blind Size
+                    "and {C:red}#1#{} Hand Size",
+                    "After defeat, create {C:bunco_virtual_dark}The 8{}",
+                    "and {C:red,E:2}Self Destruct",
+                },
+            },
+            j_unik_bunc_eternal_fuel = { --uncommon
+                name = "Eternal Fuel",
+                text = {
+                    "Remove {C:red}Reactive{} from",
+                    "all {C:attention}Jokers{} and cards",
+                    "Gain a {C:red}Vessel Tag{}",
+                    "per Sticker removed",
+                    "{C:inactive,s:0.8}(Removes debuffs if present)"
+                }
+            },
+            j_unik_bunc_domino_shield = { --common
+                name = "Domino Shield",
+                text = {
+                    "{C:red}Scattering{} Jokers",
+                    "{C:attention}no longer{} {C:red}destroy",
+                    "adjacent Jokers",
+                }
+            },
+            j_unik_bunc_haste = { --common
+                name = "Haste",
+                text = {
+                    "{C:red}Hindered{} Jokers",
+                    "are immediately {C:attention}removed",
+                    "when {C:attention}sold",
+                }
+            },
+            j_unik_bunc_cyborg = {
+                name = "Cyborg",
+                text = {
+                    "{C:attention}Rescore{} all cards",
+                    "if a {C:attention}Copper Card",
+                    "is {C:attention}rescored",
                 }
             },
             

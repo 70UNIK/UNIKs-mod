@@ -9,7 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {odds1 = 1,odds2 = 1, mult=20,odds_mult = 3, p_dollars = 20, odds_money = 7} },
+    config = { extra = {odds1 = 1,odds2 = 1, mult=7,odds_mult = 2, p_dollars = 7, odds_money = 4} },
     --ONLY DISABLE if extracredit is installed
     loc_vars = function(self, info_queue, center)
         local new_numerator1, new_denominator1 = SMODS.get_probability_vars(center, center.ability.extra.odds1, center.ability.extra.odds_mult, 'unik_lucky_seven_mult')

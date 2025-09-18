@@ -1,27 +1,46 @@
 --literally flesh panopicon
 SMODS.Joker {
     key = 'earthmover',
-    atlas = 'unik_rare',
-	pos = { x = 3, y = 1 },
+    atlas = 'placeholders',
+	pos = { x = 2, y = 0 },
     rarity = 3,
     cost = 6,
     immutable = true,
     eternal_compat = false,
 	demicoloncompat = true,
-    config = { extra = { exponent = 1.15 } },
+    discovered = true,
+    unlocked = true,
+    config = { extra = { exponent = 1.1,handsize = -2,applied_handsize = false } },
     loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway" }
+		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_bunc_the_8" }
 		if not center.edition or (center.edition and not center.edition.negative) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
 		end
-		return { vars = { center.ability.extra.exponent } }
+		return { vars = { center.ability.extra.exponent,center.ability.extra.handsize} }
 	end,
-	pronouns = "it_its",
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if card.ability.extra.applied_handsize then
+             G.hand:change_size(-card.ability.extra.handsize)
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if card.ability.extra.applied_handsize then
+            G.hand:change_size(card.ability.extra.handsize)
+        end
+    end,
+	pronouns = "he_him",
     calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and context.blind.boss and not card.getting_sliced and not context.retrigger_joker and not context.repetition then
 			local eval = function(card)
 				return not card.REMOVED and not G.RESET_JIGGLES
 			end
+            if not card.ability.extra.applied_handsize then
+                card.ability.extra.applied_handsize = true
+                G.hand:change_size(card.ability.extra.handsize)
+            end
 			juice_card_until(card, eval, true)
 			card.gone = false
 			G.GAME.blind.chips = G.GAME.blind.chips ^ card.ability.extra.exponent
@@ -62,8 +81,8 @@ SMODS.Joker {
 						nil,
 						nil,
 						nil,
-						"c_unik_gateway",
-						"earthmoverunik"
+						"c_bunc_the_8",
+						"king_minosunik"
 					)
 					card:set_edition({ negative = true }, true)
 					card:add_to_deck()

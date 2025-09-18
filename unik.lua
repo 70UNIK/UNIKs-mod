@@ -685,6 +685,9 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/D16.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/double_up.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
 
 --Rare
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
@@ -701,8 +704,8 @@ NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/last_tile.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
-NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()
@@ -711,7 +714,7 @@ NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")()
 
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")() --FULL REWORK NEEDED
+NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
@@ -733,6 +736,9 @@ NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")()
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
+end
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/jokers/bunco/king_minos.lua")() 
 end
 if Cryptid then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()

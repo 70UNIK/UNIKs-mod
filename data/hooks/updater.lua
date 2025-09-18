@@ -74,8 +74,14 @@ function Game:update(dt)
         self.C.UNIK_LARTCEPS_INVERSE[1] = 0.5+0.6*math.sin(self.TIMERS.REAL*5)
         self.C.UNIK_LARTCEPS_INVERSE[2] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
         self.C.UNIK_LARTCEPS_INVERSE[3] = 0.5+0.6*(1- math.sin(self.TIMERS.REAL*5))
+        self.C.UNIK_SUMMIT = self.C.UNIK_SUMMIT or HEX("6f859e")
         if self.C.SECONDARY_SET then
             self.C.SECONDARY_SET.unik_lartceps = self.C.UNIK_LARTCEPS1
+            self.C.SECONDARY_SET.unik_summit = self.C.UNIK_SUMMIT
+        end
+        if self.C.SET then
+            self.C.SET.unik_lartceps = self.C.UNIK_LARTCEPS
+            self.C.SET.unik_summit = self.C.UNIK_SUMMIT
         end
         if self.C.RARITY then
             if self.C.RARITY["unik_legendary_blind"] then

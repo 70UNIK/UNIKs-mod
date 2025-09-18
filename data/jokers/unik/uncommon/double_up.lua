@@ -3,7 +3,7 @@ SMODS.Joker {
     key = 'unik_double_up',
     atlas = 'placeholders',
 	pos = { x = 2, y = 0 },
-    rarity = 3,
+    rarity = 2,
     cost = 5,
 	config = {
 		extra = {

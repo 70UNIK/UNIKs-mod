@@ -98,6 +98,40 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
     if scored_card and scored_card.ability and scored_card.ability.no_score then
         key = nil
     end
+
+    local destroy_multeasers = false
+    if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
+        destroy_multeasers = true
+    end
+    
+    if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
+        destroy_multeasers = true
+    end
+    if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
+        destroy_multeasers = true
+    end
+    if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') then
+        destroy_multeasers = true
+    end
+    if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') then
+        destroy_multeasers = true
+    end
+    if G.jokers and destroy_multeasers then
+        for i,v in pairs(G.jokers.cards) do
+            if v.config.center.key == 'j_unik_multesers' and not v.ability.extra.destroyed then
+                
+                 G.E_MANAGER:add_event(Event({
+                    func = function()
+                        v.ability.extra.destroyed = true
+                        selfDestruction(v,'k_eaten_ex',G.C.MULT)
+                        return true
+                    end,
+                }))
+                
+            end
+        end
+    end
+    
     local ret = scie(effect, scored_card, key, amount, from_edition)
     if ret then
         return ret
