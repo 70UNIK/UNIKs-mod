@@ -61,31 +61,6 @@ SMODS.Blind{
 	end,
 }
 
-local backFX = Back.trigger_effect
-function Back:trigger_effect(args)
-     if self.name == 'Plasma Deck' and args.context == 'final_scoring_step' and G.GAME.unik_disable_catalyst then
-        G.E_MANAGER:add_event(Event({
-            func = (function()
-                local text = localize('k_unik_plasma_deck_fail')
-                attention_text({
-                    scale = 1.4, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
-                })
-                G.GAME.blind.triggered = true
-                 if SMODS.hand_debuff_source then SMODS.hand_debuff_source:juice_up(0.3,0) else SMODS.juice_up_blind() end
-                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.06*G.SETTINGS.GAMESPEED, blockable = false, blocking = false, func = function()
-                    play_sound('tarot2', 0.76, 0.4);return true end}))
-                play_sound('tarot2', 1, 0.4)
-                G.ROOM.jiggle = G.ROOM.jiggle + 3
-                return true
-            end)
-        }))
-        delay(0.6)
-        return args.chips, args.mult
-    end
-    local ret = backFX(self,args)
-    return ret
-end
-
 if CardSleeves then
     local plasmaSleeve = CardSleeves.Sleeve:get_obj('sleeve_casl_plasma')
     local plasmaSleeveRef = plasmaSleeve.calculate
