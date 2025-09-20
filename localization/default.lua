@@ -1398,7 +1398,7 @@ return {
                 name = '{C:unik_unik_color}UNIK',
                 text = {
                     "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
-                    "for each {C:attention}7{} scored",
+                    "for each {C:attention}7{} in scoring hand", --Remove retriggers cause otherwise he becomes extremely powerful fast with retriggers, makes him more in line with Alice
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
@@ -2156,10 +2156,10 @@ return {
             j_unik_niko = {
                 name = "Niko",
                 text = {
-                    "#1# give {X:mult,C:white}X#1#{} Mult",
-                    "when scored",
+                    "Scored {V:1}#1#{} give", --X3 mult
+                    "{X:mult,C:white}X#2#{} Mult",
                     "Suit changes after round",
-                    "(Selects a Light Suit from deck)",
+                    "{C:inactive,s:0.6}(Selects different Light Suit from deck if possible)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
@@ -2211,7 +2211,7 @@ return {
                     "loses {X:mult,C:white}X#1#{} Mult",
                     "when triggered",
                     "{C:red,E:2}Self Destructs{} at",
-                    "{X:mult,C:white}X#1#{} Mult"
+                    "{X:mult,C:white}X#3#{} Mult"
                 }
             },
             j_unik_up_n_go = {
@@ -2232,8 +2232,8 @@ return {
             j_unik_double_up = {
                 name = "Double Up",
                 text = {
-                    "Create {C:attention}#1# Double Tag#<s>1#",
-                    "when a Tag is obtained",
+                    "When a Tag is obtained",
+                    "create {C:attention}#1#{} copies of it",
                 }
             },
             --11
@@ -2409,7 +2409,7 @@ return {
                  text = {
                     "When {C:attention}Boss Blind{} is selected",
                     "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size", -- ^1.1 Blind Size
-                    "and {C:red}#1#{} Hand Size",
+                    "and {C:red}#2#{} Hand Size",
                     "After defeat, create {C:bunco_virtual_dark}The 8{}",
                     "and {C:red,E:2}Self Destruct",
                 },
@@ -3992,6 +3992,7 @@ return {
             ach_unik_royal_fail="Score a Royal Flush against Video Poker and die anyway",
             ach_unik_death_star_moonlight="Own Stella Mortis and Moonlight Cookie without Perkeo at the same time",
             ach_unik_abyss="Die to a Legendary Blind",
+            ach_unik_niko_niko="Have a Niko Niko self-destruct",
         },
         achievement_names={
             ach_unik_royal_poker="Jackpot!",
@@ -4010,6 +4011,7 @@ return {
             ach_unik_royal_fail="Royal Fuck",
             ach_unik_death_star_moonlight="That's No Moon Light!", --done
             ach_unik_abyss="The Abyss", --done
+            ach_unik_niko_niko="You Killed Niko",
         },
         blind_states={},
         challenge_names={
@@ -4285,6 +4287,12 @@ return {
             k_poppy_trigger2="Let's go Poppy!",
             k_poppy_trigger3="I did it!",
             k_poppy_trigger4="Yay!",
+
+            k_unik_niko_normal1="Oh, hi! My name is Niko!",
+            k_unik_niko_normal2="This is something different...",
+            k_unik_niko_normal3="I think we should play ",
+
+            k_unik_niko_nikoed="Oh god... I don't feel right...", --Niko sticker
 
             unik_plus_lartceps = "+1 Lartceps...",
             unik_plus_summit = "+1 Summit",

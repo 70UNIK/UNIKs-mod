@@ -119,14 +119,8 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
     if G.jokers and destroy_multeasers then
         for i,v in pairs(G.jokers.cards) do
             if v.config.center.key == 'j_unik_multesers' and not v.ability.extra.destroyed then
-                
-                 G.E_MANAGER:add_event(Event({
-                    func = function()
-                        v.ability.extra.destroyed = true
-                        selfDestruction(v,'k_eaten_ex',G.C.MULT)
-                        return true
-                    end,
-                }))
+                v.ability.extra.destroyed = true
+                selfDestruction(v,'k_eaten_ex',G.C.MULT)
                 
             end
         end

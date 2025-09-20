@@ -56,22 +56,56 @@ SMODS.Joker {
 				}
 			end
 		end
-        if (context.individual and context.cardarea == G.play)then
-			if context.other_card:get_id() == 7 and not context.blueprint  then		
+		if context.before and not context.blueprint then
+			local triggered = false
+            local increase = 0
+            for k, v in ipairs(context.scoring_hand) do
+                if v:get_id() == 7 then
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            v:juice_up()
+                            return true
+                        end,
+                    }))
+                     increase  =  increase  + (card.ability.extra.Echips_mod)
+                    triggered = true
+                end       
+            end
+            if triggered then
 				SMODS.scale_card(card, {
 					ref_table =card.ability.extra,
 					ref_value = "Echips",
-					scalar_value = "Echips_mod",
+					scalar_value = "custom_scaler",
+					scalar_table = {
+                        custom_scaler =  increase ,
+                    },
 					base = 1,
 					message_key = "a_powchips",
 					message_colour = G.C.DARK_EDITION,
 					force_full_val = true,
 				})
-				return {
+                				return {
 
 				}
-			end
-		end		
+            end
+		end
+		--TOO OP
+        -- if (context.individual and context.cardarea == G.play)then
+		-- 	if context.other_card:get_id() == 7 and not context.blueprint  then		
+		-- 		SMODS.scale_card(card, {
+		-- 			ref_table =card.ability.extra,
+		-- 			ref_value = "Echips",
+		-- 			scalar_value = "Echips_mod",
+		-- 			base = 1,
+		-- 			message_key = "a_powchips",
+		-- 			message_colour = G.C.DARK_EDITION,
+		-- 			force_full_val = true,
+		-- 		})
+		-- 		return {
+
+		-- 		}
+		-- 	end
+		-- end		
 
     end,
 }

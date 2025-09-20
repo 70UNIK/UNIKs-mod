@@ -1,8 +1,8 @@
 SMODS.Joker {
 	key = 'unik_up_n_go',
-    atlas = 'placeholders',
+    atlas = 'unik_common',
     rarity = 1,
-	pos = { x = 0, y = 0 },
+	pos = { x = 5, y = 0 },
     cost = 4,
     config = { extra = {x_mult = 3}, immutable = {rounds = 3}},
     loc_vars = function(self, info_queue, center)

@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_compounding_interest',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_rare',
+	pos = { x = 4, y = 1 },
     rarity = 3,
     cost = 8,
 	config = {

@@ -685,7 +685,7 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/D16.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/uncommon/double_up.lua")()
+
 NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
 
@@ -706,6 +706,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()
@@ -723,6 +724,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")()
 
 --Ancient
 --NIKO
+NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
 --WORLD MACHINE
 NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/white_lily_cookie.lua")()

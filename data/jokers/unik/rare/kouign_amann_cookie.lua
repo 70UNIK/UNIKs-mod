@@ -78,6 +78,18 @@ SMODS.Joker {
                 }
             end
         end
+        if context.forcetrigger then
+            local dispMult = card.ability.extra.x_mult
+            for i,v in pairs(context.scoring_hand) do
+                if UNIK.is_suit_type(v,'light') then
+                    dispMult = dispMult + card.ability.extra.x_mult_mod
+                end
+            end
+            return {
+                x_mult = dispMult,
+                card = card
+            }
+        end
         if context.after and not context.blueprint then
             card.ability.extra.x_mult = 1
         end

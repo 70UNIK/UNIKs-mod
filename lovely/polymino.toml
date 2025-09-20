@@ -96,3 +96,17 @@ payload = '''
 G.hand:brute_force_highlight(G.hand.crackers_highlighted[i])
 '''
 match_indent = true
+
+
+##not related to polys but fixes astigmatism
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Bunco "Bunco.lua"]'''
+pattern = '''BUNCOMOD.funcs.astigmatism_check = function (card, suit)
+    if not next(SMODS.find_card('j_bunc_myopia')) then'''
+position = "at"
+payload = '''
+BUNCOMOD.funcs.astigmatism_check = function (card, suit)
+    if not next(SMODS.find_card('j_bunc_astigmatism')) then
+'''
+match_indent = true

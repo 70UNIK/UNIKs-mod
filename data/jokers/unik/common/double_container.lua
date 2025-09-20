@@ -85,8 +85,10 @@ if MoreFluff then
                     
                     if eval[i].jokers.repetitions and not isTriggered then
                         for _ = 1, eval[i].jokers.repetitions do
-                            card_eval_status_text(eval[i].jokers.card, 'jokers', nil, nil, nil, eval[i].jokers)
-                            trigger_colour_end_of_round(_card,true)
+                            if _card.ability.set == "Colour" or _card.ability.set == "Shape" then
+                                card_eval_status_text(eval[i].jokers.card, 'jokers', nil, nil, nil, eval[i].jokers)
+                                trigger_colour_end_of_round(_card,true)
+                            end
                         end
                     end
                 end
