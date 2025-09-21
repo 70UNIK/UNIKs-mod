@@ -33,7 +33,7 @@ SMODS.Challenge{
                 --also nil check to avoid registring banned jokers (almanac)
                 if v.set == "Joker" and v ~= nil then
                     --ban all but high card and none type jokers
-                    if Cryptid then
+                    if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
                         if k ~= 'j_cry_giggly' and k ~= 'j_cry_dubious' and k ~= 'j_cry_undefined' and k ~= 'j_cry_nebulous' then
                             if G.P_CENTERS[k].effect and (G.P_CENTERS[k].effect == "Cry Type Mult" or G.P_CENTERS[k].effect == "Cry Type Chips") then
                                  bannedCards[#bannedCards+1] = {id = k}
@@ -47,7 +47,7 @@ SMODS.Challenge{
                     end
                 end
             end
-            if Cryptid then
+            if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
                 bannedCards[#bannedCards+1] = { id = "j_cry_wonka_bar" }
                 bannedCards[#bannedCards+1] = { id = "j_cry_fractal" }
                 bannedCards[#bannedCards+1] = { id = "v_cry_stickyhand" }

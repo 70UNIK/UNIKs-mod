@@ -131,7 +131,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
         end
     end
     --Only play if highlight cards are > 0
-    if Cryptid then
+    if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
         if #G.hand.highlighted == 0 and (Cryptid.enabled("set_cry_poker_hand_stuff") == true) and G.PROFILES[G.SETTINGS.profile].cry_none then
             G.PROFILES[G.SETTINGS.profile].cry_none = true
         end

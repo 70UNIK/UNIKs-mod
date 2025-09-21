@@ -25,7 +25,7 @@ SMODS.Challenge{
 		banned_cards = function(self)
 			local banList = {}
 			banList[#banList + 1] = { id = "j_luchador" }
-			if Cryptid then
+			if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
 				banList[#banList + 1] = { id = "v_cry_copies" }
 				banList[#banList + 1] = { id = "v_cry_tag_printer" }
 				banList[#banList + 1] = { id = "v_cry_clone_machine" }

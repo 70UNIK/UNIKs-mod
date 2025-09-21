@@ -1,0 +1,1 @@
+--X1.5 Ascension power per light card scored, X0.25 Mult

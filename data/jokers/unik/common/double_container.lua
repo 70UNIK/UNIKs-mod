@@ -25,7 +25,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
         if MoreFluff then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables2" }
-        elseif Cryptid then
+        elseif SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables3" }
         else
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables" }
