@@ -14,7 +14,11 @@ payload = '''
 local nanny = tostring(number_format(math.floor(SMODS.calculate_round_score())))
 print(nanny)
 -- -nan fix
-G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
+if nanny ~= '-nan' then
+    G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
+else
+    G.GAME.round_scores['hand'].amt = math.huge
+end
 local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,SMODS.calculate_round_score())
 local debuff_hand = false
 local add_to_blind = 0
