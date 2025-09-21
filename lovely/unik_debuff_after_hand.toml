@@ -11,6 +11,9 @@ target = 'functions/state_events.lua'
 pattern = '''check_for_unlock({type = 'chip_score', chips = math.floor( SMODS.calculate_round_score() )})'''
 position = 'after'
 payload = '''
+local nanny = tostring(number_format(math.floor(SMODS.calculate_round_score())))
+print(nanny)
+-- -nan fix
 G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
 local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,SMODS.calculate_round_score())
 local debuff_hand = false
@@ -29,6 +32,9 @@ if checker and checker.debuff then
     }))
 end
 if checker and checker.add_to_blind then
+    if nanny == '-nan' then
+        add_to_blind = to_big(math.huge)
+    end
     add_to_blind = to_big(checker.add_to_blind)
 end
 '''
@@ -79,7 +85,7 @@ pattern = '''G.E_MANAGER\:add_event\(Event\(\{
     }\)\)'''
 position = 'before'
 payload = '''
-if not debuff_hand then
+if not debuff_hand and nanny ~= '-nan' and G.GAME.chips_text ~= '-nan' then
 '''
 
 ### display the fake score before not allowing the hand and/or adding to blind part 2
@@ -97,6 +103,16 @@ pattern = '''G.E_MANAGER\:add_event\(Event\(\{
     }\)\)'''
 position = 'after'
 payload = '''
+elseif nanny == '-nan' or G.GAME.chips_text == '-nan' then
+ G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                func = (function() 
+                    G.GAME.chips = math.huge
+                    G.GAME.blind:calculate()
+                
+                return true end)
+                }))
+    
 end
 '''
 

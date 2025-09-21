@@ -141,6 +141,10 @@ function G.FUNCS.play_cards_from_highlighted(e)
     if (not Cryptid or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
         
     else
+        -- -NAN fix
+        if G.GAME.round_scores['hand'] and not G.GAME.round_scores['hand'].amt then
+            G.GAME.round_scores['hand'].amt = math.huge
+        end
         G.GAME.blind:unik_before_play()
         SMODS.calculate_context({on_select_play = true})
 
