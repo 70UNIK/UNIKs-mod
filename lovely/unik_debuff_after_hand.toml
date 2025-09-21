@@ -12,12 +12,15 @@ pattern = '''check_for_unlock({type = 'chip_score', chips = math.floor( SMODS.ca
 position = 'after'
 payload = '''
 local nanny = tostring(number_format(math.floor(SMODS.calculate_round_score())))
-print(nanny)
+
 -- -nan fix
 if nanny ~= '-nan' then
+
     G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
 else
     G.GAME.round_scores['hand'].amt = math.huge
+    G.GAME.round_scores.hand.amt = math.huge
+    print(number_format(G.GAME.round_scores.hand.amt))
 end
 local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,SMODS.calculate_round_score())
 local debuff_hand = false
@@ -37,9 +40,11 @@ if checker and checker.debuff then
 end
 if checker and checker.add_to_blind then
     if nanny == '-nan' then
-        add_to_blind = to_big(math.huge)
+        add_to_blind = math.huge
+    else
+        add_to_blind = to_big(checker.add_to_blind)
     end
-    add_to_blind = to_big(checker.add_to_blind)
+    
 end
 '''
 match_indent = true
@@ -53,14 +58,22 @@ pattern = '''        func = (function() play_sound('chips2');return true end)
     end'''
 position = 'after'
 payload = '''
-if to_big(add_to_blind) > to_big(0) then
+if to_big(add_to_blind) > to_big(0) or add_to_blind == math.huge then
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         func = (function() 
-            G.GAME.blind.chips = G.GAME.blind.chips + add_to_blind
+        if add_to_blind == math.huge then
+             G.GAME.blind.chips = math.huge
+            G.GAME.blind.chip_text = number_format(math.huge)
+            G.HUD_blind:recalculate(true)
+            G.hand_text_area.blind_chips:juice_up()
+        else
+             G.GAME.blind.chips = G.GAME.blind.chips + add_to_blind
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips + add_to_blind)
             G.HUD_blind:recalculate(true)
             G.hand_text_area.blind_chips:juice_up()
+        end
+           
         
         return true end)
         }))
@@ -107,7 +120,7 @@ pattern = '''G.E_MANAGER\:add_event\(Event\(\{
     }\)\)'''
 position = 'after'
 payload = '''
-elseif nanny == '-nan' or G.GAME.chips_text == '-nan' then
+elseif not debuff_hand and nanny == '-nan' or G.GAME.chips_text == '-nan' then
  G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 func = (function() 
