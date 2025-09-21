@@ -1378,10 +1378,11 @@ return {
             j_unik_moonlight_cookie = { --unconditional ^1.25 mult per planet
                 name = 'Moonlight Cookie',
                 text = {
-                    "{C:attention}Poker Hands{} give",
+                    "{C:planet}Planet{} cards {C:attention}in consumables{}",
+                    "appear multiple times at",
+                    "{C:attention}X#3#{} their usual rate",
+                    "and give leveled {C:attention}Poker Hands{}",
                     "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
-                    "for their corresponding {C:planet}Planet{} card", 
-                    "{C:attention}in your consumable area{}",
                     "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
@@ -3377,6 +3378,27 @@ return {
                     'and destroyed {C:attention}together'
                 }
             },
+            unik_held_in_consumables = {
+                name = "Held in Consumables Effect",
+                text = {
+                    "Triggers per {C:attention}owned{} consumable",
+                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie)"
+                }
+            },
+            unik_held_in_consumables2 = {
+                name = "Held in Consumables Effect",
+                text = {
+                    "Triggers per {C:attention}owned{} consumable",
+                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Colour Cards)"
+                }
+            },
+            unik_held_in_consumables3 = {
+                name = "Held in Consumables Effect",
+                text = {
+                    "Triggers per {C:attention}owned{} consumable",
+                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Scratch)"
+                }
+            }
         },
         Planet={
             c_unik_asteroid_belt = {

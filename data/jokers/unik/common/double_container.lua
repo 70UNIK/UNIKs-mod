@@ -23,6 +23,14 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
     loc_vars = function(self, info_queue, center)
+        if MoreFluff then
+            info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables2" }
+        elseif Cryptid then
+            info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables3" }
+        else
+            info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables" }
+        end
+        
 		return { vars = {math.min(center.ability.extra.retriggers,center.ability.immutable.max_retriggers)} }
 	end,
     in_pool = function(self, args)
