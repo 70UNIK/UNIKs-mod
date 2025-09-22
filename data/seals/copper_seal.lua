@@ -120,10 +120,12 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
         max_rescore = math.max(max_rescore,v.rescore)
     end
     for i = 1, max_rescore do
+        local combinedTable = {}
          
         -- SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable})
         for _,v in pairs(rescoring_cards) do
             if i <= v.rescore then
+                combinedTable[#combinedTable+1] = card
                 G.E_MANAGER:add_event(Event({
                     trigger = 'before',
                     func = function()
@@ -134,6 +136,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             end
         end
         play_area_status_text(localize('k_unik_repeat'))
+        SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable})
         for _,v in pairs(rescoring_cards) do
             if i <= v.rescore then
                 local pased = context

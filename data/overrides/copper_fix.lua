@@ -26,33 +26,33 @@ SMODS.Enhancement:take_ownership("m_bunc_copper",{
     end
 },true)
 
--- SMODS.Joker:take_ownership("j_bunc_robot",{
---     calculate = function(self, card, context)
---         if context.unik_post_rescore and context.rescored_cards and not context.blueprint then
---             local validCards = {}
---                 for i,v in pairs(context.rescored_cards) do
---                     if SMODS.has_enhancement(v.card,"m_bunc_copper") then
---                         validCards[#validCards+1] = v.card
---                     end
---                 end
+SMODS.Joker:take_ownership("j_bunc_robot",{
+    calculate = function(self, card, context)
+        if context.unik_post_rescore and context.rescored_cards and not context.blueprint then
+            local validCards = {}
+                for i,v in pairs(context.rescored_cards) do
+                    if SMODS.has_enhancement(v.card,"m_bunc_copper") then
+                        validCards[#validCards+1] = v.card
+                    end
+                end
 
---             card.ability.extra.mult = card.ability.extra.mult + (card.ability.extra.bonus * #validCards)
+            card.ability.extra.mult = card.ability.extra.mult + (card.ability.extra.bonus * #validCards)
 
---             return {
---                 message = localize('k_upgrade_ex'),
---                 card = card
---             }
---         end
---         if context.joker_main then
---             if card.ability.extra.mult ~= 0 then
---                 return {
---                     mult = card.ability.extra.mult,
---                     card = card
---                 }
---             end
---         end
---     end
--- },true)
+            return {
+                message = localize('k_upgrade_ex'),
+                card = card
+            }
+        end
+        if context.joker_main then
+            if card.ability.extra.mult ~= 0 then
+                return {
+                    mult = card.ability.extra.mult,
+                    card = card
+                }
+            end
+        end
+    end
+},true)
 
 SMODS.Joker:take_ownership("j_bunc_kite_experiment",{
     calculate = function(self, card, context)
