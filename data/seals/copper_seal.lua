@@ -7,7 +7,7 @@ SMODS.Seal {
     pos = { x = 0, y = 0 },
     badge_colour = G.C.UNIK_COPPER,
     calculate = function(self, card, context)
-        if context.unik_after_effect and context.cardarea and context.cardarea ~= G.play then
+        if context.unik_after_effect and context.cardarea and context.cardarea == G.hand  then
             -- print("XXXXXXXXVVVV")
             -- print(context.cardarea.cards)
             local success = false
@@ -136,7 +136,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             end
         end
         play_area_status_text(localize('k_unik_repeat'))
-        SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable})
+        SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable,cardarea = calc_card_area})
         for _,v in pairs(rescoring_cards) do
             if i <= v.rescore then
                 local pased = context

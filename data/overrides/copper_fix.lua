@@ -28,7 +28,7 @@ SMODS.Enhancement:take_ownership("m_bunc_copper",{
 
 SMODS.Joker:take_ownership("j_bunc_robot",{
     calculate = function(self, card, context)
-        if context.unik_post_rescore and context.rescored_cards and not context.blueprint then
+        if context.unik_post_rescore and context.rescored_cards and not context.blueprint and context.cardarea == G.play then
             local validCards = {}
                 for i,v in pairs(context.rescored_cards) do
                     if SMODS.has_enhancement(v.card,"m_bunc_copper") then
@@ -37,14 +37,16 @@ SMODS.Joker:take_ownership("j_bunc_robot",{
                 end
 
             card.ability.extra.mult = card.ability.extra.mult + (card.ability.extra.bonus * #validCards)
-
-            return {
-                message = localize('k_upgrade_ex'),
-                card = card
-            }
+            if to_big(card.ability.extra.bonus * #validCards) > to_big(0) then
+                return {
+                    message = localize('k_upgrade_ex'),
+                    card = card
+                }
+            end
+            
         end
         if context.joker_main then
-            if card.ability.extra.mult ~= 0 then
+            if to_big(card.ability.extra.mult) ~= to_big(0) then
                 return {
                     mult = card.ability.extra.mult,
                     card = card

@@ -1,1 +1,0 @@
---Rescore all cards if a copper card has rescored.
