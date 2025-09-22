@@ -56,7 +56,7 @@ SMODS.Joker {
 				}
 			end
 		end
-		if context.before and not context.blueprint then
+		if context.before and not context.blueprint and not context.retrigger_joker and not context.repetition then
 			local triggered = false
             local increase = 0
             for k, v in ipairs(context.scoring_hand) do

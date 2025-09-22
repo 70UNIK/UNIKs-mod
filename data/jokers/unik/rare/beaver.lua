@@ -18,7 +18,7 @@ SMODS.Joker {
 	end,
     pools = {},
     calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.hand then
+		if context.individual and context.cardarea == G.hand and not context.end_of_round then
 			if SMODS.has_enhancement(context.other_card,'m_unik_timber') then
 				return {
                     xlog_mult = card.ability.extra.base,
