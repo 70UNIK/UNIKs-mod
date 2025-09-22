@@ -7,7 +7,7 @@ SMODS.Seal {
     pos = { x = 0, y = 0 },
     badge_colour = G.C.UNIK_COPPER,
     calculate = function(self, card, context)
-        if context.unik_rescore_card and context.cardarea then
+        if context.unik_rescore_card and context.cardarea and context.cardarea ~= G.play then
             local success = false
             for i = 1, #context.cardarea.cards do
                 if context.cardarea.cards[i] == card then
