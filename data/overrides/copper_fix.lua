@@ -3,15 +3,15 @@
 SMODS.Enhancement:take_ownership("m_bunc_copper",{
     config = {extra = {rescore = 1}},
     calculate = function(self, card, context, effect)
-        if context.unik_rescore_card and context.full_hand then
+        if context.unik_rescore_card and context.scoring_hand then
             local success = false
-            for i = 1, #context.full_hand do
-                if context.full_hand[i] == card then
-                    if i > 1 and context.full_hand[i-1] and SMODS.has_enhancement(context.full_hand[i-1],'m_bunc_copper') and not context.full_hand[i-1].debuff then
+            for i = 1, #context.scoring_hand do
+                if context.scoring_hand[i] == card then
+                    if i > 1 and context.scoring_hand[i-1] and SMODS.has_enhancement(context.scoring_hand[i-1],'m_bunc_copper') and not context.scoring_hand[i-1].debuff then
                         success = true
                         break
                     end
-                    if i < #context.cardarea.cards and context.cardarea.cards[i+1] and SMODS.has_enhancement(context.full_hand[i+1],'m_bunc_copper') and not context.full_hand[i+1].debuff then
+                    if i < #context.scoring_hand and context.scoring_hand[i+1] and SMODS.has_enhancement(context.scoring_hand[i+1],'m_bunc_copper') and not context.scoring_hand[i+1].debuff then
                         success = true
                         break
                     end
