@@ -247,7 +247,7 @@ function level_up_hand(card, hand, instant, amount)
 		G.GAME.unik_level_up_buffer = true
 		local speed = 1
 		for i,v in pairs(G.consumeables.cards) do
-			SMODS.calculate_context({hand_levelup_held_consume = true,other_consumeable_lvlup = v, levelup_poker_hand = hand, levelup_instant = instant, levelup_amount = amount, levelupspeed = speed},eval)
+			SMODS.calculate_context({hand_levelup_held_consume = true,other_consumeable_lvlup = v, levelup_poker_hand = hand, levelup_instant = instant, levelup_amount = amount, levelupspeed = speed})
 			speed = speed * 1.2
 			
 		end

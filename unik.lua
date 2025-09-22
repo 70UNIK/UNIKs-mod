@@ -285,6 +285,12 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+	key = "unik_seals",
+	path = "unik_seals.png",
+	px = 71,
+	py = 95
+}
 
 SMODS.ConsumableType {
 	key = "unik_summit",
@@ -383,7 +389,8 @@ NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
-
+--seals
+NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
 --Load suit types
 
@@ -423,6 +430,7 @@ if UNIK.can_load_spectrums() then
 end
 if next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/poker_hands/bunco_override.lua")()
+
 end
 if next(SMODS.find_mod("SixSuits")) then
 	NFS.load(mod_path .. "data/poker_hands/six_suits_override.lua")()
@@ -465,6 +473,7 @@ NFS.load(mod_path .. "data/spectrals/foundry.lua")()
 NFS.load(mod_path .. "data/spectrals/sparkle.lua")() 
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
+NFS.load(mod_path .. "data/spectrals/turing.lua")() 
 --
 --hidden summits
 NFS.load(mod_path .. "data/summits/ebott.lua")() 
@@ -833,6 +842,7 @@ NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")()
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
 NFS.load(mod_path .. "data/overrides/last_hand.lua")() 
 if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/overrides/copper_fix.lua")()
 	NFS.load(mod_path .. "data/overrides/polyminos_rework.lua")() 
 end
 

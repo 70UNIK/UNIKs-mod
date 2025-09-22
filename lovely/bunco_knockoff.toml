@@ -1,0 +1,16 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+### display the fake score before not allowing the hand and/or adding to blind, now with bunco compat.
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''SMODS\.calculate\_main\_scoring\((.*)\)'''
+position = 'after'
+payload = '''
+
+----------NEW------------------------
+UNIK.calculate_rescore(v,G.play.cards,scoring_hand,text,poker_hands,{cardarea = v, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands})
+'''

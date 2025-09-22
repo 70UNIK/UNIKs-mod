@@ -29,5 +29,6 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_tooth_color = G.C.UNIK_THE_TOOTH
     G.ARGS.LOC_COLOURS.unik_rgb = G.C.UNIK_RGB
     G.ARGS.LOC_COLOURS.unik_summit = G.C.UNIK_SUMMIT
+    G.ARGS.LOC_COLOURS.unik_copper = G.C.UNIK_COPPER
     return locHook(_c,_default)
 end

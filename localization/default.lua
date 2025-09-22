@@ -3398,6 +3398,22 @@ return {
                     "Triggers per {C:attention}owned{} consumable",
                     "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Scratch)"
                 }
+            },
+             unik_copper_seal = {
+				name = "Copper Seal",
+				text = {
+					"{C:unik_copper}Rescore{} this card {C:attention}1{} time",
+					"if adjacent to another card",
+					"with a {C:unik_copper}Copper Seal",
+				},
+			},
+            unik_rescore = {
+                name = "Rescoring",
+                text = {
+                    "{C:unik_copper}Repeat{} all scoring",
+                    "{C:attention}including retriggers",
+                    "{C:inactive,s:0.8}(For instance, Copper Cards from Bunco)"
+                }
             }
         },
         Planet={
@@ -3446,6 +3462,7 @@ return {
 					"{C:chips}+#4#{} chip#<s>4#",
 				},
 			},
+           
         },
         Spectral={
             --only appears with a 0.3 chance in the cube booster pack. It's basically a gateway, but exclusively creating UNIK 
@@ -3520,6 +3537,14 @@ return {
                     "to {C:attention}#2#{} selected card#<s>2#", 
                     "{C:inactive,s:0.8}Becomes {{C:spectral,s:0.8}The Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Ebott {C:inactive,s:0.8}is already held"
+                }
+            },
+            c_unik_turing = {
+                name = "Turing",
+                text = {
+                    "Add a {C:unik_copper}Copper Seal{}",
+                    "to {C:attention}#1#{} selected",
+                    "card in your hand",
                 }
             }
         },
@@ -4379,6 +4404,7 @@ return {
             k_unik_magician_placeholder = "(^1.1 requirements)",
             k_unik_double_up = "Double Up!",
             k_unik_banished = "Banished!",
+            k_unik_repeat = "AGAIN!"
         },
         high_scores={},
         labels={
@@ -4399,6 +4425,7 @@ return {
             unik_ultradebuffed = "Ultradebuffed",
             unik_baseless = "Baseless",
             unik_limited_edition = "Limited Edition",
+            unik_copper_seal = "Copper Seal",
         },
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM

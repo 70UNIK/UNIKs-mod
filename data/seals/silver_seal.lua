@@ -1,0 +1,2 @@
+--Paperback: create a minor arcana after discard
+--Spectral: 

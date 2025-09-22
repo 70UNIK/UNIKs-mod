@@ -1,0 +1,2 @@
+--Create a spectral if played and unscoring
+--Spectral: (something ghost related)
