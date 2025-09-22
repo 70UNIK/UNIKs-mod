@@ -155,14 +155,26 @@ function G.FUNCS.play_cards_from_highlighted(e)
         if G.hand and G.hand.highlighted then
             for i = 1, #G.hand.highlighted do
                 if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group then
-                    id[G.hand.highlighted[i].ability.group.id] = true
+                    local exists = false
+                    for i,v in pairs(id) do
+                        if G.hand.highlighted[i].ability.group.id == v then
+                            exists = true
+                        end
+                    end
+                    if not exists then
+                        id[#id+1] = G.hand.highlighted[i].ability.group.id
+                    end
+                    
                 end
             end
         end
-        if id and #id > 0 then
+       -- print(id)
+        --print(#id)
+        if #id > 0 then
             for i,v in pairs(G.hand.cards) do
                 for j,x in pairs(id) do
-                    if v and v.ability and v.ability.group and v.ability.group.id == j and not v.highlighted then
+                    
+                    if v and v.ability and v.ability.group and v.ability.group.id == x and not v.highlighted then
                         G.hand:brute_force_highlight(v)
                     end
                 end
