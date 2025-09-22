@@ -125,7 +125,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
         -- SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable})
         for _,v in pairs(rescoring_cards) do
             if i <= v.rescore then
-                combinedTable[#combinedTable+1] = card
+                combinedTable[#combinedTable+1] = v
                 G.E_MANAGER:add_event(Event({
                     trigger = 'before',
                     func = function()
