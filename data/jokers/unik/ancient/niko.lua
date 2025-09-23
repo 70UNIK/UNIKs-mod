@@ -71,7 +71,6 @@ function reset_niko_card()
     local currSuit = G.GAME.current_round.unik_niko_card or { suit = "Hearts" }
     G.GAME.current_round.unik_niko_card = { suit = "Hearts" }
     local avaliableSuits = {}
-    local valid_castle_cards = {}
     
 	for k, v in ipairs(G.playing_cards) do
 		if UNIK.is_suit_type(v,'light') then
@@ -103,5 +102,12 @@ end
 local rcc = reset_castle_card
 function reset_castle_card()
 	rcc()
-    reset_niko_card()
+    G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        func = function()
+            reset_niko_card()
+            return true
+        end
+    }))
+    
 end

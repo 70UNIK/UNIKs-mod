@@ -69,83 +69,144 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     bunc_original_calculate_main_scoring(context, scoring_hand)
 
     -- Post-scoring
-    
-    local rescoring_cards = {}
-    local max_rescore = 0
     local eval = {}
-
-    SMODS.calculate_context({main_scoring = true, cardarea = calc_card_area, full_hand = G.play.cards, scoring_hand = scoring_hand, unik_after_effect = true},eval)
-    for j,x in ipairs(calc_card_area.cards) do
-        local card = x
-        local rescores = 0
-        for i = 1, #eval do
-            if eval[i] then
-                if eval[i].enhancement then
-                    if eval[i].enhancement.rescore and eval[i].enhancement.card == card then
-                        rescores = rescores + 1
-                    end
-                end
-                if eval[i].seals then
-                    if eval[i].seals.rescore and eval[i].seals.card == card then
-                        rescores = rescores + 1
-                    end
-                end
-            end
-        end
-        rescoring_cards[#rescoring_cards+1] = {card = card,rescore = rescores}
-    end
     
-    -- print(#rescoring_cards)
-    -- print(rescoring_cards)
-    local eval2 = {}
-    SMODS.calculate_context({unik_kite_experiment = true,rescored_cards = rescoring_cards, cardarea = context.cardarea, full_hand = G.play.cards,scoring_hand = scoring_hand},eval2)
-    for i = 1, #eval2 do
-        if eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and eval2[i].jokers.mod_rescore then
-            local triggered = false
-            for j,x in pairs(eval2[i].jokers.target_cards) do
-                for y,c in pairs(rescoring_cards) do
-                    if c.card == x then
-                        triggered = true
-                        c.rescore = c.rescore + eval2[i].jokers.mod_rescore
-                    end
+    SMODS.calculate_context({main_scoring = true, cardarea = calc_card_area, full_hand = G.play.cards, scoring_hand = scoring_hand, unik_after_effect = true},eval)
+    --Enhancements
+    local enhancementRescores = {}
+    for i = 1, #eval do
+
+        if eval[i] then
+            if eval[i].enhancement then
+                if eval[i].enhancement.rescore and eval[i].enhancement.card then
+                    eval[i].enhancement.card.unik_rescored = true
+                    enhancementRescores[#enhancementRescores+1] = {card = eval[i].enhancement.card, rescore = eval[i].enhancement.rescore}
+
                 end
             end
-            if triggered then
-                card_eval_status_text(eval2[i].jokers.card, 'jokers', nil, nil, nil, eval2[i].jokers)
+        end
+    end
+    --Seals
+    local sealRescores = {}
+    for i = 1, #eval do
+
+        if eval[i] then
+            if eval[i].seals then
+                if eval[i].seals.rescore and eval[i].seals.card then
+                    eval[i].seals.card.unik_rescored = true
+                    sealRescores[#sealRescores+1] = {card = eval[i].seals.card, rescore = eval[i].seals.rescore}
+                end
             end
         end
     end
 
-    for i,v in pairs(rescoring_cards) do
-        max_rescore = math.max(max_rescore,v.rescore)
-    end
-    for i = 1, max_rescore do
-        local combinedTable = {}
-         
-        -- SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable})
-        for _,v in pairs(rescoring_cards) do
-            if i <= v.rescore then
-                combinedTable[#combinedTable+1] = v
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'before',
-                    func = function()
-                        v.card:juice_up(1,1)
-                        return true
-                    end
-                }))
+    --Jokers
+    --Jokers will have individualized "source" and "message"
+    --Will take in rescored cards as well cause kite experiment relies on that.
+    local jokerRescores = {}
+    local eval2 = {}
+    SMODS.calculate_context({unik_kite_experiment = true, cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand},eval2)
+    for i = 1, #eval2 do
+        if eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and eval2[i].jokers.rescore then
+            local struct = {}
+            for j,x in pairs(eval2[i].jokers.target_cards) do
+                x.unik_rescored = true
+                struct[#struct+1] = {card = x, rescore = eval2[i].jokers.rescore}
             end
+            -- if triggered then
+            --     card_eval_status_text(eval2[i].jokers.card, 'jokers', nil, nil, nil, eval2[i].jokers)
+            -- end
+            struct.source = eval2[i].jokers.card
+            struct.message = eval2[i].jokers
+            jokerRescores[#jokerRescores+1] = struct
         end
-        play_area_status_text(localize('k_unik_repeat'))
-        SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable,cardarea = calc_card_area})
-        for _,v in pairs(rescoring_cards) do
-            if i <= v.rescore then
+    end
+    --Amalgamate the tables:
+    local combinedTable = {}
+    combinedTable[#combinedTable+1] = enhancementRescores
+    combinedTable[#combinedTable+1] = sealRescores
+
+    for i,v in pairs(jokerRescores) do
+      --  print(v)
+        combinedTable[#combinedTable+1] = v
+    end
+    for i,v in pairs(combinedTable) do
+        local max_rescore = 0
+        for j,w in pairs(v) do
+            if type(w) == 'table' and w.rescore then
+                max_rescore = math.max(max_rescore,w.rescore)
+            end
+            
+        end
+        for j = 1,max_rescore do
+            local rescoring_cards = {}
+
+            for k,w in pairs(v) do
+                if type(w) == 'table' and w.card and w.rescore and j <= w.rescore then
+                    rescoring_cards[#rescoring_cards+1] = w.card
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'before',
+                        func = function()
+                            w.card:juice_up(1,1)
+                            return true
+                        end
+                    }))
+                end
+            end
+            play_area_status_text(localize('k_unik_repeat'))
+            SMODS.calculate_context({unik_post_rescore = true,rescored_cards = rescoring_cards,cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand})
+            if v.source and v.message then
+                card_eval_status_text(v.source, 'jokers', nil, nil, nil, v.message)
+            end
+            for _,x in pairs(rescoring_cards) do
                 local pased = context
                 pased.cardarea = calc_card_area 
-                SMODS.score_card(v.card, pased)
+                SMODS.score_card(x, pased)
             end
+
+
         end
-        
     end
+        --clean table
+    for i,v in pairs(calc_card_area.cards) do
+        if v.unik_rescored then
+          --  print("CLEAN")
+            v.unik_rescored = nil
+        end
+    end
+    for i,v in pairs(G.play.cards) do
+        if v.unik_rescored then
+           -- print("CLEAN")
+            v.unik_rescored = nil
+        end
+    end
+    -- for i = 1, max_rescore do
+    --     local combinedTable = {}
+         
+    --     -- SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable})
+    --     for _,v in pairs(rescoring_cards) do
+    --         if i <= v.rescore then
+    --             combinedTable[#combinedTable+1] = v
+    --             G.E_MANAGER:add_event(Event({
+    --                 trigger = 'before',
+    --                 func = function()
+    --                     v.card:juice_up(1,1)
+    --                     return true
+    --                 end
+    --             }))
+    --         end
+    --     end
+    --     play_area_status_text(localize('k_unik_repeat'))
+    --     SMODS.calculate_context({unik_post_rescore = true,rescored_cards = combinedTable,cardarea = calc_card_area})
+    --     for _,v in pairs(rescoring_cards) do
+    --         if i <= v.rescore then
+    --             local pased = context
+    --             pased.cardarea = calc_card_area 
+    --             SMODS.score_card(v.card, pased)
+    --         end
+    --     end
+        
+    -- end
 
 end
 

@@ -31,8 +31,8 @@ SMODS.Joker:take_ownership("j_bunc_robot",{
         if context.unik_post_rescore and context.rescored_cards and not context.blueprint and context.cardarea == G.play then
             local validCards = {}
                 for i,v in pairs(context.rescored_cards) do
-                    if SMODS.has_enhancement(v.card,"m_bunc_copper") then
-                        validCards[#validCards+1] = v.card
+                    if SMODS.has_enhancement(v,"m_bunc_copper") then
+                        validCards[#validCards+1] = v
                     end
                 end
 
@@ -58,17 +58,17 @@ SMODS.Joker:take_ownership("j_bunc_robot",{
 
 SMODS.Joker:take_ownership("j_bunc_kite_experiment",{
     calculate = function(self, card, context)
-        if context.unik_kite_experiment and context.rescored_cards and context.scoring_hand then
+        if context.unik_kite_experiment and context.scoring_hand then
             if SMODS.pseudorandom_probability(card, 'kite_experiment'..G.SEED, 1, card.ability.extra.odds, 'bunc_kite_experiment') then
                 local validCards = {}
-                for i,v in pairs(context.rescored_cards) do
-                    if SMODS.has_enhancement(v.card,"m_bunc_copper") then
-                        validCards[#validCards+1] = v.card
+                for i,v in pairs(context.scoring_hand) do
+                    if SMODS.has_enhancement(v,"m_bunc_copper") and v.unik_rescored then
+                        validCards[#validCards+1] = v
                     end
                 end
                 return {
                     target_cards = validCards,
-                    mod_rescore = 1,
+                    rescore = 1,
                     card = card,
                     message = '+1',
                 }
