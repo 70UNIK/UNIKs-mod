@@ -723,16 +723,16 @@ end
 NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
 
 --Rare (characters)
-NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/blossom.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/maya_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")() 
 
 --Ancient
---NIKO
 NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
 --WORLD MACHINE
 NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()

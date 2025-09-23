@@ -7,7 +7,7 @@ SMODS.Joker {
     cost = 7,
     blueprint_compat = false,
     perishable_compat = true,
-	eternal_compat = true,
+	eternal_compat = false,
     immutable = true,
     config = {extra = {to_be_destroyed = false}},
     loc_vars = function(self, info_queue, center)

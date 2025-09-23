@@ -2403,6 +2403,16 @@ return {
                     -- when sold, create 3 corrupted detrimental jokers.
                 }
             },
+            j_unik_blossom = {
+                name = "Blossom",
+                text = {
+                    "{C:unik_copper}Rescore{} the first scoring",
+                    "card {C:attention}#2#{} time#<s>2#",
+                    "{C:unik_caption,s:0.7,E:1}#3#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Powerpuff Girls{}",
+                }
+            },
 
             --Bunco crossmod Jokers
             j_unik_bunc_king_minos = {
@@ -4391,12 +4401,12 @@ return {
             k_unik_D16_boom = "B O O M !",
             k_unik_megatron_rage1 = "DIE!",
             k_unik_megatron_rage2 = "BURN IT ALL!",
-            k_unik_megatron_rage3 = "ITS NOT OVER TIL I SAY IT IS!",
+            k_unik_megatron_rage3 = "ITS NOT OVER TILL EVERYONE IS DEAD!",
             k_unik_megatron_rage4 = "IACON CITY IS MINE!",
             k_unik_megatron1 = "THE PRIMES ARE NOTHING BUT A FUCKING FARCE!",
             k_unik_megatron2 = "DECEPTICONS, RISE UP!",
-            k_unik_megatron3 = "PRIMUS IS THE REAL ENEMY!",
-            k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!",
+            k_unik_megatron3 = "THE FUCKING PRIMES ARE THE REAL ENEMY!",
+            k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE EXECUTED!",
             k_unik_magiced = "Hope you enjoy permanent shop bloat...",
 
             k_unik_summit_pack = "Summit Pack",
@@ -4404,7 +4414,16 @@ return {
             k_unik_magician_placeholder = "(^1.1 requirements)",
             k_unik_double_up = "Double Up!",
             k_unik_banished = "Banished!",
-            k_unik_repeat = "AGAIN!"
+            k_unik_repeat = "AGAIN!",
+
+            k_unik_blossom_normal1 = "Crime and villainy has no place here!",
+            k_unik_blossom_normal2 = "Bringing safety to all, in Townsville and here!",
+            k_unik_blossom_normal3 = "Seems different here, but I'll be here to fight for you!",
+            k_unik_blossom_normal4 = "I can be cute AND strong at the same time!",
+            k_unik_blossom_trigger1 = "Ayyah!",
+            k_unik_blossom_trigger2 = "Hah!",
+            k_unik_blossom_trigger3 = "Here I go!",
+            k_unik_blossom_trigger4 = "On my lead!",
         },
         high_scores={},
         labels={

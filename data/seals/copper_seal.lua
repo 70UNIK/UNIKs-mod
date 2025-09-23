@@ -60,7 +60,11 @@ SMODS.Seal {
             G.shared_seals[card.seal]:draw_shader('dissolve', nil, nil, nil, card.children.center)
             G.shared_seals[card.seal]:draw_shader('voucher', nil, card.ARGS.send_to_shader, nil, card.children.center)
         end
-    end
+    end,
+    --can only be obtained through turing spectral
+    in_pool = function(self)
+        return false
+    end,
 }
 
 local bunc_original_calculate_main_scoring = SMODS.calculate_main_scoring
@@ -117,7 +121,8 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             --     card_eval_status_text(eval2[i].jokers.card, 'jokers', nil, nil, nil, eval2[i].jokers)
             -- end
             struct.source = eval2[i].jokers.card
-            struct.message = eval2[i].jokers
+            struct.message = eval2[i].jokers.message
+            struct.colour = eval2[i].jokers.colour
             jokerRescores[#jokerRescores+1] = struct
         end
     end
@@ -156,7 +161,12 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             play_area_status_text(localize('k_unik_repeat'))
             SMODS.calculate_context({unik_post_rescore = true,rescored_cards = rescoring_cards,cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand})
             if v.source and v.message then
-                card_eval_status_text(v.source, 'jokers', nil, nil, nil, v.message)
+                card_eval_status_text(v.source, "extra", nil, nil, nil, {
+                    message = v.message,
+                    colour = v.colour or G.C.FILTER,
+                    card=v.source,
+                })
+                
             end
             for _,x in pairs(rescoring_cards) do
                 local pased = context

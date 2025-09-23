@@ -143,3 +143,12 @@ payload = '''
 G.GAME.blind:unik_after_play()
 '''
 match_indent = true
+
+### unik_afterplay
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.chips - G.GAME.blind.chips >= 0 then'''
+position = 'at'
+payload = '''if to_big(G.GAME.chips - G.GAME.blind.chips) >= to_big(0) then'''
+match_indent = true
