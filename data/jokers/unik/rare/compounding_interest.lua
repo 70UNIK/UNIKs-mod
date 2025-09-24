@@ -33,7 +33,7 @@ SMODS.Joker {
 	end,
 	calc_dollar_bonus = function(self, card)
 		local bonus = math.floor(math.min(G.GAME.dollars*card.ability.extra.x_dollars,card.ability.immutable.cap))
-        if bonus > 0 then
+        if to_big(bonus) > to_big(0) then
 			return bonus
 		end
 	end,

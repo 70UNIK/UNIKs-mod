@@ -33,7 +33,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicolon_compat = true,
 	pronouns = "she_her",
-    config = { extra = { exp_levelup = 1.3,spawn_rate = 5} },
+    config = { extra = { exp_levelup = 1.4,spawn_rate = 5} },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		return {  

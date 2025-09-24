@@ -25,7 +25,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
 	demicoloncompat = true,
-    config = { extra = {x_mult = 3}},
+    config = { extra = {x_mult = 2.5}},
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 		local quoteset = 'normal'

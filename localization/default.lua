@@ -2406,8 +2406,8 @@ return {
             j_unik_blossom = {
                 name = "Blossom",
                 text = {
-                    "{C:unik_copper}Rescore{} the first scoring",
-                    "card {C:attention}#2#{} time#<s>2#",
+                    "{C:unik_copper}Rescore{} the {C:attention}first{} and",
+                    "{C:attention}last{} scoring card {C:attention}#2#{} time#<s>2#",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Powerpuff Girls{}",

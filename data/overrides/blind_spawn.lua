@@ -112,6 +112,7 @@ function get_new_boss()
     end
     --Ignore if a showdown boss.
     if force_override and (not G.P_BLINDS[boss].boss or (G.P_BLINDS[boss].boss and not G.P_BLINDS[boss].boss.showdown)) then
+        print("OVERRIDE")
         for k, v in pairs(G.P_BLINDS) do
             if not v.boss then
             else

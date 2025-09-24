@@ -113,10 +113,23 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     for i = 1, #eval2 do
         if eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and eval2[i].jokers.rescore then
             local struct = {}
-            for j,x in pairs(eval2[i].jokers.target_cards) do
-                x.unik_rescored = true
-                struct[#struct+1] = {card = x, rescore = eval2[i].jokers.rescore}
+            --If specified as a table, then individualize for each card(ideally align EXACTLY with the cards, but has mesures)
+            if type(eval2[i].jokers.rescore) == 'table' then
+                for z = 1, math.min(#eval2[i].jokers.target_cards,#eval2[i].jokers.rescore) do
+                    local x = eval2[i].jokers.target_cards[z]
+                    local rescoreAmount = eval2[i].jokers.rescore[z]
+                    x.unik_rescored = true
+                    struct[#struct+1] = {card = x, rescore = rescoreAmount}
+                end
+            --Otherwise apply for all selected cards
+            else
+                for j,x in pairs(eval2[i].jokers.target_cards) do
+                    x.unik_rescored = true
+                    struct[#struct+1] = {card = x, rescore = eval2[i].jokers.rescore}
+                end
             end
+            
+            
             -- if triggered then
             --     card_eval_status_text(eval2[i].jokers.card, 'jokers', nil, nil, nil, eval2[i].jokers)
             -- end
