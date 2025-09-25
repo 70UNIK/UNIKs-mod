@@ -39,6 +39,11 @@ SMODS.current_mod.config_tab = function() --Config tab
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
 		}),
+		create_toggle({
+			label = localize("unik_cryptid_nerfs_option"),
+			ref_table = unik_config,
+			ref_value = "unik_cryptid_nerfs",
+		}),
 	},
 	}
 end
@@ -731,7 +736,7 @@ NFS.load(mod_path .. "data/jokers/unik/detrimental/robert.lua")() --noimage
 NFS.load(mod_path .. "data/jokers/unik/detrimental/vampiric_hammer.lua")()
 --- 
 ---Overrides
-if (SMODS.Mods["Cryptid"] or {}).can_load  then
+if (SMODS.Mods["Cryptid"] or {}).can_load and unik_config.unik_cryptid_nerfs then
 	NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
 end
 
