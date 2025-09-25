@@ -19,6 +19,9 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.immutable.funny, center.ability.immutable.funny_limit} }
 	end,
     pronouns = "it_its",
+    in_pool = function()
+        return not G.GAME.unik_d16_destroyed
+	end,
     calculate = function(self, card, context)
 		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed then
             SMODS.scale_card(card, {
@@ -33,6 +36,7 @@ SMODS.Joker {
             end         
             if card.ability.immutable.funny >= card.ability.immutable.funny_limit then
                 card.ability.immutable.destroyed = true
+                G.GAME.unik_d16_destroyed = true
                  G.E_MANAGER:add_event(Event({
                     trigger="immediate",
                     func = function()

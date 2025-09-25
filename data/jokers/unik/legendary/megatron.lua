@@ -34,7 +34,7 @@ SMODS.Joker {
 	perishable_compat = false,
 	demicoloncompat = true,
 	eternal_compat = true,
-	config = {extra = {x_mult = 2, scoring = false},immutable = {blind_size = 1.15}},
+	config = {extra = {x_mult = 1.75, scoring = false},immutable = {blind_size = 1.15}},
 	loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
 		return {

@@ -157,7 +157,8 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group then
                     local exists = false
                     for i,v in pairs(id) do
-                        if G.hand.highlighted[i].ability.group.id == v then
+
+                        if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group and G.hand.highlighted[i].ability.group.id == v then
                             exists = true
                         end
                     end

@@ -38,7 +38,7 @@ SMODS.Joker {
         local quoteset = 'normal'
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         return { 
-           vars = {math.min(center.ability.extra.left_rescores,center.ability.immutable.max_rescores), math.min(center.ability.extra.right_rescores,center.ability.immutable.max_rescores),localize(blossom_quotes[quoteset][math.random(#blossom_quotes[quoteset])] .. "")} }
+           vars = {math.min(center.ability.extra.left_rescore,center.ability.immutable.max_rescores), math.min(center.ability.extra.right_rescore,center.ability.immutable.max_rescores),localize(blossom_quotes[quoteset][math.random(#blossom_quotes[quoteset])] .. "")} }
 	end,
     calculate = function(self, card, context)
         if context.unik_kite_experiment and context.scoring_hand then

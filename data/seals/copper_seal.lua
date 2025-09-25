@@ -75,7 +75,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     -- Post-scoring
     local eval = {}
     
-    SMODS.calculate_context({main_scoring = true, cardarea = calc_card_area, full_hand = G.play.cards, scoring_hand = scoring_hand, unik_after_effect = true},eval)
+    SMODS.calculate_context({cardarea = calc_card_area, full_hand = G.play.cards, scoring_hand = scoring_hand, unik_after_effect = true},eval)
     --Enhancements
     local enhancementRescores = {}
     for i = 1, #eval do

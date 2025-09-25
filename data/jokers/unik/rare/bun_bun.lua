@@ -1,0 +1,1 @@
+--Xmult per card based on (1+ rank x 0.05)

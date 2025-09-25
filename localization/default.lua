@@ -2406,8 +2406,9 @@ return {
             j_unik_blossom = {
                 name = "Blossom",
                 text = {
-                    "{C:unik_copper}Rescore{} the {C:attention}first{} and",
-                    "{C:attention}last{} scoring card {C:attention}#2#{} time#<s>2#",
+                    "{C:unik_copper}Rescore{} the {C:attention}first{} card {C:attention}#1#{} time#<s>1#",
+                    "and the {C:attention}last{} scoring card {C:attention}#2#{} time#<s>2#",
+                    "{C:inactive,s:0.9}(Cannot stack if 1 card is played)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Powerpuff Girls{}",
@@ -2503,7 +2504,7 @@ return {
                 }
             },
             j_unik_ghost_joker = {
-                name = "Ghost Joker",
+                name = "Poltergeist",
                 text = {
                     "Create a {C:spectral}Spectral{} card",
                     "when {C:attention}Blind{} is selected",
@@ -4144,6 +4145,7 @@ return {
             k_unik_summit = "Summit",
             b_unik_summit_cards = "Summit Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
+            unik_cryptid_nerfs_option = "Nerf Cryptid Features (Restart Required)",
             k_unik_egg_pack = "Eggcellent Pack",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",

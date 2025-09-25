@@ -126,6 +126,11 @@ SMODS.Joker {
         end
     end,
 }
+
+--TODO:
+--Hook is disabled when:
+--when selecting cards
+--or if you permanently gain/lose hands
 local handyHook = ease_hands_played
 function ease_hands_played(mod, instant)
     local initial_hands = G.GAME.current_round.hands_left

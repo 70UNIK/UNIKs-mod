@@ -1,0 +1,2 @@
+--Rescore all cards for the next 8 hands
+--If seltzer exists, Menthol should exist as well cause CRK

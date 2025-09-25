@@ -39,6 +39,11 @@ SMODS.current_mod.config_tab = function() --Config tab
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
 		}),
+		create_toggle({
+			label = localize("unik_cryptid_nerfs_option"),
+			ref_table = unik_config,
+			ref_value = "unik_cryptid_nerfs",
+		}),
 	},
 	}
 end
