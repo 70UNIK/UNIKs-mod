@@ -2158,7 +2158,7 @@ return {
                 }
             },
             j_unik_ghost_joker = {
-                name = "Ghost Joker",
+                name = "Poltergeist",
                 text = {
                     "Create a {C:spectral}Spectral{} card",
                     "when {C:attention}Blind{} is selected",
@@ -2984,6 +2984,27 @@ return {
                 "{C:spades}Spades{}, {C:clubs}Clubs{}"
                 }
             },
+            unik_held_in_consumables = {
+                name = "Held in Consumables Effect",
+                text = {
+                    "Triggers per {C:attention}owned{} consumable",
+                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie)"
+                }
+            },
+            unik_held_in_consumables2 = {
+                name = "Held in Consumables Effect",
+                text = {
+                    "Triggers per {C:attention}owned{} consumable",
+                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Colour Cards)"
+                }
+            },
+            unik_held_in_consumables3 = {
+                name = "Held in Consumables Effect",
+                text = {
+                    "Triggers per {C:attention}owned{} consumable",
+                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Scratch)"
+                }
+            }
             
         },
         Planet={
@@ -3759,7 +3780,7 @@ return {
             k_unik_megatron3 = "PRIMUS IS THE REAL ENEMY!",
             k_unik_megatron4 = "ANYONE WHO OPPOSES ME SHALL BE DESTROYED!",
             k_unik_magiced = "Hope you enjoy permanent shop bloat...",
-            k_unik_magician_placeholder = "(^1.1 requirements)"
+            k_unik_magician_placeholder = "(^1.15 requirements)"
         },
         high_scores={},
         labels={
