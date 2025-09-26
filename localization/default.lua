@@ -2505,7 +2505,6 @@ return {
             },
             j_unik_ghost_joker = {
                 name = "Poltergeist",
-                name = "Poltergeist",
                 text = {
                     "Create a {C:spectral}Spectral{} card",
                     "when {C:attention}Blind{} is selected",
