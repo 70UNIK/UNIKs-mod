@@ -12,7 +12,7 @@ SMODS.current_mod.optional_features = {
 	post_trigger = true,
 	quantum_enhancements = false,
 	-- Here are some other ones Steamodded has
-	-- Cryptid doesn't use them YET, but these should be uncommented if Cryptid uses them
+	-- Cryptid doesn't use them YET, but these should be uncommented if (SMODS.Mods["Cryptid"] or {}).can_load and   uses them
 	-- These ones add new card areas that Steamodded will calculate through
 	-- Might already be useful for sticker calc
 
@@ -38,6 +38,11 @@ SMODS.current_mod.config_tab = function() --Config tab
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
+		}),
+		create_toggle({
+			label = localize("unik_cryptid_nerfs_option"),
+			ref_table = unik_config,
+			ref_value = "unik_cryptid_nerfs",
 		}),
 	},
 	}
@@ -282,7 +287,7 @@ SMODS.Rarity({
 	loc_txt = {},
 	badge_colour = G.C.UNIK_ANCIENT,
 })
-if Cryptid then
+if (SMODS.Mods["Cryptid"] or {}).can_load then
     Cryptid.pointerblistifytype("rarity", "unik_ancient")
 end
 
@@ -302,7 +307,7 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
-if not Cryptid then
+if not (SMODS.Mods["Cryptid"] or {}).can_load then
 	NFS.load(mod_path .. "data/stickers/cryptidless_sticker_logic.lua")() 
 end
 
@@ -348,7 +353,7 @@ UNIK.light_suits = { 'Diamonds', 'Hearts' }
 UNIK.dark_suits = { 'Spades', 'Clubs' }
 NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/light_dark_suits.lua")()
-if Cryptid then
+if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
 end
 
@@ -362,7 +367,7 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
-if not Cryptid then
+if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/poker_hands/bulwark.lua")()
 	--planets
 	NFS.load(mod_path .. "data/planets/asteroid_belt.lua")()
@@ -421,7 +426,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/powerdown.lua")() 
 	NFS.load(mod_path .. "data/lartceps/brethren_moon.lua")() 
 	NFS.load(mod_path .. "data/lartceps/trim.lua")() 
-	if Cryptid then
+	if (SMODS.Mods["Cryptid"] or {}).can_load then
 		NFS.load(mod_path .. "data/lartceps/expiry.lua")() 
 	end
 	NFS.load(mod_path .. "data/lartceps/extortion.lua")() 
@@ -437,7 +442,7 @@ end
 --Vouchers
 NFS.load(mod_path .. "data/vouchers/spectral_merchant.lua")() 
 NFS.load(mod_path .. "data/vouchers/spectral_tycoon.lua")() 
-if Cryptid then
+if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
 end
 
@@ -493,7 +498,7 @@ NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
 NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
 NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
-if Cryptid then
+if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/bossBlinds/cryptid/joyless.lua")() --Cryptid crossmod
 end
 
@@ -533,7 +538,7 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_artisan.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_cookie.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_vice.lua")()
-	if Cryptid then
+	if (SMODS.Mods["Cryptid"] or {}).can_load  then
 		NFS.load(mod_path .. "data/bossBlinds/cryptid/epic_jollyless.lua")()
 	end
 	NFS.load(mod_path .. "data/bossBlinds/epic_sink.lua")() --hold for now until a more interesting effect is in place
@@ -648,7 +653,7 @@ if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
 end
-if Cryptid then
+if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/hacker.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/coupon_codes.lua")()
@@ -659,7 +664,7 @@ if next(SMODS.find_mod("GrabBag")) then
 	NFS.load(mod_path .. "data/jokers/grab_bag/poppy.lua")() 
 	NFS.load(mod_path .. "data/jokers/grab_bag/collapse.lua")() 
 	NFS.load(mod_path .. "data/jokers/grab_bag/artesian.lua")() 
-	if Cryptid then
+	if (SMODS.Mods["Cryptid"] or {}).can_load   then
 		NFS.load(mod_path .. "data/jokers/grab_bag/jollyless.lua")() 
 	end
 	NFS.load(mod_path .. "data/jokers/grab_bag/bloon.lua")() 
@@ -689,7 +694,7 @@ end
 if next(SMODS.find_mod("finity")) then
 
 	if unik_config.unik_legendary_blinds then
-		if Cryptid then
+		if (SMODS.Mods["Cryptid"] or {}).can_load then
 			Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown")
 		end
 		SMODS.Rarity({
@@ -711,7 +716,7 @@ NFS.load(mod_path .. "data/jokers/unik/detrimental/impounded.lua")()
 NFS.load(mod_path .. "data/jokers/unik/detrimental/monster_spawner.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_scale.lua")()
 NFS.load(mod_path .. "data/jokers/unik/detrimental/xchips_hater.lua")() --noimage
-if Cryptid then
+if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/rancid_smoothie.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/nostalgic_astral_in_a_bottle.lua")() --noimage
 end
@@ -731,7 +736,7 @@ NFS.load(mod_path .. "data/jokers/unik/detrimental/robert.lua")() --noimage
 NFS.load(mod_path .. "data/jokers/unik/detrimental/vampiric_hammer.lua")()
 --- 
 ---Overrides
-if Cryptid then
+if (SMODS.Mods["Cryptid"] or {}).can_load and unik_config.unik_cryptid_nerfs then
 	NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
 end
 
@@ -750,7 +755,7 @@ if unik_config.unik_legendary_blinds then
 end
 -- NFS.load(mod_path .. "data/challenges/rng_2.lua")()
 
-if not Cryptid then
+if (not (SMODS.Mods["Cryptid"] or {}).can_load  ) then
 	very_fair_quip = {}
 end
 

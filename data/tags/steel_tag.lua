@@ -10,7 +10,7 @@ SMODS.Tag{
 	apply = function(self, tag, context)
         if context.type == "store_joker_modify" then
 			local _applied = nil
-			if Cryptid and Cryptid.forced_edition() then
+			if (SMODS.Mods["Cryptid"] or {}).can_load and  Cryptid.forced_edition() then
 				tag:nope()
 			end
 			if not context.card.edition and not context.card.temp_edition and context.card.ability.set == "Joker" then
