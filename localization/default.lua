@@ -2505,6 +2505,7 @@ return {
             },
             j_unik_ghost_joker = {
                 name = "Poltergeist",
+                name = "Poltergeist",
                 text = {
                     "Create a {C:spectral}Spectral{} card",
                     "when {C:attention}Blind{} is selected",
@@ -4145,7 +4146,7 @@ return {
             k_unik_summit = "Summit",
             b_unik_summit_cards = "Summit Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
-            unik_cryptid_nerfs_option = "Nerf Cryptid Features (Restart Required)",
+            unik_cryptid_nerfs_option = "Cryptid Nerfs (Restart Required)",
             k_unik_egg_pack = "Eggcellent Pack",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",
@@ -4413,7 +4414,7 @@ return {
 
             k_unik_summit_pack = "Summit Pack",
 
-            k_unik_magician_placeholder = "(^1.1 requirements)",
+            k_unik_magician_placeholder = "(^1.15 requirements)",
             k_unik_double_up = "Double Up!",
             k_unik_banished = "Banished!",
             k_unik_repeat = "AGAIN!",

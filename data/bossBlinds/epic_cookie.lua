@@ -131,14 +131,14 @@ function G.FUNCS.play_cards_from_highlighted(e)
         end
     end
     --Only play if highlight cards are > 0
-    if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
+    if (SMODS.Mods["Cryptid"] or {}).can_load  then
         if #G.hand.highlighted == 0 and (Cryptid.enabled("set_cry_poker_hand_stuff") == true) and G.PROFILES[G.SETTINGS.profile].cry_none then
             G.PROFILES[G.SETTINGS.profile].cry_none = true
         end
     end
 
     --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
-    if (not Cryptid or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
+    if ((not (SMODS.Mods["Cryptid"] or {}).can_load  ) or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
         
     else
         -- -NAN fix

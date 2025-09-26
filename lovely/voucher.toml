@@ -8,7 +8,7 @@ priority = 999
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = "{type = 'Spectral', val = G.GAME.spectral_rate},"
+pattern = '''{type = 'Spectral', val = G.GAME.spectral_rate},'''
 position = "at"
-payload = "{type = 'Spectral', val = G.GAME.spectral_rate*((SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load and G.GAME.cry_percrate.spectral or 100)/100)},"
+payload = '''{type = 'Spectral', val = G.GAME.spectral_rate*(( (SMODS.Mods["Cryptid"] or {}).can_load and G.GAME.cry_percrate.spectral or 100)/100)},'''
 match_indent = true

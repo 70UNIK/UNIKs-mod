@@ -8,18 +8,8 @@ priority = -1
 [patches.pattern]
 target = '''=[SMODS Buffoonery "Buffoonery.lua"]'''
 pattern = '''NFS.load(Buffoonery.path .. 'notalisman.lua')()'''
-position = "before"
+position = "at"
 payload = '''
-if not Cryptid then
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Buffoonery "Buffoonery.lua"]'''
-pattern = '''NFS.load(Buffoonery.path .. 'notalisman.lua')()'''
-position = "after"
-payload = '''
-end
+--HAHAHAHAHA No
 '''
 match_indent = true

@@ -44,65 +44,72 @@ SMODS.Blind{
     end,
 }
 
+--This breaks apparently
+--To fix it...
+--
 local evalOverride = Game.update_round_eval
 function Game:update_round_eval(dt)
     if G.GAME.unik_miser_blinds_actual and G.GAME.unik_miser_blinds_actual  > 0 then
-        
-        G.GAME.unik_miser_blinds_actual  = G.GAME.unik_miser_blinds_actual  - 1
-        local text = localize('k_unik_back_to_back1') ..  G.GAME.unik_miser_blinds_actual .. localize('k_unik_back_to_back2')
-        attention_text({
-            scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
-        })
-        reset_blinds()
-        local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-        local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
-        local obj3 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
-        -- print("-----------------")
-        -- print(obj.key)
-        -- print(obj2.key)
-        -- print(obj3.key)
-        -- print("-----------------")
-        -- print(G.GAME.blind_on_deck)
-        -- print(G.GAME.round_resets.blind)
-        -- print(G.GAME.round_resets.blind_states[G.GAME.blind_on_deck])
-        -- print(G.GAME.round_resets.blind)
-        
-        
-        G.GAME.facing_blind = true
-         G.GAME.chips = 0
-         G.GAME.round_resets.lost = true
-         G.GAME.blind_on_deck = 
-        not (G.GAME.round_resets.blind_states.Small == 'Defeated' or G.GAME.round_resets.blind_states.Small == 'Skipped' or G.GAME.round_resets.blind_states.Small == 'Hide') and 'Small' or
-        not (G.GAME.round_resets.blind_states.Big == 'Defeated' or G.GAME.round_resets.blind_states.Big == 'Skipped'or G.GAME.round_resets.blind_states.Big == 'Hide') and 'Big' or 
-        'Boss'
-         ChangePhaseCrown()
-        G.GAME.blind:defeat()
-        -- G.FUNCS.select_blind(e)
-        G.E_MANAGER:add_event(Event({
+        if not G.STATE_COMPLETE then
+            
+            stop_use()
+            G.STATE_COMPLETE = true
+             G.GAME.unik_miser_blinds_actual  = G.GAME.unik_miser_blinds_actual  - 1
+            local text = localize('k_unik_back_to_back1') ..  G.GAME.unik_miser_blinds_actual .. localize('k_unik_back_to_back2')
+            attention_text({
+                scale = 0.75, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
+            })
+            G.GAME.blind:defeat()
+            reset_blinds()
+            local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
+            local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
+            local obj3 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
+            -- print("-----------------")
+            -- print(obj.key)
+            -- print(obj2.key)
+            -- print(obj3.key)
+            -- print("-----------------")
+            -- print(G.GAME.blind_on_deck)
+            -- print(G.GAME.round_resets.blind)
+            -- print(G.GAME.round_resets.blind_states[G.GAME.blind_on_deck])
+            -- print(G.GAME.round_resets.blind)
+            
+            
+            G.GAME.facing_blind = true
+            G.GAME.chips = 0
+            G.GAME.round_resets.lost = true
+            G.GAME.blind_on_deck = 
+            not (G.GAME.round_resets.blind_states.Small == 'Defeated' or G.GAME.round_resets.blind_states.Small == 'Skipped' or G.GAME.round_resets.blind_states.Small == 'Hide') and 'Small' or
+            not (G.GAME.round_resets.blind_states.Big == 'Defeated' or G.GAME.round_resets.blind_states.Big == 'Skipped'or G.GAME.round_resets.blind_states.Big == 'Hide') and 'Big' or 
+            'Boss'
+            ChangePhaseCrown()
+            
+            -- G.FUNCS.select_blind(e)
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    ease_round(1)
+                    inc_career_stat('c_rounds', 1)
+                    if _DEMO then
+                        G.SETTINGS.DEMO_ROUNDS = (G.SETTINGS.DEMO_ROUNDS or 0) + 1
+                        inc_steam_stat('demo_rounds')
+                        G:save_settings()
+                    end
+                    G.GAME.round_resets.blind = G.P_BLINDS[G.GAME.round_resets.blind_choices[G.GAME.blind_on_deck]]
+                    G.GAME.round_resets.blind_states[G.GAME.blind_on_deck] = 'Current'
+                    if AKYRS then
+                        recalculateBlindUI()
+                    end 
+                    return true
+                end})) 
+            G.E_MANAGER:add_event(Event({
             trigger = 'immediate',
             func = function()
-                ease_round(1)
-                inc_career_stat('c_rounds', 1)
-                if _DEMO then
-                    G.SETTINGS.DEMO_ROUNDS = (G.SETTINGS.DEMO_ROUNDS or 0) + 1
-                    inc_steam_stat('demo_rounds')
-                    G:save_settings()
-                end
-                G.GAME.round_resets.blind = G.P_BLINDS[G.GAME.round_resets.blind_choices[G.GAME.blind_on_deck]]
-                G.GAME.round_resets.blind_states[G.GAME.blind_on_deck] = 'Current'
-                if AKYRS then
-                    recalculateBlindUI()
-                end 
+                new_round()
                 return true
-            end})) 
-        G.E_MANAGER:add_event(Event({
-        trigger = 'immediate',
-        func = function()
-            new_round()
-            return true
-        end
-        }))
-    else
+            end
+            }))
+        end    else
         evalOverride(self,dt)
     end
     

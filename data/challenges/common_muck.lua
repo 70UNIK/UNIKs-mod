@@ -32,7 +32,7 @@ SMODS.Challenge{
                     end
                 end
             end
-            if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
+            if (SMODS.Mods["Cryptid"] or {}).can_load  then
                 banList[#banList+1] = { id = "p_cry_meme_1", ids = { "p_cry_meme_1", "p_cry_meme_two", "p_cry_meme_three" } }        
                 banList[#banList+1] = {id = 'c_cry_gateway'}
                 banList[#banList+1] = {id = 'c_cry_summoning'}
@@ -47,7 +47,7 @@ SMODS.Challenge{
             banList[#banList+1] = {id = 'tag_unik_extended_empowered'}
             banList[#banList+1] = {id = 'tag_rare'}
             banList[#banList+1] =  {id = 'tag_uncommon'}
-            if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
+            if (SMODS.Mods["Cryptid"] or {}).can_load  then
                 banList[#banList+1] = {id = 'tag_cry_epic'}
                 banList[#banList+1] = {id = 'tag_cry_bettertop_up'}
                 banList[#banList+1] = {id = 'tag_cry_loss'}
@@ -61,7 +61,7 @@ SMODS.Challenge{
         --The box is banned
         banned_other = function(self)
             local banList = {}
-            if SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
+            if (SMODS.Mods["Cryptid"] or {}).can_load  then
                 banList[#banList+1] = {id = 'bl_cry_box', type = 'blind'}
                 banList[#banList+1] = {id = 'bl_cry_striker', type = 'blind'}
                 banList[#banList+1] = {id = 'bl_cry_windmill', type = 'blind'}

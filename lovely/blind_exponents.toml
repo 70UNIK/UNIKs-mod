@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 99999
 
 ### Display exponential blind amount
 ## exponent is 'unik_exponent' for compat with entropy
@@ -61,3 +61,14 @@ elseif blind_choice.config.high_score_size then
 end
 '''
 match_indent = true
+
+
+### regex to inject 
+[[patches]]
+[patches.regex]
+target = "functions/UI_definitions.lua"
+pattern = '''\{n\=G\.UIT\.T\, config\=\{text \= (.*)\, scale \= 0\.4\, colour = G\.C\.RED\}\}'''
+position = "before"
+payload = '''
+ UNIK.custom_base_size(blind,discovered,vars) or 
+'''

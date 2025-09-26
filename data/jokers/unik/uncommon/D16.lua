@@ -9,7 +9,7 @@ SMODS.Joker {
     cost = 7,
     blueprint_compat = true,
     perishable_compat = true,
-	eternal_compat = true,
+	eternal_compat = false,
     demicolon_compat = true,
     config = {
 		extra = { x_mult = 1, x_mult_mod = 0.1, },
@@ -19,8 +19,9 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.immutable.funny, center.ability.immutable.funny_limit} }
 	end,
     pronouns = "it_its",
+    pools = {["Dice"] = true},
     in_pool = function()
-        return not G.GAME.unik_d16_destroyed
+		return not G.GAME.d16_boom_boom
 	end,
     calculate = function(self, card, context)
 		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed then
@@ -36,7 +37,17 @@ SMODS.Joker {
             end         
             if card.ability.immutable.funny >= card.ability.immutable.funny_limit then
                 card.ability.immutable.destroyed = true
-                G.GAME.unik_d16_destroyed = true
+                G.GAME.d16_boom_boom = true
+                if not G.GAME.banned_keys then
+                    G.GAME.banned_keys = {}
+                end -- i have no idea if this is always initialised already tbh
+                if not G.GAME.cry_banished_keys then
+                    G.GAME.cry_banished_keys = {}
+                end -- 
+                if not G.GAME.cry_banned_pcards then
+                    G.GAME.cry_banished_keys = {}
+                end
+                G.GAME.cry_banished_keys['j_unik_D16'] = true
                  G.E_MANAGER:add_event(Event({
                     trigger="immediate",
                     func = function()
