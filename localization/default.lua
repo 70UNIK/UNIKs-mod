@@ -2227,13 +2227,13 @@ return {
                 text = {
                     "Create an {C:uncommon}Uncommon Joker",
                     "when {C:attention}Blind{} is selected",
-                    "(Must have room)",
+                    "{C:inactive}(Must have room)",
                 }
             },
             j_unik_double_up = {
-                name = "Double Up",
+                name = "Supersize",
                 text = {
-                    "When a Tag is obtained",
+                    "When a {C:attention}Tag{} is obtained",
                     "create {C:attention}#1#{} copies of it",
                 }
             },
@@ -2372,6 +2372,26 @@ return {
                     "{C:unik_ancient,s:0.7,E:2}Origin : Learning with Pibby{}",
                 }
             },
+            j_unik_reggie = {
+                name = "Reggie",
+                text = {
+                    "{C:unik_copper}Rescore{} all scored",
+                    "{C:unik_unik_color}Pink Cards{} {C:attention}#1#{} time",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:dark_edition,s:0.7,E:2}Character by : Whygena{}",
+                }
+            },
+            j_unik_middleman = {
+                name = "Middleman",
+                text = {
+                    "Create a Spectral Card",
+                    "if played hand contains",
+                    "a scoring 8 and a straight",
+                    "(Must have room)"
+                }
+            },
+
             j_unik_compounding_interest = {
                 name = "Compounding Interest",
                 text = {
@@ -2379,16 +2399,6 @@ return {
                     "{C:attention}current money{} at the",
                     "end of round",
                     "{C:inactive}(Capped at {C:money}$#2#{C:inactive})", --capped at $200, aka at $2000
-                }
-            },
-            j_unik_rocky_road = {
-                name = "Rocky Road",
-                text = {
-                    "Create a {C:unik_summit}Summit Card", 
-                    "when a {C:attention}Bulwark",
-                    "is played",
-                    "{C:red,E:2}Destroyed{} if a {C:attention}suit",
-                    "or a {C:attention}rank{} is played",
                 }
             },
             --That's 18 non cursed jokers for the next update!!
@@ -4274,7 +4284,7 @@ return {
             k_unik_reed_part2 = "or",
             k_unik_epic_sand_placeholder = "(Tags held)",
             k_unik_half = "Half",
-            k_defeated_by = "Killed By",
+            k_defeated_by = "Executed By",
             k_unik_none_hand_banned = "None hand is banned",
             k_unik_jaundice_jack = "If a Jack not discarded before hand, convert random Joker to Hit the Road",
             k_unik_hate_ball = "If an 8 is not in scoring hand, convert random Joker to 8 Ball",
@@ -4414,7 +4424,7 @@ return {
             k_unik_summit_pack = "Summit Pack",
 
             k_unik_magician_placeholder = "(^1.15 requirements)",
-            k_unik_double_up = "Double Up!",
+            k_unik_double_up = "Supersize Me!",
             k_unik_banished = "Banished!",
             k_unik_repeat = "AGAIN!",
 
@@ -4426,6 +4436,16 @@ return {
             k_unik_blossom_trigger2 = "Hah!",
             k_unik_blossom_trigger3 = "Here I go!",
             k_unik_blossom_trigger4 = "On my lead!",
+
+            k_unik_reggie_normal1 = "Hi! I'm Reggie! I like boys!",
+            k_unik_reggie_normal2 = "I've heard there's also another femboy like me here...",
+            k_unik_reggie_normal3 = "Heh... Quite a strange place here...",
+            k_unik_reggie_normal4 = "I do have something up my sleeve, from my magic back then...", --That time when the spell went wrong I think
+            k_unik_reggie_trigger1 = "Cute...",
+            k_unik_reggie_trigger2 = "I'll help out!",
+            k_unik_reggie_trigger3 = "Wanna see what I can do?",
+
+
         },
         high_scores={},
         labels={
@@ -4590,7 +4610,7 @@ return {
             },
             special_lose_unik_epic_box={
                 "Have you've forgotten",
-                "about me and Jimbo?",
+                "about me?",
             },
             special_lose_unik_cookie={
                 "Don't get addicted",
@@ -4662,9 +4682,9 @@ return {
                 "NOT. VANILLA!!!!!",
             },
             special_lose_magician={
-                "WHO'S AFRAID OF",
-                "THE BIG BAD",
-                "MAGIC TRIK??!!",
+                "Who's afraid of",
+                "the Big Bad",
+                "Magic Trick??!!",
             },
             special_lose_eternal_egg={
                 "ETERNAL EGG IS USEFUL",

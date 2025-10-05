@@ -44,7 +44,8 @@ SMODS.Joker {
     pronouns = "he_him",
     add_to_deck = function(self,card,from_debuff)
         card.ability.eternal = true
-        card.ability.absolute = true
+        card.ability.cry_absolute = true
+        card.ability.aleph = true
     end,
 	-- The functioning part of the joker, looks at context to decide what step of scoring the game is on, and then gives a 'return' value if something activates.
     calculate = function(self, card, context)

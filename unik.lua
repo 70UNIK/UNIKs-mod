@@ -733,6 +733,7 @@ end
 NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
 
 --Rare (characters)
+NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 

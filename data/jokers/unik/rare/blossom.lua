@@ -27,6 +27,7 @@ SMODS.Joker {
     key = "unik_blossom",
     atlas = 'unik_blossom',
     rarity = 3,
+    cost = 7,
     pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
     blueprint_compat = true,

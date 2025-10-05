@@ -1,8 +1,8 @@
 --gain a double tag whenever you gain a tag (double tag included!)
 SMODS.Joker {
     key = 'unik_double_up',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_rare',
+	pos = { x = 0, y = 2 },
     rarity = 3,
     cost = 5,
 	config = {

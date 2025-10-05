@@ -1,9 +1,9 @@
 
 SMODS.Joker {
     key = 'unik_better_riffin',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
+	pos = { x = 8, y = 2 },
     cost = 7,
     blueprint_compat = true,
     perishable_compat = true,
