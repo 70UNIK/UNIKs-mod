@@ -41,34 +41,15 @@ SMODS.Joker {
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
-    config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0,sold = false,destroyed_joker_buffer = 0} },
+    config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0,sold = false,destroyed_joker_buffer = 0,hyperbolic_scale_limit = 1.5,hyperbolic_factor = 17} },
 	loc_vars = function(self, info_queue, center)
 		return { 
-            vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,center.ability.extra.Emult_mod} }
+            vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,tostring(center.ability.extra.Emult_mod),center.ability.immutable.hyperbolic_factor,center.ability.immutable.hyperbolic_scale_limit} }
 	end,
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
-            if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko 
-            and not card.ability.cry_committed and not card.ability.cry_reworked then
+            if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko then
                 unik_set_sell_cost(card,0)
-                G.GAME.Destroyed_Joker_buffer = G.GAME.Destroyed_Joker_buffer or 0
-                if G.GAME.Destroyed_Joker_buffer > 0 then
-                    SMODS.scale_card(card, {
-                        ref_table =card.ability.extra,
-                        ref_value = "Emult",
-                        scalar_value = "custom_scaler",
-                        scalar_table = {
-                            custom_scaler = G.GAME.Destroyed_Joker_buffer * card.ability.extra.Emult_mod,
-                        },
-                        base = 1,
-                        message_key = "a_powmult",
-                        message_colour = G.C.DARK_EDITION,
-                        force_full_val = true,
-                    })
-                end
-                
-
-
                 White_lily_copy(card)
             end
         end
@@ -90,20 +71,30 @@ SMODS.Joker {
             end
 		end
         if not context.blueprint and context.unik_destroying_joker then
-            if context.unik_destroyed_joker ~= card then
+            SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "Emult",
+                    scalar_value = "Emult_mod",
+                    base = 1,
+                    message_key = "a_powmult",
+                    message_colour = G.C.DARK_EDITION,
+                        force_full_val = true,
+                })
+            if to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) >= to_big(card.ability.immutable.hyperbolic_scale_limit) then
                 SMODS.scale_card(card, {
-                        ref_table =card.ability.extra,
-                        ref_value = "Emult",
-                        scalar_value = "Emult_mod",
-                        base = 1,
-                        message_key = "a_powmult",
-                        message_colour = G.C.DARK_EDITION,
-                         force_full_val = true,
-                    })
-                    				return {
-
-				}
+                    ref_table =card.ability.extra,
+                    ref_value = "Emult_mod",
+                    scalar_value = "custom_scaler",
+                    operation = "-",
+                    scalar_table = {
+                        custom_scaler = card.ability.extra.Emult_mod - card.ability.extra.Emult_mod *(100 - card.ability.immutable.hyperbolic_factor)/100,
+                    },
+                    no_message = true,
+                })
             end
+                                return {
+
+            }
         end
         if context.selling_self then
             card.ability.immutable.sold = true
@@ -134,16 +125,5 @@ function Card.remove(self)
   end
 
   local ret = remove_ref(self)
-  if removed then
-    G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			func = function()
-				G.GAME.Destroyed_Joker_buffer = math.max(G.GAME.Destroyed_Joker_buffer - 1,0)
-                --print(G.GAME.Destroyed_Joker_buffer)
-				return true
-			end,
-		}))
-    
-  end
   return ret
 end
