@@ -73,7 +73,7 @@ SMODS.Joker {
             end
             if triggered then
 				for i = 1, increase do
-					print("1")
+				--	print("1")
 					if i < increase then
 						SMODS.scale_card(card, {
 							ref_table =card.ability.extra,

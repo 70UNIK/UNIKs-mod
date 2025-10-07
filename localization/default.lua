@@ -1991,7 +1991,7 @@ return {
                     "Scored {C:attention}Light Suits",
                     "give {X:mult,C:white}X#1#{} Mult",
                     "Increases by {X:mult,C:white}X#2#{} Mult",
-                    "for each {C:attention}Light Suit",
+                    "for each {C:attention}unique {C:attention}Light Suit",
                     "in scoring hand",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
@@ -2163,23 +2163,23 @@ return {
                 text = {
                     "Scored {V:1}#1#{} give", --X3 mult
                     "{X:mult,C:white}X#2#{} Mult",
-                    "Suit changes after round",
+                    "{s:0.8}suit changes at end of round",
                     "{C:inactive,s:0.6}(Selects different Light Suit from deck if possible)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
                 }
             },
-            j_unik_world_machine = {
-                name = "World Machine",
+            j_unik_sundae_cookie = {
+                name = "Sundae Cookie",
                 text = {
                     "#1# give {X:mult,C:white}X#1#{} Mult",
                     "when scored",
-                    "Suit changes after round",
-                    "(Selects a Dark Suit from deck)",
+                    "{s:0.8}suit changes at end of round",
+                    "{C:inactive,s:0.6}(Selects different Dark Suit from deck if possible)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
                 }
             },            
             j_unik_night_skyline = {
@@ -2386,13 +2386,11 @@ return {
                     "{C:dark_edition,s:0.7,E:2}Character by : Whygena{}",
                 }
             },
-            j_unik_middleman = {
-                name = "Middleman",
+            j_unik_tape_painting = {
+                name = "Tape Painting",
                 text = {
-                    "Create a Spectral Card",
-                    "if played hand contains",
-                    "a scoring 8 and a straight",
-                    "(Must have room)"
+                    "Scoring {C:unik_unik_color}Pink Cards{} are",
+                    "no longer {C:red}destroyed{} in {C:attention}Spectrums"
                 }
             },
 

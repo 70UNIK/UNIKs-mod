@@ -14,3 +14,16 @@ payload = '''
 ----------NEW------------------------
 
 '''
+
+### destroyed_by_scattering
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if random_card then random_card:start_dissolve() end'''
+position = 'before'
+payload = '''
+if random_card then
+    random_card.ability.destroyed_by_scattering = true
+end
+'''
+match_indent = true

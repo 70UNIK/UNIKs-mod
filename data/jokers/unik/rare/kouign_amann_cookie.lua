@@ -1,4 +1,5 @@
---X1.075 Mult per light suit scored, increases this by X0.075 Mult per light suit scored
+--Rework effect 2:
+--Light suits give X1.0 Mult, increase by X0.25 per each unique light suit in scoring hand
 --
 SMODS.Atlas {
 	key = "unik_kouign_amann_cookie",
@@ -32,7 +33,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
-    config = { extra = {x_mult = 1.0,x_mult_mod = 0.1}, immutable = {x_mult_display = 1.0} },
+    config = { extra = {x_mult = 1.0,x_mult_mod = 0.25}, immutable = {x_mult_display = 1.0} },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 
@@ -41,17 +42,23 @@ SMODS.Joker {
         if G.hand and G.hand.cards and G.hand.highlighted and #G.hand.highlighted > 0 then
             local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
             for i,v in pairs(scoring_hand) do
-                if UNIK.is_suit_type(v,'light') then
-                    center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                for j=1,#UNIK.light_suits do
+                    if v:is_suit(UNIK.light_suits[j]) then
+                        center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                    end
                 end
+                
             end
         elseif G.play and G.play.cards then
             center.ability.immutable.x_mult_display = center.ability.extra.x_mult
            local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.play.cards)
-            for i,v in pairs(scoring_hand) do
-                if UNIK.is_suit_type(v,'light') then
-                    center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+             for i,v in pairs(scoring_hand) do
+                for j=1,#UNIK.light_suits do
+                    if v:is_suit(UNIK.light_suits[j]) then
+                        center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                    end
                 end
+                
             end
         end
         local quoteset = 'normal'
@@ -66,10 +73,13 @@ SMODS.Joker {
         end
         if context.individual and context.cardarea == G.play then
             local dispMult = card.ability.extra.x_mult
-            for i,v in pairs(context.scoring_hand) do
-                if UNIK.is_suit_type(v,'light') then
-                    dispMult = dispMult + card.ability.extra.x_mult_mod
+             for i,v in pairs(context.scoring_hand) do
+                for j=1,#UNIK.light_suits do
+                    if v:is_suit(UNIK.light_suits[j]) then
+                        dispMult = dispMult + card.ability.extra.x_mult_mod
+                    end
                 end
+                
             end
             if UNIK.is_suit_type(context.other_card,'light') then
                 return {
@@ -80,10 +90,13 @@ SMODS.Joker {
         end
         if context.forcetrigger then
             local dispMult = card.ability.extra.x_mult
-            for i,v in pairs(context.scoring_hand) do
-                if UNIK.is_suit_type(v,'light') then
-                    dispMult = dispMult + card.ability.extra.x_mult_mod
+             for i,v in pairs(context.scoring_hand) do
+                for j=1,#UNIK.light_suits do
+                    if v:is_suit(UNIK.light_suits[j]) then
+                        dispMult = dispMult + card.ability.extra.x_mult_mod
+                    end
                 end
+                
             end
             return {
                 x_mult = dispMult,

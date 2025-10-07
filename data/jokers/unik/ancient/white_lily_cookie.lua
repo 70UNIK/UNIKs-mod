@@ -7,6 +7,7 @@ local function White_lily_copy(card)
     _card:start_materialize()
     G.jokers:emplace(_card)
     _card.ability.destroyed_by_megatron = nil
+    _card.ability.immutable.sold = false
     -- SMODS.scale_card(_card, {
     --     ref_table =_card.ability.extra,
     --     ref_value = "Emult",
@@ -53,6 +54,9 @@ SMODS.Joker {
                 White_lily_copy(card)
             end
         end
+    end,
+    add_to_deck = function(self,card,from_debuff)
+        card.ability.immutable.sold = false
     end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
@@ -115,15 +119,12 @@ end
 local remove_ref = Card.remove
 function Card.remove(self)
   -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
-  G.GAME.Destroyed_Joker_buffer = G.GAME.Destroyed_Joker_buffer or 0
-  local removed = false
-  if self.added_to_deck and self.ability.set == 'Joker' and not G.CONTROLLER.locks.selling_card then
-        G.GAME.Destroyed_Joker_buffer = G.GAME.Destroyed_Joker_buffer + 1
-        removed = true
+  if self.added_to_deck and self.ability.set == 'Joker' and (not G.CONTROLLER.locks.selling_card or self.ability.destroyed_by_scattering) then
         SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
-            
+        self.ability.destroyed_by_scattering = nil
   end
 
   local ret = remove_ref(self)
+  self.ability.destroyed_by_scattering = nil
   return ret
 end
