@@ -89,3 +89,10 @@ else --fallback
 end
 '''
 match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''G\.GAME\.round\_resets\.ante \=\= G\.GAME\.win\_ante'''
+position = "at"
+payload = '''G.GAME.round_resets.ante >= G.GAME.win_ante'''
