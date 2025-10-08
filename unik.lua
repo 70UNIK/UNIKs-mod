@@ -745,6 +745,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")()
 
 --Ancient
 NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
+NFS.load(mod_path .. "data/jokers/unik/ancient/sundae_cookie.lua")()
 --WORLD MACHINE
 NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/white_lily_cookie.lua")()

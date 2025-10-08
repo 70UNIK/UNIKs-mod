@@ -2173,8 +2173,8 @@ return {
             j_unik_sundae_cookie = {
                 name = "Sundae Cookie",
                 text = {
-                    "#1# give {X:mult,C:white}X#1#{} Mult",
-                    "when scored",
+                    "Scored {V:1}#1#{} give", --X3 mult
+                    "{X:mult,C:white}X#2#{} Mult",
                     "{s:0.8}suit changes at end of round",
                     "{C:inactive,s:0.6}(Selects different Dark Suit from deck if possible)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -4446,6 +4446,11 @@ return {
             k_unik_reggie_trigger1 = "Cute...",
             k_unik_reggie_trigger2 = "I'll help out!",
             k_unik_reggie_trigger3 = "Wanna see what I can do?",
+            
+            k_unik_sundae_normal1 = "Come one, come all, to Sugarland!",
+            k_unik_sundae_normal2 = "Nothing beats hearing the joyful laughter of Cookies!",
+            k_unik_sundae_normal3 = "Come along and join the fun here!",
+            k_unik_sundae_normal4 = "Hehehe! Lets play ", -- [suit]!
 
 
         },

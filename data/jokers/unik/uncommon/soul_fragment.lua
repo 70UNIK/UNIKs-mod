@@ -21,6 +21,7 @@ SMODS.Joker {
                     play_sound("timpani")
                     local card2 = create_card("Joker", G.jokers, true, nil, nil, nil, nil, "unik_tech_demo")
                     card2.ability.perishable = true
+                    card2.ability.perish_tally = G.GAME.perishable_rounds or 5
                     card2:add_to_deck()
                     G.jokers:emplace(card2)
                     card2:juice_up(0.3, 0.5)

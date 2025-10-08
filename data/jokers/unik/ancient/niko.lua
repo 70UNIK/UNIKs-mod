@@ -22,7 +22,7 @@ SMODS.Joker {
 	soul_pos = { x = 1, y = 0 },
     cost = 50,
 	blueprint_compat = true,
-    perishable_compat = false,
+    perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = {x_mult = 2.5}},
