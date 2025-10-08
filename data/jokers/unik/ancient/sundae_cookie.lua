@@ -44,7 +44,7 @@ SMODS.Joker {
 					G.GAME.current_round.unik_sundae_card and G.GAME.current_round.unik_sundae_card.suit or "Spades",
 					"suits_plural"
 				),center.ability.extra.x_mult
-	,localize(niko_quotes[quoteset][RNDM] .. "" ) .. extra,
+	,localize(sundae_quotes[quoteset][RNDM] .. "" ) .. extra,
     colours = {
 					G.C.SUITS[G.GAME.current_round.unik_sundae_card and G.GAME.current_round.unik_sundae_card.suit or "Spades"],
 				},
