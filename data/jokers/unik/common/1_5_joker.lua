@@ -21,7 +21,7 @@ SMODS.Joker {
 	display_size = { w = 71, h = 144 },
     loc_vars = function(self, info_queue, center)
 		local key = 'j_unik_1_5_joker'
-		if G.hand.config.highlighted_limit and #G.hand.config.highlighted_limit > 5 then
+		if G.hand and G.hand.config and G.hand.config.highlighted_limit and G.hand.config.highlighted_limit > 5 then
 			key = 'j_unik_1_5_joker_exp'
 		end
 		return { key =key, vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.immutable.hand_size} }

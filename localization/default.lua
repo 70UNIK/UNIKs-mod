@@ -3385,6 +3385,7 @@ return {
                     "{C:blue}Hands{}/{C:red}Discards {C:attention}used",
                     "but also triggers when",
                     "Blinds {C:attention}remove{} {C:blue}Hands{} or {C:red}Discards",
+                    "{C:inactive,S:0.8}(Only during scoring or setting Blind)"
                 }
             },
 

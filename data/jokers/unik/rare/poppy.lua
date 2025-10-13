@@ -133,25 +133,35 @@ SMODS.Joker {
 --or if you permanently gain/lose hands
 local handyHook = ease_hands_played
 function ease_hands_played(mod, instant)
-    local initial_hands = G.GAME.current_round.hands_left
-    local mod2 = math.max(-G.GAME.current_round.hands_left, mod)
+
+    if(G.CONTROLLER.locked) or 
+        (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) then
+        local initial_hands = G.GAME.current_round.hands_left
+        local mod2 = math.max(-G.GAME.current_round.hands_left, mod)
+        
+        
+        if G.GAME.blind and G.GAME.blind.in_blind then
+            SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod2 })
+        end
+    end
     handyHook(mod,instant)
     
-    if G.GAME.blind and G.GAME.blind.in_blind then
-        SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod2 })
-    end
     
 end
 
 local tossyHook = ease_discard
 function ease_discard(mod, instant, silent)
-    local initial_discards = G.GAME.current_round.discards_left
-    local mod2 = math.max(-G.GAME.current_round.discards_left, mod)
-    tossyHook(mod,instant,silent)
-    
-    if G.GAME.blind and G.GAME.blind.in_blind then
-        SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod2 })
+    if (G.CONTROLLER.locked) or 
+        (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) then
+        local initial_discards = G.GAME.current_round.discards_left
+        local mod2 = math.max(-G.GAME.current_round.discards_left, mod)
+        
+        
+        if G.GAME.blind and G.GAME.blind.in_blind then
+            SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod2 })
+        end
     end
+    tossyHook(mod,instant,silent)
 end 
 
 ---initial = 3 hands
