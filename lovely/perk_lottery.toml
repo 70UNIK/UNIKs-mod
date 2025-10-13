@@ -11,6 +11,9 @@ position = "before"
 payload = '''
 if area ~= G.consumables and G.GAME.pack_choices then
     SMODS.calculate_context({ unik_selecting_booster_option = true,card = card, cards_left = area.cards})
+    if to_big(#area.cards) <= to_big(0) then
+        G.GAME.pack_choices = 0
+    end
 end
 '''
 match_indent = true

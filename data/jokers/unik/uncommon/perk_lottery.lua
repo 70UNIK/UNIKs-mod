@@ -26,8 +26,6 @@ SMODS.Joker {
                         card=card,
                     }
                 end
-            elseif to_big(#context.cards_left) <= to_big(0) then
-                G.GAME.pack_choices = 0
             end
             
         end
