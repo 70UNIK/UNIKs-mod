@@ -1,0 +1,28 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999999
+
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''G\.GAME\.round\_resets\.blind\_states\.Boss \= \'Defeated\''''
+position = "after"
+payload = '''
+
+G.GAME.unik_ranks_scored_this_ante = {}
+'''
+
+# Rush Hour - mark small blind as defeated
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''--Highlight all the cards used in scoring and play a sound indicating highlight'''
+position = "before"
+payload = '''
+if not SMODS.has_no_rank(scoring_hand[i]) then
+    G.GAME.unik_ranks_scored_this_ante = G.GAME.unik_ranks_scored_this_ante or {}
+    G.GAME.unik_ranks_scored_this_ante[scoring_hand[i]:get_id()] = true
+end
+'''
+match_indent = true

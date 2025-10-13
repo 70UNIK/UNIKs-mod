@@ -10,7 +10,7 @@ SMODS.Joker {
 	eternal_compat = false,
     demicoloncompat = true,
     config = { extra = {mult = 10, mult_mod = 0.1,destroyed = false,depleted_threshold = -10} },
-    pools = { ["Food"] = true},
+    pools = {  ["autocannibalism_food"] = true,["Food"] = true},
     loc_vars = function(self, info_queue, center)
         local sign = "+"
         if lenient_bignum(center.ability.extra.mult) < lenient_bignum(0) then

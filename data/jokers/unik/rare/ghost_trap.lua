@@ -39,7 +39,6 @@ SMODS.Joker {
 				context.added.ability.getting_captured = true
 				selfDestruction(context.added,"k_unik_pentagram_purified",G.C.MULT)
 				if card.ability.extra.limit > 0 then
-					self.ability.extra.getting_captured = nil
 					SMODS.scale_card(card, {
 						ref_table =card.ability.extra,
 						ref_value = "x_mult",

@@ -532,12 +532,20 @@ return {
                     "All cards must score",
                 }
             },
+            bl_unik_bronze_bug = { --fuck you pair builds
+                name = "Bronze Bug",
+                text = {
+                    "One random Joker destroyed",
+                    "for each missing scoring card",
+                    "below #1# cards" --aka play 1 card, and it destroys 4 cards. Play 5 cards, but 3 cards unscoring: destroy 3 jokers
+                }
+            },
             bl_unik_epic_whole = {
                 name = "Syödäänkokonaisena", --Eaten Whole
                 text = {
                     "If a hand contains a",
-                    "rank not previously scored",
-                    "in last hand, die",
+                    "rank previously played",
+                    "this ante, die",
                 }
             },
             bl_unik_epic_sink={
@@ -1491,6 +1499,18 @@ return {
                 text={
                     "{C:mult}+#1#{} Mult if played hand contains",
                     "{C:attention}#3#{} or more cards",
+                },
+                unlock = {
+                    "Own {C:attention}Half Joker",
+                    "while in",
+                    "{C:attention}The Psychic{} Boss"
+                }
+            },
+            j_unik_1_5_joker_exp = {
+                name="One-and-a-Half Joker",
+                text={
+                    "{C:mult}+#1#{} Mult if played hand contains",
+                    "{C:attention}#3#{} or more cards",
                     "Each played card above {C:attention}#3#{} cards",
                     "increases this by {C:mult}+#2#{} Mult",
                 },
@@ -2184,18 +2204,18 @@ return {
             j_unik_brownie = {
                 name = "Brownie",
                 text = {
-                    "Scored Cards each give",
+                    "Scored  {C:attention}cards{} each give",
                     "{X:mult,C:white}X#1#{} Mult",
-                    "loses {X:mult,C:white}X#1#{} Mult",
+                    "Loses {X:mult,C:white}X#2#{} Mult",
                     "when triggered",
                 }
             },
             j_unik_brownie_depleted = {
                 name = "Brownie",
                 text = {
-                    "Scored Cards each give",
+                    "Scored  {C:attention}cards{} each give",
                     "{X:mult,C:white}X#1#{} Mult",
-                    "loses {X:mult,C:white}X#1#{} Mult",
+                    "Loses {X:mult,C:white}X#2#{} Mult",
                     "when triggered",
                     "{C:red,E:2}Self Destructs{} at",
                     "{X:mult,C:white}X#3#{} Mult"
@@ -2368,11 +2388,12 @@ return {
                     "{C:dark_edition,s:0.7,E:2}Character by : Whygena{}",
                 }
             },
-            j_unik_tape_painting = {
-                name = "Tape Painting",
+            j_unik_tape_7 = {
+                name = "Tape 7",
                 text = {
                     "Scoring {C:unik_unik_color}Pink Cards{} are",
-                    "no longer {C:red}destroyed{} in {C:attention}Spectrums"
+                    "no longer {C:red}destroyed{} in",
+                    "{C:attention}Spectrums{} and {C:attention}Straights",
                 }
             },
 
@@ -2383,6 +2404,31 @@ return {
                     "{C:attention}current money{} at the",
                     "end of round",
                     "{C:inactive}(Capped at {C:money}$#2#{C:inactive})", --capped at $200, aka at $2000
+                }
+            },
+            j_unik_antijoker = {
+                name = "Antijoker",
+                text = {
+                    "After {C:attention}#1#{} round#<s>1#",
+                    "sell this card to",
+                    "add {C:dark_edition}Negative{} to a",
+                    "random {C:attention}Joker",
+                    "{C:inactive}(Currently {C:attention}#2#/#1#{C:inactive})"
+                }
+            },
+            j_unik_hall_of_mirrors = {
+                name = "Mirror Maze",
+                text = {
+                    "Rescore all scored",
+                    "{C:attention}Glass Cards {C:attention}#1#{} time"
+                }
+            },
+            j_unik_perk_lottery = {
+                name = "Perk Lottery",
+                text = {
+                    "{C:green}#1# in #2#{} chance", --1 in 2 chance
+                    "to {C:red}not{} gain {C:attention}+#3#{} choice",
+                    "after selecting in {C:attention}Booster Packs",
                 }
             },
             --That's 18 non cursed jokers for the next update!!
@@ -2484,10 +2530,12 @@ return {
             j_unik_pavement_joker = {
                 name = "Pavement Joker",
                 text = {
-                    "{C:attention}Rankless{} and {C:attention}Suitless",
-                    "cards can fill gaps up to {C:attention}1{} in",
-                    "{C:attention}Straights{}, {C:attention}Flushes{}, {C:attention}Spectrums",
-                    "and {C:attention}of a Kind{} hands"
+                    "Requirements for {C:attention}Straights{},",
+                    "{C:attention}Flushes{}, {C:attention}Spectrums",
+                    "and {C:attention}of a Kind{} hands",
+                    "are reduced by {C:attention}1{}",
+                    "for each scoring {C:attention}Rankless{}",
+                    "and {C:attention}Suitless card",
                 }
             },
             j_unik_uniku = {

@@ -1,0 +1,1 @@
+--Remove all stickers and detrimental editions from up to 3 selected jokers.

@@ -10,7 +10,7 @@ SMODS.Consumable{
         end
         return false
 	end,
-    config = { extra = { e_mult = 0.04 ,max_highlighted = 1} },
+    config = { extra = { e_mult = 0.05 ,max_highlighted = 1} },
     loc_vars = function(self, info_queue, card)
 		return {
 			vars = {card.ability.extra.e_mult,card.ability.extra.max_highlighted},

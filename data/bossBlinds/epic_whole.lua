@@ -18,11 +18,11 @@ SMODS.Blind {
         akyrs_cannot_be_skipped = true,
     },
     unik_kill_hand = function(self, cards, hand, handname, check)
-        if not G.GAME.unik_previously_scored_ranks then
-            G.GAME.unik_previously_scored_ranks = {}
+        if not G.GAME.unik_ranks_scored_this_ante then
+            G.GAME.unik_ranks_scored_this_ante = {}
         end
         for i,v in pairs(cards) do
-            if not G.GAME.unik_previously_scored_ranks[v:get_id()] then
+            if G.GAME.unik_ranks_scored_this_ante[v:get_id()] then
                 return true
             end
         end
@@ -31,13 +31,6 @@ SMODS.Blind {
     in_pool = function(self)
         return CanSpawnEpic()
     end,
-    set_blind = function(self)
-        G.GAME.unik_halt_adding_ranks = true
-	end,
-
-	defeat = function(self)
-        G.GAME.unik_halt_adding_ranks = nil
-	end,
     -- recalc_debuff = function(self, card, from_blind)
     --     if card.area ~= G.jokers then
     --         if not SMODS.has_no_rank(card) then
@@ -49,13 +42,3 @@ SMODS.Blind {
     --     return false
     -- end
 }
-
---hook
-local get_prev_ranks = evaluate_play_final_scoring
-function evaluate_play_final_scoring(text, disp_text, poker_hands, scoring_hand, non_loc_disp_text, percent, percent_delta)
-    G.GAME.unik_previously_scored_ranks = {}
-    for i,v in pairs(scoring_hand) do
-        G.GAME.unik_previously_scored_ranks[v:get_id()] = true
-    end
-    get_prev_ranks(text, disp_text, poker_hands, scoring_hand, non_loc_disp_text, percent, percent_delta)
-end

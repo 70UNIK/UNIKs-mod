@@ -14,6 +14,8 @@ SMODS.Consumable{
     use = function(self, card)
         local cards = UNIK.get_sorted_by_position(G.hand)
         local rightmostCard = cards[#cards]
+        local cards2 = cards
+        table.remove(cards2,#cards2)
         local id = nil
         local source = nil
         if rightmostCard.ability and rightmostCard.ability.group then
@@ -22,8 +24,10 @@ SMODS.Consumable{
         end
         if #cards > 1 and id and source then
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                unlink_cards(cards2)
                 for i=1, #cards do
                     local percent = 1.15 - (i-0.999)/(#cards-0.998)*0.3
+                    
                     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards[i]:flip();play_sound('card1', percent);cards[i]:juice_up(0.3, 0.3);return true end }))
                 end
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()

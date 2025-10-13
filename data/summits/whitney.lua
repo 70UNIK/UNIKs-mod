@@ -10,7 +10,7 @@ SMODS.Consumable{
         end
         return false
 	end,
-    config = { extra = { money = 1 ,max_highlighted = 2} },
+    config = { extra = { money = 2 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
 		return {
 			vars = {card.ability.extra.money,card.ability.extra.max_highlighted},

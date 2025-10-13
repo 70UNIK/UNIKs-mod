@@ -41,21 +41,20 @@ payload = '''(G.GAME.blind_on_deck == 'Boss') '''
 
 # Rush Hour - mark small blind as defeated
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = "functions/state_events.lua"
-pattern = "if G.GAME.round_resets.blind == G.P_BLINDS.bl_small then"
+pattern = '''G\.GAME\.round\_resets\.blind \=\= G\.P\_BLINDS\.bl\_small'''
 position = "at"
-payload = "if G.GAME.blind_on_deck == 'Small' then"
-match_indent = true
+payload = "G.GAME.blind_on_deck == 'Small'"
 
-# Ruby Stake - mark big blind as defeated
+# Rush Hour - mark small blind as defeated
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = "functions/state_events.lua"
-pattern = "elseif G.GAME.round_resets.blind == G.P_BLINDS.bl_big then"
+pattern = '''G\.GAME\.round\_resets\.blind \=\= G\.P\_BLINDS\.bl\_big'''
 position = "at"
-payload = "elseif G.GAME.blind_on_deck == 'Big' then"
-match_indent = true
+payload = "G.GAME.blind_on_deck == 'Big'"
+
 
 # MoreFluff fix
 [[patches]]

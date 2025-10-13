@@ -20,7 +20,11 @@ SMODS.Joker {
 	demicoloncompat = true,
 	display_size = { w = 71, h = 144 },
     loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.immutable.hand_size} }
+		local key = 'j_unik_1_5_joker'
+		if G.hand.config.highlighted_limit and #G.hand.config.highlighted_limit > 5 then
+			key = 'j_unik_1_5_joker_exp'
+		end
+		return { key =key, vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.immutable.hand_size} }
 	end,
     calculate = function(self, card, context)
 		if context.joker_main then
@@ -43,21 +47,21 @@ SMODS.Joker {
 		end
 	end
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_1_5_joker"] = {
-		text = {
-            { text = "+" },
-            { ref_table = "card.joker_display_values", ref_value = "mult", retrigger_type = "mult" }
-        },
-		reminder_text = {
-			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER,scale = 0.3},
-		},
-        text_config = { colour = G.C.MULT },
-        calc_function = function(card)
-            local hand = JokerDisplay.current_hand
-            card.joker_display_values.mult = hand and #hand > 0 and #hand >= card.ability.extra.hand_size and
-                card.ability.extra.mult + card.ability.extra.mult_mod * (#hand - card.ability.extra.hand_size) or 0
-			card.joker_display_values.localized_text = (hand and #hand > 0 and #hand >= card.ability.extra.hand_size and "(" .. #hand .. ' ' .. localize('k_unik_cards') .. ")") or ''
-        end
-	}
-end
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_1_5_joker"] = {
+-- 		text = {
+--             { text = "+" },
+--             { ref_table = "card.joker_display_values", ref_value = "mult", retrigger_type = "mult" }
+--         },
+-- 		reminder_text = {
+-- 			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER,scale = 0.3},
+-- 		},
+--         text_config = { colour = G.C.MULT },
+--         calc_function = function(card)
+--             local hand = JokerDisplay.current_hand
+--             card.joker_display_values.mult = hand and #hand > 0 and #hand >= card.ability.extra.hand_size and
+--                 card.ability.extra.mult + card.ability.extra.mult_mod * (#hand - card.ability.extra.hand_size) or 0
+-- 			card.joker_display_values.localized_text = (hand and #hand > 0 and #hand >= card.ability.extra.hand_size and "(" .. #hand .. ' ' .. localize('k_unik_cards') .. ")") or ''
+--         end
+-- 	}
+-- end

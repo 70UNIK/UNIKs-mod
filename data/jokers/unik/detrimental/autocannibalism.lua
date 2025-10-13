@@ -13,11 +13,6 @@ SMODS.ObjectType({
 	end,
 })
 SMODS.Joker {
-    dependencies = {
-		items = {
-			"set_cry_cursed",
-		},
-	},
 	key = 'unik_autocannibalism',
     atlas = 'unik_cursed',
     rarity = 'unik_detrimental',
@@ -76,6 +71,8 @@ SMODS.Joker {
                     v.ability.extra.X_chips = 1
                 elseif v.config.center.key == "j_cry_starfruit" then
                     v.ability.emult = 1
+                elseif v.config.center.key == 'j_unik_brownie' then
+                    v.ability.x_mult = 1
                 end
             end
         end
@@ -116,6 +113,8 @@ SMODS.Joker {
                     v.ability.extra.X_chips = 1
                 elseif v.config.center.key == "j_cry_starfruit" then
                     v.ability.emult = 1
+                elseif v.config.center.key == 'j_unik_brownie' then
+                    v.ability.x_mult = 1
                 end
             end
         end
