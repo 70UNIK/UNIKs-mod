@@ -53,7 +53,7 @@ SMODS.Joker {
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.pools and v.config.center.pools.autocannibalism_food then
+            if v.config.center.pools and v.config.center.pools.autocannibalism_food and not v.ability.unik_depleted then
                 v.ability.eternal = true
                 v.ability.unik_depleted = true
                 if v.ability.name == "Turtle Bean" then
@@ -86,40 +86,16 @@ SMODS.Joker {
             --print("Joker in set:")
             --print(v.ability.name)
             if v.ability.unik_depleted then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        play_sound('tarot1')
-                        card_eval_status_text(v, "extra", nil, nil, nil, {
-                            message = localize("k_eaten_ex"),
-                            colour = G.C.BLACK,
-                            card=v,
-                        })
-                        v.T.r = -0.2
-                        v:juice_up(0.3, 0.4)
-                        v.states.drag.is = true
-                        v.children.center.pinch.x = true
-                        -- This part destroys the card.
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'after',
-                            delay = 0.3,
-                            blockable = false,
-                            func = function()
-                                G.jokers:remove_card(v)
-                                v:remove()
-                                v = nil
-                                return true;
-                            end
-                        }))
-                        return true
-                    end
-                }))
+                selfDestruction(v,'k_eaten_ex',G.C.BLACK)
             end
         end
     end,
     calculate = function(self, card, context)
         if context.unik_emplace and context.added and context.cardarea == G.jokers then
-            if context.added.config.center.pools and context.added.config.center.pools.autocannibalism_food then
+            if context.added.config.center.pools and context.added.config.center.pools.autocannibalism_food and not context.added.ability.unik_depleted then
                 local v = context.added
+                v.ability.eternal = true
+                v.ability.unik_depleted = true
                 if v.ability.name == "Turtle Bean" then
                     --cancel out hand size increase
                     G.hand:change_size(-v.ability.extra.h_size)
@@ -144,9 +120,9 @@ SMODS.Joker {
             end
         end
         if context.unik_remove_from_deck and context.removed then
-            local exists = true
+            local exists = false
             for _, v in pairs(G.jokers.cards) do
-                if v.config.center.pools.autocannibalism_food then
+                if v.config.center.pools and v.config.center.pools.autocannibalism_food and v ~= context.removed then
                     exists = true
                 end
             end

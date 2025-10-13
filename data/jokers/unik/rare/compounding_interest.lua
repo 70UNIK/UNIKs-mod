@@ -9,7 +9,7 @@ SMODS.Joker {
 			x_dollars = 0.2,
 		},
         immutable = {
-            cap = 2000,
+            cap = 1000,
         }
 	},
 	perishable_compat = true,

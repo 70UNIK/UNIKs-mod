@@ -49,39 +49,10 @@ end
 local removeHook = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
     if (self.added_to_deck) then
-       --print("10")
-        --Pirahna Plant and other suit based cursed Jokers go here,
-        
-        --print("Joker deleted")
-        --print(self.ability.name)
-        --Happiness is mandatory: Joker slot check
-        --Counter for autocannibalism
         SMODS.calculate_context({ unik_remove_from_deck = true, removed = self, from_debuff = from_debuff})
-        local cannibalCards = 0
-        local autoCannibalExists = false
         for _, v in pairs(G.jokers.cards) do
-            --print("Joker in set:")
-            --print(v.ability.name)
             if v.ability.name == "j_unik_happiness" then
-                --print("checkSlots")
                 CheckSlots(v,v.ability.extra.slotLimit)
-            elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff then
-                if (self.config.center.rarity == 'unik_detrimental' or self.config.center.rarity == 'cry_cursed' ) and self.ability.extra.getting_captured then
-                    if v.ability.extra.limit > 0 then
-                        self.ability.extra.getting_captured = nil
-                        SMODS.scale_card(v, {
-                            ref_table =v.ability.extra,
-                            ref_value = "x_mult",
-                            scalar_value = "x_mult_mod",
-                            message_key = "a_xmult",
-                            message_colour = G.C.MULT,
-                        })
-                        v.ability.extra.limit = v.ability.extra.limit - 1
-                    elseif not v.ability.extra.destroyed  then
-                        v.ability.extra.destroyed = true
-                        selfDestruction(v,'k_unik_ghost_trap_explode',G.C.MULT)
-                    end
-                end
             end
         end
     end
@@ -93,16 +64,6 @@ local add_to_deck_hook = Card.add_to_deck
 function Card:add_to_deck(from_debuff)
     add_to_deck_hook(self,from_debuff)
     SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
-   --print("1")
-    if G.jokers then
-        if G.jokers.cards then
-            for _, v in pairs(G.jokers.cards) do
-                if v.ability.name == "j_unik_ghost_trap" and not v.debuff and v.ability.extra.limit > -1 then
-                    GhostTrap1(v)
-                end
-            end
-        end
-    end
 end
 
 local emplaceHook = CardArea.emplace
@@ -260,10 +221,6 @@ function CardArea:emplace(card, location, stay_flipped)
             if v.ability.name == "j_unik_happiness" then
                 --print("checkSlots")
                 CheckSlots(v,v.ability.extra.slotLimit)
-                --Autocannibalism: forcibly apply eternal and depleted to all new and existing turtle beans, ice cream, popcorn and ramen Jokers
-            --ghost trap functionality
-            elseif v.ability.name == "j_unik_ghost_trap" and not v.debuff and v.ability.extra.limit > -1 then
-                GhostTrap1(v)
             --Formidicus fix, now constantly destroys cursed jokers
             elseif v.config.center.key == "j_cry_formidiulosus" then
                 for x, w in pairs(G.jokers.cards) do
@@ -305,40 +262,6 @@ function CardArea:emplace(card, location, stay_flipped)
                 end
             end
 
-        end
-    end
-end
-
-function GhostTrap1(self)
-    for x, w in pairs(G.jokers.cards) do
-        if (w.config.center.rarity == 'unik_detrimental' or w.config.center.rarity == 'cry_cursed' ) and not w.ability.extra.getting_captured then
-            --Add to value
-            w.ability.extra.getting_captured = true
-            selfDestruction(w,"k_unik_pentagram_purified",G.C.MULT)
-            if G.GAME.unik_prevent_killing_cursed_jokers and not G.GAME.unik_prevent_killing_cursed_jokers2 then
-                --die
-                selfDestruction(self,"k_extinct_ex",G.C.BLACK)
-                G.GAME.unik_prevent_killing_cursed_jokers2 = true
-                G.E_MANAGER:add_event(  -- From buffoonery, supposed to oneshot you
-                Event({
-                    trigger = "after",
-                    delay = 0.2,
-                    func = function()
-                        if G.STATE ~= G.STATES.SELECTING_HAND then
-                            return false
-                        end
-                        G.STATE = G.STATES.HAND_PLAYED
-                        G.STATE_COMPLETE = true
-                        end_round()
-                        return true
-                    end,
-                }))
-                local text = localize('k_unik_legendary_pentagram_die')
-                attention_text({
-                    scale = 2, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
-                })
-                G.ROOM.jiggle = G.ROOM.jiggle + 5
-            end
         end
     end
 end
