@@ -29,7 +29,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     config = { extra = {x_mult = 2.5}},
 	loc_vars = function(self, info_queue, center)
-        info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
+        info_queue[#info_queue + 1] = UNIK.suit_tooltip('dark')
 		local quoteset = 'normal'
         local RNDM = math.random(#sundae_quotes[quoteset])
         local extra = ""
@@ -74,7 +74,7 @@ function reset_sundae_card()
     local avaliableSuits = {}
     
 	for k, v in ipairs(G.playing_cards) do
-		if UNIK.is_suit_type(v,'light') then
+		if UNIK.is_suit_type(v,'dark') then
             for i = 1, #UNIK.dark_suits do
             if v:is_suit(UNIK.dark_suits[i]) and currSuit.suit ~= UNIK.dark_suits[i] then
                 local exists = false

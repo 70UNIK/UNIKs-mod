@@ -99,6 +99,10 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
         key = nil
     end
 
+    local decrement_multeasers = false
+    if (key == "chip" or key == "chips" or key == "chip_mod" or key == "chips_mod") then
+        decrement_multeasers = true
+    end
     local destroy_multeasers = false
     if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
         destroy_multeasers = true
@@ -122,6 +126,28 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
                 v.ability.extra.destroyed = true
                 selfDestruction(v,'k_eaten_ex',G.C.MULT)
                 
+            end
+        end
+    end
+    if G.jokers and decrement_multeasers then
+        for i,v in pairs(G.jokers.cards) do
+            if v.config.center.key == 'j_unik_multesers' and not v.ability.extra.destroyed then
+                if not v.ability.unik_depleted and lenient_bignum(v.ability.extra.mult - v.ability.extra.mult_mod) <= lenient_bignum(0) then
+                    v.ability.extra.destroyed = true
+                    selfDestruction(v,'k_eaten_ex',G.C.MULT)
+                elseif v.ability.unik_depleted and lenient_bignum(v.ability.extra.mult - v.ability.extra.mult_mod) <= lenient_bignum(v.ability.extra.depleted_threshold) then
+                    v.ability.extra.destroyed = true
+                    selfDestruction(v,'k_eaten_ex',G.C.MULT)
+                else
+                    SMODS.scale_card(v, {
+                        ref_table = v.ability.extra,
+                        ref_value = "mult",
+                        scalar_value = "mult_mod",
+                        operation = "-",
+                        message_key = 'a_mult_minus',
+                        message_colour = G.C.MULT,
+                    })
+                end
             end
         end
     end

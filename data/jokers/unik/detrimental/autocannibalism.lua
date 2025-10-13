@@ -53,42 +53,28 @@ SMODS.Joker {
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if not v.ability.unik_depleted then
+            if v.config.center.pools and v.config.center.pools.autocannibalism_food then
+                v.ability.eternal = true
+                v.ability.unik_depleted = true
                 if v.ability.name == "Turtle Bean" then
                     --cancel out hand size increase
                     G.hand:change_size(-v.ability.extra.h_size)
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true
                     v.ability.extra.h_size = 0
-                elseif  v.ability.name == "Ramen" then
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true            
+                elseif  v.ability.name == "Ramen" then        
                     v.ability.extra.Xmult = 1       
                 elseif v.ability.name == "Ice Cream" then
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true    
                     v.ability.extra.chips = 0
-                elseif v.config.center.key == "j_cry_clicked_cookie" then
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true    
+                elseif v.config.center.key == "j_cry_clicked_cookie" then 
                     v.ability.extra.chips = 0
-                elseif v.ability.name == "Popcorn" then
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true    
+                elseif v.config.center.key == 'j_unik_multesers' then
                     v.ability.extra.mult = 0
-                    --Lollipop
+                elseif v.ability.name == "Popcorn" then
+                    v.ability.extra.mult = 0
                 elseif v.config.center.key == "j_mf_lollipop" then
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true    
                     v.ability.x_mult = 1
-                --Nachos
-                elseif v.config.center.key == "j_paperback_nachos" then
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true    
+                elseif v.config.center.key == "j_paperback_nachos" then 
                     v.ability.extra.X_chips = 1
                 elseif v.config.center.key == "j_cry_starfruit" then
-                    v.ability.unik_depleted = true
-                    v.ability.eternal = true    
                     v.ability.emult = 1
                 end
             end
@@ -129,5 +115,44 @@ SMODS.Joker {
                 }))
             end
         end
-    end
+    end,
+    calculate = function(self, card, context)
+        if context.unik_emplace and context.added and context.cardarea == G.jokers then
+            if context.added.config.center.pools and context.added.config.center.pools.autocannibalism_food then
+                local v = context.added
+                if v.ability.name == "Turtle Bean" then
+                    --cancel out hand size increase
+                    G.hand:change_size(-v.ability.extra.h_size)
+                    v.ability.extra.h_size = 0
+                elseif  v.ability.name == "Ramen" then        
+                    v.ability.extra.Xmult = 1       
+                elseif v.ability.name == "Ice Cream" then
+                    v.ability.extra.chips = 0
+                elseif v.config.center.key == "j_cry_clicked_cookie" then 
+                    v.ability.extra.chips = 0
+                elseif v.config.center.key == 'j_unik_multesers' then
+                    v.ability.extra.mult = 0
+                elseif v.ability.name == "Popcorn" then
+                    v.ability.extra.mult = 0
+                elseif v.config.center.key == "j_mf_lollipop" then
+                    v.ability.x_mult = 1
+                elseif v.config.center.key == "j_paperback_nachos" then 
+                    v.ability.extra.X_chips = 1
+                elseif v.config.center.key == "j_cry_starfruit" then
+                    v.ability.emult = 1
+                end
+            end
+        end
+        if context.unik_remove_from_deck and context.removed then
+            local exists = true
+            for _, v in pairs(G.jokers.cards) do
+                if v.config.center.pools.autocannibalism_food then
+                    exists = true
+                end
+            end
+            if not exists then
+                selfDestruction(card,"k_eaten_ex",G.C.BLACK)
+            end
+        end
+    end,
 }

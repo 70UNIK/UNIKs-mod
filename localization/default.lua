@@ -52,22 +52,6 @@ return {
                     "{C:attention}-#1#{} Joker slot",
                 }
             },
-            b_unik_pink = {
-                name = "Pink Deck",
-                text = {
-                    "Start with two {C:purple,T:c_unik_crossdresser}Crossdressers{}",
-                    "All 7s are replaced with",
-                    "Pink Cards",
-                }                
-            },
-            
-            -- +1 Hand Size
-            b_unik_tricolor = {
-                name = "Tricolor Deck",
-                text = {
-                    "{C:attention}+#1#{} Hand Size",
-                }
-            },
             b_unik_mountain_deck = {
                 name = "Mountain Deck",
                 text = {
@@ -79,7 +63,7 @@ return {
                 name = "Haunted Deck",
                 text = {
                     "Arcana Packs no longer appear in the shop",
-                    "Spectral Packs appear at 3X the usual rate",
+                    "Spectral Packs appear at 4X the usual rate",
                 }
             },
             
@@ -2161,8 +2145,7 @@ return {
             j_unik_niko = {
                 name = "Niko",
                 text = {
-                    "Scored {V:1}#1#{} give", --X3 mult
-                    "{X:mult,C:white}X#2#{} Mult",
+                    "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
                     "{s:0.8}suit changes at end of round",
                     "{C:inactive,s:0.6}(Selects different Light Suit from deck if possible)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -2173,8 +2156,7 @@ return {
             j_unik_sundae_cookie = {
                 name = "Sundae Cookie",
                 text = {
-                    "Scored {V:1}#1#{} give", --X3 mult
-                    "{X:mult,C:white}X#2#{} Mult",
+                    "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
                     "{s:0.8}suit changes at end of round",
                     "{C:inactive,s:0.6}(Selects different Dark Suit from deck if possible)",
                     "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -2320,7 +2302,7 @@ return {
                     "Scored cards give",
                     "{C:mult}#4##1#{} Mult, loses",
                     "{C:mult}-#2#{} Mult when {C:chips}+Chips{}",
-                    "is triggered by {C:attention}Jokers",
+                    "is triggered",
                     "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
                     "are triggered",
                 }
@@ -2331,7 +2313,7 @@ return {
                     "Scored cards give",
                     "{C:mult}#4##1#{} Mult, loses",
                     "{C:mult}-#2#{} Mult when {C:chips}+Chips{}",
-                    "is triggered by {C:attention}Jokers",
+                    "is triggered",
                     "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
                     "are triggered or at {C:mult}#3#{} Mult",
                 }
