@@ -2533,9 +2533,8 @@ return {
                     "Requirements for {C:attention}Straights{},",
                     "{C:attention}Flushes{}, {C:attention}Spectrums",
                     "and {C:attention}of a Kind{} hands",
-                    "are reduced by {C:attention}1{}",
-                    "for each scoring {C:attention}Rankless{}",
-                    "and {C:attention}Suitless card",
+                    "are reduced by up to {C:attention}#1#",
+                    "{C:attention}Rankless{} and {C:attention}Suitless card#<s>1#",
                 }
             },
             j_unik_uniku = {
@@ -4481,6 +4480,10 @@ return {
             k_unik_sundae_normal2 = "Nothing beats hearing the joyful laughter of Cookies!",
             k_unik_sundae_normal3 = "Come along and join the fun here!",
             k_unik_sundae_normal4 = "Hehehe! Lets play ", -- [suit]!
+
+            k_unik_must_select = "Must select ",
+            k_unik_skip_req = " to skip",
+            k_unik_skip_req2 = " to skip safely",
 
 
         },

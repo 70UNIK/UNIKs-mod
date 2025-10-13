@@ -16,7 +16,7 @@ SMODS.Blind	{
             G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
             G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering and draw cards afterwards if in blind.
-            G.GAME.lartceps_pack_pity = 0
+            G.GAME.lartceps_pack_pity = 1
             if G.jokers.cards then
 				G.GAME.blind:wiggle()
 				G.GAME.blind.triggered = true

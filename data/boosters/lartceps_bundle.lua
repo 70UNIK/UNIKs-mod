@@ -40,9 +40,17 @@ SMODS.Booster{
 	end,
 	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (almanac)
 	no_doe = true,
+	skip_req_message = function(self)
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
+		return {
+			{
+				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'lartceps_pack_pity'},localize("k_unik_skip_req"),
+			},
+		}
+	end,
 	unskippable = function(self) --Always unskippable
-		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 0
-		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity >= 4 then
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
+		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity <= 0 then
 			return false
 		end
 		return true

@@ -62,15 +62,24 @@ SMODS.Booster{
         carder.ability.rental = true
         return carder
 	end,
-	skip_effect = function(self)
+	skip_req_message = function(self)
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
 		
+		return {
+			{
+				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'lartceps_pack_pity'},localize("k_unik_skip_req2"),
+			},
+		}
+	end,
+	skip_effect = function(self)
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
 		local validJokers = {}
         for i,v in pairs(G.jokers.cards) do
             if not SMODS.is_eternal(v,self) then
                 validJokers[#validJokers+1] = v
             end
         end
-		if #validJokers > 0 and not G.GAME.disable_banish_FX then
+		if #validJokers > 0 and not G.GAME.disable_banish_FX and G.GAME.lartceps_pack_pity > 0 then
 			 local select = pseudorandom_element(validJokers, pseudoseed("unik_egg_banish"))
 			 if G.GAME.blind then
 				G.GAME.blind:wiggle()
