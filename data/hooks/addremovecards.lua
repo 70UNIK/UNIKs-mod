@@ -83,6 +83,9 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.debuff_immune = true
         unik_set_sell_cost(card,-666)
     end
+    if card.config.center.key == 'j_unik_eternal_egg' and (self == G.shop_jokers or self == G.shop_booster) then
+        card.ability.eternal = true
+    end
     --mainline:
     if self and self == G.consumeables and card.config.center.key == "c_cry_pointer" then
         for i,v in pairs(G.consumeables.cards) do

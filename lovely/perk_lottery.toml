@@ -10,7 +10,7 @@ pattern = '''if area \=\= G\.consumeables then'''
 position = "before"
 payload = '''
 if area ~= G.consumables and G.GAME.pack_choices then
-    SMODS.calculate_context({ unik_selecting_booster_option = true,card = card, cards_left = area.cards})
+    SMODS.calculate_context({ unik_selecting_booster_option = true,card = card, cards_left = area.cards, cardarea = card.from_area})
 end
 '''
 match_indent = true

@@ -44,17 +44,30 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.unik_kite_experiment and context.scoring_hand then
             local validCards = {}
-            for i = 1, #context.scoring_hand do
-                if i == 1 or i == #context.scoring_hand then
-                    validCards[#validCards+1] = context.scoring_hand[i]
+            for i = 1, math.max(card.ability.extra.left_rescore,card.ability.extra.right_rescore) do
+                local strct = {}
+                for j = 1, #context.scoring_hand do
+                    
+                    if j == 1 and i <= card.ability.extra.left_rescore then
+                        strct[#strct+1] = context.scoring_hand[j]
+                    end
+                    if j == #context.scoring_hand and i <= card.ability.extra.right_rescore then
+                        strct[#strct+1] = context.scoring_hand[j]
+                    end
                 end
+                strct.unik_scoring_segment = true
+                validCards[#validCards+1] = strct
             end
+            
             if #validCards > 0 then
+                --Complex structure:
+                --target cards = {{card,card}{card}}
+                --
                 if not context.blueprint_card then
                     local quoteset = 'trigger'
                     return {
                         target_cards = validCards,
-                        rescore = {math.min(card.ability.extra.left_rescore,card.ability.immutable.max_rescores),math.min(card.ability.extra.right_rescore,card.ability.immutable.max_rescores)},
+                        -- rescore = {math.min(card.ability.extra.left_rescore,card.ability.immutable.max_rescores),math.min(card.ability.extra.right_rescore,card.ability.immutable.max_rescores)},
                         card = card,
                         message = localize(blossom_quotes[quoteset][math.random(#blossom_quotes[quoteset])].. ""),
                         colour = HEX('F16C74'),
@@ -62,7 +75,7 @@ SMODS.Joker {
                 else
                     return {
                         target_cards = validCards,
-                        rescore = {math.min(card.ability.extra.left_rescore,card.ability.immutable.max_rescores),math.min(card.ability.extra.right_rescore,card.ability.immutable.max_rescores)},
+                        -- rescore = {math.min(card.ability.extra.left_rescore,card.ability.immutable.max_rescores),math.min(card.ability.extra.right_rescore,card.ability.immutable.max_rescores)},
                         card = card,
                         message = '+1',
                     }

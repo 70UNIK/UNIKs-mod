@@ -14,8 +14,6 @@ SMODS.Consumable{
     use = function(self, card)
         local cards = UNIK.get_sorted_by_position(G.hand)
         local rightmostCard = cards[#cards]
-        local cards2 = cards
-        table.remove(cards2,#cards2)
         local id = nil
         local source = nil
         if rightmostCard.ability and rightmostCard.ability.group then
@@ -23,8 +21,8 @@ SMODS.Consumable{
             source = rightmostCard.ability.group.source
         end
         if #cards > 1 and id and source then
+            unlink_cards(cards)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-                unlink_cards(cards2)
                 for i=1, #cards do
                     local percent = 1.15 - (i-0.999)/(#cards-0.998)*0.3
                     

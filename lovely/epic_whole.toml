@@ -13,16 +13,17 @@ payload = '''
 G.GAME.unik_ranks_scored_this_ante = {}
 '''
 
-# Rush Hour - mark small blind as defeated
 [[patches]]
 [patches.pattern]
-target = "functions/state_events.lua"
-pattern = '''--Highlight all the cards used in scoring and play a sound indicating highlight'''
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true})'''
 position = "before"
 payload = '''
-if not SMODS.has_no_rank(scoring_hand[i]) then
-    G.GAME.unik_ranks_scored_this_ante = G.GAME.unik_ranks_scored_this_ante or {}
-    G.GAME.unik_ranks_scored_this_ante[scoring_hand[i]:get_id()] = true
+for i = 1, #scoring_hand do
+    if not SMODS.has_no_rank(scoring_hand[i]) then
+        G.GAME.unik_ranks_scored_this_ante = G.GAME.unik_ranks_scored_this_ante or {}
+        G.GAME.unik_ranks_scored_this_ante[scoring_hand[i]:get_id()] = true
+    end
 end
 '''
 match_indent = true

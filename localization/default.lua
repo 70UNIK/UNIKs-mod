@@ -157,6 +157,71 @@ return {
                     "Joker to 8 Ball",
                 }
             },
+            bl_unik_ravine = {
+                name = "The Ravine",
+                text = {
+                    "After Play, gain Triggering",
+                    "Disposable or Positive tag"
+                }
+            },
+            bl_unik_crater = {
+                name = "The Crater",
+                text = {
+                    "After Play, gain Fuzzy",
+                    "Half or Corrupted tag"
+                }
+            },
+            bl_unik_abyss = {
+                name = "The Abyss",
+                text = {
+                    "After Play, gain Bloated",
+                    "Limited Edition or Handcuffs tag"
+                }
+            },
+            bl_unik_gun = {
+                name = "The Gun",
+                text = {
+                    "All held Consumables",
+                    "and discarded Cards",
+                    "become Triggering",
+                }
+            },
+            bl_unik_emerald_escalator = {
+                name = "Emerald Escalator",
+                text = {
+                    "^#1# Blind Size per",
+                    "trigger this Round",
+                }
+            },
+            bl_unik_red_runner = {
+                name = "Red Runner",
+                text = {
+                    "All Cards debuffed until",
+                    "a hand containing a",
+                    "Straight is played",
+                }
+            },
+            bl_unik_foul_flowerpot = {
+                name = "Foul Flowerpot",
+                text = {
+                    "Create an eternal Flowerpot", 
+                    "on Blind Selection",
+                    "If hand does not contain",
+                    "all scoring Spades, Clubs",
+                    "Hearts and Diamonds cards",
+                    "convert adjacent cards to Flowerpots",
+                }
+            },
+            bl_unik_shitty_superposition={
+                name = "Shitty Superposition",
+                text = {
+                    "Create an eternal Superposition", 
+                    "on Blind Selection",
+                    "If hand does not contain",
+                    "a Straight and a scoring Ace",
+                    "convert adjacent cards to Superpositions",
+                }
+            },
             bl_unik_epic_magic_trick = {
                 name = "Pahataikuri", --Evil magician
                 text = {
@@ -240,7 +305,7 @@ return {
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
-					"Create 5 Disposable Detrimental Jokers",
+					"Create 4 Disposable Detrimental Jokers",
                     "on Blind Selection",
 				},
             },
@@ -1173,11 +1238,10 @@ return {
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
                 text = {
-                    "Each played {C:attention}7{} has a", 
-                    "{C:green}#1# in #2#{} chance",
-                    "for {C:mult}+#3#{} Mult and a",
-                    "{C:green}#4# in #5#{} chance",
-                    "to win {C:money}$#6#",
+                    "Each played {C:attention}7{} gives", 
+                    "{C:mult}+#1#{} Mult and a",
+                    "{C:green}#2# in #3#{} chance",
+                    "to win {C:money}$#4#",
                 }
             },
             --Disable if extracredit is installed
@@ -1748,7 +1812,7 @@ return {
                 text = {
                     "Scored card gives {X:dark_edition,C:white}^#1#{} Mult",
                     "if played hand {C:attention}only contains{} a",
-                    "single {C:attention}King{} of {C:spades}#2#",
+                    "single {C:attention}King{}",
                 },
                 unlock = {
                     "Play {C:attention}High Card",
@@ -2602,6 +2666,17 @@ return {
 
 
             --Finity boss blinds
+            j_unik_eternal_egg={
+                name = "Eternal Egg",
+                text = {
+                    "{C:attention}Eggcellent Buffoon Packs{}",
+                    "may spawn in the shop",
+                    "{C:purple}Eternal {C:attention}Eggs{} give {X:dark_edition,C:white}^#1#{} Mult",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
+                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                    "{C:unik_ancient,s:0.7,E:2}Origin : Balatro{}",
+                }
+            },
             j_unik_indigo_icbm={
                 name = "Indigo ICBM",
                 text = {
@@ -3450,6 +3525,13 @@ return {
                 text = {
                     "Triggers per {C:attention}owned{} consumable",
                     "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Scratch)"
+                }
+            },
+            unik_held_in_consumables4 = {
+                name = "Held in Consumables Effect",
+                text = {
+                    "Triggers per {C:attention}owned{} consumable",
+                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, EGO Gifts)"
                 }
             },
              unik_copper_seal = {
@@ -4486,6 +4568,17 @@ return {
             k_unik_skip_req = " to skip",
             k_unik_skip_req2 = " to skip safely",
 
+            k_unik_eternal_egg_normal1= "SWASHBUCKLER AND I GO WAYYY BACK...",
+            k_unik_eternal_egg_normal2= "ETERNAL EGGS ARE GOOD! SWASHBUCKLER AND TEMPERANCE!",
+            --if you do have eternal egg
+            k_unik_eternal_egg_normal3= "DON'T WORRY ABOUT YOUR SLOT, COWARD.",
+            k_unik_eternal_egg_normal8= "IT WAS A SHAME WHAT HAPPENED TO YOUR SLOT.",
+            k_unik_eternal_egg_normal7= "DONT TRY TO LOCKPICK YOUR WAY OUT OF THIS.",
+            --If you dont have eternal egg
+            k_unik_eternal_egg_normal4= "REGRETTING YOUR DECISION NOW?",
+            k_unik_eternal_egg_normal5= "YOU DIDN'T GET THE ETERNAL EGG, I KILLED SOMEONE ANYWAY.",
+            k_unik_eternal_egg_normal6= "THAT EGG COULD'VE BEEN HELPFUL, A SHAME THAT SOMEONE HAD TO DIE."
+
 
         },
         high_scores={},
@@ -4755,6 +4848,22 @@ return {
             lq_legendary_crown_4={
                 "Don't make the same",
                 "mistake as I did...",
+            },
+            lq_eternal_egg_1={
+                "WHAT'S THE MATTER?",
+                "AFRAID OF THE ETERNAL EGG??!!"
+            },
+            lq_eternal_egg_2={
+                "IF ONLY YOU HAD",
+                "SWASHBUCKLER..."
+            },
+            lq_eternal_egg_3={
+                "TOO SCARED TO LOSE YOUR",
+                "JOKER SLOTS, COWARD?",
+            },
+            lq_eternal_egg_4={
+                "EGGCELLENT. YOUR CORPSE",
+                "WILL MAKE A GOOD TROPHY."
             },
         },
         ranks={},

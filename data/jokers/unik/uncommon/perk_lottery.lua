@@ -17,10 +17,10 @@ SMODS.Joker {
            vars = {new_numerator, new_denominator,center.ability.extra.choices} }
 	end,
     calculate = function(self, card, context)
-        if context.unik_selecting_booster_option and context.cards_left then
+        if context.unik_selecting_booster_option and context.cards_left and context.cardarea == G.pack_cards then
             if G.GAME.pack_choices and to_big(#context.cards_left) > to_big(0) then
                 if not SMODS.pseudorandom_probability(card, 'unik_plottery', card.ability.extra.prob, card.ability.extra.odds, 'unik_plottery') then
-                    G.GAME.pack_choices = G.GAME.pack_choices + 1
+                    G.GAME.pack_choices = math.min(#context.cards_left + 1,G.GAME.pack_choices + 1)
                     return {
                         message = "+1",
                         card=card,

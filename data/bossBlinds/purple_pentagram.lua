@@ -13,7 +13,7 @@ SMODS.Blind{
         if not reset then
             --print("vvvv")
             G.GAME.unik_killed_by_pentagram = true
-            for i = 1, 5 do
+            for i = 1, 4 do
                 G.E_MANAGER:add_event(Event({
                     delay = 0.5,
                     func = function()

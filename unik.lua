@@ -787,6 +787,14 @@ if next(SMODS.find_mod("GrabBag")) then
 end
 local mainmenuref2 = Game.main_menu
 Game.main_menu = function(change_context)
+	if next(SMODS.find_mod("finity")) then
+		local bossblinds = {
+			["bl_unik_fuck_eternal_egg"] = {"j_unik_eternal_egg","Eternal Egg"},
+		}
+		for k, v in pairs(bossblinds) do
+			FinisherBossBlindStringMap[k] = v
+		end
+	end
 	if unik_config.unik_legendary_blinds then
   	if next(SMODS.find_mod("finity")) then
 		local legendarybossblinds = {
@@ -806,6 +814,7 @@ end
 --Finity Jokers
 if next(SMODS.find_mod("finity")) then
 
+	NFS.load(mod_path .. "data/jokers/finity/eternal_egg.lua")() 
 	if unik_config.unik_legendary_blinds then
 		if (SMODS.Mods["Cryptid"] or {}).can_load then
 			Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown")

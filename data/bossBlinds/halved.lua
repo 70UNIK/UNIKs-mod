@@ -8,7 +8,7 @@ SMODS.Blind{
     pos = { x = 0, y = 22},
     boss_colour= HEX("009cfd"),
     dollars = 5,
-    mult = 2,
+    mult = 1,
     death_message = "special_lose_unik_half",
     unik_before_play = function(self)
         --Add Half to 2 random cards selected and 2 random jokers that are not already have the edition

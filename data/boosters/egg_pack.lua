@@ -16,8 +16,8 @@ SMODS.Booster{
 	kind = "Joker",
     atlas = "unik_cube_boosters",
 	pos = { x = 2, y = 1 },
-    cost = 0,
-    weight = 0, 
+    cost = 4,
+    weight = 0.7, 
     config = { extra = 4, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = egg_digital_hallucinations_compat,
@@ -99,6 +99,11 @@ SMODS.Booster{
 		end
 	end,
 	in_pool = function(self, args)
+		for i,v in pairs(G.jokers.cards) do
+			if v.config.center.key == "j_unik_eternal_egg" then
+				return true
+			end
+		end
         return false
     end,
 	unik_disablable = true,

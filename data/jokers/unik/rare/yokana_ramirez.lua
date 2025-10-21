@@ -35,14 +35,16 @@ SMODS.Joker {
 			}
 		end
 		if (context.post_trigger and card.ability.extra.scoring == true and context.other_card ~= card and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability) then
-			if not Talisman or not Talisman.config_file.disable_anims then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_card:juice_up(0.5, 0.5)
-						return true
-					end,
-				}))
-			end
+			-- if not Talisman or not Talisman.config_file.disable_anims then
+			-- 	if  context.other_card then
+			-- 		G.E_MANAGER:add_event(Event({
+			-- 			func = function()
+			-- 				context.other_card:juice_up(0.5, 0.5)
+			-- 				return true
+			-- 			end,
+			-- 		}))
+			-- 	end
+			-- end
 			
 			return {
 				x_chips = card.ability.extra.x_chips,
