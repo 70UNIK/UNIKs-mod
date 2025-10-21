@@ -8,31 +8,50 @@ SMODS.Tag{
         info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_positive
 	end,
 	in_pool = function()
-		if G.GAME.unik_enable_positives then
-			return true
-		end
 		return false
 	end,
 	apply = function(self, tag, context)
         if context.type == "store_joker_modify" then
-			local _applied = nil
-			if (SMODS.Mods["Cryptid"] or {}).can_load and Cryptid.forced_edition() then
-				tag:nope()
-			end
-			if not context.card.edition and not context.card.temp_edition and context.card.ability.set == "Joker" then
+			if not isDetrimentalEdition(context.card) and not context.card.unik_temp_detrimental and context.card.ability.set == "Joker" then
 				local lock = tag.ID
 				G.CONTROLLER.locks[lock] = true
 				context.card.temp_edition = true
+				context.card.unik_temp_detrimental = true
                 tag:too_bad("TOO BAD", G.C.UNIK_VOID_COLOR, function()
 					context.card:set_edition({ unik_positive = true }, true)
-					context.card.ability.couponed = true
+					context.card:set_cost()
 					context.card.temp_edition = nil
+					context.card.unik_temp_detrimental = nil
 					G.CONTROLLER.locks[lock] = nil
 					return true
 				end)
-				_applied = true
 				tag.triggered = true
 			end
 		end
 	end,
 }
+
+UNIK.unik_detrimental_editions = {
+	"e_gb_temporary",
+	"e_Bakery_Carbon",
+}
+
+function isDetrimentalEdition(card)
+	if card.edition then
+		if 
+		card.edition.unik_positive or
+		card.edition.unik_bloated or
+		card.edition.unik_halfjoker or
+		card.edition.unik_fuzzy or
+		card.edition.unik_corrupted then
+			return true
+		else
+			for i = 1, #UNIK.unik_detrimental_editions do
+				if card.edition.key == UNIK.unik_detrimental_editions[i] then
+					return true
+				end
+			end
+		end
+	end
+	return false
+end

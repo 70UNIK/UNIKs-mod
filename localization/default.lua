@@ -160,14 +160,14 @@ return {
             bl_unik_ravine = {
                 name = "The Ravine",
                 text = {
-                    "After Play, gain Triggering",
+                    "After Play, gain Fuzzy",
                     "Disposable or Positive tag"
                 }
             },
             bl_unik_crater = {
                 name = "The Crater",
                 text = {
-                    "After Play, gain Fuzzy",
+                    "After Play, gain Triggering",
                     "Half or Corrupted tag"
                 }
             },
@@ -189,8 +189,8 @@ return {
             bl_unik_emerald_escalator = {
                 name = "Emerald Escalator",
                 text = {
-                    "^#1# Blind Size per",
-                    "trigger this Round",
+                    "^1.004 Blind Size per",
+                    "Joker trigger this Round",
                 }
             },
             bl_unik_red_runner = {
@@ -3764,8 +3764,58 @@ return {
             tag_unik_positive = {
                 name = "Positive Tag",
                 text = {
-                    "Next base edition shop",
+                    "Next shop Joker",
                     "becomes {C:unik_shitty_edition}Positive",
+                }
+            },
+            tag_unik_triggering = {
+                name = "Triggering Tag",
+                text = {
+                    "Next shop Joker",
+                    "becomes {C:red}Triggering",
+                }
+            },
+            tag_unik_disposable = {
+                name = "Disposable Tag",
+                text = {
+                    "Next shop Joker",
+                    "is free and ",
+                    "becomes {C:red}Disposable",
+                }
+            },
+            tag_unik_limited_edition = {
+                name = "Limited Edition Tag",
+                text = {
+                    "Next shop Joker",
+                    "becomes {C:red}Limited Edition",
+                }
+            },
+            tag_unik_bloated = {
+                name = "Bloated Tag",
+                text = {
+                    "Next shop Joker",
+                    "becomes {C:unik_shitty_edition}Bloated",
+                }
+            },
+            tag_unik_half = {
+                name = "Half Tag",
+                text = {
+                    "Next shop Joker",
+                    "becomes {C:unik_shitty_edition}Half",
+                }
+            },
+            tag_unik_fuzzy = {
+                name = "Fuzzy Tag",
+                text = {
+                    "Next shop Joker",
+                    "becomes {C:unik_shitty_edition}Fuzzy",
+                }
+            },
+            tag_unik_corrupted = {
+                name = "Corrupted Tag",
+                text = {
+                    "Next shop Joker",
+                    "becomes {C:unik_shitty_edition}Corrupted",
                 }
             },
             tag_unik_steel = {
@@ -4577,8 +4627,9 @@ return {
             --If you dont have eternal egg
             k_unik_eternal_egg_normal4= "REGRETTING YOUR DECISION NOW?",
             k_unik_eternal_egg_normal5= "YOU DIDN'T GET THE ETERNAL EGG, I KILLED SOMEONE ANYWAY.",
-            k_unik_eternal_egg_normal6= "THAT EGG COULD'VE BEEN HELPFUL, A SHAME THAT SOMEONE HAD TO DIE."
+            k_unik_eternal_egg_normal6= "THAT EGG COULD'VE BEEN HELPFUL, A SHAME THAT SOMEONE HAD TO DIE.",
 
+            k_unik_triggered="Triggered!",
 
         },
         high_scores={},

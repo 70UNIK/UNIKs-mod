@@ -575,6 +575,13 @@ NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
 NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
 NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 NFS.load(mod_path .. "data/tags/positive.lua")()
+NFS.load(mod_path .. "data/tags/bloated.lua")()
+NFS.load(mod_path .. "data/tags/half.lua")()
+NFS.load(mod_path .. "data/tags/fuzzy.lua")()
+NFS.load(mod_path .. "data/tags/corrupted.lua")()
+NFS.load(mod_path .. "data/tags/disposable.lua")()
+NFS.load(mod_path .. "data/tags/triggering.lua")()
+NFS.load(mod_path .. "data/tags/limited_edition.lua")()
 --manacle tag: -1 hand size
 
 --BLINDS--
@@ -589,11 +596,15 @@ NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 NFS.load(mod_path .. "data/bossBlinds/cookie.lua")()
 NFS.load(mod_path .. "data/bossBlinds/xchips_hater.lua")()
 NFS.load(mod_path .. "data/bossBlinds/magician.lua")()
+NFS.load(mod_path .. "data/bossBlinds/gun.lua")()
 NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
 NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
 NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
+NFS.load(mod_path .. "data/bossBlinds/ravine.lua")()
+NFS.load(mod_path .. "data/bossBlinds/crater.lua")()
+NFS.load(mod_path .. "data/bossBlinds/abyss.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/bossBlinds/cryptid/joyless.lua")() --Cryptid crossmod
 end
@@ -613,6 +624,7 @@ NFS.load(mod_path .. "data/bossBlinds/eternal_egg.lua")()
 NFS.load(mod_path .. "data/bossBlinds/hate_ball.lua")()
 NFS.load(mod_path .. "data/bossBlinds/salmon_steps.lua")()
 NFS.load(mod_path .. "data/bossBlinds/burgundy_brain.lua")()
+NFS.load(mod_path .. "data/bossBlinds/emerald_escalator.lua")()
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 
