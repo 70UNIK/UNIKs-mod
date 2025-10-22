@@ -3523,6 +3523,7 @@ return {
             k_unik_lartceps="Lartceps",
             b_unik_lartceps_cards = "Lartceps Cards",
             unik_legendary_blinds_option = "Epic and Legendary Blinds (Restart Required)",
+            unik_cryptid_nerfs_option = "Cryptid Nerfs (Restart Required)",
             k_unik_egg_pack = "Eggcellent Pack",
             k_unik_711="7-Eleven!",
             k_unik_happiness1="HAPPINESS.",

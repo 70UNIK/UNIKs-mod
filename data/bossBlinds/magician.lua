@@ -13,13 +13,13 @@ SMODS.Blind{
     mult = 2,
     loc_vars = function(self, info_queue, card)
 
-		return { vars = {  (get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^1.5  } } -- no bignum?
+		return { vars = {  (get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^1.15  } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_magician_placeholder")} }
 	end,
 	unik_after_defeat = function(self,chips,blind_size)
-		if to_big(chips) > to_big(blind_size^1.5) then
+		if to_big(chips) > to_big(blind_size^1.15) then
 			if not G.GAME.used_vouchers.v_magic_trick then
                 G.GAME.blind:wiggle()
                 G.ROOM.jiggle = G.ROOM.jiggle + 2
