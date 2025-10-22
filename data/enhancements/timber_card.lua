@@ -6,6 +6,7 @@ SMODS.Enhancement {
     config = { extra = { Xlogmultbase = 50,base_odds = 1, break_odds = 3}},
     weight = 1,
     woodbreak = true,
+    immutable = true,
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card,card.ability.extra.base_odds,card.ability.extra.break_odds, 'unik_timber_enhancement')
         return {

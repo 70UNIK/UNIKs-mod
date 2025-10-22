@@ -1114,7 +1114,7 @@ return {
             m_unik_pink = {
                 name = "Pink Card",
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Chips", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
+                    "Chips {X:chips,C:white}Xlog_#1#(Chips){} ", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
                     "Considered a {C:attention}7{}",
                     "and it's {C:attention}own suit{}",
                     "{C:red,E:2}Destroyed{} if played",

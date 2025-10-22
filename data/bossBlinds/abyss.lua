@@ -14,7 +14,7 @@ SMODS.Blind{
         if not G.GAME.blind.disabled then
             local stickers = {'tag_unik_limited_edition', 'tag_unik_bloated', 'tag_unik_manacle'}
 
-            add_tag(Tag(stickers[math.random(#stickers)]))
+            add_tag(Tag(stickers[pseudorandom("unik_abyss_blind",1,3)]))
 
             G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
