@@ -40,7 +40,7 @@ elseif eval_type == 'xlog_mult' then
     config.type = 'fade'
     config.scale = 0.7
 elseif eval_type == 'xlog_chips' then
-    sound = 'unik_echips'
+    sound = 'xchips'
     volume = 0.7
     amt = amt
     text = localize{type='variable',key='a_Xlog_chips',vars={math.abs(amt)}}
