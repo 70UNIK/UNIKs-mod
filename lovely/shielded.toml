@@ -1,0 +1,19 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/overrides.lua"]'''
+pattern = '''if not edition_type or edition_type == 'base' then'''
+position = before'
+payload = '''
+if self.ability and self.ability.unik_shielded then
+    if isDetrimentalEdition2('e_' .. edition_type) or isDetrimentalEdition2(edition_type) then
+        edition_type = old_edition
+        card_eval_status_text(self, "extra", nil, nil, nil, { message = localize("k_nope_ex"),delay = 0.2})
+    end
+end
+'''
+match_indent = true

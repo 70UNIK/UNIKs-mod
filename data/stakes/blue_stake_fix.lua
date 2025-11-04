@@ -3,7 +3,7 @@
 SMODS.Stake:take_ownership('blue', {
     modifiers = function()
 		G.E_MANAGER:add_event(Event({trigger = 'before',func = function() 
-			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.3)
+			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.25)
 		return true end })) 
 	end,
 })

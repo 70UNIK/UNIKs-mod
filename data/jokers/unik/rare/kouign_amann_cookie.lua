@@ -41,21 +41,55 @@ SMODS.Joker {
         
         if G.hand and G.hand.cards and G.hand.highlighted and #G.hand.highlighted > 0 then
             local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+            local existingSuits = {}
+            --first go over existing suits
             for i,v in pairs(scoring_hand) do
-                for j=1,#UNIK.light_suits do
-                    if v:is_suit(UNIK.light_suits[j]) then
-                        center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                if not SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
                     end
                 end
-                
+            end
+            --then wilds
+            for i,v in pairs(scoring_hand) do
+                if SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
+                    end
+                end
             end
         elseif G.play and G.play.cards then
             center.ability.immutable.x_mult_display = center.ability.extra.x_mult
            local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.play.cards)
+           local existingSuits = {}
              for i,v in pairs(scoring_hand) do
-                for j=1,#UNIK.light_suits do
-                    if v:is_suit(UNIK.light_suits[j]) then
-                        center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                if not SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
+                    end
+                end
+                
+            end
+            for i,v in pairs(scoring_hand) do
+                if SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
                     end
                 end
                 
@@ -73,13 +107,30 @@ SMODS.Joker {
         end
         if context.individual and context.cardarea == G.play then
             local dispMult = card.ability.extra.x_mult
+            local existingSuits = {}
              for i,v in pairs(context.scoring_hand) do
-                for j=1,#UNIK.light_suits do
-                    if v:is_suit(UNIK.light_suits[j]) then
-                        dispMult = dispMult + card.ability.extra.x_mult_mod
+                if not SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            dispMult = dispMult + card.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
                     end
                 end
-                
+                    
+            end
+            for i,v in pairs(context.scoring_hand) do
+                if SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            dispMult = dispMult + card.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
+                    end
+                end
+                    
             end
             if UNIK.is_suit_type(context.other_card,'light') then
                 return {
@@ -90,13 +141,30 @@ SMODS.Joker {
         end
         if context.forcetrigger then
             local dispMult = card.ability.extra.x_mult
+            local existingSuits = {}
              for i,v in pairs(context.scoring_hand) do
-                for j=1,#UNIK.light_suits do
-                    if v:is_suit(UNIK.light_suits[j]) then
-                        dispMult = dispMult + card.ability.extra.x_mult_mod
+                if not SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            dispMult = dispMult + card.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
                     end
                 end
-                
+                    
+            end
+            for i,v in pairs(context.scoring_hand) do
+                if SMODS.has_any_suit(v) then
+                    for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                            dispMult = dispMult + card.ability.extra.x_mult_mod
+                            existingSuits[UNIK.light_suits[j]] = true;
+                            break
+                        end
+                    end
+                end
+                    
             end
             return {
                 x_mult = dispMult,

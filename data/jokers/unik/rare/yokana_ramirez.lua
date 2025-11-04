@@ -5,6 +5,33 @@ SMODS.Atlas {
 	py = 95
 }
 
+local yokana_quotes = {
+	alone = {
+		'k_unik_yokana_1',
+		'k_unik_yokana_2',
+        'k_unik_yokana_3',
+		'k_unik_yokana_4',
+	},
+	with_chelsea = {
+		'k_unik_yokana_1',
+		'k_unik_yokana_2',
+        'k_unik_yokana_chelsea',
+		'k_unik_yokana_4',
+	},
+	with_maya = {
+		'k_unik_yokana_1',
+		'k_unik_yokana_2',
+        'k_unik_yokana_maya',
+		'k_unik_yokana_4',
+	},
+	everyone = {
+		'k_unik_yokana_1',
+		'k_unik_yokana_2',
+        'k_unik_yokana_family',
+		'k_unik_yokana_4',
+	},
+}
+
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_yokana',
@@ -20,7 +47,15 @@ SMODS.Joker {
 	--1.25X chips nerf t
     config = { extra = {x_chips = 1.25,scoring = false} },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.x_chips} }
+		local quoteset = 'alone'
+		if next(find_joker('j_unik_jsab_chelsea')) and next(find_joker('j_unik_jsab_maya')) then
+			quoteset = 'everyone'
+		elseif next(find_joker('j_unik_jsab_chelsea')) then
+			quoteset = 'with_chelsea'
+		elseif next(find_joker('j_unik_jsab_maya')) then
+			quoteset = 'with_maya'
+		end
+		return { vars = {center.ability.extra.x_chips,localize(yokana_quotes[quoteset][math.random(#yokana_quotes[quoteset])] .. "")} }
 	end,
 	pronouns = "she_her",
 	pools = {["unik_cube"] = true },
@@ -52,9 +87,6 @@ SMODS.Joker {
 			}
 		end
 
-		if context.final_scoring_step and not context.blueprint_card and not context.retrigger_joker then
-			card.ability.extra.scoring = false
-		end
 		if context.after and not context.blueprint_card and not context.retrigger_joker then
 			card.ability.extra.scoring = false
 		end

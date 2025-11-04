@@ -1,5 +1,8 @@
---Rework: This joker gains ^0.2 Mult when a joker (itself included) is destroyed. Creates a copy of itself if destroyed. Strong but now requires effort, while not being too unbalanced with dagger.
+--in light of cookie run's new white lily update and around freedom and solidarity...
+--something to do with scaling ^Mult based on the number of individual jokers triggered per hand.
 
+
+--moonlights ability fits her enough due to planets being in space
 
 local function White_lily_copy(card)
     local _card = copy_card(card, nil, nil, nil, nil)

@@ -6,11 +6,23 @@ SMODS.Atlas {
 }
 
 local chelsea_quotes = {
-	normal = {
+	alone = {
 		'k_unik_chelsea_normal1',
 		'k_unik_chelsea_normal2',
 		'k_unik_chelsea_normal3',
         'k_unik_chelsea_normal4',
+	},
+	with_family = {
+		'k_unik_chelsea_normal1',
+		'k_unik_chelsea_normal2',
+		'k_unik_chelsea_normal3',
+        'k_unik_chelsea_normal_1member',
+	},
+	everyone = {
+		'k_unik_chelsea_normal1',
+		'k_unik_chelsea_normal2',
+		'k_unik_chelsea_normal3',
+        'k_unik_chelsea_normal_family',
 	},
 }
 SMODS.Joker {
@@ -20,7 +32,6 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
-    godsmarble_family_trauma = { x = 1, y = 0 },
     cost = 8,
 	blueprint_compat = true,
     perishable_compat = false,
@@ -30,7 +41,12 @@ SMODS.Joker {
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.02} },
     pools = {["unik_cube"] = true },
 	loc_vars = function(self, info_queue, center)
-        local quoteset = 'normal'
+		local quoteset = 'alone'
+		if next(find_joker('j_unik_jsab_yokana')) and next(find_joker('j_unik_jsab_maya')) then
+			quoteset = 'everyone'
+		elseif next(find_joker('j_unik_jsab_yokana')) or next(find_joker('j_unik_jsab_maya')) then
+			quoteset = 'with_family'
+		end
 		return { 
             vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod
             ,localize(chelsea_quotes[quoteset][math.random(#chelsea_quotes[quoteset])] .. "")
@@ -83,21 +99,21 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
     return ret
 end
 
---Simple XChips display
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_jsab_chelsea"] = {
-		text = {
-			{
-				border_nodes = {
-					{ text = "X" },
-					{
-						ref_table = "card.ability.extra",
-						ref_value = "x_chips",
-						retrigger_type = "exp"
-					},
-				},
-				border_colour = G.C.CHIPS,
-			},
-		},
-	}
-end
+-- --Simple XChips display
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_jsab_chelsea"] = {
+-- 		text = {
+-- 			{
+-- 				border_nodes = {
+-- 					{ text = "X" },
+-- 					{
+-- 						ref_table = "card.ability.extra",
+-- 						ref_value = "x_chips",
+-- 						retrigger_type = "exp"
+-- 					},
+-- 				},
+-- 				border_colour = G.C.CHIPS,
+-- 			},
+-- 		},
+-- 	}
+-- end

@@ -34,7 +34,21 @@ SMODS.Tag{
 UNIK.unik_detrimental_editions = {
 	"e_gb_temporary",
 	"e_Bakery_Carbon",
+	"e_unik_positive",
+	"e_unik_bloated",
+	"e_unik_halfjoker",
+	"e_unik_fuzzy",
+	"e_unik_corrupted",
 }
+
+function isDetrimentalEdition2(edition)
+	for i = 1, #UNIK.unik_detrimental_editions do
+		if edition == UNIK.unik_detrimental_editions[i] then
+			return true
+		end
+	end
+	return false
+end
 
 function isDetrimentalEdition(card)
 	if card.edition then

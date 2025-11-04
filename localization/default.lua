@@ -189,7 +189,7 @@ return {
             bl_unik_emerald_escalator = {
                 name = "Emerald Escalator",
                 text = {
-                    "^1.004 Blind Size per",
+                    "X1.2 Blind Size per",
                     "Joker trigger this Round",
                 }
             },
@@ -1163,6 +1163,13 @@ return {
                     "No Rank or Suit",
                 }
             },
+            m_wild={
+                name="Wild Card",
+                text={
+                    "Considered {C:attention}any suit",
+                    "{C:attention}Immune{} to {C:red,E:2}debuffs"
+                },
+            },
         },
         Rotarot = {
             c_unik_rot_crossdresser={
@@ -1484,20 +1491,17 @@ return {
                     "{X:chips,C:white}X#1#{} Chips for every",
                     "{C:attention}Joker{} triggered",
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
-                    "{C:unik_caption,s:0.7,E:1}I'll always be there for you and my family.{}",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
             },
-            j_unik_jsab_maya = { --epic: each non-face card played gains 0.75x chips, each non-face card held gains 0.25x chips
-            --Increases by 1.3x chips if maya and chelsea are present
-            --Her triggering does not trigger yokana and chelsea, but does help but providing more Xchips and more triggers for them (xchips + chips = double trigger)
-            --Basically provided its not face cards, she's a souped up hiker
+            j_unik_jsab_maya = { 
                 name="{C:unik_maya_color}Maya Ramirez{}",
                 text={
-                    "{C:attention}Scored{} cards permanently gain {X:chips,C:white}X#1#{} Chips", --values will be exponented by ^0.3
-                    --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
-                    "{C:unik_caption,s:0.7,E:1}I'm here to help, but PLEASE be careful.{}",
+                    "{C:attention}Played and scoring{} cards", 
+                    "permanently gain {X:chips,C:white}X#1#{} Chips",
+                    "{C:unik_caption,s:0.7,E:1}#2#{}",
                     "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                 },
@@ -1541,22 +1545,6 @@ return {
                 unlock = {
                     "Have {C:attention}100{} cards in your deck",
                 }             
-            },
-            --modest is a reusable hanged man
-            j_unik_lily_sprunki_modest = {
-                name="Lily",
-                text={
-                    "{C:red,E:2}Destroy{} up to {C:attention}#3#{} selected cards",
-                    "{C:attention}anytime{} {C:inactive}(once until next cashout)",
-                    "{C:inactive}(#1#)",
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI{}",
-                },    
-                unlock = {
-                    "Have {C:attention}100{} cards in your deck",
-                }
             },
             j_unik_1_5_joker = {
                 name="One-and-a-Half Joker",
@@ -1678,8 +1666,8 @@ return {
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
-                    "Gains {X:dark_edition,C:white}^#2#{} Mult when a",
-                    "{C:attention}Joker{} is {C:red}destroyed {C:inactive}(itself included)",
+                    "Gains {X:dark_edition,C:white}^#2#{} Mult when",
+                    "a {C:attention}Joker{} is {C:red}destroyed",
                     "Copies itself with {C:money}$0{}",
                     "sell value if {C:red}destroyed",
                     "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
@@ -3549,6 +3537,15 @@ return {
                     "{C:attention}including retriggers",
                     "{C:inactive,s:0.8}(For instance, Copper Cards from Bunco)"
                 }
+            },
+            unik_shielded ={
+                name = "Shielded",
+                text = {
+                    "{C:attention}Cannot{} be debuffed, flipped,",
+                    "forcibly selected or gain",
+                    "detrimental editions",
+                    "{C:inactive,s:0.8}(Not retroactive)",
+                }
             }
         },
         Planet={
@@ -3681,6 +3678,22 @@ return {
                     "to {C:attention}#1#{} selected",
                     "card in your hand",
                 }
+            },
+            c_unik_defend = {
+                name = "Defend",
+                text = {
+                    "Add {C:attention}Shielded{} to",
+                    "{C:attention}#1#{} selected card#<s>1#",
+                    "or {C:attention}#2#{} selected Joker#<s>2#"
+                }
+            },
+            c_unik_expel = {
+                name = "Expel",
+                text = {
+                    "{C:red}Banish{} a selected {C:attention}Joker,",
+                    "{C:attention}consumable{} or {C:attention}shop item",
+                    "{C:inactive}(Bypasses Eternal)"
+                }
             }
         },
         Stake={
@@ -3710,7 +3723,7 @@ return {
                 colour = "Blue",
                 text = {
                     "Ante victory requirements",
-                    "increased by {C:attention}X1.3",
+                    "increased by {C:attention}X1.25",
                     '{s:0.8}Applies all previous stakes',
                 }
             },
@@ -4487,6 +4500,29 @@ return {
             k_unik_chelsea_normal4 = "I miss being with my family...",
             k_unik_chelsea_normal_1member = "Mom! It's nice to not be alone for once...",
             k_unik_chelsea_normal_family = "Oh! Maya, Yokana! I'm glad you two are here!",
+
+            k_unik_maya_normal1 = "Please don't mind me, I can be a bit moody at times...",
+            k_unik_maya_normal2 = "With Paraiso going downhill, it's hard to for me to be happy...",
+            k_unik_maya_normal3 = "I enjoy being with my family, kind of what keeps me going...",
+            k_unik_maya_normal4 = "As for where I used to live... it's gone.",
+            k_unik_maya_chelsea = "Ah! Chelsea! Brings me joy...",
+            k_unik_maya_yokana = "Oh Yokana! I'm happy you're here...",
+            k_unik_maya_family = "Chelsea, Yokana... Oh, you'all make my day!...",
+
+            k_unik_yokana_1 = "So, lets get going shall we?",
+            k_unik_yokana_2 = "Hah... Quite an interesting place!",
+            k_unik_yokana_3 = "It would be great to be with my family here with me.",
+            k_unik_yokana_4 = "I prefer not to discuss about my... nevermind...",
+            k_unik_yokana_maya = "Maya!... I appreciate her and do understand each other...",
+            k_unik_yokana_chelsea = "My daughter, Chelsea! She's quite sweet!",
+            k_unik_yokana_family = "Maya! Chelsea! Everyone's here!",
+
+            k_unik_white_lily_normal1 = "I wished to make everyone happy...",
+            k_unik_white_lily_normal2 = "I do have my duties as Faerie Queen to do...",
+            k_unik_white_lily_normal3 = "I let myself go astray... I never wanted it that way...",
+            k_unik_white_lily_normal4 = "The Faerie Kingdom... I still feel proud there...",
+            k_unik_white_lily_normal5 = "I do wish I can get others help... Yet I feel I should do it alone...",
+            k_unik_white_lily_normal6 = "Maybe I should tell him about what happened with Elder Faerie...",
 
             k_unik_pibby_normal1 = "Learning is so much fun!",
             k_unik_pibby_normal2 = "Well what shall we learn today?",

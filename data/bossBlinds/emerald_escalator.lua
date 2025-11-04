@@ -11,9 +11,9 @@ SMODS.Blind{
     mult = 1,
     pronouns = "he_him",
     calculate = function(self, blind, context)
-		if context.post_trigger and not G.GAME.blind.disabled then
+		if context.post_trigger and not G.GAME.blind.disabled and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability then
              G.E_MANAGER:add_event(Event({func = function()
-                G.GAME.blind.chips = G.GAME.blind.chips^1.004
+                G.GAME.blind.chips = G.GAME.blind.chips*1.2
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                 G.HUD_blind:recalculate(true)
                 G.hand_text_area.blind_chips:juice_up()
@@ -22,6 +22,10 @@ SMODS.Blind{
                 play_sound('chips2')
             return true end }))
 		end
+	end,
+    disable = function(self, silent)
+		G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling
+		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
 	end,
     -- unik_before_play = function(self)
     --     for i,v in pairs(G.hand.cards) do

@@ -485,6 +485,8 @@ NFS.load(mod_path .. "data/spectrals/sparkle.lua")()
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 NFS.load(mod_path .. "data/spectrals/turing.lua")() 
+NFS.load(mod_path .. "data/spectrals/defend.lua")() 
+NFS.load(mod_path .. "data/spectrals/expel.lua")() 
 --
 --hidden summits
 NFS.load(mod_path .. "data/summits/ebott.lua")() 
