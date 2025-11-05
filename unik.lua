@@ -353,6 +353,7 @@ SMODS.Rarity({
 
 
 -- stickers
+NFS.load(mod_path .. "data/stickers/shielded.lua")() 
 NFS.load(mod_path .. "data/stickers/limited_edition.lua")() 
 NFS.load(mod_path .. "data/stickers/triggering.lua")() 
 NFS.load(mod_path .. "data/stickers/depleted.lua")() 
@@ -389,6 +390,7 @@ end
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
+NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
 
 
 -- EDITIONS --
@@ -690,6 +692,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/malicious_face.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
@@ -721,10 +724,12 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/stamp_spam.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/perk_lottery.lua")() 
-
+NFS.load(mod_path .. "data/jokers/unik/uncommon/antivirus.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/energy_compressor.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")() 
+
 
 --Rare
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
@@ -776,6 +781,10 @@ NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")()
 ---------------
 ---CROSSMOD (non cursed) JONKLERS
 ---------------
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/jokers/bunco/neon_rainbows.lua")()
+	NFS.load(mod_path .. "data/jokers/bunco/king_minos.lua")()
+end
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 

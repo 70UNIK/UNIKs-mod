@@ -79,6 +79,10 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             key = nil
              marked_for_destruction = true
         end
+        if  (key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod") then
+            key = nil
+             marked_for_destruction = true
+        end
         if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
             key = nil
              marked_for_destruction = true
@@ -109,6 +113,9 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
     end
     
     if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
+        destroy_multeasers = true
+    end
+    if  (key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod") then
         destroy_multeasers = true
     end
     if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then

@@ -8,7 +8,7 @@ SMODS.Consumable {
     config = {jokers_highlighted = 1, cards_highlighted = 2 },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_shielded" }
-        return { vars = { card.ability.jokers_highlighted,card.ability.cards_highlighted } }
+        return { vars = { card.ability.cards_highlighted,card.ability.jokers_highlighted } }
     end,
     can_use = function(self, card)
         if G.jokers and G.hand and ((#G.jokers.highlighted > 0 and #G.jokers.highlighted <= card.ability.jokers_highlighted and #G.hand.highlighted == 0)
@@ -35,14 +35,21 @@ SMODS.Consumable {
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
                 
                 for i=1, #cards1 do
-                    cards1[i].ability.unik_shielded = true
+                    
                     local percent = 0.85 + (i-0.999)/(#cards1-0.998)*0.3
-                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards1[i]:flip();play_sound('tarot2', percent, 0.6);cards1[i]:juice_up(0.3, 0.3);return true end }))
+                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards1[i]:flip();play_sound('tarot2', percent, 0.6);cards1[i]:juice_up(0.3, 0.3);
+                    cards1[i].ability.unik_shielded = true
+                    
+                    return true end }))
+                    
                 end
                 for i=1, #cards2 do
-                    cards2[i].ability.unik_shielded = true
+                    
                     local percent = 0.85 + (i-0.999)/(#cards2-0.998)*0.3
-                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards2[i]:flip();play_sound('tarot2', percent, 0.6);cards2[i]:juice_up(0.3, 0.3);return true end }))
+                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards2[i]:flip();play_sound('tarot2', percent, 0.6);cards2[i]:juice_up(0.3, 0.3);
+                    cards2[i].ability.unik_shielded = true
+                    
+                    return true end }))
                 end
                 card:juice_up(0.3, 0.5)
             return true end })) 

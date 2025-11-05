@@ -10,7 +10,6 @@ SMODS.Joker {
     immutable = true,
     config = {extra = {prob = 1, odds = 2,choices = 1}},
     pronouns = "it_its",
-    enhancement_gate = 'm_glass',
     loc_vars = function(self, info_queue, center)
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.prob, center.ability.extra.odds, 'unik_plottery')
         return { 

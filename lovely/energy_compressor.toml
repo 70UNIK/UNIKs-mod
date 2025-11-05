@@ -1,0 +1,24 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = '''functions/state_events.lua'''
+pattern = '''-- TARGET: effects before deck final_scoring_step'''
+position = "after"
+payload = '''
+if G.GAME.unik_store_scoring and G.GAME.unik_stored_scoring and type(G.GAME.unik_stored_scoring) == 'table' then
+    G.GAME.unik_store_scoring = nil
+    for i = 1, #G.GAME.unik_stored_scoring do
+        local v = G.GAME.unik_stored_scoring[i].instances
+        for j = 1, #v do
+            SMODS.calculate_context({unik_energy_compressor = true, energy_compressor_effect = G.GAME.unik_stored_scoring[i].type, energy_compressor_value = v[j]})
+        end
+    end
+end
+G.GAME.unik_stored_scoring = nil
+G.GAME.unik_store_scoring = nil
+'''
+match_indent = true

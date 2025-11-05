@@ -189,7 +189,7 @@ return {
             bl_unik_emerald_escalator = {
                 name = "Emerald Escalator",
                 text = {
-                    "X1.2 Blind Size per",
+                    "X1.15 Blind Size per",
                     "Joker trigger this Round",
                 }
             },
@@ -2160,7 +2160,7 @@ return {
                  text = {
                     "When {C:attention}Boss Blind{} is selected",
                     "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size",
-                    "After defeat, create an",
+                    "After defeat, create a {C:dark_edition}negative",
                     "{C:unik_ancient}Awakening{} and {C:red,E:2}Self Destruct",
                 },
             },
@@ -2483,6 +2483,23 @@ return {
                     "after selecting in {C:attention}Booster Packs",
                 }
             },
+            j_unik_antivirus = {
+                name = "Antivirus",
+                text = {
+                    "Playing Cards gain",
+                    "{C:attention}Shielded{} when {C:attention}enhanced",
+                    "{C:inactive,s:0.9}(Must be different enhancements)"
+                }
+            },
+            j_unik_malicious_face = {
+                name = "Malicious Face",
+                 text = {
+                    "When {C:attention}Boss Blind{} is selected",
+                    "{C:red}X#1#{} Blind Size",
+                    "After defeat, create a {C:dark_edition}negative",
+                    "{C:spectral}Black Hole{} and {C:red,E:2}Self Destruct",
+                },
+            },
             --That's 18 non cursed jokers for the next update!!
 
             j_unik_bun_bun_corrupted = {
@@ -2506,6 +2523,16 @@ return {
                     "{C:unik_ancient,s:0.7,E:2}Origin : Powerpuff Girls{}",
                 }
             },
+            j_unik_energy_compressor = {
+                name = "Energy Compressor",
+                text = {
+                    "{C:attention}Store{} all non-additive",
+                    "{C:red}Mult{} and {C:chips}Chip{} effects",
+                    "then release them {C:attention}in set order{} of",
+                    "{X:purple,C:white}Multiplicative{}, {X:purple,C:white}Loglinear{}",
+                    "{X:dark_edition,C:white}Exponential{} effects"
+                }
+            },
 
             --Bunco crossmod Jokers
             j_unik_bunc_king_minos = {
@@ -2514,8 +2541,8 @@ return {
                     "When {C:attention}Boss Blind{} is selected",
                     "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size", -- ^1.1 Blind Size
                     "and {C:red}#2#{} Hand Size",
-                    "After defeat, create {C:bunco_virtual_dark}The 8{}",
-                    "and {C:red,E:2}Self Destruct",
+                    "After defeat, create a {C:dark_edition}negative",
+                    "{C:bunco_virtual_dark}The 8{} and {C:red,E:2}Self Destruct",
                 },
             },
             j_unik_bunc_eternal_fuel = { --uncommon
@@ -2547,9 +2574,18 @@ return {
             j_unik_bunc_cyborg = {
                 name = "Cyborg",
                 text = {
-                    "{C:attention}Rescore{} all cards",
+                    "{C:attention}Rescore{} all",
+                    "non-Copper Cards",
                     "if a {C:attention}Copper Card",
                     "is {C:attention}rescored",
+                }
+            },
+            j_unik_bunc_neon_rainbows={
+                name = "Neon Rainbows",
+                text = {
+                    "Scored {C:dark_edition}Fluorescent{} cards",
+                    "become {C:dark_edition}Polychrome{}",
+                    "and {C:attention}Shielded",
                 }
             },
             
@@ -3546,6 +3582,14 @@ return {
                     "detrimental editions",
                     "{C:inactive,s:0.8}(Not retroactive)",
                 }
+            },
+            unik_banished = {
+                name = "Banishing",
+                text = {
+                    "{C:red}Banished{} items will",
+                    "{C:red}not appear again",
+                    "in their respective pools"
+                }
             }
         },
         Planet={
@@ -3691,8 +3735,9 @@ return {
                 name = "Expel",
                 text = {
                     "{C:red}Banish{} a selected {C:attention}Joker,",
-                    "{C:attention}consumable{} or {C:attention}shop item",
-                    "{C:inactive}(Bypasses Eternal)"
+                    "{C:attention}Consumable{}, {C:attention}Shop item",
+                    "or {C:attention}Booster item",
+                    "{C:inactive}(Bypasses Eternal)",
                 }
             }
         },
@@ -4666,7 +4711,10 @@ return {
             k_unik_eternal_egg_normal6= "THAT EGG COULD'VE BEEN HELPFUL, A SHAME THAT SOMEONE HAD TO DIE.",
 
             k_unik_triggered="Triggered!",
-
+            b_take = "TAKE",
+            k_unik_protected = "Protected!",
+            k_unik_stored = "Stored!",
+            k_unik_redirected = "Redirected!",
         },
         high_scores={},
         labels={
@@ -4688,6 +4736,7 @@ return {
             unik_baseless = "Baseless",
             unik_limited_edition = "Limited Edition",
             unik_copper_seal = "Copper Seal",
+            unik_shielded = "Shielded",
         },
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM

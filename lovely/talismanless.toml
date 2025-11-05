@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = -2
 
 ##OH WOW! talismanless emult/echips!
 [[patches]]
@@ -15,20 +15,6 @@ elseif eval_type == 'x_chips' and not (SMODS.Mods["Talisman"] or {}).can_load an
     amt = amt
     text = 'X' .. number_format(amt)
     colour = G.C.CHIPS
-    config.type = 'fade'
-    config.scale = 0.7
-elseif eval_type == 'e_chips' and not (SMODS.Mods["Talisman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load  then
-    sound = 'unik_echips'
-    amt = amt
-    text = '^' .. number_format(amt) .. ' ' .. localize('k_chips')
-    colour = G.C.DARK_EDITION
-    config.type = 'fade'
-    config.scale = 0.7
-elseif eval_type == 'e_mult' and not (SMODS.Mods["Talisman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load  then
-    sound = 'unik_emult'
-    amt = amt
-    text = '^' .. number_format(amt) .. ' ' .. localize('k_mult')
-    colour = G.C.DARK_EDITION
     config.type = 'fade'
     config.scale = 0.7
 elseif eval_type == 'xlog_mult' then
@@ -47,12 +33,18 @@ elseif eval_type == 'xlog_chips' then
     colour = G.C.CHIPS
     config.type = 'fade'
     config.scale = 0.7
-elseif eval_type == 'fact_mult' then
-    sound = 'unik_eemult'
-    volume = 0.7
+elseif eval_type == 'e_chips' and not (SMODS.Mods["Talisman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load  then
+    sound = 'unik_echips'
     amt = amt
-    text = localize({type='variable',key='a_factorial_mult',vars={math.abs(amt)}})
-    colour = G.C.UNIK_RGB
+    text = '^' .. number_format(amt) .. ' ' .. localize('k_chips')
+    colour = G.C.DARK_EDITION
+    config.type = 'fade'
+    config.scale = 0.7
+elseif eval_type == 'e_mult' and not (SMODS.Mods["Talisman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load  then
+    sound = 'unik_emult'
+    amt = amt
+    text = '^' .. number_format(amt) .. ' ' .. localize('k_mult')
+    colour = G.C.DARK_EDITION
     config.type = 'fade'
     config.scale = 0.7
 '''
