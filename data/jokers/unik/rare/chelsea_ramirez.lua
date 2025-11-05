@@ -80,6 +80,7 @@ or key == "EEchips_mod" or key == "ee_chips_mod" or key == "EEchips" or key == "
 or key == "EEEchips_mod" or key == "eee_chips_mod" or key == "EEEchips" or key == "eee_chips" or key == "eeechips" or key == "EEEchip_mod"
 or key == "EEEEchips_mod" or key == "eeee_chips_mod" or key == "EEEEchips" or key == "eeee_chips" or key == "eeeechips" or key == "EEEEchip_mod"
 or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" or key == "hyper_chips" or key == "hyperchips" or key == "hyperchip_mod"
+or key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod"
 ) and amount ~= 1) or
 
     key == "chips" or key == "chip_mod" or key == "chip" or key == "chips_mod" then
