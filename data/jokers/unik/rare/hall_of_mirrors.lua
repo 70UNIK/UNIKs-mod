@@ -1,10 +1,10 @@
 --rescore all scored glass cards
 SMODS.Joker {
     key = "unik_hall_of_mirrors",
-    atlas = 'placeholders',
+    atlas = 'unik_rare',
     rarity = 3,
     cost = 7,
-    pos = { x = 2, y = 0 },
+    pos = { x = 1, y = 2 },
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,

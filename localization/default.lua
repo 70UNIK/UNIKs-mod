@@ -43,15 +43,6 @@ return {
                     "Earn no {C:attention}Interest",
                 }
             },
-            --+3 hands, -1 joker slot
-            b_unik_white = {
-                name = "White Deck",
-                text = {
-                    "{C:blue}+#2#{} hands",
-                    "every round",
-                    "{C:attention}-#1#{} Joker slot",
-                }
-            },
             b_unik_mountain_deck = {
                 name = "Mountain Deck",
                 text = {
@@ -66,6 +57,20 @@ return {
                     "Spectral Packs appear at 4X the usual rate",
                 }
             },
+            b_unik_endless_deck = { --+3 joker slots, win ante is 20.
+                name = "Endless Deck",
+                text = {
+                    "{C:attention}+#1#{} Joker slot#<s>1#",
+                    "Win Ante is {C:red}#2#{}",
+                }
+            },
+            b_unik_optimized_deck = {
+                name = "Optimized Deck",
+                text = {
+                    "Start with a {C:dark_edition}Negative{}",
+                    "{C:attention}Eternal{} {C:attention,T:j_unik_energy_compressor}Energy Compressor{}",
+                }
+            }
             
             
         },
@@ -1834,7 +1839,7 @@ return {
                     "an {E:2,C:red}Epic Blind{}"
                 },
                 unlock = {
-                    "Die to a {C:attention}Finisher Blind"
+                    "Die to an {C:red}Epic Blind"
                 }
             },
             j_unik_epic_blind_sauce_no_epic = {
@@ -1938,7 +1943,7 @@ return {
             --     }
             -- },
             j_unik_copycat = { --rare, immutable. Acts as a slightly buffed blueprint. [CODE DONE]
-                name = "Copycat",
+                name = "Traced Art",
                 text = {
                     "Retrigger the",
                     "rightmost {C:attention}Joker{}",

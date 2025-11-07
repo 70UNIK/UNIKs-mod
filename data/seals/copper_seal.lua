@@ -166,19 +166,24 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
         end
         for j = 1,max_rescore do
             local rescoring_cards = {}
-
             for k,w in pairs(v) do
                 if type(w) == 'table' and w.card and w.rescore and j <= w.rescore then
                     rescoring_cards[#rescoring_cards+1] = w.card
-                    G.E_MANAGER:add_event(Event({
-                        trigger = 'before',
-                        func = function()
-                            w.card:juice_up(1,1)
-                            return true
-                        end
-                    }))
+
                 end
             end
+             G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                func = function()
+                    for k,w in pairs(v) do
+                        if type(w) == 'table' and w.card and w.rescore and j <= w.rescore then
+                                    w.card:juice_up(1,1)
+
+                        end
+                    end
+                    return true
+                end
+            }))
             play_area_status_text(localize('k_unik_repeat'))
             SMODS.calculate_context({unik_post_rescore = true,rescored_cards = rescoring_cards,cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand})
             if v.source and v.message then

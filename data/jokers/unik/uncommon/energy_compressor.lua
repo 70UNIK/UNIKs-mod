@@ -1,9 +1,9 @@
 SMODS.Joker {
     key = "unik_energy_compressor",
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
     cost = 4,
-    pos = { x = 1, y = 0 },
+    pos = { x = 0, y = 3 },
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = true,
