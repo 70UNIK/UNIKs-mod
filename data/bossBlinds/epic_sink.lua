@@ -68,7 +68,7 @@ SMODS.Blind	{
         if G.GAME.unik_sink_killswitch > 0 then
             local sum2 = math.ceil(sum)
             local digits = math.ceil(#tostring(sum2) / 2)
-            print(sum2)
+           -- print(sum2)
             ease_ante(to_number(digits))
             G.E_MANAGER:add_event(Event({
                 func = function()

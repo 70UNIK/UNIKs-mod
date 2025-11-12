@@ -1130,12 +1130,13 @@ return {
             m_unik_green = {
                 name = "Green Card",
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult", 
-                    "Considered a {C:clubs}#2#{}",
+                    "{C:mult}+#1#{} Mult",
+                    "{X:mult,C:white}Xlog_#2#(Mult){}",
+                    "Considered a {C:clubs}#3#{}",
                     "and it's {C:attention}own rank{}",
                     "{C:red,E:2}Destroyed{} if played",
                     "with anything",
-                    "other than {C:clubs}#3#{}",
+                    "other than {C:clubs}#4#{}",
                 }
             },
             m_unik_dollar = { --dollar cards. Earn +$2 when scored
@@ -1156,8 +1157,9 @@ return {
             m_unik_timber = {
                 name = "Timber Card",
                 text = {
-                    "Mult {X:mult,C:white}Xlog_#1#(Mult){}", --Xlog_50 Mult
-                    "{C:green}#2# in #3#{} chance card", --1 in 4 chance
+                    "{X:mult,C:white}X#1#{} Mult", --X1.5 mult
+                    "Mult {X:mult,C:white}Xlog_#2#(Mult){}", --Xlog_50 Mult
+                    "{C:green}#3# in #4#{} chance card", --1 in 4 chance
                     "is {C:red,E:2}destroyed{} after scoring",
                 }
             },
@@ -2476,7 +2478,7 @@ return {
             j_unik_hall_of_mirrors = {
                 name = "Mirror Maze",
                 text = {
-                    "Rescore all scored",
+                    "{C:unik_copper}Rescore{} all scored",
                     "{C:attention}Glass Cards {C:attention}#1#{} time"
                 }
             },

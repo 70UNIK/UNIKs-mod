@@ -8,7 +8,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {base = 100} },
+    config = { extra = {base = 60} },
     enhancement_gate = 'm_unik_timber',
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_timber

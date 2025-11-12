@@ -1377,14 +1377,6 @@ calculate = function(self, card, context)
 			and context.other_joker.edition.cry_astral == true
 			and card ~= context.other_joker
 		then
-			if Talisman and not Talisman.config_file.disable_anims then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_joker:juice_up(0.5, 0.5)
-						return true
-					end,
-				}))
-			end
 			return {
 				e_mult = lenient_bignum(card.ability.extra.emult + card.ability.immutable.base_emult),
 				colour = G.C.DARK_EDITION,

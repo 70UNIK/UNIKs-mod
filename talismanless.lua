@@ -1,6 +1,16 @@
 --cryptlib copying emult/echips.
 --TALISMANLESS AS WELL!
 
+function UNIK.has_talisman()
+	if (SMODS.Mods["cdataman"] or {}).can_load then
+		return true
+	end
+	if SMODS.Mods.Talisman or SMODS.Mods.Talisman.can_load then
+		return true
+	end
+	return false
+end
+
 local scie2 = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
 	local ret = scie2(effect, scored_card, key, amount, from_edition)
@@ -80,7 +90,7 @@ for _, v in ipairs({
 }) do
 	table.insert(SMODS.scoring_parameter_keys, v)
 end
-if SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) and not (SMODS.Mods["Cryptlib"] or {}).can_load then
+if SMODS and SMODS.Mods and not UNIK.has_talisman() and not (SMODS.Mods["cdataman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load then
 	local smods_xchips = false
 	for _, v in pairs(SMODS.scoring_parameter_keys) do
 		if v == "x_chips" then
@@ -198,7 +208,7 @@ if SMODS and SMODS.Mods and (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.
 end
 
 function portable_exp(initial,exponent,value)
-	if (not SMODS.Mods.Talisman or not SMODS.Mods.Talisman.can_load) or to_big(exponent) <= to_big(1) then
+	if (not UNIK.has_talisman()) or to_big(exponent) <= to_big(1) then
 		if exponent == 0 then
 			return initial*value
 		end

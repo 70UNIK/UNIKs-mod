@@ -662,16 +662,16 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Blinds below require talisman due to exponential requirements
-	if Talisman then
+	if UNIK.has_talisman() then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")() --panopicon. thats it
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
-	if Talisman then
+	if UNIK.has_talisman() then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")() --good high card score thats it.
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
-	if Talisman then
+	if UNIK.has_talisman() then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")() --dont have too much rarities, have good amount of hands, blueprint(s) 
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")() --same as above, but dont have too much hands, maybe have higher ranked cards or planets on hand

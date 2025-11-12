@@ -50,14 +50,6 @@ SMODS.Joker {
         if context.other_consumeable and context.other_consumeable.ability.set == 'Code'
 		then
 
-			if (not Talisman or not Talisman.config_file.disable_anims) and valid == true then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_consumeable:juice_up(0.5, 0.5)
-						return true
-					end,
-				}))
-			end
 			if context.other_consumeable.debuff and valid == true then
 				card_eval_status_text(card, "debuff", nil, nil, nil, nil)
 				--return true

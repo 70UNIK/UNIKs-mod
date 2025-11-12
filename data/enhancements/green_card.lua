@@ -1,5 +1,6 @@
 --Considered a club and it's own rank.
---^1.08 Mult, destroyed if played with any suit other than clubs
+--change to:
+--+6 mult and mult Xlog_50(mult)
 SMODS.Enhancement {
 	atlas = 'unik_enhancements',
 	pos = {x = 0, y = 1},
@@ -7,7 +8,7 @@ SMODS.Enhancement {
 	not_stoned = true,
 	overrides_base_rank = true, --enhancement do not generate in grim, incantation, etc...
 	replace_base_card = true, --So no base chips and no image
-    config = { extra = { Emult = 0.08}, immutable = {base_emult = 1.0} },
+    config = { extra = { mult = 5}, immutable = {Xlogmultbase = 50} },
     weight = 1,
     shatters = true, --lefunny
     force_no_face = true, --true = always face, false = always face
@@ -18,13 +19,14 @@ SMODS.Enhancement {
 
     loc_vars = function(self, info_queue, card)
         return {
-            vars = { card.ability.extra.Emult + card.ability.immutable.base_emult,localize('Clubs','suits_singular'), localize('Clubs', 'suits_plural')}
+            vars = { card.ability.extra.mult, card.ability.immutable.Xlogmultbase,localize('Clubs','suits_singular'), localize('Clubs', 'suits_plural')}
         }
     end,
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then
             return {
-				e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
+				mult = card.ability.extra.mult,
+                xlog_mult = card.ability.immutable.Xlogmultbase,
                 colour = G.C.DARK_EDITION,
 			}
 		end

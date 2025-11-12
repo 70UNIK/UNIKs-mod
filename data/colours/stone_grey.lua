@@ -6,7 +6,7 @@
     config = {
       val = 0,
       partial_rounds = 0,
-      upgrade_rounds = 50,
+      upgrade_rounds = 40,
     },
     cost = 4,
     hidden = true,

@@ -8,7 +8,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = false,
     demicolon_compat = true,
-    config = { extra = {x_mult = 1.65,x_mult_mod = 0.01,depleted_threshold = 0,destroyed = false} },
+    config = { extra = {x_mult = 1.55,x_mult_mod = 0.01,depleted_threshold = 0,destroyed = false} },
     pools = {  ["autocannibalism_food"] = true,["Food"] = true},
     loc_vars = function(self, info_queue, center)
         local key = 'j_unik_brownie'

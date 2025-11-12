@@ -82,7 +82,7 @@ SMODS.Joker {
             
             if context.other_card.area == G.consumeables then
                 if context.other_ret then
-                    print(context.other_ret)
+                 --   print(context.other_ret)
                 end
                 return {
                     message = localize('k_again_ex'),

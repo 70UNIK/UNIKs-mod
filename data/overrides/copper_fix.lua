@@ -1,6 +1,9 @@
 --Fixing bunco's copper cards to be more durable against crossmods as well as open opportunities for quantum enhancements and cyborg (rescore ALL cards when a copper card is rescored)
 
 SMODS.Enhancement:take_ownership("m_bunc_copper",{
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
+    end,
     config = {extra = {rescore = 1}},
     calculate = function(self, card, context, effect)
         if context.unik_after_effect and context.scoring_hand then

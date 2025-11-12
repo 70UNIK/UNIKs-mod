@@ -18,9 +18,9 @@ SMODS.Consumable{
 	hidden = true,
 	config = {extra = {jokers = 3}},
     loc_vars = function(self, info_queue, center)
-		local size = center.ability.extra.jokers
-		if not center.ability.extra.jokers or center.ability.extra.jokers == nil then
-			size = 3
+		local size = 3
+		if center.ability.extra.jokers and center.ability.extra.jokers ~= nil then
+			size = center.ability.extra.jokers
 		end
         return { vars = { size} }
     end,

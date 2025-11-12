@@ -14,7 +14,7 @@ SMODS.Joker {
 			G.GAME.unik_store_scoring = true
 		end
         if context.unik_energy_compressor and context.energy_compressor_effect ~= nil and context.energy_compressor_value ~= nil and not context.blueprint and not context.retrigger_joker then
-            print(context.energy_compressor_effect)
+          --  print(context.energy_compressor_effect)
             return {
                 [context.energy_compressor_effect] = context.energy_compressor_value
             }
