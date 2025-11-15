@@ -17,6 +17,9 @@ SMODS.Joker {
 	eternal_compat = false,
     config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20,impoundedSeed = ""} },
     loc_vars = function(self, info_queue, center)
+        if not center.ability.unik_impounded then
+            info_queue[#info_queue + 1] = { set = "Other", key = "unik_impounded" }
+        end
         return { 
             vars = { center.ability.extra.x_mult,center.ability.extra.multiplier,center.ability.extra.fallback_cost} }
 	end,

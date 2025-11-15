@@ -38,6 +38,7 @@ SMODS.Joker {
         return { 
            vars = {math.min(center.ability.extra.rescore,center.ability.immutable.max_rescores),localize(reggie_quotes[quoteset][math.random(#reggie_quotes[quoteset])] .. "")} }
 	end,
+    pools = {["character"] = true },
     calculate = function(self, card, context)
         if context.unik_kite_experiment and context.scoring_hand then
             local validCards = {}

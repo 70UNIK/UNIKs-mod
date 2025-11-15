@@ -47,7 +47,7 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
     triggering_blacklist = true,
-    pools = {["unik_copyrighted"] = true },
+    pools = {["character"] = true },
     add_to_deck = function(self, card, context)
         --return to normal sprite
         card.children.center:set_sprite_pos({x = 0, y = 0})

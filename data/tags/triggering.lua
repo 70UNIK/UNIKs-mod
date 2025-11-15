@@ -11,7 +11,8 @@ SMODS.Tag{
 	end,
 	apply = function(self, tag, context)
         if context.type == self.config.type then
-            if context.card and not context.card.ability.unik_triggering and context.card.ability.set == 'Joker' and not SMODS.is_eternal(context.card,self) then
+            if context.card and not context.card.ability.unik_triggering and context.card.ability.set == 'Joker' and not SMODS.is_eternal(context.card,self) 
+            and not context.card.config.center.triggering_blacklist then
                 local lock = tag.ID
 				G.CONTROLLER.locks[lock] = true
                 tag:too_bad("TOO BAD", G.C.UNIK_VOID_COLOR, function()

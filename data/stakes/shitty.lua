@@ -77,7 +77,7 @@ function Card:cry_calculate_voucher_perishable()
             }))
             card_eval_status_text(self, "jokers", nil, nil, nil, {
                 message = localize("k_unik_perished"),
-                delay = 0.1 ,
+                delay = 0.5 ,
                 colour = G.C.PERISHABLE,
             })
 		else
@@ -126,7 +126,7 @@ function Card:cry_calculate_consumeable_perishable()
         }))
          card_eval_status_text(self, "jokers", nil, nil, nil, {
             message = localize("k_unik_perished"),
-            delay = 0.1 ,
+            delay = 0.5 ,
             colour = G.C.PERISHABLE,
         })
     else
@@ -166,7 +166,7 @@ function Card:calculate_perishable()
             }))
             card_eval_status_text(self, "jokers", nil, nil, nil, {
                 message = localize("k_unik_perished"),
-                delay = 0.1 ,
+                delay = 0.5 ,
                 colour = G.C.PERISHABLE,
             })
         else

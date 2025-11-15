@@ -1,4 +1,4 @@
---Pink cards are no longer destroyed in straights and spectrums
+--Scoring Pink cards are no longer destroyed
 SMODS.Joker {
 	key = 'unik_tape_7',
     atlas = 'placeholders',

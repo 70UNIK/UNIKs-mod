@@ -44,7 +44,7 @@ SMODS.Joker {
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
-    pools = {["unik_cube"] = true },
+    pools = {["unik_cube"] = true,["character"] = true },
     config = { extra = {x_chips_scored = 0.05} },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'alone'

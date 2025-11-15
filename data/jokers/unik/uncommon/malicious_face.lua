@@ -2,9 +2,9 @@
 SMODS.Joker {
     key = 'unik_malicious_face',
     atlas = 'placeholders',
-    rarity = 1,
+    rarity = 2,
     cost = 4,
-    pos = { x = 0, y = 0 },
+    pos = { x = 1, y = 0 },
     immutable = true,
     eternal_compat = false,
 	demicoloncompat = true,

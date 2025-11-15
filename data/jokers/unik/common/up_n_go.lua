@@ -4,7 +4,7 @@ SMODS.Joker {
     rarity = 1,
 	pos = { x = 5, y = 0 },
     cost = 4,
-    config = { extra = {x_mult = 3}, immutable = {rounds = 3}},
+    config = { extra = {x_mult = 2.5}, immutable = {rounds = 3}},
     loc_vars = function(self, info_queue, center)
         return { 
             vars = { center.ability.extra.x_mult,center.ability.immutable.rounds } }

@@ -16,6 +16,8 @@ SMODS.Consumable{
 	order = 90,
 	no_doe = true,
 	hidden = true,
+	soul_set = 'character',
+	soul_rate = 0.005,
 	config = {extra = {jokers = 3}},
     loc_vars = function(self, info_queue, center)
 		local size = 3

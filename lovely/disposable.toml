@@ -38,6 +38,8 @@ unik_clubs = 0,
 unik_face_cards = 0,
 unik_ranks_scored_this_ante = {},
 unik_limited_edition_rounds = 5,
+unik_hands_lost_in_round = 0,
+unik_discards_lost_in_round = 0,
 '''
 match_indent = true
 
@@ -160,13 +162,13 @@ if self.ability.unik_disposable or self.ability.unik_niko then
             if self.ability.unik_niko then
                 card_eval_status_text(self, "jokers", nil, nil, nil, {
                     message = localize("k_unik_you_killed_niko"),
-                    delay = 0.1 ,
+                    delay = 0.4 ,
                     colour = G.C.RED,
                })               
             else
                 card_eval_status_text(self, "jokers", nil, nil, nil, {
                     message = localize("k_unik_disposed"),
-                    delay = 0.1 ,
+                    delay = 0.4 ,
                     colour = G.C.RED,
                })
             end

@@ -23,6 +23,7 @@ SMODS.Booster{
     cry_digital_hallucinations = egg_digital_hallucinations_compat,
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_egg
+		info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
 		return {
 			vars = {
 				card and card.ability.choose or self.config.choose,

@@ -10,15 +10,15 @@ SMODS.Sticker{
     no_sticker_sheet = true,
 }
 
-local flipper = Card.flip
-function Card:flip()
-    if (self.area == G.hand or self.area == G.jokers or self.area == G.consumeables) and self.ability and self.ability.unik_shielded then
-        return
-    else
-        flipper(self)
-    end
+-- local flipper = Card.flip
+-- function Card:flip()
+--     if (self.area == G.hand or self.area == G.jokers or self.area == G.consumeables) and self.ability and self.ability.unik_shielded then
+--         return
+--     else
+--         flipper(self)
+--     end
     
-end
+-- end
 
 local removeHighlight = CardArea.remove_from_highlighted
 function CardArea:remove_from_highlighted(card, force)

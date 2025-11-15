@@ -34,6 +34,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicolon_compat = true,
     config = { extra = {x_mult = 1.0,x_mult_mod = 0.25}, immutable = {x_mult_display = 1.0} },
+    pools = {["character"] = true },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 

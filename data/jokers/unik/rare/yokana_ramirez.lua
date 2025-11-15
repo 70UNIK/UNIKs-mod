@@ -58,7 +58,7 @@ SMODS.Joker {
 		return { vars = {center.ability.extra.x_chips,localize(yokana_quotes[quoteset][math.random(#yokana_quotes[quoteset])] .. "")} }
 	end,
 	pronouns = "she_her",
-	pools = {["unik_cube"] = true },
+    pools = {["unik_cube"] = true,["character"] = true },
 	calculate = function(self, card, context)
 		if context.before and not context.blueprint_card and not context.retrigger_joker  then
 			card.ability.extra.scoring = true

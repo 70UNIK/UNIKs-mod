@@ -39,6 +39,7 @@ SMODS.Joker {
         local quoteset = 'normal'
 		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
 	end,
+    pools = {["character"] = true },
     pronouns = "she_her",
     calculate = function(self, card, context)
         if context.forcetrigger then

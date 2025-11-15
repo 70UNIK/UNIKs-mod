@@ -1337,14 +1337,20 @@ return {
             j_unik_the_plant = {
                 name = 'Piranha Plant',
                 text = {
-                    "All {C:attention}face{} cards are {C:red}debuffed{}", 
-                    "{C:red}Self destructs{} when less than", 
-                    "{C:attention}#1# face{} card(s) remain in deck or",
-                    "{C:unik_plant_color}The Plant{} is triggered",
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} Face Card(s))",
-                    "{C:unik_caption,s:0.7,E:1}Grawr Charble Grawr!{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Super Mario Bros.{}",
+                    {
+                        "All {C:attention}face{} cards are {C:red}debuffed{}", 
+                        "{C:red}Self destructs{} when less than", 
+                        "{C:attention}#1# face{} card(s) remain in deck or",
+                        "{C:unik_plant_color}The Plant{} is triggered",
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} Face Card(s))",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}Grawr Charble Grawr!{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Super Mario Bros.{}",
+                    },
+
+
                 }                
             },
             j_unik_handcuffs = {
@@ -1448,14 +1454,18 @@ return {
             j_unik_moonlight_cookie = { --unconditional ^1.25 mult per planet
                 name = 'Moonlight Cookie',
                 text = {
-                    "{C:planet}Planet{} cards {C:attention}in consumables{}",
-                    "appear multiple times at",
-                    "{C:attention}X#3#{} their usual rate",
-                    "and give leveled {C:attention}Poker Hands{}",
-                    "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
+                    {
+                        "{C:planet}Planet{} cards {C:attention}in consumables{}",
+                        "appear multiple times at",
+                        "{C:attention}X#3#{} their usual rate",
+                        "and give leveled {C:attention}Poker Hands{}",
+                        "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
+                    },
                 },
             },
             j_unik_scratch = { 
@@ -1468,14 +1478,19 @@ return {
             j_unik_unik = { --mainline: ^0.03 chips
                 name = '{C:unik_unik_color}UNIK',
                 text = {
-                    "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
-                    "for each {C:attention}7{} in scoring hand", --Remove retriggers cause otherwise he becomes extremely powerful fast with retriggers, makes him more in line with Alice
-                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                    "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#4#%",
-                    "{C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#5#{C:inactive,s:0.7} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    {
+                        "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
+                        "for each {C:attention}7{} in scoring hand", --Remove retriggers cause otherwise he becomes extremely powerful fast with retriggers, makes him more in line with Alice
+                        "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
+                        "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#4#%",
+                        "{C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#5#{C:inactive,s:0.7} Chips)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    },
+
                 },
                 unlock = {
                     "Play {C:attention}5 7s in a hand",
@@ -1495,22 +1510,31 @@ return {
             --Increases by 1.3x chips if maya and chelsea are present
                 name="{C:unik_yokana_color}Yokana Ramirez{}",
                 text={
-                    "{X:chips,C:white}X#1#{} Chips for every",
-                    "{C:attention}Joker{} triggered",
+                    {
+                        "{X:chips,C:white}X#1#{} Chips for every",
+                        "{C:attention}Joker{} triggered",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    },
                     --"{C:inactive,s:0.8}If {C:unik_chelsea_color,s:0.8}Chelsea{C:inactive,s:0.8} and {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#2#X{}",
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+
                 },
             },
             j_unik_jsab_maya = { 
                 name="{C:unik_maya_color}Maya Ramirez{}",
                 text={
-                    "{C:attention}Played and scoring{} cards", 
-                    "permanently gain {X:chips,C:white}X#1#{} Chips",
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    {
+                        "{C:attention}Played and scoring{} cards", 
+                        "permanently gain {X:chips,C:white}X#1#{} Chips",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    },
                 },
             },
             
@@ -1518,13 +1542,16 @@ return {
             --Increases by 1.3x if maya and yokana are present
                 name="{C:unik_chelsea_color}Chelsea Ramirez{}",
                 text={
-                    "This Joker gains {X:chips,C:white}X#2#{} Chips when", --gain will become exponented by ^0.4 (around Exponentia)
-                    "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
-                    --"{C:inactive,s:0.8}If {C:unik_maya_color,s:0.8}Maya{C:inactive,s:0.8} and {C:unik_yokana_color,s:0.8}Yokana{C:inactive,s:0.8} are present, increase this by {X:chips,C:white,s:0.8}#3#X{}",
-                    "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    {
+                        "This Joker gains {X:chips,C:white}X#2#{} Chips when",
+                        "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
+                        "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    },
                 },
             },
             j_unik_ghost_trap = {
@@ -1541,13 +1568,17 @@ return {
             j_unik_lily_sprunki = {
                 name="Lily",
                 text={
-                    "{C:red,E:2}Destroy{} selected cards",
-                    "{C:attention}anytime{} {C:inactive}(once until next cashout)",
-                    "{C:inactive}(#1#)",
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI{}",
+                    {
+                        "{C:red,E:2}Destroy{} selected cards",
+                        "{C:attention}anytime{} {C:inactive}(once until next cashout)",
+                        "{C:inactive}(#1#)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI{}",
+                    },
                 },    
                 unlock = {
                     "Have {C:attention}100{} cards in your deck",
@@ -1673,17 +1704,19 @@ return {
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
-                    "Gains {X:dark_edition,C:white}^#2#{} Mult when",
-                    "a {C:attention}Joker{} is {C:red}destroyed",
-                    "Copies itself with {C:money}$0{}",
-                    "sell value if {C:red}destroyed",
-                    "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
-                    "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#3#%",
-                    "{C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Mult)",
-                    "{C:red,s:0.7}(Cannot copy if destroyed by Disposable)",        
-                    "{C:unik_caption,s:0.7,E:1}All I wanted was for everyone to be happy...{}", --TODO: adjustable quotes, for 
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
+                    {
+                        "Gains {X:dark_edition,C:white}^#2#{} Mult when a {C:attention}Joker{} is {C:red}destroyed",
+                        "Copies itself with {C:money}$0{} sell value if {C:red}destroyed",
+                        "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
+                        "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#3#% {C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Mult)",
+                        "{C:red,s:0.7}(Cannot copy if destroyed by Disposable)",  
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#5#{}", --TODO: adjustable quotes, for 
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
+                    }
+
                 },
                 unlock = {
                     "Destroy an {C:unik_ancient}Ancient{} Joker",
@@ -1718,13 +1751,17 @@ return {
             j_unik_extra_credit_alice = { 
                 name = 'Alice',
                 text = {
-                    "{C:white,X:dark_edition}^#1#{} Mult if played",
-                    "hand contains a scoring",
-                    "{C:attention}Odd{} and {C:attention}Even{} card",
-                    "{C:unik_caption,s:0.7,E:1}Teehee! It's time I join in on the fun!{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:dark_edition,s:0.7,E:2}Character by : KittyKnight{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Balatro - Extra Credit{}",
+                    {
+                        "{C:white,X:dark_edition}^#1#{} Mult if played",
+                        "hand contains a scoring",
+                        "{C:attention}Odd{} and {C:attention}Even{} card",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}Teehee! It's time I join in on the fun!{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:dark_edition,s:0.7,E:2}Character by : KittyKnight{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Balatro - Extra Credit{}",
+                    },
                 }
             }, 
             j_ExtraCredit_averagealice = { --overriding loc to include a 0.6% chance to get Alice on purchase
@@ -1793,13 +1830,18 @@ return {
             j_unik_pibby={
                 name = "Pibby",
                 text = {
-                    "This Joker gains {X:mult,C:white}Xmult{}",
-                    "equal to the {C:attention}sum of{}",
-                    "scoring ranks divided by {C:attention}#1#{},",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Learning with Pibby{}",
+                    {
+                        "This Joker gains {X:mult,C:white}Xmult{}",
+                        "equal to the {C:attention}sum of{}",
+                        "scoring ranks divided by {C:attention}#1#{},",
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Learning with Pibby{}",
+                    },
+
                 }
             },
             j_unik_lone_despot={
@@ -2035,14 +2077,18 @@ return {
             j_unik_poppy = {
                 name = "Poppy", --Retrigger rightmost card for every hand or discard used
                 text = {
-                    "Retrigger {C:attention}rightmost",
-                    "scored card for",
-                    "every {C:blue}Hand{} or {C:attention}2{} {C:red}discards{}",
-                    "lost in round", --that means the needle and the water will give an instant (hands - 1 or discards) triggers.
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive} retriggers)", --#max 1000 retriggers.
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Dandy's World{}",
+                    {
+                        "Retrigger {C:attention}rightmost",
+                        "scored card for",
+                        "every {C:blue}Hand{} or {C:attention}2{} {C:red}discards{}",
+                        "lost in round", --that means the needle and the water will give an instant (hands - 1 or discards) triggers.
+                        "{C:inactive}(Currently {C:attention}#1#{C:inactive} retriggers)", --#max 1000 retriggers.
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Dandy's World{}",
+                    },
                 },
                 unlock = {
                     "Retrigger {C:attention}1{} card {C:attention}8{} times"
@@ -2051,14 +2097,20 @@ return {
             j_unik_kouign_amann_cookie = { --Retrigger all light cards and reduce their requirements by 10% per trigger. (RARE)
                 name = "Kouign Amann Cookie",
                 text = {
-                    "Scored {C:attention}Light Suits",
-                    "give {X:mult,C:white}X#1#{} Mult",
-                    "Increases by {X:mult,C:white}X#2#{} Mult",
-                    "for each {C:attention}unique {C:attention}Light Suit",
-                    "in scoring hand",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
+                    {
+                        "Scored {C:attention}Light Suits",
+                        "give {X:mult,C:white}X#1#{} Mult",
+                        "Increases by {X:mult,C:white}X#2#{} Mult",
+                        "for each {C:attention}unique {C:attention}Light Suit",
+                        "in scoring hand",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
+                    },
+
+
                 },
                 unlock = {
                     "Play a {C:attention}Flush Five",
@@ -2120,15 +2172,19 @@ return {
             j_unik_robert={
                 name = "Robert",
                 text = {
-                    "{C:green}#1# in #2#{} chance card is",
-                    "drawn {C:red}face-down{}",
-                    "{C:red}Self destructs{} when a hand", 
-                    "containing {C:attention}#3#{} or more scoring",
-                    "{C:red}face-down{} cards is played",
-                    "or {C:unik_wheel_color}The Wheel{} is triggered",
-                    "{C:inactive,s:0.7,E:2}It now targets you, for no reason.{}",   
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Rubber{}",   
+                    {
+                        "{C:green}#1# in #2#{} chance card is",
+                        "drawn {C:red}face-down{}",
+                        "{C:red}Self destructs{} when a hand", 
+                        "containing {C:attention}#3#{} or more scoring",
+                        "{C:red}face-down{} cards is played",
+                        "or {C:unik_wheel_color}The Wheel{} is triggered",
+                    },
+                    {
+                        "{C:inactive,s:0.7,E:2}It now targets you, for no reason.{}",   
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Rubber{}",   
+                    },
                 }
             },
             j_unik_abandoned_house={
@@ -2191,15 +2247,19 @@ return {
             j_unik_megatron = {
                 name = "Megatron",
                 text= {
-                    "{X:mult,C:white}X#1#{} Mult whenever",
-                    "a {C:green}probability {C:attention}fails",
-                    "{C:red}Destroy{} a random Joker",
-                    "or {X:unik_void_color,E:2,C:red}^#2#{} Blind Size if no",
-                    "destroyable Jokers owned when",
-                    "a {C:green}probability {C:attention}succeeds",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
+                    {
+                        "{X:mult,C:white}X#1#{} Mult whenever",
+                        "a {C:green}probability {C:attention}fails",
+                        "{C:red}Destroy{} a random Joker",
+                        "or {X:unik_void_color,E:2,C:red}^#2#{} Blind Size if no",
+                        "destroyable Jokers owned when",
+                        "a {C:green}probability {C:attention}succeeds",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
+                    },
                 }
             },
 
@@ -2224,23 +2284,35 @@ return {
             j_unik_niko = {
                 name = "Niko",
                 text = {
-                    "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                    "{s:0.8}suit changes at end of round",
-                    "{C:inactive,s:0.6}(Selects different Light Suit from deck if possible)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
+                    {
+                        "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
+                        "{s:0.8}suit changes at end of round",
+                        "{C:inactive,s:0.6}(Selects different Light Suit from deck if possible)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
+                    },
+
+
                 }
             },
+            --unlocking those two involves winning a round with Ancient Joker while on checkered deck (cause it is incompetent and selects suits you dont have. these at least have the dignity to respect your deck)
             j_unik_sundae_cookie = {
                 name = "Sundae Cookie",
                 text = {
-                    "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                    "{s:0.8}suit changes at end of round",
-                    "{C:inactive,s:0.6}(Selects different Dark Suit from deck if possible)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
+                    {
+                        "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
+                        "{s:0.8}suit changes at end of round",
+                        "{C:inactive,s:0.6}(Selects different Dark Suit from deck if possible)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
+                    },
+
                 }
             },            
             j_unik_night_skyline = {
@@ -2409,10 +2481,9 @@ return {
             j_unik_preservatives = {
                 name = "Preservatives",
                 text = {
-                    "Replace all {C:red}Perishable",
-                    "stickers with",
-                    "{C:purple}Eternal{} Stickers",
-                    "{C:inactive,s:0.8}(Removes debuffs if present)"
+                    "Remove all {C:red}Perishable",
+                    "stickers from the",
+                    "next {C:attention}#1#{} Jokers",
                 }
             },  
             j_unik_stamp_spam = {
@@ -2429,30 +2500,41 @@ return {
             j_unik_bun_bun = {
                 name = "Bun Bun",
                 text = {
-                    "Gives {X:mult,C:white}Xmult{} equal to", --X1 + 11 x 0.05
-                    "{C:attention}(1+Scoring Card's rank x #1#)",
-                    "when a card is scored",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Learning with Pibby{}",
+                    {
+                        "Gives {X:mult,C:white}Xmult{} equal to", --X1 + 11 x 0.05
+                        "{C:attention}(1+Scoring Card's rank x #1#)",
+                        "when a card is scored",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Learning with Pibby{}",
+                    },
+
+
                 }
             },
             j_unik_reggie = {
                 name = "Reggie",
                 text = {
-                    "{C:unik_copper}Rescore{} all scored",
-                    "{C:unik_unik_color}Pink Cards{} {C:attention}#1#{} time",
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:dark_edition,s:0.7,E:2}Character by : Whygena{}",
+                    {
+                        "{C:unik_copper}Rescore{} all scored",
+                        "{C:unik_unik_color}Pink Cards{} {C:attention}#1#{} time",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:dark_edition,s:0.7,E:2}Character by : Whygena{}",
+                    },
+
+
                 }
             },
             j_unik_tape_7 = {
-                name = "Tape 7",
+                name = "Numerical Reinforcement",
                 text = {
                     "Scoring {C:unik_unik_color}Pink Cards{} are",
-                    "no longer {C:red}destroyed{} in",
-                    "{C:attention}Spectrums{} and {C:attention}Straights",
+                    "no longer {C:red}destroyed{}",
                 }
             },
 
@@ -2507,7 +2589,7 @@ return {
                     "{C:spectral}Black Hole{} and {C:red,E:2}Self Destruct",
                 },
             },
-            --That's 18 non cursed jokers for the next update!!
+
 
             j_unik_bun_bun_corrupted = {
                 name = "B?N 3UN?",
@@ -2522,12 +2604,17 @@ return {
             j_unik_blossom = {
                 name = "Blossom",
                 text = {
-                    "{C:unik_copper}Rescore{} the {C:attention}first{} card {C:attention}#1#{} time#<s>1#",
-                    "and the {C:attention}last{} scoring card {C:attention}#2#{} time#<s>2#",
-                    "{C:inactive,s:0.9}(Cannot stack if 1 card is played)",
-                    "{C:unik_caption,s:0.7,E:1}#3#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Powerpuff Girls{}",
+                    {
+                        "{C:unik_copper}Rescore{} the {C:attention}first{} card {C:attention}#1#{} time#<s>1#",
+                        "and the {C:attention}last{} scoring card {C:attention}#2#{} time#<s>2#",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Powerpuff Girls{}",
+                    },
+
+
                 }
             },
             j_unik_energy_compressor = {
@@ -2659,6 +2746,22 @@ return {
                 }
             },
 
+            j_unik_sacrifice = {
+                name = "Sacrifice",
+                text = {
+                    "{C:red,E:2}Banish{} all {C:attention}sold{} Jokers",
+                    "{C:inactive}(Sacrifice excluded)"
+                }
+            },
+            --familiar bow: gains X0.5 chips if hand contains a four of a kind 
+            j_unik_familiar_bow = {
+                name = "Familiar Bow",
+                text = {
+                    
+                }
+            },
+
+
 
 
             --Cult card crossmod
@@ -2700,12 +2803,18 @@ return {
             j_unik_eternal_egg={
                 name = "Eternal Egg",
                 text = {
-                    "{C:attention}Eggcellent Buffoon Packs{}",
-                    "may spawn in the shop",
-                    "{C:purple}Eternal {C:attention}Eggs{} give {X:dark_edition,C:white}^#1#{} Mult",
-                    "{C:unik_caption,s:0.7,E:1}#2#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Balatro{}",
+                    {
+                        "{C:attention}Eggcellent Buffoon Packs{}",
+                        "may spawn in the shop",
+                        "{C:purple}Eternal {C:attention}Eggs{} give {X:dark_edition,C:white}^#1#{} Mult",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Balatro{}",
+                    },
+
+
                 }
             },
             j_unik_indigo_icbm={
@@ -2763,14 +2872,20 @@ return {
             j_unik_legendary_crown={
                 name = "Korruptionkruunu",
                 text = {
-                    "Gains {X:dark_edition,C:white}^#1#{} Mult", --gains ^1 Mult.
-                    "if hand is {C:attention}at least{}",
-                    "your {C:attention}best hand{} this run",
-                    "{C:inactive}({C:attention}#2#{C:inactive})",
-                    "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Mult)",
-                    "{C:unik_caption,s:0.7,E:1}#4#{}",
-                    "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                    "{C:unik_ancient,s:0.7,E:2}Origin : Celeste{}",
+                    {
+                        "Gains {X:dark_edition,C:white}^#1#{} Mult", --gains ^1 Mult.
+                        "if hand is {C:attention}at least{}",
+                        "your {C:attention}best hand{} this run",
+                        "{C:inactive}({C:attention}#2#{C:inactive})",
+                        "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Mult)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#4#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Celeste{}",
+                    },
+
+
                 }
             },
 
@@ -3302,6 +3417,23 @@ return {
 					"{C:attention}each{} round",
 				},
             },
+            unik_expiring = {
+                name = "Expiring",
+                text = {
+                    "{C:red}Destroys{} itself",
+                    "after {C:attention}#1#{} rounds",
+                    "{C:inactive}({C:attention}#2#{C:inactive} remaining)",
+                    "{C:red}Unremovable{}",
+                }
+            },
+            unik_expiring_consumable = {
+                name = "Expiring",
+                text = {
+					"{C:red}Destroys{} itself after",
+					"{C:attention}each{} round",
+                    "{C:red}Unremovable{}",
+                },
+            },
             unik_niko = {
 				name = "Niko",
 				text = {
@@ -3584,13 +3716,13 @@ return {
             unik_shielded ={
                 name = "Shielded",
                 text = {
-                    "{C:attention}Cannot{} be debuffed, flipped,",
+                    "{C:attention}Cannot{} be debuffed,",
                     "forcibly selected or gain",
-                    "detrimental editions",
+                    "{C:unik_shitty_edition}detrimental{} editions",
                     "{C:inactive,s:0.8}(Not retroactive)",
                 }
             },
-            unik_banished = {
+            unik_banishing = {
                 name = "Banishing",
                 text = {
                     "{C:red}Banished{} items will",
@@ -3745,6 +3877,15 @@ return {
                     "{C:attention}Consumable{}, {C:attention}Shop item",
                     "or {C:attention}Booster item",
                     "{C:inactive}(Bypasses Eternal)",
+                }
+            },
+            c_unik_purify = {
+                name = "Purify",
+                text = {
+                    "Remove all {C:red}detrimental {C:attention}Stickers",
+                    "and {C:unik_shitty_edition}Editions{} from",
+                    "{C:attention}#1#{} selected Joker#<s>1#",
+                    "{C:inactive}(Eternal excluded)",
                 }
             }
         },
@@ -4232,6 +4373,22 @@ return {
                     "Allows control of the",
 					"shop's {C:spectral}Spectral Rate{}",
 					"{C:inactive}(Check {C:attention}Run Info{C:inactive})",
+				},
+			},
+            v_unik_summit_merchant = {
+				name = "Summit Merchant",
+				text = {
+					"{C:unik_summit}Summit{} cards",
+					"may appear",
+					"in the shop",
+				},
+			},
+            v_unik_summit_tycoon = {
+				name = "Summit Tycoon",
+				text = {
+					"{C:unik_summit}Summit{} cards appear",
+					"{C:attention}X#1#{} more frequently",
+					"in the shop",
 				},
 			},
 

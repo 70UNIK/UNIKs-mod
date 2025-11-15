@@ -488,6 +488,7 @@ NFS.load(mod_path .. "data/spectrals/prism.lua")()
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 NFS.load(mod_path .. "data/spectrals/turing.lua")() 
 NFS.load(mod_path .. "data/spectrals/defend.lua")() 
+NFS.load(mod_path .. "data/spectrals/purify.lua")() 
 NFS.load(mod_path .. "data/spectrals/expel.lua")() 
 --
 --hidden summits
@@ -541,9 +542,12 @@ end
 --Vouchers
 NFS.load(mod_path .. "data/vouchers/spectral_merchant.lua")() 
 NFS.load(mod_path .. "data/vouchers/spectral_tycoon.lua")() 
+-- NFS.load(mod_path .. "data/vouchers/summit_merchant.lua")() //turns out this becomes broken. likely have them only spawn in a dedicated deck.
+-- NFS.load(mod_path .. "data/vouchers/summit_tycoon.lua")() 
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
 end
+
 
 --MF color cards
 SMODS.Atlas({ 
@@ -684,15 +688,15 @@ end
 --Common
 NFS.load(mod_path .. "data/jokers/unik/common/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/gt710.lua")()
-NFS.load(mod_path .. "data/jokers/unik/common/golden_glove.lua")() --NoImage
-NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")() --NoImage
+NFS.load(mod_path .. "data/jokers/unik/common/golden_glove.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/1_5_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/common/noon.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
-NFS.load(mod_path .. "data/jokers/unik/common/malicious_face.lua")()
+
 NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
@@ -724,7 +728,9 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/stamp_spam.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/perk_lottery.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/malicious_face.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/antivirus.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/energy_compressor.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
@@ -732,6 +738,8 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
 
 
 --Rare
+--: create a summit card if hand contains a five of a kind
+
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
@@ -771,7 +779,6 @@ NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")()
 --Ancient
 NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/sundae_cookie.lua")()
---WORLD MACHINE
 NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/white_lily_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/moonlight_cookie.lua")()
@@ -894,7 +901,8 @@ if next(SMODS.find_mod("Bunco")) then
 end
 
 
---Challenges gone until I fix them to work with new API NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+--Challenges gone until I fix them to work with new API 
+NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()

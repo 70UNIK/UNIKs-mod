@@ -39,7 +39,7 @@ SMODS.Joker {
     demicoloncompat = true,
     fusable = true,
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.02} },
-    pools = {["unik_cube"] = true },
+    pools = {["unik_cube"] = true,["character"] = true },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'alone'
 		if next(find_joker('j_unik_jsab_yokana')) and next(find_joker('j_unik_jsab_maya')) then

@@ -57,6 +57,15 @@ SMODS.Joker {
 		end
 		return false
 	end,
+	loc_vars = function(self, info_queue, center)
+		-- return { vars = {
+		-- 	 center.ability.extra.cash_loss
+		-- } }
+        if not SMODS.is_eternal(center,self) then
+            info_queue[#info_queue + 1] = { set = "Other", key = "eternal" }
+        end
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
+	end,
 }
 
 local sellingHook = Card.sell_card

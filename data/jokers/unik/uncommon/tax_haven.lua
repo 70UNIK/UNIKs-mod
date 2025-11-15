@@ -6,10 +6,9 @@ SMODS.Joker {
     rarity = 2,
 	pos = { x = 0, y = 2 },
     cost = 5,
-	blueprint_compat = true,
+	blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = true,
-	demicoloncompat = true,
     config = { extra = {cash_loss = 3} },
     in_pool = function(self)
         for i,v in pairs(G.jokers.cards) do 
@@ -23,9 +22,12 @@ SMODS.Joker {
 		return false
 	end,
 	loc_vars = function(self, info_queue, center)
-		return { vars = {
-			 center.ability.extra.cash_loss
-		} }
+		-- return { vars = {
+		-- 	 center.ability.extra.cash_loss
+		-- } }
+        if not center.ability.rental then
+            info_queue[#info_queue + 1] = { set = "Other", key = "rental" }
+        end
 	end,
     update = function(self,card,dt)
         if card.added_to_deck and G.jokers and G.playing_cards and G.consumeables then

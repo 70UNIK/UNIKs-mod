@@ -22,7 +22,7 @@ SMODS.Joker {
         return { vars = { card.ability.extra.total_rounds, card.ability.extra.anti_rounds } }
     end,
     calculate = function(self, card, context)
-        if context.selling_self and (card.ability.extra.anti_rounds >= card.ability.extra.total_rounds) and not context.blueprint then
+        if context.selling_self and (card.ability.extra.anti_rounds >= card.ability.extra.total_rounds) and not context.blueprint or context.force_trigger then
             local jokers = {}
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i] ~= card and (not G.jokers.cards[i].edition or (G.jokers.cards[i].edition and not G.jokers.cards[i].edition.negative))then

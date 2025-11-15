@@ -5,7 +5,7 @@ SMODS.Consumable {
     atlas = 'placeholders',
     pos = { x = 2, y = 2 },
     cost = 4,
-    config = {jokers_highlighted = 1, cards_highlighted = 2 },
+    config = {jokers_highlighted = 2, cards_highlighted = 3 },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_shielded" }
         return { vars = { card.ability.cards_highlighted,card.ability.jokers_highlighted } }

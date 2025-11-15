@@ -2,6 +2,7 @@
 
 local updateHook = Game.update
 function Game:update(dt)
+
     G.GAME.unik_excommunication = false
     --Artisan builds
     if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss and (

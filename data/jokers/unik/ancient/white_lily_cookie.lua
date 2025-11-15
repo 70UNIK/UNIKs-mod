@@ -1,8 +1,14 @@
---in light of cookie run's new white lily update and around freedom and solidarity...
---something to do with scaling ^Mult based on the number of individual jokers triggered per hand.
+local wl_quotes = {
+	normal = {
+		'k_unik_white_lily_normal1',
+        'k_unik_white_lily_normal2',
+        'k_unik_white_lily_normal3',
+        'k_unik_white_lily_normal4',
+        'k_unik_white_lily_normal5',
+        'k_unik_white_lily_normal6',
+	},
+}
 
-
---moonlights ability fits her enough due to planets being in space
 
 local function White_lily_copy(card)
     local _card = copy_card(card, nil, nil, nil, nil)
@@ -47,8 +53,10 @@ SMODS.Joker {
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
     config = { extra = { Emult = 0.0, Emult_mod = 0.1,cost = 0}, immutable = {base_emult = 1.0,sold = false,destroyed_joker_buffer = 0,hyperbolic_scale_limit = 1.5,hyperbolic_factor = 17} },
 	loc_vars = function(self, info_queue, center)
+        local quoteset = 'normal'
 		return { 
-            vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,tostring(center.ability.extra.Emult_mod),center.ability.immutable.hyperbolic_factor,center.ability.immutable.hyperbolic_scale_limit} }
+            vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,tostring(center.ability.extra.Emult_mod),center.ability.immutable.hyperbolic_factor,center.ability.immutable.hyperbolic_scale_limit,
+        localize(wl_quotes[quoteset][math.random(#wl_quotes[quoteset])] .. "")} }
 	end,
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then

@@ -35,6 +35,7 @@ SMODS.Joker {
 	eternal_compat = true,
     config = {extra = {left_rescore = 2, right_rescore = 1}, immutable = {max_rescores = 10}},
     pronouns = "she_her",
+    pools = {["character"] = true },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
@@ -84,3 +85,18 @@ SMODS.Joker {
         end
     end
 }
+
+--character cards
+--spawns character jokers/almanac styled ones
+--soul spawns at 0.008% rate
+--awakening very rarely spawns here.
+SMODS.ObjectType({
+	key = "character",
+	default = "c_soul",
+	cards = {
+	},
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+
+	end,
+})

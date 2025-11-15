@@ -127,13 +127,13 @@ function Card:calculate_disposable()
             if self.ability.unik_niko then
                 card_eval_status_text(self, "jokers", nil, nil, nil, {
                     message = localize("k_unik_you_killed_niko"),
-                    delay = 0.1 ,
+                    delay = 0.5 ,
                     colour = G.C.RED,
                })               
             else
                 card_eval_status_text(self, "jokers", nil, nil, nil, {
                     message = localize("k_unik_disposed"),
-                    delay = 0.1 ,
+                    delay = 0.5 ,
                     colour = G.C.RED,
                })
             end
