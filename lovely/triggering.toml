@@ -31,7 +31,11 @@ if self.highlighted == true and self.ability and self.ability.set and self.abili
                         end
                     end
                     if G.hand.highlighted then
+                        if next(SMODS.find_mod("Bunco")) then
+                            play_sound('bunc_gunshot')
+                        end
                         card_eval_status_text(self, "extra", nil, nil, nil, { message = localize("k_unik_triggered") })
+                        
                         G.FUNCS.play_cards_from_highlighted()
                     end
                 end

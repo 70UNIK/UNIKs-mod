@@ -22,12 +22,13 @@ SMODS.Joker {
 		return false
 	end,
 	loc_vars = function(self, info_queue, center)
-		-- return { vars = {
-		-- 	 center.ability.extra.cash_loss
-		-- } }
+
         if not center.ability.rental then
-            info_queue[#info_queue + 1] = { set = "Other", key = "rental" }
+            info_queue[#info_queue + 1] = { set = "Other", key = "rental" ,vars = { 3,3 }}
         end
+        return { vars = {
+			 center.ability.extra.cash_loss
+		} }
 	end,
     update = function(self,card,dt)
         if card.added_to_deck and G.jokers and G.playing_cards and G.consumeables then

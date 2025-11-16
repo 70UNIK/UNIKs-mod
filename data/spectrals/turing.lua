@@ -1,9 +1,9 @@
 --adda copper seal to 1 card
 SMODS.Consumable {
-    key = 'unik_turing',
+    key = 'unik_lightning',
     set = 'Spectral',
-    atlas = 'placeholders',
-    pos = { x = 2, y = 2 },
+	atlas = "unik_spectrals",
+    pos = { x = 3, y = 1 },
     cost = 4,
     config = {mod_conv = "unik_copper_seal", max_highlighted = 1 },
     loc_vars = function(self, info_queue, card)

@@ -9,7 +9,7 @@ SMODS.Joker{ --Yellow Card
         },
         immutable = {
 			slots = 0,
-			max_slots = 4,
+			max_slots = 3,
 		},
     },
     pos = {

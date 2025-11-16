@@ -29,7 +29,7 @@ SMODS.Enhancement {
                 colour = G.C.DARK_EDITION,
 			}
 		end
-        if context.destroy_card and context.destroy_card == card and context.cardarea == G.play then
+        if context.destroy_card and context.destroy_card == card and context.cardarea == G.play and not next(find_joker("j_unik_numerical_reinforcement")) then
             for i,v in pairs(G.play.cards) do
                 if v:get_id() ~= 7 then
                     return { remove = true }

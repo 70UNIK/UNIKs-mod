@@ -2388,62 +2388,64 @@ return {
              j_unik_base_camp = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}triple{} the bonuses of",
+                    "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round)",
+                    "{C:inactive,s:0.8}(Money is X1)",
                 }
             },
             j_unik_base_camp1 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}triple{} the bonuses of",
+                    "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round)",
+                    "{C:inactive,s:0.8}(Money is X1)",
                 }
             },
             j_unik_base_camp2 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}triple{} the bonuses of",
+                    "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
                     "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult)",
-                    "{C:inactive,s:0.8}(Exponentials are X1)",
+                    "{C:inactive,s:0.8}(Exponentials and Money are X1)",
                 }
             },
             j_unik_base_camp3 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}triple{} the bonuses of",
+                    "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
                     "{C:inactive}{X:dark_edition,C:white}^#6#{C:inactive} chips)",
-                    "{C:inactive,s:0.8}(Exponentials are X1)",
+                    "{C:inactive,s:0.8}(Exponentials and Money are X1)",
                 }
             },  
             j_unik_base_camp4 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}triple{} the bonuses of",
+                    "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
                     "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult, {X:dark_edition,C:white}^#6#{C:inactive} chips)",
-                    "{C:inactive,s:0.8}(Exponentials are X1)",
+                    "{C:inactive,s:0.8}(Exponentials and Money are X1)",
                 }
             },
             --13 (12 usable)
@@ -2530,7 +2532,7 @@ return {
 
                 }
             },
-            j_unik_tape_7 = {
+            j_unik_numerical_reinforcement = {
                 name = "Numerical Reinforcement",
                 text = {
                     "Scoring {C:unik_unik_color}Pink Cards{} are",
@@ -2753,11 +2755,13 @@ return {
                     "{C:inactive}(Sacrifice excluded)"
                 }
             },
-            --familiar bow: gains X0.5 chips if hand contains a four of a kind 
-            j_unik_familiar_bow = {
-                name = "Familiar Bow",
+            --twin peaks: create 2 summit cards when a spectral card is used
+            j_unik_twin_peaks = {
+                name = "Twin Peaks",
                 text = {
-                    
+                    "Create {C:attention}#1#{} {C:unik_summit}Summit{} cards",
+                    "when a {C:spectral}Spectral{} card is used",
+                    "{C:inactive}(Must have room)"
                 }
             },
 
@@ -3854,8 +3858,8 @@ return {
                     "{C:spectral,s:0.8}Ebott {C:inactive,s:0.8}is already held"
                 }
             },
-            c_unik_turing = {
-                name = "Turing",
+            c_unik_lightning = {
+                name = "Lightning",
                 text = {
                     "Add a {C:unik_copper}Copper Seal{}",
                     "to {C:attention}#1#{} selected",
@@ -4247,7 +4251,7 @@ return {
             c_unik_mount_doom = {
                 name = "Doom",
                 text = {
-                    --All cards lose perma bonuses and permanently lose -4 Mult, -30 Chips and X0.5 Mult
+                    --All cards lose perma bonuses and permanently lose -4 Mult, -30 Chips,  X0.5 Mult and X0.5 Chips
                 }
             },
             c_unik_parasite = {

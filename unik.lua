@@ -696,6 +696,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/tape_seven.lua")()
 
 NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
 
@@ -730,12 +731,12 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/perk_lottery.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/malicious_face.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/antivirus.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/energy_compressor.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/twin_peaks.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
-NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")() 
-
+NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  
 
 --Rare
 --: create a summit card if hand contains a five of a kind

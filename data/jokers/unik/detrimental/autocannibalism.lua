@@ -72,7 +72,7 @@ SMODS.Joker {
                 elseif v.config.center.key == "j_cry_starfruit" then
                     v.ability.emult = 1
                 elseif v.config.center.key == 'j_unik_brownie' then
-                    v.ability.x_mult = 1
+                    v.ability.extra.x_mult = 1
                 end
             end
         end
@@ -114,7 +114,7 @@ SMODS.Joker {
                 elseif v.config.center.key == "j_cry_starfruit" then
                     v.ability.emult = 1
                 elseif v.config.center.key == 'j_unik_brownie' then
-                    v.ability.x_mult = 1
+                    v.ability.extra.x_mult = 1
                 end
             end
         end

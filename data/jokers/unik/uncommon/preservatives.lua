@@ -4,7 +4,7 @@ SMODS.Joker {
 	key = 'unik_preservatives',
     atlas = 'placeholders',
     rarity = 2,
-	pos = { x = 2, y = 0 },
+	pos = { x = 1, y = 0 },
     cost = 5,
 	blueprint_compat = true,
     perishable_compat = true,
@@ -31,10 +31,17 @@ SMODS.Joker {
              for i,v in pairs(G.jokers.cards) do
                 if v.ability and v.ability.perishable then
                     v.ability.perishable = nil
-                    v.ability.extra.jokers = v.ability.extra.jokers - 1
-                    if (v.ability.extra.jokers <= 0) then
+                    card.ability.extra.jokers = card.ability.extra.jokers - 1
+                    if (card.ability.extra.jokers <= 0) then
                         selfDestruction(card,'k_eaten_ex',G.C.PERISHABLE)
+                    else
+                         card_eval_status_text(card, 'extra', nil, nil, nil, { 
+                        message = "" .. card.ability.extra.jokers,
+                            colour = G.C.PERISHABLE,
+                            card = card
+                        })
                     end
+                    
                 end
             end
             -- for i,v in pairs(G.playing_cards) do

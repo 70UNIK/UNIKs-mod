@@ -1,10 +1,5 @@
 --sell to create an Absolute Rental Niko Exotic Joker
 SMODS.Joker {
-    dependencies = {
-		items = {
-			"set_cry_exotic",
-		},
-    },
 	-- How the code refers to the joker.
 	key = 'unik_a_taste_of_power',
     atlas = 'unik_rare',

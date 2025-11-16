@@ -36,10 +36,10 @@ function UNIK.add_bonus(type,value)
         }
     end
     if G.GAME.unik_base_camp_bonus[type] then
-        if type == 'e_mult' or type == 'e_chips' then
+        if type == 'e_mult' or type == 'e_chips' or type == 'dollars' then
             G.GAME.unik_base_camp_bonus[type] = G.GAME.unik_base_camp_bonus[type] + value
         else
-            G.GAME.unik_base_camp_bonus[type] = G.GAME.unik_base_camp_bonus[type] + value * 3
+            G.GAME.unik_base_camp_bonus[type] = G.GAME.unik_base_camp_bonus[type] + value * 2
         end
         
         return true

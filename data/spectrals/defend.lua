@@ -2,8 +2,8 @@
 SMODS.Consumable {
     key = 'unik_defend',
     set = 'Spectral',
-    atlas = 'placeholders',
-    pos = { x = 2, y = 2 },
+	atlas = "unik_spectrals",
+    pos = { x = 2, y = 1 },
     cost = 4,
     config = {jokers_highlighted = 2, cards_highlighted = 3 },
     loc_vars = function(self, info_queue, card)

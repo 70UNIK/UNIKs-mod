@@ -4,7 +4,7 @@ SMODS.Tag{
     pos = { x = 1, y = 4 },
     config = {type = "store_joker_modify"},
     loc_vars = function(self, info_queue)
-        -- info_queue[#info_queue + 1] = { set = "Other", key = "unik_limited_edition" }
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_limited_edition",vars = { 5, 5 } }
 	end,
 	in_pool = function()
 		return false
