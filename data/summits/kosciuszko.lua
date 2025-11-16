@@ -2,7 +2,7 @@ SMODS.Consumable{
     set = 'unik_summit', 
 	atlas = 'unik_summits',
     cost = 3,
-	pos = {x = 3, y = 0},
+	pos = {x = 0, y = 3},
 	key = 'unik_kosciuszko',
     can_use = function(self, card)
         if G.hand and (#G.hand.highlighted <= card.ability.extra.max_highlighted) and G.hand.highlighted[1] then

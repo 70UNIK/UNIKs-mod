@@ -2533,7 +2533,7 @@ return {
                 }
             },
             j_unik_numerical_reinforcement = {
-                name = "Numerical Reinforcement",
+                name = "Taped 7",
                 text = {
                     "Scoring {C:unik_unik_color}Pink Cards{} are",
                     "no longer {C:red}destroyed{}",
