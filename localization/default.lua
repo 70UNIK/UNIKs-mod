@@ -2335,7 +2335,7 @@ return {
             j_unik_brownie = {
                 name = "Brownie",
                 text = {
-                    "Scored  {C:attention}cards{} each give",
+                    "Scored {C:attention}cards{} each give",
                     "{X:mult,C:white}X#1#{} Mult",
                     "Loses {X:mult,C:white}X#2#{} Mult",
                     "when triggered",
@@ -2344,7 +2344,7 @@ return {
             j_unik_brownie_depleted = {
                 name = "Brownie",
                 text = {
-                    "Scored  {C:attention}cards{} each give",
+                    "Scored {C:attention}cards{} each give",
                     "{X:mult,C:white}X#1#{} Mult",
                     "Loses {X:mult,C:white}X#2#{} Mult",
                     "when triggered",

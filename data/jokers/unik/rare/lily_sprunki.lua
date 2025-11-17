@@ -30,6 +30,7 @@ SMODS.Joker {
     cost = 8,
     config = {extra = {active = true,quoteset = 'normal',limit = 2}},
     pronouns = "she_her",
+    bypass_group_selection = true, --for polyminos stuff
     loc_vars = function(self, info_queue, center)
         local quote = "k_active_ex"
         if center.ability.extra.active then

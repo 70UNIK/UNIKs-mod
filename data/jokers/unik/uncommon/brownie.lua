@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_brownie',
-    atlas = 'placeholders',
-	pos = { x = 1, y = 0 },
+    atlas = 'unik_uncommon',
+	pos = { x = 3, y = 3 },
     rarity = 2,
     cost = 7,
     blueprint_compat = true,

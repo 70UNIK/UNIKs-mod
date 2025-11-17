@@ -2,9 +2,9 @@
 SMODS.Consumable{
     set = "Tarot",
    	key = "unik_excommunicated",
-	pos = { x = 1, y = 2 },
+	pos = { x = 0, y = 2 },
 	config = {  max_highlighted = 2 },
-	atlas = "placeholders",
+	atlas = "unik_tarots",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
 

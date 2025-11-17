@@ -135,9 +135,15 @@ function CardArea:can_highlight(card)
     if card and self == G.hand and G.GAME and (G.GAME.THE_8_BYPASS) then
         return true
     end
-    --normal selection if a consumable is highlighted
+    --normal selection if a consumable (or lily) is highlighted
     if (G.consumeables and G.consumeables.highlighted) or (G.pack_cards and G.pack_cards.highlighted) then
-        if (G.consumeables and #G.consumeables.highlighted > 0) or (G.pack_cards and #G.pack_cards.highlighted > 0) then
+        local lilyHighlighted = false
+        for i,v in pairs(G.jokers.highlighted) do
+            if v.config.center.key == 'j_unik_lily_sprunki' or v.config.center.bypass_group_selection then
+                lilyHighlighted = true
+            end
+        end
+        if (G.consumeables and #G.consumeables.highlighted > 0) or (G.pack_cards and #G.pack_cards.highlighted > 0) or (G.pack_cards and #G.pack_cards.highlighted > 0) or lilyHighlighted then
             if G.CONTROLLER.HID.controller then 
                 if  self.config.type == 'hand'
                 then

@@ -3,8 +3,8 @@
 SMODS.Consumable{
     set = "Tarot",
    	key = "unik_divorce",
-	pos = { x = 1, y = 2 },
-	atlas = "placeholders",
+	pos = { x = 2, y = 1 },
+	atlas = "unik_tarots",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
 	end,
