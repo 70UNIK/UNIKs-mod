@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_stamp_spam',
-    atlas = 'placeholders',
-	pos = { x = 1, y = 0 },
+    atlas = 'unik_uncommon',
+	pos = { x = 4, y = 3 },
     rarity = 2,
     cost = 6,
     blueprint_compat = false,

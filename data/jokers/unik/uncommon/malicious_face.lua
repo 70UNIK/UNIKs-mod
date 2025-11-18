@@ -1,10 +1,10 @@
 --X2 Blind size, defeating this will give a negative black hole and self destruct.
 SMODS.Joker {
     key = 'unik_malicious_face',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
     cost = 4,
-    pos = { x = 1, y = 0 },
+    pos = { x = 5, y = 3 },
     immutable = true,
     eternal_compat = false,
 	demicoloncompat = true,
