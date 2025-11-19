@@ -62,7 +62,6 @@ return {
                 name = "Endless Deck",
                 text = {
                     "{C:attention}+#1#{} Joker slot#<s>1#",
-                    "Start on Ante {C:attention}0",
                     "Win Ante is {C:red}#2#{}",
                     "{C:attention}Final Boss Blinds{} appear",
                     "{C:red}#3#X{} as often",
@@ -2612,8 +2611,8 @@ return {
                 name = "Blossom",
                 text = {
                     {
-                        "{C:unik_copper}Rescore{} the {C:attention}first{} card {C:attention}#1#{} time#<s>1#",
-                        "and the {C:attention}last{} scoring card {C:attention}#2#{} time#<s>2#",
+                        "{C:unik_copper}Rescore{} the {C:attention}first{} card {C:attention}#1#{} times",
+                        "and the {C:attention}last{} scoring card {C:attention}#2#{} time",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",

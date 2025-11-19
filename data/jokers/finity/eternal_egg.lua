@@ -71,7 +71,12 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     soul_pos = { x = 1, y = 0 },
     cost = 10, 
-
+    in_pool = function()
+		return false
+	end,
+    paperback = {
+        permanently_eternal = true,
+    },
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {

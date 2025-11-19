@@ -5,7 +5,7 @@ function UNIK.has_talisman()
 	if (SMODS.Mods["cdataman"] or {}).can_load then
 		return true
 	end
-	if SMODS.Mods.Talisman or SMODS.Mods.Talisman.can_load then
+	if (SMODS.Mods and SMODS.Mods.Talisman) or (SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load) then
 		return true
 	end
 	return false
