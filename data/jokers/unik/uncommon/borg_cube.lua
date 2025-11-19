@@ -35,15 +35,15 @@ SMODS.Joker {
 				Xmult_mod = lenient_bignum(card.ability.extra.xmult),
 			}
 		end
-		if context.individual and context.cardarea == G.play then
-			if context.other_card.edition and context.other_card.edition.unik_steel == true then
-				return {
-					x_mult = lenient_bignum(card.ability.extra.xmult),
-					colour = G.C.MULT,
-					card = card,
-				}
-			end
-		end
+		-- if context.individual and context.cardarea == G.play then
+		-- 	if context.other_card.edition and context.other_card.edition.unik_steel == true then
+		-- 		return {
+		-- 			x_mult = lenient_bignum(card.ability.extra.xmult),
+		-- 			colour = G.C.MULT,
+		-- 			card = card,
+		-- 		}
+		-- 	end
+		-- end
 		if
 			context.individual
 			and context.cardarea == G.hand

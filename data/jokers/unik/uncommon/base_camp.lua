@@ -1,8 +1,8 @@
 SMODS.Joker {
     key = 'unik_base_camp',
-    atlas = 'placeholders',
+    atlas = 'unik_uncommon',
     rarity = 2,
-	pos = { x = 1, y = 0 },
+	pos = { x = 7, y = 3 },
     cost = 5,
     blueprint_compat = true,
     perishable_compat = true,

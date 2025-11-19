@@ -370,6 +370,9 @@ if (SMODS.Mods["Buffoonery"] or {}).can_load then
 end
 NFS.load(mod_path .. "data/stakes/stake_card_modifiers.lua")() 
 --decks
+NFS.load(mod_path .. "data/decks/greed_deck.lua")()
+NFS.load(mod_path .. "data/decks/mountain_deck.lua")()
+NFS.load(mod_path .. "data/decks/endless_deck.lua")()
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()
 NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
@@ -632,11 +635,12 @@ NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 
 --blind editions
-if (SMODS.Mods['ble'] or {}).can_load then
+if (SMODS.Mods['ble'] or {}).can_load or SMODS.BlindEdition then
 	NFS.load(mod_path .. "data/blindeditions/steel.lua")()
 	NFS.load(mod_path .. "data/blindeditions/bloated.lua")()
 	NFS.load(mod_path .. "data/blindeditions/half.lua")()
 	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
+	NFS.load(mod_path .. "data/blindeditions/shining_glitter.lua")()
 end
 
 if unik_config.unik_legendary_blinds then
@@ -722,13 +726,14 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/D16.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/stamp_spam.lua")()
-NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/uncommon/perk_lottery.lua")() 
+-- NFS.load(mod_path .. "data/jokers/unik/uncommon/perk_lottery.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/malicious_face.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/antivirus.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/energy_compressor.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")()  
 NFS.load(mod_path .. "data/jokers/unik/uncommon/twin_peaks.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/road_sign.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  

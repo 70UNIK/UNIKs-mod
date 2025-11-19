@@ -1,11 +1,11 @@
---sell to create an Absolute Rental Niko Exotic Joker
+--sell to create an eternal decaying ancient joker (destroyed after 4 rounds)
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_a_taste_of_power',
     atlas = 'unik_rare',
     rarity = 3,
 	pos = { x = 1, y = 0 },
-    cost = 6,
+    cost = 1,
 	blueprint_compat = false,
     perishable_compat = true,
     demicoloncompat = true,

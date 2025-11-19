@@ -141,6 +141,13 @@ pattern = '''SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = s
 position = 'after'
 payload = '''
 G.GAME.blind:unik_after_play()
+if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+    local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+    if edi.unik_after_play and edi.unik_after_play() and (type(edi.unik_after_play) == "function") then
+        delay(0.4)
+        edi:unik_after_play()
+    end
+end
 '''
 match_indent = true
 

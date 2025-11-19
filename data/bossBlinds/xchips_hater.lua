@@ -158,6 +158,43 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             end
         end
     end
+
+    if G.GAME.unik_shining_glitter_edition_blind and G.GAME.blind and G.GAME.blind.chips then
+        local triggered = false
+        
+        if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
+            triggered = true
+        end
+        
+        if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
+            triggered = true
+        end
+        if  (key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod") then
+            triggered = true
+        end
+        if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
+            triggered = true
+        end
+        if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') then
+            triggered = true
+        end
+        if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') then
+            triggered = true
+        end
+        if triggered then
+            G.GAME.unik_shining_glitter_base = G.GAME.unik_shining_glitter_base or G.GAME.blind.chips
+            G.E_MANAGER:add_event(Event({func = function()
+                G.GAME.blind.chips = G.GAME.blind.chips + G.GAME.unik_shining_glitter_base * 0.05
+                G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                G.HUD_blind:recalculate(true)
+                G.hand_text_area.blind_chips:juice_up()
+                play_sound('chips2')
+            return true end }))
+        end
+        
+    end
+
+
     
     local ret = scie(effect, scored_card, key, amount, from_edition)
     if ret then

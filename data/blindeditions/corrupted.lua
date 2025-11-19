@@ -1,1 +1,1 @@
---final chips and mult randomly multiplied between 0.5x and 1x
+--^0.96 Mult and ^0.96 chips after play

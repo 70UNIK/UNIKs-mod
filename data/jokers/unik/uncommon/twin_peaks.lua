@@ -16,12 +16,13 @@ SMODS.Joker {
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,
+    demicoloncompat = true,
     display_size = { w = 95, h = 71 },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.cards} }
 	end,
     calculate = function(self, card, context)
-		if context.using_consumeable and context.consumeable.ability.set == 'Spectral' then
+		if (context.using_consumeable and context.consumeable.ability.set == 'Spectral') or context.forcetrigger then
             for i = 1, card.ability.extra.cards do
                 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                     G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1

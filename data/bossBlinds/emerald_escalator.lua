@@ -8,12 +8,12 @@ SMODS.Blind{
     pos = { x = 0, y = 35},
     boss_colour= HEX("50c878"),
     dollars = 8,
-    mult = 0.5,
+    mult = 0.7,
     pronouns = "it_its",
     calculate = function(self, blind, context)
 		if context.post_trigger and not G.GAME.blind.disabled and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability then
              G.E_MANAGER:add_event(Event({func = function()
-                G.GAME.blind.chips = G.GAME.blind.chips*1.15
+                G.GAME.blind.chips = G.GAME.blind.chips*1.25
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                 G.HUD_blind:recalculate(true)
                 G.hand_text_area.blind_chips:juice_up()

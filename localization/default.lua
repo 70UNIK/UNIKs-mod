@@ -38,16 +38,17 @@ return {
             b_unik_greed = {
                 name = "Greed Deck",
                 text = {
-                    "{C:money}$#1#{s:0.85} per {C:blue}Hand lost",
-                    "{C:money}$#2#{s:0.85} per {C:red}Discard lost",
+                    "{C:money}$#1#{s:0.85} per {C:blue}Hand{} lost in round",
+                    "{C:money}$#2#{s:0.85} per {C:red}Discard{} lost in round",
                     "Earn no {C:attention}Interest",
                 }
             },
-            b_unik_mountain_deck = {
+            b_unik_mountain = {
                 name = "Mountain Deck",
                 text = {
-                    "Start with {C:attention,T:v_unik_summit_merchant}Summit Merchant",
-                    "and {C:attention}#1#{} {C:unik_summit,T:c_hex}Everest#<s>1#{}",
+                    "{C:unik_summit}Summit{} cards may",
+                    "appear in the shop",
+                    "Start with an {C:unik_summit,T:c_unik_everest}Everest{}",
                 }
             },
             b_unik_haunted_deck = {
@@ -57,11 +58,14 @@ return {
                     "Spectral Packs appear at 4X the usual rate",
                 }
             },
-            b_unik_endless_deck = { --+3 joker slots, win ante is 20.
+            b_unik_endless = { --+4 joker slots, win ante is 16, final boss blinds appear 4x as often
                 name = "Endless Deck",
                 text = {
                     "{C:attention}+#1#{} Joker slot#<s>1#",
+                    "Start on Ante {C:attention}0",
                     "Win Ante is {C:red}#2#{}",
+                    "{C:attention}Final Boss Blinds{} appear",
+                    "{C:red}#3#X{} as often",
                 }
             },
             b_unik_optimized_deck = {
@@ -121,7 +125,7 @@ return {
             ble_unik_shining_glitter={
                 name = "Glittergrid",
                 text = {
-                    "+0.1x Blind Size",
+                    "+#1#x Blind Size",
                     "when Xchips or higher",
                     "operators are triggered",
                 }
@@ -194,7 +198,7 @@ return {
             bl_unik_emerald_escalator = {
                 name = "Emerald Escalator",
                 text = {
-                    "X1.15 Blind Size per",
+                    "X1.25 Blind Size per",
                     "Joker trigger this Round",
                 }
             },
@@ -1939,6 +1943,7 @@ return {
                 text = {
                     "Other {C:dark_edition}Steel Editioned",
                     "cards give {X:mult,C:white}X#1#{} mult",
+                    "when held or on Jokers",
                 }
             },
             j_unik_shitty_joker = {
@@ -2627,6 +2632,15 @@ return {
                     "then release them {C:attention}in set order{} of",
                     "{X:purple,C:white}Multiplicative{}, {X:purple,C:white}Loglinear{}",
                     "{X:dark_edition,C:white}Exponential{} effects"
+                }
+            },
+            --create a summit card if played hand contains a straight and a 10 (uncommon)
+            j_unik_road_sign = {
+                name = "Road Sign",
+                text = {
+                    "Create a {C:unik_summit}Summit{} Card if",
+                    "played hand contains a",
+                    "{C:attention}Straight{} and a {C:attention}10"
                 }
             },
 
