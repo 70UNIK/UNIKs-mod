@@ -4,7 +4,6 @@ UNIK.detrimental_removable_stickers = {
     "rental",
     "unik_disposable",
     "unik_triggering",
-    "unik_impounded",
     "bunc_hindered",
     "bunc_scattering",
     "bunc_reactive",

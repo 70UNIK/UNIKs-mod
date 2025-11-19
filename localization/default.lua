@@ -197,7 +197,7 @@ return {
             bl_unik_emerald_escalator = {
                 name = "Emerald Escalator",
                 text = {
-                    "X1.25 Blind Size per",
+                    "X1.2 Blind Size per",
                     "Joker trigger this Round",
                 }
             },
