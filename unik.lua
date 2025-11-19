@@ -58,6 +58,12 @@ NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/hooks/boosterHooks.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
 
+SMODS.Atlas({
+	key = "unik_cube_boosters",
+	path = "unik_cube_boosters.png",
+	px = 71,
+	py = 95,
+})
 --Custom spectrum stuff
 function UNIK.can_load_spectrums()
 	if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled))
@@ -567,7 +573,8 @@ end
 --boosters
 --TODO: Replace "cube pack" with "UNIK's pack" in the next update, basically an icon pack of sorts
 NFS.load(mod_path .. "data/boosters/summit_pack.lua")()
-NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
+NFS.load(mod_path .. "data/boosters/character_pack.lua")()
+-- NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
 NFS.load(mod_path .. "data/boosters/egg_pack.lua")()
 
@@ -576,6 +583,7 @@ NFS.load(mod_path .. "data/boosters/egg_pack.lua")()
 
 NFS.load(mod_path .. "data/tags/shining_glitter_tag.lua")()
 NFS.load(mod_path .. "data/tags/steel_tag.lua")()
+NFS.load(mod_path .. "data/tags/mountain.lua")()
 NFS.load(mod_path .. "data/tags/demon_tag.lua")()
 NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
 NFS.load(mod_path .. "data/tags/vessel_tag.lua")()

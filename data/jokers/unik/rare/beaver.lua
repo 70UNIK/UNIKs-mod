@@ -1,13 +1,14 @@
 SMODS.Joker {
     key = 'unik_beaver',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 0 },
+    atlas = 'unik_rare',
+	pos = { x = 3, y = 2 },
     rarity = 3,
     cost = 8,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
+    immutable = true,
     config = { extra = {base = 60} },
     enhancement_gate = 'm_unik_timber',
     loc_vars = function(self, info_queue, center)

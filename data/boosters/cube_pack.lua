@@ -13,12 +13,6 @@ local cube_digital_hallucinations = {
 		G.jokers:emplace(ccard)
 	end,
 }
-SMODS.Atlas({
-	key = "unik_cube_boosters",
-	path = "unik_cube_boosters.png",
-	px = 71,
-	py = 95,
-})
 SMODS.Booster{
     key = "unik_cube_1",
 	kind = "unik_cube",

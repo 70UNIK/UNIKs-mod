@@ -17,6 +17,13 @@ SMODS.Joker {
 		return { vars = { center.ability.extra.exponent } }
 	end,
 	pronouns = "it_its",
+	in_pool = function() --reduce frequency of it appearing
+        if pseudorandom('earthmover'..G.SEED) < 0.2 then
+            return true
+        else
+            return false
+        end
+    end,
     calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and context.blind.boss and not card.getting_sliced and not context.retrigger_joker and not context.repetition then
 			local eval = function(card)

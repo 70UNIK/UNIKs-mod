@@ -3376,6 +3376,14 @@ return {
 					"up to {C:attention}#2# Cube/Square Jokers{}",
 				},
 			},
+            p_unik_character = {
+                name = "Character Pack",
+				text = {
+					"Choose {C:attention}#1#{} of",
+					"up to {C:attention}#2# Character-themed Jokers{}",
+                    "{s:0.8,C:inactive}(AKA: Non-legendaries with legendary art)"
+				},
+            },
             p_unik_summit_1 = {
                 name = "Summit Pack",
                 text = {
@@ -4065,6 +4073,13 @@ return {
 					"with {C:legendary,E:1}The Soul{}, {C:rare,E:1}Foundation{} and {C:unik_ancient,E:1}Awakening{}",
 				},
 			},
+            tag_unik_mountain = {
+				name = "Mountain Tag",
+				text = {
+					"Gives a free",
+					"{C:unik_summit}Mega Summit Pack",
+				},
+			},
         },
         Tarot={
             c_unik_wheel_of_misfortune = {
@@ -4664,6 +4679,7 @@ return {
             k_unik_active="Active!",
             k_unik_viced="Final Bosses now appear twice as often",
             k_unik_cube_pack = "Cube Pack",
+            k_unik_character_pack = "Character Pack",
             k_unik_lartceps_bundle = "Lartceps Bundle",
             k_unik_lartceps_pack = "Lartceps Pack",
             k_unik_hands_remaining = " scoring hands remaining",
