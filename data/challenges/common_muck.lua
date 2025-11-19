@@ -18,7 +18,7 @@ SMODS.Challenge{
         --Ban all jokers except commons (Riif roof is the only uncommon)
         banned_cards = function(self)
             local banList = {}
-            banList[#banList+1] = { id = "p_unik_cube_1", ids = { "p_unik_cube_1", "p_unik_cube_two", "p_unik_cube_three" } }
+            banList[#banList+1] = { id = "p_unik_character" }
             banList[#banList+1] = {id = 'c_soul'}
             banList[#banList+1] = {id = 'c_wraith'}
             banList[#banList+1] = {id = 'c_unik_gateway'}
