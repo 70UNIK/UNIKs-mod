@@ -4703,7 +4703,7 @@ return {
             k_unik_reed_part2 = "or",
             k_unik_epic_sand_placeholder = "(Tags held)",
             k_unik_half = "Half",
-            k_defeated_by = "Executed By",
+            k_defeated_by = "KILLED BY",
             k_unik_none_hand_banned = "None hand is banned",
             k_unik_jaundice_jack = "If a Jack not discarded before hand, convert random Joker to Hit the Road",
             k_unik_hate_ball = "If an 8 is not in scoring hand, convert random Joker to 8 Ball",
