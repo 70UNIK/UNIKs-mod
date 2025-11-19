@@ -10,7 +10,7 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 0, y = 0 },
     cost = 1,
-    config = {extra = {hands = 0,juiced_up = false,threshold = 77}},
+    config = {extra = {hands = 0,juiced_up = false,threshold = 60}},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.hands,center.ability.extra.threshold} }
     end,
@@ -21,7 +21,7 @@ SMODS.Joker {
 	eternal_compat = false,
 	demicoloncompat = true, --NOPE!
 	update = function(self,card,dt)
-		card.ability.extra.threshold = 70
+		card.ability.extra.threshold = 60
 		if card.ability.extra.hands < card.ability.extra.threshold then
 			card.ability.extra.juiced_up = false
 		end

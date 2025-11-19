@@ -16,6 +16,11 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_disposable" }
 		return { vars = { center.ability.extra.coupons} }
 	end,
+    discovered = true,
+    unlocked = true,
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("cry")[1] }, badges)
+    end,
     calculate = function(self, card, context)
         if context.forcetrigger then
             card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_redeemed_ex")})

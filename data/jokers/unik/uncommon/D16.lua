@@ -8,11 +8,11 @@ SMODS.Joker {
     rarity = 2,
     cost = 7,
     blueprint_compat = true,
-    perishable_compat = true,
+    perishable_compat = false,
 	eternal_compat = false,
     demicolon_compat = true,
     config = {
-		extra = { x_mult = 1, x_mult_mod = 0.1, },
+		extra = { x_mult = 1, x_mult_mod = 0.05, },
         immutable = {funny = 0, funny_limit = 32, destroyed = false},
 	},
     loc_vars = function(self, info_queue, center)

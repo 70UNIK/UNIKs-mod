@@ -12,5 +12,10 @@ SMODS.Consumable{
 
 		return { vars = { card and card.ability.max_highlighted or self.config.max_highlighted } }
 	end,
+		    unlocked = true,
+    discovered = true,
+	    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = MoreFluff }, badges)
+    end,
 }
 

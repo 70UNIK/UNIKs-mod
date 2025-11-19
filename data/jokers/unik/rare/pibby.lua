@@ -34,11 +34,12 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {x_mult = 1},immutable = {divisor = 100} },
+    config = { extra = {x_mult = 1},immutable = {divisor = 150} },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
 		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
 	end,
+    pools = {["character"] = true },
     pronouns = "she_her",
     calculate = function(self, card, context)
         if context.forcetrigger then
@@ -51,16 +52,7 @@ SMODS.Joker {
             local triggered = false
             local increase = 0
             for k, v in ipairs(context.scoring_hand) do
-                if SMODS.has_enhancement(v, "m_unik_pink") then
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            v:juice_up()
-                            return true
-                        end,
-                    }))
-                     increase =  increase  + (7 / card.ability.immutable.divisor)
-                    triggered = true
-                elseif v.base.nominal > 0 and not SMODS.has_no_rank(v) and not SMODS.has_enhancement(v, "m_cry_abstract") and not SMODS.has_enhancement(v, "m_unik_green") then
+                if v:get_rank_value() > 0 then
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             v:juice_up()

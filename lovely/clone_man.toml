@@ -30,6 +30,7 @@ pattern = 'if add and not G.GAME.banned_keys[v.key] then '
 position = "before"
 payload = '''
 local clonefactor = 0
+local MLfactor = 0
 if G.jokers and G.jokers.cards then
     --local eval = {}
     --SMODS.calculate_context({unik_cloneman = true},eval)
@@ -43,6 +44,11 @@ if G.jokers and G.jokers.cards then
     for a,b in pairs(G.jokers.cards) do
         if b.config.center.key == 'j_unik_cloneman' then
             clonefactor = clonefactor + math.min(b.ability.extra.multiplier,b.ability.immutable.max_multiplier)
+        end
+    end
+    for a,b in pairs(G.jokers.cards) do
+        if b.config.center.key == 'j_unik_moonlight_cookie' then
+            MLfactor = MLfactor + b.ability.extra.spawn_rate
         end
     end
 end
@@ -73,6 +79,13 @@ if G.consumeables and G.consumeables.cards and _type ~= nil then
                     _pool[#_pool + 1] = v.key
                     _pool_size = _pool_size + 1
                     --print(v.key .. y)
+                end
+                if v.set == 'Planet' then
+                    for y = 1, MLfactor do
+                        _pool[#_pool + 1] = v.key
+                        _pool_size = _pool_size + 1
+                        --print(v.key .. y)
+                    end
                 end
             
         elseif v.key == b.config.center.key and not b.config.center.unique and not b.config.center.hidden then

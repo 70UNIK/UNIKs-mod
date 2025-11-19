@@ -22,7 +22,7 @@ SMODS.Consumable{
 	use = function(self, card, area, copier)
         G.GAME.unik_bloater_bloat  = G.GAME.unik_bloater_bloat  or 0
         local formula = (G.GAME.unik_bloater_bloat + 1) * 4
-		G.hand:change_size(card.ability.extra.hand_size)
+		
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
 			local cardsCreated = {}
             for i = 1, formula do
@@ -54,6 +54,7 @@ SMODS.Consumable{
 					delay = 0.1,
 					trigger= 'after',
 					func = function()
+						G.hand:change_size(card.ability.extra.hand_size)
 						playing_card_joker_effects(cardsCreated)
 						return true
 					end

@@ -1,0 +1,19 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+# function Card:set_ability() (Neon Joker)
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'self.config.center = center'
+position = 'after'
+match_indent = true
+payload = '''
+
+if G.hand and center and (not initial) and (old_center ~= center) and center.set == 'Enhanced' then
+    SMODS.calculate_context({unik_enhance_card = true, unik_enhanced_card = self})
+end
+
+'''

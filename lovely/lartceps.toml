@@ -89,7 +89,30 @@ target = '''functions/button_callbacks.lua'''
 pattern = '''G.GAME.pack_choices = G.GAME.pack_choices - 1'''
 position = "after"
 payload = '''
-G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 0
-G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity + 1
+G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
+G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity - 1
 '''
 match_indent = true
+
+### antifrustriation feature of booster2: show how much you need to choose to skip
+[[patches]]
+[patches.regex]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''\{(.*)nodes=\{
+(.*)\{(.*)localize\('k_choose'\)..' '(.*)\},
+(.*)\{(.*)\}\}\},'''
+position = "after"
+payload = '''
+UNIK.display_skip_req(),
+'''
+
+### antifrustriation feature of booster2: show how much you need to choose to skip
+[[patches]]
+[patches.regex]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''G\.booster\_pack\.alignment\.offset\.y = \-2\.2'''
+position = "after"
+payload = '''
+
+G.booster_pack.alignment.offset.y = -2.2 - UNIK.display_skip_req_offset()
+'''

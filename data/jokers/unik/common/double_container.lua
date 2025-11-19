@@ -1,7 +1,7 @@
 --Retrigger all held in consumeable effects (not using consumeables)
 --Observatory, moonlight cookie/celestial of chaos, scratch, maybe even color cards???????
 local containerrarity = 1
-if MoreFluff then
+if MoreFluff or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
     containerrarity = 2
 end
 SMODS.Joker {
@@ -25,7 +25,9 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
         if MoreFluff then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables2" }
-        elseif Cryptid then
+        elseif (SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled then
+            info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables4" }
+        elseif SMODS.Mods.Cryptid and SMODS.Mods.Cryptid.can_load then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables3" }
         else
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables" }
@@ -48,7 +50,7 @@ SMODS.Joker {
             next(find_joker("j_mf_rainbow_joker")) or
 
             G.GAME.used_vouchers.v_observatory or
-            MoreFluff then
+            MoreFluff or (SMODS.Mods["paperback"] or {}).can_load then
 			return true
 		end
 		return false
@@ -76,10 +78,34 @@ SMODS.Joker {
                 card = card
             }
         end
+        if (context.retrigger_joker_check) and context.other_card ~= self and (context.other_context) and context.other_card then
+            
+            if context.other_card.area == G.consumeables then
+                if context.other_ret then
+                 --   print(context.other_ret)
+                end
+                return {
+                    message = localize('k_again_ex'),
+                    repetitions = math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers),
+                    card = card
+                }
+            end
+        end
+        -- if context.post_trigger and context.other_card then
+        --     if context.other_card.area == G.consumeables then
+        --         if context.other_ret then
+        --             print(context.other_ret)
+        --         end
+        --         return {
+        --             message = localize('k_again_ex'),
+        --             repetitions = math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers),
+        --             card = card
+        --         }
+        --     end
+        -- end
 	end
 }
 
---umm this suffers from stack overflow with 2 double containers.
 if MoreFluff then
     local colorHook = trigger_colour_end_of_round
     function trigger_colour_end_of_round(_card,isTriggered)
@@ -93,8 +119,10 @@ if MoreFluff then
                     
                     if eval[i].jokers.repetitions and not isTriggered then
                         for _ = 1, eval[i].jokers.repetitions do
-                            card_eval_status_text(eval[i].jokers.card, 'jokers', nil, nil, nil, eval[i].jokers)
-                            trigger_colour_end_of_round(_card,true)
+                            if _card.ability.set == "Colour" or _card.ability.set == "Shape" then
+                                card_eval_status_text(eval[i].jokers.card, 'jokers', nil, nil, nil, eval[i].jokers)
+                                trigger_colour_end_of_round(_card,true)
+                            end
                         end
                     end
                 end

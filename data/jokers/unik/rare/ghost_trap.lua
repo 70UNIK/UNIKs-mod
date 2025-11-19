@@ -27,36 +27,32 @@ SMODS.Joker {
 				Xmult_mod = card.ability.extra.x_mult,
 			}
 		end
-		--mahahahahah
 		if context.forcetrigger and not context.blueprint and not context.retrigger_joker and not context.repetition then
 			return {
 				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
 				Xmult_mod = card.ability.extra.x_mult,
 			}
 		end
+		if context.unik_add_to_deck and context.added then
+			if (context.added.config.center.rarity == 'unik_detrimental' or context.added.config.center.rarity == 'cry_cursed') 
+			and not context.added.ability.getting_captured then
+				context.added.ability.getting_captured = true
+				selfDestruction(context.added,"k_unik_pentagram_purified",G.C.MULT)
+				if card.ability.extra.limit > 0 then
+					SMODS.scale_card(card, {
+						ref_table =card.ability.extra,
+						ref_value = "x_mult",
+						scalar_value = "x_mult_mod",
+						message_key = "a_xmult",
+						message_colour = G.C.MULT,
+					})
+					card.ability.extra.limit = card.ability.extra.limit - 1
+				elseif not card.ability.extra.destroyed  then
+					card.ability.extra.destroyed = true
+					selfDestruction(card,'k_unik_ghost_trap_explode',G.C.MULT)
+				end
+			end
+			
+		end
     end,
 }
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_ghost_trap"] = {
--- 		text = {
--- 			{
--- 				border_nodes = {
--- 					{ text = "X"},
--- 					{
--- 						ref_table = "card.ability.extra",
--- 						ref_value = "x_mult",
--- 						retrigger_type = "exp",
--- 					},
--- 				},
--- 				border_colour = G.C.MULT,
--- 			},
--- 		},
--- 		reminder_text = {
--- 			{ ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.FILTER },
--- 		},
--- 		calc_function = function(card)
--- 			card.joker_display_values.localized_text = "(" .. (card.ability.extra.cursed_jokers .. "/" .. card.ability.extra.cursed_joker_limit)
--- 				.. ")"
--- 		end,
--- 	}
--- end

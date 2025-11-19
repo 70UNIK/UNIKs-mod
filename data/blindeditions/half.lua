@@ -1,9 +1,9 @@
---If more than 3 cards are played, debuff 2 random played cards
+--If more than 3 cards are played, debuff 1 random played card
 SMODS.BlindEdition {
     key = 'unik_half',
     blind_shader = 'unik_halfjoker',
     weight = 0.2,
-    dollars_mod = 3,
+    dollars_mod = 1,
     loc_vars = function(self, blind_on_deck)
         return {2,3}
     end,

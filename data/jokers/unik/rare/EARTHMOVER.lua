@@ -8,7 +8,7 @@ SMODS.Joker {
     immutable = true,
     eternal_compat = false,
 	demicoloncompat = true,
-    config = { extra = { exponent = 1.1 } },
+    config = { extra = { exponent = 1.15 } },
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway" }
 		if not center.edition or (center.edition and not center.edition.negative) then
@@ -17,6 +17,13 @@ SMODS.Joker {
 		return { vars = { center.ability.extra.exponent } }
 	end,
 	pronouns = "it_its",
+	in_pool = function() --reduce frequency of it appearing
+        if pseudorandom('earthmover'..G.SEED) < 0.2 then
+            return true
+        else
+            return false
+        end
+    end,
     calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and context.blind.boss and not card.getting_sliced and not context.retrigger_joker and not context.repetition then
 			local eval = function(card)

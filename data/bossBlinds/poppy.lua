@@ -37,7 +37,7 @@ SMODS.Blind{
 SMODS.Scoring_Calculation({
 	key = 'unik_poppy',
 	func = function(self, chips, mult, flames)
-		if (chips * mult) > (2.5 * G.GAME.blind.chips) then
+		if to_big(chips * mult) > to_big(2.5 * G.GAME.blind.chips) then
 			return (chips * mult)*0.03
 		end
 		return chips * mult

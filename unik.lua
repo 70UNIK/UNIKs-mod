@@ -55,8 +55,15 @@ NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
 NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/colours.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
+NFS.load(mod_path .. "data/hooks/boosterHooks.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
 
+SMODS.Atlas({
+	key = "unik_cube_boosters",
+	path = "unik_cube_boosters.png",
+	px = 71,
+	py = 95,
+})
 --Custom spectrum stuff
 function UNIK.can_load_spectrums()
 	if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled))
@@ -158,6 +165,10 @@ SMODS.Sound({
 SMODS.Sound({
 	key = "explosion1",
 	path = "explosion1.ogg",
+})
+SMODS.Sound({
+	key = "woodBreak",
+	path = "woodBreak.ogg",
 })
 
 
@@ -279,6 +290,49 @@ SMODS.ConsumableType {
         return false
     end
 }
+SMODS.Atlas {
+	key = "unik_summits",
+	path = "unik_summits.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas {
+	key = "unik_seals",
+	path = "unik_seals.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.ConsumableType {
+	key = "unik_summit",
+	prefix_config = { key = true },
+	primary_colour = HEX("000000"),
+	secondary_colour = HEX("000000"),
+	shop_rate = 0.0,
+	loc_txt = {},
+	default = "c_unik_elbert", 
+}
+
+SMODS.UndiscoveredSprite({
+	key = "unik_summit",
+	atlas = "unik_summits",
+	path = "unik_summits.png",
+	pos = { x = 2, y = 2 },
+	px = 71,
+	py = 95,
+})
+
+SMODS.UndiscoveredSprite({
+	key = "unik_lartceps",
+	atlas = "unik_lartceps",
+	path = "unik_lartceps.png",
+	pos = { x = 0, y = 2 },
+	px = 71,
+	py = 95,
+})
+
+
 
 --RARITIES--
 --Discount exotic
@@ -300,6 +354,7 @@ SMODS.Rarity({
 
 
 -- stickers
+NFS.load(mod_path .. "data/stickers/shielded.lua")() 
 NFS.load(mod_path .. "data/stickers/limited_edition.lua")() 
 NFS.load(mod_path .. "data/stickers/triggering.lua")() 
 NFS.load(mod_path .. "data/stickers/depleted.lua")() 
@@ -321,20 +376,26 @@ if (SMODS.Mods["Buffoonery"] or {}).can_load then
 end
 NFS.load(mod_path .. "data/stakes/stake_card_modifiers.lua")() 
 --decks
+NFS.load(mod_path .. "data/decks/greed_deck.lua")()
+NFS.load(mod_path .. "data/decks/mountain_deck.lua")()
+NFS.load(mod_path .. "data/decks/endless_deck.lua")()
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()
 NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
 
 --Enhancements
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
+NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
+NFS.load(mod_path .. "data/enhancements/timber_card.lua")()	
 if MoreFluff then
 	NFS.load(mod_path .. "data/enhancements/green_card.lua")()
 	NFS.load(mod_path .. "data/enhancements/bill_card.lua")()
 end
-NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
+NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
+
 
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/shining_glitter.lua")()
@@ -345,7 +406,8 @@ NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
-
+--seals
+NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
 --Load suit types
 
@@ -385,6 +447,7 @@ if UNIK.can_load_spectrums() then
 end
 if next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/poker_hands/bunco_override.lua")()
+
 end
 if next(SMODS.find_mod("SixSuits")) then
 	NFS.load(mod_path .. "data/poker_hands/six_suits_override.lua")()
@@ -399,18 +462,59 @@ end
 ---TAROTS
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
+NFS.load(mod_path .. "data/tarots/carpenter.lua")()
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
+--Bunco polymino tarots
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/tarots/the_chains.lua")()
+	NFS.load(mod_path .. "data/tarots/the_divorce.lua")()
+	NFS.load(mod_path .. "data/tarots/the_excommunicated.lua")()
+end
+
+SMODS.Atlas {
+	key = "unik_polyminos",
+	path = "unik_polyminos.png",
+	px = 71,
+	py = 95
+}
+
+--Polyminos
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/polyminos/the_double.lua")()
+	NFS.load(mod_path .. "data/polyminos/the_triple.lua")()
+	NFS.load(mod_path .. "data/polyminos/the_quadruple.lua")()
+end
 
 ---SPECTRALS
 NFS.load(mod_path .. "data/spectrals/foundry.lua")() 
 NFS.load(mod_path .. "data/spectrals/sparkle.lua")() 
 NFS.load(mod_path .. "data/spectrals/prism.lua")() 
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
+NFS.load(mod_path .. "data/spectrals/turing.lua")() 
+NFS.load(mod_path .. "data/spectrals/defend.lua")() 
+NFS.load(mod_path .. "data/spectrals/purify.lua")() 
+NFS.load(mod_path .. "data/spectrals/expel.lua")() 
 --
+--hidden summits
+NFS.load(mod_path .. "data/summits/ebott.lua")() 
+NFS.load(mod_path .. "data/summits/celeste.lua")() 
+
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 leftmost non eternals, create an ancient.
 
 --PLANETS
 
+--SUMMITS--
+NFS.load(mod_path .. "data/summits/bonus_exponentials.lua")() 
+NFS.load(mod_path .. "data/summits/elbert.lua")() 
+NFS.load(mod_path .. "data/summits/kosciuszko.lua")() 
+NFS.load(mod_path .. "data/summits/narodnaya.lua")() 
+NFS.load(mod_path .. "data/summits/mitchell.lua")() 
+NFS.load(mod_path .. "data/summits/charleston.lua")() 
+NFS.load(mod_path .. "data/summits/whitney.lua")() 
+NFS.load(mod_path .. "data/summits/aconcagua.lua")() 
+NFS.load(mod_path .. "data/summits/elbrus.lua")() 
+NFS.load(mod_path .. "data/summits/everest.lua")() 
+NFS.load(mod_path .. "data/summits/denali.lua")() 
 
 
 --rotarots
@@ -442,9 +546,12 @@ end
 --Vouchers
 NFS.load(mod_path .. "data/vouchers/spectral_merchant.lua")() 
 NFS.load(mod_path .. "data/vouchers/spectral_tycoon.lua")() 
+-- NFS.load(mod_path .. "data/vouchers/summit_merchant.lua")() //turns out this becomes broken. likely have them only spawn in a dedicated deck.
+-- NFS.load(mod_path .. "data/vouchers/summit_tycoon.lua")() 
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
 end
+
 
 --MF color cards
 SMODS.Atlas({ 
@@ -465,7 +572,9 @@ end
 
 --boosters
 --TODO: Replace "cube pack" with "UNIK's pack" in the next update, basically an icon pack of sorts
-NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
+NFS.load(mod_path .. "data/boosters/summit_pack.lua")()
+NFS.load(mod_path .. "data/boosters/character_pack.lua")()
+-- NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
 NFS.load(mod_path .. "data/boosters/egg_pack.lua")()
 
@@ -474,11 +583,19 @@ NFS.load(mod_path .. "data/boosters/egg_pack.lua")()
 
 NFS.load(mod_path .. "data/tags/shining_glitter_tag.lua")()
 NFS.load(mod_path .. "data/tags/steel_tag.lua")()
+NFS.load(mod_path .. "data/tags/mountain.lua")()
 NFS.load(mod_path .. "data/tags/demon_tag.lua")()
 NFS.load(mod_path .. "data/boosters/devil_pack.lua")()
 NFS.load(mod_path .. "data/tags/vessel_tag.lua")()
 NFS.load(mod_path .. "data/tags/handcuffs_tag.lua")()
 NFS.load(mod_path .. "data/tags/positive.lua")()
+NFS.load(mod_path .. "data/tags/bloated.lua")()
+NFS.load(mod_path .. "data/tags/half.lua")()
+NFS.load(mod_path .. "data/tags/fuzzy.lua")()
+NFS.load(mod_path .. "data/tags/corrupted.lua")()
+NFS.load(mod_path .. "data/tags/disposable.lua")()
+NFS.load(mod_path .. "data/tags/triggering.lua")()
+NFS.load(mod_path .. "data/tags/limited_edition.lua")()
 --manacle tag: -1 hand size
 
 --BLINDS--
@@ -493,11 +610,15 @@ NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
 NFS.load(mod_path .. "data/bossBlinds/cookie.lua")()
 NFS.load(mod_path .. "data/bossBlinds/xchips_hater.lua")()
 NFS.load(mod_path .. "data/bossBlinds/magician.lua")()
+NFS.load(mod_path .. "data/bossBlinds/gun.lua")()
 NFS.load(mod_path .. "data/bossBlinds/smile.lua")()
 NFS.load(mod_path .. "data/bossBlinds/bloon.lua")()
 NFS.load(mod_path .. "data/bossBlinds/halved.lua")()
 NFS.load(mod_path .. "data/bossBlinds/fuzzy.lua")()
 NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition effect, crossmod?
+NFS.load(mod_path .. "data/bossBlinds/ravine.lua")()
+NFS.load(mod_path .. "data/bossBlinds/crater.lua")()
+NFS.load(mod_path .. "data/bossBlinds/abyss.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/bossBlinds/cryptid/joyless.lua")() --Cryptid crossmod
 end
@@ -517,15 +638,17 @@ NFS.load(mod_path .. "data/bossBlinds/eternal_egg.lua")()
 NFS.load(mod_path .. "data/bossBlinds/hate_ball.lua")()
 NFS.load(mod_path .. "data/bossBlinds/salmon_steps.lua")()
 NFS.load(mod_path .. "data/bossBlinds/burgundy_brain.lua")()
+NFS.load(mod_path .. "data/bossBlinds/emerald_escalator.lua")()
 NFS.load(mod_path .. "data/bossBlinds/green_goalpost.lua")()
 NFS.load(mod_path .. "data/bossBlinds/video_poker.lua")()
 
 --blind editions
-if (SMODS.Mods['ble'] or {}).can_load then
+if (SMODS.Mods['ble'] or {}).can_load or SMODS.BlindEdition then
 	NFS.load(mod_path .. "data/blindeditions/steel.lua")()
 	NFS.load(mod_path .. "data/blindeditions/bloated.lua")()
 	NFS.load(mod_path .. "data/blindeditions/half.lua")()
 	NFS.load(mod_path .. "data/blindeditions/positive.lua")()
+	NFS.load(mod_path .. "data/blindeditions/shining_glitter.lua")()
 end
 
 if unik_config.unik_legendary_blinds then
@@ -550,16 +673,16 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Blinds below require talisman due to exponential requirements
-	if Talisman then
+	if UNIK.has_talisman() then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_vessel.lua")() --panopicon. thats it
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/legendary_nuke.lua")()
-	if Talisman then
+	if UNIK.has_talisman() then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_sword.lua")() --good high card score thats it.
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_tornado.lua")()
-	if Talisman then
+	if UNIK.has_talisman() then
 		NFS.load(mod_path .. "data/bossBlinds/legendary_chamber.lua")() --dont have too much rarities, have good amount of hands, blueprint(s) 
 	end
 	NFS.load(mod_path .. "data/bossBlinds/legendary_crown.lua")() --same as above, but dont have too much hands, maybe have higher ranked cards or planets on hand
@@ -572,13 +695,17 @@ end
 --Common
 NFS.load(mod_path .. "data/jokers/unik/common/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/gt710.lua")()
-NFS.load(mod_path .. "data/jokers/unik/common/golden_glove.lua")() --NoImage
-NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")() --NoImage
+NFS.load(mod_path .. "data/jokers/unik/common/golden_glove.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/1_5_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/common/noon.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/tape_seven.lua")()
+
+NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/zealous_joker.lua")()
@@ -606,8 +733,22 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/D16.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/stamp_spam.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/uncommon/perk_lottery.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/malicious_face.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/antivirus.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/energy_compressor.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/better_riffin.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/base_camp.lua")()  
+NFS.load(mod_path .. "data/jokers/unik/uncommon/twin_peaks.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/road_sign.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  
 
 --Rare
+--: create a summit card if hand contains a five of a kind
+
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
@@ -621,7 +762,12 @@ NFS.load(mod_path .. "data/jokers/unik/rare/foundation.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/EARTHMOVER.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/last_tile.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()
@@ -629,17 +775,19 @@ end
 NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
 
 --Rare (characters)
-NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")() --FULL REWORK NEEDED
+NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/blossom.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/maya_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")() 
 
 --Ancient
---NIKO
---WORLD MACHINE
+NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
+NFS.load(mod_path .. "data/jokers/unik/ancient/sundae_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/white_lily_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/moonlight_cookie.lua")()
@@ -649,6 +797,10 @@ NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")()
 ---------------
 ---CROSSMOD (non cursed) JONKLERS
 ---------------
+if next(SMODS.find_mod("Bunco")) then
+	-- NFS.load(mod_path .. "data/jokers/bunco/neon_rainbows.lua")()
+	-- NFS.load(mod_path .. "data/jokers/bunco/king_minos.lua")()
+end
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
@@ -674,6 +826,14 @@ if next(SMODS.find_mod("GrabBag")) then
 end
 local mainmenuref2 = Game.main_menu
 Game.main_menu = function(change_context)
+	if next(SMODS.find_mod("finity")) then
+		local bossblinds = {
+			["bl_unik_fuck_eternal_egg"] = {"j_unik_eternal_egg","Eternal Egg"},
+		}
+		for k, v in pairs(bossblinds) do
+			FinisherBossBlindStringMap[k] = v
+		end
+	end
 	if unik_config.unik_legendary_blinds then
   	if next(SMODS.find_mod("finity")) then
 		local legendarybossblinds = {
@@ -693,6 +853,7 @@ end
 --Finity Jokers
 if next(SMODS.find_mod("finity")) then
 
+	NFS.load(mod_path .. "data/jokers/finity/eternal_egg.lua")() 
 	if unik_config.unik_legendary_blinds then
 		if (SMODS.Mods["Cryptid"] or {}).can_load then
 			Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown")
@@ -743,9 +904,14 @@ end
 NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
 NFS.load(mod_path .. "data/overrides/last_hand.lua")() 
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/overrides/copper_fix.lua")()
+	NFS.load(mod_path .. "data/overrides/polyminos_rework.lua")() 
+end
 
 
---Challenges gone until I fix them to work with new API NFS.load(mod_path .. "data/challenges/common_muck.lua")()
+--Challenges gone until I fix them to work with new API 
+NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
@@ -778,10 +944,18 @@ function vice_check()
 	if G.GAME.OvershootFXVal >= 4 then
 		return 1
 	end
+	local multiplier = 1
+	if G.GAME.OvershootFXVal >= 2 then
+		multiplier = 2
+	end
+	if G.GAME.OvershootFXVal >= 3 then
+		multiplier = 4
+	end
 	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
 		return 1
 	end
-    if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*10000)/10000)) == 0 then
+	
+    if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*multiplier*10000)/10000)) == 0 then
         return 1
     end
     if G.GAME.round_resets.ante and G.GAME.round_resets.ante% G.GAME.win_ante == 0 then

@@ -1,0 +1,221 @@
+--Rescore card if scoring and adjacent to a card with another copper seal.
+--Literally copper cards but more versatile.
+--Spectral: Turing
+SMODS.Seal {
+    key = 'copper',
+    atlas = "unik_seals",
+    pos = { x = 0, y = 0 },
+    badge_colour = G.C.UNIK_COPPER,
+    calculate = function(self, card, context)
+        if context.unik_after_effect and context.cardarea and context.cardarea == G.hand  then
+            -- print("XXXXXXXXVVVV")
+            -- print(context.cardarea.cards)
+            local success = false
+            for i = 1, #context.cardarea.cards do
+                if context.cardarea.cards[i] == card then
+                    if i > 1 and context.cardarea.cards[i-1].seal and context.cardarea.cards[i-1].seal == 'unik_copper' and not context.cardarea.cards[i-1].debuff then
+                        success = true
+                        break
+                    end
+                    if i < #context.cardarea.cards and context.cardarea.cards[i+1].seal and context.cardarea.cards[i+1].seal == 'unik_copper' and not context.cardarea.cards[i+1].debuff then
+                        success = true
+                        break
+                    end
+                end
+            end
+            if success then
+                return {
+                    rescore = 1
+                }
+            end
+        end
+        if context.unik_after_effect and context.scoring_hand then
+            local success = false
+            for i = 1, #context.scoring_hand do
+                if context.scoring_hand[i] == card then
+                    if i > 1 and context.scoring_hand[i-1].seal and context.scoring_hand[i-1].seal == 'unik_copper' and not context.scoring_hand[i-1].debuff then
+                        success = true
+                        break
+                    end
+                    if i < #context.scoring_hand and context.scoring_hand[i+1].seal and context.scoring_hand[i+1].seal == 'unik_copper' and not context.scoring_hand[i+1].debuff then
+                        success = true
+                        break
+                    end
+                end
+            end
+            if success then
+                return {
+                    rescore = 1
+                }
+            end
+        end
+       
+    end,
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
+    end,
+    draw = function(self, card, layer)
+        if (layer == 'card' or layer == 'both') and card.sprite_facing == 'front' then
+            G.shared_seals[card.seal].role.draw_major = card
+            G.shared_seals[card.seal]:draw_shader('dissolve', nil, nil, nil, card.children.center)
+            G.shared_seals[card.seal]:draw_shader('voucher', nil, card.ARGS.send_to_shader, nil, card.children.center)
+        end
+    end,
+}
+
+local bunc_original_calculate_main_scoring = SMODS.calculate_main_scoring
+function SMODS.calculate_main_scoring(context, scoring_hand)
+    local calc_card_area = context.cardarea
+    bunc_original_calculate_main_scoring(context, scoring_hand)
+
+    -- Post-scoring
+    local eval = {}
+    
+    SMODS.calculate_context({cardarea = calc_card_area, full_hand = G.play.cards, scoring_hand = scoring_hand, unik_after_effect = true},eval)
+    --Enhancements
+    local enhancementRescores = {}
+    for i = 1, #eval do
+
+        if eval[i] then
+            if eval[i].enhancement then
+                if eval[i].enhancement.rescore and eval[i].enhancement.card then
+                    eval[i].enhancement.card.unik_rescored = true
+                    enhancementRescores[#enhancementRescores+1] = {card = eval[i].enhancement.card, rescore = eval[i].enhancement.rescore}
+
+                end
+            end
+        end
+    end
+    --Seals
+    local sealRescores = {}
+    for i = 1, #eval do
+
+        if eval[i] then
+            if eval[i].seals then
+                if eval[i].seals.rescore and eval[i].seals.card then
+                    eval[i].seals.card.unik_rescored = true
+                    sealRescores[#sealRescores+1] = {card = eval[i].seals.card, rescore = eval[i].seals.rescore}
+                end
+            end
+        end
+    end
+
+    --Jokers
+    --Jokers will have individualized "source" and "message"
+    --Will take in rescored cards as well cause kite experiment relies on that.
+    local jokerRescores = {}
+    local eval2 = {}
+    SMODS.calculate_context({unik_kite_experiment = true, cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand},eval2)
+    for i = 1, #eval2 do
+                        --for scenarios such as rescoring a random card and that card changes
+        if eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and type(eval2[i].jokers.target_cards) == 'table' and eval2[i].jokers.target_cards[1] and eval2[i].jokers.target_cards[1].unik_scoring_segment then
+            for w = 1, #eval2[i].jokers.target_cards do
+                local struct = {}
+                for x = 1, #eval2[i].jokers.target_cards[w] do
+                    struct[#struct+1] = {card = eval2[i].jokers.target_cards[w][x], rescore = 1}
+                end
+                struct.source = eval2[i].jokers.card
+                struct.message = eval2[i].jokers.message
+                struct.colour = eval2[i].jokers.colour
+                jokerRescores[#jokerRescores+1] = struct
+            end
+        elseif eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and eval2[i].jokers.rescore then
+            local struct = {}
+            --If specified as a table, then individualize for each card(ideally align EXACTLY with the cards, but has mesures)
+            if type(eval2[i].jokers.rescore) == 'table' then
+                for z = 1, math.min(#eval2[i].jokers.target_cards,#eval2[i].jokers.rescore) do
+                    local x = eval2[i].jokers.target_cards[z]
+                    local rescoreAmount = eval2[i].jokers.rescore[z]
+                    x.unik_rescored = true
+                    struct[#struct+1] = {card = x, rescore = rescoreAmount}
+                end
+            --Otherwise apply for all selected cards
+            else
+                for j,x in pairs(eval2[i].jokers.target_cards) do
+                    x.unik_rescored = true
+                    struct[#struct+1] = {card = x, rescore = eval2[i].jokers.rescore}
+                end
+            end
+            
+            
+            -- if triggered then
+            --     card_eval_status_text(eval2[i].jokers.card, 'jokers', nil, nil, nil, eval2[i].jokers)
+            -- end
+            struct.source = eval2[i].jokers.card
+            struct.message = eval2[i].jokers.message
+            struct.colour = eval2[i].jokers.colour
+            jokerRescores[#jokerRescores+1] = struct
+        end
+    end
+    --Amalgamate the tables:
+    local combinedTable = {}
+    combinedTable[#combinedTable+1] = enhancementRescores
+    combinedTable[#combinedTable+1] = sealRescores
+
+    for i,v in pairs(jokerRescores) do
+      --  print(v)
+        combinedTable[#combinedTable+1] = v
+    end
+    for i,v in pairs(combinedTable) do
+        local max_rescore = 0
+        for j,w in pairs(v) do
+            if type(w) == 'table' and w.rescore then
+                max_rescore = math.max(max_rescore,w.rescore)
+            end
+            
+        end
+        for j = 1,max_rescore do
+            local rescoring_cards = {}
+            for k,w in pairs(v) do
+                if type(w) == 'table' and w.card and w.rescore and j <= w.rescore then
+                    rescoring_cards[#rescoring_cards+1] = w.card
+
+                end
+            end
+             G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                func = function()
+                    for k,w in pairs(v) do
+                        if type(w) == 'table' and w.card and w.rescore and j <= w.rescore then
+                                    w.card:juice_up(1,1)
+
+                        end
+                    end
+                    return true
+                end
+            }))
+            play_area_status_text(localize('k_unik_repeat'))
+            SMODS.calculate_context({unik_post_rescore = true,rescored_cards = rescoring_cards,cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand})
+            if v.source and v.message then
+                card_eval_status_text(v.source, "extra", nil, nil, nil, {
+                    message = v.message,
+                    colour = v.colour or G.C.FILTER,
+                    card=v.source,
+                })
+                
+            end
+            for _,x in pairs(rescoring_cards) do
+                local pased = context
+                pased.cardarea = calc_card_area 
+                SMODS.score_card(x, pased)
+            end
+
+
+        end
+    end
+        --clean table
+    for i,v in pairs(calc_card_area.cards) do
+        if v.unik_rescored then
+          --  print("CLEAN")
+            v.unik_rescored = nil
+        end
+    end
+    for i,v in pairs(G.play.cards) do
+        if v.unik_rescored then
+           -- print("CLEAN")
+            v.unik_rescored = nil
+        end
+    end
+
+
+end

@@ -5,18 +5,18 @@
 --Jokers: Immediately sold when selected (when possible)
 --incompatible with eternal
 function Card:set_triggering(triggering)
-    if not self.config.center.triggering_blacklist then
+    if not self.config.center.triggering_blacklist and not SMODS.is_eternal(self,self) then
         self.ability.unik_triggering = triggering
         self:set_cost()
     end
 end
 local setCosta = Card.set_cost
 function Card:set_cost()
+    setCosta(self)
     if self.ability.disposable then
         self.cost = 0
         self.sell_cost = 0
     end
-    setCosta(self)
 end
 SMODS.Sticker{
     key="unik_triggering",
@@ -47,7 +47,9 @@ function Card:update(dt)
     if self.ability and self.ability.unik_triggering then
         if (self.area == G.consumeables or self.area == G.hand) and self.ability and self.ability.unik_can_autotrigger then
             local canUse = false
-            canUse = self:can_use_consumeable()
+            if self.can_use_consumeable and self.ability.consumeable then
+                canUse = self:can_use_consumeable()
+            end
             if canUse and not self.ability.unik_already_used and not G.GAME.unik_using_automatic_consumeable and not G.GAME.before_play_buffer then
                 self.ability.unik_already_used = true
                 G.GAME.unik_using_automatic_consumeable = true
@@ -75,9 +77,11 @@ function Card:update(dt)
         end
     --Ultradebuffed
     elseif self.ability and self.ability.unik_ultradebuffed then
+        self.ability.unik_shielded = nil
         if not self.debuff and not self.area.config.collection then
             self.debuff = true
             self.perma_debuff = true
+            self:set_debuff(true)
             if self.area == G.jokers then self:remove_from_deck(true) end
         end
     end

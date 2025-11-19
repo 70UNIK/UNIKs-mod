@@ -34,17 +34,21 @@ SMODS.Joker {
 	perishable_compat = false,
 	demicoloncompat = true,
 	eternal_compat = true,
-	config = {extra = {x_mult = 2, scoring = false},immutable = {blind_size = 1.15}},
+	config = {extra = {x_mult = 1.75, scoring = false},immutable = {blind_size = 1.15}},
 	loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
 		return {
 			vars = {center.ability.extra.x_mult,center.ability.immutable.blind_size,localize(megatron_quotes[quoteset][math.random(#megatron_quotes[quoteset])] .. "")}
 		}
 	end,
+    paperback = {
+        permanently_eternal = true,
+    },
     pronouns = "he_him",
     add_to_deck = function(self,card,from_debuff)
         card.ability.eternal = true
-        card.ability.absolute = true
+        card.ability.cry_absolute = true
+        card.ability.aleph = true
     end,
 	-- The functioning part of the joker, looks at context to decide what step of scoring the game is on, and then gives a 'return' value if something activates.
     calculate = function(self, card, context)

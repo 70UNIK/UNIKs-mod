@@ -23,7 +23,7 @@ SMODS.Joker{
     perishable_compat = false,
 	eternal_compat = false,
     immutable = true,
-    config = { extra = { odds = 7, flipped_cards = false , min_facedowns = 5} },
+    config = { extra = { odds = 7, flipped_cards = {} , min_facedowns = 5} },
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds)
         return { vars = { 
@@ -48,32 +48,23 @@ SMODS.Joker{
         and not context.blueprint
         and not context.retrigger_joker
         and SMODS.pseudorandom_probability(card, 'unik_wheel', 1, card.ability.extra.odds) then
-            card.ability.extra.flipped_cards = true
-            context.other_card.ability.unik_flipped_by_wheel = true
             return {
                 stay_flipped = true
             }
         end
-        if context.before and context.scoring_hand 
-        and not context.blueprint
-        and not context.retrigger_joker
+        if context.on_select_play
         then
-            local facedowns = 0
-            for i,v in pairs(context.scoring_hand) do
-                if v.ability.unik_flipped_by_wheel then
-                    facedowns = facedowns + 1
-                    v.ability.unik_flipped_by_wheel = nil
+            local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+            card.ability.extra.flipped_cards = {}
+             for i = 1, #scoring_hand do
+                if scoring_hand[i].facing == 'back' then
+                    table.insert(card.ability.extra.flipped_cards, scoring_hand[i])
                 end
             end
             --print(facedowns)
-            if facedowns >= card.ability.extra.min_facedowns then
+            if #card.ability.extra.flipped_cards >= card.ability.extra.min_facedowns then
                 selfDestruction(card,"k_unik_wheel_burst",G.C.UNIK_THE_WHEEL)
 
-            end
-        end
-        if context.setting_blind then
-            for i,v in pairs(G.playing_cards) do
-                v.ability.unik_flipped_by_wheel = nil
             end
         end
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wheel")) and not (G.GAME.blind.disabled) and not context.blueprint

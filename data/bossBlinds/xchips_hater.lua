@@ -79,6 +79,10 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             key = nil
              marked_for_destruction = true
         end
+        if  (key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod") then
+            key = nil
+             marked_for_destruction = true
+        end
         if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
             key = nil
              marked_for_destruction = true
@@ -98,6 +102,100 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
     if scored_card and scored_card.ability and scored_card.ability.no_score then
         key = nil
     end
+
+    local decrement_multeasers = false
+    if (key == "chip" or key == "chips" or key == "chip_mod" or key == "chips_mod") then
+        decrement_multeasers = true
+    end
+    local destroy_multeasers = false
+    if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
+        destroy_multeasers = true
+    end
+    
+    if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
+        destroy_multeasers = true
+    end
+    if  (key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod") then
+        destroy_multeasers = true
+    end
+    if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
+        destroy_multeasers = true
+    end
+    if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') then
+        destroy_multeasers = true
+    end
+    if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') then
+        destroy_multeasers = true
+    end
+    if G.jokers and destroy_multeasers then
+        for i,v in pairs(G.jokers.cards) do
+            if v.config.center.key == 'j_unik_multesers' and not v.ability.extra.destroyed then
+                v.ability.extra.destroyed = true
+                selfDestruction(v,'k_eaten_ex',G.C.MULT)
+                
+            end
+        end
+    end
+    if G.jokers and decrement_multeasers then
+        for i,v in pairs(G.jokers.cards) do
+            if v.config.center.key == 'j_unik_multesers' and not v.ability.extra.destroyed then
+                if not v.ability.unik_depleted and lenient_bignum(v.ability.extra.mult - v.ability.extra.mult_mod) <= lenient_bignum(0) then
+                    v.ability.extra.destroyed = true
+                    selfDestruction(v,'k_eaten_ex',G.C.MULT)
+                elseif v.ability.unik_depleted and lenient_bignum(v.ability.extra.mult - v.ability.extra.mult_mod) <= lenient_bignum(v.ability.extra.depleted_threshold) then
+                    v.ability.extra.destroyed = true
+                    selfDestruction(v,'k_eaten_ex',G.C.MULT)
+                else
+                    SMODS.scale_card(v, {
+                        ref_table = v.ability.extra,
+                        ref_value = "mult",
+                        scalar_value = "mult_mod",
+                        operation = "-",
+                        message_key = 'a_mult_minus',
+                        message_colour = G.C.MULT,
+                    })
+                end
+            end
+        end
+    end
+
+    if G.GAME.unik_shining_glitter_edition_blind and G.GAME.blind and G.GAME.blind.chips then
+        local triggered = false
+        
+        if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
+            triggered = true
+        end
+        
+        if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
+            triggered = true
+        end
+        if  (key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod") then
+            triggered = true
+        end
+        if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
+            triggered = true
+        end
+        if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') then
+            triggered = true
+        end
+        if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') then
+            triggered = true
+        end
+        if triggered then
+            G.GAME.unik_shining_glitter_base = G.GAME.unik_shining_glitter_base or G.GAME.blind.chips
+            G.E_MANAGER:add_event(Event({func = function()
+                G.GAME.blind.chips = G.GAME.blind.chips + G.GAME.unik_shining_glitter_base * 0.05
+                G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                G.HUD_blind:recalculate(true)
+                G.hand_text_area.blind_chips:juice_up()
+                play_sound('chips2')
+            return true end }))
+        end
+        
+    end
+
+
+    
     local ret = scie(effect, scored_card, key, amount, from_edition)
     if ret then
         return ret

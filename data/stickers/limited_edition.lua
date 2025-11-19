@@ -7,8 +7,13 @@ SMODS.Sticker{
     rate = 0.0,
     no_sticker_sheet = true,
     loc_vars = function(self, info_queue, card)
+        G.GAME.unik_limited_edition_rounds = G.GAME.unik_limited_edition_rounds or 5
+        local tally = G.GAME.unik_limited_edition_rounds or 5
+        if card and card.ability and card.ability.limited_edition_tally then
+            tally = card.ability.limited_edition_tally
+        end
         
-        return { vars = { G.GAME.unik_limited_edition_rounds or 5, card.ability.limited_edition_tally or G.GAME.unik_limited_edition_rounds } }
+        return { vars = { G.GAME.unik_limited_edition_rounds or 5, tally  } }
 	end,
 	calculate = function(self, card, context)
 		if context.end_of_round and context.main_eval then -- perishable is calculated seperately across G.playing_cards i believe

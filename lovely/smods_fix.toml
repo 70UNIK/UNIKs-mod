@@ -25,3 +25,13 @@ pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_ca
 position = "after"
 payload = '''end'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''if specific_vars and specific_vars.bonus_x_chips then
+        localize{type = 'other', key = 'card_h_x_chips', nodes = desc_nodes, vars = {specific_vars.bonus_h_x_chips}}'''
+position = "at"
+payload = '''if specific_vars and specific_vars.bonus_h_x_chips then
+        localize{type = 'other', key = 'card_h_x_chips', nodes = desc_nodes, vars = {specific_vars.bonus_h_x_chips}}'''
+match_indent = true

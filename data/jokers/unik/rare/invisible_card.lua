@@ -9,7 +9,7 @@ SMODS.Joker{ --Yellow Card
         },
         immutable = {
 			slots = 0,
-			max_slots = 6,
+			max_slots = 3,
 		},
     },
     pos = {
@@ -38,10 +38,10 @@ SMODS.Joker{ --Yellow Card
             if not SMODS.pseudorandom_probability(card, 'unik_invisible_card', card.ability.extra.prob, card.ability.extra.odds, 'unik_invisible_card') then
                 
                 card.ability.immutable.slots = math.min(lenient_bignum(card.ability.immutable.slots + math.floor(card.ability.extra.increase)),card.ability.immutable.max_slots)
+                G.jokers.config.card_limit = lenient_bignum(G.jokers.config.card_limit + math.floor(card.ability.extra.increase))
                 if card.ability.immutable.slots >= card.ability.immutable.max_slots then
                     card.ability.extra.increase = 0
                 end
-                G.jokers.config.card_limit = lenient_bignum(G.jokers.config.card_limit + math.floor(card.ability.extra.increase))
                 return {
 					card_eval_status_text(card, "extra", nil, nil, nil, {
 						message = localize("k_upgrade_ex"),

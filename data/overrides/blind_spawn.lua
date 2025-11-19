@@ -23,7 +23,6 @@ function Game:start_run(args)
         if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
             self.GAME.round_resets.blind_choices.Boss = get_new_boss()
         end
-        
     end
 end
 
@@ -113,6 +112,7 @@ function get_new_boss()
     end
     --Ignore if a showdown boss.
     if force_override and (not G.P_BLINDS[boss].boss or (G.P_BLINDS[boss].boss and not G.P_BLINDS[boss].boss.showdown)) then
+       -- print("OVERRIDE")
         for k, v in pairs(G.P_BLINDS) do
             if not v.boss then
             else

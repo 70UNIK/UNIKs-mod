@@ -6,11 +6,23 @@ SMODS.Atlas {
 }
 
 local chelsea_quotes = {
-	normal = {
+	alone = {
 		'k_unik_chelsea_normal1',
 		'k_unik_chelsea_normal2',
 		'k_unik_chelsea_normal3',
         'k_unik_chelsea_normal4',
+	},
+	with_family = {
+		'k_unik_chelsea_normal1',
+		'k_unik_chelsea_normal2',
+		'k_unik_chelsea_normal3',
+        'k_unik_chelsea_normal_1member',
+	},
+	everyone = {
+		'k_unik_chelsea_normal1',
+		'k_unik_chelsea_normal2',
+		'k_unik_chelsea_normal3',
+        'k_unik_chelsea_normal_family',
 	},
 }
 SMODS.Joker {
@@ -20,7 +32,6 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
-    godsmarble_family_trauma = { x = 1, y = 0 },
     cost = 8,
 	blueprint_compat = true,
     perishable_compat = false,
@@ -28,9 +39,14 @@ SMODS.Joker {
     demicoloncompat = true,
     fusable = true,
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.02} },
-    pools = {["unik_cube"] = true },
+    pools = {["unik_cube"] = true,["character"] = true },
 	loc_vars = function(self, info_queue, center)
-        local quoteset = 'normal'
+		local quoteset = 'alone'
+		if next(find_joker('j_unik_jsab_yokana')) and next(find_joker('j_unik_jsab_maya')) then
+			quoteset = 'everyone'
+		elseif next(find_joker('j_unik_jsab_yokana')) or next(find_joker('j_unik_jsab_maya')) then
+			quoteset = 'with_family'
+		end
 		return { 
             vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod
             ,localize(chelsea_quotes[quoteset][math.random(#chelsea_quotes[quoteset])] .. "")
@@ -64,6 +80,7 @@ or key == "EEchips_mod" or key == "ee_chips_mod" or key == "EEchips" or key == "
 or key == "EEEchips_mod" or key == "eee_chips_mod" or key == "EEEchips" or key == "eee_chips" or key == "eeechips" or key == "EEEchip_mod"
 or key == "EEEEchips_mod" or key == "eeee_chips_mod" or key == "EEEEchips" or key == "eeee_chips" or key == "eeeechips" or key == "EEEEchip_mod"
 or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" or key == "hyper_chips" or key == "hyperchips" or key == "hyperchip_mod"
+or key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod"
 ) and amount ~= 1) or
 
     key == "chips" or key == "chip_mod" or key == "chip" or key == "chips_mod" then
@@ -83,21 +100,21 @@ or key == "hyper_chips_mod" or key == "hyper_chips_mod" or key == "Hyper_chips" 
     return ret
 end
 
---Simple XChips display
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_jsab_chelsea"] = {
-		text = {
-			{
-				border_nodes = {
-					{ text = "X" },
-					{
-						ref_table = "card.ability.extra",
-						ref_value = "x_chips",
-						retrigger_type = "exp"
-					},
-				},
-				border_colour = G.C.CHIPS,
-			},
-		},
-	}
-end
+-- --Simple XChips display
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_jsab_chelsea"] = {
+-- 		text = {
+-- 			{
+-- 				border_nodes = {
+-- 					{ text = "X" },
+-- 					{
+-- 						ref_table = "card.ability.extra",
+-- 						ref_value = "x_chips",
+-- 						retrigger_type = "exp"
+-- 					},
+-- 				},
+-- 				border_colour = G.C.CHIPS,
+-- 			},
+-- 		},
+-- 	}
+-- end

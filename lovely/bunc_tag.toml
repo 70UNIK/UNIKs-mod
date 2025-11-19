@@ -1,0 +1,11 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+[[patches]]
+[patches.regex]
+target = '''=[SMODS Bunco "Bunco.lua"]'''
+pattern = '''tag\:yep\((.*)\, G\.C\.RED'''
+position = "at"
+payload = '''tag:too_bad("TOO BAD", G.C.UNIK_VOID_COLOR'''

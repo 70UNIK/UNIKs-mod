@@ -1,5 +1,4 @@
---^^1.2 Mult. If copied, retriggered or blind defeated in 3 hands, self destructs and the next blind becomes an epic blind.
---Becomes ^2.5 mult without talisman due to the nature of tetration (outside of morefluff's)
+
 --EPIC
 function ForceEpicBlind()
     G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus or 0
@@ -28,10 +27,6 @@ SMODS.Joker {
     config = { extra = { EEmult = 1,destroyed = false,triggers = 5,Emult = 1,trigger_mod = 5, Mult = 100, Chips = 50}, immutable = {base_emult = 1.0} },
     loc_vars = function(self, info_queue, center)
         local key = "j_unik_epic_blind_sauce"
-        if (not Talisman) then
-            key = "j_unik_epic_blind_sauce_notalisman"
-            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
-        end
         if not unik_config.unik_legendary_blinds then
             key = "j_unik_epic_blind_sauce_no_epic"
             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
@@ -63,21 +58,12 @@ SMODS.Joker {
                 if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
                     card.ability.extra.triggers = card.ability.extra.triggers - 1
                 end
-                if (not unik_config.unik_legendary_blinds) or (not Talisman) then
-                    return {
+                return {
                         mult = card.ability.extra.Mult,
                         chips = card.ability.extra.Chips,
                         e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
                         colour = G.C.DARK_EDITION,
-                    }
-                else
-                    return {
-                        mult = card.ability.extra.Mult,
-                        chips = card.ability.extra.Chips,
-                        e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                        colour = G.C.DARK_EDITION,
-                    }
-                end   
+                    } 
             end
         end
         if context.end_of_round and context.cardarea == G.jokers and not card.ability.extra.destroyed then

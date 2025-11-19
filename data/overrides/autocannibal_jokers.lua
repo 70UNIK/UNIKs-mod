@@ -9,7 +9,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 			depleted_threshold = -200,
 		},
 	},
-	pools = { ["autocannibalism_food"] = true },
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_cry_clicked_cookie2'
 		local sign = "+"
@@ -384,7 +384,7 @@ SMODS.Joker:take_ownership("j_mf_lollipop",{
 		vars = { center.ability.x_mult, center.ability.extra,0 }
 		}
 	end,
-	pools = { ["autocannibalism_food"] = true },
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	calculate = function(self, card, context)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint and not context.retrigger_joker then
 		if (card.ability.x_mult - card.ability.extra <= 1.01 and not card.ability.unik_depleted) or (card.ability.x_mult - card.ability.extra <= 0 and card.ability.unik_depleted) then 
@@ -445,7 +445,7 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 		}
 		}
 	end,
-	pools = { ["autocannibalism_food"] = true },
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	demicolon_compat = true,
 	calculate = function(self, card, context)
 		-- Gives the xChips during play

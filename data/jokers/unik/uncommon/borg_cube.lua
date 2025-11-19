@@ -26,14 +26,6 @@ SMODS.Joker {
 			and context.other_joker.edition.unik_steel == true
 			and card ~= context.other_joker
 		then
-			if not Talisman.config_file.disable_anims then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						context.other_joker:juice_up(0.5, 0.5)
-						return true
-					end,
-				}))
-			end
 			return {
 				message = localize({
 					type = "variable",
@@ -43,15 +35,15 @@ SMODS.Joker {
 				Xmult_mod = lenient_bignum(card.ability.extra.xmult),
 			}
 		end
-		if context.individual and context.cardarea == G.play then
-			if context.other_card.edition and context.other_card.edition.unik_steel == true then
-				return {
-					x_mult = lenient_bignum(card.ability.extra.xmult),
-					colour = G.C.MULT,
-					card = card,
-				}
-			end
-		end
+		-- if context.individual and context.cardarea == G.play then
+		-- 	if context.other_card.edition and context.other_card.edition.unik_steel == true then
+		-- 		return {
+		-- 			x_mult = lenient_bignum(card.ability.extra.xmult),
+		-- 			colour = G.C.MULT,
+		-- 			card = card,
+		-- 		}
+		-- 	end
+		-- end
 		if
 			context.individual
 			and context.cardarea == G.hand

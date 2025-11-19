@@ -187,7 +187,7 @@ function Tag:too_bad(message, _colour, func)
             attention_text({
                 text = message,
                 colour = G.C.UNIK_EYE_SEARING_RED,
-                scale = 1, 
+                scale = 0.85, 
                 hold = 0.3/G.SETTINGS.GAMESPEED,
                 cover = self.HUD_tag,
                 cover_colour = _colour or G.C.UNIK_VOID_COLOR,

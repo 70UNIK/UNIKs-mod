@@ -11,7 +11,17 @@ target = 'functions/state_events.lua'
 pattern = '''check_for_unlock({type = 'chip_score', chips = math.floor( SMODS.calculate_round_score() )})'''
 position = 'after'
 payload = '''
-G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
+local nanny = tostring(number_format(math.floor(SMODS.calculate_round_score())))
+
+-- -nan fix
+if nanny ~= '-nan' then
+
+    G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
+else
+    G.GAME.round_scores['hand'].amt = math.huge
+    G.GAME.round_scores.hand.amt = math.huge
+    print(number_format(G.GAME.round_scores.hand.amt))
+end
 local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,SMODS.calculate_round_score())
 local debuff_hand = false
 local add_to_blind = 0
@@ -29,7 +39,12 @@ if checker and checker.debuff then
     }))
 end
 if checker and checker.add_to_blind then
-    add_to_blind = to_big(checker.add_to_blind)
+    if nanny == '-nan' then
+        add_to_blind = math.huge
+    else
+        add_to_blind = to_big(checker.add_to_blind)
+    end
+    
 end
 '''
 match_indent = true
@@ -43,14 +58,22 @@ pattern = '''        func = (function() play_sound('chips2');return true end)
     end'''
 position = 'after'
 payload = '''
-if to_big(add_to_blind) > to_big(0) then
+if to_big(add_to_blind) > to_big(0) or add_to_blind == math.huge then
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         func = (function() 
-            G.GAME.blind.chips = G.GAME.blind.chips + add_to_blind
+        if add_to_blind == math.huge then
+             G.GAME.blind.chips = math.huge
+            G.GAME.blind.chip_text = number_format(math.huge)
+            G.HUD_blind:recalculate(true)
+            G.hand_text_area.blind_chips:juice_up()
+        else
+             G.GAME.blind.chips = G.GAME.blind.chips + add_to_blind
             G.GAME.blind.chip_text = number_format(G.GAME.blind.chips + add_to_blind)
             G.HUD_blind:recalculate(true)
             G.hand_text_area.blind_chips:juice_up()
+        end
+           
         
         return true end)
         }))
@@ -79,7 +102,7 @@ pattern = '''G.E_MANAGER\:add_event\(Event\(\{
     }\)\)'''
 position = 'before'
 payload = '''
-if not debuff_hand then
+if not debuff_hand and nanny ~= '-nan' and G.GAME.chips_text ~= '-nan' then
 '''
 
 ### display the fake score before not allowing the hand and/or adding to blind part 2
@@ -97,6 +120,16 @@ pattern = '''G.E_MANAGER\:add_event\(Event\(\{
     }\)\)'''
 position = 'after'
 payload = '''
+elseif not debuff_hand and nanny == '-nan' or G.GAME.chips_text == '-nan' then
+ G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                func = (function() 
+                    G.GAME.chips = math.huge
+                    G.GAME.blind:calculate()
+                
+                return true end)
+                }))
+    
 end
 '''
 
@@ -108,5 +141,21 @@ pattern = '''SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = s
 position = 'after'
 payload = '''
 G.GAME.blind:unik_after_play()
+if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+    local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+    if edi.unik_after_play and edi.unik_after_play() and (type(edi.unik_after_play) == "function") then
+        delay(0.4)
+        edi:unik_after_play()
+    end
+end
 '''
+match_indent = true
+
+### unik_afterplay
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.chips - G.GAME.blind.chips >= 0 then'''
+position = 'at'
+payload = '''if to_big(G.GAME.chips - G.GAME.blind.chips) >= to_big(0) then'''
 match_indent = true

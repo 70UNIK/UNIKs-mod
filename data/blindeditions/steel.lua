@@ -3,7 +3,7 @@ SMODS.BlindEdition {
     key = 'unik_steel',
     blind_shader = 'unik_steel',
     weight = 0.2,
-    dollars_mod = 3,
+    dollars_mod = 2,
     set_blind = function(self, blind_on_deck)
             G.E_MANAGER:add_event(Event({trigger = 'immediate',func = function()
                 G.GAME.unik_steel_base_size = G.GAME.blind.chips

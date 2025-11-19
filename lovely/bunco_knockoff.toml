@@ -1,0 +1,29 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+### display the fake score before not allowing the hand and/or adding to blind, now with bunco compat.
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''SMODS\.calculate\_main\_scoring\((.*)\)'''
+position = 'after'
+payload = '''
+
+----------NEW------------------------
+
+'''
+
+### destroyed_by_scattering
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if random_card then random_card:start_dissolve() end'''
+position = 'before'
+payload = '''
+if random_card then
+    random_card.ability.destroyed_by_scattering = true
+end
+'''
+match_indent = true

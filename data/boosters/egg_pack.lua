@@ -16,13 +16,14 @@ SMODS.Booster{
 	kind = "Joker",
     atlas = "unik_cube_boosters",
 	pos = { x = 2, y = 1 },
-    cost = 0,
-    weight = 0, 
+    cost = 4,
+    weight = 0.7, 
     config = { extra = 4, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = egg_digital_hallucinations_compat,
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_egg
+		info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
 		return {
 			vars = {
 				card and card.ability.choose or self.config.choose,
@@ -62,15 +63,24 @@ SMODS.Booster{
         carder.ability.rental = true
         return carder
 	end,
-	skip_effect = function(self)
+	skip_req_message = function(self)
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
 		
+		return {
+			{
+				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'lartceps_pack_pity'},localize("k_unik_skip_req2"),
+			},
+		}
+	end,
+	skip_effect = function(self)
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
 		local validJokers = {}
         for i,v in pairs(G.jokers.cards) do
             if not SMODS.is_eternal(v,self) then
                 validJokers[#validJokers+1] = v
             end
         end
-		if #validJokers > 0 and not G.GAME.disable_banish_FX then
+		if #validJokers > 0 and not G.GAME.disable_banish_FX and G.GAME.lartceps_pack_pity > 0 then
 			 local select = pseudorandom_element(validJokers, pseudoseed("unik_egg_banish"))
 			 if G.GAME.blind then
 				G.GAME.blind:wiggle()
@@ -90,6 +100,11 @@ SMODS.Booster{
 		end
 	end,
 	in_pool = function(self, args)
+		for i,v in pairs(G.jokers.cards) do
+			if v.config.center.key == "j_unik_eternal_egg" then
+				return true
+			end
+		end
         return false
     end,
 	unik_disablable = true,

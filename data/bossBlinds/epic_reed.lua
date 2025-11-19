@@ -1,3 +1,5 @@
+--todo: reowkr blind to be more like ancient joker: selects 3 ranks ignoring deck composition.
+--rn its a free win if you deckfix
 SMODS.Blind	{
     key = 'unik_epic_reed',
     config = {},

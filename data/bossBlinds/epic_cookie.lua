@@ -141,8 +141,48 @@ function G.FUNCS.play_cards_from_highlighted(e)
     if ((not (SMODS.Mods["Cryptid"] or {}).can_load  ) or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
         
     else
+        -- -NAN fix
+        if G.GAME.round_scores['hand'] and not G.GAME.round_scores['hand'].amt then
+            G.GAME.round_scores['hand'].amt = math.huge
+            G.GAME.round_scores.hand.amt = math.huge
+        end
         G.GAME.blind:unik_before_play()
         SMODS.calculate_context({on_select_play = true})
+
+        --Polymino autoselect all cards in selected group
+        local id = {}
+
+        if G.hand and G.hand.highlighted then
+            for i = 1, #G.hand.highlighted do
+                if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group then
+                    local exists = false
+                    for i,v in pairs(id) do
+
+                        if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group and G.hand.highlighted[i].ability.group.id == v then
+                            exists = true
+                        end
+                    end
+                    if not exists then
+                        id[#id+1] = G.hand.highlighted[i].ability.group.id
+                    end
+                    
+                end
+            end
+        end
+       -- print(id)
+        --print(#id)
+        if #id > 0 then
+            for i,v in pairs(G.hand.cards) do
+                for j,x in pairs(id) do
+                    
+                    if v and v.ability and v.ability.group and v.ability.group.id == x and not v.highlighted then
+                        G.hand:brute_force_highlight(v)
+                    end
+                end
+            end
+        end
+        --end
+
         pcfh(e)
     end
 	G.GAME.before_play_buffer2 = nil

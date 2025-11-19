@@ -18,6 +18,11 @@ SMODS.Joker {
 			 new_numerator, new_denominator
 		} }
 	end,
+	    discovered = true,
+    unlocked = true,
+    set_badges = function (self, card, badges)
+      SMODS.create_mod_badges({ mod = SMODS.find_mod("cry")[1] }, badges)
+    end,
     calculate = function(self, card, context)
 
 

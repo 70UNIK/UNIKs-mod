@@ -73,6 +73,23 @@ function Card:get_baseValOverride()
     return self.base.value
 end
 
+--pibby and bun bun
+function Card:get_rank_value()
+    if SMODS.has_no_rank(self) then
+        return 0
+    end
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
+        G.P_CENTERS[self.config.center.key].unik_specific_base_value
+    then
+        if not SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value] then
+            return 0
+        else
+            return SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].nominal
+        end
+    end
+    return self.base.nominal
+end
+
 --sorting
 local nominalGet = Card.get_nominal
 function Card:get_nominal(mod)

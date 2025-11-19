@@ -9,13 +9,12 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {odds1 = 1,odds2 = 1, mult=20,odds_mult = 3, p_dollars = 20, odds_money = 7} },
+    config = { extra = {odds1 = 1,odds2 = 1, mult=7,odds_mult = 2, p_dollars = 7, odds_money = 4} },
     --ONLY DISABLE if extracredit is installed
     loc_vars = function(self, info_queue, center)
-        local new_numerator1, new_denominator1 = SMODS.get_probability_vars(center, center.ability.extra.odds1, center.ability.extra.odds_mult, 'unik_lucky_seven_mult')
         local new_numerator2, new_denominator2 = SMODS.get_probability_vars(center, center.ability.extra.odds2, center.ability.extra.odds_money, 'unik_lucky_seven_cash')
         return { 
-            vars = {new_numerator1, new_denominator1,center.ability.extra.mult,
+            vars = {center.ability.extra.mult,
             new_numerator2, new_denominator2,center.ability.extra.p_dollars} }
 	end,
     
@@ -33,9 +32,7 @@ SMODS.Joker {
             if context.other_card:get_id() == 7 then
                 local multTrue = false
                 local moneyTrue = false
-                if SMODS.pseudorandom_probability(card, 'unik_lucky_seven_mult', card.ability.extra.odds1, card.ability.extra.odds_mult, 'unik_lucky_seven_mult') then
-                    multTrue = true
-                end
+                multTrue = true
                 if SMODS.pseudorandom_probability(card, 'unik_lucky_seven_cash', card.ability.extra.odds2, card.ability.extra.odds_money, 'unik_lucky_seven_cash') then
                     moneyTrue = true
                 end

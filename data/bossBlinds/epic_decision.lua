@@ -27,7 +27,7 @@ SMODS.Blind	{
             G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
             G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering and draw cards afterwards if in blind.
-            G.GAME.lartceps_pack_pity = 0
+            G.GAME.lartceps_pack_pity = 4
             if G.jokers.cards then
 				G.GAME.blind:wiggle()
 				G.GAME.blind.triggered = true
@@ -35,10 +35,6 @@ SMODS.Blind	{
 					v:juice_up(0,0.25)
 				end
 			end
-            local disp_text = localize("k_unik_must_select_four")
-            attention_text({
-                scale = 0.7, text = disp_text, maxw = 12, hold = 15, align = 'cm', offset = {x = 0,y = -1},major = G.play
-            })
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 func = function()

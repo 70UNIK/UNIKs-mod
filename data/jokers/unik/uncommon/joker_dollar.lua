@@ -14,6 +14,8 @@ SMODS.Joker {
 	pixel_size = { w = 52, h = 95 },
 	enhancement_gate = "m_unik_dollar",
 	perishable_compat = false,
+	demicolon_compat = true,
+	eternal_compat = true,
 	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_dollar
 		return {

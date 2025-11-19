@@ -1,0 +1,1 @@
+--remove a random sticker or detrimental edition from a random held card or joker

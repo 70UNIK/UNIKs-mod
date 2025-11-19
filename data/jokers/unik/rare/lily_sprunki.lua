@@ -30,6 +30,7 @@ SMODS.Joker {
     cost = 8,
     config = {extra = {active = true,quoteset = 'normal',limit = 2}},
     pronouns = "she_her",
+    bypass_group_selection = true, --for polyminos stuff
     loc_vars = function(self, info_queue, center)
         local quote = "k_active_ex"
         if center.ability.extra.active then
@@ -47,7 +48,7 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
     triggering_blacklist = true,
-    pools = {["unik_copyrighted"] = true },
+    pools = {["character"] = true },
     add_to_deck = function(self, card, context)
         --return to normal sprite
         card.children.center:set_sprite_pos({x = 0, y = 0})

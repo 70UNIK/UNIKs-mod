@@ -1,0 +1,20 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+
+
+##MAY CHANGE?
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''save_run()'''
+position = "at"
+payload = '''
+local stop = false
+if (stop) then
+    save_run()
+end
+'''
+match_indent = true
