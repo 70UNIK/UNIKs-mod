@@ -4,9 +4,9 @@ A standalone mod that adds what I want. A bit more unbalanced compared with Vani
 
 ![alt text](image-1.png)
 
-Requires Steamodded smods-1.0.0-beta-1016c or higher, Lovely v0.7.1 or higher. [Cdataman](https://github.com/frostice482/cdataman)/Talisman can be used to increase the scoring cap but isnt necessarily required.
+Requires Steamodded [smods-1.0.0-beta-1016c](https://github.com/Steamodded/smods) or higher, [Lovely](https://github.com/ethangreen-dev/lovely-injector) v0.7.1 or higher. [Cdataman](https://github.com/frostice482/cdataman)/[Talisman](https://github.com/SpectralPack/Talisman) can be used to increase the scoring cap but isnt necessarily required.
 
-It's recommended to pair this with Paperback and Bunco, goes well together with them and this mod completely overhauls linked groups in the latter.
+It's recommended to pair this with [Paperback](https://github.com/Balatro-Paperback/paperback) and [Bunco](https://github.com/jumbocarrot0/Bunco), goes well together with them and this mod completely overhauls linked groups in the latter.
 
 ## MAJOR FEATURES:
 - 80+ Jokers to play around with!
