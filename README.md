@@ -4,7 +4,7 @@ A standalone mod that adds what I want. A bit more unbalanced compared with Vani
 
 ![alt text](image-1.png)
 
-Requires Steamodded smods-1.0.0-beta-1016c or higher, Lovely v0.7.1 or higher. Cdataman/Talisman can be used to increase the scoring cap but isnt necessarily required.
+Requires Steamodded smods-1.0.0-beta-1016c or higher, Lovely v0.7.1 or higher. [Cdataman](https://github.com/frostice482/cdataman)/Talisman can be used to increase the scoring cap but isnt necessarily required.
 
 It's recommended to pair this with Paperback and Bunco, goes well together with them and this mod completely overhauls linked groups in the latter.
 
