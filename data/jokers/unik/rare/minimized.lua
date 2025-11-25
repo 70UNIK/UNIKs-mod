@@ -10,32 +10,24 @@ SMODS.Joker {
 	end,
     pixel_size = { w = 71, h = 30 },
 }
-local cgi_ref = Card.get_id
 local override_minimized = false
 local checking_minimized = false --cardsauce fix
-function Card:get_id()
-    if not checking_minimized then
-        checking_minimized = true
-        local id = cgi_ref(self) or self.base.id
-        if next(find_joker("j_unik_minimized")) and not override_minimized and not next(find_joker("cry-Maximized")) then
-            if id == nil then
-                id = 2
-            end
-            if (id >= 2 and id <= 10) or (id >= 15)then
-                id = 2
-            end
-            if id >= 11 and id <= 13 or next(find_joker("Pareidolia")) then
-                id = 11
-            end
+local cgi_ref = Card.get_id
+function Card:get_id(skippmk)
+    skippmk = skippmk or false
+    local id = cgi_ref(self,skippmk) or self.base.id
+    if next(find_joker("j_unik_minimized")) and not override_minimized and not next(find_joker("cry-Maximized")) then
+        if id == nil then
+            id = 2
         end
-        checking_minimized = false
-        return id
-    else
-        checking_minimized = false
-        local id = cgi_ref(self)
-        return id
+        if (id >= 2 and id <= 10) or (id >= 15)then
+            id = 2
+        end
+        if id >= 11 and id <= 13 or next(find_joker("Pareidolia")) then
+            id = 11
+        end
     end
-    
+    return id
 end
 --Fix issues with View Deck and Maximized
 local gui_vd = G.UIDEF.view_deck

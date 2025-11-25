@@ -28,31 +28,32 @@ function Game:unik_initialize_stuff()
     end
 end
 
--- local faceHook = Card.is_face
--- function Card:is_face(from_boss)
---     if self.debuff and not from_boss then return end
---     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and G.P_CENTERS[self.config.center.key].force_no_face then
---         return false
---     end
---     local ret = faceHook(self,from_boss)
---     return ret
--- end
+local faceHook = Card.is_face
+function Card:is_face(from_boss)
+    if self.debuff and not from_boss then return end
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and G.P_CENTERS[self.config.center.key].force_no_face then
+        return false
+    end
+    local ret = faceHook(self,from_boss)
+    return ret
+end
 
--- local getIDenhance = Card.get_id
--- function Card:get_id()
---     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
---         G.P_CENTERS[self.config.center.key].unik_specific_base_value
---     then
---         if not SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value] then
---             return G.ENHANCEMENT_OVERRIDE_RANKS[self.config.center.key][2]
---         else
---             return SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].id
---         end
---     end
--- 	local vars = getIDenhance(self)
+local getIDenhance = Card.get_id
+function Card:get_id(skippmk)
+    skippmk = skippmk or false
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
+        G.P_CENTERS[self.config.center.key].unik_specific_base_value
+    then
+        if not SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value] then
+            return G.ENHANCEMENT_OVERRIDE_RANKS[self.config.center.key][2]
+        else
+            return SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].id
+        end
+    end
+	local vars = getIDenhance(self,skippmk)
 
--- 	return vars
--- end
+	return vars
+end
 
 local suit_hook = Card.is_suit
 function Card:is_suit(suit, bypass_debuff, flush_calc)
