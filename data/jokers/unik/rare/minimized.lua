@@ -10,10 +10,12 @@ SMODS.Joker {
 	end,
     pixel_size = { w = 71, h = 30 },
 }
-local cgi_ref = Card.get_id
 local override_minimized = false
-function Card:get_id()
-    local id = cgi_ref(self)
+local checking_minimized = false --cardsauce fix
+local cgi_ref = Card.get_id
+function Card:get_id(skippmk)
+    skippmk = skippmk or false
+    local id = cgi_ref(self,skippmk) or self.base.id
     if next(find_joker("j_unik_minimized")) and not override_minimized and not next(find_joker("cry-Maximized")) then
         if id == nil then
             id = 2
@@ -24,8 +26,6 @@ function Card:get_id()
         if id >= 11 and id <= 13 or next(find_joker("Pareidolia")) then
             id = 11
         end
-        --whill this worrkrkrrk???
-        
     end
     return id
 end

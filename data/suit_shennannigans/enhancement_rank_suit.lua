@@ -39,7 +39,8 @@ function Card:is_face(from_boss)
 end
 
 local getIDenhance = Card.get_id
-function Card:get_id()
+function Card:get_id(skippmk)
+    skippmk = skippmk or false
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
@@ -49,7 +50,7 @@ function Card:get_id()
             return SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].id
         end
     end
-	local vars = getIDenhance(self)
+	local vars = getIDenhance(self,skippmk)
 
 	return vars
 end
