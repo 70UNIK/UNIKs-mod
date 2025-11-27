@@ -969,6 +969,7 @@ end
 
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
+NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
 NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 if AKYRS then
 	NFS.load(mod_path .. "data/ui/aiko_icons.lua")()

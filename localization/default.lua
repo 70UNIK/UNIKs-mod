@@ -4912,6 +4912,13 @@ return {
             k_unik_protected = "Protected!",
             k_unik_stored = "Stored!",
             k_unik_redirected = "Redirected!",
+
+
+            --more overshoot shit
+            k_unik_overshoot_addition = "OVERSHOOT",
+            k_unik_overshoot_score = "SCORE NEEDED",
+            k_current = "Current",
+            k_overshoot_effects = "Active Overshoot Effect",
         },
         high_scores={},
         labels={

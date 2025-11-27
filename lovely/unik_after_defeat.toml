@@ -23,6 +23,7 @@ local nanny = tostring(G.GAME.chips_text)
 --Naneinf will always trigger overshoot
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    
     unik_ease_overshoot(1)
 else
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
