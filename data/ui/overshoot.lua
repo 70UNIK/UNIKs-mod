@@ -247,15 +247,15 @@ G.FUNCS.overshoot_info = function(e)
     definition = G.UIDEF.overshoot_info(),
   }
   
-   G.E_MANAGER:add_event(Event({
-        delay = 0.2,
-        trigger = 'after',
-            func = function()
-                -- print("VVVVVVVVVVVVVVVVVV")
-                 G.FUNCS.overshoot_jiggle()
-                return true
-            end
-        }))
+--    G.E_MANAGER:add_event(Event({
+--         delay = 0.2,
+--         trigger = 'after',
+--             func = function()
+--                 -- print("VVVVVVVVVVVVVVVVVV")
+--                  G.FUNCS.overshoot_jiggle()
+--                 return true
+--             end
+--         }))
   
 
 end

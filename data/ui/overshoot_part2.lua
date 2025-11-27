@@ -1,7 +1,7 @@
 
 --shows:
 --overshot amount, the required score to overshoot, your current overshoot and the current overshoot effect
-function G.UIDEF.overshoot_info(highlighted)
+function G.UIDEF.overshoot_info(cantexit)
     
     local overshoot_amounts = {}
     local base_value = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling
@@ -20,24 +20,24 @@ function G.UIDEF.overshoot_info(highlighted)
         local value = amount
         local interval = i
         --naneinf is a flat +7
-        if tostring(number_format(value)) == 'naneinf' then
-            interval = 7
-        end
+        -- if tostring(number_format(value)) == 'naneinf' then
+        --     interval = 7
+        -- end
         overshoot_amounts[#overshoot_amounts+1] = {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes={
             {n=G.UIT.C, config={align = "cm", minw = 0.7}, nodes={
-            {n=G.UIT.T, config={text = "+" .. interval, scale = 0.4, colour = G.C.FILTER, shadow = true}},
+            {n=G.UIT.T, config={text = "+" .. interval, scale = 0.4, colour = cantexit and darken(G.C.JOKER_GREY,0.3) or G.C.FILTER, shadow = true,id='overshoot_info_amount_value_' .. i}},
             }},
             {n=G.UIT.C, config={align = "cr", minw = 2.8}, nodes={
             {n=G.UIT.O, config={object = blind_chip}},
             {n=G.UIT.C, config={align = "cm", minw = 0.03, minh = 0.01}, nodes={}},
-            {n=G.UIT.T, config={text =number_format(value), scale = 0.4, colour = G.C.RED, shadow = true,id='overshoot_info_amount_' .. i}},
+            {n=G.UIT.T, config={text =number_format(value), scale = 0.4, colour = cantexit and darken(G.C.JOKER_GREY,0.3) or G.C.RED, shadow = true,id='overshoot_info_amount_' .. i}},
             }}
         }}
         --naneinf will stop generating more lists
         if tostring(number_format(value)) == 'naneinf' then
             break
         end
-        amount = math.min(amount^1.5,amount*10^25)
+        amount = math.min(amount^1.5,amount*10^30)
     end
 
     local overshootUIs = {}
@@ -53,7 +53,7 @@ function G.UIDEF.overshoot_info(highlighted)
         minh = 1, 
         padding = 0.05, 
         r = 0.1, 
-        colour=highlighted and darken(G.C.UNIK_RGB,0.3) or darken(G.C.JOKER_GREY,0.3),
+        colour=highlighted and G.C.UNIK_RGB or darken(G.C.JOKER_GREY,0.3),
         emboss=0.05,
         hover = true, 
         can_collide = true,
@@ -77,7 +77,7 @@ function G.UIDEF.overshoot_info(highlighted)
         
         
     end
-
+    local localover = G.GAME.unik_overshoot
     local realstorage = {}
     realstorage[#realstorage+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
             {n=G.UIT.C, config={align = "cm", r = 0.1, colour = darken(G.C.BLACK, 0.05), padding = 0.1,minw = 2,scale = 0.6}, nodes={
@@ -87,7 +87,7 @@ function G.UIDEF.overshoot_info(highlighted)
                 }},
                 {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
                     --{n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.GAME, ref_value = 'unik_overshoot'}}, colour = lighten(G.C.UNIK_RGB, 0.2),shadow = true, scale = 2}),id = 'overshoot_info_number'}},
-                    {n=G.UIT.T, config={text = G.GAME.unik_overshoot, scale = 2, colour = lighten(G.C.UNIK_RGB, 0.2), shadow = true, id = 'overshoot_info_number'}},
+                    {n=G.UIT.T, config={text = localover, scale = 2, colour = lighten(G.C.UNIK_RGB, 0.2), shadow = true, id = 'overshoot_info_number'}},
                 }}
             }},
         }}
@@ -120,9 +120,12 @@ function G.UIDEF.overshoot_info(highlighted)
     -- w[#w+1] = 
     -- --overshoot effect dials
     -- w[#w+1] = 
-    local t = create_UIBox_generic_options({contents =w})
-    
-
+    local t
+    if cantexit then
+        t = create_UIBox_generic_options({contents =w, no_back = true})
+    else
+        t = create_UIBox_generic_options({contents =w})
+    end
     return t
 end
 
@@ -145,4 +148,123 @@ G.FUNCS.overshoot_jiggle = function(e)
 end
 
 --straddle styled overshoot popup
-function unik_trigger_overshoot_menu()
+function calculate_overshoot_amount()
+    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+
+    if not G.GAME.chips or not G.GAME.blind or not G.GAME.blind.chips then return 0 end
+
+    local amount = math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5)
+    local overshoot = 0
+    for i = 1, 20 do
+        if G.GAME.chips >= amount then
+            overshoot = overshoot + 1
+        end
+        amount = math.min(amount^1.5,amount*10^30)
+    end
+    return overshoot
+end
+
+function predictFXValue(overshoot)
+    if overshoot < 5 then
+        return 0
+    elseif overshoot < 10 then
+        return 1
+    elseif overshoot < 15 then
+        return 2
+    elseif overshoot < 20 then
+        return 3
+    elseif overshoot< 25 then
+        return 4
+    else
+        return 5
+        
+    end
+end
+
+function unik_trigger_overshoot_menu(increase)
+    G.FUNCS.overlay_menu{
+        definition = G.UIDEF.overshoot_info(true),config = {no_esc = true}
+    }
+    print(increase)
+    print(G.GAME.unik_overshoot)
+    print(predictFXValue(G.GAME.unik_overshoot + increase))
+    --"scrolling down the overshoot list"
+    G.E_MANAGER:add_event(Event({
+            func = function()
+            delay(0.5)
+            for i = 1, 20 do
+                delay(0.4)
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        local number1 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_'.. i)
+                        local number2 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_value_'.. i)
+                        number1.config.colour = G.C.UNIK_RGB
+                        number2.config.colour = G.C.UNIK_RGB
+                        number1:juice_up(0.7,0.7)
+                        number2:juice_up(0.7,0.7)
+                        play_sound('highlight2', 0.4, 0.2)
+                        play_sound('generic1')
+                        print(i)
+                        --modify UI
+                        if i > 1 then
+                            local number3 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_'.. (i-1))
+                            local number4 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_value_'.. (i-1))
+                            number3.config.colour = darken(G.C.JOKER_GREY,0.2)
+                            number4.config.colour = darken(G.C.JOKER_GREY,0.2)
+                        end
+                    return true
+                    end
+                }))
+                
+                if i >= increase then
+                    break
+                end
+            end
+
+    --juggle overshoot effect, counter, modify counter and modify effect highlighted
+            delay(1)
+            G.E_MANAGER:add_event(Event({
+                    func = function()
+                        
+                        local oldOvershootEffect = G.OVERLAY_MENU:get_UIE_by_ID('unik_overshoot_effect_box'.. G.GAME.OvershootFXVal)
+
+                        oldOvershootEffect.config.colour = darken(G.C.JOKER_GREY,0.3)
+                        return true
+                    end
+                }))
+            delay(0.1)
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        
+                        local newOvershootEffect = G.OVERLAY_MENU:get_UIE_by_ID('unik_overshoot_effect_box'.. predictFXValue(G.GAME.unik_overshoot + increase))
+                        local target = G.OVERLAY_MENU:get_UIE_by_ID("overshoot_info_number")
+                        target.config.text = G.GAME.unik_overshoot + increase
+                        G.OVERLAY_MENU:recalculate() 
+
+                        newOvershootEffect.config.colour = G.C.UNIK_RGB
+                        newOvershootEffect:juice_up(1.0,1.0)
+                        target:juice_up(1.0,1.0)
+                        play_sound('highlight2', 0.5, 0.2)
+                        play_sound('generic1')
+                        return true
+                    end
+                }))
+            delay(3)
+            G.E_MANAGER:add_event(Event({
+                    func = function()
+                    G.FUNCS:exit_overlay_menu()
+                            return true
+                    end
+                }))
+            return true
+        end
+    }))
+    -- local overshootEffect = G.OVERLAY_MENU:get_UIE_by_ID('unik_overshoot_effect_box'.. G.GAME.OvershootFXVal)
+    -- local target = G.OVERLAY_MENU:get_UIE_by_ID("overshoot_info_number")
+    -- if target and overshootEffect then
+    --     overshootEffect:juice_up(1.0,1.0)
+    --     target:juice_up(1.0,1.0)
+    -- else
+    --     print("ERROR!")
+    -- end
+end
