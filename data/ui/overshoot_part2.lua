@@ -158,6 +158,11 @@ function calculate_overshoot_amount()
     for i = 1, 20 do
         if G.GAME.chips >= amount then
             overshoot = overshoot + 1
+        else
+            break
+        end
+        if  tostring(number_format(amount)) == 'naneinf' then
+            break
         end
         amount = math.min(amount^1.5,amount*10^30)
     end
@@ -193,11 +198,15 @@ function unik_trigger_overshoot_menu(increase)
             func = function()
             delay(0.5)
             for i = 1, 20 do
+                local isnaninf = false
                 delay(0.4)
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         local number1 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_'.. i)
                         local number2 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_value_'.. i)
+                        if tostring(number2.config.text) == 'naneinf' then
+                            isnaninf = true
+                        end
                         number1.config.colour = G.C.UNIK_RGB
                         number2.config.colour = G.C.UNIK_RGB
                         number1:juice_up(0.7,0.7)
@@ -215,8 +224,8 @@ function unik_trigger_overshoot_menu(increase)
                     return true
                     end
                 }))
-                
-                if i >= increase then
+                --halt if naneinf
+                if i >= increase or isnaninf then
                     break
                 end
             end
