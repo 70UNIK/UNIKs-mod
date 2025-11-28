@@ -915,6 +915,10 @@ NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
+NFS.load(mod_path .. "data/challenges/finger_trigger_1.lua")()
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/challenges/finger_trigger_2.lua")()
+end
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/challenges/cookie_clicker.lua")()
 	NFS.load(mod_path .. "data/challenges/cookie_clicker_2.lua")()

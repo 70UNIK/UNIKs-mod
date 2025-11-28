@@ -62,6 +62,7 @@ return {
                 name = "Endless Deck",
                 text = {
                     "{C:attention}+#1#{} Joker slot#<s>1#",
+                    "Start at Ante {C:attention}#4#",
                     "Win Ante is {C:red}#2#{}",
                     "{C:attention}Final Boss Blinds{} appear",
                     "{C:red}#3#X{} as often",
@@ -4517,6 +4518,8 @@ return {
             c_unik_learning_with_pibby="Learning With Pibby",
             c_unik_cookie_clicker_1 = "Cookie Clicker I",
             c_unik_cookie_clicker_2 = "Cookie Clicker II",
+            c_unik_finger_trigger = "Trigger Finger",
+            c_unik_finger_trigger_2 = "Trigger Finger II",
         },
         collabs={},
         dictionary={
@@ -5292,6 +5295,7 @@ return {
             ch_c_unik_overshoot_15 = {"Minimum {C:red}Overshoot{} is {X:unik_void_color,C:red}15"},
             ch_c_unik_legendary_at_any_time = {"{C:red}Epic Blinds{} can spawn {X:unik_void_color,C:red}anytime"},
             ch_c_cry_no_vouchers = { "{C:attention}Vouchers{} no longer appear in the shop" },
+            ch_c_unik_all_triggering = {"All {C:attention}Playing Cards{} are {C:red}Triggering"}
         },
     },
 }
