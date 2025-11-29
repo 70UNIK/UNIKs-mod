@@ -74,7 +74,15 @@ return {
                     "Start with a {C:dark_edition}Negative{}",
                     "{C:attention}Eternal{} {C:attention,T:j_unik_energy_compressor}Energy Compressor{}",
                 }
-            }
+            },
+            b_unik_tic_tac_toe = {
+                name = "Tic Tac Toe Deck",
+                text = {
+                    "Start with a full set of",
+                    "{C:spades}#1#{}, {C:hearts}#2#{},",
+                    "{C:unik_noughts}#3#{} and {C:unik_crosses}#4#{}",
+                }
+            },
             
             
         },
@@ -2779,6 +2787,143 @@ return {
                 }
             },
 
+            --NEW SUITS!!!!!
+            j_unik_violent_joker = {
+                name = "Violent Joker",
+                text = {
+                    "Played cards with",
+                    "{V:1}#2#{} suit give",
+                    "{C:mult}+#1#{} Mult when scored",
+                }
+            },
+            j_unik_treacherous_joker = {
+                name = "Treacherous Joker",
+                text = {
+                    "Played cards with",
+                    "{V:1}#2#{} suit give",
+                    "{C:mult}+#1#{} Mult when scored",
+                }
+            },
+            j_unik_aquamarine = {
+                name = "Aquamarine",
+                text = {
+                    "Played {V:1}#1#{} have a",
+                    "{C:green}#2# in #3#{} chance to",
+                    "{C:red}not{} be {C:unik_copper}Rescored{} #4# time#<s>4#"
+                }
+            },
+            j_unik_pink_salt = {
+                name = "Himalyan Salt",
+                text = {
+                    "Scored {V:1}#1#{} have a",
+                    "{C:green}#2# in #3#{} chance to",
+                    "{C:red}not{} create a {C:unik_summit}Summit Card",
+                }
+            },
+            --retrigger all crosses, 1 other random suit in deck is debuffed per hand (global variable)
+            j_unik_railroad_crossing = {
+                name = "Railroad Crossing",
+                text = {
+                    "{C:attention}Retrigger{} all scored",
+                    "{C:unik_cross}Crosses{} #1# time#<s>1#",
+                    "{C:red}Debuffs{} another random suit",
+                    "in deck every {C:attention}hand",
+                    "{C:inactive}(Currently {V:1}#2#{C:inactive})",
+                }
+            },
+            --gain +0.25 Mult when a diamond is scored, gain +1 Mult when a nought is scored
+            j_unik_pink_guard = {
+                name = "Pink Guard",
+                text = {
+                    "Gain {C:mult}+#1#{} Mult when a",
+                    "{C:diamonds}#1#{} is scored",
+                    "Gain {C:mult}+#1#{} Mult when a",
+                    "{C:unik_noughts}#1#{} is scored"
+                }
+            },
+            --gains X0.075 mult  when a cross is scored, loses X0.1 mult and a 1 in 3 chance to self destruct when a nought or a heart is scored 
+            j_unik_vaggie = {
+
+            },
+            --gains X0.05 mult when a diamond is scored, loses X0.1 mult and a 1 in 5 chance to self destruct when a heart or a spade is scored
+            j_unik_catto_boi = {
+
+            },
+
+            j_bunc_crop_circles_noughts = {
+                name = "Crop Circles",
+                text = {
+                    'Base suit {C:clubs}Clubs{} give {C:mult}+#1#{} Mult,',
+                    'Base suit {C:unik_noughts}Noughts{} give {C:mult}+#3#{} Mult,',
+                    '{C:attention}8s{} give {C:mult}+#2#{} Mult,',
+                    '{C:attention}Qs{}, {C:attention}10s{}, {C:attention}9s{}, {C:attention}6s{} give {C:mult}+#3#{} Mult'
+                }
+            },
+            j_bunc_crop_circles_noughts_exotic = {
+                name = "Crop Circles",
+                text = {
+                    'Base suit {C:bunc_fleurons}Fleurons{} give {C:mult}+#4#{} Mult,',
+                    'Base suit {C:clubs}Clubs{} give {C:mult}+#1#{} Mult,',
+                    'Base suit {C:unik_noughts}Noughts{} give {C:mult}+#3#{} Mult,',
+                    '{C:attention}8s{} give {C:mult}+#2#{} Mult,',
+                    '{C:attention}Qs{}, {C:attention}10s{}, {C:attention}9s{}, {C:attention}6s{} give {C:mult}+#3#{} Mult'
+                }
+            },
+
+
+            --paperback
+            j_unik_great_lake = {
+                name = "Great Lake",
+                text = {
+                    "{C:unik_noughts}#1#{} give {X:mult,C:white}X#2#{} Mult when scored.",
+                    "Increases by {X:mult,C:white}X#3#{} Mult for each",
+                    "consecutively scored {C:unik_noughts}#4#{}",
+                    "{C:inactive}(Resets after each hand played)",
+                },
+            },
+            j_unik_flower_beds = {
+                name = "Flower Beds",
+                text = {
+                    "{C:unik_crosses}#1#{} give {X:mult,C:white}X#2#{} Mult when scored.",
+                    "Increases by {X:mult,C:white}X#3#{} Mult for each",
+                    "consecutively scored {C:unik_crosses}#4#{}",
+                    "{C:inactive}(Resets after each hand played)",
+                },
+            },
+            j_unik_kebab = {
+                name = "Kebab",
+                text = {
+                    "Scored {C:unik_crosses}Crosses{} give {C:mult}+#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance this card is",
+                    "{C:red}destroyed{} at end of round",
+                }
+            },
+            j_unik_charred_stick={
+                name = "Charred Stick",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult if you have",
+                    "another {C:attention}\"Stick\"{} Joker",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                }
+            },
+            j_unik_icy_pole={
+                name = "Icy Pole",
+                text = {
+                    "Scored {C:unik_noughts}Noughts{} give {C:mult}+#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance this card is",
+                    "{C:red}destroyed{} at end of round",
+                }
+            },
+            j_unik_refreshing_stick={
+                name = "Refreshing Stick",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult if you have",
+                    "another {C:attention}\"Stick\"{} Joker",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                }
+            },
+
+
 
 
 
@@ -3687,6 +3832,12 @@ return {
                     "{X:dark_edition,C:white}^#1#{} extra Mult"
                 }
             },
+            card_suit_x_chips = {
+                "{X:chips,C:white}X#1#{} Chips"
+            },
+            card_suit_x_mult = {
+                "{X:mult,C:white}X#1#{} Mult"
+            },
             bunc_linked_group = {
                 name = 'Linked group',
                 text = {
@@ -3913,7 +4064,23 @@ return {
                     "{C:attention}#1#{} selected Joker#<s>1#",
                     "{C:inactive}(Eternal excluded)",
                 }
-            }
+            },
+            c_unik_ring = {
+                name = "Ring",
+                text = {
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {V:1}#2#{}",
+                }
+            },
+            c_unik_denial = {
+                name = "Denial",
+                text = {
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {V:1}#2#{}",
+                }
+            },
         },
         Stake={
             stake_unik_shitty = {
@@ -5210,8 +5377,14 @@ return {
             },
         },
         ranks={},
-        suits_plural={},
-        suits_singular={},
+        suits_plural={
+            unik_Noughts = "Noughts",
+            unik_Crosses = "Crosses",
+        },
+        suits_singular={
+            unik_Noughts = "Nought",
+            unik_Crosses = "Cross",
+        },
         tutorial={},
         v_dictionary={
             a_eblindsize = {"^#1# Blind Size"},

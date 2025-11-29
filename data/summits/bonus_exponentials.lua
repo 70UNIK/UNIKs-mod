@@ -14,6 +14,12 @@ end
 
 local localBonusHook = SMODS.localize_perma_bonuses
 function SMODS.localize_perma_bonuses(specific_vars, desc_nodes)
+    -- if specific_vars and specific_vars.suit_x_chips then
+    --     localize{type = 'other', key = 'card_suit_x_chips', nodes = desc_nodes, vars = {specific_vars.suit_x_chips}}
+    -- end
+    -- if specific_vars and specific_vars.suit_x_mult then
+    --     localize{type = 'other', key = 'card_suit_x_mult', nodes = desc_nodes, vars = {specific_vars.suit_x_mult}}
+    -- end
     localBonusHook(specific_vars, desc_nodes)
     if specific_vars and specific_vars.bonus_e_chips then
         localize{type = 'other', key = 'card_extra_e_chips', nodes = desc_nodes, vars = {specific_vars.bonus_e_chips}}

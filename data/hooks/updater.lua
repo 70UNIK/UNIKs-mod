@@ -31,7 +31,7 @@ function Game:update(dt)
     if  G.P_CENTERS and G.P_CENTERS.j_unik_fuzzy then
         G.fuzzyAnim = G.fuzzyAnim or 0
         G.P_CENTERS.j_unik_fuzzy.pos.x = math.fmod(math.floor(G.fuzzyAnim),12)
-        G.fuzzyAnim = G.fuzzyAnim + self.TIMERS.REAL * 10
+        G.fuzzyAnim = G.fuzzyAnim + dt * 10
     end
 
 

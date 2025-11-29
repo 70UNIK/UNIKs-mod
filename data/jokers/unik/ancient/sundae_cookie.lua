@@ -92,7 +92,6 @@ function reset_sundae_card()
 			-- valid_castle_cards[#valid_castle_cards + 1] = v
 		end
 	end
-    --print(avaliableSuits)
     if avaliableSuits[1] then
         local suit = pseudorandom_element(avaliableSuits, pseudoseed("unik_sundae_cookie_22222" .. G.GAME.round_resets.ante))
         G.GAME.current_round.unik_sundae_card.suit = suit

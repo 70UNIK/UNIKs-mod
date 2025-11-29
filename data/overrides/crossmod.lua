@@ -2,47 +2,6 @@
 SMODS.Joker:take_ownership("j_mf_unregisteredhypercam",{
     rarity = 2
 }, true)
---apostle of wands: blacklist epic, exotics,legendary blinds,
-
-SMODS.Consumable:take_ownership("c_paperback_apostle_of_wands",{
-    use = function(self, card, area, copier)
-    PB_UTIL.use_consumable_animation(card, nil, function()
-		if #G.jokers.cards < G.jokers.config.card_limit then
-			G.SETTINGS.paused = true
-
-			local selectable_jokers = {}
-
-			for _, v in ipairs(G.P_CENTER_POOLS.Joker) do
-			-- Only shows discovered non-legendary and non-owned jokers
-			if v.discovered and v.rarity ~= 4 and v.rarity ~= 'unik_ancient' and v.rarity ~= 'cry_epic' and v.rarity ~= 'cry_exotic' and v.rarity ~="unik_legendary_blind_finity" and (not (SMODS.Mods["Cryptid"] or {}).can_load or ((SMODS.Mods["Cryptid"] or {}).can_load and not Cryptid.pin_debuff[v.rarity])) and not next(SMODS.find_card(v.key)) then
-				selectable_jokers[#selectable_jokers + 1] = v
-			end
-			end
-
-			-- If the list of jokers is empty, we want at least one option so the user can leave the menu
-			if #selectable_jokers <= 0 then
-			selectable_jokers[#selectable_jokers + 1] = G.P_CENTERS.j_joker
-			end
-
-			G.FUNCS.overlay_menu {
-			config = { no_esc = true },
-			definition = PB_UTIL.apostle_of_wands_collection_UIBox(
-				selectable_jokers,
-				{ 5, 5, 5 },
-				{
-				no_materialize = true,
-				modify_card = function(other_card, center)
-					other_card.sticker = get_joker_win_sticker(center)
-					PB_UTIL.create_select_card_ui(other_card, G.jokers)
-				end,
-				h_mod = 1.05,
-				}
-			),
-			}
-		end
-		end)
-	end
-}, true)
 
 --Rift, Wheel of Fortune!: Blacklist detrimental editions.
 if Entropy then
@@ -170,6 +129,70 @@ SMODS.Joker:take_ownership("j_paperback_deadringer",{
 				}
 			end
 		end
+    end,
+}, true)
+
+--crop circles, base nought suits give +1 mult
+SMODS.Joker:take_ownership("j_bunc_crop_circles",{
+	config = {extra = {fleuron_mult = 4, club_mult = 3, eight_mult = 2, nought = 1}},
+	loc_vars = function(self, info_queue, card)
+		local exotic = ""
+		if (card.area and card.area.config.collection and G.P_CENTERS['b_bunc_fairy'].unlocked) or (G.GAME and G.GAME.Exotic) then
+			exotic = "_exotic"
+		end
+		local noughts = ""
+		if UNIK.suit_in_deck('unik_Noughts') then
+			noughts = "_noughts"
+		end
+		print("j_bunc_crop_circles" .. noughts .. exotic)
+		return {
+			key = "j_bunc_crop_circles" .. noughts .. exotic,
+			vars = {
+				card.ability.extra.club_mult,card.ability.extra.eight_mult,card.ability.extra.nought,card.ability.extra.fleuron_mult
+			}
+		}
+	end,
+	calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+
+            local other_card = context.other_card
+
+            local rank_mult = 0
+            local suit_mult = 0
+
+            if not SMODS.has_no_suit(other_card) then
+                if other_card.base.suit == "bunc_Fleurons" then
+                    suit_mult = suit_mult + 4
+                elseif other_card.base.suit == "Clubs" then
+                    suit_mult = suit_mult + 3
+				elseif other_card.base.suit == "unik_Noughts" then
+					suit_mult = suit_mult + 1
+				end
+            end
+
+            if not SMODS.has_no_rank(other_card) then
+                if other_card:get_id() == 8 then
+                    rank_mult = rank_mult + 2
+                elseif other_card:get_id() == 12 or other_card:get_id() == 10 or other_card:get_id() == 9 or other_card:get_id() == 6 then
+                    rank_mult = rank_mult + 1
+                end
+            end
+
+            if (suit_mult + rank_mult) > 0 then
+                if not context.blueprint and BUNCOMOD.funcs.exotic_in_pool() then
+                    event({
+                        blocking = false,
+                        func = function()
+                            card.children.center:set_sprite_pos(coordinate_from_atlas_index(73))
+                            return true
+                        end
+                    })
+                end
+                return {
+                    mult = suit_mult + rank_mult
+                }
+            end
+        end
     end,
 }, true)
 

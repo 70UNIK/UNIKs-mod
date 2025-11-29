@@ -378,6 +378,7 @@ NFS.load(mod_path .. "data/stakes/stake_card_modifiers.lua")()
 --decks
 NFS.load(mod_path .. "data/decks/greed_deck.lua")()
 NFS.load(mod_path .. "data/decks/mountain_deck.lua")()
+NFS.load(mod_path .. "data/decks/tic_tac_toe_deck.lua")()
 NFS.load(mod_path .. "data/decks/endless_deck.lua")()
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()
@@ -411,10 +412,49 @@ NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
 --Load suit types
 
-UNIK.light_suits = { 'Diamonds', 'Hearts' }
-UNIK.dark_suits = { 'Spades', 'Clubs' }
+UNIK.light_suits = { 'Diamonds', 'Hearts','unik_Noughts' }
+UNIK.dark_suits = { 'Spades', 'Clubs','unik_Crosses' }
+SMODS.Atlas({
+	key = "unik_suits",
+	path = "unik_suits.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_suits_hc",
+	path = "unik_suits_hc.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_ranks",
+	path = "unik_ranks.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_ranks_hc",
+	path = "unik_ranks_hc.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_suits_ui",
+	path = "unik_suits_ui.png",
+	px = 18,
+	py = 18,
+})
+SMODS.Atlas({
+	key = "unik_suits_ui_hc",
+	path = "unik_suits_ui_hc.png",
+	px = 18,
+	py = 18,
+})
+NFS.load(mod_path .. "data/suit_shennannigans/noughts.lua")()
+NFS.load(mod_path .. "data/suit_shennannigans/crosses.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/light_dark_suits.lua")()
+NFS.load(mod_path .. "data/suit_shennannigans/crossmod_ranks.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
 end
@@ -494,6 +534,8 @@ NFS.load(mod_path .. "data/spectrals/turing.lua")()
 NFS.load(mod_path .. "data/spectrals/defend.lua")() 
 NFS.load(mod_path .. "data/spectrals/purify.lua")() 
 NFS.load(mod_path .. "data/spectrals/expel.lua")() 
+NFS.load(mod_path .. "data/spectrals/ring.lua")() 
+NFS.load(mod_path .. "data/spectrals/denial.lua")() 
 --
 --hidden summits
 NFS.load(mod_path .. "data/summits/ebott.lua")() 
@@ -706,6 +748,8 @@ NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/tape_seven.lua")()
 
 NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/violent_joker.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/traitorous_joker.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/zealous_joker.lua")()
@@ -745,6 +789,8 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/road_sign.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  
+NFS.load(mod_path .. "data/jokers/unik/uncommon/pink salt.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/aquamarine.lua")()
 
 --Rare
 --: create a summit card if hand contains a five of a kind

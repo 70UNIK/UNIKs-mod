@@ -1,0 +1,100 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 999
+
+## add variables
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''perma_bonus = self.ability and self.ability.perma_bonus or 0,'''
+position = 'after'
+payload = '''
+custom_suit_x_mult = self.ability and self.ability.custom_suit_x_mult or 0,
+custom_suit_x_chips = self.ability and self.ability.custom_suit_x_chips or 0,
+'''
+match_indent = true
+
+### add variables
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''bonus_x_chips = self.ability.perma_x_chips ~= 0 and (self.ability.perma_x_chips + 1) or nil,'''
+position = 'after'
+payload = '''
+suit_x_chips = self.ability.custom_suit_x_mult ~= 0 and (self.ability.custom_suit_x_chips + 1) or nil,
+suit_x_mult = self.ability.custom_suit_x_mult ~= 0 and (self.ability.custom_suit_x_mult + 1) or nil,
+'''
+match_indent = true
+
+
+## grab bag replace chips with xchips/xmult
+
+### disable chip bonus 
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+
+pattern = '''return self.base.nominal + self.ability.bonus + (self.ability.perma_bonus or 0)'''
+position = "before"
+payload = '''
+if self.base.suit == "unik_Crosses" or self.base.suit == "unik_Noughts" then
+    return self.ability.bonus + (self.ability.perma_bonus or 0)
+end
+'''
+match_indent = true
+
+
+## show nominal xmult and xchips instead
+[[patches]]
+[patches.regex]
+target = 'functions/common_events.lua'
+pattern = '''localize\{type \= 'other', (.*) vars \= \{specific_vars\.nominal_chips\}\}'''
+position = "before"
+line_prepend = '$indent'
+payload = '''
+if card.base.suit == "unik_Noughts" then
+    local summation = 1 + 0.2 + (specific_vars.nominal_chips *0.01)
+    localize{type = 'other', key = 'card_x_chips', nodes = desc_nodes, vars = {summation}}
+elseif card.base.suit == "unik_Crosses" then
+    local summation = 1 + 0.2 + (specific_vars.nominal_chips *0.01)
+    localize{type = 'other', key = 'card_x_mult', nodes = desc_nodes, vars = {summation}}
+else
+'''
+## show nominal xmult and xchips instead
+[[patches]]
+[patches.regex]
+target = 'functions/common_events.lua'
+pattern = '''localize\{type \= 'other', (.*) vars \= \{specific_vars\.nominal_chips\}\}'''
+position = "after"
+line_prepend = '$indent'
+payload = '''
+end
+'''
+
+###hey smods, please implement crossmod rank suit implementations!
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "        local _atlas, _pos = get_front_spriteinfo(_front)"
+position = "after"
+payload = """
+_atlas, _pos = UNIK.sprite_info_override(_center, _front, self, _atlas, _pos)
+"""
+overwrite = true
+match_indent = true
+
+
+# thanks steamodded
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/overrides.lua"]'
+pattern = "        local _atlas, _pos = get_front_spriteinfo(_front)"
+position = "after"
+payload = """
+_atlas, _pos = UNIK.sprite_info_override(_center, _front, self, _atlas, _pos)
+"""
+overwrite = true
+match_indent = true
