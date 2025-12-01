@@ -1,8 +1,8 @@
 --played noughts have a 1 in 2 chance to not be rescored
 SMODS.Joker {
     key = 'unik_aquamarine',
-    atlas = 'placeholders',
-	pos = { x = 1, y = 0 },
+    atlas = "unik_uncommon",
+	pos = { x = 8, y = 3 },
     rarity = 2,
     cost = 7,
 	config = {

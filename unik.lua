@@ -332,6 +332,17 @@ SMODS.UndiscoveredSprite({
 	py = 95,
 })
 
+--fonts
+SMODS.Font {
+    key = 'unik_five_by_five',
+    path = 'five_by_five.ttf',
+	render_scale = 256,
+	TEXT_HEIGHT_SCALE = 0.7,
+	TEXT_OFFSET = { x = 0, y = -50 },
+	FONTSCALE = 0.11,
+	squish = 0.9,
+	DESCSCALE = 1
+}
 
 
 --RARITIES--
@@ -791,10 +802,12 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pink salt.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/aquamarine.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/pink_guard.lua")()
+
 
 --Rare
 --: create a summit card if hand contains a five of a kind
-
+NFS.load(mod_path .. "data/jokers/unik/rare/railroad_crossing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()

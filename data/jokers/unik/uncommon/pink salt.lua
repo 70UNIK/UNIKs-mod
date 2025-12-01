@@ -1,8 +1,8 @@
 --crosses have a 2 in 3 chance to not create a summit card when scored
 SMODS.Joker {
     key = 'unik_pink_salt',
-    atlas = 'placeholders',
-	pos = { x = 1, y = 0 },
+    atlas = "unik_uncommon",
+	pos = { x = 9, y = 3 },
     rarity = 2,
     cost = 7,
 	config = {

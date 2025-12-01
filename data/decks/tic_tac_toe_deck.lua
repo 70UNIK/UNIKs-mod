@@ -1,8 +1,8 @@
 --start with 13 spades, 13 hearts, 13 noughts and 13 crosses
 SMODS.Back {
     key = 'unik_tic_tac_toe',
-    atlas = 'placeholders',
-    pos = { x = 4, y = 2 },
+    atlas = 'unik_decks',
+    pos = { x = 2, y = 1 },
     order = 15,
 
     loc_vars = function(self, info_queue, card)

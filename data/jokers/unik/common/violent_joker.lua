@@ -6,7 +6,7 @@ SMODS.Joker {
     cost = 4,
 	config = {
 		extra = {
-			mult = 6,
+			mult = 5,
             suit = 'unik_Crosses',
 		},
 	},

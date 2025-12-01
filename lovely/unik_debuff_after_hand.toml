@@ -78,6 +78,13 @@ if to_big(add_to_blind) > to_big(0) or add_to_blind == math.huge then
         return true end)
         }))
 end
+G.E_MANAGER:add_event(Event({
+    func = function()
+        UNIK.railroad_suits()
+        return true
+    end
+}))
+
 if debuff_hand then
     play_area_status_text("Not Allowed!")
 

@@ -2,14 +2,15 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_ring",
-	pos = { x = 2, y = 2 },
+	pos = { x = 5, y = 0 },
 	cost = 4,
-	atlas = "placeholders",
+	atlas = "unik_spectrals",
     config = {
-		max_highlighted = 3,
+		max_highlighted = 4,
         suit_conv = 'unik_Noughts'
 	},
 		loc_vars = function(self, info_queue, center)
+			          info_queue[#info_queue + 1] = { set = "Other", key = "unik_noughts_info" }
 		return { vars = {center.ability.max_highlighted,localize(
 					"unik_Noughts",
 					"suits_plural"

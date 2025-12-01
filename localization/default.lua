@@ -1488,7 +1488,7 @@ return {
                 }
             },
             j_unik_unik = { --mainline: ^0.03 chips
-                name = '{C:unik_unik_color}UNIK',
+                name = '{C:unik_unik_color,f:unik_five_by_five}UNIK',
                 text = {
                     {
                         "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
@@ -1498,7 +1498,7 @@ return {
                         "{C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#5#{C:inactive,s:0.7} Chips)",
                     },
                     {
-                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:unik_caption,s:0.7,E:1,f:unik_five_by_five}#3#{}",
                         "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                         "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                     },
@@ -2824,11 +2824,11 @@ return {
             j_unik_railroad_crossing = {
                 name = "Railroad Crossing",
                 text = {
-                    "{C:attention}Retrigger{} all scored",
-                    "{C:unik_cross}Crosses{} #1# time#<s>1#",
-                    "{C:red}Debuffs{} another random suit",
-                    "in deck every {C:attention}hand",
-                    "{C:inactive}(Currently {V:1}#2#{C:inactive})",
+                    "{C:unik_copper}Rescore{} all scored",
+                    "{C:unik_crosses}#2#{} #1# time#<s>1#",
+                    "{C:red}Debuffs{} all but {C:attention}2{} other",
+                    "random suits per {C:attention}hand",
+                    "{C:inactive}(Currently {V:1}#3#{C:inactive}, {V:2}#4#{C:inactive})",
                 }
             },
             --gain +0.25 Mult when a diamond is scored, gain +1 Mult when a nought is scored
@@ -2836,9 +2836,10 @@ return {
                 name = "Pink Guard",
                 text = {
                     "Gain {C:mult}+#1#{} Mult when a",
-                    "{C:diamonds}#1#{} is scored",
-                    "Gain {C:mult}+#1#{} Mult when a",
-                    "{C:unik_noughts}#1#{} is scored"
+                    "{C:diamonds}#2#{} is scored",
+                    "Gain {C:mult}+#3#{} Mult when a",
+                    "{C:unik_noughts}#4#{} is scored",
+                    "{C:inactive}(Currently {C:mult}+#5#{C:inactive} Mult)",
                 }
             },
             --gains X0.075 mult  when a cross is scored, loses X0.1 mult and a 1 in 3 chance to self destruct when a nought or a heart is scored 
@@ -3906,7 +3907,23 @@ return {
                     "{C:red}not appear again",
                     "in their respective pools"
                 }
-            }
+            },
+            unik_noughts_info = {
+                name = "Noughts",
+                text = {
+                    "Gives {C:white,X:chips}Xchips equal to",
+                    "{C:attention}1.2 + (Rank x 0.01)",
+                    "instead of {C:chips}+Chips"
+                }
+            },
+            unik_crosses_info = {
+                name = "Crosses",
+                text = {
+                    "Gives {C:white,X:mult}Xmult equal to",
+                    "{C:attention}1.2 + (Rank x 0.01)",
+                    "instead of {C:chips}+Chips"
+                }
+            },
         },
         Planet={
             c_unik_asteroid_belt = {
@@ -3954,6 +3971,7 @@ return {
 					"{C:chips}+#4#{} chip#<s>4#",
 				},
 			},
+
            
         },
         Spectral={
