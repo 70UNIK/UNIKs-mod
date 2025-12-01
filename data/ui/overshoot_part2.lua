@@ -37,7 +37,7 @@ function G.UIDEF.overshoot_info(cantexit)
         if tostring(number_format(value)) == 'naneinf' then
             break
         end
-        amount = math.min(amount^1.5,amount*10^30)
+        amount = math.max(100,math.min(amount^2,amount*10^30))
     end
 
     local overshootUIs = {}
@@ -164,7 +164,7 @@ function calculate_overshoot_amount()
         if  tostring(number_format(amount)) == 'naneinf' then
             break
         end
-        amount = math.min(amount^1.5,amount*10^30)
+        amount = math.max(100,math.min(amount^2,amount*10^30))
     end
     return overshoot
 end
@@ -213,7 +213,7 @@ function unik_trigger_overshoot_menu(increase)
                         number2:juice_up(0.7,0.7)
                         play_sound('highlight2', 0.4, 0.2)
                         play_sound('generic1')
-                        print(i)
+                      --  print(i)
                         --modify UI
                         if i > 1 then
                             local number3 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_'.. (i-1))

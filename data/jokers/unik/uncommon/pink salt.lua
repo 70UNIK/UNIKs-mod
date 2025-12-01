@@ -26,6 +26,7 @@ SMODS.Joker {
 			},
 		}
 	end,
+    pools = { ["Food"] = true}, --it IS edible
 	calculate = function(self, card, context)
         if context.forcetrigger or 
         (context.individual and context.cardarea == G.play and context.other_card:is_suit('unik_Crosses') 

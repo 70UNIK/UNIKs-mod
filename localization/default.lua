@@ -94,6 +94,7 @@ return {
                     "blind size by #1#x",
                 }
             },
+            
             ble_unik_positive={
                 name = "Positive",
                 text = {
@@ -140,6 +141,18 @@ return {
             }
         },
         Blind={
+            bl_unik_fill = {
+                name = "The Fill",
+                text = {
+                    "All Nought cards are debuffed"
+                }
+            },
+            bl_unik_approval = {
+                name = "The Approval",
+                text = {
+                    "All Cross cards are debuffed"
+                }
+            },
             bl_unik_xchips_hater = {
                 name = "The Hater",
                 text = {

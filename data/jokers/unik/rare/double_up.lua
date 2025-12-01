@@ -21,6 +21,7 @@ SMODS.Joker {
 			},
 		}
 	end,
+	pools = {  ["Food"] = true},
 	calculate = function(self, card, context)
 		if context.forcetrigger then
 			for i = 1, card.ability.extra.tags do

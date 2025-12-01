@@ -657,6 +657,8 @@ NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
+NFS.load(mod_path .. "data/bossBlinds/the_approval.lua")() 
+NFS.load(mod_path .. "data/bossBlinds/the_fill.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
