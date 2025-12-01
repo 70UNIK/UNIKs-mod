@@ -3,7 +3,7 @@ SMODS.Blind{
     config = {},
     boss = {min = 2, }, 
     atlas = "unik_showdown_blinds",
-    pos = { x = 0, y = 42},
+    pos = { x = 0, y = 41},
     boss_colour= HEX("d3757a"),
     dollars = 5,
     mult = 2,

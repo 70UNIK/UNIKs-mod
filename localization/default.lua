@@ -144,13 +144,15 @@ return {
             bl_unik_fill = {
                 name = "The Fill",
                 text = {
-                    "All Nought cards are debuffed"
+                    "All Nought cards",
+                    "are debuffed",
                 }
             },
             bl_unik_approval = {
                 name = "The Approval",
                 text = {
-                    "All Cross cards are debuffed"
+                    "All Cross cards",
+                    "are debuffed"
                 }
             },
             bl_unik_xchips_hater = {
