@@ -73,6 +73,35 @@ payload = '''
 end
 '''
 
+## smods custom enhancements
+
+[[patches]]
+[patches.regex]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''localize \{ type = 'other', key = 'card_chips', nodes = desc_nodes, vars = \{ specific_vars.nominal_chips \} \}'''
+position = "before"
+line_prepend = '$indent'
+payload = '''
+if card.base.suit == "unik_Noughts" then
+    local summation = 1 + 0.2 + (specific_vars.nominal_chips *0.01)
+    localize{type = 'other', key = 'card_x_chips', nodes = desc_nodes, vars = {summation}}
+elseif card.base.suit == "unik_Crosses" then
+    local summation = 1 + 0.2 + (specific_vars.nominal_chips *0.01)
+    localize{type = 'other', key = 'card_x_mult', nodes = desc_nodes, vars = {summation}}
+else
+'''
+
+[[patches]]
+[patches.regex]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''localize \{ type = 'other', key = 'card_chips', nodes = desc_nodes, vars = \{ specific_vars.nominal_chips \} \}'''
+position = "after"
+line_prepend = '$indent'
+payload = '''
+end
+'''
+
+
 ###hey smods, please implement crossmod rank suit implementations!
 
 [[patches]]

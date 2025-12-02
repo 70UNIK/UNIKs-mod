@@ -151,6 +151,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
 
         --Polymino autoselect all cards in selected group
         local id = {}
+        G.GAME.unik_no_finger_trigger = true
 
         if G.hand and G.hand.highlighted then
             for i = 1, #G.hand.highlighted do
@@ -181,6 +182,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 end
             end
         end
+        G.GAME.unik_no_finger_trigger = nil
         --end
 
         pcfh(e)

@@ -40,6 +40,25 @@ SMODS.Sticker{
             return { key = "unik_triggering_playing_card", vars = { new_numerator, new_denominator } }
 		end
 	end,
+    calculate = function(self, card, context)
+		if context.unik_triggering then 
+            if (context.selected_card == card) then
+                if SMODS.pseudorandom_probability(card, 'unik_triggering_playing_card', 1, 8, 'unik_triggering_playing_card') then
+                    if next(SMODS.find_mod("Bunco")) then
+                        play_sound('bunc_gunshot')
+                        card:juice_up(1,1)
+                    end
+                    return {
+                        message = localize("k_unik_triggered"),
+                        colour = G.C.RED,
+                        finger_triggered = true,
+                    }
+                end
+            end
+
+            
+		end
+	end,
 }
 
 local updateStickerHook = Card.update
@@ -87,4 +106,70 @@ function Card:update(dt)
     end
     local ret = updateStickerHook(self,dt)
     return ret
+end
+
+
+function Card:calculate_triggering(is_higlighted)
+    self.highlighted = is_higlighted
+    local eval = {}
+    if self.highlighted == true and (self.area == G.hand) and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and not G.GAME.unik_using_automatic_consumeable  and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) then
+        SMODS.calculate_context({unik_triggering = true, selected_card = self},eval)
+    end
+    local triggered = false
+    for i = 1, #eval do
+        if triggered then break end
+        if eval[i] and type(eval[i]) == 'table' then
+            if triggered then break end
+            for i,v in pairs(eval[i]) do
+                if triggered then break end
+                if v.finger_triggered then
+                    triggered = true
+                    if v.message then
+                        card_eval_status_text(v.card, "extra", nil, nil, nil, {
+                            message = v.message,
+                            colour = v.colour or G.C.FILTER,
+                            card=v.card,
+                        })
+                    end
+                    break
+                end
+            end
+
+        end
+    end
+    if triggered then
+        stop_use()
+        print("TRIGGERED!")
+        G.FUNCS.play_cards_from_highlighted()
+    end
+    
+    -- if self.highlighted == true and self.ability and self.ability.set and self.ability.unik_triggering and (self.ability.set == "Default" or self.area == G.hand) then
+    --     if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and SMODS.pseudorandom_probability(self, 'unik_triggering_playing_card', 1, 8, 'unik_triggering_playing_card') and not G.GAME.unik_using_automatic_consumeable then
+    --         local cards = {}
+    --         for i = 1, #G.hand.highlighted do
+    --             table.insert(cards, G.hand.highlighted[i])
+    --         end
+    --         G.E_MANAGER:add_event(Event({
+    --             trigger = 'after', 
+    --             func = function()
+    --                 if not G.GAME.unik_using_automatic_consumeable then
+    --                     for i = 1, #cards do
+    --                         if not cards[i].highlighted then
+    --                             cards[i]:highlight()
+    --                         end
+    --                     end
+    --                     if G.hand.highlighted then
+    --                         if next(SMODS.find_mod("Bunco")) then
+    --                             play_sound('bunc_gunshot')
+    --                         end
+    --                         card_eval_status_text(self, "extra", nil, nil, nil, { message = localize("k_unik_triggered") })
+                            
+    --                         G.FUNCS.play_cards_from_highlighted()
+    --                     end
+    --                 end
+    --                 return true 
+    --         end}))
+    --     end
+    -- -- Jokers
+    -- end
 end

@@ -196,6 +196,32 @@ SMODS.Joker:take_ownership("j_bunc_crop_circles",{
     end,
 }, true)
 
+--make trigger finger less buggy
+SMODS.Joker:take_ownership("j_bunc_trigger_finger",{
+	calculate = function(self, card, context)
+        if context.unik_triggering then 
+            if SMODS.pseudorandom_probability(card, 'trigger_finger'..G.SEED, 1, card.ability.extra.odds, 'bunc_trigger_finger') then
+				if G.SETTINGS.SOUND.bunc_trigger_finger_volume ~= 0 then
+					play_sound('bunc_gunshot',1,G.SETTINGS.SOUND.bunc_trigger_finger_volume/100)
+					card:juice_up(1,1)
+				end
+                return {
+					message = G.localization.misc.dictionary.bunc_pew,
+					colour = G.C.RED,
+					finger_triggered = true
+				}
+            end
+		end
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult,
+            }
+        end
+    end
+}, true)
+
+
+
 if next(SMODS.find_mod("Bunco")) then
 	SMODS.Stake:take_ownership('bunc_magenta', {
 		unlocked_stake = 'unik_persimmon',

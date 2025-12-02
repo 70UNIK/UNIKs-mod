@@ -197,6 +197,7 @@ local linked_discarded = G.FUNCS.discard_cards_from_highlighted
 G.FUNCS.discard_cards_from_highlighted = function(e, hook)
     --Polymino autoselect all cards in selected group
         local id = {}
+        G.GAME.unik_no_finger_trigger = true
 
         if G.hand and G.hand.highlighted then
             for i = 1, #G.hand.highlighted do
@@ -227,6 +228,7 @@ G.FUNCS.discard_cards_from_highlighted = function(e, hook)
                 end
             end
         end
+        G.GAME.unik_no_finger_trigger = nil
     --end
     local ret = linked_discarded(e,hook)
     return ret

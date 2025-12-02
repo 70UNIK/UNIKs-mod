@@ -15,35 +15,10 @@ position = 'after'
 match_indent = true
 payload = '''
 --Playing cards
-if self.highlighted == true and self.ability and self.ability.set and self.ability.unik_triggering and (self.ability.set == "Default" or self.area == G.hand) then
-    if (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and SMODS.pseudorandom_probability(self, 'unik_triggering_playing_card', 1, 8, 'unik_triggering_playing_card') and not G.GAME.unik_using_automatic_consumeable then
-        local cards = {}
-        for i = 1, #G.hand.highlighted do
-            table.insert(cards, G.hand.highlighted[i])
-        end
-        G.E_MANAGER:add_event(Event({
-            trigger = 'after', 
-            func = function()
-                if not G.GAME.unik_using_automatic_consumeable then
-                    for i = 1, #cards do
-                        if not cards[i].highlighted then
-                            cards[i]:highlight()
-                        end
-                    end
-                    if G.hand.highlighted then
-                        if next(SMODS.find_mod("Bunco")) then
-                            play_sound('bunc_gunshot')
-                        end
-                        card_eval_status_text(self, "extra", nil, nil, nil, { message = localize("k_unik_triggered") })
-                        
-                        G.FUNCS.play_cards_from_highlighted()
-                    end
-                end
-                return true 
-        end}))
-    end
--- Jokers
-elseif self.ability and self.area and self.ability.unik_triggering and self.area == G.jokers and not self.ability.unik_cursed_unsellable then
+if not G.GAME.unik_no_finger_trigger then
+    self:calculate_triggering(self.highlighted)
+end
+if self.ability and self.area and self.ability.unik_triggering and self.area == G.jokers and not self.ability.unik_cursed_unsellable then
     if self:can_sell_card() and not self.ability.unik_automatic_sold then
         self.ability.unik_automatic_sold = true
         self:sell_card()
