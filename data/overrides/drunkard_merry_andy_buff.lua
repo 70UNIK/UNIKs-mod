@@ -24,30 +24,24 @@ SMODS.Joker:take_ownership("j_drunkard",{
 						math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
 					},
 				}),
-				colour = G.C.RED
+				colour = G.C.RED,
+                card = context.blueprint_card or card
 			}
 		end
 		if (context.setting_blind and not (context.blueprint_card or card).getting_sliced) then
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					ease_discard(
-						math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards)
-					)
-					card_eval_status_text(context.blueprint_card or card, "extra", nil, nil, nil, {
-						message = localize({
-							type = "variable",
-							key = "a_unik_discards",
-							vars = {
-								math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
-							},
-						}),
-						colour = G.C.RED
-					})
-					return true
-				end,
-			}))
-			return {
-
+			ease_discard(
+				math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards)
+			)
+			return{
+				message = localize({
+					type = "variable",
+					key = "a_unik_discards",
+					vars = {
+						math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
+					},
+				}),
+				colour = G.C.RED,
+                card = context.blueprint_card or card
 			}
 		end
 	end,
@@ -79,30 +73,24 @@ SMODS.Joker:take_ownership("j_merry_andy",{
 						math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
 					},
 				}),
-				colour = G.C.RED
+				colour = G.C.RED,
+                card = context.blueprint_card or card
 			}
 		end
 		if (context.setting_blind and not (context.blueprint_card or card).getting_sliced) then
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					ease_discard(
-						math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards)
-					)
-					card_eval_status_text(context.blueprint_card or card, "extra", nil, nil, nil, {
-						message = localize({
-							type = "variable",
-							key = "a_unik_discards",
-							vars = {
-								math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
-							},
-						}),
-						colour = G.C.RED
-					})
-					return true
-				end,
-			}))
-			return {
-
+			ease_discard(
+				math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards)
+			)
+			return{
+				message = localize({
+					type = "variable",
+					key = "a_unik_discards",
+					vars = {
+						math.min(card.ability.immutable.max_hand_size_mod, card.ability.extra.discards),
+					},
+				}),
+				colour = G.C.RED,
+                card = context.blueprint_card or card
 			}
 		end
 	end,

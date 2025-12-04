@@ -69,6 +69,8 @@ SMODS.Joker {
                     colour = G.C.MULT,
                 }
             end
+        end
+        if (context.individual and context.cardarea == G.play) and not card.ability.immutable.dead and not context.blueprint then
             if context.other_card:is_suit('Spades') or context.other_card:is_suit('Hearts') then
                 --80% chance to produce a normal message, 20% to produce a custom one
                 if math.random() > 0.15 then
@@ -155,4 +157,8 @@ SMODS.Joker {
         end
 
     end,
+    --do not spawn if no diamonds exist
+    in_pool = function(self)
+		return UNIK.suit_in_deck('Diamonds') 
+	end,
 }
