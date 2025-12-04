@@ -1,0 +1,1 @@
+--all cards are ultradebuffed, then destroy any undebuffed card remaining in deck

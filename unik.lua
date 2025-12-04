@@ -373,6 +373,7 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+NFS.load(mod_path .. "data/stickers/claw_mark.lua")() 
 if not (SMODS.Mods["Cryptid"] or {}).can_load then
 	NFS.load(mod_path .. "data/stickers/cryptidless_sticker_logic.lua")() 
 end
@@ -720,12 +721,15 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_sink.lua")() --hold for now until a more interesting effect is in place
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_miser.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_claw.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_bellows.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_height.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_toxin.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_bird.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_neck.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_steed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Blinds below require talisman due to exponential requirements

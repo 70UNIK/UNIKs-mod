@@ -59,24 +59,45 @@ pattern = '''        func = (function() play_sound('chips2');return true end)
 position = 'after'
 payload = '''
 if to_big(add_to_blind) > to_big(0) or add_to_blind == math.huge then
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        func = (function() 
-        if add_to_blind == math.huge then
-             G.GAME.blind.chips = math.huge
-            G.GAME.blind.chip_text = number_format(math.huge)
-            G.HUD_blind:recalculate(true)
-            G.hand_text_area.blind_chips:juice_up()
-        else
-             G.GAME.blind.chips = G.GAME.blind.chips + add_to_blind
-            G.GAME.blind.chip_text = number_format(G.GAME.blind.chips + add_to_blind)
-            G.HUD_blind:recalculate(true)
-            G.hand_text_area.blind_chips:juice_up()
-        end
-           
-        
-        return true end)
+    if add_to_blind == math.huge then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'ease',
+            blocking = false,
+            ref_table = G.GAME.blind,
+            ref_value = 'chips',
+            ease_to = math.huge,
+            delay =  0.5,
+            func = (function(t) return math.floor(t) end)
         }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'ease',
+            blocking = false,
+            ref_table = G.GAME.blind,
+            ref_value = 'chip_text',
+            ease_to = math.huge,
+            delay =  0.5,
+            func = (function(t) return math.floor(t) end)
+        }))
+    else
+        G.E_MANAGER:add_event(Event({
+            trigger = 'ease',
+            blocking = false,
+            ref_table = G.GAME.blind,
+            ref_value = 'chips',
+            ease_to = G.GAME.blind.chips + add_to_blind,
+            delay =  0.5,
+            func = (function(t) return math.floor(t) end)
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'ease',
+            blocking = false,
+            ref_table = G.GAME.blind,
+            ref_value = 'chip_text',
+            ease_to = G.GAME.blind.chips + add_to_blind,
+            delay =  0.5,
+            func = (function(t) return math.floor(t) end)
+        }))
+    end
 end
 G.E_MANAGER:add_event(Event({
     func = function()

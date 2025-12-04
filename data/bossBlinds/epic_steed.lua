@@ -35,21 +35,31 @@ SMODS.Blind	{
                 end
                 if #validCards == 0 then
                     kill_player = true
+                else
+                    local steed_banish = pseudorandom_element(validCards, pseudoseed("unik_steed_banish"))
+                    steed_banish.ability.unik_marked_by_the_steed = true
                 end
-                local steed_banish = pseudorandom_element(validCards, pseudoseed("unik_steed_banish"))
-                steed_banish.ability.ability.unik_marked_by_the_steed = true
+                
                 
             end
         end
         for i=1,#G.jokers.cards do
             if G.jokers.cards[i].ability.unik_marked_by_the_steed then
+                G.jokers.cards[i].ability.unik_marked_by_the_steed = nil
                 G.E_MANAGER:add_event(Event({
-                    delay = 0.2,
+                    delay = 0.5,
                     trigger = 'immediate',
                     func = function()
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
                         G.jokers.cards[i]:gore6_break()
+                        if not G.GAME.banned_keys then
+                        G.GAME.banned_keys = {}
+                        end
+                        if not G.GAME.cry_banished_keys then
+                            G.GAME.cry_banished_keys = {}
+                        end
+                        G.GAME.cry_banished_keys[G.jokers.cards[i].config.center.key] = true
                         return true
                     end
                 }))

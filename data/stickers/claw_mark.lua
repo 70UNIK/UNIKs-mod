@@ -2,7 +2,7 @@ SMODS.Sticker{
     key="unik_claw_mark",
     badge_colour=HEX("512219"),
     atlas = 'unik_stickers', 
-    pos = { x = 0, y = 4 },
+    pos = { x = 3, y = 0 },
     rate = 0.0,
     no_sticker_sheet = true,
     loc_vars = function(self, info_queue, card)

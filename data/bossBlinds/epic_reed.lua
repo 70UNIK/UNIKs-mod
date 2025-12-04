@@ -30,7 +30,8 @@ SMODS.Blind	{
         akyrs_cannot_be_skipped = true,
     },
 	unik_kill_hand = function(self, cards, hand, handname, check)
-		for k, v in ipairs(cards) do
+        local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(cards)
+		for k, v in ipairs(scoring_hand) do
             if v:get_id() == G.GAME.unik_reed_ranks[1].id or v:get_id() == G.GAME.unik_reed_ranks[2].id then
                 return false
             end

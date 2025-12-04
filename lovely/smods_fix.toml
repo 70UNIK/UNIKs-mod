@@ -35,3 +35,13 @@ position = "at"
 payload = '''if specific_vars and specific_vars.bonus_h_x_chips then
         localize{type = 'other', key = 'card_h_x_chips', nodes = desc_nodes, vars = {specific_vars.bonus_h_x_chips}}'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''SMODS.upgrade_poker_hands({'''
+position = "after"
+payload = '''
+instant = instant,
+'''
+match_indent = true

@@ -458,7 +458,7 @@ return {
                 name = "Tartunnanruoko", --Reed of infestation
 				text = {
                     "If hand does not contain",
-                    "#1#, die", --2 random ranks accoring to your deck composition
+                    "scoring #1#, die", --2 random ranks accoring to your deck composition
 				},
             },
             bl_unik_epic_decision={ -- Mortoninhaarukka: Morton's Fork, cause no matter what, all choices are bad. Created last due to the effort needed to create the entire "lartceps" set (baneful spectrals)
@@ -480,11 +480,10 @@ return {
             bl_unik_epic_height = {
                 name = "Huipunkorkeus", --Height of the Summit
                 text = {
-                    "All scoring is",
-                    "added to the Blind Size",
-                    "instead of Score until",
-                    "the final hand",
+                    "All scoring is added to the Blind Size",
+                    "instead of Score until the final hand",
                     "+1 Hand if score is <= 0",
+                    "Final Hand must be #1#",
                 }
             },
             bl_unik_epic_miser={
@@ -626,6 +625,24 @@ return {
                     "every card held in hand",
                     "on play, Eternals included",
                     "If no valid Jokers remaining, die",
+                }
+            },
+            bl_unik_epic_neck = {
+                name = "Murtunutkaula",
+                text = {
+                    "Banish a random Joker for",
+                    "every card played or",
+                    "discarded, Eternals included",
+                    "If no valid Jokers remaining, die",
+                }
+            },
+            bl_unik_epic_toxin = {
+                name = "Myrkyllinenjoutomaa",
+                text = {
+                    "Play only 1 Hand type this round",
+                    "First hand multiplies",
+                    "the Blind Size instead",
+                    "of adding to score"
                 }
             },
 
@@ -2160,7 +2177,7 @@ return {
                         "Increases by {X:mult,C:white}X#2#{} Mult",
                         "for each {C:attention}unique {C:attention}Light Suit",
                         "in scoring hand",
-                        "{C:inactive}(Capped at {X:mult,C:white}#4#{C:inactive} Mult)",
+                        "{C:inactive}(Capped at {X:mult,C:white}X#4#{C:inactive} Mult)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -5007,7 +5024,7 @@ return {
             k_unik_ritualistic_placeholder = "Ritualistic",
             k_unik_hurry_up="IMPOUNDMENT SOON",
             k_unik_hurry_up2="IMPOUNDMENT IMMINENT",
-            k_unik_reed_placeholder="(3 random ranks from deck)",
+            k_unik_reed_placeholder="(2 random ranks from deck)",
             k_unik_reed_part1 = "a",
             k_unik_reed_part2 = "or",
             k_unik_epic_sand_placeholder = "(Tags held)",
@@ -5238,6 +5255,11 @@ return {
             k_overshoot_effects = "Active Overshoot Effect",
             k_unik_code = "Code: ",
             k_all_hands_no_sf= "All hands except Straight Flush",
+            k_unik_height_placeholder = "(Most Played Hand)",
+            k_unik_height_1 = "All hands except the final hand will add to the Blind Size",
+            k_unik_height_2 = "Final Hand must be a ",
+            k_unik_toxin_1 = "First hand will multiply the Blind Size",
+            k_unik_toxin_2 = "Must only play ",
         },
         high_scores={},
         labels={
@@ -5260,6 +5282,7 @@ return {
             unik_limited_edition = "Limited Edition",
             unik_copper_seal = "Copper Seal",
             unik_shielded = "Shielded",
+            unik_claw_mark = "Claw Mark",
         },
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM

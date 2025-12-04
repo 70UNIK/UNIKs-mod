@@ -98,7 +98,7 @@ SMODS.Joker {
         end
         local quoteset = 'normal'
         return { 
-            vars = {math.min(xmult,center.ability.immutable.x_mult_cap),center.ability.extra.x_mult_mod,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
+            vars = {math.min(xmult,center.ability.immutable.x_mult_cap),center.ability.extra.x_mult_mod,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),center.ability.immutable.x_mult_cap
         } 
         }
 	end,

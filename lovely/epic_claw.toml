@@ -11,8 +11,8 @@ pattern = '''draw_card\(G.hand, G.discard(.*)\)'''
 position = 'before'
 payload = '''
 if G.GAME.blind and G.GAME.blind.name == 'bl_unik_epic_claw' and not G.GAME.blind.disabled then
-    G.hand.highlighted[i].ability.claw_counter = G.hand.highlighted[i].ability.unik_claw_counter or 2
-    G.hand.highlighted[i].ability.claw_counter = G.hand.highlighted[i].ability.unik_claw_counter - 1
+    G.hand.highlighted[i].ability.unik_claw_counter = G.hand.highlighted[i].ability.unik_claw_counter or 2
+    G.hand.highlighted[i].ability.unik_claw_counter = G.hand.highlighted[i].ability.unik_claw_counter - 1
     if G.hand.highlighted[i].ability.unik_claw_counter < 1 then
         G.hand.highlighted[i].ability.unik_claw_mark = nil
         G.hand.highlighted[i].ability.unik_claw_counter = nil

@@ -32,9 +32,7 @@ SMODS.Blind	{
                 delay = 0.2,
                 func = function()
                     play_sound("tarot1")
-                    if self and self.children and self.children.animatedSprite then
-                        self.children.animatedSprite:juice_up(0.4, 0.25)
-                    end
+                    G.GAME.blind.children.animatedSprite:juice_up(0.8, 0.5)
                     G.ROOM.jiggle = G.ROOM.jiggle + 3
                     G.TAROT_INTERRUPT_PULSE = true
                     return true
@@ -47,9 +45,7 @@ SMODS.Blind	{
                 delay = 0.9,
                 func = function()
                     play_sound("tarot1")
-                    if self and self.children and self.children.animatedSprite then
-                        self.children.animatedSprite:juice_up(0.4, 0.25)
-                    end
+                    G.GAME.blind.children.animatedSprite:juice_up(0.8, 0.5)
                     G.ROOM.jiggle = G.ROOM.jiggle + 3
                     return true
                 end,
@@ -61,22 +57,22 @@ SMODS.Blind	{
                 delay = 0.9,
                 func = function()
                     play_sound("tarot1")
-                    if self and self.children and self.children.animatedSprite then
-                        self.children.animatedSprite:juice_up(0.4, 0.25)
-                    end
+                    G.GAME.blind.children.animatedSprite:juice_up(0.8, 0.5)
                     G.ROOM.jiggle = G.ROOM.jiggle + 3
                     G.TAROT_INTERRUPT_PULSE = nil
                     return true
                 end,
             }))
-            update_hand_text({ sound = "button", volume = 1.0, pitch = 0.8, delay = 0 }, { level = "=-2" })
+            update_hand_text({ sound = "button", volume = 1.0, pitch = 0.8, delay = 0 }, { level = "=0" })
             delay(1.3)
             if G.GAME.hands then
                 for i,v in ipairs(G.handlist) do
-                    local negativeChips = G.GAME.hands[v].chips
-                    level_up_hand(used_consumable, v, true, -G.GAME.hands[v].level)
-                    G.GAME.hands[v].chips = -math.abs(negativeChips) --ALWAYS NEGATIVE!
-                    G.GAME.hands[v].mult = 0
+                    if v ~= 'Straight Flush' then
+                        G.GAME.hands[v].level = 0
+                        G.GAME.hands[v].chips = -2 --ALWAYS NEGATIVE!
+                        G.GAME.hands[v].mult = -2
+                    end
+
                 end
             end
             update_hand_text(
