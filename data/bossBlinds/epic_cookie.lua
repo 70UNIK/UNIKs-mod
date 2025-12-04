@@ -170,6 +170,10 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 end
             end
         end
+        --enable 
+        if #G.hand.highlighted > 6 then
+            G.GAME.unik_scored_over_5 = true 
+        end
        -- print(id)
         --print(#id)
         if #id > 0 then

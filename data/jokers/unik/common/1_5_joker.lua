@@ -21,7 +21,8 @@ SMODS.Joker {
 	display_size = { w = 71, h = 144 },
     loc_vars = function(self, info_queue, center)
 		local key = 'j_unik_1_5_joker'
-		if G.hand and G.hand.config and G.hand.config.highlighted_limit and G.hand.config.highlighted_limit > 5 then
+		--only display the additional ones if you managed to play a hand above 5 cards (cryptid, entropy, linked groups)
+		if (G.hand and G.hand.config and G.hand.config.highlighted_limit and G.hand.config.highlighted_limit > 5) or G.GAME and G.GAME.unik_scored_over_5 then
 			key = 'j_unik_1_5_joker_exp'
 		end
 		return { key =key, vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.immutable.hand_size} }

@@ -1,0 +1,122 @@
+--Redeem a random disposable voucher at the end of the round. 1 in 2 chance to redeem another disposable voucher.
+SMODS.Joker {
+	-- How the code refers to the joker.
+	key = 'unik_coupon_codes',
+    atlas = 'unik_uncommon',
+    rarity = 3,
+	pos = { x = 1, y = 1 },
+
+    cost = 10,
+	blueprint_compat = true,
+    perishable_compat = true,
+	eternal_compat = true,
+    demicoloncompat = true,
+    config = { extra = {purchased_cards = 0,requirement=15,} },
+	loc_vars = function(self, info_queue, center)
+        info_queue[#info_queue + 1] = G.P_TAGS.tag_coupon
+        info_queue[#info_queue + 1] = G.P_TAGS.tag_voucher
+		return { vars = { center.ability.extra.purchased_cards,center.ability.extra.requirement} }
+	end,
+    calculate = function(self, card, context)
+        if context.buying_card then
+            if not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+                card.ability.extra.purchased_cards = card.ability.extra.purchased_cards + 1
+            end
+            
+            if card.ability.extra.purchased_cards >= card.ability.extra.requirement then
+                G.E_MANAGER:add_event(Event({
+					trigger = 'before',
+					func = function()
+						add_tag(Tag("tag_voucher"))
+						play_sound("generic1", 0.9 + math.random() * 0.1, 0.8)
+						play_sound("holo1", 1.2 + math.random() * 0.1, 0.4)
+						return true
+					end,
+				}))
+                G.E_MANAGER:add_event(Event({
+					trigger = 'before',
+					func = function()
+						add_tag(Tag("tag_coupon"))
+						play_sound("generic1", 0.9 + math.random() * 0.1, 0.8)
+						play_sound("holo1", 1.2 + math.random() * 0.1, 0.4)
+						return true
+					end,
+				}))
+                card.ability.extra.purchased_cards = 0
+                return {
+                    message = localize('k_unik_code')..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25)),
+                    colour = G.C.RED
+                }
+            elseif not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+                return {
+                    message = card.ability.extra.purchased_cards .. "/" .. card.ability.extra.requirement,
+                    colour = G.C.RED
+                }
+            end
+        end
+        if context.force_trigger then
+            if not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+                card.ability.extra.purchased_cards = card.ability.extra.purchased_cards + 1
+            end
+            if card.ability.extra.purchased_cards >= card.ability.extra.requirement then
+                G.E_MANAGER:add_event(Event({
+					trigger = 'before',
+					func = function()
+						add_tag(Tag("tag_voucher"))
+						play_sound("generic1", 0.9 + math.random() * 0.1, 0.8)
+						play_sound("holo1", 1.2 + math.random() * 0.1, 0.4)
+						return true
+					end,
+				}))
+                G.E_MANAGER:add_event(Event({
+					trigger = 'before',
+					func = function()
+						add_tag(Tag("tag_coupon"))
+						play_sound("generic1", 0.9 + math.random() * 0.1, 0.8)
+						play_sound("holo1", 1.2 + math.random() * 0.1, 0.4)
+						return true
+					end,
+				}))
+                card.ability.extra.purchased_cards = 0
+                return {
+                    message = localize('k_unik_code')..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25)),
+                    colour = G.C.RED
+                }
+            elseif not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+                return {
+                    message = card.ability.extra.purchased_cards .. "/" .. card.ability.extra.requirement,
+                    colour = G.C.RED
+                }
+            end
+        end
+    end,
+}
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_coupon_codes"] = {
+--         reminder_text = {
+--             {
+--                 ref_table = "card.joker_display_values",
+--                 ref_value = "localized_text",
+--                 retrigger_type = "mult",
+--             },	
+--         },
+--         extra = {
+--             {
+--                 {
+--                     ref_table = "card.joker_display_values",
+--                     ref_value = "odds",
+--                     colour = G.C.GREEN,
+--                     scale = 0.3,
+--                 },		
+-- 			},
+-- 		},
+--         calc_function = function(card)
+--             local text = ""
+--             local odds = ""
+--            
+--             text = "(" .. localize("k_voucher") .. ")"
+-- 			card.joker_display_values.localized_text = text
+--             card.joker_display_values.odds = odds
+--         end
+-- 	}
+-- end

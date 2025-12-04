@@ -144,7 +144,6 @@ SMODS.Joker:take_ownership("j_bunc_crop_circles",{
 		if UNIK.suit_in_deck('unik_Noughts') then
 			noughts = "_noughts"
 		end
-		print("j_bunc_crop_circles" .. noughts .. exotic)
 		return {
 			key = "j_bunc_crop_circles" .. noughts .. exotic,
 			vars = {

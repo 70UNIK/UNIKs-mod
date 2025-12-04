@@ -12,11 +12,11 @@ SMODS.Joker {
 	eternal_compat = false,
     demicolon_compat = true,
     config = {
-		extra = { x_mult = 1, x_mult_mod = 0.05, },
+		extra = { x_mult = 1, x_mult_mod = 0.075, },
         immutable = {funny = 0, funny_limit = 32, destroyed = false},
 	},
     loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.immutable.funny, center.ability.immutable.funny_limit} }
+		return { vars = {tostring(center.ability.extra.x_mult_mod),center.ability.extra.x_mult,center.ability.immutable.funny, center.ability.immutable.funny_limit} }
 	end,
     pronouns = "it_its",
     pools = {["Dice"] = true},

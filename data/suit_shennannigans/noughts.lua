@@ -23,7 +23,7 @@ SMODS.Suit {
 		--if you have a base rank nought, have it appear only 1 in 3 at a time.
 		if UNIK.suit_in_deck('unik_Noughts') then
 			--appears at X0.25 the rate of usual suits
-			if pseudorandom(pseudoseed("nought_spawn_rate")) < 0.25 then
+			if pseudorandom(pseudoseed("nought_spawn_rate")) < 0.33 then
 				return true
 			end
 		end
@@ -34,7 +34,7 @@ SMODS.Suit {
 local bonuser = Card.get_chip_x_bonus
 function Card:get_chip_x_bonus()
     local ret = bonuser(self)
-    if self.base.suit == "unik_Noughts" then
+    if self.base.suit == "unik_Noughts" and not SMODS.has_no_suit(self) and (not self.config.center.unik_specific_suit or self.config.center.unik_specific_suit == self.base.suit == "unik_Noughts") then
         self.ability.custom_suit_x_chips = 0.2 + (self.base.nominal *0.01)
         ret = SMODS.multiplicative_stacking(ret,self.ability.custom_suit_x_chips)
     end

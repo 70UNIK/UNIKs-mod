@@ -1752,10 +1752,13 @@ return {
             j_unik_coupon_codes = {
                 name="Coupon Codes",
                 text={
-                    "Redeem {C:attention}#1#{} random",
-                    "{C:attention}disposable{} Voucher#<s>1#",
-                    "at the end of round",
-                }         
+                    {
+                        "Obtain a {C:attention}Voucher Tag{}",
+                        "and a {C:attention}Coupon Tag{}",
+                        "for every {C:attention}#1#{} items purchased",
+                        "{C:inactive}(Currently #2#/#1# items)",
+                    },
+                },
             },
             j_unik_vessel_kiln = { --overrides get tag function to instead generate Violet vessel, negating the benefit of this Joker. It's chips cause ceramic.
                 name="Vessel Kiln",
@@ -2131,6 +2134,7 @@ return {
                         "Increases by {X:mult,C:white}X#2#{} Mult",
                         "for each {C:attention}unique {C:attention}Light Suit",
                         "in scoring hand",
+                        "{C:inactive}(Capped at {X:mult,C:white}#4#{C:inactive} Mult)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -4149,7 +4153,7 @@ return {
                 colour = "Blue",
                 text = {
                     "Ante victory requirements",
-                    "increased by {C:attention}X1.25",
+                    "increased by {C:attention}2{} Antes",
                     '{s:0.8}Applies all previous stakes',
                 }
             },
@@ -5130,6 +5134,7 @@ return {
             k_unik_overshoot_score = "SCORE NEEDED",
             k_current = "Current",
             k_overshoot_effects = "Active Overshoot Effect",
+            k_unik_code = "Code: "
         },
         high_scores={},
         labels={

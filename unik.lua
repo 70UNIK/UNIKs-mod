@@ -827,6 +827,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
 
@@ -869,7 +870,6 @@ end
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/hacker.lua")()
-	NFS.load(mod_path .. "data/jokers/cryptid/coupon_codes.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/epic_riffin.lua")() 
 end
 
