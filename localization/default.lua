@@ -2867,7 +2867,45 @@ return {
             },
             --gains X0.05 mult when a diamond is scored, loses X0.1 mult and a 1 in 5 chance to self destruct when a heart or a spade is scored
             j_unik_catto_boi = {
-
+                name = "Catto Boi",
+                text = {
+                    {
+                        "{X:mult,C:white}+X#1#{} Mult when a {V:1}#2#{} scores",
+                        "{X:mult,C:white}-X#3#{} Mult when a {V:2}#4#{} or {V:3}#5#{} scores",
+                        "{E:2,C:red}Destroyed{} if falls below {X:mult,C:white}X#6#{} Mult",
+                        "{C:inactive}(Currently {X:mult,C:white}X#7#{C:inactive} Mult)"
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#8#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Catto Boi{}",
+                    },
+                }
+            },
+            j_unik_landfill = {
+                name = "Landfill",
+                text = {
+                    "{C:chips}+#1#{} Chips per",
+                    "played {C:attention}unscoring{} card",
+                    "{C:chips}#2#{} Chips per card scored",
+                    "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)"
+                }
+            },
+            j_unik_tic_tac = {
+                name = "Tic Tac",
+                text = {
+                    "Scoring {C:attention}Light Suits{} become {V:1}#1#",
+                    "Scoring {C:attention}Dark Suits{} become {V:2}#2#",
+                    "{E:2,C:red}Destroyed{} after {C:attention}#3#{} trigger#<s>3#",
+                }
+            },
+            j_unik_mountain_dew = {
+                name = "Mountain Dew",
+                text = {
+                    "Create a {C:attention}Double Tag",
+                    "when a {C:unik_summit}Summit Card{} is used",
+                    "{E:2,C:red}Destroyed{} after {C:attention}#1#{} trigger#<s>1#",
+                }
             },
 
             j_bunc_crop_circles_noughts = {
@@ -5127,6 +5165,14 @@ return {
             k_unik_protected = "Protected!",
             k_unik_stored = "Stored!",
             k_unik_redirected = "Redirected!",
+
+            k_unik_catto_boi_normal1 = "Diamonds... Close enough for me...",
+            k_unik_catto_boi_normal2 = "Fragments, Frozen Tuna and now this? At least it's different...",
+            k_unik_catto_boi_normal3 = "I wonder how Big Boi would find this?",
+            k_unik_catto_boi_normal4 = "PLEASE NOT THOSE COLOURS! I don't want that to experience it again...",
+            k_unik_catto_boi_why1 = "Please... Don't...",
+            k_unik_catto_boi_why2 = "I CAN'T EXPERIENCE THIS AGAIN!...",
+            k_unik_catto_boi_die = "AAAAAAARRRRRGGGHHHH!!.....",
 
 
             --more overshoot shit

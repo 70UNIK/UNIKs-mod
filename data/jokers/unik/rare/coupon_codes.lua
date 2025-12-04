@@ -11,15 +11,15 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {purchased_cards = 0,requirement=15,} },
+    config = { extra = {purchased_cards = 0,requirement=14,} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_coupon
         info_queue[#info_queue + 1] = G.P_TAGS.tag_voucher
-		return { vars = { center.ability.extra.purchased_cards,center.ability.extra.requirement} }
+		return { vars = { center.ability.extra.requirement,center.ability.extra.purchased_cards,} }
 	end,
     calculate = function(self, card, context)
         if context.buying_card then
-            if not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+            if not context.blueprint and not context.retrigger_joker then
                 card.ability.extra.purchased_cards = card.ability.extra.purchased_cards + 1
             end
             
@@ -47,7 +47,7 @@ SMODS.Joker {
                     message = localize('k_unik_code')..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25)),
                     colour = G.C.RED
                 }
-            elseif not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+            elseif not context.blueprint and not context.retrigger_joker then
                 return {
                     message = card.ability.extra.purchased_cards .. "/" .. card.ability.extra.requirement,
                     colour = G.C.RED
@@ -55,7 +55,7 @@ SMODS.Joker {
             end
         end
         if context.force_trigger then
-            if not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+            if not context.blueprint and not context.retrigger_joker then
                 card.ability.extra.purchased_cards = card.ability.extra.purchased_cards + 1
             end
             if card.ability.extra.purchased_cards >= card.ability.extra.requirement then
@@ -82,7 +82,7 @@ SMODS.Joker {
                     message = localize('k_unik_code')..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25)),
                     colour = G.C.RED
                 }
-            elseif not context.blueprint_card and not context.blueprint and context.retrigger_joker then
+            elseif not context.blueprint and not context.retrigger_joker then
                 return {
                     message = card.ability.extra.purchased_cards .. "/" .. card.ability.extra.requirement,
                     colour = G.C.RED
