@@ -34,7 +34,7 @@ SMODS.Suit {
 local bonuser = Card.get_chip_x_bonus
 function Card:get_chip_x_bonus()
     local ret = bonuser(self)
-    if self.base.suit == "unik_Noughts" and not SMODS.has_no_suit(self) and (not self.config.center.unik_specific_suit or self.config.center.unik_specific_suit == self.base.suit == "unik_Noughts") then
+    if self.base.suit == "unik_Noughts" and not SMODS.has_no_suit(self) and (not self.config.center.replace_base_card) then
         self.ability.custom_suit_x_chips = 0.2 + (self.base.nominal *0.01)
         ret = SMODS.multiplicative_stacking(ret,self.ability.custom_suit_x_chips)
     end

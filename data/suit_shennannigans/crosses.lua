@@ -35,7 +35,7 @@ function Card:get_chip_x_mult(context)
     local ret = xmulter(self,context)
 
     if self.ability.set == 'Joker' then return 0 end
-    if self.base.suit == "unik_Crosses" and not SMODS.has_no_suit(self) and (not self.config.center.unik_specific_suit or self.config.center.unik_specific_suit == self.base.suit == "unik_Crosses") then
+    if self.base.suit == "unik_Crosses" and not SMODS.has_no_suit(self) and (not self.config.center.replace_base_card) then
         self.ability.custom_suit_x_mult = 0.2 + (self.base.nominal *0.01)
         ret = SMODS.multiplicative_stacking(ret, self.ability.custom_suit_x_mult)
     end
