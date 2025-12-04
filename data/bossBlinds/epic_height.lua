@@ -9,7 +9,7 @@ SMODS.Blind{
     pos = {x = 0, y = 23},
     vars = {},
     dollars = 13,
-    mult = 1,
+    mult = 0.5,
     in_pool = function(self)
         return  CanSpawnEpic()
 	end,

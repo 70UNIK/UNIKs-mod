@@ -10,6 +10,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 2,
+    unik_exponent = {1,0.9},
     pronouns = "he_him",
     debuff = {
         akyrs_blind_difficulty = "unik_epic",

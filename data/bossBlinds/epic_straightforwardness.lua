@@ -10,6 +10,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 1,
+    unik_exponent = {1,0.9},
     debuff = {
         akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,
