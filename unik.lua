@@ -726,6 +726,8 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_bellows.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_height.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_entanglement.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_straightforwardness.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_toxin.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_bird.lua")()

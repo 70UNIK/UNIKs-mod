@@ -645,6 +645,25 @@ return {
                     "of adding to score"
                 }
             },
+            bl_unik_epic_straightforwardness = {
+                name = "Tasainenviiva", --flatline
+                text = {
+                    "Base Chips and Mult",
+                    "set to 0.01",
+                    "All additive chip operations",
+                    "become subtraction",
+                }
+            },
+            bl_unik_epic_entanglement = {
+                name = "Sotkeutunutmieli",
+                text = {
+                    "All but 1 card from each",
+                    "suit drawn face-down",
+                    "Must play exactly 4 cards",
+                    "With at least 2 cards face-down",
+                    "All cards must score",
+                }
+            },
 
             bl_unik_jaundice_jack = {
                 name = "Jaundice Jack",
