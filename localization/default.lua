@@ -2870,8 +2870,8 @@ return {
                 name = "Catto Boi",
                 text = {
                     {
-                        "{X:mult,C:white}+X#1#{} Mult when a {V:1}#2#{} scores",
-                        "{X:mult,C:white}-X#3#{} Mult when a {V:2}#4#{} or {V:3}#5#{} scores",
+                        "{X:mult,C:white}+X#1#{} Mult when a {C:diamonds}#2#{} scores",
+                        "{X:mult,C:white}-X#3#{} Mult when a {C:hearts}#4#{} or {C:spades}#5#{} scores",
                         "{E:2,C:red}Destroyed{} if falls below {X:mult,C:white}X#6#{} Mult",
                         "{C:inactive}(Currently {X:mult,C:white}X#7#{C:inactive} Mult)"
                     },
@@ -2894,8 +2894,8 @@ return {
             j_unik_tic_tac = {
                 name = "Tic Tac",
                 text = {
-                    "Scoring {C:attention}Light Suits{} become {V:1}#1#",
-                    "Scoring {C:attention}Dark Suits{} become {V:2}#2#",
+                    "Scoring {C:attention}Light Suits{} become {C:unik_noughts}#1#",
+                    "Scoring {C:attention}Dark Suits{} become {C:unik_crosses}#2#",
                     "{E:2,C:red}Destroyed{} after {C:attention}#3#{} trigger#<s>3#",
                 }
             },
@@ -2906,6 +2906,29 @@ return {
                     "when a {C:unik_summit}Summit Card{} is used",
                     "{E:2,C:red}Destroyed{} after {C:attention}#1#{} trigger#<s>1#",
                 }
+            },
+
+
+            --more buffs
+            j_drunkard = {
+                name="Drunkard",
+                text={
+                    "Gain {C:red}+#1#{} Discard#<s>1# when",
+                    "{C:attention}Blind{} is selected",
+                },
+            },
+            j_merry_andy = {
+                name="Merry Andy",
+                text={
+                    "Gain {C:red}+#1#{} Discard#<s>1# when",
+                    "{C:attention}Blind{} is selected",
+                    "{C:red}#2#{} hand size",
+                },
+                unlock={
+                    "Win a run in {E:1,C:attention}#1#",
+                    "or fewer rounds",
+                },
+
             },
 
             j_bunc_crop_circles_noughts = {

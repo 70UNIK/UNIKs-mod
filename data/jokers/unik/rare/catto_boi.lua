@@ -29,14 +29,14 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = false,
     demicoloncompat = true,
-    config = {extra = {x_mult = 1,x_mult_mod_good = 0.05, malice = 0.1},immutable = {x_mult_threshold = 1.0,dead = false}},
+    config = {extra = {x_mult = 1,x_mult_mod_good = 0.05, malice = 0.075},immutable = {x_mult_threshold = 1.0,dead = false}},
     pronouns = "he_him",
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
         return {
             vars = {center.ability.extra.x_mult_mod_good,localize("Diamonds","suits_singular"),
-            center.ability.extra.malice,localize("Hearts","suits_singular"),localize("Spades","suits_singular"),center.ability.immutable.x_mult_threshold
-            ,center.ability.extra.x_mult,localize(catto_boi[quoteset][math.random(#catto_boi[quoteset])] .. ""),
+            tostring(center.ability.extra.malice),localize("Hearts","suits_singular"),localize("Spades","suits_singular"),center.ability.immutable.x_mult_threshold
+            ,tostring(center.ability.extra.x_mult),localize(catto_boi[quoteset][math.random(#catto_boi[quoteset])] .. ""),
         colours = {G.C.SUITS["Diamonds"],G.C.SUITS["Hearts"],G.C.SUITS["Spades"]}}
         }
 	end,
@@ -69,7 +69,7 @@ SMODS.Joker {
                     colour = G.C.MULT,
                 }
             end
-            if context.other_card:is_suit('Spades') or context.other_card:is_suit('Diamonds') then
+            if context.other_card:is_suit('Spades') or context.other_card:is_suit('Hearts') then
                 --80% chance to produce a normal message, 20% to produce a custom one
                 if math.random() > 0.15 then
                     SMODS.scale_card(card, {
@@ -139,10 +139,11 @@ SMODS.Joker {
                             card=card,
                         })
                     else
-                        return {
+                        card_eval_status_text(card, "extra", nil, nil, nil, {
                             message = localize(catto_boi[quoteset][math.random(#catto_boi[quoteset])] .. ""),
                             colour = G.C.UNIK_EYE_SEARING_RED,
-                        }
+                            card=card,
+                        })
                     end
                     
                 end

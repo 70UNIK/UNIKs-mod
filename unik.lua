@@ -406,8 +406,6 @@ end
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
-NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
-
 
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/shining_glitter.lua")()
@@ -755,7 +753,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/1_5_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/common/landfill.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/common/noon.lua")()
-NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
@@ -1037,6 +1035,10 @@ function vice_check()
     return G.GAME.win_ante
 end
 
+-- joker buffs
+NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
+NFS.load(mod_path .. "data/overrides/drunkard_merry_andy_buff.lua")()	
+
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
 NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
@@ -1045,6 +1047,8 @@ if AKYRS then
 	NFS.load(mod_path .. "data/ui/aiko_icons.lua")()
 end
 NFS.load(mod_path .. "data/menu.lua")()
+
+
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
@@ -1090,3 +1094,5 @@ NFS.load(mod_path .. "data/menu.lua")()
 --Epic Decision (open booster pack when selecting blind, but make it much less janky)
 --The Vice/Epic Vice (Dedicated boss blind spawn system)
 --
+
+
