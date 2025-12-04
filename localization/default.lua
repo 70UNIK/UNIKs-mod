@@ -594,7 +594,40 @@ return {
                 }
             },
 
-
+            bl_unik_epic_bellows = {
+                name = "Karjuntakuilu",
+                text = {
+                    "+4 Hand Size",
+                    "+1 Ante per",
+                    "card held on play",
+                }
+            },
+            bl_unik_epic_bird = {
+                name = "Petolintu",
+                text = {
+                    "Set all statistics of",
+                    "all hands except",
+                    "Straight Flush to -2",
+                }
+            },
+            bl_unik_epic_claw = {
+                name = "Verenvuotoinenkynsi",
+                text = {
+                    "Discarded cards return to deck",
+                    "Must only play cards that",
+                    "have returned to deck",
+                    "after discard twice",
+                }
+            },
+            bl_unik_epic_steed = {
+                name = "Epäpyhäratsu",
+                text = {
+                    "Banish a random Joker for",
+                    "every card held in hand",
+                    "on play, Eternals included",
+                    "If no valid Jokers remaining, die",
+                }
+            },
 
             bl_unik_jaundice_jack = {
                 name = "Jaundice Jack",
@@ -640,6 +673,7 @@ return {
             bl_unik_epic_whole = {
                 name = "Syödäänkokonaisena", --Eaten Whole
                 text = {
+                    "Skipping Blinds are banned",
                     "If a hand contains a",
                     "rank previously played",
                     "this ante, die",
@@ -653,14 +687,6 @@ return {
                     "until #1# hand#<s>1# containing",
                     "a Flush are discarded",
                 }
-            },
-            bl_unik_epic_bellows = {
-                name = "Karjuvakuilu", --Bellowing abyss --+1 ante per card held in hand
-                text = {
-                    "+4 Hand Size",
-                    "+1 ante per card",
-                    "on play",
-                },
             },
             bl_cry_cube={ --I don't like cube being worse than lemon trophy. So I'll just nerf it to reduce mult by ^0.5 and blind size to be ^0.33. Still severe, but can be brute forced 
                 name = "The Cube",
@@ -4011,6 +4037,13 @@ return {
                     "instead of {C:chips}+Chips"
                 }
             },
+            unik_claw_mark = {
+                name = "Claw Mark",
+                text = {
+                    "{C:red}Must{} return to deck {C:attention}#1#{} time#<s>1#",
+                    "for card to be playable",
+                }
+            }
         },
         Planet={
             c_unik_asteroid_belt = {
@@ -5203,7 +5236,8 @@ return {
             k_unik_overshoot_score = "SCORE NEEDED",
             k_current = "Current",
             k_overshoot_effects = "Active Overshoot Effect",
-            k_unik_code = "Code: "
+            k_unik_code = "Code: ",
+            k_all_hands_no_sf= "All hands except Straight Flush",
         },
         high_scores={},
         labels={

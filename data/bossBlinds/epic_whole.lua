@@ -2,7 +2,7 @@ SMODS.Blind {
     key = 'unik_epic_whole',
     config = {},
     showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
+    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true,unskippable_ante = true},
     boss_colour = HEX("555e36"),
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 24},
@@ -16,6 +16,7 @@ SMODS.Blind {
         akyrs_cannot_be_disabled = true,
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
+        unik_all_unskippable_blinds = true,
     },
     unik_kill_hand = function(self, cards, hand, handname, check)
         if not G.GAME.unik_ranks_scored_this_ante then

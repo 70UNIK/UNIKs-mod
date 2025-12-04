@@ -721,9 +721,12 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_miser.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_bellows.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_height.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_bird.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_steed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Blinds below require talisman due to exponential requirements
 	if UNIK.has_talisman() then

@@ -2,7 +2,7 @@ SMODS.Blind{
     key = 'unik_epic_cookie',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
+    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true,unskippable_ante = true},
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 9},
     boss_colour= HEX("633b11"), 
@@ -146,8 +146,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
             G.GAME.round_scores['hand'].amt = math.huge
             G.GAME.round_scores.hand.amt = math.huge
         end
-        G.GAME.blind:unik_before_play()
-        SMODS.calculate_context({on_select_play = true})
+
 
         --Polymino autoselect all cards in selected group
         local id = {}
@@ -187,6 +186,9 @@ function G.FUNCS.play_cards_from_highlighted(e)
             end
         end
         G.GAME.unik_no_finger_trigger = nil
+
+        G.GAME.blind:unik_before_play()
+        SMODS.calculate_context({on_select_play = true})
         --end
 
         pcfh(e)

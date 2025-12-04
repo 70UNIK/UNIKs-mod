@@ -11,9 +11,10 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 2,
-	pronouns = "he_him",
+	-- pronouns = "he_him",
     loc_vars = function(self)
-		return { vars = {G.GAME.unik_reed_ranks[1].rank .. 's, '  .. G.GAME.unik_reed_ranks[2].rank .. 's '.. localize('k_unik_reed_part2') .. ' ' .. G.GAME.unik_reed_ranks[3].rank .. 's'} }
+        --.. localize('k_unik_reed_part2') .. ' ' .. G.GAME.unik_reed_ranks[3].rank .. 's'
+		return { vars = {G.GAME.unik_reed_ranks[1].rank .. 's '.. localize('k_unik_reed_part2')  .. G.GAME.unik_reed_ranks[2].rank .. 's'} }
 	end,
 	collection_loc_vars = function(self)
 		return { vars = { localize('k_unik_reed_placeholder')} }
@@ -30,7 +31,7 @@ SMODS.Blind	{
     },
 	unik_kill_hand = function(self, cards, hand, handname, check)
 		for k, v in ipairs(cards) do
-            if v:get_id() == G.GAME.unik_reed_ranks[1].id or v:get_id() == G.GAME.unik_reed_ranks[2].id or v:get_id() == G.GAME.unik_reed_ranks[3].id then
+            if v:get_id() == G.GAME.unik_reed_ranks[1].id or v:get_id() == G.GAME.unik_reed_ranks[2].id then
                 return false
             end
 		end
