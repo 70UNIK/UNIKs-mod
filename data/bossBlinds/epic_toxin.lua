@@ -49,10 +49,10 @@ SMODS.Blind	{
             print(G.GAME.current_round.current_hand.handname)
             G.GAME.unik_toxin_hand = G.GAME.current_round.current_hand.handname
             local current = G.GAME.blind.chips
-            print(sum)
-            print((current * sum) - current)
-            print((current * sum))
-            print(current)
+           -- print(sum)
+           -- print((current * sum) - current)
+           -- print((current * sum))
+           -- print(current)
 			return {
                 debuff = true,
                 add_to_blind = (current * sum) - current,

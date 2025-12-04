@@ -14,18 +14,27 @@ payload = '''
 local nanny = tostring(number_format(math.floor(SMODS.calculate_round_score())))
 
 -- -nan fix
+local undefTalisman = false
 if nanny ~= '-nan' then
 
     G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
 else
-    G.GAME.round_scores['hand'].amt = math.huge
-    G.GAME.round_scores.hand.amt = math.huge
-    print(number_format(G.GAME.round_scores.hand.amt))
+    if UNIK.has_talisman() then
+        undefTalisman = true
+        G.GAME.round_scores['hand'].amt = 0
+        G.GAME.round_scores.hand.amt = 0
+        print("WHOOPS! -NAN detected. Setting hand score to 0")
+    else
+        G.GAME.round_scores['hand'].amt = math.huge
+        G.GAME.round_scores.hand.amt = math.huge
+        print("WHOOPS! -NAN detected. Setting hand score to naneinf")
+    end
+    
 end
 local checker = G.GAME.blind:unik_debuff_after_hand(poker_hands, scoring_hand,G.play.cards,false,SMODS.calculate_round_score())
 local debuff_hand = false
 local add_to_blind = 0
-if checker and checker.debuff then
+if (checker and checker.debuff) or undefTalisman then
     debuff_hand = true
     G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
@@ -41,6 +50,9 @@ end
 if checker and checker.add_to_blind then
     if nanny == '-nan' then
         add_to_blind = math.huge
+        if undefTalisman then
+            add_to_blind = 0
+        end
     else
         add_to_blind = to_big(checker.add_to_blind)
     end
@@ -106,8 +118,13 @@ G.E_MANAGER:add_event(Event({
     end
 }))
 
-if debuff_hand then
+if debuff_hand and not undefTalisman then
     play_area_status_text("Not Allowed!")
+
+    SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, debuffed_hand = true})
+end
+if undefTalisman then
+    play_area_status_text("Score is undefined!")
 
     SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, debuffed_hand = true})
 end
@@ -130,7 +147,7 @@ pattern = '''G.E_MANAGER\:add_event\(Event\(\{
     }\)\)'''
 position = 'before'
 payload = '''
-if not debuff_hand and nanny ~= '-nan' and G.GAME.chips_text ~= '-nan' then
+if not debuff_hand and nanny ~= '-nan' and G.GAME.chips_text ~= '-nan' and not undefTalisman then
 '''
 
 ### display the fake score before not allowing the hand and/or adding to blind part 2
@@ -148,7 +165,7 @@ pattern = '''G.E_MANAGER\:add_event\(Event\(\{
     }\)\)'''
 position = 'after'
 payload = '''
-elseif not debuff_hand and nanny == '-nan' or G.GAME.chips_text == '-nan' then
+elseif not debuff_hand and nanny == '-nan' or G.GAME.chips_text == '-nan' and not undefTalisman then
  G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 func = (function() 
