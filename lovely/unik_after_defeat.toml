@@ -19,11 +19,8 @@ local ceiling222 = math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5)
 --print(upper22)
 local nanny = tostring(G.GAME.chips_text)
 --Naneinf will always trigger overshoot
-G.GAME.indigo_icbm_backup = G.GAME.indigo_icbm_backup or 0
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then
-    G.GAME.indigo_icbm_backup = G.GAME.indigo_icbm_backup + 1
-    if unik_config.unik_overshoot_level > 1 then
-        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
         unik_trigger_overshoot_menu(calculate_overshoot_amount())
         delay(0.1)
             G.E_MANAGER:add_event(Event({
@@ -32,10 +29,8 @@ if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(
                 return true
             end
         }))
-    end
 else
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-    G.GAME.indigo_icbm_backup = math.max(G.GAME.indigo_icbm_backup - 1,0)
 
     unik_ease_overshoot(-1)
 end

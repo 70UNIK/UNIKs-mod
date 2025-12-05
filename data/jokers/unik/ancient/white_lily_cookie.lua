@@ -61,6 +61,27 @@ SMODS.Joker {
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
             if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko then
+                 SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "Emult",
+                    scalar_value = "Emult_mod",
+                    base = 1,
+                    message_key = "a_powmult",
+                    message_colour = G.C.DARK_EDITION,
+                        force_full_val = true,
+                })
+            if to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) >= to_big(card.ability.immutable.hyperbolic_scale_limit) then
+                SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "Emult_mod",
+                    scalar_value = "custom_scaler",
+                    operation = "-",
+                    scalar_table = {
+                        custom_scaler = card.ability.extra.Emult_mod - card.ability.extra.Emult_mod *(100 - card.ability.immutable.hyperbolic_factor)/100,
+                    },
+                    no_message = true,
+                })
+            end
                 unik_set_sell_cost(card,0)
                 White_lily_copy(card)
             end
@@ -85,7 +106,7 @@ SMODS.Joker {
                 }
             end
 		end
-        if not context.blueprint and context.unik_destroying_joker then
+        if not context.blueprint and context.unik_destroying_joker and context.unik_destroyed_joker ~= card then
             SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
                     ref_value = "Emult",

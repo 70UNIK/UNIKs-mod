@@ -25,13 +25,6 @@ SMODS.Blind{
                 return true
             end
         end
-        --when overshoot is disabled, this should still appear
-        if unik_config.unik_overshoot_level < 2 then
-            G.GAME.indigo_icbm_backup = G.GAME.indigo_icbm_backup or 0
-            if G.GAME.indigo_icbm_backup > 3 then
-                return true
-            end
-        end
 
         return false
     end,
