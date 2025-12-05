@@ -15,10 +15,8 @@ payload = '''
 -- legendary crown: force set new high score:
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
 local upper22 = G.GAME.chips
-local ceiling22 = G.GAME.blind.chips^2
-local ceiling222 = G.GAME.blind.chips^2.5
+local ceiling222 = math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5)
 --print(upper22)
---print(ceiling22)
 local nanny = tostring(G.GAME.chips_text)
 --Naneinf will always trigger overshoot
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then

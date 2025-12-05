@@ -75,7 +75,7 @@ function UNIK.railroad_suits()
                     break
                 end
             end
-            if not already_checked and v.base.suit ~= 'unik_Crosses' then
+            if not already_checked and v.base.suit ~= 'unik_Crosses' and not SMODS.has_no_suit(v) then
                 all_suits[#all_suits+1] = v.base.suit
             end
         end

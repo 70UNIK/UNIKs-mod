@@ -14,7 +14,7 @@ SMODS.Blind	{
 	-- pronouns = "he_him",
     loc_vars = function(self)
         --.. localize('k_unik_reed_part2') .. ' ' .. G.GAME.unik_reed_ranks[3].rank .. 's'
-		return { vars = {G.GAME.unik_reed_ranks[1].rank .. 's '.. localize('k_unik_reed_part2')  .. G.GAME.unik_reed_ranks[2].rank .. 's'} }
+		return { vars = {G.GAME.unik_reed_ranks[1].rank .. 's '.. localize('k_unik_reed_part2')  .. " " .. G.GAME.unik_reed_ranks[2].rank .. 's'} }
 	end,
 	collection_loc_vars = function(self)
 		return { vars = { localize('k_unik_reed_placeholder')} }

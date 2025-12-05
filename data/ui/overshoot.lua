@@ -133,7 +133,7 @@ function Game:update(dt)
     if (G.GAME.blind) then
 
         if (G.GAME.blind.chips) then
-            local num = number_format(G.GAME.blind.chips^2.5)
+            local num = number_format(math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5))
             G.GAME.blind.overshootUIchips = "Overshoot at " .. num
         else
             G.GAME.blind.overshootUIchips = ""
