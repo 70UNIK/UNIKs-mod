@@ -5292,6 +5292,17 @@ return {
             k_unik_toxin_2 = "Must only play ",
 
             k_flower_potted = "YOU IDIOT!",
+            unik_overshoot_config = "Overshoot level (Restart Required)",
+            unik_overshoot_off = "Disabled (Not recommended)",
+            unik_overshoot_lenient = "Lenient",
+            unik_overshoot_strict = "Strict (Recommended)",
+
+            unik_legendary_blinds_desc1 = "Enable Almanac-styled Epic/Legendary Blinds",
+            unik_legendary_blinds_desc2 = "when Overshoot is high",
+            unik_cryptid_nerfs_desc1 = "Nerf some of Cryptid's content when installed",
+            unik_overshoot_desc1 = "Off: Highly not recommended, especially with mods such as Cryptid (Can go into slop territory)",
+            unik_overshoot_desc2 = "\"Lenient\": Similar to the old system, always +1 if Overshooting Score (Can be slow to notice)",
+            unik_overshoot_desc3 = "Strict: Gain more Overshoot the more you score over the limit",
         },
         high_scores={},
         labels={

@@ -1,7 +1,7 @@
 local mod_path = "" .. SMODS.current_mod.path
 unik_config = SMODS.current_mod.config
 UNIK = SMODS.current_mod
-
+-- unik_config.unik_overshoot_level = 3
 if not UNIK then
 	UNIK = {}
 end
@@ -23,6 +23,17 @@ SMODS.current_mod.optional_features = {
 	},
 }
 
+-- G.FUNCS.unik_update_overshoot_opt = function(e)
+-- 	print(e)
+-- 	print(e.to_key)
+-- 	unik_config.unik_overshoot_level = e.to_key
+-- 	-- unik_config.unik_overshoot_level
+-- 	-- Talisman.config_file.score_opt_id = e.to_key
+-- 	-- local score_opts = {"", "bignumber", "omeganum"}
+-- 	-- Talisman.config_file.break_infinity = score_opts[e.to_key]
+-- 	-- nativefs.write(lovely.mod_dir .. "/Talisman/config.lua", STR_PACK(Talisman.config_file))
+-- end
+
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -38,16 +49,37 @@ SMODS.current_mod.config_tab = function() --Config tab
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
+			info = {
+				localize("unik_legendary_blinds_desc1"),
+				localize("unik_legendary_blinds_desc2")
+			},
 		}),
 		create_toggle({
 			label = localize("unik_cryptid_nerfs_option"),
 			ref_table = unik_config,
 			ref_value = "unik_cryptid_nerfs",
+			info = {
+				localize("unik_cryptid_nerfs_desc1"),
+			},
 		}),
+		-- create_option_cycle({
+		-- 	label = localize("unik_overshoot_config"),
+		-- 	scale = 0.8,
+		-- 	w = 9,
+		-- 	options = {localize("unik_overshoot_off"), localize("unik_overshoot_lenient"), localize("unik_overshoot_strict")},
+		-- 	current_option = unik_config.unik_overshoot_level,
+		-- 	opt_callback = 'unik_update_overshoot_opt',
+		-- 	info = {
+		-- 		localize("unik_overshoot_desc1"),
+		-- 		localize("unik_overshoot_desc2"),
+		-- 		localize("unik_overshoot_desc3"),
+		-- 	},
+		-- })
 	},
 	}
 end
-
+-- print("OVERSHOOT LEVEL:")
+-- print(unik_config.unik_overshoot_level)
 NFS.load(mod_path .. "talismanless.lua")()
 NFS.load(mod_path .. "data/hooks/startup.lua")()
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
