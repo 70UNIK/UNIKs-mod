@@ -65,7 +65,7 @@ SMODS.Blind{
         if G.GAME.current_round.hands_left > 1 and not next(find_joker("j_cry_panopticon")) and not next(find_joker("cry-panopticon")) and not next(find_joker("j_paperback_the_world")) and check then
             G.GAME.blind.triggered = true
             return true
-        elseif G.GAME.current_round.hands_left <= 1 and handname ~= G.GAME.current_round.most_played_poker_hand then
+        elseif ((G.GAME.current_round.hands_left < 1 and not check) or (G.GAME.current_round.hands_left <= 1 and check)) and handname ~= G.GAME.current_round.most_played_poker_hand then
              G.GAME.blind.triggered = true
             return true
         end
