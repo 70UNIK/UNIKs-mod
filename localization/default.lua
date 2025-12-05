@@ -5290,6 +5290,8 @@ return {
             k_unik_height_2 = "Final Hand must be a ",
             k_unik_toxin_1 = "First hand will multiply the Blind Size",
             k_unik_toxin_2 = "Must only play ",
+
+            k_flower_potted = "YOU IDIOT!",
         },
         high_scores={},
         labels={
@@ -5542,6 +5544,15 @@ return {
                 "YOU H8 ME!",
                 "WE ALL GIVE YOU",
                 "A BIG FUCK YOU!",
+            },
+            special_lose_runner = {
+                "You no play straight,",
+                "YOU NO LIVE!"
+            },
+            special_lose_flowerpot = {
+                "YOU ARE AN IDIOT!",
+                "HAHAHAHAHAHAHAHAHAHAAHA",
+                "HAAAAAAAAAAA!!!!!!",
             },
             --finity quips:
             lq_legendary_crown_1={
