@@ -17,6 +17,9 @@ SMODS.Blind	{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
+    in_pool = function(self)
+        return  CanSpawnEpic()
+	end,
 	set_blind = function(self, reset, silent)
         if not reset and not G.GAME.blind.disabled  then
             G.GAME.blind:wiggle()

@@ -20,6 +20,9 @@ SMODS.Blind	{
     set_blind = function(self)
         G.hand:change_size(4)
 	end,
+    in_pool = function(self)
+        return  CanSpawnEpic()
+	end,
 	press_play = function(self)
 G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.2, func = function()
         for i = 1, #G.hand.cards do

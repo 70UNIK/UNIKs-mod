@@ -63,4 +63,7 @@ SMODS.Blind	{
         }
 		end
     end,
+    in_pool = function(self)
+        return  CanSpawnEpic()
+	end,
 }

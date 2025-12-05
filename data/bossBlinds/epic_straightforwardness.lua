@@ -30,6 +30,9 @@ SMODS.Blind	{
     modify_hand = function (self, cards, poker_hands, text, mult, hand_chips)
         return 0.01, 0.01, true
     end,
+    in_pool = function(self)
+        return  CanSpawnEpic()
+	end,
 }
 
 local scie = SMODS.calculate_individual_effect

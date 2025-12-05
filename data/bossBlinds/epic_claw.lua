@@ -17,6 +17,9 @@ SMODS.Blind	{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
+    in_pool = function(self)
+        return  CanSpawnEpic()
+	end,
 	set_blind = function(self, reset, silent)
         if not reset then
             for i,v in pairs(G.playing_cards) do

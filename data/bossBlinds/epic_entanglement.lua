@@ -16,6 +16,9 @@ SMODS.Blind	{
         akyrs_cannot_be_rerolled = true,
         akyrs_cannot_be_skipped = true,
     },
+    in_pool = function(self)
+        return  CanSpawnEpic()
+	end,
     stay_flipped = function (self, area, card)
         if area == G.hand and G.hand.cards then
             local ranks = {}
