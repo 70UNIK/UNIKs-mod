@@ -3276,6 +3276,17 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                 }
             },
+            j_unik_gun = {
+                name = "The Gun",
+                text = {
+                    "X#1# Mult",
+                    '{C:attention}selecting{} a card has',
+                    'a {C:green}#2# in #3#{} chance to',
+                    'play selected cards',
+                    "{C:inactive,s:0.8}Hey, I've seen this before!",
+                }
+            },
+
             j_cry_astral_in_a_bottle_but_not_cursed = {
                 name = "Astral in a Bottle",
 				text = {

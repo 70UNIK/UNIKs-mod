@@ -12,7 +12,7 @@ SMODS.Joker {
     config = { extra = {chips = 0, chip_mod = 3, bad_chip_mod = 3}},
     loc_vars = function(self, info_queue, center)
         return { 
-            vars = {center.ability.extra.chip_mod,-center.ability.extra.bad_chip_mod,center.ability.extra.chips},
+            vars = {center.ability.extra.chip_mod,-center.ability.extra.bad_chip_mod,math.max(center.ability.extra.chips,0)},
         }
 	end,
     calculate = function(self, card, context)
@@ -47,6 +47,7 @@ SMODS.Joker {
 						ref_table[ref_value] = initial + scaling * cards
 					end,
 				})
+                card.ability.extra.chips = math.max(card.ability.extra.chips,0)
 				return {
                     
                 }
@@ -61,13 +62,15 @@ SMODS.Joker {
                 message_colour = G.C.CHIPS,
                 operation = '-',
             })
+            card.ability.extra.chips = math.max(card.ability.extra.chips,0)
             return {
 
             }
         end
         if context.joker_main or context.force_trigger then
+            card.ability.extra.chips = math.max(card.ability.extra.chips,0)
             return {
-                chips = card.ability.extra.chips
+                chips = math.max(card.ability.extra.chips,0)
             }
         end
     end,

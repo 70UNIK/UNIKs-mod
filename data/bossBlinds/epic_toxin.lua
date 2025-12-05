@@ -10,7 +10,7 @@ SMODS.Blind	{
     vars = {},
     dollars = 13,
     mult = 0.5,
-    unik_exponent = {1,0.7},
+    unik_exponent = {1,0.8},
     debuff = {
         akyrs_blind_difficulty = "unik_epic",
         akyrs_cannot_be_overridden = true,
@@ -46,7 +46,7 @@ SMODS.Blind	{
 	end,
     unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
 		if G.GAME.current_round.hands_played == 0 then
-            print(G.GAME.current_round.current_hand.handname)
+            --print(G.GAME.current_round.current_hand.handname)
             G.GAME.unik_toxin_hand = G.GAME.current_round.current_hand.handname
             local current = G.GAME.blind.chips
            -- print(sum)
