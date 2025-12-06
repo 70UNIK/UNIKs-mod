@@ -10,7 +10,7 @@ SMODS.PokerHand { -- Spectrum House (Referenced from SixSuits)
     { 'S_A',                true },
     { 'D_A', true },
     { 'C_A',                true },
-    { "S_7", true, enhancement = "m_wild" },
+    { "unik_CROSSES_7", true },
     { 'H_7',                true }
   },
 

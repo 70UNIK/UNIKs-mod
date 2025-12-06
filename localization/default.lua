@@ -228,7 +228,7 @@ return {
             bl_unik_red_runner = {
                 name = "Red Runner",
                 text = {
-                    "All Cards debuffed until",
+                    "No hands will score until",
                     "a hand containing a",
                     "Straight is played",
                 }

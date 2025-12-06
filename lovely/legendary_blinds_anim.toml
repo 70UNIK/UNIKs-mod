@@ -139,7 +139,6 @@ pattern = '''local blindTable = {'''
 position = "after"
 payload = '''
 glitchy_anim = self.glitchy_anim,
-death_message = self.death_message,
 '''
 match_indent = true
 

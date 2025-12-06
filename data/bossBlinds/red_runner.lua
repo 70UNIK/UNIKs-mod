@@ -13,17 +13,18 @@ SMODS.Blind{
 
     unik_before_play = function(self)
         local text, loc_disp_text, poker_hands, scoring_hand, disp_text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
-        if poker_hands["Straight"] then
+        if next(poker_hands["Straight"]) then
             G.E_MANAGER:add_event(Event({trigger = 'immediate',func = function()
                 G.GAME.blind:disable()
                 return true
             end}))
         end
 	end,
-    recalc_debuff = function(self, card, from_blind)
-        if (card.area ~= G.jokers) then
-            return true
-        end
-        return false
+    debuff_hand = function(self, cards, hand, handname, check)
+		if next(hand["Straight"]) then	
+			return false
+		end
+        G.GAME.blind.triggered = true
+		return true
 	end,
 }
