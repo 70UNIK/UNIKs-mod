@@ -93,7 +93,11 @@ SMODS.Sticker{
 local setCoster = Card.set_cost
 function Card:set_cost()
     setCoster(self)
-    if self.ability.unik_disposable or self.ability.unik_niko or self.ability.unik_depleted then self.cost = 0 end
+    if self.ability.unik_disposable or self.ability.unik_niko or self.ability.unik_depleted then 
+		self.cost = 0 
+		self.sell_cost = 0
+	 end
+	
 end
 
 --Disposable effect on Jokers

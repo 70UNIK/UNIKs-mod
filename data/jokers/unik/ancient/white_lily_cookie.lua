@@ -141,7 +141,7 @@ SMODS.Joker {
 function unik_set_sell_cost(card, amount)
   if not card.set_cost then return end
   -- This is called just so it calculates the cost of the card... a bit silly
-  card:set_cost()
+  
   card.ability.extra_value = amount - math.max(1, math.floor(card.cost / 2))
   card:set_cost()
 end

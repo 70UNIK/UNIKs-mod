@@ -215,3 +215,23 @@ payload = '''
 if not card.shattered and not card.destroyed and not card.removed and not card.REMOVED then
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''ease_dollars(self.sell_cost)'''
+position = "before"
+payload = '''
+if self.sell_cost ~= 0 then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''ease_dollars(self.sell_cost)'''
+position = "after"
+payload = '''
+end
+'''
+match_indent = true

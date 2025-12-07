@@ -83,6 +83,9 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.debuff_immune = true
         unik_set_sell_cost(card,-666)
     end
+    if card.ability.unik_disposable or card.ability.unik_niko or card.ability.unik_depleted then
+        unik_set_sell_cost(card,0)
+    end
     if card.config.center.key == 'j_unik_eternal_egg' and (self == G.shop_jokers or self == G.shop_booster) then
         card.ability.eternal = true
     end
