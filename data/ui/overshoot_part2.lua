@@ -190,9 +190,9 @@ function unik_trigger_overshoot_menu(increase)
     G.FUNCS.overlay_menu{
         definition = G.UIDEF.overshoot_info(true),config = {no_esc = true}
     }
-    print(increase)
-    print(G.GAME.unik_overshoot)
-    print(predictFXValue(G.GAME.unik_overshoot + increase))
+    --print(increase)
+    --print(G.GAME.unik_overshoot)
+    --print(predictFXValue(G.GAME.unik_overshoot + increase))
     --"scrolling down the overshoot list"
     G.E_MANAGER:add_event(Event({
             func = function()

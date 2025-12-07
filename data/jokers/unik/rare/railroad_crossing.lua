@@ -21,7 +21,7 @@ SMODS.Joker {
         if card.added_to_deck then
             if G.playing_cards then
                 for k, v in pairs(G.playing_cards) do
-                    if v.base.suit ~= 'unik_Crosses' and not v:is_suit(G.GAME.unik_saved_suits_railroad[1], true, true) and not v:is_suit(G.GAME.unik_saved_suits_railroad[2], true, true) then
+                    if (v.base.suit ~= 'unik_Crosses' and not v:is_suit(G.GAME.unik_saved_suits_railroad[1], true, true) and not v:is_suit(G.GAME.unik_saved_suits_railroad[2], true, true)) or SMODS.has_no_suit(v) or (v.config.center.unik_specific_suit and v.config.center.unik_specific_suit ~= 'unik_Crosses')  then
                         v:set_debuff(true)
                     else
                         v:set_debuff()
@@ -33,7 +33,7 @@ SMODS.Joker {
     remove_from_deck = function(self, card, from_debuff)
         if G.playing_cards then
             for k, v in pairs(G.playing_cards) do
-                if v.base.suit ~= 'unik_Crosses' and not v:is_suit(G.GAME.unik_saved_suits_railroad[1], true, true) and not v:is_suit(G.GAME.unik_saved_suits_railroad[2], true, true) then
+                if (v.base.suit ~= 'unik_Crosses' and not v:is_suit(G.GAME.unik_saved_suits_railroad[1], true, true) and not v:is_suit(G.GAME.unik_saved_suits_railroad[2], true, true)) or SMODS.has_no_suit(v) or (v.config.center.unik_specific_suit and v.config.center.unik_specific_suit ~= 'unik_Crosses') then
                     v:set_debuff()
                 end
             end

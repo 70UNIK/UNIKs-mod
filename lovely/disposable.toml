@@ -100,6 +100,11 @@ while i <= #G.discard.cards do
     if not gone then i = i + 1 end
 end
 i = 1
+while i <= #G.playing_cards do
+    local gone = G.playing_cards[i]:calculate_decaying()
+    if not gone then i = i + 1 end
+end
+i = 1
 while i <= #G.hand.cards do
     local gone = G.hand.cards[i]:calculate_limited_edition()
     if not gone then i = i + 1 end

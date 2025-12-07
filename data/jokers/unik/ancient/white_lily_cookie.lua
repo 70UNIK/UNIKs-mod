@@ -60,7 +60,7 @@ SMODS.Joker {
 	end,
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
-            if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko then
+            if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko and not card.ability.unik_decaying then
                  SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
                     ref_value = "Emult",

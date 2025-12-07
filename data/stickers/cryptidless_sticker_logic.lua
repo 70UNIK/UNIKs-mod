@@ -20,7 +20,7 @@ SMODS.Sticker:take_ownership("rental", {
 				card:calculate_rental()
 			end
 		end
-		if context.playing_card_end_of_round then
+		if context.playing_card_end_of_round and context.card == card then
 			card:calculate_rental()
 		end
 	end,

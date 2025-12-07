@@ -404,6 +404,7 @@ NFS.load(mod_path .. "data/stickers/depleted.lua")()
 NFS.load(mod_path .. "data/stickers/impounded.lua")() 
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
+NFS.load(mod_path .. "data/stickers/decaying.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
 NFS.load(mod_path .. "data/stickers/claw_mark.lua")() 
 if not (SMODS.Mods["Cryptid"] or {}).can_load then

@@ -1774,9 +1774,8 @@ return {
                 name="Soul Fragment",
                 text={
                     "Sell this card to create a random",
-                    "{C:attention}Perishable{} {C:legendary}Legendary{} ", 
-                    "Joker with {C:money}$0{} sell value",
-                    "{C:inactive}(Can overflow){}",
+                    "{C:attention}Perishable{} {C:legendary}Legendary{} Joker", 
+                    "with {C:money}$0{} sell value",
                 }               
             },
             --almanac version will create wonderous, transdescendant and ritualistic jokers (except kosmos)
@@ -1784,9 +1783,8 @@ return {
                 name="A Taste of Power",
                 text={
                     "Sell this card to create a random",
-                    "{C:purple}Eternal {C:red}Niko{}", 
-                    "{C:unik_ancient}Ancient{} Joker",
-                    "{C:inactive}(Can overflow){}",
+                    "{C:attention}Decaying {C:unik_ancient}Ancient{} Joker", 
+                    "with {C:money}$0{} sell value",
                 }             
             },
             -- Upgrades on destruction, making her very resilient and synegises with dagger, ankh
@@ -1798,7 +1796,7 @@ return {
                         "Copies itself with {C:money}$0{} sell value if {C:red}destroyed",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                         "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#3#% {C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Mult)",
-                        "{C:red,s:0.7}(Cannot copy if destroyed by Disposable)",  
+                        "{C:red,s:0.7}(Cannot copy if destroyed by Disposable or Decaying)",  
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#5#{}", --TODO: adjustable quotes, for 
@@ -4090,6 +4088,22 @@ return {
                     "{C:red}Must{} return to deck {C:attention}#1#{} time#<s>1#",
                     "for card to be playable",
                 }
+            },
+            unik_decaying = {
+                name = "Decaying",
+                text = {
+                    "{C:red}Destroyed{} after {C:attention}#1#{} Round#<s>1#",
+                    "{C:inactive}({C:attention}#2#{C:inactive} remaining)",
+                    "{C:red}Unremovable"
+                }
+            },
+            unik_decaying_consumable = {
+                name = "Decaying",
+                text = {
+                    "{C:red}Destroyed{} at",
+                    "end of round",
+                    "{C:red}Unremovable"
+                }
             }
         },
         Planet={
@@ -5326,6 +5340,7 @@ return {
             unik_copper_seal = "Copper Seal",
             unik_shielded = "Shielded",
             unik_claw_mark = "Claw Mark",
+            unik_decaying = "Decaying",
         },
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM

@@ -9,6 +9,7 @@ function Card:set_disposable(disposable)
     if self.config.center.perishable_compat then 
         self.ability.unik_disposable = disposable
         self:set_cost()
+        unik_set_sell_cost(self,0)
     end
     
 end
