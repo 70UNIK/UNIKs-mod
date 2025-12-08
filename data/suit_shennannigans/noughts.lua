@@ -36,6 +36,9 @@ function Card:get_chip_x_bonus()
     local ret = bonuser(self)
     if self.base.suit == "unik_Noughts" and not SMODS.has_no_suit(self) and (not self.config.center.replace_base_card) then
         self.ability.custom_suit_x_chips = 0.2 + (self.base.nominal *0.01)
+		if UNIK.is_pure_suit(self) then
+			self.ability.custom_suit_x_chips = 0.2
+		end
         ret = SMODS.multiplicative_stacking(ret,self.ability.custom_suit_x_chips)
     end
     

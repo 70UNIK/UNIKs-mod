@@ -495,6 +495,18 @@ SMODS.Atlas({
 	px = 18,
 	py = 18,
 })
+SMODS.Atlas({
+	key = "unik_nils",
+	path = "unik_nils.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_nils_hc",
+	path = "unik_nils_hc.png",
+	px = 71,
+	py = 95,
+})
 NFS.load(mod_path .. "data/suit_shennannigans/noughts.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/crosses.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
