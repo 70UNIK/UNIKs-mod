@@ -11,7 +11,6 @@ SMODS.Challenge{
         }
 	},
 	jokers = {
-        { id = "j_unik_jsab_chelsea", eternal = true},
         { id = "j_unik_unik", eternal = true},
     },
 	deck = {

@@ -40,7 +40,7 @@ SMODS.Joker {
 		end
 	end,
 	in_pool = function() --reduce frequency of it appearing
-        if pseudorandom('unik_foundation'..G.SEED) < 0.4 then
+        if pseudorandom('unik_foundation'..G.SEED) < 0.5 then
             return true
         else
             return false

@@ -7,7 +7,7 @@ SMODS.Tag{
 		info_queue[#info_queue + 1] = G.P_CENTERS.p_spectral_normal_1
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_soul" }
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_foundation
-		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway" }
+		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway", vars = {3} }
 		return { vars = {} }
 	end,
 

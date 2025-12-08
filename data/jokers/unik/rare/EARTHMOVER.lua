@@ -10,7 +10,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     config = { extra = { exponent = 1.15 } },
     loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway" }
+		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway" , vars = {3}}
 		if not center.edition or (center.edition and not center.edition.negative) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
 		end
@@ -18,7 +18,7 @@ SMODS.Joker {
 	end,
 	pronouns = "it_its",
 	in_pool = function() --reduce frequency of it appearing
-        if pseudorandom('earthmover'..G.SEED) < 0.4 then
+        if pseudorandom('earthmover'..G.SEED) < 0.5 then
             return true
         else
             return false

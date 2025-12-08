@@ -1023,7 +1023,7 @@ end
 --Challenges gone until I fix them to work with new API 
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
- NFS.load(mod_path .. "data/challenges/rich_get_richer_2.lua")()
+--  NFS.load(mod_path .. "data/challenges/rich_get_richer_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
 NFS.load(mod_path .. "data/challenges/finger_trigger_1.lua")()

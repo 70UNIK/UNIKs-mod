@@ -16,9 +16,7 @@ SMODS.Joker {
     pools = { ["Food"] = true},
     calculate = function(self, card, context)
 		if (context.using_consumeable and context.consumeable.ability.set == 'unik_summit') or context.forcetrigger then
-             if not context.blueprint and not context.retrigger_joker then
-                card.ability.extra.triggers = card.ability.extra.triggers - 1
-            end
+             
             G.E_MANAGER:add_event(Event({
                 trigger = 'before',
                 func = function()
@@ -28,6 +26,9 @@ SMODS.Joker {
                     return true
                 end,
             }))
+            if not context.blueprint and not context.retrigger_joker then
+                card.ability.extra.triggers = card.ability.extra.triggers - 1
+            end
             if card.ability.extra.triggers <= 0 then
                 selfDestruction(card,'k_drank_ex',G.C.UNIK_SUMMIT)
             else

@@ -29,14 +29,13 @@ SMODS.Joker {
         local key = "j_unik_epic_blind_sauce"
         if not unik_config.unik_legendary_blinds then
             key = "j_unik_epic_blind_sauce_no_epic"
-            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
+            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult} }
         else
-             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult,math.max(0,center.ability.extra.triggers-1)} }
+             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult} }
         end
         
 		
 	end,
-    --Only spawn if you have at least 1 king of spades in deck
     calculate = function(self, card, context)
         --dont try to force trigger it. It will self destruct and guarantee an epic blind.
         if context.forcetrigger and not card.ability.extra.destroyed then
@@ -47,34 +46,37 @@ SMODS.Joker {
                 
             }
         end
+        if context.after and SMODS.last_hand_oneshot and not context.blueprint then
+            card.ability.extra.destroyed = true
+            selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR)
+            ForceEpicBlind()
+        end
         if context.joker_main and not card.ability.extra.destroyed then
             
-            if (context.blueprint_card or context.retrigger_joker or context.repetition) and not card.ability.extra.destroyed then
-                card.ability.extra.destroyed = true
-                selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR)
-                ForceEpicBlind()
-            end
+            -- if (context.blueprint_card or context.retrigger_joker or context.repetition) and not card.ability.extra.destroyed then
+            --     card.ability.extra.destroyed = true
+            --     selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR)
+            --     ForceEpicBlind()
+            -- end
             if not card.ability.extra.destroyed then
-                if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
-                    card.ability.extra.triggers = card.ability.extra.triggers - 1
-                end
+                -- if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
+                --     card.ability.extra.triggers = card.ability.extra.triggers - 1
+                -- end
                 return {
                         mult = card.ability.extra.Mult,
                         chips = card.ability.extra.Chips,
                         e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                        colour = G.C.DARK_EDITION,
+                        -- colour = G.C.DARK_EDITION,
                     } 
             end
         end
-        if context.end_of_round and context.cardarea == G.jokers and not card.ability.extra.destroyed then
-			if card.ability.extra.triggers > 0 then
-                card.ability.extra.destroyed = true
-                selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR)
-                ForceEpicBlind()
-            end
-		end
-        if context.setting_blind then
-			card.ability.extra.triggers = card.ability.extra.trigger_mod
-		end
+        -- if context.end_of_round and context.cardarea == G.jokers and not card.ability.extra.destroyed then
+		-- 	if card.ability.extra.triggers > 0 then
+                
+        --     end
+		-- end
+        -- if context.setting_blind then
+		-- 	card.ability.extra.triggers = card.ability.extra.trigger_mod
+		-- end
     end
 }

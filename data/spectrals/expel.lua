@@ -33,6 +33,31 @@ SMODS.Consumable {
                 end
             end
         end
+        if G.shop_jokers then
+          for i,v in pairs(G.shop_jokers.highlighted ) do
+                if v == card then
+                    shop_jokers = shop_jokers - 1
+                    break
+                end
+            end
+        end
+        --weird edge scenarios such as in the voucher or a booster slot
+        if G.shop_booster then
+          for i,v in pairs(G.shop_booster.highlighted) do
+                if v == card then
+                    boosters = boosters - 1
+                    break
+                end
+            end
+        end
+        if G.shop_vouchers then
+          for i,v in pairs(G.shop_vouchers.highlighted) do
+                if v == card then
+                    vouchers = vouchers - 1
+                    break
+                end
+            end
+        end
         if (shop_jokers + booster_cards + consumables + jokers + boosters + vouchers == 1) then
             return true
         end
@@ -69,9 +94,42 @@ SMODS.Consumable {
                 --print(v.config.center.key)
             end
         end
-        c = G.shop_jokers and G.shop_jokers.highlighted[1] or c
-        c = G.shop_booster and G.shop_booster.highlighted[1] or c
-        c = G.shop_vouchers and  G.shop_vouchers.highlighted[1] or c
+        --weird edge scenario
+        if G.shop_jokers and #G.shop_jokers.highlighted >= 1 then
+            for i,v in pairs (G.shop_jokers.highlighted) do
+                if v ~= card then
+                    c = v
+                    --print(c.config.center.key)
+                    break
+                end
+                --print(v.config.center.key)
+            end
+        end
+        if G.shop_booster and #G.shop_booster.highlighted >= 1 then
+            for i,v in pairs (G.shop_booster.highlighted) do
+                if v ~= card then
+                    c = v
+                    --print(c.config.center.key)
+                    break
+                end
+                --print(v.config.center.key)
+            end
+        end
+        if G.shop_vouchers and #G.shop_vouchers.highlighted >= 1 then
+            for i,v in pairs (G.shop_vouchers.highlighted) do
+                if v ~= card then
+                    c = v
+                    --print(c.config.center.key)
+                    break
+                end
+                --print(v.config.center.key)
+            end
+        end
+        -- c = G.shop_jokers and G.shop_jokers.highlighted[1] or c
+        -- c = G.shop_booster and G.shop_booster.highlighted[1] or c
+        -- c = G.shop_vouchers and  G.shop_vouchers.highlighted[1] or c
+
+
         c = G.jokers and G.jokers.highlighted[1] or c
         if c and c ~= nil and (c.config.center.key == 'j_unik_megatron' or c.config.center.key == "j_paperback_white_night" 
             or (c.config and c.config.center and c.config.center.paperback and c.config.center.paperback.permanently_eternal))
@@ -111,7 +169,7 @@ SMODS.Consumable {
             c:gore6_break()
             return true end })) 
         else
-            error("No item found!")
+            error("No item found! Either it is trying to destroy an item in an unrecognized card area or its just programmed wrong...")
         end
     end,
 }
