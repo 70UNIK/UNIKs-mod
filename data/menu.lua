@@ -16,6 +16,20 @@ local oldfunc = Game.main_menu
 		G.title_top.T.w = G.title_top.T.w * 1.7675
 		G.title_top.T.x = G.title_top.T.x - 0.8
 		G.title_top:emplace(newcard)
+
+		-- make the title screen use different background colors
+		G.SPLASH_BACK:define_draw_steps({
+			{
+				shader = "splash",
+				send = {
+					{ name = "time", ref_table = G.TIMERS, ref_value = "REAL_SHADER" },
+					{ name = "vort_speed", val = 0.4 },
+					{ name = "colour_1", ref_table = G.C, ref_value = "UNIK_ANCIENT" },
+					{ name = "colour_2", ref_table = G.C, ref_value = "UNIK_UNIK" },
+				},
+			},
+		})
+		
 		-- make the card look the same way as the title screen Ace of Spades
 		newcard.T.w = newcard.T.w * 1.1 * 1.2
 		newcard.T.h = newcard.T.h * 1.1 * 1.2
@@ -40,3 +54,11 @@ local oldfunc = Game.main_menu
 		}))
 		return ret
 	end
+
+function Card:change_suit_no_blind(new_suit)
+    local new_code = SMODS.Suits[new_suit].card_key
+    local new_val = SMODS.Ranks[self.base.value].card_key
+    local new_card = G.P_CARDS[new_code..'_'..new_val]
+
+    self:set_base(new_card)
+end

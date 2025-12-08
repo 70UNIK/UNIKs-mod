@@ -56,7 +56,7 @@ SMODS.Joker {
                         successful = false
                         print("Uh oh, looks like it tried to debuff a cursed joker or itself... fallback")
                     end
-                    if successful == true and not ghostTrap == true then
+                    if select and successful == true and not ghostTrap == true then
                         card.ability.extra.impoundedSeed = pseudoseed('impounded_ID_unik') --used to track which joker is impounded, in case of multiple impound notices
                         card_eval_status_text(select, 'extra', nil, nil, nil, {message = localize('k_unik_impounded'), colour = G.C.BLACK})
                         G.E_MANAGER:add_event(Event({
@@ -64,8 +64,11 @@ SMODS.Joker {
 
                                 select.ability.unik_impounded = true
                                 --Scale logarithmically, so cheaper jokers would proportionately cost more, while exotics proportinately cost less, but still always increasing.
-                                card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(select.sell_cost+1))/100
-                                if select.sell_cost <= 1 then
+                                if select.sell_cost then
+                                    card.ability.extra.cost = -math.ceil(card.ability.extra.multiplier * 100 * math.log(select.sell_cost+1,math.exp(1)))/100
+                                end
+                                
+                                if not select.sell_cost or select.sell_cost <= 1 then
                                     card.ability.extra.cost = -1 * card.ability.extra.fallback_cost
                                 end
                                 select.sell_cost = 0

@@ -134,6 +134,13 @@ end
 
 --Gore6 (custom card destruction animation)
 function Card:gore6_break()
+    local enhancements = SMODS.get_enhancements(self)
+    for key, _ in pairs(enhancements) do
+        if G.P_CENTERS[key].woodbreak then 
+            self:woodBreak()
+            return nil
+        end
+    end
     local dissolve_time = 0.7
     self.shattered = true
     self.dissolve = 0

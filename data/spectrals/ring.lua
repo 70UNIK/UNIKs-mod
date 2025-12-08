@@ -6,7 +6,7 @@ SMODS.Consumable{
 	cost = 4,
 	atlas = "unik_spectrals",
     config = {
-		max_highlighted = 4,
+		max_highlighted = 5,
         suit_conv = 'unik_Noughts'
 	},
 		loc_vars = function(self, info_queue, center)

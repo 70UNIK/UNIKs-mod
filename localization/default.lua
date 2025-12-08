@@ -63,9 +63,8 @@ return {
                 text = {
                     "{C:attention}+#1#{} Joker slot#<s>1#",
                     "Start at Ante {C:attention}#4#",
+                    "and with extra {C:money}$#5#",
                     "Win Ante is {C:red}#2#{}",
-                    "{C:attention}Final Boss Blinds{} appear",
-                    "{C:red}#3#X{} as often",
                 }
             },
             b_unik_optimized_deck = {
@@ -493,13 +492,6 @@ return {
                     "be beaten back-to-back"
                 }
             },
-            bl_unik_epic_steel={
-                name = "Teräksinenterrori", --steel terror
-                text = {
-                    "Set Chips or Mult",
-                    "to lower value",
-                },
-            },
             bl_unik_epic_greed={ --
                 name = "Ahneudenkirous", --Curse of greed
                 text = {
@@ -664,6 +656,23 @@ return {
                     "All cards must score",
                 }
             },
+            bl_unik_epic_steel={
+                name = "Teräksinenterrori", --steel terror
+                text = {
+                    "Set Chips or Mult",
+                    "to lower value",
+                },
+            },
+            bl_unik_epic_spear = {
+                name = "",
+                text = {
+                    "All cards played this Ante",
+                    "are Ultradebuffed",
+                    "Skipping Blinds are banned",
+                    "Add Eternal and Ultradebuffed",
+                    "to a random Joker on Play",
+                }
+            },  
 
             bl_unik_jaundice_jack = {
                 name = "Jaundice Jack",
@@ -1815,7 +1824,8 @@ return {
                     {
                         "Obtain a {C:attention}Voucher Tag{}",
                         "and a {C:attention}Coupon Tag{}",
-                        "for every {C:attention}#1#{} items purchased",
+                        "for every {C:attention}#1#{} items",
+                        "above {C:money}$#3#{} purchased",
                         "{C:inactive}(Currently #2#/#1# items)",
                     },
                 },
@@ -4069,7 +4079,7 @@ return {
             unik_noughts_info = {
                 name = "Noughts",
                 text = {
-                    "Gives {C:white,X:chips}Xchips{} equal to",
+                    "Gives {C:white,X:chips}XChips{} equal to",
                     "{C:attention}1.2 + (Rank x 0.01)",
                     "instead of {C:chips}+Chips"
                 }
@@ -4077,7 +4087,7 @@ return {
             unik_crosses_info = {
                 name = "Crosses",
                 text = {
-                    "Gives {C:white,X:mult}Xmult{} equal to",
+                    "Gives {C:white,X:mult}XMult{} equal to",
                     "{C:attention}1.2 + (Rank x 0.01)",
                     "instead of {C:chips}+Chips"
                 }
@@ -4104,7 +4114,14 @@ return {
                     "end of round",
                     "{C:red}Unremovable"
                 }
-            }
+            },
+            unik_eternal_playing_card = {
+                name = "Eternal",
+                text = {
+                    "{C:attention}Copies{} itself",
+                    "if destroyed"
+                }
+            },
         },
         Planet={
             c_unik_asteroid_belt = {

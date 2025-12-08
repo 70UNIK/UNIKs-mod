@@ -18,7 +18,7 @@ SMODS.Joker {
 	end,
 	pronouns = "it_its",
 	in_pool = function() --reduce frequency of it appearing
-        if pseudorandom('earthmover'..G.SEED) < 0.2 then
+        if pseudorandom('earthmover'..G.SEED) < 0.4 then
             return true
         else
             return false

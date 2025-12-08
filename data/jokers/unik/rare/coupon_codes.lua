@@ -11,14 +11,14 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {purchased_cards = 0,requirement=10,} },
+    config = { extra = {purchased_cards = 0,requirement=14} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_coupon
         info_queue[#info_queue + 1] = G.P_TAGS.tag_voucher
-		return { vars = { center.ability.extra.requirement,center.ability.extra.purchased_cards,} }
+		return { vars = { center.ability.extra.requirement,center.ability.extra.purchased_cards,0} }
 	end,
     calculate = function(self, card, context)
-        if context.buying_card then
+        if context.buying_card and to_big(context.card.sell_cost) > to_big(0) and to_big(context.card.cost) > to_big(0) then
             if not context.blueprint and not context.retrigger_joker then
                 card.ability.extra.purchased_cards = card.ability.extra.purchased_cards + 1
             end
@@ -42,7 +42,17 @@ SMODS.Joker {
 						return true
 					end,
 				}))
-                card.ability.extra.purchased_cards = 0
+                if not context.blueprint and not context.retrigger_joker then
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        func = function()
+                            card.ability.extra.purchased_cards = 0
+                            return true
+                        end,
+                    }))
+                end
+                
+
                 return {
                     message = localize('k_unik_code')..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25)),
                     colour = G.C.RED
@@ -77,7 +87,15 @@ SMODS.Joker {
 						return true
 					end,
 				}))
-                card.ability.extra.purchased_cards = 0
+                if not context.blueprint and not context.retrigger_joker then
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        func = function()
+                            card.ability.extra.purchased_cards = 0
+                            return true
+                        end,
+                    }))
+                end
                 return {
                     message = localize('k_unik_code')..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25))..string.char(math.random(65, 65 + 25)),
                     colour = G.C.RED

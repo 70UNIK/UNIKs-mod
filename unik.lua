@@ -6,6 +6,8 @@ if not UNIK then
 	UNIK = {}
 end
 
+--function to get no. jokers from other mods, used to modify spawn rate of "rare" rares, such as EARTHMOVER and foundation.
+
 -- Enable optional features
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true,
@@ -1139,5 +1141,3 @@ NFS.load(mod_path .. "data/menu.lua")()
 --Epic Decision (open booster pack when selecting blind, but make it much less janky)
 --The Vice/Epic Vice (Dedicated boss blind spawn system)
 --
-
-
