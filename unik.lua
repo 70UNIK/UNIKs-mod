@@ -103,7 +103,7 @@ function UNIK.can_load_spectrums()
 	if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled))
 	 and not next(SMODS.find_mod("Bunco"))
 	  and not next(SMODS.find_mod("SixSuits")) 
-	  and not next(SMODS.find_mod("SpectrumFramework"))
+	  and not (SMODS.Mods["SpectrumFramework"] or {}).can_load
 	  then
 		return true
 	end
@@ -516,10 +516,8 @@ if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
 end
 
-NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
+
 --HANDS
-
-
 SMODS.Atlas {
 	key = "unik_poker_hand_shit",
 	path = "poker_hand_shit.png",
@@ -531,11 +529,27 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 	--planets
 	NFS.load(mod_path .. "data/planets/asteroid_belt.lua")()
 end
+
+NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
+UNIK.spectrum_planet_prefix = "unik_"
+if SpectrumAPI then
+	UNIK.spectrum_planet_prefix = "spa_"
+end
+
+UNIK.spectrum_name = 'unik_spectrum'
+if SpectrumAPI then
+	UNIK.spectrum_name = 'spa_Spectrum'
+end
+print("PREFIX: "..UNIK.spectrum_planet_prefix)
 if UNIK.can_load_spectrums() then
-	NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
-	NFS.load(mod_path .. "data/poker_hands/straight_spectrum.lua")()
-	NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
-	NFS.load(mod_path .. "data/poker_hands/spectrum_five.lua")()
+	if not SpectrumAPI then
+		NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
+		NFS.load(mod_path .. "data/poker_hands/straight_spectrum.lua")()
+		NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
+		NFS.load(mod_path .. "data/poker_hands/spectrum_five.lua")()
+	end
+	print(SpectrumAPI ~= nil)
+
 	--planets
 	NFS.load(mod_path .. "data/planets/quaoar.lua")()
 	NFS.load(mod_path .. "data/planets/haumea.lua")()
@@ -1097,6 +1111,7 @@ end
 -- joker buffs
 NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
 NFS.load(mod_path .. "data/overrides/drunkard_merry_andy_buff.lua")()	
+NFS.load(mod_path .. "data/overrides/mr_bones_ui.lua")()	
 
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()

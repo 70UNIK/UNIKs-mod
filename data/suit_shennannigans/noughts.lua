@@ -15,9 +15,9 @@ SMODS.Suit {
 
 	in_pool = function(self, args)
 		if args and args.initial_deck then
-			local back = G.GAME.selected_back
-			local back_config = back and back.effect.center.has_noughts
-			if back_config then return true end
+			-- local back = G.GAME.selected_back
+			-- local back_config = back and back.effect.center.has_noughts
+			-- if back_config then return true end
             return false
         end
 		--if you have a base rank nought, have it appear only 1 in 3 at a time.
@@ -27,7 +27,7 @@ SMODS.Suit {
 				return true
 			end
 		end
-		return false
+		return UNIK.spectrum_played()
 	end
 }
 

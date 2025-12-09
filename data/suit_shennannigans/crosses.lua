@@ -15,9 +15,9 @@ SMODS.Suit {
 
 	in_pool = function(self, args)
 		if args and args.initial_deck then
-			local back = G.GAME.selected_back
-			local back_config = back and back.effect.center.has_crosses
-			if back_config then return true end
+			-- local back = G.GAME.selected_back
+			-- local back_config = back and back.effect.center.has_crosses
+			-- if back_config then return true end
             return false
         end
 		if UNIK.suit_in_deck('unik_Crosses') then
@@ -26,7 +26,7 @@ SMODS.Suit {
 				return true
 			end
 		end
-		return false
+		return UNIK.spectrum_played()
 	end,
 }
 

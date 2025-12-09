@@ -2995,6 +2995,22 @@ return {
 
             },
 
+            j_mr_bones={
+                name="Mr. Bones",
+                text={
+                    "Prevents Death",
+                    "if chips scored",
+                    "are at least {C:attention}X#1#",
+                    "the Blind Size",
+                    "{C:inactive}({C:attention}#2#{C:inactive})",
+                    "{S:1.1,C:red,E:2}self destructs{}",
+                },
+                unlock={
+                    "Lose {C:attention,E:1}#1#{} runs",
+                    "{C:inactive}(#2#)",
+                },
+            },
+
             j_bunc_crop_circles_noughts = {
                 name = "Crop Circles",
                 text = {
@@ -4120,48 +4136,48 @@ return {
         Planet={
             c_unik_asteroid_belt = {
 				name = "Asteroid Belt",
-				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
-					"{C:attention}#1#",
-					"{C:mult}+#3#{} Mult and",
-					"{C:chips}+#4#{} chip#<s>4#",
-				},
+				-- text = {
+				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{C:attention}#1#",
+				-- 	"{C:mult}+#3#{} Mult and",
+				-- 	"{C:chips}+#4#{} chip#<s>4#",
+				-- },
 			},
             c_unik_quaoar = {
 				name = "Quaoar",
-				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
-					"{C:attention}#1#",
-					"{C:mult}+#3#{} Mult and",
-					"{C:chips}+#4#{} chip#<s>4#",
-				},
+				-- text = {
+				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{C:attention}#1#",
+				-- 	"{C:mult}+#3#{} Mult and",
+				-- 	"{C:chips}+#4#{} chip#<s>4#",
+				-- },
 			},
             c_unik_haumea = {
 				name = "Haumea",
-				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
-					"{C:attention}#1#",
-					"{C:mult}+#3#{} Mult and",
-					"{C:chips}+#4#{} chip#<s>4#",
-				},
+				-- text = {
+				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{C:attention}#1#",
+				-- 	"{C:mult}+#3#{} Mult and",
+				-- 	"{C:chips}+#4#{} chip#<s>4#",
+				-- },
 			},
             c_unik_sedna = {
 				name = "Sedna",
-				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
-					"{C:attention}#1#",
-					"{C:mult}+#3#{} Mult and",
-					"{C:chips}+#4#{} chip#<s>4#",
-				},
+				-- text = {
+				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{C:attention}#1#",
+				-- 	"{C:mult}+#3#{} Mult and",
+				-- 	"{C:chips}+#4#{} chip#<s>4#",
+				-- },
 			},
             c_unik_makemake = {
 				name = "Makemake",
-				text = {
-					"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
-					"{C:attention}#1#",
-					"{C:mult}+#3#{} Mult and",
-					"{C:chips}+#4#{} chip#<s>4#",
-				},
+				-- text = {
+				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{C:attention}#1#",
+				-- 	"{C:mult}+#3#{} Mult and",
+				-- 	"{C:chips}+#4#{} chip#<s>4#",
+				-- },
 			},
 
            
