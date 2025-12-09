@@ -28,7 +28,7 @@ else
 		key = "unik_haumea",
 		atlas = "unik_poker_hand_shit",
 		pos = { x = 2, y = 0 },
-		config = { hand_type = "unik_Straight_Spectrum", softlock = true },
+		config = { hand_type = "unik_straight_spectrum", softlock = true },
 		aurinko = true,
 		set_card_type_badge = function(self, card, badges)
 			badges[1] = create_badge(localize("k_dwarf_planet"), get_type_colour(self or card.config, card), nil, 1.2)
