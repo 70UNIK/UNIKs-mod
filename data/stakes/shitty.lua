@@ -100,7 +100,8 @@ function Card:cry_calculate_consumeable_perishable()
 	end
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
         self.ability.perish_tally = 0
-        self:set_debuff()
+        self.ability.block_wl_copy = true
+        --self:set_debuff()
         G.E_MANAGER:add_event(Event({
             func = function()
                 play_sound("tarot1")
@@ -140,7 +141,8 @@ function Card:calculate_perishable()
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
         if self.ability.perish_tally == 1 then
             self.ability.perish_tally = 0
-            self:set_debuff()
+            self.ability.block_wl_copy = true
+            --self:set_debuff()
                 G.E_MANAGER:add_event(Event({
                 func = function()
                     play_sound("tarot1")

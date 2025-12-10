@@ -2,7 +2,6 @@
 
 --WILL THIS WORK???????
 if SpectrumAPI then
-	print("LOADING IN SPECTRUMAPI SHIT")
 	SpectrumAPI.add_content({
 		priority = 1,
 		object_type = "Planet",

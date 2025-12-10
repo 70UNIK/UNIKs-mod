@@ -531,16 +531,11 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 end
 
 NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
-UNIK.spectrum_planet_prefix = "unik_"
-if SpectrumAPI then
-	UNIK.spectrum_planet_prefix = "spa_"
-end
 
 UNIK.spectrum_name = 'unik_spectrum'
 if SpectrumAPI then
 	UNIK.spectrum_name = 'spa_Spectrum'
 end
-print("PREFIX: "..UNIK.spectrum_planet_prefix)
 if UNIK.can_load_spectrums() then
 	if not SpectrumAPI then
 		NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
@@ -548,7 +543,6 @@ if UNIK.can_load_spectrums() then
 		NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
 		NFS.load(mod_path .. "data/poker_hands/spectrum_five.lua")()
 	end
-	print(SpectrumAPI ~= nil)
 
 	--planets
 	NFS.load(mod_path .. "data/planets/quaoar.lua")()
@@ -1049,6 +1043,7 @@ end
 --Challenges gone until I fix them to work with new API 
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
+  NFS.load(mod_path .. "data/challenges/the_rot.lua")()
 --  NFS.load(mod_path .. "data/challenges/rich_get_richer_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()

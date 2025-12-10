@@ -1805,7 +1805,7 @@ return {
                         "Copies itself with {C:money}$0{} sell value if {C:red}destroyed",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                         "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#3#% {C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Mult)",
-                        "{C:red,s:0.7}(Cannot copy if destroyed by Disposable or Decaying)",  
+                        "{C:red,s:0.7}(Cannot copy if Disposable or Decaying)",  
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#5#{}", --TODO: adjustable quotes, for 
@@ -2056,6 +2056,17 @@ return {
                     "is skipped",
                     "{C:inactive}(Currently {C:dark_edition}+#4#{C:inactive} slots)",
                     "{C:inactive,s:0.8s}(Capped at {C:dark_edition}+#5#{C:inactive} slots)",
+                },
+                unlock = {
+					"Skip {C:attention}30",
+					"Booster Packs in",
+                    "1 run",
+				},
+            },
+            j_unik_invisible_card_full = {
+                name = "Invisible Card",
+                text = {
+                    "{C:dark_edition}+#4#{} Joker slot#<s>4#",
                 },
                 unlock = {
 					"Skip {C:attention}30",
@@ -4209,7 +4220,7 @@ return {
 					"Create a card",
 					"of {C:cry_code}your choice",
 					"{C:inactive,s:0.8}(Exotic Jokers excluded)",
-                    "{C:inactive,s:0.8}Becomes {{C:spectral,s:0.8}The Soul {C:inactive,s:0.8}if",
+                    "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
 				},
 			},
@@ -4244,7 +4255,7 @@ return {
                 text = {
                     "Permanently add {X:dark_edition,C:white}^#1#{} Chips",
                     "to {C:attention}#2#{} selected card#<s>2#", 
-                    "{C:inactive,s:0.8}Becomes {{C:spectral,s:0.8}The Soul {C:inactive,s:0.8}if",
+                    "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Celeste {C:inactive,s:0.8}is already held"
                 }
             },
@@ -4253,7 +4264,7 @@ return {
                 text = {
                     "Permanently add {X:dark_edition,C:white}^#1#{} Mult",
                     "to {C:attention}#2#{} selected card#<s>2#", 
-                    "{C:inactive,s:0.8}Becomes {{C:spectral,s:0.8}The Soul {C:inactive,s:0.8}if",
+                    "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Ebott {C:inactive,s:0.8}is already held"
                 }
             },
@@ -4913,7 +4924,8 @@ return {
             c_unik_cookie_clicker_2 = "Cookie Clicker II",
             c_unik_finger_trigger = "Trigger Finger",
             c_unik_finger_trigger_2 = "Trigger Finger II",
-            c_unik_rich_get_richer_2 = "Rich Get Richer II"
+            c_unik_rich_get_richer_2 = "Rich Get Richer II",
+            c_unik_the_rot = "The Rot",
         },
         collabs={},
         dictionary={
@@ -5735,6 +5747,7 @@ return {
             ch_c_unik_legendary_at_any_time = {"{C:red}Epic Blinds{} can spawn {X:unik_void_color,C:red}anytime"},
             ch_c_cry_no_vouchers = { "{C:attention}Vouchers{} no longer appear in the shop" },
             ch_c_unik_all_triggering = {"All {C:attention}Playing Cards{} are {C:red}Triggering"},
+            ch_c_unik_decay_on_play = {"All played cards become {C:red}Decaying"},
             ch_c_mult_dollar_cap={
                 "{C:red}Mult{} cannot exceed the current {C:money}$",
             },

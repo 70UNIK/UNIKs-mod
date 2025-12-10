@@ -188,6 +188,11 @@ function G.FUNCS.play_cards_from_highlighted(e)
         G.GAME.unik_no_finger_trigger = nil
 
         G.GAME.blind:unik_before_play()
+        if G.GAME.modifiers.unik_decay_on_play then
+            for i = 1, #G.hand.highlighted do
+                G.hand.highlighted[i].ability.unik_decaying = true
+            end
+        end
         SMODS.calculate_context({on_select_play = true})
         --end
 

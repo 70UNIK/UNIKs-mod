@@ -40,7 +40,7 @@ SMODS.Blind{
                 func = function()
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
-                    ease_dollars(-40, true)
+                    ease_dollars(-25, true)
                     G.ROOM.jiggle = G.ROOM.jiggle + 0.7
                 return true
             end   

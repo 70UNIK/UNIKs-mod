@@ -29,9 +29,9 @@ SMODS.Joker {
     pools = { ["Food"] = true}, --it IS edible
 	calculate = function(self, card, context)
         if context.forcetrigger or 
-        (context.individual and context.cardarea == G.play and context.other_card:is_suit('unik_Crosses') 
+        (context.individual and context.cardarea == G.play and context.other_card:is_suit('unik_Crosses') and not SMODS.pseudorandom_probability(card, 'unik_pink_salt_summit', card.ability.extra.base_odds, card.ability.extra.odds, 'unik_pink_salt_summit')
         and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit
-        and not SMODS.pseudorandom_probability(card, 'unik_pink_salt_summit', card.ability.extra.base_odds, card.ability.extra.odds, 'unik_pink_salt_summit')
+        
         ) then
             local card_type = 'unik_summit'
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1

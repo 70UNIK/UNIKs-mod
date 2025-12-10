@@ -1,6 +1,6 @@
 --spectrumAPI takes precidence
 if SpectrumAPI then
-  SpectrumAPI.configuration.misc.spectrum_example_suit = "unik_Crosses"
+  SpectrumAPI.configuration.misc.spectrum_example_suit = "unik_CROSSES"
 	local calc = SpectrumAPI.get_suit
   
 	function SpectrumAPI.get_suit(card)
