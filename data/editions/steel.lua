@@ -27,7 +27,7 @@ SMODS.Edition({
 	-- 	}
 	-- },
     config = {
-		x_mult = 2,joker_x_mult = 0.5,trigger = nil,metal_scoring = nil
+		base_x_mult = 1.5, x_mult = 2,joker_x_mult = 0.5,trigger = nil,metal_scoring = nil
 	},
 	get_weight = function(self)
 		return G.GAME.edition_rate * self.weight
@@ -36,13 +36,13 @@ SMODS.Edition({
 		local key = 'e_unik_steel'
 		if card.ability and card.ability.consumeable and card.area ~= G.hand then
 			key = 'e_unik_steel_consumeable'
-			return { key = key, vars = {self.config.x_mult}, }
-		elseif card.area and (card.area.config.type == 'joker' or card.area == G.jokers) then
+			return { key = key, vars = {self.config.base_x_mult}, }
+		elseif card.area and (card.area.config.type == 'joker' or card.area == G.jokers) or (card.ability and card.ability.set == 'Joker') then
 			key = 'e_unik_steel_joker'
 			return { key = key, vars = {self.config.x_mult,self.config.joker_x_mult
 			}, }
 		end
-        return { key = key, vars = {self.config.x_mult}, }
+        return { key = key, vars = {self.config.base_x_mult}, }
 	end,
     -- loc_txt = {
 	-- 	name = 'Positive',
@@ -71,12 +71,12 @@ SMODS.Edition({
 		--held in hand or on consumeables
 		if (context.main_scoring and context.cardarea == G.hand)then
 			return {
-				x_mult = self.config.x_mult,
+				x_mult = self.config.base_x_mult,
 			} 
 		end
 		if (context.main_scoring and context.cardarea == G.consumeables)then
 			return {
-				x_mult = self.config.x_mult,
+				x_mult = self.config.base_x_mult,
 			} 
 		end
 

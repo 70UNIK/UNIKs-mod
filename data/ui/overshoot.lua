@@ -42,11 +42,13 @@ function create_UIBox_HUD()
         maxw = 1.4,
         padding = 0.05, 
         r = 0.1, 
-        colour=G.C.DYN_UI.BOSS_MAIN,
+        colour=G.C.UNIK_RGB,
         emboss=0.05,
         hover = true, 
         can_collide = true,
+        shadow = true,
         id = 'unik_overshoot_desc',
+        button = "overshoot_info",
         unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
         },
      nodes={
@@ -131,7 +133,7 @@ function Game:update(dt)
     if (G.GAME.blind) then
 
         if (G.GAME.blind.chips) then
-            local num = number_format(G.GAME.blind.chips^2.5)
+            local num = number_format(math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5))
             G.GAME.blind.overshootUIchips = "Overshoot at " .. num
         else
             G.GAME.blind.overshootUIchips = ""
@@ -234,4 +236,26 @@ function unik_ease_overshoot(mod)
         end
         }))
     end
+end
+
+---Part 2 of overshoot:
+---create a dedicated UI to show at what intervals will you overshoot, then add UI that acts akin to straddle (but more refined)
+---
+G.FUNCS.overshoot_info = function(e)
+  G.SETTINGS.paused = true
+  G.FUNCS.overlay_menu{
+    definition = G.UIDEF.overshoot_info(),
+  }
+  
+--    G.E_MANAGER:add_event(Event({
+--         delay = 0.2,
+--         trigger = 'after',
+--             func = function()
+--                 -- print("VVVVVVVVVVVVVVVVVV")
+--                  G.FUNCS.overshoot_jiggle()
+--                 return true
+--             end
+--         }))
+  
+
 end

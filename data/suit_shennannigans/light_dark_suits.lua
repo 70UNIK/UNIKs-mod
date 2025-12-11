@@ -3,6 +3,11 @@ if PB_UTIL and PB_UTIL.config.suits_enabled then
   table.insert(UNIK.dark_suits, 'paperback_Crowns')
 end
 
+if PB_UTIL then
+  table.insert(PB_UTIL.light_suits, 'unik_Noughts')
+  table.insert(PB_UTIL.dark_suits, 'unik_Crosses')
+end
+
 -- Load modded suits
 if next(SMODS.find_mod('Bunco')) then
   local prefix = SMODS.find_mod('Bunco')[1].prefix or "bunc"
@@ -21,6 +26,17 @@ function UNIK.is_suit_type(card,type)
 		end
 		return false
     end
+end
+
+function UNIK.suit_in_deck(suit)
+	if not G.playing_cards then return false end
+	for i,v in pairs(G.playing_cards) do
+		if v.base.suit == suit then
+      return true
+    end
+	end
+	return nil
+  
 end
 
 --also stolen from paperback

@@ -39,6 +39,13 @@ SMODS.Joker {
 			end
 		end
 	end,
+	in_pool = function() --reduce frequency of it appearing
+        if pseudorandom('unik_foundation'..G.SEED) < 0.5 then
+            return true
+        else
+            return false
+        end
+    end,
     calculate = function(self, card, context)
 		if context.forcetrigger then --NOPE! YOU ARE NOT GETTING A FREE EXOTIC!
 			card.ability.extra.hands = 0
@@ -56,8 +63,9 @@ SMODS.Joker {
 			and not context.blueprint
 			and not context.retrigger_joker
 		then
+			card.ability.extra.hands = card.ability.extra.hands + 1
 			if card.ability.extra.hands < card.ability.extra.threshold then 
-				card.ability.extra.hands = card.ability.extra.hands + 1
+				
 				return {
 					card_eval_status_text(card, "extra", nil, nil, nil, {
 						message = card.ability.extra.hands .. "/" .. card.ability.extra.threshold,

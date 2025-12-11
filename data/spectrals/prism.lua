@@ -74,23 +74,24 @@ SMODS.Consumable{
 							func = function()
 								local cards = {}
 								for i = 1, card.ability.extra.cards_added do
-									cards[i] = true
-									local suit_list = {}
-									for i = #SMODS.Suit.obj_buffer, 1, -1 do
-										suit_list[#suit_list + 1] = SMODS.Suit.obj_buffer[i]
-									end
-									local numbers = {}
-									for _RELEASE_MODE, v in ipairs(SMODS.Rank.obj_buffer) do
-										local r = SMODS.Ranks[v]
-										table.insert(numbers, r.card_key)
-									end
-									local _suit, _rank =
-										SMODS.Suits[pseudorandom_element(suit_list, pseudoseed("prism_create"))].card_key,
-										pseudorandom_element(numbers, pseudoseed("prism_create"))
+									-- cards[i] = true
+									-- local suit_list = {}
+									-- for i = #SMODS.Suit.obj_buffer, 1, -1 do
+									-- 	suit_list[#suit_list + 1] = SMODS.Suit.obj_buffer[i]
+									-- end
+									-- local numbers = {}
+									-- for _RELEASE_MODE, v in ipairs(SMODS.Rank.obj_buffer) do
+									-- 	local r = SMODS.Ranks[v]
+									-- 	table.insert(numbers, r.card_key)
+									-- end
+									-- local _suit, _rank =
+									-- 	SMODS.Suits[pseudorandom_element(suit_list, pseudoseed("prism_create"))].card_key,
+									-- 	pseudorandom_element(numbers, pseudoseed("prism_create"))
 									local card2 = create_playing_card({
-										front = G.P_CARDS[_suit .. "_" .. _rank],
+										front = pseudorandom_element(G.P_CARDS, pseudoseed('prism_create2')),
 										center = G.P_CENTERS.c_base,
 									}, G.hand, nil, i ~= 1, { G.C.SECONDARY_SET.Spectral })
+									cards[#cards+1] = card2
 								end
 								playing_card_joker_effects(cards)
 								return true

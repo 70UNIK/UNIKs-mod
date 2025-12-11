@@ -27,12 +27,16 @@ function Game:update(dt)
     if G.GAME.unik_dynamic_text_realtime then
 		G.GAME.blind:set_text()
     end
-    local res = updateHook(self,dt)
+    
     if  G.P_CENTERS and G.P_CENTERS.j_unik_fuzzy then
         G.fuzzyAnim = G.fuzzyAnim or 0
         G.P_CENTERS.j_unik_fuzzy.pos.x = math.fmod(math.floor(G.fuzzyAnim),12)
         G.fuzzyAnim = G.fuzzyAnim + dt * 10
     end
+    if G.GAME and not G.GAME.blind or (G.GAME.blind and not G.GAME.blind.in_blind) then
+        G.GAME.unik_wiggle_consumed = nil
+    end
+
 
     if G.ARGS.LOC_COLOURS or self.C then
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
@@ -92,6 +96,7 @@ function Game:update(dt)
         end
 		
 	end
+    local res = updateHook(self,dt)
     G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
     if G.GAME.unik_overshoot < 5 then

@@ -83,6 +83,9 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.debuff_immune = true
         unik_set_sell_cost(card,-666)
     end
+    if card.ability.unik_disposable or card.ability.unik_niko or card.ability.unik_depleted then
+        unik_set_sell_cost(card,0)
+    end
     if card.config.center.key == 'j_unik_eternal_egg' and (self == G.shop_jokers or self == G.shop_booster) then
         card.ability.eternal = true
     end
@@ -107,6 +110,7 @@ function CardArea:emplace(card, location, stay_flipped)
                                 func = function()
                                     local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
                                     n_card.no_omega = true
+                                    n_card.ability.unik_decaying = true
                                     n_card:add_to_deck()
                                     if edition then
                                         n_card:set_edition(edition, true)
@@ -125,6 +129,7 @@ function CardArea:emplace(card, location, stay_flipped)
         end
     end
     if self and self == G.consumeables and card.config.center.key == "c_unik_celeste" then
+        card.ability.unik_decaying = true
         for i,v in pairs(G.consumeables.cards) do
             if v.config.center.key == "c_unik_celeste" and v ~= card then
                 local edition = nil
@@ -138,6 +143,7 @@ function CardArea:emplace(card, location, stay_flipped)
                     func = function()
                         local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
                         n_card.no_omega = true
+                        n_card.ability.unik_decaying = true
                         n_card:add_to_deck()
                         if edition then
                             n_card:set_edition(edition, true)
@@ -151,6 +157,7 @@ function CardArea:emplace(card, location, stay_flipped)
         end
     end
         if self and self == G.consumeables and card.config.center.key == "c_unik_ebott" then
+            card.ability.unik_decaying = true
         for i,v in pairs(G.consumeables.cards) do
             if v.config.center.key == "c_unik_ebott" and v ~= card then
                 local edition = nil
@@ -164,6 +171,7 @@ function CardArea:emplace(card, location, stay_flipped)
                     func = function()
                         local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
                         n_card.no_omega = true
+                        n_card.ability.unik_decaying = true
                         n_card:add_to_deck()
                         if edition then
                             n_card:set_edition(edition, true)

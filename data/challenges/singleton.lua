@@ -94,6 +94,7 @@ SMODS.Challenge{
         banned_other = {
             {id = 'bl_psychic', type = 'blind'},
             {id = 'bl_unik_burgundy_brain', type = 'blind'},
+            {id = 'bl_unik_bronze_bug', type = 'blind'},
             {id = 'bl_unik_video_poker', type = 'blind'},
         },
 	},

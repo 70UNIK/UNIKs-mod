@@ -11,7 +11,7 @@ SMODS.Blind{
     mult = 0.5,
     pronouns = "it_its",
     calculate = function(self, blind, context)
-		if context.post_trigger and not G.GAME.blind.disabled and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability then
+		if context.post_trigger and not G.GAME.blind.disabled and not context.end_of_round and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability then
              G.E_MANAGER:add_event(Event({func = function()
                 G.GAME.blind.chips = G.GAME.blind.chips*1.2
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)

@@ -1,7 +1,7 @@
 --Spectrals appear 2x times (rate = 4)
 SMODS.Voucher{
     key = "unik_spectral_tycoon",
-	config = { extra = {rate = 3} },
+	config = { extra = {rate = 2} },
 	atlas = "unik_vouchers",
 	pos = { x = 1, y = 0 },
 	requires = { "v_unik_spectral_merchant" },

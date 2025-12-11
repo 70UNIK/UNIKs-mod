@@ -1,0 +1,13 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS SpectrumAPI "main.lua"]'''
+pattern = '''if SpectrumAPI.configuration.misc.four_fingers_spectrums then'''
+position = "before"
+payload = '''--print(suits)
+--print(num_suits)'''
+match_indent = true

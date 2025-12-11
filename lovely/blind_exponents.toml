@@ -23,7 +23,6 @@ pattern = '''self.mult = blind and blind.mult or 0'''
 position = "after"
 payload = '''
 self.unik_exponent = blind and blind.unik_exponent or {1,0}
-self.death_message = blind and blind.death_message or nil
 self.high_score_size = blind and blind.high_score_size or nil
 self.glitchy_anim = blind and blind.glitchy_anim or nil
 '''

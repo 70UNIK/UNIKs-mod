@@ -5,7 +5,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     rarity = "gb_boss",
 	-- Modest
-    config = { extra = { Xmult_mod = 0.5, bad_Xmult_mod = 0.5,Xmult = 1}},
+    config = { extra = { Xmult_mod = 0.25, bad_Xmult_mod = 0.75,Xmult = 1}},
     cost = 6,
     blueprint_compat = true,
 	perishable_compat = false,

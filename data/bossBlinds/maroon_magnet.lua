@@ -37,19 +37,11 @@ SMODS.Blind{
 	end,
     --Disable if no cards are enhanced and no steel cards present AND if alloy is obtained, also no gold cards
     in_pool = function()
-        local goldenAlloy = false
         local steels = 0
         local unenhanced = 0
-        if G.jokers then
-            for _, v in pairs(G.jokers.cards) do
-                if v.config.center.key == "j_ExtraCredit_alloy" then
-                    goldenAlloy =true
-                end
-            end
-        end
         if G.deck then 
             for i, v in pairs(G.deck.cards) do
-                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') then
                     steels = steels + 1
                 end
             end
@@ -71,22 +63,15 @@ SMODS.Blind{
     debuff_hand = function(self, cards, hand, handname, check)
         --during initial selection
         if check then
-            local goldenAlloy = false
             local steels = 0
             local steelsPlayed = 0
-            --If alloy (extra credit) is present, treat GOLD cards as steel cards as well!
-            for _, v in pairs(G.jokers.cards) do
-                if v.config.center.key == "j_ExtraCredit_alloy" then
-                    goldenAlloy =true
-                end
-            end
             for k, v in pairs(G.hand.cards) do
-                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel')  then
                     steels = steels + 1
                 end
             end
             for k, v in ipairs(cards) do
-                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel')  then
                     steelsPlayed = steelsPlayed + 1
                 end
             end
@@ -97,16 +82,9 @@ SMODS.Blind{
                 return false
             end
         else
-            local goldenAlloy = false
             local steels = 0
-            --If alloy (extra credit) is present, treat GOLD cards as steel cards as well!
-            for _, v in pairs(G.jokers.cards) do
-                if v.config.center.key == "j_ExtraCredit_alloy" then
-                    goldenAlloy =true
-                end
-            end
             for k, v in pairs(G.hand.cards) do
-                if SMODS.has_enhancement(v,'m_steel') or (goldenAlloy == true and v.config.center == G.P_CENTERS.m_gold) then
+                if SMODS.has_enhancement(v,'m_steel') then
                     steels = steels + 1
                 end
             end

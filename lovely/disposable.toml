@@ -100,6 +100,11 @@ while i <= #G.discard.cards do
     if not gone then i = i + 1 end
 end
 i = 1
+while i <= #G.playing_cards do
+    local gone = G.playing_cards[i]:calculate_decaying()
+    if not gone then i = i + 1 end
+end
+i = 1
 while i <= #G.hand.cards do
     local gone = G.hand.cards[i]:calculate_limited_edition()
     if not gone then i = i + 1 end
@@ -208,5 +213,25 @@ pattern = "if not card.shattered and not card.destroyed then"
 position = "at"
 payload = '''
 if not card.shattered and not card.destroyed and not card.removed and not card.REMOVED then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''ease_dollars(self.sell_cost)'''
+position = "before"
+payload = '''
+if self.sell_cost ~= 0 then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''ease_dollars(self.sell_cost)'''
+position = "after"
+payload = '''
+end
 '''
 match_indent = true

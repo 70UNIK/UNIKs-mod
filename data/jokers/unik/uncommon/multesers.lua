@@ -9,7 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = false,
     demicoloncompat = true,
-    config = { extra = {mult = 10, mult_mod = 0.1,destroyed = false,depleted_threshold = -10} },
+    config = { extra = {mult = 10, mult_mod = 0.2,destroyed = false,depleted_threshold = -10} },
     pools = {  ["autocannibalism_food"] = true,["Food"] = true},
     loc_vars = function(self, info_queue, center)
         local sign = "+"

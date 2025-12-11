@@ -8,20 +8,11 @@ SMODS.Consumable{
 	set_card_type_badge = function(self, card, badges)
 		badges[1] = create_badge(localize("k_planet_disc"), get_type_colour(self or card.config, card), nil, 1.2)
 	end,
-	loc_vars = function(self, info_queue, center)
-		return {
-			vars = {
-				localize("unik_bulwark"),
-				G.GAME.hands["unik_bulwark"].level,
-				G.GAME.hands["unik_bulwark"].l_mult,
-				G.GAME.hands["unik_bulwark"].l_chips,
-				colours = {
-					(
-						to_big(G.GAME.hands["unik_bulwark"].level) == to_big(1) and G.C.UI.TEXT_DARK
-						or G.C.HAND_LEVELS[to_number(math.min(7, G.GAME.hands["unik_bulwark"].level))]
-					),
-				},
-			},
-		}
-	end,
+	generate_ui = 0,
+    process_loc_text = function(self)
+        local target_text = G.localization.descriptions[self.set]['c_mercury'].text
+        SMODS.Consumable.process_loc_text(self)
+        G.localization.descriptions[self.set][self.key] = {}
+        G.localization.descriptions[self.set][self.key].text = target_text
+    end
 }

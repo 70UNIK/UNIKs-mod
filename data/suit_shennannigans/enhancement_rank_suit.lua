@@ -99,6 +99,10 @@ function Card:get_nominal(mod)
     local specific_rank_nominal = self.base.nominal
     local specific_suit_nominal = self.base.suit_nominal
     if mod == 'suit' then mult = 10000 end
+    --sepcial akirs stuff for 
+    if self.ability and self.ability.akyrs_special_card_type == "suit" and (self.base.suit == 'unik_Noughts' or self.base.suit == 'unik_Crosses') and not mod  then
+        return -10
+    end
     local vars = nominalGet(self,mod)
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
         G.P_CENTERS[self.config.center.key].unik_specific_base_value

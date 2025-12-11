@@ -10,7 +10,7 @@
         { 'S_2',                true },
         { 'D_7',                true },
         { 'C_3',                true },
-        { "S_A", true, enhancement = "m_unik_pink" },
+        { "unik_NOUGHTS_A", true },
         { 'H_K',                true },
     },
 

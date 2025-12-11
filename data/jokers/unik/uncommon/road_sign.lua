@@ -36,7 +36,7 @@ SMODS.Joker {
                 return {
                     message = localize('unik_plus_summit'),
                     colour = G.C.UNIK_SUMMIT,
-                    card = self
+                    card = card
                 }
             end
         end

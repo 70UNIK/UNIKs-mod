@@ -1,10 +1,12 @@
 local mod_path = "" .. SMODS.current_mod.path
 unik_config = SMODS.current_mod.config
 UNIK = SMODS.current_mod
-
+-- unik_config.unik_overshoot_level = 3
 if not UNIK then
 	UNIK = {}
 end
+
+--function to get no. jokers from other mods, used to modify spawn rate of "rare" rares, such as EARTHMOVER and foundation.
 
 -- Enable optional features
 SMODS.current_mod.optional_features = {
@@ -23,6 +25,17 @@ SMODS.current_mod.optional_features = {
 	},
 }
 
+-- G.FUNCS.unik_update_overshoot_opt = function(e)
+-- 	print(e)
+-- 	print(e.to_key)
+-- 	unik_config.unik_overshoot_level = e.to_key
+-- 	-- unik_config.unik_overshoot_level
+-- 	-- Talisman.config_file.score_opt_id = e.to_key
+-- 	-- local score_opts = {"", "bignumber", "omeganum"}
+-- 	-- Talisman.config_file.break_infinity = score_opts[e.to_key]
+-- 	-- nativefs.write(lovely.mod_dir .. "/Talisman/config.lua", STR_PACK(Talisman.config_file))
+-- end
+
 --config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -38,16 +51,37 @@ SMODS.current_mod.config_tab = function() --Config tab
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
+			info = {
+				localize("unik_legendary_blinds_desc1"),
+				localize("unik_legendary_blinds_desc2")
+			},
 		}),
 		create_toggle({
 			label = localize("unik_cryptid_nerfs_option"),
 			ref_table = unik_config,
 			ref_value = "unik_cryptid_nerfs",
+			info = {
+				localize("unik_cryptid_nerfs_desc1"),
+			},
 		}),
+		-- create_option_cycle({
+		-- 	label = localize("unik_overshoot_config"),
+		-- 	scale = 0.8,
+		-- 	w = 9,
+		-- 	options = {localize("unik_overshoot_off"), localize("unik_overshoot_lenient"), localize("unik_overshoot_strict")},
+		-- 	current_option = unik_config.unik_overshoot_level,
+		-- 	opt_callback = 'unik_update_overshoot_opt',
+		-- 	info = {
+		-- 		localize("unik_overshoot_desc1"),
+		-- 		localize("unik_overshoot_desc2"),
+		-- 		localize("unik_overshoot_desc3"),
+		-- 	},
+		-- })
 	},
 	}
 end
-
+-- print("OVERSHOOT LEVEL:")
+-- print(unik_config.unik_overshoot_level)
 NFS.load(mod_path .. "talismanless.lua")()
 NFS.load(mod_path .. "data/hooks/startup.lua")()
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
@@ -69,7 +103,7 @@ function UNIK.can_load_spectrums()
 	if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled))
 	 and not next(SMODS.find_mod("Bunco"))
 	  and not next(SMODS.find_mod("SixSuits")) 
-	  and not next(SMODS.find_mod("SpectrumFramework"))
+	  and not (SMODS.Mods["SpectrumFramework"] or {}).can_load
 	  then
 		return true
 	end
@@ -332,6 +366,17 @@ SMODS.UndiscoveredSprite({
 	py = 95,
 })
 
+--fonts
+SMODS.Font {
+    key = 'unik_five_by_five',
+    path = 'five_by_five.ttf',
+	render_scale = 256,
+	TEXT_HEIGHT_SCALE = 0.7,
+	TEXT_OFFSET = { x = 0, y = -50 },
+	FONTSCALE = 0.11,
+	squish = 0.9,
+	DESCSCALE = 1
+}
 
 
 --RARITIES--
@@ -361,7 +406,9 @@ NFS.load(mod_path .. "data/stickers/depleted.lua")()
 NFS.load(mod_path .. "data/stickers/impounded.lua")() 
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
+NFS.load(mod_path .. "data/stickers/decaying.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+NFS.load(mod_path .. "data/stickers/claw_mark.lua")() 
 if not (SMODS.Mods["Cryptid"] or {}).can_load then
 	NFS.load(mod_path .. "data/stickers/cryptidless_sticker_logic.lua")() 
 end
@@ -378,6 +425,7 @@ NFS.load(mod_path .. "data/stakes/stake_card_modifiers.lua")()
 --decks
 NFS.load(mod_path .. "data/decks/greed_deck.lua")()
 NFS.load(mod_path .. "data/decks/mountain_deck.lua")()
+NFS.load(mod_path .. "data/decks/tic_tac_toe_deck.lua")()
 NFS.load(mod_path .. "data/decks/endless_deck.lua")()
 NFS.load(mod_path .. "data/decks/polychrome_deck.lua")()
 NFS.load(mod_path .. "data/decks/steel_deck.lua")()
@@ -394,8 +442,6 @@ end
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/enhancements/namta.lua")()	
 end
-NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
-
 
 -- EDITIONS --
 NFS.load(mod_path .. "data/editions/shining_glitter.lua")()
@@ -411,18 +457,67 @@ NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
 --Load suit types
 
-UNIK.light_suits = { 'Diamonds', 'Hearts' }
-UNIK.dark_suits = { 'Spades', 'Clubs' }
+UNIK.light_suits = { 'Diamonds', 'Hearts','unik_Noughts' }
+UNIK.dark_suits = { 'Spades', 'Clubs','unik_Crosses' }
+SMODS.Atlas({
+	key = "unik_suits",
+	path = "unik_suits.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_suits_hc",
+	path = "unik_suits_hc.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_ranks",
+	path = "unik_ranks.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_ranks_hc",
+	path = "unik_ranks_hc.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_suits_ui",
+	path = "unik_suits_ui.png",
+	px = 18,
+	py = 18,
+})
+SMODS.Atlas({
+	key = "unik_suits_ui_hc",
+	path = "unik_suits_ui_hc.png",
+	px = 18,
+	py = 18,
+})
+SMODS.Atlas({
+	key = "unik_nils",
+	path = "unik_nils.png",
+	px = 71,
+	py = 95,
+})
+SMODS.Atlas({
+	key = "unik_nils_hc",
+	path = "unik_nils_hc.png",
+	px = 71,
+	py = 95,
+})
+NFS.load(mod_path .. "data/suit_shennannigans/noughts.lua")()
+NFS.load(mod_path .. "data/suit_shennannigans/crosses.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/light_dark_suits.lua")()
+NFS.load(mod_path .. "data/suit_shennannigans/crossmod_ranks.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
 end
 
-NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
+
 --HANDS
-
-
 SMODS.Atlas {
 	key = "unik_poker_hand_shit",
 	path = "poker_hand_shit.png",
@@ -434,11 +529,21 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 	--planets
 	NFS.load(mod_path .. "data/planets/asteroid_belt.lua")()
 end
+
+NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
+
+UNIK.spectrum_name = 'unik_spectrum'
+if SpectrumAPI then
+	UNIK.spectrum_name = 'spa_Spectrum'
+end
 if UNIK.can_load_spectrums() then
-	NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
-	NFS.load(mod_path .. "data/poker_hands/straight_spectrum.lua")()
-	NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
-	NFS.load(mod_path .. "data/poker_hands/spectrum_five.lua")()
+	if not SpectrumAPI then
+		NFS.load(mod_path .. "data/poker_hands/spectrum.lua")()
+		NFS.load(mod_path .. "data/poker_hands/straight_spectrum.lua")()
+		NFS.load(mod_path .. "data/poker_hands/spectrum_house.lua")()
+		NFS.load(mod_path .. "data/poker_hands/spectrum_five.lua")()
+	end
+
 	--planets
 	NFS.load(mod_path .. "data/planets/quaoar.lua")()
 	NFS.load(mod_path .. "data/planets/haumea.lua")()
@@ -494,6 +599,8 @@ NFS.load(mod_path .. "data/spectrals/turing.lua")()
 NFS.load(mod_path .. "data/spectrals/defend.lua")() 
 NFS.load(mod_path .. "data/spectrals/purify.lua")() 
 NFS.load(mod_path .. "data/spectrals/expel.lua")() 
+NFS.load(mod_path .. "data/spectrals/ring.lua")() 
+NFS.load(mod_path .. "data/spectrals/denial.lua")() 
 --
 --hidden summits
 NFS.load(mod_path .. "data/summits/ebott.lua")() 
@@ -604,6 +711,8 @@ NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
 
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
+NFS.load(mod_path .. "data/bossBlinds/the_approval.lua")() 
+NFS.load(mod_path .. "data/bossBlinds/the_fill.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/vice.lua")()
 NFS.load(mod_path .. "data/bossBlinds/sync_catalyst_fail.lua")()
 NFS.load(mod_path .. "data/bossBlinds/artisan_builds.lua")()
@@ -632,10 +741,15 @@ NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
 NFS.load(mod_path .. "data/bossBlinds/raspberry_racket.lua")()
 NFS.load(mod_path .. "data/bossBlinds/batman.lua")()
 NFS.load(mod_path .. "data/bossBlinds/persimmon_placard.lua")()
+NFS.load(mod_path .. "data/bossBlinds/viridian_valve.lua")()
+NFS.load(mod_path .. "data/bossBlinds/bronze_bug.lua")()
+NFS.load(mod_path .. "data/bossBlinds/red_runner.lua")()
 NFS.load(mod_path .. "data/bossBlinds/jaundice_jack.lua")()
 NFS.load(mod_path .. "data/bossBlinds/septic_seance.lua")()
 NFS.load(mod_path .. "data/bossBlinds/eternal_egg.lua")()
 NFS.load(mod_path .. "data/bossBlinds/hate_ball.lua")()
+NFS.load(mod_path .. "data/bossBlinds/foul_flowerpot.lua")()
+NFS.load(mod_path .. "data/bossBlinds/shitty_superposition.lua")()
 NFS.load(mod_path .. "data/bossBlinds/salmon_steps.lua")()
 NFS.load(mod_path .. "data/bossBlinds/burgundy_brain.lua")()
 NFS.load(mod_path .. "data/bossBlinds/emerald_escalator.lua")()
@@ -667,10 +781,18 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/bossBlinds/epic_sink.lua")() --hold for now until a more interesting effect is in place
 	NFS.load(mod_path .. "data/bossBlinds/epic_sand.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_miser.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_claw.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_reed.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_bellows.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_confrontation.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_height.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_entanglement.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_straightforwardness.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_whole.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_toxin.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_bird.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_neck.lua")()
+	NFS.load(mod_path .. "data/bossBlinds/epic_steed.lua")()
 	NFS.load(mod_path .. "data/bossBlinds/epic_xenomorph_queen.lua")()
 	--Blinds below require talisman due to exponential requirements
 	if UNIK.has_talisman() then
@@ -698,14 +820,17 @@ NFS.load(mod_path .. "data/jokers/unik/common/gt710.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/golden_glove.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/1_5_joker.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/common/landfill.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/common/noon.lua")()
-NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/common/shitty_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/skipping_stones.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/yes_nothing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/tape_seven.lua")()
 
 NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/violent_joker.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/traitorous_joker.lua")()
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/zealous_joker.lua")()
@@ -744,11 +869,16 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/twin_peaks.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/road_sign.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/mountain_dew.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  
+NFS.load(mod_path .. "data/jokers/unik/uncommon/pink salt.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/aquamarine.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/pink_guard.lua")()
+
 
 --Rare
 --: create a summit card if hand contains a five of a kind
-
+NFS.load(mod_path .. "data/jokers/unik/rare/railroad_crossing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
@@ -765,7 +895,9 @@ NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/tic_tac.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
 
@@ -775,6 +907,7 @@ end
 NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
 
 --Rare (characters)
+NFS.load(mod_path .. "data/jokers/unik/rare/catto_boi.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()
@@ -808,7 +941,6 @@ end
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/hacker.lua")()
-	NFS.load(mod_path .. "data/jokers/cryptid/coupon_codes.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/epic_riffin.lua")() 
 end
 
@@ -913,8 +1045,14 @@ end
 --Challenges gone until I fix them to work with new API 
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
+  NFS.load(mod_path .. "data/challenges/the_rot.lua")()
+--  NFS.load(mod_path .. "data/challenges/rich_get_richer_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
+NFS.load(mod_path .. "data/challenges/finger_trigger_1.lua")()
+if next(SMODS.find_mod("Bunco")) then
+	NFS.load(mod_path .. "data/challenges/finger_trigger_2.lua")()
+end
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/challenges/cookie_clicker.lua")()
 	NFS.load(mod_path .. "data/challenges/cookie_clicker_2.lua")()
@@ -928,7 +1066,7 @@ end
 -- achievements
 -- NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
 -- NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
--- NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
+NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
 -- NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
@@ -967,13 +1105,23 @@ function vice_check()
     return G.GAME.win_ante
 end
 
+-- joker buffs
+NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
+NFS.load(mod_path .. "data/overrides/drunkard_merry_andy_buff.lua")()	
+NFS.load(mod_path .. "data/overrides/mr_bones_ui.lua")()	
+NFS.load(mod_path .. "data/overrides/matador.lua")()	
+
+
 --UI
 NFS.load(mod_path .. "data/ui/overshoot.lua")()
+NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
 NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 if AKYRS then
 	NFS.load(mod_path .. "data/ui/aiko_icons.lua")()
 end
 NFS.load(mod_path .. "data/menu.lua")()
+
+
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card

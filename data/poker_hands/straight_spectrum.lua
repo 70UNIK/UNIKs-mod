@@ -9,7 +9,7 @@ SMODS.PokerHand { -- Straight Spectrum (Referenced from SixSuits)
     { 'C_T',                true},
     { 'D_9',                true },
     { 'H_8',                true },
-    { "S_7", true, enhancement = "m_wild" },
+    { "unik_CROSSES_7", true },
     { "S_6", true },
   },
 

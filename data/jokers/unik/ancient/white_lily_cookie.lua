@@ -60,7 +60,28 @@ SMODS.Joker {
 	end,
     remove_from_deck = function(self, card, from_debuff)
         if not from_debuff then
-            if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko then
+            if not  card.ability.immutable.sold and not card.ability.unik_disposable and not card.ability.unik_niko and not card.ability.unik_decaying and not card.ability.extra.block_wl_copy then
+                 SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "Emult",
+                    scalar_value = "Emult_mod",
+                    base = 1,
+                    message_key = "a_powmult",
+                    message_colour = G.C.DARK_EDITION,
+                        force_full_val = true,
+                })
+            if to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) >= to_big(card.ability.immutable.hyperbolic_scale_limit) then
+                SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "Emult_mod",
+                    scalar_value = "custom_scaler",
+                    operation = "-",
+                    scalar_table = {
+                        custom_scaler = card.ability.extra.Emult_mod - card.ability.extra.Emult_mod *(100 - card.ability.immutable.hyperbolic_factor)/100,
+                    },
+                    no_message = true,
+                })
+            end
                 unik_set_sell_cost(card,0)
                 White_lily_copy(card)
             end
@@ -85,7 +106,7 @@ SMODS.Joker {
                 }
             end
 		end
-        if not context.blueprint and context.unik_destroying_joker then
+        if not context.blueprint and context.unik_destroying_joker and context.unik_destroyed_joker ~= card then
             SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
                     ref_value = "Emult",
@@ -120,7 +141,7 @@ SMODS.Joker {
 function unik_set_sell_cost(card, amount)
   if not card.set_cost then return end
   -- This is called just so it calculates the cost of the card... a bit silly
-  card:set_cost()
+  
   card.ability.extra_value = amount - math.max(1, math.floor(card.cost / 2))
   card:set_cost()
 end

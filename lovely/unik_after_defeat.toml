@@ -11,24 +11,37 @@ target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
 payload = '''
-
 -- legendary crown: force set new high score:
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
+--if you are UNDER requirements, your overshoot is HALVED instead, better get those determinations/mr bones!
 local upper22 = G.GAME.chips
-local ceiling22 = G.GAME.blind.chips^2
-local ceiling222 = G.GAME.blind.chips^2.5
+local ceiling222 = math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5)
 --print(upper22)
---print(ceiling22)
 local nanny = tostring(G.GAME.chips_text)
 --Naneinf will always trigger overshoot
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-    unik_ease_overshoot(1)
+        unik_trigger_overshoot_menu(calculate_overshoot_amount())
+        delay(0.1)
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                unik_ease_overshoot(calculate_overshoot_amount())
+                return true
+            end
+        }))
 else
-    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-    unik_ease_overshoot(-1)
-end
+    if to_big(G.GAME.chips) < to_big(G.GAME.blind.chips) then
+        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        unik_ease_overshoot(-math.ceil(G.GAME.unik_overshoot/2))
+    else
+        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        unik_ease_overshoot(-1)
+    end
+    
 
+    
+end
+G.GAME.unik_wiggle_consumed = nil
 --print(G.GAME.unik_scores_really_big)
 '''
 match_indent = true
@@ -72,8 +85,8 @@ pattern = '''local quip, extra = SMODS.quip("loss")'''
 position = 'after'
 payload = '''
 --entropy workaround
-if G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled and not G.GAME.EECardCharacter then
-    quip = G.GAME.blind.death_message
+if G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled and not G.GAME.EECardCharacter then
+    quip = G.GAME.blind.config.blind.death_message
 end
 G.GAME.unik_prevent_killing_cursed_jokers2 = nil
 G.GAME.unik_deathly_debuff_text = nil
@@ -87,7 +100,7 @@ target = 'game.lua'
 pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
 position = 'at'
 payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled) then --Only add Jimbo to say a quip if the game over happens when the run is lost
+if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled) then --Only add Jimbo to say a quip if the game over happens when the run is lost
 '''
 match_indent = true
 
@@ -98,18 +111,7 @@ target = 'game.lua'
 pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
 position = 'at'
 payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.death_message and not G.GAME.blind.disabled) or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
-'''
-match_indent = true
-
-##LOAD DEATH MESSAGE
-[[patches]]
-[patches.pattern]
-target = 'blind.lua'
-pattern = '''function Blind:load(blindTable)'''
-position = 'after'
-payload = '''
-self.death_message = blindTable.death_message or nil
+if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled) or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
 '''
 match_indent = true
 

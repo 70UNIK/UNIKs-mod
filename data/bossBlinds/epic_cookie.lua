@@ -2,7 +2,7 @@ SMODS.Blind{
     key = 'unik_epic_cookie',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
+    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true,unskippable_ante = true},
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 9},
     boss_colour= HEX("633b11"), 
@@ -116,12 +116,7 @@ local pcfh = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
 	G.GAME.before_play_buffer2 = true
 
-    if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
-        local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
-        if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
-            edi:unik_before_play()
-        end
-    end
+    
     --Steel blind edition, each held card
 
     --Epic cookie: Deselect cards pending destruction
@@ -141,16 +136,17 @@ function G.FUNCS.play_cards_from_highlighted(e)
     if ((not (SMODS.Mods["Cryptid"] or {}).can_load  ) or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
         
     else
+
         -- -NAN fix
         if G.GAME.round_scores['hand'] and not G.GAME.round_scores['hand'].amt then
             G.GAME.round_scores['hand'].amt = math.huge
             G.GAME.round_scores.hand.amt = math.huge
         end
-        G.GAME.blind:unik_before_play()
-        SMODS.calculate_context({on_select_play = true})
+
 
         --Polymino autoselect all cards in selected group
         local id = {}
+        G.GAME.unik_no_finger_trigger = true
 
         if G.hand and G.hand.highlighted then
             for i = 1, #G.hand.highlighted do
@@ -169,6 +165,10 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 end
             end
         end
+        --enable 
+        if #G.hand.highlighted > 6 then
+            G.GAME.unik_scored_over_5 = true 
+        end
        -- print(id)
         --print(#id)
         if #id > 0 then
@@ -181,6 +181,22 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 end
             end
         end
+        G.GAME.unik_wiggle_consumed = nil
+        G.GAME.unik_no_finger_trigger = nil
+        
+        G.GAME.blind:unik_before_play()
+        if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+            local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+            if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
+                edi:unik_before_play()
+            end
+        end
+        if G.GAME.modifiers.unik_decay_on_play then
+            for i = 1, #G.hand.highlighted do
+                G.hand.highlighted[i].ability.unik_decaying = true
+            end
+        end
+        SMODS.calculate_context({on_select_play = true})
         --end
 
         pcfh(e)

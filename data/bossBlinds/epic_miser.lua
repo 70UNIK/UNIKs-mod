@@ -49,11 +49,16 @@ SMODS.Blind{
 --
 local evalOverride = Game.update_round_eval
 function Game:update_round_eval(dt)
+    if self.buttons then self.buttons:remove(); self.buttons = nil end
+    if self.shop then self.shop:remove(); self.shop = nil end
     if G.GAME.unik_miser_blinds_actual and G.GAME.unik_miser_blinds_actual  > 0 then
         if not G.STATE_COMPLETE then
             
             stop_use()
             G.STATE_COMPLETE = true
+             G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
              G.GAME.unik_miser_blinds_actual  = G.GAME.unik_miser_blinds_actual  - 1
             local text = localize('k_unik_back_to_back1') ..  G.GAME.unik_miser_blinds_actual .. localize('k_unik_back_to_back2')
             attention_text({
@@ -82,7 +87,7 @@ function Game:update_round_eval(dt)
             not (G.GAME.round_resets.blind_states.Small == 'Defeated' or G.GAME.round_resets.blind_states.Small == 'Skipped' or G.GAME.round_resets.blind_states.Small == 'Hide') and 'Small' or
             not (G.GAME.round_resets.blind_states.Big == 'Defeated' or G.GAME.round_resets.blind_states.Big == 'Skipped'or G.GAME.round_resets.blind_states.Big == 'Hide') and 'Big' or 
             'Boss'
-            ChangePhaseCrown()
+            -- ChangePhaseCrown()
             
             -- G.FUNCS.select_blind(e)
             G.E_MANAGER:add_event(Event({
@@ -109,7 +114,11 @@ function Game:update_round_eval(dt)
                 return true
             end
             }))
-        end    else
+                return true
+            end
+        }))  
+        end    
+    else
         evalOverride(self,dt)
     end
     

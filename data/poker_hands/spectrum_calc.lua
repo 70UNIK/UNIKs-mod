@@ -1,13 +1,29 @@
-SMODS.PokerHandPart { -- Spectrum base (Referenced from SixSuits)
-  key = 'spectrum',
-  func = function(hand)
-    local requiredCards = 5 - UNIK.paved_calc()
-    if #hand < requiredCards then return {} end
-    local unique_suits = UNIK.get_unique_suits(hand, nil, true)
-    return (unique_suits >= requiredCards) and { hand } or {}
-  end
-}
-
+--spectrumAPI takes precidence
+if SpectrumAPI then
+  SpectrumAPI.configuration.misc.spectrum_example_suit = "unik_CROSSES"
+	local calc = SpectrumAPI.get_suit
+  
+	function SpectrumAPI.get_suit(card)
+		if card.config.center.unik_specific_suit then
+			return card.config.center.unik_specific_suit
+		end
+		if SMODS.has_any_suit(card) then
+			return math.random(1, 1000000)
+		end
+		return calc(card)
+		
+	end
+else
+	SMODS.PokerHandPart { -- Spectrum base (Referenced from SixSuits)
+	key = 'spectrum',
+	func = function(hand)
+		local requiredCards = 5 - UNIK.paved_calc()
+		if #hand < requiredCards then return {} end
+		local unique_suits = UNIK.get_unique_suits(hand, nil, true)
+		return (unique_suits >= requiredCards) and { hand } or {}
+	end
+	}
+end
 --Override paperback's implementation of suit count
 if PB_UTIL and PB_UTIL.config.suits_enabled then
     function PB_UTIL.get_unique_suits(scoring_hand, bypass_debuff, flush_calc)

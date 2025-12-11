@@ -7,109 +7,84 @@ priority = 0
 #### Register legendary blind animations 1
 
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = "functions/UI_definitions.lua"
-pattern = '''blind_choice.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind_choice.config.atlas] or G.ANIMATION_ATLAS['blind_chips'],  blind_choice.config.pos)'''
-position = "before"
-payload = '''
---If the blind has a "glitchy animation" (Legendary blinds only)
-if blind_choice.config.glitchy_anim or blind_choice.glitchy_anim then
-    --print("GLITCH FOUND")
-    blind_choice.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind_choice.config.atlas] or G.ANIMATION_ATLAS['blind_chips'],  blind_choice.config.pos,true)
-else
-'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = '''blind_choice.animation = AnimatedSprite(0,0, 1.4, 1.4, G.ANIMATION_ATLAS[blind_choice.config.atlas] or G.ANIMATION_ATLAS['blind_chips'],  blind_choice.config.pos)'''
+pattern = '''blind_choice.animation = (.*)SMODS.create_sprite\((.*)\)'''
 position = "after"
 payload = '''
+
+--If the blind has a "glitchy animation" (Legendary blinds only)
+--legendary_blind_patch1
+if blind_choice.config.glitchy_anim or blind_choice.glitchy_anim then
+    blind_choice.animation.legendary_glitch_anim = true
 end
+
 '''
 match_indent = true
 
 ## Register blind animations 2
 
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = "functions/UI_definitions.lua"
-pattern = '''local temp_blind = AnimatedSprite(0,0,s,s, G.ANIMATION_ATLAS[discovered and v.atlas or 'blind_chips'], discovered and v.pos or G.b_undiscovered.pos)'''
+pattern = '''local temp_blind = (.*)SMODS.create_sprite\((.*)\)'''
 position = "after"
 payload = '''
---If the blind has a "glitchy animation" (Legendary blinds only)
-if v.glitchy_anim then
-    --print("GLITCH FOUND")
-    temp_blind = AnimatedSprite(0,0,s,s, G.ANIMATION_ATLAS[discovered and v.atlas or 'blind_chips'], discovered and v.pos or G.b_undiscovered.pos,discovered)
-end
-'''
-match_indent = true
 
-## Register blind animations 3
-
-[[patches]]
-[patches.pattern]
-target = "functions/UI_definitions.lua"
-pattern = '''local temp_blind = AnimatedSprite(0,0,1,1, G.ANIMATION_ATLAS[v.atlas or ''] or G.ANIMATION_ATLAS['blind_chips'], v.pos)'''
-position = "after"
-payload = '''
---If the blind has a "glitchy animation" (Legendary blinds only)
+--If the blind has a "glitchy aniddmation" (Legendary blinds only)
+--legendary_blind_patch2
 if v.glitchy_anim then
-    --print("GLITCH FOUND5")
-    temp_blind = AnimatedSprite(0,0,1,1, G.ANIMATION_ATLAS[v.atlas or ''] or G.ANIMATION_ATLAS['blind_chips'], v.pos,true)
+    temp_blind.legendary_glitch_anim = true
 end
+
 '''
 match_indent = true
 
 ## Register blind animations 4
 
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = '''=[SMODS _ "src/overrides.lua"]'''
-pattern = '''local temp_blind = AnimatedSprite(G.your_collection[row].T.x + G.your_collection[row].T.w/2, G.your_collection[row].T.y, 1.3, 1.3, G.ANIMATION_ATLAS[v.discovered and v.atlas or 'blind_chips'],
-			v.discovered and v.pos or G.b_undiscovered.pos)'''
+pattern = '''local temp_blind = (.*)SMODS.create_sprite\((.*)\)'''
 position = "after"
 payload = '''
+
 --If the blind has a "glitchy animation" (Legendary blinds only)
+--legendary_blind_patch2
 if v.glitchy_anim then
-		temp_blind = AnimatedSprite(G.your_collection[row].T.x + G.your_collection[row].T.w/2, G.your_collection[row].T.y, 1.3, 1.3, G.ANIMATION_ATLAS[v.discovered and v.atlas or 'blind_chips'],
-			v.discovered and v.pos or G.b_undiscovered.pos,v.discovered)
-            --print("GLITCH REGISTERED3")
+    temp_blind.legendary_glitch_anim = true
 end
+
 '''
 match_indent = true
 
 ## Register blind animations 5
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = "blind.lua"
-pattern = '''self.children.animatedSprite.atlas = G.ANIMATION_ATLAS[obj.atlas] or G.ANIMATION_ATLAS['blind_chips']'''
-position = "before"
+pattern = '''self.children.animatedSprite =(.*)SMODS.create_sprite\((.*)\)'''
+position = "after"
 payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if self.glitchy_anim then
+--legendary_blind_patch5
 --print("GLITCH REGISTERED2")
-    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos,true)
-    self.children.animatedSprite.states.drag.can = true
-else
-    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos)
-    self.children.animatedSprite.states.drag.can = true
+    self.children.animatedSprite.legendary_glitch_anim = true
 end
 '''
 match_indent = true
 
 ## Register blind animations 6
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = "functions/common_events.lua"
-pattern = '''local blind_sprite = AnimatedSprite(0, 0, 1.2, 1.2, G.ANIMATION_ATLAS[obj.atlas] or G.ANIMATION_ATLAS['blind_chips'], copy_table(G.GAME.blind.pos))'''
+pattern = '''local blind_sprite =(.*)SMODS.create_sprite\((.*)\)'''
 position = "after"
 payload = '''
+--legendary_blind_patch6
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if G.GAME.blind.glitchy_anim then
---print("GLITCH REGISTERED")
-    blind_sprite = AnimatedSprite(0, 0, 1.2, 1.2, G.ANIMATION_ATLAS[obj.atlas] or G.ANIMATION_ATLAS['blind_chips'], copy_table(G.GAME.blind.pos),true)
+    blind_sprite.legendary_glitch_anim = true
 end
 '''
 match_indent = true
@@ -117,17 +92,12 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = "blind.lua"
-pattern = '''    if G.P_BLINDS[blindTable.config_blind] then'''
-position = "before"
+pattern = '''self.children.animatedSprite.states.visible = true'''
+position = "after"
 payload = '''
 self.glitchy_anim = blindTable and blindTable.glitchy_anim or nil
 if self.glitchy_anim then
---print("GLITCH REGISTERED2")
-    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos,true)
-    self.children.animatedSprite.states.drag.can = true
-else
-    self.children.animatedSprite = AnimatedSprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ANIMATION_ATLAS['blind_chips'], G.P_BLINDS.bl_small.pos)
-    self.children.animatedSprite.states.drag.can = true
+self.children.animatedSprite.legendary_glitch_anim = true
 end
 '''
 match_indent = true
@@ -138,8 +108,8 @@ target = "blind.lua"
 pattern = '''local blindTable = {'''
 position = "after"
 payload = '''
+--legendary_blind_patch8
 glitchy_anim = self.glitchy_anim,
-death_message = self.death_message,
 '''
 match_indent = true
 
@@ -150,7 +120,8 @@ target = "game.lua"
 pattern = '''v:animate(self.real_dt*self.SPEEDFACTOR)'''
 position = "after"
 payload = '''
-if v.unik_enable_legendary_glitch then
+--legendary_blind_patch9
+if v.legendary_glitch_anim then
     if math.random(150) == 1 then
         v.legendary_glitch = math.random(10, 50)
         v:shift_atlas({x = 0, y = math.random(1, 5)})
@@ -176,6 +147,7 @@ target = "globals.lua"
 pattern = '''self.ANIMATIONS = {}'''
 position = "after"
 payload = '''
+--legendary_blind_patch10
 self.UNIK_LEGENDARY_GLITCH = {}
 '''
 match_indent = true

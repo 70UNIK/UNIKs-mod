@@ -13,12 +13,13 @@ SMODS.Consumable{ -- The 8
     unlocked = true,
     can_use = function(self, card)
         if G.hand then
+            local polybius = (G.GAME.used_vouchers['v_bunc_polybius'] and 1) or 0
             local cards = G.hand.highlighted
             -- Group check:
             for i = 1, #cards do
                 if cards[i].ability.group then return false end
             end
-            if #cards > 1 and #cards <= card.ability.max_highlighted then
+            if #cards > 1 and #cards <= card.ability.max_highlighted + polybius then
                 return true
             end
         end

@@ -33,12 +33,12 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
-    config = { extra = {x_mult = 1.0,x_mult_mod = 0.25}, immutable = {x_mult_display = 1.0} },
+    config = { extra = {x_mult = 1.0,x_mult_mod = 0.25}, immutable = {x_mult_display = 1.0,x_mult_cap = 1.75} },
     pools = {["character"] = true },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 
-        center.ability.immutable.x_mult_display = center.ability.extra.x_mult
+        local xmult = center.ability.extra.x_mult
         
         if G.hand and G.hand.cards and G.hand.highlighted and #G.hand.highlighted > 0 then
             local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
@@ -48,7 +48,7 @@ SMODS.Joker {
                 if not SMODS.has_any_suit(v) then
                     for j=1,#UNIK.light_suits do
                         if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
-                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            xmult = xmult + center.ability.extra.x_mult_mod
                             existingSuits[UNIK.light_suits[j]] = true;
                             break
                         end
@@ -60,7 +60,7 @@ SMODS.Joker {
                 if SMODS.has_any_suit(v) then
                     for j=1,#UNIK.light_suits do
                         if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
-                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            xmult = xmult + center.ability.extra.x_mult_mod
                             existingSuits[UNIK.light_suits[j]] = true;
                             break
                         end
@@ -68,14 +68,14 @@ SMODS.Joker {
                 end
             end
         elseif G.play and G.play.cards then
-            center.ability.immutable.x_mult_display = center.ability.extra.x_mult
+            xmult = center.ability.extra.x_mult
            local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.play.cards)
            local existingSuits = {}
              for i,v in pairs(scoring_hand) do
                 if not SMODS.has_any_suit(v) then
                     for j=1,#UNIK.light_suits do
                         if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
-                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            xmult = xmult + center.ability.extra.x_mult_mod
                             existingSuits[UNIK.light_suits[j]] = true;
                             break
                         end
@@ -87,7 +87,7 @@ SMODS.Joker {
                 if SMODS.has_any_suit(v) then
                     for j=1,#UNIK.light_suits do
                         if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
-                            center.ability.immutable.x_mult_display = center.ability.immutable.x_mult_display + center.ability.extra.x_mult_mod
+                            xmult = xmult + center.ability.extra.x_mult_mod
                             existingSuits[UNIK.light_suits[j]] = true;
                             break
                         end
@@ -98,7 +98,7 @@ SMODS.Joker {
         end
         local quoteset = 'normal'
         return { 
-            vars = {center.ability.immutable.x_mult_display,center.ability.extra.x_mult_mod,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),
+            vars = {math.min(xmult,center.ability.immutable.x_mult_cap),center.ability.extra.x_mult_mod,localize(k_amann_quotes[quoteset][math.random(#k_amann_quotes[quoteset])] .. ""),center.ability.immutable.x_mult_cap
         } 
         }
 	end,
@@ -133,6 +133,7 @@ SMODS.Joker {
                 end
                     
             end
+            dispMult = math.min(dispMult,card.ability.immutable.x_mult_cap)
             if UNIK.is_suit_type(context.other_card,'light') then
                 return {
                     x_mult = dispMult,
@@ -167,6 +168,7 @@ SMODS.Joker {
                 end
                     
             end
+            dispMult = math.min(dispMult,card.ability.immutable.x_mult_cap)
             return {
                 x_mult = dispMult,
                 card = card

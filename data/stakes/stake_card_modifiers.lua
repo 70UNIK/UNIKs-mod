@@ -21,6 +21,11 @@ function create_card(_type, area, legendary, _rarity, skip_materialize, soulable
     if card.ability.name == "j_unik_binary_asteroid" then
         card:set_edition("e_paperback_dichrome", true, nil, true)
     end
+    if G.GAME.modifiers.unik_all_triggering then
+        if (_type=='Base' or _type == 'Enhanced') then
+            card:set_triggering(true)
+        end
+    end
     if G.GAME.modifiers.enable_triggering_in_shop then
         if (area == G.shop_jokers) or (area == G.shop_booster) or (area == G.pack_cards) then
             local binning = pseudorandom("unik_triggering_sfff" .. (key_append or "") .. G.GAME.round_resets.ante)

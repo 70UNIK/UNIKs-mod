@@ -39,6 +39,9 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
         if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
             key = 'mult'
         end
+        if (key == 'xlog_chips' or key == 'xlogchips' or key == 'xlog_chips_mod') then
+            key = 'xlog_mult'
+        end
         if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
             key = 'e_mult'
         end

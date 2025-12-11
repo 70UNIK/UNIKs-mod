@@ -23,14 +23,14 @@ SMODS.Blind{
     --Give a warning if you dont have enough money
     debuff_hand = function(self, cards, hand, handname, check)
         if check then
-            if to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 40) < to_big(0) then
+            if to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0) then
                 return true
             end
         end
         return false
     end,
     unik_debuff_after_hand = function(self,poker_hands, scoring_hand,cards, check,sum)
-        if to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 40) < to_big(0) then
+        if to_big((G.GAME.dollars-G.GAME.bankrupt_at) - 25) < to_big(0) then
             return {
                 debuff = true,
             }
@@ -40,7 +40,7 @@ SMODS.Blind{
                 func = function()
                     G.GAME.blind.triggered = true
                     G.GAME.blind:wiggle()
-                    ease_dollars(-40, true)
+                    ease_dollars(-25, true)
                     G.ROOM.jiggle = G.ROOM.jiggle + 0.7
                 return true
             end   

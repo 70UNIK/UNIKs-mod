@@ -25,7 +25,11 @@ SMODS.Joker{ --Yellow Card
     atlas = 'unik_rare',
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card, card.ability.extra.prob, card.ability.extra.odds, 'unik_invisible_card')
-        return {vars = {
+        local key = 'j_unik_invisible_card'
+        if card.ability.immutable.slots >= card.ability.immutable.max_slots then
+            key = 'j_unik_invisible_card_full'
+        end
+        return {key = key, vars = {
             new_numerator, new_denominator,
             math.floor(card.ability.extra.increase),
             card.ability.immutable.slots,
@@ -35,13 +39,19 @@ SMODS.Joker{ --Yellow Card
 
     calculate = function(self, card, context)
         if context.skipping_booster then
-            if not SMODS.pseudorandom_probability(card, 'unik_invisible_card', card.ability.extra.prob, card.ability.extra.odds, 'unik_invisible_card') then
+            if not SMODS.pseudorandom_probability(card, 'unik_invisible_card', card.ability.extra.prob, card.ability.extra.odds, 'unik_invisible_card') and card.ability.immutable.slots < card.ability.immutable.max_slots then
+                G.E_MANAGER:add_event(Event({
+                    trigger = "immediate",
+                    delay = 0,
+                    func = function()
+                    card.ability.immutable.slots = math.min(lenient_bignum(card.ability.immutable.slots + math.floor(card.ability.extra.increase)),card.ability.immutable.max_slots)
+                    G.jokers.config.card_limit = lenient_bignum(G.jokers.config.card_limit + math.floor(card.ability.extra.increase))
+
+                        return true
+                    end,
+                }))
                 
-                card.ability.immutable.slots = math.min(lenient_bignum(card.ability.immutable.slots + math.floor(card.ability.extra.increase)),card.ability.immutable.max_slots)
-                G.jokers.config.card_limit = lenient_bignum(G.jokers.config.card_limit + math.floor(card.ability.extra.increase))
-                if card.ability.immutable.slots >= card.ability.immutable.max_slots then
-                    card.ability.extra.increase = 0
-                end
+                
                 return {
 					card_eval_status_text(card, "extra", nil, nil, nil, {
 						message = localize("k_upgrade_ex"),
@@ -50,14 +60,24 @@ SMODS.Joker{ --Yellow Card
 				}
             end
         end
-        if context.forcetrigger then
-            card.ability.immutable.slots = math.min(lenient_bignum(card.ability.immutable.slots + math.floor(card.ability.extra.increase)),card.ability.immutable.max_slots)
-            if card.ability.immutable.slots >= card.ability.immutable.max_slots then
-                card.ability.extra.increase = 0
-            end
-            G.jokers.config.card_limit = lenient_bignum(G.jokers.config.card_limit + math.floor(card.ability.extra.increase))
+        if context.forcetrigger and card.ability.immutable.slots < card.ability.immutable.max_slots then
+
+                G.E_MANAGER:add_event(Event({
+                    trigger = "immediate",
+                    delay = 0,
+                    func = function()
+                    card.ability.immutable.slots = math.min(lenient_bignum(card.ability.immutable.slots + math.floor(card.ability.extra.increase)),card.ability.immutable.max_slots)
+                    G.jokers.config.card_limit = lenient_bignum(G.jokers.config.card_limit + math.floor(card.ability.extra.increase))
+
+                        return true
+                    end,
+                }))
+            
             return {
-                
+                card_eval_status_text(card, "extra", nil, nil, nil, {
+                    message = localize("k_upgrade_ex"),
+                    colour = G.C.DARK_EDITION,
+                }),
             }
         end
     end,

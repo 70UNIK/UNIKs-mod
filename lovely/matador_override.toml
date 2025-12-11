@@ -1,0 +1,21 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.regex]
+target = '''card.lua'''
+pattern = '''(.*)if self.ability.name == 'Matador' then(.*)
+(.*)if G.GAME.blind.triggered then(.*)
+(.*)ease_dollars\(self.ability.extra\)(.*)
+(.*)
+(.*)
+(.*)
+(.*)
+(.*)
+(.*)
+(.*)end
+(.*)end'''
+position = "at"
+payload = '''---OVERRIDEN, matador is a hot mess, im making my own context!'''
