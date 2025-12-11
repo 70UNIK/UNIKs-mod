@@ -710,9 +710,20 @@ return {
             bl_unik_bronze_bug = { --fuck you pair builds
                 name = "Bronze Bug",
                 text = {
-                    "One random Joker destroyed",
-                    "for each missing scoring card",
-                    "below #1# cards" --aka play 1 card, and it destroys 4 cards. Play 5 cards, but 3 cards unscoring: destroy 3 jokers
+                    "Banish a random Joker",
+                    "if hand does not contain",
+                    "at least #1# scoring cards", --5 scoring cards
+                    "(Eternals Included)",
+                }
+            },
+            bl_unik_gabe_cant_count = {
+                name = "Viridian Valve",
+                text = {
+                    "-1 Hand, -1 Discard, -1 Hand Size",
+                    "All 3s are debuffed",
+                    "Must not play 3 cards",
+                    "Hand must not contain",
+                    "a Three of a Kind",
                 }
             },
             bl_unik_epic_whole = {
@@ -5618,6 +5629,11 @@ return {
                 "YOU ARE AN IDIOT!",
                 "HAHAHAHAHAHAHAHAHAHAAHA",
                 "HAAAAAAAAAAA!!!!!!",
+            },
+            special_lose_gaben = {
+                "HALF LIFE 3 WILL",
+                "NEVER HAPPEN!",
+                "BLAME GABE FOR THIS!"
             },
             --finity quips:
             lq_legendary_crown_1={

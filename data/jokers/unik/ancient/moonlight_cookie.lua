@@ -107,7 +107,7 @@ function level_up_hand(card, hand, instant, amount)
 		local speed = 1
 		local pitch = 1
 		for i,v in pairs(G.consumeables.cards) do
-			print("consumable")
+			--print("consumable")
 			eval = {}
 			
 			SMODS.calculate_context({hand_levelup_held_consume = true,other_consumeable_lvlup = v, levelup_poker_hand = hand, levelup_amount = amount},eval)
