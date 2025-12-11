@@ -11,7 +11,6 @@ target = 'functions/state_events.lua'
 pattern = '''G.GAME.blind.in_blind = false'''
 position = 'before'
 payload = '''
-
 -- legendary crown: force set new high score:
 -- scores really big for regular indigo icbm, epic and legendary blinds. Can only spawn if you scored over ^2 reqs consecutively
 --if you are UNDER requirements, your overshoot is HALVED instead, better get those determinations/mr bones!
@@ -42,7 +41,7 @@ else
 
     
 end
-
+G.GAME.unik_wiggle_consumed = nil
 --print(G.GAME.unik_scores_really_big)
 '''
 match_indent = true

@@ -710,7 +710,7 @@ return {
             bl_unik_bronze_bug = { --fuck you pair builds
                 name = "Bronze Bug",
                 text = {
-                    "Banish a random Joker",
+                    "Destroy a random Joker",
                     "if hand does not contain",
                     "at least #1# scoring cards", --5 scoring cards
                     "(Eternals Included)",
@@ -3031,6 +3031,14 @@ return {
                     "Lose {C:attention,E:1}#1#{} runs",
                     "{C:inactive}(#2#)",
                 },
+            },
+            j_matador = {
+                name = "Matador",
+                text = {
+                    "Earn {C:money}$#1#{} whenever",
+                    "the Boss Token {C:attention}Wiggles",
+                    "{C:inactive}(Once before each hand)"
+                }
             },
 
             j_bunc_crop_circles_noughts = {

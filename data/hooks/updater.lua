@@ -33,6 +33,9 @@ function Game:update(dt)
         G.P_CENTERS.j_unik_fuzzy.pos.x = math.fmod(math.floor(G.fuzzyAnim),12)
         G.fuzzyAnim = G.fuzzyAnim + dt * 10
     end
+    if G.GAME and not G.GAME.blind or (G.GAME.blind and not G.GAME.blind.in_blind) then
+        G.GAME.unik_wiggle_consumed = nil
+    end
 
 
     if G.ARGS.LOC_COLOURS or self.C then

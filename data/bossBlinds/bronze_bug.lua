@@ -35,13 +35,13 @@ SMODS.Blind{
                          G.GAME.blind.triggered = true
                             G.GAME.blind:wiggle()
                             neck_banish:gore6_break()
-                            if not G.GAME.banned_keys then
-                            G.GAME.banned_keys = {}
-                            end
-                            if not G.GAME.cry_banished_keys then
-                                G.GAME.cry_banished_keys = {}
-                            end
-                            G.GAME.cry_banished_keys[neck_banish.config.center.key] = true
+                            -- if not G.GAME.banned_keys then
+                            -- G.GAME.banned_keys = {}
+                            -- end
+                            -- if not G.GAME.cry_banished_keys then
+                            --     G.GAME.cry_banished_keys = {}
+                            -- end
+                            -- G.GAME.cry_banished_keys[neck_banish.config.center.key] = true
                        
                         return true
                     end
