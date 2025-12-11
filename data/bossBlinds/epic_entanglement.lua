@@ -40,11 +40,20 @@ SMODS.Blind	{
         local always_scores_count = 0
         local facedowns = 0
 
+        for i,v in pairs(scoring_hand) do
+            v.blacklist_scoring = true
+        end
+
         for _, card in pairs(cards) do
             if card.facing == 'back' or card.is_face_down_prior  then
                 facedowns = facedowns + 1
             end
-            if SMODS.always_scores(card) then always_scores_count = always_scores_count + 1 end
+
+            if (SMODS.always_scores(card) or next(find_joker('Splash'))) and not card.blacklist_scoring then always_scores_count = always_scores_count + 1 end
+
+        end
+        for i,v in pairs(scoring_hand) do
+            v.blacklist_scoring = nil
         end
         if #cards ~= 4 --no spectrums, no flushes (unless 4 fingers)
         or #scoring_hand + always_scores_count ~= #cards or (facedowns < 2 ) then 
@@ -66,6 +75,12 @@ SMODS.Blind	{
                 if scoring_hand[i].facing == 'back' then
                     --print(2)
                     scoring_hand[i].is_face_down_prior = true
+                end
+            end
+            for i,v in pairs(G.hand.highlighted) do
+                if v.facing == 'back' and (SMODS.always_scores(v) or next(find_joker('Splash'))) then 
+                    v.is_face_down_prior = true
+
                 end
             end
         end
