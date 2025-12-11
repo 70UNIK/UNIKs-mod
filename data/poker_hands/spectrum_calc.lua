@@ -74,7 +74,7 @@ function UNIK.spectrum_played()
   local spectrum_played = false
   if G and G.GAME and G.GAME.hands then
     for k, v in pairs(G.GAME.hands) do
-      if string.find(k, "Spectrum", nil, true) then
+      if string.find(k, "Spectrum", nil, true) or string.find(string.lower(k), "spectrum", nil, true) then
         if G.GAME.hands[k].played > 0 then
           spectrum_played = true
           break
@@ -82,7 +82,7 @@ function UNIK.spectrum_played()
       end
     end
   end
-
+  print(spectrum_played)
   return spectrum_played
 end
 

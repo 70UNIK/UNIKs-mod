@@ -25,9 +25,11 @@ SMODS.Suit {
 			--appears at X0.25 the rate of usual suits
 			if pseudorandom(pseudoseed("nought_spawn_rate")) < 0.33 then
 				return true
+			else
+				return false
 			end
 		end
-		return UNIK.spectrum_played()
+		return UNIK.spectrum_played() and pseudorandom(pseudoseed("nought_spawn_rate")) < 0.33
 	end
 }
 
