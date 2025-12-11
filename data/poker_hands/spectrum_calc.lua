@@ -82,7 +82,7 @@ function UNIK.spectrum_played()
       end
     end
   end
-  print(spectrum_played)
+  --print(spectrum_played)
   return spectrum_played
 end
 
