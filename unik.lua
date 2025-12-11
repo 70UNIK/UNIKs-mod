@@ -1110,6 +1110,7 @@ NFS.load(mod_path .. "data/overrides/wild_buff.lua")()
 NFS.load(mod_path .. "data/overrides/drunkard_merry_andy_buff.lua")()	
 NFS.load(mod_path .. "data/overrides/mr_bones_ui.lua")()	
 NFS.load(mod_path .. "data/overrides/matador.lua")()	
+NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()	
 
 
 --UI
