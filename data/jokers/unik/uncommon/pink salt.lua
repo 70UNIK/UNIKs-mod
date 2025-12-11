@@ -7,8 +7,8 @@ SMODS.Joker {
     cost = 7,
 	config = {
 		extra = {
-			base_odds = 2,
-            odds = 3,
+			base_odds = 7,
+            odds = 10,
 		},
 	},
 	perishable_compat = true,

@@ -1064,7 +1064,7 @@ end
 -- achievements
 -- NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
 -- NFS.load(mod_path .. "data/achievements/stupid_summoning.lua")()
--- NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
+NFS.load(mod_path .. "data/achievements/bloodbath.lua")()
 -- NFS.load(mod_path .. "data/achievements/moonlight_deathstar.lua")()
 if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/achievements/abyss.lua")()
