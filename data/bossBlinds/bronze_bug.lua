@@ -17,9 +17,6 @@ SMODS.Blind{
     unik_before_play = function(self)
         local text, loc_disp_text, poker_hands, scoring_hand, disp_text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
         local always_scores_count = 0
-        for _, card in pairs(G.hand.highlighted) do
-            if SMODS.always_scores(card) or next(find_joker('Splash')) then always_scores_count = always_scores_count + 1 end
-        end
         for i,v in pairs(scoring_hand) do
             v.blacklist_scoring = true
         end
