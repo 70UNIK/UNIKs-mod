@@ -1840,6 +1840,9 @@ return {
                         "{C:inactive}(Currently #2#/#1# items)",
                     },
                 },
+                unlock = {
+                    "Redeem {C:attention}Magic Trick"
+                }
             },
             j_unik_vessel_kiln = { --overrides get tag function to instead generate Violet vessel, negating the benefit of this Joker. It's chips cause ceramic.
                 name="Vessel Kiln",
@@ -1895,7 +1898,7 @@ return {
                     "{C:inactive,E:1,s:0.7}It will be worth it in the end!{}",
                 },
                 unlock = {
-                    "Use {C:spectral}Gateway{} and",
+                    "Use {C:unik_ancient}Awakening{} and",
                     "{C:red}lose{} in 1 round",
                 }
             },
@@ -2003,7 +2006,7 @@ return {
                     "a {E:2,C:red}Finisher Blind{}"
                 },
                 unlock = {
-                    "Die to an {C:red}Epic Blind"
+                    "Die to a {C:attention}Finisher Blind"
                 }
             },
             j_unik_cobblestone = {
@@ -2208,7 +2211,7 @@ return {
                     },
                 },
                 unlock = {
-                    "Retrigger {C:attention}1{} card {C:attention}8{} times"
+                    "Retrigger {C:attention}1{} card {C:attention}4{} times"
                 }
             },
             j_unik_kouign_amann_cookie = { --Retrigger all light cards and reduce their requirements by 10% per trigger. (RARE)
@@ -2231,8 +2234,8 @@ return {
 
                 },
                 unlock = {
-                    "Play a {C:attention}Flush Five",
-                    "with only {C:attention}Light Cards",
+                    "Play a {C:attention}Spectrum",
+                    "with all {C:attention}Light Suits{} present",
                 }
             },
             j_unik_hacker = {
@@ -2260,6 +2263,9 @@ return {
                     "Earn {C:money}$#1#{} per {C:red}Discard",
                     "lost in round",
                 },
+                unlock = {
+                    "Win with {C:attention}Delayed Gratification",
+                }
             },
             j_unik_golden_glove={
                 name = "Golden Glove",
@@ -2378,6 +2384,9 @@ return {
                         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                         "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
                     },
+                },
+                unlock = {
+                    "{C:red,s:2}???",
                 }
             },
 
@@ -2398,6 +2407,9 @@ return {
                     "Held {C:attention}Timber{} cards",
                     "each give Mult {X:mult,C:white}Xlog_#1#(Mult)", --Xlog_100(Mult)
                 },
+                unlock = {
+                    "Play {C:attention}5 Timber Cards",
+                }
             },
             j_unik_niko = {
                 name = "Niko",
@@ -2414,6 +2426,10 @@ return {
                     },
 
 
+                },
+                unlock = {
+                    "Win in {C:attention}Checkered Deck",
+                    "With {C:attention}Ancient Joker"
                 }
             },
             --unlocking those two involves winning a round with Ancient Joker while on checkered deck (cause it is incompetent and selects suits you dont have. these at least have the dignity to respect your deck)
@@ -2431,6 +2447,10 @@ return {
                         "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
                     },
 
+                },
+                unlock = {
+                    "Win in {C:attention}Checkered Deck",
+                    "With {C:attention}Ancient Joker"
                 }
             },            
             j_unik_night_skyline = {

@@ -12,7 +12,7 @@ function G.UIDEF.overshoot_info(cantexit)
     local amount = math.min(base_value*10^50,base_value^2.5)
     for i = 1, 20 do 
         local spacing = 1 - math.min(20, math.max(15, base_value))*0.06
-        if spacing > 0 and i > 1 then 
+        if to_big(spacing) > to_big(0) and i > 1 then 
             overshoot_amounts[#overshoot_amounts+1] = {n=G.UIT.R, config={minh = spacing}, nodes={}}
         end
         local blind_chip = Sprite(0,0,0.2,0.2,G.ASSET_ATLAS["ui_"..(G.SETTINGS.colourblind_option and 2 or 1)], {x=0, y=0})

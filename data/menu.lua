@@ -52,13 +52,8 @@ local oldfunc = Game.main_menu
 				return true
 			end,
 		}))
+		if (SMODS.Mods and SMODS.Mods.Talisman) or (SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load) then
+			print("WARNING: TALISMAN, INSTEAD OF CDATAMAN HAS BEEN LOADED. THERE MAY BE UNEXPECTED COMPARISON ERRORS")
+		end
 		return ret
 	end
-
-function Card:change_suit_no_blind(new_suit)
-    local new_code = SMODS.Suits[new_suit].card_key
-    local new_val = SMODS.Ranks[self.base.value].card_key
-    local new_card = G.P_CARDS[new_code..'_'..new_val]
-
-    self:set_base(new_card)
-end
