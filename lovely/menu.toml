@@ -9,7 +9,14 @@ target = "game.lua"
 pattern = "replace_card.states.visible = false"
 position = "before"
 payload = '''
-replace_card:change_suit_no_blind('unik_Crosses')
 replace_card:set_edition(G.P_CENTERS.e_unik_fuzzy and 'e_unik_fuzzy' or 'e_negative',true,true)
 '''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "game.lua"
+pattern = '''G.P_CARDS.S_A'''
+position = "at"
+payload = '''G.P_CARDS.unik_Crosses_A'''
 match_indent = true
