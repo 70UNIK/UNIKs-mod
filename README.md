@@ -4,22 +4,23 @@ A standalone mod that adds what I want. A bit more unbalanced compared with Vani
 
 ![alt text](image-1.png)
 
-Requires Steamodded [smods-1.0.0-beta-1016c](https://github.com/Steamodded/smods) or higher, [Lovely](https://github.com/ethangreen-dev/lovely-injector) v0.7.1 or higher. [Cdataman](https://github.com/frostice482/cdataman)/[Talisman](https://github.com/SpectralPack/Talisman) can be used to increase the scoring cap but isnt necessarily required.
+Requires Steamodded [smods-1.0.0-beta-1016c](https://github.com/Steamodded/smods) or higher, [Lovely](https://github.com/ethangreen-dev/lovely-injector) v0.7.1 or higher. [Cdataman](https://github.com/frostice482/cdataman) can be used to increase the scoring cap but isnt necessarily required.
 
 It's recommended to pair this with [Paperback](https://github.com/Balatro-Paperback/paperback) and [Bunco](https://github.com/jumbocarrot0/Bunco), goes well together with them and this mod completely overhauls linked groups in the latter.
 
 ## MAJOR FEATURES:
-- 80+ Jokers to play around with!
-- - 15 Common
-- - 29 Uncommon
-- - 30 Rare
+- 90+ Jokers to play around with!
+- - 17 Common
+- - 33 Uncommon
+- - 33 Rare
 - - 1 Legendary (With a secret method of obtaining)
 - - 6 Ancients, very powerful Jokers stronger than Legendaries
 - 18 "Detrimental" Jokers that will hinder you and can only be obtained in certain conditions
 - 4 Enhancements, including a Wild Card buff
+- 2 New Suits, Noughts and Crosses, which give Xchips and Xmult respectively instead of Chips
 - 7 Editions, 5 of which are detrimental
 - 2 Vouchers
-- 6 Decks, 3 of which are edition-based
+- 7 Decks, 3 of which are edition-based
 - 15 Tags, although 10 of them are detrimental
 - 7 Boosters
 - 2 New consumable types:
@@ -29,13 +30,13 @@ It's recommended to pair this with [Paperback](https://github.com/Balatro-Paperb
 - 1 New seal
 - 5 Planets (from other mods)
 - 11 Spectrals
-- 57 Blinds
-- - 17 regulars
-- - 15 Finishers
-- - 16 "Epic Blinds", really hard blinds that punish your run and only appear at higher overshoot values.
+- 70 Blinds
+- - 19 regulars
+- - 19 Finishers
+- - 24 "Epic Blinds", really hard blinds that punish your run and only appear at higher overshoot values.
 - - 7 "Legendary Blinds", which is basically death.
 - Overshoot, a mechanic that punishes really high scoring runs by increasing ante increase and summoning in the afforementioned Epic Blinds.
-- 8 Stickers
+- 9 Stickers
 - 2 Stakes including a reworked Blue Stake
 
 This mod also contains many crossmod content such as for:

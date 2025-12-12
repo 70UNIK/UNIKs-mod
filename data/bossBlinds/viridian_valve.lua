@@ -13,7 +13,7 @@ SMODS.Blind{
     death_message = "special_lose_gaben",
     -- unik_exponent = {1,1.03},
     recalc_debuff = function(self, card, from_blind)
-        if (card.area ~= G.jokers) and not G.GAME.blind.disabled and card:get_id() == 3 then
+        if (card.area ~= G.jokers) and not G.GAME.blind.disabled and (card:get_id() == 3 or card:is_suit('minty_3s'))then
             return true
         end
         return false

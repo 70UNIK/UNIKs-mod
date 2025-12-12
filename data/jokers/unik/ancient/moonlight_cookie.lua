@@ -207,8 +207,6 @@ function level_up_hand(card, hand, instant, amount)
 								end
 
 
-								if not instant and (not Talisman or not Talisman.config_file.disable_anims) then
-									
 									if values.x_chips then
 										G.GAME.hands[hand].chips = G.GAME.hands[hand].chips*values.x_chips^repetitions
 										if not instant and (not Talisman or not Talisman.config_file.disable_anims) then
@@ -246,7 +244,6 @@ function level_up_hand(card, hand, instant, amount)
 										card=w.card,
 										delay = instant and 0.01 or 1/speed
 									})
-								end
 								
 
 							end
