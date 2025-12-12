@@ -3,6 +3,7 @@ SMODS.Joker {
     key = "unik_antijoker",
     blueprint_compat = false,
     eternal_compat = false,
+    perishable_compat = false,
     demicoloncompat = true,
     rarity = 3,
     cost = 15,
