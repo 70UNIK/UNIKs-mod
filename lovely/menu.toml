@@ -18,5 +18,5 @@ match_indent = true
 target = "game.lua"
 pattern = '''G.P_CARDS.S_A'''
 position = "at"
-payload = '''G.P_CARDS.unik_Crosses_A'''
+payload = '''G.P_CARDS.unik_CROSSES_A'''
 match_indent = true
