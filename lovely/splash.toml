@@ -1,0 +1,94 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+###hey i am self inserting into the splash screen
+
+[[patches]]
+[patches.regex]
+target = "game.lua"
+pattern = '''SC = Card(.*)'''
+position = "after"
+payload = '''
+
+SC = Card(G.ROOM.T.w/2 - SC_scale*G.CARD_W/2, 10. + G.ROOM.T.h/2 - SC_scale*G.CARD_H/2, SC_scale*G.CARD_W, SC_scale*G.CARD_H, G.P_CARDS.empty, G.P_CENTERS['j_unik_unik'],{bypass_discovery_center = true, bypass_discovery_ui = true})
+    SC.bypass_lock = true
+            SC.bypass_discovery_center = true
+            SC.bypass_discovery_ui = true
+'''
+match_indent = true
+
+###replace playing cards with 7 of either:
+###random suits including my my own, pink cards, summit cards
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''function make_splash_card(args)'''
+position = "after"
+payload = '''
+local suit_list = {'S','H','C','D','unik_CROSSES','unik_NOUGHTS'}
+local _suit, _rank = suit_list[math.random(#suit_list)], '7'
+local joker_list = {
+    'j_unik_pibby',
+    'j_unik_white_lily_cookie',
+    'j_unik_moonlight_cookie',
+    'j_unik_sundae_cookie',
+    'j_unik_niko',
+    'j_unik_blossom',
+    'j_unik_kouign_amann_cookie',
+    'j_unik_poppy',
+    'j_unik_jsab_chelsea',
+    'j_unik_jsab_maya',
+    'j_unik_jsab_yokana',
+    }
+local isJoker = false
+if math.random() < 0.25 then
+    isJoker = true
+end
+local isPink = false
+if not isJoker and math.random() < 0.35 then
+    isPink = true
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "game.lua"
+pattern = '''pseudorandom_element\(G.P_CARDS\), G.P_CENTERS.c_base'''
+position = "at"
+payload = '''not (isJoker or isPink) and G.P_CARDS[_suit .. '_' .. _rank] or G.P_CARDS.empty,not isJoker and G.P_CENTERS.c_base or G.P_CENTERS[joker_list[math.random(#joker_list)]],{bypass_discovery_center = true, bypass_discovery_ui = true}'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''if math.random() > 0.8 then card.sprite_facing = 'back'; card.facing = 'back' end'''
+position = "after"
+payload = '''
+if not isJoker and isPink then 
+card:set_ability(G.P_CENTERS['m_unik_pink'], true, nil)
+end
+if isJoker and not isPink and card.facing ~= 'back' then
+    args.no_vortex = true
+    card.bypass_lock = true
+            card.bypass_discovery_center = true
+            card.bypass_discovery_ui = true
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''                    {name = 'colour_1', ref_table = G.C, ref_value = 'BLUE'},
+                    {name = 'colour_2', ref_table = G.C, ref_value = 'WHITE'},'''
+position = "at"
+payload = '''
+{name = 'colour_1', ref_table = G.C, ref_value = 'UNIK_ANCIENT'},
+{name = 'colour_2', ref_table = G.C, ref_value = 'UNIK_UNIK'},
+'''
+match_indent = true
+
