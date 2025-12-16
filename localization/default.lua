@@ -48,7 +48,7 @@ return {
                 text = {
                     "{C:unik_summit}Summit{} cards may",
                     "appear in the shop",
-                    "Start with 2 {C:unik_summit,T:c_unik_everest}Everests{}",
+                    "Start with an {C:unik_summit,T:c_unik_everest}Everest{}",
                 }
             },
             b_unik_haunted_deck = {
