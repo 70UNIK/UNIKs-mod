@@ -19,9 +19,15 @@ SMODS.Blind{
     in_pool = function()
         -- only appear if player scores above ^1.5 reqs 6 times consecutively
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0
         if G.GAME.unik_overshoot then
             --print(G.GAME.unik_scores_really_big)
             if G.GAME.unik_overshoot >= 3 then
+                return true
+            end
+        end
+        if G.GAME.nuke_spawn then
+            if G.GAME.nuke_spawn >= 3 then
                 return true
             end
         end

@@ -6,6 +6,9 @@ function CanSpawnEpic()
     if G.GAME.modifiers.unik_legendary_at_any_time then
         return true
     end
+    if not unik_config.unik_overshoot_enabled then
+        return false
+    end
     if G.GAME.round >= 40 then
         if G.GAME.OvershootFXVal >= 2 then
             return true
@@ -20,6 +23,9 @@ function CanSpawnLegendary()
     G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
     if G.GAME.modifiers.unik_legendary_at_any_time then
         return true
+    end
+    if not unik_config.unik_overshoot_enabled then
+        return false
     end
     if G.GAME.round >= 90 then
         if G.GAME.OvershootFXVal >= 3 then

@@ -97,21 +97,23 @@ function Game:update(dt)
 		
 	end
     local res = updateHook(self,dt)
-    G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
-    G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-    if G.GAME.unik_overshoot < 5 then
-        G.GAME.OvershootFXVal = 0
-    elseif G.GAME.unik_overshoot < 10 then
-        G.GAME.OvershootFXVal = 1
-    elseif G.GAME.unik_overshoot < 15 then
-        G.GAME.OvershootFXVal = 2
-    elseif G.GAME.unik_overshoot < 20 then
-        G.GAME.OvershootFXVal = 3
-    elseif G.GAME.unik_overshoot < 25 then
-        G.GAME.OvershootFXVal = 4
-    else
-         G.GAME.OvershootFXVal = 5
-         
+    if unik_config.unik_overshoot_enabled then
+        G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
+        G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        if G.GAME.unik_overshoot < 5 then
+            G.GAME.OvershootFXVal = 0
+        elseif G.GAME.unik_overshoot < 10 then
+            G.GAME.OvershootFXVal = 1
+        elseif G.GAME.unik_overshoot < 15 then
+            G.GAME.OvershootFXVal = 2
+        elseif G.GAME.unik_overshoot < 20 then
+            G.GAME.OvershootFXVal = 3
+        elseif G.GAME.unik_overshoot < 25 then
+            G.GAME.OvershootFXVal = 4
+        else
+            G.GAME.OvershootFXVal = 5
+            
+        end
     end
     
     return res

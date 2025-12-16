@@ -64,6 +64,22 @@ SMODS.current_mod.config_tab = function() --Config tab
 				localize("unik_cryptid_nerfs_desc1"),
 			},
 		}),
+		create_toggle({
+			label = localize("unik_enable_overshoot_option"),
+			ref_table = unik_config,
+			ref_value = "unik_overshoot_enabled",
+			info = {
+				localize("unik_overshoot_enable_desc"),
+			},
+		}),
+		create_toggle({
+			label = localize("unik_custom_menu_option"),
+			ref_table = unik_config,
+			ref_value = "unik_custom_menu",
+			info = {
+				localize("unik_menu_desc"),
+			},
+		}),
 		-- create_option_cycle({
 		-- 	label = localize("unik_overshoot_config"),
 		-- 	scale = 0.8,
@@ -1114,13 +1130,19 @@ NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()
 
 
 --UI
-NFS.load(mod_path .. "data/ui/overshoot.lua")()
-NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
+if unik_config.unik_overshoot_enabled then
+	NFS.load(mod_path .. "data/ui/overshoot.lua")()
+	NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
+end
+
 NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 if AKYRS then
 	NFS.load(mod_path .. "data/ui/aiko_icons.lua")()
 end
-NFS.load(mod_path .. "data/menu.lua")()
+if unik_config.unik_custom_menu then
+	NFS.load(mod_path .. "data/menu.lua")()
+end
+
 
 
 ---

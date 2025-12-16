@@ -5391,6 +5391,10 @@ return {
 
             unik_legendary_blinds_desc1 = "Enable Almanac-styled Epic/Legendary Blinds",
             unik_legendary_blinds_desc2 = "when Overshoot is high",
+            unik_overshoot_enable_desc = "Enable detrimental effects when you score too much above requirements, highly recommended with Big Number mods",
+            unik_menu_desc = "Enable the custom menu screen",
+            unik_enable_overshoot_option = "Enable Overshoot (Restart Required)",
+            unik_custom_menu_option = "Enable Custom Menu (Restart Required)",
             unik_cryptid_nerfs_desc1 = "Nerf some of Cryptid's content when installed",
             unik_overshoot_desc1 = "Off: Highly not recommended, especially with mods such as Cryptid (Can go into slop territory)",
             unik_overshoot_desc2 = "\"Lenient\": Similar to the old system, always +1 if Overshooting Score (Can be slow to notice)",

@@ -21,6 +21,9 @@ local nanny = tostring(G.GAME.chips_text)
 --Naneinf will always trigger overshoot
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+    G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0
+    G.GAME.nuke_spawn = G.GAME.nuke_spawn + 1
+    if unik_config.unik_overshoot_enabled then
         unik_trigger_overshoot_menu(calculate_overshoot_amount())
         delay(0.1)
             G.E_MANAGER:add_event(Event({
@@ -29,14 +32,21 @@ if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(
                 return true
             end
         }))
+        end
 else
     if to_big(G.GAME.chips) < to_big(G.GAME.blind.chips) then
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-        unik_ease_overshoot(-math.ceil(G.GAME.unik_overshoot/2))
+        if unik_config.unik_overshoot_enabled then
+            unik_ease_overshoot(-math.ceil(G.GAME.unik_overshoot/2))
+        end
     else
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-        unik_ease_overshoot(-1)
+        if unik_config.unik_overshoot_enabled then
+            unik_ease_overshoot(-1)
+        end
     end
+    G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0
+    G.GAME.nuke_spawn = math.max(0,G.GAME.nuke_spawn - 1)
     
 
     
