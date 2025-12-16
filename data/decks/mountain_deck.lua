@@ -5,6 +5,7 @@ SMODS.Back {
     config = {
       consumables = {
         'c_unik_everest',
+        'c_unik_everest',
       }
     },
     order = 15,

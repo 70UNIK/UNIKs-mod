@@ -48,7 +48,7 @@ return {
                 text = {
                     "{C:unik_summit}Summit{} cards may",
                     "appear in the shop",
-                    "Start with an {C:unik_summit,T:c_unik_everest}Everest{}",
+                    "Start with 2 {C:unik_summit,T:c_unik_everest}Everests{}",
                 }
             },
             b_unik_haunted_deck = {
@@ -586,7 +586,7 @@ return {
             },
 
             bl_unik_epic_bellows = {
-                name = "Karjuntakuilu",
+                name = "Karjuntakuilu", --bellowing abyss
                 text = {
                     "+4 Hand Size",
                     "+1 Ante per",
@@ -594,7 +594,7 @@ return {
                 }
             },
             bl_unik_epic_bird = {
-                name = "Petolintu",
+                name = "Petolintu", --bird of prey
                 text = {
                     "Set all statistics of",
                     "all hands except",
@@ -602,7 +602,7 @@ return {
                 }
             },
             bl_unik_epic_claw = {
-                name = "Verenvuotoinenkynsi",
+                name = "Verenvuotoinenkynsi", --bleeding claw
                 text = {
                     "Discarded cards return to deck",
                     "Must only play cards that",
@@ -611,7 +611,7 @@ return {
                 }
             },
             bl_unik_epic_steed = {
-                name = "Epäpyhäratsu",
+                name = "Epäpyhäratsu", --unholy steed
                 text = {
                     "Banish a random Joker for",
                     "every card held in hand",
@@ -620,7 +620,7 @@ return {
                 }
             },
             bl_unik_epic_neck = {
-                name = "Murtunutkaula",
+                name = "Murtunutkaula", --broken neck
                 text = {
                     "Banish a random Joker for",
                     "every card played or",
@@ -629,7 +629,7 @@ return {
                 }
             },
             bl_unik_epic_toxin = {
-                name = "Myrkyllinenjoutomaa",
+                name = "Myrkyllinenjoutomaa", --toxic wasteland 
                 text = {
                     "Play only 1 Hand type this round",
                     "First hand multiplies",
@@ -647,7 +647,7 @@ return {
                 }
             },
             bl_unik_epic_entanglement = {
-                name = "Sotkeutunutmieli",
+                name = "Sotkeutunutmieli", --entangled mind
                 text = {
                     "All but 1 card from each",
                     "suit drawn face-down",
