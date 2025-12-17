@@ -1336,16 +1336,7 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
                 }
             },
-            --Lartceps color card
-            c_unik_zzzzzz={
-                name = "#ZZZZZZ",
-                text = {
-                    "Create a random",
-                    "{X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card after",
-                    "{C:attention}#4#{} rounds while held", --after 5 rounds
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
-                }
-            },
+            
             c_unik_stone_grey={
                 name = "Stone Gray",
                 text = {
@@ -4179,7 +4170,8 @@ return {
                 name = "Eternal",
                 text = {
                     "{C:attention}Copies{} itself",
-                    "if destroyed"
+                    "if {C:red}destroyed",
+                    "{C:inactive,s:0.9}(Avoids destruction when possible)"
                 }
             },
         },
@@ -4357,6 +4349,13 @@ return {
                     "to {V:1}#2#{}",
                 }
             },
+            c_unik_forever = {
+                name = "Forever",
+                text = {
+                    "Selected {C:attention}Playing cards{} gain",
+                    "or lose {C:purple}Eternal"
+                }
+            }
         },
         Stake={
             stake_unik_shitty = {
@@ -4630,38 +4629,26 @@ return {
                 name = "Placard",
                 text = {
                     "Add {E:2,C:red}Ultradebuffed{}", --Brute force counters dandy (through update functions) and patch
-                    "to all cards in deck",
+                    "to {C:green}#1# in #2#{} cards in deck", --3 in 4
                 }
             },
-            c_unik_brethren_moon = { --worse than epic arm; Note that mult will always remain zero (otherwise the negatives cancel each other out)
+            c_unik_brethren_moon = { 
                 name = "Brethren Moon",
                 text = {
-                    "For {C:attention}all{} hands, set {C:mult}mult{} to {E:2,C:red}0{}",
-                    "{C:chips}chips{} to {E:2,C:red}negative{} and",
-                    "all levels to {E:2,C:red}0{}"
+                    "Set all statistics of",
+                    "{C:attention}all{} hands to {E:2,C:red}0{}",
                 }
             },
             c_unik_trim = {
                 name = "://TRIM",
                 text = {
-                    "{E:2,C:red}Remove{} {C:attention}all{} empty",
-                    "Joker slots, then",
-                    "{E:2,C:red}halve{} remaining",
-                    "Joker slots",
+                    "{E:2,C:red}-2{} Joker slots",
                 }
             },
-            c_unik_escalation_cryptid = {
+            c_unik_escalation = {
                 name = "Escalation",
                 text = {
-                    "{X:unik_void_color,E:2,C:red}^#1#{} {C:attention}ante{}",
-                }
-            },
-            c_unik_escalation_almanac = {
-                name = "Escalation",
-                text = {
-                    "{X:unik_void_color,E:2,C:red}X#1#{} {C:attention}ante{},",
-                    "{X:unik_void_color,E:2,C:red}^#2#{} {C:cry_ember}Tension{},",
-                    "Activates {C:attention}Straddle{}",
+                    "{X:unik_void_color,E:2,C:red}X#1#{} {C:attention}ante{}",
                 }
             },
             c_unik_expiry = {
@@ -4674,7 +4661,7 @@ return {
             c_unik_extortion = {
                 name = "Extortion",
                 text = {
-                    "Set {C:gold}money{} to {E:2,C:red}-$#1#{}", -- -$6666
+                    "Set {C:gold}money{} to {E:2,C:red}-$#1#{}", -- -$666
                 }
             },
             c_unik_single = {
@@ -4723,17 +4710,29 @@ return {
             c_unik_mount_doom = {
                 name = "Doom",
                 text = {
+                    "{C:red}Subtract{} Played and Held",
+                    "{C:chips}#1#{} Chips, {C:mult}#2#{} Mult",
+                    "{X:chips,C:white}X#3#{} Chips, {X:mult,C:white}X#4#{} Mult",
+                    "{X:dark_edition,C:white}^#5#{} Mult and {C:money}$#6#{} from all cards"
                     --All cards lose perma bonuses and permanently lose -4 Mult, -30 Chips,  X0.5 Mult and X0.5 Chips
                 }
             },
             c_unik_parasite = {
                 name = "The Parasite",
                 text = {
-                    "Link #1# Namta Cards",
-                    "to #1# in #2# cards",
-                    "in deck",
+                    "{C:attention}Link {C:red}#1# to #2# {X:unik_lartceps_inverse,C:unik_lartceps1}Namta{} Cards", --1 to 3
+                    "to {C:green}#3# in #4#{} cards in deck", -- 1 in 3
                 }
-            }
+            },
+            c_unik_zzzzzz={
+                name = "#ZZZZZZ",
+                text = {
+                    "Create a random",
+                    "{X:unik_lartceps_inverse,C:unik_lartceps1}Lartceps{} card after",
+                    "{C:attention}#4#{} rounds while held", --after 5 rounds
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
+                }
+            },
         },
         unik_summit = {
             --Perma Xmult, Perma Xchips, Perma Chips, Perma Mult, Perma Held Xmult, perma held Xchips, perma held Mult, perma held Chips, perma held $, perma $, ^Mult, ^Chips

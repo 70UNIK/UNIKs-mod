@@ -613,6 +613,7 @@ NFS.load(mod_path .. "data/spectrals/prism.lua")()
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 NFS.load(mod_path .. "data/spectrals/turing.lua")() 
 NFS.load(mod_path .. "data/spectrals/defend.lua")() 
+--NFS.load(mod_path .. "data/spectrals/forever.lua")() 
 NFS.load(mod_path .. "data/spectrals/purify.lua")() 
 NFS.load(mod_path .. "data/spectrals/expel.lua")() 
 NFS.load(mod_path .. "data/spectrals/ring.lua")() 
@@ -625,9 +626,11 @@ NFS.load(mod_path .. "data/summits/celeste.lua")()
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 leftmost non eternals, create an ancient.
 
 --PLANETS
+--NFS.load(mod_path .. "data/overrides/eternal_playing_card.lua")()
 
 --SUMMITS--
 NFS.load(mod_path .. "data/summits/bonus_exponentials.lua")() 
+NFS.load(mod_path .. "data/summits/bonus_indicator.lua")() 
 NFS.load(mod_path .. "data/summits/elbert.lua")() 
 NFS.load(mod_path .. "data/summits/kosciuszko.lua")() 
 NFS.load(mod_path .. "data/summits/narodnaya.lua")() 
@@ -663,6 +666,10 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/hellspawn.lua")() 
 	NFS.load(mod_path .. "data/lartceps/escalation.lua")() 
 	NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
+	NFS.load(mod_path .. "data/lartceps/doom.lua")() 
+	if next(SMODS.find_mod("Bunco")) then
+		NFS.load(mod_path .. "data/lartceps/parasite.lua")()
+	end
 	NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
 end
 

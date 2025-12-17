@@ -5,7 +5,7 @@ SMODS.Consumable{
     cost = 0,
 	pos = {x = 0, y = 1},
 	key = 'unik_hellspawn',
-    config = {extra = {jokers = 20}},
+    config = {extra = {jokers = 16}},
     no_doe = true,
     no_grc = true,
 	no_ccd = true,
