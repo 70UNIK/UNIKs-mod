@@ -59,23 +59,25 @@ SMODS.Blind	{
         end
     end
 }
-
+local G_FUNCS_can_skip_booster_ref = G.FUNCS.can_skip_booster
 G.FUNCS.can_skip_booster = function(e)
+    
 	if G.pack_cards and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) and
 	(G.STATE == G.STATES.SMODS_BOOSTER_OPENED or G.STATE == G.STATES.PLANET_PACK or G.STATE == G.STATES.STANDARD_PACK or G.STATE == G.STATES.BUFFOON_PACK or (G.hand  )) then 
 		--if a booster is unskippable (when its unskippable conditionsa re fulfilled), unhighlight it
-		local obj = SMODS.OPENED_BOOSTER.config.center
-		if obj.unskippable and type(obj.unskippable) == "function" then
+		local obj
+        if SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config then
+            obj = SMODS.OPENED_BOOSTER.config.center or nil
+        end
+		if obj and obj.unskippable and type(obj.unskippable) == "function" then
 			if obj:unskippable() == true then
 				e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 				e.config.button = nil
 			else
-				e.config.colour = G.C.GREY
-				e.config.button = 'skip_booster'
+				G_FUNCS_can_skip_booster_ref(e)
 			end
 		else
-			e.config.colour = G.C.GREY
-			e.config.button = 'skip_booster'
+			G_FUNCS_can_skip_booster_ref(e)
 		end
 	else
 	e.config.colour = G.C.UI.BACKGROUND_INACTIVE

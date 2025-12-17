@@ -9,14 +9,21 @@ target = "game.lua"
 pattern = "replace_card.states.visible = false"
 position = "before"
 payload = '''
-replace_card:set_edition(G.P_CENTERS.e_unik_fuzzy and 'e_unik_fuzzy' or 'e_negative',true,true)
+if unik_config.unik_custom_menu then
+    replace_card:set_edition(G.P_CENTERS.e_unik_fuzzy and 'e_unik_fuzzy' or 'e_negative',true,true)
+end
 '''
 match_indent = true
 
 [[patches]]
 [patches.regex]
 target = "game.lua"
-pattern = '''G.P_CARDS.S_A'''
-position = "at"
-payload = '''G.P_CARDS.unik_CROSSES_A'''
-match_indent = true
+pattern = '''(.*)G.P_CARDS.S_A(.*)'''
+position = "after"
+payload = '''
+
+if unik_config.unik_custom_menu then
+    replace_card:remove()
+    replace_card = Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.unik_CROSSES_A, G.P_CENTERS.c_base)
+end
+'''
