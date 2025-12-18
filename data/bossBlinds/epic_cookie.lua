@@ -198,7 +198,12 @@ function G.FUNCS.play_cards_from_highlighted(e)
         end
         SMODS.calculate_context({on_select_play = true})
         --end
-
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                UNIK.railroad_suits()
+                return true
+            end
+        }))
         pcfh(e)
     end
 	G.GAME.before_play_buffer2 = nil

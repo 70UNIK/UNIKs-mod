@@ -12,7 +12,7 @@ position = 'after'
 match_indent = true
 payload = '''
 
-if G.hand and center and (not initial) and (old_center ~= center) and center.set == 'Enhanced' then
+if (G.hand or G.play) and center and (not initial) and center.set == 'Enhanced' then
     SMODS.calculate_context({unik_enhance_card = true, unik_enhanced_card = self})
 end
 

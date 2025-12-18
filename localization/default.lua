@@ -2708,7 +2708,6 @@ return {
                 text = {
                     "Playing Cards gain",
                     "{C:attention}Shielded{} when {C:attention}enhanced",
-                    "{C:inactive,s:0.9}(Must be different enhancements)"
                 }
             },
             j_unik_malicious_face = {

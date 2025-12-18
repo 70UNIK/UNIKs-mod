@@ -90,12 +90,7 @@ G.E_MANAGER:add_event(Event({
     return true end)
     }))
 end
-G.E_MANAGER:add_event(Event({
-    func = function()
-        UNIK.railroad_suits()
-        return true
-    end
-}))
+
 
 if debuff_hand and not undefTalisman then
     play_area_status_text("Not Allowed!")

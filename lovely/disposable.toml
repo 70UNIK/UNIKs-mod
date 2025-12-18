@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 9999
 ### disposable/niko/bloated functionality
 ## stolen from cryptid code:
 

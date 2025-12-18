@@ -24,6 +24,9 @@ SMODS.Joker {
                         delay = 0.1,
                         func = function()
                             context.unik_enhanced_card.ability.unik_shielded = true
+                            for k, v in ipairs(G.playing_cards) do
+                                G.GAME.blind:debuff_card(v)
+                            end
                             return true
                         end,
                     }))
