@@ -4241,7 +4241,7 @@ return {
                     "Add {C:dark_edition}Steel{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
                     "Add {C:attention}#2#{} random",
-                    "unmodified card#<s>2#",
+                    "unmodified playing card#<s>2#",
                 }
             },
             c_cry_pointer_no_dupe = {
@@ -4260,7 +4260,7 @@ return {
                      "Add {C:dark_edition}Polychrome{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
                     "Add {C:attention}#2#{} random",
-                    "unmodified card#<s>2#",
+                    "unmodified playing card#<s>2#",
                 }
             },
             c_unik_bloater ={
@@ -4268,7 +4268,7 @@ return {
                 text = {
                     "{C:attention}+#1#{} Hand Size",
                     "Add {C:attention}#2#{} random",
-                    "unmodified card#<s>2#",
+                    "unmodified playing card#<s>2#",
                 }
             },
             c_unik_sparkle = {
@@ -4277,7 +4277,7 @@ return {
                      "Add {C:dark_edition}Glittergrid{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
                     "Add {C:attention}#2#{} random",
-                    "unmodified card#<s>2#",
+                    "unmodified playing card#<s>2#",
                 } 
             },
             c_unik_celeste = {

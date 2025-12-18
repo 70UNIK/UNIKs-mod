@@ -139,6 +139,12 @@ function Card:gore6_break()
         if G.P_CENTERS[key].woodbreak then 
             self:woodBreak()
             return nil
+        elseif G.P_CENTERS[key].metalbreak then 
+            self:metalBreak(G.P_CENTERS[key].metalbreak.colour or nil)
+            return nil
+        elseif G.P_CENTERS[key].rockbreak then 
+            self:rockBreak()
+            return nil
         end
     end
     local dissolve_time = 0.7

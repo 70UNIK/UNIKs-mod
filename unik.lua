@@ -220,7 +220,14 @@ SMODS.Sound({
 	key = "woodBreak",
 	path = "woodBreak.ogg",
 })
-
+SMODS.Sound({
+	key = "metalbreak",
+	path = "metalbreak.ogg",
+})
+SMODS.Sound({
+	key = "rock_break",
+	path = "rock_break.ogg",
+})
 
 
 SMODS.Atlas {
@@ -1134,6 +1141,8 @@ NFS.load(mod_path .. "data/overrides/drunkard_merry_andy_buff.lua")()
 NFS.load(mod_path .. "data/overrides/mr_bones_ui.lua")()	
 NFS.load(mod_path .. "data/overrides/matador.lua")()	
 NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()	
+
+NFS.load(mod_path .. "data/overrides/enhancement_destroy_fx.lua")()	
 
 
 --UI

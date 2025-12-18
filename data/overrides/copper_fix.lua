@@ -4,6 +4,7 @@ SMODS.Enhancement:take_ownership("m_bunc_copper",{
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
     end,
+    metalbreak = {colour = {248/255,1608/255,101/255,1.0}},
     config = {extra = {rescore = 1}},
     calculate = function(self, card, context, effect)
         if context.unik_after_effect and context.scoring_hand then

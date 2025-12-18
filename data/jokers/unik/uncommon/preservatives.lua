@@ -31,6 +31,7 @@ SMODS.Joker {
              for i,v in pairs(G.jokers.cards) do
                 if v.ability and v.ability.perishable then
                     v.ability.perishable = nil
+                    v.debuff = false
                     card.ability.extra.jokers = card.ability.extra.jokers - 1
                     if (card.ability.extra.jokers <= 0) then
                         selfDestruction(card,'k_eaten_ex',G.C.PERISHABLE)

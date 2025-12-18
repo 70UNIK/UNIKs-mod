@@ -104,7 +104,7 @@ function reset_blinds()
 	end
 	rb2()
 end
-local function BlindIncrement(penalty)
+local function BlindIncrement()
     local choices = { "Small", "Big", "Boss" }
 	for _, c in pairs(choices) do
 		if
@@ -187,7 +187,7 @@ end
 local lcpref2 = Controller.L_cursor_press
 function Controller:L_cursor_press(x, y)
     lcpref2(self, x, y)
-    BlindIncrement(0)
+    BlindIncrement()
     if G and G.GAME and G.GAME.blind and G.GAME.blind.unik_clicky_click_mod and G.GAME.blind.in_blind and not G.SETTINGS.paused and not G.OVERLAY_MENU then
         G.GAME.blind:unik_clicky_click_mod(self)
     end
