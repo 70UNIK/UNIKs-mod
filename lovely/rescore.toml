@@ -4,11 +4,11 @@ dump_lua = true
 priority = 999
 
 [[patches]]
-[patches.regex]
+[patches.pattern]
 target = '''=[SMODS _ "src/utils.lua"]'''
-pattern = '''ipairs\(context.cardarea.cards\)'''
+pattern = '''for i, card in ipairs(context.cardarea.cards) do'''
 position = 'at'
-payload = '''ipairs((unik_isRescoringOnly and context.unik_end_round_rescored_cards) or context.cardarea.cards)'''
+payload = '''for i, card in ipairs((unik_isRescoringOnly and context.unik_end_round_rescored_cards) or context.cardarea.cards) do'''
 match_indent = true
 
 [[patches]]

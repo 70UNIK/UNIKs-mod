@@ -52,7 +52,7 @@ pattern = '''local blind_amt = get_blind_amount(G.GAME.round_resets.blind_ante)*
 position = "after"
 payload = '''
 if blind_choice.config.unik_exponent then
-      local initial = get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling
+      local initial = get_blind_amount(G.GAME.round_resets.blind_ante)*G.GAME.starting_params.ante_scaling
       initial = portable_exp(initial,blind_choice.config.unik_exponent[1], blind_choice.config.unik_exponent[2])
       blind_amt = initial
 elseif blind_choice.config.high_score_size then

@@ -18,6 +18,8 @@ SMODS.Blind{
 		G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling * 2
 		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
 	end,
+    increment_in_ante = {-1,0.025},
+    increment_by_click = true,
     unik_clicky_click_mod = function(self,prevent_rep)
         if G.SETTINGS.paused then
 			return {0.0,-1}
@@ -33,8 +35,7 @@ SMODS.Blind{
                 end
             else
                 if not prevent_rep or prevent_rep == false then
-                    play_sound('cancel', 0.8, 1)
-                    G.ROOM.jiggle = G.ROOM.jiggle + 0.5
+                    
                 end
 
             end
@@ -89,17 +90,17 @@ G.FUNCS.skip_blind = function(e)
 
 end
 
---refresh on reload
+-- --refresh on reload
 local sr2 = Game.start_run
 function Game:start_run(args)
 	sr2(self, args)
-	if G.P_BLINDS.bl_unik_cookie then
-		G.P_BLINDS.bl_unik_cookie.mult = 0
-    end
-    if G.P_BLINDS.bl_unik_epic_cookie then
-        G.P_BLINDS.bl_unik_epic_cookie.mult = 1
-        G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
-    end
+	-- if G.P_BLINDS.bl_unik_cookie then
+	-- 	G.P_BLINDS.bl_unik_cookie.mult = 0
+    -- end
+    -- if G.P_BLINDS.bl_unik_epic_cookie then
+    --     G.P_BLINDS.bl_unik_epic_cookie.mult = 1
+    --     G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
+    -- end
 	if not G.GAME.defeated_blinds then
 		G.GAME.defeated_blinds = {}
 	end
@@ -116,192 +117,118 @@ function Blind:unik_clicky_click_mod(prevent_rep)
 	return 0
 end
 
---patch for multiple cookies to click all at once
-local bsb2 = Blind.set_blind
-function Blind:set_blind(blind, y, z)
-	local c = "Boss"
-	if string.sub(G.GAME.subhash or "", -1) == "S" then
-		c = "Small"
-	end
-	if string.sub(G.GAME.subhash or "", -1) == "B" then
-		c = "Big"
-	end
-	if G.GAME.CRY_BLINDS and G.GAME.CRY_BLINDS[c] and not y and blind and (blind.mult or blind.unik_exponent) and blind.unik_clicky_click_mod then
-		blind.mult = G.GAME.CRY_BLINDS[c]
-        if blind.unik_exponent and blind.unik_exponent[2] > 0 then
-            blind.unik_exponent[2] = G.GAME.CRY_BLINDS[c]
-        end
-	end
-	bsb2(self, blind, y, z)
-end
+-- --patch for multiple cookies to click all at once
+-- local bsb2 = Blind.set_blind
+-- function Blind:set_blind(blind, y, z)
+-- 	local c = "Boss"
+-- 	if string.sub(G.GAME.subhash or "", -1) == "S" then
+-- 		c = "Small"
+-- 	end
+-- 	if string.sub(G.GAME.subhash or "", -1) == "B" then
+-- 		c = "Big"
+-- 	end
+-- 	if G.GAME.CRY_BLINDS and G.GAME.CRY_BLINDS[c] and not y and blind and (blind.mult or blind.unik_exponent) and blind.unik_clicky_click_mod then
+-- 		blind.mult = G.GAME.CRY_BLINDS[c]
+--         if blind.unik_exponent and blind.unik_exponent[2] > 0 then
+--             blind.unik_exponent[2] = G.GAME.CRY_BLINDS[c]
+--         end
+-- 	end
+-- 	bsb2(self, blind, y, z)
+-- end
 
 local rb2 = reset_blinds
 function reset_blinds()
-	if G.GAME.round_resets.blind_states.Boss == "Defeated" then
-		G.GAME.CRY_BLINDS = {}
-		if G.P_BLINDS.bl_unik_cookie then
-			G.P_BLINDS.bl_unik_cookie.mult = 0
-        end
-        if G.P_BLINDS.bl_unik_epic_cookie then
-            G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
-            G.P_BLINDS.bl_unik_epic_cookie.mult = 1
-        end
+    local choices = { "Small", "Big", "Boss" }
+	for _, c in pairs(choices) do
+		if
+            G.GAME.round_resets.blind_states[c] == "Defeated"
+            or G.GAME.round_resets.blind_states[c] == 'Hide'
+            or G.GAME.round_resets.blind_states[c] == 'Skipped'
+		then
+            G.GAME.round_resets.cookie_increment = G.GAME.round_resets.cookie_increment or {}
+             G.GAME.round_resets.cookie_increment[c] = 0
+		end
 	end
+	-- if G.GAME.round_resets.blind_states.Boss == "Defeated" then
+	-- 	G.GAME.CRY_BLINDS = {}
+	-- 	if G.P_BLINDS.bl_unik_cookie then
+	-- 		G.P_BLINDS.bl_unik_cookie.mult = 0
+    --     end
+    --     if G.P_BLINDS.bl_unik_epic_cookie then
+    --         G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
+    --         G.P_BLINDS.bl_unik_epic_cookie.mult = 1
+    --     end
+	-- end
 	rb2()
 end
-
---BUG: losing against the cookie (both variants) will carry over the blind size.
 local function BlindIncrement(penalty)
     local choices = { "Small", "Big", "Boss" }
-	G.GAME.CRY_BLINDS = G.GAME.CRY_BLINDS or {}
 	for _, c in pairs(choices) do
 		if
 			G.GAME
 			and G.GAME.round_resets
 			and G.GAME.round_resets.blind_choices
 			and G.GAME.round_resets.blind_choices[c]
-			and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod
+			and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].increment_in_ante
+            and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].increment_by_click
+            and G.GAME.round_resets.blind_states[c] ~= "Defeated"
+            and G.GAME.round_resets.blind_states[c] ~= 'Hide'
+            and G.GAME.round_resets.blind_states[c] ~= 'Current'
 		then
-			if
-				G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult ~= 0
-				and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult_ante ~= G.GAME.round_resets.ante
-			then
-				if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "cry-Obsidian Orb" then
-					for i = 1, #G.GAME.defeated_blinds do
-						G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult
-							* G.P_BLINDS[G.GAME.defeated_blinds[i]]
-							/ 2
-					end
-				elseif  G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "bl_unik_epic_cookie" then
-                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
-                else
-					G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 0
-				end
-				G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult_ante = G.GAME.round_resets.ante
-			elseif G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult == 0
-            and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult_ante ~= G.GAME.round_resets.ante then
-                if  G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].name == "bl_unik_epic_cookie" then
-                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                    G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
+            G.GAME.round_resets.cookie_increment = G.GAME.round_resets.cookie_increment or {}
+            G.GAME.round_resets.cookie_increment[c] = G.GAME.round_resets.cookie_increment[c] or 0
+            G.GAME.round_resets.cookie_increment[c] = G.GAME.round_resets.cookie_increment[c] + 1
+            if G.blind_select_opts then
+                local blindText = G.blind_select_opts[string.lower(c)]:get_UIE_by_ID('blind_text_'..string.lower(c))
+                blindText.config.text = UNIK.calculate_cookie_base(c)..""
+
+                G.blind_select_opts[string.lower(c)]:recalculate()
+                blindText:juice_up()
+                if G.OVERLAY_MENU then
+                    local blindText2 = G.OVERLAY_MENU:get_UIE_by_ID('blind_text_'..string.lower(c))
+                    if blindText2 then
+                        blindText2:juice_up()
+                        blindText2.config.text = UNIK.calculate_cookie_base(c)..""
+                        G.OVERLAY_MENU:recalculate()
+                    end
+                    
                 end
+
+                
             end
-			if
-				G.GAME.round_resets.blind_states[c] ~= "Current"
-				and G.GAME.round_resets.blind_states[c] ~= "Defeated"
-			then
-                --MAJOR ISSUE, they will carry their initial blind sizes if switched.
-                --crash fix
-                if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]] and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(false) then
-                    if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[2] <= -1 then
-                        G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult)
-                        + (
-                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 0
-                        )
-                    --multiplication
-                    elseif G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[2] == 0 then
-                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult < 1 then
-                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                        end
-                        if G.GAME.CRY_BLINDS[c] and G.GAME.CRY_BLINDS[c] < 1 then
-                            G.GAME.CRY_BLINDS[c] = 1
-                        end
-                        G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult)
-                        * (
-                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
-                        )
-                    --exponentiation, tetration, etc...
-                    else
-                        -- --The problem with this is that exponentiation doesnt work at x1 mult. So it has to be multiplied for used exponentiation
-                        if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult < 0 or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] == 0 then
-                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].mult = 1
-                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] = 1
-                        end
-                        if G.GAME.CRY_BLINDS[c] and  G.GAME.CRY_BLINDS[c] < 1 then
-                            G.GAME.CRY_BLINDS[c] = 1
-                        end
-
-                        G.GAME.CRY_BLINDS[c] = (G.GAME.CRY_BLINDS[c] or G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2])
-                        * (
-                            G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_clicky_click_mod and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]]:unik_clicky_click_mod(true)[1] or 1
-                        )
-                    end
-                end
-				if G.blind_select_opts then
-					if (SMODS.Mods["StrangeLib"] or {}).can_load then
-						StrangeLib.dynablind.blind_choice_scores[c] = get_blind_amount(G.GAME.round_resets.blind_ante)
-							* G.GAME.starting_params.ante_scaling
-							* G.GAME.CRY_BLINDS[c]
-						StrangeLib.dynablind.blind_choice_score_texts[c] =
-							number_format(StrangeLib.dynablind.blind_choice_scores[c])
-					else
-						local blind_UI =
-							G.blind_select_opts[string.lower(c)].definition.nodes[1].nodes[1].nodes[1].nodes[1]
-						local chip_text_node = blind_UI.nodes[1].nodes[3].nodes[1].nodes[2].nodes[2].nodes[3]
-						if chip_text_node then
-                            local exponent = false
-                            if G.P_BLINDS[G.GAME.round_resets.blind_choices[c]] and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[2] > 0 then
-                                exponent = true
-                            end
-                            if exponent then
-                                --this registers as that but is not updating properly
-                                chip_text_node.config.text = number_format(
-                                    portable_exp(to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
-                                        * G.GAME.starting_params.ante_scaling),G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
-                                )
-                                chip_text_node.config.scale = score_number_scale(
-                                    0.9,
-                                    portable_exp(to_big(get_blind_amount(G.GAME.round_resets.blind_ante)
-                                    * G.GAME.starting_params.ante_scaling),G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].unik_exponent[1],G.GAME.CRY_BLINDS[c])
-                                )  
-                            else
-                                --print("1")
-                                chip_text_node.config.text = number_format(
-								get_blind_amount(G.GAME.round_resets.blind_ante)
-									* G.GAME.starting_params.ante_scaling
-									* G.GAME.CRY_BLINDS[c])
-							
-                                chip_text_node.config.scale = score_number_scale(
-                                    0.9,
-                                    get_blind_amount(G.GAME.round_resets.blind_ante)
-                                        * G.GAME.starting_params.ante_scaling
-                                        * G.GAME.CRY_BLINDS[c]
-                                )
-                            end
-
-						end
-						G.blind_select_opts[string.lower(c)]:recalculate()
-					end
-				end
-
-			elseif
-				G.GAME.round_resets.blind_states[c] ~= "Defeated"
-				and not G.GAME.blind.disabled
-				and to_big(G.GAME.chips) < to_big(G.GAME.blind.chips)
-			then
-                if G.GAME.blind:unik_clicky_click_mod(false) then
-                    if G.GAME.blind:unik_clicky_click_mod(true)[2] <= -1 then
-                        G.GAME.blind.chips = G.GAME.blind.chips
-                        + (G.GAME.blind:unik_clicky_click_mod(true)[1])
-                            * get_blind_amount(G.GAME.round_resets.ante)
-                            * G.GAME.starting_params.ante_scaling
-                    elseif G.GAME.blind:unik_clicky_click_mod(true)[2] <= 0 then
-                        G.GAME.blind.chips = G.GAME.blind.chips
-                        * (G.GAME.blind:unik_clicky_click_mod(true)[1])
-                            * get_blind_amount(G.GAME.round_resets.ante)
-                            * G.GAME.starting_params.ante_scaling
-                    else
-                        G.GAME.blind.chips = portable_exp(to_big(G.GAME.blind.chips),G.GAME.blind:unik_clicky_click_mod(true)[2],G.GAME.blind:unik_clicky_click_mod(true)[1])
-                    end
-                end
-                
-				
-				G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-                G.HUD_blind:recalculate(true)
-                
-			end
-		end
+            play_sound('cancel', 0.8, 1)
+            G.ROOM.jiggle = G.ROOM.jiggle + 0.5
+        elseif 			G.GAME
+			and G.GAME.round_resets
+			and G.GAME.round_resets.blind_choices
+			and G.GAME.round_resets.blind_choices[c] and 
+            G.GAME.round_resets.cookie_increment and 
+            G.GAME.round_resets.cookie_increment[c]
+            then
+            G.GAME.round_resets.cookie_increment[c] = nil
+        end
 	end
+end
+
+function UNIK.calculate_cookie_base(type)
+    local incrementer = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].increment_in_ante
+    local base = get_blind_amount(G.GAME.round_resets.blind_ante)*G.GAME.starting_params.ante_scaling
+    local initial = base
+    G.GAME.round_resets.cookie_increment = G.GAME.round_resets.cookie_increment or {}
+    G.GAME.round_resets.cookie_increment[type] = G.GAME.round_resets.cookie_increment[type] or 0
+    --iterate until get to value
+    for i = 1, G.GAME.round_resets.cookie_increment[type] do
+        if incrementer[1] == -1 then --addition
+            initial = initial + base*incrementer[2]
+        elseif incrementer[1] == 0 then --multiplication
+            initial = initial *incrementer[2]
+        elseif incrementer[1] == 1 then --exponentiation
+            initial = initial^incrementer[2]
+        elseif incrementer[1] > 1 then --higher operators
+            initial = portable_exp(initial,incrementer[1],incrementer[2])
+        end
+    end
+    return initial
 end
 
 local lcpref2 = Controller.L_cursor_press
