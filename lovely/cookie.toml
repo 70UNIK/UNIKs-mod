@@ -27,3 +27,16 @@ pattern = '''text(.*)=(.*)number_format\(blind\_amt\)\,'''
 position = "after"
 payload = '''id = 'blind_text_' .. string.lower(type),'''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "blind.lua"
+pattern = '''self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling'''
+position = "after"
+payload = '''
+if obj.increment_in_ante then
+    self.chips = UNIK.calculate_cookie_base(G.GAME.blind_on_deck)
+end
+
+'''
+match_indent = true

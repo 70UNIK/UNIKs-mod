@@ -15,39 +15,21 @@ SMODS.Blind{
 		G.P_BLINDS.bl_unik_cookie.mult = 0
 	end,
 	disable = function(self, silent)
-		G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling * 2
+		G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.blind_ante) * G.GAME.starting_params.ante_scaling * 2
 		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
 	end,
     increment_in_ante = {-1,0.025},
     increment_by_click = true,
     unik_clicky_click_mod = function(self,prevent_rep)
-        if G.SETTINGS.paused then
-			return {0.0,-1}
-		else
-            --only wiggle on click if inside the cookie or has this function, otherwise produce a sound indicating that the cookie is active.
-            if G.GAME.blind.in_blind and (G.GAME.blind.name == 'bl_unik_cookie' or G.GAME.blind.name == 'bl_unik_epic_cookie' or G.GAME.blind.name == 'cry-Obsidian Orb') and G.GAME.blind.unik_clicky_click_mod then
-                if not prevent_rep or prevent_rep == false then
-                    G.GAME.blind.triggered = true
-                    G.GAME.blind:wiggle()
-                    G.hand_text_area.blind_chips:juice_up()
-                    play_sound('chips2')
-                    G.ROOM.jiggle = G.ROOM.jiggle + 0.5
-                end
-            else
-                if not prevent_rep or prevent_rep == false then
-                    
-                end
-
-            end
-            --Syntax operators:
-            -- -1 = +Reqs
-            -- 0 = xReq
-            -- 1 = ^Req
-            -- 2 = ^^req, etc...
-            --{Amount,operator}
-            --For multiplication and exponentiation, ideally have it above 1.
-			return {0.025,-1}
-		end
+        local base = get_blind_amount(G.GAME.round_resets.blind_ante)*G.GAME.starting_params.ante_scaling
+        G.GAME.blind.chips = G.GAME.blind.chips + base * 0.025
+        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+        G.HUD_blind:recalculate(true)
+        G.hand_text_area.blind_chips:juice_up()
+        G.GAME.blind.triggered = true
+        G.GAME.blind:wiggle()
+        play_sound('chips2')
+        G.ROOM.jiggle = G.ROOM.jiggle + 0.5
     end,
 }
 
@@ -165,6 +147,7 @@ local function BlindIncrement(penalty)
     local choices = { "Small", "Big", "Boss" }
 	for _, c in pairs(choices) do
 		if
+            not G.SETTINGS.paused and 
 			G.GAME
 			and G.GAME.round_resets
 			and G.GAME.round_resets.blind_choices
@@ -191,14 +174,18 @@ local function BlindIncrement(penalty)
                         blindText2.config.text = UNIK.calculate_cookie_base(c)..""
                         G.OVERLAY_MENU:recalculate()
                     end
-                    
                 end
-
-                
             end
             play_sound('cancel', 0.8, 1)
             G.ROOM.jiggle = G.ROOM.jiggle + 0.5
-        elseif 			G.GAME
+        elseif G.GAME.round_resets.blind_states[c] == "Current" 
+            and G.GAME
+			and G.GAME.blind
+			and not G.GAME.blind.disabled
+			and to_big(G.GAME.chips) < to_big(G.GAME.blind.chips) 
+        then
+
+        elseif 			not G.SETTINGS.paused and G.GAME
 			and G.GAME.round_resets
 			and G.GAME.round_resets.blind_choices
 			and G.GAME.round_resets.blind_choices[c] and 
@@ -213,7 +200,7 @@ end
 function UNIK.calculate_cookie_base(type)
     local incrementer = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].increment_in_ante
     local base = get_blind_amount(G.GAME.round_resets.blind_ante)*G.GAME.starting_params.ante_scaling
-    local initial = base
+    local initial = get_blind_amount(G.GAME.round_resets.blind_ante)*G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].config.mult*G.GAME.starting_params.ante_scaling
     G.GAME.round_resets.cookie_increment = G.GAME.round_resets.cookie_increment or {}
     G.GAME.round_resets.cookie_increment[type] = G.GAME.round_resets.cookie_increment[type] or 0
     --iterate until get to value
@@ -235,4 +222,7 @@ local lcpref2 = Controller.L_cursor_press
 function Controller:L_cursor_press(x, y)
     lcpref2(self, x, y)
     BlindIncrement(0)
+    if G and G.GAME and G.GAME.blind and G.GAME.blind.unik_clicky_click_mod and G.GAME.blind.in_blind and not G.SETTINGS.paused and not G.OVERLAY_MENU then
+        G.GAME.blind:unik_clicky_click_mod(self)
+    end
 end
