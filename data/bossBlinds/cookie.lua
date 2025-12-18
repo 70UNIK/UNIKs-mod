@@ -11,9 +11,6 @@ SMODS.Blind{
     mult = 0,
     pronouns = "he_him",
     death_message = "special_lose_unik_cookie",
-	defeat = function(self, silent)
-		G.P_BLINDS.bl_unik_cookie.mult = 0
-	end,
 	disable = function(self, silent)
 		G.GAME.blind.chips = get_blind_amount(G.GAME.round_resets.blind_ante) * G.GAME.starting_params.ante_scaling * 2
 		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
@@ -76,13 +73,6 @@ end
 local sr2 = Game.start_run
 function Game:start_run(args)
 	sr2(self, args)
-	-- if G.P_BLINDS.bl_unik_cookie then
-	-- 	G.P_BLINDS.bl_unik_cookie.mult = 0
-    -- end
-    -- if G.P_BLINDS.bl_unik_epic_cookie then
-    --     G.P_BLINDS.bl_unik_epic_cookie.mult = 1
-    --     G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
-    -- end
 	if not G.GAME.defeated_blinds then
 		G.GAME.defeated_blinds = {}
 	end
@@ -99,25 +89,6 @@ function Blind:unik_clicky_click_mod(prevent_rep)
 	return 0
 end
 
--- --patch for multiple cookies to click all at once
--- local bsb2 = Blind.set_blind
--- function Blind:set_blind(blind, y, z)
--- 	local c = "Boss"
--- 	if string.sub(G.GAME.subhash or "", -1) == "S" then
--- 		c = "Small"
--- 	end
--- 	if string.sub(G.GAME.subhash or "", -1) == "B" then
--- 		c = "Big"
--- 	end
--- 	if G.GAME.CRY_BLINDS and G.GAME.CRY_BLINDS[c] and not y and blind and (blind.mult or blind.unik_exponent) and blind.unik_clicky_click_mod then
--- 		blind.mult = G.GAME.CRY_BLINDS[c]
---         if blind.unik_exponent and blind.unik_exponent[2] > 0 then
---             blind.unik_exponent[2] = G.GAME.CRY_BLINDS[c]
---         end
--- 	end
--- 	bsb2(self, blind, y, z)
--- end
-
 local rb2 = reset_blinds
 function reset_blinds()
     local choices = { "Small", "Big", "Boss" }
@@ -131,16 +102,6 @@ function reset_blinds()
              G.GAME.round_resets.cookie_increment[c] = 0
 		end
 	end
-	-- if G.GAME.round_resets.blind_states.Boss == "Defeated" then
-	-- 	G.GAME.CRY_BLINDS = {}
-	-- 	if G.P_BLINDS.bl_unik_cookie then
-	-- 		G.P_BLINDS.bl_unik_cookie.mult = 0
-    --     end
-    --     if G.P_BLINDS.bl_unik_epic_cookie then
-    --         G.P_BLINDS.bl_unik_epic_cookie.unik_exponent[2] = 1
-    --         G.P_BLINDS.bl_unik_epic_cookie.mult = 1
-    --     end
-	-- end
 	rb2()
 end
 local function BlindIncrement(penalty)
@@ -203,7 +164,9 @@ end
 function UNIK.calculate_cookie_base(type)
     local incrementer = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].increment_in_ante
     local base = get_blind_amount(G.GAME.round_resets.blind_ante)*G.GAME.starting_params.ante_scaling
-    local initial = get_blind_amount(G.GAME.round_resets.blind_ante)*G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].config.mult*G.GAME.starting_params.ante_scaling
+    local initial = get_blind_amount(G.GAME.round_resets.blind_ante)*G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].mult*G.GAME.starting_params.ante_scaling
+    print(initial)
+    print(G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].config.mult)
     G.GAME.round_resets.cookie_increment = G.GAME.round_resets.cookie_increment or {}
     G.GAME.round_resets.cookie_increment[type] = G.GAME.round_resets.cookie_increment[type] or 0
     --iterate until get to value
