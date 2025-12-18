@@ -165,8 +165,8 @@ function UNIK.calculate_cookie_base(type)
     local incrementer = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].increment_in_ante
     local base = get_blind_amount(G.GAME.round_resets.blind_ante)*G.GAME.starting_params.ante_scaling
     local initial = get_blind_amount(G.GAME.round_resets.blind_ante)*G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].mult*G.GAME.starting_params.ante_scaling
-    print(initial)
-    print(G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].config.mult)
+    --print(initial)
+    --print(G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].config.mult)
     G.GAME.round_resets.cookie_increment = G.GAME.round_resets.cookie_increment or {}
     G.GAME.round_resets.cookie_increment[type] = G.GAME.round_resets.cookie_increment[type] or 0
     --iterate until get to value
