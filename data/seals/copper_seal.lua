@@ -228,7 +228,7 @@ function SMODS.calculate_end_of_round_effects(context)
         G.GAME.suppress_rescoring = true
     
         local eval = {}
-        SMODS.calculate_context({cardarea = context.cardarea, unik_after_effect = true, end_of_round = true},eval)
+        SMODS.calculate_context({cardarea = context.cardarea, unik_after_effect = true, unik_end_of_round = true},eval)
         --Enhancements
         local enhancementRescores = {}
         for i = 1, #eval do
@@ -258,7 +258,7 @@ function SMODS.calculate_end_of_round_effects(context)
         end
             local jokerRescores = {}
         local eval2 = {}
-        SMODS.calculate_context({unik_kite_experiment = true, cardarea = context.cardarea, end_of_round = true},eval2)
+        SMODS.calculate_context({unik_kite_experiment = true, cardarea = context.cardarea, unik_end_of_round = true},eval2)
         for i = 1, #eval2 do
                             --for scenarios such as rescoring a random card and that card changes
             if eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and type(eval2[i].jokers.target_cards) == 'table' and eval2[i].jokers.target_cards[1] and eval2[i].jokers.target_cards[1].unik_scoring_segment then
@@ -347,9 +347,12 @@ function SMODS.calculate_end_of_round_effects(context)
                     })
                     
                 end
-                local pased = context
-                pased.unik_end_round_rescored_cards = rescoring_cards
-                after_round_rescore(pased)
+                if #rescoring_cards > 0 then
+                    local pased = context
+                    pased.unik_end_round_rescored_cards = rescoring_cards
+                    after_round_rescore(pased)
+                end
+                
             end
         end
             --clean table

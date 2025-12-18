@@ -163,10 +163,13 @@ local function BlindIncrement(penalty)
             G.GAME.round_resets.cookie_increment[c] = G.GAME.round_resets.cookie_increment[c] + 1
             if G.blind_select_opts then
                 local blindText = G.blind_select_opts[string.lower(c)]:get_UIE_by_ID('blind_text_'..string.lower(c))
-                blindText.config.text = UNIK.calculate_cookie_base(c)..""
+                if blindText then
+                    blindText.config.text = UNIK.calculate_cookie_base(c)..""
 
-                G.blind_select_opts[string.lower(c)]:recalculate()
-                blindText:juice_up()
+                    G.blind_select_opts[string.lower(c)]:recalculate()
+                    blindText:juice_up()
+                end
+                
                 if G.OVERLAY_MENU then
                     local blindText2 = G.OVERLAY_MENU:get_UIE_by_ID('blind_text_'..string.lower(c))
                     if blindText2 then
