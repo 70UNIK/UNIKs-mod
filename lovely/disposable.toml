@@ -40,6 +40,7 @@ unik_ranks_scored_this_ante = {},
 unik_limited_edition_rounds = 5,
 unik_hands_lost_in_round = 0,
 unik_discards_lost_in_round = 0,
+unik_light_dark_bonuses = {light = {mult = 1.5, chips = 1.5}, dark = {mult = 1.5,chips = 1.5}},
 '''
 match_indent = true
 

@@ -1,0 +1,46 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 9999999
+
+###Give light/dark spectrums X1.5 boost in chips and mult
+
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''G\.GAME\.hands\[text\]\.mult'''
+position = "at"
+payload = '''UNIK.modLightDarkSpectrum(G.GAME.hands[text].mult,text,scoring_hand,'mult')'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''G\.GAME\.hands\[text\]\.chips'''
+position = "at"
+payload = '''UNIK.modLightDarkSpectrum(G.GAME.hands[text].chips,text,scoring_hand,'chips')'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "cardarea.lua"
+pattern = '''G\.GAME\.hands\[text\]\.mult'''
+position = "at"
+payload = '''UNIK.modLightDarkSpectrum(G.GAME.hands[text].mult,text,self.highlighted,'mult')'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "cardarea.lua"
+pattern = '''G\.GAME\.hands\[text\]\.chips'''
+position = "at"
+payload = '''UNIK.modLightDarkSpectrum(G.GAME.hands[text].chips,text,self.highlighted,'chips')'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''function CardArea:parse_highlighted()'''
+position = "after"
+payload = '''local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(self.highlighted)'''
+match_indent = true

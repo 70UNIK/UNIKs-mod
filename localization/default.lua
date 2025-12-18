@@ -5397,6 +5397,10 @@ return {
             unik_overshoot_desc1 = "Off: Highly not recommended, especially with mods such as Cryptid (Can go into slop territory)",
             unik_overshoot_desc2 = "\"Lenient\": Similar to the old system, always +1 if Overshooting Score (Can be slow to notice)",
             unik_overshoot_desc3 = "Strict: Gain more Overshoot the more you score over the limit",
+
+            k_unik_light = "Light",
+            k_unik_dark = "Dark",
+            k_unik_gray = "Gray",
         },
         high_scores={},
         labels={

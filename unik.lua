@@ -583,6 +583,7 @@ end
 if next(SMODS.find_mod("SpectrumFramework")) then
 	NFS.load(mod_path .. "data/poker_hands/framework_override.lua")()
 end
+NFS.load(mod_path .. "data/poker_hands/light_dark_spectrum.lua")()
 ------------------------
 ---CONSUMABLES
 --------------------------
