@@ -8,6 +8,55 @@ SMODS.Enhancement:take_ownership("m_gold",{
 SMODS.Enhancement:take_ownership("m_stone",{
     rockbreak = true,
 }, true)
+SMODS.Enhancement:take_ownership("m_ortalab_ore",{
+    rockbreak = {colour = {91/255,122/255,128/255,1.0}},
+}, true)
+--rgb(91, 122, 128)
+SMODS.Enhancement:take_ownership("m_phanta_marblecard",{
+    rockbreak = {colour = {250/255,250/255,250/255,1.0}},
+}, true)
+SMODS.Enhancement:take_ownership("m_aij_ice",{
+    shatters = true,
+}, true)
+SMODS.Enhancement:take_ownership("m_ortalab_rusty",{
+    metalbreak = {colour = {255/255,183/255,129/255,1.0}},
+}, true)
+
+SMODS.Enhancement:take_ownership("m_akyrs_item_box",{
+    shatters = true,
+}, true)
+
+--rgb(251, 189, 50)
+SMODS.Enhancement:take_ownership("m_akyrs_hatena",{
+    metalbreak = {colour = {51/255,189/255,50/255,1.0}},
+}, true)
+
+SMODS.Enhancement:take_ownership("m_akyrs_brick_card",{
+    rockbreak = {colour = {123/255,84/255,60/255,1.0}},
+}, true)
+--rgb(123, 84, 60)
+
+--rgb(227, 130, 108)
+SMODS.Enhancement:take_ownership("m_phanta_coppergratefresh",{
+    metalbreak = {colour = {227/255,130/255,108/255,1.0}},
+}, true)
+--rgb(157, 132, 102)
+SMODS.Enhancement:take_ownership("m_phanta_coppergrateexposed",{
+    metalbreak = {colour = {157/255,132/255,102/255,1.0}},
+}, true)
+--rgb(109, 161, 113)
+SMODS.Enhancement:take_ownership("m_phanta_coppergrateweathered",{
+    metalbreak = {colour = {109/255,161/255,113/255,1.0}},
+}, true)
+--rgb(81, 164, 135)
+SMODS.Enhancement:take_ownership("m_phanta_coppergrateoxidised",{
+    metalbreak = {colour = {81/255,164/255,135/255,1.0}},
+}, true)
+--rgb(255, 209, 99)
+SMODS.Enhancement:take_ownership("m_mf_brass",{
+    metalbreak = {colour = {255/255,209/255,99/255,1.0}},
+}, true)
+
 SMODS.Joker:take_ownership("j_steel_joker",{
     metalbreak = {colour = {215/255,228/255,245/255,1.0}},
 }, true)
@@ -34,10 +83,10 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             self:woodBreak()
             return nil
         elseif G.P_CENTERS[key].metalbreak then 
-            self:metalBreak(G.P_CENTERS[key].metalbreak.colour or nil)
+            self:metalBreak(type(G.P_CENTERS[key].metalbreak) == "table" and G.P_CENTERS[key].metalbreak.colour or nil)
             return nil
         elseif G.P_CENTERS[key].rockbreak then 
-            self:rockBreak()
+            self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
             return nil
         elseif G.P_CENTERS[key].gore6break then 
             self:gore6_break()
@@ -51,7 +100,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         self:metalBreak(self.config.center.metalbreak.colour or nil)
         return nil
     elseif self.config.center.rockbreak then 
-        self:rockBreak()
+        self:rockBreak(type(self.config.center.rockbreak) == "table" and self.config.center.rockbreak.colour or nil)
         return nil
     elseif self.config.center.gore6break then 
             self:gore6_break()
@@ -83,8 +132,8 @@ function Card:metalBreak(colour)
     local sparkParts = Particles(0, 0, 0,0, {
         timer_type = 'TOTAL',
         timer = 0.007*dissolve_time,
-        scale = 0.1,
-        speed = 4,
+        scale = 0.15,
+        speed = 3,
         lifespan = 0.5*dissolve_time,
         attach = self,
         colours = self.dissolve_colours2,
@@ -182,11 +231,11 @@ function Card:woodBreak()
     }))
 end
 
-function Card:rockBreak()
+function Card:rockBreak(colour)
     local dissolve_time = 1.0
     self.shattered = true
     self.dissolve = 0
-    self.dissolve_colours = {{0.6,0.6,0.63,1.0}}
+    self.dissolve_colours = {colour or {0.6,0.6,0.63,1.0}}
     self:juice_up()
     local childParts = Particles(0, 0, 0,0, {
         timer_type = 'TOTAL',

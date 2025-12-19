@@ -143,7 +143,7 @@ function Card:gore6_break()
             self:metalBreak(G.P_CENTERS[key].metalbreak.colour or nil)
             return nil
         elseif G.P_CENTERS[key].rockbreak then 
-            self:rockBreak()
+            self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
             return nil
         end
     end
