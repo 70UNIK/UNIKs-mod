@@ -1,7 +1,7 @@
 SMODS.Joker {
-    key = 'unik_flowerbeds',
-    atlas = 'placeholders',
-	pos = { x = 0, y = 0 },
+    key = 'unik_shibazakura',
+    atlas = 'unik_uncommon',
+	pos = { x = 0, y = 4 },
     config = {
         extra = {
         xMult = 1.075,

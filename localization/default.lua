@@ -3073,8 +3073,8 @@ return {
 
 
             --paperback
-            j_unik_greenfield = {
-                name = "Greenfield Land",
+            j_unik_lush_forest = {
+                name = "Lush Forest",
                 text = {
                     "{C:unik_noughts}#1#{} give {X:mult,C:white}X#2#{} Mult when scored",
                     "Increases by {X:mult,C:white}X#3#{} Mult for each",
@@ -3082,8 +3082,8 @@ return {
                     "{C:inactive}(Resets after each hand played)",
                 },
             },
-            j_unik_flower_beds = {
-                name = "Flower Beds",
+            j_unik_shibazakura = {
+                name = "Shibazakura",
                 text = {
                     "{C:unik_crosses}#1#{} give {X:mult,C:white}X#2#{} Mult when scored",
                     "Increases by {X:mult,C:white}X#3#{} Mult for each",
