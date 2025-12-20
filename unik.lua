@@ -962,12 +962,19 @@ NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")()
 ---CROSSMOD (non cursed) JONKLERS
 ---------------
 if next(SMODS.find_mod("Bunco")) then
-	-- NFS.load(mod_path .. "data/jokers/bunco/neon_rainbows.lua")()
-	-- NFS.load(mod_path .. "data/jokers/bunco/king_minos.lua")()
+	NFS.load(mod_path .. "data/jokers/bunco/neon_rainbows.lua")()
+	NFS.load(mod_path .. "data/jokers/bunco/king_minos.lua")()
 end
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/nem_nuong.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/meaty_stick.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/bo_la_lot.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/charred_stick.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/flowerbeds.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/greenfield.lua")() 
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
+	
 end
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
@@ -1151,7 +1158,7 @@ if unik_config.unik_overshoot_enabled then
 	NFS.load(mod_path .. "data/ui/overshoot.lua")()
 	NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
 end
-
+NFS.load(mod_path .. "data/ui/banished_items.lua")()
 NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 if AKYRS then
 	NFS.load(mod_path .. "data/ui/aiko_icons.lua")()

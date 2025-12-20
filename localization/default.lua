@@ -2773,7 +2773,7 @@ return {
                  text = {
                     "When {C:attention}Boss Blind{} is selected",
                     "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size", -- ^1.1 Blind Size
-                    "and {C:red}#2#{} Hand Size",
+                    "and create a {C:red}Handcuffs Tag",
                     "After defeat, create a {C:dark_edition}negative",
                     "{C:bunco_virtual_dark}The 8{} and {C:red,E:2}Self Destruct",
                 },
@@ -3073,10 +3073,10 @@ return {
 
 
             --paperback
-            j_unik_great_lake = {
-                name = "Great Lake",
+            j_unik_greenfield = {
+                name = "Greenfield Land",
                 text = {
-                    "{C:unik_noughts}#1#{} give {X:mult,C:white}X#2#{} Mult when scored.",
+                    "{C:unik_noughts}#1#{} give {X:mult,C:white}X#2#{} Mult when scored",
                     "Increases by {X:mult,C:white}X#3#{} Mult for each",
                     "consecutively scored {C:unik_noughts}#4#{}",
                     "{C:inactive}(Resets after each hand played)",
@@ -3085,16 +3085,32 @@ return {
             j_unik_flower_beds = {
                 name = "Flower Beds",
                 text = {
-                    "{C:unik_crosses}#1#{} give {X:mult,C:white}X#2#{} Mult when scored.",
+                    "{C:unik_crosses}#1#{} give {X:mult,C:white}X#2#{} Mult when scored",
                     "Increases by {X:mult,C:white}X#3#{} Mult for each",
                     "consecutively scored {C:unik_crosses}#4#{}",
                     "{C:inactive}(Resets after each hand played)",
                 },
             },
-            j_unik_kebab = {
-                name = "Kebab",
+            j_unik_nem_nuong = {
+                name = "Nem Nuong",
                 text = {
                     "Scored {C:unik_crosses}Crosses{} give {C:mult}+#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance this card is",
+                    "{C:red}destroyed{} at end of round",
+                }
+            },
+            j_unik_meaty_stick={
+                name = "Meaty Stick",
+                text = {
+                    "Gives {X:mult,C:white}X#1#{} Mult for every",
+                    "{C:attention}\"Stick\"{} Joker you have",
+                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                }
+            },
+            j_unik_bo_la_lot={
+                name = "Bo La Lot",
+                text = {
+                    "Scored {C:unik_noughts}Noughts{} give {C:mult}+#1#{} Mult",
                     "{C:green}#2# in #3#{} chance this card is",
                     "{C:red}destroyed{} at end of round",
                 }
@@ -3102,24 +3118,8 @@ return {
             j_unik_charred_stick={
                 name = "Charred Stick",
                 text = {
-                    "{X:mult,C:white}X#1#{} Mult if you have",
-                    "another {C:attention}\"Stick\"{} Joker",
-                    "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-                }
-            },
-            j_unik_icy_pole={
-                name = "Icy Pole",
-                text = {
-                    "Scored {C:unik_noughts}Noughts{} give {C:mult}+#1#{} Mult",
-                    "{C:green}#2# in #3#{} chance this card is",
-                    "{C:red}destroyed{} at end of round",
-                }
-            },
-            j_unik_refreshing_stick={
-                name = "Refreshing Stick",
-                text = {
-                    "{X:mult,C:white}X#1#{} Mult if you have",
-                    "another {C:attention}\"Stick\"{} Joker",
+                    "Gives {X:mult,C:white}X#1#{} Mult for every",
+                    "{C:attention}\"Stick\"{} Joker you have",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                 }
             },
@@ -5401,6 +5401,7 @@ return {
             k_unik_light = "Light",
             k_unik_dark = "Dark",
             k_unik_gray = "Gray",
+            b_unik_banished_items = "Banished Items",
         },
         high_scores={},
         labels={
