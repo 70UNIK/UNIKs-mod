@@ -21,20 +21,23 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if (context.individual and context.cardarea == G.play) or context.forcetrigger then
             if (card.ability.unik_depleted and card.ability.extra.x_mult - card.ability.extra.x_mult_mod < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.x_mult - card.ability.extra.x_mult_mod <= 1) then
-                if (not card.ability.extra.destroyed) then
+                if (not card.ability.extra.destroyed) and not context.blueprint and not context.retrigger_joker then
                     card.ability.extra.destroyed = true
                     selfDestruction(card,'k_eaten_ex',G.C.MULT)
                 end
             else
-                SMODS.scale_card(card, {
-                    ref_table = card.ability.extra,
-                    ref_value = "x_mult",
-                    scalar_value = "x_mult_mod",
-                    operation = "-",
-                    message_key = 'a_xmult_minus',
-                    message_colour = G.C.RED,
-                    delay = 0.2,
-                })
+                if not context.blueprint then
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "x_mult",
+                        scalar_value = "x_mult_mod",
+                        operation = "-",
+                        message_key = 'a_xmult_minus',
+                        message_colour = G.C.RED,
+                        delay = 0.2,
+                    })
+                end
+                
                 return {
                     x_mult = card.ability.extra.x_mult,
                     card = card

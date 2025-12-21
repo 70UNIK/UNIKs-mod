@@ -17,26 +17,14 @@ SMODS.Joker {
             colours = {G.C.SUITS[G.GAME.unik_saved_suits_railroad[1] .. ""],G.C.SUITS[G.GAME.unik_saved_suits_railroad[2] .. ""]}}
         }
 	end,
-    update = function(self,card,dt)
-        if card.added_to_deck then
-            if G.playing_cards then
-                for k, v in pairs(G.playing_cards) do
-                    if (v.base.suit ~= 'unik_Crosses' and not v:is_suit(G.GAME.unik_saved_suits_railroad[1], true, true) and not v:is_suit(G.GAME.unik_saved_suits_railroad[2], true, true)) or SMODS.has_no_suit(v) or (v.config.center.unik_specific_suit and v.config.center.unik_specific_suit ~= 'unik_Crosses')  then
-                        v:set_debuff(true)
-                    else
-                        v:set_debuff()
-                    end
-                end
-            end
+    add_to_deck = function(self, card, from_debuff)
+        for k, v in ipairs(G.playing_cards) do
+            G.GAME.blind:debuff_card(v)
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
-        if G.playing_cards then
-            for k, v in pairs(G.playing_cards) do
-                if (v.base.suit ~= 'unik_Crosses' and not v:is_suit(G.GAME.unik_saved_suits_railroad[1], true, true) and not v:is_suit(G.GAME.unik_saved_suits_railroad[2], true, true)) or SMODS.has_no_suit(v) or (v.config.center.unik_specific_suit and v.config.center.unik_specific_suit ~= 'unik_Crosses') then
-                    v:set_debuff()
-                end
-            end
+        for k, v in ipairs(G.playing_cards) do
+            G.GAME.blind:debuff_card(v)
         end
     end,
     calculate = function(self, card, context)
@@ -56,11 +44,41 @@ SMODS.Joker {
                 }
             end   
         end
+        if not context.blueprint and context.after and context.cardarea == G.jokers and not context.retrigger_joker then
+            G.E_MANAGER:add_event(Event {
+                func = function()
+                -- Update the debuff of all playing cards when swapping suits
+                for k, v in ipairs(G.playing_cards) do
+                    G.GAME.blind:debuff_card(v)
+                end
+
+                return true
+                end
+            })
+        end
     end,
     in_pool = function(self)
 		return UNIK.suit_in_deck('unik_Crosses') 
 	end,
 }
+
+-- We hook into the vanilla function used to update the debuffed status of cards
+local debuff_card_ref = Blind.debuff_card
+function Blind.debuff_card(self, card, from_blind)
+    local ret = debuff_card_ref(self, card, from_blind)
+    if card.area ~= G.jokers then
+        for k, v in ipairs(SMODS.find_card('j_unik_railroad_crossing')) do
+            if card.playing_card and 
+            ((card.base.suit ~= 'unik_Crosses' and not card:is_suit(G.GAME.unik_saved_suits_railroad[1], true, true) and not card:is_suit(G.GAME.unik_saved_suits_railroad[2], true, true)) or SMODS.has_no_suit(card) or (card.config.center.unik_specific_suit and card.config.center.unik_specific_suit ~= 'unik_Crosses'))
+            then
+                card:set_debuff(true)
+                if card.debuff then card.debuffed_by_blind = true end
+            end
+        end
+    end
+
+    return ret
+end
 
 function UNIK.railroad_suits()
 

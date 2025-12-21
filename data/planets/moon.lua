@@ -1,0 +1,1 @@
+--+X0.05 to both light and dark spectrums

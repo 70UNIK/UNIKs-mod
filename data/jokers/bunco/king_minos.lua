@@ -10,26 +10,17 @@ SMODS.Joker {
 	demicoloncompat = true,
     discovered = true,
     unlocked = true,
-    config = { extra = { exponent = 1.1,handsize = -2,applied_handsize = false } },
+    config = { extra = { exponent = 1.1,handsize = -1} },
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_bunc_the_8" }
+		info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_manacle
 		if not center.edition or (center.edition and not center.edition.negative) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
 		end
-		return { vars = { center.ability.extra.exponent,center.ability.extra.handsize} }
+		return { vars = { center.ability.extra.exponent} }
 	end,
     set_badges = function (self, card, badges)
       SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
-    end,
-    remove_from_deck = function(self, card, from_debuff)
-        if card.ability.extra.applied_handsize then
-             G.hand:change_size(-card.ability.extra.handsize)
-        end
-    end,
-    add_to_deck = function(self, card, from_debuff)
-        if card.ability.extra.applied_handsize then
-            G.hand:change_size(card.ability.extra.handsize)
-        end
     end,
 	pronouns = "he_him",
     calculate = function(self, card, context)
@@ -37,10 +28,9 @@ SMODS.Joker {
 			local eval = function(card)
 				return not card.REMOVED and not G.RESET_JIGGLES
 			end
-            if not card.ability.extra.applied_handsize then
-                card.ability.extra.applied_handsize = true
-                G.hand:change_size(card.ability.extra.handsize)
-            end
+			local emp = Tag("tag_unik_manacle")
+				
+			add_tag(emp)
 			juice_card_until(card, eval, true)
 			card.gone = false
 			G.GAME.blind.chips = G.GAME.blind.chips ^ card.ability.extra.exponent
@@ -66,7 +56,7 @@ SMODS.Joker {
 			and not context.repetition
             and not context.retrigger_joker
 			and not context.blueprint
-			and G.GAME.blind.boss)
+			and (G.GAME.blind.boss)) --backup in case something like crimson heart disables it
 			or context.force_trigger)
 			and not card.gone
 		then

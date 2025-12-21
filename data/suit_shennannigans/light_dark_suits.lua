@@ -1,19 +1,23 @@
 if PB_UTIL and PB_UTIL.config.suits_enabled then
-  table.insert(UNIK.light_suits, 'paperback_Stars')
-  table.insert(UNIK.dark_suits, 'paperback_Crowns')
+	table.insert(UNIK.light_suits, 'paperback_Stars')
+	table.insert(UNIK.dark_suits, 'paperback_Crowns')
+end
+
+if next(SMODS.find_mod('MintysSillyMod')) then
+	table.insert(UNIK.light_suits, 'minty_3s')
 end
 
 if PB_UTIL then
-  table.insert(PB_UTIL.light_suits, 'unik_Noughts')
-  table.insert(PB_UTIL.dark_suits, 'unik_Crosses')
+	table.insert(PB_UTIL.light_suits, 'unik_Noughts')
+	table.insert(PB_UTIL.dark_suits, 'unik_Crosses')
 end
 
 -- Load modded suits
 if next(SMODS.find_mod('Bunco')) then
-  local prefix = SMODS.find_mod('Bunco')[1].prefix or "bunc"
+	local prefix = SMODS.find_mod('Bunco')[1].prefix or "bunc"
 
-  table.insert(UNIK.light_suits, prefix .. '_Fleurons')
-  table.insert(UNIK.dark_suits, prefix .. '_Halberds')
+	table.insert(UNIK.light_suits, prefix .. '_Fleurons')
+	table.insert(UNIK.dark_suits, prefix .. '_Halberds')
 end
 
 --stolen from paperback

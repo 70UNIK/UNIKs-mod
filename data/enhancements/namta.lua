@@ -10,7 +10,7 @@ SMODS.Enhancement {
     config = { extra = { x_mult = 0.1, x_chips = 0.1,blind_size = 1.15} },
     weight = 0,
     immutable = true,
-    shatters = true,
+    gore6break = true,
     loc_vars = function(self, info_queue, card)
         return {
             vars = { card.ability.extra.x_mult, card.ability.extra.x_chips,card.ability.extra.blind_size}

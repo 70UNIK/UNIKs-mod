@@ -6,7 +6,7 @@ SMODS.Joker {
     rarity = 2,
 	pos = { x = 2, y = 3 },
     cost = 5,
-	blueprint_compat = true,
+	blueprint_compat = false, --nope!
     perishable_compat = true,
 	eternal_compat = true,
     in_pool = function(self)
@@ -31,6 +31,7 @@ SMODS.Joker {
              for i,v in pairs(G.jokers.cards) do
                 if v.ability and v.ability.perishable then
                     v.ability.perishable = nil
+                    v.debuff = false
                     card.ability.extra.jokers = card.ability.extra.jokers - 1
                     if (card.ability.extra.jokers <= 0) then
                         selfDestruction(card,'k_eaten_ex',G.C.PERISHABLE)

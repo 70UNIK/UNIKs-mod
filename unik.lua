@@ -64,6 +64,22 @@ SMODS.current_mod.config_tab = function() --Config tab
 				localize("unik_cryptid_nerfs_desc1"),
 			},
 		}),
+		create_toggle({
+			label = localize("unik_enable_overshoot_option"),
+			ref_table = unik_config,
+			ref_value = "unik_overshoot_enabled",
+			info = {
+				localize("unik_overshoot_enable_desc"),
+			},
+		}),
+		create_toggle({
+			label = localize("unik_custom_menu_option"),
+			ref_table = unik_config,
+			ref_value = "unik_custom_menu",
+			info = {
+				localize("unik_menu_desc"),
+			},
+		}),
 		-- create_option_cycle({
 		-- 	label = localize("unik_overshoot_config"),
 		-- 	scale = 0.8,
@@ -204,7 +220,14 @@ SMODS.Sound({
 	key = "woodBreak",
 	path = "woodBreak.ogg",
 })
-
+SMODS.Sound({
+	key = "metalbreak",
+	path = "metalbreak.ogg",
+})
+SMODS.Sound({
+	key = "rock_break",
+	path = "rock_break.ogg",
+})
 
 
 SMODS.Atlas {
@@ -560,6 +583,7 @@ end
 if next(SMODS.find_mod("SpectrumFramework")) then
 	NFS.load(mod_path .. "data/poker_hands/framework_override.lua")()
 end
+NFS.load(mod_path .. "data/poker_hands/light_dark_spectrum.lua")()
 ------------------------
 ---CONSUMABLES
 --------------------------
@@ -597,6 +621,7 @@ NFS.load(mod_path .. "data/spectrals/prism.lua")()
 NFS.load(mod_path .. "data/spectrals/bloater.lua")() 
 NFS.load(mod_path .. "data/spectrals/turing.lua")() 
 NFS.load(mod_path .. "data/spectrals/defend.lua")() 
+--NFS.load(mod_path .. "data/spectrals/forever.lua")() 
 NFS.load(mod_path .. "data/spectrals/purify.lua")() 
 NFS.load(mod_path .. "data/spectrals/expel.lua")() 
 NFS.load(mod_path .. "data/spectrals/ring.lua")() 
@@ -609,9 +634,11 @@ NFS.load(mod_path .. "data/summits/celeste.lua")()
 NFS.load(mod_path .. "data/spectrals/unik_gateway.lua")() --rework: destroy 2 leftmost non eternals, create an ancient.
 
 --PLANETS
+--NFS.load(mod_path .. "data/overrides/eternal_playing_card.lua")()
 
 --SUMMITS--
 NFS.load(mod_path .. "data/summits/bonus_exponentials.lua")() 
+NFS.load(mod_path .. "data/summits/bonus_indicator.lua")() 
 NFS.load(mod_path .. "data/summits/elbert.lua")() 
 NFS.load(mod_path .. "data/summits/kosciuszko.lua")() 
 NFS.load(mod_path .. "data/summits/narodnaya.lua")() 
@@ -647,6 +674,10 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/lartceps/hellspawn.lua")() 
 	NFS.load(mod_path .. "data/lartceps/escalation.lua")() 
 	NFS.load(mod_path .. "data/lartceps/sauron.lua")() 
+	NFS.load(mod_path .. "data/lartceps/doom.lua")() 
+	if next(SMODS.find_mod("Bunco")) then
+		NFS.load(mod_path .. "data/lartceps/parasite.lua")()
+	end
 	NFS.load(mod_path .. "data/lartceps/blank_lartceps.lua")() 
 end
 
@@ -936,7 +967,14 @@ if next(SMODS.find_mod("Bunco")) then
 end
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/nem_nuong.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/meaty_stick.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/bo_la_lot.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/charred_stick.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/flowerbeds.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/greenfield.lua")() 
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
+	
 end
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/scratch.lua")()
@@ -1112,15 +1150,23 @@ NFS.load(mod_path .. "data/overrides/mr_bones_ui.lua")()
 NFS.load(mod_path .. "data/overrides/matador.lua")()	
 NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()	
 
+NFS.load(mod_path .. "data/overrides/enhancement_destroy_fx.lua")()	
+
 
 --UI
-NFS.load(mod_path .. "data/ui/overshoot.lua")()
-NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
+if unik_config.unik_overshoot_enabled then
+	NFS.load(mod_path .. "data/ui/overshoot.lua")()
+	NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
+end
+NFS.load(mod_path .. "data/ui/banished_items.lua")()
 NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 if AKYRS then
 	NFS.load(mod_path .. "data/ui/aiko_icons.lua")()
 end
-NFS.load(mod_path .. "data/menu.lua")()
+if unik_config.unik_custom_menu then
+	NFS.load(mod_path .. "data/menu.lua")()
+end
+
 
 
 ---

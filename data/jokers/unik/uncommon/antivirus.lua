@@ -24,6 +24,15 @@ SMODS.Joker {
                         delay = 0.1,
                         func = function()
                             context.unik_enhanced_card.ability.unik_shielded = true
+                            
+                            return true
+                        end,
+                    }))
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            for k, v in ipairs(G.playing_cards) do
+                                G.GAME.blind:debuff_card(v)
+                            end
                             return true
                         end,
                     }))

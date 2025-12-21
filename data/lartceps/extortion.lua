@@ -5,7 +5,7 @@ SMODS.Consumable{
     cost = 0,
 	pos = {x = 6, y = 0},
 	key = 'unik_extortion',
-    config = {extra = {money = 6666}},
+    config = {extra = {money = 666}},
     no_doe = true,
     no_grc = true,
 	no_ccd = true,

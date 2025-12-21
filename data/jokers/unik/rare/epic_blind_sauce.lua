@@ -4,10 +4,20 @@ function ForceEpicBlind()
     G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus or 0
     G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus + 1
     if G.GAME.round_resets.blind_states.Small == "Upcoming" then
+        if G.GAME.round_resets.cookie_increment and G.GAME.round_resets.cookie_increment.Small then
+            G.GAME.round_resets.cookie_increment.Small = nil
+        end
         G.GAME.round_resets.blind_choices.Small = get_new_boss()
+        
     elseif G.GAME.round_resets.blind_states.Big == "Upcoming" then
+        if G.GAME.round_resets.cookie_increment and G.GAME.round_resets.cookie_increment.Big then
+            G.GAME.round_resets.cookie_increment.Big = nil
+        end
         G.GAME.round_resets.blind_choices.Big = get_new_boss()
     elseif G.GAME.round_resets.blind_states.Boss == "Upcoming" then 
+        if G.GAME.round_resets.cookie_increment and G.GAME.round_resets.cookie_increment.Boss then
+            G.GAME.round_resets.cookie_increment.Boss = nil
+        end
         G.GAME.round_resets.blind_choices.Boss = get_new_boss()
     else
         
