@@ -5098,7 +5098,7 @@ return {
             k_unik_debt="Not Enough Money!",
             k_unik_poppy_placeholder="(2.5x requirements)",
             k_unik_nuke_placeholder="(3x requirements)",
-            k_unik_legendary_nuke_placeholder="(^1.666 requirements)",
+            k_unik_legendary_nuke_placeholder="(^1.4 requirements)",
             k_unik_vice_placeholder ="(halved Final Boss spawn ante requirements)",
             k_unik_vice_placeholder2 ="(2x requirements)",
             k_unik_batman_placeholder="(80% of)",
@@ -5529,7 +5529,7 @@ return {
             },
             special_lose_unik_nuke_legendary={
                 "Maybe don't score above",
-                "^1.666 requirements...",
+                "^1.4 requirements...",
             },
             special_lose_unik_tornado_legendary={
                 "Maybe not having too",

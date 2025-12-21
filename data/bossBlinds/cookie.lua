@@ -27,6 +27,7 @@ SMODS.Blind{
         G.GAME.blind:wiggle()
         play_sound('chips2')
         G.ROOM.jiggle = G.ROOM.jiggle + 0.5
+        
     end,
 }
 
@@ -118,6 +119,7 @@ local function BlindIncrement()
             and G.GAME.round_resets.blind_states[c] ~= "Defeated"
             and G.GAME.round_resets.blind_states[c] ~= 'Hide'
             and G.GAME.round_resets.blind_states[c] ~= 'Current'
+            
 		then
             G.GAME.round_resets.cookie_increment = G.GAME.round_resets.cookie_increment or {}
             G.GAME.round_resets.cookie_increment[c] = G.GAME.round_resets.cookie_increment[c] or 0
@@ -155,6 +157,7 @@ local function BlindIncrement()
 			and G.GAME.round_resets.blind_choices[c] and 
             G.GAME.round_resets.cookie_increment and 
             G.GAME.round_resets.cookie_increment[c]
+            and G.GAME.round_resets.blind_states[c] ~= 'Current'
             then
             G.GAME.round_resets.cookie_increment[c] = nil
         end

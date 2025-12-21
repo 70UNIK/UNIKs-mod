@@ -28,7 +28,7 @@ SMODS.Blind{
     death_message = "special_lose_unik_nuke_legendary",
     
     loc_vars = function(self, info_queue, card)
-		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling)^0.8)^1.666 } } -- no bignum?
+		return { vars = { ((get_blind_amount(G.GAME.round_resets.ante) * G.GAME.starting_params.ante_scaling)^0.8)^1.4 } } -- no bignum?
 	end,
 	collection_loc_vars = function(self)
 		return { vars = { localize("k_unik_legendary_nuke_placeholder") } }
@@ -50,7 +50,7 @@ SMODS.Blind{
         })
 	end,
     unik_after_defeat = function(self,chips,blind_size)
-        if to_big(chips) > to_big(blind_size^1.666) then
+        if to_big(chips) > to_big(blind_size^1.4) then
             return true
         end
         return false
