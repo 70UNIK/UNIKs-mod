@@ -64,7 +64,7 @@ SMODS.Joker {
 
 -- We hook into the vanilla function used to update the debuffed status of cards
 local debuff_card_ref = Blind.debuff_card
-function Blind.debuff_card(self, card, from_blind)
+function Blind:debuff_card(card, from_blind)
     local ret = debuff_card_ref(self, card, from_blind)
     if card.area ~= G.jokers then
         for k, v in ipairs(SMODS.find_card('j_unik_railroad_crossing')) do

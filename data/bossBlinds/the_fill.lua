@@ -18,7 +18,7 @@ SMODS.Blind{
         return false
 	end,
     recalc_debuff = function(self, card, from_blind)
-        if (card.area ~= G.jokers) and not G.GAME.blind.disabled and card:is_suit('unik_Noughts') then
+        if card:is_suit('unik_Noughts',true) then
             return true
         end
         return false
