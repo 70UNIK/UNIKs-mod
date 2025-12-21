@@ -962,8 +962,8 @@ NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")()
 ---CROSSMOD (non cursed) JONKLERS
 ---------------
 if next(SMODS.find_mod("Bunco")) then
-	NFS.load(mod_path .. "data/jokers/bunco/neon_rainbows.lua")()
-	NFS.load(mod_path .. "data/jokers/bunco/king_minos.lua")()
+	-- NFS.load(mod_path .. "data/jokers/bunco/neon_rainbows.lua")()
+	-- NFS.load(mod_path .. "data/jokers/bunco/king_minos.lua")()
 end
 if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/binary_asteroid.lua")()
