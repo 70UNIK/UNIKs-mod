@@ -10,9 +10,9 @@ pattern = '''(.*)tab_definition_function(.*)=(.*)G.UIDEF.used_vouchers,(.*)
 (.*)},(.*)'''
 position = "after"
 payload = '''
-G.GAME.cry_banished_keys and type(G.GAME.cry_banished_keys) == 'table' and #G.GAME.cry_banished_keys > 1 and {
-    label = localize('b_unik_banished_items'),
-    tab_definition_function = G.UIDEF.unik_banished_items,
-} or nil,
+--G.GAME.cry_banished_keys and type(G.GAME.cry_banished_keys) == 'table' and #G.GAME.cry_banished_keys > 1 and {
+--    label = localize('b_unik_banished_items'),
+--    tab_definition_function = G.UIDEF.unik_banished_items,
+--} or nil,
 '''
 match_indent = true
