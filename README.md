@@ -46,7 +46,7 @@ This mod also contains many crossmod content such as for:
 - MoreFluff
 - Finity
 - Blind Editions
-- Cryptid, which includes balancing changes for some Cryptid Jokers, such as the infamous Canvas (Now legendary and nerfed) and Oil Lamp (Immutable and increases values by X1.2 onces). They are a carryover from the Balanced Branch and is considered legacy content (as I am no longer in the business of maintaining it as much) so they may be unbalanced or buggy.
+- Cryptid (Unsupported)
 
 ![alt text](image.png)
 ------

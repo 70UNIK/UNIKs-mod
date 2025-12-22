@@ -3,7 +3,7 @@ SMODS.Enhancement {
 	pos = {x = 1, y = 0},
 	key = 'unik_dollar',
     config = { extra = { money = 2} },
-    weight = 0,
+    weight = 1,
     loc_vars = function(self, info_queue, card)
         return {
             vars = { card.ability.extra.money}

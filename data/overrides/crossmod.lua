@@ -179,13 +179,12 @@ SMODS.Joker:take_ownership("j_bunc_crop_circles",{
 
             if (suit_mult + rank_mult) > 0 then
                 if not context.blueprint and BUNCOMOD.funcs.exotic_in_pool() then
-                    event({
-                        blocking = false,
-                        func = function()
-                            card.children.center:set_sprite_pos(coordinate_from_atlas_index(73))
+					G.E_MANAGER:add_event(Event({
+						func = function()
+                            card.children.center:set_sprite_pos({x = 2, y = 7})
                             return true
                         end
-                    })
+					}))
                 end
                 return {
                     mult = suit_mult + rank_mult
@@ -219,6 +218,90 @@ SMODS.Joker:take_ownership("j_bunc_trigger_finger",{
     end
 }, true)
 
+--jesterman: now each card has an edition and a seal
+
+SMODS.Joker:take_ownership("j_bunc_jmjb",{
+	calculate = function(self, card, context)
+        if context.open_booster and context.card.ability.name then
+            if (context.open_booster and context.card.ability.name == 'Standard Pack' or
+            context.open_booster and context.card.ability.name == 'Jumbo Standard Pack' or
+            context.open_booster and context.card.ability.name == 'Mega Standard Pack') then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+                    delay = 0,
+						func = function()
+                        if G.pack_cards and G.pack_cards.cards and G.pack_cards.cards[1] and G.pack_cards.VT.y < G.ROOM.T.h then
+
+                            for _, v in ipairs(G.pack_cards.cards) do
+                                if v.config.center == G.P_CENTERS.c_base then
+									local new_enhancement = SMODS.poll_enhancement({guaranteed = true})
+                                    v:set_ability(G.P_CENTERS[new_enhancement])
+                                end
+								if not v.edition then
+									local edition = poll_edition('standard_edition'..G.GAME.round_resets.ante, 2, true,true)
+									v:set_edition(edition)
+								end
+								if not v.seal then
+									v:set_seal(
+										SMODS.poll_seal({ guaranteed = true, type_key = "standard" })
+									)
+								end
+                            end
+
+                            return true
+                        end
+                    end
+					}))
+            end
+        end
+    end
+}, true)
+
+--actually making astral bottle good
+SMODS.Joker:take_ownership("j_cry_astral_bottle",{
+	loc_vars = function(self, info_queue, center)
+		if not center.edition or (center.edition and not center.edition.cry_astral) then
+			info_queue[#info_queue + 1] = G.P_CENTERS.e_cry_astral
+		end
+		return{
+			key = "j_cry_astral_in_a_bottle_but_not_cursed",vars = {}
+		}
+	end,
+	calculate = function(self, card, context)
+		if (context.selling_self and not context.retrigger_joker and not context.blueprint) or context.forcetrigger then
+			local jokers = {}
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] ~= card and not G.jokers.cards[i].debuff and not G.jokers.cards[i].edition then
+					jokers[#jokers + 1] = G.jokers.cards[i]
+				end
+			end
+			if #jokers >= 1 then
+				local chosen_joker = pseudorandom_element(jokers, pseudoseed("astral_bottle"))
+				chosen_joker:set_edition({ cry_astral = true })
+				chosen_joker.ability.unik_limited_edition = true;
+				chosen_joker.ability.limited_edition_tally = G.GAME.unik_limited_edition_rounds
+				return nil, true
+			else
+				card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("k_no_other_jokers") })
+			end
+		end
+	end,
+}, true)
+
+--fuck the filler
+SMODS.Joker:take_ownership("j_cry_filler",{
+    gameset_config = {
+		modest = { disabled = true },
+		mainline = { disabled = true },
+		madness = { disabled = true },
+		experimental = { disabled = true },
+	},
+}, true)
+
+--garden of forking paths must be uncommon, its pretty bad for a rare.
+SMODS.Joker:take_ownership("j_cry_gardenfork",{
+	rarity = 2,
+}, true)
 
 
 if next(SMODS.find_mod("Bunco")) then

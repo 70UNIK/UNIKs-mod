@@ -3125,7 +3125,19 @@ return {
             },
 
 
-
+            j_bunc_jmjb = {
+                name = 'Joker Man & Jester Boy Trading Card No. 54',
+                text = {
+                    'All cards in {C:attention}Standard Packs{}',
+                    'have an {C:attention}Enhancement{}',
+                    '{C:attention}Seal{} and {C:dark_edition}Edition'
+                },
+                unlock = {
+                    'Open {E:1,C:attention}#1#',
+                    'Booster Packs',
+                    '{C:inactive}(#2#)'
+                }
+            },
 
 
             --Cult card crossmod
@@ -4244,16 +4256,16 @@ return {
                     "unmodified playing card#<s>2#",
                 }
             },
-            c_cry_pointer_no_dupe = {
-				name = "POINTER://",
-				text = {
-					"Create a card",
-					"of {C:cry_code}your choice",
-					"{C:inactive,s:0.8}(Exotic Jokers excluded)",
-                    "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
-                    "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
-				},
-			},
+            -- c_cry_pointer_no_dupe = {
+			-- 	name = "POINTER://",
+			-- 	text = {
+			-- 		"Create a card",
+			-- 		"of {C:cry_code}your choice",
+			-- 		"{C:inactive,s:0.8}(Exotic Jokers excluded)",
+            --         "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
+            --         "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
+			-- 	},
+			-- },
             c_unik_prism = {
                 name = "Prism",
                 text = {
@@ -5402,6 +5414,8 @@ return {
             k_unik_dark = "Dark",
             k_unik_gray = "Gray",
             b_unik_banished_items = "Banished Items",
+            ph_no_banished = "No Banished Items this run",
+            k_unik_banish_desc = "These Items will not appear again this run"
         },
         high_scores={},
         labels={
@@ -5749,27 +5763,6 @@ return {
 			a_tag = { "+#1# Tag" },
 			a_tags = { "+#1# Tags" },
             poppy_hand = { "Score reduced by X#1# if exceeding #2#" },
-        },
-        very_fair_quips = {
-            { "FUCK YOU", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "", "", "" },
-            { "70", "", "" },
         },
         v_text={			
             ch_c_unik_mult_set_to_one = { "{C:mult}Mult{} is added to {C:chips}Chips{} and {C:attention}set{} to {C:red}<=1{}" },
