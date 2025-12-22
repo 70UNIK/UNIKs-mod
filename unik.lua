@@ -44,7 +44,7 @@ SMODS.current_mod.config_tab = function() --Config tab
 		colour = G.C.CLEAR,
 	},
 	nodes = {
-		not (SMODS.Mods["Cryptid"] or {}).can_load and create_toggle({
+		create_toggle({
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
@@ -52,15 +52,15 @@ SMODS.current_mod.config_tab = function() --Config tab
 				localize("unik_legendary_blinds_desc1"),
 				localize("unik_legendary_blinds_desc2")
 			},
-		}) or nil,
-		not (SMODS.Mods["Cryptid"] or {}).can_load and create_toggle({
+		}),
+		create_toggle({
 			label = localize("unik_enable_overshoot_option"),
 			ref_table = unik_config,
 			ref_value = "unik_overshoot_enabled",
 			info = {
 				localize("unik_overshoot_enable_desc"),
 			},
-		}) or nil,
+		}),
 		create_toggle({
 			label = localize("unik_custom_menu_option"),
 			ref_table = unik_config,
@@ -86,9 +86,9 @@ SMODS.current_mod.config_tab = function() --Config tab
 	}
 end
 if (SMODS.Mods["Cryptid"] or {}).can_load then
-	print("So, you chose slop... Well be prepared to be treated as slop in return...")
-	unik_config.unik_overshoot_enabled = true
-	unik_config.unik_legendary_blinds = true
+	--print("So, you chose slop... Well be prepared to be treated as slop in return...")
+	--unik_config.unik_overshoot_enabled = true
+	--unik_config.unik_legendary_blinds = true
 end
 -- print("OVERSHOOT LEVEL:")
 -- print(unik_config.unik_overshoot_level)
