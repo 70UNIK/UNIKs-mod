@@ -5,7 +5,7 @@ SMODS.Enhancement {
 	pos = {x = 1, y = 1},
 	key = 'unik_bill',
     config = { extra = { money = 1, money_mod = 1} },
-    weight = 0,
+    weight = 1,
     loc_vars = function(self, info_queue, card)
         return {
             vars = { card.ability.extra.money,card.ability.extra.money_mod}

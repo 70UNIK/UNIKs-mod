@@ -179,13 +179,12 @@ SMODS.Joker:take_ownership("j_bunc_crop_circles",{
 
             if (suit_mult + rank_mult) > 0 then
                 if not context.blueprint and BUNCOMOD.funcs.exotic_in_pool() then
-                    event({
-                        blocking = false,
-                        func = function()
-                            card.children.center:set_sprite_pos(coordinate_from_atlas_index(73))
+					G.E_MANAGER:add_event(Event({
+						func = function()
+                            card.children.center:set_sprite_pos({x = 2, y = 7})
                             return true
                         end
-                    })
+					}))
                 end
                 return {
                     mult = suit_mult + rank_mult
@@ -219,6 +218,44 @@ SMODS.Joker:take_ownership("j_bunc_trigger_finger",{
     end
 }, true)
 
+--jesterman: now each card has an edition and a seal
+
+SMODS.Joker:take_ownership("j_bunc_jmjb",{
+	calculate = function(self, card, context)
+        if context.open_booster and context.card.ability.name then
+            if (context.open_booster and context.card.ability.name == 'Standard Pack' or
+            context.open_booster and context.card.ability.name == 'Jumbo Standard Pack' or
+            context.open_booster and context.card.ability.name == 'Mega Standard Pack') then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+                    delay = 0,
+						func = function()
+                        if G.pack_cards and G.pack_cards.cards and G.pack_cards.cards[1] and G.pack_cards.VT.y < G.ROOM.T.h then
+
+                            for _, v in ipairs(G.pack_cards.cards) do
+                                if v.config.center == G.P_CENTERS.c_base then
+									local new_enhancement = SMODS.poll_enhancement({guaranteed = true})
+                                    v:set_ability(G.P_CENTERS[new_enhancement])
+                                end
+								if not v.edition then
+									local edition = poll_edition('standard_edition'..G.GAME.round_resets.ante, 2, true,true)
+									v:set_edition(edition)
+								end
+								if not v.seal then
+									v:set_seal(
+										SMODS.poll_seal({ guaranteed = true, type_key = "standard" })
+									)
+								end
+                            end
+
+                            return true
+                        end
+                    end
+					}))
+            end
+        end
+    end
+}, true)
 
 
 if next(SMODS.find_mod("Bunco")) then

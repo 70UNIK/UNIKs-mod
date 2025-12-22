@@ -3125,7 +3125,19 @@ return {
             },
 
 
-
+            j_bunc_jmjb = {
+                name = 'Joker Man & Jester Boy Trading Card No. 54',
+                text = {
+                    'All cards in {C:attention}Standard Packs{}',
+                    'have an {C:attention}Enhancement{}',
+                    '{C:attention}Seal{} and {C:dark_edition}Edition'
+                },
+                unlock = {
+                    'Open {E:1,C:attention}#1#',
+                    'Booster Packs',
+                    '{C:inactive}(#2#)'
+                }
+            },
 
 
             --Cult card crossmod
