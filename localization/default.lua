@@ -5402,6 +5402,7 @@ return {
             k_unik_dark = "Dark",
             k_unik_gray = "Gray",
             b_unik_banished_items = "Banished Items",
+            ph_no_banished = "No Banished Items this run"
         },
         high_scores={},
         labels={
