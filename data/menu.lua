@@ -1,7 +1,6 @@
 local oldfunc = Game.main_menu
 	Game.main_menu = function(change_context)
 		local ret = oldfunc(change_context)
-		-- adds a Cryptid spectral to the main menu
 		local newcard = Card(
 			G.title_top.T.x,
 			G.title_top.T.y,

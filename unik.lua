@@ -14,11 +14,9 @@ SMODS.current_mod.optional_features = {
 	post_trigger = true,
 	quantum_enhancements = false,
 	-- Here are some other ones Steamodded has
-	-- Cryptid doesn't use them YET, but these should be uncommented if (SMODS.Mods["Cryptid"] or {}).can_load and   uses them
 	-- These ones add new card areas that Steamodded will calculate through
 	-- Might already be useful for sticker calc
 
-	-- Cryptid uses cardarea deck now
 	cardareas = {
 		deck = true,
 		discard = true, -- used by scorch
@@ -36,7 +34,6 @@ SMODS.current_mod.optional_features = {
 -- 	-- nativefs.write(lovely.mod_dir .. "/Talisman/config.lua", STR_PACK(Talisman.config_file))
 -- end
 
---config tag is only avaliable in baseline cryptid; in almanac, both of those are fixed to true
 SMODS.current_mod.config_tab = function() --Config tab
 	
 	return {
@@ -47,7 +44,7 @@ SMODS.current_mod.config_tab = function() --Config tab
 		colour = G.C.CLEAR,
 	},
 	nodes = {
-		create_toggle({
+		not (SMODS.Mods["Cryptid"] or {}).can_load and create_toggle({
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
@@ -55,23 +52,15 @@ SMODS.current_mod.config_tab = function() --Config tab
 				localize("unik_legendary_blinds_desc1"),
 				localize("unik_legendary_blinds_desc2")
 			},
-		}),
-		create_toggle({
-			label = localize("unik_cryptid_nerfs_option"),
-			ref_table = unik_config,
-			ref_value = "unik_cryptid_nerfs",
-			info = {
-				localize("unik_cryptid_nerfs_desc1"),
-			},
-		}),
-		create_toggle({
+		}) or nil,
+		not (SMODS.Mods["Cryptid"] or {}).can_load and create_toggle({
 			label = localize("unik_enable_overshoot_option"),
 			ref_table = unik_config,
 			ref_value = "unik_overshoot_enabled",
 			info = {
 				localize("unik_overshoot_enable_desc"),
 			},
-		}),
+		}) or nil,
 		create_toggle({
 			label = localize("unik_custom_menu_option"),
 			ref_table = unik_config,
@@ -95,6 +84,11 @@ SMODS.current_mod.config_tab = function() --Config tab
 		-- })
 	},
 	}
+end
+if (SMODS.Mods["Cryptid"] or {}).can_load then
+	print("So, you chose slop... Well be prepared to be treated as slop in return...")
+	unik_config.unik_overshoot_enabled = true
+	unik_config.unik_legendary_blinds = true
 end
 -- print("OVERSHOOT LEVEL:")
 -- print(unik_config.unik_overshoot_level)
@@ -1066,11 +1060,6 @@ NFS.load(mod_path .. "data/jokers/unik/detrimental/decaying_tooth.lua")() --noim
 NFS.load(mod_path .. "data/jokers/unik/detrimental/robert.lua")() --noimage
 NFS.load(mod_path .. "data/jokers/unik/detrimental/vampiric_hammer.lua")()
 --- 
----Overrides
-if (SMODS.Mods["Cryptid"] or {}).can_load and unik_config.unik_cryptid_nerfs then
-	NFS.load(mod_path .. "data/overrides/cryptid_balancing.lua")() 
-end
-
 NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 
 NFS.load(mod_path .. "data/overrides/last_hand.lua")() 
@@ -1096,10 +1085,6 @@ if unik_config.unik_legendary_blinds then
 	NFS.load(mod_path .. "data/challenges/cookie_clicker_2.lua")()
 end
 -- NFS.load(mod_path .. "data/challenges/rng_2.lua")()
-
-if (not (SMODS.Mods["Cryptid"] or {}).can_load  ) then
-	very_fair_quip = {}
-end
 
 -- achievements
 -- NFS.load(mod_path .. "data/achievements/epic_fail.lua")()
