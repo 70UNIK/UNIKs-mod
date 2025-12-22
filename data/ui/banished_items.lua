@@ -131,6 +131,9 @@ function G.UIDEF.unik_banished_items()
                         })
                         }
                     } or nil,
+                    { n = G.UIT.R, config = { align = "cm"}, 
+                        nodes = {{n=G.UIT.T, config={text = localize("k_unik_banish_desc"), scale = 0.5, colour = G.C.WHITE, shadow = true}}} 
+                    },
                     }
                 },
             }}
