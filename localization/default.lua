@@ -4256,16 +4256,16 @@ return {
                     "unmodified playing card#<s>2#",
                 }
             },
-            c_cry_pointer_no_dupe = {
-				name = "POINTER://",
-				text = {
-					"Create a card",
-					"of {C:cry_code}your choice",
-					"{C:inactive,s:0.8}(Exotic Jokers excluded)",
-                    "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
-                    "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
-				},
-			},
+            -- c_cry_pointer_no_dupe = {
+			-- 	name = "POINTER://",
+			-- 	text = {
+			-- 		"Create a card",
+			-- 		"of {C:cry_code}your choice",
+			-- 		"{C:inactive,s:0.8}(Exotic Jokers excluded)",
+            --         "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
+            --         "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
+			-- 	},
+			-- },
             c_unik_prism = {
                 name = "Prism",
                 text = {
