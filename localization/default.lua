@@ -4185,6 +4185,15 @@ return {
                     "{C:inactive,s:0.9}(Avoids destruction when possible)"
                 }
             },
+            unik_zeta = {
+                name = "{X:unik_void_color,C:unik_eye_searing_red}ZETA",
+                text = {
+                    "{C:unik_void_color}The {c:red}Sticker{C:unik_void_color} and Card",
+                    "{C:unik_void_color}cannot be removed",
+                    "{X:unik_void_color,C:unik_eye_searing_red,S:2}EVER."
+                }
+            },
+            
         },
         Planet={
             c_unik_asteroid_belt = {
@@ -5440,6 +5449,7 @@ return {
             unik_shielded = "Shielded",
             unik_claw_mark = "Claw Mark",
             unik_decaying = "Decaying",
+            unik_zeta = "ZETA",
         },
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM
@@ -5748,12 +5758,12 @@ return {
             a_factorial_mult = {"!Mult"},
             a_factorial_chips = {"!Chips"},
             --Cryptlib borrowing
-            a_xchips = { "X#1# Chips" },
+         --   a_xchips = { "X#1# Chips" },
 			a_powmult = { "^#1# Mult" },
 			a_powchips = { "^#1# Chips" },
 			a_powmultchips = { "^#1# Mult+Chips" },
 			a_round = { "+#1# Round" },
-			a_xchips_minus = { "-X#1# Chips" },
+		--	a_xchips_minus = { "-X#1# Chips" },
 			a_powmult_minus = { "-^#1# Mult" },
 			a_powchips_minus = { "-^#1# Chips" },
 			a_powmultchips_minus = { "-^#1# Mult+Chips" },
