@@ -10,7 +10,7 @@
 	"badge_text_colour": "",
 	"version": "0.6.2b",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-1016c)"
+        "Steamodded (>=1.0.0~BETA-1221a)"
     ],
 	"conflicts": [
 		"Talisman (<=2.4)"
