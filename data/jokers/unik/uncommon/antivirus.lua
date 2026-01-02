@@ -16,21 +16,13 @@ SMODS.Joker {
         
 	end,
     calculate = function(self, card, context)
-        if context.setting_ability and string.sub(context.new, 1, 2) == 'm_' and not context.unik_enhance_card then
+        if context.setting_ability and string.sub(context.new, 1, 2) == 'm_' and not context.unik_enhance_card  then
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.1,
                 func = function()
                     context.other_card.ability.unik_shielded = true
-                    
-                    return true
-                end,
-            }))
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    for k, v in ipairs(G.playing_cards) do
-                        G.GAME.blind:debuff_card(v)
-                    end
+                    context.other_card.debuff = false
                     return true
                 end,
             }))
@@ -48,15 +40,7 @@ SMODS.Joker {
                         delay = 0.1,
                         func = function()
                             context.unik_enhanced_card.ability.unik_shielded = true
-                            
-                            return true
-                        end,
-                    }))
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            for k, v in ipairs(G.playing_cards) do
-                                G.GAME.blind:debuff_card(v)
-                            end
+                            context.unik_enhanced_card.debuff = false
                             return true
                         end,
                     }))

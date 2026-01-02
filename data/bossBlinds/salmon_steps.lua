@@ -5,7 +5,7 @@ SMODS.Scoring_Calculation({
 		return chips + mult
 	end,
 	text = '+',
-	colour = G.C.PURPLE,
+	colour = G.C.UNIK_EYE_SEARING_RED,
 })
 
 SMODS.Blind{
@@ -20,13 +20,14 @@ SMODS.Blind{
     config = {},
     death_message = 'special_lose_salmon_steps',
     set_blind = function(self)
+		G.GAME.unik_old_scoring_calculation_key = G.GAME.current_scoring_calculation.key
 		SMODS.set_scoring_calculation('unik_plus')
 	end,
 	disable = function(self)
-		SMODS.set_scoring_calculation('multiply')
+		SMODS.set_scoring_calculation(G.GAME.unik_old_scoring_calculation_key)
 	end,
 	defeat = function(self)
-		SMODS.set_scoring_calculation('multiply')
+		SMODS.set_scoring_calculation(G.GAME.unik_old_scoring_calculation_key)
 	end,
 }
 
