@@ -3,7 +3,7 @@ local function killEternals()
     for _, v in pairs(G.jokers.cards) do
         --print("Joker in set:")
         --print(v.ability.name)
-        if (v.config.center.key == "j_superposition" and v.ability.unik_flower_pot) then
+        if (v.config.center.key == "j_superposition" and v.ability.unik_superman) then
             selfDestruction(v,"k_extinct_ex",G.C.PURPLE)
             break
         end
