@@ -48,7 +48,7 @@ if (checker and checker.debuff) or undefTalisman then
     }))
 end
 if checker and checker.add_to_blind then
-    if nanny == '-nan' then
+    if nanny == '-nan' or nanny == 'Infinity' or nanny == 'infinity' then
         add_to_blind = math.huge
         if undefTalisman then
             add_to_blind = 0

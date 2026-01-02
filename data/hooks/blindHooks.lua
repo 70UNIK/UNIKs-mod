@@ -12,6 +12,17 @@ function Blind:unik_debuff_after_hand(poker_hands, scoring_hand,cards, check,sum
 	return nil
 end
 
+--modifies the SMODS score
+function Blind:unik_mod_final_score(sum)
+	if not self.disabled then
+		local obj = self.config.blind
+		if obj.unik_mod_final_score and type(obj.unik_mod_final_score) == "function" then
+			return obj:unik_mod_final_score(sum)
+		end
+	end
+	return nil
+end
+
 --Context before play
 function Blind:unik_before_play()
 	if not self.disabled then

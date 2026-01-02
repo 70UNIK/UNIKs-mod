@@ -22,7 +22,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 				juice_card(effect.card)
 			end
 			local mult = SMODS.Scoring_Parameters["mult"]
-			mult:modify((mult.current * math.log(math.max(amount,mult.current),amount)) - mult.current)
+			mult:modify((to_big(mult.current) * to_big(math.log(to_big(math.max(amount,mult.current)),to_big(amount)))) - to_big(mult.current))
 			if not effect.remove_default_message then
 				if from_edition then
 					card_eval_status_text(
@@ -55,7 +55,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 				juice_card(effect.card)
 			end
 			local chips = SMODS.Scoring_Parameters["chips"]
-			chips:modify((chips.current * math.log(math.max(amount,chips.current),amount)) - chips.current)
+			chips:modify((to_big(chips.current) * to_big(math.log(to_big(math.max(amount,chips.current)),to_big(amount)))) - to_big(chips.current))
 			if not effect.remove_default_message then
 				if from_edition then
 					card_eval_status_text(
