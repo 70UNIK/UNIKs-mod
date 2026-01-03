@@ -8,7 +8,7 @@ SMODS.Joker {
     cost = 5,
 	blueprint_compat = false, --nope!
     perishable_compat = true,
-	eternal_compat = true,
+	eternal_compat = false,
     in_pool = function(self)
         for i,v in pairs(G.jokers.cards) do 
             if v.ability.perishable then
