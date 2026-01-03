@@ -15,7 +15,7 @@ local nanny = tostring(number_format(math.floor(SMODS.calculate_round_score())))
 
 -- -nan fix
 local undefTalisman = false
-if nanny ~= '-nan' then
+if nanny ~= '-nan' and nanny ~= 'Infinity' and nanny ~= 'infinity' then
 
     G.GAME.round_scores['hand'].amt = math.max(G.GAME.round_scores['hand'].amt,SMODS.calculate_round_score())
 else
@@ -23,7 +23,7 @@ else
         undefTalisman = true
         G.GAME.round_scores['hand'].amt = 0
         G.GAME.round_scores.hand.amt = 0
-        print("WHOOPS! -NAN detected. Setting hand score to 0")
+        print("WHOOPS! -NAN or Infinity detected. Setting hand score to 0")
     else
         G.GAME.round_scores['hand'].amt = math.huge
         G.GAME.round_scores.hand.amt = math.huge

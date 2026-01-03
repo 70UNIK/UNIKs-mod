@@ -1236,6 +1236,19 @@ return {
                     "other than {C:attention}7s{}",
                 }
             },
+            --workaround for now
+            m_unik_pink_cdataman = {
+                name = "Pink Card",
+                text = {
+                    "Chips {X:chips,C:white}Xlog_#1#(Chips){} ", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
+                    "{s:0.7,X:dark_edition,C:white}^1.007{s:0.7,C:inactive} Chips instead if total exceeds approximately {s:0.7,C:dark_edition}e306{s:0.7,C:inactive} Chips",
+                    "Considered a {C:attention}7{}",
+                    "and it's {C:attention}own suit{}",
+                    "{C:red,E:2}Destroyed{} if played",
+                    "with anything",
+                    "other than {C:attention}7s{}",
+                }
+            },
             m_unik_green = {
                 name = "Green Card",
                 text = {
