@@ -8,7 +8,7 @@ SMODS.Joker {
     cost = 7,
 	blueprint_compat = true,
     perishable_compat = false,
-	eternal_compat = true,
+	eternal_compat = false,
 	demicoloncompat = true,
 	real_time_loc = true,
     config = { extra = {x_mult = 3.5, x_mult_mod = 0.07,x_mult_initial = 3.5,selfDestruction = false,message_produced = false,in_scoring = false} },
