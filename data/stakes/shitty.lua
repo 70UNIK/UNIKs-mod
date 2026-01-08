@@ -33,10 +33,6 @@ if not (SMODS.Mods["Buffoonery"] or {}).can_load then
     })
 end
 
-SMODS.Sticker:take_ownership("perishable", {
-    atlas = 'unik_stickers', 
-    pos = { x = 3, y = 2 },
-}, true)
 local disposableOverrideVoucher = Card.cry_calculate_voucher_perishable
 function Card:cry_calculate_voucher_perishable()
     if self.ability.perishable and not self.ability.perish_tally then
