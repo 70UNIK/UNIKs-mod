@@ -23,7 +23,7 @@ if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
     G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0
     G.GAME.nuke_spawn = G.GAME.nuke_spawn + 1
-    if unik_config.unik_overshoot_enabled then
+    if UNIK.overshootEnabled() then
         unik_trigger_overshoot_menu(calculate_overshoot_amount())
         delay(0.1)
             G.E_MANAGER:add_event(Event({
@@ -36,12 +36,12 @@ if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(
 else
     if to_big(G.GAME.chips) < to_big(G.GAME.blind.chips) then
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-        if unik_config.unik_overshoot_enabled then
+        if UNIK.overshootEnabled() then
             unik_ease_overshoot(-math.ceil(G.GAME.unik_overshoot/2))
         end
     else
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-        if unik_config.unik_overshoot_enabled then
+        if UNIK.overshootEnabled() then
             unik_ease_overshoot(-1)
         end
     end

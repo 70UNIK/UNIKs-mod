@@ -87,7 +87,7 @@ SMODS.current_mod.config_tab = function() --Config tab
 end
 if (SMODS.Mods["Cryptid"] or {}).can_load then
 	--print("So, you chose slop... Well be prepared to be treated as slop in return...")
-	--unik_config.unik_overshoot_enabled = true
+	--UNIK.overshootEnabled() = true
 	--unik_config.unik_legendary_blinds = true
 end
 -- print("OVERSHOOT LEVEL:")
@@ -101,6 +101,7 @@ NFS.load(mod_path .. "data/hooks/colours.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/hooks/boosterHooks.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
+
 
 SMODS.Atlas({
 	key = "unik_cube_boosters",
@@ -1139,7 +1140,7 @@ NFS.load(mod_path .. "data/overrides/enhancement_destroy_fx.lua")()
 
 
 --UI
-if unik_config.unik_overshoot_enabled then
+if UNIK.overshootEnabled() then
 	NFS.load(mod_path .. "data/ui/overshoot.lua")()
 	NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
 end
@@ -1151,7 +1152,28 @@ end
 if unik_config.unik_custom_menu then
 	NFS.load(mod_path .. "data/menu.lua")()
 end
+--
+function UNIK.hasBlindside()
+	if next(SMODS.find_mod("Blindside")) then
+		if G.GAME.selected_back and G.GAME.selected_back.effect and G.GAME.selected_back.effect.center and G.GAME.selected_back.effect.center.config and G.GAME.selected_back.effect.center.config.extra then
+			if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
+			return true
+		end
+	end
+	return false
+end
 
+function UNIK.overshootEnabled()
+	if not unik_config.unik_overshoot_enabled then
+		return false
+	end
+	--temporary
+	if UNIK.hasBlindside() then
+		print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
+		return false
+	end
+	return true
+end
 
 
 ---
