@@ -1105,9 +1105,27 @@ return {
            dd_unik_legendary_blind={
                 name = "Legendary Blind",
                 text = {
-                    "{C:red}HELL AWAITS YOU...",
+                    "{C:unik_eye_searing_red}HELL AWAITS YOU...",
                 }
             },
+            dd_unik_ancient_joker = {
+                name = "Ancient Joker",
+                text = {
+                    "Not to be confused with the",
+                    "other {C:attention}Ancient Joker{},",
+                    "these {C:unik_ancient}Jokers{} {C:unik_eye_searing_red}will likely kill you",
+                    "Should've not {C:attention}overshot{} too much in",
+                    "the first place..."
+                }
+            },
+            dd_unik_exotic_joker = {
+                name = "Exotic Joker",
+                text = {
+                    "{C:unik_eye_searing_red}They came from Cryptid",
+                    "{C:unik_eye_searing_red}to turn you into",
+                    "{C:unik_eye_searing_red}nothing but crushed flesh and bone..."
+                }
+            }
             -- dd_akyrs_instant_death_risk={
             --     name = "Instant Death Risk",
             --     text = {
@@ -5046,6 +5064,44 @@ return {
                 "Legendary Blinds can spawn anytime",
                 "+1 ante per overshoot over 20",
                 "All Blinds are Epic+ Blinds"
+            },
+            --blindside versions
+            overshoot_unik_0_blindside = {
+                "No effects",
+                "Make sure to not score",
+                "too high too many times...",
+            },
+            overshoot_unik_1_blindside = {
+                "+1 Ante every 5 Overshoot",
+            },
+            overshoot_unik_2_blindside = {
+                "+1 Ante every 5 Overshoot",
+                "Ancient Jokers can spawn anytime",
+                "after round 40",
+                "Legendary+ Jokers spawn",
+                "twice as often"
+            },
+            overshoot_unik_3_blindside = {
+                "+1 Ante every 5 Overshoot",
+                "Ancient Jokers can spawn anytime",
+                "Exotic Jokers can spawn anytime",
+                "after round 40",
+                "Legendary+ Jokers spawn",
+                "4X as often"
+            },
+            overshoot_unik_4_blindside = {
+                "+1 Ante every 5 Overshoot",
+                "Ancient Jokers can spawn anytime",
+                "Exotic Jokers can spawn anytime",
+                "+1 ante per overshoot over 20",
+                "All Jokers are Legendary+ Jokers"
+            },
+            overshoot_unik_5_blindside = {
+                "+1 Ante every 5 Overshoot",
+                "Ancient Jokers can spawn anytime",
+                "Exotic Jokers can spawn anytime",
+                "+1 ante per overshoot over 20",
+                "All Jokers are Ancient+ Jokers"
             },
 
             k_unik_lartceps="Lartceps",

@@ -31,7 +31,7 @@ local smods_calculate_round_score_stuff = SMODS.calculate_round_score
 function SMODS.calculate_round_score(flames)
 	
 	local ret = smods_calculate_round_score_stuff(flames)
-	if G.GAME and G.GAME.blind and G.GAME.blind.unik_mod_final_score then
+	if G and G.GAME and G.GAME.blind and G.GAME.blind.unik_mod_final_score then
 		local table = G.GAME.blind:unik_mod_final_score(ret)
 		if table and table.mod_score and type(table.mod_score) == 'number' then
 			ret = ret * table.mod_score

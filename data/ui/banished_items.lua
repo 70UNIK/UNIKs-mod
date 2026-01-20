@@ -1,13 +1,15 @@
 function UNIK.get_banned_count()
     local counter = 0
-    if G.GAME.paperback.banned_run_keys then
+    if G.GAME.paperback and G.GAME.paperback.banned_run_keys then
         for i,v in pairs(G.GAME.paperback.banned_run_keys) do
             counter = counter + 1
         end
     end
     if G.GAME.cry_banished_keys then
         for i,v in pairs(G.GAME.cry_banished_keys) do
-            counter = counter + 1
+            if not G.GAME.paperback.banned_run_keys[i] then
+                counter = counter + 1
+            end
         end
     end
     return counter
@@ -15,7 +17,7 @@ end
 
 function UNIK.getCombinedBannedTable()
     local banned = {}
-    if G.GAME.paperback.banned_run_keys then
+    if G.GAME.paperback and G.GAME.paperback.banned_run_keys then
         for i,v in pairs(G.GAME.paperback.banned_run_keys) do
             banned[#banned+1] = i
         end
