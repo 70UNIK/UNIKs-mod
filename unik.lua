@@ -45,6 +45,14 @@ SMODS.current_mod.config_tab = function() --Config tab
 	},
 	nodes = {
 		create_toggle({
+			label = localize("unik_indigenous_summit_names_option"),
+			ref_table = unik_config,
+			ref_value = "unik_indigenous_summit_names",
+			info = {
+				localize("unik_indigenous_summit_names_desc"),
+			},
+		}),
+		create_toggle({
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
@@ -1173,6 +1181,13 @@ function UNIK.overshootEnabled()
 		return false
 	end
 	return true
+end
+
+function UNIK.isIndigenousSummitNaming()
+	if unik_config.unik_indigenous_summit_names then
+		return true
+	end
+	return false
 end
 
 

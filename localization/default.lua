@@ -4789,8 +4789,17 @@ return {
             --Perma Xmult, Perma Xchips, Perma Chips, Perma Mult, Perma Held Xmult, perma held Xchips, perma held Mult, perma held Chips, perma held $, perma $, ^Mult, ^Chips
             --4 of the 7 summits
             --Why summits? well hiker theming
+            --_i = indigenous names (config option)
             c_unik_everest = {
                 name = "Everest",
+                text = {
+                    "Permanently add {X:mult,C:white}X#1#{} Mult",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            --if indigenous names enabled, has a 50/50 chance of switching atlas when spawned
+            c_unik_everest_i = {
+                name = "Sagarmāthā/Qomolangma",
                 text = {
                     "Permanently add {X:mult,C:white}X#1#{} Mult",
                     "to {C:attention}#2#{} selected card#<s>2#",
@@ -4841,6 +4850,14 @@ return {
                     "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
+            c_unik_mitchell_i = {
+                name = "Attakulla",
+                text = {
+                    "Permanently add",
+                    "held {C:chips}+#1#{} Chips",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
             c_unik_narodnaya = {
                 name = "Narodnaya",
                 text = {
@@ -4857,8 +4874,22 @@ return {
                     "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
+            c_unik_charleston_i = { --near vegas, which gambling
+                name = "Nuvagantu",
+                text = {
+                    "Permanently add {C:money}$#1#{}",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
             c_unik_whitney = { ---sierra nevada
                 name = "Whitney",
+                text = {
+                    "Permanently add held {C:money}$#1#{}",
+                    "to {C:attention}#2#{} selected card#<s>2#",
+                }
+            },
+            c_unik_whitney_i = { ---sierra nevada
+                name = "Tumanguya",
                 text = {
                     "Permanently add held {C:money}$#1#{}",
                     "to {C:attention}#2#{} selected card#<s>2#",
@@ -5487,6 +5518,9 @@ return {
             unik_overshoot_desc1 = "Off: Highly not recommended, especially with mods such as Cryptid (Can go into slop territory)",
             unik_overshoot_desc2 = "\"Lenient\": Similar to the old system, always +1 if Overshooting Score (Can be slow to notice)",
             unik_overshoot_desc3 = "Strict: Gain more Overshoot the more you score over the limit",
+
+            unik_indigenous_summit_names_option = "Indigenous Summit Names",
+            unik_indigenous_summit_names_desc = "Some Summits will be renamed to their Indigenous names",
 
             k_unik_light = "Light",
             k_unik_dark = "Dark",
