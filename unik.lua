@@ -356,6 +356,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "unik_summits_alt",
+	path = "unik_summits_alt.png",
+	px = 71,
+	py = 95
+}
 
 SMODS.Atlas {
 	key = "unik_seals",
@@ -1188,6 +1194,13 @@ function UNIK.isIndigenousSummitNaming()
 		return true
 	end
 	return false
+end
+
+function UNIK.getSummitAtlas()
+	if UNIK.isIndigenousSummitNaming() then
+		return 'unik_summits_alt'
+	end
+	return 'unik_summits'
 end
 
 

@@ -1,6 +1,6 @@
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = 'unik_summits',
+	atlas = UNIK.getSummitAtlas(),
     cost = 3,
 	pos = {x = 3, y = 3},
 	key = 'unik_whitney',
@@ -12,8 +12,12 @@ SMODS.Consumable{
 	end,
     config = { extra = { money = 2 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
+        local key = 'c_unik_whitney'
+        if UNIK.isIndigenousSummitNaming() then
+            key = key + '_i'
+        end
 		return {
-			vars = {card.ability.extra.money,card.ability.extra.max_highlighted},
+			key = key, vars = {card.ability.extra.money,card.ability.extra.max_highlighted},
 		}
 	end,
     
