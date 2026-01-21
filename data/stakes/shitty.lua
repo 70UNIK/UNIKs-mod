@@ -1,15 +1,10 @@
 --jokers may be disposable (50% chance to replace perishing).
 --Perishables self destruct instead of being debuffed
-local nextStake = 'cry_ruby'
-if (SMODS.Mods["Buffoonery"] or {}).can_load then
-    nextStake = 'buf_palladium'
-end
 SMODS.Stake{ 
     key = 'unik_shitty',
 
-    unlocked_stake =  nextStake ,
-    applied_stakes = {'gold'},
-    above_stake = 'gold',
+    applied_stakes = {'unik_shitty'},
+    above_stake = 'unik_shitty',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 
     modifiers = function()
@@ -24,14 +19,6 @@ SMODS.Stake{
     atlas = 'unik_stakes',
     sticker_atlas = 'unik_sticker_stakes'
 }
-
-if not (SMODS.Mods["Buffoonery"] or {}).can_load then
-    SMODS.Stake:take_ownership('stake_cry_ruby', {
-        applied_stakes = { "unik_shitty" },
-        above_stake = "unik_shitty",
-        prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
-    })
-end
 
 local disposableOverrideVoucher = Card.cry_calculate_voucher_perishable
 function Card:cry_calculate_voucher_perishable()

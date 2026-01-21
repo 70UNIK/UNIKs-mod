@@ -14,7 +14,7 @@ SMODS.Consumable{
     loc_vars = function(self, info_queue, card)
         local key = 'c_unik_charleston'
         if UNIK.isIndigenousSummitNaming() then
-            key = key + '_i'
+            key = key .. '_i'
         end
 		return {
 			key = key, vars = {card.ability.extra.money,card.ability.extra.max_highlighted},
