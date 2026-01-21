@@ -3,8 +3,8 @@
 SMODS.Stake{ 
     key = 'unik_shitty',
 
-    applied_stakes = {'unik_shitty'},
-    above_stake = 'unik_shitty',
+    applied_stakes = {'gold'},
+    above_stake = 'gold',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 
     modifiers = function()

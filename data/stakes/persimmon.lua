@@ -5,9 +5,8 @@ end
 SMODS.Stake{ 
     key = 'unik_persimmon',
     order = 1,
-    unlocked_stake = 'unik_shitty',
-    applied_stakes = {'gold'},
-    above_stake = 'gold',
+    applied_stakes = {'unik_shitty'},
+    above_stake = 'unik_shitty',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
 
     modifiers = function()
