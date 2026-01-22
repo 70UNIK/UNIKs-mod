@@ -15,6 +15,10 @@ SMODS.PokerHand { -- Spectrum House (Referenced from SixSuits)
   },
 
   evaluate = function(parts)
+    --DO NOT EVALUATE WITH BLINDSIDE ACTIVE!!!!!
+		if UNIK.hasBlindside() then
+			return false
+		end
     if #parts._3 < 1 or #parts._2 < 2 or not next(parts.unik_spectrum) then return {} end
     return { SMODS.merge_lists(parts._all_pairs, parts.unik_spectrum) }
   end

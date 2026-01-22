@@ -15,6 +15,10 @@
     },
 
     evaluate = function(parts)
+        --DO NOT EVALUATE WITH BLINDSIDE ACTIVE!!!!!
+		if UNIK.hasBlindside() then
+			return false
+		end
         return parts.unik_spectrum
     end
     }

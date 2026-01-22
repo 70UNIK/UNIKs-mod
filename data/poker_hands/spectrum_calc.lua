@@ -17,6 +17,10 @@ else
 	SMODS.PokerHandPart { -- Spectrum base (Referenced from SixSuits)
 	key = 'spectrum',
 	func = function(hand)
+    --DO NOT EVALUATE WITH BLINDSIDE ACTIVE!!!!!
+		if UNIK.hasBlindside() then
+			return false
+		end
 		local requiredCards = 5 - UNIK.paved_calc()
 		if #hand < requiredCards then return {} end
 		local unique_suits = UNIK.get_unique_suits(hand, nil, true)
