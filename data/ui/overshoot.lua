@@ -3,7 +3,7 @@ function create_UIBox_HUD()
     local orig = uibox_ref()
 
     --temporary for now, due to a lack of "Ancient Joker"s to fight
-    if UNIK.overshootEnabled() then
+    if UNIK.overshootEnabled(true) then
         local scale = 0.4
         local stake_sprite = get_stake_sprite(G.GAME.stake or 1, 0.5)
 
@@ -134,7 +134,7 @@ end
 local fakeupd = Game.update
 function Game:update(dt)
     fakeupd(self, dt)
-    if UNIK.overshootEnabled() then
+    if UNIK.overshootEnabled(true) then
 
         if (G.GAME.blind) then
 
@@ -159,7 +159,7 @@ function create_UIBox_HUD_blind()
     -- end
 
     local node = ret.nodes[2]
-    if UNIK.overshootEnabled() then
+    if UNIK.overshootEnabled(true) then
         node.nodes[#node.nodes + 1] = {
             n = G.UIT.R,
             config = { align = "cm", minh = 0.3, r = 0.1, emboss = 0.05, colour = G.C.DYN_UI.MAIN },

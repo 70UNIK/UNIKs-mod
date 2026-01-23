@@ -1,0 +1,39 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+[[patches]]
+[patches.pattern]
+target = 'blind.lua'
+pattern = '''self.chips = get_blind_amount(G.GAME.round_resets.ante)*self.mult*G.GAME.starting_params.ante_scaling'''
+position = 'before'
+match_indent = true
+payload = '''
+self.blind_data = blind and blind.blind_data or {}
+
+'''
+
+# blindside blind chips saving
+[[patches]]
+[patches.pattern]
+target = 'blind.lua'
+pattern = '''chips = self.chips,'''
+position = 'before'
+match_indent = true
+payload = '''
+blind_data = self.blind_data,
+
+'''
+
+# blindside blind chips loading
+[[patches]]
+[patches.pattern]
+target = 'blind.lua'
+pattern = '''self.chips = blindTable.chips'''
+position = 'before'
+match_indent = true
+payload = '''
+self.blind_data = blindTable.blind_data or {}
+
+'''

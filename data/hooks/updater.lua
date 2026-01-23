@@ -97,7 +97,7 @@ function Game:update(dt)
 		
 	end
     local res = updateHook(self,dt)
-    if UNIK.overshootEnabled() then
+    if UNIK.overshootEnabled(true) then
         G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
         if G.GAME.unik_overshoot < 5 then

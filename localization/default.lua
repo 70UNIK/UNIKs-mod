@@ -140,6 +140,46 @@ return {
             }
         },
         Blind={
+            --BLINDSIDE:
+            bl_unik_blindside_lily = {
+                name = "Lily",
+                text = {
+                    "Destroy 2 random",
+                    "played Blinds",
+                }
+            },
+            bl_unik_blindside_railroad_crossing = {
+                name = "Railroad Crossing",
+                text = {
+                    "X3.2 Mult on",
+                    "first Hand",
+                    "Debuffs a random",
+                    "Hue per hand",
+                    "(Currently #1#)",
+                }
+            },
+            bl_unik_blindside_no_standing_zone = {
+                name = "No Standing Zone",
+                text = {
+                    "+0.25 Mult per second elapsed",
+                    "between played hands",
+                    "(Resets after hand)",
+                    "(Currently +#1# Mult)",
+                }
+            },
+
+            bl_unik_blindside_unik = {
+                name = "UNIK",
+                text = {
+                    "^#1# Chips per hand",
+                    "Increase this by",
+                    "^#2# when a Purple",
+                    "Blind is scored",
+                    "All played Blinds",
+                    "Must be Purple",
+                }
+            },
+
             bl_unik_fill = {
                 name = "The Fill",
                 text = {
@@ -1114,8 +1154,15 @@ return {
                     "Not to be confused with the",
                     "other {C:attention}Ancient Joker{},",
                     "these {C:unik_ancient}Jokers{} {C:unik_eye_searing_red}will likely kill you",
-                    "Should've not {C:attention}overshot{} too much in",
+                    "Shouldn't have {C:attention}overshot{} too much in",
                     "the first place..."
+                }
+            },
+            dd_unik_cursed_joker = {
+                name = "Cursed Joker",
+                text = {
+                    "{C:attention}Fulfill{} a {C:attention}requirement",
+                    "in Joker to obtain reward",
                 }
             },
             dd_unik_exotic_joker = {
@@ -5527,7 +5574,10 @@ return {
             k_unik_gray = "Gray",
             b_unik_banished_items = "Banished Items",
             ph_no_banished = "No Banished Items this run",
-            k_unik_banish_desc = "These Items will not appear again this run"
+            k_unik_banish_desc = "These Items will not appear again this run",
+            k_unik_random_hue = "(Random Hue)",
+            k_unik_joker_immune = "Joker is immune!",
+            k_unik_jchips = "Jchips"
         },
         high_scores={},
         labels={

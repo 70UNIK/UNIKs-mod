@@ -88,7 +88,7 @@ local disblref2 = Blind.disable
 function Blind:disable()
 	local obj = self.config.blind
 	if obj and obj.boss then
-		if obj.boss.legendary then
+		if obj.boss.legendary or obj.boss.exotic then
 			play_sound('cancel', 0.7 + 0.05, 0.7)
             local text = localize('k_unik_boss_immune')
             attention_text({
@@ -105,7 +105,14 @@ function Blind:disable()
             })
 			G.GAME.blind:wiggle()
 			return true
-		end
+		elseif obj.boss.ancient then
+            play_sound('cancel', 0.8, 1)
+            local text = localize('k_unik_joker_immune')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+            })
+			G.GAME.blind:wiggle()
+        end
 	end
     local ret = disblref2(self)
     if SMODS and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config and SMODS.OPENED_BOOSTER.config.center then
@@ -128,7 +135,7 @@ end
 local gfrb2 = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)
 	local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-	if obj and obj.boss and obj.boss.legendary then
+	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
 		play_sound('cancel', 0.7 + 0.05, 0.7)
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
@@ -136,7 +143,7 @@ G.FUNCS.reroll_boss = function(e)
         })
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
-    elseif obj and obj.boss and obj.boss.epic then
+    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
         play_sound('cancel', 0.8, 1)
         local text = localize('k_nope_ex')
         attention_text({

@@ -105,13 +105,16 @@ function UNIK.hasBlindside()
 	return false
 end
 
-function UNIK.overshootEnabled()
+function UNIK.overshootEnabled(no_comment)
 	if not unik_config.unik_overshoot_enabled then
 		return false
 	end
 	--temporary
 	if UNIK.hasBlindside() then
-		print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
+		if not no_comment then
+			print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
+		end
+		
 		return false
 	end
 	return true
@@ -220,6 +223,15 @@ SMODS.Atlas {
 	path = "unik_akio_icons.png",
     px = 34,
     py = 34
+}
+
+SMODS.Atlas {
+	key = "unik_blindside_jokers",
+	path = "unik_blindside_jokers.png",
+	atlas_table = "ANIMATION_ATLAS", 
+    px = 34,
+    py = 34,
+	frames = 21
 }
 
 SMODS.ObjectType({
@@ -1203,6 +1215,15 @@ if AKYRS then
 end
 if unik_config.unik_custom_menu then
 	NFS.load(mod_path .. "data/menu.lua")()
+end
+
+--blindside:
+if next(SMODS.find_mod("Blindside")) then
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
 
 

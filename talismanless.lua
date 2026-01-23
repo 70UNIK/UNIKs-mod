@@ -93,6 +93,22 @@ for _, v in ipairs({
 }) do
 	table.insert(SMODS.scoring_parameter_keys, v)
 end
+SMODS.Sound({
+	key = "emult",
+	path = "ExponentialMult.wav",
+})
+SMODS.Sound({
+	key = "echip",
+	path = "ExponentialChips.wav",
+})
+SMODS.Sound({
+	key = "xchip",
+	path = "MultiplicativeChips.wav",
+})
+SMODS.Sound({
+	key = "eemult",
+	path = "TetrationalMult.wav",
+})
 if SMODS and SMODS.Mods and not UNIK.has_talisman() and not (SMODS.Mods["cdataman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load then
 	local smods_xchips = false
 	for _, v in pairs(SMODS.scoring_parameter_keys) do
@@ -101,22 +117,7 @@ if SMODS and SMODS.Mods and not UNIK.has_talisman() and not (SMODS.Mods["cdatama
 			break
 		end
 	end
-	SMODS.Sound({
-		key = "emult",
-		path = "ExponentialMult.wav",
-	})
-	SMODS.Sound({
-		key = "echips",
-		path = "ExponentialChips.wav",
-	})
-	SMODS.Sound({
-		key = "xchip",
-		path = "MultiplicativeChips.wav",
-	})
-	SMODS.Sound({
-		key = "eemult",
-		path = "TetrationalMult.wav",
-	})
+
 	local scie = SMODS.calculate_individual_effect
 	function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
 		local ret = scie(effect, scored_card, key, amount, from_edition)

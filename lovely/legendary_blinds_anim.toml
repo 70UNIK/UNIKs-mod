@@ -33,7 +33,7 @@ payload = '''
 
 --If the blind has a "glitchy aniddmation" (Legendary blinds only)
 --legendary_blind_patch2
-if v.glitchy_anim then
+if v.glitchy_anim and discovered then
     temp_blind.legendary_glitch_anim = true
 end
 
@@ -51,7 +51,7 @@ payload = '''
 
 --If the blind has a "glitchy animation" (Legendary blinds only)
 --legendary_blind_patch2
-if v.glitchy_anim then
+if v.glitchy_anim and discovered then
     temp_blind.legendary_glitch_anim = true
 end
 

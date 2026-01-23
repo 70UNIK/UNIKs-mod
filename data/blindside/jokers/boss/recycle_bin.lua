@@ -1,0 +1,1 @@
+--X1 mult per hand, incraese this by X0.1 per blind discarded this round
