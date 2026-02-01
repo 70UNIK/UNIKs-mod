@@ -1223,6 +1223,7 @@ if next(SMODS.find_mod("Blindside")) then
 
 	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
 

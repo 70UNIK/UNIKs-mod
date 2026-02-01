@@ -18,14 +18,17 @@ BLINDSIDE.Joker({
             local triggered = true
             for z = 1,2 do
                 local eligable_cards = {}
-                for i,v in pairs(G.play.cards) do
+                for i,v in pairs(context.full_hand) do
                     if not v.to_be_destroyed_by_lily then
                         eligable_cards[#eligable_cards+1] = v
                     end
                 end
-                local card = pseudorandom_element(eligable_cards, pseudoseed("unik_lily_eat"))
-                destroyed_cards[#destroyed_cards+1] = card
-                card.to_be_destroyed_by_lily = true
+                if #eligable_cards > 0 then 
+                    local card = pseudorandom_element(eligable_cards, pseudoseed("unik_lily_eat"))
+                    destroyed_cards[#destroyed_cards+1] = card
+                    card.to_be_destroyed_by_lily = true
+                end
+                
             end
             if #destroyed_cards > 0 then
                 G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
@@ -34,7 +37,7 @@ BLINDSIDE.Joker({
             end
             
         end
-        if context.destroy_card and context.cardarea == G.play and not G.GAME.blind.disabled then
+        if context.destroy_card and not G.GAME.blind.disabled then
             if context.destroy_card.to_be_destroyed_by_lily then
                 G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0, func = function()
                     G.GAME.blind:wiggle()

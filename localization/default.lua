@@ -152,7 +152,7 @@ return {
                 name = "Railroad Crossing",
                 text = {
                     "X3.2 Mult on",
-                    "first Hand",
+                    "first hand",
                     "Debuffs a random",
                     "Hue per hand",
                     "(Currently #1#)",
@@ -176,7 +176,16 @@ return {
                     "^#2# when a Purple",
                     "Blind is scored",
                     "All played Blinds",
-                    "Must be Purple",
+                    "must be Purple",
+                }
+            },
+            bl_unik_blindside_recycle_bin = {
+                name = "Recycle Bin",
+                text = {
+                    "X#1# Mult per hand",
+                    "Increase this by",
+                    "X#2# per Blind",
+                    "discarded",
                 }
             },
 
@@ -5577,7 +5586,9 @@ return {
             k_unik_banish_desc = "These Items will not appear again this run",
             k_unik_random_hue = "(Random Hue)",
             k_unik_joker_immune = "Joker is immune!",
-            k_unik_jchips = "Jchips"
+            k_unik_jchips = "Jchips",
+            k_unik_jmult = "Jmult",
+            k_unik_all_purple = "All played Blinds must be Purple",
         },
         high_scores={},
         labels={
@@ -5846,6 +5857,28 @@ return {
                 "HALF LIFE 3 WILL",
                 "NEVER HAPPEN!",
                 "BLAME GABE FOR THIS!"
+            },
+
+            unik_blindside_unik_lose1 = {
+                "{f:unik_five_by_five}Sorry about that..."
+            },
+            unik_blindside_unik_lose2 = {
+                "{f:unik_five_by_five}Maybe you can appreciate",
+                "{f:unik_five_by_five}my dress a bit better",
+                "{f:unik_five_by_five}next time..."
+            },
+            unik_blindside_unik_lose3 = {
+                "{f:unik_five_by_five}I did make overshoot after all...",
+                "{f:unik_five_by_five}And you've shouldn't have",
+                "{f:unik_five_by_five}overshot so much..."
+            },
+            unik_blindside_lily_lose = {
+                "Oh... God..."
+            },
+            unik_blindside_railroad_crossing_lose = {
+                "PERSON FOUND DEAD",
+                "AFTER ATTEMPTING TO",
+                "CROSS ACTIVE CROSSING",
             },
             --finity quips:
             lq_legendary_crown_1={

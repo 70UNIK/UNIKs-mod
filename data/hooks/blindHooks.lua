@@ -132,6 +132,75 @@ function Blind:disable()
     return ret
 end
 
+--blindside rerollers
+local bsreroll_boss = G.FUNCS.blind_reroll_boss
+G.FUNCS.blind_reroll_boss = function(e) 
+    local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
+	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
+		play_sound('cancel', 0.7 + 0.05, 0.7)
+        local text = localize('k_unik_boss_reroll_nope')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+        })
+        G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+        })
+	else
+		return bsreroll_boss(e)
+	end
+end
+--big reroll
+local bsreroll_big =  G.FUNCS.reroll_big
+G.FUNCS.reroll_big = function(e) 
+    local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
+	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
+		play_sound('cancel', 0.7 + 0.05, 0.7)
+        local text = localize('k_unik_boss_reroll_nope')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+        })
+        G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+        })
+	else
+		return bsreroll_big(e)
+	end
+end
+--small_reroll
+local bsreroll_small =    G.FUNCS.reroll_small
+  G.FUNCS.reroll_small = function(e) 
+    local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
+	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
+		play_sound('cancel', 0.7 + 0.05, 0.7)
+        local text = localize('k_unik_boss_reroll_nope')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+        })
+        G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+        })
+	else
+		return bsreroll_small(e)
+	end
+end
+
+
+
 local gfrb2 = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)
 	local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
