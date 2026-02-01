@@ -29,7 +29,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = false,
     demicoloncompat = true,
-    config = {extra = {x_mult = 1,x_mult_mod_good = 0.05, malice = 0.075},immutable = {x_mult_threshold = 1.0,dead = false}},
+    config = {extra = {x_mult = 1,x_mult_mod_good = 0.05, malice = 0.05},immutable = {x_mult_threshold = 1.0,dead = false}},
     pronouns = "he_him",
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'

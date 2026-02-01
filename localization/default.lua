@@ -1669,8 +1669,24 @@ return {
                         "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
                         "for each {C:attention}7{} in scoring hand", --Remove retriggers cause otherwise he becomes extremely powerful fast with retriggers, makes him more in line with Alice
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                        "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#4#%",
-                        "{C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#5#{C:inactive,s:0.7} Chips)",
+                        "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Chips)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1,f:unik_five_by_five}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
+                    },
+
+                },
+                unlock = {
+                    "Play {C:attention}5 7s in a hand",
+                }
+            },
+            j_unik_unik_capped = {
+                name = '{C:unik_unik_color,f:unik_five_by_five}UNIK',
+                text = {
+                    {
+                        "{X:dark_edition,C:white}^#2#{C:inactive} Chips", 
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1,f:unik_five_by_five}#3#{}",
@@ -1890,11 +1906,29 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "Gains {X:dark_edition,C:white}^#2#{} Mult when a {C:attention}Joker{} is {C:red}destroyed",
-                        "Copies itself with {C:money}$0{} sell value if {C:red}destroyed",
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}#3#{} time",
+                        "Gains {X:dark_edition,C:white}^#2#{} Mult when this happens",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
-                        "{C:inactive,s:0.7}(Gains will be reduced by {C:attention,s:0.7}#3#% {C:inactive,s:0.7}per gain after {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Mult)",
-                        "{C:red,s:0.7}(Cannot copy if Disposable or Decaying)",  
+                        "{C:inactive,s:0.7}(Copies become {C:dark_edition}Negative{C:inactive,s:0.7} if no room)",
+                        "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Mult)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#5#{}", --TODO: adjustable quotes, for 
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
+                    }
+
+                },
+                unlock = {
+                    "Destroy an {C:unik_ancient}Ancient{} Joker",
+                }
+            },
+            j_unik_white_lily_cookie_capped = {
+                name = 'White Lily Cookie',
+                text = {
+                    {
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}#3#{} time",
+                        "{X:dark_edition,C:white}^#2#{C:inactive} Mult",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#5#{}", --TODO: adjustable quotes, for 
@@ -1975,10 +2009,6 @@ return {
 					"{C:inactive}(Currently #1#/#2#){}",
                     "{C:inactive,E:1,s:0.7}It will be worth it in the end!{}",
                 },
-                unlock = {
-                    "Use {C:unik_ancient}Awakening{} and",
-                    "{C:red}lose{} in 1 round",
-                }
             },
             j_unik_broken_scale = {
                 name = 'Broken Scale',
@@ -2494,8 +2524,8 @@ return {
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                        "{s:0.8}suit changes at end of round",
-                        "{C:inactive,s:0.6}(Selects different Light Suit from deck if possible)",
+                        "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Light Suit{C:inactive,s:0.8} in deck)",
+                        "{C:inactive,s:0.6}(Randomly selects per round if Suits appear equally)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -2509,15 +2539,14 @@ return {
                     "Win in {C:attention}Checkered Deck",
                     "With {C:attention}Ancient Joker"
                 }
-            },
-            --unlocking those two involves winning a round with Ancient Joker while on checkered deck (cause it is incompetent and selects suits you dont have. these at least have the dignity to respect your deck)
+            }, 
             j_unik_sundae_cookie = {
                 name = "Sundae Cookie",
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                        "{s:0.8}suit changes at end of round",
-                        "{C:inactive,s:0.6}(Selects different Dark Suit from deck if possible)",
+                        "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Dark Suit{C:inactive,s:0.8} in deck)",
+                        "{C:inactive,s:0.6}(Randomly selects per round if Suits appear equally)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -3020,6 +3049,7 @@ return {
                     "Scored {V:1}#1#{} have a",
                     "{C:green}#2# in #3#{} chance to",
                     "{C:red}not{} create a {C:unik_summit}Summit Card",
+                    "{C:inactive}(Must have room)",
                 }
             },
             --retrigger all crosses, 1 other random suit in deck is debuffed per hand (global variable)
@@ -4280,6 +4310,14 @@ return {
                     "{X:unik_void_color,C:unik_eye_searing_red,S:2}EVER."
                 }
             },
+            unik_lily_mark = {
+                name = "Mark of the Lily",
+                text = {
+                    "{C:red}Cannot{} be copied",
+                    "by {C:unik_ancient}White Lily Cookie",
+                    "if {C:red}destroyed",
+                }
+            }
             
         },
         Planet={
@@ -4338,9 +4376,7 @@ return {
 				name = "Awakening",
 				text = {
 					"Create an {C:unik_ancient,E:1}Ancient{} Joker",
-					"{C:red}destroy{} the {C:attention}#1#",
-					"leftmost Joker#<s>1#",
-                    "{C:inactive}(Eternals skipped){}"
+                    "{C:inactive}(Must have room)",
 				},
 			},
             c_unik_foundry = {
@@ -4616,10 +4652,10 @@ return {
                 }
             },
 			tag_unik_extended_empowered = {
-				name = "Extended Empowered Tag",
+				name = "Alternate Empowered Tag",
 				text = {
 					"Gives a free {C:spectral}Spectral Pack",
-					"with {C:legendary,E:1}The Soul{}, {C:rare,E:1}Foundation{} and {C:unik_ancient,E:1}Awakening{}",
+					"with {C:legendary,E:1}The Soul{} and {C:unik_ancient,E:1}Awakening{}",
 				},
 			},
             tag_unik_mountain = {
@@ -5614,6 +5650,7 @@ return {
             unik_claw_mark = "Claw Mark",
             unik_decaying = "Decaying",
             unik_zeta = "ZETA",
+            unik_lily_mark = "Mark of the Lily",
         },
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM

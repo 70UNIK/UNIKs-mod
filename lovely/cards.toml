@@ -150,34 +150,6 @@ end
 '''
 match_indent = true
 
-### Commit: Exclusive to white lily, she should die immediately and not respawn to not clone infinite exotics, even with that single commit limit (what if you use invisible joker on an uncommitted white lily?)
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/code.lua"]'''
-pattern = '''local _first_dissolve = nil'''
-position = "after"
-payload = '''
--- reduce commit limit by 1
-if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
-    G.jokers.highlighted[1].ability.cry_reworked = true
-end
-'''
-match_indent = true
-
-### REWORK: White Lily should immediately die without respawn if used REWORK on her:
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/code.lua"]'''
-pattern = '''jkr:start_dissolve()'''
-position = "before"
-payload = '''
--- reduce commit limit by 666
-if jkr.config.center.key == "j_unik_white_lily_cookie" then
-    jkr.ability.cry_committed = true
-end
-'''
-match_indent = true
-
 ### Custom card destruction anim thing (lily, possibly tainted ceramics)
 [[patches]]
 [patches.pattern]

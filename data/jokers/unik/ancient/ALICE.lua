@@ -28,7 +28,7 @@ SMODS.Joker {
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 0.75},immutable = {base_emult = 1.0}},
+    config = { extra = { Emult = 0.8},immutable = {base_emult = 1.0}},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
 	end,
