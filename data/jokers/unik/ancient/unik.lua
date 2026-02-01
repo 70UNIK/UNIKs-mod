@@ -34,7 +34,10 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		local key = 'j_unik_unik'
-		return {
+		if center.ability.extra.Echips + center.ability.immutable.base_echips >= center.ability.immutable.limit then
+			key = 'j_unik_unik_capped'
+		end
+		return { key = key,
 		vars = {tostring(center.ability.extra.Echips_mod),center.ability.extra.Echips + center.ability.immutable.base_echips
 	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. ""),center.ability.immutable.limit
 	} }
@@ -57,7 +60,7 @@ SMODS.Joker {
 				}
 			end
 		end
-		if context.before and not context.blueprint then
+		if context.before and not context.blueprint and card.ability.extra.Echips + card.ability.immutable.base_echips < card.ability.immutable.limit then
 			local triggered = false
             local increase = 0
             for k, v in ipairs(context.scoring_hand) do
@@ -82,7 +85,7 @@ SMODS.Joker {
 					message_colour = G.C.DARK_EDITION,
 					force_full_val = true,
 					operation = function(ref_table, ref_value, initial, scaling)
-						ref_table[ref_value] = math.min(initial + scaling * increase,card.ability.immutable.limit - card.ability.imutable.base_echipss)
+						ref_table[ref_value] = math.min(initial + scaling * increase,card.ability.immutable.limit - card.ability.immutable.base_echips)
 					end,
 				})
                 				return {

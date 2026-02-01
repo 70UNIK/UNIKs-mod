@@ -1638,15 +1638,15 @@ return {
                     "{C:red}Self destructs{} if none of above Jokers are owned",
                 },                 
             },
-            j_unik_moonlight_cookie = { --unconditional ^1.25 mult per planet
+            j_unik_moonlight_cookie = { --capped at X1
                 name = 'Moonlight Cookie',
                 text = {
                     {
-                        "{C:planet}Planet{} cards {C:attention}in consumables{}",
-                        "appear multiple times at",
-                        "{C:attention}X#3#{} their usual rate",
-                        "and give leveled {C:attention}Poker Hands{}",
                         "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
+                        "to Poker Hand whenever it {C:attention}upgrades{}",
+                        "Gives {X:mult,C:white}Xmult{} equal to",
+                        "Played Poker Hand {C:mult}Mult",
+                        "{C:inactive}(Will give {X:mult,C:white}X#3#{C:inactive}Mult)"
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#2#{}",
@@ -1901,19 +1901,18 @@ return {
                     "with {C:money}$0{} sell value",
                 }             
             },
-            -- Upgrades on destruction, making her very resilient and synegises with dagger, ankh
             j_unik_white_lily_cookie = {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}#3#{} time",
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}1{} time",
                         "Gains {X:dark_edition,C:white}^#2#{} Mult when this happens",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                         "{C:inactive,s:0.7}(Copies become {C:dark_edition}Negative{C:inactive,s:0.7} if no room)",
-                        "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Mult)",
+                        "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#3#{C:inactive,s:0.7} Mult)",
                     },
                     {
-                        "{C:unik_caption,s:0.7,E:1}#5#{}", --TODO: adjustable quotes, for 
+                        "{C:unik_caption,s:0.7,E:1}#4#{}", --TODO: adjustable quotes, for 
                         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                         "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
                     }
@@ -2524,6 +2523,8 @@ return {
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
+                        "{C:attention}Converts #4#{} random scored card#<s>4# suits",
+                        "into the first scored {C:attention}Light Suit",
                         "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Light Suit{C:inactive,s:0.8} in deck)",
                         "{C:inactive,s:0.6}(Randomly selects per round if Suits appear equally)",
                     },
@@ -2545,8 +2546,10 @@ return {
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
+                        "{C:attention}Converts all scored card#<s>4# suits",
+                        "into the first scored {C:attention}Dark Suit",
                         "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Dark Suit{C:inactive,s:0.8} in deck)",
-                        "{C:inactive,s:0.6}(Randomly selects per round if Suits appear equally)",
+                        "{C:inactive,s:0.6}(Randomly selects per hand if Suits appear equally)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -4198,28 +4201,28 @@ return {
                 name = "Held in Consumables Effect",
                 text = {
                     "Triggers per {C:attention}owned{} consumable",
-                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie)"
+                    "{C:inactive,s:0.8}(Observatory)"
                 }
             },
             unik_held_in_consumables2 = {
                 name = "Held in Consumables Effect",
                 text = {
                     "Triggers per {C:attention}owned{} consumable",
-                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Colour Cards)"
+                    "{C:inactive,s:0.8}(Observatory, Colour Cards)"
                 }
             },
             unik_held_in_consumables3 = {
                 name = "Held in Consumables Effect",
                 text = {
                     "Triggers per {C:attention}owned{} consumable",
-                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, Scratch)"
+                    "{C:inactive,s:0.8}(Observatory, Scratch)"
                 }
             },
             unik_held_in_consumables4 = {
                 name = "Held in Consumables Effect",
                 text = {
                     "Triggers per {C:attention}owned{} consumable",
-                    "{C:inactive,s:0.8}(Observatory, Moonlight Cookie, EGO Gifts)"
+                    "{C:inactive,s:0.8}(Observatory, EGO Gifts)"
                 }
             },
              unik_copper_seal = {
@@ -4316,6 +4319,7 @@ return {
                     "{C:red}Cannot{} be copied",
                     "by {C:unik_ancient}White Lily Cookie",
                     "if {C:red}destroyed",
+                    "{C:red}Unremovable{}"
                 }
             }
             

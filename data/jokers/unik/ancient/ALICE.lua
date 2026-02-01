@@ -41,7 +41,7 @@ SMODS.Joker {
                     colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
                 }
         end
-        if (context.cardarea == G.jokers and context.joker_main) then
+        if (context.joker_main) then
             local _odd, _even = false, false
             for i = 1, #context.scoring_hand do
                 if not SMODS.has_no_rank(context.scoring_hand[i]) then
