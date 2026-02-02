@@ -14,10 +14,10 @@ SMODS.Joker {
         if
 			context.selling_card and not context.blueprint
 		then
-			if context.card.ability.eternal then
+			if SMODS.is_eternal(context.card,self) then
                 --explode if  trying to sell megatron or whitenight
                 if context.card.config.center.key == 'j_unik_megatron' or context.card.config.center.key == "j_paperback_white_night" 
-                or (card.config.center.paperback and card.config.center.paperback.permanently_eternal)
+                or (card.config.center.paperback and card.config.center.paperback.permanently_eternal) or card.ability.unik_taw
                 then
                     if not G.GAME.banned_keys then
                     G.GAME.banned_keys = {}

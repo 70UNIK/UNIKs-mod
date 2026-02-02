@@ -1310,19 +1310,6 @@ return {
                     "other than {C:attention}7s{}",
                 }
             },
-            --workaround for now
-            m_unik_pink_cdataman = {
-                name = "Pink Card",
-                text = {
-                    "Chips {X:chips,C:white}Xlog_#1#(Chips){} ", --^1.07 Chips, considered a 7 and it's own suit. Destroyed if played with anything rank other than a 7.
-                    "{s:0.7,X:dark_edition,C:white}^1.007{s:0.7,C:inactive} Chips instead if total exceeds approximately {s:0.7,C:dark_edition}e306{s:0.7,C:inactive} Chips",
-                    "Considered a {C:attention}7{}",
-                    "and it's {C:attention}own suit{}",
-                    "{C:red,E:2}Destroyed{} if played",
-                    "with anything",
-                    "other than {C:attention}7s{}",
-                }
-            },
             m_unik_green = {
                 name = "Green Card",
                 text = {
@@ -1398,7 +1385,7 @@ return {
                     "random {C:red}detrimental{} {C:unik_shitty_edition}edition{} to",
                     "a random Joker",
                     "otherwise apply a random",
-                    "{C:dark_edition}edition{} to a random Joker",
+                    "non-detrimental {C:dark_edition}edition{} to a random Joker",
                     "{C:inactive}All editions are weighted equally...{}"
                 }
             }
@@ -1423,17 +1410,16 @@ return {
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
                 }
             },
-            
-            c_unik_stone_grey={
-                name = "Stone Gray",
+            --
+            c_unik_lily_green = {
+                name = "Lily Green",
                 text = {
-                    "Create a random",
-                    "{C:unik_ancient}Ancient{} joker after",
-                    "{C:attention}#4#{} rounds while held", --after 200 rounds
-                    "{C:inactive}(Must have room)",
+                    "Create a {C:dark_edition}Negative{} {C:unik_ancient}Awakening{}",
+                    "card for every {C:attention}#4#{} rounds",
+                    "this has been held",
                     "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
                 }
-            },
+            }
         },
         Joker={
             j_unik_lucky_seven = {
@@ -1646,7 +1632,7 @@ return {
                         "to Poker Hand whenever it {C:attention}upgrades{}",
                         "Gives {X:mult,C:white}Xmult{} equal to",
                         "Played Poker Hand {C:mult}Mult",
-                        "{C:inactive}(Will give {X:mult,C:white}X#3#{C:inactive}Mult)"
+                        "{C:inactive}(Will give {X:mult,C:white}X#3#{C:inactive} Mult)"
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#2#{}",
@@ -1908,7 +1894,8 @@ return {
                         "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}1{} time",
                         "Gains {X:dark_edition,C:white}^#2#{} Mult when this happens",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
-                        "{C:inactive,s:0.7}(Copies become {C:dark_edition}Negative{C:inactive,s:0.7} if no room)",
+                        "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
+                        "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)",
                         "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#3#{C:inactive,s:0.7} Mult)",
                     },
                     {
@@ -1926,11 +1913,13 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}#3#{} time",
-                        "{X:dark_edition,C:white}^#2#{C:inactive} Mult",
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}1{} time",
+                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult",
+                        "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
+                        "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)"
                     },
                     {
-                        "{C:unik_caption,s:0.7,E:1}#5#{}", --TODO: adjustable quotes, for 
+                        "{C:unik_caption,s:0.7,E:1}#4#{}", --TODO: adjustable quotes, for 
                         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                         "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
                     }
@@ -2523,10 +2512,10 @@ return {
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                        "{C:attention}Converts #4#{} random scored card#<s>4# suits",
+                        "{C:attention}Converts{} all scored cards suits",
                         "into the first scored {C:attention}Light Suit",
                         "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Light Suit{C:inactive,s:0.8} in deck)",
-                        "{C:inactive,s:0.6}(Randomly selects per round if Suits appear equally)",
+                        "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -2546,10 +2535,10 @@ return {
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                        "{C:attention}Converts all scored card#<s>4# suits",
+                        "{C:attention}Converts{} all scored cards suits",
                         "into the first scored {C:attention}Dark Suit",
                         "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Dark Suit{C:inactive,s:0.8} in deck)",
-                        "{C:inactive,s:0.6}(Randomly selects per hand if Suits appear equally)",
+                        "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -3160,6 +3149,15 @@ return {
                 unlock={
                     "Lose {C:attention,E:1}#1#{} runs",
                     "{C:inactive}(#2#)",
+                },
+            },
+            j_gros_michel = {
+                name="Gros Michel",
+                text={
+                    "{C:mult}+#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance to",
+                    "{C:red}Self-Banish",
+                    "at end of round",
                 },
             },
             j_matador = {
@@ -3922,7 +3920,7 @@ return {
 				name = "Decrementing Food Jokers",
 				text = {
 					"{s:0.8}Turtle Bean, Popcorn, Ramen,",
-					"{s:0.8}Ice Cream and Clicked Cookie",
+					"{s:0.8}Ice Cream, Brownie, Multeasers",
 				},
 			},
             unik_banned_ranks_foundation = {
@@ -4305,11 +4303,11 @@ return {
                     "{C:inactive,s:0.9}(Avoids destruction when possible)"
                 }
             },
-            unik_zeta = {
-                name = "{X:unik_void_color,C:unik_eye_searing_red}ZETA",
+            unik_taw = {
+                name = "{X:unik_void_color,C:unik_eye_searing_red}TAW",
                 text = {
-                    "{C:unik_void_color}The {c:red}Sticker{C:unik_void_color} and Card",
-                    "{C:unik_void_color}cannot be removed",
+                    "{C:unik_eye_searing_red}Sticker{C:unik_void_color} and Card",
+                    "{C:unik_eye_searing_red}cannot be removed",
                     "{X:unik_void_color,C:unik_eye_searing_red,S:2}EVER."
                 }
             },
@@ -5653,7 +5651,7 @@ return {
             unik_shielded = "Shielded",
             unik_claw_mark = "Claw Mark",
             unik_decaying = "Decaying",
-            unik_zeta = "ZETA",
+            unik_taw = "TAW",
             unik_lily_mark = "Mark of the Lily",
         },
         quips={

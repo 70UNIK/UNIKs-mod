@@ -49,6 +49,7 @@ SMODS.Joker {
         card.ability.eternal = true
         card.ability.cry_absolute = true
         card.ability.aleph = true
+        card.ability.unik_taw = true
     end,
 	-- The functioning part of the joker, looks at context to decide what step of scoring the game is on, and then gives a 'return' value if something activates.
     calculate = function(self, card, context)

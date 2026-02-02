@@ -11,7 +11,7 @@ local function killEternals()
 end
 local function turnJokerintoJoker(location,jack)
     --avoid cursed jokers and ghosts and absolute jokers
-    if (G.jokers.cards[location].config.center.key ~= "j_superposition" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
+    if (G.jokers.cards[location].config.center.key ~= "j_superposition" and not G.jokers.cards[location].ability.unik_taw and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then
             card_eval_status_text(

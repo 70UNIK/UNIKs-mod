@@ -18,6 +18,9 @@ SMODS.Joker {
         return { 
             key = key, vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.depleted_threshold} }
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.extra.destroyed = false
+    end,
     calculate = function(self, card, context)
         if (context.individual and context.cardarea == G.play) or context.forcetrigger then
             if (card.ability.unik_depleted and card.ability.extra.x_mult - card.ability.extra.x_mult_mod < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.x_mult - card.ability.extra.x_mult_mod <= 1) then

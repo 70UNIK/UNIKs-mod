@@ -1,4 +1,5 @@
 BLINDSIDE.Joker({
+    blindside_joker = true,
     key = 'unik_blindside_lily',
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=6},
@@ -8,9 +9,6 @@ BLINDSIDE.Joker({
     order = 1,
     boss = {min = 2},
     active = true,
-    in_pool = function(self, args)
-        return UNIK.hasBlindside()
-    end,
     calculate = function(self, blind, context)
         if context.before and not G.GAME.blind.disabled then
             

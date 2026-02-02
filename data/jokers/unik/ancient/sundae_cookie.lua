@@ -33,7 +33,7 @@ SMODS.Joker {
 		local quoteset = 'normal'
         local RNDM = math.random(#sundae_quotes[quoteset])
         local extra = ""
-        local suits = getDominantSuit(type)
+        local suits = getDominantSuit('dark')
         local suit = G.GAME.current_round.unik_sundae_card and G.GAME.current_round.unik_sundae_card.suit or "Spades"
         if suits and #suits == 1 then
             suit = suits[1]
@@ -42,7 +42,7 @@ SMODS.Joker {
             extra = localize(suit or "Spades","suits_plural") .. "!"
         end
 		return {
-		vars = {localize( suit or "Spades", "suits_plural"),center.ability.extra.x_mult,localize(sundae_quotes[quoteset][RNDM] .. "" ) .. extra, colours = {G.C.SUITS[suit],},
+		vars = {localize( suit or "Spades", "suits_plural"),center.ability.extra.x_mult,localize(sundae_quotes[quoteset][RNDM] .. "" ) .. extra, colours = {G.C.SUITS[suit or "Spades"],},
 	},
     
     }
@@ -71,20 +71,16 @@ SMODS.Joker {
             end
         end
         if context.after and context.cardarea == G.jokers and not context.repetition and not context.retrigger_joker then
-            local firstDark = nil
             local firstSuit = nil
             for i,v in pairs(context.scoring_hand) do
                 if UNIK.is_suit_type(v,'dark') then
-                    firstDark = v
-                    break;
-                end
-            end
-            if firstDark then
-                for i = 1, UNIK.dark_suits do
-                    if UNIK.dark_suits[i] == firstDark.base.suit then
+                    for i = 1, #UNIK.dark_suits do
+                    if UNIK.dark_suits[i] == v.base.suit then
                         firstSuit = UNIK.dark_suits[i]
                         break;
                     end
+                end
+                    break;
                 end
             end
             
@@ -112,7 +108,7 @@ SMODS.Joker {
                         delay = 0.1,
                         trigger= 'after',
                         func = function()
-                            assert(SMODS.change_base(validCards[i], firstDark))
+                            assert(SMODS.change_base(validCards[i], firstSuit))
                             return true
                         end
                 }))
@@ -145,17 +141,22 @@ function getDominantSuit(type)
         print("INVALID SUIT TYPE DETECTED: Suit must be 'light' or 'dark'")
         return nil
     end
+    if not G.playing_cards then
+        return nil
+    end
     for k, v in ipairs(G.playing_cards) do
         if UNIK.is_suit_type(v,type) then
             for i = 1, #UNIK[type..'_suits'] do
-                suitTable.UNIK[type..'_suits'][i] = suitTable.UNIK[type..'_suits'][i] or 0
-                if v:is_suit(UNIK.dark_suits[i]) then
-                    suitTable.UNIK[type..'_suits'][i] = suitTable.UNIK[type..'_suits'][i] + 1
+                local suit = UNIK[type..'_suits'][i]
+                suitTable[suit] = suitTable[suit] or 0
+                if v:is_suit(suit) then
+                    suitTable[suit] = suitTable[suit] + 1
                     
                 end
             end
         end
     end
+   -- print(suitTable)
     for i,v in pairs(suitTable) do
         --designates highest suit
         if v > highestCount then
@@ -165,7 +166,7 @@ function getDominantSuit(type)
             highestSuits[#highestSuits+1] = i
         end
     end
-    print(highestSuits)
+   -- print(highestSuits)
     return highestSuits
 end
 

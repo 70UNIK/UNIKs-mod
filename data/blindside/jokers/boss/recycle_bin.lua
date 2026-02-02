@@ -1,5 +1,6 @@
 --X1 mult per hand, incraese this by X0.1 per blind discarded this round
 BLINDSIDE.Joker({
+    blindside_joker = true,
     key = 'unik_blindside_recycle_bin',
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=9},
@@ -9,15 +10,12 @@ BLINDSIDE.Joker({
     order = 1,
     boss = {min = 1},
     active = true,
-    in_pool = function(self, args)
-        return UNIK.hasBlindside()
-    end,
     loc_vars = function(self,blind)
         G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult or 1
-        return { vars = { G.GAME.unik_blind_xmult, 0.1 .. "" } }
+        return { vars = { G.GAME.unik_blind_xmult, 0.05 .. "" } }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 1 .. "", 0.1 .. "" } }
+        return { vars = { 1 .. "", 0.05 .. "" } }
     end,
     calculate = function(self, blind, context)
         if context.setting_blind and not context.disabled and not G.GAME.blind.disabled then
@@ -38,7 +36,7 @@ BLINDSIDE.Joker({
         if not blind.disabled and context.discard then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
                 blind:wiggle()
-                G.GAME.unik_blind_xmult= G.GAME.unik_blind_xmult + 0.1
+                G.GAME.unik_blind_xmult= G.GAME.unik_blind_xmult + 0.05
                 return true
             end}))
             

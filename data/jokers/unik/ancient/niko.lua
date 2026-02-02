@@ -31,25 +31,20 @@ SMODS.Joker {
 		local quoteset = 'normal'
         local RNDM = math.random(#niko_quotes[quoteset])
         local extra = ""
-        local suits = getDominantSuit(type)
+        local suits = getDominantSuit('light')
         local suit = G.GAME.current_round.unik_niko_card and G.GAME.current_round.unik_niko_card.suit or "Hearts"
         if suits and #suits == 1 then
             suit = suits[1]
         end
         if RNDM == 3 then
             extra = localize(
-					suit,
+					suit or "Hearts",
 					"suits_plural"
 				) .. "..."
         end
 		return {
-		vars = {localize(
-					suit,
-					"suits_plural"
-				),center.ability.extra.x_mult
-	,localize(niko_quotes[quoteset][RNDM] .. "" ) .. extra,
-    colours = {
-					G.C.SUITS[suit],
+		vars = {localize(suit or "Hearts","suits_plural"),center.ability.extra.x_mult,localize(niko_quotes[quoteset][RNDM] .. "" ) .. extra,colours = {
+					G.C.SUITS[suit or "Hearts"],
 				},
 	},
     
@@ -79,20 +74,16 @@ SMODS.Joker {
             end
         end
         if context.after and context.cardarea == G.jokers and not context.repetition and not context.retrigger_joker then
-            local firstDark = nil
             local firstSuit = nil
             for i,v in pairs(context.scoring_hand) do
                 if UNIK.is_suit_type(v,'light') then
-                    firstDark = v
-                    break;
-                end
-            end
-            if firstDark then
-                for i = 1, UNIK.light_suits do
-                    if UNIK.light_suits[i] == firstDark.base.suit then
+                    for i = 1, #UNIK.light_suits do
+                    if UNIK.light_suits[i] == v.base.suit then
                         firstSuit = UNIK.light_suits[i]
                         break;
                     end
+                end
+                    break;
                 end
             end
             
@@ -120,7 +111,7 @@ SMODS.Joker {
                         delay = 0.1,
                         trigger= 'after',
                         func = function()
-                            assert(SMODS.change_base(validCards[i], firstDark))
+                            assert(SMODS.change_base(validCards[i], firstSuit))
                             return true
                         end
                 }))
@@ -145,7 +136,7 @@ SMODS.Joker {
 --Beware of using wild cards! Niko treats wild cards as "has hearts, diamonds and fluerons + stars", so will randomly select if multiple suits are present!
 function reset_niko_card()
     G.GAME.current_round.unik_niko_card = { suit = "Hearts" }
-    local suits = getDominantSuit('dark')
+    local suits = getDominantSuit('light')
     if suits then
         local suit = pseudorandom_element(suits, pseudoseed("unik_niko_22222" .. G.GAME.round_resets.ante))
         G.GAME.current_round.unik_niko_card.suit = suit

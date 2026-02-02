@@ -12,13 +12,23 @@ local wl_quotes = {
 
 local function White_lily_copy(card)
     local negative = false
-    if not #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+    if (#G.jokers.cards + G.GAME.joker_buffer > G.jokers.config.card_limit) then
         negative = true
     end
     local create = 1
 	G.GAME.joker_buffer = G.GAME.joker_buffer + create
 
-    local _card = copy_card(card, nil, nil, nil, nil)
+    local _card = nil
+    --create a new card instead with edition if it's a decrementing one
+    if card.config.center.pools and (card.config.center.pools.autocannibalism_food) then
+        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, card.config.center.key)
+        if card.edition then
+            _card:set_edition(card.edition.key,true)
+        end
+        
+    else
+        _card = copy_card(card, nil, nil, nil, nil)
+    end
     _card:add_to_deck()
     _card:start_materialize()
     G.jokers:emplace(_card)
@@ -29,6 +39,16 @@ local function White_lily_copy(card)
     _card.ability.unik_lily_mark = true
 
     G.GAME.joker_buffer = 0
+    G.E_MANAGER:add_event(Event({
+        delay = 0,
+        trigger= 'before',
+        func = function()
+            SMODS.calculate_context({unik_white_lily_increment = true})
+            return true
+        end
+    }))
+    
+    
 
 end
 SMODS.Atlas {
@@ -57,6 +77,7 @@ SMODS.Joker {
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
     config = { extra = { Emult = 0.0, Emult_mod = 0.1}, immutable = {base_emult = 1.0,limit = 2.0} },
 	loc_vars = function(self, info_queue, center)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
         local quoteset = 'normal'
         local key = 'j_unik_white_lily_cookie'
         if center.ability.extra.Emult + center.ability.immutable.base_emult >= center.ability.immutable.limit then
@@ -66,28 +87,6 @@ SMODS.Joker {
             key = key, vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,tostring(center.ability.extra.Emult_mod),center.ability.immutable.limit,
         localize(wl_quotes[quoteset][math.random(#wl_quotes[quoteset])] .. "")} }
 	end,
-    remove_from_deck = function(self, card, from_debuff)
-        if not from_debuff then
-            if not  card.ability.immutable.sold and not card.ability.unik_lily_mark then
-                SMODS.scale_card(card, {
-                    ref_table =card.ability.extra,
-                    ref_value = "Emult",
-                    scalar_value = "Emult_mod",
-                    base = 1,
-                    message_key = "a_powmult",
-                    operation = function(ref_table, ref_value, initial, scaling)
-						ref_table[ref_value] = math.min(initial + scaling,card.ability.immutable.limit - card.ability.immutable.base_emult)
-					end,
-                    message_colour = G.C.DARK_EDITION,
-                        force_full_val = true,
-                })
-                White_lily_copy(card)
-            end
-        end
-    end,
-    add_to_deck = function(self,card,from_debuff)
-        card.ability.immutable.sold = false
-    end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
         if context.forcetrigger then
@@ -104,7 +103,9 @@ SMODS.Joker {
                 }
             end
 		end
-        if not context.blueprint and context.unik_destroying_joker and card.ability.extra.Emult + card.ability.immutable.base_emult < card.ability.immutable.limit then
+        if not context.blueprint and context.unik_white_lily_increment
+        and card.ability.extra.Emult + card.ability.immutable.base_emult < card.ability.immutable.limit
+        then
                 SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
                     ref_value = "Emult",
@@ -122,9 +123,6 @@ SMODS.Joker {
 
             }
         end
-         if context.selling_self then
-            card.ability.immutable.sold = true
-        end
     end,
 }
 
@@ -140,16 +138,32 @@ end
 -- Add new context that happens after destroying jokers
 local remove_ref = Card.remove
 function Card.remove(self)
-  -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
-  if self.added_to_deck and self.ability.set == 'Joker' and (not G.CONTROLLER.locks.selling_card or self.ability.destroyed_by_scattering) then
-        SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
-        if next(find_joker("j_unik_white_lily_cookie")) then
-            White_lily_copy(card)
+    -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
+    if not G.GAME.ignore_delete_context then
+        if self.added_to_deck and self.ability.set == 'Joker' and (not G.CONTROLLER.locks.selling_card or self.ability.destroyed_by_scattering) then
+            if G and G.GAME then
+                SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
+                if next(find_joker("j_unik_white_lily_cookie")) and not self.ability.unik_lily_mark and 
+                not UNIK.detrimental_rarities[self.config.center.rarity] and not self.ability.unik_taw then
+                    White_lily_copy(self)
+                end
+            end
+            
+            self.ability.destroyed_by_scattering = nil
         end
-        self.ability.destroyed_by_scattering = nil
-  end
+    end
 
-  local ret = remove_ref(self)
-  self.ability.destroyed_by_scattering = nil
-  return ret
+
+    local ret = remove_ref(self)
+    self.ability.destroyed_by_scattering = nil
+    return ret
 end
+
+local deleter = Game.delete_run
+function Game:delete_run()
+    G.GAME.ignore_delete_context = true
+    local ret = deleter(self)
+    G.GAME.ignore_delete_context = nil
+    return ret
+end
+

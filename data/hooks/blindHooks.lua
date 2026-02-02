@@ -112,7 +112,9 @@ function Blind:disable()
                 scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
             })
 			G.GAME.blind:wiggle()
+            return true
         end
+        
 	end
     local ret = disblref2(self)
     if SMODS and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config and SMODS.OPENED_BOOSTER.config.center then

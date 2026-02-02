@@ -28,6 +28,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     immutable = true,
+    pools = {["Dice"] = true},
     loc_vars = function(self, info_queue, center)
 	end,
     calculate = function(self, card, context)

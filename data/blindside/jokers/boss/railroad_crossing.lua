@@ -1,5 +1,6 @@
 UNIK.blindside_colours = {'Red', 'Green', 'Blue', 'Yellow', 'Purple', 'Faded'}
 BLINDSIDE.Joker({
+    blindside_joker = true,
     key = 'unik_blindside_railroad_crossing',
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=7},
@@ -11,9 +12,6 @@ BLINDSIDE.Joker({
     active = true,
     get_assist = function (self)
         return G.P_BLINDS["bl_bld_chad"]
-    end,
-    in_pool = function(self, args)
-        return UNIK.hasBlindside()
     end,
     loc_vars = function(self)
         if not G.GAME.railroad_debuffed_hue then

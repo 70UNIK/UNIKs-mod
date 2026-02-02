@@ -36,8 +36,15 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		local xmult = 1
-		local text = G.FUNCS.get_poker_hand_info(G.play and G.play.cards or G.hand.highlighted)
-		if text then
+		local text = nil
+		if G.play then
+			text = G.FUNCS.get_poker_hand_info(G.play.cards)
+		end
+		if (not text or text == 'NULL') and G.hand and G.hand.highlighted then
+			text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+		end
+		
+		if text and text ~= 'NULL' then
 			xmult = G.GAME.hands[text].mult
 		end
 		return {  
@@ -61,7 +68,11 @@ SMODS.Joker {
 			G.GAME.hands[context.hand].chips = G.GAME.hands[context.hand].chips*card.ability.extra.exp_levelup
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
 				
-				update_hand_text({delay = 0}, {chips = tostring("X"..math.ceil((card.ability.extra.exp_levelup)*100)/100), StatusText = true})
+				update_hand_text({delay = 0}, {
+					chips = tostring("X"..math.ceil((card.ability.extra.exp_levelup)*100)/100), 
+					level = G.GAME.hands[context.hand].level,
+					handname = localize(context.hand, 'poker_hands'),
+				StatusText = true})
 				G.E_MANAGER:add_event(Event({
 					trigger = "immediate",
 					func = function()
@@ -70,9 +81,17 @@ SMODS.Joker {
 					end,
 				}))
 			end
+			if not context.instant then
+				delay(0.5)
+			end
+			
 			G.GAME.hands[context.hand].mult = G.GAME.hands[context.hand].mult*card.ability.extra.exp_levelup
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
-				update_hand_text({delay = 0}, {mult = tostring("X"..math.ceil((vcard.ability.extra.exp_levelup)*100)/100), StatusText = true})
+				update_hand_text({delay = 0}, {
+					mult = tostring("X"..math.ceil((card.ability.extra.exp_levelup)*100)/100), 
+					level = G.GAME.hands[context.hand].level,
+					handname = localize(context.hand, 'poker_hands'),
+					StatusText = true})
 				G.E_MANAGER:add_event(Event({
 					trigger = "immediate",
 					func = function()
@@ -81,6 +100,10 @@ SMODS.Joker {
 					end,
 				}))
 			end
+			update_hand_text(
+				{ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
+				{ mult = 0, chips = 0, handname = '', level = '' }
+			)
 			if not context.instant then
 				return {
 					message = localize("k_upgrade_ex"),

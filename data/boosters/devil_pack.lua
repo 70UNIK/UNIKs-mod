@@ -48,7 +48,7 @@ SMODS.Booster{
 	pos = { x = 0, y = 1 },
     cost = 0,
     weight = 0, 
-    config = { extra = 3, choose = 1 },
+    config = { extra = 2, choose = 1 },
     cry_digital_hallucinations = {
         colour = G.C.SECONDARY_SET.Spectral,
 		loc_key = "k_plus_spectral",

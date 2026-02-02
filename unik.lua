@@ -479,6 +479,11 @@ SMODS.Rarity({
 	badge_colour = HEX("474931"),
 })
 
+UNIK.detrimental_rarities = {
+	unik_detrimental = true,
+	cry_cursed = true,
+	jen_junk = true,
+}
 
 -- stickers
 NFS.load(mod_path .. "data/stickers/shielded.lua")() 
@@ -489,8 +494,10 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/decaying.lua")() 
-NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")()
+NFS.load(mod_path .. "data/stickers/taw.lua")()  
 NFS.load(mod_path .. "data/stickers/claw_mark.lua")() 
+NFS.load(mod_path .. "data/stickers/lily_mark.lua")() 
 if not (SMODS.Mods["Cryptid"] or {}).can_load then
 	NFS.load(mod_path .. "data/stickers/cryptidless_sticker_logic.lua")() 
 end
@@ -763,7 +770,8 @@ if MoreFluff and mf_config and mf_config["Colour Cards"] == true then
 	if (SMODS.Mods["paperback"] or {}).can_load then
 		NFS.load(mod_path .. "data/colours/lavender.lua")()
 	end
-	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
+	--NFS.load(mod_path .. "data/colours/stone_grey.lua")()
+	NFS.load(mod_path .. "data/colours/verdant_green.lua")()
 end
 
 
@@ -1227,6 +1235,19 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
 
+--excluding the marble...
+
+function UNIK.add_almanac_for_characters()
+	for i,v in pairs(G.P_CENTERS) do
+		if v.set == "Joker" and string.sub(i,1,5) == "j_jen" and (v.rarity == 1 or v.rarity == 2 or v.rarity == 3 or v.rarity == 'cry_epic') and i ~= 'j_jen_godsmarble' then
+			v.pools.Character = true
+			print("Character added: " .. i)
+		end
+	end
+end
+if next(SMODS.find_mod("jen")) then
+	UNIK.add_almanac_for_characters()
+end
 
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.

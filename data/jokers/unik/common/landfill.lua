@@ -9,7 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     immutable = true,
     demicoloncompat = true,
-    config = { extra = {chips = 0, chip_mod = 3, bad_chip_mod = 3}},
+    config = { extra = {chips = 0, chip_mod = 3, bad_chip_mod = 2}},
     loc_vars = function(self, info_queue, center)
         return { 
             vars = {center.ability.extra.chip_mod,-center.ability.extra.bad_chip_mod,math.max(center.ability.extra.chips,0)},
