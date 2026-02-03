@@ -15,7 +15,7 @@ SMODS.Blind{
     boss_colour= HEX("3dd9ca"), 
     dollars = 13,
     mult = 0.666,
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, max = 5},
     death_message = 'special_lose_unik_tornado_legendary',
     debuff = {
         akyrs_blind_difficulty = "unik_legendary",

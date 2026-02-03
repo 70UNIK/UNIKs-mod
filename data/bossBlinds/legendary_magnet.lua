@@ -17,7 +17,7 @@ SMODS.Blind{
     boss_colour= HEX("5c0007"), --all legendary blinds will be blood red and black.
     dollars = 13,
     mult = 0.666,
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, max = 5},
     debuff = {
         akyrs_blind_difficulty = "unik_legendary",
         akyrs_cannot_be_overridden = true,

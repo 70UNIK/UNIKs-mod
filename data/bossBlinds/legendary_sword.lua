@@ -22,7 +22,7 @@ SMODS.Blind{
         akyrs_cannot_be_skipped = true,
     },
     mult = 1,
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, max = 5},
     unik_exponent = {1,3},
     death_message = 'special_lose_unik_sword_legendary',
     set_blind = function(self, reset, silent)

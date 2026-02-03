@@ -145,7 +145,6 @@ NFS.load(mod_path .. "talismanless.lua")()
 NFS.load(mod_path .. "data/hooks/startup.lua")()
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
-NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/colours.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/hooks/boosterHooks.lua")()
@@ -1015,6 +1014,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/blossom.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/maya_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")() 
+--BUN BUN (note add bunny = true for bunny mod crossmod; he is a bunny after all)
 
 --Ancient
 NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
@@ -1228,11 +1228,11 @@ end
 --blindside:
 if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()	
-
-	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
-	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
-	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
-	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+	--temporarily disabled until v0.7
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
 
 --excluding the marble...
@@ -1247,6 +1247,13 @@ function UNIK.add_almanac_for_characters()
 end
 if next(SMODS.find_mod("jen")) then
 	UNIK.add_almanac_for_characters()
+end
+
+function UNIK.has_almanac()
+	if next(SMODS.find_mod("jen")) then
+		return true
+	end
+	return false
 end
 
 ---

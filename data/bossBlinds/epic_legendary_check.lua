@@ -11,6 +11,12 @@ function CanSpawnEpic()
         return true
     end
     if not UNIK.overshootEnabled() then
+        --if overshoot is disabled, but almanac is installed, it spawns like any other epic blind, AFTER ROUND 40 OF COURSE!!!!!
+        if UNIK.has_almanac() then
+            if G.GAME.round >= 40 then
+                return true
+            end
+        end
         return false
     end
     if G.GAME.round >= 40 then

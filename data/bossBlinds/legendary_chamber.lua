@@ -19,7 +19,7 @@ SMODS.Blind{
     boss_colour= HEX("9bc117"),
     dollars = 13,
     mult = 0.1,
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, max = 5},
     debuff = {
         akyrs_blind_difficulty = "unik_legendary",
         akyrs_cannot_be_overridden = true,

@@ -29,7 +29,7 @@ SMODS.Blind{
     },
     pronouns = "she_her",
     mult = 1,
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, max = 5},
     death_message = "special_lose_unik_legendary_crown",
     get_loc_debuff_text = function(self)
 		return localize("k_unik_legendary_crown_defeat_x_times1") .. (G.GAME.unik_crown_progress or G.GAME.round_resets.hands) .. localize("k_unik_legendary_crown_defeat_x_times2")
