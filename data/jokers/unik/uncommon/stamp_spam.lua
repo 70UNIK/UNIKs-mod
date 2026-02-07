@@ -8,7 +8,6 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
-    immutable = true,
     config = {extra = {triggers = 4}},
     loc_vars = function(self, info_queue, center)
         return { vars = {center.ability.extra.triggers}}

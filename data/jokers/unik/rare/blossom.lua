@@ -85,18 +85,3 @@ SMODS.Joker {
         end
     end
 }
-
---character cards
---spawns character jokers/almanac styled ones
---soul spawns at 0.008% rate
---awakening very rarely spawns here.
-SMODS.ObjectType({
-	key = "character",
-	default = "j_unik_pibby",
-	cards = {
-	},
-	inject = function(self)
-		SMODS.ObjectType.inject(self)
-
-	end,
-})

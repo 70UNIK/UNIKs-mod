@@ -3,19 +3,24 @@ function UNIK.get_banned_count()
     local gros_michael = 0
     if G.GAME.paperback and G.GAME.paperback.banned_run_keys then
         for i,v in pairs(G.GAME.paperback.banned_run_keys) do
-            counter = counter + 1
-            if i == 'j_gros_michel' then
-                gros_michael = 1
+             if G.P_CENTERS[i] then
+                counter = counter + 1
+                if i == 'j_gros_michel' then
+                    gros_michael = 1
+                end
             end
         end
     end
     if G.GAME.cry_banished_keys then
         for i,v in pairs(G.GAME.cry_banished_keys) do
-            if not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
-                counter = counter + 1
-            end
-            if i == 'j_gros_michel' and not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
-                gros_michael = 1
+            --prevents displaying cards that have been banned by jen earlier.
+            if G.P_CENTERS[i] then
+                if not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    counter = counter + 1
+                end
+                if i == 'j_gros_michel' and not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    gros_michael = 1
+                end
             end
         end
     end
@@ -30,19 +35,24 @@ function UNIK.getCombinedBannedTable()
     local gros_michael = 0
     if G.GAME.paperback and G.GAME.paperback.banned_run_keys then
         for i,v in pairs(G.GAME.paperback.banned_run_keys) do
-            banned[#banned+1] = i
-            if i == 'j_gros_michel' then
-                gros_michael = 1
+            if G.P_CENTERS[i] then
+                banned[#banned+1] = i
+                if i == 'j_gros_michel' then
+                    gros_michael = 1
+                end
             end
+            
         end
     end
     if G.GAME.cry_banished_keys then
         for i,v in pairs(G.GAME.cry_banished_keys) do
-            if not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
-                banned[#banned+1] = i
-            end
-            if i == 'j_gros_michel' and not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
-                gros_michael = 1
+            if G.P_CENTERS[i] then
+                if not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    banned[#banned+1] = i
+                end
+                if i == 'j_gros_michel' and not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    gros_michael = 1
+                end
             end
         end
     end

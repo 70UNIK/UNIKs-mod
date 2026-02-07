@@ -7,7 +7,6 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    immutable = true,
     demicoloncompat = true,
     config = { extra = {chips = 0, chip_mod = 3, bad_chip_mod = 2}},
     loc_vars = function(self, info_queue, center)

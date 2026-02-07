@@ -9,7 +9,6 @@ SMODS.Joker {
     blueprint_compat = false, --sure I can make it copyable, but if you keep on cloning blueprints and endlessly stacking itself with this, this can still explode.
     perishable_compat = true,
 	eternal_compat = true,
-    immutable = true,
     config = { extra = { 
         multiplier = 5}, --why 4X? well you can copy it, retrigger it, blueprint it
         immutable = { max_multiplier = 100 },

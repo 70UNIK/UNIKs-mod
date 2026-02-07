@@ -24,7 +24,8 @@ SMODS.current_mod.optional_features = {
 }
 
 function UNIK.has_almanac()
-	if next(SMODS.find_mod("jen")) then
+	
+	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
 		return true
 	end
 	return false
@@ -927,7 +928,7 @@ end
 ----------------------------------------
 ---JONKLERS
 ----------------------------------------
-
+NFS.load(mod_path .. "data/misc/character_pool.lua")()
 --Common
 NFS.load(mod_path .. "data/jokers/unik/common/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/gt710.lua")()
@@ -1221,33 +1222,6 @@ if next(SMODS.find_mod("Blindside")) then
 	-- NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
 	-- NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
-
---excluding the marble...
-
-function UNIK.add_almanac_for_characters()
-	for i,v in pairs(G.P_CENTERS) do
-		if v.set == "Joker" and string.sub(i,1,5) == "j_jen" and (v.rarity == 1 or v.rarity == 2 or v.rarity == 3 or v.rarity == 'cry_epic') and i ~= 'j_jen_godsmarble' then
-			v.pools.Character = true
-			print("Almanac Character added: " .. i)
-		end
-	end
-end
-
-function UNIK.add_furlatro_for_characters()
-	for i,v in pairs(G.P_CENTERS) do
-		if v.set == "Joker" and string.sub(i,1,5) == "j_fur" and (v.rarity == 1 or v.rarity == 2 or v.rarity == 3 or v.rarity == 'cry_epic') and v.pools and v.pools.furry then
-			v.pools.Character = true
-			print("Furlatro Character added: " .. i)
-		end
-	end
-end
-if next(SMODS.find_mod("jen")) then
-	UNIK.add_almanac_for_characters()
-end
-if next(SMODS.find_mod("Furlatro")) then
-	UNIK.add_furlatro_for_characters()
-end
-
 
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
