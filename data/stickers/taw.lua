@@ -15,50 +15,42 @@ SMODS.Sticker{
 
 local updateStickerHook = Card.update
 function Card:update(dt)
-    if self.unik_taw then
-        self.ability.unik_taw = true
-         self.ability[tawSeed] = true
+    if self.added_to_deck then
+        if self.unik_taw then
+            self.ability.unik_taw = true
+            self.ability[tawSeed] = true
+        end
+        if self.ability.unik_taw then
+            self.cry_absolute = nil
+            self.unik_taw = true
+            self.ability.eternal = nil
+            self.ability.cry_absolute = nil
+            self.ability[tawSeed] = true
+            self.ability.perishable = nil
+            self.ability.unik_disposable = nil
+            self.ability.unik_niko = nil
+            self.ability.unik_decaying = nil
+            self.ability.immune_to_vermillion = true
+        end
+        if self.ability[tawSeed] then
+            self.ability.unik_taw = true
+        end
+        if self.config.center.key == 'j_jen_kosmos' then
+            self.ability.unik_taw = true
+        end
     end
-    if self.ability.unik_taw then
-        self.cry_absolute = nil
-        self.unik_taw = true
-        self.ability.eternal = nil
-        self.ability.cry_absolute = nil
-        self.ability[tawSeed] = true
-        self.ability.perishable = nil
-        self.ability.unik_disposable = nil
-        self.ability.unik_niko = nil
-        self.ability.unik_decaying = nil
-        self.ability.immune_to_vermillion = true
-    end
-    if self.ability[tawSeed] then
-        self.ability.unik_taw = true
-    end
-    if self.config.center.key == 'j_jen_kosmos' or self.config.center.key == 'j_paperback_jimbocards' then
+    if self.config.center.key == 'j_paperback_jimbocards' then
         self.ability.unik_taw = true
     end
     local ret = updateStickerHook(self,dt)
     return ret
 end
 
-SMODS.Sticker:take_ownership("eternal", {
-	draw = function(self, card)
-		local notilt = nil
-		if card.area and card.area.config.type == "deck" then
-			notilt = true
-		end
-		if not card.ability.cry_absolute and not card.ability.entr_aleph and not card.ability.unik_taw then
-			G.shared_stickers[self.key].role.draw_major = card
-			G.shared_stickers[self.key]:draw_shader("dissolve", nil, nil, notilt, card.children.center)
-		end
-	end,
-}, true)
-
 local remove_ref = Card.remove
 function Card.remove(self)
     -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
     if not G.GAME.ignore_delete_context then
-        if self.added_to_deck and self.ability.unik_taw and not self.ability.unik_already_used_taw then
+        if self.ability.unik_taw and not self.ability.unik_already_used_taw and not self.ability.unik_bypass_taw and not G.SETTINGS.paused then
             local _card = nil
             --create a new card instead with edition if it's a decrementing one
             if self.config.center.pools and (self.config.center.pools.autocannibalism_food) then
@@ -88,6 +80,49 @@ function Card.remove(self)
 
     local ret = remove_ref(self)
     return ret
+end
+
+--balatro's soul hook; bypass taw:
+local cuc = Card.use_consumeable
+function Card:use_consumeable(area, copier)
+    if self.config.center.key == 'c_jen_soul_omega' then
+        for k, v in pairs(G.jokers.cards) do
+            if v.ability.unik_taw then
+                v.ability.unik_bypass_taw = true
+            end 
+        end
+        for k, v in pairs(G.consumeables.cards) do
+            if v.ability.unik_taw then
+                v.ability.unik_bypass_taw = true
+            end 
+        end
+        for k, v in pairs(G.playing_cards) do
+            if v.ability.unik_taw then
+                v.ability.unik_bypass_taw = true
+            end 
+        end
+    end
+    
+    local c = cuc(self, area, copier)
+    --backup to remove bypass if balasoul fails to trigger 
+    if self.ability.extinct and self.config.center.key == 'c_jen_soul_omega' then
+        for k, v in pairs(G.jokers.cards) do
+            if v.ability.unik_taw then
+                v.ability.unik_bypass_taw = nil
+            end 
+        end
+        for k, v in pairs(G.consumeables.cards) do
+            if v.ability.unik_taw then
+                v.ability.unik_bypass_taw = nil
+            end 
+        end
+        for k, v in pairs(G.playing_cards) do
+            if v.ability.unik_taw then
+                v.ability.unik_bypass_taw = nil
+            end 
+        end
+    end
+    return c
 end
 
 local user = Card.use_consumeable

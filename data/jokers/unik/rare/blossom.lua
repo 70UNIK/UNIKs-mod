@@ -92,7 +92,7 @@ SMODS.Joker {
 --awakening very rarely spawns here.
 SMODS.ObjectType({
 	key = "character",
-	default = "c_soul",
+	default = "j_unik_pibby",
 	cards = {
 	},
 	inject = function(self)

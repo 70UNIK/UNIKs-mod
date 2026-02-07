@@ -61,6 +61,9 @@ SMODS.Challenge{
         --The box is banned
         banned_other = function(self)
             local banList = {}
+            banList[#banList+1] = {id = 'bl_unik_septic_seance', type = 'blind'}
+            banList[#banList+1] = {id = 'bl_unik_jaundice_jack', type = 'blind'}
+            banList[#banList+1] = {id = 'bl_unik_foul_flowerpot', type = 'blind'}
             if (SMODS.Mods["Cryptid"] or {}).can_load  then
                 banList[#banList+1] = {id = 'bl_cry_box', type = 'blind'}
                 banList[#banList+1] = {id = 'bl_cry_striker', type = 'blind'}

@@ -32,7 +32,7 @@ local function turnJokerintoJoker(location,jack)
                 { message = localize("k_unik_goading_fuck_you"), colour = G.C.PURPLE }
             )            
         end
-        _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
+        local _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()

@@ -15,10 +15,9 @@ payload = '''
 
 --If the blind has a "glitchy animation" (Legendary blinds only)
 --legendary_blind_patch1
-if blind_choice.config.glitchy_anim or blind_choice.glitchy_anim then
-    blind_choice.animation.legendary_glitch_anim = (blind_choice.config.glitchy_anim or blind_choice.glitchy_anim)
+if blind_choice.config.glitchy_anim then
+    blind_choice.animation.legendary_glitch_anim = (blind_choice.config.glitchy_anim)
 end
-
 '''
 match_indent = true
 
@@ -35,8 +34,8 @@ payload = '''
 --legendary_blind_patch2
 if v.glitchy_anim and discovered then
     temp_blind.legendary_glitch_anim = v.glitchy_anim
+    print(temp_blind.legendary_glitch_anim)
 end
-
 '''
 match_indent = true
 
@@ -51,10 +50,9 @@ payload = '''
 
 --If the blind has a "glitchy animation" (Legendary blinds only)
 --legendary_blind_patch2
-if v.glitchy_anim and discovered then
+if v.glitchy_anim then
     temp_blind.legendary_glitch_anim = v.glitchy_anim
 end
-
 '''
 match_indent = true
 

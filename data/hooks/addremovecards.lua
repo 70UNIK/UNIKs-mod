@@ -244,7 +244,7 @@ function CardArea:emplace(card, location, stay_flipped)
             --Formidicus fix, now constantly destroys cursed jokers
             elseif v.config.center.key == "j_cry_formidiulosus" then
                 for x, w in pairs(G.jokers.cards) do
-                    if (w.config.center.rarity == 'unik_detrimental' or w.config.center.rarity == 'cry_cursed') and not w.ability.extra.getting_captured then
+                    if (UNIK.detrimental_rarities[w.config.center.rarity] ) and not w.ability.extra.getting_captured then
                         --destory ghost
                         selfDestruction(w,"k_unik_pentagram_purified",G.C.MULT)
                         card_eval_status_text(v, "extra", nil, nil, nil, {

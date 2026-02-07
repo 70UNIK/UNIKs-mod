@@ -92,7 +92,7 @@ function turnJokerIntoJack(location,jack)
                 { message = localize("k_unik_jackshit"), colour = G.C.FILTER }
             )            
         end
-        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
+        local _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()

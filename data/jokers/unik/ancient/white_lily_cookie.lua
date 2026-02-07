@@ -140,7 +140,7 @@ local remove_ref = Card.remove
 function Card.remove(self)
     -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
     if not G.GAME.ignore_delete_context then
-        if self.added_to_deck and self.ability.set == 'Joker' and (not G.CONTROLLER.locks.selling_card or self.ability.destroyed_by_scattering) then
+        if self.ability.set == 'Joker' and (not G.CONTROLLER.locks.selling_card or self.ability.destroyed_by_scattering) and not G.SETTINGS.paused then
             if G and G.GAME then
                 SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
                 if next(find_joker("j_unik_white_lily_cookie")) and not self.ability.unik_lily_mark and 

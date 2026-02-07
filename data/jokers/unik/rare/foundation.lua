@@ -21,7 +21,7 @@ SMODS.Joker {
 	eternal_compat = false,
 	demicoloncompat = true, --NOPE!
 	update = function(self,card,dt)
-		card.ability.extra.threshold = 60
+		card.ability.extra.threshold = 18
 		if card.ability.extra.hands < card.ability.extra.threshold then
 			card.ability.extra.juiced_up = false
 		end

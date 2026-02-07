@@ -23,16 +23,19 @@ SMODS.current_mod.optional_features = {
 	},
 }
 
--- G.FUNCS.unik_update_overshoot_opt = function(e)
--- 	print(e)
--- 	print(e.to_key)
--- 	unik_config.unik_overshoot_level = e.to_key
--- 	-- unik_config.unik_overshoot_level
--- 	-- Talisman.config_file.score_opt_id = e.to_key
--- 	-- local score_opts = {"", "bignumber", "omeganum"}
--- 	-- Talisman.config_file.break_infinity = score_opts[e.to_key]
--- 	-- nativefs.write(lovely.mod_dir .. "/Talisman/config.lua", STR_PACK(Talisman.config_file))
--- end
+function UNIK.has_almanac()
+	if next(SMODS.find_mod("jen")) then
+		return true
+	end
+	return false
+end
+
+function AlterConfigWithAlmanac(config1,config2)
+	if UNIK.has_almanac() then
+		return config2
+	end
+	return config1
+end
 
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -56,18 +59,30 @@ SMODS.current_mod.config_tab = function() --Config tab
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
-			info = {
-				localize("unik_legendary_blinds_desc1"),
-				localize("unik_legendary_blinds_desc2")
-			},
+			info = AlterConfigWithAlmanac(
+				{
+					localize("unik_legendary_blinds_desc1"),
+					localize("unik_legendary_blinds_desc2")
+				},
+				{
+					localize("unik_legendary_blinds_desc1"),
+					localize("unik_legendary_blinds_desc2"),
+					localize("unik_legendary_blinds_desc3"),
+				}
+			)
 		}),
 		create_toggle({
 			label = localize("unik_enable_overshoot_option"),
 			ref_table = unik_config,
 			ref_value = "unik_overshoot_enabled",
-			info = {
-				localize("unik_overshoot_enable_desc"),
-			},
+			info = AlterConfigWithAlmanac({
+					localize("unik_overshoot_enable_desc"),
+				},
+				{
+					localize("unik_overshoot_enable_desc"),
+					localize("unik_overshoot_enable_desc2")
+				}
+			),
 		}),
 		create_toggle({
 			label = localize("unik_custom_menu_option"),
@@ -482,6 +497,7 @@ UNIK.detrimental_rarities = {
 	unik_detrimental = true,
 	cry_cursed = true,
 	jen_junk = true,
+	valk_supercursed = true,
 }
 
 -- stickers
@@ -803,6 +819,7 @@ NFS.load(mod_path .. "data/tags/limited_edition.lua")()
 --manacle tag: -1 hand size
 
 --BLINDS--
+NFS.load(mod_path .. "data/bossBlinds/vice_check.lua")()
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
@@ -1169,37 +1186,7 @@ if unik_config.unik_legendary_blinds then
 end
 
 NFS.load(mod_path .. "data/overrides/blind_spawn.lua")()
-function vice_check()
-	if G.GAME.round_resets.ante >= 0 and G.GAME.round_resets.ante < 2 then
-		return G.GAME.win_ante
-	end
-	G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1
-	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
-	if G.GAME.OvershootFXVal >= 4 then
-		return 1
-	end
-	local multiplier = 1
-	if G.GAME.OvershootFXVal >= 2 then
-		multiplier = 2
-	end
-	if G.GAME.OvershootFXVal >= 3 then
-		multiplier = 4
-	end
-	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
-		return 1
-	end
-	
-    if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*multiplier*10000)/10000)) == 0 then
-        return 1
-    end
-    if G.GAME.round_resets.ante and G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
-        return 1
-    end
-	if G.GAME.all_finishers then
-		return 1
-	end
-    return G.GAME.win_ante
-end
+
 
 -- joker buffs
 NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
@@ -1241,20 +1228,26 @@ function UNIK.add_almanac_for_characters()
 	for i,v in pairs(G.P_CENTERS) do
 		if v.set == "Joker" and string.sub(i,1,5) == "j_jen" and (v.rarity == 1 or v.rarity == 2 or v.rarity == 3 or v.rarity == 'cry_epic') and i ~= 'j_jen_godsmarble' then
 			v.pools.Character = true
-			print("Character added: " .. i)
+			print("Almanac Character added: " .. i)
+		end
+	end
+end
+
+function UNIK.add_furlatro_for_characters()
+	for i,v in pairs(G.P_CENTERS) do
+		if v.set == "Joker" and string.sub(i,1,5) == "j_fur" and (v.rarity == 1 or v.rarity == 2 or v.rarity == 3 or v.rarity == 'cry_epic') and v.pools and v.pools.furry then
+			v.pools.Character = true
+			print("Furlatro Character added: " .. i)
 		end
 	end
 end
 if next(SMODS.find_mod("jen")) then
 	UNIK.add_almanac_for_characters()
 end
-
-function UNIK.has_almanac()
-	if next(SMODS.find_mod("jen")) then
-		return true
-	end
-	return false
+if next(SMODS.find_mod("Furlatro")) then
+	UNIK.add_furlatro_for_characters()
 end
+
 
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.

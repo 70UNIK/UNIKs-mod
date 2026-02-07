@@ -283,3 +283,52 @@ G.FUNCS.use_blind_card = function(e)
 		return bunco_hook(e)
 	end
 end
+
+--For legendary blinds,etc... It changes the atlas, without changing the base atlas
+function AnimatedSprite:shift_atlas(sprite_pos)
+    self.animation = {
+        x= sprite_pos and sprite_pos.x or 0,
+        y=sprite_pos and sprite_pos.y or 0,
+        frames=self.atlas.frames,current=0,
+        w=self.scale.x, h=self.scale.y}
+end
+
+
+-- ban skip in epic cookie
+local skipRestriction = G.FUNCS.skip_blind
+G.FUNCS.skip_blind = function(e)
+    local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
+    local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
+    local obj3 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
+	if obj.key == 'bl_unik_epic_cookie' or G.GAME.modifiers.unik_no_skipping or (obj.boss and obj.boss.unskippable_ante) then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+        })
+        if e and e.disable_button then
+            e.disable_button = nil
+        end
+    elseif G.GAME.blind_on_deck == "Small" and obj3.boss and (obj3.boss.epic or obj3.boss.legendary or obj3.boss.unskippable_ante and G.GAME.round_resets.blind_states.Small ~= "Defeated") then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj3.boss_colour or G.C.RED
+        })
+        if e and e.disable_button then
+            e.disable_button = nil
+        end
+    elseif G.GAME.blind_on_deck == "Big" and obj2.boss and (obj2.boss.epic or obj2.boss.legendary or (obj2.boss.unskippable_ante and G.GAME.round_resets.blind_states.Big ~= "Defeated")) then
+        play_sound('cancel', 0.8, 1)
+        local text = localize('k_nope_ex')
+        attention_text({
+            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj2.boss_colour or G.C.RED
+        })
+        if e and e.disable_button then
+            e.disable_button = nil
+        end
+    else
+        skipRestriction(e)
+    end
+
+end

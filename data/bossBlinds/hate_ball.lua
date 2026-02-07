@@ -80,7 +80,7 @@ function turnJokerIntoEight(location,jack)
                 { message = localize("k_unik_hate_8"), colour = G.C.BLACK }
             )            
         end
-        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_8_ball")
+        local _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_8_ball")
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()

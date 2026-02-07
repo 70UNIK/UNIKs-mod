@@ -64,11 +64,11 @@ SMODS.Joker {
 			end
 			
 		end
-		if context.unik_after_levelup and context.hand then
-			G.GAME.hands[context.hand].chips = G.GAME.hands[context.hand].chips*card.ability.extra.exp_levelup
+		if context.unik_after_levelup and context.hand and context.amount > 0 then
+			G.GAME.hands[context.hand].chips = G.GAME.hands[context.hand].chips*card.ability.extra.exp_levelup^context.amount
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
 				
-				update_hand_text({delay = 0}, {
+				update_hand_text({delay = 0.25}, {
 					chips = tostring("X"..math.ceil((card.ability.extra.exp_levelup)*100)/100), 
 					level = G.GAME.hands[context.hand].level,
 					handname = localize(context.hand, 'poker_hands'),
@@ -85,9 +85,9 @@ SMODS.Joker {
 				delay(0.5)
 			end
 			
-			G.GAME.hands[context.hand].mult = G.GAME.hands[context.hand].mult*card.ability.extra.exp_levelup
+			G.GAME.hands[context.hand].mult = G.GAME.hands[context.hand].mult*card.ability.extra.exp_levelup^context.amount
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
-				update_hand_text({delay = 0}, {
+				update_hand_text({delay = 0.25}, {
 					mult = tostring("X"..math.ceil((card.ability.extra.exp_levelup)*100)/100), 
 					level = G.GAME.hands[context.hand].level,
 					handname = localize(context.hand, 'poker_hands'),
@@ -100,10 +100,18 @@ SMODS.Joker {
 					end,
 				}))
 			end
-			update_hand_text(
-				{ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
-				{ mult = 0, chips = 0, handname = '', level = '' }
-			)
+			if not context.instant then
+				delay(0.5)
+				update_hand_text(
+					{sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, 
+					{mult = G.GAME.hands[context.hand].mult, chips = G.GAME.hands[context.hand].chips, handname = localize(context.hand, 'poker_hands'), level = G.GAME.hands[context.hand].level}
+				)
+				delay(0.5)
+				update_hand_text(
+					{ sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 },
+					{ mult = 0, chips = 0, handname = '', level = '' }
+				)
+			end
 			if not context.instant then
 				return {
 					message = localize("k_upgrade_ex"),
@@ -115,7 +123,7 @@ SMODS.Joker {
 					message = localize("k_upgrade_ex"),
 					colour = G.C.DARK_EDITION,
 					card = card,
-					delay = 0.075,
+					delay = 0.05,
 				}
 			end
 			

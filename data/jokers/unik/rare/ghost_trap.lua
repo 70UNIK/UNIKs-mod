@@ -20,7 +20,7 @@ SMODS.Joker {
 	end,
 	add_to_deck = function(self, card, from_debuff)
 		for i,v in pairs(G.jokers.cards) do
-			if v.config.center.rarity == 'unik_detrimental' or v.config.center.rarity == 'cry_cursed' and not card.ability.extra.destroyed then
+			if UNIK.detrimental_rarities[v.config.center.rarity] and not card.ability.extra.destroyed then
 				v.ability.getting_captured = true
 				selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
 				if card.ability.extra.limit > 0 then
@@ -56,7 +56,7 @@ SMODS.Joker {
 			}
 		end
 		if context.unik_add_to_deck and context.added then
-			if (context.added.config.center.rarity == 'unik_detrimental' or context.added.config.center.rarity == 'cry_cursed') 
+			if (UNIK.detrimental_rarities[context.added.config.center.rarity]) 
 			and not context.added.ability.getting_captured then
 				context.added.ability.getting_captured = true
 				selfDestruction(context.added,"k_unik_pentagram_purified",G.C.MULT)
