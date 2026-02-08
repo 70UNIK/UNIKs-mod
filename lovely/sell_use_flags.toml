@@ -1,0 +1,63 @@
+[manifest]
+version = "1.0.0"
+priority = 9999
+
+###full credit to paperback for this one
+###may not cover everything though
+
+# Set flag if start_dissolve() called due to selling card
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self:start_dissolve({G.C.GOLD})"
+position = "before"
+match_indent = true
+payload = '''
+self.unik_dissolve_sell_flag = true
+'''
+times = 1
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "self:start_dissolve({G.C.GOLD})"
+position = "after"
+match_indent = true
+payload = '''
+self.unik_dissolve_sell_flag = false
+'''
+times = 1
+
+# Card:start_dissolve()
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "function Card:start_dissolve(*"
+position = "after"
+match_indent = true
+payload = '''
+    local unik_dissolve_sell_flag = self.unik_dissolve_sell_flag
+'''
+
+# Repeated twice
+[[patches]]
+[patches.regex]
+target = "card.lua"
+pattern = '''1\.05\*dissolve_time.*
+(.*\n){0,10}?.*(?<root>self:remove\(\))'''
+position = "before"
+payload = '''
+
+            if unik_dissolve_sell_flag then self.unik_dissolve_sell_flag = true end
+            '''
+root_capture = '$root'
+times = 1
+[[patches]]
+[patches.regex]
+target = "card.lua"
+pattern = '''Card:start_dissolve\(.*
+(.*\n){0,35}?.*(?<root>self:remove\(\))'''
+position = "before"
+payload = '''if unik_dissolve_sell_flag then self.unik_dissolve_sell_flag = true end
+                            '''
+root_capture = '$root'
+times = 1

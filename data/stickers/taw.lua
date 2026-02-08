@@ -49,36 +49,45 @@ end
 local remove_ref = Card.remove
 function Card.remove(self)
     -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
-    if not G.GAME.ignore_delete_context then
-        if self.ability.unik_taw and not self.ability.unik_already_used_taw and not self.ability.unik_bypass_taw and not G.SETTINGS.paused then
-            local _card = nil
-            --create a new card instead with edition if it's a decrementing one
-            if self.config.center.pools and (self.config.center.pools.autocannibalism_food) then
-                _card = create_card("Joker", G.jokers, nil, nil, nil, nil, self.config.center.key)
-                if self.edition then
-                    _card:set_edition(self.edition.key,true)
-                end
-                
-            else
-                _card = copy_card(self, nil, nil, nil, nil)
-            end
-            _card:add_to_deck()
-            _card:start_materialize()
-            if self.ability.set == 'Joker' then
-                G.jokers:emplace(_card)
-            elseif self.playing_card then
-                table.insert(G.playing_cards, _card)
-                G.deck:emplace(_card)
-            elseif self.area == G.consumeables then
-                G.consumeables:emplace(_card)
-            end
-            
-            _card.ability.destroyed_by_megatron = nil
-        end
-    end
+    local originalArea = self.area
+    
 
 
     local ret = remove_ref(self)
+    if not G.GAME.ignore_delete_context then
+        if self.ability.unik_taw and not self.ability.unik_already_used_taw and not self.ability.unik_bypass_taw and not G.SETTINGS.paused then
+            if originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers then
+                local _card = nil
+                --create a new card instead with edition if it's a decrementing one
+                if self.config.center.pools and (self.config.center.pools.autocannibalism_food) then
+                    _card = create_card("Joker", G.jokers, nil, nil, nil, nil, self.config.center.key)
+                    if self.edition then
+                        _card:set_edition(self.edition.key,true)
+                    end
+                    
+                else
+                    _card = copy_card(self, nil, nil, nil, nil)
+                end
+                _card:add_to_deck()
+                _card:start_materialize()
+            
+                if self.ability.set == 'Joker' then
+                    G.jokers:emplace(_card)
+                elseif self.playing_card then
+                    table.insert(G.playing_cards, _card)
+                    G.deck:emplace(_card)
+                elseif originalArea == G.consumeables then
+                    G.consumeables:emplace(_card)
+                elseif originalArea then
+                    originalArea:emplace(_card)
+                end
+                 self.ability.destroyed_by_megatron = nil
+            end
+
+            
+           
+        end
+    end
     return ret
 end
 

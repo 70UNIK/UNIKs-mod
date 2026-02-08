@@ -27,7 +27,7 @@ SMODS.Consumable{
         return { vars = { size} }
     end,
 	can_use = function(self, card)
-		if G.jokers.cards and to_big(#G.jokers.cards) < to_big(G.jokers.config.card_limit - #G.jokers.cards) then
+		if G.jokers.cards and to_big(#G.jokers.cards) < to_big(G.jokers.config.card_limit) then
 			return true
 		end
 		return false

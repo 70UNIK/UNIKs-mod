@@ -1948,7 +1948,8 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}1{} time",
+                        "{C:attention}Prevents{} Jokers {C:red}destruction{}",
+                        "to the left of this Joker once",
                         "Gains {X:dark_edition,C:white}^#2#{} Mult when this happens",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
@@ -1970,7 +1971,8 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{C:attention}Prevents{} Joker {C:red}destruction{} {C:attention}1{} time",
+                        "{C:attention}Prevents{} Jokers {C:red}destruction{}",
+                        "to the left of this Joker once",
                         "{X:dark_edition,C:white}^#1#{C:inactive} Mult",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
                         "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)"
@@ -4376,6 +4378,18 @@ return {
                     "if {C:red}destroyed",
                     "{C:red}Unremovable{}"
                 }
+            },
+            unik_cannot_duplicate1 = {
+                name="n",
+                text={
+                    "{C:red,s:0.9}(This copy cannot store effects)",
+                },
+            },
+            unik_cannot_duplicate2 = {
+                name="n",
+                text={
+                    "{C:inactive,s:0.9}(Only the leftmost copy can store effects)",
+                },
             }
             
         },
@@ -5450,6 +5464,11 @@ return {
             k_unik_unik_normal4 = "I can admittedly be a bit dreary at times...",
             k_unik_unik_normal5 = "Let me know what I can help out with.",
             k_unik_unik_normal6 = "Umm, hi... Can't believe I'm here now...",
+
+            --fear (almanac exclusive)
+            k_unik_unik_scared1 = "Wh... IT'S TOO MUCH!!!",
+            k_unik_unik_scared2 = "PLEASE STOP! I can't handle this!",
+            k_unik_unik_scared3 = "The fuck is all this?!",
             --Chelsea
             ---Normal:
             k_unik_chelsea_normal1 = "Hola! Maybe I can help out?",

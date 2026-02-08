@@ -13,6 +13,11 @@ local unik_quotes = {
 		'k_unik_unik_normal5',
 		'k_unik_unik_normal6',
 	},
+	drama = {
+		'k_unik_unik_scared1',
+		'k_unik_unik_scared2',
+		'k_unik_unik_scared3',
+	},
 }
 
 SMODS.Joker {
@@ -22,6 +27,7 @@ SMODS.Joker {
 	
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
+	drama = { x = 2, y = 0 }, 
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,
@@ -34,6 +40,9 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		local key = 'j_unik_unik'
+		if (SMODS.Mods["jen"] or {}).can_load then
+			quoteset = Jen.dramatic and 'drama'  or 'normal'
+		end
 		if center.ability.extra.Echips + center.ability.immutable.base_echips >= center.ability.immutable.limit then
 			key = 'j_unik_unik_capped'
 		end

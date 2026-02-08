@@ -12,33 +12,34 @@ local wl_quotes = {
 
 local function White_lily_copy(card)
     local negative = false
-    if (#G.jokers.cards + G.GAME.joker_buffer > G.jokers.config.card_limit) then
-        negative = true
-    end
-    local create = 1
-	G.GAME.joker_buffer = G.GAME.joker_buffer + create
-
-    local _card = nil
-    --create a new card instead with edition if it's a decrementing one
-    if card.config.center.pools and (card.config.center.pools.autocannibalism_food) then
-        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, card.config.center.key)
-        if card.edition then
-            _card:set_edition(card.edition.key,true)
+        if (#G.jokers.cards + G.GAME.joker_buffer > G.jokers.config.card_limit) then
+            negative = true
         end
         
-    else
-        _card = copy_card(card, nil, nil, nil, nil)
-    end
-    _card:add_to_deck()
-    _card:start_materialize()
-    G.jokers:emplace(_card)
-    if negative then
-        _card:set_edition({negative = true},true)
-    end
-    _card.ability.destroyed_by_megatron = nil
-    _card.ability.unik_lily_mark = true
 
-    G.GAME.joker_buffer = 0
+        local _card = nil
+        --create a new card instead with edition if it's a decrementing one
+        if card.config.center.pools and (card.config.center.pools.autocannibalism_food) then
+            _card = create_card("Joker", G.jokers, nil, nil, nil, nil, card.config.center.key)
+            if card.edition then
+                _card:set_edition(card.edition.key,true)
+            end
+            
+        else
+            _card = copy_card(card, nil, nil, nil, nil)
+        end
+        _card:add_to_deck()
+        _card:start_materialize()
+        G.jokers:emplace(_card)
+        if negative then
+            _card:set_edition({negative = true},true)
+        end
+        _card.ability.destroyed_by_megatron = nil
+        _card.ability.unik_lily_mark = true
+        
+    
+
+    
     G.E_MANAGER:add_event(Event({
         delay = 0,
         trigger= 'before',
@@ -140,22 +141,29 @@ local remove_ref = Card.remove
 function Card.remove(self)
     -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
     if not G.GAME.ignore_delete_context then
-        if self.ability.set == 'Joker' and (not G.CONTROLLER.locks.selling_card or self.ability.destroyed_by_scattering) and not G.SETTINGS.paused then
+        if self.added_to_deck and self.ability.set == 'Joker' and (not self.unik_dissolve_sell_flag) then
             if G and G.GAME then
-                SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
+                --SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
                 if next(find_joker("j_unik_white_lily_cookie")) and not self.ability.unik_lily_mark and 
                 not UNIK.detrimental_rarities[self.config.center.rarity] and not self.ability.unik_taw then
-                    White_lily_copy(self)
+                    G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                     G.E_MANAGER:add_event(Event({
+                        delay = 0,
+                        trigger= 'immediate',
+                        func = function()
+                            White_lily_copy(self)
+                            G.GAME.joker_buffer = 0
+                            return true
+                        end
+                    }))
+                    
                 end
             end
-            
-            self.ability.destroyed_by_scattering = nil
         end
     end
 
 
     local ret = remove_ref(self)
-    self.ability.destroyed_by_scattering = nil
     return ret
 end
 
