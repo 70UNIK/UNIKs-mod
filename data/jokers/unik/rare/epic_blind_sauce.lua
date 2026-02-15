@@ -23,6 +23,120 @@ function ForceEpicBlind()
         
     end
 end
+
+function rerollAnyBlind(type,blind)
+    stop_use()
+    
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+        play_sound('other1')
+            if G.STATE == G.STATES.BLIND_SELECT then
+                G.blind_select_opts[string.lower(type)]:set_role({xy_bond = 'Weak'})
+                G.blind_select_opts[string.lower(type)].alignment.offset.y = 20
+            end
+
+        return true
+        end
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.3,
+        func = (function()
+            G.GAME.round_resets.blind_choices[type] = blind
+            if G.STATE == G.STATES.BLIND_SELECT then
+                local par = G.blind_select_opts[string.lower(type)].parent
+                G.blind_select_opts[string.lower(type)]:remove()
+                    G.blind_select_opts[string.lower(type)] = UIBox{
+                    T = {par.T.x, 0, 0, 0, },
+                    definition =
+                        {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={
+                        UIBox_dyn_container({create_UIBox_blind_choice(type)},false,get_blind_main_colour('Boss'), mix_colours(G.C.BLACK, get_blind_main_colour('Boss'), 0.8))
+                        }},
+                    config = {align="bmi",
+                                offset = {x=0,y=G.ROOM.T.y + 9},
+                                major = par,
+                                xy_bond = 'Weak'
+                            }
+                    }
+                par.config.object = G.blind_select_opts[string.lower(type)]
+                par.config.object:recalculate()
+                G.blind_select_opts[string.lower(type)].parent = par
+                G.blind_select_opts[string.lower(type)].alignment.offset.y = 0
+            end
+            return true
+        end)
+    }))
+end
+function epic_blind_sauce_reroll()
+    local triggered = false
+    G.CONTROLLER.locks.boss_reroll = true
+    local blinds = {Small = true, Big = true, Boss = true}
+    for i,v in pairs(blinds) do
+        
+        if G.GAME.round_resets.blind_states[i] == "Upcoming" or G.GAME.round_resets.blind_states[i] == 'Select' then
+            local isSelected = false
+            if G.GAME.round_resets.blind_states[i] == 'Select' then
+                isSelected = true
+            end
+            if G.P_BLINDS[G.GAME.round_resets.blind_choices[i]] and G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss and
+            (G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss.epic or G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss.legendary or
+            G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss.ancient or G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss.exotic) then
+                
+            elseif (G.GAME.round_resets.blind_choices[i] == "bl_small" or G.GAME.round_resets.blind_choices[i] == "bl_big") and
+            not G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss
+            then
+                triggered = true
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        
+                    G.GAME.unik_force_boss_blind = G.GAME.unik_force_boss_blind or 0
+                    G.GAME.unik_force_boss_blind = G.GAME.unik_force_boss_blind + 1
+                   -- print("Reroll small/big")
+                    local boss = get_new_boss()
+                  --  print(boss)
+                    rerollAnyBlind(i,boss)
+                    return true
+                    end
+                }))
+                
+            elseif i == "Boss" and ((G.P_BLINDS[G.GAME.round_resets.blind_choices[i]] and G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss 
+            and not G.P_BLINDS[G.GAME.round_resets.blind_choices[i]].boss.showdown) or 
+            G.GAME.round_resets.blind_choices[i] == "bl_unik_bigger_blind")
+             then
+                triggered = true
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'immediate',
+                    func = function()
+                        
+                    G.GAME.unik_force_finisher_blinds = true
+                 --   print("reroll_boss")
+                    local boss = get_new_boss()
+                 --   print(boss)
+                    rerollAnyBlind(i,boss)
+                    G.GAME.unik_force_finisher_blinds = nil
+                    return true
+                    end
+                }))
+                
+            end
+              G.E_MANAGER:add_event(Event({blocking = false, trigger = 'after', delay = 0,func = function()
+                    if isSelected then
+                        G.GAME.round_resets.blind_states[i] = 'Select'
+                    end
+                    return true
+                    end
+                }))
+        end
+    end
+     G.E_MANAGER:add_event(Event({blocking = false, trigger = 'after', delay = 0.2,func = function()
+        G.CONTROLLER.locks.boss_reroll = nil
+        return true
+        end
+    }))
+    return triggered
+end 
 SMODS.Joker {
     key = 'unik_epic_blind_sauce',
     atlas = 'unik_epic',
@@ -33,59 +147,40 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = false,
     demicoloncompat = true,
-    config = { extra = { EEmult = 1,destroyed = false,triggers = 5,Emult = 1,trigger_mod = 5, Mult = 100, Chips = 50}, immutable = {base_emult = 1.0} },
+    config = { extra = { x_mult = 6 }},
     loc_vars = function(self, info_queue, center)
-        local key = "j_unik_epic_blind_sauce"
-        if not unik_config.unik_legendary_blinds then
-            key = "j_unik_epic_blind_sauce_no_epic"
-            return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult} }
-        else
-             return { key = key, vars = {center.ability.extra.Mult,center.ability.extra.Chips,center.ability.extra.Emult + center.ability.immutable.base_emult} }
-        end
-        
-		
+        return { vars = {center.ability.extra.x_mult} }
+
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'immediate',
+            func = function()
+            if epic_blind_sauce_reroll() then
+                card:juice_up(0.8, 0.8)
+            end
+            return true
+            end
+        }))
+        
+    end,
     calculate = function(self, card, context)
         --dont try to force trigger it. It will self destruct and guarantee an epic blind.
-        if context.forcetrigger and not card.ability.extra.destroyed then
-            card.ability.extra.destroyed = true
-            selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR) 
-            ForceEpicBlind()
+        if context.forcetrigger or context.joker_main then
             return {
-                
+                x_mult = card.ability.extra.x_mult
             }
         end
-        if context.after and SMODS.last_hand_oneshot and not context.blueprint then
-            card.ability.extra.destroyed = true
-            selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR)
-            ForceEpicBlind()
+        if context.unik_refresh_blinds then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                if epic_blind_sauce_reroll() then
+                    card:juice_up(0.8, 0.8)
+                end
+                return true
+                end
+            }))
         end
-        if context.joker_main and not card.ability.extra.destroyed then
-            
-            -- if (context.blueprint_card or context.retrigger_joker or context.repetition) and not card.ability.extra.destroyed then
-            --     card.ability.extra.destroyed = true
-            --     selfDestruction(card,"k_drank_ex",G.C.UNIK_VOID_COLOR)
-            --     ForceEpicBlind()
-            -- end
-            if not card.ability.extra.destroyed then
-                -- if not (context.blueprint_card or context.retrigger_joker or context.repetition) then
-                --     card.ability.extra.triggers = card.ability.extra.triggers - 1
-                -- end
-                return {
-                        mult = card.ability.extra.Mult,
-                        chips = card.ability.extra.Chips,
-                        e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                        -- colour = G.C.DARK_EDITION,
-                    } 
-            end
-        end
-        -- if context.end_of_round and context.cardarea == G.jokers and not card.ability.extra.destroyed then
-		-- 	if card.ability.extra.triggers > 0 then
-                
-        --     end
-		-- end
-        -- if context.setting_blind then
-		-- 	card.ability.extra.triggers = card.ability.extra.trigger_mod
-		-- end
     end
 }

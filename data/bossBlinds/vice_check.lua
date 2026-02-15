@@ -1,4 +1,7 @@
 function vice_check()
+	if G.GAME.unik_force_finisher_blinds then
+		return 1
+	end
 	if G.GAME.round_resets.ante >= 0 and G.GAME.round_resets.ante < 2 then
 		return G.GAME.win_ante
 	end

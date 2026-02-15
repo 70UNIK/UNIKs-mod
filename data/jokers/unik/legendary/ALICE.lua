@@ -20,28 +20,28 @@ SMODS.Atlas {
 SMODS.Joker {
 	key = 'unik_extra_credit_alice',
     atlas = 'unik_alice',
-    rarity = "unik_ancient",
+    rarity = 4,
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
-    cost = 50,
+    cost = 20,
 	blueprint_compat = true,
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = true,
-    config = { extra = { Emult = 0.8},immutable = {base_emult = 1.0}},
+    config = { extra = { x_mult = 1, x_mult_mod = 0.6}},
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
+		return { vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult} }
 	end,
     pools = {},
     pronouns = "she_her",
     calculate = function(self, card, context)
-        if context.forcetrigger then
+        if context.forcetrigger or context.joker_main then
             return {
-                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                    colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
+                    x_mult = card.ability.extra.x_mult
+                
                 }
         end
-        if (context.joker_main) then
+        if context.before and not context.blueprint then
             local _odd, _even = false, false
             for i = 1, #context.scoring_hand do
                 if not SMODS.has_no_rank(context.scoring_hand[i]) then
@@ -54,12 +54,19 @@ SMODS.Joker {
                 end
             end
             if (_odd and _even) then
+                SMODS.scale_card(card, {
+                    ref_table =v.ability.extra,
+                    ref_value = "x_mult",
+                    scalar_value = "x_mult_mod",
+                    message_key = "a_xmult",
+                    message_colour = G.C.MULT,
+                    force_full_val = true,
+                })
                 return {
-                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                    colour = { 0.8, 0.45, 0.85, 1 }, --plasma colors
+
                 }
             end
-		end
+        end
     end,
 
 }

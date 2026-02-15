@@ -2025,9 +2025,10 @@ return {
                 name = 'Alice',
                 text = {
                     {
-                        "{C:white,X:dark_edition}^#1#{} Mult if played",
+                        "Gains {X:mult,C:white}X#1#{} Mult if",
                         "hand contains a scoring",
                         "{C:attention}Odd{} and {C:attention}Even{} card",
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}Teehee! It's time I join in on the fun!{}",
@@ -2043,8 +2044,8 @@ return {
                     "{C:white,X:mult}X#1#{} Mult if played",
                     "hand contains a scoring",
                     "{C:attention}Odd{} and {C:attention}Even{} card",
-                    "{C:inactive,s:0.7}If obtained, fixed {C:green,s:0.7}0.8%{C:inactive,s:0.7} chance",
-                    "{C:inactive,s:0.7}to obtain {C:unik_ancient,s:0.7,E:1}Alice {C:inactive,s:0.7}instead",
+                    "{C:inactive,s:0.7}If obtained, fixed {C:green,s:0.7}1%{C:inactive,s:0.7} chance",
+                    "{C:inactive,s:0.7}to obtain {C:legendary,s:0.7,E:1}Alice {C:inactive,s:0.7}instead",
                 }
             },
             j_unik_foundation = {
@@ -2126,43 +2127,14 @@ return {
                 }
             },
             j_unik_epic_blind_sauce = {
-                name = "Epic Blind Sauce",
+                name = "Epic Blind Sauce", --SUBJECT TO NAME AND  THEME CHANGE
                 text = {
-                    "{C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips, {X:dark_edition,C:white}^#3#{} Mult",
-                    "If score catches {C:attention}fire",
-                    "{E:2,C:red}Self destruct{} and",
-                    "next blind becomes",
-                    "an {E:2,C:red}Epic Blind{}"
+                    "{X:mult,C:white}X#1#{} Mult", --likely X5 or X6 Mult or ^1.25 Mult 
+                    "All {C:attention}Small{} and {C:attention}Big Blinds",
+                    "become {C:attention}Boss Blinds",
+                    "All {C:attention}Boss Blinds{} become",
+                    "{C:attention}Finisher Blinds"
                 },
-                unlock = {
-                    "Die to an {C:red}Epic Blind"
-                }
-            },
-            -- j_unik_epic_blind_sauce_notalisman = { --no talisman, yes epic blinds
-            --     name = "Epic Blind Sauce",
-            --     text = {
-            --         "{C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips, {X:dark_edition,C:white}^#3#{} Mult",
-            --         "If score catches {C:attention}fire",
-            --         "{E:2,C:red}Self destruct{} and",
-            --         "next blind becomes",
-            --         "an {E:2,C:red}Epic Blind{}"
-            --     },
-            --     unlock = {
-            --         "Die to an {C:red}Epic Blind"
-            --     }
-            -- },
-            j_unik_epic_blind_sauce_no_epic = {
-                name = "Epic Blind Sauce",
-                text = {
-                    "{C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips, {X:dark_edition,C:white}^#3#{} Mult",
-                    "If score catches {C:attention}fire",
-                    "{E:2,C:red}Self destruct{} and",
-                    "next blind becomes",
-                    "a {E:2,C:red}Finisher Blind{}"
-                },
-                unlock = {
-                    "Die to a {C:attention}Finisher Blind"
-                }
             },
             j_unik_cobblestone = {
                 name = "Cobblestone",

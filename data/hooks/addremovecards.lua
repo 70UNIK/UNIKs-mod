@@ -198,7 +198,7 @@ function CardArea:emplace(card, location, stay_flipped)
         --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)
         if (SMODS.Mods["extracredit"] or {}).can_load then
             if card.config.center.key == "j_ExtraCredit_averagealice" then
-                if pseudorandom('unik_average_alice_exotic_change') < 0.8/100 then
+                if pseudorandom('unik_average_alice_exotic_change') < 1/100 then
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             card_eval_status_text(card, "extra", nil, nil, nil, {

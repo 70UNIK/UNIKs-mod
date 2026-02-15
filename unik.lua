@@ -1020,7 +1020,7 @@ if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()
 end
 NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
-
+NFS.load(mod_path .. "data/jokers/unik/legendary/ALICE.lua")()
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/catto_boi.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
@@ -1037,7 +1037,6 @@ NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")()
 --Ancient
 NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/sundae_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/white_lily_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")() 

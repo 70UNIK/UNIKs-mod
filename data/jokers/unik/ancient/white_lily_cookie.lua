@@ -139,9 +139,10 @@ end
 -- Add new context that happens after destroying jokers
 local remove_ref = Card.remove
 function Card.remove(self)
-    -- Check that the card being removed is a joker that's in the player's deck and that it's not being sold
+    local originalArea = self.area
+    -- Check that the card being removed is a joker that's in the player's deck, is a joker cardarea (or not in the cardarea) and that it's not being sold
     if not G.GAME.ignore_delete_context then
-        if self.added_to_deck and self.ability.set == 'Joker' and (not self.unik_dissolve_sell_flag) then
+        if self.added_to_deck and self.ability.set == 'Joker' and (not self.unik_dissolve_sell_flag) and ((originalArea and originalArea == G.jokers) or (not originalArea) or (originalArea and originalArea ~= G.shop_jokers and originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers))  then
             if G and G.GAME then
                 --SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
                 if next(find_joker("j_unik_white_lily_cookie")) and not self.ability.unik_lily_mark and 

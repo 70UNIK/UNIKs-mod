@@ -63,6 +63,7 @@ function reset_blinds()
             if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
                 G.GAME.round_resets.blind_choices.Boss = get_new_boss()
             end
+             SMODS.calculate_context({unik_refresh_blinds = true})
             G.GAME.blind_on_deck = 'Small'
             G.GAME.round_resets.boss_rerolled = false
         end
@@ -173,6 +174,19 @@ function get_new_boss()
                         elseif v.boss then
                             eligible_bosses[k] = nil
                         end
+                    end
+                --force REGULAR blinds to appear
+                elseif G.GAME.unik_force_boss_blind and G.GAME.unik_force_boss_blind > 0 then
+                    G.GAME.unik_force_boss_blind = G.GAME.unik_force_boss_blind - 1
+                    if v.boss and not v.boss.showdown then
+                        if v.in_pool then
+                            local res, options = v:in_pool()
+                            eligible_bosses[k] = res and true or nil
+                        else    
+                            eligible_bosses[k] = true
+                        end
+                    elseif v.boss and v.boss.showdown then
+                        eligible_bosses[k] = nil
                     end
                 end
             end
