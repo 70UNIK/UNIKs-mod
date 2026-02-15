@@ -2117,7 +2117,7 @@ return {
             j_unik_lone_despot={
                 name = "Lone Despot",
                 text = {
-                    "Scored card gives {X:dark_edition,C:white}^#1#{} Mult",
+                    "{X:dark_edition,C:white}^#1#{} Mult",
                     "if played hand {C:attention}only contains{} a",
                     "single {C:attention}King{}",
                 },

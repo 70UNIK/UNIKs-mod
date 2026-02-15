@@ -55,7 +55,7 @@ SMODS.Joker {
             end
             if (_odd and _even) then
                 SMODS.scale_card(card, {
-                    ref_table =v.ability.extra,
+                    ref_table =card.ability.extra,
                     ref_value = "x_mult",
                     scalar_value = "x_mult_mod",
                     message_key = "a_xmult",
