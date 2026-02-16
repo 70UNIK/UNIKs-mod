@@ -7,6 +7,9 @@ SMODS.Rarity:take_ownership('Rare',{
 SMODS.Rarity:take_ownership('cry_epic',{
     fallback_joker = 'j_cry_error'
 },true)
+SMODS.Rarity:take_ownership('cry_candy',{
+    fallback_joker = 'j_cry_wrapped'
+},true)
 SMODS.Rarity:take_ownership('Legendary',{
     fallback_joker = 'j_chicot'
 },true)

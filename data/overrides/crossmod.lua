@@ -246,6 +246,8 @@ SMODS.Joker:take_ownership("j_bunc_jmjb",{
 										SMODS.poll_seal({ guaranteed = true, type_key = "standard" })
 									)
 								end
+								v.ability.unik_shielded = true
+								v.debuff = false
                             end
 
                             return true

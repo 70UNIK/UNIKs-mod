@@ -1486,14 +1486,6 @@ return {
                     "to win {C:money}$#4#",
                 }
             },
-            --Disable if extracredit is installed
-            j_unik_lucky_seven_modest = {
-                name = 'Lucky 7',
-                text = {
-                    "{C:attention}7s{} are considered", 
-                    "{C:attention}Lucky Cards{}",
-                }
-            },
             j_unik_yes_nothing = {
                 name = 'Yes! Nothing',
                 text={
@@ -1502,15 +1494,6 @@ return {
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}0 in 3{C:inactive})",
                 },
             },
-            j_unik_yes_nothing_modest = {
-                name = 'Yes! Nothing*',
-                text={
-                    "Halves all {C:green,E:1,S:1.1}listed{}",
-                    "{C:green,E:1,S:1.1}probabilities{}",
-                    "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}1 in 3{C:inactive})",
-                },
-            },
-            --buffed it since I dont tend to use it due to spawn conditions and cost of cramming joker slots
             j_unik_711 = {
                 name = '7/11',
                 text = {
@@ -1719,9 +1702,6 @@ return {
                     },
 
                 },
-                unlock = {
-                    "Play {C:attention}5 7s in a hand",
-                }
             },
             j_unik_unik_capped = {
                 name = '{C:unik_unik_color,f:unik_five_by_five}UNIK',
@@ -1736,9 +1716,6 @@ return {
                     },
 
                 },
-                unlock = {
-                    "Play {C:attention}5 7s in a hand",
-                }
             },
             --Cube jokers
             j_unik_cube_joker = {  -- uncommon: gains x0.09 chips
@@ -1825,7 +1802,7 @@ return {
                     },
                 },    
                 unlock = {
-                    "Have {C:attention}100{} cards in your deck",
+                    "Redeem {C:red}Magic Trick",
                 }             
             },
             j_unik_1_5_joker = {
@@ -1946,8 +1923,7 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{C:attention}Prevents{} Jokers {C:red}destruction{}",
-                        "to the left of this Joker once",
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} once",
                         "Gains {X:dark_edition,C:white}^#2#{} Mult when this happens",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
@@ -1997,9 +1973,6 @@ return {
                         "{C:inactive}(Currently #2#/#1# items)",
                     },
                 },
-                unlock = {
-                    "Redeem {C:attention}Magic Trick"
-                }
             },
             j_unik_vessel_kiln = { --overrides get tag function to instead generate Violet vessel, negating the benefit of this Joker. It's chips cause ceramic.
                 name="Vessel Kiln",
@@ -2175,17 +2148,6 @@ return {
                     "when held or on Jokers",
                 }
             },
-            j_unik_shitty_joker = {
-                name = "Shitty Joker",
-                text = {
-					"Gain {C:red}+#1#{} Discard#<s>1# when",
-					"{C:attention}Blind{} is selected",
-                },
-                unlock = {
-                    "Discard while",
-                    "in {C:attention}The Water{} boss}",
-                }
-            },
             j_unik_invisible_card = {
                 name = "Invisible Card",
                 text = {
@@ -2249,19 +2211,6 @@ return {
                     "{C:attention}Rankless and",
                     "{C:attention}Suitless{} cards",
                     "{C:attention}#1#{} time#<s>1#",
-                },
-                unlock = {
-                    "Play a {C:attention}Bulwark",
-                }
-            },
-            j_unik_skipping_stones_modest = {
-                name = "Skipping Stones",
-                text = {
-                    "Retrigger all scored",
-                    "{C:attention}Rankless and",
-                    "{C:attention}Suitless{} cards",
-                    "if played hand is",
-                    "not a {C:attention}Bulwark",
                 },
                 unlock = {
                     "Play a {C:attention}Bulwark",
@@ -2511,7 +2460,8 @@ return {
                     },
                 },
                 unlock = {
-                    "{C:red,s:2}???",
+                    "{E:2,C:red}Banish {C:attention}D16{} with",
+                    "it's own effect"
                 }
             },
 
@@ -2632,6 +2582,10 @@ return {
                     "Create an {C:uncommon}Uncommon Joker",
                     "when {C:attention}Blind{} is selected",
                     "{C:inactive}(Must have room)",
+                },
+                unlock = {
+                    "Obtain an {C:uncommon}Uncommon{} Joker",
+                    "from {C:attention}Judgement"
                 }
             },
             j_unik_double_up = {
@@ -3278,7 +3232,8 @@ return {
                 text = {
                     'All cards in {C:attention}Standard Packs{}',
                     'have an {C:attention}Enhancement{}',
-                    '{C:attention}Seal{} and {C:dark_edition}Edition'
+                    '{C:attention}Seal{}, {C:dark_edition}Edition',
+                    'and are all {C:attention}Shielded',
                 },
                 unlock = {
                     'Open {E:1,C:attention}#1#',
@@ -3616,36 +3571,6 @@ return {
                 }
             },
 
-            j_cry_canvas_mainline = {
-				name = "Canvas",
-				text = {
-					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
-					"once for {C:attention}every{} unique non-{C:blue}Common{C:attention} Joker{}",
-					"to the right of this Joker",
-                    "{C:inactive}(Up to #2# retrigger#<s>2#)",
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive})",
-				},
-				unlock = {
-					"Retrigger a {C:attention}Joker",
-					"{C:attention}114{} times",
-					"in one hand",
-				},
-			},
-			j_cry_canvas_modest = {
-				name = "Canvas",
-				text = {
-					"{C:attention}Retrigger{} all {C:attention}Jokers{} to the left",
-					"once for {C:attention}every{} unique non-{C:blue}Common{C:attention} Joker{}",
-					"to the right of this Joker",
-                    "{C:inactive}(Up to #2# retrigger#<s>2#)",
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive})",
-				},
-				unlock = {
-					"Retrigger a {C:attention}Joker",
-					"{C:attention}114{} times",
-					"in one hand",
-				},
-			},
 
             j_cry_pirate_dagger_balanced = {
 				name = "Pirate Dagger",
@@ -4347,7 +4272,6 @@ return {
                     "{C:red}Cannot{} be copied",
                     "by {C:unik_ancient}White Lily Cookie",
                     "if {C:red}destroyed",
-                    "{C:red}Unremovable{}"
                 }
             },
             unik_cannot_duplicate1 = {
