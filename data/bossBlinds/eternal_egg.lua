@@ -10,7 +10,15 @@ SMODS.Blind	{
     dollars = 8,
     mult = 2,
     pronouns = "he_him",
-	death_message = 'special_lose_eternal_egg',
+    death_card = {
+        card = 'j_egg', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+            card.ability.eternal = true
+            card.ability.rental = true
+        end,
+        quotes = {'special_lose_eternal_egg'},
+        say_times = 10,
+    },
     set_blind = function(self, reset, silent)
         if not reset then
             G.GAME.blind:wiggle()

@@ -24,12 +24,15 @@ function ForceEpicBlind()
     end
 end
 
-function rerollAnyBlind(type,blind)
+function rerollAnyBlind(type,blind,card)
     stop_use()
     
     G.E_MANAGER:add_event(Event({
         trigger = 'immediate',
         func = function()
+            if card then
+                card:juice_up(0.8, 0.8)
+            end
         play_sound('other1')
             if G.STATE == G.STATES.BLIND_SELECT then
                 G.blind_select_opts[string.lower(type)]:set_role({xy_bond = 'Weak'})
@@ -51,7 +54,7 @@ function rerollAnyBlind(type,blind)
                     T = {par.T.x, 0, 0, 0, },
                     definition =
                         {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR}, nodes={
-                        UIBox_dyn_container({create_UIBox_blind_choice(type)},false,get_blind_main_colour('Boss'), mix_colours(G.C.BLACK, get_blind_main_colour('Boss'), 0.8))
+                        UIBox_dyn_container({create_UIBox_blind_choice(type)},false,get_blind_main_colour(type), mix_colours(G.C.BLACK, get_blind_main_colour(type), 0.8))
                         }},
                     config = {align="bmi",
                                 offset = {x=0,y=G.ROOM.T.y + 9},
@@ -68,8 +71,7 @@ function rerollAnyBlind(type,blind)
         end)
     }))
 end
-function epic_blind_sauce_reroll()
-    local triggered = false
+function epic_blind_sauce_reroll(card)
     G.CONTROLLER.locks.boss_reroll = true
     local blinds = {Small = true, Big = true, Boss = true}
     for i,v in pairs(blinds) do
@@ -96,7 +98,8 @@ function epic_blind_sauce_reroll()
                    -- print("Reroll small/big")
                     local boss = get_new_boss()
                   --  print(boss)
-                    rerollAnyBlind(i,boss)
+                        
+                    rerollAnyBlind(i,boss,card)
                     return true
                     end
                 }))
@@ -114,7 +117,7 @@ function epic_blind_sauce_reroll()
                  --   print("reroll_boss")
                     local boss = get_new_boss()
                  --   print(boss)
-                    rerollAnyBlind(i,boss)
+                    rerollAnyBlind(i,boss,card)
                     G.GAME.unik_force_finisher_blinds = nil
                     return true
                     end
@@ -135,7 +138,6 @@ function epic_blind_sauce_reroll()
         return true
         end
     }))
-    return triggered
 end 
 SMODS.Joker {
     key = 'unik_epic_blind_sauce',
@@ -156,9 +158,7 @@ SMODS.Joker {
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',
             func = function()
-            if epic_blind_sauce_reroll() then
-                card:juice_up(0.8, 0.8)
-            end
+            epic_blind_sauce_reroll(card)
             return true
             end
         }))
@@ -175,9 +175,7 @@ SMODS.Joker {
             G.E_MANAGER:add_event(Event({
                 trigger = 'immediate',
                 func = function()
-                if epic_blind_sauce_reroll() then
-                    card:juice_up(0.8, 0.8)
-                end
+                epic_blind_sauce_reroll(card)
                 return true
                 end
             }))

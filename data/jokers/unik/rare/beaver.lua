@@ -9,12 +9,12 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
-    config = { extra = {base = 60} },
+    config = { extra = {base = 60,x_mult = 1.4} },
     enhancement_gate = 'm_unik_timber',
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_timber
         return { 
-            vars = {center.ability.extra.base} 
+            vars = {center.ability.extra.x_mult,center.ability.extra.base} 
         }
 	end,
     pools = {},
@@ -22,6 +22,7 @@ SMODS.Joker {
 		if context.individual and context.cardarea == G.hand and not context.end_of_round then
 			if SMODS.has_enhancement(context.other_card,'m_unik_timber') then
 				return {
+                    x_mult = card.ability.extra.x_mult,
                     xlog_mult = card.ability.extra.base,
 					card = card,
 				}
@@ -29,6 +30,7 @@ SMODS.Joker {
 		end
 		if context.forcetrigger then
 			return {
+                x_mult = card.ability.extra.x_mult,
                 xlog_mult = card.ability.extra.base,
                 card = card,
             }

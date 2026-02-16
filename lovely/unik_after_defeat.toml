@@ -84,44 +84,4 @@ payload = '''
 '''
 match_indent = true
 
-###BOSS BLIND DEATH MESSAGES
-
-###Entropy patch
-
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''local quip, extra = SMODS.quip("loss")'''
-position = 'after'
-payload = '''
---entropy workaround
-if G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled and not G.GAME.EECardCharacter then
-    quip = G.GAME.blind.config.blind.death_message
-end
-G.GAME.unik_prevent_killing_cursed_jokers2 = nil
-G.GAME.unik_deathly_debuff_text = nil
-'''
-match_indent = true
-
-##STANDARD
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled) then --Only add Jimbo to say a quip if the game over happens when the run is lost
-'''
-match_indent = true
-
-##FINITY
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled) or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
-'''
-match_indent = true
 

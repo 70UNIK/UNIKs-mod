@@ -1,0 +1,27 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_object.lua"]'''
+pattern = '''object_type.rarities[#object_type.rarities+1] = {'''
+position = "after"
+payload = '''
+fallback_joker = rarity.fallback_joker,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''elseif _type == 'Tarot' or _type == 'Tarot_Planet' then _pool[#_pool + 1] = "c_strength"'''
+position = "before"
+payload = '''
+elseif _type == 'Joker' and _rarity and SMODS.Rarities[_rarity] and SMODS.Rarities[_rarity].fallback_joker then _pool[#_pool + 1] = SMODS.Rarities[_rarity].fallback_joker
+elseif _type == 'Joker' and _rarity and _rarity == 2 then  _pool[#_pool + 1] = 'j_ring_master'
+elseif _type == 'Joker' and _rarity and _rarity == 3 then  _pool[#_pool + 1] = 'j_brainstorm'
+elseif _type == 'Joker' and _rarity and _rarity == 4 then  _pool[#_pool + 1] = 'j_chicot'
+'''
+match_indent = true

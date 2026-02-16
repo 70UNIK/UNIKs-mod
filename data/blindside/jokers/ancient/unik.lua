@@ -24,6 +24,14 @@ BLINDSIDE.Joker({
         return localize("k_unik_all_purple")
 		
 	end,
+    death_card = {
+        card = 'j_unik_unik', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+            
+        end,
+        quotes = {'unik_blindside_unik_lose1','unik_blindside_unik_lose2','unik_blindside_unik_lose3'},
+        say_times = 7,
+    },
     calculate = function(self, blind, context)
         if context.setting_blind and not context.disabled and not G.GAME.blind.disabled then
             G.GAME.unik_dynamic_text_realtime = true

@@ -23,6 +23,13 @@ BLINDSIDE.Joker({
         
         return { vars = { localize('k_unik_random_hue') } }
     end,
+    death_card = {
+        card = 'j_unik_railroad_crossing', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+            
+        end,
+        quotes = {'unik_blindside_railroad_crossing_lose'},
+    },
     calculate = function(self, blind, context)
         if context.setting_blind and not context.disabled then
             blind.active = true

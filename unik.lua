@@ -482,6 +482,7 @@ SMODS.Rarity({
 	key = "unik_ancient",
 	loc_txt = {},
 	badge_colour = G.C.UNIK_ANCIENT,
+	fallback_joker = 'j_ancient'
 })
 if (SMODS.Mods["Cryptid"] or {}).can_load then
     Cryptid.pointerblistifytype("rarity", "unik_ancient")
@@ -492,7 +493,9 @@ SMODS.Rarity({
 	key = "unik_detrimental",
 	loc_txt = {},
 	badge_colour = HEX("474931"),
+	fallback_joker = 'j_unik_impounded'
 })
+NFS.load(mod_path .. "data/overrides/rarity_ownership.lua")() 
 
 UNIK.detrimental_rarities = {
 	unik_detrimental = true,
@@ -824,6 +827,7 @@ NFS.load(mod_path .. "data/bossBlinds/vice_check.lua")()
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
+NFS.load(mod_path .. "data/misc/death_quote_functions.lua")()
 
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/the_approval.lua")() 
@@ -1196,6 +1200,7 @@ NFS.load(mod_path .. "data/overrides/matador.lua")()
 NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()	
 
 NFS.load(mod_path .. "data/overrides/enhancement_destroy_fx.lua")()	
+NFS.load(mod_path .. "data/overrides/values_changes.lua")()	
 
 
 --UI
@@ -1216,10 +1221,10 @@ end
 if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()	
 	--temporarily disabled until v0.7
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
 
 ---
@@ -1267,3 +1272,16 @@ end
 --Epic Decision (open booster pack when selecting blind, but make it much less janky)
 --The Vice/Epic Vice (Dedicated boss blind spawn system)
 --
+
+
+--April fools events:
+-- Every ancient Joker is resdesigned to look like Ancient Joker or
+-- Only Ancient Jokers can spawn from awakening (randomizes per run)
+-- Not winning small blind on the first hand in round 1 will instantly kill you on the spot (with a special message)
+-- all eternal stickers are replaced with TAW and lockpick is automatically banished in the run.
+-- playing a 7 and a 10 together has a 1 in 700 chance to spawn UNIK
+-- playing a 6 and a 9 together brings up the url to my furaffinity profile
+-- playing a 4 and a 2 together levels up hand
+--playing a 6 and a 7 together instatly kills you
+-- "Ancient Ancient Ancient Joker" can spawn in the ancient joker pool (create 5 disposable negative ancient jokers on cashout)
+---April fools can be toggled between: off, on and always active (not recommended)

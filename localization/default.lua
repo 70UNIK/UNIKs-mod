@@ -172,9 +172,8 @@ return {
                 name = "Recycle Bin",
                 text = {
                     "X#1# Mult per hand",
-                    "Increase this by",
-                    "X#2# per Blind",
-                    "discarded",
+                    "+X#2# Mult per",
+                    "Blind discarded",
                 }
             },
 
@@ -182,8 +181,7 @@ return {
                 name = "UNIK",
                 text = {
                     "^#1# Chips per hand",
-                    "Increase this by",
-                    "^#2# when a Purple",
+                    "+^#2# when a Purple",
                     "Blind is scored",
                     "All played Blinds",
                     "must be Purple",
@@ -2532,7 +2530,8 @@ return {
                 name = "Beaver",
                 text = {
                     "Held {C:attention}Timber{} cards",
-                    "each give Mult {X:mult,C:white}Xlog_#1#(Mult)", --Xlog_100(Mult)
+                    "each give {X:mult,C:white}X#1#{} Mult", --Xlog_100(Mult)
+                    "and Mult {X:mult,C:white}Xlog_#2#(Mult)"
                 },
                 unlock = {
                     "Play {C:attention}5 Timber Cards",
@@ -5967,6 +5966,11 @@ return {
                 "PERSON FOUND DEAD",
                 "AFTER ATTEMPTING TO",
                 "CROSS ACTIVE CROSSING",
+            },
+            unik_blindside_no_standing_zone_lose = {
+                "PARKING VIOLATION:",
+                "VEHICLE IS PRESENT",
+                "BEYOND ALLOWED TIME",
             },
             --finity quips:
             lq_legendary_crown_1={

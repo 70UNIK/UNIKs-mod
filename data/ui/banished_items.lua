@@ -126,7 +126,7 @@ function G.UIDEF.unik_banished_items()
                 if not center then break end
                 local card = Card(G.your_collection[j].T.x + G.your_collection[j].T.w / 2, G.your_collection[j].T.y,
                 G.CARD_W * args.card_scale, G.CARD_H * args.card_scale, G.P_CARDS.empty,
-                (args.center and G.P_CENTERS[args.center]) or center)
+                (args.center and G.P_CENTERS[args.center]) or center,{bypass_discovery_center = true})
                 if args.modify_card then args.modify_card(card, center, i, j) end
                 if not args.no_materialize then card:start_materialize(nil, i > 1 or j > 1) end
                 G.your_collection[j]:emplace(card)

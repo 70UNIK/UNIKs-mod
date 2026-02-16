@@ -40,6 +40,9 @@ SMODS.Joker {
         colours = {G.C.SUITS["Diamonds"],G.C.SUITS["Hearts"],G.C.SUITS["Spades"]}}
         }
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.immutable.dead = false
+    end,
     pools = {["character"] = true },
     calculate = function(self, card, context)
         if ((context.joker_main or context.force_trigger) and to_big(card.ability.extra.x_mult) > to_big(1)) and not card.ability.immutable.dead then

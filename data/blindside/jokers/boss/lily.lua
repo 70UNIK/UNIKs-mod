@@ -9,6 +9,14 @@ BLINDSIDE.Joker({
     order = 1,
     boss = {min = 2},
     active = true,
+    death_card = {
+        card = 'j_unik_lily_sprunki', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+            
+        end,
+        quotes = {'unik_blindside_lily_lose'},
+        say_times = 1,
+    },
     calculate = function(self, blind, context)
         if context.before and not G.GAME.blind.disabled then
             
