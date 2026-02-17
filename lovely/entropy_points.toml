@@ -1,0 +1,57 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999999
+
+[[patches]]
+[patches.pattern]
+target = "main.lua"
+pattern = "Entropy.EnhancementPoints ={"
+position = "after"
+payload = '''
+m_unik_namta = -666,
+m_unik_pink = 7.7,
+m_unik_green = 6.7,
+m_unik_dollar = 6.3,
+m_unik_timber = 5.8,
+m_unik_bill = 6.4,
+'''
+match_indent = true
+
+###my own recipes!
+[[patches]]
+[patches.pattern]
+target = "main.lua"
+pattern = "Entropy.FixedRecipes = {"
+position = "after"
+payload = '''
+    m_unik_timberm_unik_timberm_unik_timberm_unik_timberm_unik_timber = "j_unik_beaver",
+    m_unik_pinkm_unik_pinkm_unik_pinkm_unik_pinkm_unik_pink = "j_unik_reggie",
+    m_unik_greenm_unik_greenm_unik_greenm_unik_greenm_unik_green = "j_onyx_agate",
+    m_unik_billm_unik_billm_unik_billm_unik_billm_unik_bill = "j_mf_top10",
+    m_unik_dollarm_unik_dollarm_unik_dollarm_unik_dollarm_unik_dollar = "j_joker_dollar",
+    m_unik_dollarc_basec_basec_basem_entr_disavowed = "j_entr_tenner",
+    m_unik_namtam_entr_fleshm_entr_fleshm_entr_fleshm_entr_flesh = "j_unik_monster_spawner",
+    m_unik_pinkm_unik_pinkm_unik_pinkm_unik_pinkm_entr_disavowed = "j_unik_xchips_hater",
+    m_entr_disavowedm_entr_fleshm_entr_fleshm_entr_fleshm_entr_flesh = "j_unik_autocannibalism",
+    m_unik_dollarm_entr_disavowedm_entr_disavowedm_entr_disavowedm_entr_disavowed = "j_unik_decaying_tooth",
+    m_unik_dollarm_entr_disavowedm_entr_disavowedm_entr_disavowedm_unik_namta = "j_unik_impounded",
+    m_bonusm_bonusm_bonusm_bonusm_unik_pink = "j_unik_chipzel",
+    m_unik_pinkm_unik_pinkm_unik_pinkc_basec_base = "j_unik_uniku",
+    m_unik_pinkc_basec_basec_basec_base = "j_unik_numerical_reinforcement",
+    m_luckym_luckym_entr_disavowedm_steelm_steel = "j_unik_megatron",
+    m_luckym_luckym_basem_steelm_steel = "j_unik_D16",
+    m_entr_fleshm_entr_fleshm_entr_fleshm_steelm_unik_pink = "j_unik_lily",
+
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Entropy "lib/hooks.lua"]'''
+pattern = "[1]=0,"
+position = "after"
+payload = '''
+unik_detrimental=-999999999999999,
+'''
+match_indent = true

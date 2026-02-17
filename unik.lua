@@ -1231,6 +1231,28 @@ end
 
 
 NFS.load(mod_path .. "data/stickers/mad.lua")() 
+
+if Entropy then
+	local entroper = Entropy.GetRecipeResult(val,jokerrares,seed)
+	function Entropy.GetRecipeResult(val,jokerrares,seed)
+		local res = entroper(val,jokerrares,seed)
+
+		local rare = 1 .. "" 
+		local cost=0
+		for i, v in pairs({
+			unik_detrimental = -99999999999999,
+			unik_ancient = 37,
+		}) do
+			if v >= cost and val >= v then
+				rare = i;cost=v
+			end
+		end
+		if i == 'unik_detrimental' or i == 'unik_ancient' then
+			return pseudorandom_element(jokerrares[rare..""] or {}, pseudoseed(seed)) or "j_joker"
+		end
+		return res
+	end
+end
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card
