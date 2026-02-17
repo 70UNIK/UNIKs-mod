@@ -286,8 +286,7 @@ return {
             bl_unik_hate_ball = {
                 name = "Hate Ball",
                 text = {
-                    "If an 8 is not in",
-                    "scoring hand,",
+                    "If an 8 is not played",
                     "convert a random",
                     "Joker to 8 Ball",
                 }

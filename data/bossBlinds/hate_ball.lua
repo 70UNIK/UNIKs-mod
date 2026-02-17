@@ -22,7 +22,7 @@ SMODS.Blind{
     unik_before_play = function(self)
         local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
         local has8 = false
-        for i,v in pairs(scoring_hand) do
+        for i,v in pairs(G.hand.highlighted) do
             if v:get_id() == 8 then
                 has8 = true
             end
