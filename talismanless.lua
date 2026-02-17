@@ -60,9 +60,6 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 			end
 			local chips = SMODS.Scoring_Parameters["chips"]
 			local log = math.log(math.max(amount,chips.current),amount)
-			print(chips.current)
-			print(amount)
-			print(log)
 			chips:modify(chips.current * math.log(math.max(amount,chips.current),amount) - chips.current)
 
 			if not effect.remove_default_message then

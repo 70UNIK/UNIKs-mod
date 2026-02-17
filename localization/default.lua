@@ -4263,7 +4263,7 @@ return {
                 text = {
                     "{C:unik_eye_searing_red}Sticker{C:unik_void_color} and Card",
                     "{C:unik_eye_searing_red}cannot be removed",
-                    "{X:unik_void_color,C:unik_eye_searing_red,S:2}EVER."
+                    "{X:unik_void_color,C:unik_eye_searing_red,s:2}EVER."
                 }
             },
             unik_lily_mark = {
@@ -4285,6 +4285,14 @@ return {
                 text={
                     "{C:inactive,s:0.9}(Only the leftmost copy can store effects)",
                 },
+            },
+            unik_mad = {
+                name = "{C:unik_eye_searing_red}Mutually Assured Destruction",
+                text = {
+                    "If {C:red}destroyed",
+                    "{X:unik_void_color,C:unik_eye_searing_red,s:2}DIE.",
+                    "{C:red}Unremovable"
+                }
             }
             
         },
@@ -4334,6 +4342,7 @@ return {
 				-- 	"{C:chips}+#4#{} chip#<s>4#",
 				-- },
 			},
+            
 
            
         },
@@ -5104,6 +5113,8 @@ return {
             c_unik_finger_trigger_2 = "Trigger Finger II",
             c_unik_rich_get_richer_2 = "Rich Get Richer II",
             c_unik_the_rot = "The Rot",
+            c_unik_centrelink = "Centrelink",
+            c_unik_catto_boi_adventures = "Catto Boi Adventures",
         },
         collabs={},
         dictionary={
@@ -5625,6 +5636,7 @@ return {
             unik_decaying = "Decaying",
             unik_taw = "TAW",
             unik_lily_mark = "Mark of the Lily",
+            unik_mad = "M.A.D",
         },
         quips={
             --Getting killed when you go over 3x score in Indigo ICBM
@@ -6005,6 +6017,7 @@ return {
             ch_c_mult_dollar_cap={
                 "{C:red}Mult{} cannot exceed the current {C:money}$",
             },
+            ch_c_unik_no_arcana = {"{C:tarot}Arcana cards{} no longer spawn in the shop"}
         },
     },
 }

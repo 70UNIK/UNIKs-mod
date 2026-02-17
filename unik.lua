@@ -514,7 +514,7 @@ NFS.load(mod_path .. "data/stickers/disposable.lua")()
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/decaying.lua")() 
 NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")()
-NFS.load(mod_path .. "data/stickers/taw.lua")()  
+NFS.load(mod_path .. "data/stickers/taw.lua")()   
 NFS.load(mod_path .. "data/stickers/claw_mark.lua")() 
 NFS.load(mod_path .. "data/stickers/lily_mark.lua")() 
 if not (SMODS.Mods["Cryptid"] or {}).can_load then
@@ -1167,6 +1167,8 @@ end
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
   NFS.load(mod_path .. "data/challenges/the_rot.lua")()
+  NFS.load(mod_path .. "data/challenges/centrelink.lua")()
+  NFS.load(mod_path .. "data/challenges/catto_boi_adventures.lua")()
 --  NFS.load(mod_path .. "data/challenges/rich_get_richer_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
@@ -1227,6 +1229,8 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
 
+
+NFS.load(mod_path .. "data/stickers/mad.lua")() 
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card

@@ -8,7 +8,7 @@ SMODS.Challenge{
 	},
     jokers = {
         { id = "j_cavendish", edition = "negative"},
-        { id = "j_bunc_trigger_finger", edition = "negative", stickers = {"eternal"}, eternal = true},
+        { id = "j_bunc_trigger_finger", edition = "negative", stickers = {"unik_taw"}},
 	},
 	deck = {
 		type = "Challenge Deck",

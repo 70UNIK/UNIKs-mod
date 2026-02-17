@@ -5,7 +5,7 @@ local tawSeed = math.random(1,100)..math.random(1,100)..math.random(1,100)..math
 
 SMODS.Sticker{
     key="unik_taw",
-    badge_colour=HEX("030001"),
+    badge_colour=HEX("350017"),
     atlas = 'unik_stickers', 
     pos = { x = 4, y = 0 },
     rate = 0.0,

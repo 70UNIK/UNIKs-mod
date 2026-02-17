@@ -13,7 +13,7 @@ SMODS.Challenge{
 	},
 	jokers = {
         { id = "j_hanging_chad"},
-        { id = "j_unik_poppy", eternal = true},
+        { id = "j_unik_poppy", extra_stickers = {'unik_taw'}, },
         
     },
     consumeables = {

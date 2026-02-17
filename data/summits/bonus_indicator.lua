@@ -13,6 +13,7 @@ UNIK.perma_bonus_coords = {
     perma_h_chips = {x = 2, y = 4},
     perma_h_mult = {x = 4, y = 4},
     perma_h_dollars = {x = 3, y = 4},
+    perma_repetitions = {x = 1, y = 5},
 }
 
 SMODS.DrawStep {

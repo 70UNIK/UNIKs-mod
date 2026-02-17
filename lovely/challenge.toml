@@ -26,3 +26,34 @@ if not saveTable and G.GAME.modifiers.unik_single_select_limit then
 end
 '''
 match_indent = true
+
+
+###stolen from entropy, extra stickers
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "if v.eternal then card:set_eternal(true) end"
+position = "before"
+payload = '''
+if v.extra_stickers then
+	for i, _v in ipairs(v.extra_stickers) do
+		SMODS.Stickers[_v]:apply(card, true)
+	end
+end
+'''
+match_indent = true
+
+# same deal for actual game
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = "if v.eternal then _joker:set_eternal(true) end"
+position = "before"
+payload = '''
+if v.extra_stickers then
+	for i, _v in ipairs(v.extra_stickers) do
+		SMODS.Stickers[_v]:apply(_joker, true)
+	end
+end
+'''
+match_indent = true

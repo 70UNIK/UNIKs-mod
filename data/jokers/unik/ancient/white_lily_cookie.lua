@@ -177,18 +177,16 @@ function Card.remove(self)
             end
         end
     end
-    G.E_MANAGER:add_event(Event({
-        delay = 0,
-        trigger= 'after',
-        func = function()
-            if white_lily then
+    if white_lily then
+        G.E_MANAGER:add_event(Event({
+            delay = 0,
+            trigger= 'after',
+            func = function()
                 G.GAME.unik_white_lily_persistance = G.GAME.unik_white_lily_persistance - 1
+                return true
             end
-            return true
-        end
-    }))
-    print("WLs present: " ..G.GAME.unik_white_lily_persistance)
-
+        }))
+    end
     local ret = remove_ref(self)
     return ret
 end

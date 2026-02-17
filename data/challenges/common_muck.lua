@@ -7,6 +7,7 @@ SMODS.Challenge{
 		modifiers = {},
 	},
     jokers = {
+        { id = "j_unik_riif_roof", extra_stickers = {"unik_taw"} },
 	},
 	deck = {
 		type = "Challenge Deck",
