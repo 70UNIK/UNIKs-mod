@@ -8,7 +8,7 @@ priority = 9999999
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = "set_profile_progress()"
+pattern = "self:splash_screen()"
 position = "before"
 payload = '''
 self:unik_initialize_stuff()
