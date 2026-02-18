@@ -1537,10 +1537,10 @@ return {
                 name = 'Happiness is Mandatory',
                 text = {
                     {
-                        "Turns random played card {C:unik_shitty_edition}Positive{} and",
-                        "add {C:unik_shitty_edition}Positive{} and {C:attention}Limited Edition",
-                        "to a random Joker per hand",
-                        "{C:red,E:2}Self destructs{} after Joker slots becomes {C:attention}#1#{}" ,
+                        "Add {C:unik_shitty_edition}Positive{} to a random ",
+                        "played card and Joker per hand",
+                        "{C:red,E:2}Self destructs{} after Joker",
+                        "slots becomes {C:attention}#1#{}",
                         "{C:inactive,s:0.6}Happiness is mandatory. Failure to be happy is treason.{}",
                     },
 
