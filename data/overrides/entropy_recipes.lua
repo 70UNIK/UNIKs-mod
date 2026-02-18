@@ -104,7 +104,7 @@ function Entropy.GetRecipe(cards)
             end
         end
         table.sort(enh, function(a,b)return (enhancements[a])>(enhancements[b]) end)
-        print(Entropy.ConcatStrings(enh))
+        --print(Entropy.ConcatStrings(enh))
     end
     return ret 
 end

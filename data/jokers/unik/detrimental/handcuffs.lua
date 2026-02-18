@@ -42,29 +42,29 @@ SMODS.Joker {
         end
     end
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_handcuffs"] = {
-		text = {
-            { text = "(" },
-            {
-                ref_table = "card.ability.extra",
-                ref_value = "min",
-            },
-            { text = " <= " },
-            {
-                ref_table = "card.joker_display_values",
-                ref_value = "hand_size",
-            },
-            { text = " <= " },
-            {
-                ref_table = "card.ability.extra",
-                ref_value = "max",
-            },
-            { text = ")" },
-        },
-        text_config = { colour = G.C.FILTER },
-        calc_function = function(card)
-            card.joker_display_values.hand_size = G.hand and G.hand.config.card_limit or "NIL"
-        end
-	}
-end
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_handcuffs"] = {
+-- 		text = {
+--             { text = "(" },
+--             {
+--                 ref_table = "card.ability.extra",
+--                 ref_value = "min",
+--             },
+--             { text = " <= " },
+--             {
+--                 ref_table = "card.joker_display_values",
+--                 ref_value = "hand_size",
+--             },
+--             { text = " <= " },
+--             {
+--                 ref_table = "card.ability.extra",
+--                 ref_value = "max",
+--             },
+--             { text = ")" },
+--         },
+--         text_config = { colour = G.C.FILTER },
+--         calc_function = function(card)
+--             card.joker_display_values.hand_size = G.hand and G.hand.config.card_limit or "NIL"
+--         end
+-- 	}
+-- end

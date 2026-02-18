@@ -57,20 +57,20 @@ SMODS.Joker {
     end
     end,
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_monster_spawner"] = {
-		text = {
-            {
-                border_nodes = {
-                    { ref_table = "card.joker_display_values", ref_value = "localized_text"},
-                },
-                border_colour = HEX("474931"),
-            }
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_monster_spawner"] = {
+-- 		text = {
+--             {
+--                 border_nodes = {
+--                     { ref_table = "card.joker_display_values", ref_value = "localized_text"},
+--                 },
+--                 border_colour = HEX("474931"),
+--             }
 			
-		},
-        calc_function = function(card)
-            card.joker_display_values.localized_text = "(" .. card.ability.extra.jokers_spawned .. "/" .. card.ability.extra.max_jokers .. ")"
+-- 		},
+--         calc_function = function(card)
+--             card.joker_display_values.localized_text = "(" .. card.ability.extra.jokers_spawned .. "/" .. card.ability.extra.max_jokers .. ")"
 
-        end
-	}
-end
+--         end
+-- 	}
+-- end

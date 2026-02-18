@@ -1536,12 +1536,14 @@ return {
             j_unik_happiness = {
                 name = 'Happiness is Mandatory',
                 text = {
-                    "On spawn, turn the {C:attention}leftmost{} Joker", 
-                    "and {C:attention}all{} equipped consumables {C:unik_shitty_edition}Positive{}", 
-                    "Turns a {C:attention} random{} played card {C:unik_shitty_edition}Positive{} and creates a", 
-                    "{C:unik_shitty_edition}Positive{} {C:attention}Eternal Smiley Face{} every hand",   
-                    "{C:red}Self destructs{} after Joker slots becomes {C:attention}#1#{}" ,
-                    "{C:inactive,s:0.7,E:1}Happiness is mandatory. Failure to be happy is treason.{}",
+                    {
+                        "Turns random played card {C:unik_shitty_edition}Positive{} and",
+                        "add {C:unik_shitty_edition}Positive{} and {C:attention}Limited Edition",
+                        "to a random Joker per hand",
+                        "{C:red,E:2}Self destructs{} after Joker slots becomes {C:attention}#1#{}" ,
+                        "{C:inactive,s:0.6}Happiness is mandatory. Failure to be happy is treason.{}",
+                    },
+
                 }
             },
             j_unik_the_plant = {

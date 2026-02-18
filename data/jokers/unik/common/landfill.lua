@@ -16,7 +16,7 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.before and not context.blueprint then
-            cards = 0
+            local cards = 0
 			for k, v in ipairs(context.scoring_hand) do
 				v.landfill_incompat = true
 			end

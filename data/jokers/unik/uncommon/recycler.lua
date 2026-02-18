@@ -42,15 +42,15 @@ SMODS.Joker {
 		end
     end,
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_recycler"] = {
-		text = {
-            {
-                border_nodes = {
-                    { text = "X" },
-                    { ref_table = "card.ability.extra", ref_value = "x_mult", retrigger_type = "exp" }
-                }
-            }
-        },
-	}
-end
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_recycler"] = {
+-- 		text = {
+--             {
+--                 border_nodes = {
+--                     { text = "X" },
+--                     { ref_table = "card.ability.extra", ref_value = "x_mult", retrigger_type = "exp" }
+--                 }
+--             }
+--         },
+-- 	}
+-- end
