@@ -289,7 +289,7 @@ JokerDisplay.Definitions["j_unik_zealous_joker"] = {
             mult = card.ability.extra.t_mult
         end
         card.joker_display_values.mult = mult
-        card.joker_display_values.localized_text = localize(card.ability.type, 'poker_hands')
+        card.joker_display_values.localized_text = localize(card.ability.extra.type, 'poker_hands')
     end
 }
 JokerDisplay.Definitions["j_unik_lurid_joker"] = {
@@ -310,6 +310,6 @@ JokerDisplay.Definitions["j_unik_lurid_joker"] = {
             chips = card.ability.extra.t_chips
         end
         card.joker_display_values.chips = chips
-        card.joker_display_values.localized_text = localize(card.ability.type, 'poker_hands')
+        card.joker_display_values.localized_text = localize(card.ability.extra.type, 'poker_hands')
     end
 }
