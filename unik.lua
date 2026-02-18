@@ -1238,6 +1238,10 @@ if Entropy then
 end
 if JokerDisplay then
 	NFS.load(mod_path .. "data/jokerdisplay/rescoring_calc.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/rescoring_jokers.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/ancient.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/legendary.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/common.lua")() 
 end
 
 

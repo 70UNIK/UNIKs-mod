@@ -22,18 +22,3 @@ SMODS.Joker {
 		end
 	end
 }
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_noon"] = {
--- 		text = {
---             {
---                 border_nodes = {
---                     { text = "X" },
---                     { ref_table = "card.joker_display_values", ref_value = "x_mult", retrigger_type = "exp" }
---                 }
---             }
---         },
---         calc_function = function(card)
---             card.joker_display_values.x_mult = G.GAME and G.GAME.current_round.hands_played ~= 0 and G.GAME.current_round.hands_left > 0 and card.ability.extra.x_mult or 1
---         end
--- 	}
--- end

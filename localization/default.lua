@@ -5611,6 +5611,14 @@ return {
             k_unik_jmult = "Jmult",
             k_unik_all_purple = "All played Blinds must be Purple",
             k_unik_cannot_skip = "Unskippable",
+            k_glass = "Glass",
+            k_unik_pink="Pink Cards",
+            k_unik_rescores = "Rescores",
+            k_unik_not = "NOT",
+            k_unik_probability_fail = "Probability Failure",
+            k_unik_hands_lost = "per Hand",
+            k_unik_discards_lost = "per Discard",
+            k_unik_rankless_suitless = "Rankless and Suitless"
         },
         high_scores={},
         labels={
