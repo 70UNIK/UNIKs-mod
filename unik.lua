@@ -1236,6 +1236,10 @@ if Entropy then
 	NFS.load(mod_path .. "data/overrides/entropy_recipes.lua")() 
 	
 end
+if JokerDisplay then
+	NFS.load(mod_path .. "data/jokerdisplay/rescoring_calc.lua")() 
+end
+
 
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
