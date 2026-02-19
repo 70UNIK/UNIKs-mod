@@ -68,8 +68,8 @@ JokerDisplay.Definitions["j_unik_railroad_crossing"] = {
     },
     rescore_function = function(playing_card, scoring_hand, held_in_hand, joker_card)
         if held_in_hand then return 0 end
-        return SMODS.is_suit('unik_Crosses') and JokerDisplay.in_scoring(playing_card, scoring_hand) and
-                math.min(joker_card.ability.extra.rescore,joker_card.ability.immutable.max_rescores) * JokerDisplay.calculate_joker_triggers(joker_card) or 0
+        return playing_card:is_suit('unik_Crosses') and JokerDisplay.in_scoring(playing_card, scoring_hand) and
+                joker_card.ability.extra.retriggers * JokerDisplay.calculate_joker_triggers(joker_card) or 0
     end,
     calc_function = function(card)
 
@@ -112,9 +112,9 @@ JokerDisplay.Definitions["j_unik_aquamarine"] = {
 	},
     rescore_function = function(playing_card, scoring_hand, held_in_hand, joker_card)
         if held_in_hand then return 0 end
-        return SMODS.is_suit('unik_Noughts') and JokerDisplay.in_scoring(playing_card, scoring_hand) and 
-        SMODS.pseudorandom_probability(joker_card, 'unik_aquamarine_resc2', joker_card.ability.extra.base_odds, joker_card.ability.extra.odds, 'unik_aquamarine_resc2') and
-                math.min(joker_card.ability.extra.rescore,joker_card.ability.immutable.max_rescores) * JokerDisplay.calculate_joker_triggers(joker_card) or 0
+        return playing_card:is_suit('unik_Noughts') and JokerDisplay.in_scoring(playing_card, scoring_hand) and 
+        not SMODS.pseudorandom_probability(joker_card, 'unik_aquamarine_resc2', joker_card.ability.extra.base_odds, joker_card.ability.extra.odds, 'unik_aquamarine_resc2') and
+                joker_card.ability.extra.rescores * JokerDisplay.calculate_joker_triggers(joker_card) or 0
     end,
     calc_function = function(card)
         local text, _, scoring_hand = JokerDisplay.evaluate_hand()

@@ -132,7 +132,7 @@ JokerDisplay.Definitions["j_unik_skipping_stones"] = {
     retrigger_function = function(playing_card, scoring_hand, held_in_hand, joker_card)
         if held_in_hand then return 0 end
         return SMODS.has_no_suit(playing_card) and SMODS.has_no_rank(playing_card) and JokerDisplay.in_scoring(playing_card, scoring_hand) and
-            joker_card.ability.extra * JokerDisplay.calculate_joker_triggers(joker_card) or 0
+            math.min(joker_card.ability.extra.retriggers,joker_card.ability.immutable.max_retriggers) * JokerDisplay.calculate_joker_triggers(joker_card) or 0
     end,
     calc_function = function(card)
         card.joker_display_values.localized_text = localize("k_unik_rankless_suitless")

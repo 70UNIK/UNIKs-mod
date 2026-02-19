@@ -40,20 +40,3 @@ function add_tag(_tag)
 	end
 	return vessel2(tag)
 end
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_vessel_kiln"] = {
--- 		text = {
--- 			{
--- 				border_nodes = {
--- 					{ text = "X" },
--- 					{
--- 						ref_table = "card.ability.extra",
--- 						ref_value = "x_chips",
--- 						retrigger_type = "exp"
--- 					},
--- 				},
--- 				border_colour = G.C.CHIPS,
--- 			},
--- 		},
--- 	}
--- end

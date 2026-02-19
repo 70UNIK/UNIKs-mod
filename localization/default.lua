@@ -4750,6 +4750,7 @@ return {
                 name = "Placard",
                 text = {
                     "Add {E:2,C:red}Ultradebuffed{}", --Brute force counters dandy (through update functions) and patch
+                    "and {X:unik_void_colorE:2,C:red}TAW{}",
                     "to {C:green}#1# in #2#{} cards in deck", --3 in 4
                 }
             },
@@ -5618,7 +5619,10 @@ return {
             k_unik_probability_fail = "Probability Failure",
             k_unik_hands_lost = "per Hand",
             k_unik_discards_lost = "per Discard",
-            k_unik_rankless_suitless = "Rankless and Suitless"
+            k_unik_rankless_suitless = "Rankless and Suitless",
+            k_unik_sticker_remove= "Sticker removal",
+            k_unik_steel = "Steel",
+            k_bonus_cards = "Bonus Cards"
         },
         high_scores={},
         labels={
