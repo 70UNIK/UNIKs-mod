@@ -13,6 +13,7 @@ perma_e_mult = self.ability and self.ability.perma_e_mult or 0,
 perma_e_chips = self.ability and self.ability.perma_e_chips or 0,
 custom_suit_x_mult = self.ability and self.ability.custom_suit_x_mult or 0,
 custom_suit_x_chips = self.ability and self.ability.custom_suit_x_chips or 0,
+perma_rescores = self.ability and self.ability.perma_rescores or 0,
 '''
 match_indent = true
 
@@ -24,6 +25,7 @@ position = 'before'
 payload = '''
 bonus_e_mult = self.ability.perma_e_mult ~= 0 and (self.ability.perma_e_mult + 1) or nil,
 bonus_e_chips = self.ability.perma_e_chips ~= 0 and (self.ability.perma_e_chips + 1) or nil,
+bonus_rescores = self.ability.perma_rescores > 0 and (self.ability.perma_rescores) or nil,
 '''
 match_indent = true
 

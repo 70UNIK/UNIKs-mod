@@ -560,6 +560,7 @@ NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
+NFS.load(mod_path .. "data/misc/rescoring_api.lua")()
 --seals
 NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
@@ -1223,10 +1224,10 @@ end
 if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()	
 	--temporarily disabled until v0.7
-	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
-	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
-	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
-	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 end
 
 

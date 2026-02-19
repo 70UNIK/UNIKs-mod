@@ -40,7 +40,7 @@ JokerDisplay.Definitions["j_unik_happiness"] = {
         local text, _, scoring_hand = JokerDisplay.evaluate_hand(hand)
         local cards = 0
         for i,v in pairs(scoring_hand) do
-            if v.edition and v.edition.positive then
+            if v.edition and v.edition.unik_positive then
                 cards = cards + 1
             end
         end
