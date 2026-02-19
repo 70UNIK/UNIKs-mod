@@ -20,6 +20,7 @@ SMODS.Joker {
 	end,
     add_to_deck = function(self, card, from_debuff)
         card.ability.extra.x_mult = card.ability.extra.x_mult_initial
+		card.ability.extra.selfDestruction = false
     end,
     update = function(self,card,dt)
 		if card.added_to_deck and card.ability.extra.in_scoring == false then

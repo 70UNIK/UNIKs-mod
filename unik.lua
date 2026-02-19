@@ -1244,6 +1244,8 @@ if JokerDisplay then
 	NFS.load(mod_path .. "data/jokerdisplay/common.lua")() 
 	NFS.load(mod_path .. "data/jokerdisplay/uncommon.lua")() 
 	NFS.load(mod_path .. "data/jokerdisplay/rare.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/editions.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/detrimental.lua")() 
 end
 
 

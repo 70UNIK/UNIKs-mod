@@ -1,11 +1,3 @@
-function CheckSlots(card,slotLimit)
-    --Check joker slots for when Joker Card is added, removed
-    --if  context.cardarea == G.jokers and not context.blueprint_card and not context.retrigger_joker then
-    --print("SlotCount")
-    if G.jokers.config.card_limit <= slotLimit then
-        selfDestruction(card,"k_unik_happiness3",G.C.BLACK)
-    end
-end
 
 function selfDestruction(card,message,color,dissolve)
     -- This part plays the animation.
@@ -86,11 +78,6 @@ local removeHook = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
     if (self.added_to_deck) then
         SMODS.calculate_context({ unik_remove_from_deck = true, removed = self, from_debuff = from_debuff})
-        for _, v in pairs(G.jokers.cards) do
-            if v.ability.name == "j_unik_happiness" then
-                CheckSlots(v,v.ability.extra.slotLimit)
-            end
-        end
     end
     local ret = removeHook(self,from_debuff)
     return ret
@@ -238,11 +225,7 @@ function CardArea:emplace(card, location, stay_flipped)
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.ability.name == "j_unik_happiness" then
-                --print("checkSlots")
-                CheckSlots(v,v.ability.extra.slotLimit)
-            --Formidicus fix, now constantly destroys cursed jokers
-            elseif v.config.center.key == "j_cry_formidiulosus" then
+            if v.config.center.key == "j_cry_formidiulosus" then
                 for x, w in pairs(G.jokers.cards) do
                     if (UNIK.detrimental_rarities[w.config.center.rarity] ) and not w.ability.extra.getting_captured then
                         --destory ghost

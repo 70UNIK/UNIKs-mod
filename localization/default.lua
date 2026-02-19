@@ -1537,10 +1537,10 @@ return {
                 name = 'Happiness is Mandatory',
                 text = {
                     {
-                        "Add {C:unik_shitty_edition}Positive{} to a random ",
+                        "Add {C:unik_shitty_edition}Positive{} to a random",
                         "played card and Joker per hand",
-                        "{C:red,E:2}Self destructs{} after Joker",
-                        "slots becomes {C:attention}#1#{}",
+                        "{C:red,E:2}Self destructs{} after playing",
+                        "{C:attention}#1#{} scoring {C:unik_shitty_edition}Positive{} cards",
                         "{C:inactive,s:0.6}Happiness is mandatory. Failure to be happy is treason.{}",
                     },
 
@@ -5628,6 +5628,7 @@ return {
             k_single_king = "X1 King",
             k_light_suits = "Light Suits",
             k_dark_suits = "Dark Suits",
+            k_unik_positive = "Positive",
         },
         high_scores={},
         labels={

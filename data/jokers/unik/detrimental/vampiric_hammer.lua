@@ -85,19 +85,4 @@ SMODS.Joker {
         end
     end
 }
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_vampiric_hammer"] = {
---         reminder_text = {
---             {
---                 ref_table = "card.joker_display_values",
---                 ref_value = "counter",
---                 retrigger_type = "mult",
---                 colour = G.C.FILTER,
---             },	
---         },
---         calc_function = function(card)
--- 			card.joker_display_values.counter = "(" .. card.ability.extra.enhanced_cards .. "/" .. card.ability.extra.min_enhanced_cards .. ")"
---         end
--- 	}
--- end
 
