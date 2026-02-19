@@ -99,22 +99,3 @@ or key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod"
     end
     return ret
 end
-
--- --Simple XChips display
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_jsab_chelsea"] = {
--- 		text = {
--- 			{
--- 				border_nodes = {
--- 					{ text = "X" },
--- 					{
--- 						ref_table = "card.ability.extra",
--- 						ref_value = "x_chips",
--- 						retrigger_type = "exp"
--- 					},
--- 				},
--- 				border_colour = G.C.CHIPS,
--- 			},
--- 		},
--- 	}
--- end

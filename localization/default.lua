@@ -5622,7 +5622,12 @@ return {
             k_unik_rankless_suitless = "Rankless and Suitless",
             k_unik_sticker_remove= "Sticker removal",
             k_unik_steel = "Steel",
-            k_bonus_cards = "Bonus Cards"
+            k_bonus_cards = "Bonus Cards",
+            k_timber_cards = "Timber Cards",
+            k_retriggers = "Retriggers",
+            k_single_king = "X1 King",
+            k_light_suits = "Light Suits",
+            k_dark_suits = "Dark Suits",
         },
         high_scores={},
         labels={

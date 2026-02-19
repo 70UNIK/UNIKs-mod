@@ -9,12 +9,12 @@ SMODS.Joker {
     cost = 15,
     atlas = 'unik_rare',
     pos = { x = 2, y = 2 },
-    draw = function(self, card, layer)
-        if card.config.center.discovered or card.bypass_discovery_center then
-             card.children.center:draw_shader('negative', nil, card.ARGS.send_to_shader)
-            card.children.center:draw_shader('negative_shine', nil, card.ARGS.send_to_shader)
-        end
-    end,
+    -- draw = function(self, card, layer)
+    --     if card.config.center.discovered or card.bypass_discovery_center then
+    --          card.children.center:draw_shader('negative', nil, card.ARGS.send_to_shader)
+    --         card.children.center:draw_shader('negative_shine', nil, card.ARGS.send_to_shader)
+    --     end
+    -- end,
     immutable = true,
     config = { extra = { anti_rounds = 0, total_rounds = 4 } },
     loc_vars = function(self, info_queue, card)
@@ -54,3 +54,19 @@ SMODS.Joker {
         end
     end,
 }
+
+SMODS.DrawStep {
+	key = "antijoker_edition",
+	order = 5,
+    func = function(self)
+        if self.ability.name == 'j_unik_antijoker' and (self.config.center.discovered or self.bypass_discovery_center) then
+            self.children.center:draw_shader('negative', nil, self.ARGS.send_to_shader)
+            self.children.center:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
+            if self.children.front and not self:should_hide_front() then
+                self.children.front:draw_shader('negative', nil, self.ARGS.send_to_shader)
+                self.children.front:draw_shader('negative_shine', nil, self.ARGS.send_to_shader)
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+} 

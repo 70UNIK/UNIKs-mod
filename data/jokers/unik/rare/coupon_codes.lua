@@ -109,32 +109,3 @@ SMODS.Joker {
         end
     end,
 }
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_coupon_codes"] = {
---         reminder_text = {
---             {
---                 ref_table = "card.joker_display_values",
---                 ref_value = "localized_text",
---                 retrigger_type = "mult",
---             },	
---         },
---         extra = {
---             {
---                 {
---                     ref_table = "card.joker_display_values",
---                     ref_value = "odds",
---                     colour = G.C.GREEN,
---                     scale = 0.3,
---                 },		
--- 			},
--- 		},
---         calc_function = function(card)
---             local text = ""
---             local odds = ""
---            
---             text = "(" .. localize("k_voucher") .. ")"
--- 			card.joker_display_values.localized_text = text
---             card.joker_display_values.odds = odds
---         end
--- 	}
--- end

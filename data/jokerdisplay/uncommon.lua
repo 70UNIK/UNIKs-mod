@@ -204,7 +204,7 @@ JokerDisplay.Definitions["j_unik_malicious_face"] = {
     end,
     style_function = function(card, text, reminder_text, extra)
         if reminder_text and reminder_text.children and reminder_text.children[2] then
-            reminder_text.children[2].config.colour = card.joker_display_values.is_active and G.C.ATTENTION or
+            reminder_text.children[2].config.colour = card.joker_display_values.is_active and G.C.ORANGE or
                 G.C.UI.TEXT_INACTIVE
         end
     end
