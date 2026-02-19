@@ -6,13 +6,15 @@ JokerDisplay.Definitions["j_unik_last_tile"] = {
         { text = ")" },
     },
     calc_function = function(card)
-        local active = false
+        
         if ((G.GAME.current_round.hands_left == 1 and not next(G.play.cards)) or
         (G.GAME.current_round.hands_left == 0 and next(G.play.cards))) or
             next(find_joker("cry-panopticon")) or next(find_joker("j_paperback_the_world")) then
-            active = true
-        end
-        card.joker_display_values.active = active and
+            card.joker_display_values.is_active = true
+            else
+                card.joker_display_values.is_active = false
+            end
+        card.joker_display_values.active = card.joker_display_values.is_active and
             localize("k_active") or localize("k_inactive_ex")
     end,
     style_function = function(card, text, reminder_text, extra)
