@@ -68,8 +68,8 @@ function create_UIBox_HUD()
                 }},
             }}
         else
-            print(#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes)
-            print(#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6])
+            --print(#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes)
+            --print(#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6])
             orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes[#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes + 1] = {n=G.UIT.C, config={minw = spacing},nodes={}}
             orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes[#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes + 1] = {n=G.UIT.C, config={
                 align = "cm", 
