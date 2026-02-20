@@ -1,4 +1,14 @@
 
+
+
+local localBonusHook = SMODS.localize_perma_bonuses
+function SMODS.localize_perma_bonuses(specific_vars, desc_nodes)
+    localBonusHook(specific_vars, desc_nodes)
+    if specific_vars and specific_vars.bonus_rescores then
+        localize{type = 'other', key = 'card_extra_rescore', nodes = desc_nodes, vars = {specific_vars.bonus_rescores}}
+    end
+end
+
 local bunc_original_calculate_main_scoring = SMODS.calculate_main_scoring
 function SMODS.calculate_main_scoring(context, scoring_hand)
     local calc_card_area = context.cardarea
@@ -35,7 +45,24 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
 
         end
     end
-
+    
+    --perma_rescores
+    if scoring_hand and calc_card_area ~= "unscored" and (calc_card_area == G.play) then
+        for i,v in pairs(scoring_hand) do
+            if v.ability and v.ability.perma_rescores and v.ability.perma_rescores > 0 then
+                v.unik_rescored = true
+                micelRescores[#micelRescores+1] = {card = v, rescore = v.ability.perma_rescores}
+            end
+        end
+    end
+    if (calc_card_area == G.hand) then
+        for i,v in pairs(calc_card_area.cards) do
+            if v.ability and v.ability.perma_rescores and v.ability.perma_rescores > 0 then
+                v.unik_rescored = true
+                micelRescores[#micelRescores+1] = {card = v, rescore = v.ability.perma_rescores}
+            end
+        end
+    end
     --Jokers
     --Jokers will have individualized "source" and "message"
     --Will take in rescored cards as well cause kite experiment relies on that.
@@ -193,6 +220,15 @@ function SMODS.calculate_end_of_round_effects(context)
             end
         end
 
+                --perma_rescores
+        if  (context.cardarea == G.hand) then
+            for i,v in pairs(context.cardarea.cards) do
+                if v.ability and v.ability.perma_rescores and v.ability.perma_rescores > 0 then
+                    v.unik_rescored = true
+                    micelRescores[#micelRescores+1] = {card = v, rescore = v.ability.perma_rescores}
+                end
+            end
+        end
             local jokerRescores = {}
         local eval2 = {}
         SMODS.calculate_context({unik_kite_experiment = true, cardarea = context.cardarea, unik_end_of_round = true},eval2)

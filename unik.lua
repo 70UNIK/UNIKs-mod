@@ -20,6 +20,7 @@ SMODS.current_mod.optional_features = {
 	cardareas = {
 		deck = true,
 		discard = true, -- used by scorch
+		unscored = true,
 	},
 }
 
@@ -1033,6 +1034,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
+--NFS.load(mod_path .. "data/jokers/unik/rare/electroplating.lua")() --NOT released until v0.8, will only be here for the purpose of testing perma rescoring
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()

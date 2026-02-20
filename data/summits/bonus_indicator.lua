@@ -14,6 +14,7 @@ UNIK.perma_bonus_coords = {
     perma_h_mult = {x = 4, y = 4},
     perma_h_dollars = {x = 3, y = 4},
     perma_repetitions = {x = 1, y = 5},
+    perma_rescores = {x = 3,y = 5}
 }
 
 SMODS.DrawStep {
@@ -22,7 +23,7 @@ SMODS.DrawStep {
     func = function(self)
         if self.area ~= G.deck then
             for i,v in pairs(UNIK.perma_bonus_coords) do
-                if self.ability[i] ~= 0 then
+                if self.ability and self.ability[i] and self.ability[i] ~= 0 then
                     if not self.children[i .. "_render"] then
                         self.children[i .. "_render"] = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS['unik_stickers'], v)
                         self.children[i .. "_render"].states.visible = false

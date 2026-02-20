@@ -2860,6 +2860,17 @@ return {
                 }
             },
 
+            j_unik_electroplating = {
+                name = "Electroplating",
+                text = {
+                    "Played and scoring cards",
+                    "with a {C:unik_copper}Copper Seal",
+                    "permanently gain {C:attention}+#1#",
+                    "{C:unik_copper}Rescore#<s>1#{} and {C:red}loses",
+                    "it's seal"
+                }
+            },
+
             --Bunco crossmod Jokers
             j_unik_bunc_king_minos = {
                 name =  "The Corpse of King Minos", --Poly mino... gettit?
@@ -4135,6 +4146,12 @@ return {
             card_extra_e_mult = {
                 text = {
                     "{X:dark_edition,C:white}^#1#{} extra Mult"
+                }
+            },
+            card_extra_rescore = {
+                text = {
+                    "{C:unik_copper}Rescore{} this card",
+                    "{C:attention}#1#{} time#<s>1#"
                 }
             },
             card_suit_x_chips = {

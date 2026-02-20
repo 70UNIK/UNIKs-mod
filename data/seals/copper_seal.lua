@@ -7,6 +7,8 @@ SMODS.Seal {
     pos = { x = 0, y = 0 },
     badge_colour = G.C.UNIK_COPPER,
     calculate = function(self, card, context)
+        --FUTURE: Phanta compatibility with unscoring card effects
+
         if context.unik_after_effect and context.cardarea and context.cardarea == G.hand  then
             -- print("XXXXXXXXVVVV")
             -- print(context.cardarea.cards)

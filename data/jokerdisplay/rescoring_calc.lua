@@ -63,7 +63,8 @@ JokerDisplay.calculate_card_triggers = function(card, scoring_hand, held_in_hand
             end
         end
     end
+    local perma = card.ability.perma_rescores or 0
     
-    scores = scores
+    scores = scores + perma
     return ret * scores
 end
