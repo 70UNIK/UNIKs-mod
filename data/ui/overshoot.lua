@@ -18,51 +18,90 @@ function create_UIBox_HUD()
 
         --Shortening buttons:
         --Run info
-        if orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[1].config.id == "run_info_button" then
-        orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[1] = {n=G.UIT.R, config={id = 'run_info_button', align = "cm", minh = 1, minw = 1.5,padding = 0.05, r = 0.1, hover = true, colour = G.C.RED, button = "run_info", shadow = true}, nodes={
-                {n=G.UIT.R, config={align = "cm", padding = 0, maxw = 1.4}, nodes={
-                {n=G.UIT.T, config={text = localize('b_run_info_1'), scale = 1.2*scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
-                }},
-                {n=G.UIT.R, config={align = "cm", padding = 0, maxw = 1.4}, nodes={
-                {n=G.UIT.T, config={text = localize('b_run_info_2'), scale = 1*scale, colour = G.C.UI.TEXT_LIGHT, shadow = true, focus_args = {button = G.F_GUIDE and 'guide' or 'back', orientation = 'bm'}, func = 'set_button_pip'}}
+        if not UNIK.has_almanac() then
+
+            if orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[1].config.id == "run_info_button" then
+            orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[1] = {n=G.UIT.R, config={id = 'run_info_button', align = "cm", minh = 1, minw = 1.5,padding = 0.05, r = 0.1, hover = true, colour = G.C.RED, button = "run_info", shadow = true}, nodes={
+                    {n=G.UIT.R, config={align = "cm", padding = 0, maxw = 1.4}, nodes={
+                    {n=G.UIT.T, config={text = localize('b_run_info_1'), scale = 1.2*scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
+                    }},
+                    {n=G.UIT.R, config={align = "cm", padding = 0, maxw = 1.4}, nodes={
+                    {n=G.UIT.T, config={text = localize('b_run_info_2'), scale = 1*scale, colour = G.C.UI.TEXT_LIGHT, shadow = true, focus_args = {button = G.F_GUIDE and 'guide' or 'back', orientation = 'bm'}, func = 'set_button_pip'}}
+                    }}
                 }}
-            }}
-        end
-        --options:
-        if orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[2].config.button == "options" then
-            orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm", minh = 1, minw = 1.5,padding = 0.05, r = 0.1, hover = true, colour = G.C.ORANGE, button = "options", shadow = true}, nodes={
-                {n=G.UIT.C, config={align = "cm", maxw = 1.4, focus_args = {button = 'start', orientation = 'bm'}, func = 'set_button_pip'}, nodes={
-                {n=G.UIT.T, config={text = localize('b_options'), scale = scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
+            end
+            --options:
+            if orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[2].config.button == "options" then
+                orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[2] = {n=G.UIT.R, config={align = "cm", minh = 1, minw = 1.5,padding = 0.05, r = 0.1, hover = true, colour = G.C.ORANGE, button = "options", shadow = true}, nodes={
+                    {n=G.UIT.C, config={align = "cm", maxw = 1.4, focus_args = {button = 'start', orientation = 'bm'}, func = 'set_button_pip'}, nodes={
+                    {n=G.UIT.T, config={text = localize('b_options'), scale = scale, colour = G.C.UI.TEXT_LIGHT, shadow = true}}
+                    }},
+                }}
+            end
+
+            --
+            
+            --adding a new button
+            orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes + 1] = {n=G.UIT.R, config={
+                align = "cm", 
+                
+                minh = 1, 
+                maxw = 1.4,
+                padding = 0.05, 
+                r = 0.1, 
+                colour=G.C.UNIK_RGB,
+                emboss=0.05,
+                hover = true, 
+                can_collide = true,
+                shadow = true,
+                id = 'unik_overshoot_desc',
+                button = "overshoot_info",
+                unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
+                },
+            nodes={
+                {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
+                {n=G.UIT.T, config={text = localize('k_overshoot'), minh = 0.33, scale = 0.85*scale, colour = G.C.UI.TEXT_LIGHT, shadow = true
+                }},
+                }},
+                {n=G.UIT.R, config={align = "cm", r = 0.1, minw = 1, colour = temp_col2, id = 'row_overshoot_text'}, nodes={
+                {n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.GAME, ref_value = 'unik_overshoot'}}, colours = {G.C.UNIK_RGB},shadow = true, scale = 2*scale}),id = 'unik_overshoot_UI_count'}},
                 }},
             }}
+        else
+            print(#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes)
+            print(#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6])
+            orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes[#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes + 1] = {n=G.UIT.C, config={minw = spacing},nodes={}}
+            orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes[#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[6].nodes + 1] = {n=G.UIT.C, config={
+                align = "cm", 
+                
+                minh = 1, 
+                maxw = 1.4,
+                padding = 0.05, 
+                r = 0.1, 
+                colour=G.C.UNIK_RGB,
+                emboss=0.05,
+                hover = true, 
+                can_collide = true,
+                shadow = true,
+                id = 'unik_overshoot_desc',
+                button = "overshoot_info",
+                unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
+                },
+            nodes={
+                {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
+                {n=G.UIT.T, config={text = localize('k_overshoot'), minh = 0.33, scale = 0.85*scale, colour = G.C.UI.TEXT_LIGHT, shadow = true
+                }},
+                }},
+                {n=G.UIT.R, config={align = "cm", r = 0.1, minw = 1, colour = temp_col2, id = 'row_overshoot_text'}, nodes={
+                {n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.GAME, ref_value = 'unik_overshoot'}}, colours = {G.C.UNIK_RGB},shadow = true, scale = 2*scale}),id = 'unik_overshoot_UI_count'}},
+                }},
+            }}
+            --start = 
+            --then = 
+            --almanac: will instead try to attach an additional ui next to "relief"... If you DARE
+
         end
         
-        --adding a new button
-        orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[#orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes + 1] = {n=G.UIT.R, config={
-            align = "cm", 
-            
-            minh = 1, 
-            maxw = 1.4,
-            padding = 0.05, 
-            r = 0.1, 
-            colour=G.C.UNIK_RGB,
-            emboss=0.05,
-            hover = true, 
-            can_collide = true,
-            shadow = true,
-            id = 'unik_overshoot_desc',
-            button = "overshoot_info",
-            unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
-            },
-        nodes={
-            {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
-            {n=G.UIT.T, config={text = localize('k_overshoot'), minh = 0.33, scale = 0.85*scale, colour = G.C.UI.TEXT_LIGHT, shadow = true
-            }},
-            }},
-            {n=G.UIT.R, config={align = "cm", r = 0.1, minw = 1, colour = temp_col2, id = 'row_overshoot_text'}, nodes={
-            {n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.GAME, ref_value = 'unik_overshoot'}}, colours = {G.C.UNIK_RGB},shadow = true, scale = 2*scale}),id = 'unik_overshoot_UI_count'}},
-            }},
-            }}
     end
 
     return orig
