@@ -1222,10 +1222,8 @@ NFS.load(mod_path .. "data/overrides/values_changes.lua")()
 
 
 --UI
-if UNIK.overshootEnabled() then
-	NFS.load(mod_path .. "data/ui/overshoot.lua")()
-	NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
-end
+NFS.load(mod_path .. "data/ui/overshoot.lua")()
+NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
 NFS.load(mod_path .. "data/ui/banished_items.lua")()
 NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 if AKYRS then

@@ -19,6 +19,20 @@ local ceiling222 = math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5)
 --print(upper22)
 local nanny = tostring(G.GAME.chips_text)
 --Naneinf will always trigger overshoot
+--update UI if settings were changed on the fly
+local ante_UI = G.HUD:get_UIE_by_ID('unik_overshoot_desc')
+if not ante_UI and UNIK.overshootEnabled(true) then
+    G.HUD = UIBox{
+        definition = create_UIBox_HUD(),
+        config = {align=('cli'), offset = {x=-0.7,y=0},major = G.ROOM_ATTACH}
+    }
+elseif ante_UI and not UNIK.overshootEnabled(true) then
+    G.HUD = UIBox{
+        definition = create_UIBox_HUD(),
+        config = {align=('cli'), offset = {x=-0.7,y=0},major = G.ROOM_ATTACH}
+    }
+end
+
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
     G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0
