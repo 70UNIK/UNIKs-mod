@@ -12,7 +12,7 @@ SMODS.Booster{
             return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_soul", nil)
         end
 		--has a 0.1% chance to appear when in these packs when almanac is installed
-		if next(SMODS.find_mod("jen")) then
+		if UNIK.has_almanac() then
 			if pseudorandom("almanac_funny" .. G.GAME.round_resets.ante) > 0.999 then
 				return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_jen_yawetag", nil)
 			end

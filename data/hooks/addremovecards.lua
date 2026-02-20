@@ -98,7 +98,7 @@ function CardArea:emplace(card, location, stay_flipped)
     end
     --Happiness is mandatory: Joker slot check after the hook
     if card.ability.set == "unik_lartceps" then
-        card.ability.unik_taw = true
+        card.ability.eternal = true
         card.ability.perishable = nil
         card.ability.rental = true
         card.ability.unik_triggering = true

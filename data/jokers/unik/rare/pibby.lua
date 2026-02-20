@@ -38,7 +38,7 @@ SMODS.Joker {
     config = { extra = {x_mult = 1},immutable = {divisor = 175} },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
-        if (SMODS.Mods["jen"] or {}).can_load then
+        if UNIK.has_almanac() then
 			quoteset = Jen.sinister and 'drama'  or 'normal'
 		end
 		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }

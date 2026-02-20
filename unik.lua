@@ -28,7 +28,20 @@ function UNIK.has_almanac()
 	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
 		return true
 	end
+	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
+		return true
+	end
 	return false
+end
+
+function UNIK.get_almanac_prefix()
+	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
+		return 'jen'
+	end
+	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
+		return 'pwx'
+	end
+	return 'jen'
 end
 
 function AlterConfigWithAlmanac(config1,config2)

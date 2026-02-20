@@ -332,3 +332,71 @@ G.FUNCS.skip_blind = function(e)
     end
 
 end
+
+--immediately ends the round, sets score to -1 and unless you have something like Determination (will still respect that), you die.
+function UNIK.instakill()
+    if not G.GAME.blind or (G.GAME.blind and not G.GAME.blind.in_blind ) then
+        local game_over = true
+        SMODS.saved = false
+        SMODS.calculate_context({out_of_round = true, game_over = game_over})
+        if SMODS.saved then game_over = false end
+        if game_over then
+            G.E_MANAGER:add_event(Event({
+                delay = 0,
+                trigger = 'immediate',
+                func = function()
+                    G.STATE = G.STATES.GAME_OVER
+                    G.STATE_COMPLETE = false 
+                    return true
+                end
+            }))
+        end
+    else
+        
+    G.GAME.chips = -1
+    G.E_MANAGER:add_event(
+        Event({
+            trigger = "immediate",
+            func = function()
+                if G.STATE ~= G.STATES.SELECTING_HAND then
+                    return false
+                end
+                G.STATE = G.STATES.HAND_PLAYED
+                G.STATE_COMPLETE = true
+                end_round()
+                return true
+            end,
+        }),
+        "other"
+    )
+        
+        
+    end
+    
+end
+
+G.FUNCS.draw_from_play_to_deck = function(e)
+    local play_count = #G.play.cards
+    local it = 1
+    for k, v in ipairs(G.play.cards) do
+        if (not v.shattered) and (not v.destroyed) then 
+            draw_card(G.play,G.deck, it*100/play_count,'down', false, v)
+            it = it + 1
+        end
+    end
+end
+
+local end_roundref = end_round
+function end_round()
+    local instakill = G.GAME.blind:unik_after_defeat(G.GAME.chips,G.GAME.blind.chips)
+    if instakill then
+        G.GAME.chips = -1
+        game_over = true
+        G.ROOM.jiggle = G.ROOM.jiggle + 25
+        G.GAME.blind.triggered = true
+        G.GAME.blind:wiggle()
+    end
+    local ret = end_roundref()
+
+    return ret
+end

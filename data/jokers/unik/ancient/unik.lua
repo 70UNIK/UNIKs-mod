@@ -40,7 +40,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		local key = 'j_unik_unik'
-		if (SMODS.Mods["jen"] or {}).can_load then
+		if UNIK.has_almanac() then
 			quoteset = Jen.dramatic and 'drama'  or 'normal'
 		end
 		if center.ability.extra.Echips + center.ability.immutable.base_echips >= center.ability.immutable.limit then

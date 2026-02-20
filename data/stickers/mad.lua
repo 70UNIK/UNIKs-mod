@@ -41,14 +41,7 @@ function Card.remove(self)
                                 end
                             end
                             if originalArea and not hasbeenrestored then
-                                G.E_MANAGER:add_event(Event({
-                                    delay = 0,
-                                    func = function()
-                                        G.STATE = G.STATES.GAME_OVER
-                                        G.STATE_COMPLETE = false 
-                                        return true
-                                    end
-                                }))
+                                UNIK.instakill()
                             end                                           
                         end
                         

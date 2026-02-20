@@ -11,6 +11,13 @@ SMODS.Blind{
     boss_colour= HEX("5799b2"),
     dollars = 5,
     mult = 2,
+    death_card = {
+        card = 'v_magic_trick', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_magician'},
+        say_times = 6,
+    },
     loc_vars = function(self, info_queue, card)
 
 		return { vars = {  (get_blind_amount(G.GAME.round_resets.ante) * 2 * G.GAME.starting_params.ante_scaling)^1.15  } } -- no bignum?

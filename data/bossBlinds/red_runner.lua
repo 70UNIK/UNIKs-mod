@@ -8,9 +8,14 @@ SMODS.Blind{
     dollars = 8,
     mult = 2,
     config = {},
-    death_message = "special_lose_runner",
-    --Create an eternal ghost
-
+    pronouns = "he_him",
+    death_card = {
+        card = 'j_runner', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_runner'},
+        say_times = 6,
+    },
     unik_before_play = function(self)
         local text, loc_disp_text, poker_hands, scoring_hand, disp_text = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
         if next(poker_hands["Straight"]) then

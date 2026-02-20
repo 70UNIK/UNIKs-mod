@@ -5871,12 +5871,11 @@ return {
                 "NOT. VANILLA!!!!!",
             },
             special_lose_magician={
-                "Who's afraid of",
-                "the Big Bad",
-                "Magic Trick??!!",
+                "AFRAID OF ME",
+                "YOU LITTLE SHIT?!",
             },
             special_lose_eternal_egg={
-                "ETERNAL EGG IS USEFUL",
+                "I'M USEFUL",
                 "WITH TEMPERANCE AND",
                 "SWASHBUCKLER!!!!!!!!",
             },
