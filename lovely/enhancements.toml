@@ -64,7 +64,7 @@ payload = '''
     then
         return suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
     else
-    print(suit)
+   -- print(suit)
     
 '''
 match_indent = true
