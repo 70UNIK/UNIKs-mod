@@ -4788,7 +4788,7 @@ return {
                 name = "Placard",
                 text = {
                     "Add {E:2,C:red}Ultradebuffed{}", --Brute force counters dandy (through update functions) and patch
-                    "and {X:unik_void_colorE:2,C:red}TAW{}",
+                    "and {X:unik_void_color,E:2,C:red}TAW{}",
                     "to {C:green}#1# in #2#{} cards in deck", --3 in 4
                 }
             },
