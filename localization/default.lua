@@ -4788,7 +4788,7 @@ return {
                 name = "Placard",
                 text = {
                     "Add {E:2,C:red}Ultradebuffed{}", --Brute force counters dandy (through update functions) and patch
-                    "and {X:unik_void_color,E:2,C:red}TAW{}",
+                    "and {X:unik_void_color,E:2,C:unik_eye_searing_red}TAW{}",
                     "to {C:green}#1# in #2#{} cards in deck", --3 in 4
                 }
             },
@@ -5869,8 +5869,8 @@ return {
                 "YOU JACKSHIT!",
             },
             special_lose_unik_seance={
-                "Bruh, seance is the BEST",
-                "card, you shitass!",
+                "You are unworthy for",
+                "the ritual...",
             },
             special_lose_torture_chamber={
                 "Good luck in your eternal",
@@ -5881,8 +5881,8 @@ return {
                 "GET DIZZY!",
             },
             special_lose_unik_half={
-                "Too late to beg for",
-                "a half joker now!",
+                "Too late to beg",
+                "for me now!",
             },
             special_lose_unik_darkness={
                 "P L A Y",
@@ -5896,8 +5896,9 @@ return {
                 "already popped."
             },
             special_lose_unik_positive={
-                "Big brother is",
-                "always watching!",
+                "{C:red}YOU HAVE EXPRESSED UNHAPPINESS.",
+                "{C:red}UNHAPPINESS IS TREASON.",
+                "{C:red}SENTENCE: {X:unik_void_color,C:unik_eye_searing_red,s:2}EXECUTION!"
             },
             special_lose_salmon_steps={
                 "This seems familar...",

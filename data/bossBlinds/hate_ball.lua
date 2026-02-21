@@ -15,7 +15,13 @@ SMODS.Blind{
         return true
 	end,
     pronouns = "he_him",
-    death_message = "special_lose_hate_ball",
+    death_card = {
+        card = 'j_8_ball', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_hate_ball'},
+        say_times = 5,
+    },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_hate_ball")
 	end,

@@ -14,12 +14,12 @@ SMODS.Challenge{
         { id = "j_unik_catto_boi", extra_stickers = {'unik_mad'}},
     },
     consumeables = {
-        {id = 'c_star',edition= 'negative'},
+        {id = 'c_star'},
         {id = 'c_star'},
         {id = 'c_star'},
     },
 	deck = {
-		type = "Checkered Deck",
+		type = "Challenge Deck",
                 cards = {
             { s = "S", r = "3",},
 			{ s = "S", r = "4",},

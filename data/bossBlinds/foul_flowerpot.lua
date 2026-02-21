@@ -65,7 +65,13 @@ SMODS.Blind{
         end
         return true
 	end,
-    death_message = "special_lose_flowerpot",
+    death_card = {
+        card = 'j_flower_pot', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_flowerpot'},
+        say_times = 5,
+    },
     --Create an eternal ghost
     set_blind = function(self, reset, silent)
         G.GAME.unik_pentagram_manager_fix = true

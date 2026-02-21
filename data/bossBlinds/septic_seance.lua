@@ -14,7 +14,13 @@ SMODS.Blind{
         end
         return true
 	end,
-    death_message = "special_lose_unik_seance",
+    death_card = {
+        card = 'j_seance', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_unik_seance'},
+        say_times = 5,
+    },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_septic_seance")
 	end,

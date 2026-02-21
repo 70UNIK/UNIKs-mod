@@ -12,7 +12,13 @@ SMODS.Blind{
     set_blind = function(self, reset, silent)
         G.GAME.unik_positive_draw = true
     end,
-    death_message = "special_lose_unik_positive",
+    death_card = {
+        card = 'j_unik_happiness', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_unik_positive'},
+        say_times = 5,
+    },
     --doesnt actually flip cards
     -- stay_flipped = function(self, area, card)
 	-- 	if
