@@ -41,24 +41,6 @@ SMODS.Consumable {
                 highlighted.ability["perma_h_mult"] = highlighted.ability["perma_h_mult"] - card.ability.extra.mult
                 highlighted.ability["perma_h_dollars"] = highlighted.ability["perma_h_dollars"] or 0
                 highlighted.ability["perma_h_dollars"] = highlighted.ability["perma_h_dollars"] - card.ability.extra.money
-            
-            -- G.E_MANAGER:add_event(Event({
-            --     trigger = 'after', 
-            --     delay = 0.1, 
-            --     func = function()
-                
-            --     card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-            --         message = localize({
-            --             type = "variable",
-            --             key = "a_powchips",
-            --             vars = { number_format(1+highlighted.ability["perma_e_chips"]) },
-            --         }),
-            --         colour = G.C.UNIK_LARTCEPS1,
-            --         card=highlighted,
-            --     })
-            --     return true 
-            --     end 
-            -- }))
         end
     end,
     in_pool = function()

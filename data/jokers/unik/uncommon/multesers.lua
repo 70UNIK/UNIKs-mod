@@ -23,6 +23,9 @@ SMODS.Joker {
         return { 
             key = key, vars = {center.ability.extra.mult,center.ability.extra.mult_mod,center.ability.extra.depleted_threshold,sign} }
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.extra.destroyed = false
+    end,
     calculate = function(self, card, context)
         if context.forcetrigger and not card.ability.extra.destroyed then
             return {

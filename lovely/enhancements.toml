@@ -8,7 +8,7 @@ priority = 9999999
 [[patches]]
 [patches.pattern]
 target = "game.lua"
-pattern = "set_profile_progress()"
+pattern = "self:splash_screen()"
 position = "before"
 payload = '''
 self:unik_initialize_stuff()
@@ -48,5 +48,32 @@ payload = '''
     for i = 1, #G.ENHANCEMENT_OVERRIDE_RANKS do
         vals[#vals + 1] = {}
     end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''return self.base.suit == suit'''
+position = "before"
+payload = '''
+
+    --if its a specific suit, then override the base suit, but still allow stuff like patches
+    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
+    G.P_CENTERS[self.config.center.key].unik_specific_suit 
+    then
+        return suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
+    else
+   -- print(suit)
+    
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''return self.base.suit == suit'''
+position = "after"
+payload = '''
+    end  
 '''
 match_indent = true

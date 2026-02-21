@@ -5,6 +5,10 @@
 --Jokers: Immediately sold when selected (when possible)
 --incompatible with eternal
 function Card:set_triggering(triggering)
+    --colour cards are blacklisted
+    if self.config.center.set == 'Colour' then
+        return nil
+    end
     if not self.config.center.triggering_blacklist and not SMODS.is_eternal(self,self) then
         self.ability.unik_triggering = triggering
         self:set_cost()

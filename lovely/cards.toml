@@ -94,12 +94,15 @@ if G.jokers then
                     end
                 end
                 for i = 1, 2 do
-                    if G.hand.cards[i] then 
+                    if G.hand.cards and G.hand.cards[i] then 
                         local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('hook'))
-                        G.hand:add_to_highlighted(selected_card, true)
-                        table.remove(_cards, card_key)
-                        any_selected = true
-                        play_sound('card1', 1)
+                        if selected_card then
+                             G.hand:add_to_highlighted(selected_card, true)
+                            table.remove(_cards, card_key)
+                            any_selected = true
+                            play_sound('card1', 1)
+                        end
+                       
                     end
                 end
                 if any_selected then G.FUNCS.discard_cards_from_highlighted(nil, true) end
@@ -146,34 +149,6 @@ position = "before"
 payload = '''
 if next(SMODS.find_card('j_unik_vessel_kiln')) then
 	_tag = Tag('tag_unik_vessel', nil, blind_choice)
-end
-'''
-match_indent = true
-
-### Commit: Exclusive to white lily, she should die immediately and not respawn to not clone infinite exotics, even with that single commit limit (what if you use invisible joker on an uncommitted white lily?)
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/code.lua"]'''
-pattern = '''local _first_dissolve = nil'''
-position = "after"
-payload = '''
--- reduce commit limit by 1
-if G.jokers.highlighted[1].config.center.key == "j_unik_white_lily_cookie" then
-    G.jokers.highlighted[1].ability.cry_reworked = true
-end
-'''
-match_indent = true
-
-### REWORK: White Lily should immediately die without respawn if used REWORK on her:
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/code.lua"]'''
-pattern = '''jkr:start_dissolve()'''
-position = "before"
-payload = '''
--- reduce commit limit by 666
-if jkr.config.center.key == "j_unik_white_lily_cookie" then
-    jkr.ability.cry_committed = true
 end
 '''
 match_indent = true

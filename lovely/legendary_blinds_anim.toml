@@ -15,10 +15,9 @@ payload = '''
 
 --If the blind has a "glitchy animation" (Legendary blinds only)
 --legendary_blind_patch1
-if blind_choice.config.glitchy_anim or blind_choice.glitchy_anim then
-    blind_choice.animation.legendary_glitch_anim = true
+if blind_choice.config.glitchy_anim then
+    blind_choice.animation.legendary_glitch_anim = (blind_choice.config.glitchy_anim)
 end
-
 '''
 match_indent = true
 
@@ -33,10 +32,10 @@ payload = '''
 
 --If the blind has a "glitchy aniddmation" (Legendary blinds only)
 --legendary_blind_patch2
-if v.glitchy_anim then
-    temp_blind.legendary_glitch_anim = true
+if v.glitchy_anim and discovered then
+    temp_blind.legendary_glitch_anim = v.glitchy_anim
+    print(temp_blind.legendary_glitch_anim)
 end
-
 '''
 match_indent = true
 
@@ -52,9 +51,8 @@ payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
 --legendary_blind_patch2
 if v.glitchy_anim then
-    temp_blind.legendary_glitch_anim = true
+    temp_blind.legendary_glitch_anim = v.glitchy_anim
 end
-
 '''
 match_indent = true
 
@@ -69,7 +67,7 @@ payload = '''
 if self.glitchy_anim then
 --legendary_blind_patch5
 --print("GLITCH REGISTERED2")
-    self.children.animatedSprite.legendary_glitch_anim = true
+    self.children.animatedSprite.legendary_glitch_anim = self.glitchy_anim
 end
 '''
 match_indent = true
@@ -84,7 +82,7 @@ payload = '''
 --legendary_blind_patch6
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if G.GAME.blind.glitchy_anim then
-    blind_sprite.legendary_glitch_anim = true
+    blind_sprite.legendary_glitch_anim = G.GAME.blind.glitchy_anim
 end
 '''
 match_indent = true
@@ -97,7 +95,7 @@ position = "after"
 payload = '''
 self.glitchy_anim = blindTable and blindTable.glitchy_anim or nil
 if self.glitchy_anim then
-self.children.animatedSprite.legendary_glitch_anim = true
+self.children.animatedSprite.legendary_glitch_anim = self.glitchy_anim
 end
 '''
 match_indent = true
@@ -122,13 +120,20 @@ position = "after"
 payload = '''
 --legendary_blind_patch9
 if v.legendary_glitch_anim then
+    local min = 0
+    local max = 5
+    --backward compat: if its not a table, it skips it, otherwise, checks for min and max and assigns integers (hopefully)
+    if type(v.legendary_glitch_anim) == 'table' and v.legendary_glitch_anim.min and v.legendary_glitch_anim.max then
+        min = v.legendary_glitch_anim.min
+        max = v.legendary_glitch_anim.max
+    end
     if math.random(150) == 1 then
         v.legendary_glitch = math.random(10, 50)
-        v:shift_atlas({x = 0, y = math.random(1, 5)})
+        v:shift_atlas({x = 0, y = math.random(math.min(min+1,max), max)})
         --print("GLITCH")
     elseif v.legendary_glitch then
         if v.legendary_glitch <= 1 then
-            v:shift_atlas({x = 0, y = 0})
+            v:shift_atlas({x = 0, y = min})
             v.legendary_glitch = nil
         else
             v.legendary_glitch = v.legendary_glitch - 1

@@ -54,6 +54,9 @@ payload = '''
 CARD.ability.unik_depleted = nil
 CARD.ability.unik_triggering = nil
 CARD.ability.unik_disposable = nil
+for M = 1, #UNIK.detrimental_removable_stickers do
+    CARD.ability[UNIK.detrimental_removable_stickers[M]] = nil
+end
 '''
 match_indent = true
 

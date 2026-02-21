@@ -9,7 +9,6 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    immutable = true,
     config = { extra = { discards = 1,hands = 1},immutable = { max_hand_size_mod = 100 }, },
     loc_vars = function(self, info_queue, center)
 		return { vars = {math.min(center.ability.extra.hands,center.ability.immutable.max_hand_size_mod),math.min(center.ability.extra.discards,center.ability.immutable.max_hand_size_mod)} }

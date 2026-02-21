@@ -45,12 +45,11 @@ SMODS.Joker {
         --     end
         -- end
         if 
-            next(find_joker("j_unik_moonlight_cookie")) or 
             next(find_joker("j_unik_scratch")) or 
             next(find_joker("j_mf_rainbow_joker")) or
 
             G.GAME.used_vouchers.v_observatory or
-            MoreFluff or (SMODS.Mods["paperback"] or {}).can_load then
+            MoreFluff or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
 			return true
 		end
 		return false

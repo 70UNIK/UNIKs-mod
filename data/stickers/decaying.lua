@@ -29,7 +29,7 @@ function Card:calculate_decaying()
     if self.ability.unik_decaying then
         G.GAME.unik_decaying_rounds = G.GAME.unik_decaying_rounds or 4
         if self.ability.unik_decaying and not self.ability.unik_decaying_tally then self.ability.unik_decaying_tally = G.GAME.unik_decaying_rounds end
-        if self.ability.unik_decaying_tally == 1 or self.ability.consumeable then
+        if self.ability.unik_decaying_tally <= 1 or self.ability.consumeable then
             self.ability.unik_decaying_tally = 0
             self.ability.block_wl_copy = true
             self:set_debuff()

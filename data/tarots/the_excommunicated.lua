@@ -14,6 +14,11 @@ SMODS.Consumable{
     discovered = true,
      use = function(self, card)
         local cards = G.hand.highlighted
+        for i = #cards, 1, -1 do
+            if SMODS.is_eternal(cards[i],self) then
+                table.remove(cards,i)
+            end
+        end
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             unlink_cards(cards)
             SMODS.destroy_cards(cards)

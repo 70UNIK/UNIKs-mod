@@ -11,7 +11,7 @@ local function killEternals()
 end
 local function turnJokerintoJoker(location,jack)
     --avoid cursed jokers and ghosts and absolute jokers
-    if (G.jokers.cards[location].config.center.key ~= "j_flower_pot" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
+    if (G.jokers.cards[location].config.center.key ~= "j_flower_pot" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].ability.unik_taw and not G.jokers.cards[location].config.center.immune_to_vermillion) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then
             card_eval_status_text(
@@ -32,7 +32,7 @@ local function turnJokerintoJoker(location,jack)
                 { message = localize("k_flower_potted"), colour = G.C.RED }
             )            
         end
-        _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
+        local _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()
@@ -65,7 +65,13 @@ SMODS.Blind{
         end
         return true
 	end,
-    death_message = "special_lose_flowerpot",
+    death_card = {
+        card = 'j_flower_pot', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_flowerpot'},
+        say_times = 5,
+    },
     --Create an eternal ghost
     set_blind = function(self, reset, silent)
         G.GAME.unik_pentagram_manager_fix = true

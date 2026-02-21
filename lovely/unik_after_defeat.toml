@@ -19,11 +19,25 @@ local ceiling222 = math.min(G.GAME.blind.chips*10^50,G.GAME.blind.chips^2.5)
 --print(upper22)
 local nanny = tostring(G.GAME.chips_text)
 --Naneinf will always trigger overshoot
+--update UI if settings were changed on the fly
+local ante_UI = G.HUD:get_UIE_by_ID('unik_overshoot_desc')
+if not ante_UI and UNIK.overshootEnabled(true) then
+    G.HUD = UIBox{
+        definition = create_UIBox_HUD(),
+        config = {align=('cli'), offset = {x=-0.7,y=0},major = G.ROOM_ATTACH}
+    }
+elseif ante_UI and not UNIK.overshootEnabled(true) then
+    G.HUD = UIBox{
+        definition = create_UIBox_HUD(),
+        config = {align=('cli'), offset = {x=-0.7,y=0},major = G.ROOM_ATTACH}
+    }
+end
+
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
     G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0
     G.GAME.nuke_spawn = G.GAME.nuke_spawn + 1
-    if unik_config.unik_overshoot_enabled then
+    if UNIK.overshootEnabled() then
         unik_trigger_overshoot_menu(calculate_overshoot_amount())
         delay(0.1)
             G.E_MANAGER:add_event(Event({
@@ -36,12 +50,12 @@ if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(
 else
     if to_big(G.GAME.chips) < to_big(G.GAME.blind.chips) then
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-        if unik_config.unik_overshoot_enabled then
+        if UNIK.overshootEnabled() then
             unik_ease_overshoot(-math.ceil(G.GAME.unik_overshoot/2))
         end
     else
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
-        if unik_config.unik_overshoot_enabled then
+        if UNIK.overshootEnabled() then
             unik_ease_overshoot(-1)
         end
     end
@@ -84,44 +98,4 @@ payload = '''
 '''
 match_indent = true
 
-###BOSS BLIND DEATH MESSAGES
-
-###Entropy patch
-
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''local quip, extra = SMODS.quip("loss")'''
-position = 'after'
-payload = '''
---entropy workaround
-if G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled and not G.GAME.EECardCharacter then
-    quip = G.GAME.blind.config.blind.death_message
-end
-G.GAME.unik_prevent_killing_cursed_jokers2 = nil
-G.GAME.unik_deathly_debuff_text = nil
-'''
-match_indent = true
-
-##STANDARD
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled) then --Only add Jimbo to say a quip if the game over happens when the run is lost
-'''
-match_indent = true
-
-##FINITY
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or ( G.GAME.blind and G.GAME.blind.config.blind.death_message and not G.GAME.blind.disabled) or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
-'''
-match_indent = true
 

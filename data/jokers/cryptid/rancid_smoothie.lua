@@ -67,31 +67,31 @@ SMODS.Joker {
 		end
     end,
 }
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_rancid_smoothie"] = {
-		text = {
-			{
-				border_nodes = {
-					{ text = "^" },
-					{
-						ref_table = "card.ability.extra",
-						ref_value = "Emult",
-						retrigger_type = "exp"
-					},
-				},
-				border_colour = G.C.DARK_EDITION,
-			},
-        },
-		reminder_text = {
-			{
-				ref_table = "card.joker_display_values",
-				ref_value = "amount",
-				colour = G.C.RED
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_rancid_smoothie"] = {
+-- 		text = {
+-- 			{
+-- 				border_nodes = {
+-- 					{ text = "^" },
+-- 					{
+-- 						ref_table = "card.ability.extra",
+-- 						ref_value = "Emult",
+-- 						retrigger_type = "exp"
+-- 					},
+-- 				},
+-- 				border_colour = G.C.DARK_EDITION,
+-- 			},
+--         },
+-- 		reminder_text = {
+-- 			{
+-- 				ref_table = "card.joker_display_values",
+-- 				ref_value = "amount",
+-- 				colour = G.C.RED
 
-			},		
-		},
-        calc_function = function(card)
-            card.joker_display_values.amount = "(X" .. 1/card.ability.extra.divisor .. ")"
-		end
-	}
-end
+-- 			},		
+-- 		},
+--         calc_function = function(card)
+--             card.joker_display_values.amount = "(X" .. 1/card.ability.extra.divisor .. ")"
+-- 		end
+-- 	}
+-- end

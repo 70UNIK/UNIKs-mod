@@ -15,7 +15,7 @@ SMODS.Blind{
     dollars = 13,
     mult = 1,
     unik_exponent = {1,2.5},
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, 5},
     debuff = {
         akyrs_blind_difficulty = "unik_legendary",
         akyrs_cannot_be_overridden = true,

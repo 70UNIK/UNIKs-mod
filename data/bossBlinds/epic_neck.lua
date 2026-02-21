@@ -28,8 +28,7 @@ SMODS.Blind	{
                     func = function()
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
-                        G.STATE = G.STATES.GAME_OVER
-                        G.STATE_COMPLETE = false 
+                        UNIK.instakill()
                         return true
                     end
                 }))
@@ -42,8 +41,7 @@ SMODS.Blind	{
                         if neck_banish == nil then
                             G.GAME.blind.triggered = true
                             G.GAME.blind:wiggle()
-                            G.STATE = G.STATES.GAME_OVER
-                            G.STATE_COMPLETE = false 
+                            UNIK.instakill()
                         else
                              G.GAME.blind.triggered = true
                             G.GAME.blind:wiggle()

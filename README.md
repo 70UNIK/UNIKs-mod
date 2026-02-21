@@ -36,7 +36,7 @@ It's recommended to pair this with [Paperback](https://github.com/Balatro-Paperb
 - - 24 "Epic Blinds", really hard blinds that punish your run and only appear at higher overshoot values.
 - - 7 "Legendary Blinds", which is basically death.
 - Overshoot, a mechanic that punishes really high scoring runs by increasing ante increase and summoning in the afforementioned Epic Blinds.
-- 9 Stickers
+- 13 Stickers
 - 2 Stakes including a reworked Blue Stake
 
 This mod also contains many crossmod content such as for:

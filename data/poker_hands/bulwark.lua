@@ -13,6 +13,10 @@ SMODS.PokerHand({
 		{ "S_A", true, enhancement = "m_stone" },
 	},
 	evaluate = function(parts, hand)
+		--DO NOT EVALUATE WITH BLINDSIDE ACTIVE!!!!!
+		if UNIK.hasBlindside() then
+			return false
+		end
 		local stones = {}
 		for i, card in ipairs(hand) do
 			if

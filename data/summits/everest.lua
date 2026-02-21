@@ -1,6 +1,7 @@
+
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = 'unik_summits',
+	atlas = UNIK.getSummitAtlas(),
     cost = 3,
 	pos = {x = 1, y = 1},
 	key = 'unik_everest',
@@ -12,10 +13,19 @@ SMODS.Consumable{
 	end,
     config = { extra = { x_mult = 0.2 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
+        local key = 'c_unik_everest'
+        if UNIK.isIndigenousSummitNaming() then
+            key = key .. '_i'
+        end
 		return {
-			vars = {card.ability.extra.x_mult,card.ability.extra.max_highlighted},
+			key = key, vars = {card.ability.extra.x_mult,card.ability.extra.max_highlighted},
 		}
 	end,
+    set_ability = function(self, card, initial, delay_sprites)
+        if initial and UNIK.isIndigenousSummitNaming() and pseudorandom("differentSpriteEverest", 1, 100) > 50 then
+            card.children.center:set_sprite_pos { x = 3, y = 1 }
+        end
+    end,
     
 	use = function(self, card, area, copier)
         UNIK.add_bonus('x_mult',card.ability.extra.x_mult)

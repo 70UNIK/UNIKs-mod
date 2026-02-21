@@ -6,7 +6,6 @@ SMODS.Tag{
 	loc_vars = function(self, info_queue)
 		info_queue[#info_queue + 1] = G.P_CENTERS.p_spectral_normal_1
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_soul" }
-		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_foundation
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_unik_gateway", vars = {3} }
 		return { vars = {} }
 	end,
@@ -49,16 +48,14 @@ SMODS.Booster{
 	pos = { x = 0, y = 1 },
     cost = 0,
     weight = 0, 
-    config = { extra = 3, choose = 1 },
+    config = { extra = 2, choose = 1 },
     cry_digital_hallucinations = {
         colour = G.C.SECONDARY_SET.Spectral,
 		loc_key = "k_plus_spectral",
 		create = function()
 			local ccard
-			if pseudorandom(pseudoseed("diha_devil")) < 0.333 then
+			if pseudorandom(pseudoseed("diha_devil")) < 0.5 then
 				ccard = create_card("Spectral", G.consumeables, nil, nil, true, true, "c_soul")
-            elseif pseudorandom(pseudoseed("diha_devil")) < 0.666 then
-				ccard = create_card("Joker", G.jokers, nil, nil, true,true, "j_unik_foundation")
             else
 				ccard = create_card("Spectral", G.consumeables, nil, nil, true, true, "c_unik_gateway")
 			end
@@ -100,8 +97,6 @@ SMODS.Booster{
 			return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_unik_gateway")
 		elseif not G.GAME.used_jokers["c_soul"] and not next(find_joker("Showman")) then
 			return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_soul")
-        elseif not G.GAME.used_jokers["j_unik_foundation"] and not next(find_joker("Showman")) then
-            return create_card("Joker", G.jokers, nil, nil, true,true, "j_unik_foundation")
         else
 			return create_card("Spectral", G.pack_cards, nil, nil, true, true)
 		end

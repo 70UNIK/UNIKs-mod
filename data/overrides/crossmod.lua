@@ -246,6 +246,8 @@ SMODS.Joker:take_ownership("j_bunc_jmjb",{
 										SMODS.poll_seal({ guaranteed = true, type_key = "standard" })
 									)
 								end
+								v.ability.unik_shielded = true
+								v.debuff = false
                             end
 
                             return true
@@ -310,3 +312,23 @@ if next(SMODS.find_mod("Bunco")) then
 	})
 end
 
+SMODS.Joker:take_ownership("j_aij_mistake",{
+    calculate = function(self, card, context)
+		if (card.config.center.paperback and card.config.center.paperback.permanently_eternal) or card.ability.unik_taw then
+			if not G.GAME.banned_keys then
+				G.GAME.banned_keys = {}
+				end
+				if not G.GAME.cry_banished_keys then
+					G.GAME.cry_banished_keys = {}
+				end
+				G.GAME.cry_banished_keys[card.config.center.key] = true
+				card.ability.destroyed_by_megatron = true
+				G.E_MANAGER:add_event(Event({
+					trigger="immediate",
+					func = function()
+					
+					card:gore6_break()
+				return true end }))
+		end
+	end
+}, true)

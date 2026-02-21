@@ -1,0 +1,12 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+### display the fake score before not allowing the hand and/or adding to blind, now with bunco compat.
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''if G.GAME.blind and G.GAME.blind.config.blind.boss.showdown then'''
+position = 'at'
+payload = '''if G.GAME.blind and G.GAME.blind.config.blind.boss and G.GAME.blind.config.blind.boss.showdown then'''

@@ -15,15 +15,19 @@ SMODS.Consumable{
     loc_vars = function(self, info_queue, center)
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.base, center.ability.extra.odds, 'unik_placard')
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_ultradebuffed" }
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_taw" }
         return {vars = {new_numerator,new_denominator}}
 	end,
 	use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             for i,v in pairs(G.hand.cards) do
+                v.skip_this = true
                 if SMODS.pseudorandom_probability(card, 'unik_placard', card.ability.extra.base, card.ability.extra.odds, 'unik_placard') then
-                    v.skip_this = true
+                    
                     G.E_MANAGER:add_event(Event({func = function()
-                    v.ability.unik_ultradebuffed = true
+                        v.ability.unik_ultradebuffed = true
+                        v.ability.unik_taw = true
+                        v.unik_taw = true
                     card:juice_up()
                     v:juice_up()
                     play_sound('cancel', 0.8+ (0.9 + 0.2*math.random())*0.2, 1)
@@ -36,6 +40,8 @@ SMODS.Consumable{
                 for i,v in pairs(G.playing_cards) do
                     if not v.skip_this and SMODS.pseudorandom_probability(card, 'unik_placard', card.ability.extra.base, card.ability.extra.odds, 'unik_placard') then
                         v.ability.unik_ultradebuffed = true
+                        v.ability.unik_taw = true
+                        v.unik_taw = true
                     end
                 end
             return true end })) 

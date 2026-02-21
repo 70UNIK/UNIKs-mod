@@ -14,7 +14,13 @@ SMODS.Blind{
         end
         return true
 	end,
-    death_message = "special_lose_unik_jaundice_jack",
+    death_card = {
+        card = 'j_hit_the_road', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_unik_jaundice_jack'},
+        say_times = 5,
+    },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_jaundice_jack")
 	end,
@@ -38,7 +44,7 @@ SMODS.Blind{
             --Get all ghosts 
             for i=1,#G.jokers.cards do
                 --print("POSSESS")
-                if G.jokers.cards[i].config.center.key ~= "j_hit_the_road" and not G.jokers.cards[i].ability.cry_absolute and not G.jokers.cards[i].config.center.immune_to_vermillion then
+                if G.jokers.cards[i].config.center.key ~= "j_hit_the_road" and not G.jokers.cards[i].ability.unik_taw and not G.jokers.cards[i].ability.cry_absolute and not G.jokers.cards[i].config.center.immune_to_vermillion then
                     validCards[#validCards+1] = G.jokers.cards[i]
                 end
             end
@@ -71,7 +77,7 @@ SMODS.Blind{
 }
 function turnJokerIntoJack(location,jack)
     --avoid cursed jokers and ghosts and absolute jokers
-    if (G.jokers.cards[location].config.center.key ~= "j_hit_the_road" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
+    if (G.jokers.cards[location].config.center.key ~= "j_hit_the_road" and not G.jokers.cards[location].ability.unik_taw and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then
             card_eval_status_text(
@@ -92,7 +98,7 @@ function turnJokerIntoJack(location,jack)
                 { message = localize("k_unik_jackshit"), colour = G.C.FILTER }
             )            
         end
-        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
+        local _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_hit_the_road")
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()

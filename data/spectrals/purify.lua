@@ -12,6 +12,7 @@ UNIK.detrimental_removable_stickers = {
     "cry_flickering",
     "cry_possessed",
     "temporary",
+    "unik_lily_mark"
 }
 SMODS.Consumable {
     key = 'unik_purify',

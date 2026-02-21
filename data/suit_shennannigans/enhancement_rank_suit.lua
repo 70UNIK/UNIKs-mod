@@ -55,16 +55,6 @@ function Card:get_id(skippmk)
 	return vars
 end
 
-local suit_hook = Card.is_suit
-function Card:is_suit(suit, bypass_debuff, flush_calc)
-    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
-    G.P_CENTERS[self.config.center.key].unik_specific_suit
-    then
-        return suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
-    end
-    return suit_hook(self,suit, bypass_debuff, flush_calc)
-end
-
 function Card:get_baseValOverride()
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
         G.P_CENTERS[self.config.center.key].unik_specific_base_value

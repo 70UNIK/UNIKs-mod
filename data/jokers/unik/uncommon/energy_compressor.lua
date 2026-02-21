@@ -7,22 +7,60 @@ SMODS.Joker {
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = true,
+    cloneman_blacklist = true,
+    unique = true,
     immutable = true,
     pronouns = "it_its",
     calculate = function(self, card, context)
         if context.before and not context.blueprint and not context.retrigger_joker then
 			G.GAME.unik_store_scoring = true
 		end
-        if context.unik_energy_compressor and context.energy_compressor_effect ~= nil and context.energy_compressor_value ~= nil and not context.blueprint and not context.retrigger_joker then
+        if context.unik_energy_compressor and context.energy_compressor_effect ~= nil and context.energy_compressor_value ~= nil and not context.blueprint and not context.retrigger_joker and context.energy_compressor_ref then
           --  print(context.energy_compressor_effect)
-            return {
+            local value = G.GAME.unik_stored_scoring[context.energy_compressor_ref[1]].instances[context.energy_compressor_ref[2]]
+            G.GAME.unik_stored_scoring[context.energy_compressor_ref[1]].instances[context.energy_compressor_ref[2]] = nil
+            if value then
+                return {
                 [context.energy_compressor_effect] = context.energy_compressor_value
             }
+            end
+            
         end
         if context.after then
             G.GAME.unik_store_scoring = nil
         end
-    end
+    end,
+    loc_vars = function(self, info_queue, card)
+        local main_end
+
+        if G.jokers then
+            for _, v in pairs(G.jokers.cards) do
+                if v.config.center.key == 'j_unik_energy_compressor' and not v.debuff then
+                    main_end = {}
+                    if v ~= card then
+                        
+                        localize {
+                            type = 'other',
+                            key = 'unik_cannot_duplicate1',
+                            nodes = main_end
+                        }
+                    else
+                        localize {
+                            type = 'other',
+                            key = 'unik_cannot_duplicate2',
+                            nodes = main_end
+                        }
+
+                    end
+
+                    break
+                end
+            end
+        end
+        return {
+            main_end = main_end and main_end[1]
+        }
+    end,
 }
 
 local scie = SMODS.calculate_individual_effect
@@ -125,6 +163,7 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
                         nil,
                         { message = localize("k_unik_stored"), colour = G.C.DARK_EDITION,delay = 0.35 }
                     )
+                    break
                 end
             end
             if not effect.remove_default_message then

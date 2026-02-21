@@ -13,6 +13,11 @@ local unik_quotes = {
 		'k_unik_unik_normal5',
 		'k_unik_unik_normal6',
 	},
+	drama = {
+		'k_unik_unik_scared1',
+		'k_unik_unik_scared2',
+		'k_unik_unik_scared3',
+	},
 }
 
 SMODS.Joker {
@@ -22,6 +27,7 @@ SMODS.Joker {
 	
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
+	drama = { x = 2, y = 0 }, 
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,
@@ -30,12 +36,19 @@ SMODS.Joker {
 	--Contra logos from ascensio has ^0.01 chips per 7 or 4 contained in scoring hand (doesnt have to score), but unless you have joker retriggers, it cannot retrigger 7s.
 	--This has ^0.01 chips per scoring 7 (can be retriggered). You can retrgger scoring 7s, which makes this potentally stronger than contra logos even if harder to use. Also pink cards.
 	--This is why I nerfed it to ^0.01
-    config = { extra = {Echips_mod = 0.01, Echips = 0.0}, immutable = {base_echips = 1.0,hyperbolic_scale_limit = 1.6,hyperbolic_factor = 2.5}}, --normally he should not be cappted in mainline+
+    config = { extra = {Echips_mod = 0.01, Echips = 0.0}, immutable = {base_echips = 1.0,limit = 2.0}}, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
-		return {
+		local key = 'j_unik_unik'
+		if UNIK.has_almanac() then
+			quoteset = Jen.dramatic and 'drama'  or 'normal'
+		end
+		if center.ability.extra.Echips + center.ability.immutable.base_echips >= center.ability.immutable.limit then
+			key = 'j_unik_unik_capped'
+		end
+		return { key = key,
 		vars = {tostring(center.ability.extra.Echips_mod),center.ability.extra.Echips + center.ability.immutable.base_echips
-	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. ""),center.ability.immutable.hyperbolic_factor,center.ability.immutable.hyperbolic_scale_limit
+	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. ""),center.ability.immutable.limit
 	} }
 	end,
 	pronouns = "he_him",
@@ -56,7 +69,7 @@ SMODS.Joker {
 				}
 			end
 		end
-		if context.before and not context.blueprint then
+		if context.before and not context.blueprint and card.ability.extra.Echips + card.ability.immutable.base_echips < card.ability.immutable.limit then
 			local triggered = false
             local increase = 0
             for k, v in ipairs(context.scoring_hand) do
@@ -72,45 +85,18 @@ SMODS.Joker {
                 end       
             end
             if triggered then
-				for i = 1, increase do
-				--	print("1")
-					if i < increase then
-						SMODS.scale_card(card, {
-							ref_table =card.ability.extra,
-							ref_value = "Echips",
-							scalar_value = "Echips_mod",
-							base = 1,
-							message_key = "a_powchips",
-							message_colour = G.C.DARK_EDITION,
-							force_full_val = true,
-							no_message = true,
-						})
-					else
-						SMODS.scale_card(card, {
-							ref_table =card.ability.extra,
-							ref_value = "Echips",
-							scalar_value = "Echips_mod",
-							base = 1,
-							message_key = "a_powchips",
-							message_colour = G.C.DARK_EDITION,
-							force_full_val = true,
-						})
-					end
-					
-					if (to_big(card.ability.extra.Echips + card.ability.immutable.base_echips) > to_big(card.ability.immutable.hyperbolic_scale_limit)) then
-						SMODS.scale_card(card, {
-							ref_table =card.ability.extra,
-							ref_value = "Echips_mod",
-							scalar_value = "custom_scaler",
-							operation = "-",
-							scalar_table = {
-								custom_scaler = card.ability.extra.Echips_mod - card.ability.extra.Echips_mod *(100 - card.ability.immutable.hyperbolic_factor)/100,
-							},
-							no_message = true,
-						})
-					end
-					
-				end
+				SMODS.scale_card(card, {
+					ref_table =card.ability.extra,
+					ref_value = "Echips",
+					scalar_value = "Echips_mod",
+					base = 1,
+					message_key = "a_powchips",
+					message_colour = G.C.DARK_EDITION,
+					force_full_val = true,
+					operation = function(ref_table, ref_value, initial, scaling)
+						ref_table[ref_value] = math.min(initial + scaling * increase,card.ability.immutable.limit - card.ability.immutable.base_echips)
+					end,
+				})
                 				return {
 
 				}

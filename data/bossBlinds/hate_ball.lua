@@ -15,14 +15,20 @@ SMODS.Blind{
         return true
 	end,
     pronouns = "he_him",
-    death_message = "special_lose_hate_ball",
+    death_card = {
+        card = 'j_8_ball', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_hate_ball'},
+        say_times = 5,
+    },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_hate_ball")
 	end,
     unik_before_play = function(self)
         local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
         local has8 = false
-        for i,v in pairs(scoring_hand) do
+        for i,v in pairs(G.hand.highlighted) do
             if v:get_id() == 8 then
                 has8 = true
             end
@@ -32,7 +38,7 @@ SMODS.Blind{
             --Get all ghosts 
             for i=1,#G.jokers.cards do
                 --print("POSSESS")
-                if G.jokers.cards[i].config.center.key ~= "j_8_ball" and not G.jokers.cards[i].ability.cry_absolute and not G.jokers.cards[i].config.center.immune_to_vermillion then
+                if G.jokers.cards[i].config.center.key ~= "j_8_ball" and not G.jokers.cards[i].ability.unik_taw and not G.jokers.cards[i].ability.cry_absolute and not G.jokers.cards[i].config.center.immune_to_vermillion then
                     validCards[#validCards+1] = G.jokers.cards[i]
                 end
             end
@@ -59,7 +65,7 @@ SMODS.Blind{
 }
 function turnJokerIntoEight(location,jack)
     --avoid cursed jokers and ghosts and absolute jokers
-    if (G.jokers.cards[location].config.center.key ~= "j_8_ball" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
+    if (G.jokers.cards[location].config.center.key ~= "j_8_ball" and not G.jokers.cards[location].ability.unik_taw and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then
             card_eval_status_text(
@@ -80,7 +86,7 @@ function turnJokerIntoEight(location,jack)
                 { message = localize("k_unik_hate_8"), colour = G.C.BLACK }
             )            
         end
-        _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_8_ball")
+        local _card = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_8_ball")
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()

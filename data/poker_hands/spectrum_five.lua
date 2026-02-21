@@ -15,6 +15,10 @@ SMODS.PokerHand { -- Spectrum Five (Referenced from SixSuits)
   },
 
   evaluate = function(parts)
+    --DO NOT EVALUATE WITH BLINDSIDE ACTIVE!!!!!
+		if UNIK.hasBlindside() then
+			return false
+		end
     if not next(parts._5) or not next(parts.unik_spectrum) then return {} end
     return { SMODS.merge_lists(parts._5, parts.unik_spectrum) }
   end

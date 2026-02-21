@@ -1,0 +1,24 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''perma_bonus = self.ability and self.ability.perma_bonus or 0,'''
+position = 'after'
+payload = '''
+perma_rescores = self.ability and self.ability.perma_rescores or 0,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''bonus_chips = bonus_chips ~= 0 and bonus_chips or nil,'''
+position = 'before'
+payload = '''
+bonus_rescores = self.ability.perma_rescores > 0 and (self.ability.perma_rescores) or nil,
+'''
+match_indent = true

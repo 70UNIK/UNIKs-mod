@@ -14,10 +14,10 @@ local pibby_quotes = {
 		'k_unik_pibby_normal2',
         'k_unik_pibby_normal3',
 	},
-	-- drama = {
-	-- 	'k_unik_pibby_scared1',
-	-- 	'k_unik_pibby_scared2',
-	-- },
+	drama = {
+		'k_unik_pibby_scared1',
+		'k_unik_pibby_scared2',
+	},
 	-- darkness = {
 	-- 	'k_unik_pibby_darkness1',
 	-- 	'k_unik_pibby_darkness2',
@@ -29,14 +29,18 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 1, y = 0 },
+    sinis = { x = 2, y = 0 },
     cost = 8,
     blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {x_mult = 1},immutable = {divisor = 150} },
+    config = { extra = {x_mult = 1},immutable = {divisor = 175} },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
+        if UNIK.has_almanac() then
+			quoteset = Jen.sinister and 'drama'  or 'normal'
+		end
 		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }
 	end,
     pools = {["character"] = true },

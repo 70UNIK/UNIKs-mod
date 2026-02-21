@@ -20,19 +20,37 @@ SMODS.current_mod.optional_features = {
 	cardareas = {
 		deck = true,
 		discard = true, -- used by scorch
+		unscored = true,
 	},
 }
 
--- G.FUNCS.unik_update_overshoot_opt = function(e)
--- 	print(e)
--- 	print(e.to_key)
--- 	unik_config.unik_overshoot_level = e.to_key
--- 	-- unik_config.unik_overshoot_level
--- 	-- Talisman.config_file.score_opt_id = e.to_key
--- 	-- local score_opts = {"", "bignumber", "omeganum"}
--- 	-- Talisman.config_file.break_infinity = score_opts[e.to_key]
--- 	-- nativefs.write(lovely.mod_dir .. "/Talisman/config.lua", STR_PACK(Talisman.config_file))
--- end
+function UNIK.has_almanac()
+	
+	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
+		return true
+	end
+	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
+		return true
+	end
+	return false
+end
+
+function UNIK.get_almanac_prefix()
+	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
+		return 'jen'
+	end
+	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
+		return 'pwx'
+	end
+	return 'jen'
+end
+
+function AlterConfigWithAlmanac(config1,config2)
+	if UNIK.has_almanac() then
+		return config2
+	end
+	return config1
+end
 
 SMODS.current_mod.config_tab = function() --Config tab
 	
@@ -45,21 +63,41 @@ SMODS.current_mod.config_tab = function() --Config tab
 	},
 	nodes = {
 		create_toggle({
+			label = localize("unik_indigenous_summit_names_option"),
+			ref_table = unik_config,
+			ref_value = "unik_indigenous_summit_names",
+			info = {
+				localize("unik_indigenous_summit_names_desc"),
+			},
+		}),
+		create_toggle({
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
-			info = {
-				localize("unik_legendary_blinds_desc1"),
-				localize("unik_legendary_blinds_desc2")
-			},
+			info = AlterConfigWithAlmanac(
+				{
+					localize("unik_legendary_blinds_desc1"),
+					localize("unik_legendary_blinds_desc2")
+				},
+				{
+					localize("unik_legendary_blinds_desc1"),
+					localize("unik_legendary_blinds_desc2"),
+					localize("unik_legendary_blinds_desc3"),
+				}
+			)
 		}),
 		create_toggle({
 			label = localize("unik_enable_overshoot_option"),
 			ref_table = unik_config,
 			ref_value = "unik_overshoot_enabled",
-			info = {
-				localize("unik_overshoot_enable_desc"),
-			},
+			info = AlterConfigWithAlmanac({
+					localize("unik_overshoot_enable_desc"),
+				},
+				{
+					localize("unik_overshoot_enable_desc"),
+					localize("unik_overshoot_enable_desc2")
+				}
+			),
 		}),
 		create_toggle({
 			label = localize("unik_custom_menu_option"),
@@ -85,9 +123,50 @@ SMODS.current_mod.config_tab = function() --Config tab
 	},
 	}
 end
+
+--
+function UNIK.hasBlindside()
+	if next(SMODS.find_mod("Blindside")) then
+		if G and G.GAME and G.GAME.selected_back and G.GAME.selected_back.effect and G.GAME.selected_back.effect.center and G.GAME.selected_back.effect.center.config and G.GAME.selected_back.effect.center.config.extra then
+			if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
+			return true
+		end
+	end
+	return false
+end
+
+function UNIK.overshootEnabled(no_comment)
+	if not unik_config.unik_overshoot_enabled then
+		return false
+	end
+	--temporary
+	if UNIK.hasBlindside() then
+		if not no_comment then
+			print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
+		end
+		
+		return false
+	end
+	return true
+end
+
+function UNIK.isIndigenousSummitNaming()
+	if unik_config.unik_indigenous_summit_names then
+		return true
+	end
+	return false
+end
+
+function UNIK.getSummitAtlas()
+	if UNIK.isIndigenousSummitNaming() then
+		return 'unik_summits_alt'
+	end
+	return 'unik_summits'
+end
+
 if (SMODS.Mods["Cryptid"] or {}).can_load then
 	--print("So, you chose slop... Well be prepared to be treated as slop in return...")
-	--unik_config.unik_overshoot_enabled = true
+	--UNIK.overshootEnabled() = true
 	--unik_config.unik_legendary_blinds = true
 end
 -- print("OVERSHOOT LEVEL:")
@@ -96,11 +175,11 @@ NFS.load(mod_path .. "talismanless.lua")()
 NFS.load(mod_path .. "data/hooks/startup.lua")()
 NFS.load(mod_path .. "data/hooks/addremovecards.lua")()
 NFS.load(mod_path .. "data/hooks/hand_size_change.lua")()
-NFS.load(mod_path .. "data/hooks/legendary_blinds.lua")()
 NFS.load(mod_path .. "data/hooks/colours.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/hooks/boosterHooks.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
+
 
 SMODS.Atlas({
 	key = "unik_cube_boosters",
@@ -173,6 +252,15 @@ SMODS.Atlas {
 	path = "unik_akio_icons.png",
     px = 34,
     py = 34
+}
+
+SMODS.Atlas {
+	key = "unik_blindside_jokers",
+	path = "unik_blindside_jokers.png",
+	atlas_table = "ANIMATION_ATLAS", 
+    px = 34,
+    py = 34,
+	frames = 21
 }
 
 SMODS.ObjectType({
@@ -347,6 +435,12 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+SMODS.Atlas {
+	key = "unik_summits_alt",
+	path = "unik_summits_alt.png",
+	px = 71,
+	py = 95
+}
 
 SMODS.Atlas {
 	key = "unik_seals",
@@ -402,6 +496,7 @@ SMODS.Rarity({
 	key = "unik_ancient",
 	loc_txt = {},
 	badge_colour = G.C.UNIK_ANCIENT,
+	fallback_joker = 'j_ancient'
 })
 if (SMODS.Mods["Cryptid"] or {}).can_load then
     Cryptid.pointerblistifytype("rarity", "unik_ancient")
@@ -412,8 +507,16 @@ SMODS.Rarity({
 	key = "unik_detrimental",
 	loc_txt = {},
 	badge_colour = HEX("474931"),
+	fallback_joker = 'j_unik_impounded'
 })
+NFS.load(mod_path .. "data/overrides/rarity_ownership.lua")() 
 
+UNIK.detrimental_rarities = {
+	unik_detrimental = true,
+	cry_cursed = true,
+	jen_junk = true,
+	valk_supercursed = true,
+}
 
 -- stickers
 NFS.load(mod_path .. "data/stickers/shielded.lua")() 
@@ -424,8 +527,10 @@ NFS.load(mod_path .. "data/stickers/impounded.lua")()
 NFS.load(mod_path .. "data/stickers/disposable.lua")() 
 NFS.load(mod_path .. "data/stickers/niko.lua")() 
 NFS.load(mod_path .. "data/stickers/decaying.lua")() 
-NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")() 
+NFS.load(mod_path .. "data/stickers/ultradebuffed.lua")()
+NFS.load(mod_path .. "data/stickers/taw.lua")()   
 NFS.load(mod_path .. "data/stickers/claw_mark.lua")() 
+NFS.load(mod_path .. "data/stickers/lily_mark.lua")() 
 if not (SMODS.Mods["Cryptid"] or {}).can_load then
 	NFS.load(mod_path .. "data/stickers/cryptidless_sticker_logic.lua")() 
 end
@@ -469,6 +574,7 @@ NFS.load(mod_path .. "data/editions/half.lua")()
 NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
+NFS.load(mod_path .. "data/misc/rescoring_api.lua")()
 --seals
 NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
@@ -698,7 +804,8 @@ if MoreFluff and mf_config and mf_config["Colour Cards"] == true then
 	if (SMODS.Mods["paperback"] or {}).can_load then
 		NFS.load(mod_path .. "data/colours/lavender.lua")()
 	end
-	NFS.load(mod_path .. "data/colours/stone_grey.lua")()
+	--NFS.load(mod_path .. "data/colours/stone_grey.lua")()
+	NFS.load(mod_path .. "data/colours/verdant_green.lua")()
 end
 
 
@@ -731,9 +838,11 @@ NFS.load(mod_path .. "data/tags/limited_edition.lua")()
 --manacle tag: -1 hand size
 
 --BLINDS--
+NFS.load(mod_path .. "data/bossBlinds/vice_check.lua")()
 NFS.load(mod_path .. "data/hooks/blindHooks.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/bigger_blind.lua")()
 NFS.load(mod_path .. "data/bossBlinds/poppy.lua")() 
+NFS.load(mod_path .. "data/misc/death_quote_functions.lua")()
 
 NFS.load(mod_path .. "data/bossBlinds/collapse.lua")()
 NFS.load(mod_path .. "data/bossBlinds/the_approval.lua")() 
@@ -838,7 +947,7 @@ end
 ----------------------------------------
 ---JONKLERS
 ----------------------------------------
-
+NFS.load(mod_path .. "data/misc/character_pool.lua")()
 --Common
 NFS.load(mod_path .. "data/jokers/unik/common/lucky_seven.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/gt710.lua")()
@@ -925,12 +1034,13 @@ NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
+--NFS.load(mod_path .. "data/jokers/unik/rare/electroplating.lua")() --NOT released until v0.8, will only be here for the purpose of testing perma rescoring
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/jokers/unik/poker_hands/the_dynasty.lua")()
 end
 NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")() 
-
+NFS.load(mod_path .. "data/jokers/unik/legendary/ALICE.lua")()
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/catto_boi.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
@@ -942,11 +1052,11 @@ NFS.load(mod_path .. "data/jokers/unik/rare/blossom.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/chelsea_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/maya_ramirez.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/yokana_ramirez.lua")() 
+--BUN BUN (note add bunny = true for bunny mod crossmod; he is a bunny after all)
 
 --Ancient
 NFS.load(mod_path .. "data/jokers/unik/ancient/niko.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/sundae_cookie.lua")()
-NFS.load(mod_path .. "data/jokers/unik/ancient/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/white_lily_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/moonlight_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/ancient/unik.lua")() 
@@ -1073,6 +1183,8 @@ end
 NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
   NFS.load(mod_path .. "data/challenges/the_rot.lua")()
+  NFS.load(mod_path .. "data/challenges/centrelink.lua")()
+  NFS.load(mod_path .. "data/challenges/catto_boi_adventures.lua")()
 --  NFS.load(mod_path .. "data/challenges/rich_get_richer_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_2.lua")()
@@ -1096,37 +1208,7 @@ if unik_config.unik_legendary_blinds then
 end
 
 NFS.load(mod_path .. "data/overrides/blind_spawn.lua")()
-function vice_check()
-	if G.GAME.round_resets.ante >= 0 and G.GAME.round_resets.ante < 2 then
-		return G.GAME.win_ante
-	end
-	G.GAME.unik_vice_squeeze = G.GAME.unik_vice_squeeze or 1
-	G.GAME.OvershootFXVal = G.GAME.OvershootFXVal or 0
-	if G.GAME.OvershootFXVal >= 4 then
-		return 1
-	end
-	local multiplier = 1
-	if G.GAME.OvershootFXVal >= 2 then
-		multiplier = 2
-	end
-	if G.GAME.OvershootFXVal >= 3 then
-		multiplier = 4
-	end
-	if G.GAME.win_ante < G.GAME.unik_vice_squeeze then
-		return 1
-	end
-	
-    if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*multiplier*10000)/10000)) == 0 then
-        return 1
-    end
-    if G.GAME.round_resets.ante and G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
-        return 1
-    end
-	if G.GAME.all_finishers then
-		return 1
-	end
-    return G.GAME.win_ante
-end
+
 
 -- joker buffs
 NFS.load(mod_path .. "data/overrides/wild_buff.lua")()	
@@ -1136,13 +1218,12 @@ NFS.load(mod_path .. "data/overrides/matador.lua")()
 NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()	
 
 NFS.load(mod_path .. "data/overrides/enhancement_destroy_fx.lua")()	
+NFS.load(mod_path .. "data/overrides/values_changes.lua")()	
 
 
 --UI
-if unik_config.unik_overshoot_enabled then
-	NFS.load(mod_path .. "data/ui/overshoot.lua")()
-	NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
-end
+NFS.load(mod_path .. "data/ui/overshoot.lua")()
+NFS.load(mod_path .. "data/ui/overshoot_part2.lua")()
 NFS.load(mod_path .. "data/ui/banished_items.lua")()
 NFS.load(mod_path .. "data/ui/blind_exponent.lua")()
 if AKYRS then
@@ -1152,6 +1233,34 @@ if unik_config.unik_custom_menu then
 	NFS.load(mod_path .. "data/menu.lua")()
 end
 
+--blindside:
+if next(SMODS.find_mod("Blindside")) then
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()	
+	--temporarily disabled until v0.7
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
+	-- NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+end
+
+
+NFS.load(mod_path .. "data/stickers/mad.lua")() 
+
+if Entropy then
+	NFS.load(mod_path .. "data/overrides/entropy_recipes.lua")() 
+	
+end
+if JokerDisplay then
+	NFS.load(mod_path .. "data/jokerdisplay/rescoring_calc.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/rescoring_jokers.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/ancient.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/legendary.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/common.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/uncommon.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/rare.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/editions.lua")() 
+	NFS.load(mod_path .. "data/jokerdisplay/detrimental.lua")() 
+end
 
 
 ---
@@ -1199,3 +1308,16 @@ end
 --Epic Decision (open booster pack when selecting blind, but make it much less janky)
 --The Vice/Epic Vice (Dedicated boss blind spawn system)
 --
+
+
+--April fools events:
+-- Every ancient Joker is resdesigned to look like Ancient Joker or
+-- Only Ancient Jokers can spawn from awakening (randomizes per run)
+-- Not winning small blind on the first hand in round 1 will instantly kill you on the spot (with a special message)
+-- all eternal stickers are replaced with TAW and lockpick is automatically banished in the run.
+-- playing a 7 and a 10 together has a 1 in 700 chance to spawn UNIK
+-- playing a 6 and a 9 together brings up the url to my furaffinity profile
+-- playing a 4 and a 2 together levels up hand
+--playing a 6 and a 7 together instatly kills you
+-- "Ancient Ancient Ancient Joker" can spawn in the ancient joker pool (create 5 disposable negative ancient jokers on cashout)
+---April fools can be toggled between: off, on and always active (not recommended)

@@ -20,7 +20,7 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
     enhancement_gate = 'm_bonus',
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_bonus
-        return {vars = {card.ability.extra.x_chips, card.ability.extra.x_chip_mod}}
+        return {vars = {card.ability.extra.x_chips + card.ability.extra.x_chip_mod, card.ability.extra.x_chip_mod}}
     end,
     calculate = function(self, card, context)
         if context.before then

@@ -493,7 +493,99 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 		end
 	end
 }, true)
---Cube pools
+--Starfruit (again...)
+--starfruit should suicide itself if force triggered, starts at a much more reasonable ^1.5 emult and is immutable. Oh and it can be autocannibal food
+SMODS.Joker:take_ownership("j_cry_starfruit",{
+	config = { emult = 1.0, emult_mod = 0.2, immutable = {base_emult = 1} },
+	immutable = true,
+	loc_vars = function(self, info_queue, center)
+		local key = 'j_cry_starfruit'
+		if center.ability.unik_depleted then
+			key = 'j_cry_starfruit_depleted'
+		end
+		return {
+			key = key,
+			vars = {
+				number_format(center.ability.emult + center.ability.immutable.base_emult),
+				number_format(center.ability.emult_mod),
+			},
+		}
+	end,
+	pools = { ["Food"] = true, ["autocannibalism_food"] = true},
+	calculate = function(self, card, context)
+		if context.joker_main then
+			return {
+				e_mult = lenient_bignum(card.ability.emult),
+				colour = G.C.DARK_EDITION,
+			}
+		end
+		if context.forcetrigger then
+			SMODS.scale_card(card, {
+				ref_table = card.ability,
+				ref_value = "emult",
+				scalar_value = "emult_mod",
+				operation = "-",
+				no_message = true,
+				 force_full_val = true,
+				 base = 1,
+			})
+			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) then
+				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
+			elseif (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
+				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
+			else
+				return {
+					e_mult = lenient_bignum(card.ability.emult + card.ability.immutable.base_emult),
+					colour = G.C.DARK_EDITION,
+				}
+			end
+		end
+		if context.reroll_shop then
+			SMODS.scale_card(card, {
+				ref_table = card.ability,
+				ref_value = "emult",
+				scalar_value = "emult_mod",
+				operation = "-",
+				no_message = true,
+				 force_full_val = true,
+				 base = 1,
+			})
+			--floating point precision can kiss my ass istg
+			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						play_sound("tarot1")
+						card.T.r = -0.2
+						card:juice_up(0.3, 0.4)
+						card.states.drag.is = true
+						card.children.center.pinch.x = true
+						G.E_MANAGER:add_event(Event({
+							trigger = "after",
+							delay = 0.3,
+							blockable = false,
+							func = function()
+								G.jokers:remove_card(card)
+								card:remove()
+								card = nil
+								return true
+							end,
+						}))
+						return true
+					end,
+				}))
+				return {
+					message = localize("k_eaten_ex"),
+					colour = G.C.DARK_EDITION,
+				}
+			else
+				return {
+					message = "-^" .. number_format(card.ability.emult_mod) .. " Mult",
+					colour = G.C.DARK_EDITION,
+				}
+			end
+		end
+	end,
+}, true)
 
 --Force incompatible eternal jokers to be unsellable anyways
 local eternalOverride = SMODS.is_eternal

@@ -8,7 +8,6 @@ SMODS.Joker {
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = false,
-    immutable = true,
     config = {extra = {triggers = 15}},
     pools = { ["Food"] = true},
     loc_vars = function(self, info_queue, center)

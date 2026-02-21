@@ -44,9 +44,6 @@ SMODS.Joker {
                 if not G.GAME.cry_banished_keys then
                     G.GAME.cry_banished_keys = {}
                 end -- 
-                if not G.GAME.cry_banned_pcards then
-                    G.GAME.cry_banished_keys = {}
-                end
                 G.GAME.cry_banished_keys['j_unik_D16'] = true
                  G.E_MANAGER:add_event(Event({
                     trigger="immediate",

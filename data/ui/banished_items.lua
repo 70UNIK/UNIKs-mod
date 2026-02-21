@@ -1,32 +1,65 @@
 function UNIK.get_banned_count()
     local counter = 0
-    if G.GAME.paperback.banned_run_keys then
+    local gros_michael = 0
+    if G.GAME.paperback and G.GAME.paperback.banned_run_keys then
         for i,v in pairs(G.GAME.paperback.banned_run_keys) do
-            counter = counter + 1
+             if G.P_CENTERS[i] then
+                counter = counter + 1
+                if i == 'j_gros_michel' then
+                    gros_michael = 1
+                end
+            end
         end
     end
     if G.GAME.cry_banished_keys then
         for i,v in pairs(G.GAME.cry_banished_keys) do
-            counter = counter + 1
+            --prevents displaying cards that have been banned by jen earlier.
+            if G.P_CENTERS[i] then
+                if not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    counter = counter + 1
+                end
+                if i == 'j_gros_michel' and not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    gros_michael = 1
+                end
+            end
         end
+    end
+    if G.GAME.pool_flags.gros_michel_extinct and gros_michael == 0 then
+        counter = counter + 1
     end
     return counter
 end
 
 function UNIK.getCombinedBannedTable()
     local banned = {}
-    if G.GAME.paperback.banned_run_keys then
+    local gros_michael = 0
+    if G.GAME.paperback and G.GAME.paperback.banned_run_keys then
         for i,v in pairs(G.GAME.paperback.banned_run_keys) do
-            banned[#banned+1] = i
+            if G.P_CENTERS[i] then
+                banned[#banned+1] = i
+                if i == 'j_gros_michel' then
+                    gros_michael = 1
+                end
+            end
+            
         end
     end
     if G.GAME.cry_banished_keys then
         for i,v in pairs(G.GAME.cry_banished_keys) do
-            if not G.GAME.paperback.banned_run_keys[i] then
-                banned[#banned+1] = i
+            if G.P_CENTERS[i] then
+                if not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    banned[#banned+1] = i
+                end
+                if i == 'j_gros_michel' and not G.GAME.paperback or (G.GAME.paperback and not G.GAME.paperback.banned_run_keys[i]) then
+                    gros_michael = 1
+                end
             end
         end
     end
+    if G.GAME.pool_flags.gros_michel_extinct and gros_michael == 0 then
+        banned[#banned+1] = 'j_gros_michel'
+    end
+
     return banned
 end
 
@@ -93,7 +126,7 @@ function G.UIDEF.unik_banished_items()
                 if not center then break end
                 local card = Card(G.your_collection[j].T.x + G.your_collection[j].T.w / 2, G.your_collection[j].T.y,
                 G.CARD_W * args.card_scale, G.CARD_H * args.card_scale, G.P_CARDS.empty,
-                (args.center and G.P_CENTERS[args.center]) or center)
+                (args.center and G.P_CENTERS[args.center]) or center,{bypass_discovery_center = true})
                 if args.modify_card then args.modify_card(card, center, i, j) end
                 if not args.no_materialize then card:start_materialize(nil, i > 1 or j > 1) end
                 G.your_collection[j]:emplace(card)

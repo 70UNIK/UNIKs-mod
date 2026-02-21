@@ -27,22 +27,7 @@ SMODS.Consumable{
         return { vars = { size} }
     end,
 	can_use = function(self, card)
-		local validJokers = 0
-		local totalJokers = 0
-		if G.jokers.cards then
-			for i = 1, #G.jokers.cards do
-				if totalJokers < card.ability.extra.jokers then
-					local v = G.jokers.cards[i]
-					if not SMODS.is_eternal(v,self) then
-						totalJokers = totalJokers + 1
-						if ((v.edition and not v.edition.negative) or not v.edition) then
-							validJokers = validJokers + 1
-						end
-					end
-				end
-			end
-		end
-		if G.jokers.cards and to_big(#G.jokers.cards - totalJokers) < to_big(G.jokers.config.card_limit - totalJokers + validJokers) then
+		if G.jokers.cards and to_big(#G.jokers.cards) < to_big(G.jokers.config.card_limit) then
 			return true
 		end
 		return false
@@ -64,28 +49,6 @@ SMODS.Consumable{
 				return true
 			end,
 		}))
-		if (#SMODS.find_card("j_jen_saint") + #SMODS.find_card("j_jen_saint_attuned")) <= 0 then
-			local deletable_jokers = {}
-			for i = 1, #G.jokers.cards do
-				if #deletable_jokers < card.ability.extra.jokers then
-					if not SMODS.is_eternal(G.jokers.cards[i],self) then
-						deletable_jokers[#deletable_jokers + 1] = G.jokers.cards[i]
-					end
-				end
-			end
-			local _first_dissolve = nil
-			G.E_MANAGER:add_event(Event({
-				trigger = "before",
-				delay = 0.75,
-				func = function()
-					for k, v in pairs(deletable_jokers) do
-						v:start_dissolve(nil, _first_dissolve)
-						_first_dissolve = true
-					end
-					return true
-				end,
-			}))
-		end
 		delay(0.6)
 	end,
 }

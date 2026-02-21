@@ -73,6 +73,10 @@ SMODS.Enhancement:take_ownership("m_entr_flesh",{
     gore6break = true,
 }, true)
 
+SMODS.Enhancement:take_ownership("m_bld_tablet",{
+    rockbreak = true,
+}, true)
+
 
 
 local dissolveHook = Card.start_dissolve
@@ -106,6 +110,10 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             self:gore6_break()
             return nil
         end
+    if self.to_be_destroyed_by_lily then
+        self:gore6_break()
+        return nil
+    end
     local ret = dissolveHook(self,dissolve_colours, silent, dissolve_time_fac, no_juice)
     return ret
 end

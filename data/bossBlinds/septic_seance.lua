@@ -14,7 +14,13 @@ SMODS.Blind{
         end
         return true
 	end,
-    death_message = "special_lose_unik_seance",
+    death_card = {
+        card = 'j_seance', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+        end,
+        quotes = {'special_lose_unik_seance'},
+        say_times = 5,
+    },
     get_loc_debuff_text = function(self)
 		return localize("k_unik_septic_seance")
 	end,
@@ -100,7 +106,7 @@ function killEternalSeances()
 end
 function turnJokerIntoSeance(location,jack)
     --avoid cursed jokers and ghosts and absolute jokers
-    if (G.jokers.cards[location].config.center.key ~= "j_seance" and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
+    if (G.jokers.cards[location].config.center.key ~= "j_seance" and not G.jokers.cards[location].ability.unik_taw and not G.jokers.cards[location].ability.cry_absolute and not G.jokers.cards[location].config.center.immune_to_vermillion) then
         --It will even destroy eternals!
         if G.jokers.cards[location].ability.eternal then
             card_eval_status_text(
@@ -121,7 +127,7 @@ function turnJokerIntoSeance(location,jack)
                 { message = localize("k_unik_seance_or_else"), colour = HEX('424e54') }
             )            
         end
-        _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
+        local _card = copy_card(G.jokers.cards[jack], nil, nil, nil, nil)
         G.jokers.cards[location]:remove_from_deck()
         _card:add_to_deck()
         _card:start_materialize()

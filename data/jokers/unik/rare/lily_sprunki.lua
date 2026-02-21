@@ -70,10 +70,10 @@ SMODS.Joker {
 	end,
 }
 
-if JokerDisplay then
-	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
-    }
-end
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
+--     }
+-- end
 
 --cashout context
 local cashoutcontext = G.FUNCS.cash_out

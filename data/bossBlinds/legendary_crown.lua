@@ -29,7 +29,7 @@ SMODS.Blind{
     },
     pronouns = "she_her",
     mult = 1,
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, max = 5},
     death_message = "special_lose_unik_legendary_crown",
     get_loc_debuff_text = function(self)
 		return localize("k_unik_legendary_crown_defeat_x_times1") .. (G.GAME.unik_crown_progress or G.GAME.round_resets.hands) .. localize("k_unik_legendary_crown_defeat_x_times2")
@@ -95,14 +95,6 @@ end
 
 local end_roundref = end_round
 function end_round()
-    local instakill = G.GAME.blind:unik_after_defeat(G.GAME.chips,G.GAME.blind.chips)
-    if instakill then
-        G.GAME.chips = 0
-        game_over = true
-        G.ROOM.jiggle = G.ROOM.jiggle + 25
-        G.GAME.blind.triggered = true
-        G.GAME.blind:wiggle()
-    end
     if not (G.GAME.blind and G.GAME.blind.config and G.GAME.blind.config.blind.key == "bl_entr_endless_entropy_phase_four") then
         if to_big(G.GAME.chips) >= to_big(G.GAME.blind.chips) then
             if G.GAME.unik_crown_progress and G.GAME.unik_crown_progress > 1 then
@@ -137,13 +129,13 @@ function end_round()
                     end
                 }))
             else
-                end_roundref()
+                return end_roundref()
             end
 		else
-            end_roundref()
+            return end_roundref()
         end
     else    
-        end_roundref()
+        return end_roundref()
     end
 end
 

@@ -26,7 +26,7 @@ SMODS.Blind{
 		end
 	end,
     death_message = 'special_lose_unik_darkness',
-    glitchy_anim = true,
+    glitchy_anim = {min = 0, 5}, --after seeing jen's legendary heart sprite, it is a table; min = starting sprite, max = max extent of which sprites to glitch into
     calculate = function(self, blind, context)
 		if context.discard and not G.GAME.blind.disabled then
 			--visual cue to wiggle all jokers

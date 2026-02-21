@@ -1,13 +1,8 @@
 --jokers may be disposable (50% chance to replace perishing).
 --Perishables self destruct instead of being debuffed
-local nextStake = 'cry_ruby'
-if (SMODS.Mods["Buffoonery"] or {}).can_load then
-    nextStake = 'buf_palladium'
-end
 SMODS.Stake{ 
     key = 'unik_shitty',
 
-    unlocked_stake =  nextStake ,
     applied_stakes = {'gold'},
     above_stake = 'gold',
     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
@@ -25,21 +20,13 @@ SMODS.Stake{
     sticker_atlas = 'unik_sticker_stakes'
 }
 
-if not (SMODS.Mods["Buffoonery"] or {}).can_load then
-    SMODS.Stake:take_ownership('stake_cry_ruby', {
-        applied_stakes = { "unik_shitty" },
-        above_stake = "unik_shitty",
-        prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
-    })
-end
-
 local disposableOverrideVoucher = Card.cry_calculate_voucher_perishable
 function Card:cry_calculate_voucher_perishable()
     if self.ability.perishable and not self.ability.perish_tally then
 		self.ability.perish_tally = G.GAME.cry_voucher_perishable_rounds
 	end
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
-        if self.ability.perish_tally == 1 then
+        if self.ability.perish_tally <= 1 then
             local area
             if G.STATE == G.STATES.HAND_PLAYED then
                 if not G.redeemed_vouchers_during_hand then
@@ -140,7 +127,7 @@ local disposablePerishOverride = Card.calculate_perishable
 function Card:calculate_perishable()
     if self.ability.perishable and not self.ability.perish_tally then self.ability.perish_tally = G.GAME.perishable_rounds end
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
-        if self.ability.perish_tally == 1 then
+        if self.ability.perish_tally <= 1 then
             self.ability.perish_tally = 0
             self.ability.block_wl_copy = true
             --self:set_debuff()

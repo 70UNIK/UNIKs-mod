@@ -7,9 +7,16 @@ SMODS.Booster{
     weight = 0.05, --very rare
     config = { extra = 4, choose = 1 },
     create_card = function(self, card)
+		--0.5% chance to appear
         if pseudorandom("character_soul_" .. G.GAME.round_resets.ante) > 0.995 then
             return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_soul", nil)
         end
+		--has a 0.1% chance to appear when in these packs when almanac is installed
+		if UNIK.has_almanac() then
+			if pseudorandom("almanac_funny" .. G.GAME.round_resets.ante) > 0.999 then
+				return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_jen_yawetag", nil)
+			end
+		end
 		return create_card("character", G.pack_cards, nil, nil, true, true, nil, "character")
 	end,
 	ease_background_colour = function(self)
@@ -31,3 +38,4 @@ SMODS.Booster{
 		SMODS.Booster.update_pack(self, dt)
 	end,
 }
+

@@ -1,11 +1,3 @@
-function CheckSlots(card,slotLimit)
-    --Check joker slots for when Joker Card is added, removed
-    --if  context.cardarea == G.jokers and not context.blueprint_card and not context.retrigger_joker then
-    --print("SlotCount")
-    if G.jokers.config.card_limit <= slotLimit then
-        selfDestruction(card,"k_unik_happiness3",G.C.BLACK)
-    end
-end
 
 function selfDestruction(card,message,color,dissolve)
     -- This part plays the animation.
@@ -46,15 +38,46 @@ function selfDestruction(card,message,color,dissolve)
     })
 end
 
+function selfDestruction_noMessage(card,dissolve)
+    -- This part plays the animation.
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            --Dissolving
+            if (dissolve) then
+                if SMODS.shatters(card) then
+                    card:shatter()
+                else
+                    card:start_dissolve()
+                end
+            --extinct animation
+            else
+                play_sound('tarot1')
+                card.T.r = -0.2
+                card:juice_up(0.3, 0.4)
+                card.states.drag.is = true
+                card.children.center.pinch.x = true
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.3,
+                    blockable = false,
+                    func = function()
+                        G.jokers:remove_card(card)
+                        card:remove()
+                        card = nil
+                        return true;
+                    end
+                }))
+            end
+            
+            return true
+        end
+    }))
+end
+
 local removeHook = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)
     if (self.added_to_deck) then
         SMODS.calculate_context({ unik_remove_from_deck = true, removed = self, from_debuff = from_debuff})
-        for _, v in pairs(G.jokers.cards) do
-            if v.ability.name == "j_unik_happiness" then
-                CheckSlots(v,v.ability.extra.slotLimit)
-            end
-        end
     end
     local ret = removeHook(self,from_debuff)
     return ret
@@ -162,7 +185,7 @@ function CardArea:emplace(card, location, stay_flipped)
         --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)
         if (SMODS.Mods["extracredit"] or {}).can_load then
             if card.config.center.key == "j_ExtraCredit_averagealice" then
-                if pseudorandom('unik_average_alice_exotic_change') < 0.8/100 then
+                if pseudorandom('unik_average_alice_exotic_change') < 1/100 then
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             card_eval_status_text(card, "extra", nil, nil, nil, {
@@ -202,13 +225,9 @@ function CardArea:emplace(card, location, stay_flipped)
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.ability.name == "j_unik_happiness" then
-                --print("checkSlots")
-                CheckSlots(v,v.ability.extra.slotLimit)
-            --Formidicus fix, now constantly destroys cursed jokers
-            elseif v.config.center.key == "j_cry_formidiulosus" then
+            if v.config.center.key == "j_cry_formidiulosus" then
                 for x, w in pairs(G.jokers.cards) do
-                    if (w.config.center.rarity == 'unik_detrimental' or w.config.center.rarity == 'cry_cursed') and not w.ability.extra.getting_captured then
+                    if (UNIK.detrimental_rarities[w.config.center.rarity] ) and not w.ability.extra.getting_captured then
                         --destory ghost
                         selfDestruction(w,"k_unik_pentagram_purified",G.C.MULT)
                         card_eval_status_text(v, "extra", nil, nil, nil, {

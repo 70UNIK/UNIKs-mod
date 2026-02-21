@@ -7,9 +7,8 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
-    immutable = true,
     demicoloncompat = true,
-    config = { extra = {chips = 0, chip_mod = 3, bad_chip_mod = 3}},
+    config = { extra = {chips = 0, chip_mod = 3, bad_chip_mod = 2}},
     loc_vars = function(self, info_queue, center)
         return { 
             vars = {center.ability.extra.chip_mod,-center.ability.extra.bad_chip_mod,math.max(center.ability.extra.chips,0)},
@@ -17,7 +16,7 @@ SMODS.Joker {
 	end,
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.before and not context.blueprint then
-            cards = 0
+            local cards = 0
 			for k, v in ipairs(context.scoring_hand) do
 				v.landfill_incompat = true
 			end

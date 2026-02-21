@@ -1,0 +1,77 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 99999
+
+
+###Death quips that will occur after getting killed by a boss that has a specific message, even on endless.
+###They will always have Jimbo for now
+
+###BOSS BLIND DEATH MESSAGES
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if G.OVERLAY_MENU and G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot') then'''
+position = 'after'
+payload = '''
+    if G.GAME.blind and G.GAME.blind:has_death_quotes() and (not FinisherBossBlindQuips or not FinisherBossBlindQuips[G.GAME.blind.config.blind.key]) then
+        Jimbo = Card_Character({x = 0, y = 5})
+        local spot = G.OVERLAY_MENU:get_UIE_by_ID('jimbo_spot')
+        local quip = G.GAME.blind:get_death_quote()
+        spot.config.object:remove()
+        spot.config.object = Jimbo
+        Jimbo.ui_object_updated = true
+        Jimbo:add_speech_bubble(quip, nil, {quip = true})
+        Jimbo:say_stuff(G.GAME.blind:get_death_say_times())
+        return true
+    end
+'''
+match_indent = true
+
+##STANDARD
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
+position = 'at'
+payload = '''
+if G.GAME.round_resets.ante <= G.GAME.win_ante or G.GAME.blind:has_death_quotes() then --Only add Jimbo to say a quip if the game over happens when the run is lost
+'''
+match_indent = true
+
+##FINITY
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
+position = 'at'
+payload = '''
+if G.GAME.round_resets.ante <= G.GAME.win_ante or G.GAME.blind:has_death_quotes() or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card_character.lua"
+pattern = 'self.config = {args = args}'
+position = "after"
+payload = '''
+if G.GAME.blind:has_death_quotes() and G.GAME.blind.config.blind.death_card then
+	self.children.card = Card(self.T.x, self.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, args.center and G.P_CENTERS[args.center] or G.P_CENTERS[G.GAME.blind.config.blind.death_card.card] or G.P_CENTERS.j_joker, {bypass_discovery_center = true})
+    if G.GAME.blind.config.blind.death_card and G.GAME.blind.config.blind.death_card.mod_card and type(G.GAME.blind.config.blind.death_card.mod_card) == 'function' then
+        G.GAME.blind:mod_card(self.children.card)
+    end
+else
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card_character.lua"
+pattern = 'self.children.card.states.visible = false'
+position = "before"
+payload = '''
+end
+'''
+match_indent = true

@@ -25,7 +25,8 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 				juice_card(effect.card)
 			end
 			local mult = SMODS.Scoring_Parameters["mult"]
-			mult:modify((to_big(mult.current) * to_big(math.log(to_big(math.max(amount,mult.current)),to_big(amount)))) - to_big(mult.current))
+			mult:modify(mult.current * math.log(math.max(amount,mult.current),amount) - mult.current)
+
 			if not effect.remove_default_message then
 				if from_edition then
 					card_eval_status_text(
@@ -58,7 +59,9 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 				juice_card(effect.card)
 			end
 			local chips = SMODS.Scoring_Parameters["chips"]
-			chips:modify((to_big(chips.current) * to_big(math.log(to_big(math.max(amount,chips.current)),to_big(amount)))) - to_big(chips.current))
+			local log = math.log(math.max(amount,chips.current),amount)
+			chips:modify(chips.current * math.log(math.max(amount,chips.current),amount) - chips.current)
+
 			if not effect.remove_default_message then
 				if from_edition then
 					card_eval_status_text(
@@ -93,6 +96,22 @@ for _, v in ipairs({
 }) do
 	table.insert(SMODS.scoring_parameter_keys, v)
 end
+SMODS.Sound({
+	key = "emult",
+	path = "ExponentialMult.wav",
+})
+SMODS.Sound({
+	key = "echip",
+	path = "ExponentialChips.wav",
+})
+SMODS.Sound({
+	key = "xchip",
+	path = "MultiplicativeChips.wav",
+})
+SMODS.Sound({
+	key = "eemult",
+	path = "TetrationalMult.wav",
+})
 if SMODS and SMODS.Mods and not UNIK.has_talisman() and not (SMODS.Mods["cdataman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load then
 	local smods_xchips = false
 	for _, v in pairs(SMODS.scoring_parameter_keys) do
@@ -101,22 +120,7 @@ if SMODS and SMODS.Mods and not UNIK.has_talisman() and not (SMODS.Mods["cdatama
 			break
 		end
 	end
-	SMODS.Sound({
-		key = "emult",
-		path = "ExponentialMult.wav",
-	})
-	SMODS.Sound({
-		key = "echips",
-		path = "ExponentialChips.wav",
-	})
-	SMODS.Sound({
-		key = "xchip",
-		path = "MultiplicativeChips.wav",
-	})
-	SMODS.Sound({
-		key = "eemult",
-		path = "TetrationalMult.wav",
-	})
+
 	local scie = SMODS.calculate_individual_effect
 	function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
 		local ret = scie(effect, scored_card, key, amount, from_edition)

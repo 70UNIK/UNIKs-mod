@@ -1,0 +1,2 @@
+--set all statistics of played hand to 0
+--gain ^Mult equal to total mult lost x 0.1

@@ -1,0 +1,19 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS JokerDisplay "src/api_helper_functions.lua"]'''
+pattern = '''polychrome = { atlas = "cry_atlaseditiondeck", pos = { x = 2, y = 0 } },'''
+position = "after"
+payload = '''
+unik_positive = { atlas = "unik_edition_deck", pos = { x = 0, y = 0 } },
+unik_bloated = { atlas = "unik_edition_deck", pos = { x = 1, y = 0 } },
+unik_halfjoker = { atlas = "unik_edition_deck", pos = { x = 2, y = 0 } },
+unik_fuzzy = { atlas = "unik_edition_deck", pos = { x = 0, y = 1 } },
+unik_corrupted = { atlas = "unik_edition_deck", pos = { x = 1, y = 1 } },
+unik_steel = { atlas = "unik_edition_deck", pos = { x = 2, y = 1 } },
+'''
+match_indent = true

@@ -20,6 +20,7 @@ SMODS.Joker {
 	end,
     add_to_deck = function(self, card, from_debuff)
         card.ability.extra.x_mult = card.ability.extra.x_mult_initial
+		card.ability.extra.selfDestruction = false
     end,
     update = function(self,card,dt)
 		if card.added_to_deck and card.ability.extra.in_scoring == false then
@@ -160,42 +161,3 @@ SMODS.Joker {
         end
     end,
 }
---Simple EChips display
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_no_standing_zone"] = {
--- 		text = {
--- 			{
--- 				border_nodes = {
--- 					{ text = "X" ,scale = 0.6},
--- 					{
--- 						ref_table = "card.ability.extra",
--- 						ref_value = "x_mult",
--- 						retrigger_type = "exp",
--- 						scale = 0.6,
--- 					},
--- 				},
--- 				border_colour = G.C.MULT,
--- 			},
--- 		},
--- 		reminder_text = {
--- 			{
--- 				ref_table = "card.joker_display_values",
--- 				ref_value = "warning",
--- 				colour = G.C.RED,
--- 			},		
--- 		},
--- 		calc_function = function(card)
--- 			local warning = ""
--- 			if card.ability.extra.x_mult < (1 + card.ability.extra.x_mult_mod*15) and card.ability.extra.x_mult > (1 + card.ability.extra.x_mult_mod*7.5) then
--- 				if math.ceil(card.ability.extra.x_mult*10) % 2 == 0 then
--- 					warning = localize('k_unik_hurry_up')
--- 				end
--- 			elseif card.ability.extra.x_mult <= (1 + card.ability.extra.x_mult_mod*7.5) then
--- 				if math.ceil(card.ability.extra.x_mult*20) % 2 == 0 then
--- 					warning = localize('k_unik_hurry_up2')
--- 				end
--- 			end
--- 			card.joker_display_values.warning = warning
--- 		end
--- 	}
--- end
