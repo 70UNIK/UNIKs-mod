@@ -57,10 +57,20 @@ end
 
 local suit_hook = Card.is_suit
 function Card:is_suit(suit, bypass_debuff, flush_calc)
-    if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
-    G.P_CENTERS[self.config.center.key].unik_specific_suit
-    then
-        return suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
+    if flush_calc then
+
+        if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
+        G.P_CENTERS[self.config.center.key].unik_specific_suit and suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
+        then
+            return true
+        end
+    else
+        if self.debuff and not bypass_debuff then return end
+        if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
+        G.P_CENTERS[self.config.center.key].unik_specific_suit and suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
+        then
+            return true
+        end
     end
     return suit_hook(self,suit, bypass_debuff, flush_calc)
 end

@@ -1946,9 +1946,8 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{C:attention}Prevents{} Jokers {C:red}destruction{}",
-                        "to the left of this Joker once",
-                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult",
+                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult, {C:attention}Prevents{} Joker",
+                        "{C:red}destruction{} once",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
                         "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)"
                     },
@@ -4495,7 +4494,7 @@ return {
                 }
             }
         },
-        Stake={
+        Stake = not All_in_Jest or (All_in_Jest and not All_in_Jest.config.blue_stake_rework) and {
             stake_unik_shitty = {
 				name = "Shitty Stake",
 				colour = "Shitty", --this is used for auto-generated sticker localization
@@ -4526,6 +4525,28 @@ return {
                     '{s:0.8}Applies all previous stakes',
                 }
             },
+        } or {
+            stake_unik_shitty = {
+				name = "Shitty Stake",
+				colour = "Shitty", --this is used for auto-generated sticker localization
+				text = {
+					"{C:attention}Perishable{} Jokers can be {C:attention}Disposable{}",
+					"{s:0.8,C:inactive}({s:0.8,C:red}Destroyed {s:0.8,C:inactive}after round){}",
+                    "{C:attention}Perishable{} Jokers are {C:red}destroyed{} instead of being {C:red}debuffed",
+                    '{s:0.8}Applies all previous stakes',
+				},
+			},
+            stake_unik_persimmon = {
+				name = "Persimmon Stake",
+				colour = "Persimmon", --this is used for auto-generated sticker localization
+				text = {
+					"All cards can be {C:attention}Triggering{}",
+					"{s:0.8,C:inactive}({s:0.8,C:green}1 in 8{s:0.8,C:inactive} chance to {s:0.8,C:attention}play{s:0.8,C:inactive} cards when selected){}",
+                    "{s:0.8,C:inactive}(Consumeables automatically {s:0.8,C:attention}trigger{s:0.8,C:inactive} when possible){}",
+                    "{s:0.8,C:inactive}(Jokers automatically {s:0.8,C:red}sell {s:0.8,C:inactive}when selected){}",
+                    '{s:0.8}Applies all previous stakes',
+				},
+			},
         },
         Sleeve = {
             sleeve_casl_ghost = {
