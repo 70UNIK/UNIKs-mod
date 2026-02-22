@@ -4494,7 +4494,7 @@ return {
                 }
             }
         },
-        Stake = not All_in_Jest or (All_in_Jest and not All_in_Jest.config.blue_stake_rework) and {
+        Stake = (not All_in_Jest or (All_in_Jest and not All_in_Jest.config.blue_stake_rework)) and {
             stake_unik_shitty = {
 				name = "Shitty Stake",
 				colour = "Shitty", --this is used for auto-generated sticker localization
