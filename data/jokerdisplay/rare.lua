@@ -452,3 +452,27 @@ JokerDisplay.Definitions["j_unik_epic_blind_sauce"] = {
         }
     },
 }
+JokerDisplay.Definitions["j_unik_the_dynasty"] = {
+    text = {
+        {
+            border_nodes = {
+                { text = "X" },
+                { ref_table = "card.joker_display_values", ref_value = "x_mult", retrigger_type = "exp" }
+            }
+        }
+    },
+    reminder_text = {
+        { text = "(" },
+        { ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.ORANGE },
+        { text = ")" },
+    },
+    calc_function = function(card)
+        local x_mult = 1
+        local _, poker_hands, _ = JokerDisplay.evaluate_hand()
+        if poker_hands[card.ability.extra.type] and next(poker_hands[card.ability.extra.type]) then
+            x_mult = card.ability.extra.Xmult
+        end
+        card.joker_display_values.x_mult = x_mult
+        card.joker_display_values.localized_text = localize(card.ability.extra.type, 'poker_hands')
+    end
+}
