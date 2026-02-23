@@ -1,7 +1,7 @@
 --Retrigger all held in consumeable effects (not using consumeables)
 --Observatory, moonlight cookie/celestial of chaos, scratch, maybe even color cards???????
 local containerrarity = 1
-if MoreFluff or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
+if (MoreFluff and mf_config and mf_config["Colour Cards"]) or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
     containerrarity = 2
 end
 SMODS.Joker {
@@ -23,7 +23,7 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
     loc_vars = function(self, info_queue, center)
-        if MoreFluff then
+        if (MoreFluff and mf_config and mf_config["Colour Cards"]) then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables2" }
         elseif (SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables4" }
