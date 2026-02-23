@@ -305,13 +305,6 @@ SMODS.Joker:take_ownership("j_cry_gardenfork",{
 	rarity = 2,
 }, true)
 
-
-if next(SMODS.find_mod("Bunco")) then
-	SMODS.Stake:take_ownership('bunc_magenta', {
-		unlocked_stake = 'unik_persimmon',
-	})
-end
-
 SMODS.Joker:take_ownership("j_aij_mistake",{
     calculate = function(self, card, context)
 		if (card.config.center.paperback and card.config.center.paperback.permanently_eternal) or card.ability.unik_taw then

@@ -1,28 +1,27 @@
 --Various buffoonery fixes.
 
---Overriding buffoonery's stakes so it works with vice_squeeze and comes after shitty stake and before pink stake
-SMODS.Stake:take_ownership('stake_buf_spinel', {
-	modifiers = function()
-		G.E_MANAGER:add_event(Event({trigger = 'before',func = function() 
-			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.5)
-		return true end })) 
-    end,
-})
--- SMODS.Stake:take_ownership('cry_pink', {
---     applied_stakes = { "buf_spinel" },
---     above_stake = "buf_spinel",
---     prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+-- SMODS.Stake:take_ownership('stake_buf_spinel', {
+-- 	modifiers = function()
+-- 		G.E_MANAGER:add_event(Event({trigger = 'before',func = function() 
+-- 			G.GAME.win_ante = math.ceil(G.GAME.win_ante * 1.5)
+-- 		return true end })) 
+--     end,
 -- })
+-- -- SMODS.Stake:take_ownership('cry_pink', {
+-- --     applied_stakes = { "buf_spinel" },
+-- --     above_stake = "buf_spinel",
+-- --     prefix_config = { above_stake = {mod = false}, applied_stakes = {mod = false} },
+-- -- })
 
-SMODS.Stake:take_ownership('stake_buf_palladium', {
-        applied_stakes = {"unik_shitty"},
-    above_stake = "unik_shitty",
-    prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
-    modifiers = function()
-		G.GAME.modifiers.buf_halfstep_bosses = true --dummy variable
-        G.GAME.unik_vice_squeeze = 2
-    end,
-})
+-- SMODS.Stake:take_ownership('stake_buf_palladium', {
+--         applied_stakes = {"unik_shitty"},
+--     above_stake = "unik_shitty",
+--     prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}},
+--     modifiers = function()
+-- 		G.GAME.modifiers.buf_halfstep_bosses = true --dummy variable
+--         G.GAME.unik_vice_squeeze = 2
+--     end,
+-- })
 --The must win at ante 10 stake becomes ANTE 16 HAHAHAHAHAHAHHAHAHAHAHAHAHAH!!! 
 
 -- SMODS.Stake:take_ownership('stake_unik_shitty', {
