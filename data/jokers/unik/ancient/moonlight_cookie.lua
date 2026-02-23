@@ -66,7 +66,8 @@ SMODS.Joker {
 		end
 		if context.unik_after_levelup and context.hand then
 			local amount = context.amount or 1
-			G.GAME.hands[context.hand].chips = G.GAME.hands[context.hand].chips*card.ability.extra.exp_levelup^amount
+			if amount > 0 then
+				G.GAME.hands[context.hand].chips = G.GAME.hands[context.hand].chips*card.ability.extra.exp_levelup^amount
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
 				
 				update_hand_text({delay = 0.25}, {
@@ -127,6 +128,8 @@ SMODS.Joker {
 					delay = 0.05,
 				}
 			end
+			end
+			
 			
 		end
 		
