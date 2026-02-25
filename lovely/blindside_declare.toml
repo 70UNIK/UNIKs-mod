@@ -1,0 +1,14 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 99
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Blindside "lib/utils/declarations.lua"]'''
+pattern = '''"tag_bld_hiss",'''
+match_indent = true
+position = 'after'
+payload = '''
+'tag_unik_blindside_dethroning',
+'''

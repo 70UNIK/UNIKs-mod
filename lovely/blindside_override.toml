@@ -1,0 +1,32 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 99999
+
+[[patches]]
+[patches.regex]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''(.*)function BLINDSIDE.chipsupdate(.*)'''
+match_indent = true
+position = 'after'
+payload = '''
+
+G.GAME.unik_current_operator = G.GAME.unik_current_operator or 0
+
+'''
+
+[[patches]]
+[patches.regex]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''G.GAME.blind.basechips\*G.GAME.blind.mult'''
+match_indent = true
+position = 'at'
+payload = ''' UNIK.arrowfunction(G.GAME.unik_current_operator,G.GAME.blind.basechips,G.GAME.blind.mult) '''
+
+[[patches]]
+[patches.regex]
+target = '=[SMODS _ "src/ui.lua"]'
+pattern = '''text = \"X\"'''
+match_indent = true
+position = 'after'
+payload = ''', id = "unik_operator_text_7777" '''

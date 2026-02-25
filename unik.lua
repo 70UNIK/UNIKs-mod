@@ -411,6 +411,14 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+	key = "unik_blindside_blinds",
+	path = "unik_blindside_blinds.png",
+	px = 71,
+	py = 95
+}
+
+
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
 	key = "unik_boss_blind_joker",
@@ -1235,12 +1243,22 @@ end
 
 --blindside:
 if next(SMODS.find_mod("Blindside")) then
-	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()	
-	--temporarily disabled until v0.7
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
+	
+	--BLINDS
+	NFS.load(mod_path .. "data/blindside/blinds/halved.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/prince.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/blossom.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/catterfly.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/descending.lua")()	
+	--JOKERS
+	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+
+	--TAGS
+	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()	
 end
 
 

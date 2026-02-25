@@ -86,6 +86,7 @@ end
 local disblref2 = Blind.disable
 
 function Blind:disable()
+    
 	local obj = self.config.blind
 	if obj and obj.boss then
 		if obj.boss.legendary or obj.boss.exotic then
@@ -116,7 +117,9 @@ function Blind:disable()
         end
         
 	end
+    G.GAME.unik_override_prince = true
     local ret = disblref2(self)
+    G.GAME.unik_override_prince = true
     if SMODS and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config and SMODS.OPENED_BOOSTER.config.center then
         local obj2 = SMODS.OPENED_BOOSTER.config.center
         if obj2 and obj2.unik_disablable and obj2.unik_disablable == true then

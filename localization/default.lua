@@ -1414,6 +1414,84 @@ return {
                     "{C:attention}Immune{} to {C:red,E:2}debuffs"
                 },
             },
+
+            --Blindside blinds
+            m_unik_blindside_blossom = {
+                name = "The Blossom",
+                text = {
+					"{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
+					"{C:unik_copper}Rescore {C:attention}first{} scoring",
+					"Blind {C:attention}#1#{} times",
+                    "Always scores"
+                }
+            },
+            m_unik_blindside_blossom_upgraded = {
+                name = "The Blossom",
+                text = {
+					"{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
+					"{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last{}",
+					"scoring Blinds {C:attention}#1#{} times",
+                    "Always scores"
+                }
+            },
+            m_unik_blindside_halved = {
+                name = "The Halved",
+                text = {
+                    "{X:chips,C:white}Blue{}",
+                    "{C:mult}+#1#{} Mult",
+                    "{C:red}Debuffed{} if played",
+                    "more than {C:attention}#2#{} Blinds",
+                }
+            },
+            m_unik_blindside_descending = {
+                name = "The Descending",
+                text = {
+                    "{X:chips,C:white}Blue{} {X:purple,C:white}Purple{}",
+					"Sets Joker {C:attention}operator{} to",
+                    "{C:dark_edition}addition{} for the round",
+                    "then {X:dark_edition,C:white}^#1#{} Mult to Joker",
+                    "{C:attention,E:1}Burns{} on success",
+					"{C:attention,E:1}Self-Scoring{} with a",
+					"{C:green}#2# in #3#{} chance",
+                }
+            },
+            m_unik_blindside_catterfly = {
+                name = "The Catterfly",
+                text = {
+                    "{X:purple,C:white}Purple{}",
+                    "When played",
+                    "Gains {X:chips,C:white}X#2#{} Chips when",
+                    "{C:chips}Chips{}, {X:chips,C:white}XChips{},",
+                    "{X:dark_edition,C:white}^Chips{}, etc... trigger",
+                    "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
+                }
+            },
+            m_unik_blindside_prince = {
+                name = "The Prince",
+                text = {
+                    "{X:red,C:white}Red{}",
+                    "{C:mult}+#1#{} Mult",
+                    "Creates a {C:attention}Dethroning",
+                    "tag if in scoring hand",
+                    "{C:attention,E:1}Burns{}",
+                }
+            },
+            m_unik_blindside_prince_upgraded = {
+                name = "The Prince",
+                text = {
+                    "{X:red,C:white}Red{}",
+                    "{C:mult}+#1#{} Mult",
+                    "Creates a {C:attention}Dethroning",
+                    "tag when scored",
+                    "{C:attention,E:1}Burns{}",
+                }
+            },
+            m_unik_blindside_epic_sand = {
+                name = "Juoksuhiekka",
+                text = {
+                    ""
+                }
+            }
         },
         Rotarot = {
             c_unik_rot_crossdresser={
@@ -4681,6 +4759,13 @@ return {
 					"{C:unik_summit}Mega Summit Pack",
 				},
 			},
+            tag_unik_blindside_dethroning = {
+                name = "Dethroning Tag",
+                text = {
+                    "{C:attention}Disables{} the current",
+                    "Joker for {C:attention}#1#{} hand"
+                }
+            }
         },
         Tarot={
             c_unik_wheel_of_misfortune = {

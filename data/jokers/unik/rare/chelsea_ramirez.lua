@@ -60,6 +60,19 @@ SMODS.Joker {
 				colour = G.C.CHIPS,
 			}
         end
+		 if context.unik_chelsea_trigger then
+			 SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "x_chips",
+                    scalar_value = "x_chips_mod",
+                    message_key = "a_xchips",
+                    message_colour = G.C.CHIPS,
+                    force_full_val = true,
+                })
+				return {
+
+				}
+		 end
 		if (context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1))) and not card.ability.extra.unik_godsmarble_debuff then
 			return {
 
@@ -84,18 +97,24 @@ or key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod"
 ) and amount ~= 1) or
 
     key == "chips" or key == "chip_mod" or key == "chip" or key == "chips_mod" then
-        for _, v in pairs(SMODS.find_card('j_unik_jsab_chelsea')) do
-            if not v.ability.extra.unik_godsmarble_debuff then
-                SMODS.scale_card(v, {
-                    ref_table =v.ability.extra,
-                    ref_value = "x_chips",
-                    scalar_value = "x_chips_mod",
-                    message_key = "a_xchips",
-                    message_colour = G.C.CHIPS,
-                    force_full_val = true,
-                })
-            end
-        end
+		if not G.GAME.block_additional_shit then
+			G.GAME.block_additional_shit = true
+			SMODS.calculate_context({unik_chelsea_trigger = true, card = scored_card})
+			for i,v in pairs(G.play.cards) do
+				if v.config.center.key == 'm_unik_blindside_catterfly' and v.ability.unik_in_scoring_hand then
+					 SMODS.scale_card(v, {
+						ref_table =v.ability.extra,
+						ref_value = "x_chips",
+						scalar_value = "x_chip_mod",
+						message_key = "a_xchips",
+						message_colour = G.C.CHIPS,
+						force_full_val = true,
+						delay = 0.4,
+					})
+				end
+			end
+			G.GAME.block_additional_shit = nil
+		end
     end
     return ret
 end
