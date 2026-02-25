@@ -22,6 +22,7 @@ BLINDSIDE.Joker({
             G.GAME.unik_blind_xmult = 1
         end
         if (context.after) and not G.GAME.blind.disabled then
+            G.GAME.blind:set_text()
             G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult or 1
             if G.GAME.unik_blind_xmult > 1 then
                 UNIK.blindside_chips_modifyV2({x_mult = G.GAME.unik_blind_xmult})   
@@ -34,9 +35,9 @@ BLINDSIDE.Joker({
         end
         if not blind.disabled and context.discard then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
-                G.GAME.blind:set_text()
                 blind:wiggle()
                 G.GAME.unik_blind_xmult= G.GAME.unik_blind_xmult + 0.05
+                G.GAME.blind:set_text()
                 return true
             end}))
             
