@@ -6,11 +6,11 @@
         config = {
             extra = {
                 value = 100,
-                chance = 1,
-                trigger = 3,
-                chancedown = -1,
-                j_e_mult = 2,
-                j_e_mult_down = 0.3,
+                chance = 2,
+                trigger = 5,
+                chancedown = -2,
+                j_e_mult = 1.75,
+                j_e_mult_down = 0.35,
             }
         },
         hues = {"Purple", "Blue"},
@@ -18,7 +18,7 @@
         rare = true,
         calculate = function(self, card, context)
             if context.cardarea == G.play and context.before and card.facing ~= 'back' then
-                if SMODS.pseudorandom_probability(card, pseudoseed("flip"), card.ability.extra.chance, card.ability.extra.trigger, 'flip') and card.facing ~= "back" then
+                if not SMODS.pseudorandom_probability(card, pseudoseed("flip"), card.ability.extra.chance, card.ability.extra.trigger, 'flip') and card.facing ~= "back" then
                     card:flip()
                     card:flip()
                 else
@@ -39,9 +39,9 @@
                         focus = card,
                     }
                 else
+                    card_eval_status_text(card, "debuff", nil, nil, nil, nil)
                     return {
-                        message = localize('k_nope_ex'),
-                        colour = G.C.PURPLE
+                        
                     }
                 end
             end
@@ -116,3 +116,4 @@ function Blind:defeat(silent)
     end
     return ret
 end
+--eval G.hand.cards[1]:set_ability('m_unik_blindside_descending')

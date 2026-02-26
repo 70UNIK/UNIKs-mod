@@ -1,0 +1,1 @@
+--X1.5 Mult, permanently gains either +5 Chips, +1 Mult, X0.02 Mult, X0.02 Chips or $0.25 when scored

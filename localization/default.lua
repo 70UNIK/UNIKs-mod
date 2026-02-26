@@ -1419,71 +1419,188 @@ return {
             m_unik_blindside_blossom = {
                 name = "The Blossom",
                 text = {
+                    {
 					"{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
 					"{C:unik_copper}Rescore {C:attention}first{} scoring",
 					"Blind {C:attention}#1#{} times",
+                    },
+                    {
                     "Always scores"
+                    },
+
+
                 }
             },
             m_unik_blindside_blossom_upgraded = {
                 name = "The Blossom",
                 text = {
+                    {
 					"{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
 					"{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last{}",
 					"scoring Blinds {C:attention}#1#{} times",
+                    },
+                    {
                     "Always scores"
+                    },
+
+
                 }
             },
             m_unik_blindside_halved = {
                 name = "The Halved",
                 text = {
+                    {
                     "{X:chips,C:white}Blue{}",
                     "{C:mult}+#1#{} Mult",
+                    },
+                    {
                     "{C:red}Debuffed{} if played",
                     "more than {C:attention}#2#{} Blinds",
+                    },
+
+
                 }
             },
             m_unik_blindside_descending = {
                 name = "The Descending",
                 text = {
-                    "{X:chips,C:white}Blue{} {X:purple,C:white}Purple{}",
-					"Sets Joker {C:attention}operator{} to",
-                    "{C:dark_edition}addition{} for the round",
-                    "then {X:dark_edition,C:white}^#1#{} Mult to Joker",
-                    "{C:attention,E:1}Burns{} on success",
+                    {
+                        "{X:chips,C:white}Blue{} {X:purple,C:white}Purple{}",
+                        "Sets Joker {C:attention}operator{} to",
+                        "{C:dark_edition}addition{} for the round",
+                        "then {X:dark_edition,C:white}^#1#{} Mult to Joker",                    
+                    },
+                    {
 					"{C:attention,E:1}Self-Scoring{} with a",
 					"{C:green}#2# in #3#{} chance",
+                    },
+                    {
+                    "{C:attention,E:1}Burns{} on success",
+                    },
+
+
+
                 }
             },
             m_unik_blindside_catterfly = {
                 name = "The Catterfly",
                 text = {
-                    "{X:purple,C:white}Purple{}",
-                    "When played",
-                    "Gains {X:chips,C:white}X#2#{} Chips when",
-                    "{C:chips}Chips{}, {X:chips,C:white}XChips{},",
-                    "{X:dark_edition,C:white}^Chips{}, etc... trigger",
+                    {
+                        "{X:purple,C:white}Purple{}",
+                        "When played",
+                        "Gains {X:chips,C:white}X#2#{} Chips when",
+                        "{C:chips}Chips{}, {X:chips,C:white}XChips{},",
+                        "{X:dark_edition,C:white}^Chips{}, etc... trigger",
+                    },
+                    {
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
+                    },
                 }
             },
             m_unik_blindside_prince = {
                 name = "The Prince",
                 text = {
-                    "{X:red,C:white}Red{}",
-                    "{C:mult}+#1#{} Mult",
-                    "Creates a {C:attention}Dethroning",
-                    "tag if in scoring hand",
-                    "{C:attention,E:1}Burns{}",
+                    {
+                        "{X:red,C:white}Red{}",
+                        "{C:mult}+#1#{} Mult",
+                    },
+                    {
+                        "Creates a {C:attention}Dethroning",
+                        "tag if in scoring hand",
+                    },
+                    {
+                        "{C:attention,E:1}Burns{}",
+                    },
+
                 }
             },
             m_unik_blindside_prince_upgraded = {
                 name = "The Prince",
                 text = {
+                    {
                     "{X:red,C:white}Red{}",
                     "{C:mult}+#1#{} Mult",
+                    },
+                    {
                     "Creates a {C:attention}Dethroning",
                     "tag when scored",
+                    },
+                    {
                     "{C:attention,E:1}Burns{}",
+                    },
+
+                }
+            },
+            m_unik_blindside_gun = {
+                name = "The Gun",
+                text = {
+                    {
+                    "{X:money,C:white}Yellow{}",
+                    "{X:mult,C:white}X#1#{} Mult",
+                    },
+                    {
+                    "{C:green}#2# in #3#{} chance to",
+                    "{C:attention}Play{} selected cards",
+                    "when selected"
+                    },
+
+
+                }
+            },
+            m_unik_blindside_bloon = {
+                name = "The Bloon",
+                text = {
+                    {
+                        "{X:red,C:white}Red{}",
+                        "{X:mult,C:white}X#1#{} Mult",
+                    },
+                    {
+                        "{C:green}#2# in #3#{} chance to",
+                        "be {C:red}Destroyed{}",
+                        "after scoring"
+                    }
+
+                } 
+            },
+            m_unik_blindside_stop = {
+                name = "The Stop",
+                text = {
+                    {
+                        "{X:red,C:white}Red{}",
+                        "{X:mult,C:white}X#1#{} Mult",
+                    },
+                    {
+                        "{C:red}Debuffs{} all scoring",
+                        "non-{X:red,C:white}Red{} blinds",
+                    }
+
+
+                } 
+            },
+            m_unik_blindside_trade = {
+                name = "The Trade",
+                text = {
+                    {
+                        "{X:money,C:white}Yellow{}",
+                        "When {C:red}Discarded{},",
+                        "earn {C:money}$#2#{} and",
+                        "{C:red}destroys{} {C:attention}#1#{} selected",
+                        "Blind#<s>1# to the right",
+                    },
+                    {
+                        "{C:attention,E:1}Burns{} on success",
+                    }
+
+                    
+                }
+            },
+            m_unik_blindside_cliff = {
+                name = "The Cliff",
+                text = {
+                    "{X:dark_edition,C:white}Faded{}",
+                    "When in scoring hand",
+                    "create {C:attention}#1#",
+                    "random {C:attention}Tag#<s>1#",
                 }
             },
             m_unik_blindside_epic_sand = {
@@ -4388,7 +4505,25 @@ return {
                     "{X:unik_void_color,C:unik_eye_searing_red,s:2}DIE.",
                     "{C:red}Unremovable"
                 }
-            }
+            },
+            unik_rescore_blindside = {
+                name = "Rescoring",
+                text = {
+                    "{C:unik_copper}Repeat{} all scoring",
+                    "{C:attention}including retriggers",
+                    "{C:inactive,s:0.8}(For instance, Copper Cards from Bunco)"
+                }
+            },
+            unik_self_debuffing = {
+                name = "Self-Debuffing",
+                text = {
+					"{C:attention}Always scores",
+					"{s:0.2} {}",
+					"If {C:green}chance{} succeeds,",
+					"instead {C:red}fails{}",
+					"to score"
+                }
+            },
             
         },
         Planet={

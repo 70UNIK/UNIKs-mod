@@ -48,10 +48,8 @@ SMODS.Sticker{
 		if context.unik_triggering then 
             if (context.selected_card == card) then
                 if SMODS.pseudorandom_probability(card, 'unik_triggering_playing_card', 1, 8, 'unik_triggering_playing_card') then
-                    if next(SMODS.find_mod("Bunco")) then
-                        play_sound('bunc_gunshot')
-                        card:juice_up(1,1)
-                    end
+                    play_sound('unik_gunshot')
+                    card:juice_up(1.25,1.25)
                     return {
                         message = localize("k_unik_triggered"),
                         colour = G.C.RED,
@@ -132,6 +130,7 @@ function Card:calculate_triggering(is_higlighted)
                 if triggered then break end
                 if v.finger_triggered then
                     triggered = true
+                    v.card:juice_up(2,2)
                     if v.message then
                         card_eval_status_text(v.card, "extra", nil, nil, nil, {
                             message = v.message,

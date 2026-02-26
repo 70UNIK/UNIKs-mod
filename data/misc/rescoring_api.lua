@@ -1,5 +1,16 @@
+--blindside: hook into it's own rescore function to obtain all its retriggers
+if BLINDSIDE then
+    local blindscore = BLINDSIDE.rescore_card
+    function BLINDSIDE.rescore_card(card, context)
+        local ret = blindscore(card, context)
+        if not G.GAME.unik_block_blindside_rescore then
+            card.blindside_rescore =  card.blindside_rescore or 0
+            card.blindside_rescore =  card.blindside_rescore + 1
+        end
 
-
+        return ret
+    end
+end
 
 local localBonusHook = SMODS.localize_perma_bonuses
 function SMODS.localize_perma_bonuses(specific_vars, desc_nodes)
@@ -16,7 +27,6 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
 
     -- Post-scoring
     local eval = {}
-    
     SMODS.calculate_context({cardarea = calc_card_area, full_hand = G.play.cards, scoring_hand = scoring_hand, unik_after_effect = true},eval)
     --Enhancements
     local enhancementRescores = {}
@@ -163,7 +173,21 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             for _,x in pairs(rescoring_cards) do
                 local pased = context
                 pased.cardarea = calc_card_area 
+
                 SMODS.score_card(x, pased)
+                if BLINDSIDE and x.blindside_rescore then
+                    for z = 1, x.blindside_rescore do
+                        G.GAME.unik_block_blindside_rescore = true
+                        card_eval_status_text(x, "extra", nil, nil, nil, {
+                            message = (localize('k_again_ex')),
+                            colour = v.colour or G.C.FILTER,
+                            card=x,
+                        })
+                        BLINDSIDE.rescore_card(x, context)
+
+                        G.GAME.unik_block_blindside_rescore = nil
+                    end
+                end
             end
 
 
@@ -175,12 +199,14 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
           --  print("CLEAN")
             v.unik_rescored = nil
         end
+        v.blindside_rescore = nil
     end
     for i,v in pairs(G.play.cards) do
         if v.unik_rescored then
            -- print("CLEAN")
             v.unik_rescored = nil
         end
+        v.blindside_rescore = nil
     end
 
 

@@ -167,6 +167,7 @@ if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not r
         edi:unik_after_play()
     end
 end
+G.GAME.unik_can_trigger_prince = true
 '''
 match_indent = true
 

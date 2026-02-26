@@ -1,0 +1,1 @@
+--+50 Chips and X1.5 Chips, debuffs all scoring purple blinds

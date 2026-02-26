@@ -1,0 +1,1 @@
+--+30 Chips, X1.6 Chips when another blue blind is scored

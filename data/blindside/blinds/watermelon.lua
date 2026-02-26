@@ -1,0 +1,1 @@
+--gains X0.25 Mult when a green or red blind is scored, debuffs all played and held blue blinds,

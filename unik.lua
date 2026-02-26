@@ -291,6 +291,10 @@ SMODS.Atlas({
 		py = 34, 
 		frames = 21 })
 SMODS.Sound({
+	key = "gunshot",
+	path = "gunshot.ogg",
+})
+SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
 })
@@ -1247,6 +1251,11 @@ if next(SMODS.find_mod("Blindside")) then
 	
 	--BLINDS
 	NFS.load(mod_path .. "data/blindside/blinds/halved.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/the_gun.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/the_stop.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/trade.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/the_cliff.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/the_bloon.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/prince.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/blossom.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/catterfly.lua")()	

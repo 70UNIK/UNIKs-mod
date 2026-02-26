@@ -1,0 +1,1 @@
+--retriggers the rightmost scored blind for every hand and discard lost this round

@@ -95,6 +95,9 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         elseif G.P_CENTERS[key].gore6break then 
             self:gore6_break()
             return nil
+        elseif G.P_CENTERS[key].bloonpop then
+            self:bloated_pop()
+            return nil
         end
     end
     if self.config.center.woodbreak then 

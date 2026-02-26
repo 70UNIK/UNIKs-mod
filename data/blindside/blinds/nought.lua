@@ -1,0 +1,1 @@
+--X1.5 Chips, rescores if adjacent to another blue blind

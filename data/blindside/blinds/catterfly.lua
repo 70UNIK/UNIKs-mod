@@ -7,8 +7,8 @@ BLINDSIDE.Blind({
         extra = {
             value = 17,
             x_chips = 1,
-            x_chip_mod = 0.05,
-            x_chip_mod_upgrade = 0.05,
+            x_chip_mod = 0.04,
+            x_chip_mod_upgrade = 0.04,
         }},
     hues = {"Purple"},
     calculate = function(self, card, context) 

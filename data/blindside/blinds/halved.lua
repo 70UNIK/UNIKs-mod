@@ -42,3 +42,4 @@ BLINDSIDE.Blind({
         end
     end
 })
+--eval G.hand.cards[1]:set_ability('m_unik_blindside_halved')

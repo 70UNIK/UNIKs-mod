@@ -1,0 +1,1 @@
+--X2 Mult, -1 hand size while held --> X3 Mult, -1 Hand Size while held

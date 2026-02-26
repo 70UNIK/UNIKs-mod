@@ -19,7 +19,7 @@ BLINDSIDE.Blind({
                 mult = card.ability.extra.mult
             }
         end
-        if context.before then
+        if context.before and not card.ability.extra.upgraded then
             local exists = false
             for i,v in pairs(context.scoring_hand) do
                 if v == card then

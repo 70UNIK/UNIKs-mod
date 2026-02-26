@@ -14,8 +14,9 @@ SMODS.Tag {
 		return { vars = { self.config.hands } }
 	end,
     apply = function(self, tag, context)
-        if not G.GAME.imprisonment_buffer and (context.type == 'round_start_bonus') and G.GAME.blind and not G.GAME.blind.disabled and not G.GAME.unik_override_prince then
-        --    print("remaining at time:" .. G.GAME.unik_prince_hands_remaining )
+        if not G.GAME.imprisonment_buffer and (context.type == 'round_start_bonus') and not G.GAME.unik_override_prince and G.GAME.unik_can_trigger_prince then
+           -- print("remaining at time:" .. G.GAME.unik_prince_hands_remaining )
+            G.GAME.unik_prince_hands_remaining =  G.GAME.unik_prince_hands_remaining or 0
             if G.GAME.unik_prince_hands_remaining < 1 then
                 G.GAME.imprisonment_buffer = true
                 G.GAME.unik_prince_hands_remaining = G.GAME.unik_prince_hands_remaining or 0
@@ -108,5 +109,6 @@ function Blind:defeat(silent)
     G.GAME.unik_saved_blind = nil
     G.GAME.unik_prince_hands_remaining = 0
     G.GAME.unik_override_prince = nil
+    G.GAME.unik_can_trigger_prince = true
     return ret
 end
