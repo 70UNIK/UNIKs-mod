@@ -1,1 +1,0 @@
---on even hands, X2 Mult, on odd hands X1.5 Mult to Joker

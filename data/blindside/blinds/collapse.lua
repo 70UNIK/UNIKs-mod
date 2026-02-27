@@ -1,1 +1,0 @@
---rescore all other played blinds, debuff and destroy all other played faded blinds

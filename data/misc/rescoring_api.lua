@@ -134,6 +134,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     end
     for i,v in pairs(combinedTable) do
         local max_rescore = 0
+        print("RESCORE")
         for j,w in pairs(v) do
             if type(w) == 'table' and w.rescore then
                 max_rescore = math.max(max_rescore,w.rescore)
@@ -193,7 +194,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
 
         end
     end
-        --clean table
+    --     --clean table
     for i,v in pairs(calc_card_area.cards) do
         if v.unik_rescored then
           --  print("CLEAN")

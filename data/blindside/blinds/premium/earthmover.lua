@@ -1,1 +1,1 @@
---the prison: X4 Mult to Joker, burns, after this is played 3 times, destroys itself and all other copies of the prison in deck, then creates an Ancient Blind in hand
+--the earthmover: ^1.1 Mult to Joker, after playing this 4 times, destroys itself and other copies of itself in deck, then creates an Ancient Blind in hand

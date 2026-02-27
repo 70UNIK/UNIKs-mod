@@ -1,1 +1,0 @@
---When played or held, gains X0.25 Chips for each blind triggered before itself, resets after hand

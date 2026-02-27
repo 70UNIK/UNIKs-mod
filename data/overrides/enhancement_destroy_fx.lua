@@ -79,47 +79,47 @@ SMODS.Enhancement:take_ownership("m_bld_tablet",{
 
 
 
-local dissolveHook = Card.start_dissolve
-function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
-    local enhancements = SMODS.get_enhancements(self)
-    for key, _ in pairs(enhancements) do
-        if G.P_CENTERS[key].woodbreak then 
-            self:woodBreak()
-            return nil
-        elseif G.P_CENTERS[key].metalbreak then 
-            self:metalBreak(type(G.P_CENTERS[key].metalbreak) == "table" and G.P_CENTERS[key].metalbreak.colour or nil)
-            return nil
-        elseif G.P_CENTERS[key].rockbreak then 
-            self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
-            return nil
-        elseif G.P_CENTERS[key].gore6break then 
-            self:gore6_break()
-            return nil
-        elseif G.P_CENTERS[key].bloonpop then
-            self:bloated_pop()
-            return nil
-        end
-    end
-    if self.config.center.woodbreak then 
-        self:woodBreak()
-        return nil
-    elseif self.config.center.metalbreak then 
-        self:metalBreak(self.config.center.metalbreak.colour or nil)
-        return nil
-    elseif self.config.center.rockbreak then 
-        self:rockBreak(type(self.config.center.rockbreak) == "table" and self.config.center.rockbreak.colour or nil)
-        return nil
-    elseif self.config.center.gore6break then 
-            self:gore6_break()
-            return nil
-        end
-    if self.to_be_destroyed_by_lily then
-        self:gore6_break()
-        return nil
-    end
-    local ret = dissolveHook(self,dissolve_colours, silent, dissolve_time_fac, no_juice)
-    return ret
-end
+-- local dissolveHook = Card.start_dissolve
+-- function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
+--     local enhancements = SMODS.get_enhancements(self)
+--     for key, _ in pairs(enhancements) do
+--         if G.P_CENTERS[key].woodbreak then 
+--             self:woodBreak()
+--             return nil
+--         elseif G.P_CENTERS[key].metalbreak then 
+--             self:metalBreak(type(G.P_CENTERS[key].metalbreak) == "table" and G.P_CENTERS[key].metalbreak.colour or nil)
+--             return nil
+--         elseif G.P_CENTERS[key].rockbreak then 
+--             self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
+--             return nil
+--         elseif G.P_CENTERS[key].gore6break then 
+--             self:gore6_break()
+--             return nil
+--         elseif G.P_CENTERS[key].bloonpop then
+--             self:bloated_pop()
+--             return nil
+--         end
+--     end
+--     if self.config.center.woodbreak then 
+--         self:woodBreak()
+--         return nil
+--     elseif self.config.center.metalbreak then 
+--         self:metalBreak(self.config.center.metalbreak.colour or nil)
+--         return nil
+--     elseif self.config.center.rockbreak then 
+--         self:rockBreak(type(self.config.center.rockbreak) == "table" and self.config.center.rockbreak.colour or nil)
+--         return nil
+--     elseif self.config.center.gore6break then 
+--             self:gore6_break()
+--             return nil
+--         end
+--     if self.to_be_destroyed_by_lily then
+--         self:gore6_break()
+--         return nil
+--     end
+--     local ret = dissolveHook(self,dissolve_colours, silent, dissolve_time_fac, no_juice)
+--     return ret
+-- end
 
 
 

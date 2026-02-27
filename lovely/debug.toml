@@ -1,0 +1,84 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 999
+
+### the hell is going on with the staff
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context({initial_scoring_step = true, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands})'''
+position = 'before'
+match_indent = true
+payload = '''
+print("PASS1")
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_main_scoring({cardarea = v, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands}, v == G.play and scoring_hand or nil)'''
+position = 'before'
+match_indent = true
+payload = '''
+print("PASS2")
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''mult, hand_chips, modded = G.GAME.blind:modify_hand(G.play.cards, poker_hands, text, mult, hand_chips, scoring_hand)'''
+position = 'before'
+match_indent = true
+payload = '''
+print("PASS3")
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''mult, hand_chips, modded = G.GAME.blind:modify_hand(G.play.cards, poker_hands, text, mult, hand_chips, scoring_hand)'''
+position = 'after'
+match_indent = true
+payload = '''
+print("PASS4")
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/overrides.lua"]'''
+pattern = '''local flags = SMODS.calculate_context({ modify_hand = true, poker_hands = poker_hands, scoring_name = text, scoring_hand = scoring_hand, full_hand = cards })'''
+position = 'after'
+match_indent = true
+payload = '''
+print("PASS7")
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/overrides.lua"]'''
+pattern = '''local flags = SMODS.calculate_context({ modify_hand = true, poker_hands = poker_hands, scoring_name = text, scoring_hand = scoring_hand, full_hand = cards })'''
+position = 'before'
+match_indent = true
+payload = '''
+print("PASS6")
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''--calculate the played card effects'''
+position = 'before'
+match_indent = true
+payload = '''
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''--calculate the played card effects'''
+position = 'after'
+match_indent = true
+payload = '''
+'''

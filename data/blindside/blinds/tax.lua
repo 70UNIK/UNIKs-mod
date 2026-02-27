@@ -1,1 +1,0 @@
---X2.5 Mult if current score is less than 1/4 of Joker's score, --> X3 Mult if current score is less than 1/2 of Joker's score

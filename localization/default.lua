@@ -1471,7 +1471,7 @@ return {
                         "then {X:dark_edition,C:white}^#1#{} Mult to Joker",                    
                     },
                     {
-					"{C:attention,E:1}Self-Scoring{} with a",
+					"{C:red,E:1}Self-Debuffing{} with a",
 					"{C:green}#2# in #3#{} chance",
                     },
                     {
@@ -1599,7 +1599,7 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{}",
-                        "When in scoring hand",
+                        "Before scoring",
                         "create {C:attention}#1#",
                         "random {C:attention}Tag#<s>1#",
                     },
@@ -1609,6 +1609,125 @@ return {
 
                 }
             },
+            m_unik_blindside_chromatic = {
+                name = "The Chromatic",
+                text = {
+                    {
+                        "{C:mult}+#1#{} Mult",
+                        "on {C:attention}odd Hands",
+                        "{V:1}(#2#)"
+                    },
+                    {
+                        "{C:mult}+#1#{} Mult",
+                        "to Joker otherwise",
+                    }
+                }
+            },
+            m_unik_blindside_tax = {
+                name = "The Taxation",
+                text = {
+                    {
+                        "{X:mult,C:white}X#1#{} Mult",
+                        "if played hand score",
+                        "is less than {C:attention}#2#%",
+                        "of Joker's {C:attention}total chips",
+                        "{C:inactive}(#3#)",
+                    },
+                    {
+                        "Otherwise {C:money}+$#1#",
+                    }
+                }
+            },
+            m_unik_blindside_artesian = {
+                name = "The Artesian",
+                text = {
+                    {
+                        "While in full deck",
+                        "Gains {C:red}+#1#{} Mult",
+                        "per {C:attention}reroll{} in Shop"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:red}+#1#{C:inactive} Mult)",
+                    },
+                }
+            },
+            m_unik_blindside_collapse = {
+                name = "The Collapse",
+                text = {
+                    {
+                        "{C:chips}+#1#{} Chips"
+                    },
+                    {
+                        "{C:red}Debuffs and {C:attention}burns",
+                        "all other played",
+                        "{X:dark_edition}Faded{} Blinds"
+                    },                    
+                }
+            },
+            m_unik_blindside_smiley = {
+                name = "The Smiley",
+                text = {
+                    {
+                        "{X:mult,C:white}X#1#{} Mult"
+                    },
+                    {
+                        "{C:red}-#1#{} Hand Size",
+                        "while held",
+                    }
+                }
+            },
+            m_unik_blindside_copper = {
+                name = "The Copper",
+                text = {
+                    {
+                        "{X:mult,C:white}X#1#{} Mult"
+                    },
+                    {   
+                        "{C:unik_copper}Rescores adjacent Blinds"
+                    }
+                }
+            },
+            m_unik_blindside_hurdle = {
+                name = "The Hurdle",
+                text = {
+                    {
+                        "{C:mult}+#1#{} Mult",
+                    },
+                    {
+                        "{C:red}Debuffs{} the",
+                        "{C:attention}leftmost{} scoring Blind"
+                    }
+                }
+            },
+            m_unik_blindside_nought = {
+                name = "The Nought",
+                text = {
+                    {"{X:chips,C:white}Blue{}",
+					"Creates a {C:unik_copper}Recursive",
+					"{C:attention}Tag{} before scoring",},
+					{"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance"},
+                }
+            },
+            m_unik_blindside_nought_upgraded = {
+                name = "The Nought",
+                text = {
+                    {"{X:chips,C:white}Blue{}",
+					"Creates a {C:unik_copper}Recursive",
+					"{C:attention}Tag{} before scoring",},
+					{"Always scores"},
+                }
+            },
+            m_unik_blindside_onion = {
+                name = "The Onion",
+                text = {
+                    "Has a",
+                    "{C:unik_eye_searing_red}RANDOM{}",
+                    "effect{C:unik_eye_searing_red}!!!"
+                }
+            },
+
+
             m_unik_blindside_epic_sand = {
                 name = "Juoksuhiekka",
                 text = {
@@ -1616,7 +1735,7 @@ return {
 					"{X:mult,C:white}X#1#{} Mult and",
                 "Mult {X:mult,C:white}Xlog_#2#{}(Mult)"},
 
-					{"{C:unik_rescore}Rescores{} once for",
+					{"{C:unik_copper}Rescores{} once for",
 					"every {C:attention}#3#{} Tag#<s>3# held",
 					"{C:inactive}(Currently #4# time#<s>4#)"},
                 }
@@ -1664,7 +1783,8 @@ return {
                     },
                 	{"{C:attention}Burns"},
                 }
-            }
+            },
+
         },
         Rotarot = {
             c_unik_rot_crossdresser={

@@ -1,1 +1,0 @@
---X2 Mult, X0.2 Mult if score exceeds Joker's Mult by X3 --> X2.5 Mult, X0.35 Mult if score exceeds Joker's Mult by X3

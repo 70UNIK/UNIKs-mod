@@ -1,1 +1,0 @@
---when scored, all scored blinds permanently gain X0.05 Chips

@@ -51,3 +51,4 @@ BLINDSIDE.Blind({
     end
 })
 --eval G.hand.cards[1]:set_ability('m_unik_blindside_blossom')
+--eval G.hand.cards[1]:set_ability('m_bld_staff')

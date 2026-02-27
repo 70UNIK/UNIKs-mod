@@ -20,5 +20,13 @@ if G.GAME.unik_store_scoring and G.GAME.unik_stored_scoring and type(G.GAME.unik
 end
 G.GAME.unik_stored_scoring = nil
 G.GAME.unik_store_scoring = nil
+print("COMPRESSOR")
+print("COMPRESSOR")
+print("COMPRESSOR")
+print("COMPRESSOR")
+print("COMPRESSOR")
+print("COMPRESSOR")
+print("COMPRESSOR")
+print("COMPRESSOR")
 '''
 match_indent = true

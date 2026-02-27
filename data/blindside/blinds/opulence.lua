@@ -1,1 +1,0 @@
---+$2 when played or held, +$2 for each scoring green or yellow blind --> $4, +$4
