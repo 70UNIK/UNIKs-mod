@@ -403,3 +403,100 @@ function end_round()
 
     return ret
 end
+
+local pcfh = G.FUNCS.play_cards_from_highlighted
+function G.FUNCS.play_cards_from_highlighted(e)
+	G.GAME.before_play_buffer2 = true
+
+    
+    --Steel blind edition, each held card
+
+    --Epic cookie: Deselect cards pending destruction
+    for i=1, #G.hand.highlighted do
+        if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.set_for_destruction then
+            G.hand:remove_from_highlighted(G.hand.highlighted[i])
+        end
+    end
+    --Only play if highlight cards are > 0
+    if (SMODS.Mods["Cryptid"] or {}).can_load  then
+        if #G.hand.highlighted == 0 and (Cryptid.enabled("set_cry_poker_hand_stuff") == true) and G.PROFILES[G.SETTINGS.profile].cry_none then
+            G.PROFILES[G.SETTINGS.profile].cry_none = true
+        end
+    end
+
+    --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
+    if ((not (SMODS.Mods["Cryptid"] or {}).can_load  ) or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
+        
+    else
+
+        -- -NAN fix
+        if G.GAME.round_scores['hand'] and not G.GAME.round_scores['hand'].amt then
+            G.GAME.round_scores['hand'].amt = math.huge
+            G.GAME.round_scores.hand.amt = math.huge
+        end
+
+
+        --Polymino autoselect all cards in selected group
+        local id = {}
+        G.GAME.unik_no_finger_trigger = true
+
+        if G.hand and G.hand.highlighted then
+            for i = 1, #G.hand.highlighted do
+                if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group then
+                    local exists = false
+                    for i,v in pairs(id) do
+
+                        if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group and G.hand.highlighted[i].ability.group.id == v then
+                            exists = true
+                        end
+                    end
+                    if not exists then
+                        id[#id+1] = G.hand.highlighted[i].ability.group.id
+                    end
+                    
+                end
+            end
+        end
+        --enable 
+        if #G.hand.highlighted > 6 then
+            G.GAME.unik_scored_over_5 = true 
+        end
+       -- print(id)
+        --print(#id)
+        if #id > 0 then
+            for i,v in pairs(G.hand.cards) do
+                for j,x in pairs(id) do
+                    
+                    if v and v.ability and v.ability.group and v.ability.group.id == x and not v.highlighted then
+                        G.hand:brute_force_highlight(v)
+                    end
+                end
+            end
+        end
+        G.GAME.unik_wiggle_consumed = nil
+        G.GAME.unik_no_finger_trigger = nil
+        
+        -- G.GAME.blind:unik_before_play()
+        -- if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+        --     local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+        --     if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
+        --         edi:unik_before_play()
+        --     end
+        -- end
+        if G.GAME.modifiers.unik_decay_on_play then
+            for i = 1, #G.hand.highlighted do
+                G.hand.highlighted[i].ability.unik_decaying = true
+            end
+        end
+        SMODS.calculate_context({on_select_play = true})
+        --end
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                UNIK.railroad_suits()
+                return true
+            end
+        }))
+        pcfh(e)
+    end
+	G.GAME.before_play_buffer2 = nil
+end

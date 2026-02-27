@@ -1248,6 +1248,7 @@ end
 --blindside:
 if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
+	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
 	
 	--BLINDS
 	NFS.load(mod_path .. "data/blindside/blinds/simple/halved.lua")()	

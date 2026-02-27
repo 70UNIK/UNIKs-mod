@@ -1,0 +1,1 @@
+-- 1 in 2 chance to NOT upgrade a random played blind, if succeeds, burns itself and upgraded blind.

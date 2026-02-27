@@ -1,0 +1,1 @@
+--2 in 5 chance to NOT apply a random edition on a random blind, burns editioned blind on successss

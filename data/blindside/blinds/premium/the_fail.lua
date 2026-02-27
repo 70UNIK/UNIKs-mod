@@ -1,0 +1,2 @@
+--while held, all probabilities will fail
+--gains X0.075 Mult whenever a probability fails
