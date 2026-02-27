@@ -31,6 +31,7 @@ BLINDSIDE.Blind({
             end
         end
     end,
+    always_scores = true,
     common = true,
     loc_vars = function(self, info_queue, card)
         return {

@@ -1597,16 +1597,72 @@ return {
             m_unik_blindside_cliff = {
                 name = "The Cliff",
                 text = {
-                    "{X:dark_edition,C:white}Faded{}",
-                    "When in scoring hand",
-                    "create {C:attention}#1#",
-                    "random {C:attention}Tag#<s>1#",
+                    {
+                        "{X:dark_edition,C:white}Faded{}",
+                        "When in scoring hand",
+                        "create {C:attention}#1#",
+                        "random {C:attention}Tag#<s>1#",
+                    },
+                    {
+                    "Always scores"
+                    },
+
                 }
             },
             m_unik_blindside_epic_sand = {
                 name = "Juoksuhiekka",
                 text = {
-                    ""
+                    {"{X:money,C:white}Yellow{} {X:chips,C:white}Blue{}",
+					"{X:mult,C:white}X#1#{} Mult and",
+                "Mult {X:mult,C:white}Xlog_#2#{}(Mult)"},
+
+					{"{C:unik_rescore}Rescores{} once for",
+					"every {C:attention}#3#{} Tag#<s>3# held",
+					"{C:inactive}(Currently #4# time#<s>4#)"},
+                }
+            },
+            m_unik_blindside_epic_wall = {
+                name = "Ylitsepääsemätönseinä",
+                text = {
+                    {"{X:purple,C:white}Purple{} {X:dark_edition,C:white}Green{}",
+					"Currently {X:dark_edition,C:white}^#1#{} Mult"},
+					{"Gains {X:dark_edition,C:white}^#2#{} Mult",
+					"after being played"},
+					{"Always scores"},
+                }
+            },
+            m_unik_blindside_epic_bellows = {
+                name = "Karjuntakuilu",
+                text = {
+                    {
+                        "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{}",
+                        "While held,",
+                        "{X:mult,C:white}X#1#{} Mult and",
+                        "Mult {X:mult,C:white}Xlog_#2#{}(Mult)"
+                    },
+                    {
+                        "{C:attention}+#3#{} Hand Size",
+                            "while held",
+                    },
+                    {"{C:green}Retained"},
+                }
+            },
+            m_unik_blindside_epic_flip = {
+                name = "Ylösalaisin",
+                text = {
+
+                }
+            },
+            m_unik_epic_hook = {
+                name = "Verenvuotokoukku",
+                text = {
+                    {"{X:red,C:white}Red{} {X:chips,C:white}Blue{}",
+                    "{X:dark_edition,C:white}^#1#{} Mult and",
+                    "{C:red}+#2#{} Discards"},
+                    {"{C:red}Destroys{} #3# Blind#<s>3#",
+                        "held in hand"
+                    },
+                	{"{C:attention}Burns"},
                 }
             }
         },
@@ -5232,6 +5288,15 @@ return {
                 }
             }
 
+        },
+        bld_obj_ritual = {
+            c_unik_blindside_sigil = {
+                name = "The Sigil",
+                text = {
+                    "Creates an",
+					"{C:unik_ancient,E:1}Ancient{} Blind"
+                }
+            },
         },
         Voucher={
             v_unik_spectral_merchant = {

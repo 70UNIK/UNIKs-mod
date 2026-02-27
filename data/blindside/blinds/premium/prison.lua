@@ -1,0 +1,1 @@
+--the prison: X4 Mult to Joker, burns, after this is played 3 times, destroys itself and all other copies of the prison in deck, then creates a Legendary Blind in hand
