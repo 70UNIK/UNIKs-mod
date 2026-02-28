@@ -27,7 +27,7 @@ BLINDSIDE.Blind({
             end
         end
         if context.cardarea == G.play and context.main_scoring then
-            if card.facing ~= 'back' then
+            if card.facing == 'back' and G.play.cards[1] == card then
                  card_eval_status_text(card, "debuff", nil, nil, nil, nil)
                 return {
                     

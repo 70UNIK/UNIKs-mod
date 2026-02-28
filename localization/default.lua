@@ -1724,12 +1724,12 @@ return {
                 name = "The Collapse",
                 text = {
                     {
-                        "{X:dark_edition}Faded{}",
+                        "{X:dark_edition,C:white}Faded{}",
                         "{C:chips}+#1#{} Chips"
                     },
                     {
-                        "{C:red}Debuffs all other",
-                        "played {X:dark_edition}Faded{} Blinds",
+                        "{C:red}Debuffs{} all other",
+                        "played {X:dark_edition,C:white}Faded{} Blinds",
                     },                    
                 }
             },
@@ -1776,8 +1776,8 @@ return {
                 name = "The Nought",
                 text = {
                     {"{X:chips,C:white}Blue{}",
-					"Creates a {C:unik_copper}Recursive",
-					"{C:attention}Tag{} before scoring",},
+					"Creates a {C:unik_copper}Circles",
+					"{C:unik_copper}Tag{} before scoring",},
 					{"{C:red,E:1}Self-Debuffing{} with a",
 					"{C:green}#1# in #2#{} chance"},
                 }
@@ -1786,8 +1786,8 @@ return {
                 name = "The Nought",
                 text = {
                     {"{X:chips,C:white}Blue{}",
-					"Creates a {C:unik_copper}Recursive",
-					"{C:attention}Tag{} before scoring",},
+					"Creates a {C:unik_copper}Circles",
+					"{C:unik_copper}Tag{} before scoring",},
 					{"Always scores"},
                 }
             },
@@ -5151,7 +5151,7 @@ return {
                 }
             },
             tag_unik_blindside_recursive = {
-                name = "Recursive Tag",
+                name = "Circles Tag",
                 text = {
                     "Each scored Blind has",
                     "a {C:green}#1# in #2#{} chance",

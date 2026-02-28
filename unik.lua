@@ -1253,7 +1253,7 @@ if next(SMODS.find_mod("Blindside")) then
 	--BLINDS
 	NFS.load(mod_path .. "data/blindside/blinds/simple/collapse.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_gun.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/simsple/the_cliff.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/the_cliff.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_bloon.lua")()
 	--NFS.load(mod_path .. "data/blindside/blinds/simple/smiley.lua")() --this is borked
 	NFS.load(mod_path .. "data/blindside/blinds/simple/halved.lua")()	
