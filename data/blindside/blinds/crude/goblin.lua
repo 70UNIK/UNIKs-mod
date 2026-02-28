@@ -1,0 +1,2 @@
+--while held, destroy a random played blind before scoring, if played, destroys a random trinket instead, stubborn,  retained --> while held, enhances a random played blind then burns
+--green goblin reference

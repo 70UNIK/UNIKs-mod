@@ -1,0 +1,1 @@
+--adds 4 random basic blinds in hand, stubborn, retained --> adds 2 premium blinds in hand after scoring, burns, not stubborn, not retained

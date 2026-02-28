@@ -1,0 +1,1 @@
+--+4 Mult for each green blind in scoring hand

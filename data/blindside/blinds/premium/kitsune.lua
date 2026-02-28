@@ -1,0 +1,1 @@
+--while held, gives X1.25 chips whenever a blue or purple blind is scored

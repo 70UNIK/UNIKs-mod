@@ -101,7 +101,7 @@ or key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod"
 			G.GAME.block_additional_shit = true
 			SMODS.calculate_context({unik_chelsea_trigger = true, card = scored_card})
 			for i,v in pairs(G.play.cards) do
-				if v.config.center.key == 'm_unik_blindside_catterfly' and v.ability.unik_in_scoring_hand then
+				if v.config.center.key == 'm_unik_blindside_catterfly' and v.ability.unik_in_scoring_hand and not v.debuff then
 					 SMODS.scale_card(v, {
 						ref_table =v.ability.extra,
 						ref_value = "x_chips",

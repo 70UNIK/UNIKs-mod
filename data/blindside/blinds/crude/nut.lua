@@ -1,0 +1,1 @@
+--debuffs all held blinds, stubborn, retained, --> flips all blinds held in hand until end of round, gains +3 Mult for each flipped blind

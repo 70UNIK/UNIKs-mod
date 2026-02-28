@@ -1791,6 +1791,7 @@ return {
 					{"Always scores"},
                 }
             },
+
             m_unik_blindside_onion = {
                 name = "The Onion",
                 text = {
@@ -1799,8 +1800,192 @@ return {
                     "effect{C:unik_eye_searing_red}!!!"
                 }
             },
+            m_unik_blindside_lamppost = {
+                name = "The Lamppost",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:money,C:white}Yellow{}",
+                        "{C:attention}Retriggers{} and {C:unik_copper}rescores",
+                        "adjacent {X:money,C:white}Yellow",
+                        "Blinds #1# time#<s>#",
+                    },
+                    {
+                        "{C:red}Debuffs{} all Blinds",
+                        "{C:attention}not adjacent{} to",
+                        "each instance of {C:attention}itself"
+                    },
+                }
+            },
+            m_unik_blindside_cat = {
+                name = "The Cat",
+                text = {
+                    "{X:purple,C:white}Purple{} {X:red,C:white}Red{}",
+                    "When scored, all",
+                    "scoring Blinds",
+                    "{C:attention}permanently gain",
+                    "{X:chips,C:white}X#1#{} Chips"
+                }
+            },
+            m_unik_blindside_tree = {
+                name = "The Tree",
+                text = {
+                    {
+                        "{X:green,C:white}Green",
+                        "{C:mult}+#1#{} Mult for",
+                        "each scoring",
+                        "{X:green,C:white}Green{} Blind"
+                    },
+                    {
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                    },
+                }
+            },
+            m_unik_blindside_evergreen = {
+                name = "The Evergreen",
+                text = {
+                    {
+                        "{X:green,C:white}Green {X:dark_edition,C:white}Faded{}",
+                        "{X:mult,C:white}X#1#{} Mult for",
+                        "each scoring",
+                        "{X:green,C:white}Green{} Blind"
+                    },
+                    {
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                    },
+                }                
+            },
+            m_unik_blindside_approval = {
+                name = "The Approval",
+                text = {
+                    {
+                         "{X:green,C:white}Green",                       
+                        "{C:mult}+#1#{} Mult"
+                    },
+                    {
+                        "{C:red}Debuffs{} all",
+                        "played {X:red,C:white}Red{} Blinds",
+                    }
+                }
+            },
+            m_unik_blindside_fill = {
+                name = "The Fill",
+                text = {
+                    {
+                        "{X:red,C:white}Red",                        
+                        "{C:chips}+#1#{} Chips"
+                    },
+                    {
+                        "{C:red}Debuffs{} all",
+                        "{C:attention}held{} Blinds",
+                    }
+                }
+            },
 
+            m_unik_blindside_opulence = {
+                name = "The Opulence"
 
+            },
+
+            m_unik_blindside_magician = {
+                name = "The Magician",
+                text = {
+                    {
+                        "{X:chips,C:white}Blue", 
+                        "Create {C:attention}#1#",
+                        "{X:blue,C:white}Starter{} Blind#<s>1#",
+                        "in hand"
+                    },
+                    {"{C:attention}Stubborn"},
+                    {"{C:green}Retained"},
+                }
+            },
+            m_unik_blindside_magician_upgraded = {
+                name = "The Magician",
+                text = {
+                    {
+                        "{X:chips,C:white}Blue", 
+                        "Create {C:attention}#1#",
+                        "{X:red,C:white}Premium{} Blind#<s>1#",
+                        "in hand"
+                    },
+                    {"{C:attention}Burns"},
+                }
+            },
+            m_unik_blindside_goblin = {
+                name ="The Goblin",
+                text = {
+                    {
+                        "{X:green,C:white}Green", 
+                        "{C:red}Destroy{} a random",
+                        "played Blind {C:attention}before",
+                        "play when held"
+                    },
+                    {"{C:attention}Stubborn"},
+                    {"{C:green}Retained"},
+                }
+            },
+            m_unik_blindside_goblin_upgraded = {
+                name ="The Goblin",
+                text = {
+                    {
+                        "{X:green,C:white}Green", 
+                        "{C:attention}Upgrade{} a random",
+                        "played Blind {C:attention}before",
+                        "play when held"
+                    },
+                    {"{C:attention}Burns"},
+                }
+            },
+            m_unik_blindside_corpo ={
+                name = "The Corpo",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded",  
+                        "{C:red}+#1#{} Mult to Joker",
+                        "{C:red}#1#{} Mult",
+                        "{C:money}-$#1#{}"
+                    },
+                    {"{C:green}Retained"},
+                }
+            },
+            m_unik_blindside_corpo_upgraded ={
+                name = "The Corpo",
+                text = {
+                    {
+                         "{X:dark_edition,C:white}Faded",                        
+                        "{C:red}#1#{} Mult to Joker",
+                        "{C:red}+#1#{} Mult",
+                        "{C:money}$#1#{}"
+                    },
+                }
+            },
+            m_unik_blindside_ai_brainrot = {
+                name = "The AI",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded", 
+                        "Create {C:attention}#1#",
+                        "{X:blue,C:white}Crude{} Blind#<s>1#",
+                        "in hand",
+                    },
+                    {"{C:attention}Stubborn"}, 
+					{"{C:attention}Forced to",
+					"{C:attention}be selected",}  ,
+                    {"{C:red}Self-Destructs"},
+                }
+            },
+            m_unik_blindside_ai_brainrot_upgraded = {
+                name = "The AI",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded", 
+                        "Create {C:attention}#1# upgraded",
+                        "{X:black,C:white}Crude{} Blind#<s>1#",
+                        "in hand",
+                    },   
+                    {"{C:attention}Burns"},
+                }
+            },
             m_unik_blindside_epic_sand = {
                 name = "Juoksuhiekka",
                 text = {

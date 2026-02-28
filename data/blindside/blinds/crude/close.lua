@@ -1,0 +1,1 @@
+--debuffs all blinds not adjacent to each copy of itself --> rescores adjacent blinds 2 times

@@ -1,0 +1,2 @@
+--the corpo
+-- +1 Mult to Joker, -2 Mult and -$3 dollars --> -0.5 Mult to joker, +4 Mult and +$3 dollars

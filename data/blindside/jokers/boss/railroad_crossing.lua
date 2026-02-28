@@ -30,7 +30,37 @@ BLINDSIDE.Joker({
         end,
         quotes = {'unik_blindside_railroad_crossing_lose'},
     },
+    unik_after_play = function(self)
+        for i=1, #G.hand.cards do
+            local carder = G.play.cards[i]
+            if carder.debuff and carder.facing == 'back' and (not carder.ability.extra or (carder.ability.extra and not carder.ability.extra.flipped)) then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        carder:flip()
+                        return true
+                    end,
+                }))
+                
+            end
+        end
+    end,
+    unik_before_play = function(self)
+        
+        for i,v in pairs(G.hand.cards) do
+            if v.facing ~= 'back' and v.debuff then
+                v:flip()
+            end
+        end
+    end,
     calculate = function(self, blind, context)
+        if context.before then
+            for i,v in pairs(G.play.cards) do
+                if v.facing ~= 'back' and v.debuff then
+                    v:flip()
+                end
+            end
+        end
+        
         if context.setting_blind and not context.disabled then
             blind.active = true
         end
@@ -86,6 +116,7 @@ BLINDSIDE.Joker({
             end
             if context.press_play then
                 blind.prepped = true
+
             end
             if context.hand_drawn then
                 G.GAME.unik_dynamic_text_realtime = true
