@@ -2,7 +2,7 @@
 BLINDSIDE.Blind({
     key = 'unik_blindside_fill',
     atlas = 'unik_blindside_blinds',
-    pos = {x = 4, y = 0},
+    pos = {x = 6, y = 0},
     config = {
         extra = {
             value = 24,
@@ -14,15 +14,15 @@ BLINDSIDE.Blind({
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then
             for i=1, #G.hand.cards do
                 G.hand.cards[i].config.center.blind_debuff(G.hand.cards[i], true)
-                G.play.cards[i].debuffed_by_fill = true
+                G.hand.cards[i].debuffed_by_fill = true
             end
         end
         if context.cardarea == G.play and context.after and card.facing ~= 'back' then
             
             for i=1, #G.hand.cards do
                 G.hand.cards[i]:set_debuff(false)
-                G.play.cards[i].debuffed_by_fill = nil
-                local carder = G.play.cards[i]
+                G.hand.cards[i].debuffed_by_fill = nil
+                local carder = G.hand.cards[i]
                 if carder.facing == 'back' and (not carder.ability.extra or (carder.ability.extra and not carder.ability.extra.flipped)) then
                     G.E_MANAGER:add_event(Event({
                         func = function()

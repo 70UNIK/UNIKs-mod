@@ -1844,7 +1844,7 @@ return {
                 name = "The Evergreen",
                 text = {
                     {
-                        "{X:green,C:white}Green {X:dark_edition,C:white}Faded{}",
+                        "{X:green,C:white}Green{} {X:dark_edition,C:white}Faded{}",
                         "{X:mult,C:white}X#1#{} Mult for",
                         "each scoring",
                         "{X:green,C:white}Green{} Blind"
@@ -1891,10 +1891,11 @@ return {
                 text = {
                     {
                         "{X:chips,C:white}Blue", 
-                        "Create {C:attention}#1#",
+                        "Create {C:attention}#1#{} random",
                         "{X:blue,C:white}Starter{} Blind#<s>1#",
                         "in hand"
                     },
+                    {"Always scores"},
                     {"{C:attention}Stubborn"},
                     {"{C:green}Retained"},
                 }
@@ -1904,10 +1905,10 @@ return {
                 text = {
                     {
                         "{X:chips,C:white}Blue", 
-                        "Create {C:attention}#1#",
-                        "{X:red,C:white}Premium{} Blind#<s>1#",
-                        "in hand"
+                        "{C:attention}Copies{} another",
+                        "random scoring Blind",
                     },
+                    {"Always scores"},
                     {"{C:attention}Burns"},
                 }
             },
@@ -1968,6 +1969,7 @@ return {
                         "{X:blue,C:white}Crude{} Blind#<s>1#",
                         "in hand",
                     },
+                    {"Always scores"},
                     {"{C:attention}Stubborn"}, 
 					{"{C:attention}Forced to",
 					"{C:attention}be selected",}  ,
@@ -1983,6 +1985,7 @@ return {
                         "{X:black,C:white}Crude{} Blind#<s>1#",
                         "in hand",
                     },   
+                    {"Always scores"},
                     {"{C:attention}Burns"},
                 }
             },
@@ -6338,6 +6341,7 @@ return {
             k_light_suits = "Light Suits",
             k_dark_suits = "Dark Suits",
             k_unik_positive = "Positive",
+            k_unik_deckbloat = "HOPE YOU LIKE BLOAT!"
         },
         high_scores={},
         labels={

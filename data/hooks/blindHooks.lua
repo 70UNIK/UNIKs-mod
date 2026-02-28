@@ -476,13 +476,13 @@ function G.FUNCS.play_cards_from_highlighted(e)
         G.GAME.unik_wiggle_consumed = nil
         G.GAME.unik_no_finger_trigger = nil
         
-        -- G.GAME.blind:unik_before_play()
-        -- if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
-        --     local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
-        --     if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
-        --         edi:unik_before_play()
-        --     end
-        -- end
+        G.GAME.blind:unik_before_play()
+        if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+            local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+            if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
+                edi:unik_before_play()
+            end
+        end
         if G.GAME.modifiers.unik_decay_on_play then
             for i = 1, #G.hand.highlighted do
                 G.hand.highlighted[i].ability.unik_decaying = true

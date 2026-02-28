@@ -30,42 +30,39 @@ BLINDSIDE.Joker({
         end,
         quotes = {'unik_blindside_railroad_crossing_lose'},
     },
-    unik_after_play = function(self)
-        for i=1, #G.hand.cards do
-            local carder = G.play.cards[i]
-            if carder.debuff and carder.facing == 'back' and (not carder.ability.extra or (carder.ability.extra and not carder.ability.extra.flipped)) then
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        carder:flip()
-                        return true
-                    end,
-                }))
-                
-            end
-        end
-    end,
     unik_before_play = function(self)
         
         for i,v in pairs(G.hand.cards) do
             if v.facing ~= 'back' and v.debuff then
                 v:flip()
+                v.flipped_by_railroad = true
             end
         end
     end,
     calculate = function(self, blind, context)
-        if context.before then
-            for i,v in pairs(G.play.cards) do
-                if v.facing ~= 'back' and v.debuff then
-                    v:flip()
-                end
-            end
-        end
         
         if context.setting_blind and not context.disabled then
             blind.active = true
         end
-        if context.after and not G.GAME.blind.disabled and G.GAME.blind.active then
+        if context.after and not G.GAME.blind.disabled  then
             
+            G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0, func = function()
+                    
+            for i=1, #G.hand.cards do
+                local carder = G.hand.cards[i]
+                
+                if carder.flipped_by_railroad and carder.facing == 'back' and (not carder.ability.extra or (carder.ability.extra and not carder.ability.extra.flipped)) then
+                    carder:flip()
+                    carder.flipped_by_railroad = nil
+                end
+            end
+            for i,v in pairs(G.playing_cards) do
+                v.flipped_by_railroad = nil
+            end
+                        return true
+                    end}))
+            if G.GAME.blind.active then
+
             for i=1,6 do
                 if i == 4 then
                     G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.5, func = function()
@@ -105,6 +102,7 @@ BLINDSIDE.Joker({
             G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
             G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
             G.GAME.blind.active = nil
+        end
         end
         if not G.GAME.blind.disabled then
             if context.debuff_card then
@@ -147,6 +145,9 @@ BLINDSIDE.Joker({
     disable = function(self)
         G.GAME.unik_dynamic_text_realtime = nil
         G.GAME.railroad_debuffed_hue = nil
+        for i,v in pairs(G.playing_cards) do
+            SMODS.recalc_debuff(v)
+        end
     end,
     joker_defeat = function()
         G.GAME.unik_dynamic_text_realtime = nil

@@ -16,7 +16,7 @@ BLINDSIDE.Blind({
         if context.cardarea == G.play and context.main_scoring then
             for i,v in pairs(context.scoring_hand) do
                 v.ability["perma_x_chips"] = v.ability["perma_x_chips"] or 0
-				v.ability["perma_x_chips"] = v.ability["perma_x_chips"] + card.ability.extra.x_chips_scored
+				v.ability["perma_x_chips"] = v.ability["perma_x_chips"] + card.ability.extra.x_chips
                 G.E_MANAGER:add_event(Event({
 					func = function()
 						v:juice_up()

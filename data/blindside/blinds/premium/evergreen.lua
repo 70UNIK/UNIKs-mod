@@ -2,7 +2,7 @@
 BLINDSIDE.Blind({
     key = 'unik_blindside_evergreen',
     atlas = 'unik_blindside_blinds',
-    pos = {x = 77, y = 1},
+    pos = {x = 7, y = 1},
     config = {
         extra = {
             value = 17,
@@ -10,7 +10,7 @@ BLINDSIDE.Blind({
             x_mult_mod = 0.3,
             x_mult_mod_upgrade = 0.3,
         }},
-    hues = {"Green"},
+    hues = {"Green","Faded"},
     calculate = function(self, card, context) 
         if context.cardarea == G.play and context.main_scoring then
 
@@ -23,7 +23,7 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.extra.x_mult + findNoColours(nil,'Green') * card.ability.extra.x_mult_mod
+                card.ability.extra.x_mult_mod, card.ability.extra.x_mult + findNoColours(nil,'Green') * card.ability.extra.x_mult_mod
             }
         }
     end,
@@ -37,7 +37,7 @@ BLINDSIDE.Blind({
 
 function findNoColours(context,color)
     local colours = 0
-    if context.scoring_hand then
+    if context and context.scoring_hand then
         for i,v in pairs(context.scoring_hand) do
             if v:is_color(color, true, false) then
                 colours = colours + 1
