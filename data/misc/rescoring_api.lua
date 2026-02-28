@@ -122,6 +122,26 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             end
         end
     end
+    for i = 1, #G.GAME.tags do
+        local ret = G.GAME.tags[i]:apply_to_run({type = 'unik_rescoring_cards', full_hand = G.play.cards,scoring_hand = scoring_hand, context = context,cardarea = calc_card_area})
+        if ret then
+            --print(ret)
+            if ret.target_cards and type( ret.target_cards) == 'table' and  ret.target_cards[1] and  ret.target_cards[1].unik_scoring_segment then
+                for w = 1, #ret.target_cards do
+                    local struct = {}
+                    for x = 1, #ret.target_cards[w] do
+                        struct[#struct+1] = {card = ret.target_cards[w][x], rescore = 1}
+                    end
+                    struct.source = ret.card or nil
+                    struct.message = ret.message or nil
+                    struct.colour = ret.colour or nil
+                    struct.from_tag = ret.from_tag or false
+                    --"""JOker"""
+                    jokerRescores[#jokerRescores+1] = struct
+                end
+            end
+        end
+    end
     --Amalgamate the tables:
     local combinedTable = {}
     combinedTable[#combinedTable+1] = enhancementRescores
@@ -163,14 +183,28 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             play_area_status_text(localize('k_unik_repeat'))
             SMODS.calculate_context({unik_post_rescore = true,rescored_cards = rescoring_cards,cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand})
             if v.source and v.message then
-                card_eval_status_text(v.source, "extra", nil, nil, nil, {
-                    message = v.message,
-                    colour = v.colour or G.C.FILTER,
-                    card=v.source,
-                })
+                if v.from_tag and BLINDSIDE then
+                    tag_area_status_text(v.source, v.message, v.colour or G.C.FILTER, false, 0)
+                    
+                     G.E_MANAGER:add_event(Event({
+                        trigger = 'before',
+                        func = function()
+                            v.source:juice_up(1,1)
+                            return true
+                        end
+                    }))
+                else
+                    card_eval_status_text(v.source, "extra", nil, nil, nil, {
+                        message = v.message,
+                        colour = v.colour or G.C.FILTER,
+                        card=v.source,
+                    })
+                end
+
                 
             end
             for _,x in pairs(rescoring_cards) do
+                G.GAME.unik_block_blindside_rescore = true
                 local pased = context
                 pased.cardarea = calc_card_area 
 
@@ -185,9 +219,10 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
                         })
                         BLINDSIDE.rescore_card(x, context)
 
-                        G.GAME.unik_block_blindside_rescore = nil
+                        
                     end
                 end
+                G.GAME.unik_block_blindside_rescore = nil
             end
 
 

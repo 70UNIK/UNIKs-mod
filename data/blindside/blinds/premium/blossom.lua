@@ -11,7 +11,7 @@ BLINDSIDE.Blind({
     hues = {"Red", "Faded"},
     always_scores = true,
     calculate = function(self, card, context) 
-        if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and card.area == G.play then
+        if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and card.area == G.hand then
             local validCards = {}
             for i = 1, card.ability.extra.repetitions do
                 local strct = {}

@@ -80,3 +80,25 @@ BLINDSIDE.Blind:take_ownership("m_bld_staff",{
     end
 end,
 },true)
+
+
+--taking ownership of symmetry tag to enable detection by the fail
+SMODS.Tag:take_ownership('tag_bld_symmetry',{
+    apply = function(self, tag, context)
+        if context.type == 'shop_start' and not (next(SMODS.find_card("j_bld_taglock")) and not (G.GAME.blind.boss or G.GAME.last_joker)) then
+                tag:yep('+', G.C.GREEN, function() 
+                    return true end)
+                tag.triggered = true
+        end
+        if context.type == 'scoring_card' then
+            local numerator, denominator = SMODS.get_probability_vars(tag, 1, 2, 'symmetry', true)
+
+            if SMODS.pseudorandom_probability(tag, pseudoseed("symmetry"), numerator, denominator, 'symmetry') and context.card.facing ~= 'back' and context.context.cardarea == G.play then
+            --if pseudorandom('symmetry') < numerator / denominator and context.card.facing ~= 'back' and context.context.cardarea == G.play then
+                tag:juice_up()
+                tag_area_status_text(tag, localize('k_again_ex'), G.C.FILTER, false, 0)
+                BLINDSIDE.rescore_card(context.card, context.context)
+            end
+        end
+    end,
+},true)

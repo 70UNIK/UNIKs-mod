@@ -9,7 +9,7 @@ BLINDSIDE.Blind({
             value = 20,
             x_mult = 1,
             x_mult_mod = 0.1,
-            x_mult_up = 0.05,
+            x_mult_up = 0.1,
             retain = true,
         }},
     hues = {"Purple","Yellow", },

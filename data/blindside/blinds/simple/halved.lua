@@ -6,8 +6,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 20,
-            mult = 20,
-            multup = 10,
+            mult = 15,
+            multup = 15,
             card_limit = 3,
         }},
     hues = {"Blue"},

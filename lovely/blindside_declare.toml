@@ -11,4 +11,5 @@ match_indent = true
 position = 'after'
 payload = '''
 'tag_unik_blindside_dethroning',
+'tag_unik_blindside_recursive',
 '''

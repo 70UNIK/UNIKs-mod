@@ -20,6 +20,4 @@ pattern = '''SMODS.post_prob[#SMODS.post_prob+1] = {pseudorandom_result = true, 
 match_indent = true
 position = 'after'
 payload = '''
-print("prob")
-SMODS.calculate_context({unik_probability_outcome = true, success = result, numerator = numerator, denominator = denominator, cause = trigger_obj, identifier = identifier or seed})
 '''

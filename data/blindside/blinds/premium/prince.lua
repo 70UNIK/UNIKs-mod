@@ -7,7 +7,7 @@ BLINDSIDE.Blind({
         extra = {
             value = 25,
             mult = 6,
-            multup = 4,
+            multup = 6,
         }},
     hues = {"Red"},
     calculate = function(self, card, context) 
@@ -36,14 +36,10 @@ BLINDSIDE.Blind({
                 }
             end
         end
-        if context.burn_card and context.cardarea == G.play and context.burn_card == card then
-            return { remove = true }
-        end
     end,
     rare = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_blindside_dethroning
-        info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         return {
             key = card.ability.extra.upgraded and 'm_unik_blindside_prince_upgraded' or 'm_unik_blindside_prince',
             vars = {

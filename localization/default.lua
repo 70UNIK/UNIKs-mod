@@ -1420,9 +1420,10 @@ return {
                 name = "The Blossom",
                 text = {
                     {
-					"{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
-					"{C:unik_copper}Rescore {C:attention}first{} scoring",
-					"Blind {C:attention}#1#{} times",
+                        "{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
+                        "While {C:attention}held in hand{},",
+                        "{C:unik_copper}Rescore {C:attention}first{} scoring",
+                        "Blind {C:attention}#1#{} times",
                     },
                     {
                     "Always scores"
@@ -1435,9 +1436,10 @@ return {
                 name = "The Blossom",
                 text = {
                     {
-					"{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
-					"{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last{}",
-					"scoring Blinds {C:attention}#1#{} times",
+                        "{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
+                        "While {C:attention}held in hand{},",
+                        "{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last{}",
+                        "scoring Blinds {C:attention}#1#{} times",
                     },
                     {
                     "Always scores"
@@ -1508,9 +1510,6 @@ return {
                         "Creates a {C:attention}Dethroning",
                         "tag if in scoring hand",
                     },
-                    {
-                        "{C:attention,E:1}Burns{}",
-                    },
 
                 }
             },
@@ -1524,9 +1523,6 @@ return {
                     {
                     "Creates a {C:attention}Dethroning",
                     "tag when scored",
-                    },
-                    {
-                    "{C:attention,E:1}Burns{}",
                     },
 
                 }
@@ -1614,12 +1610,13 @@ return {
                 name = "The Chromatic",
                 text = {
                     {
+                        "{X:purple,C:white}Purple{}",
                         "{C:mult}+#1#{} Mult",
                         "on {C:attention}odd Hands",
                         "{V:1}(#2#)"
                     },
                     {
-                        "{C:mult}+#1#{} Mult",
+                        "{C:mult}+#3#{} Mult",
                         "to Joker otherwise",
                     }
                 }
@@ -1635,7 +1632,6 @@ return {
                     {
                         "Gains {X:mult,C:white}X#1#{} Mult whenever",
                         "a {C:green}probability {C:red}fails",
-                        "during scoring",
                     },
                     {
                         "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
@@ -1728,12 +1724,12 @@ return {
                 name = "The Collapse",
                 text = {
                     {
+                        "{X:dark_edition}Faded{}",
                         "{C:chips}+#1#{} Chips"
                     },
                     {
-                        "{C:red}Debuffs and {C:attention}burns",
-                        "all other played",
-                        "{X:dark_edition}Faded{} Blinds"
+                        "{C:red}Debuffs all other",
+                        "played {X:dark_edition}Faded{} Blinds",
                     },                    
                 }
             },
@@ -1741,10 +1737,11 @@ return {
                 name = "The Smiley",
                 text = {
                     {
+                        "{X:gold,C:white}Yellow",
                         "{X:mult,C:white}X#1#{} Mult"
                     },
                     {
-                        "{C:red}-#1#{} Hand Size",
+                        "{C:red}#2#{} Hand Size",
                         "while held",
                     }
                 }
@@ -1753,10 +1750,12 @@ return {
                 name = "The Copper",
                 text = {
                     {
+                        "{X:gold,C:white}Yellow",
                         "{X:mult,C:white}X#1#{} Mult"
                     },
                     {   
-                        "{C:unik_copper}Rescores adjacent Blinds"
+                        "{C:unik_copper}Rescores{} adjacent",
+                        "Blinds {C:attention}#2#{} time#<s>2#"
                     }
                 }
             },
@@ -1764,6 +1763,7 @@ return {
                 name = "The Hurdle",
                 text = {
                     {
+                        "{X:red,C:white}Red{}",
                         "{C:mult}+#1#{} Mult",
                     },
                     {
@@ -5149,7 +5149,15 @@ return {
                     "{C:attention}Disables{} the current",
                     "Joker for {C:attention}#1#{} hand"
                 }
-            }
+            },
+            tag_unik_blindside_recursive = {
+                name = "Recursive Tag",
+                text = {
+                    "Each scored Blind has",
+                    "a {C:green}#1# in #2#{} chance",
+                    "to {C:red}not{} be {C:unik_copper}rescored"
+                }
+            },
         },
         Tarot={
             c_unik_wheel_of_misfortune = {
