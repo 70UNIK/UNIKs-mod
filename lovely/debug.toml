@@ -1,0 +1,25 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''-- context.before calculations'''
+position = "after"
+payload = '''
+
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''SMODS.post_prob[#SMODS.post_prob+1] = {pseudorandom_result = true, result = result, trigger_obj = trigger_obj, numerator = numerator, denominator = denominator, identifier = identifier or seed}'''
+match_indent = true
+position = 'after'
+payload = '''
+print("prob")
+SMODS.calculate_context({unik_probability_outcome = true, success = result, numerator = numerator, denominator = denominator, cause = trigger_obj, identifier = identifier or seed})
+'''

@@ -1609,6 +1609,7 @@ return {
 
                 }
             },
+
             m_unik_blindside_chromatic = {
                 name = "The Chromatic",
                 text = {
@@ -1621,6 +1622,78 @@ return {
                         "{C:mult}+#1#{} Mult",
                         "to Joker otherwise",
                     }
+                }
+            },
+            m_unik_blindside_fail = {
+                name = "The Fail",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{} {X:money,C:white}Yellow{}",
+                        "All {C:green}probabilities{} will",
+                        "{C:red}fail{} while {C:attention}held",
+                    },
+                    {
+                        "Gains {X:mult,C:white}X#1#{} Mult whenever",
+                        "a {C:green}probability {C:red}fails",
+                        "during scoring",
+                    },
+                    {
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+                    },
+                    {
+                        "{C:green}Retained"
+                    },
+                }
+            },
+            m_unik_blindside_wrench = {
+                name = "The Wrench",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{}",
+                        "{C:attention}Upgrade{} a",
+                        "random scoring Blind,",
+                        "then {C:attention}burn{} it"},
+                    {
+					"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance",
+                    },
+                }
+            },
+            m_unik_blindside_wrench_upgraded = {
+                name = "The Wrench",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{}",
+                        "{C:attention}Upgrade{} a",
+                        "random scoring Blind"},
+                    {
+					"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance",
+                    },
+                }
+            },
+            m_unik_blindside_shine = {
+                name = "The Shine",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{}",
+                        "Add a random {C:dark_edition}Edition{}",
+                        "to a random scoring Blind,",
+                        "then {C:attention}burn{} it"},
+                    {
+                        "{C:red,E:1}Self-Debuffing{} with a",
+                        "{C:green}#1# in #2#{} chance",
+                    },
+                }
+            },
+            m_unik_blindside_shine_upgraded = {
+                name = "The Shine",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{}",
+                        "Add a random {C:dark_edition}Edition{}",
+                        "to a random scoring Blind"},
+					{"Always scores"},
                 }
             },
             m_unik_blindside_tax = {

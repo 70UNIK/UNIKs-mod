@@ -16,7 +16,7 @@ if G.GAME.unik_can_trigger_prince then
     G.E_MANAGER:add_event(Event({
         trigger = 'before',
         func = function()
-        print(G.GAME.unik_override_prince)
+        --print(G.GAME.unik_override_prince)
             if G.GAME.unik_prince_hands_remaining < 1 and G.GAME.blind.disabled and not G.GAME.unik_override_prince then
                 UNIK.summon_blind()
             end

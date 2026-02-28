@@ -1258,9 +1258,12 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_cliff.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_bloon.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prince.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/shine.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/blossom.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/descending.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/the_fail.lua")()	
 	--JOKERS
 	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	

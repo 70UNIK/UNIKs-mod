@@ -6,7 +6,7 @@
         config = {
             extra = {
                 value = 100,
-                chance = 2,
+                chance = 3,
                 trigger = 5,
                 chancedown = -2,
                 j_e_mult = 1.75,
@@ -18,7 +18,7 @@
         rare = true,
         calculate = function(self, card, context)
             if context.cardarea == G.play and context.before and card.facing ~= 'back' then
-                if not SMODS.pseudorandom_probability(card, pseudoseed("flip"), card.ability.extra.chance, card.ability.extra.trigger, 'flip') and card.facing ~= "back" then
+                if not SMODS.pseudorandom_probability(card, pseudoseed("descflip"), card.ability.extra.chance, card.ability.extra.trigger, 'descflip') and card.facing ~= "back" then
                     card:flip()
                     card:flip()
                 else
@@ -53,7 +53,7 @@
         loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'unik_self_debuffing', set = 'Other'}
         info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
-            local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.chance, card.ability.extra.trigger, 'flip')
+            local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.chance, card.ability.extra.trigger, 'descflip')
             return {
                 vars = {
                     card.ability.extra.j_e_mult,
@@ -65,7 +65,7 @@
         end,
         upgrade = function(card) 
             if not card.ability.extra.upgraded then
-            card.ability.extra.trigger = card.ability.extra.trigger + card.ability.extra.chancedown
+            card.ability.extra.chance = card.ability.extra.chance + card.ability.extra.chancedown
             card.ability.extra.j_e_mult = card.ability.extra.j_e_mult - card.ability.extra.j_e_mult_down
             
             card.ability.extra.upgraded = true
