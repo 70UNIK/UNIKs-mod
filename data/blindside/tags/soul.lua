@@ -14,6 +14,11 @@ SMODS.Tag {
     loc_vars = function(self, info_queue,tag)
         
 	end,
+    config = {
+        extra = {
+            hex = true,
+        }
+    },
     apply = function(self, tag, context)
         if context.type == 'new_blind_choice' and not G.GAME.unik_lock_soul_tag then 
             G.GAME.unik_lock_soul_tag = true
@@ -60,10 +65,8 @@ end
 local small_overrider = get_new_small
 function get_new_small(current)
     if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) then
-        print("overide small")
         local boss = get_new_boss()
         if boss then
-            print("overide small2")
             return boss
         end
     end
@@ -74,10 +77,8 @@ end
 local big_overrider = get_new_big
 function get_new_big(current)
     if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) then
-        print("overide big")
         local boss = get_new_boss()
         if boss then
-            print("overide big2")
             return boss
         end
     end

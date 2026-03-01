@@ -86,7 +86,7 @@ BLINDSIDE.Blind({
                     }
                 end
             end
-        if context.burn_card and context.cardarea == G.play and card.ability.extra.upgraded then
+        if context.burn_card and context.cardarea == G.play and card.ability.extra.upgraded and context.burn_card == card then
             card.ability.extra.succeed = nil
             return { remove = true }
         end

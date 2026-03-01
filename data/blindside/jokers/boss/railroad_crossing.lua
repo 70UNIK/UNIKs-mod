@@ -5,7 +5,7 @@ BLINDSIDE.Joker({
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=7},
     boss_colour = HEX("f00039"),
-    mult = 12,
+    mult = 8,
     base_dollars = 8,
     order = 1,
     boss = {min = 2},
@@ -124,10 +124,13 @@ BLINDSIDE.Joker({
                     end
                     G.GAME.railroad_debuffed_hue = pseudorandom_element(valid_colours, pseudoseed("unik_railroad_debuff_blind"))
                     for i,v in pairs(G.playing_cards) do
-                        SMODS.recalc_debuff(v)
-                        if v:is_color(G.GAME.railroad_debuffed_hue) then
-                            v:juice_up()
+                        if not v.seal or (v.seal and not v.seal ~= 'bld_wild') then
+                            SMODS.recalc_debuff(v)
+                            if v:is_color(G.GAME.railroad_debuffed_hue) then
+                                v:juice_up()
+                            end
                         end
+
                     end
                     blind:wiggle()
                 end

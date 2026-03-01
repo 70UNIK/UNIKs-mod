@@ -1,0 +1,1 @@
+--always scores, drawn face down, ^1.1 Chips, all played cards return to hand and are retained, retained

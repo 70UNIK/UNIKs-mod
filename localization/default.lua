@@ -1886,7 +1886,7 @@ return {
                     },
                     {
                         "Create a {C:red}Soul Tag",
-                        "when scored"
+                        "when played"
                     },
                     {
                         "Always Scores"
@@ -2015,26 +2015,44 @@ return {
                     {"{C:attention}Burns"},
                 }
             },
+            m_unik_blindside_epic_straightforwardness = {
+                name = "Tasainenviiva",
+                text = {
+                    {
+                        "{X:chips,C:white}Blue{} {X:gold,C:white}Yellow",
+                        "{X:dark_edition,C:white}^#1#{} Chips",
+                        "to Joker",
+                    },
+                    {"{C:attention}Burns"},
+                }
+            },
+            m_unik_blindside_epic_straightforwardness_upgraded = {
+                name = "Tasainenviiva",
+                text = {
+                    {
+                        
+                    },
+                }
+            },
             m_unik_blindside_epic_sand = {
                 name = "Juoksuhiekka",
                 text = {
                     {"{X:money,C:white}Yellow{} {X:chips,C:white}Blue{}",
 					"{X:mult,C:white}X#1#{} Mult and",
-                "Mult {X:mult,C:white}Xlog_#2#{}(Mult)"},
+                "Mult {X:mult,C:white}Xlog_#2#(Mult)"},
 
 					{"{C:unik_copper}Rescores{} once for",
 					"every {C:attention}#3#{} Tag#<s>3# held",
-					"{C:inactive}(Currently #4# time#<s>4#)"},
+					"{C:inactive}(Currently {C:attention}#4#{C:inactive} time#<s>4#)"},
                 }
             },
             m_unik_blindside_epic_wall = {
                 name = "Ylitsepääsemätönseinä",
                 text = {
-                    {"{X:purple,C:white}Purple{} {X:dark_edition,C:white}Green{}",
-					"Currently {X:dark_edition,C:white}^#1#{} Mult"},
-					{"Gains {X:dark_edition,C:white}^#2#{} Mult",
+                    {"{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
+                    "Gains {X:dark_edition,C:white}^#2#{} Mult",
 					"after being played"},
-					{"Always scores"},
+					{"{C:inactive}Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult"},
                 }
             },
             m_unik_blindside_epic_bellows = {
@@ -6375,7 +6393,9 @@ return {
             k_light_suits = "Light Suits",
             k_dark_suits = "Dark Suits",
             k_unik_positive = "Positive",
-            k_unik_deckbloat = "HOPE YOU LIKE BLOAT!"
+            k_unik_deckbloat = "HOPE YOU LIKE BLOAT!",
+            k_unik_exotic = "Exotic",
+            
         },
         high_scores={},
         labels={

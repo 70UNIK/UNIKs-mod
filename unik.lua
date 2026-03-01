@@ -1246,6 +1246,15 @@ if unik_config.unik_custom_menu then
 end
 
 --blindside:
+
+SMODS.Atlas({ 
+    key = "unik_blindside_epic_blinds", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_blindside_epic_blinds.png", 
+    px = 71, 
+    py = 95, 
+frames = 3 })
+
 if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
@@ -1264,7 +1273,7 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_stop.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/copper.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/tree.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/trade.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/trade.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prince.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/vice.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
@@ -1277,11 +1286,16 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/descending.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/the_fail.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_straightforwardness.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_sand.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
 	--JOKERS
 	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/rituals/sigil.lua")()
 
 	--TAGS
 	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
