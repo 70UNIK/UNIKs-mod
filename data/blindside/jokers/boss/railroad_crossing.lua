@@ -5,14 +5,11 @@ BLINDSIDE.Joker({
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=7},
     boss_colour = HEX("f00039"),
-    mult = 5,
+    mult = 12,
     base_dollars = 8,
     order = 1,
     boss = {min = 2},
     active = true,
-    get_assist = function (self)
-        return G.P_BLINDS["bl_bld_chad"]
-    end,
     loc_vars = function(self)
         if not G.GAME.railroad_debuffed_hue then
             return { vars = { localize('k_unik_random_hue') } }
@@ -44,6 +41,13 @@ BLINDSIDE.Joker({
         if context.setting_blind and not context.disabled then
             blind.active = true
         end
+        if context.before then
+            for i,v in pairs(G.play.cards) do
+                if v.facing ~= 'back' and v.debuff then
+                    v:flip()
+                end
+            end
+        end
         if context.after and not G.GAME.blind.disabled  then
             
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0, func = function()
@@ -63,8 +67,8 @@ BLINDSIDE.Joker({
                     end}))
             if G.GAME.blind.active then
 
-            for i=1,6 do
-                if i == 4 then
+            for i=1,2 do
+                if i == 2 then
                     G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.5, func = function()
                     
                         G.GAME.blind:wiggle()
@@ -74,19 +78,10 @@ BLINDSIDE.Joker({
                     play_area_status_text(localize('k_unik_repeat'))
                     if SMODS.hand_debuff_source then SMODS.hand_debuff_source:juice_up(0.3,0) else  end
                 end
-                if i > 1 and i ~=4 then
-                    joker_area_status_text(localize('k_again_ex'), G.C.FILTER)
-                    G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.5, func = function()
-                    
-                        G.GAME.blindassist:juice_up()
-                        return true
-                    end}))
-                    
-                end
                 G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.5, func = function()
                     
                     G.hand_text_area.blind_mult_text:juice_up()
-                    G.GAME.blind.mult_text = number_format(G.GAME.blind.mult*1.22^i)
+                    G.GAME.blind.mult_text = number_format(G.GAME.blind.mult*1.31^i)
                     if not silent then play_sound('multhit2') end
                     return true
                 end}))
@@ -94,7 +89,7 @@ BLINDSIDE.Joker({
             end
              G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.5, func = function()
                     
-                G.GAME.blind.mult = G.GAME.blind.mult*1.22*1.22*1.22*1.22*1.22
+                G.GAME.blind.mult = G.GAME.blind.mult*1.31*1.31
                 return true
             end}))
             

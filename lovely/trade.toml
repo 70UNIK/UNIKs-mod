@@ -1,0 +1,17 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''table.insert(cards, G.hand.highlighted[i])'''
+position = "before"
+match_indent = true
+payload = '''
+if G.hand.highlighted[i].unik_marked_for_destruction_after_discard then
+    removed = true
+end
+'''

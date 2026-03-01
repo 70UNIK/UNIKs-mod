@@ -144,14 +144,14 @@ return {
             bl_unik_blindside_lily = {
                 name = "Lily",
                 text = {
-                    "Destroy 2 random",
-                    "played Blinds",
+                    "Destroy a random",
+                    "played Blind",
                 }
             },
             bl_unik_blindside_railroad_crossing = {
                 name = "Railroad Crossing",
                 text = {
-                    "X3.2 Mult on",
+                    "X1.72 Mult on",
                     "first hand",
                     "Debuffs a random",
                     "Hue per hand",
@@ -1599,9 +1599,6 @@ return {
                         "create {C:attention}#1#",
                         "random {C:attention}Tag#<s>1#",
                     },
-                    {
-                    "Always scores"
-                    },
 
                 }
             },
@@ -1880,6 +1877,34 @@ return {
                     }
                 }
             },
+            m_unik_blindside_vice = {
+                name = "The Vice",
+                text = {
+                    {
+                        "{C:unik_copper}Rescore{} all",
+                        "scored Blinds",
+                    },
+                    {
+                        "Create a {C:red}Soul Tag",
+                        "when scored"
+                    },
+                    {
+                        "Always Scores"
+                    },
+                },
+            },
+            m_unik_blindside_vice_upgraded = {
+                name = "The Vice",
+                text = {
+                    {
+                        "{C:unik_copper}Rescore{} all",
+                        "scored Blinds",
+                    },
+                    {
+                        "Always Scores"
+                    },
+                },
+            },
 
             m_unik_blindside_opulence = {
                 name = "The Opulence"
@@ -1905,7 +1930,8 @@ return {
                 text = {
                     {
                         "{X:chips,C:white}Blue", 
-                        "{C:attention}Copies{} another",
+                        "Makes an {C:attention}Upgraded",
+                        "{C:attention}Copy{} of another",
                         "random scoring Blind",
                     },
                     {"Always scores"},
@@ -5344,6 +5370,14 @@ return {
                     "Each scored Blind has",
                     "a {C:green}#1# in #2#{} chance",
                     "to {C:red}not{} be {C:unik_copper}rescored"
+                }
+            },
+            tag_unik_blindside_soul = {
+                name = "Soul Tag",
+                text = {
+                    "{C:attention}Replaces{} the next",
+                    "Joker with a",
+                    "{C:red}Legendary{} Joker"
                 }
             },
         },

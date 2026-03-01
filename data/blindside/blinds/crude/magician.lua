@@ -6,7 +6,7 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 30,
-            cards = 5,
+            cards = 4,
             cardsdown = 2,
             retain = true,
             stubborn = true,
@@ -47,8 +47,7 @@ BLINDSIDE.Blind({
                     }))
                 end
             }
-        end
-                if context.after and context.cardarea == G.play and card.facing ~= 'back' then
+            elseif context.after and context.cardarea == G.play and card.facing ~= 'back' and card.ability.extra.upgraded then
                     local cardlist = {}
                     for i,v in pairs(context.scoring_hand) do
                         if v ~= card then
@@ -63,10 +62,13 @@ BLINDSIDE.Blind({
                     table.insert(G.playing_cards, copy_card)
                     G.hand:emplace(copy_card)
                     copy_card.states.visible = nil
-
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             copy_card:start_materialize()
+                            if not copy_card.ability.extra or (copy_card.ability.extra and not copy_card.ability.extra.upgraded) then
+                                upgrade_blinds({copy_card})
+                            end
+                            
                             return true
                         end
                     }))   

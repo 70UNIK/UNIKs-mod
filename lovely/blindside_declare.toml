@@ -12,4 +12,5 @@ position = 'after'
 payload = '''
 'tag_unik_blindside_dethroning',
 'tag_unik_blindside_recursive',
+'tag_unik_blindside_soul',
 '''

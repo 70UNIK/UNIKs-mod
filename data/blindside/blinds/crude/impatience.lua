@@ -1,1 +1,2 @@
 --while held, each blind has a 1 in 8 chance to play selected blinds when selected, stubborn
+--X3 Mult, when selected has a 1 in 5 chance to play selected blinds

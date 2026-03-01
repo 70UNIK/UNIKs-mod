@@ -5,8 +5,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 4,
-            chips = 90,
-            chips_up = 90,
+            chips = 85,
+            chips_up = 85,
         }},
     hues = {"Faded"},
     calculate = function(self, card, context) 

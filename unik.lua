@@ -1263,8 +1263,10 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_cliff.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_stop.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/copper.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/tree.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/trade.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prince.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/vice.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/shine.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/nought.lua")()	
@@ -1282,7 +1284,8 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 
 	--TAGS
-	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/soul.lua")()	
 	NFS.load(mod_path .. "data/blindside/tags/recursive.lua")()	
 end
 

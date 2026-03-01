@@ -22,7 +22,7 @@ BLINDSIDE.Joker({
             
             local destroyed_cards = {}
             local triggered = true
-            for z = 1,2 do
+            for z = 1,1 do
                 local eligable_cards = {}
                 for i,v in pairs(context.full_hand) do
                     if not v.to_be_destroyed_by_lily then

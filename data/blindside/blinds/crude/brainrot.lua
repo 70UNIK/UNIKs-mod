@@ -1,0 +1,1 @@
+--Create two crude blinds, self destructs

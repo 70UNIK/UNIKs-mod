@@ -8,7 +8,8 @@ BLINDSIDE.Blind({
             value = 20,
             x_mult = 1.3,
             repetitions = 1,
-            xmult_up = 0.3
+            xmult_up = 0.2,
+            repetitions_up = 1,
         }},
     hues = {"Yellow"},
     calculate = function(self, card, context) 
@@ -66,6 +67,7 @@ BLINDSIDE.Blind({
     upgrade = function(card)
         if not card.ability.extra.upgraded then
             card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.xmult_up
+            card.ability.extra.repetitions = card.ability.extra.repetitions + card.ability.extra.repetitions_up
         card.ability.extra.upgraded = true
         end
     end
