@@ -80,6 +80,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 					ref_table = card.ability.extra,
 					ref_value = "chips",
 					scalar_value = "chip_mod2",
+					operation = "-",
 					scaling_message = {
 						message = "-" .. number_format(card.ability.extra.chip_mod2),
 						colour = G.C.CHIPS,
