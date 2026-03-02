@@ -2052,7 +2052,7 @@ return {
                     {"{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
                     "Gains {X:dark_edition,C:white}^#2#{} Mult",
 					"after being played"},
-					{"{C:inactive}Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult"},
+					{"{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)"},
                 }
             },
             m_unik_blindside_epic_bellows = {
@@ -2074,21 +2074,91 @@ return {
             m_unik_blindside_epic_flip = {
                 name = "Ylösalaisin",
                 text = {
+                    {"{X:green,C:white}Green{} {X:purple,C:white}Purple{}",
+                    "{C:green}#1# in #2#{} chance for",
+                    "{X:dark_edition,C:white}^#3#{} Mult or",
+                    "{X:dark_edition,C:white}^#4#{} Chips",},
+                    {
+                        "otherwise {X:mult,C:white}X#5#{} Mult",
+                        "or {X:chips,C:white}X#6#{} Chips",
+                    },
 
                 }
             },
-            m_unik_epic_hook = {
+            m_unik_blindside_epic_hook = {
                 name = "Verenvuotokoukku",
                 text = {
                     {"{X:red,C:white}Red{} {X:chips,C:white}Blue{}",
                     "{X:dark_edition,C:white}^#1#{} Mult and",
                     "{C:red}+#2#{} Discards"},
-                    {"{C:red}Destroys{} #3# Blind#<s>3#",
-                        "held in hand"
+                    {"{C:attention}Burns{} all",
+                        "held Blinds"
                     },
-                	{"{C:attention}Burns"},
+                    {"{C:attention}Burns"},
                 }
             },
+            m_unik_blindside_epic_hook_upgraded = {
+                name = "Verenvuotokoukku",
+                text = {
+                    {"{X:red,C:white}Red{} {X:chips,C:white}Blue{}",
+                    "{X:dark_edition,C:white}^#1#{} Mult and",
+                    "{C:red}+#2#{} Discards"},
+                    {"{C:attention}Burns{} all",
+                        "held Blinds"
+                    },
+                }
+            },
+            m_unik_blindside_epic_trench = {
+                name = "Merenkaivanto", --trench of the ocean
+                text = {
+                    {
+                        "{X:chips,C:white}Blue{} {X:dark_edition,C:white}Faded",
+                        "Gains {C:white,X:dark_edition}^#1#{} Chips",
+					    "when {C:attention}scored"
+                    },
+					{
+                        "{C:attention}Resets{} to {C:white,X:dark_edition}^#2#",
+                        "each round"
+                    },
+                    {
+                        "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Chips)"
+                    },
+                },
+            },
+
+            m_unik_blindside_epic_blossom = {
+                name = "Kukoistavasankaritar", --blossoming heroine
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:dark_edition,C:white}Faded",
+                        "While {C:attention}held in hand{},",
+                        "{C:unik_copper}Rescore {C:attention}first{}",
+                        "scoring Blind for every",
+                        "{C:attention}#2# {X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
+                        "in your full deck"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#1#{C:inactive} Rescores)"
+                    },
+                }
+            },
+            m_unik_blindside_epic_blossom_upgraded = {
+                name = "Kukoistavasankaritar", --blossoming heroine
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:dark_edition,C:white}Faded",
+                        "While {C:attention}held in hand{},",
+                        "{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last",
+                        "scoring Blind for every",
+                        "{C:attention}#2# {X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
+                        "in your full deck"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#1#{C:inactive} Rescores)"
+                    },
+                }
+            },
+
 
         },
         Rotarot = {

@@ -59,7 +59,7 @@ SMODS.Consumable {
         card:explode()
         return true end }))
         local args = {}
-        delay(0.75)
+        delay(1)
         args.guaranteed = true
         args.options = G.P_CENTER_POOLS.unik_obj_blindcard_ancient
         args.unik_ancient = true
