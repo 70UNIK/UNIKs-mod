@@ -44,6 +44,9 @@ function UNIK.get_almanac_prefix()
 	end
 	return 'jen'
 end
+if next(SMODS.find_mod("Cryptlib")) then
+	print("CRYPTLIB IS FOUND")
+end
 
 function AlterConfigWithAlmanac(config1,config2)
 	if UNIK.has_almanac() then

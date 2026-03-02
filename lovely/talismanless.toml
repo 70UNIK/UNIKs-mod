@@ -33,14 +33,14 @@ elseif eval_type == 'xlog_chips' then
     colour = G.C.CHIPS
     config.type = 'fade'
     config.scale = 0.7
-elseif eval_type == 'e_chips' and not UNIK.has_talisman() and not (SMODS.Mods["Cryptlib"] or {}).can_load  then
+elseif eval_type == 'e_chips' and not UNIK.has_talisman() and not next(SMODS.find_mod("Cryptlib"))  then
     sound = 'unik_echip'
     amt = amt
     text = '^' .. number_format(amt) .. ' ' .. localize('k_chips')
     colour = G.C.DARK_EDITION
     config.type = 'fade'
     config.scale = 0.7
-elseif eval_type == 'e_mult' and not UNIK.has_talisman() and not (SMODS.Mods["Cryptlib"] or {}).can_load  then
+elseif eval_type == 'e_mult' and not UNIK.has_talisman() and not next(SMODS.find_mod("Cryptlib"))  then
     sound = 'unik_emult'
     amt = amt
     text = '^' .. number_format(amt) .. ' ' .. localize('k_mult')

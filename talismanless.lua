@@ -14,6 +14,7 @@ function UNIK.has_talisman()
 	return false
 end
 
+
 local scie2 = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
 	local ret = scie2(effect, scored_card, key, amount, from_edition)
@@ -112,7 +113,7 @@ SMODS.Sound({
 	key = "eemult",
 	path = "TetrationalMult.wav",
 })
-if SMODS and SMODS.Mods and not UNIK.has_talisman() and not (SMODS.Mods["cdataman"] or {}).can_load and not (SMODS.Mods["Cryptlib"] or {}).can_load then
+if SMODS and SMODS.Mods and not UNIK.has_talisman() and not (SMODS.Mods["cdataman"] or {}).can_load and not next(SMODS.find_mod("Cryptlib")) then
 	local smods_xchips = false
 	for _, v in pairs(SMODS.scoring_parameter_keys) do
 		if v == "x_chips" then
