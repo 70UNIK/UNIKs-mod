@@ -1,4 +1,4 @@
-if not Cryptid and not (SMODS.Mods["Cryptlib"] or {}).can_load then
+if not Cryptid and not next(SMODS.find_mod("Cryptlib")) then
     -- simple plural s function for localisation
     function cry_pluralize(str, vars)
         local inside = str:match("<(.-)>") -- finds args

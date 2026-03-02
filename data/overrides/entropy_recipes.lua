@@ -22,12 +22,18 @@ function UNIK.build_fixed_recipe(enhancements,result)
     --print(newTable)
     if #newTable == 5 and not invalid then
         table.sort(newTable, function(a,b)return (Entropy.EnhancementPoints[a])>(Entropy.EnhancementPoints[b]) end)
-        local string = Entropy.ConcatStrings(newTable)
-        Entropy.FixedRecipes[string] = result
-        --print("Recipe " .. string .. " created successfully")
+        local string = Entropy.concat_strings(newTable)
+        if Entropy.FixedRecipes then
+            Entropy.FixedRecipes[string] = result
+            print("Recipe " .. string .. " created successfully")
+        else
+            print("LIST NOT INITIALIZED!")
+        end
+        
+        
         return true
     else
-        --print("INVALID RECIPE; MUST BE EXACTLY 5 CARDS!")
+        print("INVALID RECIPE; MUST BE EXACTLY 5 CARDS!")
         return false
     end
 end
@@ -41,12 +47,12 @@ function Game:unik_initialize_stuff()
         UNIK.build_fixed_recipe({m_unik_namta = 5},'j_unik_earthmover')
         UNIK.build_fixed_recipe({m_unik_green = 5},'j_unik_onyx_agate')
         UNIK.build_fixed_recipe({m_unik_bill = 5},'j_mf_top10')
-        UNIK.build_fixed_recipe({m_unik_bill = 1,m_entr_disavowed = 1, c_base = 3},'j_entr_tenner')
+        UNIK.build_fixed_recipe({m_unik_dollar = 1,m_entr_disavowed = 1, c_base = 3},'j_entr_tenner')
         UNIK.build_fixed_recipe({m_entr_flesh = 4,m_unik_namta = 1},'j_unik_monster_spawner')
         UNIK.build_fixed_recipe({m_unik_pink = 4,m_entr_disavowed = 1},'j_unik_xchips_hater')
         UNIK.build_fixed_recipe({m_entr_flesh = 4,m_entr_disavowed = 1},'j_unik_autocannibalism')
-        UNIK.build_fixed_recipe({m_unik_bill = 1,m_entr_disavowed = 4},'j_unik_decaying_tooth')
-        UNIK.build_fixed_recipe({m_unik_bill = 1,m_entr_disavowed = 3,m_unik_namta = 1},'j_unik_impounded')
+        UNIK.build_fixed_recipe({m_unik_dollar = 1,m_entr_disavowed = 4},'j_unik_decaying_tooth')
+        UNIK.build_fixed_recipe({m_unik_dollar = 1,m_entr_disavowed = 3,m_unik_namta = 1},'j_unik_impounded')
         UNIK.build_fixed_recipe({m_bonus = 4,m_unik_pink = 1},'j_unik_chipzel')
         UNIK.build_fixed_recipe({c_base = 2,m_unik_pink = 3},'j_unik_uniku')
         UNIK.build_fixed_recipe({c_base = 4,m_unik_pink = 1},'j_unik_numerical_reinforcement')
