@@ -1264,6 +1264,7 @@ if next(SMODS.find_mod("Blindside")) then
 	
 	--BLINDS
 	NFS.load(mod_path .. "data/blindside/blinds/simple/collapse.lua")()
+	--NFS.load(mod_path .. "data/blindside/blinds/simple/artesian.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_gun.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_bloon.lua")()
 	--NFS.load(mod_path .. "data/blindside/blinds/simple/smiley.lua")() --this is borked
@@ -1272,11 +1273,16 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/simple/fill.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/chromatic.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/hurdle.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/sharp.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_cliff.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/the_stop.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/copper.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/tree.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/simple/peak.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/simple/trade.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/hunter.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/riff.lua")()	
+
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prince.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/vice.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
@@ -1288,7 +1294,12 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/evergreen.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/descending.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/the_fail.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/watermelon.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/bat.lua")()	
+
 	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/corpo.lua")()
+	
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_flip.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_trench.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_blossom.lua")()

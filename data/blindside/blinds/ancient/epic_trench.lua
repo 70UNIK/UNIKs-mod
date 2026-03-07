@@ -13,7 +13,6 @@ BLINDSIDE.Blind({
             e_chips_gain_up = 0.01,
         }},
     hues = {"Blue", "Faded"},
-    always_scores = true,
     calculate = function(self, card, context) 
         if context.cardarea == G.play and context.main_scoring then
              SMODS.scale_card(card, {

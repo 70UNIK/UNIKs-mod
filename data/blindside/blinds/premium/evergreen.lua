@@ -23,7 +23,7 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.extra.x_mult_mod, card.ability.extra.x_mult + findNoColours(nil,'Green') * card.ability.extra.x_mult_mod
+                card.ability.extra.x_mult_mod, card.ability.extra.x_mult + findNoColours(nil,'Green',card) * card.ability.extra.x_mult_mod
             }
         }
     end,
@@ -35,7 +35,7 @@ BLINDSIDE.Blind({
     end
 })
 
-function findNoColours(context,color)
+function findNoColours(context,color,card)
     local colours = 0
     if context and context.scoring_hand then
         for i,v in pairs(context.scoring_hand) do
@@ -46,6 +46,15 @@ function findNoColours(context,color)
         return colours
     else
         if G and G.GAME then
+            if G.play and G.play.cards and #G.play.cards > 0 and card.area == G.play then
+                for i,v in pairs(G.play.cards) do
+                    if v:is_color(color, true, false) then
+                        colours = colours + 1
+                    end
+                end
+
+                return colours
+            end
             if G.hand then
                 if G.hand.highlighted then
                     for i,v in pairs(G.hand.highlighted) do

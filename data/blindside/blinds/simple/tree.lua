@@ -22,7 +22,7 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-                card.ability.extra.mult_mod, findNoColours(nil,'Green') * card.ability.extra.mult_mod
+                card.ability.extra.mult_mod, findNoColours(nil,'Green',card) * card.ability.extra.mult_mod
             }
         }
     end,

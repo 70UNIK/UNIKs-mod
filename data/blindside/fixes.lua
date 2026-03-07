@@ -155,3 +155,98 @@ BLINDSIDE.Blind:take_ownership("m_bld_death",{
             end
         end,
 },true)
+
+BLINDSIDE.Blind:take_ownership("m_bld_tablet",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+},true)
+
+function UNIK.get_enhancements_with_exact_colors(colors,ancient,cursed)
+    local enhancements = {}
+    local final = {}
+    for key, value in pairs(G.P_CENTER_POOLS.bld_obj_blindcard_generate) do
+        -- basically checks table equality
+        local good = true
+        if not ancient and (value.unik_ancient or value.legendary or value.unik_exotic) then
+            good = false
+        end
+        if not cursed and value.cursed then
+            good = false
+        end
+        for key, color in pairs(colors) do
+            if not tableContains(color, value.config.extra.hues) then
+                good = false
+                break
+            end
+        end
+        if good then
+            for key, color in pairs(value.config.extra.hues) do
+                if not tableContains(color, colors) then
+                    good = false
+                    break
+                end
+            end
+            if good then
+                enhancements[value] = true
+            end
+        end
+    end
+    --convert to list
+    for i,v in pairs(enhancements) do
+        final[#final+1] = i
+    end
+    return final
+
+end
+
+SMODS.Consumable:take_ownership("c_bld_assimilate",{
+    use = function(self, card, area)
+        local hues = {}
+        for key, value in pairs(G.hand.highlighted[1].ability.extra.hues) do
+            if not tableContains(value, hues) then
+                table.insert(hues, value)
+            end
+        end
+        for key, value in pairs(G.hand.highlighted[2].ability.extra.hues) do
+            if not tableContains(value, hues) then
+                table.insert(hues, value)
+            end
+        end
+
+        local enhancements = UNIK.get_enhancements_with_exact_colors(hues)
+        if #enhancements == 0 then
+            error("UH OH, NO VALID HUE COMBO DETECTED! ")
+        end
+        local enhancement = pseudorandom_element(enhancements, pseudoseed("unik_assimilate"))
+        local rand = pseudorandom(pseudoseed('assimilate'))
+
+        local card
+        if rand > 0.5 then
+            card = copy_card(G.hand.highlighted[1], nil, nil, G.playing_card)
+            card:remove_sticker('bld_upgrade')
+            card:set_ability(enhancement)
+            if G.hand.highlighted[1].ability.extra.upgraded then
+                upgrade_blinds({card}, nil, true)
+            end
+        else
+            card = copy_card(G.hand.highlighted[2], nil, nil, G.playing_card)
+            card:remove_sticker('bld_upgrade')
+            card:set_ability(enhancement)
+            if G.hand.highlighted[2].ability.extra.upgraded then
+                upgrade_blinds({card}, nil, true)
+            end
+        end
+        
+        G.hand:emplace(card)
+        table.insert(G.playing_cards, card)
+        destroy_blinds_and_calc(G.hand.highlighted, card)
+        card:start_materialize()
+
+        delay(0.5)
+    end,
+},true)
+
+--assimilate: now takes into account multiple hues

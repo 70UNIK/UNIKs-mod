@@ -9,7 +9,6 @@ BLINDSIDE.Blind({
             repetitions = 2,
         }},
     hues = {"Red", "Faded"},
-    always_scores = true,
     calculate = function(self, card, context) 
         if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and ((not context.cardarea and not context.main_eval) or context.main_eval) and card.area == G.hand then
             local validCards = {}

@@ -1,36 +1,39 @@
---when scored, all other scored blinds permanently gain X0.05 Chips
+--when scored, other scoring simple blinds give X1.3 Mult
 BLINDSIDE.Blind({
-    key = 'unik_blindside_cat',
+    key = 'unik_blindside_riff',
     atlas = 'unik_blindside_blinds',
-    pos = {x = 2, y = 2},
+    pos = {x = 6, y = 4},
     config = {
         extra = {
-            value = 12,
-            x_chips = 0.05,
-            x_chips_up = 0.05,
+            value = 23,
+            x_chips = 1.3,
+            x_chips_up = 0.3,
         }},
-    hues = {"Purple","Red", },
-    rare = true,
+    hues = {"Blue" },
+    common = true,
     calculate = function(self, card, context)
         
         if context.cardarea == G.play and context.main_scoring then
             for i,v in pairs(context.scoring_hand) do
-                --MAKE SURE TO AVOID ITSELF! it otherwise powercreeps chelsea
-                if v ~= card then
-                    v.ability["perma_x_chips"] = v.ability["perma_x_chips"] or 0
-                    v.ability["perma_x_chips"] = v.ability["perma_x_chips"] + card.ability.extra.x_chips
+                if v.config.center.basic then
                     G.E_MANAGER:add_event(Event({
+                        trigger = 'immediate',
                         func = function()
-                            v:juice_up()
+                            card:juice_up()
                             return true
-                        end,
+                        end
                     }))
+                    SMODS.calculate_effect({
+                        x_chips = card.ability.extra.x_chips,
+                        colour = G.C.DARK_EDITION,
+                    }, v)
+                    
+                    
                 end
 
-                end
+            end
             return {
-                message = localize('k_upgrade_ex'),
-                colour = G.C.CHIPS,
+
             }
         end
     end,

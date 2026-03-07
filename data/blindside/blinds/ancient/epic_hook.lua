@@ -6,35 +6,34 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            e_mult = 1.3,
+            e_mult = 1.2,
             e_mult_up = 0.15,
             discards = 2,
             discards_up = 2,
         }},
     hues = {"Red", "Blue"},
-    always_scores = true,
     calculate = function(self, card, context) 
+        if context.before then
+            local exists = false
+            for i,v in pairs(context.scoring_hand) do
+                if v == card then
+                    exists = true
+                    break
+                end
+            end
+            if exists then
+                for i,v in pairs(G.hand.cards) do
+                    v.ability.unik_burned_by_hook = true
+                end
+            end
+        end
         if context.cardarea == G.play and context.main_scoring then
             ease_discard(card.ability.extra.discards)
             return {
                 e_mult = card.ability.extra.e_mult
             }
         end
-         if context.burn_card and context.cardarea == G.play and context.burn_card == card then
-            G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.2,
-            func = function() 
-                            for i=#G.hand.cards, 1, -1 do
-                local card2 = G.hand.cards[i]
-                if not card2.ability.extra.burned_by_hook then
-                    card2.ability.extra.burned_by_hook = true 
-                    card2:start_burn(G.hand)
-                    
-                end
-
-            end
-                return true end }))
+        if context.burn_card and context.cardarea == G.play and context.burn_card == card then
             return { remove = true }
             
         end

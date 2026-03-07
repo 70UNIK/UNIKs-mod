@@ -8,17 +8,16 @@ BLINDSIDE.Blind({
             value = 1,
             trigger = 2,
             chance = 1,
-            e_mult = 1.25,
+            e_mult = 1.2,
             e_mult_up = 0.1,
             e_chips = 1.1,
             e_chips_up = 0.05,
             x_mult = 2.5,
             x_mult_up = 1,
-            x_chips = 1.5,
+            x_chips = 2,
             x_chips_up = 1,
         }},
     hues = {"Green","Purple"},
-    always_scores = true,
     calculate = function(self, card, context) 
         if context.cardarea == G.play and context.main_scoring then
             if SMODS.pseudorandom_probability(card, pseudoseed("flip_alternate"), card.ability.extra.chance, card.ability.extra.trigger, 'flip_alternate') then

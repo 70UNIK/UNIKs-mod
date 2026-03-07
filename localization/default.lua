@@ -1425,9 +1425,6 @@ return {
                         "{C:unik_copper}Rescore {C:attention}first{} scoring",
                         "Blind {C:attention}#1#{} times",
                     },
-                    {
-                    "Always scores"
-                    },
 
 
                 }
@@ -1440,9 +1437,6 @@ return {
                         "While {C:attention}held in hand{},",
                         "{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last{}",
                         "scoring Blinds {C:attention}#1#{} times",
-                    },
-                    {
-                    "Always scores"
                     },
 
 
@@ -1704,19 +1698,6 @@ return {
                     }
                 }
             },
-            m_unik_blindside_artesian = {
-                name = "The Artesian",
-                text = {
-                    {
-                        "While in full deck",
-                        "Gains {C:red}+#1#{} Mult",
-                        "per {C:attention}reroll{} in Shop"
-                    },
-                    {
-                        "{C:inactive}(Currently {C:red}+#1#{C:inactive} Mult)",
-                    },
-                }
-            },
             m_unik_blindside_collapse = {
                 name = "The Collapse",
                 text = {
@@ -1797,27 +1778,11 @@ return {
                     "effect{C:unik_eye_searing_red}!!!"
                 }
             },
-            m_unik_blindside_lamppost = {
-                name = "The Lamppost",
-                text = {
-                    {
-                        "{X:dark_edition,C:white}Faded{} {X:money,C:white}Yellow{}",
-                        "{C:attention}Retriggers{} and {C:unik_copper}rescores",
-                        "adjacent {X:money,C:white}Yellow",
-                        "Blinds #1# time#<s>#",
-                    },
-                    {
-                        "{C:red}Debuffs{} all Blinds",
-                        "{C:attention}not adjacent{} to",
-                        "each instance of {C:attention}itself"
-                    },
-                }
-            },
             m_unik_blindside_cat = {
                 name = "The Cat",
                 text = {
                     "{X:purple,C:white}Purple{} {X:red,C:white}Red{}",
-                    "When scored, all",
+                    "When scored, other",
                     "scoring Blinds",
                     "{C:attention}permanently gain",
                     "{X:chips,C:white}X#1#{} Chips"
@@ -1906,11 +1871,280 @@ return {
                 },
             },
 
-            m_unik_blindside_opulence = {
-                name = "The Opulence"
 
+            m_unik_blindside_sharp = {
+                name = "The Sharpened",
+                text = {
+                    {
+                        "{X:blue,C:white}Blue{}",
+                        "When played, {C:attention}Rerolls",
+                        "{C:attention}#1#{} Blind#<s>1# to",
+                        "the right into Blind#<s>1#",
+					    "of the same {C:attention}hue{}"
+                    },
+                }
             },
+            m_unik_blindside_peak = {
+                name = "The Peak",
+                text = {
+                    {
+                        "{X:blue,C:white}Blue{}",
+                        "When scored, other",
+                        "scoring Blinds",
+                        "{C:attention}permanently gain",
+                        "{C:chips}+#1#{} Chips"
+                    }
+                }
+            },
+            m_unik_blindside_artesian = {
+                name = "The Artesian",
+                text = {
+                    {
+                        "{X:blue,C:white}Blue{}",
+                        "Gains {C:chips}+#2#{} Chips",
+                        "when drawn after",
+                        "deck has {C:attention}Reshuffled",
 
+                    },
+                    {
+                        "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
+                    }
+                }
+            },
+            m_unik_blindside_hunter = {
+                name = "The Hunter",
+                text = {
+                    {
+                        "{X:red,C:white}Red{}",
+                        "{C:red}Debuffs{} and {C:red}Destroys",
+                        "{C:attention}#1#{} played Blind#<s>1#",
+                        "to it's right"
+                    },
+                    {
+                        "{C:red}+#2#{} Discard#<s>2# if successful"
+                    },
+                    {
+                        "Always Scores"
+                    },
+                    {
+                        "{C:attention}Burns{} on success"
+                    },
+                }
+            },
+            m_unik_blindside_riff = {
+                name = "The Riff",
+                text = {
+                    {
+                        "{X:chips,C:white}Blue{}",
+                        "When scored, other",
+                        "{X:chips,C:white}Starter{} Blinds",
+                        "give {X:chips,C:white}X#1#{} Chips"
+                    },
+                }
+            },
+            m_unik_blindside_bat = {
+                name = "The Bat",
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:money,C:white}Yellow{}",
+                        "When scored, other",
+                        "{X:green,C:white}Simple{} Blinds",
+                        "give {X:mult,C:white}X#1#{} Mult"
+                    },
+                }
+            },
+            m_unik_blindside_fizzy ={
+                name = "The Fizzy",
+                text = {
+                    {
+                        "{C:attention}Retrigger{} the rightmost",
+                        "played Blind for each",
+                        "{C:chips}Hand{} or {C:red}Discard lost",
+                        "in current Round"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#1#{C:inactive}Retriggers)",
+                    },
+                }
+            },
+            m_unik_blindside_fizzy_upgraded ={
+                name = "The Fizzy",
+                text = {
+                    {
+                        "{C:unik_rescore}Rescore the rightmost",
+                        "played Blind {C:attention}#2#{} time#<s>2#"
+                    },
+                    {
+                        "{C:attention}Retrigger{} the rightmost",
+                        "played Blind for each",
+                        "{C:chips}Hand{} or {C:red}Discard lost",
+                        "in current Round"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#1#{C:inactive}Retriggers)",
+                    },
+                }
+            },
+            m_unik_blindside_hater = {
+                name = "The Hater",
+                text = {
+                    {
+                        "{X:mult,C:white}X#1#{} Mult",
+                    },
+                    {
+                        "When played, all",
+                        "{X:chips,C:white}XChips{} and higher",
+                        "operations become {C:red}+Mult",
+                        "operations",
+                    },
+                }
+            },
+            m_unik_blindside_lamppost = {
+                name = "The Lamppost",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:money,C:white}Yellow{}",
+                        "Adjacent Blinds are",
+                        "{C:attention}Retriggered {}#1# time#<s>2#",
+                        "and {C:unik_copper}Rescored{} #2# time#<s>2#",
+                    },
+                    {
+                        "{C:red}Debuffs{} all Blinds",
+                        "{C:attention}not adjacent{} to",
+                        "each {C:attention}Lamppost"
+                    },
+                }
+            },
+            m_unik_blindside_decepticon = {
+                name = "The Decepticon",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{} {X:dark_edition,C:white}Faded{}",
+                        "While held",
+                        "{X:chips,C:white}X#1#{} Chips to Joker",
+                        "when a {C:green}probability {C:red}fails",
+                    },
+                    {
+                        "{C:red}Otherwise,",
+                        "{X:chips,C:white}X#1#{} Chips to Joker",
+                        "when a {C:green}probability {C:attention}Succeeds",
+                    },
+                },
+            },
+            m_unik_blindside_patina = {
+                name = "The Patina",
+                text = {
+                    {
+                        "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{} ",      
+                        "{X:chips,C:white}X#1#{} Chips"
+                        
+                    },
+                    {
+                        "{C:unik_copper}Rescore{} all scored cards",
+                    },
+                    {"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#2# in #3#{} chance"},
+                }
+            },
+            m_unik_blindside_patina_upgraded = {
+                name = "The Patina",
+                text = {
+                    {
+                        "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{} ",      
+                        "{X:chips,C:white}X#1#{} Chips"
+                        
+                    },
+                    {
+                        "{C:unik_copper}Rescore{} all scored cards",
+                    },
+                    {
+                        "Always Scores"
+                    },
+                }
+            },
+            m_unik_blindside_zu = {
+                name = "The Zu",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{} {X:green,C:white}Green",
+                        "{C:attention}Duplicates{} the leftmost",
+                        "held consumable",
+                        "{C:inactive}(Must have room)",
+                    },
+                    {"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance"},
+                }
+            },
+            m_unik_blindside_zu_upgraded = {
+                name = "The Zu",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{} {X:green,C:white}Green",
+                        "{C:attention}Duplicates{} the leftmost",
+                        "held consumable",
+                        "{C:inactive}(Must have room)",
+                    },
+                    {
+                        "Always Scores"
+                    },
+                }
+            },
+            m_unik_blindside_bliss = {
+                name = "The Bliss",
+                text = {
+                    
+                }
+            },
+            m_unik_blindside_opulence ={
+                name = "The Opulence",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow{} {X:green,C:white}Green",
+                        "{C:money}+$#1#{} for each {X:gold,C:white}Yellow{}",
+                        "or {X:green,C:white}Green",
+                        "Blind in your Full Deck"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
+                    },
+                    {
+                    "{C:attention,E:1}Burns{}",
+                    },
+                }
+            },
+            m_unik_blindside_watermelon = {
+                name = "The Watermelon",
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:green,C:white}Green",
+                        "When scored, {C:attention}Trigger{} all",
+                        "played {X:red,C:white}Red{} Blinds as if",
+                        "they were {C:unik_copper}Scored"
+                    },
+                    {
+                        "{C:red}Debuffs{} and {C:red}Destroys",
+                        "all held and played",
+                        "{X:chips,C:white}Blue{} Blinds",
+                    },
+                }
+            },
+            m_unik_blindside_watermelon_upgraded = {
+                name = "The Watermelon",
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:green,C:white}Green",
+                        "When scored, {C:attention}Trigger{} all",
+                        "played {X:red,C:white}Red{} and",
+                        "{X:green,C:white}Green{} Blinds as if",
+                        "they were {C:unik_copper}Scored"
+                    },
+                    {
+                        "{C:red}Debuffs{} all",
+                        "held and played",
+                        "{X:chips,C:white}Blue{} Blinds",
+                    },
+                }
+            },
             m_unik_blindside_magician = {
                 name = "The Magician",
                 text = {
@@ -1969,10 +2203,11 @@ return {
                     {
                         "{X:dark_edition,C:white}Faded",  
                         "{C:red}+#1#{} Mult to Joker",
-                        "{C:red}#1#{} Mult",
-                        "{C:money}-$#1#{}"
+                        "{C:red}#2#{} Mult",
+                        "{C:money}-$#3#{}"
                     },
                     {"{C:green}Retained"},
+                    {"{C:attention}Burns"},
                 }
             },
             m_unik_blindside_corpo_upgraded ={
@@ -1981,9 +2216,10 @@ return {
                     {
                          "{X:dark_edition,C:white}Faded",                        
                         "{C:red}#1#{} Mult to Joker",
-                        "{C:red}+#1#{} Mult",
-                        "{C:money}$#1#{}"
+                        "{C:red}+#2#{} Mult",
+                        "{C:money}$#3#{}"
                     },
+                    {"{C:attention}Burns"},
                 }
             },
             m_unik_blindside_ai_brainrot = {
@@ -2015,6 +2251,40 @@ return {
                     {"{C:attention}Burns"},
                 }
             },
+            m_unik_blindside_taw = {
+                name = "The Taw",
+                text = {
+                    {
+                        "{X:red,C:white}X#1#{} Mult"
+                    },
+                    {
+                        "{C:red}Cannot be {C:attention}Burned",
+                        "{C:attention}Copies{} itself to",
+                        "hand if {C:red}Destroyed"
+                    },
+                    {
+                        "{C:red}Unrerollable{}"
+                    },
+                    {"{C:attention}Stubborn"},
+                    {"{C:green}Retained"},
+                }
+            },
+            m_unik_blindside_taw_upgraded = {
+                name = "The Taw",
+                text = {
+                    {
+                        "{X:red,C:white}X#1#{} Mult"
+                    },
+                    {
+                        "{C:red}Cannot be {C:attention}Burned",
+                        "{C:attention}Copies{} itself if",
+                        "{C:red}Destroyed"
+                    },
+                    {
+                        "{C:red}Unrerollable{}"
+                    },
+                }
+            },
             m_unik_blindside_epic_straightforwardness = {
                 name = "Tasainenviiva",
                 text = {
@@ -2024,14 +2294,6 @@ return {
                         "to Joker",
                     },
                     {"{C:attention}Burns"},
-                }
-            },
-            m_unik_blindside_epic_straightforwardness_upgraded = {
-                name = "Tasainenviiva",
-                text = {
-                    {
-                        
-                    },
                 }
             },
             m_unik_blindside_epic_sand = {
@@ -5808,6 +6070,16 @@ return {
 					"{C:unik_ancient,E:1}Ancient{} Blind"
                 }
             },
+            ["c_bld_assimilate"] = {
+				["name"] = "Assimilate",
+				["text"] = {
+					{"Select {C:attention}#1#{} Blinds of",
+					"only {C:attention}2 different hues"},
+					{"They are {C:red}destroyed{}, and",
+					"a random {E:1}multicolor{} Blind of",
+					"their {C:attention}hues{} is created"},
+				},
+			},
         },
         Voucher={
             v_unik_spectral_merchant = {
@@ -6465,6 +6737,9 @@ return {
             k_unik_positive = "Positive",
             k_unik_deckbloat = "HOPE YOU LIKE BLOAT!",
             k_unik_exotic = "Exotic",
+            k_unik_rerolled = "Rerolled!",
+            k_unik_hunter_1 = "Targeting!",
+            k_unik_hunter_2 = "Hunted!",
             
         },
         high_scores={},

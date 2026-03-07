@@ -6,10 +6,10 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            x_mult = 1.5,
+            x_mult = 1.75,
             log_base = 40,
             log_down = 20,
-            x_mult_up = 0.5,
+            x_mult_up = 0.75,
             tags = 2,
             tag_down = 1,
         }

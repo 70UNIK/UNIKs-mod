@@ -13,6 +13,7 @@
         "Steamodded (>=1.0.0~BETA-1221a)"
     ],
 	"conflicts": [
-		"Talisman (<=2.4)"
+		"Talisman (<=2.4)",
+		"Entropy (<=1.2)"
     ]
 }

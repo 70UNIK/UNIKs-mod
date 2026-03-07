@@ -40,7 +40,7 @@ rare = true,
         
         local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.badchance, card.ability.extra.trigger, 'nought_unik')
         return {
-            key = card.ability.extra.upgraded and 'm_unik_blindside_nought' or 'm_unik_blindside_nought',
+            key = card.ability.extra.upgraded and 'm_unik_blindside_nought_upgraded' or 'm_unik_blindside_nought',
             vars = {
                 chance,
                 trigger

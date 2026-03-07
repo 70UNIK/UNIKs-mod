@@ -35,9 +35,10 @@ BLINDSIDE.Joker({
     calculate = function(self, blind, context)
         if context.setting_blind and not context.disabled and not G.GAME.blind.disabled then
             G.GAME.unik_blind_e_mult = 1
+            G.GAME.unik_dynamic_text_realtime = true
         end
         if (context.after) and not G.GAME.blind.disabled then
-            G.GAME.blind:set_text()
+            G.GAME.unik_dynamic_text_realtime = true
             G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult or 1
             if G.GAME.unik_blind_e_mult > 1 then
                 UNIK.blindside_chips_modifyV2({e_chips = G.GAME.unik_blind_e_mult})   
@@ -52,7 +53,7 @@ BLINDSIDE.Joker({
             if context.other_card:is_color('Purple') and context.other_card.facing ~= 'back' then
                 
                 G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult + 0.07
-                G.GAME.blind:set_text()
+                G.HUD_blind:recalculate(true)
                 return {
                     message = "+^" .. 0.07 .. localize('k_unik_jchips'),
                     colour = G.C.BLACK,
@@ -75,9 +76,11 @@ BLINDSIDE.Joker({
     end,
     disable = function(self)
         G.GAME.unik_blind_e_mult = 1
+        G.GAME.unik_dynamic_text_realtime = nil
     end,
     joker_defeat = function()
         G.GAME.unik_blind_e_mult = 1
+        G.GAME.unik_dynamic_text_realtime = nil
     end
 })
 

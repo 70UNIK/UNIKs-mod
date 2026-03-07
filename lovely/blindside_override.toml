@@ -45,5 +45,55 @@ for i, card in pairs(G.playing_cards) do
     if card.ability and card.ability.extra and card.ability.extra.e_chips and SMODS.has_enhancement(card, 'm_unik_blindside_epic_trench') then
         card.ability.extra.e_chips = card.ability.extra.e_chips_base
     end
+     card.ability.unik_burned_by_hook = nil
 end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''-- TARGET: card destroyed'''
+match_indent = true
+position = 'after'
+payload = '''
+
+'''
+
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context({hand_discard = true, other_card =  _cards[i], full_hand = _cards, ignore_other_debuff = true}, effects)'''
+match_indent = true
+position = 'after'
+payload = '''
+if _cards[i] and _cards[i].ability and _cards[i].ability.unik_burned_by_hook then
+    burned = true
+    _cards[i].ability.unik_burned_by_hook = nil
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context({hand_retain = true, other_card =  _retained_cards[i], full_hand = _retained_cards, ignore_other_debuff = true}, effects)'''
+match_indent = true
+position = 'after'
+payload = '''
+if _cards[i] and _cards[i].ability and _cards[i].ability.unik_burned_by_hook then
+    burned = true
+    _cards[i].ability.unik_burned_by_hook = nil
+end
+'''
+
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context\(\{(.*)end_of_round = true(.*)game_over = game_over(.*)'''
+match_indent = true
+position = 'after'
+payload = '''
+
+G.GAME.last_joker = G.GAME.blind.boss
+
 '''
