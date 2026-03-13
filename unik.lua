@@ -1296,9 +1296,16 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/the_fail.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/watermelon.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/bat.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/lamppost.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/patina.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/hater.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/fizzy.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/zu.lua")()	
 
 	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/corpo.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/impatience.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/brainrot.lua")()
 	
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_flip.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_trench.lua")()

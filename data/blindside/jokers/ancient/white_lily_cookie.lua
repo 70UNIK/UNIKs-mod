@@ -1,0 +1,1 @@
+--^1 mult per hand, +^0.05 Mult per blind burned or destroyed this run

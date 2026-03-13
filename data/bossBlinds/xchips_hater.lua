@@ -29,9 +29,23 @@ SMODS.Blind{
 	end,
 }
 
+function UNIK.has_hater()
+    if G.GAME.unik_xchips_becomes_mult then
+        return true
+    end
+    if BLINDSIDE then
+        for i,v in pairs(G.play.cards) do
+            if v.config.center.key == 'm_unik_blindside_hater' and v.hater_scoring and not v.debuff and v.facing ~= 'back' then
+                return true
+            end
+        end
+    end
+    return false
+end
+
 local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
-    if G.GAME.unik_xchips_becomes_mult then
+    if UNIK.has_hater() then
         if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
             key = 'x_mult'
         end

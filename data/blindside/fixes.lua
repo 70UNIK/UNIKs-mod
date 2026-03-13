@@ -189,8 +189,8 @@ function UNIK.get_enhancements_with_exact_colors(colors,ancient,cursed)
                     break
                 end
             end
-            if good then
-                enhancements[value] = true
+            if good and G.P_CENTERS[value.key] then
+                enhancements[value.key] = true
             end
         end
     end
@@ -198,6 +198,7 @@ function UNIK.get_enhancements_with_exact_colors(colors,ancient,cursed)
     for i,v in pairs(enhancements) do
         final[#final+1] = i
     end
+    table.sort(final)
     return final
 
 end
@@ -227,7 +228,7 @@ SMODS.Consumable:take_ownership("c_bld_assimilate",{
         if rand > 0.5 then
             card = copy_card(G.hand.highlighted[1], nil, nil, G.playing_card)
             card:remove_sticker('bld_upgrade')
-            card:set_ability(enhancement)
+            card:set_ability(G.P_CENTERS[enhancement])
             if G.hand.highlighted[1].ability.extra.upgraded then
                 upgrade_blinds({card}, nil, true)
             end

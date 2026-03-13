@@ -6,8 +6,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 12,
-            x_chips = 0.05,
-            x_chips_up = 0.05,
+            x_chips = 0.04,
+            x_chips_up = 0.04,
         }},
     hues = {"Purple","Red", },
     rare = true,

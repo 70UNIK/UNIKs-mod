@@ -49,6 +49,7 @@ if not  card.ability.extra.upgraded then
             card.ability.extra.jokermult = card.ability.extra.jokermult + card.ability.extra.jokermultdown
             card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.multup
             card.ability.extra.dollars = card.ability.extra.dollars + card.ability.extra.dollarsup
+            card.ability.extra.retain = false
             card.ability.extra.retain = nil
             card.ability.extra.upgraded = true
         end

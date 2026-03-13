@@ -12,6 +12,7 @@ BLINDSIDE.Blind({
             stubborn = true,
         }},
     hues = {"Blue"},
+always_scores = true,
     calculate = function(self, card, context) 
         if context.cardarea == G.play and context.after and card.facing ~= 'back' and not  card.ability.extra.upgraded then
             local cardsadded = {}

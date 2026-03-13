@@ -2,6 +2,9 @@
 if BLINDSIDE then
     local blindscore = BLINDSIDE.rescore_card
     function BLINDSIDE.rescore_card(card, context)
+        if G.GAME.unik_only_rescore then
+            return false
+        end
         local ret = blindscore(card, context)
         if not G.GAME.unik_block_blindside_rescore then
             card.blindside_rescore =  card.blindside_rescore or 0
@@ -9,6 +12,8 @@ if BLINDSIDE then
         end
 
         return ret
+        
+        
     end
 end
 
@@ -205,6 +210,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             end
             for _,x in pairs(rescoring_cards) do
                 G.GAME.unik_block_blindside_rescore = true
+                G.GAME.unik_only_rescore = true
                 local pased = context
                 pased.cardarea = calc_card_area 
 
@@ -217,18 +223,21 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
                             colour = v.colour or G.C.FILTER,
                             card=x,
                         })
+                        G.GAME.unik_only_rescore = nil
                         BLINDSIDE.rescore_card(x, context)
-
+                        G.GAME.unik_only_rescore = true
                         
                     end
                 end
                 G.GAME.unik_block_blindside_rescore = nil
+                G.GAME.unik_only_rescore = nil
             end
 
 
         end
     end
     --     --clean table
+    G.GAME.unik_only_rescore = nil
     for i,v in pairs(calc_card_area.cards) do
         if v.unik_rescored then
           --  print("CLEAN")

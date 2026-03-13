@@ -34,6 +34,7 @@ BLINDSIDE.Blind({
                     end
                     for i,v in pairs(cards) do
                          G.GAME.unik_block_blindside_rescore = true
+                         G.GAME.unik_only_rescore = true
                          G.GAME.unik_restrict_watermelon = true
                         local ctx = {
                             cardarea = G.play,
@@ -52,11 +53,13 @@ BLINDSIDE.Blind({
                                     colour = G.C.RED,
                                     card=v,
                                 })
+                                G.GAME.unik_only_rescore = nil
                                 BLINDSIDE.rescore_card(v, context)
-
+                                G.GAME.unik_only_rescore = true
                                 
                             end
                         end
+                        G.GAME.unik_only_rescore = nil
                         G.GAME.unik_restrict_watermelon = nil    
                          G.GAME.unik_block_blindside_rescore = nil
                     end

@@ -16,3 +16,19 @@ payload = '''
 },
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/ui.lua"]'
+pattern = '''tab_definition_function = G.UIDEF.used_price_tags,
+                },'''
+position = "after"
+payload = '''
+
+{
+    label = localize('b_unik_banished_items'),
+    tab_definition_function = G.UIDEF.unik_banished_items,
+},
+
+'''
+match_indent = true
