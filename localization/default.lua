@@ -1603,13 +1603,9 @@ return {
                     {
                         "{X:purple,C:white}Purple{}",
                         "{C:mult}+#1#{} Mult",
-                        "on {C:attention}odd Hands",
+                        "on {C:attention}even Hands",
                         "{V:1}(#2#)"
                     },
-                    {
-                        "{C:mult}+#3#{} Mult",
-                        "to Joker otherwise",
-                    }
                 }
             },
             m_unik_blindside_fail = {
@@ -2343,9 +2339,8 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded", 
-                        "Create {C:attention}#1#",
-                        "{X:black,C:white}Crude{} Blind#<s>1#",
-                        "in hand",
+                        "Create {C:attention}#1# {X:black,C:white}Crude{}",
+                        "Blind#<s>1# in hand",
                     },
                     {
                         "{C:red}Banishes{} all held and",
@@ -2364,8 +2359,7 @@ return {
                     {
                         "{X:dark_edition,C:white}Faded", 
                         "Create {C:attention}#1# upgraded",
-                        "{X:black,C:white}Crude{} Blind#<s>1#",
-                        "in hand",
+                        "{X:black,C:white}Crude{} Blind#<s>1# in hand",
                     },   
                     {"Always scores"},
                     {"{C:attention}Burns"},

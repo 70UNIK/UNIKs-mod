@@ -25,7 +25,7 @@ function Card:cry_calculate_voucher_perishable()
     if self.ability.perishable and not self.ability.perish_tally then
 		self.ability.perish_tally = G.GAME.cry_voucher_perishable_rounds
 	end
-    if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
+    if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally then
         if self.ability.perish_tally <= 1 then
             local area
             if G.STATE == G.STATES.HAND_PLAYED then

@@ -41,11 +41,13 @@ pattern = '''
 match_indent = true
 position = 'after'
 payload = '''
-for i, card in pairs(G.playing_cards) do
-    if card.ability and card.ability.extra and card.ability.extra.e_chips and SMODS.has_enhancement(card, 'm_unik_blindside_epic_trench') then
-        card.ability.extra.e_chips = card.ability.extra.e_chips_base
+if BLINDSIDE then
+    for i, card in pairs(G.playing_cards) do
+        if card.ability and card.ability.extra and card.ability.extra.e_chips and card.config.center.key == 'm_unik_blindside_epic_trench' then
+            card.ability.extra.e_chips = card.ability.extra.e_chips_base
+        end
+        card.ability.unik_burned_by_hook = nil
     end
-     card.ability.unik_burned_by_hook = nil
 end
 '''
 

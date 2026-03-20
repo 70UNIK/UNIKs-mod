@@ -23,8 +23,13 @@ SMODS.Joker {
     in_pool = function()
 		return not G.GAME.d16_boom_boom
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.immutable.destroyed = false
+    end,
     calculate = function(self, card, context)
-		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed then
+		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed and
+        ((not context.identifier) or (context.identifier and context.identifier ~= 'unik_aquamarine_resc2'))
+        then
             SMODS.scale_card(card, {
 				ref_table =card.ability.extra,
 				ref_value = "x_mult",

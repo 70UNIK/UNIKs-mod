@@ -19,7 +19,7 @@ BLINDSIDE.Blind({
                     break
                 end
             end
-            if exists and not card.ability.extra.upgraded then
+            if exists then
                 for i = 1, card.ability.extra.tags do
                     add_tag(Tag(get_next_tag_key()))
                 end
