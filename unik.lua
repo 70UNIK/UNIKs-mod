@@ -1331,7 +1331,7 @@ end
 
 NFS.load(mod_path .. "data/stickers/mad.lua")() 
 
-if Entropy then
+if (SMODS.Mods["entr"] or {}).can_load then
 	NFS.load(mod_path .. "data/overrides/entropy_recipes.lua")() 
 	
 end
