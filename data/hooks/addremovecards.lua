@@ -109,11 +109,11 @@ function CardArea:emplace(card, location, stay_flipped)
     if card.ability.unik_disposable or card.ability.unik_niko or card.ability.unik_depleted then
         unik_set_sell_cost(card,0)
     end
-    if card.config.center.key == 'j_unik_eternal_egg' and (self == G.shop_jokers or self == G.shop_booster) then
+    if card and card.config and card.config.center and card.config.center.key == 'j_unik_eternal_egg' and (self == G.shop_jokers or self == G.shop_booster) then
         card.ability.eternal = true
     end
     --mainline:
-    if self and self == G.consumeables and card.config.center.key == "c_unik_celeste" then
+    if self and self == G.consumeables and card and card.config and card.config.center and card.config.center.key == "c_unik_celeste" then
         card.ability.unik_decaying = true
         for i,v in pairs(G.consumeables.cards) do
             if v.config.center.key == "c_unik_celeste" and v ~= card then
@@ -141,7 +141,7 @@ function CardArea:emplace(card, location, stay_flipped)
             end
         end
     end
-        if self and self == G.consumeables and card.config.center.key == "c_unik_ebott" then
+        if self and self == G.consumeables and card and card.config and card.config.center and card.config.center.key == "c_unik_ebott" then
             card.ability.unik_decaying = true
         for i,v in pairs(G.consumeables.cards) do
             if v.config.center.key == "c_unik_ebott" and v ~= card then
@@ -184,7 +184,7 @@ function CardArea:emplace(card, location, stay_flipped)
        --print("11")
         --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)
         if (SMODS.Mods["extracredit"] or {}).can_load then
-            if card.config.center.key == "j_ExtraCredit_averagealice" then
+            if card and card.config and card.config.center and card.config.center.key == "j_ExtraCredit_averagealice" then
                 if pseudorandom('unik_average_alice_exotic_change') < 1/100 then
                     G.E_MANAGER:add_event(Event({
                         func = function()
