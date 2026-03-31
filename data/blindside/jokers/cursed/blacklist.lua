@@ -1,0 +1,1 @@
+--When a [random blind] is played, it permanently gains -0.1 Mult to Joker, blind changes per hand

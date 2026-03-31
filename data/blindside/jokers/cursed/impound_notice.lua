@@ -1,0 +1,1 @@
+--Leftmost Trinket is debuffed, it becomes negative on defeat

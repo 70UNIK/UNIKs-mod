@@ -9,7 +9,7 @@ BLINDSIDE.Blind({
             mult_mod = 4,
             mult_mod_up = 4,
         }},
-    hues = {"Green","Faded"},
+    hues = {"Green"},
     calculate = function(self, card, context) 
         if context.cardarea == G.play and context.main_scoring then
 

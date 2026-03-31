@@ -1,0 +1,1 @@
+--winning hand permanently gains -X0.2 Chips to Joker if no Xchips or higher effects are triggered. (Capped at -X0.9 Chips)

@@ -6,11 +6,11 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            x_mult = 1.75,
-            log_base = 40,
-            log_down = 20,
-            x_mult_up = 0.75,
-            tags = 2,
+            x_mult = 1.5,
+            log_base = 50,
+            log_down = 25,
+            x_mult_up = 0.5,
+            tags = 1,
             tag_down = 1,
         }
     },
@@ -64,7 +64,7 @@ BLINDSIDE.Blind({
         if not card.ability.extra.upgraded then
         card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_up
         card.ability.extra.log_base = card.ability.extra.log_base - card.ability.extra.log_down
-        card.ability.extra.tags = card.ability.extra.tags - card.ability.extra.tag_down
+        --card.ability.extra.tags = card.ability.extra.tags - card.ability.extra.tag_down
         card.ability.extra.upgraded = true
         end
     end

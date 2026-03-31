@@ -89,9 +89,9 @@ BLINDSIDE.Blind({
                     v.ability.marked_by_brainrot = true
                 end
             end
-            SMODS.destroy_cards(cards)
+            --SMODS.destroy_cards(cards)
         end
-        if context.destroy_card and not card.ability.extra.upgraded then
+        if context.destroy_card and not card.ability.extra.upgraded and card.area == G.play and (context.cardarea == G.play or context.cardarea == G.hand) then
             if (context.destroy_card.area == G.play or context.destroy_card.area == G.hand) and not context.destroy_card.config.center.curse then
                  if not G.GAME.cry_banned_pcards then
                     G.GAME.cry_banned_pcards = {}

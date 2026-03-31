@@ -104,7 +104,7 @@ BLINDSIDE.Blind({
                 
             end
         end
-        if context.destroy_card  and not card.ability.extra.upgraded  then
+        if context.destroy_card  and not card.ability.extra.upgraded and card.area == G.play and (context.cardarea == G.play or context.cardarea == G.hand) then
             if (context.destroy_card.area == G.play or context.destroy_card.area == G.hand) and context.destroy_card:is_color("Blue", true, false) then
                 return { 
                     remove = true, 

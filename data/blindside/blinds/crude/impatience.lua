@@ -21,7 +21,7 @@ BLINDSIDE.Blind({
                 x_mult = card.ability.extra.x_mult
             }
         end
-        if context.unik_triggering then 
+        if context.unik_triggering and card.area == G.hand then 
             if (context.selected_card == card) or (not card.ability.extra.upgraded and context.selected_card.area == G.hand) then
                 if SMODS.pseudorandom_probability(card, pseudoseed('unik_impatience'), card.ability.extra.base_chance, card.ability.extra.chance, 'unik_impatience') then
                     play_sound('unik_gunshot')

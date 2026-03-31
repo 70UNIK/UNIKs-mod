@@ -1,0 +1,1 @@
+--Lose at least $6 in this round to double your money when defeated

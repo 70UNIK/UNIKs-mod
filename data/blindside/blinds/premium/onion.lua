@@ -1,4 +1,4 @@
---HAS A RANDOM EFFECT!
+--HAS A RANDOM EFFECT!!!
 --All chances are equal:
 --X3 Mult,
 --+25 Mult,

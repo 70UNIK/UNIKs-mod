@@ -106,6 +106,14 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.debuff_immune = true
         unik_set_sell_cost(card,-666)
     end
+    if card and card.ability and card.ability.extra and type(card.ability.extra) == 'table' and card.ability.extra.unik_unique and card.added_to_deck then
+        for i,v in pairs(G.playing_cards) do
+            if card.config.center.key == v.config.center.key and v ~= card then
+                selfDestruction(card,"k_nope_ex",G.C.MULT)
+                return true
+            end
+        end
+    end
     if card.ability.unik_disposable or card.ability.unik_niko or card.ability.unik_depleted then
         unik_set_sell_cost(card,0)
     end

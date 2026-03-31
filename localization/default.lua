@@ -2186,10 +2186,12 @@ return {
                         "{X:mult,C:white}X#1#{} Mult to Joker"
                     },
                     {
-                        "After playing this",
-                        "{C:attention}#2#{} time#<s>2#, create",
-                        "a {C:dark_edition}Negative{} {C:purple}The Cage",
-                        "and {C:red,E:2}Self-Destruct"
+                        "{X:dark_edition,C:white}Faded",  
+                        "After played in",
+                        "scoring hand {C:attention}#2#{} time#<s>2#,",
+                        "create {C:purple}The Cage",
+                        "and {C:red,E:2}Self-Destruct",
+                        "{C:inactive}(Can overflow)",
                     },
                     {"{C:attention}Unique"},
                     {"{C:attention}Burns"},
@@ -2202,10 +2204,12 @@ return {
                         "{X:dark_edition,C:white}^#1#{} Mult to Joker"
                     },
                     {
-                        "After playing this",
-                        "{C:attention}#2#{} time#<s>2#, create",
-                        "a {C:dark_edition}Negative{} {C:unik_ancient}The Sigil",
-                        "and {C:red,E:2}Self-Destruct"
+                        "{X:dark_edition,C:white}Faded",  
+                        "After played in",
+                        "scoring hand {C:attention}#2#{} time#<s>2#,",
+                        "create {C:unik_ancient}The Sigil",
+                        "and {C:red,E:2}Self-Destruct",
+                        "{C:inactive}(Can overflow)",
                     },
                     {"{C:attention}Unique"},
                     {"{C:attention}Burns"},
@@ -2219,6 +2223,7 @@ return {
                         "{X:dark_edition,C:white}^#1#{} Chips to Joker"
                     },
                     {
+                        "{X:dark_edition,C:white}Faded",  
                         "After playing this",
                         "{C:attention}#2#{} time#<s>2#, create",
                         "a {C:dark_edition}Negative{} {C:unik_exotic}???",

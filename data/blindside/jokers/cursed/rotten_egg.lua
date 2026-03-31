@@ -1,0 +1,1 @@
+--doubles sell value of all owned trinkets per hand

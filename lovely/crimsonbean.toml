@@ -1,0 +1,13 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 99
+###crimsonbean blindside fix
+
+[[patches]]
+[patches.regex]
+target = "cardarea.lua"
+pattern = '''self.config.type == 'hand' and cardAreaTable.config.card_limits.total_slots'''
+position = "before"
+payload = ''' (cardAreaTable and cardAreaTable.config and cardAreaTable.config.card_limits and cardAreaTable.config.card_limits.extra_slots) and '''
+match_indent = true

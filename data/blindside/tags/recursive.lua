@@ -3,11 +3,16 @@ SMODS.Tag {
     hide_ability = false,
     atlas = 'unik_tags',
     pos = {x = 4, y = 0},
-    in_pool = function(self, args)
-        return false
-    end,
     pools = {["bld_obj_blindside"] = true},
     config = {chancefail = 1, chance = 2},
+    in_pool = function(self, args)
+        if G.GAME.selected_back.effect.center.config.extra then
+            if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
+            return true
+        else
+            return false
+        end
+    end,
     loc_vars = function(self, info_queue,tag)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         local chance, trigger = SMODS.get_probability_vars(tag, self.config.chancefail, self.config.chance, 'recursive_unik')
