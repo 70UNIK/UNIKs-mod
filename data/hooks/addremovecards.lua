@@ -87,12 +87,16 @@ local add_to_deck_hook = Card.add_to_deck
 function Card:add_to_deck(from_debuff)
     add_to_deck_hook(self,from_debuff)
     SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
+        self.will_be_destroyed_1 = nil
+       self.will_be_gored = nil
 end
 
 local emplaceHook = CardArea.emplace
 
 function CardArea:emplace(card, location, stay_flipped)
     emplaceHook(self,card, location, stay_flipped)
+    if card then card.will_be_destroyed_1 = nil end
+                if card then card.will_be_gored = nil end
     if  G.consumeables and G.jokers then
         SMODS.calculate_context({ unik_emplace = true, added = card, cardarea = self,location = location, isFlipped = stay_flipped})
     end
@@ -277,3 +281,25 @@ function CardArea:emplace(card, location, stay_flipped)
     end
 end
 
+function UNIK.trigger_globals_after_play()
+    G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        func = function()
+            -- local cards_destroyed_after = {}
+            -- for i,v in pairs(G.playing_cards) do
+            --     -- if (v.will_be_destroyed_1  or v.will_be_gored) and not v.removed then
+            --     if v.removed then
+            --         cards_destroyed_after[#cards_destroyed_after+1] = v
+            --         print("leftover cleanup")
+            --     end
+                    
+            --     --      cards_destroyed_after[#cards_destroyed_after+1] = v
+            --     -- end
+            -- end
+            -- SMODS.destroy_cards(cards_destroyed_after)
+            return true
+        end
+    }))
+   
+    
+end

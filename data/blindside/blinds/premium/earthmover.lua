@@ -57,34 +57,7 @@ BLINDSIDE.Blind({
     in_pool = function(self, args)
         if G.GAME.selected_back.effect.center.config.extra then
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
-            for i,v in pairs(G.playing_cards) do
-                if v.config.center.key == 'm_unik_blindside_earthmover' then
-                    return false
-                end
-            end
-            if G.pack_cards then
-                for i,v in pairs(G.pack_cards.cards) do
-                    if v.config.center.key == 'm_unik_blindside_earthmover' then
-                        return false
-                    end
-                end
-            end
-            if G.shop_jokers then
-                for i,v in pairs(G.shop_jokers.cards) do
-                    if v.config.center.key == 'm_unik_blindside_earthmover' then
-                        return false
-                    end
-                end
-            end
-            if G.shop_booster then
-                for i,v in pairs(G.shop_booster.cards) do
-                    if v.config.center.key == 'm_unik_blindside_earthmover' then
-                        return false
-                    end
-                end
-            end
-            
-            return pseudorandom('earthmover'..G.SEED) < 0.33
+            return UNIK.check_if_exists('m_unik_blindside_earthmover') and pseudorandom('earthmover'..G.SEED) < 0.33
         else
             return false
         end
@@ -108,3 +81,39 @@ BLINDSIDE.Blind({
         end
     end
 })
+
+--checks if a copy exists in deck, in the shop, or in boosters
+function UNIK.check_if_exists(blind_key)
+    if G.GAME.selected_back.effect.center.config.extra then
+        if not G.GAME.selected_back.effect.center.config.extra.blindside then return nil end
+        for i,v in pairs(G.playing_cards) do
+            if v.config.center.key == blind_key then
+                return true
+            end
+        end
+        if G.pack_cards then
+            for i,v in pairs(G.pack_cards.cards) do
+                if v.config.center.key == blind_key then
+                    return true
+                end
+            end
+        end
+        if G.shop_jokers then
+            for i,v in pairs(G.shop_jokers.cards) do
+                if v.config.center.key == blind_key then
+                    return true
+                end
+            end
+        end
+        if G.shop_booster then
+            for i,v in pairs(G.shop_booster.cards) do
+                if v.config.center.key == blind_key then
+                    return true
+                end
+            end
+        end
+        return false
+    end
+    --error("Blindside is not active! This check should not happen! Contact 70UNIK for assistance")
+    return nil
+end

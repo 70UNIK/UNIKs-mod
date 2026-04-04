@@ -251,3 +251,29 @@ SMODS.Consumable:take_ownership("c_bld_assimilate",{
 },true)
 
 --assimilate: now takes into account multiple hues
+
+BLINDSIDE.Joker:take_ownership("bl_bld_throwback",{
+    joker_set = function(self)
+        for i, v in pairs(G.GAME.tags) do
+            if v:apply_to_run({type = 'real_round_before_start', card = card}) then break end
+        end
+        if not G.GAME.blind.disabled then
+            if G.GAME.round_resets.blind_states.Small ~= 'Skipped' and G.GAME.round_resets.blind_states.Big ~= 'Skipped' then
+                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
+                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_big_joker_2" or "bld_playing_with_fire_each_big_joker_1"
+                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 * (G.GAME.used_vouchers.v_bld_swearjar and 2 or 1)
+                BLINDSIDE.chipsmodify(0, 0, 4, 0, true)
+                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                    BLINDSIDE.chipsupdate()
+                return true end }))
+            end
+        end
+    end,
+},true)
+
+local groupHook = has_group_of
+function has_group_of(num, hands)
+    if not hands then return false end
+
+    return groupHook(num,hands)
+end

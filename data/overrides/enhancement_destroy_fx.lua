@@ -113,7 +113,7 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             self:gore6_break()
             return nil
         end
-    if self.to_be_destroyed_by_lily then
+    if self.to_be_destroyed_by_lily or self.will_be_gored then
         self:gore6_break()
         return nil
     end

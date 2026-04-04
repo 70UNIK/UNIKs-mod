@@ -144,8 +144,8 @@ return {
             bl_unik_blindside_lily = {
                 name = "Lily",
                 text = {
-                    "Destroy a random",
-                    "played Blind",
+                    "Destroy 2 random",
+                    "played Blinds",
                 }
             },
             bl_unik_blindside_railroad_crossing = {
@@ -2151,9 +2151,10 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
-                        "When scored, {C:attention}Trigger{} all",
-                        "played {X:red,C:white}Red{} Blinds as if",
-                        "they were {C:unik_copper}Scored"
+                        "When scored, each played {X:red,C:white}Red{}",
+                        "Blinds have a {C:green}#1# in #2#{} chance",
+                        "to {C:red}not{} be triggered as if",
+                        "they were {C:unik_copper}rescored",
                     },
                     {
                         "{C:red}Debuffs{} and {C:red}Destroys",
@@ -2167,10 +2168,11 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
-                        "When scored, {C:attention}Trigger{} all",
-                        "played {X:red,C:white}Red{} and",
-                        "{X:green,C:white}Green{} Blinds as if",
-                        "they were {C:unik_copper}Scored"
+                        "When scored, each played",
+                        "{X:red,C:white}Red{} and {X:green,C:white}Green{}",
+                        "Blinds have a {C:green}#1# in #2#{} chance",
+                        "to {C:red}not{} be triggered as if",
+                        "they were {C:unik_copper}rescored",
                     },
                     {
                         "{C:red}Debuffs{} all",

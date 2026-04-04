@@ -12,7 +12,16 @@ BLINDSIDE.Blind({
         }},
     hues = {"Faded"},
     calculate = function(self, card, context) 
+        if tableContains(card, G.hand.cards) and not tableContains(card, G.hand.highlighted) and #G.hand.highlighted < 5 and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+            card.ability.forced_selection = true
+            G.hand:add_to_highlighted(card, true)
+        end
+
+        if context.after then
+            card.ability.forced_selection = false
+        end
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+            card.ability.stuffplayed = true
             local cardsadded = {}
             for i = 1, card.ability.extra.cards do
                 G.E_MANAGER:add_event(Event({
@@ -42,6 +51,30 @@ BLINDSIDE.Blind({
                 
             end
             if not card.ability.extra.upgraded then
+                for i,v in pairs(context.full_hand) do
+                    -- if not v.config.center.curse then
+                    --     v.will_be_gored = true
+                    --     if not G.GAME.cry_banned_pcards then
+                    --         G.GAME.cry_banned_pcards = {}
+                    --     end
+                    --     if not G.GAME.banned_keys then
+                    --         G.GAME.banned_keys = {}
+                    --     end
+                    --     G.GAME.cry_banished_keys[v.config.center.key] = true
+                    -- end
+                end
+                for i,v in pairs(G.hand.cards) do
+                    -- if not v.config.center.curse then
+                    --     v.will_be_gored = true
+                    --         if not G.GAME.cry_banned_pcards then
+                    --         G.GAME.cry_banned_pcards = {}
+                    --     end
+                    --     if not G.GAME.banned_keys then
+                    --         G.GAME.banned_keys = {}
+                    --     end
+                    --     G.GAME.cry_banished_keys[v.config.center.key] = true
+                    -- end
+                end
                  return {
                     message = localize('k_unik_ai'),
                     colour = G.C.BLACK,
@@ -49,6 +82,7 @@ BLINDSIDE.Blind({
                         G.E_MANAGER:add_event(Event({
                             func = function()
                                 SMODS.calculate_context({ playing_card_added = true, cards = { cardsadded } })
+                                 
                                 return true
                             end
                         }))
@@ -67,29 +101,47 @@ BLINDSIDE.Blind({
                 end
             }
             end
-            
-           
         end
-        if context.burn_card and context.cardarea == G.play and card.ability.extra.upgraded and context.burn_card == card then
-            return { remove = true }
-        end
-        if context.final_scoring_step and card.area == G.play and not card.ability.extra.upgraded then
+        if context.after and not card.ability.extra.upgraded and card.ability.stuffplayed then
             local cards = {}
-            for i,v in pairs(G.hand.cards) do
-                if not card.ability.marked_by_brainrot and not v.config.center.curse  then
-                     if not G.GAME.cry_banned_pcards then
+            for i,v in pairs(context.full_hand) do
+                if not v.config.center.curse then
+                    v.will_be_gored = true
+                    if not G.GAME.cry_banned_pcards then
                         G.GAME.cry_banned_pcards = {}
                     end
                     if not G.GAME.banned_keys then
                         G.GAME.banned_keys = {}
                     end
-                        G.GAME.cry_banished_keys[v.config.center.key] = true
-                        v.to_be_destroyed_by_lily = true
+                    G.GAME.cry_banished_keys[v.config.center.key] = true
                     cards[#cards+1] = v
-                    v.ability.marked_by_brainrot = true
                 end
             end
-            --SMODS.destroy_cards(cards)
+            for i,v in pairs(G.hand.cards) do
+                if not v.config.center.curse then
+                    v.will_be_gored = true
+                        if not G.GAME.cry_banned_pcards then
+                        G.GAME.cry_banned_pcards = {}
+                    end
+                    if not G.GAME.banned_keys then
+                        G.GAME.banned_keys = {}
+                    end
+                    G.GAME.cry_banished_keys[v.config.center.key] = true
+                    cards[#cards+1] = v
+                end
+            end
+            cards[#cards+1] = card
+            return {
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            SMODS.destroy_cards(cards)
+                                
+                            return true
+                        end
+                    }))
+                end
+            }
         end
         if context.destroy_card and not card.ability.extra.upgraded and card.area == G.play and (context.cardarea == G.play or context.cardarea == G.hand) then
             if (context.destroy_card.area == G.play or context.destroy_card.area == G.hand) and not context.destroy_card.config.center.curse then
@@ -100,14 +152,17 @@ BLINDSIDE.Blind({
                     G.GAME.banned_keys = {}
                 end
                     G.GAME.cry_banished_keys[context.destroy_card.config.center.key] = true
-                    context.destroy_card.to_be_destroyed_by_lily = true
+                    context.destroy_card.will_be_gored = true
                 return { remove = true }
             end
-            if context.destroy_card == card and context.cardarea == G.play then
-                return { remove = true }
-            end
+            -- if context.destroy_card == card and context.cardarea == G.play then
+            --     return { remove = true }
+            -- end
 			
 		end
+        if context.burn_card and context.cardarea == G.play and card.ability.extra.upgraded and context.burn_card == card then
+            return { remove = true }
+        end
     end,
     curse = true,
 always_scores = true,

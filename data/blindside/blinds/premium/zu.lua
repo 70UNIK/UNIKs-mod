@@ -38,7 +38,7 @@ BLINDSIDE.Blind({
                 return { remove = true }
             end
         
-        if context.cardarea == G.play and context.main_scoring then
+        if context.cardarea == G.play and context.main_scoring and #G.consumeables.cards > 0 then
             local triggered = false
             G.E_MANAGER:add_event(Event({
                 func = function() 

@@ -32,3 +32,31 @@ payload = '''
 
 '''
 match_indent = true
+
+###blindside blacklist enhancements
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''if not skip then'''
+match_indent = true
+position = 'before'
+payload = '''
+if not G.GAME.cry_banned_pcards then
+    G.GAME.cry_banned_pcards = {}
+end
+if not G.GAME.banned_keys then
+    G.GAME.banned_keys = {}
+end
+if not skip and G.GAME.cry_banished_keys[enhance_option.key] or G.GAME.banned_keys[enhance_option.key] then
+    skip = true
+    print(enhance_option.key .. " BANISHED!")
+end
+if not skip and  G.P_CENTERS[enhance_option.key].in_pool and type(G.P_CENTERS[enhance_option.key].in_pool) == 'function' then
+    if not SMODS.add_to_pool(G.P_CENTERS[enhance_option.key],args) then
+        print(enhance_option.key .. "NOT IN POOL!")
+        skip = true
+    end
+end
+
+'''

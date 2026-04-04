@@ -57,34 +57,8 @@ BLINDSIDE.Blind({
     in_pool = function(self, args)
         if G.GAME.selected_back.effect.center.config.extra then
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
-            for i,v in pairs(G.playing_cards) do
-                if v.config.center.key == 'm_unik_blindside_prison' then
-                    return false
-                end
-            end
-            if G.pack_cards then
-                for i,v in pairs(G.pack_cards.cards) do
-                    if v.config.center.key == 'm_unik_blindside_prison' then
-                        return false
-                    end
-                end
-            end
-            if G.shop_jokers then
-                for i,v in pairs(G.shop_jokers.cards) do
-                    if v.config.center.key == 'm_unik_blindside_prison' then
-                        return false
-                    end
-                end
-            end
-            if G.shop_booster then
-                for i,v in pairs(G.shop_booster.cards) do
-                    if v.config.center.key == 'm_unik_blindside_prison' then
-                        return false
-                    end
-                end
-            end
             
-            return pseudorandom('cage'..G.SEED) < 0.4
+            return UNIK.check_if_exists('m_unik_blindside_prison')  and pseudorandom('cage'..G.SEED) < 0.4
         else
             return false
         end

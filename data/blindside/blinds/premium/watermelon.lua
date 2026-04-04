@@ -5,6 +5,9 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 20,
+            fail = 1,
+            chance = 2,
+            chance_up = 1,
         }},
     hues = {"Red", "Green"},
     calculate = function(self, card, context) 
@@ -15,7 +18,7 @@ BLINDSIDE.Blind({
                 func = function()
                     local cards = {}
                     for i,v in pairs(G.play.cards) do
-                        if v:is_color('Red') or (card.ability.extra.upgraded and v:is_color('Green')) then
+                        if v:is_color('Red') or (card.ability.extra.upgraded and v:is_color('Green')) and SMODS.pseudorandom_probability(card, pseudoseed("watermelon"), card.ability.extra.fail, card.ability.extra.chance, 'watermelon') then
                             cards[#cards+1] = v
                         end      
                     end
@@ -33,6 +36,7 @@ BLINDSIDE.Blind({
                         
                     end
                     for i,v in pairs(cards) do
+
                          G.GAME.unik_block_blindside_rescore = true
                          G.GAME.unik_only_rescore = true
                          G.GAME.unik_restrict_watermelon = true
@@ -72,11 +76,18 @@ BLINDSIDE.Blind({
             for i=1, #G.play.cards do
                 if G.play.cards[i]:is_color("Blue", true, false) and G.play.cards[i] ~= card then
                     G.play.cards[i].config.center.blind_debuff(G.play.cards[i], true)
+                    -- if not card.ability.extra.upgraded  then
+                    --     G.play.cards[i].will_be_destroyed_1 = true
+                    -- end
+                     
                 end
             end
             for i=1, #G.hand.cards do
                  if G.hand.cards[i]:is_color("Blue", true, false) then
                      G.hand.cards[i].config.center.blind_debuff(G.hand.cards[i], true)
+                    --  if not card.ability.extra.upgraded  then
+                    --     G.play.cards[i].will_be_destroyed_1 = true
+                    -- end
                  end
                
             end
@@ -115,14 +126,16 @@ BLINDSIDE.Blind({
     rare = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
-
+        local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.fail, card.ability.extra.chance, 'watermelon')
         return {
             key = card.ability.extra.upgraded and 'm_unik_blindside_watermelon_upgraded' or 'm_unik_blindside_watermelon',
+            vars = {chance,trigger}
         }
     end,
     upgrade = function(card)
         if not card.ability.extra.upgraded then
         card.ability.extra.upgraded = true
+        card.ability.extra.chance = card.ability.extra.chance + card.ability.extra.chance_up
         end
     end
 })

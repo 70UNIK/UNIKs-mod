@@ -18,7 +18,6 @@ BLINDSIDE.Blind({
             }
         end
     end,
-    rare = true,
     loc_vars = function(self, info_queue, card)
         return {
             vars = {

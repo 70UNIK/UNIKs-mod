@@ -1,0 +1,16 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''-- TARGET: card destroyed'''
+position = 'after'
+payload = '''
+if card.will_be_destroyed_1  or card.will_be_gored then
+    --destroyed = true
+end
+'''
+match_indent = true
