@@ -124,7 +124,7 @@ BLINDSIDE.Joker({
                     end
                     G.GAME.railroad_debuffed_hue = pseudorandom_element(valid_colours, pseudoseed("unik_railroad_debuff_blind"))
                     for i,v in pairs(G.playing_cards) do
-                        if not v.seal or (v.seal and not v.seal ~= 'bld_wild') then
+                        if not v.seal or (v.seal and v.seal ~= 'bld_wild') then
                             SMODS.recalc_debuff(v)
                             if v:is_color(G.GAME.railroad_debuffed_hue) then
                                 v:juice_up()

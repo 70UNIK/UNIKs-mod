@@ -18,7 +18,7 @@ BLINDSIDE.Blind({
                 func = function()
                     local cards = {}
                     for i,v in pairs(G.play.cards) do
-                        if v:is_color('Red') or (card.ability.extra.upgraded and v:is_color('Green')) and SMODS.pseudorandom_probability(card, pseudoseed("watermelon"), card.ability.extra.fail, card.ability.extra.chance, 'watermelon') then
+                        if (v:is_color('Red') or (card.ability.extra.upgraded and v:is_color('Green'))) and not SMODS.pseudorandom_probability(card, pseudoseed("watermelon"), card.ability.extra.fail, card.ability.extra.chance, 'watermelon') then
                             cards[#cards+1] = v
                         end      
                     end
@@ -117,6 +117,7 @@ BLINDSIDE.Blind({
         end
         if context.destroy_card  and not card.ability.extra.upgraded and card.area == G.play and (context.cardarea == G.play or context.cardarea == G.hand) then
             if (context.destroy_card.area == G.play or context.destroy_card.area == G.hand) and context.destroy_card:is_color("Blue", true, false) then
+                context.destroy_card.retain = true
                 return { 
                     remove = true, 
                 }

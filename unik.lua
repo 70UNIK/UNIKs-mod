@@ -1306,8 +1306,10 @@ if next(SMODS.find_mod("Blindside")) then
 
 	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/corpo.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/taw.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/impatience.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/brainrot.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/goblin.lua")()
 	
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_flip.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_trench.lua")()

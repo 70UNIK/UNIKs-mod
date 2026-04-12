@@ -32,8 +32,8 @@ BLINDSIDE.Blind({
                 end
 
             end
-            return {
-
+           return {
+                message = "" .. "",
             }
         end
     end,

@@ -50,11 +50,11 @@ if not G.GAME.banned_keys then
 end
 if not skip and G.GAME.cry_banished_keys[enhance_option.key] or G.GAME.banned_keys[enhance_option.key] then
     skip = true
-    print(enhance_option.key .. " BANISHED!")
+   -- print(enhance_option.key .. " BANISHED!")
 end
 if not skip and  G.P_CENTERS[enhance_option.key].in_pool and type(G.P_CENTERS[enhance_option.key].in_pool) == 'function' then
     if not SMODS.add_to_pool(G.P_CENTERS[enhance_option.key],args) then
-        print(enhance_option.key .. "NOT IN POOL!")
+       -- print(enhance_option.key .. "NOT IN POOL!")
         skip = true
     end
 end

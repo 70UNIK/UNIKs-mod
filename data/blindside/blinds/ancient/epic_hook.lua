@@ -14,18 +14,14 @@ BLINDSIDE.Blind({
     hues = {"Red", "Blue"},
     calculate = function(self, card, context) 
         if context.before then
-            local exists = false
+            card.ability.extra.scoring = nil
             for i,v in pairs(context.scoring_hand) do
                 if v == card then
-                    exists = true
+                    card.ability.extra.scoring = true
                     break
                 end
             end
-            if exists then
-                for i,v in pairs(G.hand.cards) do
-                    v.ability.unik_burned_by_hook = true
-                end
-            end
+
         end
         if context.cardarea == G.play and context.main_scoring then
             ease_discard(card.ability.extra.discards)
@@ -33,9 +29,18 @@ BLINDSIDE.Blind({
                 e_mult = card.ability.extra.e_mult
             }
         end
-        if context.burn_card and context.cardarea == G.play and context.burn_card == card then
+        if context.burn_card and card.ability.extra.scoring and ((context.cardarea == G.play and context.burn_card == card)) then
+            
+            context.burn_card.retain = true
             return { remove = true }
             
+        end
+        if (context.hand_discard or context.hand_retain) and context.other_card.area == G.hand and card.ability.extra.scoring  then
+            return { burn = true }
+            
+        end
+        if context.after then
+            card.ability.extra.scoring = nil
         end
     end,
     unik_ancient = true,

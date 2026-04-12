@@ -21,7 +21,7 @@ BLINDSIDE.Blind({
             card.ability.forced_selection = false
         end
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then
-            card.ability.stuffplayed = true
+            --card.ability.stuffplayed = true
             local cardsadded = {}
             for i = 1, card.ability.extra.cards do
                 G.E_MANAGER:add_event(Event({
@@ -102,34 +102,34 @@ BLINDSIDE.Blind({
             }
             end
         end
-        if context.after and not card.ability.extra.upgraded and card.ability.stuffplayed then
+        if context.after and not card.ability.extra.upgraded then
             local cards = {}
-            for i,v in pairs(context.full_hand) do
-                if not v.config.center.curse then
-                    v.will_be_gored = true
-                    if not G.GAME.cry_banned_pcards then
-                        G.GAME.cry_banned_pcards = {}
-                    end
-                    if not G.GAME.banned_keys then
-                        G.GAME.banned_keys = {}
-                    end
-                    G.GAME.cry_banished_keys[v.config.center.key] = true
-                    cards[#cards+1] = v
-                end
-            end
-            for i,v in pairs(G.hand.cards) do
-                if not v.config.center.curse then
-                    v.will_be_gored = true
-                        if not G.GAME.cry_banned_pcards then
-                        G.GAME.cry_banned_pcards = {}
-                    end
-                    if not G.GAME.banned_keys then
-                        G.GAME.banned_keys = {}
-                    end
-                    G.GAME.cry_banished_keys[v.config.center.key] = true
-                    cards[#cards+1] = v
-                end
-            end
+            -- for i,v in pairs(context.full_hand) do
+            --     if not v.config.center.curse then
+            --         v.will_be_gored = true
+            --         if not G.GAME.cry_banned_pcards then
+            --             G.GAME.cry_banned_pcards = {}
+            --         end
+            --         if not G.GAME.banned_keys then
+            --             G.GAME.banned_keys = {}
+            --         end
+            --         G.GAME.cry_banished_keys[v.config.center.key] = true
+            --         cards[#cards+1] = v
+            --     end
+            -- end
+            -- for i,v in pairs(G.hand.cards) do
+            --     if not v.config.center.curse then
+            --         v.will_be_gored = true
+            --             if not G.GAME.cry_banned_pcards then
+            --             G.GAME.cry_banned_pcards = {}
+            --         end
+            --         if not G.GAME.banned_keys then
+            --             G.GAME.banned_keys = {}
+            --         end
+            --         G.GAME.cry_banished_keys[v.config.center.key] = true
+            --         cards[#cards+1] = v
+            --     end
+            -- end
             cards[#cards+1] = card
             return {
                 func = function()
@@ -152,7 +152,9 @@ BLINDSIDE.Blind({
                     G.GAME.banned_keys = {}
                 end
                     G.GAME.cry_banished_keys[context.destroy_card.config.center.key] = true
-                    context.destroy_card.will_be_gored = true
+                    context.destroy_card.ability.gore_6_destruction = true
+                    context.destroy_card.retain = true
+                    -- G.play:emplace(context.destroy_card)
                 return { remove = true }
             end
             -- if context.destroy_card == card and context.cardarea == G.play then

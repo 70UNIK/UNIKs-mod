@@ -488,7 +488,9 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 G.hand.highlighted[i].ability.unik_decaying = true
             end
         end
+        G.GAME.no_repeat_play = true
         SMODS.calculate_context({on_select_play = true})
+        G.GAME.no_repeat_play = nil
         --end
         G.E_MANAGER:add_event(Event({
             func = function()

@@ -91,21 +91,21 @@ function UNIK.check_if_exists(blind_key)
                 return true
             end
         end
-        if G.pack_cards then
+        if G.pack_cards and G.pack_cards.cards then
             for i,v in pairs(G.pack_cards.cards) do
                 if v.config.center.key == blind_key then
                     return true
                 end
             end
         end
-        if G.shop_jokers then
+        if G.shop_jokers and G.shop_jokers.cards then
             for i,v in pairs(G.shop_jokers.cards) do
                 if v.config.center.key == blind_key then
                     return true
                 end
             end
         end
-        if G.shop_booster then
+        if G.shop_booster and G.shop_booster.cards then
             for i,v in pairs(G.shop_booster.cards) do
                 if v.config.center.key == blind_key then
                     return true

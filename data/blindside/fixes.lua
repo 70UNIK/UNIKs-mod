@@ -277,3 +277,28 @@ function has_group_of(num, hands)
 
     return groupHook(num,hands)
 end
+
+--reroll tag: do not accumulate free rerolls, aka count the free rerolls based on total reroll tags
+
+--Finish: if on a trinket, retrigger it (when possible)
+
+SMODS.Edition:take_ownership("e_bld_finish",{
+    calculate = function(self, card, context)
+        if context.repetition and card.facing ~= 'back' and context.other_card and context.other_card == card and context.other_card.ability.extra.rescore ~= 1 then
+            return {
+                repetitions = card.edition.extra.retriggers
+            }
+        end
+        if (context.retrigger_joker_check) and context.other_card and context.other_card == card then
+			if card.edition and card.edition.key == 'e_bld_finish' then
+				return {
+					message = localize("k_again_ex"),
+					repetitions = 1,
+					card = card,
+				}
+			else
+				return nil, true
+			end
+		end
+    end
+},true)

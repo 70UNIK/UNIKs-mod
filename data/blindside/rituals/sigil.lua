@@ -55,7 +55,10 @@ SMODS.Consumable {
         G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.4,func = function()
                 play_sound('bld_crack', 0.6, 1.2)
                 card:juice_up(0.8, 0.5)
-                card.area:remove_card()
+                if card.area then
+                    card.area:remove_card()
+                end
+                
         card:explode()
         return true end }))
         local args = {}

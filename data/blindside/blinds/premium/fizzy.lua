@@ -70,7 +70,10 @@ BLINDSIDE.Blind({
     end,
     rare = true,
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
+        if card.ability.extra.upgraded then
+            info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
+        end
+        
         local retriggers = 0
         retriggers = retriggers + (G.GAME.unik_hands_lost_in_round or 0)
         retriggers = retriggers + math.floor((G.GAME.unik_discards_lost_in_round or 0)/2)
@@ -87,5 +90,6 @@ BLINDSIDE.Blind({
         if not card.ability.extra.upgraded then
         card.ability.extra.upgraded = true
         end
-    end
+    end,
+    always_scores = true,
 })

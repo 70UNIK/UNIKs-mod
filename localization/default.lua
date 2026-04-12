@@ -1979,6 +1979,7 @@ return {
                     {
                         "{C:inactive}(Currently {C:attention}#1#{C:inactive} Retriggers)",
                     },
+                    {"Always scores"},
                 }
             },
             m_unik_blindside_fizzy_upgraded ={
@@ -1998,6 +1999,7 @@ return {
                     {
                         "{C:inactive}(Currently {C:attention}#1#{C:inactive} Retriggers)",
                     },
+                    {"Always scores"},
                 }
             },
             m_unik_blindside_hater = {
@@ -2296,10 +2298,14 @@ return {
                 text = {
                     {
                         "{X:green,C:white}Green", 
-                        "{C:red}Destroy{} a random",
-                        "played Blind {C:attention}before",
-                        "play when held"
+                        "{C:red}Banish{} a random",
+                        "Trinket {C:attention}before{} play",
                     },
+                    {"If no Trinkets owned,",
+                    "{C:red}Banish{} all",
+                    "non-{X:black,C:white}Crude{} Blinds",
+                    "remaining in Deck"},
+                    {"{C:attention}Burns"},
                     {"{C:attention}Stubborn"},
                     {"{C:green}Retained"},
                 }
@@ -2309,9 +2315,10 @@ return {
                 text = {
                     {
                         "{X:green,C:white}Green", 
-                        "{C:attention}Upgrade{} a random",
-                        "played Blind {C:attention}before",
-                        "play when held"
+                        "Add {C:dark_edition}Finish{}",
+                        "to a random",
+                        "Trinket {C:attention}before{} play",
+                        "then {C:red}Debuff{} it",
                     },
                     {"{C:attention}Burns"},
                 }
@@ -2386,34 +2393,41 @@ return {
                 name = "The Taw",
                 text = {
                     {
-                        "{X:red,C:white}X#1#{} Mult"
-                    },
-                    {
-                        "{C:red}Cannot be {C:attention}Burned",
+                        "{X:purple,C:white}Purple",
                         "{C:attention}Copies{} itself to",
                         "hand if {C:red}Destroyed"
                     },
                     {
                         "{C:red}Unrerollable{}"
                     },
+                    {
+                        "{C:red}Cannot{} be {C:attention}Burned",
+                    },
                     {"{C:attention}Stubborn"},
-                    {"{C:green}Retained"},
+					{"{C:attention}Forced to",
+					"{C:attention}be selected"},
                 }
             },
             m_unik_blindside_taw_upgraded = {
                 name = "The Taw",
                 text = {
                     {
+                                "{X:purple,C:white}Purple",
                         "{X:red,C:white}X#1#{} Mult"
                     },
-                    {
-                        "{C:red}Cannot be {C:attention}Burned",
-                        "{C:attention}Copies{} itself if",
-                        "{C:red}Destroyed"
+                                        {
+                        "{C:attention}Copies{} itself to",
+                        "hand if {C:red}Destroyed"
                     },
                     {
                         "{C:red}Unrerollable{}"
                     },
+                    {
+                        "{C:red}Cannot{} be {C:attention}Burned",
+                    },
+                    {"{C:attention}Stubborn"},
+					{"{C:attention}Forced to",
+					"{C:attention}be selected"},
                 }
             },
             m_unik_blindside_epic_straightforwardness = {
@@ -5476,6 +5490,13 @@ return {
                     "this Blind"
                 }
             },
+            unik_unrerollable = {
+                name = "Unrerollable",
+                text = {
+                    "{C:red}Cannot{} be {C:attention}rerolled",
+                    "into another Blind"
+                }
+            }
             
         },
         Planet={

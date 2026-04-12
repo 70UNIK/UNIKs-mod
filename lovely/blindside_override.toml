@@ -99,3 +99,14 @@ payload = '''
 G.GAME.last_joker = G.GAME.blind.boss
 
 '''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/uishop.lua"]'
+pattern = '''local final_free = G.GAME.current_round.free_rerolls > 0'''
+match_indent = true
+position = 'after'
+payload = '''
+
+print("Free Rerolls: ".. G.GAME.current_round.free_rerolls)
+'''
