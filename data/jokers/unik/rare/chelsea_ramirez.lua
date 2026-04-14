@@ -37,7 +37,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
-    fusable = true,
+
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.02} },
     pools = {["unik_cube"] = true,["character"] = true },
 	loc_vars = function(self, info_queue, center)
