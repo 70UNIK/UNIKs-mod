@@ -1288,6 +1288,7 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/shine.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/nought.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/napkin.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prison.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/earthmover.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()	

@@ -289,7 +289,8 @@ SMODS.Edition:take_ownership("e_bld_finish",{
                 repetitions = card.edition.extra.retriggers
             }
         end
-        if (context.retrigger_joker_check) and context.other_card and context.other_card == card then
+        --trinket specific
+        if (context.retrigger_joker_check) and context.other_card and context.other_card == card and card.area == G.jokers then
 			if card.edition and card.edition.key == 'e_bld_finish' then
 				return {
 					message = localize("k_again_ex"),

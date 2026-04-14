@@ -1464,7 +1464,7 @@ return {
                         "{X:chips,C:white}Blue{} {X:purple,C:white}Purple{}",
                         "Sets Joker {C:attention}operator{} to",
                         "{C:dark_edition}addition{} for the round",
-                        "then {X:dark_edition,C:white}^#1#{} Mult to Joker",                    
+                        -- "then {X:dark_edition,C:white}^#1#{} Mult to Joker",                    
                     },
                     {
 					"{C:red,E:1}Self-Debuffing{} with a",
@@ -1561,7 +1561,8 @@ return {
                     },
                     {
                         "{C:red}Debuffs{} all scoring",
-                        "non-{X:red,C:white}Red{} blinds",
+                        "blinds without",
+                        "{X:red,C:white}Red{} Hue"
                     }
 
 
@@ -1778,7 +1779,7 @@ return {
                 name = "The Cat",
                 text = {
                     "{X:purple,C:white}Purple{} {X:red,C:white}Red{}",
-                    "When scored, other",
+                    "Before scoring, other",
                     "scoring Blinds",
                     "{C:attention}permanently gain",
                     "{X:chips,C:white}X#1#{} Chips"
@@ -2153,10 +2154,8 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
-                        "When scored, each played {X:red,C:white}Red{}",
-                        "Blinds have a {C:green}#1# in #2#{} chance",
-                        "to {C:red}not{} be triggered as if",
-                        "they were {C:unik_copper}rescored",
+                        "When scoring, {C:unik_copper}Rescore{} all",
+                        "{X:red,C:white}Red{} Blinds",
                     },
                     {
                         "{C:red}Debuffs{} and {C:red}Destroys",
@@ -2170,27 +2169,36 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
-                        "When scored, each played",
-                        "{X:red,C:white}Red{} and {X:green,C:white}Green{}",
-                        "Blinds have a {C:green}#1# in #2#{} chance",
-                        "to {C:red}not{} be triggered as if",
-                        "they were {C:unik_copper}rescored",
+                        "When scoring, {C:unik_copper}Rescore{} all",
+                        "{X:red,C:white}Red{} and {X:green,C:white}Green{} Blinds",
+                    },
+                }
+            },
+            m_unik_blindside_napkin = {
+                name = "The Napkin",
+                text = {
+                    {
+"{X:dark_edition,C:white}Faded",  
+                    "{C:attention}Copies{} the effect of",
+                    "the {C:attention}Leftmost{} Blind in",
+                    "the current area",
+                    "{C:attention}#1#{} time#<s>1#",
+                    "{C:inactive}(When possible)"
                     },
                     {
-                        "{C:red}Debuffs{} all",
-                        "held and played",
-                        "{X:chips,C:white}Blue{} Blinds",
-                    },
+                        "Always Scores"
+                    }
+                    
                 }
             },
             m_unik_blindside_prison = {
                 name = "The Prison",
                 text = {
                     {
+                        "{X:dark_edition,C:white}Faded",  
                         "{X:mult,C:white}X#1#{} Mult to Joker"
                     },
                     {
-                        "{X:dark_edition,C:white}Faded",  
                         "After played in",
                         "scoring hand {C:attention}#2#{} time#<s>2#,",
                         "create {C:purple}The Cage",
@@ -2205,10 +2213,10 @@ return {
                 name = "The Earthmover",
                 text = {
                     {
+                                                "{X:dark_edition,C:white}Faded",  
                         "{X:dark_edition,C:white}^#1#{} Mult to Joker"
                     },
                     {
-                        "{X:dark_edition,C:white}Faded",  
                         "After played in",
                         "scoring hand {C:attention}#2#{} time#<s>2#,",
                         "create {C:unik_ancient}The Sigil",

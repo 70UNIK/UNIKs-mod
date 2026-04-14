@@ -303,3 +303,17 @@ function UNIK.trigger_globals_after_play()
    
     
 end
+
+function UNIK.get_sorted_by_position(area)
+  local cards = {}
+
+  for i = 1, #area.highlighted do
+    cards[i] = area.highlighted[i]
+  end
+
+  table.sort(cards, function(a, b)
+    return a.T.x < b.T.x
+  end)
+
+  return cards
+end

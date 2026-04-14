@@ -6,9 +6,9 @@
         config = {
             extra = {
                 value = 100,
-                chance = 3,
-                trigger = 5,
-                chancedown = -2,
+                chance = 2,
+                trigger = 3,
+                chancedown = -1,
                 j_e_mult = 1.75,
                 j_e_mult_down = 0.35,
             }
@@ -21,30 +21,32 @@
                 if not SMODS.pseudorandom_probability(card, pseudoseed("descflip"), card.ability.extra.chance, card.ability.extra.trigger, 'descflip') and card.facing ~= "back" then
                     card:flip()
                     card:flip()
+                    UNIK.operator(-1)
+                    card.ability.extra.succeed = true
                 else
                     if card.facing ~= 'back' then 
                     card:flip()
                     end
                 end
             end
-            if context.cardarea == G.play and context.main_scoring then
-                if card.facing ~= "back" then
-                    UNIK.operator(-1)
-                    card.ability.extra.succeed = true
+            -- if context.cardarea == G.play and context.main_scoring then
+            --     if card.facing ~= "back" then
+            --         UNIK.operator(-1)
+            --         card.ability.extra.succeed = true
                     
-                    UNIK.blindside_chips_modifyV2({e_mult = card.ability.extra.j_e_mult}) 
-                    return {
-                        message = "^" .. card.ability.extra.j_e_mult .. localize('k_unik_jmult'),
-                        colour = G.C.BLACK,
-                        focus = card,
-                    }
-                else
-                    card_eval_status_text(card, "debuff", nil, nil, nil, nil)
-                    return {
+            --         UNIK.blindside_chips_modifyV2({e_mult = card.ability.extra.j_e_mult}) 
+            --         return {
+            --             message = "^" .. card.ability.extra.j_e_mult .. localize('k_unik_jmult'),
+            --             colour = G.C.BLACK,
+            --             focus = card,
+            --         }
+            --     else
+            --         card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+            --         return {
                         
-                    }
-                end
-            end
+            --         }
+            --     end
+            -- end
             if context.burn_card and context.cardarea == G.play and context.burn_card == card and card.ability.extra.succeed then
                 card.ability.extra.succeed = nil
                 return { remove = true }
