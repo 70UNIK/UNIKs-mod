@@ -29,7 +29,7 @@ BLINDSIDE.Blind({
             card.hater_scoring = nil
         end
     end,
-    common = true,
+    rare = true,
     loc_vars = function(self, info_queue, card)
         return {
             vars = {

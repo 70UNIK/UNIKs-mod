@@ -24,83 +24,142 @@ UNIK.perma_bonus_coords = {
 --Full credit to Paperback and Meta for the paperback implementation;
 
 local SCORE_OFFSET_X = -6
+local DEFAULT_OFFSET_X = -35
+local DEFAULT_OFFSET_Y = -40
+local BLINDSIDE_RADI = -40
+local BLINDSIDE_HELD_RADI = -35
 local HELD_OFFSET_X = -1
 local HEIGHT = (SMODS.Mods["paperback"] or {}).can_load and 7 or 5 
 local GAP = 1
 
 SMODS.Atlas {
-  key = "unik_indicators",
-  px = 71,
-  py = 95,
-  path = "unik_indicators.png",
+	key = "unik_indicators",
+	px = 71,
+	py = 95,
+	path = "unik_indicators.png",
 
-  inject = function(self)
-    SMODS.Atlas.inject(self)
+	inject = function(self)
+		SMODS.Atlas.inject(self)
 
-    for _, side in pairs(UNIK.perma_bonus_coords) do
-      for _, v in ipairs(side) do
-        v.sprite = Sprite(0, 0, G.CARD_W, G.CARD_H, self, v.pos)
-      end
-    end
-  end
+		for _, side in pairs(UNIK.perma_bonus_coords) do
+		for _, v in ipairs(side) do
+			v.sprite = Sprite(0, 0, G.CARD_W, G.CARD_H, self, v.pos)
+		end
+		end
+	end
 }
 
 local function should_draw_indicator(card, key)
-  return card and card.ability
-      and type(card.ability[key]) == "number"
-      and card.ability[key] > 0
-      and card.area and card.area.config.type ~= 'deck'
+	return card and card.ability
+		and type(card.ability[key]) == "number"
+		and card.ability[key] > 0
+		and card.area and card.area.config.type ~= 'deck'
 end
 
-local function draw_single_indicator(card, sprite, x_offset, y_offset)
-  x_offset = (card.T.w / 71) * (x_offset or 0) * card.T.scale
-  y_offset = (card.T.h / 95) * (y_offset or 0) * card.T.scale
+local function draw_single_indicator(card, sprite, x_offset, y_offset,rotation)
+	x_offset = (card.T.w / 71) * (x_offset or 0) * card.T.scale
+	y_offset = (card.T.h / 95) * (y_offset or 0) * card.T.scale
 
-  sprite.role.draw_major = card
-  sprite:draw_shader(
-    (card.greyed and 'played') or 'dissolve',
-    nil, nil, nil,
-    card.children.center,
-    nil, nil,
-    x_offset, y_offset
-  )
+	sprite.role.draw_major = card
+	sprite:draw_shader(
+		(card.greyed and 'played') or 'dissolve',
+		nil, nil, nil,
+		card.children.center,
+		nil, rotation,
+		x_offset, y_offset
+	)
+end
+local function rotate(original_x,original_y,pivot_x,pivot_y,angle)
+	local x = 0
+	local y = 0
+	--rotate around origin temporarily
+	local temp_x = (original_x - pivot_x)
+	local temp_y = (original_y - pivot_y)
+	x = temp_x 
+	y = temp_y 
+	temp_x = x*math.cos(angle)-y*math.sin(angle)
+	temp_y = x*math.sin(angle)+y*math.cos(angle)
+	x = temp_x + pivot_x
+	y = temp_y + pivot_y
+	return {x = x, y = y}
 end
 
-local function draw_indicators(indicators, card, x_offset, y_offset)
-  local y = GAP
+local function degree_to_Radian(angle)
+	return angle*math.pi/180
+end
+local function draw_indicators(indicators, card, x_offset, y_offset,radi)
+	local y = GAP + y_offset
+	local x = x_offset
 
-  for _, v in ipairs(indicators) do
-    if should_draw_indicator(card, v.key) then
-      draw_single_indicator(
-        card,
-        v.sprite,
-        x_offset,
-        y + (y_offset or 0)
-      )
+	--rotation stuff for blindside
+	local rotation = 0
+	local original_x = 0
+	local original_y = 0
+	local pivot_x = 0
+	local pivot_y = 0
+	local rotation_mod = 0
 
-      y = y + HEIGHT + GAP
-    end
-  end
+	--ifblindside enabled, rotate around blinds instead
+	if UNIK.hasBlindside() then
+		rotation = degree_to_Radian(90)
+		x = 4
+		y = radi
+		original_x = 4
+		original_y = radi
+		pivot_x = 4
+		pivot_y = 0
+	end
+	
+	if UNIK.hasBlindside() then
+
+		rotation = rotation - degree_to_Radian(45)
+		rotation_mod = 0 - degree_to_Radian(45)
+		local struct = rotate(original_x,original_y,pivot_x,pivot_y,rotation_mod)
+		x = struct.x
+		y = struct.y
+	end
+	for _, v in ipairs(indicators) do
+		if should_draw_indicator(card, v.key) then
+		draw_single_indicator(
+			card,
+			v.sprite,
+			x,
+			y,rotation
+		)
+			if UNIK.hasBlindside() then
+				rotation = rotation - degree_to_Radian(10)
+				rotation_mod = rotation_mod - degree_to_Radian(10)
+				local struct = rotate(original_x,original_y,pivot_x,pivot_y,rotation_mod)
+				x = struct.x
+				y = struct.y
+			else
+				y = y + HEIGHT + GAP
+			end
+		
+		end
+	end
 end
 
 SMODS.DrawStep {
-  key = "bonus_indicators_front",
-  order = 41,
-  func = function(card)
-    if card and card.ability then
-        draw_indicators(UNIK.perma_bonus_coords.on_held, card, HELD_OFFSET_X)
-    end
-  end
+	key = "bonus_indicators_front",
+	order = 43,
+	func = function(card)
+		if card and card.ability then
+			draw_indicators(UNIK.perma_bonus_coords.on_held, card, HELD_OFFSET_X+DEFAULT_OFFSET_X,DEFAULT_OFFSET_Y,BLINDSIDE_HELD_RADI)
+		end
+	end,
+	conditions = { vortex = false, facing = 'front' },
 }
 
 SMODS.DrawStep {
-  key = "bonus_indicators_back",
-  order = -29,
-  func = function(card)
-    if card and card.ability then
-        draw_indicators(UNIK.perma_bonus_coords.on_score, card, SCORE_OFFSET_X)
-    end
-  end
+	key = "bonus_indicators_back",
+	order = 42,
+	func = function(card)
+		if card and card.ability then
+			draw_indicators(UNIK.perma_bonus_coords.on_score, card, SCORE_OFFSET_X+DEFAULT_OFFSET_X,DEFAULT_OFFSET_Y,BLINDSIDE_RADI)
+		end
+	end,
+	conditions = { vortex = false, facing = 'front' },
 }
 
 --old ye ye ass code

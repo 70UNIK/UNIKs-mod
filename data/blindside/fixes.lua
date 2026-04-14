@@ -279,7 +279,20 @@ function has_group_of(num, hands)
 end
 
 --reroll tag: do not accumulate free rerolls, aka count the free rerolls based on total reroll tags
-
+SMODS.Tag:take_ownership("tag_bld_reroll",{
+    apply = function(self, tag, context)
+        if context.type == 'shop_start'  then
+            calculate_blindreroll_cost(true)
+        end
+        if context.type == 'after_reroll'  and not G.GAME.rerolled then
+            SMODS.change_free_rerolls(-1)
+            G.GAME.rerolled = true
+            tag:yep('+', G.C.GREEN, function() 
+                return true end)
+            tag.triggered = true
+        end
+    end,
+},true)
 --Finish: if on a trinket, retrigger it (when possible)
 
 SMODS.Edition:take_ownership("e_bld_finish",{

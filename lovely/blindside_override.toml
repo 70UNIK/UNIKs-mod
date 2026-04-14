@@ -108,5 +108,6 @@ match_indent = true
 position = 'after'
 payload = '''
 
-print("Free Rerolls: ".. G.GAME.current_round.free_rerolls)
+print("current Free Rerolls: ".. G.GAME.current_round.free_rerolls)
+print("overall Free Rerolls: "..  G.GAME.round_resets.free_rerolls)
 '''
