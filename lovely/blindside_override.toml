@@ -108,6 +108,42 @@ match_indent = true
 position = 'after'
 payload = '''
 
-print("current Free Rerolls: ".. G.GAME.current_round.free_rerolls)
-print("overall Free Rerolls: "..  G.GAME.round_resets.free_rerolls)
+--print("current Free Rerolls: ".. G.GAME.current_round.free_rerolls)
+--print("overall Free Rerolls: "..  G.GAME.round_resets.free_rerolls)
+'''
+
+[[patches]]
+[patches.regex]
+target = 'functions/button_callbacks.lua'
+pattern = '''(.*)SMODS.calculate_context\(\{(.*)ending_shop = true(.*)\}\)(.*)'''
+match_indent = true
+position = 'after'
+payload = '''
+
+G.GAME.unik_blindside_reroll_tags_consumed = G.GAME.unik_blindside_reroll_tags_consumed or 0
+SMODS.change_free_rerolls(-G.GAME.unik_blindside_reroll_tags_consumed)
+G.GAME.unik_blindside_reroll_tags_consumed = 0
+
+'''
+
+##blindside: doubled up jokers may appear anytime after you win!
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "items/jokers/smalljokers.lua"]'
+pattern = '''return G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 3'''
+match_indent = true
+position = 'at'
+payload = '''
+return (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 3) or G.GAME.round_resets.ante > 7
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "items/jokers/bigjokers.lua"]'
+pattern = '''G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5'''
+match_indent = true
+position = 'at'
+payload = '''
+return (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5) or G.GAME.round_resets.ante > 7
 '''

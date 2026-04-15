@@ -1,4 +1,4 @@
---gains  +2 Mult when drawn after the deck is reshuffled (currently +2 Mult)
+--create a reroll tag before scoring, burns
 BLINDSIDE.Blind({
     key = 'unik_blindside_artesian',
     atlas = 'unik_blindside_blinds',
@@ -6,54 +6,38 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 24,
-            chips = 0,
-            chips_mod = 10,
-            chips_up = 10,
+            tags = 2,
         }},
     hues = {"Blue"},
-    calculate = function(self, card, context) 
-        if (context.hand_drawn and context.cardarea == G.hand and tableContains(card, context.hand_drawn)) or (context.other_drawn and context.cardarea == G.hand and tableContains(card, context.other_drawn)) then
-            if  G.GAME.current_round.reshuffles_round and  G.GAME.current_round.reshuffles_round > 0 then
-                local drawn = false
-                local hand_drawn = context.hand_drawn or context.other_drawn
-                for i,v in pairs(hand_drawn) do
-                    if v == card then
-                        drawn = true
-                        break
-                    end
-                end
-                if drawn then
-                    SMODS.scale_card(card, {
-                        ref_table =card.ability.extra,
-                        ref_value = "chips",
-                        scalar_value = "chips_mod",
-                        message_key = "a_chips",
-                        message_colour = G.C.CHIPS,
-                    })
-                    return {
-
-                    }
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+            add_tag(Tag('tag_bld_reroll'))
+            if card.ability.extra.upgraded then
+                for i = 1, card.ability.extra.tags - 1 do
+                    add_tag(Tag('tag_bld_reroll'))
                 end
             end
-            
-        end
-        if context.cardarea == G.play and context.main_scoring then
             return {
-                chips = card.ability.extra.chips
+                card = card,
+                message = localize('k_tagged_ex')
             }
+        end
+        if context.burn_card and context.cardarea == G.play and context.burn_card == card and not card.ability.extra.upgraded then
+            return { remove = true }
         end
     end,
     common = true,
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_TAGS['tag_bld_reroll']
+        if not card.ability.extra.upgraded then
+            info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
+        end
         return {
-            vars = {
-                card.ability.extra.chips,card.ability.extra.chips_mod
-            }
+            key = card.ability.extra.upgraded and 'm_unik_blindside_artesian_upgraded' or 'm_unik_blindside_artesian',vars = {card.ability.extra.tags}
         }
     end,
     upgrade = function(card)
         if not card.ability.extra.upgraded then
-            card.ability.extra.chips_mod = card.ability.extra.chips_mod + card.ability.extra.chips_up
             card.ability.extra.upgraded = true
         end
     end

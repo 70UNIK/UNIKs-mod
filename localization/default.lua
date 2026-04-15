@@ -1504,6 +1504,9 @@ return {
                         "Creates a {C:attention}Dethroning",
                         "tag if in scoring hand",
                     },
+                    {
+                        "{C:attention}Burns"
+                    }
 
                 }
             },
@@ -1515,9 +1518,12 @@ return {
                     "{C:mult}+#1#{} Mult",
                     },
                     {
-                    "Creates a {C:attention}Dethroning",
-                    "tag when scored",
+                        "Creates a {C:attention}Dethroning",
+                        "tag when scored",
                     },
+                    {
+                        "{C:attention}Burns"
+                    }
 
                 }
             },
@@ -1900,14 +1906,24 @@ return {
                 text = {
                     {
                         "{X:blue,C:white}Blue{}",
-                        "Gains {C:chips}+#2#{} Chips",
-                        "when drawn after",
-                        "deck has {C:attention}Reshuffled",
+                        "Before scoring, create",
+                        "a {C:attention}Reroll Tag",
 
                     },
                     {
-                        "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
+                        "{C:attention}Burns",
                     }
+                }
+            },
+            m_unik_blindside_artesian_upgraded = {
+                name = "The Artesian",
+                text = {
+                    {
+                        "{X:blue,C:white}Blue{}",
+                        "Before scoring, create",
+                        "#1# {C:attention}Reroll Tag#<s>1#",
+
+                    },
                 }
             },
             m_unik_blindside_hunter = {
@@ -2154,7 +2170,7 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
-                        "When scoring, {C:unik_copper}Rescore{} all",
+                        "{C:unik_copper}Rescore{} all scored",
                         "{X:red,C:white}Red{} Blinds",
                     },
                     {
@@ -2169,7 +2185,7 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
-                        "When scoring, {C:unik_copper}Rescore{} all",
+                        "{C:unik_copper}Rescore{} all scored",
                         "{X:red,C:white}Red{} and {X:green,C:white}Green{} Blinds",
                     },
                 }
@@ -2573,6 +2589,31 @@ return {
                     },
                 }
             },
+
+            ["m_bld_king"] = {
+				["name"] = "The King",
+				["text"] = {
+                    {
+					"{X:dark_edition,C:white}Faded{}",
+					"{C:white,X:mult}X#1#{} Mult to {C:attention}Joker",
+					"when {C:attention}held in hand",
+                    },
+                    {"{C:attention}Temporary"},
+
+				},
+			},
+			["m_bld_queen"] = {
+				["name"] = "The Queen",
+				["text"] = {
+                    {
+					"{X:dark_edition,C:white}Faded{}",
+					"{C:white,X:mult}X#1#{} Mult to {C:attention}Joker",
+					"when {C:red}discarded",
+                    },
+                    {"{C:attention}Temporary"},
+
+				},
+			},
 
 
         },
@@ -6909,7 +6950,8 @@ return {
             k_unik_hunter_1 = "Targeting!",
             k_unik_hunter_2 = "Hunted!",
             k_unik_ai = "CAKADILLO! FUCKYOUTINO!",
-            k_unik_ai_upgrade = "Created!"
+            k_unik_ai_upgrade = "Created!",
+            k_unik_lowered = "Reduced!",
         },
         high_scores={},
         labels={

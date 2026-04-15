@@ -19,6 +19,9 @@ BLINDSIDE.Blind({
                 mult = card.ability.extra.mult
             }
         end
+        if context.burn_card and context.cardarea == G.play and context.burn_card == card then
+            return { remove = true }
+        end
         if context.before and not card.ability.extra.upgraded then
             local exists = false
             for i,v in pairs(context.scoring_hand) do
@@ -40,6 +43,7 @@ BLINDSIDE.Blind({
     rare = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_blindside_dethroning
+        info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         return {
             key = card.ability.extra.upgraded and 'm_unik_blindside_prince_upgraded' or 'm_unik_blindside_prince',
             vars = {

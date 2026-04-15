@@ -23,10 +23,18 @@
                     card:flip()
                     UNIK.operator(-1)
                     card.ability.extra.succeed = true
+                    return {
+                        message = localize('k_unik_lowered'),
+                        colour = G.C.DARK_EDITION,
+                        focus = card,
+                    }
                 else
                     if card.facing ~= 'back' then 
                     card:flip()
                     end
+                    card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+                    return {
+                    }
                 end
             end
             -- if context.cardarea == G.play and context.main_scoring then

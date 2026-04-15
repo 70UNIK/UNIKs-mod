@@ -93,6 +93,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     local eval2 = {}
     SMODS.calculate_context({unik_kite_experiment = true, cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand},eval2)
     --this does not work for recursive stuff such as SMODS.merge_effects (the napkin for instance). This will need to be converted
+    --print(calc_card_area == G.hand)
     for i = 1, #eval2 do
         if eval2[i] and type(eval2[i]) == 'table' then
             --print(eval2[i])

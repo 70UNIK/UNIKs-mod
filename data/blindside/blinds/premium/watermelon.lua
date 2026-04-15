@@ -42,39 +42,6 @@ BLINDSIDE.Blind({
                 end   
             end
         end
-        if context.unik_kite_experiment and (context.cardarea == G.hand) and card.area == G.play then
-            local isScoring = false
-            local index = -1
-            for i = 1, #context.scoring_hand do
-                if context.scoring_hand[i] == card then
-                    isScoring = true
-                    index = i
-                    break
-                end
-            end
-            if isScoring and index > 0 then
-                local validCards = {}
-                for z = 1, card.ability.extra.repetitions do
-                    local strct = {}
-                    for i,v in pairs(context.cardarea) do
-                        if v:is_color("Red", true, false) or (card.ability.extra.upgraded and v:is_color("Green", true, false)) then
-                            strct[#strct+1] = v
-                        end
-                    end
-                    strct.unik_scoring_segment = true
-                    validCards[#validCards+1] = strct
-                end
-                
-                if #validCards > 0 then
-                    return {
-                        target_cards = validCards,
-                        card = card,
-                        message = '+1',
-                        colour = G.C.MULT
-                    }
-                end   
-            end
-        end
         if context.cardarea == G.play and context.before and card.facing ~= 'back' and not card.ability.extra.upgraded then
             for i=1, #G.play.cards do
                 if G.play.cards[i]:is_color("Blue", true, false) and G.play.cards[i] ~= card then

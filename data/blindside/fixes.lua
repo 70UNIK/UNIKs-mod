@@ -285,7 +285,9 @@ SMODS.Tag:take_ownership("tag_bld_reroll",{
             calculate_blindreroll_cost(true)
         end
         if context.type == 'after_reroll'  and not G.GAME.rerolled then
-            SMODS.change_free_rerolls(-1)
+            --SMODS.change_free_rerolls(-1)
+            G.GAME.unik_blindside_reroll_tags_consumed = G.GAME.unik_blindside_reroll_tags_consumed or 0
+            G.GAME.unik_blindside_reroll_tags_consumed = G.GAME.unik_blindside_reroll_tags_consumed + 1
             G.GAME.rerolled = true
             tag:yep('+', G.C.GREEN, function() 
                 return true end)
@@ -315,4 +317,56 @@ SMODS.Edition:take_ownership("e_bld_finish",{
 			end
 		end
     end
+},true)
+
+--king and queen: destroyed at end of round + can be upgraded (somehow)
+BLINDSIDE.Blind:take_ownership("m_bld_king",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+    calculate = function(self, card, context)
+            if context.cardarea == G.hand and context.main_scoring then
+                BLINDSIDE.chipsmodify(0, 0, card.ability.extra.jokerxmult)
+                return {
+                    message = "X" .. card.ability.extra.jokerxmult .. " JMult",
+                    colour = G.C.BLACK
+                }
+            end
+                        if context.end_of_round then
+                card:start_dissolve()
+            end   
+        end,
+        upgrade = function(card)
+            if not card.ability.extra.upgraded then
+                card.ability.extra.upgraded = true
+                card.ability.extra.jokerxmult = card.ability.extra.jokerxmult - 0.75
+            end
+        end
+},true)
+BLINDSIDE.Blind:take_ownership("m_bld_queen",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+calculate = function(self, card, context)
+            if context.discard and context.other_card == card then
+                BLINDSIDE.chipsmodify(0, 0, card.ability.extra.jokerxmult)
+                return {
+                    message = "X" .. card.ability.extra.jokerxmult .. " JMult",
+                    colour = G.C.BLACK
+                }
+            end
+                        if context.end_of_round then
+                card:start_dissolve()
+            end   
+        end,
+        upgrade = function(card)
+            if not card.ability.extra.upgraded then
+                card.ability.extra.upgraded = true
+                card.ability.extra.jokerxmult = card.ability.extra.jokerxmult - 0.75
+            end
+        end
 },true)
