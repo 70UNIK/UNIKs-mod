@@ -141,7 +141,7 @@ return (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 3) or
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Blindside "items/jokers/bigjokers.lua"]'
-pattern = '''G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5'''
+pattern = '''return G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5'''
 match_indent = true
 position = 'at'
 payload = '''

@@ -1,0 +1,1 @@
+--1 in 2 chance blinds in hand do not gain either X0.2 Chips, X0.2 Mult or $1, create a landslide tag

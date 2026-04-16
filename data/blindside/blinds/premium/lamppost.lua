@@ -123,6 +123,7 @@ BLINDSIDE.Blind({
         end
     end,
     rare = true,
+    always_scores = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         return {

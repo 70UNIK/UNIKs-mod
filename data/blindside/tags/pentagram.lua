@@ -1,0 +1,1 @@
+--each hand creates 1 random Crude Blind in hand

@@ -1,0 +1,1 @@
+--balances 20% of chips and mult after scoring

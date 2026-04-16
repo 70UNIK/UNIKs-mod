@@ -2,7 +2,7 @@
 --All chances are equal:
 --X3 Mult,
 --+25 Mult,
---+100 Chips,
+--+120 Chips,
 --+$10,
 --Rescores a random played card 3 times
 --Retriggers all blinds

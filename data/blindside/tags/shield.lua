@@ -1,0 +1,1 @@
+--destroys the oldest held detrimental tag

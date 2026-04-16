@@ -1,0 +1,1 @@
+--^^0.95 Mult after hand is scored

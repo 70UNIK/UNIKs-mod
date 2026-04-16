@@ -2032,6 +2032,7 @@ return {
                         "operations become {C:red}lower",
                         "operations",
                     },
+                    {"Always scores"},
                 }
             },
             m_unik_blindside_lamppost = {
@@ -2048,6 +2049,7 @@ return {
                         "Blinds {C:attention}not adjacent{}",
                         "to each {C:attention}Lamppost"
                     },
+                    {"Always scores"},
                 }
             },
             m_unik_blindside_lamppost_upgraded = {

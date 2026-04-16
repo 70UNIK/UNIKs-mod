@@ -1,0 +1,1 @@
+--each played blind permanently loses 10 chips or 1 Mult

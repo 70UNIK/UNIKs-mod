@@ -1,0 +1,1 @@
+--each hand banishes 1 random played and scoring blind
