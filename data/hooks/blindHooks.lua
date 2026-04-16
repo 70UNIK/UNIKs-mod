@@ -483,6 +483,9 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 edi:unik_before_play()
             end
         end
+        for i = 1, #G.GAME.tags do
+            G.GAME.tags[i]:apply_to_run({type = 'unik_before_play'})
+        end
         if G.GAME.modifiers.unik_decay_on_play then
             for i = 1, #G.hand.highlighted do
                 G.hand.highlighted[i].ability.unik_decaying = true

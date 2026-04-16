@@ -1287,7 +1287,8 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/vice.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/shine.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/nought.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/nought.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/cross.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/napkin.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prison.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/earthmover.lua")()	
@@ -1325,12 +1326,42 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 
+	--rituals
+	NFS.load(mod_path .. "data/blindside/rituals/erosion.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/augment.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/mirror.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/repetition.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/bind.lua")()
+	--Spy (Curse tag)
+	--
 	NFS.load(mod_path .. "data/blindside/rituals/sigil.lua")()
 
 	--TAGS
 	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
-	NFS.load(mod_path .. "data/blindside/tags/soul.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/peak.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/gore.lua")()
+	
+	NFS.load(mod_path .. "data/blindside/tags/pentagram.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/multiplicative.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/shield.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/landslide.lua")()	
 	NFS.load(mod_path .. "data/blindside/tags/recursive.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/downscale.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/cult.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/soul.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/handcuffs.lua")()	
+
+	--stakes
+	NFS.load(mod_path .. "data/blindside/stakes/greed.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/endless.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/tic_tac_toe.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/mountain.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/polychrome.lua")()	
+	--NFS.load(mod_path .. "data/blindside/stakes/steel.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/shining_glitter.lua")()	
+
+	--decks
+	NFS.load(mod_path .. "data/blindside/decks/endless.lua")()	
 end
 
 

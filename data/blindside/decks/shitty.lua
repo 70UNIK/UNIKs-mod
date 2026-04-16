@@ -1,0 +1,8 @@
+--Earn $3 for each blind destroyed
+--Red: Standard + 2 The Hunter
+--Yellow: 2 The Trade
+--Green: Standard
+--Blue: Standard
+--Purple: Standard
+--Faded: X2 The Air
+--Detrimental: X2 The Taw

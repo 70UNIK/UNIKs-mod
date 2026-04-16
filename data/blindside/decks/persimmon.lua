@@ -1,0 +1,8 @@
+--Create a max tag when joker is selected
+--Red: Standard
+--Yellow: X2 The Ore, X2 The Gun, X2 The Paint
+--Green: Standard
+--Blue: Standard
+--Purple: Standard
+--Faded: THe Cliff X2
+--Crudes: The Impatience X2

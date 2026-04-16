@@ -370,3 +370,14 @@ calculate = function(self, card, context)
             end
         end
 },true)
+
+local big_overrider = get_new_big
+function get_new_big(current)
+    
+    local ret =  big_overrider(current)
+    if ret == 'bl_bld_gros_michel' or ret == 'bl_bld_cavendish' then
+        G.GAME.unik_banana_generated = true
+    end
+    return ret
+end
+--Small and big jokers: Spawn after skipping or defeating cavendish/gros michael instead of when ante ~= 1

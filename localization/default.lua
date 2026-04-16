@@ -82,6 +82,24 @@ return {
                     "{C:unik_noughts}#3#{} and {C:unik_crosses}#4#{}",
                 }
             },
+            b_unik_blindside_endless = {
+                name = "Endless Deck?",
+                text = {
+                    "???",
+                    "{C:attention}+#1#{} Trinket slot#<s>1#",
+                    "{C:attention}+#2#{} Hand Size",
+                    "Start at Ante {C:attention}#3#",
+                    "Win Ante is {C:red}#4#{}",
+                }
+            },
+            b_unik_blindside_persimmon = {
+                name = "Persimmon Deck?",
+                text = {
+                    "???",
+                    "Create a {C:attention,T:tag_bld_maxim}Max Tag",
+                    "when Joker is selected"
+                }
+            }
             
             
         },
@@ -1772,6 +1790,29 @@ return {
 					{"Always scores"},
                 }
             },
+            m_unik_blindside_cross = {
+                name = "The Cross",
+                text = {
+                    {
+                        "{X:red,C:white}Red{}",
+                        "Create a {C:unik_summit}Peak Tag",
+                        "before scoring"
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
+            m_unik_blindside_cross_upgraded = {
+                name = "The Cross",
+                text = {
+                    {
+                                                "{X:red,C:white}Red{}",
+                        "Create a {C:unik_summit}Peak Tag",
+                        "before scoring"
+                    },
+                }
+            },
 
             m_unik_blindside_onion = {
                 name = "The Onion",
@@ -2032,7 +2073,6 @@ return {
                         "operations become {C:red}lower",
                         "operations",
                     },
-                    {"Always scores"},
                 }
             },
             m_unik_blindside_lamppost = {
@@ -2327,10 +2367,6 @@ return {
                         "{C:red}Banish{} a random",
                         "Trinket {C:attention}before{} play",
                     },
-                    {"If no Trinkets owned,",
-                    "{C:red}Banish{} all",
-                    "non-{X:black,C:white}Crude{} Blinds",
-                    "remaining in Deck"},
                     {"{C:attention}Burns"},
                     {"{C:attention}Stubborn"},
                     {"{C:green}Retained"},
@@ -2383,8 +2419,8 @@ return {
                         "Blind#<s>1# in hand",
                     },
                     {
-                        "{C:red}Banishes{} all held and",
-                        "played non-{X:black,C:white}Crude{} Blinds",
+                        "{C:red}Banishes{} all held",
+                        "non-{X:black,C:white}Crude{} Blinds",
                     },
                     {"Always scores"},
                     {"{C:attention}Stubborn"}, 
@@ -5762,6 +5798,64 @@ return {
                     '{s:0.8}Applies all previous stakes',
                 }
             },
+            stake_unik_blindside_greed_deck = {
+                name = "Greed Stake???",
+                text = {
+                    "{C:red}Lose {C:gold}$1{}",
+                    "for each remaining",
+                    "{C:chips}Hand{} or {C:red}Discard",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_endless_deck = {
+                name = "Endless Stake???",
+                text = {
+                    "{C:red}+2{} Win Ante",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_tic_tac_toe_deck = {
+                name = "Tic Tac Toe Stake????",
+                text = {
+                    "{C:legendary}Legendary{} Jokers appear",
+                    "{C:red}Twice{} as often",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_mountain_deck = {
+                name = "Mountain Stake????",
+                text = {
+                    "Add {C:red} 1 {X:black,C:white}Crude{} Blind",
+                    "to deck when",
+                    "{C:attention}Boss Joker{} is selected",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_polychrome_deck = {
+                name = "Polychrome Stake????",
+                text = {
+                    "Blinds may become {C:unik_shitty_edition}Fuzzy",
+                    "{s:0.8,C:inactive}({s:0.8,C:blue}-50 - 0{s:0.8,C:inactive} Chips, {s:0.8,C:red}-3 - 0{s:0.8,C:inactive}Mult, {s:0.8,C:money}-$1 - $0{s:0.8,C:inactive}){}",  
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_steel_deck = {
+                name = "Steel Stake????",
+                text = {
+                    "Blinds may become {C:unik_shitty_edition}Bloated",
+                    "{s:0.8,C:inactive}({s:0.8,C:green}1 in 3{s:0.8,C:inactive} chance played Blind is {s:0.8,C:red}Destroyed{}){}",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_shining_glitter_deck = {
+                name = "Glittergrid Stake????",
+                text = {
+                    "Blinds may become {C:unik_shitty_edition}Bloated",
+                    "{s:0.8,C:inactive}({s:0.8,C:green}1 in 3{s:0.8,C:inactive} chance played Blind is {s:0.8,C:red}Destroyed{s:0.8,C:inactive}){}",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+
         } or {
             stake_unik_shitty = {
 				name = "Shitty Stake",
@@ -5784,6 +5878,63 @@ return {
                     '{s:0.8}Applies all previous stakes',
 				},
 			},
+             stake_unik_blindside_greed_deck = {
+                name = "Greed Stake???",
+                text = {
+                    "{C:red}Lose {C:gold}$1{}",
+                    "for each remaining",
+                    "{C:chips}Hand{} or {C:red}Discard",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_endless_deck = {
+                name = "Endless Stake???",
+                text = {
+                    "{C:red}+2{} Win Ante",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_tic_tac_toe_deck = {
+                name = "Tic Tac Toe Stake????",
+                text = {
+                    "{C:legendary}Legendary{} Jokers appear",
+                    "{C:red}Twice{} as often",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_mountain_deck = {
+                name = "Mountain Stake????",
+                text = {
+                    "Add {C:red} 1 {X:black,C:white}Crude{} Blind",
+                    "to deck when",
+                    "{C:attention}Boss Joker{} is selected",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_polychrome_deck = {
+                name = "Polychrome Stake????",
+                text = {
+                    "Blinds may become {C:unik_shitty_edition}Fuzzy",
+                    "{s:0.8,C:inactive}({s:0.8,C:blue}-50 - 0{s:0.8,C:inactive} Chips, {s:0.8,C:red}-3 - 0{s:0.8,C:inactive} Mult, {s:0.8,C:money}-$1 - $0{s:0.8,C:inactive}){}",  
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_steel_deck = {
+                name = "Steel Stake????",
+                text = {
+                    "Blinds may become {C:unik_shitty_edition}Bloated",
+                    "{s:0.8,C:inactive}({s:0.8,C:green}1 in 3{s:0.8,C:inactive} chance played Blind is {s:0.8,C:red}Destroyed{s:0.8,C:inactive}){}",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
+            stake_unik_blindside_shining_glitter_deck = {
+                name = "Glittergrid Stake????",
+                text = {
+                    "Blinds may become {C:unik_shitty_edition}Bloated",
+                    "{s:0.8,C:inactive}({s:0.8,C:green}1 in 3{s:0.8,C:inactive} chance played Blind is {s:0.8,C:red}Destroyed{s:0.8,C:inactive}){}",
+                    '{s:0.8}Applies all previous stakes',
+                }
+            },
         },
         Sleeve = {
             sleeve_casl_ghost = {
@@ -5939,6 +6090,75 @@ return {
                     "{C:attention}Replaces{} the next",
                     "Joker with a",
                     "{C:red}Legendary{} Joker"
+                }
+            },
+            tag_unik_blindside_handcuffs = {
+                name = "Handcuffs Tag",
+                text = {
+                    "{C:red}-#1#{} Hand Size",
+					"this round"
+                }
+            },
+            tag_unik_blindside_downscale = {
+                name = "Downscale Tag",
+                text = {
+                    "{X:dark_edition,C:white}^0.9{} Mult after",
+					"hand is scored"
+                }
+            },
+            tag_unik_blindside_gore = {
+                name = "Gore Tag",
+                text = {
+                    "{C:red}Banish{} the {C:attention}leftmost",
+                    "Trinket on play"
+                }
+            },
+            tag_unik_blindside_pentagram = {
+                name = "Pentagram Tag",
+                text = {
+                    "Create a {X:black,C:white}Crude{} Blind",
+                    "in hand on play"     
+                }
+            },
+            tag_unik_blindside_landslide = {
+                name = "Landslide Tag",
+                text = {
+                    "Each played Blind",
+                    "{C:attention}permanently {C:red}Loses{}",
+                    "either {C:chips}#1#{} Chips",
+                    "or {C:mult}#2#{} Mult"
+                }
+            },
+            tag_unik_blindside_multiplicative = {
+                name ="Multiplicative Tag",
+                text = {
+                    "{C:green}#1# in #2#{} chance to {C:red}not",
+					"add an {C:dark_edition}Edition",
+                    "to played Blinds",
+                }
+            },
+            tag_unik_blindside_shield = {
+                name ="Shield Tag",
+                text = {
+                    "{C:attention}Destroys{} the",
+					"oldest held",
+                    "{C:red}Detrimental tag",
+                }
+            },
+            tag_unik_blindside_cult = {
+                name = "Cult Tag",
+                text = {
+					"Gives a free",
+					"{C:bld_obj_ritual}Mega Hallow Pack",
+                }
+            },
+            tag_unik_blindside_peak = {
+                name = "Peak Tag",
+                text = {
+                    "Played Blinds",
+                    "{C:attention}permanently gain{} either",
+                    "{C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips,",
+                    "{C:white,X:mult}X#3#{} Mult or {C:white,X:chips}X#4#{} Chips",
                 }
             },
         },
@@ -6291,6 +6511,72 @@ return {
 					"their {C:attention}hues{} is created"},
 				},
 			},
+            c_unik_blindside_erosion = {
+                name = "Erosion",
+                text = {
+					{"Each Blind {C:attention}permanently gains",
+					"either {X:mult,C:white}X#3#{} Mult,",
+					"{X:chips,C:white}X#4#{} Chips or {C:money}$#5#{}"},
+					{"Create a",
+					"{C:red}Landslide Tag"}
+                }
+            },
+            c_unik_blindside_mirror = {
+                name = "Mirror",
+                text = {
+                    {
+                        "Add {C:dark_edition}Finish{} to",
+                        "{C:attention}#1#{} selected Trinket#<s>1#"
+                    },
+					{"Create a",
+					"{C:red}Gore Tag"}
+                }
+            },
+            c_unik_blindside_repetition = {
+                name = "Repetition",
+                text = {
+                    {
+                        "Add {C:dark_edition}Finish{} to",
+                        "{C:attention}#1#{} random",
+                        "Blind#<s>1# in hand"
+                    },
+					{"Create a",
+					"{C:red}Pentagram Tag"}
+                }
+            },
+            c_unik_blindside_augment = {
+                name = "Augment",
+                text = {
+                    {
+                        "Add {C:dark_edition}Shiny{} to",
+                        "{C:attention}#1#{} random",
+                        "Blind#<s>1# in hand"
+                    },
+					{"Create a",
+					"{C:red}Downscale Tag"}
+                }
+            },
+            c_unik_blindside_bind = {
+                name = "Bind",
+                text = {
+                    {
+                        "Create an {C:attention}Additive Tag",
+                        "and a {C:attention}Multiplicative Tag",
+                    },
+					{"Create a",
+					"{C:red}Handcuffs Tag"}
+                }
+            },
+            c_unik_blindside_expel = {
+                name = "Expel",
+                text = {
+                    {
+                        "{C:red}Banish{} a selected",
+                        "{C:attention}Blind{}, {C:attention}Consumable",
+                        "{C:attention}Price Tag{} or {C:bld_trinket}Trinket",
+                    },
+                }
+            },
         },
         Voucher={
             v_unik_spectral_merchant = {

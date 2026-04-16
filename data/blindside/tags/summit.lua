@@ -1,1 +1,0 @@
---3 in 4 chance each played blind does not gain either +20 Chips, +3 Mult, X0.2 Chips, X0.2 Mult or $1.

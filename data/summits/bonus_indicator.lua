@@ -54,7 +54,7 @@ SMODS.Atlas {
 local function should_draw_indicator(card, key)
 	return card and card.ability
 		and type(card.ability[key]) == "number"
-		and card.ability[key] > 0
+		and card.ability[key] ~= 0
 		and card.area and card.area.config.type ~= 'deck'
 end
 

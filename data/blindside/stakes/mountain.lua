@@ -1,27 +1,16 @@
---each hand creates 1 random Crude Blind in hand
-SMODS.Tag {
-    key = "unik_blindside_pentagram",
-    hide_ability = false,
-    atlas = 'unik_tags',
-    pos = {x = 7, y = 5},
-    in_pool = function(self, args)
-        return false
-    end,
-    loc_vars = function(self, info_queue,tag)
+--mountain stake????
+--add 1 random crude blind to deck when Boss+ Joker is selected
+SMODS.Stake{
+    key = 'unik_blindside_mountain_deck',
 
-	end,
-    config = {
-        extra = {
-            hex = true,
-        }
-    },
-    apply = function(self, tag, context)
-        if context.type == 'shop_start' and not (next(SMODS.find_card("j_bld_taglock")) and not (G.GAME.blind.boss or G.GAME.last_joker)) then
-            tag:yep('+', G.C.RED, function() 
-                return true end)
-            tag.triggered = true
-        end
-        if context.type == 'before' then
+    applied_stakes = {'unik_blindside_tic_tac_toe_deck'},
+    prefix_config = {above_stake = {mod = false}, applied_stakes = {mod = false}, unlocked_stake = {mod = false}},
+    
+    modifiers = function()
+        
+    end,
+    calculate = function(self, context) 
+        if  context.setting_blind and context.blind and context.blind.boss then
             local cardsadded = {}
              G.E_MANAGER:add_event(Event({
                 delay = 1,
@@ -38,9 +27,8 @@ SMODS.Tag {
                         cardr.playing_card = G.playing_card
                         table.insert(G.playing_cards, cardr)
                         cardr:start_materialize()
-                        G.hand:emplace(cardr)
+                        G.deck:emplace(cardr)
                         cardsadded[#cardsadded+1] = cardr
-                        tag:juice_up(3,3)
                         return true
                     end
                 }))
@@ -53,4 +41,10 @@ SMODS.Tag {
             }))
         end
     end,
+
+    --colour = ,
+
+
+    pos = { x = 3, y = 1 },
+    atlas = 'unik_stakes',
 }

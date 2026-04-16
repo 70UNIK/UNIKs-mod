@@ -1,1 +1,1 @@
---Create a curse tag
+--Create a curse tag and a soul tag

@@ -6,8 +6,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 23,
-            mult_mod = 4,
-            mult_mod_up = 4,
+            mult_mod = 3,
+            mult_mod_up = 3,
         }},
     hues = {"Green"},
     calculate = function(self, card, context) 

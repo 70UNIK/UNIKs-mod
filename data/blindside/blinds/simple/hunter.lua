@@ -13,6 +13,18 @@ BLINDSIDE.Blind({
     hues = {"Red"},
     always_scores = true,
     calculate = function(self, card, context) 
+        if context.on_select_play and card.highlighted then
+            local found = false
+            local count = 0
+            for i,v in pairs(G.hand.highlighted) do
+                if found and count < card.ability.extra.cards then
+                    v.debuff = true --preemptive measure (the goblin for instance)
+                end
+                if v == card then
+                    found = true
+                end
+            end
+        end
         if context.cardarea == G.play and context.before and card.facing ~= 'back'  then
             card.ability.extra.successful = nil
             local count = 0

@@ -48,7 +48,7 @@
                         local seed2 = math.random(1000000,9999999)
                         card.ability.extra.stored_seed = 'unik_shine_seed' .. seed .. seed2
                         selected_card.ability.unik_assigned_shine = card.ability.extra.stored_seed
-                        local fail = falses
+                        local fail = false
                         for i,v in pairs(context.scoring_hand) do
                             if v ~= card and v ~= selected_card and v.ability.unik_assigned_shine and v.ability.unik_assigned_shine == card.ability.extra.stored_seed then
                                 print("Dupe seed exists, attemtping rebuild")
