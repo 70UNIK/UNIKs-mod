@@ -11,7 +11,7 @@ BLINDSIDE.Blind({
     hues = {"Faded"},
     always_scores = true,
     calculate = function(self, card, context) 
-        if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+        if context.cardarea == G.play and context.before and card.facing ~= 'back' and not card.ability.extra.upgraded then
 
              G.E_MANAGER:add_event(Event({
                     trigger = 'immediate',

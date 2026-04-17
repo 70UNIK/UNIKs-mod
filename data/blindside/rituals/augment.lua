@@ -6,6 +6,16 @@ SMODS.Consumable {
 	pos = { x = 2, y = 1 },
     config = {
         extra = {affected = 3}},
+    can_use = function (self, card)
+        if #G.hand.cards > 0 then
+            for key, value in pairs(G.hand.cards) do
+                if not value.edition then
+                    return true
+                end
+            end
+        end
+        return false
+    end,
     use = function(self, card, area)
          local choices = {}
         for key, value in pairs(G.hand.cards) do

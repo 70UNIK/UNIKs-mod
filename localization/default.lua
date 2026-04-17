@@ -1987,6 +1987,31 @@ return {
                     },
                 }
             },
+            m_unik_blindside_shield = {
+                name = "The Shield",
+                text = {
+                    {
+                        "{X:green,C:white}Green",
+                        "Create a {C:attention}Shield Tag",
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
+            m_unik_blindside_shield_upgraded = {
+                name = "The Shield",
+                text = {
+                    {
+                        "{X:green,C:white}Green",
+                        "Create a {C:attention}Shield Tag",
+                        "{C:chips}+#1#{} Chips"
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
             m_unik_blindside_poppy = {
                 name = "The Poppy",
                 text = {
@@ -2154,8 +2179,10 @@ return {
                         "held {C:attention}consumable",
                         "{C:inactive}(Must have room)",
                     },
+                    {"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance"},
                     {
-                        "{C:attention}Burns{}"
+                        "{C:attention}Burns{} on success"
                     },
                 }
             },
@@ -2173,8 +2200,10 @@ return {
                         "copy of the leftmost held",
                         "{C:attention}consumable{} before scoring"
                     },
+                    {"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance"},
                     {
-                        "{C:attention}Burns{}"
+                        "{C:attention}Burns{} on success"
                     },
                 }
             },

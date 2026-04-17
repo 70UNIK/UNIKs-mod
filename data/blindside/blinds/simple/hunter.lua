@@ -16,9 +16,11 @@ BLINDSIDE.Blind({
         if context.on_select_play and card.highlighted then
             local found = false
             local count = 0
-            for i,v in pairs(G.hand.highlighted) do
+            local cards = UNIK.get_sorted_by_position(G.hand)
+            for i,v in pairs(cards) do
                 if found and count < card.ability.extra.cards then
                     v.debuff = true --preemptive measure (the goblin for instance)
+                    count = count + 1
                 end
                 if v == card then
                     found = true

@@ -1,4 +1,6 @@
 --When played, Gains X0.05 Chips whenever +Chips, Xchips, ^Chips, etc... is triggered --> When played, Gains X0.1 Chips whenever +Chips, Xchips, ^Chips, etc... is triggered
+--Yeah TOO OP in current form; needs to be instead:
+--gains X0.35 Chips if Xchips, +Chips, etc.. has triggered in this hand
 BLINDSIDE.Blind({
     key = 'unik_blindside_catterfly',
     atlas = 'unik_blindside_blinds',

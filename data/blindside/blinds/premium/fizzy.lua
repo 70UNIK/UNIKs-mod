@@ -15,6 +15,13 @@ BLINDSIDE.Blind({
         if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and card.area == G.play and card.ability.extra.upgraded then
             local isScoring = false
             local index = -1
+            for i = 1, #context.scoring_hand do
+                if context.scoring_hand[i] == card then
+                    isScoring = true
+                    index = i
+                    break
+                end
+            end
             if isScoring and index > 0 then
                 local validCards = {}
                 for z = 1, card.ability.extra.rescores do
