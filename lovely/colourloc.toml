@@ -38,5 +38,7 @@ UNIK_UNIK = HEX('fe90ff'),
 UNIK_CAPTION = HEX('009A9A'),
 UNIK_SUMMIT = HEX("6f859e"),
 UNIK_COPPER = HEX("F8A065"),
+UNIK_EQMULT = HEX("cb7f7f"),
+UNIK_EQCHIPS = HEX("5b89a6"),
 """
 match_indent = true

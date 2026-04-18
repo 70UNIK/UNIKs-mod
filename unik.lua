@@ -1313,6 +1313,10 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/crude/impatience.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/brainrot.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/goblin.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/blacklist.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/vomit.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/landlord.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/close.lua")()
 	
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_flip.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_trench.lua")()
@@ -1338,19 +1342,32 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/rituals/sigil.lua")()
 
 	--TAGS
-	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
-	NFS.load(mod_path .. "data/blindside/tags/peak.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/gore.lua")()
-	
 	NFS.load(mod_path .. "data/blindside/tags/pentagram.lua")()	
-	NFS.load(mod_path .. "data/blindside/tags/multiplicative.lua")()	
-	NFS.load(mod_path .. "data/blindside/tags/shield.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/landslide.lua")()	
-	NFS.load(mod_path .. "data/blindside/tags/recursive.lua")()	
-	NFS.load(mod_path .. "data/blindside/tags/downscale.lua")()	
-	NFS.load(mod_path .. "data/blindside/tags/cult.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/downscale.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/soul.lua")()	
 	NFS.load(mod_path .. "data/blindside/tags/handcuffs.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/tags/peak.lua")()
+	--greed
+	NFS.load(mod_path .. "data/blindside/tags/multiplicative.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/recursive.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/balance.lua")()
+	--cursed
+
+	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
+	--boosted
+	NFS.load(mod_path .. "data/blindside/tags/shield.lua")()
+	--reel
+	NFS.load(mod_path .. "data/blindside/tags/cult.lua")()
+	--wrench
+	
+	
+	
+	
+	
+	
 
 	--stakes
 	NFS.load(mod_path .. "data/blindside/stakes/greed.lua")()	

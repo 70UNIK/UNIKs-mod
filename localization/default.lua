@@ -1633,6 +1633,7 @@ return {
                     },
                 }
             },
+            --change to only scaling once while held
             m_unik_blindside_fail = {
                 name = "The Fail",
                 text = {
@@ -2126,6 +2127,7 @@ return {
                         "{C:attention}Retriggered {}#1# time#<s>1#",
                         "and {C:unik_copper}Rescored{} #2# time#<s>2#",
                     },
+                    {"Always scores"},
                 }
             },
             m_unik_blindside_decepticon = {
@@ -2470,16 +2472,6 @@ return {
                     {"{C:attention}Burns"},
                 }
             },
-            -- -$1 per trinket owned
-            -- --Add rental to a random trinket if held
-            m_unik_blindside_landlord = {
-                name = "The Landlord",
-                text = {
-                    {
-                        
-                    }
-                }
-            },
             m_unik_blindside_taw = {
                 name = "The Taw",
                 text = {
@@ -2494,9 +2486,6 @@ return {
                     {
                         "{C:red}Cannot{} be {C:attention}Burned",
                     },
-                    {"{C:attention}Stubborn"},
-					{"{C:attention}Forced to",
-					"{C:attention}be selected"},
                 }
             },
             m_unik_blindside_taw_upgraded = {
@@ -2516,10 +2505,113 @@ return {
                     {
                         "{C:red}Cannot{} be {C:attention}Burned",
                     },
-                    {"{C:attention}Stubborn"},
-					{"{C:attention}Forced to",
-					"{C:attention}be selected"},
                 }
+            },
+            m_unik_blindside_landlord = {
+                name = "The Landlord",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "{C:red}Lose{} {C:money}$#1#{} per",
+                        "Trinket owned"
+                    },
+                                        {
+                        "{C:attention}Stubborn"
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
+            m_unik_blindside_landlord_upgraded = {
+                name = "The Landlord",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "{C:money}+$#1#{} per",
+                        "Trinket owned"
+                    },
+                                        {
+                        "{C:attention}Stubborn"
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
+            m_unik_blindside_vomit = {
+                name = "The Vomit",
+                text = {
+                    {
+                        "{X:green,C:white}Green",
+                        "{C:green}#1# in #2#{} chance",
+                        "for {X:dark_edition,C:white}^#3#{} Mult",
+                        "to Joker"
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
+            m_unik_blindside_close = {
+                name = "The Close",
+                text = {
+                    {
+                        "{X:red,C:white}Red",
+                        "{C:red}Debuffs{} all blinds",
+                        "not adjacent to",
+                        "each {C:attention}Close"
+                    },
+                    {
+                        "Always Scores"
+                    }
+                }
+            },
+            m_unik_blindside_close_upgraded = {
+                name = "The Close",
+                text = {
+                    {
+                        "{X:red,C:white}Red",
+                        "Adjacent Blinds are",
+                        "{C:unik_copper}Rescored{} {C:attention}#1#{} time#<s>1#",
+                    },
+                    {
+                        "Always Scores"
+                    }
+                }
+            },
+            m_unik_blindside_blacklist = {
+                name = "The Blacklist",
+                text = {
+                    {
+                                                "{X:red,C:white}Red",
+                        "When {C:attention}held,",
+                        "{X:unik_eqchips,C:white}=#2#{} Chips and",
+                        "{X:unik_eqmult,C:white}=#1#{} Mult",
+                        "then {C:attention}Burns"
+                    },
+                    {
+                        "{C:attention}Stubborn"
+                    }
+                }
+            },
+            m_unik_blindside_blacklist_upgraded = {
+                name = "The Blacklist",
+                text = {
+                    {
+                                                "{X:red,C:white}Red",
+                        "When {C:attention}held,",
+                        "{C:chips}+#4#{} Chips and",
+                        "{C:mult}+#3#{} Mult",
+                        "then {C:attention}Burns"
+                    },
+                    {
+                        "{C:attention}Stubborn"
+                    }
+                }
+            },
+            m_unik_blindside_nut = {
+
             },
             m_unik_blindside_epic_straightforwardness = {
                 name = "Tasainenviiva",
@@ -2657,28 +2749,26 @@ return {
                 }
             },
 
-            ["m_bld_king"] = {
-				["name"] = "The King",
-				["text"] = {
+            m_bld_king = {
+				name = "The King",
+				text = {
                     {
 					"{X:dark_edition,C:white}Faded{}",
 					"{C:white,X:mult}X#1#{} Mult to {C:attention}Joker",
 					"when {C:attention}held in hand",
                     },
-                    {"{C:attention}Temporary"},
-
+                    {"{C:attention}Temporary"}
 				},
 			},
-			["m_bld_queen"] = {
-				["name"] = "The Queen",
-				["text"] = {
+			m_bld_queen = {
+				name = "The Queen",
+				text = {
                     {
 					"{X:dark_edition,C:white}Faded{}",
 					"{C:white,X:mult}X#1#{} Mult to {C:attention}Joker",
 					"when {C:red}discarded",
                     },
-                    {"{C:attention}Temporary"},
-
+                    {"{C:attention}Temporary"}
 				},
 			},
 
@@ -6190,6 +6280,13 @@ return {
                     "{C:white,X:mult}X#3#{} Mult or {C:white,X:chips}X#4#{} Chips",
                 }
             },
+            tag_unik_blindside_balance = {
+                name = "Balance Tag",
+                text = {
+                    "{C:purple}Balances{} {X:dark_edition,C:white}^#1#",
+                    "of {C:chips}Chips{} and {C:red}Mult"
+                }
+            }
         },
         Tarot={
             c_unik_wheel_of_misfortune = {
@@ -7623,6 +7720,8 @@ return {
             a_hyper_hyper_mult = "#1##2# Mult",
             a_Xlog_mult = "Mult Xlog_#1#(Mult)",
             a_Xlog_chips = "Chips Xlog_#1#(Chips)",
+            a_eq_mult = "=#1# Mult",
+            a_eq_chips = "=#1# Chips",
             a_unik_hands_1="#1# hands",
             a_unik_discards_1="#1# discards",
             a_unik_reed_construct="ranks #1# or #2#",

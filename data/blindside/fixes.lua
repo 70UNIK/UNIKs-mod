@@ -287,6 +287,7 @@ SMODS.Tag:take_ownership("tag_bld_reroll",{
         -- end
         if context.type == 'after_reroll'  and not G.GAME.rerolled then
             --SMODS.change_free_rerolls(-1)
+            print("-1 Free rerolls")
             G.GAME.unik_blindside_reroll_tags_consumed = G.GAME.unik_blindside_reroll_tags_consumed or 0
             G.GAME.unik_blindside_reroll_tags_consumed = G.GAME.unik_blindside_reroll_tags_consumed + 1
             G.GAME.rerolled = true
@@ -294,8 +295,21 @@ SMODS.Tag:take_ownership("tag_bld_reroll",{
                 return true end)
             tag.triggered = true
         end
+        if context.type == 'self_tag_added' then
+            SMODS.change_free_rerolls(1)
+            print("+1 Free rerolls")
+        end
     end,
 },true)
+
+local vessel2 = add_tag
+function add_tag(_tag)
+	local ret = vessel2(_tag)
+    _tag:apply_to_run({type = 'self_tag_added', tag = _tag})
+    return ret
+end
+--
+
 --Finish: if on a trinket, retrigger it (when possible)
 
 SMODS.Edition:take_ownership("e_bld_finish",{

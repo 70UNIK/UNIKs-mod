@@ -54,23 +54,14 @@ BLINDSIDE.Blind({
     atlas = 'unik_blindside_blinds',
     pos = {x = 5, y = 6},
     config = {
-        forced_selection = true,
         extra = {
             value = 30,
             taw_unbreakable = true,
-            stubborn = true,
-            x_mult = 4,
+            x_mult = 2.5,
         },
     },
     hues = {"Purple"},
     calculate = function(self, card, context) 
-        if tableContains(card, G.hand.cards) and not tableContains(card, G.hand.highlighted) and #G.hand.highlighted < 5 and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
-            card.ability.forced_selection = true
-            G.hand:add_to_highlighted(card, true)
-        end
-        if context.after then
-            card.ability.forced_selection = false
-        end
          if context.cardarea == G.play and context.main_scoring and card.ability.extra.upgraded then
             return {
                 x_mult = card.ability.extra.x_mult
@@ -79,7 +70,6 @@ BLINDSIDE.Blind({
     end,
     curse = true,
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'bld_stubborn', set = 'Other'}
         info_queue[#info_queue+1] = {key = 'unik_unrerollable', set = 'Other'}
         return {
             key = card.ability.extra.upgraded and 'm_unik_blindside_taw_upgraded' or 'm_unik_blindside_taw',

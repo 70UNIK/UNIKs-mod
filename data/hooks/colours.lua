@@ -30,5 +30,7 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_rgb = G.C.UNIK_RGB
     G.ARGS.LOC_COLOURS.unik_summit = G.C.UNIK_SUMMIT
     G.ARGS.LOC_COLOURS.unik_copper = G.C.UNIK_COPPER
+    G.ARGS.LOC_COLOURS.unik_eqmult = G.C.UNIK_EQMULT
+    G.ARGS.LOC_COLOURS.unik_eqchips = G.C.UNIK_EQCHIPS
     return locHook(_c,_default)
 end

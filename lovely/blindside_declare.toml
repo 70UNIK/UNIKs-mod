@@ -22,6 +22,7 @@ payload = '''
 'tag_unik_blindside_peak',
 'tag_unik_blindside_shield',
 'tag_unik_blindside_cult',
+'tag_unik_blindside_balance',
 'c_unik_blindside_sigil',
 'c_unik_blindside_erosion',
 'c_unik_blindside_bind',

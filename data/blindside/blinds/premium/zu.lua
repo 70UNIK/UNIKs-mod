@@ -14,7 +14,7 @@ BLINDSIDE.Blind({
     rare = true,
     always_scores = true,
     calculate = function(self, card, context)
-        if context.before and context.scoring_hand and context.cardarea == G.play and card.ability.extra.upgraded then
+        if context.before and context.scoring_hand and context.cardarea == G.play then
             
             local exists = false
             for i,v in pairs(context.scoring_hand) do
@@ -24,9 +24,11 @@ BLINDSIDE.Blind({
                 end
             end
             if card.facing ~= 'back' then
-                if not SMODS.pseudorandom_probability(card, pseudoseed("zuflip"), card.ability.extra.chance, card.ability.extra.trigger, 'zuflip') or card.ability.extra.upgraded then
+                if not SMODS.pseudorandom_probability(card, pseudoseed("zuflip"), card.ability.extra.chance, card.ability.extra.trigger, 'zuflip') then
+                                           card:flip()
                     card:flip()
-                    card:flip()
+                    if card.ability.extra.upgraded then
+ 
                      if exists and G.consumeables.cards[1] then
                         G.E_MANAGER:add_event(Event({
                             func = function() 
@@ -42,6 +44,8 @@ BLINDSIDE.Blind({
                                 colour = G.C.DARK_EDITION,
                             }
                     end
+                    end
+                    
                 else
                     if card.facing ~= 'back' then 
                         card:flip()
@@ -115,3 +119,4 @@ BLINDSIDE.Blind({
         end
     end
 })
+--eval G.hand.cards[1]:set_ability('m_unik_blindside_zu')

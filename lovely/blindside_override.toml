@@ -206,3 +206,15 @@ if isDetrimentalEdition2(edition) then
 card.cost = card.cost - 2
 end
 '''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+pattern = '''if _tag.key == 'tag_bld_reroll' then
+    SMODS.change_free_rerolls(1)
+end'''
+match_indent = true
+position = 'at'
+payload = '''
+--overridden, will use hook instead
+'''

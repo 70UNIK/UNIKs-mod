@@ -16,8 +16,8 @@ SMODS.Tag {
 	end,
     config = {
         extra = {
-            mult = 1,
-            chips = 7,
+            mult = 0.5,
+            chips = 4,
             hex = true,
         }
     },

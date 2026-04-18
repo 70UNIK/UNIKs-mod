@@ -12,12 +12,15 @@ BLINDSIDE.Blind({
         }},
     hues = {"Faded"},
     calculate = function(self, card, context) 
-        if tableContains(card, G.hand.cards) and not tableContains(card, G.hand.highlighted) and #G.hand.highlighted < 5 and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        if card.ability.extra.upgraded then
+            card.ability.forced_selection = false
+        end
+        if tableContains(card, G.hand.cards) and not tableContains(card, G.hand.highlighted) and #G.hand.highlighted < 5 and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not card.ability.extra.upgraded then
             card.ability.forced_selection = true
             G.hand:add_to_highlighted(card, true)
         end
 
-        if context.after then
+        if context.after and not card.ability.extra.upgraded then
             card.ability.forced_selection = false
         end
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then

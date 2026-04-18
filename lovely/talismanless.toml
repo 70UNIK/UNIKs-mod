@@ -29,8 +29,24 @@ elseif eval_type == 'xlog_chips' then
     sound = 'xchips'
     volume = 0.7
     amt = amt
-    text = localize{type='variable',key='a_Xlog_chips',vars={math.abs(amt)}}
+    text = '=' .. number_format(amt) .. ' ' .. localize('k_mult')
     colour = G.C.CHIPS
+    config.type = 'fade'
+    config.scale = 0.7
+elseif eval_type == 'eq_mult' and not next(SMODS.find_mod("Spectrallib")) then
+    sound = 'multhit1'
+    volume = 0.7
+    amt = amt
+    text = '=' .. number_format(amt) .. ' ' .. localize('k_mult')
+    colour = G.C.UNIK_EQMULT
+    config.type = 'fade'
+    config.scale = 0.7
+elseif eval_type == 'eq_chips' and not next(SMODS.find_mod("Spectrallib")) then
+    sound = 'chips1'
+    volume = 0.7
+    amt = amt
+    text = '=' .. number_format(amt) .. ' ' .. localize('k_chips')
+    colour =  G.C.UNIK_EQCHIPS
     config.type = 'fade'
     config.scale = 0.7
 elseif eval_type == 'e_chips' and not UNIK.has_talisman() and not next(SMODS.find_mod("Cryptlib"))  then
@@ -48,4 +64,12 @@ elseif eval_type == 'e_mult' and not UNIK.has_talisman() and not next(SMODS.find
     config.type = 'fade'
     config.scale = 0.7
 '''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "functions/common_events.lua"
+pattern = '''(.*)amt > 0(.*)or(.*)amt < 0'''
+position = "after"
+payload = ''' or ((eval_type == 'eq_mult' or eval_type == 'eq_chips') and not next(SMODS.find_mod("Cryptlib"))) '''
 match_indent = true
