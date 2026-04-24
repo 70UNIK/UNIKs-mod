@@ -1,6 +1,5 @@
 --When played, Gains X0.05 Chips whenever +Chips, Xchips, ^Chips, etc... is triggered --> When played, Gains X0.1 Chips whenever +Chips, Xchips, ^Chips, etc... is triggered
---Yeah TOO OP in current form; needs to be instead:
---gains X0.35 Chips if Xchips, +Chips, etc.. has triggered in this hand
+--Yeah TOO OP in current form; at least values nerfed and should not scale when triggered by ITSELF!
 BLINDSIDE.Blind({
     key = 'unik_blindside_catterfly',
     atlas = 'unik_blindside_blinds',
@@ -9,8 +8,8 @@ BLINDSIDE.Blind({
         extra = {
             value = 17,
             x_chips = 1,
-            x_chip_mod = 0.04,
-            x_chip_mod_upgrade = 0.04,
+            x_chip_mod = 0.05,
+            x_chip_mod_upgrade = 0.05,
         }},
     hues = {"Purple"},
     calculate = function(self, card, context) 

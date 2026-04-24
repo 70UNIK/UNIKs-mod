@@ -4,9 +4,9 @@ SMODS.Joker {
 	pos = { x = 0, y = 4 },
     config = {
         extra = {
-        xMult = 1.075,
-        xMult_gain = 0.075,
-        xMult_base = 1.075,
+        xMult = 1.08,
+        xMult_gain = 0.3,
+        xMult_base = 1.08,
         suit = "unik_Crosses",
         }
     },

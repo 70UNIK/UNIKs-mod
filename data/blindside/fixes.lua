@@ -305,7 +305,12 @@ SMODS.Tag:take_ownership("tag_bld_reroll",{
 local vessel2 = add_tag
 function add_tag(_tag)
 	local ret = vessel2(_tag)
-    _tag:apply_to_run({type = 'self_tag_added', tag = _tag})
+    if not _tag.ability or (_tag.ability and not _tag.ability.unik_has_been_added) then
+        _tag:apply_to_run({type = 'self_tag_added', tag = _tag})
+        --hopefully this only applies ONCE!
+        _tag.ability.unik_has_been_added = true
+    end
+    
     return ret
 end
 --
@@ -395,4 +400,184 @@ function get_new_big(current)
     end
     return ret
 end
---Small and big jokers: Spawn after skipping or defeating cavendish/gros michael instead of when ante ~= 1
+--scaling blinds will use scale_card instead so its easier to block from being copied
+--The Snow (/)
+--The Line (/)
+--The Trench (/)
+--Monolith (/)
+BLINDSIDE.Blind:take_ownership("m_bld_monolith",{
+    calculate = function(self, card, context)
+         if context.before then
+                local _best_hand, _hand, _tally = nil, nil, -1
+                for k, v in ipairs(G.handlist) do
+                    if G.GAME.hands[v].visible and G.GAME.hands[v].played > _tally then
+                        _hand = v
+                        _best_hand = k
+                        _tally = G.GAME.hands[v].played
+                    end
+                end
+                if _hand then
+                    if _hand == context.scoring_name then
+                         SMODS.scale_card(card, {
+                            ref_table = card.ability.extra,
+                            ref_value = "xmult",
+                            scalar_value = "xmult_lose",
+                            operation = '-',
+                                no_message = true,
+
+                        })
+                        card.ability.extra.xmult = math.max(card.ability.extra.xmult,0)
+                        --card.ability.extra.xmult = math.max(0, card.ability.extra.xmult - card.ability.extra.xmult_lose)
+                        return {
+                            message = localize("k_downgrade_ex")
+                        }
+                    else
+                        SMODS.scale_card(card, {
+                            ref_table = card.ability.extra,
+                            ref_value = "xmult",
+                            scalar_value = "xmult_gain",
+                            operation = '+',
+                                no_message = true,
+
+                        })
+                       --card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_gain
+                        return {
+                            message = localize("k_upgrade_ex")
+                        }
+                    end
+                end
+            end
+            
+            if context.cardarea == G.play and context.main_scoring then
+                return {
+                    xmult = card.ability.extra.xmult
+                }
+            end
+    end,
+},true)
+BLINDSIDE.Blind:take_ownership("m_bld_trench",{
+    calculate = function(self, card, context)
+         if context.cardarea == G.play and context.main_scoring then
+            --card.ability.extra.xchips = card.ability.extra.xchips + card.ability.extra.xchips_gain
+            return {
+                xchips = card.ability.extra.xchips,
+                func = function ()
+                         SMODS.scale_card(card, {
+                            ref_table = card.ability.extra,
+                            ref_value = "xchips",
+                            scalar_value = "xchips_gain",
+                            operation = '+',
+                                no_message = true,
+
+                        })
+                    end
+            }
+        end
+    end,
+},true)
+BLINDSIDE.Blind:take_ownership("m_bld_line",{
+        replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+    calculate = function(self, card, context)
+        if context.modify_hand and context.scoring_hand then
+            local i_scored = false
+            for key, value in pairs(context.scoring_hand) do
+                if value == card then
+                    i_scored = true
+                end
+            end
+
+            if not i_scored then
+                return
+            end
+
+            if G.GAME.current_round.discards_left > 0 then
+                 SMODS.scale_card(card, {
+                            ref_table =card.ability.extra,
+                            ref_value = "xmult",
+                            scalar_value = "custom_scaler",
+                            scalar_table = {
+                                custom_scaler = G.GAME.current_round.discards_left * card.ability.extra.xmult_gain,
+                            },
+                            message_key = "a_xmult",
+                            message_colour = G.C.MULT,
+                        })
+                        --ease_discard(-G.GAME.current_round.discards_left)
+                return {
+                    message = localize('k_upgrade_ex'),
+                    func = function ()
+                        ease_discard(-G.GAME.current_round.discards_left)
+                       
+                    end
+                }
+            end
+        end
+
+        if context.main_scoring and context.cardarea == G.play and card.ability.extra.xmult > 1 then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+        end,
+},true)
+BLINDSIDE.Blind:take_ownership("m_bld_snow",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.main_scoring then
+            return {
+                chips = card.ability.extra.chips
+            }
+        end
+
+        if context.cardarea == G.hand and context.main_scoring then
+            --card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain_chips
+            SMODS.scale_card(card, {
+                ref_table = card.ability.extra,
+                ref_value = "chips",
+                scalar_value = "gain_chips",
+                operation = '+',
+                message_colour = G.C.CHIPS,
+                -- force_full_val = true,
+                -- operation = function(ref_table, ref_value, initial, scaling)
+                --     ref_table[ref_value] = initial + scaling * cards
+                -- end,
+            })
+            -- SMODS.scale_card(card, {
+            --     ref_table = card.ability.extra,
+            --     ref_value = "x_mult",
+            --     scalar_value = "x_mult_bonus",
+            --     operation = '+',
+            --     message_colour = G.C.PURPLE
+            -- })
+            return {
+                -- message = localize('k_upgrade_ex')
+            }
+        end
+
+        if context.after and context.scoring_hand then
+            local i_scored = false
+            for key, value in pairs(context.scoring_hand) do
+                if value == card then
+                    i_scored = true
+                    break
+                end
+            end
+
+            if i_scored then
+                card.ability.extra.chips = 0
+                return {
+                    message = localize('k_reset')
+                }
+            end
+        end   
+    end,
+},true)
+
+--all trinkets will be made retriggerable and copyable when possible 

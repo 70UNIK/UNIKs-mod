@@ -27,7 +27,7 @@ SMODS.Tag {
         if context.type == 'unik_rescoring_cards' and context.scoring_hand then
             local cards = {}
             for i,v in pairs(context.scoring_hand) do
-                if not SMODS.pseudorandom_probability(tag, 'recursive_unik', self.config.chancefail, self.config.chance, 'unik_aquamarine_resc') and v.facing ~= 'back' then
+                if not SMODS.pseudorandom_probability(tag, 'recursive_unik', self.config.chancefail, self.config.chance, 'recursive_unik') and v.facing ~= 'back' then
                     cards[#cards+1] = v
                 end
             end

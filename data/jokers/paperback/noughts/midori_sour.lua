@@ -1,0 +1,1 @@
+--the next 5 scored noughts will permanently gain +1 rescore (only applies once per card), rare

@@ -21,7 +21,7 @@ BLINDSIDE.Blind({
             }
         end
         if context.pseudorandom_result and not context.result and card.area == G.hand and ((not context.cardarea and not context.main_eval) or context.main_eval) then
-            if not card.ability.suppress_upgrade then
+            if not card.ability.suppress_upgrade and (not context.identifier or (context.identifier and context.identifier ~= 'recursive_unik')) then
                 card.ability.suppress_upgrade = true
                 SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
@@ -47,6 +47,8 @@ BLINDSIDE.Blind({
     end,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
+        info_queue[#info_queue+1] = G.P_TAGS['tag_unik_blindside_recursive']
+        info_queue[#info_queue+1] = G.P_TAGS['tag_bld_symmetry']
         return {
             vars = {card.ability.extra.x_mult_mod,card.ability.extra.x_mult}
         }

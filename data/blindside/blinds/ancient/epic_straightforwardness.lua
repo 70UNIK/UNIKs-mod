@@ -7,7 +7,7 @@ BLINDSIDE.Blind({
         extra = {
             value = 1,
             joker_e_chips = 0.9,
-            joker_e_chips_down = 0.1,
+            joker_e_chips_down = 0.05,
         }
     },
     hues = {"Blue", "Yellow"},

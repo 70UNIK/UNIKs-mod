@@ -91,6 +91,9 @@ BLINDSIDE.Blind({
         local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.chance, card.ability.extra.trigger, 'zuflip')
 
         local main_end
+        if card.ability.extra.upgraded then
+            info_queue[#info_queue + 1] = { set = "Other", key = "unik_decaying_consumable" }
+        end
 
         if G.consumeables then
             for _, v in ipairs(G.consumeables.cards) do

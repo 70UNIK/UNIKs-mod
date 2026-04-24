@@ -1,5 +1,10 @@
 --copies the effect of the leftmost blind in the area 3 times, always scores
-
+local scaler = SMODS.scale_card
+function SMODS.scale_card(card, args)
+    if card.ability.block_recursive_napkin or card.ability.block_scaling_copied then return end
+    local ret = scaler(card, args)
+    return ret
+end
 BLINDSIDE.Blind({
     key = 'unik_blindside_napkin',
     atlas = 'unik_blindside_blinds',
@@ -30,6 +35,7 @@ BLINDSIDE.Blind({
             end
             if areacards and areacards[1] and areacards[1] ~= card and areacards[1].config.center.key ~= 'm_unik_blindside_napkin' then
                 --print("copying " .. areacards[1].config.center.key)
+                areacards[1].ability.block_scaling_copied = true
                 for k = 1, card.ability.extra.times do
                     local effect = UNIK.blueprint_enhancement(card, areacards[1], context)
                     if effect then
@@ -39,6 +45,7 @@ BLINDSIDE.Blind({
                     effects_table[#effects_table+1] = effect
                     
                 end
+                areacards[1].ability.block_scaling_copied = nil
             end
             
             
@@ -124,6 +131,7 @@ end
 function UNIK.blueprint_enhancement(copier, copied_card, context)
     if not copied_card or copied_card == copier or copied_card.debuff or context.no_blueprint then return end
     if (context.blueprint or 0) > #copier.area.cards then return end
+        --copied_card.ability.block_scaling_copied = true
         local old_context_blueprint = context.blueprint
         context.blueprint = (context.blueprint or 0) + 1
         local old_context_blueprint_card = context.blueprint_card
@@ -132,6 +140,7 @@ function UNIK.blueprint_enhancement(copier, copied_card, context)
         context.blueprint_copiers_stack[#context.blueprint_copiers_stack+1] = copier
         context.blueprint_copier = context.blueprint_copiers_stack[#context.blueprint_copiers_stack]
         local eff_card = context.blueprint_card
+        
         local eval = eval_card(copied_card, context)
         context.blueprint = old_context_blueprint
         context.blueprint_card = old_context_blueprint_card
@@ -146,6 +155,7 @@ function UNIK.blueprint_enhancement(copier, copied_card, context)
                -- print(v)
             end
         end
+        --copied_card.ability.block_scaling_copied = nil
         return SMODS.merge_effects(ret)
 end
 --eval G.hand.cards[1]:set_ability('m_unik_blindside_napkin')

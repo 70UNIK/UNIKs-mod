@@ -6,9 +6,9 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            e_mult = 1,
-            e_mult_up = 0.04,
-            e_mult_up2 = 0.04,
+            e_mult = 0.95,
+            e_mult_up = 0.05,
+            e_mult_up2 = 0.02,
         }
     },
     hues = {"Purple", "Green"},
@@ -25,7 +25,7 @@ BLINDSIDE.Blind({
                     force_full_val = true,
             })
         end
-        if context.cardarea == G.play and context.main_scoring then
+        if SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
             
             return {
                 e_mult = card.ability.extra.e_mult

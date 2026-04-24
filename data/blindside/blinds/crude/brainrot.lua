@@ -105,7 +105,7 @@ BLINDSIDE.Blind({
             }
             end
         end
-        if context.after and not card.ability.extra.upgraded then
+        if context.after and not card.ability.extra.upgraded and SMODS.in_scoring(card,context.scoring_hand) then
             local cards = {}
             -- for i,v in pairs(context.full_hand) do
             --     if not v.config.center.curse then

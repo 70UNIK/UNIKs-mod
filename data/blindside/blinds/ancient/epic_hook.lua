@@ -6,7 +6,7 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            e_mult = 1.2,
+            e_mult = 1.25,
             e_mult_up = 0.15,
             discards = 2,
             discards_up = 2,
@@ -25,6 +25,13 @@ BLINDSIDE.Blind({
         end
         if context.cardarea == G.play and context.main_scoring then
             ease_discard(card.ability.extra.discards)
+            return {
+                message = localize({type='variable',key='a_unik_discards_1',vars={card.ability.extra.discards}}),
+                --e_mult = card.ability.extra.e_mult
+                colour = G.C.MULT,
+            }
+        end
+        if SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
             return {
                 e_mult = card.ability.extra.e_mult
             }

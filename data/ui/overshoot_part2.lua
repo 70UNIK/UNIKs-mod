@@ -59,7 +59,7 @@ function G.UIDEF.overshoot_info(cantexit)
             can_collide = true,
             shadow = true,
             id = 'unik_overshoot_effect_box'..numero,
-            unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. numero)},
+            unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. numero .. (UNIK.hasBlindside() and "_blindside" or ""))},
             },
             nodes={
                 {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={

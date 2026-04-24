@@ -1505,6 +1505,7 @@ return {
                         "Gains {X:chips,C:white}X#2#{} Chips when",
                         "{C:chips}Chips{}, {X:chips,C:white}XChips{},",
                         "{X:dark_edition,C:white}^Chips{}, etc... trigger",
+                        "{C:inactive}(Itself excluded)"
                     },
                     {
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
@@ -1536,8 +1537,8 @@ return {
                     "{C:mult}+#1#{} Mult",
                     },
                     {
-                        "Creates a {C:attention}Dethroning",
-                        "tag when scored",
+                        "Creates {C:attention}#2# {C:attention}Dethroning",
+                        "tag#<s>2# if in scoring hand",
                     },
                     {
                         "{C:attention}Burns"
@@ -1645,6 +1646,8 @@ return {
                     {
                         "Gains {X:mult,C:white}X#1#{} Mult whenever",
                         "a {C:green}probability {C:red}fails",
+                        "{C:inactive}(Symmetry and Circles",
+                        "{C:inactive}tags excluded)",
                     },
                     {
                         "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
@@ -2636,13 +2639,15 @@ return {
 					"{C:inactive}(Currently {C:attention}#4#{C:inactive} time#<s>4#)"},
                 }
             },
+            --^0.95 Mult after scoring, increases by ^0.05 Mult
             m_unik_blindside_epic_wall = {
                 name = "Ylitsepääsemätönseinä",
                 text = {
                     {"{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
                     "Gains {X:dark_edition,C:white}^#2#{} Mult",
 					"after being played"},
-					{"{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)"},
+					{"{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult",
+                "{C:attention}after scoring{C:inactive})"},
                 }
             },
             m_unik_blindside_epic_bellows = {
@@ -2662,15 +2667,17 @@ return {
                 }
             },
             m_unik_blindside_epic_flip = {
-                name = "Ylösalaisin",
+                name = "Ylösalaisin", --upside down
                 text = {
                     {"{X:green,C:white}Green{} {X:purple,C:white}Purple{}",
                     "{C:green}#1# in #2#{} chance for",
                     "{X:dark_edition,C:white}^#3#{} Mult or",
-                    "{X:dark_edition,C:white}^#4#{} Chips",},
+                    "{X:dark_edition,C:white}^#4#{} Chips",
+                    "{C:attention}after scoring"},
                     {
                         "otherwise {X:mult,C:white}X#5#{} Mult",
                         "or {X:chips,C:white}X#6#{} Chips",
+                        "{C:attention}after scoring",
                     },
 
                 }
@@ -2679,39 +2686,33 @@ return {
                 name = "Verenvuotokoukku",
                 text = {
                     {"{X:red,C:white}Red{} {X:chips,C:white}Blue{}",
-                    "{X:dark_edition,C:white}^#1#{} Mult and",
                     "{C:red}+#2#{} Discards"},
+                    {
+                        "{X:dark_edition,C:white}^#1#{} Mult",
+                        "{C:attention}after scoring"
+                    },
                     {"{C:attention}Burns{} all",
                         "held Blinds"
                     },
                     {"{C:attention}Burns"},
                 }
             },
-            m_unik_blindside_epic_hook_upgraded = {
-                name = "Verenvuotokoukku",
-                text = {
-                    {"{X:red,C:white}Red{} {X:chips,C:white}Blue{}",
-                    "{X:dark_edition,C:white}^#1#{} Mult and",
-                    "{C:red}+#2#{} Discards"},
-                    {"{C:attention}Burns{} all",
-                        "held Blinds"
-                    },
-                }
-            },
+            --^1.25 Chips after scoring, increase by ^0.15, resets at ^1.25
             m_unik_blindside_epic_trench = {
                 name = "Merenkaivanto", --trench of the ocean
                 text = {
                     {
                         "{X:chips,C:white}Blue{} {X:dark_edition,C:white}Faded",
                         "Gains {C:white,X:dark_edition}^#1#{} Chips",
-					    "when {C:attention}scored"
+					    "after scoring"
                     },
 					{
                         "{C:attention}Resets{} to {C:white,X:dark_edition}^#2#",
                         "each round"
                     },
                     {
-                        "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Chips)"
+                        "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Chips",
+                        "{C:attention}after scoring{C:inactive})"
                     },
                 },
             },
@@ -4595,6 +4596,22 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                 }
             },
+            j_unik_negroni = {
+                name = "Negroni",
+                text = {
+                    "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
+                    "{C:green}+#3#{} retriggers before scoring",
+                    "{C:inactive}(Once per card)"
+                }
+            },
+            j_unik_midori_sour = {
+                name = "Midori Sour",
+                text = {
+                    "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
+                    "{C:green}+#3#{} {C:unik_copper}rescores{} before scoring",
+                    "{C:inactive}(Once per card)"
+                }
+            },
 
 
             j_bunc_jmjb = {
@@ -6276,7 +6293,7 @@ return {
                 text = {
                     "Played Blinds",
                     "{C:attention}permanently gain{} either",
-                    "{C:mult}+#1#{} Mult, {C:chips}+#2#{} Chips,",
+                    "{C:mult}+#2#{} Mult, {C:chips}+#1#{} Chips,",
                     "{C:white,X:mult}X#3#{} Mult or {C:white,X:chips}X#4#{} Chips",
                 }
             },

@@ -1,0 +1,1 @@
+--The catalyst, create a balance tag, self debuffing at 1 in 2 chance

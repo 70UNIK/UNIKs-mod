@@ -358,18 +358,21 @@ function get_new_boss()
             end
             local _, newBoss = pseudorandom_element(eligible_bosses, pseudoseed('unik_boss_finisher'))
             forceNewBoss = newBoss
-            --Revert
-            G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] - 1
-            G.GAME.bosses_used[forceNewBoss] = G.GAME.bosses_used[forceNewBoss] + 1
-            if unik_config.unik_legendary_blinds and G.P_BLINDS[forceNewBoss] and G.P_BLINDS[forceNewBoss].boss then
-                if ((G.P_BLINDS[forceNewBoss].boss.ancient or G.P_BLINDS[forceNewBoss].boss.exotic)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
-                    G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
-                end
-            else
-                if ((G.P_BLINDS[forceNewBoss].boss.showdown)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
-                    G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+            if forceNewBoss then
+                --Revert
+                G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] - 1
+                G.GAME.bosses_used[forceNewBoss] = G.GAME.bosses_used[forceNewBoss] + 1
+                if unik_config.unik_legendary_blinds and G.P_BLINDS[forceNewBoss] and G.P_BLINDS[forceNewBoss].boss then
+                    if ((G.P_BLINDS[forceNewBoss].boss.ancient or G.P_BLINDS[forceNewBoss].boss.exotic)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                        G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+                    end
+                else
+                    if ((G.P_BLINDS[forceNewBoss].boss.showdown)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                        G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+                    end
                 end
             end
+            
         else
             if unik_config.unik_legendary_blinds and G.P_BLINDS[boss] and G.P_BLINDS[boss].boss then
                 if ((G.P_BLINDS[boss].boss.ancient or G.P_BLINDS[boss].boss.exotic)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then

@@ -143,13 +143,13 @@ function UNIK.overshootEnabled(no_comment)
 		return false
 	end
 	--temporary
-	if UNIK.hasBlindside() then
-		if not no_comment then
-			print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
-		end
+	-- if UNIK.hasBlindside() then
+	-- 	if not no_comment then
+	-- 		print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
+	-- 	end
 		
-		return false
-	end
+	-- 	return false
+	-- end
 	return true
 end
 
@@ -1401,7 +1401,7 @@ if JokerDisplay then
 	NFS.load(mod_path .. "data/jokerdisplay/detrimental.lua")() 
 end
 
-
+NFS.load(mod_path .. "data/misc/tag_squish.lua")()
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.
 ---Persimmon Placard: All cards are debuffed, held debuffed cards each give X1 mult and $1. Increase Xmult by +X0.1 per played debuffed card

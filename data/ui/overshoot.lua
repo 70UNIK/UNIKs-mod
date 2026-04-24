@@ -56,7 +56,7 @@ function create_UIBox_HUD()
                 shadow = true,
                 id = 'unik_overshoot_desc',
                 button = "overshoot_info",
-                unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
+                unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal .. (UNIK.hasBlindside() and "_blindside" or ""))},
                 },
             nodes={
                 {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
@@ -85,7 +85,7 @@ function create_UIBox_HUD()
                 shadow = true,
                 id = 'unik_overshoot_desc',
                 button = "overshoot_info",
-                unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)},
+                unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal .. (UNIK.hasBlindside() and "_blindside" or ""))},
                 },
             nodes={
                 {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
@@ -230,6 +230,49 @@ function create_UIBox_HUD_blind()
     return ret
 end
 
+if UNIK.hasBlindside() then
+    local _create_UIBox_HUD_jokerblind = create_UIBox_HUD_jokerblind
+    function create_UIBox_HUD_jokerblind()
+        local ret = _create_UIBox_HUD_jokerblind()
+
+
+        -- if (not G.GAME.blind.boss) then
+        --     return ret
+        -- end
+
+        --local node = ret.nodes[2]
+        if UNIK.overshootEnabled(true) then
+            ret.nodes[2].nodes[#ret.nodes[2].nodes + 1] = {
+                n = G.UIT.R,
+                config = { align = "cm", minh = 0.3, r = 0.1, emboss = 0.05, colour = G.C.DYN_UI.MAIN },
+                nodes = {
+                    {
+                        n = G.UIT.C,
+                        config = { align = "cm", minw = 3 },
+                        nodes = {
+                            {
+                                n = G.UIT.O,
+                                config = {
+                                    object = DynaText({
+                                        string = { { ref_table = G.GAME.blind, ref_value = "overshootUIchips"} },
+                                        colours = { G.C.UI.TEXT_LIGHT },
+                                        shadow = true,
+                                        float = true,
+                                        scale = 0.25,
+
+                                    }),
+                                    id = "overshoot_chips_UI",
+                                },
+                            },
+                        },
+                    },
+                },
+            }
+        end
+        
+        return ret
+    end
+end
 
 function unik_ease_overshoot(mod)
     if UNIK.overshootEnabled() then
@@ -267,7 +310,7 @@ function unik_ease_overshoot(mod)
                     
                 end
                 ante_UI.config.object:update()
-                ante_UI2.config.unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal)}
+                ante_UI2.config.unik_fake_tooltip = {title = localize("overshoot_unik"), text = localize("overshoot_unik_" .. G.GAME.OvershootFXVal .. (UNIK.hasBlindside() and "_blindside" or ""))}
                 G.HUD:recalculate()
                 --Popup text next to the chips in UI showing number of chips gained/lost
                 attention_text({

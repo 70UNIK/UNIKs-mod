@@ -1,0 +1,1 @@
+--the next 5 scored crosses will permanently gain +1 retrigger (only applies once per card)

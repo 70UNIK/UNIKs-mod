@@ -31,7 +31,7 @@ SMODS.Tag {
                 
             end
         end
-        if (context.type == 'tag_add') then
+        if (context.type == 'self_tag_added') then
             for key, tag2 in pairs(G.GAME.tags) do
                 if (tag2.key == 'tag_bld_debuff' or (G.P_TAGS[tag2.key] and G.P_TAGS[tag2.key].config and G.P_TAGS[tag2.key].config.extra and G.P_TAGS[tag2.key].config.extra.hex)) and not G.GAME.unik_suppress_shield then
                     G.GAME.unik_suppress_shield = true
