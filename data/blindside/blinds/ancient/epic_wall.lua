@@ -25,7 +25,7 @@ BLINDSIDE.Blind({
                     force_full_val = true,
             })
         end
-        if SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
+        if context.scoring_hand and SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
             
             return {
                 e_mult = card.ability.extra.e_mult

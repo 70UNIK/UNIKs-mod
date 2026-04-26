@@ -21,7 +21,7 @@ SMODS.Tag {
 	end,
     config = {
         extra = {
-            amount = 0.75,
+            amount = 0.8,
         }
     },
     apply = function(self, tag, context)

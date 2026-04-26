@@ -9,9 +9,9 @@ BLINDSIDE.Blind({
             trigger = 2,
             chance = 1,
             e_mult = 1.25,
-            e_mult_up = 0.15,
+            e_mult_up = 0.2,
             e_chips = 1.2,
-            e_chips_up = 0.15,
+            e_chips_up = 0.2,
             x_mult = 2.5,
             x_mult_up = 1.5,
             x_chips = 2.5,
@@ -19,7 +19,7 @@ BLINDSIDE.Blind({
         }},
     hues = {"Green","Purple"},
     calculate = function(self, card, context) 
-        if SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
+        if context.scoring_hand and SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
             if SMODS.pseudorandom_probability(card, pseudoseed("flip_alternate"), card.ability.extra.chance, card.ability.extra.trigger, 'flip_alternate') then
                 if pseudorandom('flip_alternate_middle') < 0.5 then
                     return {

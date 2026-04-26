@@ -1,36 +1,35 @@
---+$6, create a handcuffs tag, burns
+--+10 Mult, always on the rightmost positon
 BLINDSIDE.Blind({
-    key = 'unik_blindside_smiley',
+    key = 'unik_blindside_pinned',
     atlas = 'unik_blindside_blinds',
-    pos = {x = 0, y = 1},
+    pos = {x = 0, y = 8},
     config = {
         extra = {
+            left_pinned = true,
             value = 34,
-            dollars = 5,
-            dollars_up = 5,
+            x_mult = 1.65,
+            x_mult_up = 0.65,
         }
     },
     hues = {"Yellow"},
     calculate = function(self, card, context) 
         if context.cardarea == G.play and context.main_scoring then
-            add_tag(Tag('tag_unik_blindside_handcuffs'))
             return {
-                p_dollars = card.ability.extra.dollars
+                x_mult = card.ability.extra.x_mult
             }
         end
     end,
     common = true,
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = G.P_TAGS['tag_unik_blindside_handcuffs']
         return {
             vars = {
-                card.ability.extra.dollars,
+                card.ability.extra.x_mult,
             }
         }
     end,
     upgrade = function(card)
         if not card.ability.extra.upgraded then
-            card.ability.extra.dollars = card.ability.extra.dollars + card.ability.extra.dollars_up
+            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_up
             card.ability.extra.upgraded = true
         end
     end,

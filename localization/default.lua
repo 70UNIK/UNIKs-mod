@@ -202,7 +202,8 @@ return {
                     "+^#2# when a Purple",
                     "Blind is scored",
                     "All played Blinds",
-                    "must be Purple",
+                    "must contain",
+                    "Purple hue",
                 }
             },
             bl_unik_blindside_moonlight_cookie = {
@@ -1479,10 +1480,12 @@ return {
                 name = "The Descending",
                 text = {
                     {
-                        "{X:chips,C:white}Blue{} {X:purple,C:white}Purple{}",
+                        "{X:purple,C:white}Purple{} {X:chips,C:white}Blue{}",
                         "Sets Joker {C:attention}operator{} to",
-                        "{C:dark_edition}addition{} for the round",
-                        -- "then {X:dark_edition,C:white}^#1#{} Mult to Joker",                    
+                        "{C:dark_edition}addition{} for the round",                  
+                    },
+                    {
+                        "{X:dark_edition,C:white}X#1#{} Mult to Joker",  
                     },
                     {
 					"{C:red,E:1}Self-Debuffing{} with a",
@@ -1555,7 +1558,7 @@ return {
                     },
                     {
                     "{C:green}#2# in #3#{} chance to",
-                    "{C:attention}Play{} selected cards",
+                    "{C:attention}Play{} selected Blinds",
                     "when selected"
                     },
 
@@ -1741,11 +1744,12 @@ return {
                 text = {
                     {
                         "{X:gold,C:white}Yellow",
-                        "{X:mult,C:white}X#1#{} Mult"
+                        "{C:money}+$#1#{} when scored"
                     },
                     {
-                        "{C:red}#2#{} Hand Size",
-                        "while held",
+                        "Create a",
+                        "{C:red}Handcuffs Tag{}",
+                        "when scored",
                     }
                 }
             },
@@ -1778,7 +1782,7 @@ return {
             m_unik_blindside_nought = {
                 name = "The Nought",
                 text = {
-                    {"{X:chips,C:white}Blue{}",
+                    {"{X:chips,C:white}Blue{} {X:green,C:white}Green{}",
 					"Creates a {C:unik_copper}Circles",
 					"{C:unik_copper}Tag{} before scoring",},
 					{"{C:red,E:1}Self-Debuffing{} with a",
@@ -1788,7 +1792,7 @@ return {
             m_unik_blindside_nought_upgraded = {
                 name = "The Nought",
                 text = {
-                    {"{X:chips,C:white}Blue{}",
+                    {"{X:chips,C:white}Blue{} {X:green,C:white}Green{}",
 					"Creates a {C:unik_copper}Circles",
 					"{C:unik_copper}Tag{} before scoring",},
 					{"Always scores"},
@@ -1841,13 +1845,15 @@ return {
                 text = {
                     {
                         "{X:green,C:white}Green",
-                        "{C:mult}+#1#{} Mult for",
-                        "each scoring",
-                        "{X:green,C:white}Green{} Blind"
+                        "{C:green}#2# in #3#{} chance",
+                        "to {C:red}not{} give",
+                        "{C:mult}+#1#{} Mult"
                     },
                     {
-                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
-                    },
+                        "{C:green}Numerator{} decreases",
+                        "for each played",
+                        "{X:green,C:white}Green{} Blind"
+                    }
                 }
             },
             m_unik_blindside_evergreen = {
@@ -1855,13 +1861,15 @@ return {
                 text = {
                     {
                         "{X:green,C:white}Green{} {X:dark_edition,C:white}Faded{}",
-                        "{X:mult,C:white}X#1#{} Mult for",
-                        "each scoring",
-                        "{X:green,C:white}Green{} Blind"
+                        "{C:green}#2# in #3#{} chance",
+                        "to {C:red}not{} give",
+                        "{X:mult,C:white}X#1#{} Mult",
                     },
                     {
-                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-                    },
+                        "{C:green}Numerator{} decreases",
+                        "for each played",
+                        "{X:green,C:white}Green{} Blind"
+                    }
                 }                
             },
             m_unik_blindside_approval = {
@@ -1931,6 +1939,9 @@ return {
                         "{C:attention}#1#{} Blind#<s>1# to",
                         "the right into Blind#<s>1#",
 					    "of the same {C:attention}hue{}"
+                    },
+                    {
+                        "Always Scores"
                     },
                 }
             },
@@ -2153,7 +2164,7 @@ return {
                 name = "The Patina",
                 text = {
                     {
-                        "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{} ",      
+                        "{X:money,C:white}Yellow{} {X:green,C:white}Green{}",      
                         "{C:unik_copper}Rescore{} all",
                         "scored Blinds",
                         
@@ -2166,7 +2177,7 @@ return {
                 name = "The Patina",
                 text = {
                     {
-                        "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{} ",      
+                        "{X:money,C:white}Yellow{} {X:green,C:white}Green{}",      
                         "{C:unik_copper}Rescore{} all",
                         "scored Blinds",
                     },
@@ -2337,7 +2348,40 @@ return {
                     {"{C:attention}Burns"},
                 }
 
-            },    
+            },  
+            m_unik_blindside_pinned = {
+                name = "The Pinned",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "{X:red,C:white}X#1#{} Mult"
+                    },
+                    {
+                        "{C:red}Always{} at the",
+                        "{C:attention}leftmost{} position"
+                    },
+                    
+                }
+            },
+            m_unik_blindside_catalyst = {
+                name = "The Catalyst",
+                text = {
+                      {"{X:purple,C:white}Purple{}",
+					"Creates a {C:purple}Balance",
+					"{C:purple}Tag{} before scoring",},
+					{"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance"},
+                }
+            },
+            m_unik_blindside_catalyst_upgraded = {
+                name = "The Catalyst",
+                text = {
+                      {"{X:purple,C:white}Purple{}",
+					"Creates a {C:purple}Balance",
+					"{C:purple}Tag{} before scoring",},
+					{"Always Scores"},
+                }
+            },
             m_unik_blindside_magician = {
                 name = "The Magician",
                 text = {
@@ -2704,7 +2748,7 @@ return {
                     {
                         "{X:chips,C:white}Blue{} {X:dark_edition,C:white}Faded",
                         "Gains {C:white,X:dark_edition}^#1#{} Chips",
-					    "after scoring"
+					    "when scored"
                     },
 					{
                         "{C:attention}Resets{} to {C:white,X:dark_edition}^#2#",
@@ -5705,6 +5749,13 @@ return {
 					"to score"
                 }
             },
+            unik_right_pinned = {
+                name = "Pinned",
+                text = {
+                    "{C:red}Kept{} to the",
+                    "{C:attention}rightmost{} position"
+                }
+            },
             unik_unique = {
                 name = "Unique",
                 text = {
@@ -7356,7 +7407,7 @@ return {
             k_unik_joker_immune = "Joker is immune!",
             k_unik_jchips = "Jchips",
             k_unik_jmult = "Jmult",
-            k_unik_all_purple = "All played Blinds must be Purple",
+            k_unik_all_purple = "All played Blinds must contain Purple hues",
             k_unik_cannot_skip = "Unskippable",
             k_glass = "Glass",
             k_unik_pink="Pink Cards",

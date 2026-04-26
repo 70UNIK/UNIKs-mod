@@ -1,1 +1,56 @@
 --The catalyst, create a balance tag, self debuffing at 1 in 2 chance
+BLINDSIDE.Blind({
+    key = 'unik_blindside_catalyst',
+    atlas = 'unik_blindside_blinds',
+    pos = {x = 7, y = 7},
+    config = {
+        extra = {
+            value = 100,
+            badchance = 1,
+            trigger = 2,
+        }},
+    hues = {"Purple"},
+rare = true,
+    always_scores = true,
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+            if not SMODS.pseudorandom_probability(card, pseudoseed("catalyst_unik"), card.ability.extra.badchance, card.ability.extra.trigger, 'catalyst_unik') or card.ability.extra.upgraded then
+                card:flip()
+                card:flip()
+                add_tag(Tag('tag_unik_blindside_balance'))
+                return {
+                    focus = card,
+                    message = localize('k_tagged_ex'),
+                    card = card,
+                }
+            else
+                if card.facing ~= 'back' then 
+                    card:flip()
+                end
+                card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+                return {
+                }
+            end
+        end
+    end,
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_TAGS['tag_unik_blindside_balance']
+        if not card.ability.extra.upgraded then
+            info_queue[#info_queue+1] = {key = 'unik_self_debuffing', set = 'Other'}
+        end
+        
+        local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.badchance, card.ability.extra.trigger, 'catalyst_unik')
+        return {
+            key = card.ability.extra.upgraded and 'm_unik_blindside_catalyst_upgraded' or 'm_unik_blindside_catalyst',
+            vars = {
+                chance,
+                trigger
+            }
+        }
+    end,
+    upgrade = function(card)
+        if not card.ability.extra.upgraded then
+            card.ability.extra.upgraded = true
+        end
+    end
+})

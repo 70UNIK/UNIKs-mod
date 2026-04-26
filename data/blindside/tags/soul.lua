@@ -64,7 +64,7 @@ end
 
 local small_overrider = get_new_small
 function get_new_small(current)
-    if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal >= 4) then
+    if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4) then
         local boss = get_new_boss()
         if boss then
             return boss
@@ -76,7 +76,7 @@ end
 
 local big_overrider = get_new_big
 function get_new_big(current)
-    if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal >= 4) then
+    if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4) then
         local boss = get_new_boss()
         if boss then
             return boss

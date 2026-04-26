@@ -10,6 +10,7 @@ BLINDSIDE.Blind({
             blinds_up = 1,
         }},
     hues = {"Blue"},
+    always_scores = true,
     calculate = function(self, card, context) 
         if context.cardarea == G.play and context.after then
             local enhancement = {}

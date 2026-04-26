@@ -5,25 +5,23 @@ function Game:start_run(args)
     start_run_boss_override(self,args)
     local saveTable = args.savetext or nil
     if not saveTable then
-        if not UNIK.hasBlindside() then
-            if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
-                G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
-            end
-            if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
-                self.GAME.round_resets.blind_choices.Small = get_new_boss()
-            end
-            if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
-                G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
-            end
-            if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
-                self.GAME.round_resets.blind_choices.Big = get_new_boss()
-            end
-            if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
-                G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
-            end
-            if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
-                self.GAME.round_resets.blind_choices.Boss = get_new_boss()
-            end
+         if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+            G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+        end
+        if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
+            self.GAME.round_resets.blind_choices.Small = get_new_boss()
+        end
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+            G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+        end
+        if G.GAME.unik_force_epic_plus > 0 or G.GAME.modifiers.cry_rush_hour_ii then
+            self.GAME.round_resets.blind_choices.Big = get_new_boss()
+        end
+        if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
+            G.GAME.unik_force_epic_plus = math.max(1,G.GAME.unik_force_epic_plus)
+        end
+        if G.GAME.superboss_active and G.GAME.unik_force_epic_plus > 0 then
+            self.GAME.round_resets.blind_choices.Boss = get_new_boss()
         end
         
     end
@@ -239,6 +237,7 @@ function get_new_boss()
             return forceNewBoss
         end
     else
+      --  print("bs reroll")
                 G.GAME.perscribed_bosses = G.GAME.perscribed_bosses or {
         }
         if G.GAME.perscribed_bosses and G.GAME.perscribed_bosses[G.GAME.round_resets.ante] then 
@@ -263,49 +262,62 @@ function get_new_boss()
         if G.GAME.unik_force_epic_plus > 0 then
             force_override = true
         end
+       -- print(vice_check())
+       -- print(G.GAME.OvershootFXVal)
+      --  print(G.GAME.unik_overshoot)
         --Ignore if a showdown boss.
         if force_override and (not G.P_BLINDS[boss].boss or (G.P_BLINDS[boss].boss and not G.P_BLINDS[boss].boss.showdown)) then
+          --  print("Override time")
             for k, v in pairs(G.P_BLINDS) do
                 if not v.boss or (not string.sub(k,1,6) == "bl_bld" and not v.blindside_joker) then
-                    
+                    eligible_bosses[k] = nil
                 else
+                  --  print(v)
                     if v.in_pool and type(v.in_pool) == 'function' then
                         local res, options = SMODS.add_to_pool(v)
                         if 
-                            v.boss.showdown
-                            or (options or {}).ignore_showdown_check then
+                            (v.boss.showdown
+                            or (options or {}).ignore_showdown_check ) and  (string.sub(k,1,6) == "bl_bld" or v.blindside_joker) then
                             eligible_bosses[k] = res and true or nil
                         end
                         if
                             unik_config.unik_legendary_blinds and 
-                            (v.boss and (v.boss.exotic or v.boss.ancient) and G.GAME.modifiers.unik_legendary_at_any_time)
+                            (v.boss and (v.boss.exotic or v.boss.ancient) and G.GAME.modifiers.unik_legendary_at_any_time) and
+                             (string.sub(k,1,6) == "bl_bld" or v.blindside_joker)
                         then
                             if (v.boss.exotic or v.boss.ancient) then
                                 local res, options = v:in_pool()
                                 eligible_bosses[k] = res and true or nil
+                               -- print(k)
+                             --   print(res)
                             end
                         end
-                    elseif v.boss.showdown then
+                    elseif v.boss.showdown and  (string.sub(k,1,6) == "bl_bld" or v.blindside_joker) then
                         eligible_bosses[k] = true
+                      --  print(k)
                     else
                         eligible_bosses[k] = nil
                     end
                 end
                 if G.GAME.unik_force_epic_plus > 0 then
+                    --print("Force epics+")
                 if unik_config.unik_legendary_blinds then
-                    if v.boss and (v.boss.exotic or v.boss.ancient) then
+                    if v.boss and (v.boss.exotic or v.boss.ancient) and  (string.sub(k,1,6) == "bl_bld" or v.blindside_joker) then
                         if v.in_pool then
                             local res, options = v:in_pool()
                             eligible_bosses[k] = res and true or nil
+                          --  print(v)
+                          --  print(res)
                         else
                             eligible_bosses[k] = true
                         end
                     elseif v.boss then
                         eligible_bosses[k] = nil
+                       -- print(k)
                     end
                     else
                     --fallback to finisher blinds if epic blinds are disabled or jens not installed
-                        if v.boss and v.boss.showdown then
+                        if v.boss and v.boss.showdown and  (string.sub(k,1,6) == "bl_bld" or v.blindside_joker) then
                             if v.in_pool then
                                 local res, options = v:in_pool()
                                 eligible_bosses[k] = res and true or nil
@@ -319,7 +331,7 @@ function get_new_boss()
                 --force REGULAR blinds to appear
                 elseif G.GAME.unik_force_boss_blind and G.GAME.unik_force_boss_blind > 0 then
                     G.GAME.unik_force_boss_blind = G.GAME.unik_force_boss_blind - 1
-                    if v.boss and not v.boss.showdown then
+                    if v.boss and not v.boss.showdown and  (string.sub(k,1,6) == "bl_bld" or v.blindside_joker) then
                         if v.in_pool then
                             local res, options = v:in_pool()
                             eligible_bosses[k] = res and true or nil
@@ -334,7 +346,7 @@ function get_new_boss()
             for k, v in pairs(G.GAME.banned_keys) do
                 if eligible_bosses[k] then eligible_bosses[k] = nil end
             end
-
+           -- print(eligible_bosses)
             local min_use = 100
             for k, v in pairs(G.GAME.bosses_used) do
                 if eligible_bosses[k] then
@@ -358,18 +370,15 @@ function get_new_boss()
             end
             local _, newBoss = pseudorandom_element(eligible_bosses, pseudoseed('unik_boss_finisher'))
             forceNewBoss = newBoss
-            if forceNewBoss then
-                --Revert
-                G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] - 1
-                G.GAME.bosses_used[forceNewBoss] = G.GAME.bosses_used[forceNewBoss] + 1
-                if unik_config.unik_legendary_blinds and G.P_BLINDS[forceNewBoss] and G.P_BLINDS[forceNewBoss].boss then
-                    if ((G.P_BLINDS[forceNewBoss].boss.ancient or G.P_BLINDS[forceNewBoss].boss.exotic)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
-                        G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
-                    end
-                else
-                    if ((G.P_BLINDS[forceNewBoss].boss.showdown)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
-                        G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
-                    end
+            G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] - 1
+            G.GAME.bosses_used[forceNewBoss] = G.GAME.bosses_used[forceNewBoss] + 1
+            if unik_config.unik_legendary_blinds and G.P_BLINDS[forceNewBoss] and G.P_BLINDS[forceNewBoss].boss then
+                if ((G.P_BLINDS[forceNewBoss].boss.ancient or G.P_BLINDS[forceNewBoss].boss.exotic)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                    G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
+                end
+            else
+                if ((G.P_BLINDS[forceNewBoss].boss.showdown)) and G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0 then
+                    G.GAME.unik_force_epic_plus = G.GAME.unik_force_epic_plus - 1
                 end
             end
             

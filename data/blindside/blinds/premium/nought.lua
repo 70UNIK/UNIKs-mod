@@ -8,7 +8,7 @@ BLINDSIDE.Blind({
             badchance = 1,
             trigger = 2,
         }},
-    hues = {"Blue"},
+    hues = {"Blue", "Green"},
 rare = true,
     always_scores = true,
     calculate = function(self, card, context)

@@ -581,3 +581,9 @@ BLINDSIDE.Blind:take_ownership("m_bld_snow",{
 },true)
 
 --all trinkets will be made retriggerable and copyable when possible 
+
+
+--exquisite blinds:
+--epic rarity equivalent
+--stronger than premiums, weaker than legendaries
+--examples include Pit Blinds and Hyperblinds

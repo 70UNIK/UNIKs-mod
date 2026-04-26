@@ -1,0 +1,28 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''table.sort(self.cards, function (a, b) return a.T.x + a.T.w/2 < b.T.x + b.T.w/2 end)'''
+position = "at"
+payload = '''table.sort(self.cards, function (a, b) return a.T.x + a.T.w/2 - 100*((a.pinned and not a.ignore_pinned) and a.sort_id or 0) < b.T.x + b.T.w/2 - 100*((b.pinned and not b.ignore_pinned) and b.sort_id or 0) end)'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "cardarea.lua"
+pattern = '''a.pinned'''
+position = "at"
+payload = '''(a.pinned or (a.ability and a.ability.extra and type(a.ability.extra) == 'table' and a.ability.extra.left_pinned))'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "cardarea.lua"
+pattern = '''b.pinned'''
+position = "at"
+payload = '''(b.pinned or (b.ability and b.ability.extra and type(b.ability.extra) == 'table' and b.ability.extra.left_pinned))'''
+match_indent = true

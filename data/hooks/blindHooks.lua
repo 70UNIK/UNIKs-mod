@@ -138,10 +138,16 @@ function Blind:disable()
 end
 
 --blindside rerollers
+--will have to override if film reel is obtained
+
 local bsreroll_boss = G.FUNCS.blind_reroll_boss
 G.FUNCS.blind_reroll_boss = function(e) 
+    local deduct_hand = true
+    if G.from_boss_tag then
+        deduct_hand = false
+    end
     local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
+	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) and not G.GAME.used_vouchers["v_bld_film_reel"] then
 		play_sound('cancel', 0.7 + 0.05, 0.7)
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
@@ -149,14 +155,64 @@ G.FUNCS.blind_reroll_boss = function(e)
         })
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
-    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
+    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) and not G.GAME.used_vouchers["v_bld_film_reel"] then
         play_sound('cancel', 0.8, 1)
         local text = localize('k_nope_ex')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
         })
 	else
-		return bsreroll_boss(e)
+        --complex film reel procedure: rerolls all 3
+        if G.GAME.used_vouchers["v_bld_film_reel"] then
+            local triggered = false
+
+            local set = {"Small","Big","Boss"}
+            for i = 1, #set do
+                if G.GAME.round_resets.blind_states[set[i]] ~= 'Defeated' and G.GAME.round_resets.blind_states[set[i]] ~= 'Skipped' and G.GAME.round_resets.blind_states[set[i]] ~= 'Hidden' then
+                    local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices[set[i]]]
+                    if obj2 and obj2.boss and (obj2.boss.legendary or obj2.boss.exotic) then
+                        play_sound('cancel', 0.7 + 0.05, 0.7)
+                        local text = localize('k_unik_boss_reroll_nope')
+                        attention_text({
+                            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+                        })
+                        G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+                        --jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+                    elseif obj2 and obj2.boss and (obj2.boss.epic or obj2.boss.ancient ) then
+                        play_sound('cancel', 0.8, 1)
+                        local text = localize('k_nope_ex')
+                        attention_text({
+                            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj2.boss_colour or G.C.RED
+                        })
+                    else
+                        if set[i] == "Small" then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_small()
+                            triggered = true
+                        elseif set[i] == "Big" then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_big()
+                             triggered = true
+                        elseif set[i] == "Boss" then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_boss()
+                             triggered = true
+                        end
+    
+                    end
+                end
+            end
+            if deduct_hand and  triggered then 
+                ease_hands_played(-1)
+                G.GAME.round_resets.hands = G.GAME.round_resets.hands - 1
+                G.GAME.round_resets.hands_removed = (G.GAME.round_resets.hands_removed or 0) + 1
+            end
+            G.from_boss_tag = nil
+            
+        else
+            return bsreroll_boss(e)
+        end
+		
 	end
 end
 --big reroll
@@ -203,8 +259,6 @@ local bsreroll_small =    G.FUNCS.reroll_small
 		return bsreroll_small(e)
 	end
 end
-
-
 
 local gfrb2 = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)

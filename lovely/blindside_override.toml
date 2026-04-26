@@ -60,31 +60,29 @@ position = 'after'
 payload = '''
 
 '''
-
-
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''SMODS.calculate_context({hand_discard = true, other_card =  _cards[i], full_hand = _cards, ignore_other_debuff = true}, effects)'''
+pattern = '''table.insert(cards, _cards[i])'''
 match_indent = true
 position = 'after'
 payload = '''
-if _cards[i] and _cards[i].ability and _cards[i].ability.unik_burned_by_hook then
+if _cards[i].unik_burned_by_hook then
+    _cards[i].unik_burned_by_hook = nil
     burned = true
-    _cards[i].ability.unik_burned_by_hook = nil
 end
 '''
 
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
-pattern = '''SMODS.calculate_context({hand_retain = true, other_card =  _retained_cards[i], full_hand = _retained_cards, ignore_other_debuff = true}, effects)'''
+pattern = '''table.insert(cards, _retained_cards[i])'''
 match_indent = true
 position = 'after'
 payload = '''
-if _cards[i] and _cards[i].ability and _cards[i].ability.unik_burned_by_hook then
+if _retained_cards[i].unik_burned_by_hook then
+    _retained_cards[i].unik_burned_by_hook = nil
     burned = true
-    _cards[i].ability.unik_burned_by_hook = nil
 end
 '''
 

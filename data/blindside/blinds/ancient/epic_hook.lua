@@ -7,21 +7,18 @@ BLINDSIDE.Blind({
         extra = {
             value = 1,
             e_mult = 1.25,
-            e_mult_up = 0.15,
+            e_mult_up = 0.2,
             discards = 2,
             discards_up = 2,
         }},
     hues = {"Red", "Blue"},
     calculate = function(self, card, context) 
-        if context.before then
-            card.ability.extra.scoring = nil
-            for i,v in pairs(context.scoring_hand) do
-                if v == card then
-                    card.ability.extra.scoring = true
-                    break
+        if context.before and context.scoring_hand then
+            if SMODS.in_scoring(card,context.scoring_hand) then
+                for i,v in pairs(G.hand.cards) do
+                    v.unik_burned_by_hook = true
                 end
             end
-
         end
         if context.cardarea == G.play and context.main_scoring then
             ease_discard(card.ability.extra.discards)
@@ -31,23 +28,15 @@ BLINDSIDE.Blind({
                 colour = G.C.MULT,
             }
         end
-        if SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
+        if context.scoring_hand and SMODS.in_scoring(card,context.scoring_hand) and context.final_scoring_step then
             return {
                 e_mult = card.ability.extra.e_mult
             }
         end
-        if context.burn_card and card.ability.extra.scoring and ((context.cardarea == G.play and context.burn_card == card)) then
+        if context.burn_card and context.cardarea == G.play and context.burn_card == card then
             
-            context.burn_card.retain = true
             return { remove = true }
             
-        end
-        if (context.hand_discard or context.hand_retain) and context.other_card.area == G.hand and card.ability.extra.scoring  then
-            return { burn = true }
-            
-        end
-        if context.after then
-            card.ability.extra.scoring = nil
         end
     end,
     unik_ancient = true,
