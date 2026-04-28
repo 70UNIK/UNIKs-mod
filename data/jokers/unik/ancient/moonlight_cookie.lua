@@ -64,16 +64,18 @@ SMODS.Joker {
 			end
 			
 		end
-		if context.unik_after_levelup and context.hand then
-			local amount = context.amount or 1
+		if context.unik_after_levelup and context.hands and context.level_up > 0 then
+			if type(context.hands) == 'string' then context.hands = {context.hands} end
+			for i,v in ipairs(context.hands) do
+							local amount = context.amount or 1
 			if amount > 0 then
-				G.GAME.hands[context.hand].chips = G.GAME.hands[context.hand].chips*card.ability.extra.exp_levelup^amount
+				G.GAME.hands[v].chips = G.GAME.hands[v].chips*card.ability.extra.exp_levelup^amount
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
 				
 				update_hand_text({delay = 0.25}, {
 					chips = tostring("X"..math.ceil((card.ability.extra.exp_levelup)*100)/100), 
-					level = G.GAME.hands[context.hand].level,
-					handname = localize(context.hand, 'poker_hands'),
+					level = G.GAME.hands[v].level,
+					handname = localize(v, 'poker_hands'),
 				StatusText = true})
 				G.E_MANAGER:add_event(Event({
 					trigger = "immediate",
@@ -87,12 +89,12 @@ SMODS.Joker {
 				delay(0.5)
 			end
 			
-			G.GAME.hands[context.hand].mult = G.GAME.hands[context.hand].mult*card.ability.extra.exp_levelup^amount
+			G.GAME.hands[v].mult = G.GAME.hands[v].mult*card.ability.extra.exp_levelup^amount
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
 				update_hand_text({delay = 0.25}, {
 					mult = tostring("X"..math.ceil((card.ability.extra.exp_levelup)*100)/100), 
-					level = G.GAME.hands[context.hand].level,
-					handname = localize(context.hand, 'poker_hands'),
+					level = G.GAME.hands[v].level,
+					handname = localize(v, 'poker_hands'),
 					StatusText = true})
 				G.E_MANAGER:add_event(Event({
 					trigger = "immediate",
@@ -106,7 +108,7 @@ SMODS.Joker {
 				delay(0.5)
 				update_hand_text(
 					{sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, 
-					{mult = G.GAME.hands[context.hand].mult, chips = G.GAME.hands[context.hand].chips, handname = localize(context.hand, 'poker_hands'), level = G.GAME.hands[context.hand].level}
+					{mult = G.GAME.hands[v].mult, chips = G.GAME.hands[v].chips, handname = localize(v, 'poker_hands'), level = G.GAME.hands[v].level}
 				)
 				delay(0.5)
 				update_hand_text(
@@ -114,6 +116,8 @@ SMODS.Joker {
 					{ mult = 0, chips = 0, handname = '', level = '' }
 				)
 			end
+			end
+
 			if not context.instant then
 				return {
 					message = localize("k_upgrade_ex"),
@@ -137,12 +141,14 @@ SMODS.Joker {
 
 }
 
-local levelUpHook = level_up_hand
-function level_up_hand(card, hand, instant, amount)
-	levelUpHook(card, hand, instant, amount)
+
+local handHook = SMODS.upgrade_poker_hands
+function SMODS.upgrade_poker_hands(args)
+	local ret = handHook(args)
 	if not G.GAME.levelupbuffer then
 		G.GAME.levelupbuffer = true
-		SMODS.calculate_context({unik_after_levelup = true, card = card, hand = hand, instant = instant, amount = amount})
+		SMODS.calculate_context({unik_after_levelup = true, card = args.from, hands = args.hands, instant = args.instant, level_up = args.level_up or 1})
 		G.GAME.levelupbuffer = nil
 	end
+	return args
 end

@@ -1092,7 +1092,11 @@ if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/noughts/charred_stick.lua")() 
 	NFS.load(mod_path .. "data/jokers/paperback/crosses/flowerbeds.lua")() 
 	NFS.load(mod_path .. "data/jokers/paperback/noughts/greenfield.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/cosmopolitan.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/midori_sour.lua")() 
+	
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
+
 	
 end
 if (SMODS.Mods["Cryptid"] or {}).can_load  then

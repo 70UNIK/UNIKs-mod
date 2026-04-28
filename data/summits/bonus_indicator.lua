@@ -11,6 +11,7 @@ UNIK.perma_bonus_coords = {
         {key = "perma_p_dollars", pos = {x = 3, y = 0}},
         {key = "perma_repetitions", pos = {x = 1, y = 2}},
         {key = "perma_rescores", pos = {x = 3,y = 2}},
+		{ key = "perma_paperback_plus_odds", pos = { x = 2, y = 2 } },
     },
     on_held = {
         {key = "perma_h_x_chips", pos = {x = 1, y = 1}},

@@ -2071,7 +2071,7 @@ return {
                         "{X:chips,C:white}Blue{} {X:dark_edition,C:white}Faded{}",
                         "{C:attention}Retrigger{} the rightmost",
                         "played Blind for each",
-                        "{C:chips}Hand{} or {C:red}Discard lost",
+                        "{C:chips}Hand{} or 2 {C:red}Discards lost",
                         "in current Round"
                     },
                     {
@@ -2087,7 +2087,7 @@ return {
                         "{X:chips,C:white}Blue{} {X:dark_edition,C:white}Faded{}",
                         "{C:attention}Retrigger{} the rightmost",
                         "played Blind for each",
-                        "{C:chips}Hand{} or {C:red}Discard lost",
+                        "{C:chips}Hand{} or 2 {C:red}discards lost",
                         "in current Round"
                     },
                     {
@@ -4640,11 +4640,11 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
                 }
             },
-            j_unik_negroni = {
-                name = "Negroni",
+            j_unik_cosmopolitan = {
+                name = "Cosmopolitan",
                 text = {
                     "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
-                    "{C:green}+#3#{} retriggers before scoring",
+                    "{C:attention}+#3#{} retriggers when scored",
                     "{C:inactive}(Once per card)"
                 }
             },
@@ -4652,7 +4652,7 @@ return {
                 name = "Midori Sour",
                 text = {
                     "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
-                    "{C:green}+#3#{} {C:unik_copper}rescores{} before scoring",
+                    "{C:unik_copper}+#3#{} {C:unik_copper}rescores{} when scored",
                     "{C:inactive}(Once per card)"
                 }
             },
@@ -5985,6 +5985,8 @@ return {
                     '{s:0.8}Applies all previous stakes',
                 }
             },
+            --too harsh?
+            --may reduce $ loss, relegate it to only discards or
             stake_unik_blindside_greed_deck = {
                 name = "Greed Stake???",
                 text = {
@@ -7731,6 +7733,112 @@ return {
                 "PARKING VIOLATION:",
                 "VEHICLE IS PRESENT",
                 "BEYOND ALLOWED TIME",
+            },
+            unik_blindside_goob_lose = {
+                "Oopsie! Did I hug",
+                "you too much?"
+            },
+            unik_blindside_dandy_lose = {
+                "Why didn't you give me",
+                "the tapes?..."
+            },
+            unik_blindside_oxy_lose = {
+                "i do have my saw you know?",
+                "you shoulve known that..."
+            },
+            unik_blindside_cursed_lose = {
+                "How the fuck did you lose",
+                "to them?",
+                "They were supposed to help",
+                "you out!"
+            },
+            unik_blindside_fat_joker_lose = {
+                "FUCK YOU SHITFACED N00B!",
+                "GO DIE IN A FUCKING HOLE!",
+            },
+            unik_blindside_d16_lose = {
+                "*Angry metallic noises*"
+            },
+            unik_blindside_tax_haven_lose = {
+                "Seems like you lack enough",
+                "money to benefit...",
+            },
+            unik_blindside_catto_boi_lose = {
+                "Don't you mess with me",
+                "and Big Boi again!"
+            },
+            unik_blindside_chelsea_lose = {
+                "Go away! You hurt me!",
+                "*Sob*"
+            },
+            unik_blindside_maya_lose = {
+                "Don't you fucking hurt",
+                "my family again."
+            },
+            unik_blindside_fiendish_joker_lose = {
+                "WHAT'S THE MATTER?",
+                "SHORT ON CASH????!!!"
+            },
+            unik_blindside_circus_lose = {
+                "You're not invited to",
+                "the Circus!"
+            },
+            unik_blindside_swabbie_lose = {
+                "Short on cash?",
+                "NYEHEHEHEHEEHEHEHEH!!!"
+            },
+            unik_blindside_megatron_lose={
+                "YOU SIDED WITH SENTINEL!",
+                "NOW DIE YOU MOTHERFUCKER!!!!",
+            },
+            unik_blindside_whitenight_lose = {
+                "Thou shall seek",
+                "repetance after thath blasphemy."
+            },
+            unik_blindside_jimbotron_9000 = {
+                "TERMINATE.",
+                "TERMINATE.",
+                "TERMINATE!"
+            },
+            unik_blindside_moonlight_lose1 ={
+                "I'm sorry it had to come",
+                "to this..."
+            },
+            unik_blindside_moonlight_lose2 = {
+                "Please do not lay waste",
+                "the stars again."
+            },
+            unik_blindside_niko_lose1 = {
+                "Sorry... I dont",
+                "feel OK being with you..."
+            },
+            unik_blindside_niko_lose2 = {
+                "Sorry..."
+            },
+            unik_blindside_niko_lose3 = {
+                "I do have someone looking",
+                "out for me...",
+                "You're definitely not them..."
+            },
+            unik_blindside_white_lily_lose1 = {
+                "Feels intoxicating for",
+                "you, quite a shame...",
+            },
+            unik_blindside_white_lily_lose2 = {
+                "As Faerie Queen, you shall",
+                "not disturb the kingdom again."
+            },
+            unik_blindside_white_lily_lose3 = {
+                "I have made my mistakes before...",
+                "I hope you learn too..."
+            },
+            unik_blindside_sundae_lose1 = {
+                "Sorry, but you're banned",
+                "from Sugarland after what",
+                "you did!"
+            },
+            unik_blindside_sundae_lose2 = {
+                "You're no fun..."
             },
             --finity quips:
             lq_legendary_crown_1={

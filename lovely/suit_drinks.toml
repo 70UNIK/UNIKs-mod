@@ -1,0 +1,23 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS paperback "utilities/misc_functions.lua"]'''
+pattern = '''if card.ability.extra.remaining > 0 then'''
+position = "after"
+payload = ''' 
+if card.ability and card.ability.extra and card.ability.extra.blacklist then
+    context.other_card.ability[card.ability.extra.blacklist] = true
+end'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = '''=[SMODS paperback "utilities/misc_functions.lua"]'''
+pattern = '''card.ability.extra.remaining > 0'''
+position = "after"
+payload = ''' and not context.other_card.ability[card.ability and card.ability.extra and card.ability.extra.blacklist or "Suit_drink_blacklist"] '''
