@@ -29,7 +29,7 @@ elseif eval_type == 'xlog_chips' then
     sound = 'xchips'
     volume = 0.7
     amt = amt
-    text = '=' .. number_format(amt) .. ' ' .. localize('k_mult')
+    text = localize{type='variable',key='a_Xlog_chips',vars={math.abs(amt)}}
     colour = G.C.CHIPS
     config.type = 'fade'
     config.scale = 0.7
