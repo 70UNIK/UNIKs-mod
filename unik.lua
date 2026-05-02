@@ -953,7 +953,7 @@ end
 NFS.load(mod_path .. "data/misc/character_pool.lua")()
 --Common
 NFS.load(mod_path .. "data/jokers/unik/common/lucky_seven.lua")()
-NFS.load(mod_path .. "data/jokers/unik/common/gt710.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/GT710.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/golden_glove.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/instant_gratification.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/1_5_joker.lua")() 
