@@ -1407,6 +1407,10 @@ if JokerDisplay then
 	NFS.load(mod_path .. "data/jokerdisplay/detrimental.lua")() 
 end
 
+if UNIK.has_almanac() then
+	NFS.load(mod_path .. "data/overrides/pwx_stuff.lua")() 
+end
+
 NFS.load(mod_path .. "data/misc/tag_squish.lua")()
 ---
 ---Indigo ICBM: Gain X1 Mult per hand played, lose X1 mult if hand exceeds 3X requirements.

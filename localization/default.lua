@@ -1235,7 +1235,8 @@ return {
                 text = {
                     "Not to be confused with the",
                     "other {C:attention}Ancient Joker{},",
-                    "these {C:unik_ancient}Jokers{} {C:unik_eye_searing_red}will likely kill you",
+                    "these {C:unik_ancient}Cute Characters{}",
+                    "{C:unik_eye_searing_red}will likely kill you",
                     "Shouldn't have {C:attention}overshot{} too much in",
                     "the first place..."
                 }
