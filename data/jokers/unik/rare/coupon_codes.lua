@@ -11,14 +11,13 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {purchased_cards = 0,requirement=12} },
+    config = { extra = {purchased_cards = 0,requirement=12,min_cost = 3} },
 	loc_vars = function(self, info_queue, center)
-        info_queue[#info_queue + 1] = G.P_TAGS.tag_coupon
         info_queue[#info_queue + 1] = G.P_TAGS.tag_voucher
-		return { vars = { center.ability.extra.requirement,center.ability.extra.purchased_cards,0} }
+		return { vars = { center.ability.extra.requirement,center.ability.extra.purchased_cards,center.ability.extra.min_cost} }
 	end,
     calculate = function(self, card, context)
-        if context.buying_card and to_big(context.card.sell_cost) > to_big(0) and to_big(context.card.cost) > to_big(0) then
+        if context.buying_card and to_big(context.card.sell_cost) >= to_big(card.ability.extra.min_cost) and to_big(context.card.cost) >= to_big(card.ability.extra.min_cost) then
             if not context.blueprint and not context.retrigger_joker then
                 card.ability.extra.purchased_cards = card.ability.extra.purchased_cards + 1
             end
@@ -33,15 +32,15 @@ SMODS.Joker {
 						return true
 					end,
 				}))
-                G.E_MANAGER:add_event(Event({
-					trigger = 'before',
-					func = function()
-						add_tag(Tag("tag_coupon"))
-						play_sound("generic1", 0.9 + math.random() * 0.1, 0.8)
-						play_sound("holo1", 1.2 + math.random() * 0.1, 0.4)
-						return true
-					end,
-				}))
+                -- G.E_MANAGER:add_event(Event({
+				-- 	trigger = 'before',
+				-- 	func = function()
+				-- 		add_tag(Tag("tag_coupon"))
+				-- 		play_sound("generic1", 0.9 + math.random() * 0.1, 0.8)
+				-- 		play_sound("holo1", 1.2 + math.random() * 0.1, 0.4)
+				-- 		return true
+				-- 	end,
+				-- }))
                 if not context.blueprint and not context.retrigger_joker then
                     G.E_MANAGER:add_event(Event({
                         trigger = 'after',

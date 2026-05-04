@@ -1320,8 +1320,8 @@ return {
 				name = "Steel",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
-                    "then {X:mult,C:white}X#2#{} Mult",
-                    "if Joker has {C:attention}triggered{}",
+                    "if Joker has not",
+                    "{C:attention}triggered{} prior"
 				},
 			},
             e_unik_shining_glitter = {
@@ -1967,9 +1967,8 @@ return {
                 text={
                     {
                         "Obtain a {C:attention}Voucher Tag{}",
-                        "and a {C:attention}Coupon Tag{}",
                         "for every {C:attention}#1#{} items",
-                        "above {C:money}$#3#{} purchased",
+                        "at least {C:money}$#3#{} purchased",
                         "{C:inactive}(Currently #2#/#1# items)",
                     },
                 },
@@ -2198,7 +2197,7 @@ return {
                 text = {
                     "Retrigger the",
                     "rightmost {C:attention}Joker{}",
-                    "{C:inactive,s:0.7}(Cannot retrigger Joker retriggers)", --important notice
+                    "{C:inactive,s:0.7}(Cannot retrigger effects that retrigger Jokers)", --important notice
                 },
                 unlock = {
                     "Discard a {C:attention}Flush Five",

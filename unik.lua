@@ -1034,6 +1034,9 @@ NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/tic_tac.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
+---This may be fixed to:
+---Increase base cost to $3,
+---Only generates a voucher tag.
 NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
