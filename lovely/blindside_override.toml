@@ -216,3 +216,44 @@ position = 'at'
 payload = '''
 --overridden, will use hook instead
 '''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/hands.lua"]'
+pattern = '''-- begin iteration from first (not already considered) card'''
+match_indent = true
+position = 'after'
+payload = '''
+--print(colorsuits)
+'''
+
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/hands.lua"]'
+pattern = '''-- < 5 hand cant be a spectrum'''
+match_indent = true
+position = 'after'
+payload = '''
+--print("Hand size:" .. #hand)
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/hands.lua"]'
+pattern = '''-- if somehow no suits: spectrum is impossible'''
+match_indent = true
+position = 'after'
+payload = '''
+--print("cardcolors:" .. #cardcolors)
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/hands.lua"]'
+pattern = '''if colorsuits[cardcolors[1]] == false then return {} end'''
+match_indent = true
+position = 'after'
+payload = '''
+--SORRY, but stuff can HAVE SPECTRUMS INSIDE (goob eval, playing 6 cards)
+'''

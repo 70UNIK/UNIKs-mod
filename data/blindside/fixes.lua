@@ -580,6 +580,100 @@ BLINDSIDE.Blind:take_ownership("m_bld_snow",{
     end,
 },true)
 
+--All in (raise/spectrum) calculation fix: make it compatible with stuff like pairs and 3 of a kinds for situations like:
+--goob
+--devils deal.
+
+SMODS.PokerHandPart:take_ownership("bld_allin",{
+    func = function(hand)
+        if G.GAME.selected_back.effect.center.config.extra then
+            if not G.GAME.selected_back.effect.center.config.extra.blindside then return {} end
+            local colorsuits = {}
+            local threshold = #hand
+            local colors = {'Red', 'Green', 'Blue', 'Yellow', 'Purple', 'Faded'}
+            for _, v in ipairs(colors) do
+                colorsuits[v] = true
+            end
+
+            local checker = false
+            if next(find_joker('j_bld_checker', true)) then
+                checker = true
+            end
+
+            -- < 5 hand cant be a spectrum
+            if (#hand < 5 and not checker) or #hand < 3 then return {} end
+
+            local nonwilds = {}
+            for i = 1, #hand do
+                local cardcolors = {}
+                for _, v in ipairs(colors) do
+                    -- determine table of suits for each card (for future faster calculations)
+                    if hand[i]:is_color(v, nil, true) then
+                        table.insert(cardcolors, v)
+                    end
+                end
+                -- if somehow no suits: spectrum is impossible
+                if #cardcolors == 0 then
+                    return {}
+                -- if only 1 suit: can be handled immediately
+                elseif #cardcolors == 1 then
+                    -- if suit is already present, lower the threshold. Ideally, duplicate colors when a spectrum can otherwise be made should not disrupt it, otherwise remove suit from "not yet used suits"
+                    if colorsuits[cardcolors[1]] == false then 
+                        threshold = threshold - 1
+                    end
+                    --If the threshold is lower than 5 (min for spectrum), it cannot be one (checkers requires no pairs)
+                    if (threshold < 5) then
+                        return {} 
+                    end
+                    colorsuits[cardcolors[1]] = false
+                -- add all cards with 2-4 suits to a table to be looked at
+                elseif #cardcolors < 8 then
+                    table.insert(nonwilds, cardcolors)
+                end
+            end
+
+            -- recursive function for iterating over combinations
+            local isSpectrum 
+            isSpectrum = function(i, remaining)
+                -- traversed all the cards, found spectrum
+                if i == #nonwilds + 1 then
+                    return true
+                end
+
+                -- copy remaining suits
+                local newremaining = {}
+                for k, v in pairs(remaining) do
+                    newremaining[k] = v
+                end
+
+                -- for every suit of the current card: 
+                for _, suit in ipairs(nonwilds[i]) do
+                    -- do nothing if suit has already been used
+                    if remaining[suit] == true then
+                        -- use up suit on this card and check next card
+                        newremaining[suit] = false
+                        if isSpectrum(i + 1, newremaining) then
+                            return true
+                        end
+                        -- reset suit before continuing
+                        newremaining[suit] = true
+                    end
+                end
+                return false
+            end
+
+            -- begin iteration from first (not already considered) card
+            if isSpectrum(1, colorsuits) then
+                return {hand}
+            else
+                return {}
+            end
+        else
+            return {}
+        end
+    end
+ })
+
 --all trinkets will be made retriggerable and copyable when possible 
 
 

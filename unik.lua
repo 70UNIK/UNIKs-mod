@@ -1265,6 +1265,7 @@ frames = 3 })
 if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/taunt_sprites.lua")()	
 	
 	--BLINDS
 	NFS.load(mod_path .. "data/blindside/blinds/simple/collapse.lua")()
@@ -1335,6 +1336,11 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/energy_compressor.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/fat_joker.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/boss/fiendish_joker.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/oxy.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/goob.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 
 	--rituals

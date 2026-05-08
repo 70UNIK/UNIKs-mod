@@ -9,15 +9,28 @@ target = '''functions/state_events.lua'''
 pattern = '''-- TARGET: effects before deck final_scoring_step'''
 position = "after"
 payload = '''
-if G.GAME.unik_store_scoring and G.GAME.unik_stored_scoring and type(G.GAME.unik_stored_scoring) == 'table' then
+if (G.GAME.unik_store_scoring or G.GAME.energy_compressor_blind_effect) and G.GAME.unik_stored_scoring and type(G.GAME.unik_stored_scoring) == 'table' then
     G.GAME.unik_store_scoring = nil
-    for i = 1, #G.GAME.unik_stored_scoring do
-        local v = G.GAME.unik_stored_scoring[i].instances
-        for j = #v, 1, -1 do
-            SMODS.calculate_context({unik_energy_compressor = true, energy_compressor_effect = G.GAME.unik_stored_scoring[i].type, energy_compressor_value = v[j], energy_compressor_ref = {i,j}})
+    --reverse order if the effect is from that joker boss
+    if G.GAME.energy_compressor_blind_effect then
+        G.GAME.energy_compressor_blind_effect = nil
+        for i = #G.GAME.unik_stored_scoring, 1, -1 do
+            local v = G.GAME.unik_stored_scoring[i].instances
+            for j = #v, 1, -1 do
+                SMODS.calculate_context({unik_energy_compressor = true, energy_compressor_effect = G.GAME.unik_stored_scoring[i].type, energy_compressor_value = v[j], energy_compressor_ref = {i,j}})
+            end
+        end
+    else
+        for i = 1, #G.GAME.unik_stored_scoring do
+            local v = G.GAME.unik_stored_scoring[i].instances
+            for j = #v, 1, -1 do
+                SMODS.calculate_context({unik_energy_compressor = true, energy_compressor_effect = G.GAME.unik_stored_scoring[i].type, energy_compressor_value = v[j], energy_compressor_ref = {i,j}})
+            end
         end
     end
+    
 end
+G.GAME.energy_compressor_blind_effect = nil
 G.GAME.unik_stored_scoring = nil
 G.GAME.unik_store_scoring = nil
 '''

@@ -86,15 +86,28 @@ end
 local add_to_deck_hook = Card.add_to_deck
 function Card:add_to_deck(from_debuff)
     add_to_deck_hook(self,from_debuff)
+    if self and self.config.center and self.config.center.rarity == 'unik_nil_rarity' then
+        if self.ability and self.ability.unik_taw then
+            UNIK.instakill()
+        else
+            selfDestruction_noMessage(self)
+        end
+    end
     SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
         self.will_be_destroyed_1 = nil
        self.will_be_gored = nil
 end
 
 local emplaceHook = CardArea.emplace
-
 function CardArea:emplace(card, location, stay_flipped)
     emplaceHook(self,card, location, stay_flipped)
+    if self and self.config.center and self.config.center.rarity == 'unik_nil_rarity' and (self == G.pack_cards or self == G.shop_jokers or self == G.consumeables or self == G.jokers or self == G.shop_booster or self == G.shop_vouchers )then
+        if self.ability and self.ability.unik_taw then
+            UNIK.instakill()
+        else
+            selfDestruction_noMessage(self)
+        end
+    end
     if card then card.will_be_destroyed_1 = nil end
                 if card then card.will_be_gored = nil end
     if  G.consumeables and G.jokers then

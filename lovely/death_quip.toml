@@ -58,6 +58,9 @@ pattern = 'self.config = {args = args}'
 position = "after"
 payload = '''
 if G.GAME.blind:has_death_quotes() and G.GAME.blind.config.blind.death_card then
+    if G.GAME.blind.config.blind.death_card.card then
+        
+    end
 	self.children.card = Card(self.T.x, self.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, args.center and G.P_CENTERS[args.center] or G.P_CENTERS[G.GAME.blind.config.blind.death_card.card] or G.P_CENTERS.j_joker, {bypass_discovery_center = true})
     if G.GAME.blind.config.blind.death_card and G.GAME.blind.config.blind.death_card.mod_card and type(G.GAME.blind.config.blind.death_card.mod_card) == 'function' then
         G.GAME.blind:mod_card(self.children.card)

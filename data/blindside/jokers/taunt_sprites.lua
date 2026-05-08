@@ -1,0 +1,68 @@
+--Taunt sprites
+--All credit goes to the authors and mods of these sprites. these are just added for the sole purpose of quips for when their associated mod is not installed. They are never supposed to be obtained in gameplay; doing so will 
+--cause them to self destruct. (If taw, will immediately cause a game over instead)
+
+
+SMODS.Rarity({
+	key = "unik_nil_rarity",
+	loc_txt = {},
+	badge_colour = HEX("aaaaaa"),
+	fallback_joker = 'j_unik_autocannibalism',
+    no_doe = true,
+    no_collection = true,
+    in_pool = function()
+        return false
+    end
+})
+
+SMODS.Atlas {
+	key = "unik_taunt_sprites",
+	path = "unik_taunt_sprites.png",
+	px = 71,
+	py = 95
+}
+
+if not UNIK.has_almanac() then
+    print("LOADING TAUNT SPRITE PWX")
+    SMODS.Joker({
+        key='unik_blindside_taunt_oxy_pwx',
+        atlas = 'unik_taunt_sprites',
+        order = 10^300,
+        cost = 66666666,
+        pos = {x = 0, y = 0},
+        soul_pos = {x = 1, y = 0},
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+    SMODS.Joker({
+        key='unik_blindside_taunt_goob_pwx',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 0, y = 1},
+        soul_pos = {x = 1, y = 1},
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+end
+if not next(SMODS.find_mod("Bunco")) then
+    print("LOADING TAUNT SPRITE BUNCO")
+    SMODS.Joker({
+        key='unik_blindside_fiendish_joker_bunc',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 2, y = 0},
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+end

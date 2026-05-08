@@ -159,6 +159,50 @@ return {
         },
         Blind={
             --BLINDSIDE:
+            bl_unik_blindside_oxy = {
+                name = "Oxy",
+                text = {
+                    "X#1# Mult to Joker",
+                    "when a Blind with",
+                    "a Trim is scored"
+                }
+            },
+            bl_unik_blindside_energy_compressor={
+                name = "Energy Compressor",
+                text = {
+                    "Stores all Mult and",
+                    "Chip operations then",
+                    "releases in set order",
+                    "of Exponential,",
+                    "Loglinear, Multiplicative",
+                    "then Additive operations"
+                }
+            },
+            bl_unik_blindside_fat_joker={
+                name = "Fat Joker",
+                text = {
+                    "Gains +#1# Mult for every",
+                    "#2# Blinds above #3#",
+                    "in your Full Deck",
+                    "(Currently +#4# Mult)"
+                }
+            },
+            bl_unik_blindside_goob = {
+                name = "Goob",
+                text = {
+                    "Level down all",
+                    "possible hands",
+                    "from held Blinds",
+                    "on Play"
+                }
+            },
+            bl_unik_blindside_fiendish_joker = {
+                name = "Fiendish Joker",
+                text = {
+                    "All payout is",
+                    "capped at -$2"
+                }
+            },
             bl_unik_blindside_lily = {
                 name = "Lily",
                 text = {
@@ -1854,6 +1898,9 @@ return {
                         "{C:green}Numerator{} decreases",
                         "for each played",
                         "{X:green,C:white}Green{} Blind"
+                    },
+                    {
+                        "Always Scores"
                     }
                 }
             },
@@ -1870,6 +1917,9 @@ return {
                         "{C:green}Numerator{} decreases",
                         "for each played",
                         "{X:green,C:white}Green{} Blind"
+                    },
+                    {
+                        "Always Scores"
                     }
                 }                
             },
@@ -2881,6 +2931,28 @@ return {
             }
         },
         Joker={
+            -- Trinkets --
+
+            -- Blindside Taunt "Jokers" --
+            j_unik_blindside_taunt_oxy_pwx={
+                name = "YOU SHOULDNT SEE THIS",
+                text = {
+                    "YOU SHOULDNT SEE THIS"
+                }
+            },
+            j_unik_blindside_taunt_goob_pwx={
+                name = "YOU SHOULDNT SEE THIS",
+                text = {
+                    "YOU SHOULDNT SEE THIS"
+                }
+            },
+            j_unik_blindside_fiendish_joker_bunc={
+                name = "YOU SHOULDNT SEE THIS",
+                text = {
+                    "YOU SHOULDNT SEE THIS"
+                }
+            },
+            -- The rest --
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
                 text = {
@@ -7437,6 +7509,9 @@ return {
             k_unik_ai = "CAKADILLO! FUCKYOUTINO!",
             k_unik_ai_upgrade = "Created!",
             k_unik_lowered = "Reduced!",
+            k_unik_fiendish_cashout = "WHAT'S THE MATTER? SHORT ON CASH???!!!",
+            k_unik_fat_joker_placeholder = "(Half of Full Deck)",
+            k_unik_goob_warning = "will be downgraded",
         },
         high_scores={},
         labels={
@@ -7466,6 +7541,10 @@ return {
             unik_mad = "M.A.D",
         },
         quips={
+            special_lose_unik_you_got_nil={
+                "You're NOT supposed to get",
+                "that in the first place!"
+            },
             --Getting killed when you go over 3x score in Indigo ICBM
             special_lose_unik_get_nuked={
                 "I'm sure you're happy",
@@ -7709,6 +7788,7 @@ return {
                 "BLAME GABE FOR THIS!"
             },
 
+            ---- BLINDSIDE QUIPS ----
             unik_blindside_unik_lose1 = {
                 "{f:unik_five_by_five}Sorry about that..."
             },

@@ -59,7 +59,11 @@ While all art is done by me, art for the Spectrum-based Jokers and Planets are f
 - Aikoyori's Shennanigans (Aikoyori) - Inspiration for Epic Confrontation and Epic Height
 - CelesteCardCollection (Mod) - Inspiration for Legendary Golden Crown
 - Bunco (Mod) - Poker Hands Inspiration for Epic Sand and Epic Miser
+    - Fiendish Joker sprite - Used for Blindside namesake boss death quip
 - Ortalab (Shinku) - Inspiration for Epic Reed and Legendary Sword
-- Paperback (PaperMoon) - Inspiration for Weetomancer
+- Paperback (PaperMoon) - Inspiration for Weetomancer, + crossmod cards + Apostles
+    - WhiteNight sprite (PaperMoon) - Will be used for Blindside namesake boss death quip (when Paperback is not installed)
 - MoreFluff (NotMario) - Color Cards
-- Jen's Almanac (Jenwalter666) -  Epic/Legendary Blinds concept + some code used for functionality such as Blank Lartceps and shaders such as Dizzy and Bloated edition.
+- POLTERWORX (Jenwalter666) -  Epic/Legendary Blinds concept + some code used for functionality such as Blank Lartceps and shaders such as Dizzy and Bloated edition.
+    - Oxy Sprite (Ocksie) - Used for Blindside namesake boss death quip (when PWX is not installed)
+    - Goob Sprite (Jenwallter666) - Used for Blindside namesake boss death quip (when PWX is not installed)
