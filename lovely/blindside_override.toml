@@ -101,13 +101,27 @@ G.GAME.last_joker = G.GAME.blind.boss
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Blindside "lib/utils/uishop.lua"]'
-pattern = '''local final_free = G.GAME.current_round.free_rerolls > 0'''
+pattern = '''for i = 1, #G.GAME.tags do
+                                    G.GAME.tags[i]:apply_to_run({type = 'shop_start'})
+                                end'''
+match_indent = true
+position = 'before'
+payload = '''
+--on loading a save, prevent tags from being consumed as if entering the shop.
+if not G.GAME.shop_entered_already_blindside then
+G.GAME.shop_entered_already_blindside = true
+'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/uishop.lua"]'
+pattern = '''for i = 1, #G.GAME.tags do
+                                    G.GAME.tags[i]:apply_to_run({type = 'shop_start'})
+                                end'''
 match_indent = true
 position = 'after'
 payload = '''
-
---print("current Free Rerolls: ".. G.GAME.current_round.free_rerolls)
---print("overall Free Rerolls: "..  G.GAME.round_resets.free_rerolls)
+end
 '''
 
 [[patches]]
@@ -123,6 +137,7 @@ print("reroll tags consumed:" .. G.GAME.unik_blindside_reroll_tags_consumed)
 SMODS.change_free_rerolls(-G.GAME.unik_blindside_reroll_tags_consumed)
 G.GAME.unik_blindside_reroll_tags_consumed = 0
 print("Free rerolls remaining:" .. G.GAME.round_resets.free_rerolls)
+G.GAME.shop_entered_already_blindside = nil
 
 '''
 

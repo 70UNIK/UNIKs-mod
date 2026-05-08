@@ -14,31 +14,36 @@ BLINDSIDE.Blind({
     always_scores = true,
     hues = {"Green","Faded"},
     calculate = function(self, card, context) 
-        -- if context.cardarea == G.play and context.before and card.facing ~= 'back' then
-        --     --print(findNoColours(nil,'Green',card))
-        --     if not SMODS.pseudorandom_probability(card, pseudoseed("evergreenflip"), math.max(0,card.ability.extra.chance - findNoColours(nil,'Green',card)), card.ability.extra.trigger, 'evergreenflip') and card.facing ~= "back" then
-        --         card:flip()
-        --         card:flip()
-        --         return {
-        --         }
-        --     else
-        --         if card.facing ~= 'back' then 
-        --         card:flip()
-        --         end
-        --         return {
-        --         }
-        --     end
-        -- end
+        if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+            --print(findNoColours(nil,'Green',card))
+            local greens = 0
+            if G.playing_cards then
+                for k, v in pairs(G.playing_cards) do
+                    if v ~= card and v:is_color("Green") then greens = greens + 1 end
+                end 
+            end
+            if not SMODS.pseudorandom_probability(card, pseudoseed("evergreenflip"), math.max(0,card.ability.extra.chance - greens ), card.ability.extra.trigger, 'evergreenflip') and card.facing ~= "back" then
+                card:flip()
+                card:flip()
+                return {
+                }
+            else
+                if card.facing ~= 'back' then 
+                card:flip()
+                end
+                return {
+                }
+            end
+        end
         if context.cardarea == G.play and context.main_scoring then
-            if not SMODS.pseudorandom_probability(card, pseudoseed("evergreenflip"), math.max(0,card.ability.extra.chance - findNoColours(nil,'Green',card)), card.ability.extra.trigger, 'evergreenflip') then
+            if card.facing ~= 'back' then
                 return {
                     x_mult = card.ability.extra.x_mult
                 }
             else
-                                --card_eval_status_text(card, "debuff", nil, nil, nil, nil)
+                card_eval_status_text(card, "debuff", nil, nil, nil, nil)
                 return {
-                    message = localize('k_nope_ex'),
-                    colour = G.C.GREEN
+    
                 }
             end
             
@@ -46,8 +51,15 @@ BLINDSIDE.Blind({
     end,
     rare = true,
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue+1] = {key = 'unik_self_debuffing', set = 'Other'}
         --info_queue[#info_queue+1] = {key = 'unik_self_debuffing', set = 'Other'}
-         local chance, trigger = SMODS.get_probability_vars(card, math.max(0,card.ability.extra.chance - findNoColours(nil,'Green',card)), card.ability.extra.trigger, 'evergreenflip')
+        local greens = 0
+            if G.playing_cards then
+                for k, v in pairs(G.playing_cards) do
+                    if v ~= card and v:is_color("Green") then greens = greens + 1 end
+                end 
+            end
+         local chance, trigger = SMODS.get_probability_vars(card, math.max(0,card.ability.extra.chance - greens), card.ability.extra.trigger, 'evergreenflip')
         return {
             vars = {
                 card.ability.extra.x_mult, chance, trigger

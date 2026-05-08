@@ -1909,17 +1909,16 @@ return {
                 text = {
                     {
                         "{X:green,C:white}Green{} {X:dark_edition,C:white}Faded{}",
-                        "{C:green}#2# in #3#{} chance",
-                        "to {C:red}not{} give",
                         "{X:mult,C:white}X#1#{} Mult",
                     },
                     {
-                        "{C:green}Numerator{} decreases",
-                        "for each played",
-                        "{X:green,C:white}Green{} Blind"
+                        "{C:red,E:1}Self-Debuffing{} with a",
+                        "{C:green}#2# in #3#{} chance",
                     },
                     {
-                        "Always Scores"
+                        "{C:green}Numerator{} decreases",
+                        "for each other {X:green,C:white}Green{}",
+                        "Blind in full deck",
                     }
                 }                
             },
