@@ -78,3 +78,47 @@ payload = '''
 end
 '''
 match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "game.lua"
+pattern = '''SMODS\.quip\(\"loss\"\)'''
+position = "at"
+payload = '''SMODS.quip(UNIK.hasBlindside() and "bld_loss" or "loss")'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = "functions/state_events.lua"
+pattern = '''SMODS\.quip\(\"win\"\)'''
+position = "at"
+payload = '''SMODS.quip(UNIK.hasBlindside() and "bld_win" or "win")'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''Jimbo = Card_Character(extra)'''
+position = "after"
+payload = '''
+if extra.googly and Jimbo.children.card then
+    Jimbo.googly = true
+    Jimbo.children.card.googly = true
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''Jimbo = Card_Character(extra)'''
+position = "after"
+payload = '''
+if extra.googly and Jimbo.children.card then
+    Jimbo.googly = true
+    Jimbo.children.card.googly = true
+end
+'''
+match_indent = true
+
+

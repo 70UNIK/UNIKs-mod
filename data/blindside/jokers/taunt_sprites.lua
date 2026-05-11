@@ -66,3 +66,41 @@ if not next(SMODS.find_mod("Bunco")) then
         end
     })
 end
+
+-- flippy quips
+for i=1,5 do
+    SMODS.JimboQuip{
+        key = "unik_blindside_flippy_win"..tostring(i),
+        type = 'bld_win',
+        extra = {center = "m_bld_flip",googly = true},
+        filter = function(quip, type) 
+            if type == "bld_win" then return true, {override_base_checks = true} end
+        end
+    }
+end
+
+for i=1,8 do
+    SMODS.JimboQuip{
+        key = "unik_blindside_flippy_lose"..tostring(i),
+        type = 'bld_loss',
+        extra = {center = "m_bld_flip",googly = true},
+        filter = function(quip, type) 
+            if type == "bld_loss" then return true, {override_base_checks = true} end
+        end
+    }
+end
+
+local googlychar = Card_Character.init
+function Card_Character:init(args)
+
+        if args.googly then
+
+            self.googly = true
+        end
+    local ret = googlychar(self,args)
+    if args.googly then
+
+            self.googly = true
+        end
+    return ret
+end

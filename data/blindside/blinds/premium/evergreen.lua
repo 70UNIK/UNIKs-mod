@@ -10,6 +10,7 @@ BLINDSIDE.Blind({
             x_mult_up = 1,
             chance = 5,
             trigger = 5,
+            interval = 2,
         }},
     always_scores = true,
     hues = {"Green","Faded"},
@@ -19,9 +20,10 @@ BLINDSIDE.Blind({
             local greens = 0
             if G.playing_cards then
                 for k, v in pairs(G.playing_cards) do
-                    if v ~= card and v:is_color("Green") then greens = greens + 1 end
+                    if v:is_color("Green") then greens = greens + 1 end
                 end 
             end
+            greens = math.floor(greens/card.ability.extra.interval)
             if not SMODS.pseudorandom_probability(card, pseudoseed("evergreenflip"), math.max(0,card.ability.extra.chance - greens ), card.ability.extra.trigger, 'evergreenflip') and card.facing ~= "back" then
                 card:flip()
                 card:flip()
@@ -56,13 +58,14 @@ BLINDSIDE.Blind({
         local greens = 0
             if G.playing_cards then
                 for k, v in pairs(G.playing_cards) do
-                    if v ~= card and v:is_color("Green") then greens = greens + 1 end
+                    if v:is_color("Green") then greens = greens + 1 end
                 end 
             end
+        greens = math.floor(greens/card.ability.extra.interval)
          local chance, trigger = SMODS.get_probability_vars(card, math.max(0,card.ability.extra.chance - greens), card.ability.extra.trigger, 'evergreenflip')
         return {
             vars = {
-                card.ability.extra.x_mult, chance, trigger
+                card.ability.extra.x_mult, chance, trigger,card.ability.extra.interval
             }
         }
     end,

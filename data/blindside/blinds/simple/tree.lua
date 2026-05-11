@@ -10,6 +10,7 @@ BLINDSIDE.Blind({
             mult_up = 10,
             chance = 5,
             trigger = 5,
+            interval = 2,
         }},
         
     always_scores = true,
@@ -20,9 +21,13 @@ BLINDSIDE.Blind({
              local greens = 0
             if G.playing_cards then
                 for k, v in pairs(G.playing_cards) do
-                    if v ~= card and v:is_color("Green") then greens = greens + 1 end
+                    if v:is_color("Green") then 
+                        greens = greens + 1 
+                    end
                 end 
+                --greens = greens - 1
             end
+            greens = math.floor(greens/card.ability.extra.interval)
             if not SMODS.pseudorandom_probability(card, pseudoseed("treeflip"), math.max(0,card.ability.extra.chance -  greens), card.ability.extra.trigger, 'treeflip') and card.facing ~= "back" then
                 card:flip()
                 card:flip()
@@ -54,15 +59,18 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'unik_self_debuffing', set = 'Other'}
          local greens = 0
-            if G.playing_cards then
-                for k, v in pairs(G.playing_cards) do
-                    if v ~= card and v:is_color("Green") then greens = greens + 1 end
-                end 
-            end
+
+            for k, v in pairs(G.playing_cards) do
+                if v:is_color("Green") then 
+                    greens = greens + 1 
+                end
+            end 
+            greens = math.floor(greens/card.ability.extra.interval)
+
         local chance, trigger = SMODS.get_probability_vars(card, math.max(0,card.ability.extra.chance -  greens), card.ability.extra.trigger, 'treeflip')
         return {
             vars = {
-                card.ability.extra.mult,chance, trigger
+                card.ability.extra.mult,chance, trigger,card.ability.extra.interval
             }
         }
     end,

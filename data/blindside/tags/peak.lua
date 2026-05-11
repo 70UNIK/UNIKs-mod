@@ -20,10 +20,10 @@ SMODS.Tag {
 	end,
     config = {
         extra = {
-            mult = 1,
-            chips = 10,
-            x_mult = 0.1,
-            x_chips = 0.1,
+            mult = 0.25,
+            chips = 2,
+            x_mult = 0.02,
+            x_chips = 0.02,
         }
     },
     apply = function(self, tag, context)

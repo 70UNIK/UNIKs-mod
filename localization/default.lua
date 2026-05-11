@@ -213,8 +213,8 @@ return {
             bl_unik_blindside_railroad_crossing = {
                 name = "Railroad Crossing",
                 text = {
-                    "X1.72 Mult on",
-                    "first hand",
+                    "X1.72 Mult to Joker",
+                    "on first hand",
                     "Debuffs a random",
                     "Hue per hand",
                     "(Currently #1#)",
@@ -233,16 +233,32 @@ return {
             bl_unik_blindside_recycle_bin = {
                 name = "Recycle Bin",
                 text = {
-                    "X#1# Mult per hand",
+                    "X#1# Mult to Joker",
+                    "per hand",
                     "+X#2# Mult per",
                     "Blind discarded",
                 }
             },
-
+            bl_unik_blindside_riif_roof = {
+                name = "Riff Roof",
+                text = {
+                    "X#1# Mult per",
+                    "Trinket owned"
+                }
+            },
+            bl_unik_blindside_fruity_joker = {
+                name = "Fruity Joker",
+                text = {
+                    "+#1# Mult whenever",
+                    "an Editioned Blind",
+                    "is scored"
+                }
+            },
             bl_unik_blindside_unik = {
                 name = "UNIK",
                 text = {
-                    "^#1# Chips per hand",
+                    "^#1# Chips to Joker",
+                    "per hand",
                     "+^#2# when a Purple",
                     "Blind is scored",
                     "All played Blinds",
@@ -250,15 +266,31 @@ return {
                     "Purple hue",
                 }
             },
+            bl_unik_blindside_niko = {
+                name = "Niko",
+                text = {
+                    "X#1# Mult to Joker",
+                    "then double this",
+                    "value when a Yellow",
+                    "Blind is scored",
+                    "All played Blinds",
+                    "must contain",
+                    "Yellow hue"
+                },
+            },
+            bl_unik_sundae_cookie = {
+                
+            },
             bl_unik_blindside_moonlight_cookie = {
                 name = "Moonlight Cookie",
                 text = {
-                    "X#1# Mult per hand",
-                    "Increase by Mult",
-                    "of played hand then",
+                    "X#1# Mult to Joker",
+                    "per hand",
+                    "Takes all Mult ",
+                    "from all visible",
+                    "hands as Xmult, then",
                     "set all statistics",
-                    "of played Hand",
-                    "to 0",
+                    "of all hands to 0"
                 }
             },
             bl_unik_blindside_white_lily_cookie = {
@@ -285,7 +317,11 @@ return {
             bl_unik_blindside_exponentia = {
                 name = "Exponentia",
                 text = {
-                    ""
+                    "^#1# Mult per hand",
+                    "Gains ^#1# when any",
+                    "Mult effect triggers",
+                    "Immediately scores when",
+                    "any Chips effect triggers",
                 }
             },
             bl_unik_blindside_formidicus = {
@@ -295,6 +331,34 @@ return {
                     "to X3 your deck size",
                     "If a non-Crude Blind",
                     "is played or Held, die",
+                }
+            },
+            bl_unik_blindside_crustulum = {
+                name = "Crustulum",
+                text = {
+                    "+^#1# Chips per",
+                    "shop reroll this ante",
+                    "If less than #1# rerolls",
+                    "made this ante, die",
+                    "(Currently #2# rerolls)"
+                }
+            },
+            bl_unik_blindside_stellar_mortis = {
+                name = "Stellar Mortis",
+                text = {
+                    "Destroy a Mineral card",
+                    "on play and gains ^#1# Mult",
+                    "If no mineral card",
+                    "is held on play, die",
+                    "(Currently ^#2# Mult)"
+                }
+            },
+            bl_unik_blindside_facile = {
+                name = "Facile",
+                text = {
+                    "If more than 10 Blinds",
+                    "have been scored, die",
+                    "(Retriggers included)"
                 }
             },
             bl_unik_blindside_gourmand = {
@@ -1890,17 +1954,16 @@ return {
                 text = {
                     {
                         "{X:green,C:white}Green",
-                        "{C:green}#2# in #3#{} chance",
-                        "to {C:red}not{} give",
                         "{C:mult}+#1#{} Mult"
                     },
                     {
-                        "{C:green}Numerator{} decreases",
-                        "for each played",
-                        "{X:green,C:white}Green{} Blind"
+                        "{C:red,E:1}Self-Debuffing{} with a",
+                        "{C:green}#2# in #3#{} chance",
                     },
                     {
-                        "Always Scores"
+                        "{C:green}Numerator{} decreases",
+                        "for every {C:attention}#4#{} {X:green,C:white}Green{}",
+                        "Blind#<s>4# in full deck",
                     }
                 }
             },
@@ -1917,8 +1980,8 @@ return {
                     },
                     {
                         "{C:green}Numerator{} decreases",
-                        "for each other {X:green,C:white}Green{}",
-                        "Blind in full deck",
+                        "for every {C:attention}#4#{} {X:green,C:white}Green{}",
+                        "Blind#<s>4# in full deck",
                     }
                 }                
             },
@@ -6064,7 +6127,7 @@ return {
                 text = {
                     "{C:red}Lose {C:gold}$1{}",
                     "for each remaining",
-                    "{C:chips}Hand{} or {C:red}Discard",
+                    "{C:chips}Hand",
                     '{s:0.8}Applies all previous stakes',
                 }
             },
@@ -6086,7 +6149,7 @@ return {
             stake_unik_blindside_mountain_deck = {
                 name = "Mountain Stake????",
                 text = {
-                    "Add {C:red} 1 {X:black,C:white}Crude{} Blind",
+                    "Add {C:red}1 {X:black,C:white}Crude{} Blind",
                     "to deck when",
                     "{C:attention}Boss Joker{} is selected",
                     '{s:0.8}Applies all previous stakes',
@@ -6096,15 +6159,16 @@ return {
                 name = "Polychrome Stake????",
                 text = {
                     "Blinds may become {C:unik_shitty_edition}Fuzzy",
-                    "{s:0.8,C:inactive}({s:0.8,C:blue}-50 - 0{s:0.8,C:inactive} Chips, {s:0.8,C:red}-3 - 0{s:0.8,C:inactive}Mult, {s:0.8,C:money}-$1 - $0{s:0.8,C:inactive}){}",  
+                    "{s:0.8,C:inactive}({s:0.8,C:blue}-50 - 0{s:0.8,C:inactive} Chips, {s:0.8,C:red}-3 - 0 {s:0.8,C:inactive}Mult, {s:0.8,C:money}-$1 - $0{s:0.8,C:inactive}){}",  
                     '{s:0.8}Applies all previous stakes',
                 }
             },
             stake_unik_blindside_steel_deck = {
                 name = "Steel Stake????",
                 text = {
-                    "Blinds may become {C:unik_shitty_edition}Bloated",
-                    "{s:0.8,C:inactive}({s:0.8,C:green}1 in 3{s:0.8,C:inactive} chance played Blind is {s:0.8,C:red}Destroyed{}){}",
+                    "{C:attention}Boss Jokers{} can appear in",
+                    "{C:attention}Small{} and {C:attention}Big Joker{} slots",
+                    "{C:attention}Big Jokers{} can appear in {C:attention}Small Joker{} slots",
                     '{s:0.8}Applies all previous stakes',
                 }
             },
@@ -7482,6 +7546,7 @@ return {
             k_unik_jchips = "Jchips",
             k_unik_jmult = "Jmult",
             k_unik_all_purple = "All played Blinds must contain Purple hues",
+            k_unik_all_yellow = "All played Blinds must contain Yellow hues",
             k_unik_cannot_skip = "Unskippable",
             k_glass = "Glass",
             k_unik_pink="Pink Cards",
@@ -7511,6 +7576,8 @@ return {
             k_unik_fiendish_cashout = "WHAT'S THE MATTER? SHORT ON CASH???!!!",
             k_unik_fat_joker_placeholder = "(Half of Full Deck)",
             k_unik_goob_warning = "will be downgraded",
+            k_unik_edition_warning = "Hand contains Blinds with editions",
+            k_unik_enhancement_warning = "Hand contaings Blinds with Trims",
         },
         high_scores={},
         labels={
@@ -7818,6 +7885,12 @@ return {
                 "Oopsie! Did I hug",
                 "you too much?"
             },
+            unik_blindside_riif_roof_lose = {
+                "Looks like your roof",
+                "needs a fix!",
+                "Call 1300 36 70 70 to ",
+                "fix your roof today!"
+            },
             unik_blindside_dandy_lose = {
                 "Why didn't you give me",
                 "the tapes?..."
@@ -7920,6 +7993,58 @@ return {
             unik_blindside_sundae_lose2 = {
                 "You're no fun..."
             },
+            --default flippy quips, win and lose (5 win, 8 loss)
+            unik_blindside_flippy_win1 = {
+                "You're flipping it!"
+            },
+            unik_blindside_flippy_win2 = {
+                "No wonder all those 'decks'",
+                "are virtual, it'll be too much!"
+            },
+            unik_blindside_flippy_win3 = {
+                "Well done!"
+            },
+            unik_blindside_flippy_win4 = {
+                "Wow! You're quite skilled",
+                "in this!"
+            },
+            unik_blindside_flippy_win5 = {
+                "Looks like the Jokers",
+                "will have to lick",
+                "their wounds!"
+            },
+            unik_blindside_flippy_lose1 = {
+                "It seems like you're",
+                "too used to Vanilla,",
+                "would you like assistance?",
+            },
+            unik_blindside_flippy_lose2 = {
+                "What a flop!"
+            },
+            unik_blindside_flippy_lose3 = {
+                "Damn, those looked",
+                "stronger than they look...",
+            },
+            unik_blindside_flippy_lose4 = {
+                "Did you forget to",
+                "trim those Crudes today?"
+            },
+            unik_blindside_flippy_lose5 = {
+                "Maybe Vanilla's our speed..."
+            },
+            unik_blindside_flippy_lose6 = {
+                "Uh oh!"
+            },
+            unik_blindside_flippy_lose7 = {
+                "Time for us to flop",
+                "down and try again!"
+            },
+            unik_blindside_flippy_lose8 = {
+                "Hey, next time in your",
+                "next revive, please",
+                "be careful!"
+            },
+
             --finity quips:
             lq_legendary_crown_1={
                 "Why did you",

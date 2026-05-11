@@ -366,7 +366,7 @@ G.FUNCS.skip_blind = function(e)
         if e and e.disable_button then
             e.disable_button = nil
         end
-    elseif G.GAME.blind_on_deck == "Small" and obj3.boss and (obj3.boss.epic or obj3.boss.legendary or obj3.boss.unskippable_ante and G.GAME.round_resets.blind_states.Small ~= "Defeated") then
+    elseif G.GAME.blind_on_deck == "Small" and obj3.boss and (obj3.boss.epic or obj3.boss.legendary or obj3.boss.ancient or obj3.boss.exotic or obj3.boss.unskippable_ante and G.GAME.round_resets.blind_states.Small ~= "Defeated") then
         play_sound('cancel', 0.8, 1)
         local text = localize('k_nope_ex')
         attention_text({
@@ -375,7 +375,7 @@ G.FUNCS.skip_blind = function(e)
         if e and e.disable_button then
             e.disable_button = nil
         end
-    elseif G.GAME.blind_on_deck == "Big" and obj2.boss and (obj2.boss.epic or obj2.boss.legendary or (obj2.boss.unskippable_ante and G.GAME.round_resets.blind_states.Big ~= "Defeated")) then
+    elseif G.GAME.blind_on_deck == "Big" and obj2.boss and (obj2.boss.epic or obj2.boss.legendary or obj2.boss.ancient or obj2.boss.exotic  or (obj2.boss.unskippable_ante and G.GAME.round_resets.blind_states.Big ~= "Defeated")) then
         play_sound('cancel', 0.8, 1)
         local text = localize('k_nope_ex')
         attention_text({

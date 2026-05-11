@@ -1333,14 +1333,18 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_hook.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
 	--JOKERS
+	NFS.load(mod_path .. "data/blindside/jokers/big/fruity_joker.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/energy_compressor.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/riif_roof.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/fat_joker.lua")()
 	NFS.load(mod_path .. "data/blindside/jokers/boss/fiendish_joker.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/oxy.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/goob.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/niko.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/moonlight_cookie.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 
 	--rituals
@@ -1387,9 +1391,9 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/stakes/tic_tac_toe.lua")()	
 	NFS.load(mod_path .. "data/blindside/stakes/mountain.lua")()	
 	NFS.load(mod_path .. "data/blindside/stakes/polychrome.lua")()	
-	--NFS.load(mod_path .. "data/blindside/stakes/steel.lua")()	
+	
 	NFS.load(mod_path .. "data/blindside/stakes/shining_glitter.lua")()	
-
+	NFS.load(mod_path .. "data/blindside/stakes/steel.lua")()	
 	--decks
 	NFS.load(mod_path .. "data/blindside/decks/endless.lua")()	
 end

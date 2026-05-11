@@ -393,11 +393,15 @@ calculate = function(self, card, context)
 
 local big_overrider = get_new_big
 function get_new_big(current)
-    
+    if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.unik_banana_generated and pseudorandom(pseudoseed('unik_big_override')) > 0.7 then
+        return get_new_boss()
+    end
     local ret =  big_overrider(current)
+    
     if ret == 'bl_bld_gros_michel' or ret == 'bl_bld_cavendish' then
         G.GAME.unik_banana_generated = true
     end
+    
     return ret
 end
 --scaling blinds will use scale_card instead so its easier to block from being copied

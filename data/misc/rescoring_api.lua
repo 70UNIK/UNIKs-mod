@@ -227,7 +227,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             end
             for _,x in pairs(rescoring_cards) do
                 G.GAME.unik_block_blindside_rescore = true
-                G.GAME.unik_only_rescore = true
+                G.GAME.unik_only_rescore = nil
                 local pased = context
                 pased.cardarea = calc_card_area 
 
@@ -247,7 +247,7 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
                     end
                 end
                 G.GAME.unik_block_blindside_rescore = nil
-                G.GAME.unik_only_rescore = nil
+                G.GAME.unik_only_rescore = true
             end
 
 
