@@ -19,10 +19,6 @@ BLINDSIDE.Blind({
     hues = {"Faded"},
     always_scores = true,
     calculate = function(self, card, context) 
-        -- finity inspired code, see if it works... OR NOT
-        if context.blueprint_card then
-            return
-        end
         local effects_table = {}
         if card.area and card.added_to_deck then
             local areacards = card.area.cards
@@ -34,23 +30,29 @@ BLINDSIDE.Blind({
                 areacards = context.scoring_hand
             end
             if areacards and areacards[1] and areacards[1] ~= card and areacards[1].config.center.key ~= 'm_unik_blindside_napkin' then
-                --print("copying " .. areacards[1].config.center.key)
-                areacards[1].ability.block_scaling_copied = true
-                for k = 1, card.ability.extra.times do
-                    local effect = UNIK.blueprint_enhancement(card, areacards[1], context)
-                    if effect then
-                        effect.colour = G.C.DARK_EDITION
-                        effect.card = card
+                if not UNIK.detect_bp_loop(card,areacards,1) then
+                    --print("copying " .. areacards[1].config.center.key)
+                    areacards[1].ability.block_scaling_copied = true
+                    for k = 1, card.ability.extra.times do
+                        local effect = UNIK.blueprint_enhancement(card, areacards[1], context)
+                        if effect then
+                            effect.colour = G.C.DARK_EDITION
+                            effect.card = card
+                        end
+                        effects_table[#effects_table+1] = effect
+                        
                     end
-                    effects_table[#effects_table+1] = effect
-                    
+                    areacards[1].ability.block_scaling_copied = nil
+                else
+                   -- print("LOOP DETECTED ABORTING!")
+                    effects_table = {}
                 end
-                areacards[1].ability.block_scaling_copied = nil
+                
             end
             
             
         end
-        return UNIK.blueprint_multiple_times(effects_table,1)
+        return SMODS.merge_effects(effects_table)
     end,
     rare = true,
     loc_vars = function(self, info_queue, card)
@@ -111,6 +113,32 @@ BLINDSIDE.Blind({
         end
     end
 })
+
+function UNIK.detect_bp_loop(card,cardarea_cards,index)
+    local i = index
+    while(true) do
+        local next = cardarea_cards[i]
+
+        if not next then
+            return nil
+        end
+        
+        if next == card then
+            return true
+        end
+        if next.config.center.key == 'm_unik_blindside_tracer' then
+            i = i + 1
+        elseif next.config.center.key == 'm_unik_blindside_napkin' then
+            i = 1
+        else
+            return nil
+        end
+        if i  > #cardarea_cards then
+            return nil
+        end
+    end
+    return nil
+end
 
 function UNIK.blueprint_multiple_times(table_return_table, index)
     local ret = table_return_table[index]

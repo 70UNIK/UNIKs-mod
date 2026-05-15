@@ -66,6 +66,35 @@ if not next(SMODS.find_mod("Bunco")) then
         end
     })
 end
+if not (SMODS.Mods["Cryptid"] or {}).can_load then
+    print("LOADING TAUNT SPRITE cryprid")
+    SMODS.Joker({
+        key='unik_blindside_formidiulosus_cry',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 0, y = 3},
+        soul_pos = { x = 2, y = 3, extra = { x = 1, y = 3 } },
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+    SMODS.Joker({
+        key='unik_blindside_exponentia_cry',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 0, y = 4},
+        soul_pos = { x = 2, y = 4, extra = { x = 1, y = 4 } },
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+end
 
 -- flippy quips
 for i=1,5 do

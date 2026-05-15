@@ -157,4 +157,22 @@ self.UNIK_LEGENDARY_GLITCH = {}
 '''
 match_indent = true
 
+###blindside animations
+[[patches]]
+[patches.regex]
+target = '=[SMODS Blindside "lib/utils/ui.lua"]'
+pattern = '''local temp_blind = (.*)SMODS.create_sprite\((.*)\)'''
+position = "after"
+payload = '''
+
+--If the blind has a "glitchy animation" (Legendary blinds only)
+--legendary_blind_patch2
+if v.glitchy_anim and v.discovered then
+    temp_blind.legendary_glitch_anim = v.glitchy_anim
+end
+'''
+match_indent = true
+
+
+
 

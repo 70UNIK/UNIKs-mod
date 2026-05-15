@@ -13,6 +13,10 @@ BLINDSIDE.Blind({
     },
     hues = {"Green"},
     calculate = function(self, card, context) 
+        if card.ability.extra.ugpraded then
+            card.ability.extra.stubborn = nil
+            card.ability.extra.retain = nil
+        end
         if context.on_select_play and card.highlighted and not card.ability.extra.used then
             if card.ability.extra.upgraded then
                 local cards = {}

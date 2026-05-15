@@ -233,8 +233,7 @@ return {
             bl_unik_blindside_recycle_bin = {
                 name = "Recycle Bin",
                 text = {
-                    "X#1# Mult to Joker",
-                    "per hand",
+                    "X#1# Mult per hand",
                     "+X#2# Mult per",
                     "Blind discarded",
                 }
@@ -257,8 +256,7 @@ return {
             bl_unik_blindside_unik = {
                 name = "UNIK",
                 text = {
-                    "^#1# Chips to Joker",
-                    "per hand",
+                    "^#1# Chips per hand",
                     "+^#2# when a Purple",
                     "Blind is scored",
                     "All played Blinds",
@@ -284,8 +282,7 @@ return {
             bl_unik_blindside_moonlight_cookie = {
                 name = "Moonlight Cookie",
                 text = {
-                    "X#1# Mult to Joker",
-                    "per hand",
+                    "X#1# Mult per hand",
                     "Takes all Mult ",
                     "from all visible",
                     "hands as Xmult, then",
@@ -318,19 +315,22 @@ return {
                 name = "Exponentia",
                 text = {
                     "^#1# Mult per hand",
-                    "Gains ^#1# when any",
+                    "Gains ^#2# when any",
                     "Mult effect triggers",
                     "Immediately scores when",
                     "any Chips effect triggers",
                 }
             },
-            bl_unik_blindside_formidicus = {
-                name = "Formidicus",
+            bl_unik_blindside_formidiulosus = {
+                name = "Formidiulosus",
                 text = {
-                    "Add Crude Blinds",
-                    "to X3 your deck size",
-                    "If a non-Crude Blind",
-                    "is played or Held, die",
+                    "^#1# Mult per hand",
+                    "+^#2# Mult per Crude",
+                    "Blind in full deck",
+                    "Before scoring, permanently",
+                    "convert held and played",
+                    "non-Crude Blinds",
+                    "to random Crude Blinds"
                 }
             },
             bl_unik_blindside_crustulum = {
@@ -357,7 +357,8 @@ return {
                 name = "Facile",
                 text = {
                     "If more than 10 Blinds",
-                    "have been scored, die",
+                    "have been scored",
+                    "in a hand, die",
                     "(Retriggers included)"
                 }
             },
@@ -2407,6 +2408,23 @@ return {
                     
                 }
             },
+            m_unik_blindside_tracer = {
+                name = "The Tracer",
+                text = {
+                    {
+"{X:dark_edition,C:white}Faded",  
+                    "{C:attention}Copies{} the effect of",
+                    "the Blind to the {C:attention}right",
+                    "in the current area",
+                    "{C:attention}#1#{} time#<s>1#",
+                    "{C:inactive}(When possible)"
+                    },
+                    {
+                        "Always Scores"
+                    }
+                    
+                }
+            },
             m_unik_blindside_prison = {
                 name = "The Prison",
                 text = {
@@ -2484,6 +2502,36 @@ return {
 					"{C:purple}Tag{} before scoring",},
 					{"{C:red,E:1}Self-Debuffing{} with a",
 					"{C:green}#1# in #2#{} chance"},
+                }
+            },
+            m_unik_blindside_scrum = {
+                name = "The Scrum",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{}",
+                        "{X:mult,C:white}X#1#{} Mult"
+                    },
+                    {
+                        "{C:attention}Multi-Upgradable"
+                    },
+                }
+            },
+            m_unik_blindside_upgrade = {
+                  name = "The Upgrade",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{}",
+                        "{C:mult}+#1# {}Mult and ",
+                        "{C:chips}+#2#{} Chips",
+                    },
+                    {
+                        "{C:green}#3# in #4#{} chance to",
+                        "{C:attention}Upgrade{} self",
+                        "after scoring",
+                    },
+                    {
+                        "{C:attention}Multi-Upgradable"
+                    },
                 }
             },
             m_unik_blindside_catalyst_upgraded = {
@@ -5905,6 +5953,15 @@ return {
                     "{C:red}Cannot{} be {C:attention}rerolled",
                     "into another Blind"
                 }
+            },
+            unik_multi_upgrade = {
+                name = "Multi-Upgradable",
+                text = {
+                    "Can be {C:attention}upgraded",
+                    "{C:attention}infinitely",
+                    "{C:inactive}(Currently upgraded",
+                    "{C:attention}#1# {C:inactive}time#<s>1#)"
+                }
             }
             
         },
@@ -7264,6 +7321,7 @@ return {
             k_unik_odd_and_even = "(Scoring odd and even)",
             k_unik_cards="cards",
             k_unik_debuffed_card_only="Must only play debuffed cards",
+            k_unik_crudes_only= "Must only play or hold Crude Blinds",
             k_unik_xenomorph_start='"Get away from her, you bitch!"',
             k_unik_darth_vader_start='"Be careful not to choke on your aspirations, Director."',
             --placeholder fusion rarities
@@ -7993,6 +8051,14 @@ return {
             unik_blindside_sundae_lose2 = {
                 "You're no fun..."
             },
+            unik_blindside_formidi_lose = {
+                "Tu vitam tuam",
+                "habe in inferno.",
+            },
+            unik_blindside_exponentia_lose = {
+                "{X:unik_void_color,C:unik_eye_searing_red,S:2}UNLIMITED POWAARRRRRR!!!!!!!",
+                "{X:unik_void_color,C:unik_eye_searing_red,S:2}UNLIMITED POWWWWAAAAAAAAARRRRRRRRR!!!!!!!!!!!"
+            },
             --default flippy quips, win and lose (5 win, 8 loss)
             unik_blindside_flippy_win1 = {
                 "You're flipping it!"
@@ -8044,6 +8110,7 @@ return {
                 "next revive, please",
                 "be careful!"
             },
+
 
             --finity quips:
             lq_legendary_crown_1={

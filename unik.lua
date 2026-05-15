@@ -590,6 +590,7 @@ NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
 NFS.load(mod_path .. "data/misc/rescoring_api.lua")()
+NFS.load(mod_path .. "data/misc/extra_soul.lua")()
 --seals
 NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
@@ -1297,6 +1298,9 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/cross.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/shield.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/napkin.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/tracer.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/scrum.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/upgrade.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prison.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/earthmover.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()	
@@ -1346,6 +1350,9 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/niko.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/moonlight_cookie.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/exponentia.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/formidiulosus.lua")()
+	--formidiulosus
 
 	--rituals
 	NFS.load(mod_path .. "data/blindside/rituals/erosion.lua")()

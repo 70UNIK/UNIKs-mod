@@ -4,7 +4,7 @@ BLINDSIDE.Joker({
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=0},
     boss_colour = HEX("ff6deb"),
-    mult = 16,
+    mult = 70,
     base_dollars = 16,
     order = 999999,
     boss = {min = 1,showdown = true,ancient = true},
@@ -89,36 +89,37 @@ function UNIK.blindside_chips_modifyV2(operation,silent,originalchips)
     if operation then
         if operation.x_chips and operation.x_chips ~= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
-            G.GAME.blind.basechips = G.GAME.blind.basechips*operation.x_chips
+            G.GAME.blind.basechips = to_big(G.GAME.blind.basechips)*operation.x_chips
             G.hand_text_area.blind_chip_text:juice_up()
-                G.GAME.blind.basechips_text = number_format(G.GAME.blind.basechips, 100000)
+                G.GAME.blind.basechips_text = number_format(to_big(G.GAME.blind.basechips), 100000)
                 if not silent then play_sound('xchips',0.95,1) end
                 return true
             end}))
         end
         if operation.e_chips and operation.e_chips ~= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
-            G.GAME.blind.basechips = G.GAME.blind.basechips^operation.e_chips
+            G.GAME.blind.basechips = to_big(G.GAME.blind.basechips)^operation.e_chips
             G.hand_text_area.blind_chip_text:juice_up()
-                G.GAME.blind.basechips_text = number_format(G.GAME.blind.basechips, 100000)
+                G.GAME.blind.basechips_text = number_format(to_big(G.GAME.blind.basechips), 100000)
                 if not silent then play_sound('unik_echip',0.95,1) end
                 return true
             end}))
         end
         if operation.x_mult and operation.x_mult ~= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
-            G.GAME.blind.mult = G.GAME.blind.mult*operation.x_mult
+            G.GAME.blind.mult = to_big(G.GAME.blind.mult)*operation.x_mult
             G.hand_text_area.blind_mult_text:juice_up()
-                G.GAME.blind.mult_text = number_format(G.GAME.blind.mult)
+                G.GAME.blind.mult_text = to_big(G.GAME.blind.mult)
                 if not silent then play_sound('multhit2',0.95,1) end
                 return true
             end}))
         end
         if operation.e_mult and operation.e_mult ~= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
-            G.GAME.blind.mult = G.GAME.blind.mult^operation.e_mult
+            G.GAME.blind.mult = to_big(G.GAME.blind.mult)^operation.e_mult
+            print(G.GAME.blind.mult)
             G.hand_text_area.blind_mult_text:juice_up()
-                G.GAME.blind.mult_text = number_format(G.GAME.blind.mult)
+                G.GAME.blind.mult_text = to_big(G.GAME.blind.mult)
                 if not silent then play_sound('unik_emult',0.95,1) end
                 return true
             end}))

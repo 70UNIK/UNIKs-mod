@@ -3,7 +3,7 @@ BLINDSIDE.Joker({
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=2},
     boss_colour = HEX("7c3f3f"),
-    mult = 6,
+    mult = 16,
     base_dollars = 16,
     order = 999999,
     boss = {min = 1,showdown = true,ancient = true},
