@@ -6956,8 +6956,8 @@ return {
 					"{C:red}Handcuffs Tag"}
                 }
             },
-            c_unik_blindside_expel = {
-                name = "Expel",
+            c_unik_blindside_kill = {
+                name = "KILL",
                 text = {
                     {
                         "{C:red}Banish{} a selected",

@@ -1360,6 +1360,7 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/rituals/mirror.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/repetition.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/bind.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/kill.lua")()
 	--Spy (Curse tag)
 	--
 	NFS.load(mod_path .. "data/blindside/rituals/sigil.lua")()

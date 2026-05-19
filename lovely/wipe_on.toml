@@ -1,0 +1,41 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 999
+
+
+## wipe_on to:
+## default has a 50% chance to displayijng a character or ancient jokers
+## blindside displays a blind from blindside instead
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''G.screenwipecard = Card(1, 1, G.CARD_W, G.CARD_H, pseudorandom_element(G.P_CARDS), G.P_CENTERS.c_base)'''
+position = "before"
+payload = '''
+	if UNIK.hasBlindside() then
+        local args = {}
+        args.guaranteed = true
+        args.options = G.P_CENTER_POOLS.bld_obj_blindcard_generate
+        args.shop = true
+        local cardtype = BLINDSIDE.poll_enhancement(args)
+        G.screenwipecard = Card(1, 1, G.CARD_W, G.CARD_H, pseudorandom_element(G.P_CARDS), G.P_CENTERS[cardtype])
+    elseif pseudorandom(pseudoseed('wipe_on_sprite'..os.time()..G.TIMERS.REAL)) > 0.5 then
+        local joker = nil
+
+        local jokers = UNIK.all_mod_characters_list()
+        joker = pseudorandom_element(jokers, pseudoseed("select_random_wipe_on_sprite"))
+        G.screenwipecard = Card(1, 1, G.CARD_W, G.CARD_H, nil, G.P_CENTERS[joker])
+    else
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''G.screenwipecard = Card(1, 1, G.CARD_W, G.CARD_H, pseudorandom_element(G.P_CARDS), G.P_CENTERS.c_base)'''
+position = "after"
+payload = '''
+	end
+'''
+match_indent = true

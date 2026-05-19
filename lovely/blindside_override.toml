@@ -282,3 +282,20 @@ position = 'at'
 payload = '''
 if value.ability and value.ability.extra and type(value.ability.extra) == 'table' and value.ability.extra.stubborn then
 '''
+
+[[patches]]
+[patches.regex]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''G\.GAME\.blind\.mult \+ mult'''
+match_indent = true
+position = 'at'
+payload = '''math.max(1,to_big(G.GAME.blind.mult + mult))'''
+
+
+[[patches]]
+[patches.regex]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''G\.GAME\.blind\.mult\*xmult'''
+match_indent = true
+position = 'at'
+payload = '''math.max(1,to_big(G.GAME.blind.mult*xmult))'''

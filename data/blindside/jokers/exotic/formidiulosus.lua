@@ -30,10 +30,10 @@ BLINDSIDE.Joker({
     },
     loc_vars = function(self,blind)
         G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult or 1
-        return { vars = { G.GAME.unik_blind_e_mult, 0.25 .. "" } }
+        return { vars = { G.GAME.unik_blind_e_mult, 0.1 .. "" } }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 1 .. "", 0.25 .. "" } }
+        return { vars = { 1 .. "", 0.1 .. "" } }
     end,
     calculate = function(self, blind, context)
         if not context.disabled and not G.GAME.blind.disabled then
@@ -43,7 +43,7 @@ BLINDSIDE.Joker({
                     crudes = crudes + 1
                 end
             end
-            G.GAME.unik_blind_e_mult = 1 + crudes*0.25
+            G.GAME.unik_blind_e_mult = 1 + crudes*0.1
         end
         
         if context.setting_blind and not context.disabled and not G.GAME.blind.disabled then
@@ -55,7 +55,7 @@ BLINDSIDE.Joker({
                     crudes = crudes + 1
                 end
             end
-            G.GAME.unik_blind_e_mult = 1 + crudes*0.25
+            G.GAME.unik_blind_e_mult = 1 + crudes*0.1
         end
         if (context.after) and not G.GAME.blind.disabled then
             G.GAME.unik_dynamic_text_realtime = true
@@ -72,7 +72,13 @@ BLINDSIDE.Joker({
         
     end,
     press_play = function(self)
+        G.GAME.unik_blind_e_mult = 1
         local crudes = 0
+        for i,v in pairs(G.playing_cards) do
+            if v.config.center.curse then
+                crudes = crudes + 1
+            end
+        end
         G.E_MANAGER:add_event(Event({trigger = 'before', delay = 1, func = function()
         for i = 1, #G.hand.cards do
             if not G.hand.cards[i].config.center.curse then
@@ -122,7 +128,7 @@ BLINDSIDE.Joker({
             end
             crudes = crudes + 1
         end
-        G.GAME.unik_blind_e_mult = 1 + crudes*0.25
+        G.GAME.unik_blind_e_mult = 1 + crudes*0.1
         return true end })) 
 	end,
     disable = function(self)

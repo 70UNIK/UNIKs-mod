@@ -60,3 +60,18 @@ if not skip and  G.P_CENTERS[enhance_option.key].in_pool and type(G.P_CENTERS[en
 end
 
 '''
+
+##return backup enhancement if failed to return anything (ie: the whole set is banished)
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''                return v.key
+            end
+        end
+    end'''
+match_indent = true
+position = 'after'
+payload = '''
+    print("POOL IS EMPTY! RETURNING BACKUP")
+    return UNIK.backup_blindside_rarities[rarity]
+'''

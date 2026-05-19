@@ -71,5 +71,24 @@ SMODS.ObjectType({
 	cards = UNIK.get_all_characters()
 })
 
+
+function UNIK.all_mod_characters()
+    local characters = {}
+    for i,v in pairs(G.P_CENTERS) do
+        if (v.pools and v.pools["character"]) or v.rarity == 'unik_ancient' or string.sub(i,1,5) == "j_" .. UNIK.get_almanac_prefix() then
+            characters[i] = true
+        end
+    end
+    return characters
+end
+function UNIK.all_mod_characters_list()
+    local characters = {}
+    for i,v in pairs(G.P_CENTERS) do
+        if (v.pools and v.pools["character"]) or v.rarity == 'unik_ancient' or string.sub(i,1,5) == "j_" .. UNIK.get_almanac_prefix() then
+            characters[#characters+1] = i
+        end
+    end
+    return characters
+end
 --todo:
 --redeeming furry convention would also inject mythic furries into the pool, would require fuckery with the booster packs or pool though.

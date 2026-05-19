@@ -1,9 +1,9 @@
---Banish a selected shop item, consumable or joker, bypasses eternal.
+--literally ://delete or expel
 SMODS.Consumable {
-    key = 'unik_expel',
-    set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 2, y = 0 },
+    key = 'unik_blindside_kill',
+    set = 'bld_obj_ritual',
+    atlas = 'placeholders',
+	pos = { x = 2, y = 1 },
     cost = 4,
     config = {max_card = 1 },
     loc_vars = function(self, info_queue, center)
@@ -16,7 +16,16 @@ SMODS.Consumable {
         local jokers = G.jokers and #G.jokers.highlighted or 0
         local boosters = G.shop_booster and #G.shop_booster.highlighted or 0
         local vouchers = G.shop_vouchers and #G.shop_vouchers.highlighted or 0
+        local cards = G.hand and G.hand.highlighted and #G.hand.highlighted or 0
         --Exclude currently selected card
+        if G.hand then
+            for i,v in pairs(G.hand.highlighted) do
+                if v == card then
+                    cards = cards - 1
+                    break
+                end
+            end
+        end
         if G.consumeables then
             for i,v in pairs(G.consumeables.highlighted) do
                 if v == card then
@@ -58,7 +67,7 @@ SMODS.Consumable {
                 end
             end
         end
-        if (shop_jokers + booster_cards + consumables + jokers + boosters + vouchers == 1) then
+        if (shop_jokers + booster_cards + consumables + jokers + boosters + vouchers + cards == 1) then
             return true
         end
         return false
@@ -74,6 +83,15 @@ SMODS.Consumable {
             G.GAME.banned_keys = {}
             end
         local c = nil
+        --Exclude currently selected card
+        if G.hand and #G.hand.highlighted >= 1 then
+            for i,v in pairs(G.hand.highlighted) do
+                if v ~= card then
+                    c = v
+                    break
+                end
+            end
+        end
         if G.consumeables and #G.consumeables.highlighted >= 1 then
             for i,v in pairs (G.consumeables.highlighted) do
                 if v ~= card then
@@ -120,10 +138,21 @@ SMODS.Consumable {
                 if v ~= card then
                     c = v
                     --print(c.config.center.key)
+                     if c.shop_voucher and G.GAME.selected_back.effect.center.config.extra and G.GAME.selected_back.effect.center.config.extra.blindside then 
+                    G.GAME.current_round.voucher = SMODS.get_next_vouchers()
+                    G.GAME.round_resets.tags_bought = G.GAME.round_resets.tags_bought + 1
+                    for _, key in ipairs(G.GAME.current_round.voucher or {}) do
+                        if G.P_CENTERS[key] and G.GAME.current_round.voucher.spawn[key] then
+                            SMODS.add_voucher_to_shop(key)
+                            G.shop_vouchers.cards[1].cost = math.max(G.shop_vouchers.cards[1].cost + 5*G.GAME.round_resets.tags_bought - (G.GAME.used_vouchers['v_bld_treasurechest'] and 20 or 0), 0)
+                        end
+                    end
+                end
                     break
                 end
                 --print(v.config.center.key)
             end
+           
         end
         -- c = G.shop_jokers and G.shop_jokers.highlighted[1] or c
         -- c = G.shop_booster and G.shop_booster.highlighted[1] or c
@@ -174,84 +203,57 @@ SMODS.Consumable {
     end,
 }
 
-  -- special thanks to John Cryptid for this
-  -- and Betmma, apparently
-  G.FUNCS.can_reserve_card2 = function(e)
-    if #G.consumeables.cards < G.consumeables.config.card_limit then
-      e.config.colour = G.C.GREEN
-      e.config.button = "reserve_card2"
-    else
-      e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-      e.config.button = nil
-    end
-  end
-  G.FUNCS.reserve_card2 = function(e)
-    local c1 = e.config.ref_table
-    G.E_MANAGER:add_event(Event({
-      trigger = "after",
-      delay = 0.1,
-      func = function()
-        c1.area:remove_card(c1)
-        c1:add_to_deck()
-        if c1.children.price then
-          c1.children.price:remove()
-        end
-        c1.children.price = nil
-        if c1.children.buy_button then
-          c1.children.buy_button:remove()
-        end
-        c1.children.buy_button = nil
-        remove_nils(c1.children)
-        G.consumeables:emplace(c1)
-        G.GAME.pack_choices = G.GAME.pack_choices - 1
-        if G.GAME.pack_choices <= 0 then
-          G.FUNCS.end_consumeable(nil, delay_fac)
-        end
-        return true
-      end,
-    }))
-  end
+-- fallback blinds if blinds have been banished out of existence:
+--starter: the blank
+--simple: the hat
+--premium: the wall
+--crude; AI SLOP!!!
+--legenary: violet vessel
+--ancient: epic wall
 
-local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
-  function G.UIDEF.use_and_sell_buttons(card)
-    if (card.area == G.pack_cards and G.pack_cards) and card.ability.consumeable then --Add a use button
-      if card.config.center.key == 'c_unik_expel' or card.config.center.key == 'c_unik_blindside_kill' then
-        return {
-          n = G.UIT.ROOT,
-          config = { padding = -0.1, colour = G.C.CLEAR },
-          nodes = {
-            {
-              n = G.UIT.R,
-              config = {
-                ref_table = card,
-                r = 0.08,
-                padding = 0.1,
-                align = "bm",
-                minw = 0.5 * card.T.w - 0.15,
-                minh = 0.7 * card.T.h,
-                maxw = 0.7 * card.T.w - 0.15,
-                hover = true,
-                shadow = true,
-                colour = G.C.UI.BACKGROUND_INACTIVE,
-                one_press = true,
-                button = "use_card",
-                func = "can_reserve_card2",
-              },
-              nodes = {
-                {
-                  n = G.UIT.T,
-                  config = {
-                    text = localize("b_take"),
-                    colour = G.C.UI.TEXT_LIGHT,
-                    scale = 0.55,
-                    shadow = true,
-                  },
-                },
-              },
-            },
-          },
-        }
-      end
-    end
-    return G_UIDEF_use_and_sell_buttons_ref(card)
-  end
+UNIK.backup_blindside_rarities = {
+    [3] = 'm_unik_blindside_ai_brainrot',
+    [0] = 'm_bld_hat',
+    [1] = 'm_bld_air',
+    [4] = 'm_bld_violet_vessel',
+    [70] = 'm_unik_blindside_epic_wall',
+    [99] = 'm_unik_blindside_legendary_crown',
+    [-1] = 'm_bld_blank',
+}
+
+-- local poller =  BLINDSIDE.poll_enhancement
+-- function BLINDSIDE.poll_enhancement(args)
+--     local ret = poller(args)
+--     local rarity = 0
+--     if not ret then
+--         if args.shop then
+--             if G.GAME.modifiers.enable_shop_curses and pseudorandom(pseudoseed('bld_blind_curse_in_shop')) > 0.9 then
+--                 rarity = 3
+--             else
+--                 if (rand < 0.85) then
+--                     rarity = 0
+--                 elseif rand <= 1 then --(rand < 0.999) then
+--                     rarity = 1
+--                 else
+--                     rarity = 2
+--                 end
+--             end
+--         elseif args.cursed then
+--             rarity = 3
+--         elseif args.unik_ancient then
+--             rarity = 70
+--         elseif args.unik_exotic then
+--             rarity = 99
+--         elseif args.legendary then
+--             rarity = 4
+--         else
+--             if (rand < 0.85) then
+--             rarity = 0
+--             elseif rand <= 1 then --(rand < 0.999) then
+--                 rarity = 1
+--             else
+--                 rarity = 2
+--             end
+--         end
+--     end
+-- end
