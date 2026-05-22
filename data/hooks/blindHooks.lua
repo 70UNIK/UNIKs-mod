@@ -461,7 +461,15 @@ end
 local pcfh = G.FUNCS.play_cards_from_highlighted
 function G.FUNCS.play_cards_from_highlighted(e)
 	G.GAME.before_play_buffer2 = true
-
+    stop_use()
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            G.STATE = G.STATES.HAND_PLAYED
+            G.STATE_COMPLETE = true
+            return true
+        end
+    }))
     
     --Steel blind edition, each held card
 
@@ -537,9 +545,7 @@ function G.FUNCS.play_cards_from_highlighted(e)
                 edi:unik_before_play()
             end
         end
-        for i = 1, #G.GAME.tags do
-            G.GAME.tags[i]:apply_to_run({type = 'unik_before_play'})
-        end
+        
         if G.GAME.modifiers.unik_decay_on_play then
             for i = 1, #G.hand.highlighted do
                 G.hand.highlighted[i].ability.unik_decaying = true
@@ -548,6 +554,9 @@ function G.FUNCS.play_cards_from_highlighted(e)
         G.GAME.no_repeat_play = true
         SMODS.calculate_context({on_select_play = true})
         G.GAME.no_repeat_play = nil
+        for i = 1, #G.GAME.tags do
+            G.GAME.tags[i]:apply_to_run({type = 'unik_before_play'})
+        end
         --end
         G.E_MANAGER:add_event(Event({
             func = function()

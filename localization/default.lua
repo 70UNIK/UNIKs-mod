@@ -2689,7 +2689,7 @@ return {
                         "hand if {C:red}Destroyed"
                     },
                     {
-                        "{C:red}Unrerollable{}"
+                        "{C:attention}Unrerollable{}"
                     },
                     {
                         "{C:red}Cannot{} be {C:attention}Burned",
@@ -2706,9 +2706,6 @@ return {
                                         {
                         "{C:attention}Copies{} itself to",
                         "hand if {C:red}Destroyed"
-                    },
-                    {
-                        "{C:red}Unrerollable{}"
                     },
                     {
                         "{C:red}Cannot{} be {C:attention}Burned",
@@ -2818,8 +2815,80 @@ return {
                     }
                 }
             },
+            m_unik_blindside_robot = {
+                name = "The Robot",
+                text = {
+                    {
+                        "{X:chips,C:white}Blue", 
+                        "{C:attention}Play{} selected cards",
+                        "when selected"
+                    },
+                    {"Always scores"},
+                    {"{C:attention}Stubborn"}, 
+					{"{C:attention}Forced to",
+					"{C:attention}be selected",},
+                }
+            },
+            m_unik_blindside_robot_upgraded = {
+                name = "The Robot",
+                text = {
+                    {
+                        "{X:chips,C:white}Blue", 
+                        "{X:chips,C:white}X#1#{} Chips",
+                    },
+                    {
+                        "Before scoring, {C:blue}+#2#{} hand#<s>2#",
+                    },
+                    {
+                        "{C:green}Retain{} all held",
+                        "Blinds {C:attention}this hand"
+                    },
+                    {
+                        "{C:attention}Play{} selected cards",
+                        "when selected"
+                    },
+                    {"Always scores"},
+                    {"{C:attention}Burns"}, 
+                    {"{C:attention}Stubborn"}, 
+					{"{C:attention}Forced to",
+					"{C:attention}be selected",},
+                }
+            },
             m_unik_blindside_nut = {
-
+                name = "The Nut",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "{C:attention}Shuffles{} all Blinds",
+                        "and Trinkets",
+                        "while {C:attention}held{} on play",
+                    },
+                    {
+                        "{C:attention}Floor{} {C:gold}money{} to {C:red}$#1#",
+                        "when scored",
+                    },
+                    {
+                        "{C:attention}Stubborn"
+                    },
+                    {"Always scores"},
+                    {"{C:green}Retained"},
+                }
+            },
+            m_unik_blindside_nut_upgraded = {
+                name = "The Nut",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "{C:gold}+$#2#{} while held",
+                    },
+                    {
+                        "{C:attention}Shuffles{} all Blinds",
+                        "and Trinkets",
+                        "while {C:attention}held{} on play",
+                    },
+                    {"Always scores"},
+                    {"{C:green}Retained"},
+                }
             },
             m_unik_blindside_epic_straightforwardness = {
                 name = "Tasainenviiva",

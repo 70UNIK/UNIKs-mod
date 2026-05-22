@@ -280,7 +280,7 @@ pattern = '''if value.config.center and value.config.center.config.extra and val
 match_indent = true
 position = 'at'
 payload = '''
-if value.ability and value.ability.extra and type(value.ability.extra) == 'table' and value.ability.extra.stubborn then
+if value.ability and value.ability.extra and type(value.ability.extra) == 'table' and value.ability.extra.stubborn and value.config.center.config.extra.stubborn then
 '''
 
 [[patches]]

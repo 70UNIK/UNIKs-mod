@@ -41,7 +41,7 @@ end
 
 local set_abilityref = Card.set_ability
 function Card:set_ability(center, initial, delay)
-    local tawsome = self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unbreakable
+    local tawsome = self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unrerollable
     if (not tawsome) or G.SETTINGS.paused then
         set_abilityref(self, center, initial, delay)
     else
@@ -57,6 +57,7 @@ BLINDSIDE.Blind({
         extra = {
             value = 30,
             taw_unbreakable = true,
+            taw_unrerollable = true,
             x_mult = 2.5,
         },
     },
@@ -70,7 +71,10 @@ BLINDSIDE.Blind({
     end,
     curse = true,
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'unik_unrerollable', set = 'Other'}
+        if not card.ability.extra.upgraded then
+            info_queue[#info_queue+1] = {key = 'unik_unrerollable', set = 'Other'}
+        end
+        
         return {
             key = card.ability.extra.upgraded and 'm_unik_blindside_taw_upgraded' or 'm_unik_blindside_taw',
             vars = {
@@ -81,6 +85,7 @@ BLINDSIDE.Blind({
     upgrade = function(card)
         if not card.ability.extra.upgraded then
             card.ability.extra.upgraded = true
+            card.ability.extra.taw_unrerollable = nil
         end
     end
 })

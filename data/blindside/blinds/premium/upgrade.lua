@@ -5,10 +5,10 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 20,
-            mult = 3,
-            chips = 20,
-            mult_up = 2,
-            chips_up = 15,
+            mult = 4,
+            chips = 30,
+            mult_up = 4,
+            chips_up = 30,
             chance = 1,
             trigger = 2,
         }},

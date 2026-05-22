@@ -114,11 +114,54 @@ function Card:update(dt)
     return ret
 end
 
+local highlighter = CardArea.can_highlight
+function CardArea:can_highlight(card)
+    local ret = highlighter(self,card)
+    if G.GAME.force_play_anyway then
+        return false
+    end
+    return ret
+end
+
+--the robot (blindside)
+local robotHook = Card.update
+function Card:update(dt)
+    if self.config.center.key == 'm_unik_blindside_robot' and self.ability.forced_selection then
+        if (self.area == G.hand) and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) then
+            if not G.GAME.finger_triggered_suppression then
+                stop_use()
+                -- play_sound('unik_gunshot')
+                -- self:juice_up(1.25,1.25)
+                print("BEEP BOOP MOTHERFUCKER!")
+                G.FUNCS.play_cards_from_highlighted()
+            end
+        end
+    end
+    -- if G.GAME.force_play_anyway then
+    --     G.GAME.force_play_anyway = nil
+    --     stop_use()
+    --     print("FORCE IT!")
+    --     G.FUNCS.play_cards_from_highlighted()
+    -- end
+    local ret = robotHook(self,dt)
+    return ret
+end
+
+
+local pcfh = G.FUNCS.play_cards_from_highlighted
+function G.FUNCS.play_cards_from_highlighted(e)
+    if not G.GAME.finger_triggered_suppression then
+        G.GAME.finger_triggered_suppression = true
+        pcfh(e)
+    else
+        print("SUPPRESSED!")
+    end
+end
 
 function Card:calculate_triggering(is_higlighted)
     self.highlighted = is_higlighted
     local eval = {}
-    if self.highlighted == true and (self.area == G.hand) and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and not G.GAME.unik_using_automatic_consumeable  and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) then
+    if self.highlighted == true and (self.area == G.hand) and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and not G.GAME.unik_using_automatic_consumeable  and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) or self.ability.forced_selection) then
         SMODS.calculate_context({unik_triggering = true, selected_card = self},eval)
     end
     local triggered = false
@@ -144,7 +187,11 @@ function Card:calculate_triggering(is_higlighted)
 
         end
     end
-    if triggered then
+    if triggered and self.ability.forced_selection then
+        stop_use()
+        print("BEEP BOOP!")
+        G.GAME.force_play_anyway = true
+    elseif triggered and not G.GAME.force_play_anyway then
         stop_use()
         print("TRIGGERED!")
         G.FUNCS.play_cards_from_highlighted()

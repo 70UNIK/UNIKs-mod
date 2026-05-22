@@ -47,6 +47,8 @@ if (checker and checker.debuff) or undefTalisman then
         end)
     }))
 end
+G.GAME.finger_triggered_suppression = nil
+G.GAME.force_play_anyway = nil
 if checker and checker.add_to_blind then
     if nanny == '-nan' or nanny == 'Infinity' or nanny == 'infinity' then
         add_to_blind = math.huge

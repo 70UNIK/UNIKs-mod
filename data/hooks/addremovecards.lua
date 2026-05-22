@@ -38,6 +38,21 @@ function selfDestruction(card,message,color,dissolve)
     })
 end
 
+function CardArea:brute_force_highlight(card,silent)
+    self.highlighted[#self.highlighted+1] = card
+    card:highlight(true)
+    if not silent then play_sound('cardSlide1') end
+end
+
+-- mmm shallow....
+function UNIK.shallow_copy(t)
+	local t2 = {}
+	for k, v in pairs(t) do
+		t2[k] = v
+	end
+	return t2
+end
+
 function selfDestruction_noMessage(card,dissolve)
     -- This part plays the animation.
     G.E_MANAGER:add_event(Event({
