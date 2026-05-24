@@ -23,10 +23,13 @@ payload = '''
 'tag_unik_blindside_shield',
 'tag_unik_blindside_cult',
 'tag_unik_blindside_balance',
+'tag_unik_blindside_cursed',
 'c_unik_blindside_sigil',
 'c_unik_blindside_erosion',
 'c_unik_blindside_bind',
 'c_unik_blindside_augment',
 'c_unik_blindside_mirror',
 'c_unik_blindside_repetition',
+'c_unik_blindside_kill',
+'c_unik_blindside_backstab',
 '''

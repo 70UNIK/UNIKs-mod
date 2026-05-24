@@ -62,6 +62,9 @@ function reset_blinds()
                 G.GAME.round_resets.blind_choices.Boss = get_new_boss()
             end
              SMODS.calculate_context({unik_refresh_blinds = true})
+             for i,v in pairs(G.jokers.cards) do
+                v.ability.unik_bought_this_ante = nil
+             end
             G.GAME.blind_on_deck = 'Small'
             G.GAME.round_resets.boss_rerolled = false
         end
@@ -75,6 +78,10 @@ end
 --A finisher blind if the vice check succeeds
 local boss_override = get_new_boss
 function get_new_boss()
+    if G.GAME.unik_force_cursed_jokers then
+        local ret = get_new_cursed()
+        return ret
+    end
     
     local boss = boss_override()
     if not UNIK.hasBlindside() then

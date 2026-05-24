@@ -28,7 +28,7 @@ BLINDSIDE.Blind({
                 if #cards > 0 then
                     local neck_banish = pseudorandom_element(cards, pseudoseed("unik_osborn"))
                     card:juice_up(1,1)
-                    neck_banish:set_edition( {bld_finish = true},true, nil, true )
+                    neck_banish:set_edition( {bld_shiny = true},true, nil, true )
                     neck_banish:set_debuff(true)
                 end
             else
@@ -96,7 +96,7 @@ if not  card.ability.extra.upgraded then
             info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}  
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
         else
-            info_queue[#info_queue+1] = G.P_CENTERS.e_bld_finish
+            info_queue[#info_queue+1] = G.P_CENTERS.e_bld_shiny
         end
         
         return {

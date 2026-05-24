@@ -1264,6 +1264,7 @@ SMODS.Atlas({
 frames = 3 })
 
 if next(SMODS.find_mod("Blindside")) then
+	NFS.load(mod_path .. "data/stickers/impounded_blindside.lua")() 
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/taunt_sprites.lua")()	
@@ -1349,12 +1350,15 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/boss/fiendish_joker.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/oxy.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/goob.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/monopoly_money.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/blacklist.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/spy.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/impound_notice.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/niko.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/moonlight_cookie.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/exotic/exponentia.lua")()
 	NFS.load(mod_path .. "data/blindside/jokers/exotic/formidiulosus.lua")()
-	--formidiulosus
 
 	--rituals
 	NFS.load(mod_path .. "data/blindside/rituals/erosion.lua")()
@@ -1362,7 +1366,9 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/rituals/mirror.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/repetition.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/bind.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/backstab.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/kill.lua")()
+	
 	--Spy (Curse tag)
 	--
 	NFS.load(mod_path .. "data/blindside/rituals/sigil.lua")()
@@ -1380,7 +1386,7 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/tags/multiplicative.lua")()	
 	NFS.load(mod_path .. "data/blindside/tags/recursive.lua")()	
 	NFS.load(mod_path .. "data/blindside/tags/balance.lua")()
-	--cursed
+	NFS.load(mod_path .. "data/blindside/tags/cursed.lua")()	
 
 	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
 	--boosted

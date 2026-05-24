@@ -6,14 +6,32 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 34,
-            dollars = 5,
-            dollars_up = 5,
+            dollars = 6,
+            dollars_up = 6,
         }
     },
     hues = {"Yellow"},
     calculate = function(self, card, context) 
+        if context.before then
+            local exists = false
+            for i,v in pairs(context.scoring_hand) do
+                if v == card then
+                    exists = true
+                    break
+                end
+            end
+            if exists then
+                add_tag(Tag('tag_unik_blindside_handcuffs'))
+                return {
+                    focus = card,
+                    message = localize('k_unik_too_bad'),
+                    card = card,
+                    colour = G.C.MULT,
+                }
+            end
+        end
         if context.cardarea == G.play and context.main_scoring then
-            add_tag(Tag('tag_unik_blindside_handcuffs'))
+            
             return {
                 p_dollars = card.ability.extra.dollars
             }

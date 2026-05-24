@@ -101,7 +101,15 @@ function Card:update(dt)
             end
         end
     --Ultradebuffed
-    elseif self.ability and self.ability.unik_ultradebuffed then
+    end
+    if self.ability and self.ability.unik_impounded_blindside then
+        if not self.debuff and not self.area.config.collection then
+            self.debuff = true
+            self:set_debuff(true)
+            if self.area == G.jokers then self:remove_from_deck(true) end
+        end
+    end
+    if self.ability and self.ability.unik_ultradebuffed then
         self.ability.unik_shielded = nil
         if not self.debuff and not self.area.config.collection then
             self.debuff = true

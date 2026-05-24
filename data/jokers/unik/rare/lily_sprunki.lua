@@ -80,7 +80,7 @@ local cashoutcontext = G.FUNCS.cash_out
 G.FUNCS.cash_out = function(e)
     SMODS.calculate_context({after_cashout = true})
     cashoutcontext(e)
-    G.GAME.unik_fiendish_cap = nil
+    -- G.GAME.unik_fiendish_cap = nil
 end
 
 --Add "devour" button on highlight

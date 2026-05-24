@@ -78,6 +78,13 @@ while i <= #G.consumeables.cards do
     local gone = G.consumeables.cards[i]:calculate_disposable()
     if not gone then i = i + 1 end
 end
+i = 1
+if UNIK.hasBlindside() then
+    while i <= #G.jokers.cards do
+        G.jokers.cards[i]:calculate_impounded()
+        i = i + 1
+    end
+end
 '''
 match_indent = true
 

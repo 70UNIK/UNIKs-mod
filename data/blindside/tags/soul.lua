@@ -64,6 +64,10 @@ end
 
 local small_overrider = get_new_small
 function get_new_small(current)
+    if G.GAME.unik_force_cursed_jokers then
+        local ret = get_new_cursed()
+        return ret
+    end
     if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.unik_banana_generated and pseudorandom(pseudoseed('unik_small_override')) > 0.7 then
         local ret = get_new_big()
         return ret
@@ -81,6 +85,10 @@ end
 
 local big_overrider = get_new_big
 function get_new_big(current)
+    if G.GAME.unik_force_cursed_jokers then
+        local ret = get_new_cursed()
+        return ret
+    end
     if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4) then
         local boss = get_new_boss()
         if boss then

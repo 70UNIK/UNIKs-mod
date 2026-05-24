@@ -1,1 +1,0 @@
---rerolls the next non-boss joker into a Cursed Joker

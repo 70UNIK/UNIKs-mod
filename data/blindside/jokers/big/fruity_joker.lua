@@ -12,6 +12,7 @@ BLINDSIDE.Joker({
     --can spawn if at least 5 blinds with editions are in deck.
     in_pool = function(self, args)
         if G.GAME.selected_back.effect.center.config.extra and G.playing_cards then
+            if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
             local seals = 0
             for i,v in pairs(G.playing_cards) do
                 if (v).edition then

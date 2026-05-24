@@ -162,9 +162,9 @@ return {
             bl_unik_blindside_oxy = {
                 name = "Oxy",
                 text = {
-                    "X#1# Mult to Joker",
-                    "when a Blind with",
-                    "a Trim is scored"
+                    "Scoring a trimmed",
+                    "Blind gives Joker",
+                    "X#1# Mult",
                 }
             },
             bl_unik_blindside_energy_compressor={
@@ -175,7 +175,8 @@ return {
                     "releases in set order",
                     "of Exponential,",
                     "Loglinear, Multiplicative",
-                    "then Additive operations"
+                    "then Additive operations",
+                    "exponentiated by ^0.9",
                 }
             },
             bl_unik_blindside_fat_joker={
@@ -199,8 +200,8 @@ return {
             bl_unik_blindside_fiendish_joker = {
                 name = "Fiendish Joker",
                 text = {
-                    "All payout is",
-                    "capped at -$2"
+                    "X$0.75 whenever",
+                    "money changes"
                 }
             },
             bl_unik_blindside_lily = {
@@ -233,7 +234,7 @@ return {
             bl_unik_blindside_recycle_bin = {
                 name = "Recycle Bin",
                 text = {
-                    "X#1# Mult per hand",
+                    "X#1# Mult each hand",
                     "+X#2# Mult per",
                     "Blind discarded",
                 }
@@ -248,15 +249,99 @@ return {
             bl_unik_blindside_fruity_joker = {
                 name = "Fruity Joker",
                 text = {
-                    "+#1# Mult whenever",
-                    "an Editioned Blind",
-                    "is scored"
+                    "Scoring an Editioned",
+                    "Blind gives Joker",
+                    "+#1# Mult",
+                }
+            },
+            bl_unik_blindside_plain_jane = {
+                name = "Plain Jane",
+                text = {
+                    "X#1# Mult to Joker",
+                    "if hand contains",
+                    "a trimmed Blind",
+                }
+            },
+            bl_unik_blindside_pavement_joker = {
+                name = "Pavement Joker",
+                text = {
+                    "All Hands are",
+                    "considered Bet",
+                    "Only the leftmost",
+                    "Blind scores",
+                }
+            },
+            bl_unik_blindside_supersize={
+                name = "Supersize",
+                text = {
+                    "Create #1# detrimental",
+                    "tags per hand",
+                }
+            },
+            bl_unik_blindside_monopoly_money = {
+                name = "Monopoly Money",
+                text = {
+                    "Sell a Trinket",
+                    "purchased this Ante",
+                    "to double money once",
+                }
+            },
+            bl_unik_blindside_impound_notice = {
+                name = "Impound Notice",
+                text = {
+                    "Debuffs a random Trinket",
+                    "It becomes negative and",
+                    "loses debuff after",
+                    "#1# rounds",
+                }
+            },
+            bl_unik_blindside_blacklist = {
+                name = "Blacklist",
+                text = {
+                    "Debuffs all instances",
+                    "of #1# in deck",
+                    "If hand contains only",
+                    "a single instance of",
+                    "#1#, it gains",
+                    "+#2# Retrigger#<s>2#"
+                }
+            },
+            bl_unik_blindside_ghost = {
+                name = "Ghost",
+                text = {
+                    "Debuffs a random Trinket",
+                    "It becomes Finish and",
+                    "loses debuff after 2 Rounds",
+                }
+            },
+            bl_unik_blindside_rotten_egg = {
+                name = "Rotten Egg",
+                text = {
+                    "Double all sell",
+                    "values of owned Trinkets",
+                    "every hand",
+                }
+            },
+            bl_unik_blindside_spy = {
+                name = "Spy",
+                text = {
+                    "Create 2 Heartbreak Tags",
+                    "an Imprisonment Tag",
+                    "and 2 Shield Tags",
+                    "when Defeated"
+                }
+            },
+            bl_unik_blindside_joker_in_yellow={
+                name = "The Joker in Yellow",
+                text = {
+                    "Yellow Blinds permanently",
+                    "gain +1 Mult when played",
                 }
             },
             bl_unik_blindside_unik = {
                 name = "UNIK",
                 text = {
-                    "^#1# Chips per hand",
+                    "^#1# Chips each hand",
                     "+^#2# when a Purple",
                     "Blind is scored",
                     "All played Blinds",
@@ -282,7 +367,7 @@ return {
             bl_unik_blindside_moonlight_cookie = {
                 name = "Moonlight Cookie",
                 text = {
-                    "X#1# Mult per hand",
+                    "X#1# Mult each hand",
                     "Takes all Mult ",
                     "from all visible",
                     "hands as Xmult, then",
@@ -293,7 +378,7 @@ return {
             bl_unik_blindside_white_lily_cookie = {
                 name = "White Lily Cookie",
                 text = {
-                    "^#1# Mult per hand",
+                    "^#1# Mult each hand",
                     "Banish a random",
                     "Trinket for each",
                     "Trinket sold this run",
@@ -314,7 +399,7 @@ return {
             bl_unik_blindside_exponentia = {
                 name = "Exponentia",
                 text = {
-                    "^#1# Mult per hand",
+                    "^#1# Mult each hand",
                     "Gains ^#2# when any",
                     "Mult effect triggers",
                     "Immediately scores when",
@@ -324,7 +409,7 @@ return {
             bl_unik_blindside_formidiulosus = {
                 name = "Formidiulosus",
                 text = {
-                    "^#1# Mult per hand",
+                    "^#1# Mult each hand",
                     "+^#2# Mult per Crude",
                     "Blind in full deck",
                     "Before scoring, permanently",
@@ -1859,7 +1944,7 @@ return {
                     {
                         "Create a",
                         "{C:red}Handcuffs Tag{}",
-                        "when scored",
+                        "when played",
                     }
                 }
             },
@@ -2308,6 +2393,7 @@ return {
                         "{C:attention}Duplicates{} the leftmost",
                         "held {C:attention}consumable",
                         "{C:inactive}(Must have room)",
+                        "{C:inactive,s:0.7}(Cannot copy {s:0.7,C:bld_obj_rune}Tachys{s:0.7,C:inactive} or Rare Consumables)",
                     },
                     {"{C:red,E:1}Self-Debuffing{} with a",
 					"{C:green}#1# in #2#{} chance"},
@@ -2324,6 +2410,7 @@ return {
                         "{C:attention}Duplicates{} the leftmost",
                         "held {C:attention}consumable",
                         "{C:inactive}(Must have room)",
+                        "{C:inactive,s:0.7}(Cannot copy {s:0.7,C:bld_obj_rune}Tachys{s:0.7,C:inactive} or Rare Consumables)",
                     },
                     {
                         "Creates a {C:dark_edition}Negative{} {C:red}Decaying",
@@ -2616,7 +2703,7 @@ return {
                 text = {
                     {
                         "{X:green,C:white}Green", 
-                        "Add {C:dark_edition}Finish{}",
+                        "Add {C:dark_edition}Shiny{}",
                         "to a random",
                         "Trinket {C:attention}before{} play",
                         "then {C:red}Debuff{} it",
@@ -3131,6 +3218,34 @@ return {
                     "YOU SHOULDNT SEE THIS"
                 }
             },
+            --ironic for a pwx crossmod element, this will be styled more like an exotic joker
+            --initially does nothing in case you dont want to suffer
+            --wonderous
+            j_unik_jen_hellgate_off = {
+                name = "Hellgate",
+                text= {
+                    "{C:inactive}Does nothing?",
+                    "{C:unik_eye_searing_red,E:2}TURN IT ON IF YOU DARE",
+                    "{C:inactive}(This action cannot be undone)",
+                    "{C:inactive}Sell this to Banish self",
+                    "{C:inactive}and create another Wonderous",
+                    "{C:inactive}Joker instead"
+                }
+            },
+            j_unik_jen_hellgate = {
+                name = "Hellgate",
+                text= {
+                    "Gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult for every",
+                    "{X:unik_void_color,C:unik_eye_searing_red}Epic+{} {X:unik_void_color,C:unik_eye_searing_red}Blind{} defeated",
+                    "{C:red}All{} Boss Blinds become",
+                    "{X:unik_void_color,C:unik_eye_searing_red}Epic+{} {X:unik_void_color,C:unik_eye_searing_red}Blinds",
+                    "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2# {C:inactive}Mult)",
+                    "{C:unik_eye_searing_red,s:0.7}At this point, scoring becomes secondary.",
+                    "{C:unik_eye_searing_red,s:0.7}Look what you have done.",
+                    "{C:unik_eye_searing_red,s:0.7}Face your conseqences.",
+                }
+            },
+
             -- The rest --
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
@@ -5931,6 +6046,15 @@ return {
                     "{C:red}Unremovable"
                 }
             },
+            unik_impounded_blindside = {
+                name = "Locked",
+                text = {
+                    "{C:red}Debuffed{} for {C:attention}#1#{} Round#<s>1#",
+                    "Becomes {C:dark_edition}Negative{}",
+                    "after {C:attention}#1#{} Round#<s>1#",
+                    "{C:inactive}({C:attention}#2#{C:inactive} remaining)",
+                }
+            },
             unik_decaying_consumable = {
                 name = "Decaying",
                 text = {
@@ -6030,6 +6154,14 @@ return {
                     "{C:attention}infinitely",
                     "{C:inactive}(Currently upgraded",
                     "{C:attention}#1# {C:inactive}time#<s>1#)"
+                }
+            },
+            unik_cursed_joker = {
+                name = "Cursed Jokers",
+                text = {
+                    "Gives {C:attention}benefits",
+                    "when triggered",
+                    "or defeated",
                 }
             }
             
@@ -6543,6 +6675,14 @@ return {
                     "{C:red}Legendary{} Joker"
                 }
             },
+            tag_unik_blindside_ancient = {
+                name = '"Ancient" Tag',
+                text = {
+                    "{C:attention}Replaces{} the next",
+                    "{X:unik_ancient,C:white}Ancient{} Joker with",
+                    "{C:attention}Ancient Joker",
+                }
+            },
             tag_unik_blindside_handcuffs = {
                 name = "Handcuffs Tag",
                 text = {
@@ -6617,6 +6757,14 @@ return {
                 text = {
                     "{C:purple}Balances{} {X:dark_edition,C:white}^#1#",
                     "of {C:chips}Chips{} and {C:red}Mult"
+                }
+            },
+            tag_unik_blindside_cursed = {
+                name = "Cursed Tag",
+                text = {
+                    "{C:attention}Replaces{} the next",
+                    "{C:attention}non-Boss{} Joker with a",
+                    "{X:unik_detrimental,C:white}Cursed{} Joker"
                 }
             }
         },
@@ -7032,6 +7180,19 @@ return {
                         "{C:red}Banish{} a selected",
                         "{C:attention}Blind{}, {C:attention}Consumable",
                         "{C:attention}Price Tag{} or {C:bld_trinket}Trinket",
+                    },
+                }
+            },
+            c_unik_blindside_backstab = {
+                name = "Backstab",
+                text = {
+                    {
+                        "Destroy #1#",
+                        "selected Trinket#<s>1#"
+                    },
+                    {
+                        "Create a",
+                        "{X:unik_detrimental,C:white}Cursed{} {C:attention}Tag"
                     },
                 }
             },
@@ -7705,6 +7866,7 @@ return {
             k_unik_goob_warning = "will be downgraded",
             k_unik_edition_warning = "Hand contains Blinds with editions",
             k_unik_enhancement_warning = "Hand contaings Blinds with Trims",
+            k_unik_random_blind = "(a random Blind in deck)",
         },
         high_scores={},
         labels={
@@ -8252,6 +8414,7 @@ return {
 			a_round = "+#1# Round",
 		--	a_xchips_minus = { "-X#1# Chips" },
 			a_powmult_minus = "-^#1# Mult",
+            a_retriggers = "#1# Retriggers",
 			a_powchips_minus = "-^#1# Chips",
 			a_powmultchips_minus = "-^#1# Mult+Chips",
 			a_round_minus = "-#1# Round",
