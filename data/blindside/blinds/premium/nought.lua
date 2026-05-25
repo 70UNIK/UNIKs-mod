@@ -18,9 +18,9 @@ rare = true,
                 card:flip()
                 add_tag(Tag('tag_unik_blindside_recursive'))
                 return {
-                    focus = card,
+                    focus =  context.blueprint_card or card,
                     message = localize('k_tagged_ex'),
-                    card = card,
+                    card =  context.blueprint_card or card,
                 }
             else
                 if card.facing ~= 'back' then 

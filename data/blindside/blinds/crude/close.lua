@@ -73,7 +73,7 @@ BLINDSIDE.Blind({
                 if #validCards > 0 then
                     return {
                         target_cards = validCards,
-                        card = card,
+                        card = context.blueprint_card or card,
                         message = '+1',
                     }
                 end   

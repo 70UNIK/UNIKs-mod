@@ -299,3 +299,14 @@ pattern = '''G\.GAME\.blind\.mult\*xmult'''
 match_indent = true
 position = 'at'
 payload = '''math.max(1,to_big(G.GAME.blind.mult*xmult))'''
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''if v.small or v.big then bosses_used[k] = 0 end'''
+match_indent = true
+position = 'after'
+payload = '''
+if v.cursed then bosses_used[k] = 0 end
+'''
+

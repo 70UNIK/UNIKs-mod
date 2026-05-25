@@ -37,9 +37,9 @@ BLINDSIDE.Blind({
                     add_tag(Tag('tag_unik_blindside_dethroning'))
                 end
                 return {
-                    focus = card,
+                    focus =  context.blueprint_card or  card,
                     message = localize('k_tagged_ex'),
-                    card = card,
+                    card =  context.blueprint_card or card,
                 }
             end
         end

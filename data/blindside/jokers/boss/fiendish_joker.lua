@@ -22,11 +22,27 @@ BLINDSIDE.Joker({
     blindside_joker = true,
     calculate = function(self, blind, context)
         if context.unik_dollar_mod and context.mod ~= 0 and not G.GAME.blind.disabled then
-            ease_dollars(-math.floor(G.GAME.dollars/4), true)
+            G.E_MANAGER:add_event(Event({
+                        trigger='immediate',
+                        delay=1,
+                        func = (function()
+                        return true
+                        end)
+                    }))
+            -- delay(1)
+             G.E_MANAGER:add_event(Event({
+                        trigger='after',
+                        delay=0.1,
+                        func = (function()
+    ease_dollars(-math.ceil(G.GAME.dollars/3), true,true)
             blind:wiggle()
             G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
             G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
             G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                        return true
+                        end)
+                    }))
+                    
             return {
                 
             }
@@ -35,7 +51,7 @@ BLINDSIDE.Joker({
 })
 
 local dollar_ease = ease_dollars
-function ease_dollars(mod, instant)
+function ease_dollars(mod, instant,stop_mod)
     
     -- if G.GAME.unik_fiendish_cap then
     --     if mod > -2 then
@@ -56,7 +72,8 @@ function ease_dollars(mod, instant)
     --     mod = math.min(-2,mod)
     -- end
     dollar_ease(mod,instant)
-    if not G.GAME.suppress_dollar_mod then
+    
+    if not G.GAME.suppress_dollar_mod and not stop_mod then
         G.GAME.suppress_dollar_mod  = true
         SMODS.calculate_context({unik_dollar_mod = true, mod = mod, instant = instant})
         G.GAME.suppress_dollar_mod  = nil

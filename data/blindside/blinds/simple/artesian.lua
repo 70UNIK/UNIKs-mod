@@ -18,7 +18,7 @@ BLINDSIDE.Blind({
                 end
             end
             return {
-                card = card,
+                card =  context.blueprint_card or card,
                 message = localize('k_tagged_ex')
             }
         end

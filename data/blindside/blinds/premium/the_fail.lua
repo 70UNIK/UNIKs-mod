@@ -8,20 +8,23 @@ BLINDSIDE.Blind({
         extra = {
             value = 20,
             x_mult = 1,
-            x_mult_mod = 0.15,
-            x_mult_up = 0.15,
+            x_mult_mod = 0.4,
+            x_mult_up = 0.4,
             retain = true,
         }},
     hues = {"Purple","Yellow", },
     rare = true,
     calculate = function(self, card, context)
+        if context.after then
+            card.ability.suppress_upgrade = nil
+        end
         if context.fix_probability and card.area == G.hand then
             return {
                 numerator = 0,
             }
         end
         if context.pseudorandom_result and not context.result and card.area == G.hand and ((not context.cardarea and not context.main_eval) or context.main_eval) then
-            if not card.ability.suppress_upgrade and (not context.identifier or (context.identifier and context.identifier ~= 'recursive_unik')) then
+            if not card.ability.suppress_upgrade then
                 card.ability.suppress_upgrade = true
                 SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
@@ -32,24 +35,21 @@ BLINDSIDE.Blind({
                     force_full_val = true,
                     delay = 0.8,
                 })
-                card.ability.suppress_upgrade = nil
                 return {
                     
                 }
             end
             
         end
-        if context.cardarea == G.play and context.main_scoring then
+        if context.main_scoring and (context.cardarea == G.play) then
             return {
                 x_mult = card.ability.extra.x_mult
             }
         end
     end,
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
-        info_queue[#info_queue+1] = G.P_TAGS['tag_unik_blindside_recursive']
-        info_queue[#info_queue+1] = G.P_TAGS['tag_bld_symmetry']
         return {
+            key = card.ability.extra.upgraded and 'm_unik_blindside_fail_upgraded' or 'm_unik_blindside_fail',
             vars = {card.ability.extra.x_mult_mod,card.ability.extra.x_mult}
         }
     end,

@@ -23,12 +23,12 @@ BLINDSIDE.Blind({
                     break
                 end
             end
-            if exists then
+            if exists and not context.blueprint_card then
                 card.ability.extra.times = card.ability.extra.times - 1
                 return {
                     focus = card,
                     message = card.ability.extra.times .. "",
-                    card = card,
+                    card =  card,
                     colour = G.C.RED,
                 }
             end

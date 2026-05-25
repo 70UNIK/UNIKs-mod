@@ -13,9 +13,9 @@ BLINDSIDE.Blind({
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then
             add_tag(Tag('tag_unik_blindside_peak'))
             return {
-                focus = card,
+                focus = context.blueprint_card or card,
                 message = localize('k_tagged_ex'),
-                card = card,
+                card =  context.blueprint_card or card,
             }
         end
         if context.burn_card and context.cardarea == G.play and context.burn_card == card and not card.ability.extra.upgraded then

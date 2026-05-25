@@ -26,7 +26,7 @@ BLINDSIDE.Blind({
                     SMODS.calculate_effect({
                         x_chips = card.ability.extra.x_chips,
                         colour = G.C.DARK_EDITION,
-                    }, v)
+                    }, context.blueprint_card or v)
                     
                     
                 end

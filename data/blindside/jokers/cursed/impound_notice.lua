@@ -7,7 +7,7 @@ BLINDSIDE.Joker({
     mult = 22,
     base_dollars = 8,
     order = 1,
-    cursed = true,
+    cursed = {min = -66},
     active = true,
     blindside_joker = true,
     in_pool = function(self, args)

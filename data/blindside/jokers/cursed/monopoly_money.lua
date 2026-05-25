@@ -7,7 +7,7 @@ BLINDSIDE.Joker({
     mult = 25,
     base_dollars = 8,
     order = 1,
-    cursed = true,
+    cursed = {min = -66},
     active = true,
     blindside_joker = true,
     in_pool = function(self, args)
@@ -22,7 +22,7 @@ BLINDSIDE.Joker({
         if context.setting_blind and not context.disabled then
             blind.active = true
         end
-        if not blind.disabled and context.selling_card and blind.active and context.selling_card.ability.unik_bought_this_ante then
+        if not blind.disabled and context.selling_card and blind.active and context.card.ability.unik_bought_this_ante then
             G.GAME.blind.active = false
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 ease_dollars(G.GAME.dollars, true)

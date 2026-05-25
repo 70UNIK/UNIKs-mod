@@ -23,9 +23,9 @@ BLINDSIDE.Blind({
             if exists then
                 add_tag(Tag('tag_unik_blindside_handcuffs'))
                 return {
-                    focus = card,
+                    focus =  context.blueprint_card or card,
                     message = localize('k_unik_too_bad'),
-                    card = card,
+                    card =  context.blueprint_card or card,
                     colour = G.C.MULT,
                 }
             end

@@ -7,6 +7,11 @@ SMODS.Tag {
     in_pool = function(self, args)
         return false
     end,
+    config = {
+        extra = {
+            cannot_copy = true, --martisoka
+        }
+    },
     pools = {["bld_obj_blindside"] = true},
     loc_vars = function(self, info_queue,tag)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_cursed_joker" }
@@ -43,6 +48,7 @@ SMODS.Tag {
 }
 
 function get_new_cursed(current)
+    
     G.GAME.perscribed_cursed = G.GAME.perscribed_cursed or {
     }
     if G.GAME.perscribed_cursed and G.GAME.perscribed_cursed[G.GAME.round_resets.ante] then 
@@ -54,19 +60,38 @@ function get_new_cursed(current)
 
     local eligible_bosses = {bl_unik_blindside_monopoly_money = true}
     for k, v in pairs(G.P_BLINDS) do
+        local res, options = SMODS.add_to_pool(v)
+        options = options or {}
         if not v.cursed then
         elseif k == current then
         elseif v.in_pool and type(v.in_pool) == 'function' then
-            local res, options = v:in_pool()
             eligible_bosses[k] = res and true or nil
         else
-            eligible_bosses[k] = true
+            eligible_bosses[k] = res and true or nil
         end
     end
     for k, v in pairs(G.GAME.banned_keys) do
         if eligible_bosses[k] then eligible_bosses[k] = nil end
     end
 
+    local min_use = 100
+    for k, v in pairs(G.GAME.bosses_used) do
+        if eligible_bosses[k] then
+            eligible_bosses[k] = v
+            if eligible_bosses[k] <= min_use then 
+                min_use = eligible_bosses[k]
+                --print(min_use)
+            end
+        end
+    end
+    for k, v in pairs(eligible_bosses) do
+        if eligible_bosses[k] then
+            --print(eligible_bosses[k])
+            if eligible_bosses[k] > min_use then 
+                eligible_bosses[k] = nil
+            end
+        end
+    end
     if G.GAME.selected_back.effect.center.config.extra and G.GAME.selected_back.effect.center.config.extra.blindside then
         for k, v in pairs(eligible_bosses) do
             if v and not BLINDSIDE.is_blindside(k) then
@@ -74,9 +99,12 @@ function get_new_cursed(current)
             end
         end
     end
-
     local _, boss = pseudorandom_element(eligible_bosses, pseudoseed('cursed'))
-    
+    if boss then
+        G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1
+    else --fallback
+        boss = 'bl_unik_blindside_monopoly_money'
+    end
     return boss
 end
 

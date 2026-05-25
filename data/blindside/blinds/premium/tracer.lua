@@ -35,9 +35,9 @@ BLINDSIDE.Blind({
                     areacards[index+1].ability.block_scaling_copied = true
                     for k = 1, card.ability.extra.times do
                         local effect = UNIK.blueprint_enhancement(card, areacards[index+1], context)
-                        if effect and effect.card and effect.card == card then
-                            break
-                        end
+                        -- if effect and effect.card and effect.card == card then
+                        --     break
+                        -- end
                         if effect then
                             effect.colour = G.C.DARK_EDITION
                             effect.card = card

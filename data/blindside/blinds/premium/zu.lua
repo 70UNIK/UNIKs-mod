@@ -29,7 +29,9 @@ BLINDSIDE.Blind({
                     card:flip()
                     if card.ability.extra.upgraded then
  
-                     if exists and G.consumeables.cards[1] then
+                     if exists and G.consumeables.cards[1] and not G.consumeables.cards[1].config.center.hidden and
+                     G.consumeables.cards[1].config.center.key ~= 'c_bld_techys'
+                     then
                         G.E_MANAGER:add_event(Event({
                             func = function() 
                                 local card = copy_card(G.consumeables.cards[1], nil)
@@ -61,7 +63,10 @@ BLINDSIDE.Blind({
                 return { remove = true }
             end
         
-        if context.cardarea == G.play and context.main_scoring and #G.consumeables.cards > 0 and card.facing ~= 'back' then
+        if context.cardarea == G.play and context.main_scoring and #G.consumeables.cards > 0 and card.facing ~= 'back'
+         and not G.consumeables.cards[1].config.center.hidden and
+                     G.consumeables.cards[1].config.center.key ~= 'c_bld_techys'
+        then
             local triggered = false
             G.E_MANAGER:add_event(Event({
                 func = function() 
@@ -88,6 +93,7 @@ BLINDSIDE.Blind({
     end,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'unik_self_debuffing', set = 'Other'}
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_bld_techys
         local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.chance, card.ability.extra.trigger, 'zuflip')
 
         local main_end

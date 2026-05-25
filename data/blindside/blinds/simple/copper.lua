@@ -8,45 +8,30 @@ BLINDSIDE.Blind({
             value = 20,
             x_mult = 1.3,
             repetitions = 1,
-            xmult_up = 0.2,
+            xmult_up = 0.3,
             repetitions_up = 1,
         }},
     hues = {"Yellow"},
     calculate = function(self, card, context) 
-        if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and card.area == G.play then
-            local isScoring = false
-            local index = -1
+        if context.unik_after_effect and context.scoring_hand then
+            local success = false
             for i = 1, #context.scoring_hand do
                 if context.scoring_hand[i] == card then
-                    isScoring = true
-                    index = i
-                    break
+                    if i > 1 and context.scoring_hand[i-1]:is_color("Yellow") and not context.scoring_hand[i-1].debuff then
+                        success = true
+                        break
+                    end
+                    if i < #context.scoring_hand and context.scoring_hand[i+1]:is_color("Yellow") and not context.scoring_hand[i+1].debuff then
+                        success = true
+                        break
+                    end
                 end
             end
-            if isScoring and index > 0 then
-                local validCards = {}
-                for z = 1, card.ability.extra.repetitions do
-                    local strct = {}
-                    if index > 1 then
-                        strct[#strct+1] = context.scoring_hand[index - 1]
-                    end
-                    if index < #context.scoring_hand then
-                        strct[#strct+1] = context.scoring_hand[index + 1]
-                    end
-                    strct.unik_scoring_segment = true
-                    validCards[#validCards+1] = strct
-                end
-                
-                if #validCards > 0 then
-                    return {
-                        target_cards = validCards,
-                        card = card,
-                        message = '+1',
-                    }
-                end   
+            if success then
+                return {
+                    rescore = card.ability.extra.repetitions
+                }
             end
-            
-            
         end
         if context.cardarea == G.play and context.main_scoring then
             return {

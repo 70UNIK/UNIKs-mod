@@ -157,6 +157,79 @@ BLINDSIDE.Blind:take_ownership("m_bld_death",{
         end,
 },true)
 
+--adds shit to a global counter to easily track it and reset it
+BLINDSIDE.Blind:take_ownership("m_bld_bones",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+calculate = function(self, card, context)
+        if (context.cardarea == G.play or (card.ability.extra.upgraded and context.cardarea == G.hand)) and context.before and not card.ability.extra.ikeeptrackoftriggers then
+            G.GAME.unik_add_bones_probability =  G.GAME.unik_add_bones_probability or 0
+             G.GAME.unik_add_bones_probability =  G.GAME.unik_add_bones_probability + card.ability.extra.chance
+            --G.GAME.probabilities.normal = G.GAME.probabilities.normal + card.ability.extra.chance
+            card.ability.extra.ikeeptrackoftriggers = true
+        end
+        if context.burn_card and context.cardarea == G.play and context.burn_card == card then
+            return { remove = true }
+        end
+        if card.ability.extra.upgraded and (context.hand_discard or context.hand_retain) and context.other_card == card then
+            return {
+                burn = true
+            }
+        end
+        -- if context.end_of_round and not context.repetition and context.playing_card_end_of_round and card.ability.extra.ikeeptrackoftriggers then
+        --     card.ability.extra.ikeeptrackoftriggers = false
+        -- end
+    end,
+},true)
+
+BLINDSIDE.Blind:take_ownership("m_bld_wheel",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.before and not card.ability.extra.failed then
+            if SMODS.pseudorandom_probability(card, pseudoseed("flip"), card.ability.extra.chance, card.ability.extra.trigger, 'flip') and not card.ability.extra.failed then
+                card:flip()
+                card:flip()
+            else
+                card.ability.extra.failed = true
+                if card.facing ~= 'back' then 
+                card:flip()
+                end
+            end
+        end
+        if context.cardarea == G.play and context.main_scoring then
+            if not card.ability.extra.failed then
+                return {
+                    chips = card.ability.extra.chips
+                }
+            else
+                return {
+                    message = localize('k_nope_ex'),
+                    colour = G.C.GREEN
+                }
+            end
+        end
+        if context.after then
+            card.ability.extra.failed = nil
+        end
+    end,
+},true)
+
+--and apply it via this function
+local probab_mod = SMODS.get_probability_vars
+function SMODS.get_probability_vars(trigger_obj, base_numerator, base_denominator, identifier, from_roll, no_mod)
+    local numerator, denominator = probab_mod(trigger_obj, base_numerator, base_denominator, identifier, from_roll, no_mod)
+    G.GAME.unik_add_bones_probability = G.GAME.unik_add_bones_probability or 0
+    numerator = numerator + G.GAME.unik_add_bones_probability
+    return numerator, denominator
+end
+
 BLINDSIDE.Blind:take_ownership("m_bld_tablet",{
     replace_base_card = true,
     no_rank = true,
@@ -254,6 +327,7 @@ SMODS.Consumable:take_ownership("c_bld_assimilate",{
 --assimilate: now takes into account multiple hues
 
 BLINDSIDE.Joker:take_ownership("bl_bld_throwback",{
+    order = 5,
     joker_set = function(self)
         for i, v in pairs(G.GAME.tags) do
             if v:apply_to_run({type = 'real_round_before_start', card = card}) then break end
@@ -271,6 +345,126 @@ BLINDSIDE.Joker:take_ownership("bl_bld_throwback",{
         end
     end,
 },true)
+
+BLINDSIDE.Joker:take_ownership("bl_bld_triboulet",{
+    order = 20,
+    joker_set = function ()
+        for i, v in pairs(G.GAME.tags) do
+            if v:apply_to_run({type = 'real_round_before_start', card = card}) then break end
+        end
+        if not G.GAME.blind.disabled then
+            for i = 1, 8, 1 do
+                local enhancement = 'm_bld_king'
+                local card = SMODS.create_card { set = "Base", enhancement = enhancement, area = G.discard }
+                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                card.playing_card = G.playing_card
+                table.insert(G.playing_cards, card)
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.3,
+                    func = function()
+                            card:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                            G.deck:emplace(card)
+                            card.ability.tribuolet_generated = true
+                        return true
+                    end
+                }))
+            end
+            for i = 1, 8, 1 do
+                local enhancement = 'm_bld_queen'
+                local card = SMODS.create_card { set = "Base", enhancement = enhancement, area = G.discard }
+                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                card.playing_card = G.playing_card
+                table.insert(G.playing_cards, card)
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.3,
+                    func = function()
+                            card:start_materialize({ G.C.SECONDARY_SET.Enhanced })
+                            G.deck:emplace(card)
+                            card.ability.tribuolet_generated = true
+                        return true
+                    end
+                }))
+            end
+        end
+    end,
+    disable = function(self)
+        for key, value in pairs(G.playing_cards) do
+            if value.ability.tribuolet_generated then
+                value:gore6_break()
+            end
+        end
+    end,
+    joker_defeat = function ()
+        for key, value in pairs(G.playing_cards) do
+            if value.ability.tribuolet_generated then
+                value:gore6_break()
+            end
+        end
+    end,
+},true)
+
+-- Chicot
+BLINDSIDE.Joker:take_ownership("bl_bld_chicot",{
+    order = 20,
+    calculate = function(self, blind, context)
+        if context.after and not blind.disabled then
+            local transformed = false
+            for _, scored_card in ipairs(context.scoring_hand) do
+                if not scored_card.ability.chicot_original then
+                    scored_card.ability.chicot_original = copy3(scored_card.ability)
+                    scored_card.ability.originaltype = scored_card.config.center.key
+                    transformed = true
+                    local new_type = 'm_bld_big'
+                    if scored_card:is_color("Red") or scored_card:is_color("Yellow") then
+                        new_type = 'm_bld_big'
+                    elseif scored_card:is_color("Blue") or scored_card:is_color("Purple") then
+                        new_type = 'm_bld_small'
+                    else
+                        if pseudorandom('flip') < 1/2 then
+                            new_type = 'm_bld_big'
+                        else
+                            new_type = 'm_bld_small'
+                        end
+                    end
+                    scored_card:set_ability(new_type, nil, true)
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            scored_card:juice_up()
+                            play_sound('tarot2', percent, 0.6)
+                            return true
+                        end
+                    }))
+                end
+            end
+            if transformed then    
+                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
+            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
+                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+            end
+        end
+    end,
+    disable = function()
+        for key, value in pairs(G.playing_cards) do
+            if value.original then
+                value:set_ability(value.originaltype)
+                value.ability = copy3(value.original)
+                value.original = nil
+            end
+        end
+    end,
+    joker_defeat = function()
+        for key, value in pairs(G.playing_cards) do
+            if value.ability.chicot_original then
+                value:set_ability(value.ability.originaltype)
+                value.ability = copy3(value.ability.chicot_original)
+                value.ability.chicot_original = nil
+            end
+        end
+    end
+},true)
+
 
 local groupHook = has_group_of
 function has_group_of(num, hands)
@@ -337,58 +531,6 @@ SMODS.Edition:take_ownership("e_bld_finish",{
 			end
 		end
     end
-},true)
-
---king and queen: destroyed at end of round + can be upgraded (somehow)
-BLINDSIDE.Blind:take_ownership("m_bld_king",{
-    replace_base_card = true,
-    no_rank = true,
-    no_suit = true,
-    overrides_base_rank = true,
-    blindside_blind = true,
-    calculate = function(self, card, context)
-            if context.cardarea == G.hand and context.main_scoring then
-                BLINDSIDE.chipsmodify(0, 0, card.ability.extra.jokerxmult)
-                return {
-                    message = "X" .. card.ability.extra.jokerxmult .. " JMult",
-                    colour = G.C.BLACK
-                }
-            end
-                        if context.end_of_round then
-                card:start_dissolve()
-            end   
-        end,
-        upgrade = function(card)
-            if not card.ability.extra.upgraded then
-                card.ability.extra.upgraded = true
-                card.ability.extra.jokerxmult = card.ability.extra.jokerxmult - 0.75
-            end
-        end
-},true)
-BLINDSIDE.Blind:take_ownership("m_bld_queen",{
-    replace_base_card = true,
-    no_rank = true,
-    no_suit = true,
-    overrides_base_rank = true,
-    blindside_blind = true,
-calculate = function(self, card, context)
-            if context.discard and context.other_card == card then
-                BLINDSIDE.chipsmodify(0, 0, card.ability.extra.jokerxmult)
-                return {
-                    message = "X" .. card.ability.extra.jokerxmult .. " JMult",
-                    colour = G.C.BLACK
-                }
-            end
-                        if context.end_of_round then
-                card:start_dissolve()
-            end   
-        end,
-        upgrade = function(card)
-            if not card.ability.extra.upgraded then
-                card.ability.extra.upgraded = true
-                card.ability.extra.jokerxmult = card.ability.extra.jokerxmult - 0.75
-            end
-        end
 },true)
 
 local big_overrider = get_new_big
@@ -677,6 +819,48 @@ SMODS.PokerHandPart:take_ownership("bld_allin",{
         end
     end
  })
+
+ SMODS.Joker:take_ownership("j_bld_matryoshka",{
+    calculate = function(self, card, context)
+            if context.setting_blind and card.ability.extra.last_tag then
+                G.E_MANAGER:add_event(Event({
+                    func = function ()
+                        add_tag(Tag(card.ability.extra.last_tag))
+                        card:juice_up(0.65, 0.65)
+                        play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+                        play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+                        return true
+                    end
+                }))
+                delay(0.4)
+                G.E_MANAGER:add_event(Event({
+                    func = function ()
+                        add_tag(Tag(card.ability.extra.last_tag))
+                        card:juice_up(0.65, 0.65)
+                        play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
+                        play_sound('holo1', 1.2 + math.random()*0.1, 0.4)
+                        return true
+                    end
+                }))
+                return {
+
+                }
+            end
+            if context.tag_triggered and not (context.tag_triggered.config and context.tag_triggered.config.extra and (context.tag_triggered.config.extra.hex or context.tag_triggered.config.extra.cannot_copy)) then
+                print(inspect(context.tag_triggered))
+                card.ability.extra.last_tag = context.tag_triggered.key
+            end
+        end,
+        loc_vars = function (self, info_queue, card)
+            info_queue[#info_queue+1] = card.ability.extra.last_tag and {key = card.ability.extra.last_tag, set = 'Tag'} or nil
+            info_queue[#info_queue+1] = {key = 'tag_unik_blindside_cursed', set = 'Tag'}
+            return {
+                vars = {
+                    card.ability.extra.last_tag and localize({key = card.ability.extra.last_tag, type = 'name_text', set = 'Tag'}) or localize("matryoshka_none")
+                }
+            }
+        end
+ },true)
 
 --all trinkets will be made retriggerable and copyable when possible 
 

@@ -14,7 +14,7 @@ BLINDSIDE.Blind({
     hues = {"Yellow"},
     always_scores = true,
     calculate = function(self, card, context) 
-        if card.area == G.hand and context.press_play and card.facing ~= 'back' then
+        if card.area == G.hand and context.press_play then
             G.E_MANAGER:add_event(Event({
                     func = function()
                         if #G.jokers.cards > 0 then

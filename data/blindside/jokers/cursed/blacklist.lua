@@ -8,7 +8,7 @@ BLINDSIDE.Joker({
     mult = 18,
     base_dollars = 8,
     order = 1,
-    cursed = true,
+    cursed = {min = -66},
     active = true,
     in_pool = function(self, args)
         if G.GAME.selected_back.effect.center.config.extra then
@@ -88,8 +88,8 @@ BLINDSIDE.Joker({
             end
             if context.final_scoring_step then
                 blind.prepped = true
-                print(#G.play.cards)
-                print(G.play.cards[1].config.center.key)
+              --  print(#G.play.cards)
+               -- print(G.play.cards[1].config.center.key)
                 if #G.play.cards == 1 and G.play.cards[1].config.center.key == G.GAME.unik_blindside_blacklist_blind then
                     G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                     G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
@@ -151,7 +151,7 @@ local function  reset_blacklist_blind()
         
     end
     G.GAME.unik_blindside_blacklist_blind = card
-    print( G.GAME.unik_blindside_blacklist_blind)
+   -- print( G.GAME.unik_blindside_blacklist_blind)
 end
 
 --After defeating the final boss blind (ignoring ante) or at start, reset the ranks

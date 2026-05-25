@@ -5,16 +5,16 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 20,
-            x_mult = 1.5,
-            x_mult_up = 0.5,
+            x_mult = 1.3,
+            x_mult_up = 0.2,
         }},
     hues = {"Red" , "Yellow"},
     rare = true,
     calculate = function(self, card, context)
         
         if context.cardarea == G.play and context.main_scoring then
-            for i,v in pairs(context.scoring_hand) do
-                if (not v.config.center.basic and not v.config.center.rare and not v.config.center.curse and not v.config.center.legendary and not v.config.center.unik_ancient and not v.config.center.unik_exotic) then
+            for i,v in pairs(G.jokers.cards) do
+                if v.config.center.rarity == 'bld_keepsake' then
                     G.E_MANAGER:add_event(Event({
                         trigger = 'immediate',
                         func = function()
@@ -25,10 +25,9 @@ BLINDSIDE.Blind({
                     SMODS.calculate_effect({
                         x_mult = card.ability.extra.x_mult,
                         colour = G.C.DARK_EDITION,
-                    }, v)
-                    
-                    
+                    }, context.blueprint_card or v)
                 end
+                
 
             end
             return {

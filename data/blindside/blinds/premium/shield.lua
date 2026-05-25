@@ -14,9 +14,9 @@ BLINDSIDE.Blind({
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then
             add_tag(Tag('tag_unik_blindside_shield'))
             return {
-                focus = card,
+                focus = context.blueprint_card or  card,
                 message = localize('k_tagged_ex'),
-                card = card,
+                card =  context.blueprint_card or card,
             }
         end
         if context.cardarea == G.play and context.main_scoring and card.ability.extra.upgraded then

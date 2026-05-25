@@ -24,9 +24,7 @@ BLINDSIDE.Blind({
                     add_tag(Tag(get_next_tag_key()))
                 end
                 return {
-                    focus = card,
                     message = localize('k_tagged_ex'),
-                    card = card,
                 }
             end
         end

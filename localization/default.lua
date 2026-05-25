@@ -159,6 +159,17 @@ return {
         },
         Blind={
             --BLINDSIDE:
+
+            ["bl_bld_chicot"] = {
+				["name"] = "Chicot",
+				["text"] = {
+					"Converts scored Blinds",
+					"into Big and Small",
+					"Blinds after scoring",
+                    "for this Round",
+				},
+			},
+
             bl_unik_blindside_oxy = {
                 name = "Oxy",
                 text = {
@@ -200,8 +211,9 @@ return {
             bl_unik_blindside_fiendish_joker = {
                 name = "Fiendish Joker",
                 text = {
-                    "X$0.75 whenever",
-                    "money changes"
+                    "X$0.66 whenever",
+                    "money changes,",
+                    "rounded down"
                 }
             },
             bl_unik_blindside_lily = {
@@ -1826,7 +1838,7 @@ return {
                 text = {
                     {
                         "{X:purple,C:white}Purple{}",
-                        "{C:mult}+#1#{} Mult",
+                        "{X:mult,C:white}X#1#{} Mult",
                         "on {C:attention}even Hands",
                         "{V:1}(#2#)"
                     },
@@ -1844,14 +1856,28 @@ return {
                     {
                         "Gains {X:mult,C:white}X#1#{} Mult whenever",
                         "a {C:green}probability {C:red}fails",
-                        "{C:inactive}(Symmetry and Circles",
-                        "{C:inactive}tags excluded)",
+                        "this hand"
                     },
                     {
                         "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
                     },
+                }
+            },
+            m_unik_blindside_fail_upgraded = {
+                name = "The Fail",
+                text = {
                     {
-                        "{C:green}Retained"
+                        "{X:purple,C:white}Purple{} {X:money,C:white}Yellow{}",
+                        "All {C:green}probabilities{} will",
+                        "{C:red}fail{} while {C:attention}held",
+                    },
+                    {
+                        "Gains {X:mult,C:white}X#1#{} Mult whenever",
+                        "a {C:green}probability {C:red}fails",
+                        "this hand"
+                    },
+                    {
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
                     },
                 }
             },
@@ -1956,8 +1982,9 @@ return {
                         "{X:mult,C:white}X#1#{} Mult"
                     },
                     {   
-                        "{C:unik_copper}Rescores{} adjacent",
-                        "Blinds {C:attention}#2#{} time#<s>2#"
+                        "{C:unik_copper}Rescores{} {C:attention}#2#{} time#<s>2#",
+                        "if played and {C:attention}adjacent",
+                        "to another {X:gold,C:white}Yellow{} Blind"
                     }
                 }
             },
@@ -2258,8 +2285,7 @@ return {
                     {
                         "{X:red,C:white}Red{} {X:money,C:white}Yellow{}",
                         "When scored, other",
-                        "{X:green,C:white}Simple{} Blinds",
-                        "give {X:mult,C:white}X#1#{} Mult"
+                        "{C:bld_keepsake,E:1}Keepsakes{} give {X:mult,C:white}X#1#{} Mult"
                     },
                 }
             },
@@ -2393,7 +2419,7 @@ return {
                         "{C:attention}Duplicates{} the leftmost",
                         "held {C:attention}consumable",
                         "{C:inactive}(Must have room)",
-                        "{C:inactive,s:0.7}(Cannot copy {s:0.7,C:bld_obj_rune}Tachys{s:0.7,C:inactive} or Rare Consumables)",
+                        "{C:inactive,s:0.7}(Cannot copy {s:0.7,C:bld_obj_rune}Techys{s:0.7,C:inactive} or Rare Consumables)",
                     },
                     {"{C:red,E:1}Self-Debuffing{} with a",
 					"{C:green}#1# in #2#{} chance"},
@@ -2410,7 +2436,7 @@ return {
                         "{C:attention}Duplicates{} the leftmost",
                         "held {C:attention}consumable",
                         "{C:inactive}(Must have room)",
-                        "{C:inactive,s:0.7}(Cannot copy {s:0.7,C:bld_obj_rune}Tachys{s:0.7,C:inactive} or Rare Consumables)",
+                        "{C:inactive,s:0.7}(Cannot copy {s:0.7,C:bld_obj_rune}Techys{s:0.7,C:inactive} or Rare Consumables)",
                     },
                     {
                         "Creates a {C:dark_edition}Negative{} {C:red}Decaying",
@@ -3110,31 +3136,6 @@ return {
                     },
                 }
             },
-
-            m_bld_king = {
-				name = "The King",
-				text = {
-                    {
-					"{X:dark_edition,C:white}Faded{}",
-					"{C:white,X:mult}X#1#{} Mult to {C:attention}Joker",
-					"when {C:attention}held in hand",
-                    },
-                    {"{C:attention}Temporary"}
-				},
-			},
-			m_bld_queen = {
-				name = "The Queen",
-				text = {
-                    {
-					"{X:dark_edition,C:white}Faded{}",
-					"{C:white,X:mult}X#1#{} Mult to {C:attention}Joker",
-					"when {C:red}discarded",
-                    },
-                    {"{C:attention}Temporary"}
-				},
-			},
-
-
         },
         Rotarot = {
             c_unik_rot_crossdresser={
@@ -3198,7 +3199,16 @@ return {
         },
         Joker={
             -- Trinkets --
-
+            ['j_bld_matryoshka'] = {
+				["name"] = "Matryoshka",
+				["text"] = {
+					"When Joker is selected,",
+					"create {C:attention}2{} copies of the",
+					"last consumed positive {C:attention}Tag",
+                    "{C:inactive}({X:unik_detrimental,C:white}Cursed{C:inactive} Tags excluded)",
+					"{C:inactive}(Currently: {C:attention}#1#{C:inactive})"
+				}
+			},
             -- Blindside Taunt "Jokers" --
             j_unik_blindside_taunt_oxy_pwx={
                 name = "YOU SHOULDNT SEE THIS",
@@ -7187,7 +7197,7 @@ return {
                 name = "Backstab",
                 text = {
                     {
-                        "Destroy #1#",
+                        "Destroy {C:attention}#1#",
                         "selected Trinket#<s>1#"
                     },
                     {
@@ -7894,6 +7904,7 @@ return {
             unik_taw = "TAW",
             unik_lily_mark = "Mark of the Lily",
             unik_mad = "M.A.D",
+            unik_impounded_blindside = "Locked",
         },
         quips={
             special_lose_unik_you_got_nil={
@@ -8188,11 +8199,28 @@ return {
                 "i do have my saw you know?",
                 "you shoulve known that..."
             },
-            unik_blindside_cursed_lose = {
-                "How the fuck did you lose",
-                "to them?",
-                "They were supposed to help",
-                "you out!"
+            unik_blindside_cursed_lose1 = {
+                "How the fuck did you",
+                "lose to them?",
+                "They were supposed to",
+                "help you out!"
+            },
+            unik_blindside_cursed_lose2 = {
+                "I could've sworn our",
+                "undercover Joker agents",
+                "have measures against this..."
+            },
+            unik_blindside_cursed_lose3 = {
+                "I guess these Jokers are",
+                "more or less turncoats",
+                "and it appears you went",
+                "on their bad side...",
+            },
+            unik_blindside_cursed_lose4 = {
+                "I think our contracts with",
+                "these Jokers may or may",
+                "not have taken your demise",
+                "by them in account..."
             },
             unik_blindside_fat_joker_lose = {
                 "FUCK YOU SHITFACED N00B!",
