@@ -59,13 +59,15 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'unik_self_debuffing', set = 'Other'}
          local greens = 0
-
+        if G.playing_cards then
             for k, v in pairs(G.playing_cards) do
                 if v:is_color("Green") then 
                     greens = greens + 1 
                 end
             end 
-            greens = math.floor(greens/card.ability.extra.interval)
+            
+        end
+           greens = math.floor(greens/card.ability.extra.interval) 
 
         local chance, trigger = SMODS.get_probability_vars(card, math.max(0,card.ability.extra.chance -  greens), card.ability.extra.trigger, 'treeflip')
         return {

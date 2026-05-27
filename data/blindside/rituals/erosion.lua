@@ -10,7 +10,7 @@ SMODS.Consumable {
         end
         return false
     end,
-    config = {extra = {base = 2, odds = 5,x_chips = 0.25, x_mult = 0.25, money = 1}},
+    config = {extra = {base = 2, odds = 5,x_chips = 0.25, x_mult = 0.25, money = 2}},
     use = function(self, card, area)
         for key, highlighted in pairs(G.hand.cards) do
             if true then

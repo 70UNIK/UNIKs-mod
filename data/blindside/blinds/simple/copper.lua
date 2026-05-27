@@ -17,13 +17,19 @@ BLINDSIDE.Blind({
             local success = false
             for i = 1, #context.scoring_hand do
                 if context.scoring_hand[i] == card then
-                    if i > 1 and context.scoring_hand[i-1]:is_color("Yellow") and not context.scoring_hand[i-1].debuff then
-                        success = true
-                        break
+                    if i > 1 and context.scoring_hand[i-1]:is_color("Yellow") then
+                        if not context.scoring_hand[i-1].debuff then
+                             success = true
+                            break
+                        end
+                       
                     end
-                    if i < #context.scoring_hand and context.scoring_hand[i+1]:is_color("Yellow") and not context.scoring_hand[i+1].debuff then
-                        success = true
+                    if i < #context.scoring_hand and context.scoring_hand[i+1]:is_color("Yellow") then
+                        if not context.scoring_hand[i+1].debuff then
+                            success = true
                         break
+                        end
+                        
                     end
                 end
             end

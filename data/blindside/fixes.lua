@@ -238,6 +238,43 @@ BLINDSIDE.Blind:take_ownership("m_bld_tablet",{
     blindside_blind = true,
 },true)
 
+BLINDSIDE.Blind:take_ownership("m_bld_king",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+    upgrade = function(card)
+        if not card.ability.extra.upgraded then
+            card.ability.extra.jokerxmult = card.ability.extra.jokerxmult - 0.75
+            card.ability.extra.upgraded = true
+        end
+    end
+},true)
+
+BLINDSIDE.Blind:take_ownership("m_bld_queen",{
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+    calculate = function(self, card, context) 
+        if context.discard and context.main_eval and context.other_card == card then
+            BLINDSIDE.chipsmodify(0, 0, card.ability.extra.jokerxmult)
+            return {
+                message = "X" .. card.ability.extra.jokerxmult .. " JMult",
+                colour = G.C.BLACK
+            }
+        end
+    end,
+    upgrade = function(card)
+            if not card.ability.extra.upgraded then
+                card.ability.extra.jokerxmult = card.ability.extra.jokerxmult - 0.75
+                card.ability.extra.upgraded = true
+            end
+        end
+},true)
+
 function UNIK.get_enhancements_with_exact_colors(colors,ancient,cursed)
     local enhancements = {}
     local final = {}
@@ -299,19 +336,36 @@ SMODS.Consumable:take_ownership("c_bld_assimilate",{
         local rand = pseudorandom(pseudoseed('assimilate'))
 
         local card
+        --merge trims and editions together. Upgrade if either one is upgraded
+        local upgraded = G.hand.highlighted[1].ability.extra.upgraded or G.hand.highlighted[2].ability.extra.upgraded or false
+        local trim = (not G.hand.highlighted[2].seal and G.hand.highlighted[1].seal) or (not G.hand.highlighted[1].seal and G.hand.highlighted[2].seal) or false
+        local edition = (not G.hand.highlighted[2].edition and G.hand.highlighted[1].edition  and G.hand.highlighted[1].edition.key) or 
+        (not G.hand.highlighted[1].edition and G.hand.highlighted[2].edition and G.hand.highlighted[2].edition.key) or false
         if rand > 0.5 then
             card = copy_card(G.hand.highlighted[1], nil, nil, G.playing_card)
             card:remove_sticker('bld_upgrade')
             card:set_ability(G.P_CENTERS[enhancement])
-            if G.hand.highlighted[1].ability.extra.upgraded then
+            if G.hand.highlighted[1].ability.extra.upgraded or upgraded then
                 upgrade_blinds({card}, nil, true)
+            end
+            if trim then
+                card:set_seal(trim, nil, true)
+            end
+            if edition then
+                card:set_edition(edition,true)
             end
         else
             card = copy_card(G.hand.highlighted[2], nil, nil, G.playing_card)
             card:remove_sticker('bld_upgrade')
             card:set_ability(enhancement)
-            if G.hand.highlighted[2].ability.extra.upgraded then
+            if G.hand.highlighted[2].ability.extra.upgraded or upgraded then
                 upgrade_blinds({card}, nil, true)
+            end
+            if trim then
+                card:set_seal(trim, nil, true)
+            end
+            if edition then
+                card:set_edition(edition,true)
             end
         end
         
@@ -723,6 +777,83 @@ BLINDSIDE.Blind:take_ownership("m_bld_snow",{
                 }
             end
         end   
+    end,
+},true)
+
+--curb excessive acorn scaling
+BLINDSIDE.Blind:take_ownership("m_bld_amber_acorn",{
+    config = {
+        extra = {
+            value = 1,
+            xchips = 1,
+            xchips_increase = 0.2,
+            xchipsup = 0.2,
+            hues = {"Yellow"},
+        }
+    },
+    hues = {"Yellow"},
+    replace_base_card = true,
+    no_rank = true,
+    no_suit = true,
+    overrides_base_rank = true,
+    blindside_blind = true,
+    calculate = function(self, card, context)
+        if context.cardarea == G.play and context.before and not context.blueprint and not context.blueprint_card then
+            local scoring = false
+            for i,v in pairs(context.scoring_hand) do
+                if v == card then
+                    scoring = true
+                    break
+                end
+            end
+            if scoring then
+                local step = 0
+                for i, held_card in pairs(G.hand.cards) do
+                    local stored_step = step
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.4,
+                        func = function()
+                            
+                            held_card:juice_up()
+                            held_card:flip()
+                            if not held_card.ability.extra then
+                                held_card.ability.extra = {temp_flipped = true}
+                            else
+                                if held_card.ability.extra.temp_flipped then
+                                    held_card.ability.extra.temp_flipped = false
+                                else
+                                    held_card.ability.extra.temp_flipped = true
+                                end
+                            end
+                            play_sound('chips1', 0.8 + (stored_step * 0.02))
+                            card:juice_up()
+                            G.ROOM.jiggle = G.ROOM.jiggle + 0.7    
+                            return true
+                        end
+                    }))
+                    step = step + 5
+                end
+                SMODS.scale_card(card, {
+                    ref_table = card.ability.extra,
+                    ref_value = "xchips",
+                    scalar_value = "custom_scaler",
+                    scalar_table = {
+                        custom_scaler = card.ability.extra.xchips_increase * #G.hand.cards,
+                    },
+                    -- scalar_value = "xchips_gain",
+                    message_key = "a_xchips",
+                            message_colour = G.C.CHIPS,
+                        force_full_val = true,
+
+                })
+            end
+        end
+        if context.cardarea == G.play and context.main_scoring then
+            return {
+                xchips = card.ability.extra.xchips,
+            }
+        end
     end,
 },true)
 

@@ -15,14 +15,18 @@
         always_scores = true,
         rare = true,
         calculate = function(self, card, context)
-            if context.cardarea == G.play and context.before and card.facing ~= 'back' then
-                card.ability.extra.stored_seed = nil
+            
+            if context.press_play and card.facing ~= 'back' and context.main_eval then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        if card.area == G.play then
+                                            card.ability.extra.stored_seed = nil
                 if not SMODS.pseudorandom_probability(card, pseudoseed("wrench_flip"), card.ability.extra.chance, card.ability.extra.trigger, 'wrench_flip') and card.facing ~= "back" then
                     card:flip()
                     card:flip()
 
                 local i_scored = false
-                for key, value in pairs(context.scoring_hand) do
+                for key, value in pairs(G.play.cards) do
                     if value == card then
                         i_scored = true
                     end
@@ -33,7 +37,7 @@
                 end
 
                 local _cards = {}
-                for k, v in ipairs(context.scoring_hand) do
+                for k, v in ipairs(G.play.cards) do
                     if (not v.ability.extra or (v.ability.extra and not v.ability.extra.upgraded)) and v ~= card then
                         _cards[#_cards+1] = v
                     end
@@ -48,7 +52,7 @@
                         card.ability.extra.stored_seed = 'unik_wrench_seed' .. seed .. seed2
                         selected_card.ability.unik_assigned_wrench = card.ability.extra.stored_seed
                         local fail = false
-                        for i,v in pairs(context.scoring_hand) do
+                        for i,v in pairs(G.play.cards) do
                             if v ~= card and v ~= selected_card and v.ability.unik_assigned_wrench and v.ability.unik_assigned_wrench == card.ability.extra.stored_seed then
                                 print("Dupe seed exists, attemtping rebuild")
                                 fail = true
@@ -74,6 +78,14 @@
                         }
                     end
                 end
+                end
+
+                        return true
+                    end
+                }))
+                                    --print("attempt")
+
+
             end
             if card.facing ~= "back" and card.ability.extra.stored_seed and context.burn_card and not card.ability.extra.upgraded then
                 if context.burn_card ~= card and context.burn_card.ability.unik_assigned_wrench and context.burn_card.ability.unik_assigned_wrench == card.ability.extra.stored_seed then

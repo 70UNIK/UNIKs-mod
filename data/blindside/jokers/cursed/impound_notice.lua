@@ -35,24 +35,19 @@ BLINDSIDE.Joker({
             end
             if context.hand_drawn then
                 if blind.prepped and G.jokers.cards[1] then
-                    local prev_chosen_set = {}
-                    local fallback_jokers = {}
                     local jokers = {}
                     for i = 1, #G.jokers.cards do
-                        if G.jokers.cards[i].ability.unik_impounded_blindside then
-                            prev_chosen_set[G.jokers.cards[i]] = true
-                            if G.jokers.cards[i].debuff then SMODS.recalc_debuff(G.jokers.cards[i]) end
+                        if not G.jokers.cards[i].debuff and not  G.jokers.cards[i].edition then
+                            jokers[#jokers + 1] = G.jokers.cards[i]
                         end
                     end
-                    for i = 1, #G.jokers.cards do
-                        if not G.jokers.cards[i].debuff then
-                            if not prev_chosen_set[G.jokers.cards[i]] then
-                                jokers[#jokers + 1] = G.jokers.cards[i]
-                            end
-                            table.insert(fallback_jokers, G.jokers.cards[i])
+                    if #jokers == 0 then
+                        for i = 1, #G.jokers.cards do
+                        if not G.jokers.cards[i].debuff and (G.jokers.cards[i].edition and not G.jokers.cards[i].edition.negative) then
+                            jokers[#jokers + 1] = G.jokers.cards[i]
                         end
                     end
-                    if #jokers == 0 then jokers = fallback_jokers end
+                    end
                     local _card = pseudorandom_element(jokers, 'impound_notice')
                     if _card then
                         _card.ability.unik_impounded_blindside = true

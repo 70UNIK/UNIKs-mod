@@ -10,7 +10,6 @@ BLINDSIDE.Blind({
             x_mult = 1,
             x_mult_mod = 0.4,
             x_mult_up = 0.4,
-            retain = true,
         }},
     hues = {"Purple","Yellow", },
     rare = true,
@@ -18,6 +17,7 @@ BLINDSIDE.Blind({
         if context.after then
             card.ability.suppress_upgrade = nil
         end
+        
         if context.fix_probability and card.area == G.hand then
             return {
                 numerator = 0,

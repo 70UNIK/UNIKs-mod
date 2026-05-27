@@ -80,7 +80,9 @@ BLINDSIDE.Joker({
         end
         if not G.GAME.blind.disabled then
             if context.debuff_card then
-                if G.GAME.unik_blindside_blacklist_blind  and context.debuff_card.config.center.key == G.GAME.unik_blindside_blacklist_blind  then
+                if G.GAME.unik_blindside_blacklist_blind  and context.debuff_card.config.center.key == G.GAME.unik_blindside_blacklist_blind 
+                
+                and (not context.debuff_card.seal or (context.debuff_card.seal and context.debuff_card.seal ~= 'bld_wild')) then
                     return {
                         debuff = true
                     }

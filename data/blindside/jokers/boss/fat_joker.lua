@@ -40,6 +40,9 @@ BLINDSIDE.Joker({
         }
     end,
     joker_set = function ()
+        for i, v in pairs(G.GAME.tags) do
+            if v:apply_to_run({type = 'real_round_before_start', card = card}) then break end
+        end
         local times = 0
         local mult = 1.5
         if G.playing_cards and G.GAME.starting_deck_size then

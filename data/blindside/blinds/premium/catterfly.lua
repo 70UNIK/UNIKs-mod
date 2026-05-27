@@ -8,8 +8,8 @@ BLINDSIDE.Blind({
         extra = {
             value = 17,
             x_chips = 1,
-            x_chip_mod = 0.05,
-            x_chip_mod_upgrade = 0.05,
+            x_chip_mod = 0.3,
+            x_chip_mod_upgrade = 0.3,
         }},
     hues = {"Purple"},
     calculate = function(self, card, context) 
@@ -29,6 +29,7 @@ BLINDSIDE.Blind({
         end
         if context.after then
             card.ability.unik_in_scoring_hand = nil
+            card.ability.unik_chelsea_scaled = nil 
         end
     end,
     rare = true,

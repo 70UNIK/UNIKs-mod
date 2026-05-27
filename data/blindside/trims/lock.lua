@@ -1,0 +1,2 @@
+--lock trim:
+--X1.35 Mult, cannot be rerolled or change modifiers, copied if destroyed, removed if blind was attempted to be rerolled or destroyed. Cannot normally spawn.

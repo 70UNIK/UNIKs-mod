@@ -14,19 +14,19 @@ BLINDSIDE.Blind({
     hues = {"Yellow"},
     always_scores = true,
     calculate = function(self, card, context) 
-        if card.area == G.hand and context.press_play then
+        if card.area == G.hand and context.press_play and context.main_eval then
             G.E_MANAGER:add_event(Event({
                     func = function()
                         if #G.jokers.cards > 0 then
-                            print("suffle")
+                           -- print("suffle")
                             G.jokers:shuffle('NUTTY'); play_sound('cardSlide1', 0.85)
                         end
                         if #G.hand.cards > 0 then
-                            print("suffle2")
+                           -- print("suffle2")
                             G.hand:shuffle('NUTTY2');
                         end
                         if #G.play.cards > 0 then
-                            print("suffle2")
+                           -- print("suffle2")
                             G.play:shuffle('NUTTY3'); 
                         end
                         return true

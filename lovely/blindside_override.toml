@@ -309,4 +309,37 @@ position = 'after'
 payload = '''
 if v.cursed then bosses_used[k] = 0 end
 '''
+### Also, it appears blinds remaining face down even after they are played are not intentional, given a lot of chance effects only trigger if they are NOT face down.
+###I'll have to fix that
+### stuff like the wheel never trigger for that reason without changes
+
+# pareidolia perkeo fix
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = '''stay_flipped = G.GAME and G.GAME.blindassist and G.GAME.blindassist:stay_flipped(to, card, from)'''
+match_indent = true
+position = 'at'
+payload = '''stay_flipped = G.GAME and G.GAME.blindassist and G.GAME.blindassist:stay_flipped(to, card, area)'''
+
+
+# pareidolia perkeo fix
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''check_for_unlock({type = 'run_card_replays'})'''
+match_indent = true
+position = 'before'
+payload = '''
+if UNIK.hasBlindside() then
+    for i = 1, #G.hand.highlighted do
+        if G.hand.highlighted[i].facing == 'back' then
+            G.hand.highlighted[i]:flip()
+            
+        end
+    end
+end
+'''
+
+
 

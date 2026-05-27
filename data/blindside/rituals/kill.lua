@@ -160,6 +160,10 @@ SMODS.Consumable {
 
 
         c = G.jokers and G.jokers.highlighted[1] or c
+        if c then
+            G.GAME.current_round.trinket.spawn[c.config.center_key] = false
+        end
+        
         if c and c ~= nil and (c.config.center.key == 'j_unik_megatron' or c.config.center.key == "j_paperback_white_night" 
             or (c.config and c.config.center and c.config.center.paperback and c.config.center.paperback.permanently_eternal) or c.ability.unik_taw)
             then

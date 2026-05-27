@@ -1705,17 +1705,18 @@ return {
 
 
                 }
-            },
+            }, 
             m_unik_blindside_catterfly = {
                 name = "The Catterfly",
                 text = {
                     {
                         "{X:purple,C:white}Purple{}",
-                        "When played",
-                        "Gains {X:chips,C:white}X#2#{} Chips when",
+                        "When played, gains",
+                        "{X:chips,C:white}X#2#{} Chips when",
                         "{C:chips}Chips{}, {X:chips,C:white}XChips{},",
                         "{X:dark_edition,C:white}^Chips{}, etc... trigger",
-                        "{C:inactive}(Itself excluded)"
+                        "{C:attention}once{} during hand",
+                        "{C:inactive}(Itself excluded)",
                     },
                     {
                     "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
@@ -1887,7 +1888,7 @@ return {
                     {
                         "{X:dark_edition,C:white}Faded{}",
                         "{C:attention}Upgrade{} a",
-                        "random scoring Blind,",
+                        "random played Blind,",
                         "then {C:attention}burn{} it"},
                     {
 					"{C:red,E:1}Self-Debuffing{} with a",
@@ -1901,7 +1902,7 @@ return {
                     {
                         "{X:dark_edition,C:white}Faded{}",
                         "{C:attention}Upgrade{} a",
-                        "random scoring Blind"},
+                        "random played Blind"},
                     {
 					"{C:red,E:1}Self-Debuffing{} with a",
 					"{C:green}#1# in #2#{} chance",

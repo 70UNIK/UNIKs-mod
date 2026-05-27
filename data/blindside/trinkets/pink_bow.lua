@@ -1,0 +1,9 @@
+--Trinkets and keepstakes:
+--one for halving listed probabilities (trinket) and X2 Mult, (blank die)
+--pink bow - X3 Chips if all scoring blinds contain purple hue.
+--Cat Hat - First scored faded, yellow or red hue gives X2 Mult,
+--Sundae Hat - First scored purple, blue or green hue gives X2 Mult,
+-- Faerie Tiara - Trinkets are copied if destroyed (must have room), gains X0.25 Mult when that happens.
+-- Celestial Nightcap - +1 Mult and +8 Chips to Poker hands whenevr they are levelled up.
+-- Cat Biscuit - X2 Mult, destroyed if hand contains red hue
+-- Microwave - Destroy 1 selected card anytime (once before cashout)
