@@ -33,3 +33,16 @@ payload = '''
 'c_unik_blindside_kill',
 'c_unik_blindside_backstab',
 '''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS Blindside "lib/utils/declarations.lua"]'''
+pattern = '''"bl_bld_maliciousjoker2",'''
+match_indent = true
+position = 'after'
+payload = '''
+"bl_unik_blindside_complementary_jokers",
+"bl_unik_blindside_complementary_jokers2",
+"bl_unik_blindside_infuriating_notes",
+"bl_unik_blindside_infuriating_notes2",
+'''

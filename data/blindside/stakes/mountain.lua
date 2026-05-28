@@ -34,7 +34,7 @@ SMODS.Stake{
                 }))
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    SMODS.calculate_context({ playing_card_added = true, cards = { cardsadded } })
+                    SMODS.calculate_context({ playing_card_added = true, cards = cardsadded })
                         
                     return true
                 end

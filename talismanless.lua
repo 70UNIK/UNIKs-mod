@@ -334,6 +334,86 @@ function UNIK.calculate_balance_exp(chips, mult, exp)
 	return returnTable
 end
 
+
+function UNIK.calculate_balance_percent_values(input_hand_chips, input_mult, percent)
+  local chip_mod = percent * input_hand_chips
+  local mult_mod = percent * input_mult
+  local avg = (chip_mod + mult_mod)/2
+  local new_hand_chips = input_hand_chips + (avg - chip_mod)
+  local new_mult = input_mult + (avg - mult_mod)
+
+  return new_hand_chips, new_mult
+end
+
+
+function UNIK.balance_percent(percent,card,nomessage)
+	local new_chips,new_mult = UNIK.calculate_balance_percent_values(hand_chips,mult,percent)
+	hand_chips = mod_chips(new_chips)
+	mult = mod_mult(new_mult)
+
+	update_hand_text({ delay = 0 }, { mult = mult, chips = hand_chips })
+
+	-- Cosmetic effects
+	G.E_MANAGER:add_event(Event({
+		func = (function()
+		-- Play sounds and change the color of the scoring values
+		play_sound('gong', 0.94, 0.3)
+		play_sound('gong', 0.94 * 1.5, 0.2)
+		play_sound('tarot1', 1.5)
+		ease_colour(G.C.UI_CHIPS, { 0.8, 0.45, 0.85, 1 })
+		ease_colour(G.C.UI_MULT, { 0.8, 0.45, 0.85, 1 })
+
+		-- If a card was passed, show the balanced message on it
+		if not nomessage then
+			if card then
+				SMODS.calculate_effect({
+				message = localize('k_balanced'),
+				colour = { 0.8, 0.45, 0.85, 1 },
+				instant = true
+				}, card)
+			else
+				local text = localize('k_balanced')
+				attention_text({
+					scale = 1.4, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play
+				})
+			end
+		end
+		
+
+		-- Return the colors to normal
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			blockable = false,
+			blocking = false,
+			delay = 4.3,
+			func = (function()
+			ease_colour(G.C.UI_CHIPS, G.C.BLUE, 2)
+			ease_colour(G.C.UI_MULT, G.C.RED, 2)
+			return true
+			end)
+		}))
+
+		G.E_MANAGER:add_event(Event({
+			trigger = 'after',
+			blockable = false,
+			blocking = false,
+			no_delete = true,
+			delay = 6.3,
+			func = (function()
+			G.C.UI_CHIPS[1], G.C.UI_CHIPS[2], G.C.UI_CHIPS[3], G.C.UI_CHIPS[4] =
+				G.C.BLUE[1], G.C.BLUE[2], G.C.BLUE[3], G.C.BLUE[4]
+			G.C.UI_MULT[1], G.C.UI_MULT[2], G.C.UI_MULT[3], G.C.UI_MULT[4] =
+				G.C.RED[1], G.C.RED[2], G.C.RED[3], G.C.RED[4]
+			return true
+			end)
+		}))
+		return true
+		end)
+	}))
+
+	delay(0.6)
+end
+
 function UNIK.balance_exp(exp,card,nomessage)
 	local table = UNIK.calculate_balance_exp(hand_chips, mult, exp)
 	local new_chips = table.chips

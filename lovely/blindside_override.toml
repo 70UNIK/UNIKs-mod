@@ -341,5 +341,49 @@ if UNIK.hasBlindside() then
 end
 '''
 
+### localization change whenever blindside is active
 
+[[patches]]
+[patches.regex]
+target = 'functions/UI_definitions.lua'
+pattern = '''\'ph\_choose\_blind\_2\''''
+match_indent = true
+position = 'after'
+payload = '''.. (UNIK.hasBlindside() and '_blindside' or "")'''
+
+[[patches]]
+[patches.regex]
+target = 'functions/UI_definitions.lua'
+pattern = '''\'ph_up_ante_2\''''
+match_indent = true
+position = 'after'
+payload = '''.. (UNIK.hasBlindside() and '_blindside' or "")'''
+
+[[patches]]
+[patches.regex]
+target = 'functions/UI_definitions.lua'
+pattern = '''\'ph_up_ante_3\''''
+match_indent = true
+position = 'after'
+payload = '''.. (UNIK.hasBlindside() and '_blindside' or "")'''
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/ui.lua"]'
+pattern = '''if G.GAME and G.GAME.selected_back.effect.center.config.extra and G.GAME.selected_back.effect.center.config.extra.blindside then'''
+match_indent = true
+position = 'at'
+payload = '''if UNIK.hasBlindside() then'''
+
+###FIX YOUR MOD!!!!!!
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/ui.lua"]'
+pattern = '''return run_info_ref'''
+match_indent = true
+position = 'at'
+payload = '''
+local ret = run_info_ref()
+return ret
+'''
 

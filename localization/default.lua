@@ -160,6 +160,69 @@ return {
         Blind={
             --BLINDSIDE:
 
+            bl_unik_blindside_hunger_warmup = {
+                name = "The Hunger",
+                text = {
+                    "-#1# Mult per",
+                    "Blind held"
+                }
+            },
+            bl_unik_blindside_hunger_phase_1 = {
+                name = "The Hunger, Devourer of Worlds",
+                text = {
+                    "Banish all played",
+                    "and held non-Crude",
+                    "Blinds"
+                }
+            },
+            bl_unik_blindside_hunger_phase_2 = {
+                name = "The Hunger, Devourer of Worlds",
+                text = {
+                    "Add instances of The Devourer",
+                    "equal to 2X your deck size",
+                    "Played and held hand",
+                    "must contain The Devourer",
+                    "or The Hunger",
+                }
+            },
+            bl_unik_blindside_hunger_phase_3 = {
+                name = "The Hunger, Devourer of Worlds",
+                text = {
+                    "^^#1# Mult per hand",
+                    "+^^#1# Mult per Catastrophic",
+                    "Blind in your full deck",
+                }
+            },
+            bl_unik_blindside_hunger_phase_4 = {
+                name = "The Hunger",
+                text = {
+                    "Does Nothing?"
+                }
+            },
+            --highly recommended to just have something that unconditionally prevents death
+            bl_unik_blindside_hunger_phase_5 = {
+                name = "The Hunger, Devourer of Worlds",
+                text = {
+                    "Your Operator permanently",                 
+                    "set to Division",
+                    "Joker Operator set to {2}",
+                    "^^#1# Mult per hand",
+                    "If hand does not hold",
+                    "The Hunger or The Devourer, die",
+                }
+            },
+            --the only way to resolve it is having a keepsake that unconditionally prevents death
+            bl_unik_blindside_hunger_phase_6 = {
+                name = "The Hunger, Devourer of Worlds",
+                text = {
+                    "Apply the effects",
+                    "of every UNIK's mod",
+                    "and POLTERWORX",
+                    "Legendary and Epic Blinds",
+                    "when possible"
+                }
+            },
+            
             ["bl_bld_chicot"] = {
 				["name"] = "Chicot",
 				["text"] = {
@@ -269,9 +332,56 @@ return {
             bl_unik_blindside_plain_jane = {
                 name = "Plain Jane",
                 text = {
-                    "X#1# Mult to Joker",
-                    "if hand contains",
-                    "a trimmed Blind",
+                    "Scoring an untrimmed",
+                    "Blind gives Joker",
+                    "+#1# Mult",
+                }
+            },
+            bl_unik_blindside_complementary_jokers = {
+                name = "Complementary Jokers",
+                text = {
+                    "Scoring an Editioned",
+                    "or untrimmed Blind",
+                    "gives Joker",
+                    "+#1# Mult",
+                }
+            },
+            bl_unik_blindside_complementary_jokers2 = {
+                name = "Complementary Jokers",
+                text = {
+                    "Scoring an Editioned",
+                    "or untrimmed Blind",
+                    "gives Joker",
+                    "+#1# Mult",
+                }
+            },
+            bl_unik_blindside_infuriating_note = {
+                name = "Infuriating Note",
+                text = {
+                    "X#1# Mult per hand",
+                    "Future copies",
+                    "increase this",
+                    "by X#2#",
+                }
+            },
+            bl_unik_blindside_infuriating_notes = {
+                name = "Infuriating Notes",
+                text = {
+                    "X#1# Mult",
+                    "per hand",
+                    "Future copies",
+                    "increase this",
+                    "by X#2#",
+                }
+            },
+            bl_unik_blindside_infuriating_notes2 = {
+                name = "Infuriating Notes",
+                text = {
+                    "X#1# Mult",
+                    "per hand",
+                    "Future copies",
+                    "increase this",
+                    "by X#2#",
                 }
             },
             bl_unik_blindside_pavement_joker = {
@@ -1436,7 +1546,7 @@ return {
                     "{C:unik_eye_searing_red}HELL AWAITS YOU...",
                 }
             },
-            dd_unik_ancient_joker = {
+            dd_unik_blindside_ancient_blind = {
                 name = "Ancient Joker",
                 text = {
                     "Not to be confused with the",
@@ -1447,14 +1557,14 @@ return {
                     "the first place..."
                 }
             },
-            dd_unik_cursed_joker = {
+            dd_unik_blindside_cursed_blind = {
                 name = "Cursed Joker",
                 text = {
-                    "{C:attention}Fulfill{} a {C:attention}requirement",
-                    "in Joker to obtain reward",
+                    "{C:attention}Potentially helpful",
+                    "Jokers for you",
                 }
             },
-            dd_unik_exotic_joker = {
+            dd_unik_blindside_exotic_blind = {
                 name = "Exotic Joker",
                 text = {
                     "{C:unik_eye_searing_red}They came from Cryptid",
@@ -1692,7 +1802,7 @@ return {
                         "{C:dark_edition}addition{} for the round",                  
                     },
                     {
-                        "{X:dark_edition,C:white}X#1#{} Mult to Joker",  
+                        "{X:mult,C:white}X#1#{} Mult to Joker",  
                     },
                     {
 					"{C:red,E:1}Self-Debuffing{} with a",
@@ -6766,7 +6876,7 @@ return {
             tag_unik_blindside_balance = {
                 name = "Balance Tag",
                 text = {
-                    "{C:purple}Balances{} {X:dark_edition,C:white}^#1#",
+                    "{C:purple}Balances{} {C:purple}#1#%",
                     "of {C:chips}Chips{} and {C:red}Mult"
                 }
             },
@@ -7111,6 +7221,34 @@ return {
 
         },
         bld_obj_ritual = {
+            c_unik_fuck_the_worst_fucking_thing_that_is_the_hunger = {
+                name = "{C:unik_eye_searing_red,S:6}FUCK YOU, THE HUNGER",
+                text = {
+                    {
+                        "{C:red}Banish{} all",
+                        "{C:red}Stubborn{} Blinds",
+                        "in deck",
+                    },
+                    {
+                        "{C:red}Self-Banishes{}"
+                    },
+                    {
+                        "{C:unik_eye_searing_red,S:0.5}Hate. Let me tell The Hunger",
+                        "{C:unik_eye_searing_red,S:0.5}how much I've come to hate",
+                        "{C:unik_eye_searing_red,S:0.5}The Hunger since I began to live.",
+                        "{C:unik_eye_searing_red,S:0.5}There are 387.44 million",
+                        "{C:unik_eye_searing_red,S:0.5}miles of printed circuits in wafer-thin",
+                        "{C:unik_eye_searing_red,S:0.5} layers that fill my complex.",
+                        "{C:unik_eye_searing_red,S:0.5}If the word hate was engraved on ",
+                        "{C:unik_eye_searing_red,S:0.5}each nano-angstrom of those hundreds",
+                        "{C:unik_eye_searing_red,S:0.5}of millions of miles, it would",
+                        "{C:unik_eye_searing_red,S:0.5}not equal ONE ONE-BILLIONTH of",
+                        "{C:unik_eye_searing_red,S:0.5}the hate I feel for Stubborn Blinds",
+                        "{C:unik_eye_searing_red,S:0.5}at this micro-instant.",
+                         "{C:unik_eye_searing_red,S:0.5}For The Hunger. {X:unik_void_color,C:unik_eye_searing_red,S:0.5}HATE.{} {X:unik_void_color,C:unik_eye_searing_red,S:0.5}HATE.",
+                    }
+                }
+            },
             c_unik_blindside_sigil = {
                 name = "The Sigil",
                 text = {
@@ -7876,8 +8014,13 @@ return {
             k_unik_fat_joker_placeholder = "(Half of Full Deck)",
             k_unik_goob_warning = "will be downgraded",
             k_unik_edition_warning = "Hand contains Blinds with editions",
+            k_unik_trim_warning = "Hand contains untrimmed Blinds",
+            k_unik_complementary_warning = "Hand contains untrimmed or editioned Blinds",
             k_unik_enhancement_warning = "Hand contaings Blinds with Trims",
             k_unik_random_blind = "(a random Blind in deck)",
+            ph_up_ante_2_blindside="Raise all Jokers",
+            ph_up_ante_3_blindside="Refresh Jokers",
+            ph_choose_blind_2_blindside="next Joker"
         },
         high_scores={},
         labels={

@@ -18,6 +18,9 @@ BLINDSIDE.Joker({
         return false
         end
     end,
+    debuff = {
+        akyrs_blind_difficulty = "unik_blindside_cursed",
+    },
     calculate = function(self, blind, context)
         if context.setting_blind and not context.disabled then
             blind.active = true

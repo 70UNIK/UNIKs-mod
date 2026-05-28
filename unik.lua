@@ -1341,6 +1341,10 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
 	--JOKERS
 	NFS.load(mod_path .. "data/blindside/jokers/big/fruity_joker.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/plain_jane.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/infuriating_note.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/big/complementary_jokers.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/infuriating_notes.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
@@ -1368,6 +1372,7 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/rituals/bind.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/backstab.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/kill.lua")()
+	--NFS.load(mod_path .. "data/blindside/rituals/fuckyouinparticularthehunger.lua")()
 	
 	--Spy (Curse tag)
 	--

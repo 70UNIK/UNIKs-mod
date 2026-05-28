@@ -24,6 +24,13 @@ BLINDSIDE.Joker({
         return localize("k_unik_all_purple")
 		
 	end,
+    debuff = {
+        akyrs_blind_difficulty = "unik_blindside_ancient",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
     death_card = {
         card = 'j_unik_unik', 
         mod_card = function(self, card) --used to apply editions and/or stickers

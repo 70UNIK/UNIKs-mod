@@ -14,7 +14,7 @@ BLINDSIDE.Blind({
     hues = {"Blue"},
 always_scores = true,
     calculate = function(self, card, context) 
-        if context.cardarea == G.play and context.after and card.facing ~= 'back' and not  card.ability.extra.upgraded then
+        if context.cardarea == G.play and context.before and card.facing ~= 'back' and not  card.ability.extra.upgraded then
             local cardsadded = {}
             for i = 1, card.ability.extra.cards do
                 G.E_MANAGER:add_event(Event({
@@ -41,7 +41,7 @@ always_scores = true,
                 func = function()
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            SMODS.calculate_context({ playing_card_added = true, cards = { cardsadded } })
+                            SMODS.calculate_context({ playing_card_added = true, cards =  cardsadded  })
                             return true
                         end
                     }))

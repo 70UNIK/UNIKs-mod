@@ -18,6 +18,9 @@ BLINDSIDE.Joker({
         return false
         end
     end,
+    debuff = {
+        akyrs_blind_difficulty = "unik_blindside_cursed",
+    },
      joker_defeat = function()
         add_tag(Tag('tag_bld_heartbreak'))
             add_tag(Tag('tag_bld_heartbreak'))

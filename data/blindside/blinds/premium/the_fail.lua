@@ -8,8 +8,8 @@ BLINDSIDE.Blind({
         extra = {
             value = 20,
             x_mult = 1,
-            x_mult_mod = 0.4,
-            x_mult_up = 0.4,
+            x_mult_mod = 0.35,
+            x_mult_up = 0.35,
         }},
     hues = {"Purple","Yellow", },
     rare = true,

@@ -42,6 +42,9 @@ BLINDSIDE.Joker({
             end
         end
     end,
+    debuff = {
+        akyrs_blind_difficulty = "unik_blindside_cursed",
+    },
     disable = function(self)
         for i,v in pairs(G.playing_cards) do
             SMODS.recalc_debuff(v)

@@ -19,6 +19,13 @@ BLINDSIDE.Joker({
     in_pool = function(self, args)
         return UNIK.hasBlindside() and CanSpawnExotic()
     end,
+    debuff = {
+        akyrs_blind_difficulty = "unik_blindside_exotic",
+        akyrs_cannot_be_overridden = true,
+        akyrs_cannot_be_disabled = true,
+        akyrs_cannot_be_rerolled = true,
+        akyrs_cannot_be_skipped = true,
+    },
     glitchy_anim = {min = 0, max = 5},
     death_card = {
         card = 'j_cry_formidiulosus' and (SMODS.Mods["Cryptid"] or {}).can_load or 'j_unik_blindside_formidiulosus_cry', 

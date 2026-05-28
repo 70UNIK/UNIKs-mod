@@ -314,6 +314,8 @@ function UNIK.get_enhancements_with_exact_colors(colors,ancient,cursed)
 
 end
 
+--due to multiple hues now, it now selects a random multihue blind
+
 SMODS.Consumable:take_ownership("c_bld_assimilate",{
     use = function(self, card, area)
         local hues = {}
@@ -410,6 +412,7 @@ BLINDSIDE.Joker:take_ownership("bl_bld_triboulet",{
             for i = 1, 8, 1 do
                 local enhancement = 'm_bld_king'
                 local card = SMODS.create_card { set = "Base", enhancement = enhancement, area = G.discard }
+                card:add_to_deck()
                 G.playing_card = (G.playing_card and G.playing_card + 1) or 1
                 card.playing_card = G.playing_card
                 table.insert(G.playing_cards, card)
@@ -427,6 +430,7 @@ BLINDSIDE.Joker:take_ownership("bl_bld_triboulet",{
             for i = 1, 8, 1 do
                 local enhancement = 'm_bld_queen'
                 local card = SMODS.create_card { set = "Base", enhancement = enhancement, area = G.discard }
+                card:add_to_deck()
                 G.playing_card = (G.playing_card and G.playing_card + 1) or 1
                 card.playing_card = G.playing_card
                 table.insert(G.playing_cards, card)
@@ -597,6 +601,19 @@ function get_new_big(current)
     if ret == 'bl_bld_gros_michel' or ret == 'bl_bld_cavendish' then
         G.GAME.unik_banana_generated = true
     end
+
+    --scaling infuriating note for each GENERATED infuriating note
+    if ret == 'unik_blindside_infuriating_note'  then
+        G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future or 1.2
+        G.GAME.unik_infuriating_xmult = G.GAME.unik_infuriating_xmult_future
+        G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future* 1.2
+    end
+    if ret == 'unik_blindside_infuriating_notes' then
+        G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future or 1.2
+        G.GAME.unik_infuriating_xmult = G.GAME.unik_infuriating_xmult_future
+        G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future* 1.2^2
+    end
+    
     
     return ret
 end
@@ -895,11 +912,13 @@ SMODS.PokerHandPart:take_ownership("bld_allin",{
                 -- if only 1 suit: can be handled immediately
                 elseif #cardcolors == 1 then
                     -- if suit is already present, lower the threshold. Ideally, duplicate colors when a spectrum can otherwise be made should not disrupt it, otherwise remove suit from "not yet used suits"
+                    local thresholdtrigger = false
                     if colorsuits[cardcolors[1]] == false then 
                         threshold = threshold - 1
+                        thresholdtrigger = true
                     end
                     --If the threshold is lower than 5 (min for spectrum), it cannot be one (checkers requires no pairs)
-                    if (threshold < 5) then
+                    if (threshold < 5 and thresholdtrigger) then
                         return {} 
                     end
                     colorsuits[cardcolors[1]] = false
@@ -951,6 +970,7 @@ SMODS.PokerHandPart:take_ownership("bld_allin",{
     end
  })
 
+ --exclude cursed tags
  SMODS.Joker:take_ownership("j_bld_matryoshka",{
     calculate = function(self, card, context)
             if context.setting_blind and card.ability.extra.last_tag then
@@ -993,8 +1013,14 @@ SMODS.PokerHandPart:take_ownership("bld_allin",{
         end
  },true)
 
---all trinkets will be made retriggerable and copyable when possible 
-
+-- --didnt even have a chance to try to create a UIbox cause balala doesnt like hooks that use this
+-- local ui = create_UIBox_generic_options
+-- function create_UIBox_generic_options(args)
+--     print("33333")
+--     local ret = ui(args)
+--     print("$$$$$$")
+--     return ret
+-- end
 
 --exquisite blinds:
 --epic rarity equivalent

@@ -8,7 +8,7 @@ BLINDSIDE.Blind({
         extra = {
             value = 18,
             times = 2,
-            times_up = 2,
+            times_up = 1, --nerf to only upgrade by 1 due to it's already broken ability with recursive copying
         }},
     hues = {"Faded"},
     always_scores = true,

@@ -68,6 +68,7 @@ SMODS.Consumable {
         args.unik_ancient = true
         local cardtype = BLINDSIDE.poll_enhancement(args)
         local legendary = SMODS.create_card({ set = 'Playing Card', enhancement = cardtype, area = G.play })
+        legendary:add_to_deck()
         legendary.states.visible = false
         G.playing_card = (G.playing_card and G.playing_card + 1) or 1
         legendary.playing_card = G.playing_card
@@ -80,6 +81,7 @@ SMODS.Consumable {
                     play_sound('unik_jenomega', 1,1)
                     legendary:add_to_deck()
                     G.play:emplace(legendary)
+                    G.deck.config.card_limit = G.deck.config.card_limit + 1
                     G.ROOM.jiggle = G.ROOM.jiggle + 5
                     legendary:juice_up(2,2)
                 return true

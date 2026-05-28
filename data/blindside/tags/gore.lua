@@ -23,20 +23,27 @@ SMODS.Tag {
             tag.triggered = true
         end
         if context.type == 'unik_before_play' then
-            if G.jokers and G.jokers.cards and #G.jokers.cards > 0 then
-                local neck_banish =  G.jokers.cards[1]
-                --neck_banish.banished_by_goblin = true
-                tag:juice_up(3,3)
-                neck_banish:gore6_break()
-                if not G.GAME.banned_keys then
-                G.GAME.banned_keys = {}
-                end
-                if not G.GAME.cry_banished_keys then
-                    G.GAME.cry_banished_keys = {}
-                end
-                G.GAME.cry_banished_keys[neck_banish.config.center.key] = true
-               
-            end
+            G.E_MANAGER:add_event(Event({
+                    trigger = 'before',
+                    func = function()
+                        if G.jokers and G.jokers.cards and #G.jokers.cards > 0 then
+                            local neck_banish =  G.jokers.cards[1]
+                            --neck_banish.banished_by_goblin = true
+                            tag:juice_up(3,3)
+                            neck_banish:gore6_break()
+                            if not G.GAME.banned_keys then
+                            G.GAME.banned_keys = {}
+                            end
+                            if not G.GAME.cry_banished_keys then
+                                G.GAME.cry_banished_keys = {}
+                            end
+                            G.GAME.cry_banished_keys[neck_banish.config.center.key] = true
+                        
+                        end
+                        return true
+                    end
+                }))
+            
         end
     end,
 }

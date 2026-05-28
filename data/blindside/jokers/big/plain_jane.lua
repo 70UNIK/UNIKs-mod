@@ -1,9 +1,10 @@
+--+2 Mult whenever an untrimmed blind is scored
 BLINDSIDE.Joker({
     blindside_joker = true,
-    key = 'unik_blindside_fruity_joker',
+    key = 'unik_blindside_plain_jane',
     atlas = 'unik_blindside_jokers',
-    pos = {x=0, y=18},
-    boss_colour = HEX("b270c9"),
+    pos = {x=0, y=19},
+    boss_colour = HEX("dcdcdc"),
     mult = 8,
     base_dollars = 6,
     order = 1,
@@ -15,7 +16,7 @@ BLINDSIDE.Joker({
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
             local seals = 0
             for i,v in pairs(G.playing_cards) do
-                if (v).edition then
+                if (v).seal then
                     seals = seals+ 1
                 end
             end
@@ -47,13 +48,13 @@ BLINDSIDE.Joker({
         if context.scoring_hand and context.full_hand and context.poker_hands and G.STATE == G.STATES.SELECTING_HAND and not G.GAME.blind.disabled then
             local triggered = false
             for i,v in pairs(context.full_hand) do
-                if v.edition then
+                if not v.seal then
                     triggered = true
                     break
                 end
             end
             if triggered then
-                BLINDSIDE.alert_debuff(self, true, localize('k_unik_edition_warning'))
+                BLINDSIDE.alert_debuff(self, true, localize('k_unik_trim_warning'))
             else
                 BLINDSIDE.alert_debuff(self, false)
             end
@@ -63,7 +64,7 @@ BLINDSIDE.Joker({
             BLINDSIDE.alert_debuff(self, false)
         end
         if context.scoring_hand and context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
-            if tableContains(context.other_card, context.scoring_hand) and (context.other_card).edition  and context.other_card.facing ~= 'back' then
+            if tableContains(context.other_card, context.scoring_hand) and not (context.other_card).seal  and context.other_card.facing ~= 'back' then
                 return {
                     message = "+" .. 2 .. localize('k_unik_jmult'),
                     colour = G.C.BLACK,

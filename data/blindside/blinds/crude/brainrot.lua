@@ -25,6 +25,7 @@ BLINDSIDE.Blind({
         end
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then
             --card.ability.stuffplayed = true
+            card.ability.extra.creadded_cards = nil
             local cardsadded = {}
             for i = 1, card.ability.extra.cards do
                 G.E_MANAGER:add_event(Event({
@@ -38,16 +39,19 @@ BLINDSIDE.Blind({
                             local cardtype = BLINDSIDE.poll_enhancement(args)
                             
                             local cardr = SMODS.create_card { set = "Base", enhancement = cardtype, area = G.hand }
+                            cardr:add_to_deck()
                             if card.ability.extra.upgraded then
                                 upgrade_blinds({cardr}, nil, true)
                             end
                             G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                            G.deck.config.card_limit = G.deck.config.card_limit + 1
                             cardr.playing_card = G.playing_card
                             table.insert(G.playing_cards, cardr)
                             cardr:start_materialize()
                             G.hand:emplace(cardr)
                             cardsadded[#cardsadded+1] = cardr
                             card:juice_up(1,1)
+                            card.ability.extra.creadded_cards = true
                             return true
                         end
                     }))
@@ -84,7 +88,7 @@ BLINDSIDE.Blind({
                     func = function()
                         G.E_MANAGER:add_event(Event({
                             func = function()
-                                SMODS.calculate_context({ playing_card_added = true, cards = { cardsadded } })
+                                SMODS.calculate_context({ playing_card_added = true, cards = cardsadded })
                                  
                                 return true
                             end
@@ -97,7 +101,7 @@ BLINDSIDE.Blind({
                 func = function()
                     G.E_MANAGER:add_event(Event({
                         func = function()
-                            SMODS.calculate_context({ playing_card_added = true, cards = { cardsadded } })
+                            SMODS.calculate_context({ playing_card_added = true, cards = cardsadded })
                             return true
                         end
                     }))
@@ -105,7 +109,7 @@ BLINDSIDE.Blind({
             }
             end
         end
-        if context.after and not card.ability.extra.upgraded and SMODS.in_scoring(card,context.scoring_hand) then
+        if context.after and not card.ability.extra.upgraded and SMODS.in_scoring(card,context.scoring_hand) and card.ability.extra.creadded_cards then
             local cards = {}
             -- for i,v in pairs(context.full_hand) do
             --     if not v.config.center.curse then
