@@ -22,7 +22,7 @@ SMODS.Joker {
 			for i,v in ipairs(context.hands) do
 							local amount = context.amount or 1
 			if amount > 0 then
-				G.GAME.hands[v].chips = G.GAME.hands[v].chips*card.ability.extra.chips*amount
+				G.GAME.hands[v].chips = G.GAME.hands[v].chips+card.ability.extra.chips*amount
 			if not context.instant and (not Talisman or not Talisman.config_file.disable_anims) then
 				
 				update_hand_text({delay = 0.25}, {

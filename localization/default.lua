@@ -3525,10 +3525,10 @@ return {
             j_unik_blindside_cat_hat = {
                 name = "Cat Hat",
                 text = {
-                    "{C:attention}First{} scored",
-                    "{X:gold,C:white}Yellow{}, {X:red,C:white}Red",
-                    "or {X:dark_edition,C:white}Faded{} Blind",
-                    "gives {X:mult,C:white}X#1#{} Mult"
+                    "{C:attention}First{} scored Blind",
+                    "gives {X:mult,C:white}X#1#{} Mult if",
+                    "containing {X:gold,C:white}Yellow{}, {X:red,C:white}Red",
+                    "or {X:dark_edition,C:white}Faded{} hue",
                 }
             },
             j_unik_blindside_witch_hat = {
@@ -3544,8 +3544,7 @@ return {
                 name = "Celestial Nightcap",
                 text = {
                     "{C:attention}Poker Hands{} gain",
-                    "{C:mult}+#1#{} Mult and", --+5 chips and +0.5 mult
-                    "{C:chips}+#2#{} Chips",
+                    "{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips", --+5 chips and +0.5 mult
                     "when {C:attention}levelled up",
                 }
             },

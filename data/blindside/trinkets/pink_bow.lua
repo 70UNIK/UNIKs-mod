@@ -49,7 +49,7 @@ SMODS.Joker({
                     end
                 end
             end
-            if not success then
+            if success then
                 return {
                     xchips = card.ability.extra.xchips
                 }
