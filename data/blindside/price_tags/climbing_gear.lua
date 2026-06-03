@@ -1,0 +1,5 @@
+--PRICE TAGS:
+--CLimbing Gear: create a free jumbo summit pack at the start of a boss shop
+--Summit Camp: Summit packs may appear in Boss Shops
+--Cult of personality: Create a Cult tag after defeating a Boss Joker
+--Joker Sacrifice: Ritual cards may appear in Boss Shops

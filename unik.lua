@@ -138,6 +138,17 @@ function UNIK.hasBlindside()
 	return false
 end
 
+function firstToUpper(str)
+    return (str:gsub("^%l", string.upper))
+end
+
+function UNIK.blindOrCard(capitalize)
+	if UNIK.hasBlindside() then
+		return capitalize and firstToUpper("blind") or "blind"
+	end
+	return capitalize and firstToUpper("card") or "card"
+end
+
 function UNIK.overshootEnabled(no_comment)
 	if not unik_config.unik_overshoot_enabled then
 		return false
@@ -424,6 +435,14 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas {
+	key = "unik_trinkets",
+	path = "unik_trinkets.png",
+	px = 71,
+	py = 95
+}
+
 
 
 -- Pool used by boss blind jokers
@@ -1406,7 +1425,10 @@ if next(SMODS.find_mod("Blindside")) then
 	
 	
 	
-	
+	NFS.load(mod_path .. "data/blindside/trinkets/pink_bow.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/celestial_nightcap.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/cat_hat.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/tic_tac_toe_board.lua")()	
 	
 	
 

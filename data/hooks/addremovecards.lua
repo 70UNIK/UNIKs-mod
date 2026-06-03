@@ -166,7 +166,7 @@ function CardArea:emplace(card, location, stay_flipped)
                  G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     func = function()
-                        local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
+                        local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, UNIK.hasBlindside() and 'c_soul', 'sup')
                         n_card.no_omega = true
                         n_card.ability.unik_decaying = true
                         n_card:add_to_deck()

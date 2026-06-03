@@ -32,6 +32,10 @@ payload = '''
 'c_unik_blindside_repetition',
 'c_unik_blindside_kill',
 'c_unik_blindside_backstab',
+'j_unik_blindside_pink_bow',
+'j_unik_blindside_celestial_nightcap',
+'j_unik_blindside_cat_hat',
+'j_unik_blindside_tic_tac_toe_board',
 '''
 
 [[patches]]

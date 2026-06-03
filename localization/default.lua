@@ -3513,12 +3513,12 @@ return {
             --keepsakes
             ---ancient joker headgear, etc...
             j_unik_blindside_pink_bow = {
-                name = "Pink Bow",
+                name = "{C:unik_unik_color,f:unik_five_by_five,s:0.8} Pink Bow",
                 text = {
-                    "X#1# Chips",
-                    "if hand contains",
+                    "{X:chips,C:white}X#1#{} Chips",
+                    "if {C:attention}scoring hand{} contains",
                     "at least {C:attention}#2#{} Blinds",
-                    "and all played Blinds",
+                    "and all {C:attention}played{} Blinds",
                     "contain {X:purple,C:white}Purple{} hue"
                 }
             },
@@ -3526,8 +3526,8 @@ return {
                 name = "Cat Hat",
                 text = {
                     "{C:attention}First{} scored",
-                    "{X:gold,C:white}Yellow{}, {X:gold,C:white}Red",
-                    "or {X:gold,C:white}Faded{} Blind",
+                    "{X:gold,C:white}Yellow{}, {X:red,C:white}Red",
+                    "or {X:dark_edition,C:white}Faded{} Blind",
                     "gives {X:mult,C:white}X#1#{} Mult"
                 }
             },
@@ -3543,9 +3543,9 @@ return {
             j_unik_blindside_celestial_nightcap = {
                 name = "Celestial Nightcap",
                 text = {
-                    "Poker Hands gain",
-                    "{C:chips}+#1#{} Chips and",
-                    "{C:mult}+#2#{} Mult",
+                    "{C:attention}Poker Hands{} gain",
+                    "{C:mult}+#1#{} Mult and", --+5 chips and +0.5 mult
+                    "{C:chips}+#2#{} Chips",
                     "when {C:attention}levelled up",
                 }
             },
@@ -3572,6 +3572,15 @@ return {
                 text = {
                     "{C:unik_copper}Rescore{} a random",
                     "played Blind {C:attention}#1#{} time#<s>1#"
+                }
+            },
+            j_unik_blindside_tic_tac_toe_board = {
+                name = "Tic Tac Toe Board",
+                text = {
+                    "Creates either a",
+                    "{C:unik_copper}Circles Tag{} or",
+                    "a {C:attention}Peak Tag{}",
+					"when deck is {C:attention}reshuffled"
                 }
             },
             
@@ -7366,7 +7375,7 @@ return {
                 name = "Everest",
                 text = {
                     "Permanently add {X:mult,C:white}X#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             --if indigenous names enabled, has a 50/50 chance of switching atlas when spawned
@@ -7374,14 +7383,14 @@ return {
                 name = "Sagarmāthā/Qomolangma",
                 text = {
                     "Permanently add {X:mult,C:white}X#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_denali = {
                 name = "Denali",
                 text = {
                     "Permanently add {X:chips,C:white}X#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_aconcagua = {
@@ -7389,7 +7398,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {X:mult,C:white}X#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",                 
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",                 
                 }
             },
             c_unik_elbrus = {
@@ -7397,21 +7406,21 @@ return {
                 text = {
                     "Permanently add",
                     "held {X:chips,C:white}X#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_kosciuszko = {
                 name = "Kosciuszko",
                 text = {
                     "Permanently add {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 },
             },
             c_unik_elbert = {
                 name = "Elbert",
                 text = {
                     "Permanently add {C:mult}+#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 },
             },
             c_unik_mitchell = {
@@ -7419,7 +7428,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_mitchell_i = {
@@ -7427,7 +7436,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_narodnaya = {
@@ -7435,7 +7444,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:mult}+#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
 
@@ -7443,28 +7452,28 @@ return {
                 name = "Charleston",
                 text = {
                     "Permanently add {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_charleston_i = { --near vegas, which gambling
                 name = "Nuvagantu",
                 text = {
                     "Permanently add {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_whitney = { ---sierra nevada
                 name = "Whitney",
                 text = {
                     "Permanently add held {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_whitney_i = { ---sierra nevada
                 name = "Tumanguya",
                 text = {
                     "Permanently add held {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected " .. UNIK.blindOrCard() .. "#<s>2#",
                 }
             },
             c_unik_blank_summit = {
