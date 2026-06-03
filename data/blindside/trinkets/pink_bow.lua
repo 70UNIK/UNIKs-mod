@@ -48,12 +48,13 @@ SMODS.Joker({
                         break
                     end
                 end
+                if success then
+                    return {
+                        xchips = card.ability.extra.xchips
+                    }
+                end
             end
-            if success then
-                return {
-                    xchips = card.ability.extra.xchips
-                }
-            end
+            
             
         end
     end
