@@ -603,12 +603,12 @@ function get_new_big(current)
     end
 
     --scaling infuriating note for each GENERATED infuriating note
-    if ret == 'unik_blindside_infuriating_note'  then
+    if ret == 'bl_unik_blindside_infuriating_note'  then
         G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future or 1.2
         G.GAME.unik_infuriating_xmult = G.GAME.unik_infuriating_xmult_future
         G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future* 1.2
     end
-    if ret == 'unik_blindside_infuriating_notes' then
+    if ret == 'bl_unik_blindside_infuriating_notes' then
         G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future or 1.2
         G.GAME.unik_infuriating_xmult = G.GAME.unik_infuriating_xmult_future
         G.GAME.unik_infuriating_xmult_future =  G.GAME.unik_infuriating_xmult_future* 1.2^2

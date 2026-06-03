@@ -17,7 +17,7 @@ SMODS.Tag {
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_cursed_joker" }
 	end,
     apply = function(self, tag, context)
-        if context.type == 'new_blind_choice' and not G.GAME.unik_lock_soul_tag then 
+        if context.type == 'immediate' and not G.GAME.unik_lock_soul_tag then 
             G.GAME.unik_lock_soul_tag = true
             local type = curse_check()
             if type then

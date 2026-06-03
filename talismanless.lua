@@ -334,20 +334,25 @@ function UNIK.calculate_balance_exp(chips, mult, exp)
 	return returnTable
 end
 
-
-function UNIK.calculate_balance_percent_values(input_hand_chips, input_mult, percent)
-  local chip_mod = percent * input_hand_chips
-  local mult_mod = percent * input_mult
-  local avg = (chip_mod + mult_mod)/2
-  local new_hand_chips = input_hand_chips + (avg - chip_mod)
-  local new_mult = input_mult + (avg - mult_mod)
-
-  return new_hand_chips, new_mult
+function UNIK.calculate_balance_percent_values(input_hand_chips, input_mult, frac)
+	if not frac then frac = 1 end
+	frac = math.max(0,math.min(1,frac))
+	local tot = (input_hand_chips + input_mult) * frac
+	return math.floor(input_hand_chips * (1 - frac) + tot / 2), math.floor(input_mult * (1 - frac) + tot / 2)
 end
+-- function UNIK.calculate_balance_percent_values(input_hand_chips, input_mult, percent)
+--   local chip_mod = percent * input_hand_chips
+--   local mult_mod = percent * input_mult
+--   local avg = (chip_mod + mult_mod)/2
+--   local new_hand_chips = input_hand_chips + (avg - chip_mod)
+--   local new_mult = input_mult + (avg - mult_mod)
+
+--   return new_hand_chips, new_mult
+-- end
 
 
 function UNIK.balance_percent(percent,card,nomessage)
-	local new_chips,new_mult = UNIK.calculate_balance_percent_values(hand_chips,mult,percent)
+	local new_chips,new_mult = UNIK.calculate_balance_percent_values(hand_chips,mult,percent/100)
 	hand_chips = mod_chips(new_chips)
 	mult = mod_mult(new_mult)
 

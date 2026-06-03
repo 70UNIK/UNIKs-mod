@@ -40,9 +40,6 @@ BLINDSIDE.Joker({
         }
     end,
     joker_set = function ()
-        for i, v in pairs(G.GAME.tags) do
-            if v:apply_to_run({type = 'real_round_before_start', card = card}) then break end
-        end
         local times = 0
         local mult = 1.5
         if G.playing_cards and G.GAME.starting_deck_size then
@@ -59,4 +56,38 @@ BLINDSIDE.Joker({
             return true end }))
         end
     end,
+    disable = function()
+        local times = 0
+        local mult = 1.5
+        if G.playing_cards and G.GAME.starting_deck_size then
+            times = math.max(0,math.ceil((math.ceil(#G.playing_cards) - math.ceil(G.GAME.starting_deck_size/2))/2))
+        end
+        
+        if times > 0 then
+            G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + times
+            G.GAME.playing_with_fire = G.GAME.playing_with_fire + (G.GAME.used_vouchers.v_bld_swearjar and 2 or 1) * times
+            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
+            BLINDSIDE.chipsmodify(times * -mult, 0, 0)
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                BLINDSIDE.chipsupdate()
+            return true end }))
+        end
+    end,
+    enable = function()
+        local times = 0
+        local mult = 1.5
+        if G.playing_cards and G.GAME.starting_deck_size then
+            times = math.max(0,math.ceil((math.ceil(#G.playing_cards) - math.ceil(G.GAME.starting_deck_size/2))/2))
+        end
+        
+        if times > 0 then
+            G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + times
+            G.GAME.playing_with_fire = G.GAME.playing_with_fire + (G.GAME.used_vouchers.v_bld_swearjar and 2 or 1) * times
+            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
+            BLINDSIDE.chipsmodify(times * mult, 0, 0)
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                BLINDSIDE.chipsupdate()
+            return true end }))
+        end
+    end
 })

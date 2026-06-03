@@ -23,6 +23,9 @@ SMODS.Rarity:take_ownership('cry_cursed',{
 SMODS.Rarity:take_ownership('jen_junk',{
     fallback_joker = 'j_jen_rot'
 },true)
+SMODS.Rarity:take_ownership('jen_doom',{
+    fallback_joker = 'j_jen_rot'
+},true)
 SMODS.Rarity:take_ownership('jen_wonderous',{
     fallback_joker = 'j_unik_moonlight_cookie'
 },true)

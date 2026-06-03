@@ -14,6 +14,9 @@ BLINDSIDE.Blind({
     hues = {"Purple","Yellow", },
     rare = true,
     calculate = function(self, card, context)
+        if context.press_play then
+            card.ability.suppress_upgrade = nil
+        end
         if context.after then
             card.ability.suppress_upgrade = nil
         end
@@ -23,7 +26,7 @@ BLINDSIDE.Blind({
                 numerator = 0,
             }
         end
-        if context.pseudorandom_result and not context.result and card.area == G.hand and ((not context.cardarea and not context.main_eval) or context.main_eval) then
+        if context.pseudorandom_result and not context.result and card.area == G.hand and context.main_eval then
             if not card.ability.suppress_upgrade then
                 card.ability.suppress_upgrade = true
                 SMODS.scale_card(card, {

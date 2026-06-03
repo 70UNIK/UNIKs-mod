@@ -387,3 +387,24 @@ local ret = run_info_ref()
 return ret
 '''
 
+##wl tracking burned blinds this run
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''dissolve_colours = dissolve_colours or (type(self.destroyed) == 'table' and self.destroyed.colours) or nil'''
+match_indent = true
+position = 'after'
+payload = '''        G.GAME.blinds_burned_this_run = G.GAME.blinds_burned_this_run or 0
+        G.GAME.blinds_burned_this_run = G.GAME.blinds_burned_this_run + 1
+        --print("burned: " .. G.GAME.blinds_burned_this_run)
+        '''
+
+## fixing atlas breaking for custom assist jokers
+[[patches]]
+[patches.regex]
+target = '=[SMODS Blindside "items/jokers/showdownjokers.lua"]'
+pattern = '''G\.ANIMATION\_ATLAS\[obj\.config\.atlas\]'''
+match_indent = true
+position = 'after'
+payload = ''' or (self.config.blind.atlas and G.ANIMATION_ATLAS[self.config.blind.atlas]) '''

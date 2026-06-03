@@ -44,6 +44,24 @@ payload = '''
 	end
 '''
 match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''if G.GAME.tags[i]:apply_to_run({type = 'immediate'}) then break end'''
+position = "before"
+payload = '''
+	if not G.GAME.unik_mortons_fork then
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''if G.GAME.tags[i]:apply_to_run({type = 'immediate'}) then break end'''
+position = "after"
+payload = '''
+	end
+'''
+match_indent = true
 
 
 ##Part 1 of below:

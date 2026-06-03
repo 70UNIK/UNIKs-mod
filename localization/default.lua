@@ -241,16 +241,24 @@ return {
                     "X#1# Mult",
                 }
             },
+            bl_unik_blindside_cheese = { --literally the needle
+                name = "Cheese",
+                text = {
+                    "+1 Discard",
+                    "Set hands to 0",
+                    "if played hand is",
+                    "not a #1#",
+                }
+            },
             bl_unik_blindside_energy_compressor={
                 name = "Energy Compressor",
                 text = {
-                    "Stores all Mult and",
-                    "Chip operations then",
+                    "Stores X0.9 of all Mult",
+                    "and Chip operations then",
                     "releases in set order",
                     "of Exponential,",
                     "Loglinear, Multiplicative",
                     "then Additive operations",
-                    "exponentiated by ^0.9",
                 }
             },
             bl_unik_blindside_fat_joker={
@@ -260,15 +268,6 @@ return {
                     "#2# Blinds above #3#",
                     "in your Full Deck",
                     "(Currently +#4# Mult)"
-                }
-            },
-            bl_unik_blindside_goob = {
-                name = "Goob",
-                text = {
-                    "Level down all",
-                    "possible hands",
-                    "from held Blinds",
-                    "on Play"
                 }
             },
             bl_unik_blindside_fiendish_joker = {
@@ -321,6 +320,151 @@ return {
                     "Trinket owned"
                 }
             },
+            bl_unik_blindside_maya_ramirez = {
+                name = "Maya Ramirez",
+                text = {
+                    "Played Blinds",
+                    "Permanently lose",
+                    "X#1# Chips",
+                }
+            },
+            bl_unik_blindside_catto_boi = {
+                name = "Catto Boi",
+                text = {
+                    "X#1# Mult per hand",
+                    "+X#2# Mult per Yellow",
+                    "Blind scored",
+                    "-X#3# Mult per Red",
+                    "Blind scored",
+                    "Self destructs",
+                    "below X1 Mult"
+                }
+            },
+            bl_unik_blindside_pibby = {
+                name = "Pibby",
+                text = {
+                    "X#1# Mult per hand",
+                    "+X#2# Mult per Blind",
+                    "in scoring hand",
+                }
+            },
+            bl_unik_blindside_chelsea_ramirez = {
+                name = "Chelsea Ramirez",
+                text = {
+                    "X#1# Chips per hand",
+                    "+X#2# Chips when",
+                    "+Chips, XChips, ^Chips,",
+                    "etc... trigger",
+                }
+            },
+            bl_unik_blindside_yokana_ramirez = {
+                name = "Yokana Ramirez",
+                text = {
+                    "X#1# Chips whenever",
+                    "a Blind is triggered",
+                }
+            },
+            --cube joker + square joker
+            bl_unik_blindside_square_jokers = {
+                name = "Square Jokers",
+                text = {
+                    "+#1# Chips and",
+                    "X#2# Chips per hand",
+                    "+#3# Chips if hand",
+                    "does not contain",
+                    "exactly 4 Blinds",
+                    "otherwise +X#4# Chips",
+                }
+            },
+            bl_unik_blindside_square_jokers2 = {
+                name = "Square Jokers",
+                text = {
+                    "+#1# Chips and",
+                    "X#2# Chips per hand",
+                    "+#3# Chips if hand",
+                    "does not contain",
+                    "exactly 4 Blinds",
+                    "otherwise +X#4# Chips"
+                }
+            },
+            --Pit jokers
+            bl_unik_blindside_dandy = {
+                name = 'Dandicus "Dandy" Dancifer',
+                text = {
+                    "#1# in #2# Blinds",
+                    "are debuffed",
+                    "ignoring trims",
+                }
+            },
+            bl_unik_blindside_swabbie = {
+                name = "Swabbie",
+                text = {
+                    "Lose $#1# per",
+                    "Blind burned or",
+                    "destroyed this run",
+                    "(Will lose $#2#)",
+                }
+            },
+            bl_unik_blindside_circus = {
+                name = "Circus",
+                text = {
+                    "X#1# Mult per",
+                    "Trinket owned",
+                    "X#2# Mult per",
+                    "Keepsake owned"
+                }
+            },
+            bl_unik_blindside_huge = {
+                name = "Huge",
+                text = {
+                    "X#1# Mult per hand",
+                    "if hand contains",
+                    "a pair this round",
+                }
+            },
+            bl_unik_blindside_nostalgic_candy = {
+                name = "Nostalgic Candy",
+                text = {
+                    "-#1# Hand Size",
+                    "for #2# Round#<s>2#",
+                }
+            },
+            bl_unik_blindside_sync_catalyst = {
+                name = "Sync Catalyst",
+                text = {
+                    "Balances #1#% of",
+                    "Joker Chips and",
+                    "Mult per hand"
+                }
+            },
+            bl_unik_blindside_jimbotron_9000 = {
+                name = "Jimbotron 9000",
+                text = {
+                    "+1 Mult per hand",
+                    "then ^#1# Mult once",
+                    "if score exceeds",
+                    "requirements this round",
+                }
+            },
+            --change: goob will level down all hands contaiend in played and held hands to make him a pit joker.
+            bl_unik_blindside_goob = {
+                name = "Goob",
+                text = {
+                    "Level down all",
+                    "possible hands",
+                    "from held Blinds",
+                    "on Play"
+                }
+            },
+            bl_unik_blindside_cosmo = {
+                name = "Cosmo",
+                text = {
+                    "Trimmed Blinds",
+                    "cannot be",
+                    "played",
+                }
+            },
+            --big jokers
             bl_unik_blindside_fruity_joker = {
                 name = "Fruity Joker",
                 text = {
@@ -398,6 +542,28 @@ return {
                 text = {
                     "Create #1# detrimental",
                     "tags per hand",
+                }
+            },
+            bl_unik_blindside_megatron = {
+               name = "Megatron",
+               text = {
+                    "All listed probabilities",
+                    "are guaranteed",
+                    "Destroy a random Trinket",
+                    "or X1.75 Mult to Joker",
+                    "if no Trinket owned when",
+                    "a probability succeeds",
+               }
+            },
+            bl_unik_blindside_whitenight = {
+                name = "WhiteNight",
+                text = {
+                    "Add #1# The Apostles",
+                    "to your deck",
+                    "If scoring hand has no",
+                    "The Apostles, Banish a",
+                    "random owned Trinket",
+                    "and debuff all played Blinds"
                 }
             },
             bl_unik_blindside_monopoly_money = {
@@ -490,7 +656,7 @@ return {
                 name = "Moonlight Cookie",
                 text = {
                     "X#1# Mult each hand",
-                    "Takes all Mult ",
+                    "Takes all Mult",
                     "from all visible",
                     "hands as Xmult, then",
                     "set all statistics",
@@ -501,11 +667,12 @@ return {
                 name = "White Lily Cookie",
                 text = {
                     "^#1# Mult each hand",
-                    "Banish a random",
-                    "Trinket for each",
-                    "Trinket sold this run",
-                    "gain ^#1# Mult when",
-                    "no trinkets remaining",
+                    "+^#2# Mult for each",
+                    "The Lily in full deck",
+                    "Add The Lily for",
+                    "every Blind burned",
+                    "or destroyed this run",
+                    "(Will add #3#)",
                 }
             },
             bl_unik_blindside_redeo = {
@@ -2873,6 +3040,29 @@ return {
                     {"{C:attention}Burns"},
                 }
             },
+            m_unik_blindside_lily = {
+                name = "The Lily",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:red,C:white}Red", 
+                        "{X:dark_edition,C:white}^#1#{} Mult to Joker",
+                    },
+                    {"Always scores"},
+                    {"{C:green}Retained"}, 
+					{"{C:attention}Forced to",
+					"{C:attention}be selected",},
+                }
+            },
+            m_unik_blindside_lily_upgraded = {
+                name = "The Lily",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:red,C:white}Red", 
+                        "{X:dark_edition,C:white}^#1#{} Mult to Joker",
+                    },
+                    {"Always scores"},
+                }
+            },
             m_unik_blindside_ai_brainrot = {
                 name = "The AI",
                 text = {
@@ -3320,6 +3510,72 @@ return {
 					"{C:inactive}(Currently: {C:attention}#1#{C:inactive})"
 				}
 			},
+            --keepsakes
+            ---ancient joker headgear, etc...
+            j_unik_blindside_pink_bow = {
+                name = "Pink Bow",
+                text = {
+                    "X#1# Chips",
+                    "if hand contains",
+                    "at least {C:attention}#2#{} Blinds",
+                    "and all played Blinds",
+                    "contain {X:purple,C:white}Purple{} hue"
+                }
+            },
+            j_unik_blindside_cat_hat = {
+                name = "Cat Hat",
+                text = {
+                    "{C:attention}First{} scored",
+                    "{X:gold,C:white}Yellow{}, {X:gold,C:white}Red",
+                    "or {X:gold,C:white}Faded{} Blind",
+                    "gives {X:mult,C:white}X#1#{} Mult"
+                }
+            },
+            j_unik_blindside_witch_hat = {
+                name = "Witch Hat",
+                text = {
+                    "{C:attention}First{} scored",
+                    "{X:green,C:white}Green{}, {X:blue,C:white}Blue",
+                    "or {X:purple,C:white}Purple{} Blind",
+                    "gives {X:mult,C:white}X#1#{} Mult"
+                }
+            },
+            j_unik_blindside_celestial_nightcap = {
+                name = "Celestial Nightcap",
+                text = {
+                    "Poker Hands gain",
+                    "{C:chips}+#1#{} Chips and",
+                    "{C:mult}+#2#{} Mult",
+                    "when {C:attention}levelled up",
+                }
+            },
+            j_unik_blindside_faerie_tiara = {
+                name = "Faerie Tiara",
+                text = {
+                    "{C:attention}Create{} a copy of",
+                    "a {C:bld_trinket}Trinket",
+                    "if it's {C:red}destroyed",
+                    "{C:inactive}(Itself included)",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            j_unik_blindside_microwave = {
+                name = "Microwave",
+                text = {
+                    "{C:red}Destroy{} up to {C:attention}#1#",
+                    "selected Blind {C:attention}anytime",
+                    "{C:inactive}(Once before cashout)",
+                }
+            },
+            j_unik_blindside_red_bow = {
+                name = "Red Bow",
+                text = {
+                    "{C:unik_copper}Rescore{} a random",
+                    "played Blind {C:attention}#1#{} time#<s>1#"
+                }
+            },
+            
+
             -- Blindside Taunt "Jokers" --
             j_unik_blindside_taunt_oxy_pwx={
                 name = "YOU SHOULDNT SEE THIS",
@@ -3380,8 +3636,8 @@ return {
             j_unik_yes_nothing = {
                 name = 'Yes! Nothing',
                 text={
-                    "Sets all {C:green,E:1,S:1.1}listed{}",
-                    "{C:green,E:1,S:1.1}probabilities{} to {C:attention}0{}",
+                    "Sets all {C:green,E:1,s:1.1}listed{}",
+                    "{C:green,E:1,s:1.1}probabilities{} to {C:attention}0{}",
                     "{C:inactive}(ex: {C:green}2 in 3{C:inactive} -> {C:green}0 in 3{C:inactive})",
                 },
             },
@@ -5031,7 +5287,7 @@ return {
                     "are at least {C:attention}X#1#",
                     "the Blind Size",
                     "{C:inactive}({C:attention}#2#{C:inactive})",
-                    "{S:1.1,C:red,E:2}self destructs{}",
+                    "{s:1.1,C:red,E:2}self destructs{}",
                 },
                 unlock={
                     "Lose {C:attention,E:1}#1#{} runs",
@@ -6017,7 +6273,7 @@ return {
                     "{C:blue}Hands{}/{C:red}Discards {C:attention}used",
                     "but also triggers when",
                     "Blinds {C:attention}remove{} {C:blue}Hands{} or {C:red}Discards",
-                    "{C:inactive,S:0.8}(Only during scoring or setting Blind)"
+                    "{C:inactive,s:0.8}(Only during scoring or setting Blind)"
                 }
             },
 
@@ -6291,7 +6547,7 @@ return {
             c_unik_asteroid_belt = {
 				name = "Asteroid Belt",
 				-- text = {
-				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{s:0.8}({s:0.8,V:1}lvl.#2#{s:0.8}){} Level up",
 				-- 	"{C:attention}#1#",
 				-- 	"{C:mult}+#3#{} Mult and",
 				-- 	"{C:chips}+#4#{} chip#<s>4#",
@@ -6300,7 +6556,7 @@ return {
             c_unik_quaoar = {
 				name = "Quaoar",
 				-- text = {
-				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{s:0.8}({s:0.8,V:1}lvl.#2#{s:0.8}){} Level up",
 				-- 	"{C:attention}#1#",
 				-- 	"{C:mult}+#3#{} Mult and",
 				-- 	"{C:chips}+#4#{} chip#<s>4#",
@@ -6309,7 +6565,7 @@ return {
             c_unik_haumea = {
 				name = "Haumea",
 				-- text = {
-				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{s:0.8}({s:0.8,V:1}lvl.#2#{s:0.8}){} Level up",
 				-- 	"{C:attention}#1#",
 				-- 	"{C:mult}+#3#{} Mult and",
 				-- 	"{C:chips}+#4#{} chip#<s>4#",
@@ -6318,7 +6574,7 @@ return {
             c_unik_sedna = {
 				name = "Sedna",
 				-- text = {
-				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{s:0.8}({s:0.8,V:1}lvl.#2#{s:0.8}){} Level up",
 				-- 	"{C:attention}#1#",
 				-- 	"{C:mult}+#3#{} Mult and",
 				-- 	"{C:chips}+#4#{} chip#<s>4#",
@@ -6327,7 +6583,7 @@ return {
             c_unik_makemake = {
 				name = "Makemake",
 				-- text = {
-				-- 	"{S:0.8}({S:0.8,V:1}lvl.#2#{S:0.8}){} Level up",
+				-- 	"{s:0.8}({s:0.8,V:1}lvl.#2#{s:0.8}){} Level up",
 				-- 	"{C:attention}#1#",
 				-- 	"{C:mult}+#3#{} Mult and",
 				-- 	"{C:chips}+#4#{} chip#<s>4#",
@@ -7222,7 +7478,7 @@ return {
         },
         bld_obj_ritual = {
             c_unik_fuck_the_worst_fucking_thing_that_is_the_hunger = {
-                name = "{C:unik_eye_searing_red,S:6}FUCK YOU, THE HUNGER",
+                name = "{C:unik_eye_searing_red,s:6}FUCK YOU, THE HUNGER",
                 text = {
                     {
                         "{C:red}Banish{} all",
@@ -7233,19 +7489,19 @@ return {
                         "{C:red}Self-Banishes{}"
                     },
                     {
-                        "{C:unik_eye_searing_red,S:0.5}Hate. Let me tell The Hunger",
-                        "{C:unik_eye_searing_red,S:0.5}how much I've come to hate",
-                        "{C:unik_eye_searing_red,S:0.5}The Hunger since I began to live.",
-                        "{C:unik_eye_searing_red,S:0.5}There are 387.44 million",
-                        "{C:unik_eye_searing_red,S:0.5}miles of printed circuits in wafer-thin",
-                        "{C:unik_eye_searing_red,S:0.5} layers that fill my complex.",
-                        "{C:unik_eye_searing_red,S:0.5}If the word hate was engraved on ",
-                        "{C:unik_eye_searing_red,S:0.5}each nano-angstrom of those hundreds",
-                        "{C:unik_eye_searing_red,S:0.5}of millions of miles, it would",
-                        "{C:unik_eye_searing_red,S:0.5}not equal ONE ONE-BILLIONTH of",
-                        "{C:unik_eye_searing_red,S:0.5}the hate I feel for Stubborn Blinds",
-                        "{C:unik_eye_searing_red,S:0.5}at this micro-instant.",
-                         "{C:unik_eye_searing_red,S:0.5}For The Hunger. {X:unik_void_color,C:unik_eye_searing_red,S:0.5}HATE.{} {X:unik_void_color,C:unik_eye_searing_red,S:0.5}HATE.",
+                        "{C:unik_eye_searing_red,s:0.5}Hate. Let me tell The Hunger",
+                        "{C:unik_eye_searing_red,s:0.5}how much I've come to hate",
+                        "{C:unik_eye_searing_red,s:0.5}The Hunger since I began to live.",
+                        "{C:unik_eye_searing_red,s:0.5}There are 387.44 million",
+                        "{C:unik_eye_searing_red,s:0.5}miles of printed circuits in wafer-thin",
+                        "{C:unik_eye_searing_red,s:0.5} layers that fill my complex.",
+                        "{C:unik_eye_searing_red,s:0.5}If the word hate was engraved on ",
+                        "{C:unik_eye_searing_red,s:0.5}each nano-angstrom of those hundreds",
+                        "{C:unik_eye_searing_red,s:0.5}of millions of miles, it would",
+                        "{C:unik_eye_searing_red,s:0.5}not equal ONE ONE-BILLIONTH of",
+                        "{C:unik_eye_searing_red,s:0.5}the hate I feel for Stubborn Blinds",
+                        "{C:unik_eye_searing_red,s:0.5}at this micro-instant.",
+                         "{C:unik_eye_searing_red,s:0.5}For The Hunger. {X:unik_void_color,C:unik_eye_searing_red,s:0.5}HATE.{} {X:unik_void_color,C:unik_eye_searing_red,s:0.5}HATE.",
                     }
                 }
             },
@@ -8403,7 +8659,7 @@ return {
             },
             unik_blindside_megatron_lose={
                 "YOU SIDED WITH SENTINEL!",
-                "NOW DIE YOU MOTHERFUCKER!!!!",
+                "NOW DIE, MOTHERFUCKER!!!!",
             },
             unik_blindside_whitenight_lose = {
                 "Thou shall seek",
@@ -8459,8 +8715,8 @@ return {
                 "habe in inferno.",
             },
             unik_blindside_exponentia_lose = {
-                "{X:unik_void_color,C:unik_eye_searing_red,S:2}UNLIMITED POWAARRRRRR!!!!!!!",
-                "{X:unik_void_color,C:unik_eye_searing_red,S:2}UNLIMITED POWWWWAAAAAAAAARRRRRRRRR!!!!!!!!!!!"
+                "{X:unik_void_color,C:unik_eye_searing_red,s:2}UNLIMITED{} {X:unik_void_color,C:unik_eye_searing_red,s:2}POWAARRRRRR!!!!!!!",
+                "{X:unik_void_color,C:unik_eye_searing_red,s:2}UNLIMITED{} {X:unik_void_color,C:unik_eye_searing_red,s:2}POWWWWAAAAAAAAARRRRRRRRR!!!!!!!!!!!"
             },
             --default flippy quips, win and lose (5 win, 8 loss)
             unik_blindside_flippy_win1 = {

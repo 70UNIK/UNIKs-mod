@@ -31,7 +31,7 @@ SMODS.Tag {
             tag.triggered = true
         end
         if context.type == 'after_hand' then
-            UNIK.percent(self.config.extra.amount,nil,true)
+            UNIK.balance_percent(self.config.extra.amount,nil,true)
             tag_area_status_text(tag, "Balanced", G.C.DARK_EDITION, false, 0)
             G.E_MANAGER:add_event(Event({trigger = 'immediate', func = function()
                 tag:juice_up()

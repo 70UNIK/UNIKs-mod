@@ -21,7 +21,7 @@ BLINDSIDE.Joker({
             if value then
                 
                 return {
-                [context.energy_compressor_effect] = context.energy_compressor_value^0.9
+                [context.energy_compressor_effect] = context.energy_compressor_value*0.9
             }
             end
             
