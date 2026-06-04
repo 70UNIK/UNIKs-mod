@@ -58,7 +58,7 @@ BLINDSIDE.Blind({
             value = 30,
             taw_unbreakable = true,
             taw_unrerollable = true,
-            x_mult = 2.5,
+            x_mult = 2,
         },
     },
     hues = {"Purple"},

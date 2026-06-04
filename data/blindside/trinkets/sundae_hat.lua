@@ -1,7 +1,7 @@
 SMODS.Joker({
-    key = 'unik_blindside_cat_hat',
+    key = 'unik_blindside_sundae_hat',
     atlas = 'unik_trinkets',
-    pos = {x = 2, y = 0},
+    pos = {x = 3, y = 0},
     rarity = 'bld_keepsake',
     cost = 15,
     blueprint_compat = true,
@@ -24,7 +24,7 @@ SMODS.Joker({
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card and context.other_card.facing ~= "back" and not context.end_of_round then
             if (context.other_card == context.scoring_hand[1] ) then
-                if context.other_card:is_color("Faded") or context.other_card:is_color("Red") or context.other_card:is_color("Yellow") then
+                if context.other_card:is_color("Blue") or context.other_card:is_color("Green") or context.other_card:is_color("Purple") then
                     return {
                         x_mult = card.ability.extra.x_mult,
                     }

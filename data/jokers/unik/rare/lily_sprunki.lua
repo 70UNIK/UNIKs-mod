@@ -41,7 +41,10 @@ SMODS.Joker {
         return { 
             vars = {localize(quote) ,
             localize(lily_quotes[center.ability.extra.quoteset][math.random(#lily_quotes[center.ability.extra.quoteset])] .. "")
-            ,center.ability.extra.limit
+            ,center.ability.extra.limit,
+            colours = { 
+                G.C.SECONDARY_SET.Enhanced
+            }
         } }
     end,
     blueprint_compat = false,
@@ -68,146 +71,25 @@ SMODS.Joker {
 
         end
 	end,
-}
-
--- if JokerDisplay then
--- 	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
---     }
--- end
-
---cashout context
-local cashoutcontext = G.FUNCS.cash_out
-G.FUNCS.cash_out = function(e)
-    SMODS.calculate_context({after_cashout = true})
-    cashoutcontext(e)
-    -- G.GAME.unik_fiendish_cap = nil
-end
-
---Add "devour" button on highlight
-  local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
-  function G.UIDEF.use_and_sell_buttons(card)
-    local tdc =  G_UIDEF_use_and_sell_buttons_ref(card)
-    if (card.area == G.jokers) and card.config.center.key == "j_unik_lily_sprunki" then --Add a devour button
-        local sell = nil
-        local use = nil
-        local devour = nil
-
-        sell = {n=G.UIT.C, config={align = "cr"}, nodes={
-        {n=G.UIT.C, config={ref_table = card, align = "cr",padding = 0.1, r=0.08, minw = 1.25, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'sell_card', func = 'can_sell_card'}, nodes={
-            {n=G.UIT.B, config = {w=0.1,h=0.6}},
-            {n=G.UIT.C, config={align = "tm"}, nodes={
-            {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
-                {n=G.UIT.T, config={text = localize('b_sell'),colour = G.C.UI.TEXT_LIGHT, scale = 0.4, shadow = true}}
-            }},
-            {n=G.UIT.R, config={align = "cm"}, nodes={
-                {n=G.UIT.T, config={text = localize('$'),colour = G.C.WHITE, scale = 0.4, shadow = true}},
-                {n=G.UIT.T, config={ref_table = card, ref_value = 'sell_cost_label',colour = G.C.WHITE, scale = 0.55, shadow = true}}
-            }}
-            }}
-        }},
-        }}
-         devour = 
-            {n=G.UIT.C, config={align = "cr"}, nodes={
-            
-            {n=G.UIT.C, config={ref_table = card, align = "cr",maxw = 1.25, padding = 0.1, r=0.08, minw = 1.25, minh = (card.area and card.area.config.type == 'joker') and 0 or 1, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'unik_devour_fs', func = 'unik_can_devour_fs'}, nodes={
-                {n=G.UIT.B, config = {w=0.1,h=0.6}},
-                {n=G.UIT.T, config={text = localize('b_unik_devour'),colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
-            }}
-        }}
-        --overwriting usual buttons
-        tdc = {
-      n=G.UIT.ROOT, config = {padding = 0, colour = G.C.CLEAR}, nodes={
-        {n=G.UIT.C, config={padding = 0.15, align = 'cl'}, nodes={
-          {n=G.UIT.R, config={align = 'cl'}, nodes={
-            sell
-          }},
-          {n=G.UIT.R, config={align = 'cl'}, nodes={
-            use
-          }},
-          {n=G.UIT.R, config={align = 'cl'}, nodes={
-            devour
-          }},
-        }},
-    }}
-    end
-    return tdc
-end
-
---Gore6 (custom card destruction animation)
-function Card:gore6_break()
-    local enhancements = SMODS.get_enhancements(self)
-    for key, _ in pairs(enhancements) do
-        if G.P_CENTERS[key].woodbreak then 
-            self:woodBreak()
-            return nil
-        elseif G.P_CENTERS[key].metalbreak then 
-            self:metalBreak(G.P_CENTERS[key].metalbreak.colour or nil)
-            return nil
-        elseif G.P_CENTERS[key].rockbreak then 
-            self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
-            return nil
-        end
-    end
-    local dissolve_time = 0.7
-    self.shattered = true
-    self.dissolve = 0
-    self.dissolve_colours = {{0.5,0,0,0.8}}
-    self:juice_up()
-    local childParts = Particles(0, 0, 0,0, {
-        timer_type = 'TOTAL',
-        timer = 0.007*dissolve_time,
-        scale = 0.3,
-        speed = 4,
-        lifespan = 0.5*dissolve_time,
-        attach = self,
-        colours = self.dissolve_colours,
-        fill = true
-    })
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.5*dissolve_time,
-        func = (function() childParts:fade(0.15*dissolve_time) return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        blockable = false,
-        func = (function()
-                play_sound("unik_gore6", math.random()*0.2 + 0.9,0.5)
-                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
-            return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'ease',
-        blockable = false,
-        ref_table = self,
-        ref_value = 'dissolve',
-        ease_to = 1,
-        delay =  0.5*dissolve_time,
-        func = (function(t) return t end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.55*dissolve_time,
-        func = (function() self:remove() return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.51*dissolve_time,
-    }))
-end
-
-G.FUNCS.unik_devour_fs = function(e)
-    local card = e.config.ref_table
-    local eternals = 0
-    if G.hand and G.hand.highlighted and #G.hand.highlighted > 0 then
-        for i, v in pairs(G.hand.highlighted) do
-            if  SMODS.is_eternal(v, card) then
-                eternals = eternals + 1
+    unik_can_activate_ability = function(self,card)
+        if not card.ability.extra.active then return false end
+        local cards = 0
+        for i,v in pairs(G.hand.highlighted) do
+            if not SMODS.is_eternal(v,card) then
+                cards = cards + 1
             end
         end
-    end
+        return cards > 0
+    end,
+    unik_activated_ability = function(self,card) 
+        local eternals = 0
+        if G.hand and G.hand.highlighted and #G.hand.highlighted > 0 then
+            for i, v in pairs(G.hand.highlighted) do
+                if  SMODS.is_eternal(v, card) then
+                    eternals = eternals + 1
+                end
+            end
+        end
     if G.hand and G.hand.highlighted and #G.hand.highlighted - eternals > 0 then 
         G.CONTROLLER.locks.unik_destroy_selected = true
         G.E_MANAGER:add_event(Event({
@@ -285,51 +167,90 @@ G.FUNCS.unik_devour_fs = function(e)
             func = function()
                 G.CONTROLLER.locks.unik_destroy_selected = nil
                 card.ability.extra.active = false
-                
-                G.E_MANAGER:add_event(Event({
-                    trigger='after',
-                        func = function()
-                            e.disable_button = nil
-                        return true
-                    end
-                }))
                 return true
             end
         }))
     else
-        print("OOps error!")
-        e.disable_button = nil
-        
+        error("UH OH!")
     end
+    end,
+
+}
+
+-- if JokerDisplay then
+-- 	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
+--     }
+-- end
+
+--cashout context
+local cashoutcontext = G.FUNCS.cash_out
+G.FUNCS.cash_out = function(e)
+    SMODS.calculate_context({after_cashout = true})
+    cashoutcontext(e)
+    -- G.GAME.unik_fiendish_cap = nil
 end
 
-G.FUNCS.unik_can_devour_fs = function(e)
-    local card = e.config.ref_table
-    if G.hand and G.hand.highlighted and not card.debuff then
-        if
-            not (G.CONTROLLER.locked or (G.GAME.STOP_USE and G.GAME.STOP_USE > 0))
-            and not G.SETTINGS.paused
-            and card.area.config.type ~= "shop" then
-            local eternals = 0
-            for i, v in pairs(G.hand.highlighted) do
-                if SMODS.is_eternal(v, card) then
-                    eternals = eternals + 1
-                end
-            end
-            if #G.hand.highlighted - eternals > 0 and (card.ability and card.ability.extra and (card.ability.extra.active)) then
-                e.config.colour = G.C.UNIK_EYE_SEARING_RED
-                e.config.button = "unik_devour_fs"
-            else
-                e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-                e.config.button = nil
-            end
-        else
-            e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-            e.config.button = nil
+--Gore6 (custom card destruction animation)
+function Card:gore6_break()
+    local enhancements = SMODS.get_enhancements(self)
+    for key, _ in pairs(enhancements) do
+        if G.P_CENTERS[key].woodbreak then 
+            self:woodBreak()
+            return nil
+        elseif G.P_CENTERS[key].metalbreak then 
+            self:metalBreak(G.P_CENTERS[key].metalbreak.colour or nil)
+            return nil
+        elseif G.P_CENTERS[key].rockbreak then 
+            self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
+            return nil
         end
-    else
-        e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-        e.config.button = nil
     end
-        
+    local dissolve_time = 0.7
+    self.shattered = true
+    self.dissolve = 0
+    self.dissolve_colours = {{0.5,0,0,0.8}}
+    self:juice_up()
+    local childParts = Particles(0, 0, 0,0, {
+        timer_type = 'TOTAL',
+        timer = 0.007*dissolve_time,
+        scale = 0.3,
+        speed = 4,
+        lifespan = 0.5*dissolve_time,
+        attach = self,
+        colours = self.dissolve_colours,
+        fill = true
+    })
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.5*dissolve_time,
+        func = (function() childParts:fade(0.15*dissolve_time) return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        blockable = false,
+        func = (function()
+                play_sound("unik_gore6", math.random()*0.2 + 0.9,0.5)
+                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
+            return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blockable = false,
+        ref_table = self,
+        ref_value = 'dissolve',
+        ease_to = 1,
+        delay =  0.5*dissolve_time,
+        func = (function(t) return t end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.55*dissolve_time,
+        func = (function() self:remove() return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.51*dissolve_time,
+    }))
 end

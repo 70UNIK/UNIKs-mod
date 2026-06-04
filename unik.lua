@@ -193,6 +193,7 @@ NFS.load(mod_path .. "data/hooks/colours.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/hooks/boosterHooks.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
+NFS.load(mod_path .. "data/misc/activated_ability.lua")()
 
 
 SMODS.Atlas({
@@ -1426,10 +1427,13 @@ if next(SMODS.find_mod("Blindside")) then
 	
 	
 	NFS.load(mod_path .. "data/blindside/trinkets/pink_bow.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/faerie_tiara.lua")()	
 	NFS.load(mod_path .. "data/blindside/trinkets/celestial_nightcap.lua")()	
 	NFS.load(mod_path .. "data/blindside/trinkets/cat_hat.lua")()	
-	NFS.load(mod_path .. "data/blindside/trinkets/tic_tac_toe_board.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/sundae_hat.lua")()	
 	
+	NFS.load(mod_path .. "data/blindside/trinkets/tic_tac_toe_board.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/microwave.lua")()	
 	
 
 	--stakes

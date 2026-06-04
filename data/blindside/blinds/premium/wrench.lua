@@ -18,6 +18,8 @@
             
             if context.press_play and card.facing ~= 'back' and context.main_eval then
                 G.E_MANAGER:add_event(Event({
+                    trigger = "after",
+                    delay = 0.5,
                     func = function()
                         if card.area == G.play then
                                             card.ability.extra.stored_seed = nil

@@ -2613,8 +2613,8 @@ return {
                     {
                         "When played, all",
                         "{X:chips,C:white}XChips{} and higher",
-                        "operations become {C:red}lower",
-                        "operations",
+                        "operations set {C:chips}Chips",
+                        "to {C:red}0{} instead",
                     },
                 }
             },
@@ -2624,8 +2624,8 @@ return {
                     {
                         "{X:money,C:white}Yellow{} {X:dark_edition,C:white}Faded{}",
                         "Adjacent Blinds are",
-                        "{C:attention}Retriggered {}#1# time#<s>1#",
-                        "and {C:unik_copper}Rescored{} #2# time#<s>2#",
+                        "{C:attention}Retriggered {C:attention}#1#{} time#<s>1#",
+                        "and {C:unik_copper}Rescored{C:attention} #2#{} time#<s>2#",
                     },
                     {
                         "{C:red}Debuffs{} all played",
@@ -2641,8 +2641,8 @@ return {
                     {
                         "{X:money,C:white}Yellow{} {X:dark_edition,C:white}Faded{}",
                         "Adjacent Blinds are",
-                        "{C:attention}Retriggered {}#1# time#<s>1#",
-                        "and {C:unik_copper}Rescored{} #2# time#<s>2#",
+                        "{C:attention}Retriggered {C:attention}#1#{} time#<s>1#",
+                        "and {C:unik_copper}Rescored{C:attention} #2#{} time#<s>2#",
                     },
                     {"Always scores"},
                 }
@@ -2732,23 +2732,6 @@ return {
                 name = "The Bliss",
                 text = {
                     
-                }
-            },
-            m_unik_blindside_opulence ={
-                name = "The Opulence",
-                text = {
-                    {
-                        "{X:gold,C:white}Yellow{} {X:green,C:white}Green",
-                        "{C:money}+$#1#{} for each {X:gold,C:white}Yellow{}",
-                        "or {X:green,C:white}Green",
-                        "Blind in your Full Deck"
-                    },
-                    {
-                        "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
-                    },
-                    {
-                    "{C:attention,E:1}Burns{}",
-                    },
                 }
             },
             m_unik_blindisde_decepticon = {
@@ -2900,13 +2883,54 @@ return {
                 text = {
                     {
                         "{X:purple,C:white}Purple{}",
-                        "{X:mult,C:white}X#1#{} Mult"
+                        "{X:mult,C:white}X#1#{} Mult if",
+                        "it has a {C:attention}modifier",
                     },
                     {
                         "{C:attention}Multi-Upgradable"
                     },
                 }
             },
+            -- --initally +$2 and $X1.35 Mult
+            -- m_unik_blindside_opulence= {
+            --     name = "The Opulence",
+            --     text = {
+            --         {
+            --             "{X:green}Green{}",
+            --             "{C:gold}$#1#{} and {X:mult,C:white}X#2#{} Mult"
+            --         },
+            --         {
+            --             "{C:green}#1# in #2#{} chance to {C:red} not{}",
+            --             "{C:attention}upgrade{} self whenever",
+            --             "another Blind is {C:attention}upgraded",
+            --             "{C:inactive,s:0.8}(Even if {C:attention}burned{}, {C:red}discarded{} or {C:attention}in deck{})",
+            --         },
+            --         {
+            --             "{C:attention}Multi-Upgradable"
+            --         },
+            --     }
+            -- },
+            --yeah ppg
+            --something like rescoring 
+            --2 --> 4
+            m_unik_blindside_bubbles = {
+                name = "The Bubbles",
+                text = {
+                    "While {C:attention}held in hand",
+                    "{C:unik_copper}Rescores{} adjacent Blinds",
+                    "held in hand {C:attention}#1#{} time#<s>1#"
+                }
+            },
+            m_unik_blindside_bubbles_upgraded = {
+                name = "The Bubbles",
+                text = {
+                    "While {C:attention}held in hand",
+                    "{C:attention}Retriggers{} and {C:unik_copper}Rescores{}",
+                    "adjacent Blinds held",
+                    "in hand {C:attention}#1#{} time#<s>1#"
+                }
+            },
+            
             m_unik_blindside_upgrade = {
                   name = "The Upgrade",
                 text = {
@@ -2918,7 +2942,7 @@ return {
                     {
                         "{C:green}#3# in #4#{} chance to",
                         "{C:attention}Upgrade{} self",
-                        "after scoring",
+                        "before scoring",
                     },
                     {
                         "{C:attention}Multi-Upgradable"
@@ -3515,11 +3539,10 @@ return {
             j_unik_blindside_pink_bow = {
                 name = "{C:unik_unik_color,f:unik_five_by_five,s:0.8} Pink Bow",
                 text = {
-                    "{X:chips,C:white}X#1#{} Chips",
-                    "if {C:attention}scoring hand{} contains",
+                    "{X:chips,C:white}X#1#{} Chips if",
+                    "{C:attention}scoring hand{} contains",
                     "at least {C:attention}#2#{} Blinds",
-                    "and all {C:attention}played{} Blinds",
-                    "contain {X:purple,C:white}Purple{} hue"
+                    "containing {X:purple,C:white}Purple{} hue",
                 }
             },
             j_unik_blindside_cat_hat = {
@@ -3531,13 +3554,13 @@ return {
                     "or {X:dark_edition,C:white}Faded{} hue",
                 }
             },
-            j_unik_blindside_witch_hat = {
-                name = "Witch Hat",
+            j_unik_blindside_sundae_hat = {
+                name = "Sundae Hat",
                 text = {
-                    "{C:attention}First{} scored",
-                    "{X:green,C:white}Green{}, {X:blue,C:white}Blue",
-                    "or {X:purple,C:white}Purple{} Blind",
-                    "gives {X:mult,C:white}X#1#{} Mult"
+                    "{C:attention}First{} scored Blind",
+                    "gives {X:mult,C:white}X#1#{} Mult if",
+                    "containing {X:green,C:white}Green{}, {X:blue,C:white}Blue",
+                    "or {X:purple,C:white}Purple{} hue",
                 }
             },
             j_unik_blindside_celestial_nightcap = {
@@ -3551,19 +3574,31 @@ return {
             j_unik_blindside_faerie_tiara = {
                 name = "Faerie Tiara",
                 text = {
-                    "{C:attention}Create{} a copy of",
-                    "a {C:bld_trinket}Trinket",
-                    "if it's {C:red}destroyed",
-                    "{C:inactive}(Itself included)",
-                    "{C:inactive}(Must have room)",
+                    {
+                        "{X:mult,C:white}X#1#{} Mult if",
+                        "a {C:bld_trinket}Trinket{} was",
+                        "{C:red}destroyed {C:attention}this ante",
+                        "{V:1}(#2#)",
+                    },
+                    {
+                        "{C:attention}Create{} a copy of",
+                        "a {C:bld_trinket}Trinket",
+                        "if it's {C:red}destroyed",
+                        "{C:inactive}(Itself included)",
+                        "{C:inactive}(Must have room)",
+                    },
+
+
                 }
             },
             j_unik_blindside_microwave = {
                 name = "Microwave",
                 text = {
+                    "{B:1,C:white,s:0.8}Activated Ability",
                     "{C:red}Destroy{} up to {C:attention}#1#",
-                    "selected Blind {C:attention}anytime",
+                    "selected Blind#<s>1# {C:attention}anytime",
                     "{C:inactive}(Once before cashout)",
+                    "{V:2}(#2#)",
                 }
             },
             j_unik_blindside_red_bow = {
@@ -3947,8 +3982,9 @@ return {
                 name="Lily",
                 text={
                     {
+                        "{B:1,C:white,s:0.8}Activated Ability",
                         "{C:red,E:2}Destroy{} selected cards",
-                        "{C:attention}anytime{} {C:inactive}(once until next cashout)",
+                        "{C:inactive}(once until next cashout)",
                         "{C:inactive}(#1#)",
                     },
                     {
@@ -7601,7 +7637,7 @@ return {
                 text = {
                     {
                         "Destroy {C:attention}#1#",
-                        "selected Trinket#<s>1#"
+                        "selected {C:bld_trinket}Trinket#<s>1#"
                     },
                     {
                         "Create a",
@@ -8284,7 +8320,8 @@ return {
             k_unik_random_blind = "(a random Blind in deck)",
             ph_up_ante_2_blindside="Raise all Jokers",
             ph_up_ante_3_blindside="Refresh Jokers",
-            ph_choose_blind_2_blindside="next Joker"
+            ph_choose_blind_2_blindside="next Joker",
+            k_unik_destroyed = "Destroyed!",
         },
         high_scores={},
         labels={

@@ -6,13 +6,13 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 20,
-            x_mult = 1.5,
+            x_mult = 1.75,
             x_mult_up = 0.75,
         }},
     hues = {"Purple" },
     rare = true,
     calculate = function(self, card, context)
-        if context.cardarea == G.play and context.main_scoring then
+        if context.cardarea == G.play and context.main_scoring and (card.edition or card.seal) then
             return {
                 x_mult = card.ability.extra.x_mult
             }
@@ -22,6 +22,7 @@ BLINDSIDE.Blind({
         card.ability.extra.upgraded_times = card.ability.extra.upgraded_times or 0
         card.ability.extra.upgraded = false
         info_queue[#info_queue+1] = {key = 'unik_multi_upgrade', set = 'Other',vars={card.ability.extra.upgraded_times or 0}}
+        info_queue[#info_queue + 1] = {key = 'bld_modifiers', set = 'Other'}
         return {
             vars = {card.ability.extra.x_mult}
         }

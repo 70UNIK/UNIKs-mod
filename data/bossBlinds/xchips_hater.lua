@@ -29,16 +29,22 @@ SMODS.Blind{
 	end,
 }
 
-function UNIK.has_hater()
-    if G.GAME.unik_xchips_becomes_mult then
-        return true
-    end
+function UNIK.has_hater2()
     if BLINDSIDE then
         for i,v in pairs(G.play.cards) do
             if v.config.center.key == 'm_unik_blindside_hater' and v.hater_scoring and not v.debuff and v.facing ~= 'back' then
                 return true
             end
         end
+    end
+end
+
+function UNIK.has_hater()
+    if G.GAME.unik_xchips_becomes_mult then
+        return true
+    end
+    if UNIK.has_hater2() then
+        return true
     end
     return false
 end
@@ -48,22 +54,46 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
     if UNIK.has_hater() then
         if (key == "e_chips" or key == "echips" or key == "Echip_mod") then
             key = 'x_mult'
+            if UNIK.has_hater2() then
+                key = 'eq_chips'
+                amount = -1
+            end
         end
         
         if (key == 'x_chips' or key == 'xchips' or key == 'Xchip_mod') then
             key = 'mult'
+            if UNIK.has_hater2() then
+                key = 'eq_chips'
+                amount = -1
+            end
         end
         if (key == 'xlog_chips' or key == 'xlogchips' or key == 'xlog_chips_mod') then
             key = 'xlog_mult'
+            if UNIK.has_hater2() then
+                key = 'eq_chips'
+                amount = -1
+            end
         end
         if (key == 'ee_chips' or key == 'eechips' or key == 'EEchip_mod') then
             key = 'e_mult'
+            if UNIK.has_hater2() then
+                key = 'eq_chips'
+                amount = -1
+            end
         end
         if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') then
             key = 'ee_mult'
+            if UNIK.has_hater2() then
+                key = 'eq_chips'
+                amount = -1
+            end
         end
         if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') then
             key = 'hyper_mult'
+            if UNIK.has_hater2() then
+                key = 'eq_chips'
+                amount = -1
+            end
         end
     else
         G.GAME.unik_xchips_triggers = G.GAME.unik_xchips_triggers or 0

@@ -1,1 +1,0 @@
---+$8, 1 in 2 chance to not increase this by $4 when scored again.

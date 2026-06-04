@@ -146,6 +146,9 @@ function SMODS.is_eternal(c, ...)
     if c and c.ability and c.ability.unik_taw then
         return true
     end
+    if c and c.config.center.key == 'm_unik_blindside_taw' then
+        return true
+    end
     if c then
         return is_eternalref(c, ...)
     end

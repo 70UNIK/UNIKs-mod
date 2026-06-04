@@ -53,17 +53,27 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
                         v.card.unik_rescored = true
                         sealRescores[#sealRescores+1] = {card = v.card, rescore = v.rescore}
                     end
+                    if v.extra then
+                        on_card_rescursive_rescore_finding(v.extra,sealRescores)
+                    end
                 elseif i == 'enhancement' then
                     if v.rescore and v.card then
                         v.card.unik_rescored = true
                         enhancementRescores[#enhancementRescores+1] = {card = v.card, rescore = v.rescore}
+                    end
+                    if v.extra then
+                        on_card_rescursive_rescore_finding(v.extra,enhancementRescores)
                     end
                 elseif i ~= 'jokers' then
                     if v.rescore and v.card then
                         v.card.unik_rescored = true
                         micelRescores[#micelRescores+1] = {card = v.card, rescore = v.rescore}
                     end
+                    if v.extra then
+                        on_card_rescursive_rescore_finding(v.extra,micelRescores)
+                    end
                 end
+                
             end
 
         end
@@ -271,6 +281,16 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     end
 
 
+end
+
+function on_card_rescursive_rescore_finding(v,rescoreType)
+    if v.rescore and v.card then
+        v.card.unik_rescored = true
+        rescoreType[#rescoreType+1] = {card = v.card, rescore = v.rescore}
+    end
+    if v.extra then
+        recursive_rescore_finding(v.extra,rescoreType)
+    end
 end
 
 function recursive_rescore_finding(v,jokerRescores)
