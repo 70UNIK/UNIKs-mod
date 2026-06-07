@@ -46,6 +46,7 @@ BLINDSIDE.Joker({
             if #validJokers > 0 then
                 local select = pseudorandom_element(validJokers, pseudoseed("unik_megatron_rage"))
                 select.ability.destroyed_by_megatron = true
+                print(context.identifier)
                    
                     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                         select:gore6_break()

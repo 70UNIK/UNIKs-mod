@@ -1,0 +1,1 @@
+--X1.5 Mult and Xlog mult when held in hand, +1 hand size while held, retained

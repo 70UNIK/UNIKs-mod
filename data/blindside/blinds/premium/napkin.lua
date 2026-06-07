@@ -30,6 +30,9 @@ BLINDSIDE.Blind({
                 areacards = context.scoring_hand
             end
             if areacards and areacards[1] and areacards[1] ~= card and areacards[1].config.center.key ~= 'm_unik_blindside_napkin' then
+                for i,v in pairs(areacards) do
+                    v.bp_iterations = 0
+                end
                 if not UNIK.detect_bp_loop(card,areacards,1) then
                     --print("copying " .. areacards[1].config.center.key)
                     areacards[1].ability.block_scaling_copied = true
@@ -126,9 +129,17 @@ function UNIK.detect_bp_loop(card,cardarea_cards,index)
         if next == card then
             return true
         end
+        --if caught in a loop (ie: via 2 napkins and 1 tracer as the leftmost one)
+        if next.bp_iterations > 0 then
+            return nil
+        end
         if next.config.center.key == 'm_unik_blindside_tracer' then
+            next.bp_iterations = next.bp_iterations or 0
+            next.bp_iterations = next.bp_iterations + 1
             i = i + 1
         elseif next.config.center.key == 'm_unik_blindside_napkin' then
+            next.bp_iterations = next.bp_iterations or 0
+            next.bp_iterations = next.bp_iterations + 1
             i = 1
         else
             return nil

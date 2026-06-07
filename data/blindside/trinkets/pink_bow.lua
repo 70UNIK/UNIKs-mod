@@ -8,10 +8,12 @@
 -- Cat Biscuit - X2 Mult, destroyed if hand contains red hue (Trinket)
 -- Microwave - Destroy 1 selected card anytime (once before cashout) (keepsake) (YE)
 -- Antivirus: Create a shield tag for every 2 ritual cards used (trinket)
--- Mountain Boots: Create a summit card whenever deck is reshuffled
 -- ???: Prevents death, self destructs (keepsake)
 -- Tic Tac Toe Board: Create a circles tag when deck is reshuffled (YE)
 -- 3D Printer: Copies the effect of the leftmost Trinket
+-- pistol: X3 Mult, 1 in 12 chance to play selected blinds when a blind is selected
+-- Floppy Disk: Use to Save up to 1 selected shop item, then use it to spawn it in shop (trinket), useful for trinkets, price tags, etc...
+-- 
 
 --Monkey Paws: Detrimental trinkets
 --The Decision creates 1 negative monkey paw then burns
@@ -46,14 +48,13 @@ SMODS.Joker({
         if context.joker_main then
             local purples = 0
             for i,v in pairs(context.scoring_hand) do
-                if v:is_color("Purple") then
+                if v:is_color("Purple", true, false) then
                     purples = purples + 1
-                    break
                 end
             end
             if purples >= card.ability.extra.min then
                 return {
-                    xchips = card.ability.extra.xchips
+                    x_chips = card.ability.extra.xchips
                 }
             end
             

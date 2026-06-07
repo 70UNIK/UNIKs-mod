@@ -22,9 +22,10 @@ BLINDSIDE.Blind({
                 end
             end
             if scoring then
+                local currcard = context.blueprint_card or card
                 for i,v in pairs(context.scoring_hand) do
                 --MAKE SURE TO AVOID ITSELF! it otherwise powercreeps chelsea
-                    if v ~= card then
+                    if v ~= currcard then
                         v.ability["perma_x_chips"] = v.ability["perma_x_chips"] or 0
                         v.ability["perma_x_chips"] = v.ability["perma_x_chips"] + card.ability.extra.x_chips
                         G.E_MANAGER:add_event(Event({

@@ -68,6 +68,15 @@ function reset_blinds()
             G.GAME.blind_on_deck = 'Small'
             G.GAME.round_resets.boss_rerolled = false
         end
+    else
+        if G.GAME.round_resets.blind_states.Small == 'Upcoming' and
+            G.GAME.round_resets.blind_states.Big == 'Upcoming' and
+            G.GAME.round_resets.blind_states.Boss == 'Upcoming' then
+                SMODS.calculate_context({unik_refresh_blinds = true})
+                for i,v in pairs(G.jokers.cards) do
+                    v.ability.unik_bought_this_ante = nil
+                end
+        end
     end
 end
 

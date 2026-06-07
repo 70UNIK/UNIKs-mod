@@ -94,6 +94,15 @@ BLINDSIDE.Joker({
 --better version
 function UNIK.blindside_chips_modifyV2(operation,silent,originalchips)
     if operation then
+        if operation.chips_base and operation.chips_base ~= 0 then
+             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
+            G.GAME.blind.basechips = math.max(1,to_big(G.GAME.blind.basechips)+operation.chips_base*get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling)
+            G.hand_text_area.blind_chip_text:juice_up()
+                G.GAME.blind.basechips_text = number_format(to_big(G.GAME.blind.basechips), 100000)
+                if not silent then play_sound('chips1',0.95,1) end
+                return true
+            end}))
+        end
         if operation.x_chips and operation.x_chips ~= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
             G.GAME.blind.basechips = math.max(1,to_big(G.GAME.blind.basechips)*operation.x_chips)

@@ -58,7 +58,7 @@ BLINDSIDE.Blind({
         if G.GAME.selected_back.effect.center.config.extra then
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
             
-            return UNIK.check_if_exists('m_unik_blindside_prison')  and pseudorandom('cage'..G.SEED) < 0.4
+            return UNIK.check_if_exists('m_unik_blindside_prison')  and pseudorandom('cage'..G.SEED) < 0.8
         else
             return false
         end

@@ -20,7 +20,7 @@ BLINDSIDE.Blind({
         if context.cardarea == G.play and context.main_scoring then
             UNIK.blindside_chips_modifyV2({e_chips = card.ability.extra.joker_e_chips})  
             return {
-                message = "^" .. card.ability.extra.joker_e_chips .. " JChips",
+                message = "^" .. card.ability.extra.joker_e_chips .. localize('k_unik_jchips'),
                 colour = G.C.L_BLACK
             }
         end

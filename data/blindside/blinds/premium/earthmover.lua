@@ -57,7 +57,7 @@ BLINDSIDE.Blind({
     in_pool = function(self, args)
         if G.GAME.selected_back.effect.center.config.extra then
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
-            return UNIK.check_if_exists('m_unik_blindside_earthmover') and pseudorandom('earthmover'..G.SEED) < 0.33
+            return UNIK.check_if_exists('m_unik_blindside_earthmover') and pseudorandom('earthmover'..G.SEED) < 0.5
         else
             return false
         end

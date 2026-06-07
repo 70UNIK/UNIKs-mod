@@ -14,8 +14,9 @@ BLINDSIDE.Blind({
     calculate = function(self, card, context)
         
         if context.cardarea == G.play and context.main_scoring then
+            local currcard = context.blueprint_card or card
             for i,v in pairs(context.scoring_hand) do
-                if v ~= card then
+                 if v ~= currcard then
                     v.ability["perma_bonus"] = v.ability["perma_bonus"] or 0
                     v.ability["perma_bonus"] = v.ability["perma_bonus"] + card.ability.extra.chips
                     G.E_MANAGER:add_event(Event({

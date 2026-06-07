@@ -142,13 +142,6 @@ function firstToUpper(str)
     return (str:gsub("^%l", string.upper))
 end
 
-function UNIK.blindOrCard(capitalize)
-	if UNIK.hasBlindside() then
-		return capitalize and firstToUpper("blind") or "blind"
-	end
-	return capitalize and firstToUpper("card") or "card"
-end
-
 function UNIK.overshootEnabled(no_comment)
 	if not unik_config.unik_overshoot_enabled then
 		return false
@@ -1316,19 +1309,23 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/vice.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/shine.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/catalyst.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/catalyst.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/nought.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/cross.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/shield.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/napkin.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/tracer.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/scrum.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/upgrade.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/onion.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prison.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/earthmover.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/kitsune.lua")()	
+
 	NFS.load(mod_path .. "data/blindside/blinds/premium/cat.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/blossom.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/nought.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/bubbles.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/evergreen.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/descending.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/the_fail.lua")()	
@@ -1338,7 +1335,9 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/patina.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/hater.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/fizzy.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/bliss.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/zu.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/decepticon.lua")()	
 
 	NFS.load(mod_path .. "data/blindside/blinds/crude/lily.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()

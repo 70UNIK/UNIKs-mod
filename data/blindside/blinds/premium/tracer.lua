@@ -25,6 +25,7 @@ BLINDSIDE.Blind({
             end
             local index = -1
             for i = 1, #areacards do
+                areacards[i].bp_iterations = 0
                 if areacards[i] == card then
                     index = i
                 end

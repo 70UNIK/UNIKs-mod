@@ -17,8 +17,9 @@ SMODS.Consumable{
         if UNIK.isIndigenousSummitNaming() then
             key = key .. '_i'
         end
+        local cardOrBlind = UNIK.hasBlindside() and 'k_unik_blind' or 'k_unik_card'
 		return {
-			key = key, vars = {card.ability.extra.x_mult,card.ability.extra.max_highlighted},
+			key = key, vars = {card.ability.extra.x_mult,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
     set_ability = function(self, card, initial, delay_sprites)

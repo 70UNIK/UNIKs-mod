@@ -27,15 +27,19 @@ SMODS.Joker {
                 x_mult = card.ability.extra.x_mult
             }
         end
-        if context.unik_refresh_blinds then
+        if context.unik_refresh_blinds and not context.blueprint and not context.retrigger_joker then
             card.ability.extra.active = false
             return {
                 message = localize('k_reset'),
                 colour = G.C.DARK_EDITION,
             }
         end
-        if context.unik_destroying_joker and context.unik_destroyed_joker then
-            if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+        if context.unik_destroying_joker and context.unik_destroyed_joker and not context.blueprint and not context.retrigger_joker then
+           -- print("create" .. context.unik_destroyed_joker.config.center.key)
+            G.E_MANAGER:add_event(Event({
+                trigger="before",
+                func = function()
+                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
                 local create = 1
                 G.GAME.joker_buffer = G.GAME.joker_buffer + create
                 
@@ -46,6 +50,7 @@ SMODS.Joker {
                             _card:add_to_deck()
                             _card:start_materialize()
                             G.jokers:emplace(_card)
+                             _card.ability.destroyed_by_megatron = nil
                             G.GAME.joker_buffer = 0
                         end
                         
@@ -53,6 +58,10 @@ SMODS.Joker {
                     end
                 }))
             end
+                    return true
+                end
+            }))
+            
             
             if not card.ability.extra.active then
                 card.ability.extra.active = true
@@ -70,13 +79,6 @@ SMODS.Joker {
 }
 
 local function attempt_backup_copy_lily(card)
-    print("ATTEMPT BACKUP COPY")
-    for i,v in pairs(G.jokers.cards) do
-        if v == card then
-            return false
-        end
-    end
-    print("---")
     if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
         local create = 1
         G.GAME.joker_buffer = G.GAME.joker_buffer + create
@@ -88,6 +90,7 @@ local function attempt_backup_copy_lily(card)
                     _card:add_to_deck()
                     _card:start_materialize()
                     G.jokers:emplace(_card)
+                    _card.ability.destroyed_by_megatron = nil
                     G.GAME.joker_buffer = 0
                 end
                 
@@ -96,6 +99,7 @@ local function attempt_backup_copy_lily(card)
         }))
         return true
     end
+    
     return false
 end
 
@@ -103,25 +107,25 @@ local remove_ref = Card.remove
 function Card.remove(self)
     local originalArea = self.area
     local white_lily = false
-    G.GAME.unik_white_lily_persistance = G.GAME.unik_white_lily_persistance or 0
+    G.GAME.unik_white_lily_persistance2 = G.GAME.unik_white_lily_persistance2 or 0
     if not G.GAME.ignore_delete_context then
         if self.added_to_deck and self.ability.set == 'Joker' and (not self.unik_dissolve_sell_flag) and ((originalArea and originalArea == G.jokers) or (not originalArea) or (originalArea and originalArea ~= G.shop_jokers and originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers))  then
-            if self.config.center.key == 'j_unik_white_lily_cookie' then
-                    G.GAME.unik_white_lily_persistance = G.GAME.unik_white_lily_persistance + 1
-                    white_lily = true
-                end
+            
             if G and G.GAME then
+                
                 SMODS.calculate_context({unik_destroying_joker = true, unik_destroyed_joker = self})
-                if G.GAME.unik_white_lily_persistance and G.GAME.unik_white_lily_persistance > 0 then
+                if G.GAME.unik_white_lily_persistance2 and G.GAME.unik_white_lily_persistance2 > 0 then
                     G.E_MANAGER:add_event(Event({
-                        delay = 0,
-                        trigger= 'immediate',
                         func = function()
                             attempt_backup_copy_lily(self)
                             return true
                         end
                     }))
                     
+                end
+                if self.config.center.key == 'j_unik_blindside_faerie_tiara' then
+                    G.GAME.unik_white_lily_persistance2 = G.GAME.unik_white_lily_persistance2 + 1
+                    white_lily = true
                 end
             end
         end
@@ -131,7 +135,7 @@ function Card.remove(self)
             delay = 0,
             trigger= 'after',
             func = function()
-                G.GAME.unik_white_lily_persistance = G.GAME.unik_white_lily_persistance - 1
+                G.GAME.unik_white_lily_persistance2 = G.GAME.unik_white_lily_persistance2 - 1
                 return true
             end
         }))
