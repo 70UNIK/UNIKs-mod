@@ -15,7 +15,7 @@ BLINDSIDE.Blind({
     hidden = true,
     unik_ancient = true,
     calculate = function(self, card, context)
-        if context.cardarea == G.play and context.after and card.facing ~= 'back' then
+        if context.cardarea == G.play and context.after and card.facing ~= 'back' and not context.blueprint then
             SMODS.scale_card(card, {
                 ref_table = card.ability.extra,
                 ref_value = "e_mult",

@@ -30,7 +30,7 @@ payload = '''
 elseif card.config.center.weight == 700 then
     badges[#badges+1] = create_badge(localize('k_unik_ancient'), G.C.UNIK_ANCIENT, G.C.WHITE, 1 )
 elseif card.config.center.weight == 999 then
-    badges[#badges+1] = create_badge(localize('k_unik_exotic'), G.C.DARK_EDITION, G.C.WHITE, 1 )
+    badges[#badges+1] = create_badge(localize('k_unik_exotic'), G.C.UNIK_EXOTIC, G.C.WHITE, 1 )
 '''
 
 [[patches]]
@@ -45,6 +45,7 @@ if self.unik_ancient then
     self.pools["unik_obj_blindcard_ancient"] = true
 end
 if self.unik_exotic then
+    self.pools["unik_obj_blindcard_exotic"] = true
 end
 '''
 
@@ -76,3 +77,21 @@ match_indent = true
 position = 'after'
 payload = ''' or rarity == 70 or rarity == 99'''
 
+##LEGENDARY BLIND SQUARES
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/card_draw.lua"]'''
+pattern = '''elseif self.seal then
+            G.shared_seals[self.seal].role.draw_major = self
+            G.shared_seals[self.seal]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+            if self.seal == 'Gold' then G.shared_seals[self.seal]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center) end
+        end'''
+position = "before"
+payload = '''
+-- EXOTIC/LEGENDARY BLINDS ARE SQUARE
+elseif self.seal and G.P_SEALS[self.seal] and  G.P_SEALS[self.seal].pools and G.P_SEALS[self.seal].pools["bld_obj_enhancements"] and self.config.center.unik_exotic then
+    G.shared_seals[self.seal].role.draw_major = self
+    G.shared_seals[self.seal]:draw_shader('unik_blindside_square', nil, nil, nil, self.children.center)
+    if self.seal == 'Gold' then G.shared_seals[self.seal]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center) end
+'''
+match_indent = true

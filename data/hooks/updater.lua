@@ -59,6 +59,17 @@ function Game:update(dt)
             self.C.UNIK_ANCIENT[2] = 0.20784313725490197 + 0.15*math.sin(self.TIMERS.REAL*1.3)
             self.C.UNIK_ANCIENT[3] = 0.6823529411764706 + 0.31*math.sin(self.TIMERS.REAL*1.3)
         end
+        self.C.UNIK_EXOTIC = self.C.UNIK_EXOTIC or {0.4392156862745098,0.5450980392156862,0.5686274509803921,1}
+        --exotic colors for legendary blinds
+        if self.C.UNIK_EXOTIC then
+            local exotic_colors = {{0.4392156862745098,0.5450980392156862,0.5686274509803921,1},{0.11764705882352941,0.6196078431372549,0.7294117647058823,1}}
+            local anim_timer = self.TIMERS.REAL * 1.5
+            local p = 0.5 * (math.sin(anim_timer) + 1)
+            for i = 1, 4 do
+                self.C.UNIK_EXOTIC[i] = exotic_colors[1][i] * p + exotic_colors[2][i] * (1 - p)
+            end
+            --HEX("708b91"), HEX("1e9eba")
+        end
         self.C.UNIK_SHITTY_EDITION = self.C.UNIK_SHITTY_EDITION or {0,0,0,1}
         --self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)
         self.C.UNIK_SHITTY_EDITION[1] = 0.6+0.2*(1- math.sin(self.TIMERS.REAL*1.3))

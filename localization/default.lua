@@ -3558,6 +3558,38 @@ return {
                     },
                 }
             },
+            --scaling ^chips
+            m_unik_blindside_legendary_golden_crown = {
+                name = "Korruptionkruunu",
+                text = {
+                    {
+                        "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{}",
+                        "Gains {X:dark_edition,C:white}^#2#{} Chips",
+                        "if hand is {C:attention}at least{}",
+                        "your {C:attention}best hand{} this run",
+                        "{C:inactive}({C:attention}#3#{C:inactive})",
+                    },
+                    {
+                        "{C:inactive}Currently {X:dark_edition,C:white}^#1#{C:inactive} Chips"
+                    }
+                }
+            },
+            --^0.5 chips to joker and ^0.5 mult to joker
+            m_unik_blindside_legendary_violet_vessel = {
+
+            },
+            --^1.1 mult when held, draws 1 card from deck when drawn
+            m_unik_blindside_legendary_maroon_magnet = {
+
+            },
+            --^1.5 chips, but banishes all other played blinds if score exceeds ^1.4 requirements
+            m_unik_blindside_legendary_indigo_icbm = {
+
+            },
+            --^1.5 mult after scoring, creates a gillotine tag (disables jokers up to Epic Jokers, then ^0.5 mult and ^0.5 chips to joker)
+            m_unik_blindside_legendary_crimson_heart = {
+
+            },
         },
         Rotarot = {
             c_unik_rot_crossdresser={

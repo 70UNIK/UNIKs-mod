@@ -23,6 +23,19 @@ SMODS.ObjectType {
     end,
 }
 
+SMODS.ObjectType {
+    key = "unik_obj_blindcard_ancient",
+    default = "m_unik_blindside_legendary_golden_crown",
+    inject_card = function(self, center)
+        SMODS.ObjectType.inject_card(self, center)
+        SMODS.insert_pool(G.P_CENTER_POOLS['unik_obj_blindcard_exotic'], center)
+    end,
+    delete_card = function(self, center)
+        SMODS.ObjectType.delete_card(self, center)
+        SMODS.remove_pool(G.P_CENTER_POOLS['unik_obj_blindcard_exotic'], center.key)
+    end,
+}
+
 
 SMODS.Consumable {
     key = 'unik_blindside_sigil',

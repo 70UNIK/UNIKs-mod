@@ -1277,11 +1277,20 @@ SMODS.Atlas({
     py = 95, 
 frames = 3 })
 
+SMODS.Atlas({ 
+    key = "unik_blindside_legendary_blinds", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_blindside_legendary_blinds.png", 
+    px = 71, 
+    py = 95, 
+frames = 3 })
+
 if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/stickers/impounded_blindside.lua")() 
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/taunt_sprites.lua")()	
+	NFS.load(mod_path .. "data/blindside/trims/square_trims.lua")()
 	
 	--BLINDS
 	NFS.load(mod_path .. "data/blindside/blinds/simple/collapse.lua")()
@@ -1360,6 +1369,8 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_sand.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_hook.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
+
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_crown.lua")()
 	--JOKERS
 	NFS.load(mod_path .. "data/blindside/jokers/big/fruity_joker.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/big/plain_jane.lua")()	
