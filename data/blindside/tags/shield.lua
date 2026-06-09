@@ -21,10 +21,12 @@ SMODS.Tag {
                     func = function ()
                         context.tag:nope()
                         context.tag.triggered = true
+                        G.GAME.unik_suppress_shield = nil
                         tag:yep('+', G.C.GREEN, function() 
                             return true end)
+                        
                         tag.triggered = true
-                        G.GAME.unik_suppress_shield = nil
+                        
                         return true
                     end
                 }))
@@ -39,10 +41,12 @@ SMODS.Tag {
                                 func = function ()
                             tag2:nope()
                             tag2.triggered = true
+                            G.GAME.unik_suppress_shield = nil
                             tag:yep('+', G.C.GREEN, function() 
                                 return true end)
+                            
                             tag.triggered = true
-                            G.GAME.unik_suppress_shield = nil
+                            
                                             return true
                         end
                     }))

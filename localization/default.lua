@@ -2787,6 +2787,7 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
+                        "{X:mult,C:white}X#1#{} Mult and",
                         "{C:unik_copper}Rescore{} all scored",
                         "{X:red,C:white}Red{} Blinds",
                     },
@@ -2802,6 +2803,7 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:green,C:white}Green",
+                        "{X:mult,C:white}X#1#{} Mult and",
                         "{C:unik_copper}Rescore{} all scored",
                         "{X:red,C:white}Red{} and {X:green,C:white}Green{} Blinds",
                     },
@@ -2882,14 +2884,16 @@ return {
                 name = "The Panopticon",
                 text = {
                     {
-                        "{X:dark_edition,C:white}^#1#{} Chips to Joker"
+                                                "{X:dark_edition,C:white}Faded",  
+                        "{X:unik_rgb,C:white}^^#1#{} Chips to Joker"
                     },
                     {
-                        "{X:dark_edition,C:white}Faded",  
-                        "After playing this",
-                        "{C:attention}#2#{} time#<s>2#, create",
-                        "a {C:dark_edition}Negative{} {C:unik_exotic}???",
-                        "and {C:red,E:2}Self-Destruct"
+
+                        "After played in",
+                        "scoring hand {C:attention}#2#{} time#<s>2#,",
+                        "create {C:unik_exotic}The Portal",
+                        "and {C:red,E:2}Self-Destruct",
+                        "{C:inactive}(Can overflow)",
                     },
                     {"{C:attention}Unique"},
                     {"{C:attention}Burns"},
@@ -3256,7 +3260,7 @@ return {
                         "Trinket owned"
                     },
                                         {
-                        "{C:attention}"
+                        "{C:red}Stubborn"
                     },
                     {
                         "{C:attention}Burns"
@@ -3570,7 +3574,7 @@ return {
                         "{C:inactive}({C:attention}#3#{C:inactive})",
                     },
                     {
-                        "{C:inactive}Currently {X:dark_edition,C:white}^#1#{C:inactive} Chips"
+                        "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Chips)"
                     }
                 }
             },
@@ -3580,11 +3584,72 @@ return {
             },
             --^1.1 mult when held, draws 1 card from deck when drawn
             m_unik_blindside_legendary_maroon_magnet = {
-
+                name = "Murhaavamagneetti",
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:chips,C:white}Blue",
+                        "{X:dark_edition,C:white}^#1#{} Mult when",
+                        "held in hand"
+                    },
+                    {
+                        "Once per round, create",
+                        "a {C:attention}Toss Tag{} when",
+                        "drawn to hand"
+                    }
+                }
+            },
+            m_unik_blindside_legendary_maroon_magnet_upgraded = {
+                name = "Murhaavamagneetti",
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:chips,C:white}Blue",
+                        "{X:dark_edition,C:white}^#1#{} Mult when",
+                          "held in hand"
+                    },
+                    {
+                        "Once per round, create",
+                        "a {C:attention}Toss Tag{} when",
+                        "drawn to hand"
+                    },
+                    {
+                        "{C:green}Retained"
+                    }
+                }
             },
             --^1.5 chips, but banishes all other played blinds if score exceeds ^1.4 requirements
             m_unik_blindside_legendary_indigo_icbm = {
-
+                name = "Tuomiopäivänlaite",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
+                        "{X:dark_edition,C:white}^#1#{} Mult"
+                    },
+                    {
+                        "If hand score",
+                        "exceeds {C:attention}^#2#{} requirements",
+                        "{C:inactive}({C:attention}#3#{C:inactive})",
+                        "{C:red,E:2}Destroy{} {C:attention}all{} other",
+                        "played and held Blinds",
+                    },
+                }
+            },
+            m_unik_blindside_legendary_indigo_icbm_upgraded = {
+                name = "Tuomiopäivänlaite",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
+                        "{X:dark_edition,C:white}^#1#{} Mult"
+                    },
+                    {
+                        "If hand score",
+                        "exceeds {C:attention}^#2#{} requirements",
+                        "{C:inactive}({C:attention}#3#{C:inactive})",
+                        "{C:red,E:2}Destroy{} {C:attention}all{} other",
+                        "played Blinds and",
+                        "{C:attention}Burn{} {C:attention}all{}",
+                        "held Blinds",
+                    },
+                }
             },
             --^1.5 mult after scoring, creates a gillotine tag (disables jokers up to Epic Jokers, then ^0.5 mult and ^0.5 chips to joker)
             m_unik_blindside_legendary_crimson_heart = {
@@ -7683,6 +7748,20 @@ return {
                 text = {
                     "Creates an",
 					"{C:unik_ancient,E:1}Ancient{} Blind"
+                }
+            },
+            c_unik_blindside_portal = {
+                name = "The Portal",
+                text = {
+                    {
+                        "Creates an",
+                        "{C:unik_exotic,E:1}Exotic{} Blind"
+                    },
+                    {
+                        "Create {C:red}#1#",
+                        "{C:red}Voodoo Tag#<s>1#",
+                    },
+   
                 }
             },
             ["c_bld_assimilate"] = {

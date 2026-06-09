@@ -176,6 +176,10 @@ SMODS.Sound({
 	path = "ExponentialChips.wav",
 })
 SMODS.Sound({
+	key = "eechip",
+	path = "TetrationalChips.ogg",
+})
+SMODS.Sound({
 	key = "xchip",
 	path = "MultiplicativeChips.wav",
 })

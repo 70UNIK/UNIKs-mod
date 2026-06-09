@@ -121,6 +121,28 @@ function UNIK.blindside_chips_modifyV2(operation,silent,originalchips)
                 return true
             end}))
         end
+        if operation.ee_chips and operation.ee_chips ~= 1 then
+            if UNIK.has_talisman() then
+                G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
+                G.GAME.blind.basechips = math.max(1,to_big(G.GAME.blind.basechips):arrow(2,operation.ee_chips))
+
+                G.hand_text_area.blind_chip_text:juice_up()
+                    G.GAME.blind.basechips_text = number_format(to_big(G.GAME.blind.basechips), 100000)
+                    if not silent then play_sound('unik_eechip',0.95,1) end
+                    return true
+                end}))
+            else
+                G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
+                G.GAME.blind.basechips = math.max(1,to_big(G.GAME.blind.basechips)^(to_big(G.GAME.blind.basechips)^(operation.ee_chips - 1)))
+
+                G.hand_text_area.blind_chip_text:juice_up()
+                    G.GAME.blind.basechips_text = number_format(to_big(G.GAME.blind.basechips), 100000)
+                    if not silent then play_sound('unik_eechip',0.95,1) end
+                    return true
+                end}))
+            end
+            
+        end
         if operation.x_mult and operation.x_mult ~= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
             G.GAME.blind.mult = math.max(1,to_big(G.GAME.blind.mult)*operation.x_mult)

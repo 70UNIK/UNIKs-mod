@@ -1329,6 +1329,7 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/onion.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prison.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/earthmover.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/panopticon.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/kitsune.lua")()	
 
@@ -1370,6 +1371,8 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_hook.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
 
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_magnet.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_nuke.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_crown.lua")()
 	--JOKERS
 	NFS.load(mod_path .. "data/blindside/jokers/big/fruity_joker.lua")()	
@@ -1411,6 +1414,7 @@ if next(SMODS.find_mod("Blindside")) then
 	--Spy (Curse tag)
 	--
 	NFS.load(mod_path .. "data/blindside/rituals/sigil.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/portal.lua")()
 
 	--TAGS
 	NFS.load(mod_path .. "data/blindside/tags/gore.lua")()

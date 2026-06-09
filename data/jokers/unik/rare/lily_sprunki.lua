@@ -186,6 +186,12 @@ SMODS.Joker {
 local cashoutcontext = G.FUNCS.cash_out
 G.FUNCS.cash_out = function(e)
     SMODS.calculate_context({after_cashout = true})
+    for i, card in pairs(G.playing_cards) do
+        if card.ability and card.ability.extra and type(card.ability.extra) == 'table' then
+             card.ability.extra.created_tag = nil
+        end
+        
+    end
     cashoutcontext(e)
     -- G.GAME.unik_fiendish_cap = nil
 end

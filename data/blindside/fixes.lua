@@ -554,6 +554,70 @@ SMODS.Tag:take_ownership("tag_bld_reroll",{
     end,
 },true)
 
+--toss tag, reload fixes
+SMODS.Tag:take_ownership("tag_bld_toss",{
+    apply = function(self, tag, context)
+        if context.type == 'self_tag_added' then
+            G.hand:change_size(1)
+            print("+1 Handsize")
+        end
+        -- if tag.config.extra.give and #G.hand.cards > 0 then
+        --     tag.config.extra.give = false
+        --     G.hand:change_size(1)
+        --     G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + 1
+        -- end
+        if context.type == 'shop_start' and not (next(SMODS.find_card("j_bld_taglock")) and not (G.GAME.blind.boss or G.GAME.last_joker)) then
+            print("-1 Handsize")
+            G.hand:change_size(-1)
+            tag:yep('+', G.C.GREEN, function() 
+                return true end)
+            tag.triggered = true
+        end
+        -- if context.type == 'shop_start' and (next(SMODS.find_card("j_bld_taglock")) and not (G.GAME.blind.boss or G.GAME.last_joker)) then
+        --     tag.config.extra.give = true
+        -- end
+        -- if tag.config.extra.give and context.type == 'round_start_bonus' then
+        --     tag.config.extra.give = false
+        --     G.hand:change_size(1)
+        --     G.GAME.round_resets.temp_handsize = (G.GAME.round_resets.temp_handsize or 0) + 1
+        --     return true
+        -- end
+    end,
+},true)
+
+--collectors tag: apply once per booster pack
+SMODS.Tag:take_ownership("tag_bld_collector",{
+       apply = function(self, tag, context)
+        if context.type == 'symbol_pack_opened' and not G.GAME.suppress_collector_tag then
+            local valid = false
+            for _, v in ipairs(G.pack_cards.cards) do
+                if not v.edition then
+                    valid = true
+                end
+            end
+            if valid then
+                G.GAME.suppress_collector_tag = true
+                G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+                        if G.pack_cards and G.pack_cards.cards ~= nil and G.pack_cards.cards[1] and G.pack_cards.VT.y < G.ROOM.T.h then
+                            for _, v in ipairs(G.pack_cards.cards) do
+                                local edition = poll_edition('collector', nil, true, true, BLINDSIDE.get_blindside_editions())
+                                v:set_edition(edition, true)
+                            end
+                            G.GAME.suppress_collector_tag = nil
+                            tag:yep('+', G.C.DARK_EDITION, function()
+                                return true
+                            end)
+                            tag.triggered = true
+                        return true
+                    end
+                end}))
+                
+            end
+            
+        end
+    end,
+},true)
+
 local vessel2 = add_tag
 function add_tag(_tag)
 	local ret = vessel2(_tag)

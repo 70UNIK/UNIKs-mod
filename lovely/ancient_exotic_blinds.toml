@@ -62,7 +62,7 @@ elseif args.unik_exotic then
 '''
 
 [[patches]]
-[patches.regex]
+[patches.regex] 
 target = '=[SMODS Blindside "lib/utils/utils.lua"]'
 pattern = '''\(wght == 99 and rarity == 4\)'''
 match_indent = true
@@ -90,8 +90,41 @@ position = "before"
 payload = '''
 -- EXOTIC/LEGENDARY BLINDS ARE SQUARE
 elseif self.seal and G.P_SEALS[self.seal] and  G.P_SEALS[self.seal].pools and G.P_SEALS[self.seal].pools["bld_obj_enhancements"] and self.config.center.unik_exotic then
-    G.shared_seals[self.seal].role.draw_major = self
-    G.shared_seals[self.seal]:draw_shader('unik_blindside_square', nil, nil, nil, self.children.center)
-    if self.seal == 'Gold' then G.shared_seals[self.seal]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center) end
+    --If it has an atlas sheet, print that instead
+    if G.P_SEALS[self.seal].legendary_atlas and  G.P_SEALS[self.seal].legendary_atlas_coords then
+        if not self.children["unik_legendary_trim_render_" .. G.P_SEALS[self.seal].key] then
+            self.children["unik_legendary_trim_render_" .. G.P_SEALS[self.seal].key] = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS[G.P_SEALS[self.seal].legendary_atlas], G.P_SEALS[self.seal].legendary_atlas_coords)
+            self.children["unik_legendary_trim_render_" .. G.P_SEALS[self.seal].key].states.visible = false
+        end
+        self.children["unik_legendary_trim_render_" .. G.P_SEALS[self.seal].key].role.draw_major = self
+        self.children["unik_legendary_trim_render_" .. G.P_SEALS[self.seal].key]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+        if self.seal == 'Gold' then G.shared_seals[self.seal]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center) end
+    else
+        G.shared_seals[self.seal].role.draw_major = self
+        G.shared_seals[self.seal]:draw_shader('unik_blindside_square', nil, nil, nil, self.children.center)
+        if self.seal == 'Gold' then G.shared_seals[self.seal]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center) end
+    end
+
+'''
+match_indent = true
+
+###upgrade stickers will be changed into rectangular ones
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/card_draw.lua"]'''
+pattern = '''if v and v.draw and type(v.draw) == 'function' then
+                    v:draw(self, layer)'''
+position = "after"
+payload = '''
+--change sprite if exotic and bld_upgrade
+elseif self.config.center.unik_exotic and self.ability[v.key] and v.key == 'bld_upgrade' then
+    if not self.children["unik_legendary_upgrade_render"] then
+        self.children["unik_legendary_upgrade_render"] = Sprite(self.T.x, self.T.y, self.T.w, self.T.h, G.ASSET_ATLAS['unik_legendary_blind_enhancements'], {x = 0, y = 2})
+        self.children["unik_legendary_upgrade_render"].states.visible = false
+    end
+    self.children["unik_legendary_upgrade_render"].role.draw_major = self
+    self.children["unik_legendary_upgrade_render"]:draw_shader('dissolve', nil, nil, nil, self.children.center)
+    self.children["unik_legendary_upgrade_render"]:draw_shader('voucher', nil, self.ARGS.send_to_shader, nil, self.children.center)
+    self.children["unik_legendary_upgrade_render"]:draw_shader('bld_shiny', nil, self.ARGS.send_to_shader, nil, self.children.center)
 '''
 match_indent = true

@@ -42,10 +42,16 @@ BLINDSIDE.Blind({
             }
         end
         if context.destroy_card and card.ability.extra.times <= 0 then
-            if context.destroy_card == card and context.cardarea == G.play then
-                local planet = create_card('bld_obj_ritual',G.consumeables, nil, nil, nil, nil, 'c_unik_blindside_sigil')
-                planet:add_to_deck()
-                G.consumeables:emplace(planet)
+            if context.destroy_card == card and context.cardarea == G.play and not card.ability.extra.created  then
+                card.ability.extra.created = true
+                G.E_MANAGER:add_event(Event({
+                    func = function() 
+                            local planet = create_card('bld_obj_ritual',G.consumeables, nil, nil, nil, nil, 'c_unik_blindside_sigil')
+                            planet:add_to_deck()
+                            G.consumeables:emplace(planet)
+                        return true
+                    end}))
+
                 return { remove = true }
             end
         end
@@ -57,7 +63,7 @@ BLINDSIDE.Blind({
     in_pool = function(self, args)
         if G.GAME.selected_back.effect.center.config.extra then
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
-            return UNIK.check_if_exists('m_unik_blindside_earthmover') and pseudorandom('earthmover'..G.SEED) < 0.5
+            return not UNIK.check_if_exists('m_unik_blindside_earthmover') and pseudorandom('earthmover'..G.SEED) < 0.3
         else
             return false
         end

@@ -6,7 +6,7 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 20,
-            x_mult = 1.4,
+            x_mult = 1.35,
             x_mult_up = 0.4,
             retriggers = 0,
             retriggers_up = 1,
@@ -54,9 +54,7 @@ BLINDSIDE.Blind({
         end
     end,
     loc_vars = function(self, info_queue, card)
-         if card.ability.extra.upgraded then
-            info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}  
-        end
+        info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}  
         return {
             vars = {card.ability.extra.x_mult}
         }
