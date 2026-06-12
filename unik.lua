@@ -1250,6 +1250,7 @@ NFS.load(mod_path .. "data/overrides/drunkard_merry_andy_buff.lua")()
 NFS.load(mod_path .. "data/overrides/mr_bones_ui.lua")()	
 NFS.load(mod_path .. "data/overrides/matador.lua")()	
 NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()	
+NFS.load(mod_path .. "data/overrides/blind_fixes.lua")()	
 
 NFS.load(mod_path .. "data/overrides/enhancement_destroy_fx.lua")()	
 NFS.load(mod_path .. "data/overrides/values_changes.lua")()	
@@ -1368,6 +1369,7 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_blossom.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_straightforwardness.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_sand.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_bellows.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_hook.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
 

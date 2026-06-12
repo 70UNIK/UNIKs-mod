@@ -7,7 +7,9 @@ BLINDSIDE.Blind({
         extra = {
             value = 1,
             e_mult = 1.1,
-            e_mult_up = 0.1,
+            e_mult_up = 0.05,
+            hand_size = 1,
+            retain = true
         }},
     hues = {"Red","Blue"},
     calculate = function(self, card, context) 
@@ -16,29 +18,29 @@ BLINDSIDE.Blind({
                 e_mult = card.ability.extra.e_mult
             }
         end
-        if tableContains(card, G.hand.cards) and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not card.ability.extra.created_tag then
-            card.ability.extra.created_tag = true
-            add_tag(Tag('tag_bld_toss'))
+        if tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+            card.ability.extra.unik_hand_size_added = true
+            --add_tag(Tag('tag_bld_toss'))
+            G.hand:change_size(card.ability.extra.hand_size)
             
+        end
+        if not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+            card.ability.extra.unik_hand_size_added = nil
+            G.hand:change_size(-card.ability.extra.hand_size)
         end
     end,
     unik_exotic = true,
     loc_vars = function(self, info_queue, card)
-        if card.ability.extra.upgraded then
-            info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
-        end
-        info_queue[#info_queue + 1] = G.P_TAGS['tag_bld_toss']
+        info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
         return {
-            key = card.ability.extra.upgraded and 'm_unik_blindside_legendary_maroon_magnet_upgraded' or 'm_unik_blindside_legendary_maroon_magnet',
             vars = {
-                card.ability.extra.e_mult
+                card.ability.extra.e_mult,card.ability.extra.hand_size,
             }
         }
     end,
     upgrade = function(card)
         if not card.ability.extra.upgraded then
             card.ability.extra.e_mult = card.ability.extra.e_mult + card.ability.extra.e_mult_up
-            card.ability.extra.retain = true
             card.ability.extra.upgraded = true
         end
     end

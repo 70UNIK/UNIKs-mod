@@ -108,6 +108,9 @@ function Card:add_to_deck(from_debuff)
             selfDestruction_noMessage(self)
         end
     end
+    if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_hand_size_added then
+        self.ability.extra.unik_hand_size_added = nil
+    end
     SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
         self.will_be_destroyed_1 = nil
        self.will_be_gored = nil

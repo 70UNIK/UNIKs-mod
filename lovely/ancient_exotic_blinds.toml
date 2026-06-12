@@ -128,3 +128,26 @@ elseif self.config.center.unik_exotic and self.ability[v.key] and v.key == 'bld_
     self.children["unik_legendary_upgrade_render"]:draw_shader('bld_shiny', nil, self.ARGS.send_to_shader, nil, self.children.center)
 '''
 match_indent = true
+
+###if you flip legendary blinds, they should be square shaped, as weird as they would look
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/card_draw.lua"]'''
+pattern = '''self.children.back:draw_shader('dissolve')'''
+position = "before"
+payload = '''
+if self.config.center.unik_exotic then
+    self.children.back:draw_shader('unik_blindside_square_back')
+else
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/card_draw.lua"]'''
+pattern = '''self.children.back:draw_shader('dissolve')'''
+position = "after"
+payload = '''
+end
+'''
+match_indent = true

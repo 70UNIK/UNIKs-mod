@@ -590,11 +590,16 @@ SMODS.Tag:take_ownership("tag_bld_collector",{
        apply = function(self, tag, context)
         if context.type == 'symbol_pack_opened' and not G.GAME.suppress_collector_tag then
             local valid = false
-            for _, v in ipairs(G.pack_cards.cards) do
-                if not v.edition then
-                    valid = true
+            if G.pack_cards then
+                for _, v in ipairs(G.pack_cards.cards) do
+                    if not v.edition then
+                        valid = true
+                    end
                 end
+            else
+                valid = true
             end
+            
             if valid then
                 G.GAME.suppress_collector_tag = true
                 G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
@@ -1077,16 +1082,125 @@ SMODS.PokerHandPart:take_ownership("bld_allin",{
         end
  },true)
 
--- --didnt even have a chance to try to create a UIbox cause balala doesnt like hooks that use this
--- local ui = create_UIBox_generic_options
--- function create_UIBox_generic_options(args)
---     print("33333")
---     local ret = ui(args)
---     print("$$$$$$")
---     return ret
--- end
-
 --exquisite blinds:
 --epic rarity equivalent
 --stronger than premiums, weaker than legendaries
 --examples include Pit Blinds and Hyperblinds
+
+local blindside_draw_deck_hand = G.FUNCS.blind_draw_from_deck_to_hand
+G.FUNCS.blind_draw_from_deck_to_hand = function(e)
+    G.GAME.can_draw_tech = true
+    local ret = blindside_draw_deck_hand(e)
+    return ret
+end
+--reworking tech blinds to work with smods's draw card functionality, it will only draw once no space remains (ie: hackysack, toss tag, legendary magnet, epic bellows)
+function UNIK.tech_draw()
+    if not BLINDSIDE.tech_temp then
+        if UNIK.hasBlindside() and G.GAME.can_draw_tech then
+            --print("techdraw2")
+           -- print(G.GAME.tech_draw_primary_buffer)
+            G.GAME.can_draw_tech = nil
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    if G.GAME.tech_draw_primary_buffer and G.GAME.tech_draw_primary_buffer > 0 then
+                        
+                      --  print("techdraw3")
+                        BLINDSIDE.tech_temp = true
+                        G.FUNCS.blind_draw_from_deck_to_hand(math.floor(G.GAME.tech_draw_primary_buffer))
+                        BLINDSIDE.tech_temp = nil
+                        G.GAME.tech_draw_primary_buffer = 0
+                        --G.GAME.tech_draw_buffer = 0
+                    elseif G.GAME.tech_draw_buffer   and G.GAME.tech_draw_buffer > 0 then
+                        
+                    end
+                return true
+                end
+            }))
+
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            if not G.GAME.tech_draw_primary_buffer then
+                                G.GAME.tech_draw_primary_buffer = 0
+                            end
+                            G.GAME.tech_draw_primary_buffer = G.GAME.tech_draw_primary_buffer + (G.GAME.tech_draw_buffer or 0)
+                            G.GAME.tech_draw_buffer = 0
+                            G.E_MANAGER:add_event(Event({
+                                trigger = 'after',
+                                delay = 0.2,
+                                func = function()
+                                    save_run()
+                                    return true
+                                end
+                            }))
+                            return true
+                        end
+                    }))
+                    return true
+                end
+            }))
+        end
+    end
+end
+
+function UNIK.reshuffle()
+    if UNIK.hasBlindside() then
+        if #G.deck.cards < G.hand.config.card_limit - #G.hand.cards and G.hand.config.card_limit - #G.hand.cards >= 1 and #G.deck.cards <= 0 then
+            local discard_count = #G.discard.cards
+            for i=1, discard_count do --draw cards from deck
+                draw_card(G.discard, G.deck, i*100/discard_count,'up', nil ,nil, 0.005, i%2==0, nil, math.max((21-i)/20,0.7))
+            end
+            SMODS.calculate_context({reshuffle = true})
+            G.GAME.current_round.reshuffles_round = G.GAME.current_round.reshuffles_round + 1
+            delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.7,
+            func = function()
+                G.deck:shuffle('beta'..G.GAME.round_resets.ante, true)
+                return true
+            end
+        }))
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    local cards_to_draw = {}
+                    local limit = G.hand.config.card_limit - #G.hand.cards
+                    local unfixed = not G.hand.config.fixed_limit
+                    local n = 0
+                    while n < #G.deck.cards do
+                        local card = G.deck.cards[#G.deck.cards-n]
+                        local mod = unfixed and (card.ability.card_limit - card.ability.extra_slots_used) or 0
+                        if limit - 1 + mod < 0 then
+                        else    
+                            limit = limit - 1 + mod
+                            table.insert(cards_to_draw, card)
+                            if limit <= 0 then break end
+                        end
+                        n = n + 1
+                    end
+                    hand_space = #cards_to_draw
+                    for i=1, hand_space do --draw cards from deckL
+                        if G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK then 
+                            draw_card(G.deck,G.hand, i*100/hand_space,'up', true, cards_to_draw[i])
+                        else
+                            draw_card(G.deck,G.hand, i*100/hand_space,'up', true, cards_to_draw[i])
+                        end
+                    end
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.7,
+                        func = function()
+                            save_run()
+                            return true
+                        end
+                    }))
+                    return true
+                end
+            }))
+
+        end
+    end
+    
+end

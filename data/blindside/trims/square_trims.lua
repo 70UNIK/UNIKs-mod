@@ -3,6 +3,10 @@ SMODS.Shader({
     key = "blindside_square",
     path = "blindside_square.fs",
 })
+SMODS.Shader({
+    key = "blindside_square_back",
+    path = "blindside_square_back.fs",
+})
 
 SMODS.Atlas {
 	key = "unik_legendary_blind_enhancements",

@@ -8,18 +8,18 @@ BLINDSIDE.Blind({
             value = 1,
             e_mult = 1.35,
             e_mult_up = 0.15,
-            requirements = 1.4,
-            requirements_up = 0.35,
+            requirements = 1.75,
+            requirements_up = 0.5,
         }},
     hues = {"Purple","Green"},
     calculate = function(self, card, context) 
-        if context.destroy_card and (context.cardarea == G.play or (not card.ability.extra.upgraded and context.cardarea == G.hand)) 
+        if context.destroy_card and (context.cardarea == G.play or (not card.ability.extra.upgraded and context.cardarea == G.hand)) and context.destroy_card ~= card
         and SMODS.calculate_round_score() > G.GAME.blind.chips^card.ability.extra.requirements then
             return {
                 remove = true,
             }
         end
-        if context.before and context.scoring_hand and card.ability.extra.upgraded 
+        if context.after and context.scoring_hand and card.ability.extra.upgraded 
         and SMODS.calculate_round_score() > G.GAME.blind.chips^card.ability.extra.requirements then
             if SMODS.in_scoring(card,context.scoring_hand) then
                 for i,v in pairs(G.hand.cards) do

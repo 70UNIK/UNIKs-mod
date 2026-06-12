@@ -76,6 +76,7 @@ end
 local function degree_to_Radian(angle)
 	return angle*math.pi/180
 end
+
 local function draw_indicators(indicators, card, x_offset, y_offset,radi)
 	local y = y_offset or 0
 	local x = x_offset or 0
@@ -85,7 +86,9 @@ local function draw_indicators(indicators, card, x_offset, y_offset,radi)
 
 	--ifblindside enabled, rotate around blinds instead
 	if UNIK.hasBlindside() then
-		rotation = degree_to_Radian(90)
+		if not card.config.center.unik_exotic then
+			rotation = degree_to_Radian(90)
+		end
 		y = y - y_offset
 		-- x = 4
 		-- y = radi
@@ -96,8 +99,13 @@ local function draw_indicators(indicators, card, x_offset, y_offset,radi)
 	end
 	
 	if UNIK.hasBlindside() then
+
+		if not card.config.center.unik_exotic then
+			rotation = rotation - degree_to_Radian(45)
+		else
+			y = y + y_offset*2/3
+		end
 		
-		rotation = rotation - degree_to_Radian(45)
 		-- rotation_mod = 0 - degree_to_Radian(45)
 		-- local struct = rotate(original_x,original_y,pivot_x,pivot_y,rotation_mod)
 		-- x = struct.x
@@ -111,14 +119,14 @@ local function draw_indicators(indicators, card, x_offset, y_offset,radi)
 			x,
 			y,rotation
 		)
-			if UNIK.hasBlindside() then
+			if UNIK.hasBlindside() and not card.config.center.unik_exotic then
 				rotation = rotation - degree_to_Radian(10)
 				-- rotation_mod = rotation_mod - degree_to_Radian(10)
 				-- local struct = rotate(original_x,original_y,pivot_x,pivot_y,rotation_mod)
 				-- x = struct.x
 				-- y = struct.y
 			else
-				y = y + HEIGHT + GAP
+				y = y + HEIGHT + (UNIK.hasBlindside() and card.config.center.unik_exotic and GAP/2) or GAP
 			end
 		
 		end

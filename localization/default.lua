@@ -159,6 +159,16 @@ return {
         },
         Blind={
             --BLINDSIDE:
+            bl_final_acorn = {
+                name = "Amber Acorn",
+                text = {
+                    "Flips and Shuffles",
+                    "all Joker Cards",
+                    "Shuffles all Jokers,",
+                    "held and played",
+                    "Cards on play",
+                }
+            },
 
             bl_unik_blindside_hunger_warmup = {
                 name = "The Hunger",
@@ -3448,7 +3458,7 @@ return {
                 "Mult {X:mult,C:white}Xlog_#2#(Mult)"},
 
 					{"{C:unik_copper}Rescores{} once for",
-					"every {C:attention}#3#{} Tag#<s>3# held",
+					"every Tag#<s>3# held",
 					"{C:inactive}(Currently {C:attention}#4#{C:inactive} time#<s>4#)"},
                 }
             },
@@ -3468,13 +3478,13 @@ return {
                 text = {
                     {
                         "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{}",
-                        "While held,",
                         "{X:mult,C:white}X#1#{} Mult and",
-                        "Mult {X:mult,C:white}Xlog_#2#{}(Mult)"
+                        "Mult {X:mult,C:white}Xlog_#2#(Mult)",
+                        "while held in hand"
                     },
                     {
-                        "{C:attention}+#3#{} Hand Size",
-                            "while held",
+                        "{C:attention}+#3#{} hand size",
+                            "while held in hand",
                     },
                     {"{C:green}Retained"},
                 }
@@ -3538,7 +3548,7 @@ return {
                         "While {C:attention}held in hand{},",
                         "{C:unik_copper}Rescore {C:attention}first{}",
                         "scoring Blind for every",
-                        "{C:attention}#2# {X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
+                        "{X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
                         "in your full deck"
                     },
                     {
@@ -3592,28 +3602,10 @@ return {
                         "held in hand"
                     },
                     {
-                        "Once per round, create",
-                        "a {C:attention}Toss Tag{} when",
-                        "drawn to hand"
-                    }
-                }
-            },
-            m_unik_blindside_legendary_maroon_magnet_upgraded = {
-                name = "Murhaavamagneetti",
-                text = {
-                    {
-                        "{X:red,C:white}Red{} {X:chips,C:white}Blue",
-                        "{X:dark_edition,C:white}^#1#{} Mult when",
-                          "held in hand"
+                        "{C:attention}+#2#{} hand size{}",
+                        "while held in hand"
                     },
-                    {
-                        "Once per round, create",
-                        "a {C:attention}Toss Tag{} when",
-                        "drawn to hand"
-                    },
-                    {
-                        "{C:green}Retained"
-                    }
+                                        {"{C:green}Retained"},
                 }
             },
             --^1.5 chips, but banishes all other played blinds if score exceeds ^1.4 requirements
@@ -5548,6 +5540,15 @@ return {
                     "the Boss Token {C:attention}Wiggles",
                     "{C:inactive}(Once before each hand)"
                 }
+            },
+            j_four_fingers = {
+                name = "Four Fingers",
+                text={
+                    "All {C:attention}Flushes{}, ",
+                    "{C:attention}Straights{} and",
+                    "{C:attention}Spectrums{} can be",
+                    "made with {C:attention}4{} cards",
+                },
             },
 
             j_bunc_crop_circles_noughts = {
