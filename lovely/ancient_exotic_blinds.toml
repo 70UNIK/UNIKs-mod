@@ -77,6 +77,9 @@ match_indent = true
 position = 'after'
 payload = ''' or rarity == 70 or rarity == 99'''
 
+
+
+
 ##LEGENDARY BLIND SQUARES
 [[patches]]
 [patches.pattern]

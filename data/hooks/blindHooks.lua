@@ -445,14 +445,6 @@ end
 
 local end_roundref = end_round
 function end_round()
-    if UNIK.hasBlindside() then
-        G.GAME.unik_add_bones_probability = 0
-        for i,v in pairs(G.playing_cards) do
-            if v.ability and v.ability.extra and type(v.ability.extra) == 'table' and v.ability.extra.ikeeptrackoftriggers then
-                v.ability.extra.ikeeptrackoftriggers = false
-            end
-        end
-    end
     
     local instakill = G.GAME.blind:unik_after_defeat(G.GAME.chips,G.GAME.blind.chips)
     if instakill then
