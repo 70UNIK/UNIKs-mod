@@ -58,7 +58,7 @@ SMODS.Consumable {
         local args = {}
         delay(1)
         args.guaranteed = true
-        args.options = G.P_CENTER_POOLS.unik_obj_blindcard_exotic
+        args.options = G.P_CENTER_POOLS.bld_obj_blindcard_crossmod_unik_exotic
         args.unik_exotic = true
         local cardtype = BLINDSIDE.poll_enhancement(args)
         local legendary = SMODS.create_card({ set = 'Playing Card', enhancement = cardtype, area = G.play })

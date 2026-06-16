@@ -112,7 +112,7 @@ BLINDSIDE.Joker({
             end
         end
         G.GAME.unik_dynamic_text_realtime = nil
-    end
+    end,
 })
 
 local remove_ref = Card.remove

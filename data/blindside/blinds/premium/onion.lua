@@ -106,15 +106,15 @@ BLINDSIDE.Blind({
                         return { remove = true }
                     end
                 elseif card.ability.extra.destruction_randomizer < 0.35*upgrade_multiplier then
-                    if context.burn_card and context.cardarea == G.play then
+                    if context.burn_card and context.cardarea == G.play and card.area == G.play then
                         return { remove = true }
                     end
                 elseif card.ability.extra.destruction_randomizer < 0.37*upgrade_multiplier then
-                    if context.destroy_card and context.destroy_card == card and context.cardarea == G.play then
+                    if context.destroy_card and context.destroy_card == card and context.cardarea == G.play and card.area == G.play then
                         return { remove = true }
                     end
                 else
-                    if context.destroy_card and context.cardarea == G.play and context.destroy_card.onioned then
+                    if context.destroy_card and context.cardarea == G.play and context.destroy_card.onioned and card.area == G.play then
                         return { remove = true }
                     end
                 end

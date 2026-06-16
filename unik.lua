@@ -1287,6 +1287,8 @@ SMODS.Atlas({
 frames = 3 })
 
 if next(SMODS.find_mod("Blindside")) then
+	BLINDSIDE.add_crossmod_rarity('unik_ancient',G.C.UNIK_ANCIENT,G.C.WHITE,'k_unik_ancient','m_unik_blindside_epic_wall',0)
+	BLINDSIDE.add_crossmod_rarity('unik_exotic',G.C.UNIK_EXOTIC,G.C.WHITE,'k_unik_exotic','m_unik_blindside_legendary_golden_crown',0)
 	NFS.load(mod_path .. "data/stickers/impounded_blindside.lua")() 
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
@@ -1439,7 +1441,41 @@ if next(SMODS.find_mod("Blindside")) then
 	--reel
 	NFS.load(mod_path .. "data/blindside/tags/cult.lua")()
 	--wrench
-	
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_dethroning')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_recursive')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_soul')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_landslide')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_downscale')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_gore')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_pentagram')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_handcuffs')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_multiplicative')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_peak')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_shield')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_cult')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_balance')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_cursed')
+
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_sigil')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_portal')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_erosion')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_bind')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_augment')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_mirror')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_repetition')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_kill')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_backstab')
+	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_pink_bow')
+	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_faerie_tiara')
+	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_celestial_nightcap')
+	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_cat_hat')
+	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_sundae_hat')
+	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_tic_tac_toe_board')
+	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_microwave')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_complementary_jokers')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_complementary_jokers2')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_infuriating_notes')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_infuriating_notes2')
 	
 	
 	NFS.load(mod_path .. "data/blindside/trinkets/pink_bow.lua")()	

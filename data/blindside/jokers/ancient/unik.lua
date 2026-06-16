@@ -155,10 +155,7 @@ function UNIK.blindside_chips_modifyV2(operation,silent,originalchips)
         if operation.e_mult and operation.e_mult ~= 1 then
             G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
             G.GAME.blind.mult = to_big(G.GAME.blind.mult)
-            print(operation.e_mult)
-            print(G.GAME.blind.mult^operation.e_mult)
             G.GAME.blind.mult = math.max(1, G.GAME.blind.mult^operation.e_mult)
-            print(G.GAME.blind.mult)
             G.hand_text_area.blind_mult_text:juice_up()
                 G.GAME.blind.mult_text = to_big(G.GAME.blind.mult)
                 if not silent then play_sound('unik_emult',0.95,1) end

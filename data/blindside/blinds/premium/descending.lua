@@ -18,10 +18,11 @@
         rare = true,
         calculate = function(self, card, context)
             if context.cardarea == G.play and context.before and card.facing ~= 'back' then
-                if not SMODS.pseudorandom_probability(card, pseudoseed("descflip"), card.ability.extra.chance, card.ability.extra.trigger, 'descflip') and card.facing ~= "back" then
+                if not SMODS.pseudorandom_probability(card, pseudoseed("descflip"), card.ability.extra.chance, card.ability.extra.trigger, 'descflip') and card.facing ~= "back"  then
                     card:flip()
                     card:flip()
-                    UNIK.operator(-1)
+                    G.GAME.unik_old_operator = G.GAME.blindside_current_operator
+                    BLINDSIDE.joker_operator(-1)
                     card.ability.extra.succeed = true
                     return {
                         message = localize('k_unik_lowered'),
@@ -39,8 +40,6 @@
             end
             if context.cardarea == G.play and context.main_scoring then
                 if card.facing ~= "back" then
-                    UNIK.operator(-1)
-                    card.ability.extra.succeed = true
                     
                     UNIK.blindside_chips_modifyV2({x_mult = card.ability.extra.j_e_mult}) 
                     return {
@@ -82,47 +81,12 @@
             end
         end
 })
-function UNIK.operator(arrow)
-     G.E_MANAGER:add_event(Event({trigger = 'immediate', delay = 0, func = function()
-        local container = G.HUD_blind:get_UIE_by_ID('unik_operator_text_7777')
-        if container then
-            play_sound('button', 1.1, 0.65)
-            if arrow == -1 then
-                G.GAME.unik_current_operator = arrow
-                container:juice_up()
-            -- G.GAME.blind.hand_operator_container:juice_up()
-                container.config.text = "+"
-                
-            else
-                G.GAME.unik_current_operator = 0
-                container:juice_up()
-                container.config.text = "X"
-            end
-            G.HUD_blind:recalculate()
-        end
-        
-        
-        return true
-    end}))
-    
-end
-function UNIK.arrowfunction(operator,first,second)
-    if operator == -1 then
-        return first + second
-    elseif operator == 0 then
-        return first * second
-    elseif operator == 1 then
-        return first ^ second
-    end
-    return first * second
-end
-
 local defeatHook = Blind.defeat
 function Blind:defeat(silent)
     local ret = defeatHook(self,silent)
-    G.GAME.unik_current_operator = G.GAME.unik_current_operator or 0
-    if G.GAME.unik_current_operator ~= 0 then
-        UNIK.operator(0)
+    if G.GAME.unik_old_operator then
+        BLINDSIDE.joker_operator(G.GAME.unik_old_operator)
+        G.GAME.unik_old_operator = nil
     end
     return ret
 end
