@@ -38,7 +38,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '=[SMODS Blindside "lib/utils/utils.lua"]'
-pattern = '''if not skip then'''
+pattern = '''--add in pool, banishing functions before here. Specifying skip = true makes it no longer spawn afterwards.'''
 match_indent = true
 position = 'before'
 payload = '''

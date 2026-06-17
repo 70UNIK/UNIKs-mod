@@ -1287,8 +1287,18 @@ SMODS.Atlas({
 frames = 3 })
 
 if next(SMODS.find_mod("Blindside")) then
-	BLINDSIDE.add_crossmod_rarity('unik_ancient',G.C.UNIK_ANCIENT,G.C.WHITE,'k_unik_ancient','m_unik_blindside_epic_wall',0)
-	BLINDSIDE.add_crossmod_rarity('unik_exotic',G.C.UNIK_EXOTIC,G.C.WHITE,'k_unik_exotic','m_unik_blindside_legendary_golden_crown',0)
+	BLINDSIDE.add_crossmod_rarity('unik_ancient',G.C.UNIK_ANCIENT,G.C.WHITE,'k_unik_ancient','m_unik_blindside_epic_wall',
+		function(self)
+			---print("ancientnospawn")
+			return 0
+		end
+	)
+	BLINDSIDE.add_crossmod_rarity('unik_exotic',G.C.UNIK_EXOTIC,G.C.WHITE,'k_unik_exotic','m_unik_blindside_legendary_golden_crown',
+		function(self)
+			--print("exoticnospawn")
+			return 0
+		end
+	)
 	NFS.load(mod_path .. "data/stickers/impounded_blindside.lua")() 
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	

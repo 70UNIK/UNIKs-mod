@@ -97,16 +97,6 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load then
 end
 
 -- flippy quips
-for i=1,5 do
-    SMODS.JimboQuip{
-        key = "unik_blindside_flippy_win"..tostring(i),
-        type = 'bld_win',
-        extra = {center = "m_bld_flip",googly = true},
-        filter = function(quip, type) 
-            if type == "bld_win" then return true, {override_base_checks = true} end
-        end
-    }
-end
 --losing against a cursed joker
 for i=1,4 do
     SMODS.JimboQuip{
@@ -115,17 +105,6 @@ for i=1,4 do
         extra = {center = "m_bld_flip",googly = true},
         filter = function(quip, type) 
             if type == "bld_loss" and G.GAME.blind.config.blind.cursed then return true, {override_base_checks = true} end
-        end
-    }
-end
---losing in general
-for i=1,8 do
-    SMODS.JimboQuip{
-        key = "unik_blindside_flippy_lose"..tostring(i),
-        type = 'bld_loss',
-        extra = {center = "m_bld_flip",googly = true},
-        filter = function(quip, type) 
-            if type == "bld_loss" and not G.GAME.blind.config.blind.cursed then return true, {override_base_checks = true} end
         end
     }
 end

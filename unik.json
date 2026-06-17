@@ -5,15 +5,17 @@
 	"description": "An unbalanced standalone mod where I add what I want or can.",
 	"prefix": "unik",
 	"main_file": "unik.lua",
-	"priority": 7777770,
+	"priority": 777000,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
 	"version": "0.7",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-1221a)"
+        "Steamodded (>=1.0.0~BETA-1620a)", 
+		"Lovely (>=0.8.0)"
     ],
 	"conflicts": [
 		"Talisman (<=2.4)",
-		"Entropy (<=1.2)"
+		"Entropy (<=1.2)",
+		"Blindside (<=0.3)" 
     ]
 }
