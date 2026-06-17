@@ -31,9 +31,13 @@ SMODS.Tag {
             G.hand:change_size(-1)
             print("-1 Handsize")
         end
-        if context.type == 'shop_start' and not (next(SMODS.find_card("j_bld_taglock")) and not (G.GAME.blind.boss or G.GAME.last_joker)) then
-            print("+1 Handsize")
+        if context.type == 'self_tag_removed' then
             G.hand:change_size(1)
+            print("+1 Handsize")
+        end
+        if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
+            -- print("+1 Handsize")
+            -- G.hand:change_size(1)
             tag:yep('+', G.C.BLACK, function() 
                 return true end)
             tag.triggered = true

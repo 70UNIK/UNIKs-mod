@@ -19,7 +19,7 @@ SMODS.Tag {
 		return { vars = { chance,trigger } }
 	end,
     apply = function(self, tag, context)
-        if context.type == 'shop_start' and not (next(SMODS.find_card("j_bld_taglock")) and not (G.GAME.blind.boss or G.GAME.last_joker)) then
+        if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
             tag:yep('+', G.C.SUITS["unik_Noughts"], function() 
                 return true end)
             tag.triggered = true

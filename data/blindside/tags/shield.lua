@@ -15,8 +15,8 @@ SMODS.Tag {
     pools = {["bld_obj_blindside"] = true},
     apply = function(self, tag, context)
         if (context.type == 'tag_add') then
-            if (context.tag.key == 'tag_bld_debuff' or (G.P_TAGS[context.tag.key] and G.P_TAGS[context.tag.key].config and G.P_TAGS[context.tag.key].config.extra and G.P_TAGS[context.tag.key].config.extra.hex)) and not G.GAME.unik_suppress_shield then
-                G.GAME.unik_suppress_shield = true
+            if (context.tag.key == 'tag_bld_debuff' or (G.P_TAGS[context.tag.key] and G.P_TAGS[context.tag.key].config and G.P_TAGS[context.tag.key].config.extra and G.P_TAGS[context.tag.key].config.extra.hex)) and not context.tag.to_be_destroyed_by_shield then
+                context.tag.to_be_destroyed_by_shield = true
                 G.E_MANAGER:add_event(Event({
                     func = function ()
                         context.tag:nope()
@@ -35,8 +35,9 @@ SMODS.Tag {
         end
         if (context.type == 'self_tag_added') then
             for key, tag2 in pairs(G.GAME.tags) do
-                if (tag2.key == 'tag_bld_debuff' or (G.P_TAGS[tag2.key] and G.P_TAGS[tag2.key].config and G.P_TAGS[tag2.key].config.extra and G.P_TAGS[tag2.key].config.extra.hex)) and not G.GAME.unik_suppress_shield then
-                    G.GAME.unik_suppress_shield = true
+                if (tag2.key == 'tag_bld_debuff' or (G.P_TAGS[tag2.key] and G.P_TAGS[tag2.key].config and G.P_TAGS[tag2.key].config.extra and G.P_TAGS[tag2.key].config.extra.hex))  and not context.tag.to_be_destroyed_by_shield then
+                    --G.GAME.unik_suppress_shield = true
+                    context.tag.to_be_destroyed_by_shield = true
                                     G.E_MANAGER:add_event(Event({
                                 func = function ()
                             tag2:nope()
