@@ -684,6 +684,8 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 end
 
 NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
+NFS.load(mod_path .. "data/poker_hands/biparte.lua")()
+
 
 UNIK.spectrum_name = 'unik_spectrum'
 if SpectrumAPI then

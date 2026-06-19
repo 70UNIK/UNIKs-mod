@@ -30,7 +30,7 @@ SMODS.Tag {
             local converts = {}
                 for k, v in ipairs(context.scoring_hand) do
                     if not v.edition and not SMODS.pseudorandom_probability(tag, pseudoseed("multiplicative_unik"), tag.ability.chance, tag.ability.trigger, 'multiplicative_unik') then 
-                        local edition = poll_edition(pseudoseed('"multiplicative_unik2'), nil, true, true, {'e_bld_enameled', 'e_bld_finish', 'e_bld_mint', 'e_bld_shiny'})
+                        local edition = poll_edition(pseudoseed('"multiplicative_unik2'), nil, true, true, BLINDSIDE.get_blindside_editions('none'))
                         v:set_edition(edition, true)
                         G.E_MANAGER:add_event(Event({
                             func = function()

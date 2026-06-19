@@ -95,7 +95,26 @@ function get_new_big(current)
             return boss
         end
     end
-    return big_overrider(current)
+    local boss = big_overrider(current)
+    if boss == 'bl_unik_blindside_infuriating_note' then
+        --print("infury")
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier * 1.2
+        --print(G.GAME.unik_infuriating_xmult)
+        --print(G.GAME.unik_infuriating_multiplier)
+
+    elseif boss == 'bl_unik_blindside_infuriating_notes' then
+        --print("infury2")
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier * 1.2^2
+        --print(G.GAME.unik_infuriating_xmult)
+        --print(G.GAME.unik_infuriating_multiplier)
+    end
+    return boss
 
 end
 

@@ -2995,7 +2995,7 @@ return {
                   name = "The Upgrade",
                 text = {
                     {
-                        "{X:purple,C:white}Purple{}",
+                        "{X:green,C:white}Green{}",
                         "{C:mult}+#1# {}Mult and ",
                         "{C:chips}+#2#{} Chips",
                     },
@@ -3601,10 +3601,7 @@ return {
                         "{X:dark_edition,C:white}^#1#{} Mult when",
                         "held in hand"
                     },
-                    {
-                        "{C:attention}+#2#{} hand size{}",
-                        "while held in hand"
-                    },
+                    --handsize bonus is too op
                                         {"{C:green}Retained"},
                 }
             },
@@ -3638,8 +3635,7 @@ return {
                         "{C:inactive}({C:attention}#3#{C:inactive})",
                         "{C:red,E:2}Destroy{} {C:attention}all{} other",
                         "played Blinds and",
-                        "{C:attention}Burn{} {C:attention}all{}",
-                        "held Blinds",
+                        "{C:attention}Burn{} {C:attention}all{} held Blinds",
                     },
                 }
             },
@@ -5541,13 +5537,25 @@ return {
                     "{C:inactive}(Once before each hand)"
                 }
             },
+            -- j_flower_pot = {
+            --     name = "Flower Pot",
+            --     text = {
+            --         {
+            --             "{X:mult,C:white}X#1#{} Mult{} if poker hand",
+            --             "contains at least {C:attention}#2#",
+            --             "{C:attention}unique{} suits across",
+            --             "{C:attention}#3#{} scoring cards"
+            --         },
+                    
+            --     }
+            -- },
             j_four_fingers = {
                 name = "Four Fingers",
                 text={
                     "All {C:attention}Flushes{}, ",
                     "{C:attention}Straights{} and",
                     "{C:attention}Spectrums{} can be",
-                    "made with {C:attention}4{} cards",
+                    "made with {C:attention}1{} less card",
                 },
             },
 

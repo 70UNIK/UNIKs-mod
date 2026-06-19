@@ -5,8 +5,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 20,
-            x_mult = 1.3,
-            x_mult_up = 0.2,
+            x_mult = 1.4,
+            x_mult_up = 0.35,
         }},
     hues = {"Red" , "Yellow"},
     rare = true,

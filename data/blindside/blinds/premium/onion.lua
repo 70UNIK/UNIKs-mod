@@ -275,7 +275,7 @@ BLINDSIDE.Blind({
                     local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('staff'))
                     selected_card:set_seal(enhancement, nil, true)
                 elseif random2 < 0.7 and #_cards > 0 then
-                    local edition = poll_edition(pseudoseed('shine_unik'), nil, true, true, {'e_bld_enameled', 'e_bld_finish', 'e_bld_mint', 'e_bld_shiny'})
+                    local edition = poll_edition(pseudoseed('shine_unik'), nil, true, true, BLINDSIDE.get_blindside_editions('none'))
                     local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('onionedition'))
                     selected_card:set_edition(edition, true)
                 elseif random2 < 0.8 then

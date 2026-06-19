@@ -18,16 +18,16 @@ BLINDSIDE.Blind({
                 e_mult = card.ability.extra.e_mult
             }
         end
-        if tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
-            card.ability.extra.unik_hand_size_added = true
-            --add_tag(Tag('tag_bld_toss'))
-            G.hand:change_size(card.ability.extra.hand_size)
+        -- if tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        --     card.ability.extra.unik_hand_size_added = true
+        --     --add_tag(Tag('tag_bld_toss'))
+        --     G.hand:change_size(card.ability.extra.hand_size)
             
-        end
-        if not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
-            card.ability.extra.unik_hand_size_added = nil
-            G.hand:change_size(-card.ability.extra.hand_size)
-        end
+        -- end
+        -- if not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        --     card.ability.extra.unik_hand_size_added = nil
+        --     G.hand:change_size(-card.ability.extra.hand_size)
+        -- end
     end,
     unik_exotic = true,
     loc_vars = function(self, info_queue, card)

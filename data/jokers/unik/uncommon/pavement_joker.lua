@@ -39,6 +39,13 @@ SMODS.Joker {
 local fourHook = SMODS.four_fingers
 function SMODS.four_fingers(hand_type)
     local ret = fourHook(hand_type)
+	local max = 5
+	--multiple four fingers reduce the requirements of straights and flushes by 1 each. impactical, but makes sense
+	for i,v in pairs(G.jokers.cards) do
+		if v.config.center.key == 'j_four_fingers' and not v.debuff then
+			max = max - 1
+		end
+	end
     return math.max(math.ceil(ret - UNIK.paved_calc()),0)
 end
 
