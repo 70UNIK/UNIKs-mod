@@ -1377,6 +1377,10 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/crude/landlord.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/nut.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/close.lua")()
+
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/persimmon_placard.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/emerald_escalator.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/purple_pentagram.lua")()
 	
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_flip.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_trench.lua")()

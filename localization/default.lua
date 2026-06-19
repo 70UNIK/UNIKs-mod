@@ -3439,6 +3439,112 @@ return {
                     {"{C:green}Retained"},
                 }
             },
+            m_unik_blindside_emerald_escalator = {
+                name = "Emerald Escalator",
+                text = {
+                    {
+                        "{X:green,C:white}Green",
+                        "{X:purple,C:white}X#1#{} Score",
+                    },
+                    {
+                        "{X:purple,C:white}+X#2#{} Score",
+                        "when scored",
+                        "{C:inactive}(Resets after hand)"
+                    },
+                    {
+                        "{C:green}Retained"
+                    }
+                }
+            },
+            m_unik_blindside_salmon_steps = { --x0.75 chips to joker and sets operator to addition, subtraction maay be problematic due to a couple of ancient/exotic jokers reliant on mult operations
+                name = "Salmon Steps",
+                text = {
+                    {
+                        "{X:red,C:white}Red",
+                        "{X:chips,C:white}X#1#{} Chips",
+                        "to Joker"
+                    },
+                    {
+                        "Sets Joker {C:attention}operator{}",
+                        "to {C:dark_edition}Addition",
+                        "for the round",
+                    },
+    
+                }
+            },
+            m_unik_blindside_persimmon_placard = {
+                name = "Persimmon Placard",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "{X:mult,C:white}X#1#{} Mult and {C:money}+$#2#",
+                    },
+                    {
+                        "{C:red}Debuffs{} all other",
+                        "played Blinds"
+                    },
+                    {
+                        "{C:unik_copper}Rescores{} once for",
+                        "each {C:red}debuffed{} Blind",
+                        "in scoring hand",
+                    }
+                }
+            },
+            m_unik_blindside_bronze_bug = {
+                name = "Bronze Bug",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded",
+                        "If hand at least {C:attention}#3#",
+                        "scoring Blinds, all scoring",
+                        "Blinds are {C:attention}retriggered{}#1# time#<s>1#",
+                        "and {C:unik_copper}rescored{}}#2# time#<s>2#"
+                    },
+                    {
+                        "Otherwise {C:red}debuffs",
+                        "all played Blinds,",
+                        "itself included"
+                    },
+                    {
+                        "Always Scores"
+                    }
+                }
+            },
+            m_unik_blindside_bronze_bug_upgraded = {
+                name = "Bronze Bug",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded",
+                        "If hand at least {C:attention}#3#",
+                        "scoring Blinds, all scoring",
+                        "Blinds are {C:attention}retriggered{}#1# time#<s>1#",
+                        "and {C:unik_copper}rescored{}}#2# time#<s>2#"
+                    },
+                    {
+                        "Otherwise {C:red}debuffs",
+                        "all played Blinds,",
+                        "itself included"
+                    },
+                    {
+                        "Always Scores"
+                    }
+                }
+            },
+            m_unik_blindside_purple_pentagram = {
+                name = "Purple Pentagram",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple",
+                        "{X:red,C:white}X#1#{} Mult"
+                    },
+                    { --unblueprintable
+                        "When scored",
+                        "create a {C:bld_obj_ritual}Backstab",
+                        "{C:inactive}(Must have room)",
+                    }
+                }
+            },
+            
             m_unik_blindside_epic_straightforwardness = {
                 name = "Tasainenviiva",
                 text = {

@@ -15,10 +15,10 @@ BLINDSIDE.Joker({
         G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run or 0
         G.GAME.blinds_burned_this_run = G.GAME.blinds_burned_this_run  or 0
         G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult or 1
-        return { vars = { G.GAME.unik_blind_e_mult, 0.1 .. "" , G.GAME.blinds_destroyed_this_run + G.GAME.blinds_burned_this_run  .. ""} }
+        return { vars = { G.GAME.unik_blind_e_mult, 0.02 .. "" , G.GAME.blinds_destroyed_this_run + G.GAME.blinds_burned_this_run  .. ""} }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 1 .. "",0.1 .. "", 0 .. ""} }
+        return { vars = { 1 .. "",0.02 .. "", 0 .. ""} }
     end,
     debuff = {
         akyrs_blind_difficulty = "unik_blindside_ancient",
@@ -64,7 +64,7 @@ BLINDSIDE.Joker({
                 func = function()
                     for i,v in pairs(G.playing_cards) do
                         if v.config.center.key == 'm_unik_blindside_lily' then
-                            G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult + 0.1
+                            G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult + 0.02
                         end
                     end
                     SMODS.calculate_context({ playing_card_added = true, cards = cards_added })
@@ -81,7 +81,7 @@ BLINDSIDE.Joker({
             G.GAME.unik_blind_e_mult  = 1
             for i,v in pairs(G.playing_cards) do
                 if v.config.center.key == 'm_unik_blindside_lily' then
-                    G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult + 0.1
+                    G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult + 0.02
                 end
             end
             G.HUD_blind:recalculate(true)
