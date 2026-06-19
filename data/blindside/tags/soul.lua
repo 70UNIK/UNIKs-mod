@@ -68,7 +68,7 @@ function get_new_small(current)
         local ret = get_new_cursed()
         return ret
     end
-    if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.unik_banana_generated and pseudorandom(pseudoseed('unik_small_override')) > 0.7 then
+    if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.unik_banana_generated and pseudorandom(pseudoseed('unik_small_override')) > 0.75 then
         local ret = get_new_big()
         return ret
     end
@@ -94,6 +94,10 @@ function get_new_big(current)
         if boss then
             return boss
         end
+    end
+    if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.unik_banana_generated and pseudorandom(pseudoseed('unik_big_override')) > 0.75 then
+        local ret = get_new_boss()
+        return ret
     end
     local boss = big_overrider(current)
     if boss == 'bl_unik_blindside_infuriating_note' then

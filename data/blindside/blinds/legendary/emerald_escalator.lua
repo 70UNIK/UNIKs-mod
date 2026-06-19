@@ -5,11 +5,11 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            x_score = 1.5,
-            x_score_base = 1.5,
+            x_score = 1.75,
+            x_score_base = 1.75,
             x_score_mod = 0.25,
             x_score_mod_up = 0.25,
-            x_score_base_up = 0.5,
+            x_score_base_up = 0.75,
             retain = true,
         }},
     hues = {"Green"},

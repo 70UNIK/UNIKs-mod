@@ -15,7 +15,7 @@ BLINDSIDE.Blind({
         if context.unik_after_effect and context.scoring_hand then
             local cards = 0
             for i,v in pairs(context.scoring_hand) do
-                if v.debuff or v.facing ~= 'back' then
+                if v.debuff or v.facing == 'back' then
                     cards = cards + 1
                 end
             end
