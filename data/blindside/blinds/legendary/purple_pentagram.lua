@@ -7,7 +7,6 @@ BLINDSIDE.Blind({
             value = 1,
             x_mult = 2,
             x_mult_up = 1,
-            triggered_this_round = false,
         }},
     hues = {"Purple"},
     legendary = true,

@@ -16,7 +16,7 @@ BLINDSIDE.Blind({
     always_scores = true,
     hues = {"Green","Blue"},
     calculate = function(self, card, context) 
-        if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+        if context.cardarea == G.play and context.before and card.facing ~= 'back'  then
             if not SMODS.pseudorandom_probability(card, pseudoseed("blissflip"), card.ability.extra.chance, card.ability.extra.trigger, 'blissflip') and card.facing ~= "back" then
                 card:flip()
                 card:flip()

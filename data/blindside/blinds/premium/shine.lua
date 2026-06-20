@@ -15,7 +15,7 @@
         always_scores = true,
         rare = true,
         calculate = function(self, card, context)
-            if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+            if context.cardarea == G.play and context.before and card.facing ~= 'back'  then
                 card.ability.extra.stored_seed = nil
                 if card.ability.extra.upgraded or not SMODS.pseudorandom_probability(card, pseudoseed("shine_flip"), card.ability.extra.chance, card.ability.extra.trigger, 'shine_flip') and card.facing ~= "back" then
                     card:flip()

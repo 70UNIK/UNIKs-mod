@@ -18,11 +18,11 @@
         rare = true,
         calculate = function(self, card, context)
             if context.cardarea == G.play and context.before and card.facing ~= 'back' then
-                if not SMODS.pseudorandom_probability(card, pseudoseed("descflip"), card.ability.extra.chance, card.ability.extra.trigger, 'descflip') and card.facing ~= "back"  then
+                if not SMODS.pseudorandom_probability(card, pseudoseed("descflip"), card.ability.extra.chance, card.ability.extra.trigger, 'descflip') and card.facing ~= "back" and not G.GAME.unik_old_operator then
                     card:flip()
                     card:flip()
-                    G.GAME.unik_old_operator = G.GAME.blindside_current_operator
-                    BLINDSIDE.joker_operator(-1)
+                    G.GAME.unik_old_operator = true
+                    BLINDSIDE.joker_operator(G.GAME.blindside_current_operator-1)
                     card.ability.extra.succeed = true
                     return {
                         message = localize('k_unik_lowered'),
@@ -75,6 +75,7 @@
         upgrade = function(card) 
             if not card.ability.extra.upgraded then
             card.ability.extra.chance = card.ability.extra.chance + card.ability.extra.chancedown
+            card.ability.extra.trigger = card.ability.extra.trigger + card.ability.extra.chancedown
             card.ability.extra.j_e_mult = card.ability.extra.j_e_mult - card.ability.extra.j_e_mult_down
             
             card.ability.extra.upgraded = true
@@ -85,7 +86,7 @@ local defeatHook = Blind.defeat
 function Blind:defeat(silent)
     local ret = defeatHook(self,silent)
     if G.GAME.unik_old_operator then
-        BLINDSIDE.joker_operator(G.GAME.unik_old_operator)
+        BLINDSIDE.joker_operator(G.GAME.blindside_current_operator+1)
         G.GAME.unik_old_operator = nil
     end
     return ret

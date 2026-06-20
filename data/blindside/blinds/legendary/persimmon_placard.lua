@@ -26,7 +26,7 @@ BLINDSIDE.Blind({
                 }
             end
         end
-        if context.cardarea == G.play and context.before and card.facing ~= 'back' then
+        if context.cardarea == G.play and context.before and card.facing ~= 'back' and not context.blueprint then
             for i=1, #G.play.cards do
                 if G.play.cards[i] ~= card then
                     G.play.cards[i].config.center.blind_debuff(G.play.cards[i], true)
@@ -34,7 +34,7 @@ BLINDSIDE.Blind({
                 end
             end
         end
-        if context.cardarea == G.play and context.after and card.facing ~= 'back' then
+        if context.cardarea == G.play and context.after and card.facing ~= 'back' and not context.blueprint then
             for i=1, #G.play.cards do
                 if  G.play.cards[i] ~= card then
                     G.play.cards[i]:set_debuff(false)

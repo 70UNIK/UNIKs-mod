@@ -126,7 +126,12 @@ local function draw_indicators(indicators, card, x_offset, y_offset,radi)
 				-- x = struct.x
 				-- y = struct.y
 			else
-				y = y + HEIGHT + (UNIK.hasBlindside() and card.config.center.unik_exotic and GAP/2) or GAP
+				if UNIK.hasBlindside() and card.config.center.unik_exotic then
+					y = (y + HEIGHT + (GAP/2))
+				else
+					y = GAP
+				end
+				-- GAP
 			end
 		
 		end

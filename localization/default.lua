@@ -3461,14 +3461,31 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red",
-                        "{X:chips,C:white}X#1#{} Chips",
-                        "to Joker"
-                    },
-                    {
                         "Sets Joker {C:attention}operator{}",
                         "to {C:dark_edition}Addition",
                         "for the round",
                     },
+                    {
+                        "{C:attention}Burns"
+                    }
+    
+                }
+            },
+            m_unik_blindside_salmon_steps_upgraded = { --x0.75 chips to joker and sets operator to addition, subtraction maay be problematic due to a couple of ancient/exotic jokers reliant on mult operations
+                name = "Salmon Steps",
+                text = {
+                    {
+                        "{X:red,C:white}Red",
+                        "{X:chips,C:white}X#1#{} Chips to Joker",
+                    },
+                    {
+                        "Reduces Joker {C:attention}operator{}",
+                        "by {C:dark_edition}Addition",
+                        "for the round",
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
     
                 }
             },
@@ -3522,7 +3539,7 @@ return {
                     },
                     {
                         "Otherwise {C:red}debuffs",
-                        "all played Blinds,",
+                        "all played Blinds",
                         "itself included"
                     },
                     {

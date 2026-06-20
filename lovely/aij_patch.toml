@@ -1,0 +1,23 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+# Add CardAreas used to store the jokers that Clay Joker and Visage will copy
+# Also adds Sprites needed for patches and a new sticker/indicator for perma debuff
+# Also handles moving all data in G_all_in_jest as children of G.all_in_jest when loading a run
+# Keeping in one patch to ensure the G_all_in_jest stuff always happens last
+# Using CardAreas so that reloading a run works properly
+# Game:start_run
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''G.all_in_jest.patches_sprites["Other"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"aij_enhancements_atlas", {x=0,y=2})'''
+position = "before"
+match_indent = true
+payload = '''
+G.all_in_jest.patches_sprites["unik_Crosses"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=1,y=0})
+G.all_in_jest.patches_sprites["hc_unik_Crosses"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=1,y=1})
+G.all_in_jest.patches_sprites["unik_Noughts"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=0,y=0})
+G.all_in_jest.patches_sprites["hc_unik_Noughts"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=0,y=0})
+'''
