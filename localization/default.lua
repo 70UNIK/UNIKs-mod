@@ -99,7 +99,17 @@ return {
                     "Create a {C:attention,T:tag_bld_maxim}Max Tag",
                     "when Joker is selected"
                 }
-            }
+            },
+            b_unik_blindside_shitty = {
+                name = "Shitty Deck?",
+                text = {
+                    "???",
+                    "Earn {C:gold}$#1#{} whenever",
+                    "a Blind is {C:red}destroyed",
+					"Extra hands earn",
+					"{C:attention}no money"
+                }
+            },
             
             
         },
@@ -720,9 +730,9 @@ return {
                     "^#1# Mult each hand",
                     "+^#2# Mult per Crude",
                     "Blind in full deck",
-                    "Before scoring, permanently",
-                    "convert held and played",
-                    "non-Crude Blinds",
+                    "After scoring, convert",
+                    "half of held and",
+                    "played non-Crude Blinds",
                     "to random Crude Blinds"
                 }
             },
@@ -1985,10 +1995,10 @@ return {
                     {
                         "{X:purple,C:white}Purple{} {X:chips,C:white}Blue{}",
                         "Sets Joker {C:attention}operator{} to",
-                        "{C:dark_edition}addition{} for the round",                  
-                    },
-                    {
-                        "{X:mult,C:white}X#1#{} Mult to Joker",  
+                        "{C:dark_edition}addition{} for the round",    
+                        "then {C:attention}multiplies{} Joker {C:mult}Mult",
+                        "by {C:attention}1/4{} of Joker {C:chips}Chips",
+                        "{C:inactive}(Only if not already addition)"
                     },
                     {
 					"{C:red,E:1}Self-Debuffing{} with a",
@@ -1997,9 +2007,6 @@ return {
                     {
                     "{C:attention,E:1}Burns{} on success",
                     },
-
-
-
                 }
             }, 
             m_unik_blindside_catterfly = {
@@ -2313,6 +2320,86 @@ return {
                         "{C:red}Debuffs{} the",
                         "{C:attention}leftmost{} played Blind"
                     }
+                }
+            },
+            m_unik_blindside_diamond = {
+                name = "The Diamond",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "Create a {C:attention}Dental",
+                        "tag before scoring",
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
+            m_unik_blindside_diamond_upgraded = {
+                name = "The Diamond",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "Create a {C:attention}Dental",
+                        "tag before scoring",
+                    }
+                }
+            },
+            m_unik_blindside_spade = {
+                name = "The Spade",
+                text = {
+                    {
+                        "{X:gold,C:white}Yellow",
+                        "Create a {C:attention}Shovel",
+                        "tag before scoring",
+                    },
+                    {
+                        "{C:attention}Burns"
+                    }
+                }
+            },
+            m_unik_blindside_spade_upgraded = {
+                name = "The Spade",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded",
+                        "Create a {C:attention}Shovel", --scored blinds give +30 chips
+                        "tag before scoring",
+                    }
+                }
+            },
+            m_unik_blindside_leaf = {
+                name = "The Leaf",
+                text = {
+                    {
+                        "{X:blue,C:white}Blue",
+                        "Create a {C:attention}Club", --+3 Mult per blind in scoring hand
+                        "tag before scoring"
+                    }
+                }
+            },
+            m_unik_blindside_heart = {
+                name = "The Heart",
+                text = {
+                    {
+                        "{X:red,C:white}Red",
+                        "Create a {C:attention}Blood", --scored blinds have a 1 in 2 chacne to give x1.5 mult
+                        "tag before scoring"
+                    },
+					{"{C:attention,E:1}Self-Scoring{} with a",
+					"{C:green}#1# in #2#{} chance"},
+                }
+            },
+            m_unik_blindside_star = {
+                name = "The Star",
+                text = {
+                    {
+                        "{X:red,C:white}Faded",
+                        "Create a {C:attention}",
+                        "tag before scoring"
+                    },
+					{"{C:red,E:1}Self-Debuffing{} with a",
+					"{C:green}#1# in #2#{} chance"},
                 }
             },
             m_unik_blindside_nought = {
@@ -3095,7 +3182,6 @@ return {
                         "selected Blinds"
                     },
                     {"{C:red}Stubborn"},
-                    {"{C:green}Retained"},
                 }
             },
             m_unik_blindside_impatience_upgraded = {
@@ -3199,7 +3285,7 @@ return {
                 }
             },
             m_unik_blindside_ai_brainrot = {
-                name = "The AI",
+                name = "The AI Slop",
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded", 
@@ -3218,7 +3304,7 @@ return {
                 }
             },
             m_unik_blindside_ai_brainrot_upgraded = {
-                name = "The AI",
+                name = "The AI Slop",
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded", 
@@ -3527,26 +3613,6 @@ return {
                     }
                 }
             },
-            m_unik_blindside_bronze_bug_upgraded = {
-                name = "Bronze Bug",
-                text = {
-                    {
-                        "{X:dark_edition,C:white}Faded",
-                        "If hand at least {C:attention}#3#",
-                        "scoring Blinds, all scoring",
-                        "Blinds are {C:attention}retriggered{}#1# time#<s>1#",
-                        "and {C:unik_copper}rescored{}}#2# time#<s>2#"
-                    },
-                    {
-                        "Otherwise {C:red}debuffs",
-                        "all played Blinds",
-                        "itself included"
-                    },
-                    {
-                        "Always Scores"
-                    }
-                }
-            },
             m_unik_blindside_purple_pentagram = {
                 name = "Purple Pentagram",
                 text = {
@@ -3560,6 +3626,10 @@ return {
                         "{C:inactive}(Must have room)",
                     }
                 }
+            },
+            --blue finisher
+            m_unik_blindside_blue_ball={
+                
             },
             
             m_unik_blindside_epic_straightforwardness = {
@@ -8483,6 +8553,7 @@ return {
             k_unik_legendary_blind_finity = "Legendary Blind",
             k_unik_detrimental = "Detrimental",
             k_unik_ancient = "Ancient",
+            k_unik_exquisite = "Exquisite",
 
             k_legendary_crown_normal1 = "I tried to climb the mountain...",
             k_legendary_crown_normal2 = "I should've listened to her...",

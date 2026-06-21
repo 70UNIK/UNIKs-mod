@@ -38,7 +38,6 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         if not  card.ability.extra.upgraded then
              info_queue[#info_queue+1] = {key = 'bld_stubborn', set = 'Other'}
-            info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}  
         else
 
         end

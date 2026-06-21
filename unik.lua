@@ -1307,6 +1307,12 @@ if next(SMODS.find_mod("Blindside")) then
 			return 0
 		end
 	)
+	BLINDSIDE.add_crossmod_rarity('unik_exquisite',HEX("ef0098"),G.C.WHITE,'k_unik_exquisite','m_unik_blindside_tracer',
+		function(self)
+			--print("exoticnospawn")
+			return 0.003
+		end
+	)
 	NFS.load(mod_path .. "data/stickers/impounded_blindside.lua")() 
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
@@ -1344,13 +1350,12 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/cross.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/shield.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/napkin.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/tracer.lua")()	
+	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/scrum.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/upgrade.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/onion.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/prison.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/earthmover.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/premium/panopticon.lua")()	
+
 	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/premium/kitsune.lua")()	
 
@@ -1370,6 +1375,13 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/premium/zu.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/premium/decepticon.lua")()	
 
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/tracer.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/earthmover.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/panopticon.lua")()	
+	--the jail
+	--the dandy
+	--the circus
+
 	NFS.load(mod_path .. "data/blindside/blinds/crude/lily.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/corpo.lua")()
@@ -1384,9 +1396,11 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/crude/nut.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/close.lua")()
 
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/salmon_steps.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/legendary/persimmon_placard.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/legendary/emerald_escalator.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/legendary/purple_pentagram.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/bronze_bug.lua")()
 	
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_flip.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_trench.lua")()
@@ -1520,6 +1534,8 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/stakes/shining_glitter.lua")()	
 	NFS.load(mod_path .. "data/blindside/stakes/steel.lua")()	
 	--decks
+	NFS.load(mod_path .. "data/blindside/decks/shitty.lua")()	
+	NFS.load(mod_path .. "data/blindside/decks/persimmon.lua")()	
 	NFS.load(mod_path .. "data/blindside/decks/endless.lua")()	
 end
 

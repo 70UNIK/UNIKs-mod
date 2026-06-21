@@ -66,12 +66,12 @@ BLINDSIDE.Blind({
         if G.GAME.selected_back.effect.center.config.extra then
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
             
-            return not UNIK.check_if_exists('m_unik_blindside_panopticon')  and pseudorandom('panopticon_spawn'..G.SEED) < 0.1
+            return not UNIK.check_if_exists('m_unik_blindside_panopticon')  and pseudorandom('panopticon_spawn'..G.SEED) < 0.5
         else
             return false
         end
     end,
-    rare = true,
+    unik_exquisite = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.c_unik_blindside_portal
         info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}

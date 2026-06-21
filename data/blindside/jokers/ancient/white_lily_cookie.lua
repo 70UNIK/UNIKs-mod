@@ -121,6 +121,7 @@ function Card.remove(self)
         if self.added_to_deck and self.ability.set == 'Enhanced' and UNIK.hasBlindside() and (not self.unik_dissolve_sell_flag) then
             G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run or 0
             G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run + 1
+            SMODS.calculate_context({ unik_blind_destroyed = true, blind = self })
             --print("Destroyed: " .. G.GAME.blinds_destroyed_this_run)
         end
     end

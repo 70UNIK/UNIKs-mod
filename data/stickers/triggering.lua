@@ -102,6 +102,10 @@ function Card:update(dt)
         end
     --Ultradebuffed
     end
+    if self.ability and self.ability.all_in_jest and self.ability.all_in_jest.perma_debuff then
+        self.ability.all_in_jest.perma_debuff = nil
+        self.ability.unik_ultradebuffed = true
+    end
     if self.ability and self.ability.unik_impounded_blindside then
         if not self.debuff and not self.area.config.collection then
             self.debuff = true

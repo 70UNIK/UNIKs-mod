@@ -57,7 +57,7 @@ BLINDSIDE.Blind({
         end
         return SMODS.merge_effects(effects_table)
     end,
-    rare = true,
+    unik_exquisite = true,
     loc_vars = function(self, info_queue, card)
         local cardarea = card.area and card.area.cards or nil
         if G.play and card.area == G.play then

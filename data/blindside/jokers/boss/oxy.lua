@@ -37,14 +37,14 @@ BLINDSIDE.Joker({
      loc_vars = function (self)
         return {
             vars = {
-                1.5
+                1.35
             }
         }
     end,
     collection_loc_vars = function(self)
         return {
             vars = {
-                1.5
+                1.35
             }
         }
     end,
@@ -70,14 +70,14 @@ BLINDSIDE.Joker({
         if context.scoring_hand and context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
             if tableContains(context.other_card, context.scoring_hand) and (context.other_card):get_seal() and context.other_card.facing ~= 'back' then
                 return {
-                    message = "X" .. 1.5 .. localize('k_unik_jmult'),
+                    message = "X" .. 1.35 .. localize('k_unik_jmult'),
                     colour = G.C.BLACK,
                     focus = context.other_card,
                     func = function ()
                         G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                         G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
                         G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
-                         UNIK.blindside_chips_modifyV2({x_mult = 1.5})   
+                         UNIK.blindside_chips_modifyV2({x_mult = 1.35})   
                         G.E_MANAGER:add_event(Event({
                             func = (function()
                             G.GAME.blind:wiggle()

@@ -1,4 +1,5 @@
 --1 in 3 chance to set joker operator to addition then ^2.5 joker's mult
+--descending fix: +Mult equal to joker's chips
     BLINDSIDE.Blind({
         key = 'unik_blindside_descending',
         atlas = 'unik_blindside_blinds',
@@ -9,8 +10,8 @@
                 chance = 2,
                 trigger = 3,
                 chancedown = -1,
-                j_e_mult = 2,
-                j_e_mult_down = 0.5,
+                j_e_mult = 5,
+                j_e_mult_down = 2,
             }
         },
         hues = {"Purple", "Blue"},
@@ -24,6 +25,7 @@
                     G.GAME.unik_old_operator = true
                     BLINDSIDE.joker_operator(G.GAME.blindside_current_operator-1)
                     card.ability.extra.succeed = true
+                    BLINDSIDE.chipsmodify(G.GAME.blind.basechips*G.GAME.blind.mult/4, 0, 0)
                     return {
                         message = localize('k_unik_lowered'),
                         colour = G.C.DARK_EDITION,
@@ -35,22 +37,6 @@
                     end
                     card_eval_status_text(card, "debuff", nil, nil, nil, nil)
                     return {
-                    }
-                end
-            end
-            if context.cardarea == G.play and context.main_scoring then
-                if card.facing ~= "back" then
-                    
-                    UNIK.blindside_chips_modifyV2({x_mult = card.ability.extra.j_e_mult}) 
-                    return {
-                        message = "X" .. card.ability.extra.j_e_mult .. localize('k_unik_jmult'),
-                        colour = G.C.BLACK,
-                        focus = card,
-                    }
-                else
-                    card_eval_status_text(card, "debuff", nil, nil, nil, nil)
-                    return {
-                        
                     }
                 end
             end

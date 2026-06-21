@@ -5,8 +5,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            x_mult = 3,
-            money = 2,
+            x_mult = 4,
+            money = 3,
             x_mult_up = 2,
             money_up = 3,
         }},

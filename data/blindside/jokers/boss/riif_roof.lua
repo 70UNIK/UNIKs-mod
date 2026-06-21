@@ -20,28 +20,28 @@ BLINDSIDE.Joker({
      loc_vars = function (self)
         return {
             vars = {
-                1.2
+                1.15
             }
         }
     end,
     collection_loc_vars = function(self)
         return {
             vars = {
-                1.2
+                1.15
             }
         }
     end,
     calculate = function(self, blind, context)
         if (context.other_joker) then
             return {
-                    message = "X" .. 1.2 .. localize('k_unik_jmult'),
+                    message = "X" .. 1.15 .. localize('k_unik_jmult'),
                     colour = G.C.BLACK,
                     focus = context.other_card,
                     func = function ()
                         G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                         G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
                         G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
-                         UNIK.blindside_chips_modifyV2({x_mult = 1.2})   
+                         UNIK.blindside_chips_modifyV2({x_mult = 1.15})   
                         G.E_MANAGER:add_event(Event({
                             func = (function()
                             G.GAME.blind:wiggle()

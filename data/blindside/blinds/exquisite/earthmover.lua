@@ -63,12 +63,12 @@ BLINDSIDE.Blind({
     in_pool = function(self, args)
         if G.GAME.selected_back.effect.center.config.extra then
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
-            return not UNIK.check_if_exists('m_unik_blindside_earthmover') and pseudorandom('earthmover'..G.SEED) < 0.3
+            return not UNIK.check_if_exists('m_unik_blindside_earthmover') 
         else
             return false
         end
     end,
-    rare = true,
+    unik_exquisite = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.c_unik_blindside_sigil
         info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
