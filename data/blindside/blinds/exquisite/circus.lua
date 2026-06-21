@@ -7,7 +7,7 @@ BLINDSIDE.Blind({
             value = 20,
             x_mult_p = 1.5,
             x_mult_p_up = 0.5,
-            x_mult_e_=1.75,
+            x_mult_e=1.75,
             x_mult_e_up=0.5,
             x_mult_l=2,
             x_mult_l_up=0.5,
@@ -96,7 +96,7 @@ BLINDSIDE.Blind({
     end,
     loc_vars = function(self, info_queue, card)
         return {
-            vars = {card.ability.extra.x_mult}
+            vars = {card.ability.extra.x_mult_p,card.ability.extra.x_mult_e,card.ability.extra.x_mult_l,card.ability.extra.x_mult_a}
         }
     end,
     upgrade = function(card)

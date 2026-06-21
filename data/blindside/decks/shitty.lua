@@ -53,5 +53,5 @@ SMODS.Back {
             delay(0.3)
         end
     end,
-    edition_back_shader = 'voucher'
+    
 }

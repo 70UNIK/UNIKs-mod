@@ -1,7 +1,7 @@
 BLINDSIDE.Blind({
     key = 'unik_blindside_brilliance',
     atlas = 'unik_blindside_blinds',
-    pos = {x = 8, y = 4},
+    pos = {x = 9, y = 4},
     config = {
         extra = {
             value = 3,
@@ -37,13 +37,15 @@ BLINDSIDE.Blind({
         end
     end,
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_TAGS.tag_bld_battery
         info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         return {
-            vars = {card.ability.extra.batteries,card.ability.extra.money}
+            vars = {card.ability.extra.money,card.ability.extra.batteries,}
         }
     end,
     upgrade = function(card)
         if not card.ability.extra.upgraded then
+            card.ability.extra.money = card.ability.extra.money + card.ability.extra.money_up
             card.ability.extra.upgraded = true
         end
     end

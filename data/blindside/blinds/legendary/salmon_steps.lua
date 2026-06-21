@@ -36,6 +36,7 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         return {
+            key = card.ability.extra.upgraded and 'm_unik_blindside_salmon_steps_upgraded' or 'm_unik_blindside_salmon_steps',
             vars = {card.ability.extra.jxchips}
         }
     end,

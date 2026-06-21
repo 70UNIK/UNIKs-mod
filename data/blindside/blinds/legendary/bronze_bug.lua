@@ -88,7 +88,7 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         return {
-            vars = {card.ability.extra.retriggers,card.ability.extra.rescores}
+            vars = {card.ability.extra.min_cards,card.ability.extra.retriggers,card.ability.extra.rescores}
         }
     end,
     upgrade = function(card)

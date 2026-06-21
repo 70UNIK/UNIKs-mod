@@ -3564,12 +3564,15 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{}",
-                        "{C:chips}+#1#{} Chips"
+                        "{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips"
                     },
                     {
                         "Create an {C:attention}Imprisonment Tag",
                         "once per ante",
                         "{C:inactive}({C:attention}Active!{C:inactive})"
+                    },
+                    {
+                        "{C:attention}Burns",
                     }
                 },
             },
@@ -3578,12 +3581,15 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{}",
-                        "{C:chips}+#1#{} Chips"
+                        "{C:mult}+#1#{} Mult and {C:chips}+#2#{} Chips"
                     },
                     {
                         "{C:inactive}Create an {C:attention}Imprisonment Tag",
                         "{C:inactive}once per ante",
                         "{C:inactive}(Inactive)"
+                    },
+                    {
+                        "{C:attention}Burns",
                     }
                 },
             },
@@ -3597,7 +3603,7 @@ return {
                     },
                     {
                         "{C:green}#2# in #3#{} chance",
-                        "for {C:attention}+#1#{} hand size",
+                        "for {C:attention}+#4#{} hand size",
                         "when drawn and held",
                     },
                     {
@@ -3631,7 +3637,7 @@ return {
                         "on {C:attention}Final{} hand",
                     },
                     {
-                        "Otherwise {X:mult,C:white}X#1#{} Mult",
+                        "Otherwise {X:mult,C:white}X#2#{} Mult",
                         "and {C:attention}Burns"
                     },
                     {
@@ -3649,7 +3655,7 @@ return {
                         "{C:inactive}({C:attention}Active!{C:inactive})"
                     },
                     {
-                        "Otherwise {X:mult,C:white}X#1#{} Mult",
+                        "Otherwise {X:mult,C:white}X#2#{} Mult",
                         "and {C:attention}Burns"
                     },
                     {
@@ -3667,7 +3673,7 @@ return {
                         "{C:inactive}(Inactive{C:inactive})"
                     },
                     {
-                        "Otherwise {X:mult,C:white}X#1#{} Mult",
+                        "Otherwise {X:mult,C:white}X#2#{} Mult",
                         "and {C:attention}Burns"
                     },
                     {
@@ -3783,14 +3789,14 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded",
-                        "If hand at least {C:attention}#3#",
-                        "scoring Blinds, all scoring",
-                        "Blinds are {C:attention}retriggered{}#1# time#<s>1#",
-                        "and {C:unik_copper}rescored{}}#2# time#<s>2#"
+                        "If hand at least {C:attention}#1#",
+                        "scoring Blind#<s>1#, all scoring",
+                        "Blinds are {C:attention}retriggered{C:attention} #2#{} time#<s>2#",
+                        "and {C:unik_copper}rescored{C:attention} #3# {}time#<s>3#"
                     },
                     {
                         "Otherwise {C:red}debuffs",
-                        "all played Blinds,",
+                        "{C:attention}all{} played Blinds,",
                         "itself included"
                     },
                     {

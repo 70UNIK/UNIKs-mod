@@ -45,5 +45,6 @@ SMODS.Back {
             add_tag(Tag('tag_bld_maxim'))
             delay(0.3)
         end
-    end
+    end,
+    edition_back_shader = 'voucher'
 }

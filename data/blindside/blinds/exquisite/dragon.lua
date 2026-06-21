@@ -69,7 +69,7 @@ BLINDSIDE.Blind({
     upgrade = function(card)
         if not card.ability.extra.upgraded then
             card.ability.extra.x_mult = card.ability.extra.x_mult +card.ability.extra.x_mult_up
-            card.ability.extra.trigger = card.ability.extra.trigger - card.abiltiy.extra.trigger_down
+            card.ability.extra.trigger = card.ability.extra.trigger - card.ability.extra.trigger_down
             card.ability.extra.upgraded = true
         end
     end
