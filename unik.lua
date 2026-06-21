@@ -1307,7 +1307,7 @@ if next(SMODS.find_mod("Blindside")) then
 			return 0
 		end
 	)
-	BLINDSIDE.add_crossmod_rarity('unik_exquisite',HEX("ef0098"),G.C.WHITE,'k_unik_exquisite','m_unik_blindside_tracer',
+	BLINDSIDE.add_crossmod_rarity('unik_exquisite',G.C.UNIK_EXQUISITE,G.C.WHITE,'k_unik_exquisite','m_unik_blindside_tracer',
 		function(self)
 			--print("exoticnospawn")
 			return 0.003
@@ -1377,7 +1377,13 @@ if next(SMODS.find_mod("Blindside")) then
 
 	NFS.load(mod_path .. "data/blindside/blinds/exquisite/tracer.lua")()	
 	NFS.load(mod_path .. "data/blindside/blinds/exquisite/earthmover.lua")()	
-	NFS.load(mod_path .. "data/blindside/blinds/exquisite/panopticon.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/panopticon.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/brilliance.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/dragon.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/frost.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/end.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/jail.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/dandy.lua")()	
 	--the jail
 	--the dandy
 	--the circus

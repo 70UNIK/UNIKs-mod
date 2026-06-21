@@ -30,9 +30,15 @@ BLINDSIDE.Joker({
     unik_before_play = function(self)
         
         for i,v in pairs(G.hand.cards) do
-            if v.facing ~= 'back' and v.debuff then
+            if v.facing ~= 'back' and v.debuff and v:bld_can_debuff_card_externally() then
                 v:flip()
                 v.flipped_by_railroad = true
+            elseif not v:bld_can_debuff_card_externally() then
+                if v.facing == 'back' then
+                    v:flip()
+                    v.debuff = false
+                    v.flipped_by_railroad = nil
+                end
             end
         end
     end,
@@ -101,7 +107,7 @@ BLINDSIDE.Joker({
         end
         if not G.GAME.blind.disabled then
             if context.debuff_card then
-                if G.GAME.railroad_debuffed_hue and context.debuff_card:is_color(G.GAME.railroad_debuffed_hue) then
+                if G.GAME.railroad_debuffed_hue and context.debuff_card:is_color(G.GAME.railroad_debuffed_hue) and context.debuff_card:bld_can_debuff_card_externally() then
                     return {
                         debuff = true
                     }
@@ -124,7 +130,7 @@ BLINDSIDE.Joker({
                     end
                     G.GAME.railroad_debuffed_hue = pseudorandom_element(valid_colours, pseudoseed("unik_railroad_debuff_blind"))
                     for i,v in pairs(G.playing_cards) do
-                        if not v.seal or (v.seal and v.seal ~= 'bld_wild') then
+                        if v:bld_can_debuff_card_externally() then
                             SMODS.recalc_debuff(v)
                             if v:is_color(G.GAME.railroad_debuffed_hue) then
                                 v:juice_up()

@@ -111,7 +111,13 @@ function Card:add_to_deck(from_debuff)
     if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_hand_size_added then
         self.ability.extra.unik_hand_size_added = nil
     end
-    SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
+    if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.dragon_attempt_made then
+        self.ability.extra.dragon_attempt_made = nil
+    end
+    if self then
+        SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
+    end
+    
         self.will_be_destroyed_1 = nil
        self.will_be_gored = nil
 end

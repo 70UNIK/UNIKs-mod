@@ -2690,7 +2690,7 @@ return {
                     {
                         "{X:chips,C:white}Blue{}",
                         "When scored, other",
-                        "{X:chips,C:white}Starter{} Blinds",
+                        "{C:chips}Starter{} Blinds",
                         "give {X:chips,C:white}X#1#{} Chips"
                     },
                 }
@@ -2700,8 +2700,8 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:money,C:white}Yellow{}",
-                        "When scored, other",
-                        "{C:bld_keepsake,E:1}Keepsakes{} give {X:mult,C:white}X#1#{} Mult"
+                        "When scored, other {C:green}Simple{}",
+                        "Blinds give {X:mult,C:white}X#1#{} Mult"
                     },
                 }
             },
@@ -3150,7 +3150,7 @@ return {
                     {
                         "{X:chips,C:white}Blue", 
                         "Create {C:attention}#1#{} random",
-                        "{X:blue,C:white}Starter{} Blind#<s>1#",
+                        "{C:chips}Starter{} Blind#<s>1#",
                         "in hand"
                     },
                     {"Always scores"},
@@ -3523,6 +3523,191 @@ return {
                     },
                     {"Always scores"},
                     {"{C:green}Retained"},
+                }
+            },
+            m_unik_blindside_dandy = {
+                name = "The Dandy",
+                text = {
+                    {"{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
+					"{X:green,C:white}Green{} {X:money,C:white}Yellow{} {X:purple,C:white}Purple{}"},
+					{"{X:red,C:white}X#1#{} Mult",
+					"{X:blue,C:white}X#2#{} Chips"},
+                    {
+                        "When played,",
+                        "{C:attention}prevents{} itself and",
+                        "other Blinds from",
+                        "being {C:red}debuffed{} by",
+                        "{C:attention}external{} means",
+                    },
+                }
+            },
+            --literally cryptid circus,
+            --X1.5 mult per premium, X1.75 mult per exquisite, X2.25 mult per legendary, X3 mult per ancient or exotic rarity.
+            m_unik_blindside_circus = {
+                name = "The Circus",
+                text = {
+                    {
+                        "{X:red,C:white}Red{}",
+                        "When scored,",
+                    },
+                    {
+                        "Other {C:red}Premium{} Blinds give {X:red,C:white}X#1#{} Mult",
+                        "Other {C:unik_exquisite}Exquisite{} Blinds give {X:red,C:white}X#2#{} Mult",
+                        "Other {C:purple}Legendary{} Blinds give {X:red,C:white}X#3#{} Mult",
+                        "Other {C:unik_ancient}Ancient{} and {C:unik_exotic}Exotic{} Blinds",
+                        "give {X:red,C:white}X#4#{} Mult"
+                    }
+                }
+            },
+            m_unik_blindside_jail = {
+                name = "The Jail",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{}",
+                        "{C:chips}+#1#{} Chips"
+                    },
+                    {
+                        "Create an {C:attention}Imprisonment Tag",
+                        "once per ante",
+                        "{C:inactive}({C:attention}Active!{C:inactive})"
+                    }
+                },
+            },
+            m_unik_blindside_jail_inactive = {
+                name = "The Jail",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{}",
+                        "{C:chips}+#1#{} Chips"
+                    },
+                    {
+                        "{C:inactive}Create an {C:attention}Imprisonment Tag",
+                        "{C:inactive}once per ante",
+                        "{C:inactive}(Inactive)"
+                    }
+                },
+            },
+            m_unik_blindside_dragon = {
+                name = "The Dragon",
+                text = {
+                    {
+                        "{X:green,C:white}Green",
+                        "{X:mult,C:white}X#1#{} Mult",
+                        "when held in hand",
+                    },
+                    {
+                        "{C:green}#2# in #3#{} chance",
+                        "for {C:attention}+#1#{} hand size",
+                        "when drawn and held",
+                    },
+                    {
+                        "{C:green}Retained"
+                    },
+                }
+            },
+            m_unik_blindside_brilliance = {
+                name = "The Brilliance",
+                text = {
+                      {
+                        "{X:gold,C:white}Yellow",
+                        "{C:gold}+$#1#{}",
+                    },
+                    {
+                        "Create #2# {C:attention}Battery Tag#<s>2#",
+                        "before scoring"
+                    },
+                    {
+                        "{C:attention}Burns"
+                    },
+                }
+            },
+            --x3 score on final hand
+            m_unik_blindside_end = {
+                name = "The End",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple",
+                        "{X:purple,C:white}X#1#{} score",
+                        "on {C:attention}Final{} hand",
+                    },
+                    {
+                        "Otherwise {X:mult,C:white}X#1#{} Mult",
+                        "and {C:attention}Burns"
+                    },
+                    {
+                        "{C:green}Retained"
+                    }
+                }
+            },
+            m_unik_blindside_end_active = {
+                name = "The End",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple",
+                        "{X:purple,C:white}X#1#{} score",
+                        "on {C:attention}Final{} hand",
+                        "{C:inactive}({C:attention}Active!{C:inactive})"
+                    },
+                    {
+                        "Otherwise {X:mult,C:white}X#1#{} Mult",
+                        "and {C:attention}Burns"
+                    },
+                    {
+                        "{C:green}Retained"
+                    }
+                }
+            },
+            m_unik_blindside_end_inactive = {
+                name = "The End",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple",
+                        "{X:inactive,C:white}X#1#{C:inactive} score",
+                        "{C:inactive}on Final hand",
+                        "{C:inactive}(Inactive{C:inactive})"
+                    },
+                    {
+                        "Otherwise {X:mult,C:white}X#1#{} Mult",
+                        "and {C:attention}Burns"
+                    },
+                    {
+                        "{C:green}Retained"
+                    }
+                }
+            },
+            m_unik_blindside_ranges = {
+                name = "The Ranges",
+                text = {
+                    {
+                        "{X:purple,C:white}Purple",
+                        "Create a {C:unik_summit}Summit Card",
+                        "when scored",
+                        "{C:inactive}(Must have room)"
+                    },
+                    {
+                        "{C:red}Debuffs{} all played",
+                        "{X:red,C:white}Red{} and {X:blue,C:white}Blue{} Blinds"
+                    },
+                    {
+                        "{C:attention}Burns"
+                    },
+                },
+            },
+            m_unik_blindside_frost = { --cerulean bell sidegrade, literally ice cards from all in jest
+                name = "The Frost",
+                text = {
+                    {
+                        "{X:blue,C:white}Blue",
+                        "{C:blue}+#1#{} Chips"
+                    },
+                    {
+                        "{C:attention}+#2#{} play",
+                        "selection limit",
+                        "when {C:attention}selected"
+                    },
+                    {
+                        "Always Scores"
+                    }
                 }
             },
             m_unik_blindside_emerald_escalator = {
@@ -7821,7 +8006,7 @@ return {
                 name = "Denali",
                 text = {
                     "Permanently add {X:chips,C:white}X#1#{} Chips",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_aconcagua = {
@@ -7829,7 +8014,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {X:mult,C:white}X#1#{} Mult",
-                    "to {C:attention}#2#{} selected cards#<s>2#",              
+                    "to {C:attention}#2#{} selected card#<s>2#",              
                 }
             },
             c_unik_elbrus = {
@@ -7837,21 +8022,21 @@ return {
                 text = {
                     "Permanently add",
                     "held {X:chips,C:white}X#1#{} Chips",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_kosciuszko = {
                 name = "Kosciuszko",
                 text = {
                     "Permanently add {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 },
             },
             c_unik_elbert = {
                 name = "Elbert",
                 text = {
                     "Permanently add {C:mult}+#1#{} Mult",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 },
             },
             c_unik_mitchell = {
@@ -7859,7 +8044,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_mitchell_i = {
@@ -7867,7 +8052,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_narodnaya = {
@@ -7875,7 +8060,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:mult}+#1#{} Mult",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
 
@@ -7883,28 +8068,28 @@ return {
                 name = "Charleston",
                 text = {
                     "Permanently add {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_charleston_i = { --near vegas, which gambling
                 name = "Nuvagantu",
                 text = {
                     "Permanently add {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_whitney = { ---sierra nevada
                 name = "Whitney",
                 text = {
                     "Permanently add held {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_whitney_i = { ---sierra nevada
                 name = "Tumanguya",
                 text = {
                     "Permanently add held {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected cards#<s>2#",
+                    "to {C:attention}#2#{} selected card#<s>2#",
                 }
             },
             c_unik_blank_summit = {

@@ -314,7 +314,7 @@ BLINDSIDE.Blind({
                     for j = 1, 2 do
                         local valid_cards = {}
                         for i,v in pairs(context.scoring_hand) do
-                            if v ~= card and not v.debuffed_by_onion and (not v.seal or (v.seal and v.seal ~= 'bld_wild')) then
+                            if v ~= card and not v.debuffed_by_onion and v:bld_can_debuff_card_externally() then
                                 valid_cards[#valid_cards+1] = v
                             end
                         end

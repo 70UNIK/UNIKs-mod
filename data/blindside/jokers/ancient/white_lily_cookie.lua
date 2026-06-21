@@ -123,6 +123,15 @@ function Card.remove(self)
             G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run + 1
             SMODS.calculate_context({ unik_blind_destroyed = true, blind = self })
             --print("Destroyed: " .. G.GAME.blinds_destroyed_this_run)
+            print("REMOVED!")
+            if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_hand_size_added then
+                self.ability.extra.unik_hand_size_added = nil
+                print("REMOVED BY OTHER MEANS!")
+                G.hand:change_size(-self.ability.extra.hand_size)
+                G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
+                G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker - 1
+                print("hand_mod: " .. G.GAME.bellows_hs_tracker)
+            end
         end
     end
     local ret = remove_ref(self)

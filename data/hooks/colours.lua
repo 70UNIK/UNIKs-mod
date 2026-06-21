@@ -14,6 +14,7 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_arm_color = G.C.UNIK_THE_ARM
     G.ARGS.LOC_COLOURS.unik_hook_color = G.C.UNIK_THE_HOOK
     G.ARGS.LOC_COLOURS.unik_exotic = G.C.UNIK_EXOTIC
+    G.ARGS.LOC_COLOURS.unik_exquisite = G.C.UNIK_EXQUISITE
     G.ARGS.LOC_COLOURS.unik_orta_hammer_color = G.C.UNIK_ORTA_THE_HAMMER
     G.ARGS.LOC_COLOURS.unik_eye_searing_blue = G.C.UNIK_EYE_SEARING_BLUE
     G.ARGS.LOC_COLOURS.unik_eye_searing_red = G.C.UNIK_EYE_SEARING_RED
