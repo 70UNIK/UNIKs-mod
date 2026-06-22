@@ -20,7 +20,8 @@ BLINDSIDE.Blind({
         
         if context.cardarea == G.play and context.main_scoring then
             for i,v in pairs(context.scoring_hand) do
-                if v.config.center.rare then
+                if v ~= card then
+                    if v.config.center.rare then
                     G.E_MANAGER:add_event(Event({
                         trigger = 'immediate',
                         func = function()
@@ -87,6 +88,8 @@ BLINDSIDE.Blind({
                         colour = G.C.RED,
                     }, v)
                 end
+                end
+                
 
             end
             return {

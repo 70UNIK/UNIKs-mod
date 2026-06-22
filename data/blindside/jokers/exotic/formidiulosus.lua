@@ -72,74 +72,77 @@ BLINDSIDE.Joker({
                     crudes = crudes + 1
                 end
             end
-            G.E_MANAGER:add_event(Event({trigger = 'before', delay = 1, func = function()
-            for i = 1, #G.hand.cards do
+for i = 1, #G.hand.cards do
                 
                 if not G.hand.cards[i].config.center.curse and not G.hand.cards[i].ability.formidi_original then
-                    G.E_MANAGER:add_event(Event({delay = 1, func = function() 
-                        G.hand.cards[i].ability.formidi_original = copy3(G.hand.cards[i].ability)
-                        G.hand.cards[i].ability.formidi_originaltype = G.hand.cards[i].config.center.key
-                        local args = {}
-                        args.guaranteed = true
-                        args.options = G.P_CENTER_POOLS.bld_obj_blindcard_generate
-                        args.cursed = true
-                        local cardtype = BLINDSIDE.poll_enhancement(args)
-                        local upgrade =G.hand.cards[i].ability.extra.upgraded
-                        G.hand.cards[i]:set_ability(cardtype)
-                        if upgrade then
-                            upgrade_blinds({G.hand.cards[i]}, true, true)
-                        end
-                        G.GAME.blind:wiggle()
-                        G.hand.cards[i]:juice_up()
-                        G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                        G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-                        G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
-                        play_sound('cancel', 0.8+ (0.9 + 0.2*math.random())*0.2, 1)
-                    return true end })) 
-                
-                end
-                crudes = crudes + 1
-            end
-            for i = 1, #G.play.cards do
-                if not G.play.cards[i].config.center.curse and not G.play.cards[i].ability.formidi_original then
-                    G.E_MANAGER:add_event(Event({delay = 1, func = function() 
-                        G.play.cards[i].ability.formidi_original = copy3(G.play.cards[i].ability)
-                        G.play.cards[i].ability.formidi_originaltype = G.play.cards[i].config.center.key
-                        local args = {}
-                        args.guaranteed = true
-                        args.options = G.P_CENTER_POOLS.bld_obj_blindcard_generate
-                        args.cursed = true
-                        local cardtype = BLINDSIDE.poll_enhancement(args)
-                        local upgrade =G.play.cards[i].ability.extra.upgraded
-                        G.play.cards[i]:set_ability(cardtype)
-                        if upgrade then
-                            upgrade_blinds({G.play.cards[i]}, true, true)
-                        end
-                        G.GAME.blind:wiggle()
-                        G.play.cards[i]:juice_up()
-                        G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                        G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-                        G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
-                        play_sound('cancel', 0.8+ (0.9 + 0.2*math.random())*0.2, 1)
-                    return true end })) 
-                
-                end
-                crudes = crudes + 1
-            end
-            G.GAME.unik_blind_e_mult = 1 + crudes*0.15
-            return true end })) 
-
-
-            G.E_MANAGER:add_event(Event({delay = 1, func = function() 
-                G.GAME.unik_dynamic_text_realtime = true
-                G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult or 1
-                if G.GAME.unik_blind_e_mult > 1 then
-                    UNIK.blindside_chips_modifyV2({e_mult = G.GAME.unik_blind_e_mult})   
+                    G.hand.cards[i].ability.formidi_original = copy3(G.hand.cards[i].ability)
+                    G.hand.cards[i].ability.formidi_originaltype = G.hand.cards[i].config.center.key
+                    local args = {}
+                    args.guaranteed = true
+                    args.options = G.P_CENTER_POOLS.bld_obj_blindcard_generate
+                    args.cursed = true
+                    local cardtype = BLINDSIDE.poll_enhancement(args)
+                    local upgrade =G.hand.cards[i].ability.extra.upgraded
+                    
+                    
                     G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                     G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
                     G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                    
+                    G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.1, func = function() 
+                        play_sound('cancel', 0.8+ (0.9 + 0.2*math.random())*0.2, 1)
+                        G.hand.cards[i]:set_ability(cardtype)
+                        G.GAME.blind:wiggle()
+                    G.hand.cards[i]:juice_up()
+                        if upgrade then
+                            upgrade_blinds({G.hand.cards[i]}, true, true)
+                        end
+                    return true end })) 
+                    delay(0.1)
+                    crudes = crudes + 1
                 end
-            return true end })) 
+                
+            end
+            for i = 1, #G.play.cards do
+                if not G.play.cards[i].config.center.curse and not G.play.cards[i].ability.formidi_original then
+                    G.play.cards[i].ability.formidi_original = copy3(G.play.cards[i].ability)
+                    G.play.cards[i].ability.formidi_originaltype = G.play.cards[i].config.center.key
+                    local args = {}
+                    args.guaranteed = true
+                    args.options = G.P_CENTER_POOLS.bld_obj_blindcard_generate
+                    args.cursed = true
+                    local cardtype = BLINDSIDE.poll_enhancement(args)
+                    local upgrade =G.play.cards[i].ability.extra.upgraded
+                    
+                   
+                    G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
+                    G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
+                    G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                    
+                    G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.1, func = function() 
+                        play_sound('cancel', 0.8+ (0.9 + 0.2*math.random())*0.2, 1)
+                        G.play.cards[i]:set_ability(cardtype)
+                         G.GAME.blind:wiggle()
+                    G.play.cards[i]:juice_up()
+                        if upgrade then
+                            upgrade_blinds({G.play.cards[i]}, true, true)
+                        end
+                    return true end })) 
+                    delay(0.1)
+                    crudes = crudes + 1
+                end
+                
+            end
+            --print(crudes)
+            G.GAME.unik_blind_e_mult = 1 + crudes*0.15
+            G.GAME.unik_dynamic_text_realtime = true
+            G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult or 1
+            if G.GAME.unik_blind_e_mult > 1 then
+                UNIK.blindside_chips_modifyV2({e_mult = G.GAME.unik_blind_e_mult})   
+                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
+                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
+                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+            end
             
            
             
@@ -151,8 +154,8 @@ BLINDSIDE.Joker({
 	-- end,
     disable = function()
         for key, value in pairs(G.playing_cards) do
-            if value.ability.formidi_original then
-                value:set_ability(value.ability.originaltype)
+            if value and  value.ability and value.ability.formidi_original then
+                value:set_ability(value.ability.formidi_originaltype)
                 value.ability = copy3(value.ability.formidi_original)
                 value.ability.formidi_original = nil
             end
@@ -162,8 +165,8 @@ BLINDSIDE.Joker({
     end,
     joker_defeat = function()
         for key, value in pairs(G.playing_cards) do
-            if value.ability.formidi_original then
-                value:set_ability(value.ability.originaltype)
+            if value and value.ability and value.ability.formidi_original then
+                value:set_ability(value.ability.formidi_originaltype)
                 value.ability = copy3(value.ability.formidi_original)
                 value.ability.formidi_original = nil
             end

@@ -36,7 +36,7 @@ SMODS.Back {
         BLINDSIDE.set_up_blindside()
         G.E_MANAGER:add_event(Event({func = function()
             BLINDSIDE.set_up_deck({"Red","Yellow"}, 
-            {"m_unik_blindside_bloon","m_unik_blindside_bloon","m_bld_fire","m_bld_fire","m_unik_blindside_hunter", "m_unik_blindside_hunter", "m_unik_blindside_trade","m_unik_blindside_trade"}, 
+            {"m_unik_blindside_bloon","m_unik_blindside_bloon","m_unik_blindside_bloon","m_unik_blindside_hunter", "m_unik_blindside_hunter", "m_unik_blindside_trade","m_unik_blindside_trade","m_unik_blindside_trade"}, 
             {'m_unik_blindside_nut','m_unik_blindside_nut'})
         return true end }))
         

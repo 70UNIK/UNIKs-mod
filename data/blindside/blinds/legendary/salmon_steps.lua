@@ -20,7 +20,7 @@ BLINDSIDE.Blind({
             }
                
             end
-        if context.cardarea == G.play and context.main_scoring then
+        if context.cardarea == G.play and context.main_scoring and card.ability.extra.upgraded then
             UNIK.blindside_chips_modifyV2({x_chips = card.ability.extra.jxchips}) 
                 return {
                     message = "X" .. card.ability.extra.jxchips .. localize('k_unik_jchips'),

@@ -27,7 +27,7 @@ BLINDSIDE.Joker({
         end
     end,
    pool_override = function()
-        return  G.GAME.unik_banana_generated  and not (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5) and G.GAME.modifiers.enable_bld_tough_jokers
+        return  G.GAME.blindside_banana_generated  and not (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5) and G.GAME.modifiers.enable_bld_tough_jokers
     end,
      loc_vars = function (self)
         return {

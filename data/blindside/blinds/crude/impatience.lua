@@ -24,6 +24,10 @@ BLINDSIDE.Blind({
             if (context.selected_card == card) or (not card.ability.extra.upgraded and context.selected_card.area == G.hand) then
                 if SMODS.pseudorandom_probability(card, pseudoseed('unik_impatience'), card.ability.extra.base_chance, card.ability.extra.chance, 'unik_impatience') then
                     play_sound('unik_gunshot')
+                    if not card.ability.extra.upgraded then
+                        card.ability.extra.to_be_burned = true
+                    end
+                    
                     card:juice_up(1.25,1.25)
                     return {
                         finger_triggered = true,
@@ -33,11 +37,16 @@ BLINDSIDE.Blind({
 
             
 		end
+        if (context.hand_discard or context.hand_retain) and context.other_card == card and card.ability.extra.to_be_burned and not card.ability.extra.upgraded then
+            card.ability.extra.to_be_burned = nil
+                return { burn = true }
+            end
     end,
     curse = true,
     loc_vars = function(self, info_queue, card)
         if not  card.ability.extra.upgraded then
              info_queue[#info_queue+1] = {key = 'bld_stubborn', set = 'Other'}
+             info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         else
 
         end

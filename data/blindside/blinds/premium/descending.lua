@@ -25,7 +25,7 @@
                     G.GAME.unik_old_operator = true
                     BLINDSIDE.joker_operator(G.GAME.blindside_current_operator-1)
                     card.ability.extra.succeed = true
-                    BLINDSIDE.chipsmodify(G.GAME.blind.basechips*G.GAME.blind.mult/4, 0, 0)
+                    BLINDSIDE.chipsmodify(0, 0, G.GAME.blind.basechips/4)
                     return {
                         message = localize('k_unik_lowered'),
                         colour = G.C.DARK_EDITION,

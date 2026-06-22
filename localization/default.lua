@@ -2700,8 +2700,9 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:money,C:white}Yellow{}",
-                        "When scored, other {C:green}Simple{}",
-                        "Blinds give {X:mult,C:white}X#1#{} Mult"
+                        "When scored, other",
+                        "{C:green}Simple{} Blinds give",
+                        "{X:mult,C:white}X#1#{} Mult"
                     },
                 }
             },
@@ -3181,6 +3182,9 @@ return {
                         "chance to {C:attention}Play{}",
                         "selected Blinds"
                     },
+                    {
+                        "{C:attention}Burns{} when triggered"
+                    },
                     {"{C:red}Stubborn"},
                 }
             },
@@ -3633,7 +3637,7 @@ return {
                 text = {
                     {
                         "{X:purple,C:white}Purple",
-                        "{X:purple,C:white}X#1#{} score",
+                        "{X:purple,C:white}X#1#{} Score",
                         "on {C:attention}Final{} hand",
                     },
                     {
@@ -3650,7 +3654,7 @@ return {
                 text = {
                     {
                         "{X:purple,C:white}Purple",
-                        "{X:purple,C:white}X#1#{} score",
+                        "{X:purple,C:white}X#1#{} Score",
                         "on {C:attention}Final{} hand",
                         "{C:inactive}({C:attention}Active!{C:inactive})"
                     },
@@ -3668,7 +3672,7 @@ return {
                 text = {
                     {
                         "{X:purple,C:white}Purple",
-                        "{X:inactive,C:white}X#1#{C:inactive} score",
+                        "{X:inactive,C:white}X#1#{C:inactive} Score",
                         "{C:inactive}on Final hand",
                         "{C:inactive}(Inactive{C:inactive})"
                     },
@@ -3707,7 +3711,7 @@ return {
                         "{C:blue}+#1#{} Chips"
                     },
                     {
-                        "{C:attention}+#2#{} play",
+                        "{C:attention}Ignores{} play",
                         "selection limit",
                         "when {C:attention}selected"
                     },

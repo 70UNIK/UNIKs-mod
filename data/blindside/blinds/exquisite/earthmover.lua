@@ -6,8 +6,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 11,
-            joker_emult = 1.8,
-            joker_emultdown = 0.3,
+            joker_emult = 1.5,
+            joker_emultdown = 0.25,
             times = 7,
             timesdown = 1,
             unik_unique = true

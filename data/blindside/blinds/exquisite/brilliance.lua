@@ -16,19 +16,15 @@ BLINDSIDE.Blind({
             for i = 1, card.ability.extra.batteries do
                 add_tag(Tag('tag_bld_battery'))
             end
-            
+            return {
+                message = localize('k_tagged_ex'),
+            }
         end
         if context.cardarea == G.play and context.main_scoring then
-            if card.ability.extra.upgraded then
-                return {
-                    p_dollars = card.ability.extra.money,
-                    x_score = card.ability.extra.x_score + G.GAME.current_round.hands_left * card.ability.extra.x_score_mod
-                }
-            else
-                return {
-                    x_score = card.ability.extra.x_score + G.GAME.current_round.hands_left * card.ability.extra.x_score_mod
-                }
-            end
+            return {
+                p_dollars = card.ability.extra.money,
+            
+            }
             
         end
         if context.burn_card and context.cardarea == G.play and context.burn_card == card then

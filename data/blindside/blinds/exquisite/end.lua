@@ -12,8 +12,8 @@ BLINDSIDE.Blind({
         }},
     hues = {"Purple"},
     calculate = function(self, card, context) 
-        if context.cardarea == G.hand and context.main_scoring then
-            if G.GAME.current_round.hands_left == 0 then
+        if context.cardarea == G.play and context.main_scoring then
+            if G.GAME.current_round.hands_left ~= 0 then
                 return {
                     x_mult = card.ability.extra.x_mult,
                 }
@@ -33,6 +33,7 @@ BLINDSIDE.Blind({
     unik_exquisite = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
+        info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         if not card.added_to_deck or not G.GAME or not G.GAME.current_round then
             return {
                 vars = {
