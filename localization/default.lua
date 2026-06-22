@@ -106,8 +106,8 @@ return {
                     "???",
                     "Earn {C:gold}$#1#{} whenever",
                     "a Blind is {C:red}destroyed",
-					"Extra hands earn",
-					"{C:attention}no money"
+					"Create a random {C:blue}Starter",
+                    "Blind when Joker is {C:attention}selected"
                 }
             },
             
@@ -3285,7 +3285,7 @@ return {
                 }
             },
             m_unik_blindside_ai_brainrot = {
-                name = "The AI Slop",
+                name = "The GPT",
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded", 
@@ -3304,7 +3304,7 @@ return {
                 }
             },
             m_unik_blindside_ai_brainrot_upgraded = {
-                name = "The AI Slop",
+                name = "The GPT",
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded", 

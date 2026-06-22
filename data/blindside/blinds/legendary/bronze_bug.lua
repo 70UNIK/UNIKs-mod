@@ -67,16 +67,20 @@ BLINDSIDE.Blind({
                                 table.insert(retrigger_cards, context.scoring_hand[i])
                                 end
                             end
+                            
                             for streak_index = 1, #retrigger_cards do
                                 local streak_card = retrigger_cards[streak_index]
                                 for _, play_card in ipairs(G.play.cards) do
                                     if play_card == streak_card and streak_card.ability.extra.rescore ~= 1 then
-                                        card:juice_up()
-                                        local passed_context = context
-                                        card_eval_status_text(play_card, 'extra', nil, nil, nil, {
-                                            message = localize('k_again_ex'),
-                                            colour = HEX('754223')})
-                                        BLINDSIDE.rescore_card(play_card, passed_context)
+                                        for i = 1, card.ability.extra.retriggers do
+                                            card:juice_up()
+                                            local passed_context = context
+                                            card_eval_status_text(play_card, 'extra', nil, nil, nil, {
+                                                message = localize('k_again_ex'),
+                                                colour = HEX('754223')})
+                                            BLINDSIDE.rescore_card(play_card, passed_context)
+                                        end
+                                        
                                     end
                                 end
                             end

@@ -26,6 +26,7 @@ BLINDSIDE.Blind({
         if context.cardarea == G.play and context.before and card.facing ~= 'back' then
             --card.ability.stuffplayed = true
             card.ability.extra.creadded_cards = nil
+           -- print("1")
             local cardsadded = {}
             for i = 1, card.ability.extra.cards do
                 G.E_MANAGER:add_event(Event({
@@ -52,36 +53,13 @@ BLINDSIDE.Blind({
                             cardsadded[#cardsadded+1] = cardr
                             card:juice_up(1,1)
                             card.ability.extra.creadded_cards = true
+                          --  print("2")
                             return true
                         end
                     }))
                 
             end
             if not card.ability.extra.upgraded then
-                for i,v in pairs(context.full_hand) do
-                    -- if not v.config.center.curse then
-                    --     v.will_be_gored = true
-                    --     if not G.GAME.cry_banned_pcards then
-                    --         G.GAME.cry_banned_pcards = {}
-                    --     end
-                    --     if not G.GAME.banned_keys then
-                    --         G.GAME.banned_keys = {}
-                    --     end
-                    --     G.GAME.cry_banished_keys[v.config.center.key] = true
-                    -- end
-                end
-                for i,v in pairs(G.hand.cards) do
-                    -- if not v.config.center.curse then
-                    --     v.will_be_gored = true
-                    --         if not G.GAME.cry_banned_pcards then
-                    --         G.GAME.cry_banned_pcards = {}
-                    --     end
-                    --     if not G.GAME.banned_keys then
-                    --         G.GAME.banned_keys = {}
-                    --     end
-                    --     G.GAME.cry_banished_keys[v.config.center.key] = true
-                    -- end
-                end
                  return {
                     message = localize('k_unik_ai'),
                     colour = G.C.BLACK,
@@ -89,6 +67,7 @@ BLINDSIDE.Blind({
                         G.E_MANAGER:add_event(Event({
                             func = function()
                                 SMODS.calculate_context({ playing_card_added = true, cards = cardsadded })
+                                card.ability.extra.creadded_cards = true
                                  
                                 return true
                             end
@@ -109,46 +88,17 @@ BLINDSIDE.Blind({
             }
             end
         end
-        if context.after and not card.ability.extra.upgraded and SMODS.in_scoring(card,context.scoring_hand) and card.ability.extra.creadded_cards then
+        if context.after and not card.ability.extra.upgraded and  context.cardarea == G.play then
             local cards = {}
-            -- for i,v in pairs(context.full_hand) do
-            --     if not v.config.center.curse then
-            --         v.will_be_gored = true
-            --         if not G.GAME.cry_banned_pcards then
-            --             G.GAME.cry_banned_pcards = {}
-            --         end
-            --         if not G.GAME.banned_keys then
-            --             G.GAME.banned_keys = {}
-            --         end
-            --         G.GAME.cry_banished_keys[v.config.center.key] = true
-            --         cards[#cards+1] = v
-            --     end
-            -- end
-            -- for i,v in pairs(G.hand.cards) do
-            --     if not v.config.center.curse then
-            --         v.will_be_gored = true
-            --             if not G.GAME.cry_banned_pcards then
-            --             G.GAME.cry_banned_pcards = {}
-            --         end
-            --         if not G.GAME.banned_keys then
-            --             G.GAME.banned_keys = {}
-            --         end
-            --         G.GAME.cry_banished_keys[v.config.center.key] = true
-            --         cards[#cards+1] = v
-            --     end
-            -- end
             cards[#cards+1] = card
-            return {
+            --print("!1")
+            G.E_MANAGER:add_event(Event({
                 func = function()
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            SMODS.destroy_cards(cards)
-                                
-                            return true
-                        end
-                    }))
+                    SMODS.destroy_cards(cards)
+                        --print("DESTROY")
+                    return true
                 end
-            }
+            }))
         end
         if context.destroy_card and not card.ability.extra.upgraded and card.area == G.play and (context.cardarea == G.play or context.cardarea == G.hand) then
             if (context.destroy_card.area == G.hand) and not context.destroy_card.config.center.curse then

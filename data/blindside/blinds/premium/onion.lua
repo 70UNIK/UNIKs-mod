@@ -170,17 +170,13 @@ BLINDSIDE.Blind({
                     G.consumeables:emplace(planet)
                     local cards = {}
                     cards[#cards+1] = card
-                    return {
+                    G.E_MANAGER:add_event(Event({
                         func = function()
-                            G.E_MANAGER:add_event(Event({
-                                func = function()
-                                    SMODS.destroy_cards(cards)
-                                        
-                                    return true
-                                end
-                            }))
+                            SMODS.destroy_cards(cards)
+                                 print("DESTROY")
+                            return true
                         end
-                    }
+                    }))
                 end
             elseif (random1 > 0.85 and not card.ability.extra.upgraded) or (random1 > 0.95 and card.ability.extra.upgraded) and context.after and context.scoring_name and not card.ability.extra.upgraded and context.main_eval and tableContains(card, context.scoring_hand) then
                 G.E_MANAGER:add_event(Event({

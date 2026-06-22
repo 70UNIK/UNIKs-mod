@@ -21,7 +21,11 @@ always_scores = true,
                     delay = 1,
                     trigger = 'before',
                         func = function()
-                            local enhancement = pseudorandom_element({'m_bld_sharp', 'm_bld_adder', 'm_bld_flip', 'm_bld_bite', 'm_bld_pot', 'm_bld_sharp', 'm_bld_adder', 'm_bld_flip', 'm_bld_bite', 'm_bld_pot', 'm_bld_blank'}, pseudoseed('magician'))
+                            local args = {}
+                            args.guaranteed = true
+                            args.options = G.P_CENTER_POOLS.bld_obj_blindcard_generate
+                            args.basic = true
+                            local enhancement = BLINDSIDE.poll_enhancement(args)
                             local cardr = SMODS.create_card { set = "Base", enhancement = enhancement, area = G.hand }
                             G.playing_card = (G.playing_card and G.playing_card + 1) or 1
                             cardr.playing_card = G.playing_card

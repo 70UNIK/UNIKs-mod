@@ -220,8 +220,7 @@ UNIK.backup_blindside_rarities = {
     [0] = 'm_bld_hat',
     [1] = 'm_bld_air',
     [4] = 'm_bld_violet_vessel',
-    [70] = 'm_unik_blindside_epic_wall',
-    [99] = 'm_unik_blindside_legendary_crown',
+    [2] = 'm_bld_blank',
     [-1] = 'm_bld_blank',
 }
 
