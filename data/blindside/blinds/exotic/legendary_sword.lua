@@ -1,0 +1,4 @@
+--sadistic sword
+--Always shuffled to the top of the deck
+--If hand contains only 1 blind, retrigger and rescore it 5 times.
+--burns when held

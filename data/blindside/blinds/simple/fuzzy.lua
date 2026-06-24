@@ -1,0 +1,1 @@
+--0-8 mult, 0-40 chips, -0 -$1, randomises hue after play

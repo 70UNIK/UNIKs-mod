@@ -1294,25 +1294,47 @@ SMODS.Atlas({
     py = 95, 
 frames = 3 })
 
+SMODS.Atlas({ 
+    key = "unik_blindside_rituals", 
+    path = "unik_blindside_rituals.png", 
+    px = 71, 
+    py = 95, 
+frames = 3 })
+
 if next(SMODS.find_mod("Blindside")) then
-	BLINDSIDE.add_crossmod_rarity('unik_ancient',G.C.UNIK_ANCIENT,G.C.WHITE,'k_unik_ancient','m_unik_blindside_epic_wall',
-		function(self)
+	BLINDSIDE.add_crossmod_rarity({
+		key = 'unik_ancient',
+		background_colour = G.C.UNIK_ANCIENT,
+		text_colour = G.C.WHITE,
+		text = 'k_unik_ancient',
+		spawn_rate = function(self)
 			---print("ancientnospawn")
 			return 0
-		end
-	)
-	BLINDSIDE.add_crossmod_rarity('unik_exotic',G.C.UNIK_EXOTIC,G.C.WHITE,'k_unik_exotic','m_unik_blindside_legendary_golden_crown',
-		function(self)
-			--print("exoticnospawn")
+		end,
+		default_blind_key = 'm_unik_blindside_epic_wall'
+	})
+	BLINDSIDE.add_crossmod_rarity({
+		key = 'unik_exotic',
+		background_colour = G.C.UNIK_EXOTIC,
+		text_colour = G.C.WHITE,
+		text = 'k_unik_exotic',
+		spawn_rate = function(self)
+			---print("ancientnospawn")
 			return 0
-		end
-	)
-	BLINDSIDE.add_crossmod_rarity('unik_exquisite',G.C.UNIK_EXQUISITE,G.C.WHITE,'k_unik_exquisite','m_unik_blindside_tracer',
-		function(self)
+		end,
+		default_blind_key = 'm_unik_blindside_legendary_golden_crown'
+	})
+	BLINDSIDE.add_crossmod_rarity({
+		key = 'unik_exquisite',
+		background_colour = G.C.UNIK_EXQUISITE,
+		text_colour = G.C.WHITE,
+		text = 'k_unik_exquisite',
+		spawn_rate = function(self)
 			--print("exoticnospawn")
 			return 0.003
-		end
-	)
+		end,
+		default_blind_key = 'm_unik_blindside_tracer',
+	})
 	NFS.load(mod_path .. "data/stickers/impounded_blindside.lua")() 
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
 	NFS.load(mod_path .. "data/blindside/fixes.lua")()	

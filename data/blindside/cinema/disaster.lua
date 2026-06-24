@@ -1,1 +1,1 @@
---
+--converts 1 selected blind into an explosive blind (when played, is destroyed, destroys adjacent blinds if that occurs)

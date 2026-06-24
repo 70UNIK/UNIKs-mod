@@ -3,3 +3,5 @@
 --Summit Camp: Summit packs may appear in Boss Shops
 --Cult of personality: Create a Cult tag after defeating a Boss Joker
 --Joker Sacrifice: Ritual cards may appear in Boss Shops
+--smart TV: +1 consumable slot
+--Paranormal activity: Ritual cards may appear in cinema packs.

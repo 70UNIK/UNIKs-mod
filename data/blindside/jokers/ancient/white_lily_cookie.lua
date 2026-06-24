@@ -118,7 +118,9 @@ BLINDSIDE.Joker({
 local remove_ref = Card.remove
 function Card.remove(self)
     if not G.GAME.ignore_delete_context then
-        if self.added_to_deck and self.ability.set == 'Enhanced' and UNIK.hasBlindside() and (not self.unik_dissolve_sell_flag) then
+        if self.ability.set == 'Enhanced' and UNIK.hasBlindside() and (not self.unik_dissolve_sell_flag) and 
+        (self.area == G.hand or self.area == G.discard or self.area == G.exhaust or self.area == G.deck or self.area == G.play or tableContains(G.playing_cards,self))
+        then
             G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run or 0
             G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run + 1
             SMODS.calculate_context({ unik_blind_destroyed = true, blind = self })

@@ -2,8 +2,8 @@
 SMODS.Consumable {
     key = 'unik_blindside_kill',
     set = 'bld_obj_ritual',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 1 },
+    atlas = 'unik_blindside_rituals',
+	pos = { x = 2, y = 0 },
     cost = 4,
     config = {max_card = 1 },
     loc_vars = function(self, info_queue, center)

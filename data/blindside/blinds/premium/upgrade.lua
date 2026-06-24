@@ -21,12 +21,12 @@ BLINDSIDE.Blind({
                 chips = card.ability.extra.chips
             }
         end
-        if context.press_play and card.area == G.play and card.facing ~= 'back' then
+        if context.press_play and card.facing ~= 'back' then
             G.E_MANAGER:add_event(Event({
                     trigger = "after",
-                    delay = 0.5,
+                    delay = 1,
                     func = function()
-                        if SMODS.pseudorandom_probability(card, pseudoseed("blind_upgrade_self"), card.ability.extra.chance, card.ability.extra.trigger, "blind_upgrade_self") then
+                        if card.area == G.play and SMODS.pseudorandom_probability(card, pseudoseed("blind_upgrade_self"), card.ability.extra.chance, card.ability.extra.trigger, "blind_upgrade_self") then
                             upgrade_blinds({card})
                             return {
                                 message = localize('k_upgrade_ex'),

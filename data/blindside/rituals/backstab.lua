@@ -2,8 +2,8 @@
 SMODS.Consumable {
     key = 'unik_blindside_backstab',
     set = 'bld_obj_ritual',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 1 },
+    atlas = 'unik_blindside_rituals',
+	pos = { x = 0, y = 0 },
     config = {
         extra = {
             affected = 1

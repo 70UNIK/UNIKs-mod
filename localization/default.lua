@@ -749,10 +749,11 @@ return {
             bl_unik_blindside_stellar_mortis = {
                 name = "Stellar Mortis",
                 text = {
+                    "^#1# Mult per hand",
                     "Destroy a Mineral card",
-                    "on play and gains ^#1# Mult",
-                    "If no mineral card",
-                    "is held on play, die",
+                    "on play and gains ^#2# Mult", --^1 mult
+                    "If no mineral card owned",
+                    "hand will not score",
                     "(Currently ^#2# Mult)"
                 }
             },
@@ -760,11 +761,13 @@ return {
                 name = "Facile",
                 text = {
                     "If more than 10 Blinds",
-                    "have been scored",
-                    "in a hand, die",
+                    "have been scored,",
+                    "future scored blinds",
+                    "give ^#1# Mult to Joker",
                     "(Retriggers included)"
                 }
             },
+
             bl_unik_blindside_gourmand = {
                 name = "The Gourmand",
                 text = {
@@ -7705,7 +7708,8 @@ return {
             tag_unik_blindside_downscale = {
                 name = "Downscale Tag",
                 text = {
-                    "{X:dark_edition,C:white}^0.9{} Mult after",
+                    "{X:dark_edition,C:white}^0.9{} Mult and",
+                    "{X:dark_edition,C:white}^0.9{} Chips after",
 					"hand is scored"
                 }
             },
@@ -8161,17 +8165,33 @@ return {
    
                 }
             },
-            ["c_bld_assimilate"] = {
-				["name"] = "Assimilate",
-				["text"] = {
-					{"Select {C:attention}#1#{} Blinds of",
-					"only {C:attention}2 different hues"},
-					{"They are {C:red}destroyed{}, and",
-					"a random {E:1}multicolor{} Blind of",
-					"their {C:attention}hues{} is created"},
-				},
-			},
-            c_unik_blindside_erosion = {
+            -- ["c_bld_assimilate"] = {
+			-- 	["name"] = "Assimilate",
+			-- 	["text"] = {
+			-- 		{"Select {C:attention}#1#{} Blinds of",
+			-- 		"only {C:attention}2 different hues"},
+			-- 		{"They are {C:red}destroyed{}, and",
+			-- 		"a random {E:1}multicolor{} Blind of",
+			-- 		"their {C:attention}hues{} is created"},
+			-- 	},
+			-- },
+            c_unik_blindside_caldera = {
+                name = "Caldera",
+                text = {
+                    {
+                        "Create two random",
+                        "{C:unik_summit}Summit Cards",
+                        "{C:inactive}(Must have room)",
+                    },
+                    {
+                        "{C:attention}#1#{} selected Blind#<s>1#",
+                        "{C:attention}permanently {C:red}lose",
+                        "bonuses based on",
+                        "{C:unik_summit}Summit Cards{} generated",
+                    }
+                }
+            },
+            c_unik_blindside_erosion = { --hasart
                 name = "Erosion",
                 text = {
 					{"Each Blind {C:attention}permanently gains",
@@ -8181,7 +8201,7 @@ return {
 					"{C:red}Landslide Tag"}
                 }
             },
-            c_unik_blindside_mirror = {
+            c_unik_blindside_mirror = { --hasart
                 name = "Mirror",
                 text = {
                     {
@@ -8227,8 +8247,8 @@ return {
 					"{C:red}Handcuffs Tag"}
                 }
             },
-            c_unik_blindside_kill = {
-                name = "KILL",
+            c_unik_blindside_kill = { --hasart
+                name = "K I L L",
                 text = {
                     {
                         "{C:red}Banish{} a selected",
@@ -8237,7 +8257,7 @@ return {
                     },
                 }
             },
-            c_unik_blindside_backstab = {
+            c_unik_blindside_backstab = { --hasart
                 name = "Backstab",
                 text = {
                     {

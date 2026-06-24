@@ -1,0 +1,1 @@
+--X2 chips, ignores card selection limit, +1 hand size when held

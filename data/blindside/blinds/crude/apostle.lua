@@ -1,0 +1,2 @@
+--exclusive to whitenight, X1.5 mult to joker when scored, stubborn, retained.
+--if hand contains no scoring apostles, destroy all played non-crude blinds.

@@ -1,0 +1,1 @@
+--create two summit cards, but 2 selected blinds lose bonuses based on summit cards generated.

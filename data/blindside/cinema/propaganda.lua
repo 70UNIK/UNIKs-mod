@@ -1,5 +1,3 @@
 --CINEMA CARDS
 --Propaganda: Enhance 1 selected blind into a locked blind (X1.3 Mult, copied if destroyed, cannot change trim or be rerolled, lose trim if attempted to be rerolled)
 --Disaster: Enhance 1 blind into an explosive blind (When played, self destructs, if destroyed, destroy 2 adjacent blinds in it's cardarea (or 2 random blinds if in deck))
---News: 
---Hijack: Select 2 blinds, blinds to the left becomes the rightmost blind (upgrade, trim, edition and bonuses retained)
