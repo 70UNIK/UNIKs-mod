@@ -12,8 +12,9 @@ SMODS.Consumable{
 	end,
     config = { extra = { mult = 3 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
+        local cardOrBlind = UNIK.hasBlindside() and 'k_unik_blind' or 'k_unik_card'
 		return {
-			vars = {card.ability.extra.mult,card.ability.extra.max_highlighted},
+			vars = {card.ability.extra.mult,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
     

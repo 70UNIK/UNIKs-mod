@@ -381,7 +381,7 @@ return {
                 name = "Yokana Ramirez",
                 text = {
                     "X#1# Chips whenever",
-                    "a Blind is triggered",
+                    "a Blind is scored",
                 }
             },
             --cube joker + square joker
@@ -458,6 +458,15 @@ return {
                 }
             },
             bl_unik_blindside_jimbotron_9000 = {
+                name = "Jimbotron 9000",
+                text = {
+                    "+1 Mult per hand",
+                    "then ^#1# Mult once",
+                    "if score exceeds",
+                    "requirements this round",
+                }
+            },
+            bl_unik_blindside_jimbotron_9000_2 = {
                 name = "Jimbotron 9000",
                 text = {
                     "+1 Mult per hand",
@@ -587,10 +596,10 @@ return {
             bl_unik_blindside_whitenight = {
                 name = "WhiteNight",
                 text = {
-                    "Add #1# The Apostles",
+                    "Add #1# Apostles",
                     "to your deck",
                     "If scoring hand has no",
-                    "The Apostles, Banish a",
+                    "Apostles, Banish a",
                     "random owned Trinket",
                     "and debuff all played Blinds"
                 }
@@ -711,7 +720,7 @@ return {
                     "spent this Ante",
                     "If less than",
                     "#1# spent this", --(total money spent this run)^0.75
-                    "Ante, on select, die",
+                    "Ante, ^2 Ante"
                 }
             },
             bl_unik_blindside_exponentia = {
@@ -742,7 +751,8 @@ return {
                     "+^#1# Chips per",
                     "shop reroll this ante",
                     "If less than #1# rerolls",
-                    "made this ante, die",
+                    "made this ante, ^^#3# Chips",
+                    "to Joker when selected",
                     "(Currently #2# rerolls)"
                 }
             },
@@ -763,7 +773,7 @@ return {
                     "If more than 10 Blinds",
                     "have been scored,",
                     "future scored blinds",
-                    "give ^#1# Mult to Joker",
+                    "give ^#1# Mult to Joker", --^3
                     "(Retriggers included)"
                 }
             },
@@ -772,8 +782,8 @@ return {
                 name = "The Gourmand",
                 text = {
                     "Retrigger a random",
-                    "Ancient Joker",
-                    "25 times",
+                    "Ancient Joker this",
+                    "round 10 times",
                     "(Currently #1#)",
                 }
             },
@@ -8020,7 +8030,7 @@ return {
                 name = "Denali",
                 text = {
                     "Permanently add {X:chips,C:white}X#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_aconcagua = {
@@ -8028,7 +8038,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {X:mult,C:white}X#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",              
+                    "to {C:attention}#2#{} selected #3##<s>2#",              
                 }
             },
             c_unik_elbrus = {
@@ -8036,7 +8046,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {X:chips,C:white}X#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_kosciuszko = {
@@ -8050,7 +8060,7 @@ return {
                 name = "Elbert",
                 text = {
                     "Permanently add {C:mult}+#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 },
             },
             c_unik_mitchell = {
@@ -8058,7 +8068,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_mitchell_i = {
@@ -8066,7 +8076,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:chips}+#1#{} Chips",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_narodnaya = {
@@ -8074,7 +8084,7 @@ return {
                 text = {
                     "Permanently add",
                     "held {C:mult}+#1#{} Mult",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
 
@@ -8082,28 +8092,28 @@ return {
                 name = "Charleston",
                 text = {
                     "Permanently add {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_charleston_i = { --near vegas, which gambling
                 name = "Nuvagantu",
                 text = {
                     "Permanently add {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_whitney = { ---sierra nevada
                 name = "Whitney",
                 text = {
                     "Permanently add held {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_whitney_i = { ---sierra nevada
                 name = "Tumanguya",
                 text = {
                     "Permanently add held {C:money}$#1#{}",
-                    "to {C:attention}#2#{} selected card#<s>2#",
+                    "to {C:attention}#2#{} selected #3##<s>2#",
                 }
             },
             c_unik_blank_summit = {
@@ -8179,15 +8189,15 @@ return {
                 name = "Caldera",
                 text = {
                     {
-                        "Create two random",
-                        "{C:unik_summit}Summit Cards",
+                        "Create {C:attention}#1#{} random",
+                        "{C:unik_summit}Summit Card#<s>1#",
                         "{C:inactive}(Must have room)",
                     },
                     {
-                        "{C:attention}#1#{} selected Blind#<s>1#",
+                        "{C:attention}#2#{} selected Blind#<s>2#",
                         "{C:attention}permanently {C:red}lose",
-                        "bonuses based on",
-                        "{C:unik_summit}Summit Cards{} generated",
+                        "played and held",
+                        "{C:red}#3#{} Mult{} and {C:chips}#4#{} Chips{} "
                     }
                 }
             },

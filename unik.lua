@@ -1472,6 +1472,7 @@ if next(SMODS.find_mod("Blindside")) then
 
 	--rituals
 	NFS.load(mod_path .. "data/blindside/rituals/erosion.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/caldera.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/augment.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/mirror.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/repetition.lua")()
@@ -1530,6 +1531,30 @@ if next(SMODS.find_mod("Blindside")) then
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_repetition')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_kill')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_backstab')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_caldera')
+
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_everest')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_aconcagua')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_charleston')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_denali')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_elbrus')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_elbert')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_kosciuszko')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_mitchell')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_narodnaya')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_whitney')
+
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_everest')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_aconcagua')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_charleston')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_denali')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_elbrus')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_elbert')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_kosciuszko')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_mitchell')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_narodnaya')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_whitney')
+
 	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_pink_bow')
 	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_faerie_tiara')
 	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_celestial_nightcap')

@@ -2,8 +2,8 @@
 SMODS.Consumable {
     key = 'unik_blindside_augment',
     set = 'bld_obj_ritual',
-    atlas = 'placeholders',
-	pos = { x = 2, y = 1 },
+    atlas = 'unik_blindside_rituals',
+	pos = { x = 0, y = 1 },
     config = {
         extra = {affected = 3}},
     can_use = function (self, card)
