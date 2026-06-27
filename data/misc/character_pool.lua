@@ -1,30 +1,30 @@
 --weird pool inject
 
 --character cards
---spawns character jokers/almanac styled ones
+--spawns character jokers/bos styled ones
 --soul spawns at 0.008% rate
 --awakening very rarely spawns here.
 
-UNIK.Almanac_Characters = {
-    ['j_' .. UNIK.get_almanac_prefix() .. '_oxy'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_honey'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_haro']  = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_pickel'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_cheese'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_ratau'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_jen'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_poppin'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_swabbie'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_strelitzia'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_jeremy'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_survivor'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_goob'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_cosmo'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_toodles'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_dandy'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_suzaku'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_monk'] = true,
-    ['j_' .. UNIK.get_almanac_prefix() .. '_alice'] = true,
+UNIK.bos_Characters = {
+    ['j_' .. UNIK.get_bos_prefix() .. '_oxy'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_honey'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_haro']  = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_pickel'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_cheese'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_ratau'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_jen'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_poppin'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_swabbie'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_strelitzia'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_jeremy'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_survivor'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_goob'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_cosmo'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_toodles'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_dandy'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_suzaku'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_monk'] = true,
+    ['j_' .. UNIK.get_bos_prefix() .. '_alice'] = true,
 }
 UNIK.furlatro_characters = {
     j_fur_gale = true,
@@ -47,8 +47,8 @@ UNIK.furlatro_talismanless_characters = {
 
 function UNIK.get_all_characters()
     local characters = {}
-    if UNIK.has_almanac() then
-        for i,v in pairs(UNIK.Almanac_Characters) do
+    if UNIK.has_bos() then
+        for i,v in pairs(UNIK.bos_Characters) do
             characters[i] = true
         end
     end
@@ -75,7 +75,7 @@ SMODS.ObjectType({
 function UNIK.all_mod_characters()
     local characters = {}
     for i,v in pairs(G.P_CENTERS) do
-        if (v.pools and v.pools["character"]) or v.rarity == 'unik_ancient' or string.sub(i,1,5) == "j_" .. UNIK.get_almanac_prefix() then
+        if (v.pools and v.pools["character"]) or v.rarity == 'unik_ancient' or string.sub(i,1,5) == "j_" .. UNIK.get_bos_prefix() then
             characters[i] = true
         end
     end
@@ -84,7 +84,7 @@ end
 function UNIK.all_mod_characters_list()
     local characters = {}
     for i,v in pairs(G.P_CENTERS) do
-        if (v.pools and v.pools["character"]) or v.rarity == 'unik_ancient' or string.sub(i,1,5) == "j_" .. UNIK.get_almanac_prefix() then
+        if (v.pools and v.pools["character"]) or v.rarity == 'unik_ancient' or string.sub(i,1,5) == "j_" .. UNIK.get_bos_prefix() then
             characters[#characters+1] = i
         end
     end

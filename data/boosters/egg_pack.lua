@@ -40,7 +40,7 @@ SMODS.Booster{
         ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.RED, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
 		SMODS.Booster.update_pack(self, dt)
 	end,
-	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (almanac)
+	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
 	no_doe = true,
 	unskippable = function(self) --Unskippable when all jokers are eternal and slots not full.
 		local validJokers = 0

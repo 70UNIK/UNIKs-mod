@@ -22,7 +22,7 @@ SMODS.Atlas {
 	py = 95
 }
 
-if not UNIK.has_almanac() then
+if not UNIK.has_bos() then
     print("LOADING TAUNT SPRITE PWX")
     SMODS.Joker({
         key='unik_blindside_taunt_oxy_pwx',

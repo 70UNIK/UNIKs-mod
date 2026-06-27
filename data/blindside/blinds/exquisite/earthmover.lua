@@ -46,7 +46,7 @@ BLINDSIDE.Blind({
                 card.ability.extra.created = true
                 G.E_MANAGER:add_event(Event({
                     func = function() 
-                            local planet = create_card('bld_obj_ritual',G.consumeables, nil, nil, nil, nil, 'c_unik_blindside_sigil')
+                            local planet = create_card('bld_obj_ritual',G.consumeables, nil, nil, nil, nil, 'c_unik_blindside_pentatope')
                             planet:add_to_deck()
                             G.consumeables:emplace(planet)
                         return true
@@ -70,7 +70,7 @@ BLINDSIDE.Blind({
     end,
     unik_exquisite = true,
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = G.P_CENTERS.c_unik_blindside_sigil
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_unik_blindside_pentatope
         info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         info_queue[#info_queue+1] = {key = 'unik_unique', set = 'Other'}
         return {

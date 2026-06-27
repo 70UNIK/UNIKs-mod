@@ -4,9 +4,9 @@ A standalone mod that adds what I want. A bit more unbalanced compared with Vani
 
 ![alt text](image-1.png)
 
-Requires Steamodded [smods-1.0.0-beta-1016c](https://github.com/Steamodded/smods) or higher, [Lovely](https://github.com/ethangreen-dev/lovely-injector) v0.7.1 or higher. [Cdataman](https://github.com/frostice482/cdataman) can be used to increase the scoring cap but isnt necessarily required.
+Requires Steamodded [smods-1.0.0-beta-1620a](https://github.com/Steamodded/smods) or higher, [Lovely](https://github.com/ethangreen-dev/lovely-injector) v0.7.1 or higher. [Amulet](https://github.com/frostice482/amulet) can be used to increase the scoring cap but isnt necessarily required.
 
-It's recommended to pair this with [Paperback](https://github.com/Balatro-Paperback/paperback) and [Bunco](https://github.com/jumbocarrot0/Bunco), goes well together with them and this mod completely overhauls linked groups in the latter.
+It's recommended to pair this with [Paperback](https://github.com/Balatro-Paperback/paperback) and [Bunco](https://github.com/jumbocarrot0/Bunco), goes well together with them and this mod completely overhauls linked groups in the latter. It also features one of the most extensive crossmods with [Blindside](https://github.com/70UNIK/Blindside), albeit requiring a specific fork to work.
 
 ## MAJOR FEATURES:
 - 90+ Jokers to play around with!
@@ -64,6 +64,5 @@ While all art is done by me, art for the Spectrum-based Jokers and Planets are f
 - Paperback (PaperMoon) - Inspiration for Weetomancer, + crossmod cards + Apostles
     - WhiteNight sprite (PaperMoon) - Will be used for Blindside namesake boss death quip (when Paperback is not installed)
 - MoreFluff (NotMario) - Color Cards
-- POLTERWORX (Jenwalter666) -  Epic/Legendary Blinds concept + some code used for functionality such as Blank Lartceps and shaders such as Dizzy and Bloated edition.
-    - Oxy Sprite (Ocksie) - Used for Blindside namesake boss death quip (when PWX is not installed)
-    - Goob Sprite (Jenwallter666) - Used for Blindside namesake boss death quip (when PWX is not installed)
+- BOOK OF SHADOWS
+    - Oxy Sprite (Ocksie) - Used for Blindside namesake boss death quip sprite (when BOS is not installed)

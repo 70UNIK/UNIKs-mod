@@ -3,9 +3,9 @@
 --Defeat this blind, [Number of hands] times
 --Set hands to 1, only replenish if defeated blind (otherwise set to -6666, to counter hunter)
 --As for if deck is replenished, it WILL NOT be replenished, it just immediately sets score to 0 then displays disabled text
---After each defeat, rescale to highest score x 1.25 (^1.01 in almanac)
---If hands = 1, blind size is increased by ^6.666 (^^6.666 in almanac)
---To survive, joker rearrangement, scaling jokers or in almanac, amalgamate or hydrea is the way to survive (as well as high consistent scoring and keeping an eye on the highest score)
+--After each defeat, rescale to highest score x 1.25 (^1.01 in bos)
+--If hands = 1, blind size is increased by ^6.666 (^^6.666 in bos)
+--To survive, joker rearrangement, scaling jokers or in bos, amalgamate or hydrea is the way to survive (as well as high consistent scoring and keeping an eye on the highest score)
 SMODS.Atlas({ 
     key = "unik_legendary_crown", 
     atlas_table = "ANIMATION_ATLAS", 

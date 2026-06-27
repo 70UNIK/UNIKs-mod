@@ -60,7 +60,7 @@ BLINDSIDE.Joker({
     boss = {min = 2},
     active = true,
     death_card = {
-        card = UNIK.has_almanac() and 'j_' .. UNIK.get_almanac_prefix() .. '_goob' or 'j_unik_blindside_taunt_goob_pwx', 
+        card = UNIK.has_bos() and 'j_' .. UNIK.get_bos_prefix() .. '_goob' or 'j_unik_blindside_taunt_goob_pwx', 
         mod_card = function(self, card) --used to apply editions and/or stickers
             
         end,

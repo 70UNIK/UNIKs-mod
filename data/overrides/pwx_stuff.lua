@@ -1,48 +1,48 @@
 --SURPRISE SURPRISE I TAKE OWNERSHIP HERE!
 
---All the "you will die" blinds will use my own "unik_kill_hand" for a far more seamless death
-SMODS.Blind:take_ownership("bl_" .. UNIK.get_almanac_prefix() .. "epicclub",{
-    unik_kill_hand = function(self, cards, hand, handname, check)
-		for k, v in ipairs(cards) do
-			if v.base.suit == 'Clubs' then
-				return false
+-- --All the "you will die" blinds will use my own "unik_kill_hand" for a far more seamless death
+-- SMODS.Blind:take_ownership("bl_" .. UNIK.get_bos_prefix() .. "epicclub",{
+--     unik_kill_hand = function(self, cards, hand, handname, check)
+-- 		for k, v in ipairs(cards) do
+-- 			if v.base.suit == 'Clubs' then
+-- 				return false
 				
-			end
-		end
-        return true
-	end,
-    modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
-		-- local safe = false
-		-- for k, v in ipairs(cards) do
-		-- 	if v.base.suit == 'Clubs' then
-		-- 		safe = true
-		-- 		break
-		-- 	end
-		-- end
-		-- if not safe then gameover() return to_big(0), to_big(0), true end
-		return hand_chips, mult, false
-	end
-},true)
+-- 			end
+-- 		end
+--         return true
+-- 	end,
+--     modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
+-- 		-- local safe = false
+-- 		-- for k, v in ipairs(cards) do
+-- 		-- 	if v.base.suit == 'Clubs' then
+-- 		-- 		safe = true
+-- 		-- 		break
+-- 		-- 	end
+-- 		-- end
+-- 		-- if not safe then gameover() return to_big(0), to_big(0), true end
+-- 		return hand_chips, mult, false
+-- 	end
+-- },true)
 
-SMODS.Blind:take_ownership("bl_" .. UNIK.get_almanac_prefix() .. "epicwindow",{
-    unik_kill_hand = function(self, cards, hand, handname, check)
-		for k, v in ipairs(cards) do
-			if v.base.suit == 'Diamonds' then
-				return false
+-- SMODS.Blind:take_ownership("bl_" .. UNIK.get_bos_prefix() .. "epicwindow",{
+--     unik_kill_hand = function(self, cards, hand, handname, check)
+-- 		for k, v in ipairs(cards) do
+-- 			if v.base.suit == 'Diamonds' then
+-- 				return false
 				
-			end
-		end
-        return true
-	end,
-    modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
-		-- local safe = false
-		-- for k, v in ipairs(cards) do
-		-- 	if v.base.suit == 'Clubs' then
-		-- 		safe = true
-		-- 		break
-		-- 	end
-		-- end
-		-- if not safe then gameover() return to_big(0), to_big(0), true end
-		return hand_chips, mult, false
-	end
-},true)
+-- 			end
+-- 		end
+--         return true
+-- 	end,
+--     modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
+-- 		-- local safe = false
+-- 		-- for k, v in ipairs(cards) do
+-- 		-- 	if v.base.suit == 'Clubs' then
+-- 		-- 		safe = true
+-- 		-- 		break
+-- 		-- 	end
+-- 		-- end
+-- 		-- if not safe then gameover() return to_big(0), to_big(0), true end
+-- 		return hand_chips, mult, false
+-- 	end
+-- },true)

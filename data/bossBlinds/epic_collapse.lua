@@ -35,7 +35,7 @@ SMODS.Blind	{
         if stoneCards < 1 then
             return false
         end
-        --maybe its funnier to have it spawn even without stone hands in deck in almanac
+        --maybe its funnier to have it spawn even without stone hands in deck in bos
         return CanSpawnEpic()
 	end,
 	unik_kill_hand = function(self, cards, hand, handname, check)

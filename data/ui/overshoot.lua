@@ -18,7 +18,7 @@ function create_UIBox_HUD()
 
         --Shortening buttons:
         --Run info
-        if not UNIK.has_almanac() then
+        if not UNIK.has_bos() then
 
             if orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[1].config.id == "run_info_button" then
             orig.nodes[1].nodes[1].nodes[5].nodes[1].nodes[1].nodes[1] = {n=G.UIT.R, config={id = 'run_info_button', align = "cm", minh = 1, minw = 1.5,padding = 0.05, r = 0.1, hover = true, colour = G.C.RED, button = "run_info", shadow = true}, nodes={
@@ -98,7 +98,7 @@ function create_UIBox_HUD()
             }}
             --start = 
             --then = 
-            --almanac: will instead try to attach an additional ui next to "relief"... If you DARE
+            --bos: will instead try to attach an additional ui next to "relief"... If you DARE
 
         end
         

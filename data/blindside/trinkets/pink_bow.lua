@@ -29,8 +29,8 @@ SMODS.Joker({
     eternal_compat = true,
     config = {
             extra = {
-                xchips = 3.27,
-                min = 4,
+                xchips = 3,
+                min = 3,
             }
         },
     in_pool = function(self, args)

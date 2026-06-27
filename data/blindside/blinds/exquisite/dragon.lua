@@ -6,7 +6,7 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            x_mult = 1.75,
+            x_mult = 2,
             x_mult_up = 0.5,
             retain = true,
             chance = 1,
@@ -62,7 +62,9 @@ BLINDSIDE.Blind({
         
         return {
             vars = {
-                card.ability.extra.x_mult,chance,trigger,card.ability.extra.hand_size
+                card.ability.extra.x_mult,chance,trigger,card.ability.extra.hand_size, card.ability.extra.unik_hand_size_added and localize("k_unik_applied") or localize("k_unik_not_applied"),colours = {
+					card.ability.extra.unik_hand_size_added and G.C.FILTER or  G.C.UI.TEXT_INACTIVE,
+				},
             }
         }
     end,

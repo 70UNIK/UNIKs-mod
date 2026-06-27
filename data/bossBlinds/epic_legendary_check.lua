@@ -11,8 +11,8 @@ function CanSpawnEpic()
         return true
     end
     if not UNIK.overshootEnabled() then
-        --if overshoot is disabled, but almanac is installed, it spawns like any other epic blind, AFTER ROUND 40 OF COURSE!!!!!
-        if UNIK.has_almanac() then
+        --if overshoot is disabled, but bos is installed, it spawns like any other epic blind, AFTER ROUND 40 OF COURSE!!!!!
+        if UNIK.has_bos() then
             if G.GAME.round > Jen.config.ante_threshold * 2 then
                 return true
             end

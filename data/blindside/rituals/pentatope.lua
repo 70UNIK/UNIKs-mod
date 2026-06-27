@@ -1,11 +1,4 @@
---create an ancient blind, create a soul tag
-
-SMODS.Atlas({
-	key = "unik_blindside_sigil", --this is easier to spell then consumables
-	path = "unik_blindside_sigil.png",
-	px = 71,
-	py = 95,
-})
+--create an ancient blind, create a soul ta
 SMODS.Sound({
 	key = "jenomega",
 	path = "jenomega.ogg",
@@ -38,9 +31,9 @@ SMODS.Sound({
 
 
 SMODS.Consumable {
-    key = 'unik_blindside_sigil',
+    key = 'unik_blindside_pentatope',
     set = 'bld_obj_ritual',
-    atlas = 'unik_blindside_sigil',
+    atlas = 'unik_blindside_rituals',
     hidden = true,
     soul_sets = {
         'bld_obj_ritual',
@@ -53,7 +46,7 @@ SMODS.Consumable {
     can_use = function (self, card)
         return true
     end,
-    pos = {x=0, y=0},
+    pos = {x=0, y=2},
     use = function(self, card, area)
         G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.4,func = function() 
                 play_sound('bld_crack', 1.0, 1)
@@ -115,7 +108,7 @@ SMODS.Consumable {
                     trigger = 'after',
                     delay = 0.7,
                     func = function()
-                        pseudoshuffle(G.deck.cards, 'unik_sigil'..G.GAME.round_resets.ante)
+                        pseudoshuffle(G.deck.cards, 'unik_pentatope'..G.GAME.round_resets.ante)
                         return true
                     end
                 }))

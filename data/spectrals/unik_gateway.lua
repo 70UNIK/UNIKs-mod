@@ -58,7 +58,7 @@ SMODS.DrawStep {
     key = 'floating_sprite',
     order = 60,
     func = function(self)
-       if (self.ability.name == 'c_unik_gateway' or self.ability.name == 'c_unik_blindside_sigil' or self.config.center.key == 'c_unik_blindside_portal') and (self.config.center.discovered or self.bypass_discovery_center) then
+       if (self.ability.name == 'c_unik_gateway' or self.ability.name == 'c_unik_blindside_pentatope' or self.config.center.key == 'c_unik_blindside_portal') and (self.config.center.discovered or self.bypass_discovery_center) then
 			local edition_soul_sprite = false
 			local edition = nil;
             if self.edition then 
@@ -203,14 +203,14 @@ function Card:set_sprites(_center, _front)
 		self.children.floating_sprite.states.hover.can = false
 		self.children.floating_sprite.states.click.can = false
 	end
-	if _center and (_center.name == "c_unik_blindside_sigil") then
+	if _center and (_center.name == "c_unik_blindside_pentatope") then
 		self.children.floating_sprite = Sprite(
 			self.T.x,
 			self.T.y,
 			self.T.w,
 			self.T.h,
 			G.ASSET_ATLAS[_center.atlas or _center.set],
-			{ x = 1, y = 0 }
+			{ x = 1, y = 2 }
 		)
 		self.children.floating_sprite.role.draw_major = self
 		self.children.floating_sprite.states.hover.can = false

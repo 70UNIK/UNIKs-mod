@@ -1,4 +1,4 @@
---sigil but exotic blinds
+--pentatope but exotic blinds
 --it however bloats your deck in return
 
 SMODS.Atlas({

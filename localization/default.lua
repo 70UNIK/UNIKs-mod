@@ -237,7 +237,6 @@ return {
                 text = {
                     "Apply the effects",
                     "of every UNIK's mod",
-                    "and POLTERWORX",
                     "Legendary and Epic Blinds",
                     "when possible"
                 }
@@ -688,7 +687,16 @@ return {
                 },
             },
             bl_unik_sundae_cookie = {
-                
+                name = "Sundae Cookie",
+                text = {
+                    "X#1# Mult to Joker",
+                    "then double this",
+                    "value when a Purple",
+                    "Blind is scored",
+                    "All played Blinds",
+                    "must contain",
+                    "Purple hue"    
+                }
             },
             bl_unik_blindside_moonlight_cookie = {
                 name = "Moonlight Cookie",
@@ -761,7 +769,7 @@ return {
                 text = {
                     "^#1# Mult per hand",
                     "Destroy a Mineral card",
-                    "on play and gains ^#2# Mult", --^1 mult
+                    "on play and gains ^#2# Mult", --^1.5 mult
                     "If no mineral card owned",
                     "hand will not score",
                     "(Currently ^#2# Mult)"
@@ -782,8 +790,8 @@ return {
                 name = "The Gourmand",
                 text = {
                     "Retrigger a random",
-                    "Ancient Joker this",
-                    "round 10 times",
+                    "Ancient Joker for",
+                    "this round 10 times",
                     "(Currently #1#)",
                 }
             },
@@ -1018,7 +1026,7 @@ return {
                     "to each Ghost into Ghosts",
 				},
             },
-            bl_unik_red_rot={ --Almanac replacement for Bigger Boo, maybe have the hunter instantly explode when entering this blind as a secret.
+            bl_unik_red_rot={ --bos replacement for Bigger Boo, maybe have the hunter instantly explode when entering this blind as a secret.
                 name = "Red Rot",
 				text = {
 					"Create an absolute Rot",
@@ -1618,7 +1626,7 @@ return {
             },
             --All consumeables and CCD cards are debuffed
             --Appears if you own at least 2 consumeables and
-            --have >17 consumeables (almanac *cough*)
+            --have >17 consumeables (bos *cough*)
             --Perkeo
             --Moonlight Cookie
             --Scratch
@@ -1711,7 +1719,7 @@ return {
                 text = {
                     "Joker values are multiplied",
                     "by 0.95x every second spent",
-                    "in this round", --excluding scoring, resets joker values upon defeat.. unless its almanac
+                    "in this round", --excluding scoring, resets joker values upon defeat.. unless its bos
                 }
             },
             bl_unik_beast_eternal_sugar={
@@ -1746,7 +1754,6 @@ return {
                 text={
                     "{C:red}You've should not",
                     "{C:red}have overshot...",
-                    "{C:red}It escaped Almanac...",
                 }
             },
            dd_unik_legendary_blind={
@@ -2982,7 +2989,7 @@ return {
                     {
                         "After played in",
                         "scoring hand {C:attention}#2#{} time#<s>2#,",
-                        "create {C:unik_ancient}The Sigil",
+                        "create {C:unik_ancient}The Pentatope",
                         "and {C:red,E:2}Self-Destruct",
                         "{C:inactive}(Can overflow)",
                     },
@@ -3622,6 +3629,7 @@ return {
                         "{C:green}#2# in #3#{} chance",
                         "for {C:attention}+#4#{} hand size",
                         "when drawn and held",
+                        "{C:inactive}({V:1}#5#{C:inactive})"
                     },
                     {
                         "{C:green}Retained"
@@ -4686,7 +4694,7 @@ return {
                     "with {C:money}$0{} sell value",
                 }               
             },
-            --almanac version will create wonderous, transdescendant and ritualistic jokers (except kosmos)
+
             j_unik_a_taste_of_power = {
                 name="A Taste of Power",
                 text={
@@ -8154,8 +8162,8 @@ return {
                     }
                 }
             },
-            c_unik_blindside_sigil = {
-                name = "The Sigil",
+            c_unik_blindside_pentatope = {
+                name = "The Pentatope",
                 text = {
                     "Creates an",
 					"{C:unik_ancient,E:1}Ancient{} Blind"
@@ -8663,9 +8671,9 @@ return {
             b_unik_devour = "DEVOUR",
             b_spectral_rate = "Spectral Rate",
             cry_good_luck_ex = "Good luck!",
-            --Almanac Quotes:
 
-            --Moonlight Cookie: She will be the first Joker with full almanac functionality (has a fusion, different quotes)
+
+            --Moonlight Cookie: She will be the first Joker with full bos functionality (has a fusion, different quotes)
             ---Normal:
             k_unik_moonlight_normal1 = "May I wish you happy dreams...",
             k_unik_moonlight_normal2 = "The stars dance and the dreams flow...",
@@ -8680,7 +8688,7 @@ return {
             k_unik_unik_normal5 = "Let me know what I can help out with.",
             k_unik_unik_normal6 = "Umm, hi... Can't believe I'm here now...",
 
-            --fear (almanac exclusive)
+
             k_unik_unik_scared1 = "Wh... IT'S TOO MUCH!!!",
             k_unik_unik_scared2 = "PLEASE STOP! I can't handle this!",
             k_unik_unik_scared3 = "The fuck is all this?!",
@@ -8761,8 +8769,6 @@ return {
             k_unik_epic_sand_cry_1 = "^2 Blind size",
             k_unik_epic_sand_cry_2 = "per tag held",
             k_unik_tag="tags",
-            k_unik_epic_sand_almanac_1 = "Increase blind size",
-            k_unik_epic_sand_almanac_2 = "by {Tags held}1.1",
             k_unik_epic_vice_placeholder = "(4, increase by ^1.05 per Tukehtumisenpahe)",
             ph_game_over="YOU ARE DEAD",
             k_unik_leg_tornado_warn_1 = "Must only play the last ",
@@ -8892,11 +8898,13 @@ return {
             unik_overshoot_lenient = "Lenient",
             unik_overshoot_strict = "Strict (Recommended)",
 
-            unik_legendary_blinds_desc1 = "Enable Almanac-styled Epic/Legendary Blinds",
+            unik_legendary_blinds_desc1 = "Enable Epic/Legendary Blinds",
             unik_legendary_blinds_desc2 = "when Overshoot is high",
-            unik_legendary_blinds_desc3 = "With POLTERWORX active, without Overshoot, Epic Blinds will spawn after Round 40 and Legendary Blinds after 90 no matter what.",
+            --they may have a different spawning condition instead.
+            unik_legendary_blinds_desc3 = "With BOOK OF SHADOWS active, without Overshoot, Epic Blinds will spawn after Round 40 and Legendary Blinds after 90 no matter what.",
+            
             unik_overshoot_enable_desc = "Enable detrimental effects when you score too much above requirements, highly recommended with Big Number mods",
-            unik_overshoot_enable_desc2 = "With POLTERWORX active, it's recommended to disable this as it's not balanced with frequent use of Big Numbers; Enable Straddle instead.",
+            unik_overshoot_enable_desc2 = "With BOOK OF SHADOWS active, it's recommended to disable this as it's not balanced with frequent use of Big Numbers; Enable Straddle instead.",
             unik_menu_desc = "Enable the custom menu screen",
             unik_enable_overshoot_option = "Enable Overshoot",
             unik_custom_menu_option = "Enable Custom Menu (Restart Required)",
@@ -8961,6 +8969,8 @@ return {
             k_unik_destroyed = "Destroyed!",
             k_unik_blind = "blind",
             k_unik_card = "card",
+            k_unik_applied = "Applied!",
+            k_unik_not_applied = "Not Applied"
         },
         high_scores={},
         labels={

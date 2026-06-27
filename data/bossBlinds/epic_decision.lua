@@ -85,8 +85,8 @@ G.FUNCS.can_skip_booster = function(e)
 	end
 end
 
---Hook for booster skip to say NOPE! in almanac (since alamanac overrides)
-local almanac_no_skip = G.FUNCS.skip_booster
+--Hook for booster skip to say NOPE! in bos (since alamanac overrides)
+local bos_no_skip = G.FUNCS.skip_booster
 G.FUNCS.skip_booster = function(e)
     local obj = SMODS.OPENED_BOOSTER.config.center
     local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
@@ -108,7 +108,7 @@ G.FUNCS.skip_booster = function(e)
         if obj.skip_effect and type(obj.skip_effect) == "function" then
             obj:skip_effect()
         end
-        almanac_no_skip(e)
+        bos_no_skip(e)
         --Draw cards after the booster pack has been skipped/finished
         
     end

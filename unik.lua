@@ -24,32 +24,26 @@ SMODS.current_mod.optional_features = {
 	},
 }
 
-function UNIK.has_almanac()
+function UNIK.has_bos()
 	
-	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
-		return true
-	end
-	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
+	return UNIK.has_BOS()
+end
+function UNIK.has_BOS()
+	if next(SMODS.find_mod("BOS")) or next(SMODS.find_mod("bos")) then
 		return true
 	end
 	return false
 end
 
-function UNIK.get_almanac_prefix()
-	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
-		return 'jen'
-	end
-	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
-		return 'pwx'
-	end
-	return 'jen'
+function UNIK.get_bos_prefix()
+	return 'bos'
 end
 if next(SMODS.find_mod("Cryptlib")) then
 	print("CRYPTLIB IS FOUND")
 end
 
-function AlterConfigWithAlmanac(config1,config2)
-	if UNIK.has_almanac() then
+function AlterConfigWithbos(config1,config2)
+	if UNIK.has_bos() then
 		return config2
 	end
 	return config1
@@ -77,7 +71,7 @@ SMODS.current_mod.config_tab = function() --Config tab
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
-			info = AlterConfigWithAlmanac(
+			info = AlterConfigWithbos(
 				{
 					localize("unik_legendary_blinds_desc1"),
 					localize("unik_legendary_blinds_desc2")
@@ -93,7 +87,7 @@ SMODS.current_mod.config_tab = function() --Config tab
 			label = localize("unik_enable_overshoot_option"),
 			ref_table = unik_config,
 			ref_value = "unik_overshoot_enabled",
-			info = AlterConfigWithAlmanac({
+			info = AlterConfigWithbos({
 					localize("unik_overshoot_enable_desc"),
 				},
 				{
@@ -1331,7 +1325,7 @@ if next(SMODS.find_mod("Blindside")) then
 		text = 'k_unik_exquisite',
 		spawn_rate = function(self)
 			--print("exoticnospawn")
-			return 0.003
+			return 0.004
 		end,
 		default_blind_key = 'm_unik_blindside_tracer',
 	})
@@ -1483,7 +1477,7 @@ if next(SMODS.find_mod("Blindside")) then
 	
 	--Spy (Curse tag)
 	--
-	NFS.load(mod_path .. "data/blindside/rituals/sigil.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/pentatope.lua")()
 	NFS.load(mod_path .. "data/blindside/rituals/portal.lua")()
 
 	--TAGS
@@ -1522,7 +1516,7 @@ if next(SMODS.find_mod("Blindside")) then
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_balance')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_cursed')
 
-	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_sigil')
+	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_pentatope')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_portal')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_erosion')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_bind')
@@ -1612,7 +1606,7 @@ if JokerDisplay then
 	NFS.load(mod_path .. "data/jokerdisplay/detrimental.lua")() 
 end
 
-if UNIK.has_almanac() then
+if UNIK.has_bos() then
 	NFS.load(mod_path .. "data/overrides/pwx_stuff.lua")() 
 end
 
