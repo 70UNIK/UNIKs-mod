@@ -23,7 +23,7 @@ BLINDSIDE.Joker({
                 end
             end
             if seals >= 5 then
-                return true
+                return (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5) or G.GAME.round_resets.ante > 7
             end
         else
         return false

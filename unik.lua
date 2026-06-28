@@ -212,6 +212,44 @@ SMODS.Atlas {
 	px = 66,
 	py = 66,
 }
+
+--NEW UNIFIED GENERAL ATLASes
+
+SMODS.Atlas {
+	key = "unik_consumables",
+	path = "unik_consumables.png",
+	px = 71,
+	py = 95
+}
+SMODS.Atlas {
+	key = "unik_normal_jokers",
+	path = "unik_normal_jokers.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas {
+	key = "unik_character_jokers",
+	path = "unik_character_jokers.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas {
+	key = "unik_finity_jokers",
+	path = "unik_finity_jokers.png",
+	px = 71,
+	py = 95
+}
+
+SMODS.Atlas {
+	key = "unik_blindside_consumables",
+	path = "unik_blindside_consumables.png",
+	px = 71,
+	py = 95
+}
+
+
 SMODS.Atlas {
 	key = "unik_edition_deck",
 	path = "unik_edition_deck.png",
