@@ -12,8 +12,8 @@ local lartceps_digital_hallucinations_compat = {
 SMODS.Booster{
     key = "unik_lartceps_bundle",
 	kind = "unik_lartceps",
-    atlas = "unik_cube_boosters",
-	pos = { x = 1, y = 1 },
+    atlas = "unik_unik_consumables",
+	pos = { x = 9, y = 4 },
     cost = 0,
     weight = 0, 
     config = { extra = 10, choose = 4 },

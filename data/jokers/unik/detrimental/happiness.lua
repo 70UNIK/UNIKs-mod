@@ -1,8 +1,8 @@
 SMODS.Joker {
 	key = 'unik_happiness',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
-	pos = { x = 0, y = 0 },
+	pos = { x = 9, y = 4 },
     cost = 0,
 	blueprint_compat = false,
 	perishable_compat = false,

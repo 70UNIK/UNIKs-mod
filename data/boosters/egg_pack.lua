@@ -14,8 +14,8 @@ local egg_digital_hallucinations_compat = {
 SMODS.Booster{
     key = "unik_egg_pack",
 	kind = "Joker",
-    atlas = "unik_cube_boosters",
-	pos = { x = 2, y = 1 },
+    atlas = "unik_unik_consumables",
+	pos = { x = 10, y = 4 },
     cost = 4,
     weight = 0.7, 
     config = { extra = 4, choose = 1 },

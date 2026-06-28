@@ -14,10 +14,10 @@ SMODS.ObjectType({
 })
 SMODS.Joker {
 	key = 'unik_autocannibalism',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
     no_dbl = true,
-	pos = { x = 0, y = 1 },
+	pos = { x = 9, y = 5 },
     cost = 1,
     config = { extra = { selfDestruct = false} },
 	blueprint_compat = false,

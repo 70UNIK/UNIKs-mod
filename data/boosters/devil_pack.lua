@@ -44,8 +44,8 @@ SMODS.Tag{
 SMODS.Booster{
     key = "unik_extended_empowered",
 	kind = "Spectral",
-    atlas = "unik_cube_boosters",
-	pos = { x = 0, y = 1 },
+    atlas = "unik_unik_consumables",
+	pos = { x = 8, y = 4 },
     cost = 0,
     weight = 0, 
     config = { extra = 2, choose = 1 },

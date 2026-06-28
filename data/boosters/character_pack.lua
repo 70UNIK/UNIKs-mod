@@ -1,8 +1,8 @@
 SMODS.Booster{
     key = "unik_character",
 	kind = "character",
-    atlas = "unik_cube_boosters",
-	pos = { x = 0, y = 3 },
+    atlas = "unik_unik_consumables",
+	pos = { x = 8, y = 6 },
     cost = 10,
     weight = 0.05, --very rare
     config = { extra = 4, choose = 1 },

@@ -7,10 +7,10 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_broken_scale',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
     no_dbl = true,
-	pos = { x = 0, y = 2 },
+	pos = { x = 9, y = 6 },
     cost = 1,
     config = { extra = {rounds = 0,round_limit = 8} },
     loc_vars = function(self, info_queue, center)

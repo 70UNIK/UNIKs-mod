@@ -4,9 +4,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_monster_spawner',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
-	pos = { x = 3, y = 1 },
+	pos = { x = 12, y = 5 },
     cost = 1,
 	blueprint_compat = false,
     perishable_compat = false,

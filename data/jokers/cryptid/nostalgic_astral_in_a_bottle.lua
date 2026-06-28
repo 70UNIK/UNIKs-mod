@@ -7,10 +7,10 @@ SMODS.Joker {
 	},
 	-- How the code refers to the joker.
 	key = 'unik_astral_bottle',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'cry_cursed',
 	no_dbl = true,
-	pos = { x = 1, y = 3 },
+	pos = { x = 10, y = 7 }, --x + 9, x + 4
     cost = 0,
 	blueprint_compat = false,
     perishable_compat = false,

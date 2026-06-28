@@ -6,9 +6,9 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_vampiric_hammer',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
-	pos = { x = 4, y = 2 },
+	pos = { x = 13, y = 6 },
     no_dbl = true,
     cost = 1,
     --will not be changed in modest
