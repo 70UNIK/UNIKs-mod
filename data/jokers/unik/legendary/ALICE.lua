@@ -11,12 +11,7 @@ local function contains(table_, value)
 
     return false
 end
-SMODS.Atlas {
-	key = "unik_alice",
-	path = "unik_alice.png",
-	px = 71,
-	py = 95
-}
+
 SMODS.Joker {
 	key = 'unik_extra_credit_alice',
     atlas = 'unik_alice',

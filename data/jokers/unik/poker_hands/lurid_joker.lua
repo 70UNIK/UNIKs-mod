@@ -9,9 +9,9 @@ if SpectrumAPI then
 		type = UNIK.spectrum_name
 		}},
 		rarity = 1,
-		pos = { x = 0, y = 2 },
+		pos = { x = 7, y = 2 },
 		effect = "Cry Type Chips",
-		atlas = "unik_poker_hand_shit",
+		atlas = "unik_consumables",
 		cost = 3,
 		blueprint_compat = true,
 		eternal_compat = true,
@@ -57,9 +57,9 @@ SMODS.Joker {
       type = UNIK.spectrum_name
     }},
     rarity = 1,
-    pos = { x = 0, y = 2 },
+    pos = { x = 7, y = 2 },
     effect = "Cry Type Chips",
-    atlas = "unik_poker_hand_shit",
+    atlas = "unik_consumables",
     cost = 3,
     blueprint_compat = true,
     eternal_compat = true,

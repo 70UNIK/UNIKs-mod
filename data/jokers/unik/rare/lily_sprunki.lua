@@ -1,12 +1,7 @@
 --Turns out lily feels more like a blind than a benefit given how you have little control of card destruction.
 --Rework: Grants the option to destroy all selected cards, once per round (Active!/Inactive)
 --Has a dedicated button to do so
-SMODS.Atlas {
-	key = "unik_lily_sprunki",
-	path = "unik_lily_sprunki.png",
-	px = 71,
-	py = 95
-}
+
 
 local lily_quotes = {
     normal = {

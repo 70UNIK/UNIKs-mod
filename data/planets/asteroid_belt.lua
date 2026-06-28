@@ -1,8 +1,8 @@
 SMODS.Consumable{
     set = "Planet",
    	key = "unik_asteroid_belt",
-    atlas = "unik_poker_hand_shit",
-	pos = { x = 0, y = 0 },
+    atlas = "unik_consumables",
+	pos = { x = 7, y = 0 },
 	config = { hand_type = "unik_bulwark", softlock = true },
 	aurinko = true,
 	set_card_type_badge = function(self, card, badges)

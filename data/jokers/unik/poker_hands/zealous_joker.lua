@@ -8,8 +8,8 @@ if SpectrumAPI then
 		type = UNIK.spectrum_name
 		}},
 		rarity = 1,
-		pos = { x = 0, y = 1 },
-		atlas = "unik_poker_hand_shit",
+		pos = { x = 7, y = 1 },
+		atlas = "unik_consumables",
 		effect = "Cry Type Mult",
 		cost = 3,
 		blueprint_compat = true,
@@ -55,8 +55,8 @@ else
 		type = UNIK.spectrum_name
 		}},
 		rarity = 1,
-		pos = { x = 0, y = 1 },
-		atlas = "unik_poker_hand_shit",
+		pos = { x = 7, y = 1 },
+		atlas = "unik_consumables",
 		effect = "Cry Type Mult",
 		cost = 3,
 		blueprint_compat = true,

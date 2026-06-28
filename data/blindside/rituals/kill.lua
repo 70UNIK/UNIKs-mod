@@ -2,7 +2,7 @@
 SMODS.Consumable {
     key = 'unik_blindside_kill',
     set = 'bld_obj_ritual',
-    atlas = 'unik_blindside_rituals',
+    atlas = 'unik_blindside_consumables',
 	pos = { x = 2, y = 0 },
     cost = 4,
     config = {max_card = 1 },

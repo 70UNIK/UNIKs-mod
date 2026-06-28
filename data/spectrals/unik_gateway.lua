@@ -1,12 +1,7 @@
 --Gateway but only spawns UNIK, cause he's the only "cube" joker thats an exotic (cause hes the creator)
 --Only spawns with a 0.3% chance in "Square" pack (like with SOUL)
 --Copied from cryptid, since apart from the "spawns exclusively UNIK and only spawns in cube pack", it's the same as gateway.
-SMODS.Atlas({
-	key = "unik_gateway", --this is easier to spell then consumables
-	path = "unik_gateway.png",
-	px = 71,
-	py = 95,
-})
+
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_gateway",
@@ -223,7 +218,7 @@ function Card:set_sprites(_center, _front)
 			self.T.w,
 			self.T.h,
 			G.ASSET_ATLAS[_center.atlas or _center.set],
-			{ x = 1, y = 0 }
+			{ x = 3, y = 2 }
 		)
 		self.children.floating_sprite.role.draw_major = self
 		self.children.floating_sprite.states.hover.can = false

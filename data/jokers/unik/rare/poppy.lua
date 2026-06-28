@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_poppy",
-	path = "unik_poppy.png",
-	px = 71,
-	py = 95
-}
+
 local poppy_quotes = {
 	normal = {
 		'k_poppy_normal1',

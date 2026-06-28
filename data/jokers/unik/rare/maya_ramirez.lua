@@ -1,12 +1,7 @@
 --context.cardarea = G.play and context.individual
 --CURRENTLY BROKEN
 
-SMODS.Atlas {
-	key = "unik_maya",
-	path = "unik_maya.png",
-	px = 71,
-	py = 95
-}
+
 local maya_quotes = {
 	alone = {
 		'k_unik_maya_normal1',

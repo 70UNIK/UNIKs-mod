@@ -33,7 +33,7 @@ SMODS.Sound({
 SMODS.Consumable {
     key = 'unik_blindside_pentatope',
     set = 'bld_obj_ritual',
-    atlas = 'unik_blindside_rituals',
+    atlas = 'unik_blindside_consumables',
     hidden = true,
     soul_sets = {
         'bld_obj_ritual',

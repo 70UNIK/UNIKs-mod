@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_catto_boi",
-	path = "unik_catto_boi.png",
-	px = 71,
-	py = 95
-}
+
 
 local catto_boi = {
 	normal = {
@@ -20,10 +15,10 @@ local catto_boi = {
 
 SMODS.Joker {
     key = "unik_catto_boi",
-    atlas = "unik_catto_boi",
+    atlas = "unik_character_jokers",
     rarity = 3,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 3, y = 8 },
+	soul_pos = { x = 4, y = 8 },
     cost = 8,
     blueprint_compat = true,
     perishable_compat = false,

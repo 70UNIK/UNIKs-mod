@@ -2,7 +2,7 @@
 SMODS.Consumable {
     key = 'unik_blindside_erosion',
     set = 'bld_obj_ritual',
-    atlas = 'unik_blindside_rituals',
+    atlas = 'unik_blindside_consumables',
 	pos = { x = 1, y = 0 },
     can_use = function (self, card)
         if #G.hand.cards > 0 then

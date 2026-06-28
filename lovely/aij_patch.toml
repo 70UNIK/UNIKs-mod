@@ -16,8 +16,8 @@ pattern = '''G.all_in_jest.patches_sprites["Other"] = SMODS.create_sprite(0,0,G.
 position = "before"
 match_indent = true
 payload = '''
-G.all_in_jest.patches_sprites["unik_Crosses"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=1,y=0})
-G.all_in_jest.patches_sprites["hc_unik_Crosses"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=1,y=1})
-G.all_in_jest.patches_sprites["unik_Noughts"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=0,y=0})
-G.all_in_jest.patches_sprites["hc_unik_Noughts"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_aij_patches", {x=0,y=0})
+G.all_in_jest.patches_sprites["unik_Crosses"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_enhancements", {x=3,y=1})
+G.all_in_jest.patches_sprites["hc_unik_Crosses"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_enhancements", {x=3,y=2})
+G.all_in_jest.patches_sprites["unik_Noughts"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_enhancements", {x=2,y=1})
+G.all_in_jest.patches_sprites["hc_unik_Noughts"] = SMODS.create_sprite(0,0,G.CARD_W,G.CARD_H,"unik_enhancements", {x=2,y=2})
 '''

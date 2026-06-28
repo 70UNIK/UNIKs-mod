@@ -1,17 +1,10 @@
 --pentatope but exotic blinds
 --it however bloats your deck in return
 
-SMODS.Atlas({
-	key = "unik_blindside_portal", --this is easier to spell then consumables
-	path = "unik_blindside_portal.png",
-	px = 71,
-	py = 95,
-})
-
 SMODS.Consumable {
     key = 'unik_blindside_portal',
     set = 'bld_obj_ritual',
-    atlas = 'unik_blindside_portal',
+    atlas = 'unik_blindside_consumables',
     hidden = true,
     soul_sets = {
         'bld_obj_ritual',
@@ -34,7 +27,7 @@ SMODS.Consumable {
             }
         }
     end,
-    pos = {x=0, y=0},
+    pos = {x=2, y=2},
     use = function(self, card, area)
         G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.4,func = function() 
                 play_sound('bld_crack', 1.0, 1)

@@ -3,8 +3,8 @@ if SpectrumAPI then
 		priority = 1,
 		object_type = "Joker",
 		key = "unik_the_dynasty",
-		atlas = "unik_poker_hand_shit",
-		pos = { x = 0, y = 3 },
+		atlas = "unik_consumables",
+		pos = { x = 7, y = 3 },
 		config = {
 			extra = {
 				Xmult = 5,
@@ -56,8 +56,8 @@ if SpectrumAPI then
 else
 	SMODS.Joker {
 		key = "unik_the_dynasty",
-		atlas = "unik_poker_hand_shit",
-		pos = { x = 0, y = 3 },
+		atlas = "unik_consumables",
+		pos = { x = 7, y = 3 },
 		config = {
 			extra = {
 				Xmult = 5,

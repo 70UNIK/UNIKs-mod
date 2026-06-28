@@ -52,12 +52,7 @@ local function White_lily_copy(card)
     
 
 end
-SMODS.Atlas {
-	key = "unik_white_lily",
-	path = "unik_white_lily.png",
-	px = 71,
-	py = 95
-}
+
 
 --helps with white lily persistance even if she gets destroyed
 function UNIK.white_lily_present()

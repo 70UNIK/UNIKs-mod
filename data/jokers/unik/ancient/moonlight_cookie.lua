@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_moonlight",
-	path = "unik_moonlight_cookie.png",
-	px = 71,
-	py = 95
-}
+
 --from maxie
 local moonlight_quotes = {
 	normal = {

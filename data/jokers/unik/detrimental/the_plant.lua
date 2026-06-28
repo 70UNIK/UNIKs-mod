@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_the_plant",
-	path = "unik_the_plant.png",
-	px = 71,
-	py = 95
-}
+
 SMODS.Joker {
     dependencies = {
 		items = {

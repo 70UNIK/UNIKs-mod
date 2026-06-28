@@ -183,12 +183,6 @@ NFS.load(mod_path .. "data/misc/plurals.lua")()
 NFS.load(mod_path .. "data/misc/activated_ability.lua")()
 
 
-SMODS.Atlas({
-	key = "unik_cube_boosters",
-	path = "unik_cube_boosters.png",
-	px = 71,
-	py = 95,
-})
 --Custom spectrum stuff
 function UNIK.can_load_spectrums()
 	if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled))
@@ -249,42 +243,18 @@ SMODS.Atlas {
 	py = 95
 }
 
-
-SMODS.Atlas {
-	key = "unik_edition_deck",
-	path = "unik_edition_deck.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_sticker_deck",
-	path = "unik_sticker_decks.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_sticker_stakes",
-	path = "unik_sticker_stakes.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_stakes",
-	path = "unik_stakes.png",
-	px = 29,
-	py = 29
-}
 SMODS.Atlas {
 	key = "unik_enhancements",
 	path = "unik_enhancements.png",
 	px = 71,
 	py = 95
 }
+
 SMODS.Atlas {
-	key = "placeholder_voucher",
-	path = "placeholder_voucher.png",
-	px = 71,
-	py = 95
+	key = "unik_stakes",
+	path = "unik_stakes.png",
+	px = 29,
+	py = 29
 }
 
 SMODS.Atlas {
@@ -375,56 +345,8 @@ SMODS.Atlas {
 	py = 34
 }
 SMODS.Atlas {
-	key = "unik_common",
-	path = "unik_common.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_uncommon",
-	path = "unik_uncommon.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
 	key = "placeholders",
 	path = "placeholders.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_rare",
-	path = "unik_rare.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_epic",
-	path = "unik_epic.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_cursed",
-	path = "unik_cursed.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_tarots",
-	path = "unik_tarots.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_spectrals",
-	path = "unik_spectrals.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_vouchers",
-	path = "unik_vouchers.png",
 	px = 71,
 	py = 95
 }
@@ -447,13 +369,6 @@ SMODS.Atlas({
   px = 107, 
   py = 107
 })
-
-SMODS.Atlas {
-	key = "unik_grab_bag_jokers",
-	path = "unik_grab_bag_jokers.png",
-	px = 71,
-	py = 95
-}
 
 SMODS.Atlas {
 	key = "unik_blindside_blinds",
@@ -489,19 +404,6 @@ SMODS.ConsumableType {
         return false
     end
 }
-SMODS.Atlas {
-	key = "unik_summits",
-	path = "unik_summits.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_summits_alt",
-	path = "unik_summits_alt.png",
-	px = 71,
-	py = 95
-}
-
 SMODS.Atlas {
 	key = "unik_seals",
 	path = "unik_seals.png",
@@ -692,12 +594,6 @@ SMODS.Atlas({
 	px = 71,
 	py = 95,
 })
-SMODS.Atlas {
-	key = "unik_aij_patches",
-	path = "unik_aij_patches.png",
-	px = 71,
-	py = 95,
-}
 NFS.load(mod_path .. "data/suit_shennannigans/noughts.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/crosses.lua")()
 NFS.load(mod_path .. "data/suit_shennannigans/enhancement_rank_suit.lua")()
@@ -706,15 +602,6 @@ NFS.load(mod_path .. "data/suit_shennannigans/crossmod_ranks.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
 end
-
-
---HANDS
-SMODS.Atlas {
-	key = "unik_poker_hand_shit",
-	path = "poker_hand_shit.png",
-	px = 71,
-	py = 95
-}
 if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/poker_hands/bulwark.lua")()
 	--planets
@@ -769,14 +656,6 @@ if next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/tarots/the_divorce.lua")()
 	NFS.load(mod_path .. "data/tarots/the_excommunicated.lua")()
 end
-
-SMODS.Atlas {
-	key = "unik_polyminos",
-	path = "unik_polyminos.png",
-	px = 71,
-	py = 95
-}
-
 --Polyminos
 if next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/polyminos/the_double.lua")()
@@ -860,14 +739,6 @@ if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
 end
 
-
---MF color cards
-SMODS.Atlas({ 
-  key = "unik_colours", 
-  path = "unik_colours.png",
-  px = 71, 
-  py = 95 
-})
 --Color cards
 if MoreFluff and mf_config and mf_config["Colour Cards"] == true then
 	NFS.load(mod_path .. "data/colours/spectral_blue.lua")()
@@ -1322,13 +1193,6 @@ SMODS.Atlas({
     key = "unik_blindside_legendary_blinds", 
     atlas_table = "ANIMATION_ATLAS", 
     path = "unik_blindside_legendary_blinds.png", 
-    px = 71, 
-    py = 95, 
-frames = 3 })
-
-SMODS.Atlas({ 
-    key = "unik_blindside_rituals", 
-    path = "unik_blindside_rituals.png", 
     px = 71, 
     py = 95, 
 frames = 3 })

@@ -1,12 +1,7 @@
 --Rework effect 2:
 --Light suits give X1.0 Mult, increase by X0.25 per each unique light suit in scoring hand
 --
-SMODS.Atlas {
-	key = "unik_kouign_amann_cookie",
-	path = "unik_kouign_amann_cookie.png",
-	px = 71,
-	py = 95
-}
+
 local k_amann_quotes = {
 	normal = {
 		'k_k_amann_normal1',

@@ -2,12 +2,7 @@
 --If force triggered, produces xmult equal to sum of played ranks / 100 instead.
 --Must have unstable compat (for instance, decimal cards, 161)
 --Does not count ranks for rankless/custom ranks (abstract)
-SMODS.Atlas {
-	key = "unik_pibby",
-	path = "unik_pibby.png",
-	px = 71,
-	py = 95
-}
+
 local pibby_quotes = {
 	normal = {
 		'k_unik_pibby_normal1',

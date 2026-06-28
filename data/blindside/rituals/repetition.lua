@@ -2,7 +2,7 @@
 SMODS.Consumable {
     key = 'unik_blindside_repetition',
     set = 'bld_obj_ritual',
-    atlas = 'unik_blindside_rituals',
+    atlas = 'unik_blindside_consumables',
 	pos = { x = 3, y = 1 },
     config = {
         extra = {

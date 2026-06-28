@@ -5,8 +5,8 @@ if SpectrumAPI then
 		priority = 1,
 		object_type = "Planet",
 		key = "unik_sedna",
-		atlas = "unik_poker_hand_shit",
-		pos = { x = 1, y = 1 },
+		atlas = "unik_consumables",
+		pos = { x = 8, y = 1 },
 		config = { hand_type = "spa_Spectrum_House", softlock = true },
 		aurinko = true,
 		set_card_type_badge = function(self, card, badges)
@@ -24,7 +24,7 @@ else
 	SMODS.Consumable{
 		set = "Planet",
 		key = "unik_sedna",
-		atlas = "unik_poker_hand_shit",
+		atlas = "unik_consumables",
 		pos = { x = 1, y = 1 },
 		config = { hand_type = "unik_spectrum_house", softlock = true },
 		aurinko = true,

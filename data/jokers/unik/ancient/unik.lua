@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_unik",
-	path = "unik_unik.png",
-	px = 71,
-	py = 95
-}
+
 local unik_quotes = {
 	normal = {
 		'k_unik_unik_normal1',

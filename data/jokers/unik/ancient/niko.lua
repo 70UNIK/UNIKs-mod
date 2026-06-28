@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_niko",
-	path = "unik_niko.png",
-	px = 71,
-	py = 95
-}
+
 
 local niko_quotes = {
 	normal = {

@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_yokana",
-	path = "unik_yokana.png",
-	px = 71,
-	py = 95
-}
+
 
 local yokana_quotes = {
 	alone = {

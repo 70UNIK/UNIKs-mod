@@ -1,10 +1,5 @@
 --First hearts card is rescored 2 times
-SMODS.Atlas {
-	key = "unik_blossom",
-	path = "unik_blossom.png",
-	px = 71,
-	py = 95
-}
+
 
 local blossom_quotes = {
 	normal = {
@@ -25,11 +20,11 @@ local blossom_quotes = {
 
 SMODS.Joker {
     key = "unik_blossom",
-    atlas = 'unik_blossom',
+    atlas = 'unik_character_jokers',
     rarity = 3,
     cost = 7,
-    pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+    pos = { x = 6, y =3 },
+	soul_pos = { x = 7, y = 3 },
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,

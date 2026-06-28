@@ -1,9 +1,3 @@
-SMODS.Atlas {
-	key = "unik_reggie",
-	path = "unik_reggie.png",
-	px = 71,
-	py = 95
-}
 
 local reggie_quotes = {
 	normal = {

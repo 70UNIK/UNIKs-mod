@@ -3,7 +3,7 @@
 SMODS.Consumable {
     key = 'unik_blindside_caldera',
     set = 'bld_obj_ritual',
-    atlas = 'unik_blindside_rituals',
+    atlas = 'unik_blindside_consumables',
 	pos = { x = 2, y = 1 },
     config = {
         extra = {
