@@ -14,10 +14,10 @@ end
 
 SMODS.Joker {
 	key = 'unik_extra_credit_alice',
-    atlas = 'unik_alice',
+    atlas = 'unik_character_jokers',
     rarity = 4,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 7, y = 10 },
+	soul_pos = { x = 8, y = 10 },
     cost = 20,
 	blueprint_compat = true,
     perishable_compat = true,

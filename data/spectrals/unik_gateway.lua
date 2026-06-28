@@ -5,8 +5,8 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_gateway",
-	atlas = "unik_spectrals",
-	pos = { x = 0, y = 2},
+	atlas = "unik_consumables",
+	pos = { x = 3, y = 6},
 	cost = 4,
 	order = 90,
 	no_doe = true,
@@ -192,7 +192,7 @@ function Card:set_sprites(_center, _front)
 			self.T.w,
 			self.T.h,
 			G.ASSET_ATLAS[_center.atlas or _center.set],
-			{ x = 1, y = 2 }
+			{ x = 4, y = 6 }
 		)
 		self.children.floating_sprite.role.draw_major = self
 		self.children.floating_sprite.states.hover.can = false

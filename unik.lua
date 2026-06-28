@@ -158,12 +158,12 @@ function UNIK.isIndigenousSummitNaming()
 	return false
 end
 
-function UNIK.getSummitAtlas()
-	if UNIK.isIndigenousSummitNaming() then
-		return 'unik_summits_alt'
-	end
-	return 'unik_summits'
-end
+-- function 'unik_summits'
+-- 	-- if UNIK.isIndigenousSummitNaming() then
+-- 	-- 	return 'unik_summits_alt'
+-- 	-- end
+-- 	return 'unik_summits'
+-- end
 
 if (SMODS.Mods["Cryptid"] or {}).can_load then
 	--print("So, you chose slop... Well be prepared to be treated as slop in return...")

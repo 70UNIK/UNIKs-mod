@@ -1,9 +1,9 @@
 SMODS.Consumable{
     set = "Tarot",
    	key = "carpenter",
-	pos = { x = 2, y = 0 },
+	pos = { x = 2, y = 4 },
 	config = { mod_conv = "m_unik_timber", max_highlighted = 1 },
-	atlas = "unik_tarots",
+	atlas = "unik_consumables",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_timber
 

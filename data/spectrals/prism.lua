@@ -2,9 +2,9 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_prism",
-	pos = { x = 1, y = 0 },
+	pos = { x = 4, y = 4 },
 	cost = 4,
-	atlas = "unik_spectrals",
+	atlas = "unik_consumables",
 	order = 90,
     config = {
 		max_highlighted = 1, extra= {cards_added = 3}

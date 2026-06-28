@@ -4,9 +4,9 @@
 --Oops all 6s and rigged will only guarantee negative effects
 SMODS.Consumable{
     set = 'Tarot', 
-	atlas = 'unik_tarots',
+	atlas = 'unik_consumables',
     cost = 4,
-	pos = {x = 0, y = 0},
+	pos = {x = 0, y = 4},
 	key = 'unik_wheel_of_misfortune',
     update = function(self,card,dt)
         if (G.jokers) then

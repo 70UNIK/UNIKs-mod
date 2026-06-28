@@ -19,9 +19,9 @@ local k_amann_quotes = {
 }
 SMODS.Joker {
     key = 'unik_kouign_amann_cookie',
-    atlas = 'unik_kouign_amann_cookie',
-	pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 },
+    atlas = 'unik_character_jokers',
+	pos = { x = 6, y = 2 },
+    soul_pos = { x = 7, y = 2 },
     rarity = 3,
     cost = 8,
     blueprint_compat = true,

@@ -2,9 +2,9 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_foundry",
-	pos = { x = 0, y = 0 },
+	pos = { x = 3, y = 4 },
 	cost = 4,
-	atlas = "unik_spectrals",
+	atlas = "unik_consumables",
 	order = 90,
     config = {
 		max_highlighted = 1, extra = {odds = 3, cards_added = 3}

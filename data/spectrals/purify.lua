@@ -17,8 +17,8 @@ UNIK.detrimental_removable_stickers = {
 SMODS.Consumable {
     key = 'unik_purify',
     set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 3, y = 0 },
+	atlas = "unik_consumables",
+    pos = { x = 6, y = 4 },
     cost = 4,
     config = {jokers_highlighted = 1 },
     loc_vars = function(self, info_queue, card)

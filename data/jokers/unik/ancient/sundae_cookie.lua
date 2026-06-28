@@ -1,11 +1,4 @@
 --Beware of using wild cards! Like Niko, Sundae Cookie treats wild cards as "has spades, clubs, halberds and crowns", so will randomly select if multiple suits are present!
-SMODS.Atlas {
-	key = "unik_sundae_cookie",
-	path = "unik_sundae_cookie.png",
-	px = 71,
-	py = 95
-}
-
 local sundae_quotes = {
 	normal = {
 		'k_unik_sundae_normal1',
@@ -17,11 +10,11 @@ local sundae_quotes = {
 
 SMODS.Joker {
 	key = 'unik_sundae_cookie',
-    atlas = 'unik_sundae_cookie',
+    atlas = 'unik_character_jokers',
     rarity = "unik_ancient",
 	
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 0, y = 4 },
+	soul_pos = { x = 1, y = 4 },
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,

@@ -15,9 +15,9 @@ SMODS.Stake{
     colour = HEX('4e4d25'),
 
     pos = { x = 0, y = 0 },
-    sticker_pos = { x = 0, y = 0 },
+    sticker_pos = { x = 0, y = 3 },
     atlas = 'unik_stakes',
-    sticker_atlas = 'unik_sticker_stakes'
+    sticker_atlas = 'unik_stickers'
 }
 
 local disposableOverrideVoucher = Card.cry_calculate_voucher_perishable

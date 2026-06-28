@@ -14,11 +14,11 @@ local reggie_quotes = {
 }
 SMODS.Joker {
     key = "unik_reggie",
-    atlas = 'unik_reggie',
+    atlas = 'unik_character_jokers',
     rarity = 3,
     cost = 7,
-    pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+    pos = { x = 6, y = 4 },
+	soul_pos = { x = 7, y = 4 },
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,

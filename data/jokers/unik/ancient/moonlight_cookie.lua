@@ -18,10 +18,10 @@ local moonlight_quotes = {
 
 SMODS.Joker {
 	key = 'unik_moonlight_cookie',
-    atlas = 'unik_moonlight',
+    atlas = 'unik_character_jokers',
     rarity = "unik_ancient",
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 0, y = 8 },
+	soul_pos = { x = 1, y = 8 },
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,

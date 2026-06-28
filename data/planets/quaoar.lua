@@ -25,7 +25,7 @@ else
 		set = "Planet",
 		key = "unik_quaoar",
 		atlas = "unik_consumables",
-		pos = { x = 1, y = 0 },
+		pos = { x = 8, y = 0 },
 		config = { hand_type = "unik_spectrum", softlock = true },
 		aurinko = true,
 		set_card_type_badge = function(self, card, badges)

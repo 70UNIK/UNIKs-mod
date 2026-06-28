@@ -10,11 +10,11 @@ local niko_quotes = {
 
 SMODS.Joker {
 	key = 'unik_niko',
-    atlas = 'unik_niko',
+    atlas = 'unik_character_jokers',
     rarity = "unik_ancient",
 	
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 0, y = 6 },
+	soul_pos = { x = 1, y = 6 },
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = true,

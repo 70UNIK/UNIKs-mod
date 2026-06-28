@@ -2,9 +2,9 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_denial",
-	pos = { x = 4, y = 0 },
+	pos = { x = 7, y = 4 },
 	cost = 4,
-	atlas = "unik_spectrals",
+	atlas = "unik_consumables",
     config = {
 		max_highlighted = 5,
         suit_conv = 'unik_Crosses'

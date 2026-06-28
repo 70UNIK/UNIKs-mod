@@ -1,9 +1,9 @@
 
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = UNIK.getSummitAtlas(),
+	atlas = 'unik_summits',
     cost = 3,
-	pos = {x = 1, y = 1},
+	pos = {x = 4, y = 0} and UNIK.isIndigenousSummitNaming() or {x = 1, y = 1},
 	key = 'unik_everest',
     can_use = function(self, card)
         if G.hand and (#G.hand.highlighted <= card.ability.extra.max_highlighted) and G.hand.highlighted[1] then
@@ -24,7 +24,7 @@ SMODS.Consumable{
 	end,
     set_ability = function(self, card, initial, delay_sprites)
         if initial and UNIK.isIndigenousSummitNaming() and pseudorandom("differentSpriteEverest", 1, 100) > 50 then
-            card.children.center:set_sprite_pos { x = 3, y = 1 }
+            card.children.center:set_sprite_pos { x = 5, y = 0 }
         end
     end,
     

@@ -31,9 +31,9 @@ local maya_quotes = {
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_maya',
-    atlas = 'unik_maya',
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+    atlas = 'unik_character_jokers',
+	pos = { x = 3, y = 6 },
+	soul_pos = { x = 4, y = 6 },
     rarity = 3,
 	cost = 8,
 	blueprint_compat = true,

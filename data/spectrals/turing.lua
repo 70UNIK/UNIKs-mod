@@ -2,8 +2,8 @@
 SMODS.Consumable {
     key = 'unik_lightning',
     set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 3, y = 1 },
+	atlas = "unik_consumables",
+    pos = { x = 6, y = 5 },
     cost = 4,
     config = {mod_conv = "unik_copper_seal", max_highlighted = 1 },
     loc_vars = function(self, info_queue, card)

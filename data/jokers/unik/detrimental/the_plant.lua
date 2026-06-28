@@ -7,10 +7,10 @@ SMODS.Joker {
 	},
 	key = 'unik_the_plant',
     no_dbl = true,
-    atlas = 'unik_the_plant',
+    atlas = 'unik_character_jokers',
     rarity = 'unik_detrimental',
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 2, y = 0 },
+	pos = { x = 7, y = 11 },
+	soul_pos = { x = 8, y = 11 },
     cost = 1,
     experimental = true, --requires a complex function for iterating per card so this is appropriate
     config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false,debuff_name = "unik_plant",entered = false} },

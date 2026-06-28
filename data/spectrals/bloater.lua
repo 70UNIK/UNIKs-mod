@@ -2,9 +2,9 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_bloater",
-	pos = { x = 0, y = 1 },
+	pos = { x = 3, y = 5 },
 	cost = 4,
-	atlas = "unik_spectrals",
+	atlas = "unik_consumables",
 	order = 90,
     config = {
 		extra = {

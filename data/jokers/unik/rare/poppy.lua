@@ -16,9 +16,9 @@ local poppy_quotes = {
 }
 SMODS.Joker {
     key = 'unik_poppy',
-    atlas = 'unik_poppy',
-	pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 },
+    atlas = 'unik_character_jokers',
+	pos = { x = 6, y = 0 },
+    soul_pos = { x = 7, y = 0 },
     rarity = 3,
     cost = 9,
     blueprint_compat = true,

@@ -20,11 +20,11 @@ local pibby_quotes = {
 }
 SMODS.Joker {
     key = 'unik_pibby',
-    atlas = 'unik_pibby',
+    atlas = 'unik_character_jokers',
     rarity = 3,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
-    sinis = { x = 2, y = 0 },
+	pos = { x = 3, y = 0 },
+	soul_pos = { x = 4, y = 0 },
+    sinis = { x = 5, y = 0 },
     cost = 8,
     blueprint_compat = true,
     perishable_compat = false,

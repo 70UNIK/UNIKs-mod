@@ -2,8 +2,8 @@
 SMODS.Consumable {
     key = 'unik_expel',
     set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 2, y = 0 },
+	atlas = "unik_consumables",
+    pos = { x = 5, y = 4 },
     cost = 4,
     config = {max_card = 1 },
     loc_vars = function(self, info_queue, center)

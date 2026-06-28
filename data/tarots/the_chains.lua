@@ -2,8 +2,8 @@
 SMODS.Consumable{
     set = "Tarot",
    	key = "unik_chains",
-	pos = { x = 1, y = 1 },
-	atlas = "unik_tarots",
+	pos = { x = 1, y = 5 },
+	atlas = "unik_consumables",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
         return {vars = {card and card.ability.max_highlighted or self.config.max_highlighted}}

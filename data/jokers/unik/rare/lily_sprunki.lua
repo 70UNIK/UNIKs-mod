@@ -18,10 +18,10 @@ local lily_quotes = {
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_lily_sprunki',
-    atlas = 'unik_lily_sprunki',
+    atlas = 'unik_character_jokers',
     rarity = 3,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 3, y = 2 },
+	soul_pos = { x = 4, y = 2 },
     cost = 8,
     config = {extra = {active = true,quoteset = 'normal',limit = 2}},
     pronouns = "she_her",
@@ -49,8 +49,8 @@ SMODS.Joker {
     pools = {["character"] = true },
     add_to_deck = function(self, card, context)
         --return to normal sprite
-        card.children.center:set_sprite_pos({x = 0, y = 0})
-        card.children.floating_sprite:set_sprite_pos({x = 1, y = 0})
+        card.children.center:set_sprite_pos({x = 3, y = 2})
+        card.children.floating_sprite:set_sprite_pos({x = 4, y = 2})
     end,
     calculate = function(self, card, context)
 
@@ -90,8 +90,8 @@ SMODS.Joker {
         G.E_MANAGER:add_event(Event({
             func = function()
                  card:juice_up(0.5, 0.5)
-                 card.children.center:set_sprite_pos({x = 0, y = 1})
-                 card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
+                 card.children.center:set_sprite_pos({x = 3, y = 3})
+                 card.children.floating_sprite:set_sprite_pos({x = 4, y = 3})
                  card.ability.extra.quoteset = 'feral'
                 return true
             end
@@ -118,8 +118,8 @@ SMODS.Joker {
             trigger='immediate',
             func = function()
                  card:juice_up(0.5, 0.5)
-                 card.children.center:set_sprite_pos({x = 0, y = 1})
-                 card.children.floating_sprite:set_sprite_pos({x = 2, y = 1})
+                 card.children.center:set_sprite_pos({x = 3, y = 3})
+                 card.children.floating_sprite:set_sprite_pos({x = 4, y = 3})
                 G.ROOM.jiggle = G.ROOM.jiggle + 5
                 --play_sound("unik_gore6") --thats funny
                 return true
@@ -143,8 +143,8 @@ SMODS.Joker {
         G.E_MANAGER:add_event(Event({
             func = function()
                  card:juice_up(0.5, 0.5)
-                 card.children.center:set_sprite_pos({x = 0, y = 0})
-                 card.children.floating_sprite:set_sprite_pos({x = 1, y = 0})
+                card.children.center:set_sprite_pos({x = 3, y = 2})
+                card.children.floating_sprite:set_sprite_pos({x = 4, y = 2})
                  card.ability.extra.quoteset = 'tired'
                   card.ability.extra.triggered = false
                   card.ability.extra.feral = false

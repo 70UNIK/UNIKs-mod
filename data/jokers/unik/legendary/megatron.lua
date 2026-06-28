@@ -21,9 +21,9 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_megatron',
 	rarity = 4,
-	atlas = 'unik_megatron',
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	atlas = 'unik_character_jokers',
+	pos = { x = 3, y = 11 },
+	soul_pos = { x = 4, y = 11 },
 	cost = 20,
 	blueprint_compat = true,
 	perishable_compat = false,
