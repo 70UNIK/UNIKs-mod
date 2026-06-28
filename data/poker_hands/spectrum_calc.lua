@@ -21,9 +21,10 @@ else
 		if UNIK.hasBlindside() then
 			return false
 		end
-		local requiredCards = 5 - UNIK.paved_calc() - SMODS.four_fingers()
+		local requiredCards = math.max(0,SMODS.four_fingers() - UNIK.paved_calc())
 		if #hand < requiredCards then return {} end
 		local unique_suits = UNIK.get_unique_suits(hand, nil, true)
+		--print(unique_suits .. " " .. requiredCards)
 		return (unique_suits >= requiredCards) and { hand } or {}
 	end
 	}
