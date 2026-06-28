@@ -1,8 +1,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_poppy_gb',
-    atlas = 'unik_grab_bag_jokers',
-    pos = { x = 0, y = 0 },
+    atlas = 'unik_normal_jokers',
+    pos = { x = 7, y = 8 },
     rarity = "gb_boss",
 	-- Modest
     config = { extra = { Xmult_mod = 0.25, bad_Xmult_mod = 0.75,Xmult = 1}},

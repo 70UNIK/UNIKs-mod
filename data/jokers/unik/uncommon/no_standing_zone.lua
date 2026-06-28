@@ -2,7 +2,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_no_standing_zone',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 0, y = 1 },
     cost = 7,

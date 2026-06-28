@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = "unik_energy_compressor",
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
     cost = 4,
     pos = { x = 0, y = 3 },

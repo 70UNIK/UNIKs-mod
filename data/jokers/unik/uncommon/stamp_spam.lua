@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_stamp_spam',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 4, y = 3 },
     rarity = 2,
     cost = 6,

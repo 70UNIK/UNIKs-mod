@@ -5,8 +5,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_ghost_trap',
-    atlas = 'unik_rare',
-    rarity = 3,
+    atlas = 'unik_normal_jokers',
+    rarity = 13,
 	pos = { x = 0, y = 0 },
     cost = 8,
 	blueprint_compat = true,

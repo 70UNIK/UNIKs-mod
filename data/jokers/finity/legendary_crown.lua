@@ -1,10 +1,4 @@
 --Increase Emult by ^1 if scoring above the best hand in this run.
-SMODS.Atlas {
-		key = "unik_finity_legendary_crown",
-		path = "unik_finity_legendary_crown.png",
-		px = 71,
-		py = 95,
-	}
 	
 local madeline_quotes = {
 	normal = {
@@ -16,7 +10,7 @@ local madeline_quotes = {
 }
 
 if FinisherBossBlinddecksprites then
-    FinisherBossBlinddecksprites["bl_unik_legendary_crown"] = {"unik_finity_legendary_crown",{ x = 2, y = 0 }}
+    FinisherBossBlinddecksprites["bl_unik_legendary_crown"] = {"unik_finity_jokers",{ x = 2, y = 1 }}
 end
 
 if FinisherBossBlindQuips then
@@ -26,7 +20,7 @@ end
 
 SMODS.Joker {
     key = "unik_legendary_crown",
-    atlas = 'unik_finity_legendary_crown',
+    atlas = 'unik_finity_jokers',
     config = {
       extra = {Emult = 0.0, Emult_mod = 0.15},
       immutable = {base_emult = 1.0}
@@ -49,9 +43,9 @@ SMODS.Joker {
     blueprint_compat = true,
     unlocked = true,
     discovered = true, --workaround:
-    rarity = "unik_legendary_blind_finity",
-    pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 },
+    rarity = "unik_finity_jokers",
+    pos = { x = 0, y = 1 },
+    soul_pos = { x = 1, y = 1 },
     cost = 10, 
 
     calculate = function(self, card, context)

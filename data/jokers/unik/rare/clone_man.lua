@@ -2,9 +2,9 @@
 --showman on steroids
 SMODS.Joker {
     key = 'unik_cloneman',
-    atlas = 'unik_epic',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 2, y = 0 },
+	pos = { x = 6, y = 8 },
     cost = 5,
     blueprint_compat = false, --sure I can make it copyable, but if you keep on cloning blueprints and endlessly stacking itself with this, this can still explode.
     perishable_compat = true,

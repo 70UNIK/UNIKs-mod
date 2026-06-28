@@ -2,9 +2,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_a_taste_of_power',
-    atlas = 'unik_rare',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 1, y = 0 },
+	pos = { x = 10, y = 0 },
     cost = 1,
 	blueprint_compat = false,
     perishable_compat = true,

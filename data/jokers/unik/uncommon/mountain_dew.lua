@@ -1,7 +1,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_mountain_dew',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 9, y = 0 },
     rarity = 2,
     config = { extra = { triggers = 10 } },

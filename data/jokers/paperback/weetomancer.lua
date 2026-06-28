@@ -2,7 +2,7 @@
 if PB_UTIL and PB_UTIL.config.minor_arcana_enabled then
 SMODS.Joker {
     key = 'unik_weetomancer',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 8, y = 1 },
     cost = 7,

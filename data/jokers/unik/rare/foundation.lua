@@ -6,9 +6,9 @@
 
 SMODS.Joker {
     key = 'unik_foundation',
-    atlas = 'unik_epic',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 0, y = 0 },
+	pos = { x = 4, y = 8 },
     cost = 1,
     config = {extra = {hands = 0,juiced_up = false,threshold = 18}},
     loc_vars = function(self, info_queue, center)

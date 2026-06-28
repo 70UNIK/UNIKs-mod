@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_shibazakura',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 0, y = 4 },
     config = {
         extra = {

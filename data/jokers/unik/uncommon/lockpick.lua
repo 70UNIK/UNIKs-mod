@@ -3,7 +3,7 @@
 --Self destructs after selling an eternal joker
 SMODS.Joker {
     key = 'unik_lockpick',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 4, y = 1 },
     cost = 5,

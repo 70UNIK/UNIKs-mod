@@ -7,7 +7,7 @@ end
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_double_container',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     pos = {
         x = 5,
         y = 1

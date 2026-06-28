@@ -1,7 +1,7 @@
 SMODS.Joker {
 	key = "unik_minimized",
-    atlas = "unik_rare",
-	pos = { x = 4, y = 0 },
+    atlas = "unik_normal_jokers",
+	pos = { x = 14, y = 0 },
 	rarity = 3,
 	cost = 8,
 	immutable = true,

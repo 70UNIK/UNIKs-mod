@@ -3,7 +3,7 @@
 --After becoming megatron, all D16 instances become Eternal Megatrons and D16 is ba
 SMODS.Joker {
     key = 'unik_D16',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 5, y = 2 },
     rarity = 2,
     cost = 7,

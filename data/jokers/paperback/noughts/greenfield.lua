@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_lush_forest',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 1, y = 4 },
     config = {
         extra = {

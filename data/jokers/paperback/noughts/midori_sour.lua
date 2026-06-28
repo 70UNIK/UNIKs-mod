@@ -10,8 +10,8 @@ SMODS.Joker {
     }
   },
   rarity = 3,
-  pos = { x = 1, y = 3 },
-  atlas = "unik_rare",
+  pos = { x = 11, y = 3 },
+  atlas = "unik_normal_jokers",
   cost = 8,
   unlocked = true,
   discovered = true,

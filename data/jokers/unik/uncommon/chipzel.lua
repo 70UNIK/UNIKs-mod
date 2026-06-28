@@ -6,7 +6,7 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
             x_chip_mod = 0.1,
         }
     },
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     pos = {
         x = 6,
         y = 1

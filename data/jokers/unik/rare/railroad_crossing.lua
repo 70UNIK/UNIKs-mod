@@ -1,7 +1,7 @@
 --retrigger all crosses, debuffs all but 2 random suits in deck per hand
 SMODS.Joker {
     key = "unik_railroad_crossing",
-    atlas = "unik_uncommon",
+    atlas = "unik_normal_jokers",
     rarity = 3,
     cost = 7,
     pos = { x = 9, y = 1 },

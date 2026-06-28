@@ -1,9 +1,9 @@
 --retriggers the joker to the left
 SMODS.Joker {
     key = 'unik_copycat',
-    atlas = "unik_rare",
+    atlas = "unik_normal_jokers",
     rarity = 3,
-    pos = {x = 0, y = 1},
+    pos = {x = 10, y = 1},
 	cost = 11,
     blueprint_compat = true,
     perishable_compat = true,

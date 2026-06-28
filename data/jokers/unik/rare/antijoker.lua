@@ -7,8 +7,8 @@ SMODS.Joker {
     demicoloncompat = true,
     rarity = 3,
     cost = 15,
-    atlas = 'unik_rare',
-    pos = { x = 2, y = 2 },
+    atlas = 'unik_normal_jokers',
+    pos = { x = 12, y = 2 },
     -- draw = function(self, card, layer)
     --     if card.config.center.discovered or card.bypass_discovery_center then
     --          card.children.center:draw_shader('negative', nil, card.ARGS.send_to_shader)

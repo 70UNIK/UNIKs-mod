@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_ghost_joker',
-    atlas = 'unik_rare',
-	pos = { x = 1, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 11, y = 1 },
     rarity = 3,
     cost = 9,
     blueprint_compat = true,

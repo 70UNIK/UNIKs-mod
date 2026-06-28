@@ -1,7 +1,7 @@
 --rankless and suitless cards have a 1 in 2 chance to NOT give x1.5 chips
 SMODS.Joker {
     key = 'unik_cobblestone',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 6, y = 0 },
     rarity = 2,
     cost = 7,

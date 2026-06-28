@@ -1074,7 +1074,7 @@ if next(SMODS.find_mod("finity")) then
 	NFS.load(mod_path .. "data/jokers/finity/eternal_egg.lua")() 
 	if unik_config.unik_legendary_blinds then
 		if (SMODS.Mods["Cryptid"] or {}).can_load then
-			Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown")
+			Cryptid.pointerblistifytype("rarity", "unik_legendary_blind_finity")
 		end
 		SMODS.Rarity({
 			key = "unik_legendary_blind_finity",

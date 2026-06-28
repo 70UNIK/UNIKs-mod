@@ -141,9 +141,9 @@ function epic_blind_sauce_reroll(card)
 end 
 SMODS.Joker {
     key = 'unik_epic_blind_sauce',
-    atlas = 'unik_epic',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 0, y = 1 },
+	pos = { x = 4, y = 9 },
     cost = 8,
     blueprint_compat = true,
     perishable_compat = true,

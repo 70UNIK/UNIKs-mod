@@ -1,7 +1,7 @@
 --create a summit card if hand contains a straight and a 10.
 SMODS.Joker {
     key = 'unik_road_sign',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 6, y = 3 },
     cost = 5,

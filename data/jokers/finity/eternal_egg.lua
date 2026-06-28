@@ -1,11 +1,4 @@
 --Increase Emult by ^1 if scoring above the best hand in this run.
-SMODS.Atlas {
-		key = "unik_eternal_egg",
-		path = "unik_eternal_egg.png",
-		px = 71,
-		py = 95,
-	}
-	
 local egg_quotes = {
 
 	with_egg = {
@@ -26,7 +19,7 @@ local egg_quotes = {
 }
 
 if FinisherBossBlinddecksprites then
-    FinisherBossBlinddecksprites["bl_unik_fuck_eternal_egg"] = {"unik_eternal_egg",{ x = 2, y = 0 }}
+    FinisherBossBlinddecksprites["bl_unik_fuck_eternal_egg"] = {"unik_finity_jokers",{ x = 2, y = 0 }}
 end
 
 if FinisherBossBlindQuips then
@@ -36,7 +29,7 @@ end
 
 SMODS.Joker {
     key = "unik_eternal_egg",
-    atlas = 'unik_eternal_egg',
+    atlas = 'unik_finity_jokers',
     config = {
       extra = {Emult = 0.5},
       immutable = {base_emult = 1.0}

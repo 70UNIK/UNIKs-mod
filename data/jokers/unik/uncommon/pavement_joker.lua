@@ -2,7 +2,7 @@
 --Rankless/Suitless cards can fill gaps of 1 in straights, flushes, spectrums and of a kind hands
 SMODS.Joker {
     key = 'unik_pavement_joker',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 2, y = 2 },
     rarity = 2,
     cost = 6,
