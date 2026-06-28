@@ -2,9 +2,9 @@
 SMODS.Joker {
     key = "unik_hall_of_mirrors",
     atlas = 'unik_normal_jokers',
-    rarity = 13,
+    rarity = 3,
     cost = 7,
-    pos = { x = 1, y = 2 },
+    pos = { x = 11, y = 2 },
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,

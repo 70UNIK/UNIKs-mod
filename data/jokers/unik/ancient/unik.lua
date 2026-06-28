@@ -17,7 +17,7 @@ local unik_quotes = {
 
 SMODS.Joker {
 	key = 'unik_unik',
-    atlas = 'unik_unik',
+    atlas = 'unik_character_jokers',
     rarity = "unik_ancient",
 	
 	pos = { x = 0, y = 0 },

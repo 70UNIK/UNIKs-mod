@@ -1,7 +1,7 @@
 --earn $0 at end of round, increase by $3 per dollar card held at end of round
 SMODS.Joker {
     key = 'unik_joker_dollar',
-    atlas = 'uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 7, y = 0 },
     rarity = 2,
     cost = 6,

@@ -1,7 +1,7 @@
 
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = 'unik_summits',
+	atlas = 'unik_consumables',
     cost = 3,
 	pos = {x = 4, y = 0} and UNIK.isIndigenousSummitNaming() or {x = 1, y = 1},
 	key = 'unik_everest',

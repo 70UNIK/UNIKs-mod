@@ -1,6 +1,6 @@
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = 'unik_summits',
+	atlas = 'unik_consumables',
     cost = 3,
 	pos = {x = 0, y = 0},
 	key = 'unik_elbrus',

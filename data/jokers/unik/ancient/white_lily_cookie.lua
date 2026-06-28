@@ -66,7 +66,7 @@ end
 --TODO: also disable her cloning functionality if you use BALATRO's SOUL, to not make her way to op, but more importantly, fix a critical issue (she will get destroyed and clone over and over, crashing the game)
 SMODS.Joker {
 	key = 'unik_white_lily_cookie',
-    atlas = 'unik_white_lily',
+    atlas = 'unik_character_jokers',
     rarity = "unik_ancient",
 	pos = { x = 0, y = 2 },
 	soul_pos = { x = 1, y = 2 },

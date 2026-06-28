@@ -12,7 +12,7 @@ local summit_digital_hallucinations_compat = {
 SMODS.Booster{
     key = "unik_summit_1",
 	kind = "unik_summit",
-    atlas = "unik_unik_consumables",
+    atlas = "unik_consumables",
 	pos = { x = 10, y = 5 },
     cost = 4,
     weight = 1, 
@@ -40,7 +40,7 @@ SMODS.Booster{
 SMODS.Booster{
     key = "unik_summit_4",
 	kind = "unik_summit",
-    atlas = "unik_unik_consumables",
+    atlas = "unik_consumables",
 	pos = { x = 9, y = 6 },
     cost = 4,
     weight = 1,
@@ -68,7 +68,7 @@ SMODS.Booster{
 SMODS.Booster{
     key = "unik_summit_2",
 	kind = "unik_summit",
-    atlas = "unik_unik_consumables",
+    atlas = "unik_consumables",
 	pos = { x = 9, y = 5 },
     cost = 6,
     weight = 1, 
@@ -96,7 +96,7 @@ SMODS.Booster{
 SMODS.Booster{
     key = "unik_summit_3",
 	kind = "unik_summit",
-    atlas = "unik_unik_consumables",
+    atlas = "unik_consumables",
 	pos = { x = 8, y = 5 },
     cost = 8,
     weight = 0.15, 

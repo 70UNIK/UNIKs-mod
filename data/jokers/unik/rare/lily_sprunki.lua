@@ -119,7 +119,7 @@ SMODS.Joker {
             func = function()
                  card:juice_up(0.5, 0.5)
                  card.children.center:set_sprite_pos({x = 3, y = 3})
-                 card.children.floating_sprite:set_sprite_pos({x = 4, y = 3})
+                 card.children.floating_sprite:set_sprite_pos({x = 5, y = 3})
                 G.ROOM.jiggle = G.ROOM.jiggle + 5
                 --play_sound("unik_gore6") --thats funny
                 return true

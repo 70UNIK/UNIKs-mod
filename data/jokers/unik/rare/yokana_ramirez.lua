@@ -30,7 +30,7 @@ local yokana_quotes = {
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_yokana',
-    atlas = 'unik_yokana',
+    atlas = 'unik_character_jokers',
     rarity = 3,
 	pos = { x = 3, y = 4 },
 	soul_pos = { x = 4, y = 4 },

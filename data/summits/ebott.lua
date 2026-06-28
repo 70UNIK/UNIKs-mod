@@ -1,6 +1,6 @@
 SMODS.Consumable{
     set = 'Spectral', 
-	atlas = 'unik_summits',
+	atlas = 'unik_consumables',
     cost = 4,
 	pos = {x = 2, y = 0},
 	key = 'unik_ebott',

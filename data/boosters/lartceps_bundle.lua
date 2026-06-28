@@ -12,7 +12,7 @@ local lartceps_digital_hallucinations_compat = {
 SMODS.Booster{
     key = "unik_lartceps_bundle",
 	kind = "unik_lartceps",
-    atlas = "unik_unik_consumables",
+    atlas = "unik_consumables",
 	pos = { x = 9, y = 4 },
     cost = 0,
     weight = 0, 

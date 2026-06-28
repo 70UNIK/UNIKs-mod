@@ -158,11 +158,11 @@ function UNIK.isIndigenousSummitNaming()
 	return false
 end
 
--- function 'unik_summits'
+-- function 'unik_consumables'
 -- 	-- if UNIK.isIndigenousSummitNaming() then
 -- 	-- 	return 'unik_summits_alt'
 -- 	-- end
--- 	return 'unik_summits'
+-- 	return 'unik_consumables'
 -- end
 
 if (SMODS.Mods["Cryptid"] or {}).can_load then

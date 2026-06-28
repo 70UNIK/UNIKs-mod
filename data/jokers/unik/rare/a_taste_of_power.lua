@@ -4,7 +4,7 @@ SMODS.Joker {
 	key = 'unik_a_taste_of_power',
     atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 10, y = 0 },
+	pos = { x = 11, y = 0 },
     cost = 1,
 	blueprint_compat = false,
     perishable_compat = true,
