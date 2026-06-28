@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_welfare_payment',
-    atlas = 'unik_common',
-	pos = { x = 5, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 5, y = 6 },
     rarity = 1,
     cost = 4,
 	config = {

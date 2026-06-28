@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_charred_stick',
-    atlas = 'unik_common',
-	pos = { x = 1, y = 3 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 1, y = 8 },
     rarity = 1,
     cost = 7,
     config = {

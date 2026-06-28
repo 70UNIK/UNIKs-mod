@@ -1,9 +1,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_noon',
-    atlas = 'unik_common',
+    atlas = 'unik_normal_jokers',
     rarity = 1,
-	pos = { x = 3, y = 0 },
+	pos = { x = 3, y = 5 },
     config = { extra = { x_mult = 1.75} }, --For comparison, in mainline cryptid, stardust is the common "unconditional Xmult" Joker, hence it's 1.75x
     cost = 4,
     blueprint_compat = true,

@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_nem_nuong',
-    atlas = 'unik_common',
-	pos = { x = 2, y = 3 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 2, y = 8 },
     rarity = 1,
     cost = 6,
 	config = {

@@ -1,9 +1,9 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_gt710',
-    atlas = 'unik_common',
+    atlas = 'unik_normal_jokers',
     rarity = 1,
-	pos = { x = 1, y = 0 },
+	pos = { x = 1, y = 5 },
     config = { extra = { money = 7,has10 = false, has7 = false} },
     cost = 4,
     blueprint_compat = true,

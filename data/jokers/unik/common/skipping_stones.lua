@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_skipping_stones',
-    atlas = 'unik_common',
-	pos = { x = 1, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 1, y = 6 },
     rarity = 1,
     cost = 5,
     blueprint_compat = true,

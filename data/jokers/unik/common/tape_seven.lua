@@ -1,9 +1,9 @@
 --Scoring Pink cards are no longer destroyed
 SMODS.Joker {
 	key = 'unik_numerical_reinforcement',
-    atlas = 'unik_common',
+    atlas = 'unik_normal_jokers',
     rarity = 1,
-	pos = { x = 7, y = 1 },
+	pos = { x = 7, y = 6 },
     cost = 3,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_pink
