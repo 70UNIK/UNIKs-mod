@@ -3,7 +3,7 @@ SMODS.Consumable({
     object_type = "Consumable",
     set = "Colour",
     key = "lily_green",
-    pos = { x = 1, y = 1 },
+    pos = { x = 9, y = 3 },
     config = {
       val = 0,
       partial_rounds = 0,
@@ -11,7 +11,7 @@ SMODS.Consumable({
     },
     hidden = true,
     cost = 4,
-    atlas = "unik_colours",
+    atlas = "unik_consumables",
     unlocked = true,
     discovered = true,
     display_size = { w = 71, h = 87 },
