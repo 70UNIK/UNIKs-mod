@@ -85,7 +85,7 @@ BLINDSIDE.Joker({
             if context.debuff_card then
                 if G.GAME.unik_blindside_blacklist_blind  and context.debuff_card.config.center.key == G.GAME.unik_blindside_blacklist_blind 
                 
-                and context.debuff_card:bld_can_debuff_card_externally() then
+                and BLINDSIDE.can_debuff_card_externally(context.debuff_card) then
                     return {
                         debuff = true
                     }
@@ -127,7 +127,7 @@ BLINDSIDE.Joker({
                 if blind.prepped then
 
                     for i,v in pairs(G.playing_cards) do
-                        if v:bld_can_debuff_card_externally() then
+                        if BLINDSIDE.can_debuff_card_externally(v) then
                             SMODS.recalc_debuff(v)
                             if v.config.center.key == G.GAME.unik_blindside_blacklist_blind  then
                                 v:juice_up()

@@ -4055,7 +4055,7 @@ return {
         },
         Rotarot = {
             c_unik_rot_crossdresser={
-                name = "The Crossdresser!",
+                name = "{E:mf_rotarot_title}The Crossdresser!",
                 text = {
                     "Enhances {C:attention}#1#{} selected",
                     "card into a",
@@ -4063,7 +4063,7 @@ return {
                 }
             },
             c_unik_rot_oligarch={
-                name = "The Oligarch!",
+                name = "{E:mf_rotarot_title}The Oligarch!",
                 text = {
                     "Enhances {C:attention}#1#{} selected",
                     "card#<s>1# into",
@@ -4071,7 +4071,7 @@ return {
                 }
             },
             c_unik_rot_wheel_of_misfortune={ --3 in 4 chance to add a detrimental edition and banana to a joker, otherwise add a random modded edition.
-                name = 'The Evocation!',
+                name = '{E:mf_rotarot_title}The Evocation!',
                 text = {
                     "{C:green}#1# in #2#{} chance to add a",
                     "random {C:red}detrimental{} {C:unik_shitty_edition}edition{} to",
@@ -4084,34 +4084,26 @@ return {
         },
         Colour = {
             c_unik_spectral_blue={
-                name = "Spectral Blue",
+                name = "{E:mf_colour_title}Spectral Blue",
                 text = {
                     "Create a random {C:dark_edition}Negative{}",
                     "{C:spectral}Spectral{} card for every",
                     "{C:attention}#4#{} rounds this has been held",
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention,f:mf_emoji}#2#{C:inactive,f:mf_emoji}#3#{}]{C:inactive})",
                 }
             },
             --uniks mod, morefluff and paperback
             c_unik_lavender={
-                name = "Lavender",
+                name = "{E:mf_colour_title}Lavender",
                 text = {
                     "Create a random {C:dark_edition}Negative{}",
                     "{C:paperback_minor_arcana}Minor Arcana{} card for every",
                     "{C:attention}#4#{} rounds this has been held",
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention,f:mf_emoji}#2#{C:inactive,f:mf_emoji}#3#{}]{C:inactive})",
                 }
             },
             --
-            c_unik_lily_green = {
-                name = "Lily Green",
-                text = {
-                    "Create a {C:dark_edition}Negative{} {C:unik_ancient}Awakening{}",
-                    "card for every {C:attention}#4#{} rounds",
-                    "this has been held",
-                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention}#2#{C:inactive}#3#{}]{C:inactive})",
-                }
-            }
+            
         },
         Joker={
             -- Trinkets --
@@ -7311,6 +7303,15 @@ return {
                     "to {C:attention}#2#{} selected card#<s>2#", 
                     "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Celeste {C:inactive,s:0.8}is already held"
+                }
+            },
+            c_unik_lily_green = {
+                name = "{E:mf_colour_title}Lily Green",
+                text = {
+                    "Create a {C:dark_edition}Negative{} {C:unik_ancient}Awakening{}",
+                    "card for every {C:attention}#4#{} rounds",
+                    "this has been held",
+                    "{C:inactive}(Currently {C:attention}#1#{C:inactive}, {}[{C:attention,f:mf_emoji}#2#{C:inactive,f:mf_emoji}#3#{}]{C:inactive})",
                 }
             },
             c_unik_ebott = {

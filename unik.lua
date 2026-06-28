@@ -520,7 +520,7 @@ NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 NFS.load(mod_path .. "data/enhancements/timber_card.lua")()	
-if MoreFluff then
+if (SMODS.Mods["MoreFluff"] or {}).can_load then
 	NFS.load(mod_path .. "data/enhancements/green_card.lua")()
 	NFS.load(mod_path .. "data/enhancements/bill_card.lua")()
 end
@@ -701,7 +701,7 @@ NFS.load(mod_path .. "data/summits/denali.lua")()
 
 
 --rotarots
-if MoreFluff then
+if (SMODS.Mods["MoreFluff"] or {}).can_load then
 	NFS.load(mod_path .. "data/tarots/rotated_crossdresser.lua")() 
 	NFS.load(mod_path .. "data/tarots/rotated_oligarch.lua")() 
 	NFS.load(mod_path .. "data/tarots/rotated_wheel_of_misfortune.lua")() 
@@ -740,7 +740,7 @@ if (SMODS.Mods["Cryptid"] or {}).can_load  then
 end
 
 --Color cards
-if MoreFluff and mf_config and mf_config["Colour Cards"] == true then
+if (SMODS.Mods["MoreFluff"] or {}).can_load then
 	NFS.load(mod_path .. "data/colours/spectral_blue.lua")()
 	if (SMODS.Mods["paperback"] or {}).can_load then
 		NFS.load(mod_path .. "data/colours/lavender.lua")()

@@ -1,7 +1,7 @@
 --Retrigger all held in consumeable effects (not using consumeables)
 --Observatory, moonlight cookie/celestial of chaos, scratch, maybe even color cards???????
 local containerrarity = 1
-if (MoreFluff and mf_config and mf_config["Colour Cards"]) or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
+if (SMODS.Mods["MoreFluff"] or {}).can_load or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
     containerrarity = 2
 end
 SMODS.Joker {
@@ -23,7 +23,7 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
     loc_vars = function(self, info_queue, center)
-        if (MoreFluff and mf_config and mf_config["Colour Cards"]) then
+        if ((SMODS.Mods["MoreFluff"] or {}).can_load ) then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables2" }
         elseif (SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_held_in_consumables4" }
@@ -49,7 +49,7 @@ SMODS.Joker {
             next(find_joker("j_mf_rainbow_joker")) or
 
             G.GAME.used_vouchers.v_observatory or
-            MoreFluff or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
+            (SMODS.Mods["MoreFluff"] or {}).can_load or ((SMODS.Mods["paperback"] or {}).can_load and PB_UTIL.config.ego_gifts_enabled) then
 			return true
 		end
 		return false
@@ -63,7 +63,7 @@ SMODS.Joker {
             }
         end
         --mf colour cards retriggers
-        if MoreFluff and context.unik_mf_color_trigger then
+        if (SMODS.Mods["MoreFluff"] or {}).can_load and context.unik_mf_color_trigger then
             return{
                 message = localize('k_again_ex'),
                 repetitions = math.min(card.ability.extra.retriggers,card.ability.immutable.max_retriggers),
@@ -105,7 +105,7 @@ SMODS.Joker {
 	end
 }
 
-if MoreFluff then
+if (SMODS.Mods["MoreFluff"] or {}).can_load then
     local colorHook = trigger_colour_end_of_round
     function trigger_colour_end_of_round(_card,isTriggered)
         colorHook(_card)

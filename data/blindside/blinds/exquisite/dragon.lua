@@ -10,7 +10,7 @@ BLINDSIDE.Blind({
             x_mult_up = 0.5,
             retain = true,
             chance = 1,
-            trigger = 3,
+            trigger = 2,
             trigger_down = 1,
             hand_size = 1,
         }},
@@ -71,7 +71,7 @@ BLINDSIDE.Blind({
     upgrade = function(card)
         if not card.ability.extra.upgraded then
             card.ability.extra.x_mult = card.ability.extra.x_mult +card.ability.extra.x_mult_up
-            card.ability.extra.trigger = card.ability.extra.trigger - card.ability.extra.trigger_down
+          --  card.ability.extra.trigger = card.ability.extra.trigger - card.ability.extra.trigger_down
             card.ability.extra.upgraded = true
         end
     end

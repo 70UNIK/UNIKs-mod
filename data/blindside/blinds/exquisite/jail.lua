@@ -24,7 +24,7 @@ BLINDSIDE.Blind({
         if context.bld_actually_defeated_boss then
             card.ability.extra.status = "active"
         end
-        if context.before and card.ability.extra.status ~= "inactive" and not context.blueprint then
+        if context.before and context.cardarea == G.play and card.ability.extra.status ~= "inactive" and not context.blueprint then
             card.ability.extra.status = "inactive"
             add_tag(Tag('tag_bld_imprisonment'))
             return {
@@ -50,25 +50,3 @@ BLINDSIDE.Blind({
         end
     end
 })
-
-local debuffcheck = Card.bld_can_debuff_card_externally
-function Card:bld_can_debuff_card_externally()
-    local ret = debuffcheck(self)
-    local dandyexists = false
-    if self.config.center.key == 'm_unik_blindside_dandy' then
-        self:set_debuff(false)
-        return false
-    end
-    if G.play then
-        for i,v in pairs(G.play) do
-            if v.config.center.key == 'm_unik_blindside_dandy' then
-                dandyexists = true
-            end
-        end
-        if dandyexists and self.area == G.play then
-            return false
-        end
-    end
-    
-    return ret
-end

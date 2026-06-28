@@ -2,7 +2,7 @@ SMODS.Consumable{
     set = 'unik_summit', 
 	atlas = 'unik_consumables',
     cost = 3,
-	pos = {x = 4, y = 1} and UNIK.isIndigenousSummitNaming() or {x = 2, y = 3},
+	pos = UNIK.isIndigenousSummitNaming() and {x = 4, y = 1} or {x = 2, y = 3},
 	key = 'unik_charleston',
     can_use = function(self, card)
         if G.hand and (#G.hand.highlighted <= card.ability.extra.max_highlighted) and G.hand.highlighted[1] then
