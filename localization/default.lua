@@ -4313,6 +4313,9 @@ return {
                     {
                         "Add {C:unik_shitty_edition}Positive{} to a random",
                         "played card and Joker per hand",
+                        
+                    },
+                    {
                         "{C:red,E:2}Self destructs{} after playing",
                         "{C:attention}#1#{} scoring {C:unik_shitty_edition}Positive{} cards",
                         "{C:inactive,s:0.6}Happiness is mandatory. Failure to be happy is treason.{}",
@@ -4325,6 +4328,9 @@ return {
                 text = {
                     {
                         "All {C:attention}face{} cards are {C:red}debuffed{}", 
+                        
+                    },
+                    {
                         "{C:red}Self destructs{} when less than", 
                         "{C:attention}#1# face{} card(s) remain in deck or",
                         "{C:unik_plant_color}The Plant{} is triggered",
@@ -4342,87 +4348,113 @@ return {
             j_unik_handcuffs = {
                 name = 'Handcuffs',
                 text={
-                    "{C:red}#2#{} hand size",
-                    "{C:red}Self destructs{} when hand", 
+                    {
+                        "{C:red}#2#{} hand size",
+                    },
+                    {
+                        "{C:red}Self destructs{} when hand", 
                     "size is {C:attention}above #3#{}, {C:attention}below #4#{} or",
-                    "{C:unik_manacle_color}The Manacle{} is triggered",                    
+                    "{C:unik_manacle_color}The Manacle{} is triggered",  
+                    },
+                    
+                                      
                 },                 
             },
             j_unik_border_wall = {
                 name = 'Border Wall',
                 text={
-                    "{C:red}#2#x{} Blind size",
-                    "{C:red}Self destructs{} when scoring", 
-                    " above {C:attention}#3#x{} Blind requirements or",
-                    "{C:unik_wall_color}The Wall{} is triggered",                    
+                    {
+                         "{C:red}X#2#{} Blind size",
+                    },
+                    {
+                         "{C:red}Self destructs{} when scoring", 
+                        " above {C:attention}#3#x{} Blind requirements or",
+                        "{C:unik_wall_color}The Wall{} is triggered",    
+                    },
+                   
+                                   
                 },                 
             },
             --Patronizing joker, but way more crass and ragged
             j_unik_goading_joker = {
                 name = 'Goading Joker',
                 text={
-                    "{C:attention}All {C:spades}Spade{} cards are {C:red}debuffed{}", 
-                    "{C:red}Self destructs{} when less than", 
-                    "{C:attention}#1#{} {C:spades}Spade{} card(s) remain in deck or",
-                    "{C:unik_goad_color}The Goad{} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:spades}Spade(s){C:inactive})",
+                    {
+                        "{C:attention}All {C:spades}Spade{} cards are {C:red}debuffed{}", 
+                    },
+                    {
+                        "{C:red}Self destructs{} when less than", 
+                        "{C:attention}#1#{} {C:spades}Spade{} card(s) remain in deck or",
+                        "{C:unik_goad_color}The Goad{} is triggered",      
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:spades}Spade(s){C:inactive})",
+                    },
+                    
+                    
                 },                 
             },
             j_unik_headless_joker = {
                 name = 'Headless Joker',
                 text={
-                    "{C:attention}All {C:hearts}Heart{} cards are {C:red}debuffed{}", 
-                    "{C:red}Self destructs{} when less than", 
-                    "{C:attention}#1#{} {C:hearts}Heart{} card(s) remain in deck or",
-                    "{C:unik_head_color}The Head{} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:hearts}Heart(s){C:inactive})",
+                    {
+                        "{C:attention}All {C:hearts}Heart{} cards are {C:red}debuffed{}", 
+                    },
+                    {
+                        "{C:red}Self destructs{} when less than", 
+                        "{C:attention}#1#{} {C:hearts}Heart{} card(s) remain in deck or",
+                        "{C:unik_head_color}The Head{} is triggered",      
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:hearts}Heart(s){C:inactive})",
+                    },
+                    
                 },                 
             },
             j_unik_broken_window = {
                 name = 'Broken Window',
                 text={
-                    "{C:attention}All {C:diamonds}Diamond{} cards are {C:red}debuffed{}", 
-                    "{C:red}Self destructs{} when less than", 
-                    "{C:attention}#1#{} {C:diamonds}Diamond{} card(s) remain in deck or",
+                    {
+                                            "{C:red}Self destructs{} when less than", 
+                    },
+                    {
+                        "{C:attention}#1#{} {C:diamonds}Diamond{} card(s) remain in deck or",
                     "{C:unik_window_color}The Window{} is triggered",      
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:diamonds}Diamond(s){C:inactive})",
+                        "{C:attention}All {C:diamonds}Diamond{} cards are {C:red}debuffed{}", 
+                    },
+                    
                 },                 
             },
             --a caveman club smashing a club ace
             j_unik_caveman_club = {
                 name = 'Caveman Club',
                 text={
-                    "{C:attention}All {C:clubs}Club{} cards are {C:red}debuffed{}", 
-                    "{C:red}Self destructs{} when less than", 
-                    "{C:attention}#1#{} {C:clubs}Club{} card(s) remain in deck or",
-                    "{C:unik_club_color}The Club{} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:clubs}Club(s){C:inactive})",
-                    "{C:inactive,s:0.6}We are going to beat you to death.{}",
+                    {
+                        "{C:attention}All {C:clubs}Club{} cards are {C:red}debuffed{}", 
+                    },
+                    {
+                        "{C:red}Self destructs{} when less than", 
+                        "{C:attention}#1#{} {C:clubs}Club{} card(s) remain in deck or",
+                        "{C:unik_club_color}The Club{} is triggered",      
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:clubs}Club(s){C:inactive})",
+                        "{C:inactive,s:0.6}We are going to beat you to death.{}",
+                    },
+                    
+                    
                 },                 
             },
             --Space joker but has a broken arm, fitting the theme
             j_unik_broken_arm = {
                 name = 'Broken Arm',
                 text={
-                    "{C:red}Levels down{} played {C:attention}poker hand{}", 
-                    "by {C:attention}#1#{} level {C:attention}before{} each hand",
-                    "{C:red}Self destructs{} when a level 1", 
-                    "hand is played {C:attention}#2#{} times {C:attention}consecutively{}",
-                    "or {C:unik_arm_color}The Arm{} is triggered",   
-                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} Hand(s))",
-                },                 
-            },
-            --1 in 4 chance to make it in line with Space Joker in modest
-            j_unik_broken_arm_modest = {
-                name = 'Broken Arm',
-                text={
-                    "{C:green}#4# in #5#{} chance to {C:red}Level down{}", 
-                    "played {C:attention}poker hand{} by", 
-                    "{C:attention}#1#{} level {C:attention}before{} each hand",
-                    "{C:red}Self destructs{} when a level 1", 
-                    "hand is played {C:attention}#2#{} times",
-                    "or {C:unik_arm_color}The Arm{} is triggered",   
-                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} Hand(s))",
+                    {
+                        "{C:red}Levels down{} played {C:attention}poker hand{}", 
+                        "by {C:attention}#1#{} level {C:attention}before{} each hand",
+                    },
+                    {
+                        "{C:red}Self destructs{} when a level 1", 
+                        "hand is played {C:attention}#2#{} times {C:attention}consecutively{}",
+                        "or {C:unik_arm_color}The Arm{} is triggered",   
+                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} Hand(s))",
+                    },
+
                 },                 
             },
             --Basically instead of being "eaten", popcorn and ice cream become negative, ramen becomes < 1.0X, Turtle bean reduces hand size.
@@ -4430,11 +4462,18 @@ return {
             j_unik_autocannibalism = {
                 name = 'Esophagus Now',
                 text={
-                    "Create an {C:attention}Eternal Depleted{} decrementing food Joker", 
-                    "Add {C:attention}Eternal and Depleted{} to new and",
-                    "existing decrementing food Jokers and",
-                    "set values to {C:attention}self destruct values{}",      
-                    "{C:red}Self destructs{} if none of above Jokers are owned",
+                    {
+                        "Create an {C:attention}Eternal Depleted{} decrementing food Joker", 
+                    },
+                    {
+                        "Add {C:attention}Eternal and Depleted{} to new and",
+                        "existing decrementing food Jokers and",
+                        "set values to {C:attention}self destruct values{}",   
+                    },
+                    {
+                        "{C:red}Self destructs{} if none of above Jokers are owned",
+                    },
+                       
                 },                 
             },
             j_unik_moonlight_cookie = { --capped at X1
@@ -4443,6 +4482,8 @@ return {
                     {
                         "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
                         "to Poker Hand per level {C:attention}gained{}", 
+                    },
+                    {
                         "Gives {X:mult,C:white}Xmult{} equal to",
                         "Played Poker Hand {C:mult}Mult",
                         "{C:inactive}(Will give {X:mult,C:white}X#3#{C:inactive} Mult)"
@@ -4553,12 +4594,18 @@ return {
             j_unik_ghost_trap = {
                 name="Ghost Trap",
                 text={
-					"This Joker {C:red}destroys{} all {X:unik_detrimental,C:white}Detrimental{} Jokers",
-                    "and gains {X:mult,C:white}X#2#{} Mult per Joker",
-                    "destroyed that way",
-                    "{C:red}Self destructs{} after",
+                    {
+                        "This Joker {C:red}destroys{} all {X:unik_detrimental,C:white}Detrimental{} Jokers",
+                        "and gains {X:mult,C:white}X#2#{} Mult per Joker",
+                        "destroyed that way",
+                    },
+                    {
+                        "{C:red}Self destructs{} after",
                     "destroying {C:attention}#3#{} Joker#<s>3#",
 					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
+                    },
+					
+                    
                 },
             },
             j_unik_lily_sprunki = {
@@ -4596,10 +4643,16 @@ return {
             j_unik_1_5_joker_exp = {
                 name="One-and-a-Half Joker",
                 text={
-                    "{C:mult}+#1#{} Mult if played hand contains",
+                    {
+                           "{C:mult}+#1#{} Mult if played hand contains",
                     "{C:attention}#3#{} or more cards",
-                    "Each played card above {C:attention}#3#{} cards",
+                    },
+                    {
+                        "Each played card above {C:attention}#3#{} cards",
                     "increases this by {C:mult}+#2#{} Mult",
+                    },
+                 
+                    
                 },
                 unlock = {
                     "Own {C:attention}Half Joker",
@@ -4610,13 +4663,24 @@ return {
             j_unik_no_standing_zone = {
                 name="No Standing Zone",
                 text={
-                    "{X:mult,C:white}X#1#{} Mult, decreases by",
-                    "{X:mult,C:white}X#2#{} every {C:attention}second{}",
-                    "Becomes {C:red}Impound Notice{} at {X:mult,C:white}X1{} mult",
+                    {
+                        "{X:mult,C:white}X#1#{} Mult, decreases by",
+                        "{X:mult,C:white}X#2#{} every {C:attention}second{}",
+                        
+                    },
+                    {
+                        "Resets at {X:mult,C:white}X#3#{} Mult at",
+                        "start and end of {C:attention}Round{}",
+                        
+                    },
+                    {
+                        "Becomes {C:red}Impound Notice{} at {X:mult,C:white}X1{} mult",
                     "or when {C:attention}sold{} in Blind",
-                    "Resets at {X:mult,C:white}X#3#{} Mult at",
-                    "start and end of {C:attention}Round{}",
                     "{C:inactive,s:0.7}(Hover off and on again to see the new Xmult){}",
+                    },
+                    
+                    
+                    
                 }, 
             },
             j_unik_impounded = {
@@ -4643,39 +4707,62 @@ return {
             j_unik_rancid_smoothie = {
                 name="Rancid Smoothie",
                 text={
-                    "{X:dark_edition,C:white}^#1#{} Mult {C:attention}after scoring{}",
-                    "Selling will {C:red}divide{} values",
+                    {
+                        "{X:dark_edition,C:white}^#1#{} Mult {C:attention}after scoring{}",
+                    },
+                    {
+                        "Selling will {C:red}divide{} values",
 					"of owned jokers by {C:attention}#2#{}",
+                    },
+                    
+                    
                 }
             },
             j_unik_hook_n_discard = {
                 name="Hook n' Discard",
                 text={
-                    "Discards {C:attention}2{} {C:attention}random{} cards per hand",
-                    "{C:red}Self destructs{} after {C:attention}#1#{} {C:attention}consecutive{}",
-					"discards with only {C:attention}2{} cards",
-                    "or {C:unik_hook_color}The Hook{} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#3#{C:inactive} discards)",
+                    {
+                        "Discards {C:attention}2{} {C:attention}random{} cards per hand",
+                    },
+                    {
+                        "{C:red}Self destructs{} after {C:attention}#1#{} {C:attention}consecutive{}",
+                        "discards with only {C:attention}2{} cards",
+                        "or {C:unik_hook_color}The Hook{} is triggered",      
+                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} discards)",
+                    },
+                    
                 }
             },
             j_unik_vampiric_hammer = {
                 name="Vampiric Hammer",
                 text={
-                    "{C:red}Remove{} card {C:attention}enhancements{} after scoring",
-                    "{C:red}Self destructs{} when less than", 
-                    "{C:attention}#1#{} {C:attention}Enhanced{} card(s) remain in deck or",
-                    "{C:unik_orta_hammer_color}The Hammer (Ortalab){} is triggered",      
-                    "{C:inactive}(Currently {C:attention}#2#{C:inactive} enhanced cards)",
+                    {
+                         "{C:red}Remove{} card {C:attention}enhancements{} after scoring",
+                    },
+                    {
+                        "{C:red}Self destructs{} when less than", 
+                        "{C:attention}#1#{} {C:attention}Enhanced{} card(s) remain in deck or",
+                        "{C:unik_orta_hammer_color}The Hammer (Ortalab){} is triggered",      
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} enhanced cards)",
+                    },
+                   
+                    
                 }
             },
             j_unik_monster_spawner = {
                 name="Monster Spawner",
                 text={
-                    "Create {C:attention}1{} {X:unik_detrimental,C:white}Detrimental{} Joker",
+                    {
+                        "Create {C:attention}1{} {X:unik_detrimental,C:white}Detrimental{} Joker",
                     "at end of Boss Blind", 
-                    "{C:red}Self destructs{} after",
+                    },
+                    {
+                        "{C:red}Self destructs{} after",
                     "creating {C:attention}#1#{} {X:unik_detrimental,C:white}Detrimental{} Jokers",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} {X:unik_detrimental,C:white}Detrimental{C:inactive} Joker(s))",
+                    },
+                    
+                    
                 }               
             },
             j_unik_soul_fragment = {
@@ -4700,6 +4787,9 @@ return {
                 text = {
                     {
                         "{C:attention}Prevents{} Joker {C:red}destruction{} once",
+                        
+                    },
+                    {
                         "Gains {X:dark_edition,C:white}^#2#{} Mult when this happens",
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
@@ -4721,7 +4811,10 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult, {C:attention}Prevents{} Joker",
+                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult, ",
+                    },
+                    {
+                        "{C:attention}Prevents{} Joker",
                         "{C:red}destruction{} once",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
                         "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)"
@@ -4807,21 +4900,17 @@ return {
             j_unik_broken_scale = {
                 name = 'Broken Scale',
                 text = {
-                    "Scaling {C:attention}Jokers",
+                    {
+                        "Scaling {C:attention}Jokers",
                     "scale {C:red}1/3 as fast{}",
-                    "{E:2,C:red}Self destructs{}",
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{}",
 					"after {C:attention}#2#{} rounds",
                     "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",
-                }
-            },
-            j_unik_broken_scale_modest = {
-                name = 'Broken Scale',
-                text = {
-                    "Scaling {C:attention}Jokers",
-                    "scale {C:red}3/4 as fast{}",
-                    "{E:2,C:red}Self destructs{}",
-					"after {C:attention}#2#{} rounds",
-                    "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",
+                    },
+                    
+                    
                 }
             },
             j_unik_lockpick = {
@@ -4875,11 +4964,17 @@ return {
             j_unik_epic_blind_sauce = {
                 name = "Epic Blind Sauce", --SUBJECT TO NAME AND  THEME CHANGE
                 text = {
-                    "{X:mult,C:white}X#1#{} Mult", --likely X5 or X6 Mult or ^1.25 Mult 
-                    "All {C:attention}Small{} and {C:attention}Big Blinds",
+                    {
+                        "{X:mult,C:white}X#1#{} Mult", --likely X5 or X6 Mult or ^1.25 Mult 
+                    },
+                    {
+                         "All {C:attention}Small{} and {C:attention}Big Blinds",
                     "become {C:attention}Boss Blinds",
                     "All {C:attention}Boss Blinds{} become",
                     "{C:attention}Finisher Blinds"
+                    },
+                    
+                   
                 },
             },
             j_unik_cobblestone = {
@@ -5008,11 +5103,17 @@ return {
             j_unik_minimized = { --rare 
                 name = "Minimized",
                 text = {
-                    "All {C:attention}Face{} cards",
+                    {
+                         "All {C:attention}Face{} cards",
                     "are considered {C:attention}Jacks",
-                    "All {C:attention}numbered{} cards",
+                    },
+                    {
+                             "All {C:attention}numbered{} cards",
                     "are considered {C:attention}2s",
                     "{C:inactive}(Cancels out Maximized)",
+                    },
+                   
+               
                 },
                 unlock = {
 					"Play a {C:attention}Flush Five{}",
@@ -5022,11 +5123,17 @@ return {
             j_cry_maximized_alt = { 
 				name = "Maximized",
 				text = {
-					"All {C:attention}face{} cards",
+                    {
+                        				"All {C:attention}face{} cards",
 					"are considered {C:attention}Kings{},",
-					"all {C:attention}numbered{} cards",
+                    },
+                    {
+                        "all {C:attention}numbered{} cards",
 					"are considered {C:attention}10s{}",
                     "{C:inactive}(Cancels out Minimized)",
+                    },
+	
+					
 				},
 				unlock = {
 					"Play a {C:attention}Flush Five{}",
@@ -5036,11 +5143,17 @@ return {
             j_unik_joker_dollar = { --uncommon
                 name = "Joker Dollars",
                 text = {
-                    "Earn {C:money}$#1#{} at", --earn $0
+                    {
+                         "Earn {C:money}$#1#{} at", --earn $0
                     "end of round",
-                    "Increase payout by {C:money}$#2#{}", --+$3 per dollar card held.
+                    },
+                    {
+                        "Increase payout by {C:money}$#2#{}", --+$3 per dollar card held.
                     "for each {C:attention}Dollar Card",
                     "held after round",
+                    },
+                   
+                    
                 }
             },
             j_unik_poppy = {
@@ -5069,7 +5182,10 @@ return {
                     {
                         "Scored {C:attention}Light Suits",
                         "give {X:mult,C:white}X#1#{} Mult",
-                        "Increases by {X:mult,C:white}X#2#{} Mult",
+                       
+                    },
+                    {
+                         "Increases by {X:mult,C:white}X#2#{} Mult",
                         "for each {C:attention}unique {C:attention}Light Suit",
                         "in scoring hand",
                         "{C:inactive}(Capped at {X:mult,C:white}X#4#{C:inactive} Mult)",
@@ -5099,10 +5215,16 @@ return {
             j_unik_tax_haven={
                 name = "Tax Haven",
                 text = {
-                    "{C:attention}Remove{} all {C:attention}Rental{} Stickers",
+                    {
+                        "{C:attention}Remove{} all {C:attention}Rental{} Stickers",
                     "on all owned",
                     "Jokers and cards",
-                    "{C:red}Lose{} {C:money}$#1#{} per Sticker removed",
+                    },
+                    {
+                        "{C:red}Lose{} {C:money}$#1#{} per Sticker removed",
+                    },
+                    
+                    
                 }
             },
 
@@ -5134,12 +5256,18 @@ return {
             j_unik_xchips_hater={
                 name = "XCHIPS IS NOT VANILLA!!!!!",
                 text = {
-                    "{X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... cards and Jokers",
+                    {
+                        "{X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... cards and Jokers",
                     "will {C:red}not trigger{} and are {C:red}destroyed{} instead",
-                    "{C:red}Self destructs{} after {C:attention}#1#",
+                    },
+                    {
+                        "{C:red}Self destructs{} after {C:attention}#1#",
                     "{C:attention}consecutive{} rounds without",
                     "attempted {X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... triggers",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive})",
+                    },
+                    
+                    
                 },
             },
             j_unik_robert={
@@ -5148,6 +5276,9 @@ return {
                     {
                         "{C:green}#1# in #2#{} chance card is",
                         "drawn {C:red}face-down{}",
+                        
+                    },
+                    {
                         "{C:red}Self destructs{} when a hand", 
                         "containing {C:attention}#3#{} or more scoring",
                         "{C:red}face-down{} cards is played",
@@ -5163,29 +5294,47 @@ return {
             j_unik_abandoned_house={
                 name = "Boarded-Up House",
                 text = {
-                    "{C:attention}First drawn{} hand is",
+                    {
+                        "{C:attention}First drawn{} hand is",
                     "drawn {C:red}face-down{}",
-                    "{C:red}Self destructs{} when a hand", 
+                    },
+                    {
+                        "{C:red}Self destructs{} when a hand", 
                     "containing {C:attention}#3# all scoring",
                     "{C:red}face-down{} cards is played",
                     "or {C:unik_house_color}The House{} is triggered",
+                    },
+                    
+                    
                 }
             },
             j_unik_decaying_tooth={
                 name = "Decaying Tooth",
                 text = {
-                    "{C:red}Lose {C:gold}$#1#{} per card played",
-                    "{C:red}Self destructs{} after earning",
+                    {
+                        "{C:red}Lose {C:gold}$#1#{} per card played",
+                    },
+                    {
+                        "{C:red}Self destructs{} after earning",
                     "at least {C:gold}$#2#{} per hand or",
                     "{C:unik_tooth_color}The Tooth{} is triggered",
+                    },
+                    
+                    
                 }
             },
             j_unik_astral_bottle = {
                 name = "Nostalgic Astral in a Bottle",
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult after scoring",
-                    "Sell to add {C:dark_edition}Astral{} and",
+                    {
+                        "{X:dark_edition,C:white}^#1#{} Mult after scoring",
+                    },
+                    {
+                        "Sell to add {C:dark_edition}Astral{} and",
                     "{C:red}Perishable{} to a {C:attention}random{} Joker",
+                    },
+                    
+                    
                 },
             },
             
@@ -5194,10 +5343,16 @@ return {
             j_unik_earthmover = {
                 name = "1000-THR \"Earthmover\"",
                  text = {
-                    "When {C:attention}Boss Blind{} is selected",
+                    {
+                        "When {C:attention}Boss Blind{} is selected",
                     "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size",
-                    "After defeat, create a {C:dark_edition}negative",
+                    },
+                    {
+                        "After defeat, create a {C:dark_edition}negative",
                     "{C:unik_ancient}Awakening{} and {C:red,E:2}Self Destruct",
+                    },
+                    
+                    
                 },
             },
             j_unik_euclid = {
@@ -5223,6 +5378,9 @@ return {
                     {
                         "{X:mult,C:white}X#1#{} Mult whenever",
                         "a {C:green}probability {C:attention}fails",
+                        
+                    },
+                    {
                         "{C:red}Destroy{} a random Joker",
                         "or {X:unik_void_color,E:2,C:red}^#2#{} Blind Size if no",
                         "destroyable Jokers owned when",
@@ -5267,7 +5425,10 @@ return {
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                        "{C:attention}Converts{} all scored cards suits",
+                       
+                    },
+                    {
+                         "{C:attention}Converts{} all scored cards suits",
                         "into the first scored {C:attention}Light Suit",
                         "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Light Suit{C:inactive,s:0.8} in deck)",
                         "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
@@ -5290,6 +5451,9 @@ return {
                 text = {
                     {
                         "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
+                        
+                    },
+                    {
                         "{C:attention}Converts{} all scored cards suits",
                         "into the first scored {C:attention}Dark Suit",
                         "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Dark Suit{C:inactive,s:0.8} in deck)",
@@ -5310,11 +5474,17 @@ return {
             j_unik_night_skyline = {
                 name = "Night Skyline",
                 text = {
-                    "Scored {C:attention}Dark Suits",
+                    {
+                        "Scored {C:attention}Dark Suits",
                     "give {X:mult,C:white}X#1#{} Mult",
-                    "Increases by {X:mult,C:white}X#2#{} Mult",
+                    },
+                    {
+                        "Increases by {X:mult,C:white}X#2#{} Mult",
                     "for each {C:attention}Dark Suit",
                     "in scoring hand",
+                    },
+                    
+                    
                 }
             },
             j_unik_it_prints_money = {
@@ -5327,21 +5497,34 @@ return {
             j_unik_brownie = {
                 name = "Brownie",
                 text = {
-                    "Scored {C:attention}cards{} each give",
+                    {
+                        "Scored {C:attention}cards{} each give",
                     "{X:mult,C:white}X#1#{} Mult",
-                    "Loses {X:mult,C:white}X#2#{} Mult",
+                    },
+                    {
+                         "Loses {X:mult,C:white}X#2#{} Mult",
                     "when triggered",
+                    },
                 }
             },
             j_unik_brownie_depleted = {
                 name = "Brownie",
                 text = {
-                    "Scored {C:attention}cards{} each give",
+                    {
+                        "Scored {C:attention}cards{} each give",
                     "{X:mult,C:white}X#1#{} Mult",
-                    "Loses {X:mult,C:white}X#2#{} Mult",
+                    },
+                    {
+                         "Loses {X:mult,C:white}X#2#{} Mult",
                     "when triggered",
-                    "{C:red,E:2}Self Destructs{} at",
+                    },
+                    {
+                        "{C:red,E:2}Self Destructs{} at",
                     "{X:mult,C:white}X#3#{} Mult"
+                    },
+                    
+                   
+                    
                 }
             },
             j_unik_up_n_go = {
@@ -5374,97 +5557,144 @@ return {
             j_unik_lobotomy_needle = {
                 name = "Lobotomy Needle",
                 text = {
-                    "{C:attention}X#1#{} Blind Size and",
+                    {
+                        "{C:attention}X#1#{} Blind Size and",
                     "set {C:blue}Hands{} to {C:red}1{}",
-                    "{C:red,E:2}Self destructs{} after",
+                    },
+                    {
+                        "{C:red,E:2}Self destructs{} after",
                     "playing {C:attention}#1#{} Hands",
-                    "or {C:unik_needle_color}The Needle{} is triggered",
+                    "or {C:unik_needle_color}The Needle{} is triggered",  
+                    },
+                    
+                    
                 }
             },
              j_unik_base_camp = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}double{} the bonuses of",
+                    {
+                        "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
-                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round)",
                     "{C:inactive,s:0.8}(Money is X1)",
+                    },
+                    
+                    
                 }
             },
             j_unik_base_camp1 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}double{} the bonuses of",
+                    {
+                        "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
-                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round)",
                     "{C:inactive,s:0.8}(Money is X1)",
+                    },
+                    
+                    
                 }
             },
             j_unik_base_camp2 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}double{} the bonuses of",
+                    {
+                        "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
-                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
                     "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult)",
                     "{C:inactive,s:0.8}(Exponentials and Money are X1)",
+                    },
+                    
+                    
                 }
             },
             j_unik_base_camp3 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}double{} the bonuses of",
+                    {
+                        "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
-                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    },
+                    {
+                         "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
                     "{C:inactive}{X:dark_edition,C:white}^#6#{C:inactive} chips)",
                     "{C:inactive,s:0.8}(Exponentials and Money are X1)",
+                    },
+                    
+                   
                 }
             },  
             j_unik_base_camp4 = {
                 name = "Base Camp",
                 text = {
-                    "Gains {C:attention}double{} the bonuses of",
+                    {
+                        "Gains {C:attention}double{} the bonuses of",
                     "all {C:unik_summit}Summit{} cards",
                     "used this run",
-                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
                     "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult, {X:dark_edition,C:white}^#6#{C:inactive} chips)",
                     "{C:inactive,s:0.8}(Exponentials and Money are X1)",
+                    },
+                    
+                    
                 }
             },
             --13 (12 usable)
             j_unik_multesers = { --scored cards give +10 Mult, loses 1 Mult when +chips is triggered from Jokers, immediately eaten if Xchips or higher is triggered
                 name = "Multesers",
                 text = {
-                    "Scored cards give",
-                    "{C:mult}#4##1#{} Mult, loses",
-                    "{C:mult}-#2#{} Mult when {C:chips}+Chips{}",
-                    "is triggered",
-                    "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
+                    {
+                        "Scored cards give",
+                        "{C:mult}#4##1#{} Mult, loses",
+                        "{C:mult}-#2#{} Mult when {C:chips}+Chips{}",
+                        "is triggered",
+                    },
+                    {
+                        "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
                     "are triggered",
+                    },
+                    
                 }
             },
             j_unik_multesers_depleted = { --scored cards give +10 Mult, loses 1 Mult when +chips is triggered from Jokers, immediately eaten if Xchips or higher is triggered
                 name = "Multesers",
                 text = {
-                    "Scored cards give",
+                    {
+                        "Scored cards give",
                     "{C:mult}#4##1#{} Mult, loses",
                     "{C:mult}-#2#{} Mult when {C:chips}+Chips{}",
                     "is triggered",
-                    "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
+                    },
+                    {
+                         "{C:red,E:2}Destroyed{} if {X:chips,C:white}XChips{} or higher",
                     "are triggered or at {C:mult}#3#{} Mult",
+                    },
+                    
+                   
                 }
             },
             j_unik_welfare_payment = {
@@ -5487,12 +5717,18 @@ return {
             j_unik_stamp_spam = {
                 name = "Stamp Spam",
                 text = {
-                    "Add random {C:attention}Seals",
+                    {
+                        "Add random {C:attention}Seals",
                     "to all scoring cards",
                     "if played hand",
-                    "contains a {C:attention}Spectrum",        
-                    "{C:red,E:2}Self destructs{} after",
+                    "contains a {C:attention}Spectrum",   
+                    },
+                    {
+                        "{C:red,E:2}Self destructs{} after",
                     "{C:attention}#1#{} trigger#<s>1#"
+                    },
+                         
+                    
                 }
             },
             j_unik_bun_bun = {
@@ -5580,10 +5816,16 @@ return {
             j_unik_malicious_face = {
                 name = "Malicious Face",
                  text = {
-                    "When {C:attention}Boss Blind{} is selected",
+                    {
+                         "When {C:attention}Boss Blind{} is selected",
                     "{C:red}X#1#{} Blind Size",
-                    "After defeat, create a {C:dark_edition}negative",
+                    },
+                    {
+                        "After defeat, create a {C:dark_edition}negative",
                     "{C:spectral}Black Hole{} and {C:red,E:2}Self Destruct",
+                    },
+                   
+                    
                 },
             },
 
@@ -5649,21 +5891,33 @@ return {
             j_unik_bunc_king_minos = {
                 name =  "The Corpse of King Minos", --Poly mino... gettit?
                  text = {
-                    "When {C:attention}Boss Blind{} is selected",
+                    {
+                        "When {C:attention}Boss Blind{} is selected",
                     "{X:unik_void_color,C:unik_eye_searing_red}^#1#{} Blind Size", -- ^1.1 Blind Size
                     "and create a {C:red}Handcuffs Tag",
-                    "After defeat, create a {C:dark_edition}negative",
+                    },
+                    {
+                        "After defeat, create a {C:dark_edition}negative",
                     "{C:bunco_virtual_dark}The 8{} and {C:red,E:2}Self Destruct",
+                    },
+                    
+                    
                 },
             },
             j_unik_bunc_eternal_fuel = { --uncommon
                 name = "Eternal Fuel",
                 text = {
-                    "Remove {C:red}Reactive{} from",
+                    {
+                        "Remove {C:red}Reactive{} from",
                     "all {C:attention}Jokers{} and cards",
-                    "Gain a {C:red}Vessel Tag{}",
+                    },
+                    {
+                        "Gain a {C:red}Vessel Tag{}",
                     "per Sticker removed",
                     "{C:inactive,s:0.8}(Removes debuffs if present)"
+                    },
+                    
+                    
                 }
             },
             j_unik_bunc_domino_shield = { --common
@@ -5688,7 +5942,7 @@ return {
                     "{C:attention}Rescore{} all",
                     "non-Copper Cards",
                     "if a {C:attention}Copper Card",
-                    "is {C:attention}rescored",
+                    "has {C:attention}rescored",
                 }
             },
             j_unik_bunc_neon_rainbows={
@@ -5754,12 +6008,18 @@ return {
             j_unik_rainbow_river = {
                 name = "Rainbow River",
                 text = {
-                    "Add random {C:dark_edition}Editions",
+                    {
+                        "Add random {C:dark_edition}Editions",
                     "to all scoring cards",
                     "if played hand",
-                    "contains a {C:attention}Spectrum",        
-                    "{C:red,E:2}Self destructs{} after",
+                    "contains a {C:attention}Spectrum",    
+                    },
+                    {
+                        "{C:red,E:2}Self destructs{} after",
                     "{C:attention}#1#{} trigger#<s>1#"
+                    },
+                        
+                
                 }
             },
 
@@ -5818,22 +6078,37 @@ return {
             j_unik_railroad_crossing = {
                 name = "Railroad Crossing",
                 text = {
-                    "{C:unik_copper}Rescore{} all scored",
+                    {
+                        "{C:unik_copper}Rescore{} all scored",
                     "{C:unik_crosses}#2#{} #1# time#<s>1#",
-                    "{C:red}Debuffs{} all but {C:attention}2{} other",
+                    },
+                    {
+                        "{C:red}Debuffs{} all but {C:attention}2{} other",
                     "random suits per {C:attention}hand",
                     "{C:inactive}(Currently {V:1}#3#{C:inactive}, {V:2}#4#{C:inactive})",
+                    },
+                    
+                    
                 }
             },
             --gain +0.25 Mult when a diamond is scored, gain +1 Mult when a nought is scored
             j_unik_pink_guard = {
                 name = "Pink Guard",
                 text = {
-                    "Gain {C:mult}+#1#{} Mult when a",
+                    {
+                        "Gain {C:mult}+#1#{} Mult when a",
                     "{C:diamonds}#2#{} is scored",
-                    "Gain {C:mult}+#3#{} Mult when a",
+                    },
+                    {
+                        "Gain {C:mult}+#3#{} Mult when a",
                     "{C:unik_noughts}#4#{} is scored",
-                    "{C:inactive}(Currently {C:mult}+#5#{C:inactive} Mult)",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:mult}+#5#{C:inactive} Mult)",
+                    },
+                    
+                    
+                    
                 }
             },
             --gains X0.075 mult  when a cross is scored, loses X0.1 mult and a 1 in 3 chance to self destruct when a nought or a heart is scored 
@@ -5847,6 +6122,9 @@ return {
                     {
                         "{X:mult,C:white}+X#1#{} Mult when a {C:diamonds}#2#{} scores",
                         "{X:mult,C:white}-X#3#{} Mult when a {C:hearts}#4#{} or {C:spades}#5#{} scores",
+                        
+                    },
+                    {
                         "{E:2,C:red}Destroyed{} if falls below {X:mult,C:white}X#6#{} Mult",
                         "{C:inactive}(Currently {X:mult,C:white}X#7#{C:inactive} Mult)"
                     },
@@ -5860,18 +6138,30 @@ return {
             j_unik_landfill = {
                 name = "Landfill",
                 text = {
-                    "{C:chips}+#1#{} Chips per",
+                    {
+                        "{C:chips}+#1#{} Chips per",
                     "played {C:attention}unscoring{} card",
-                    "{C:chips}#2#{} Chips per card scored",
+                    },
+                    {
+                        "{C:chips}#2#{} Chips per card scored",
                     "{C:inactive}(Currently {C:chips}+#3#{C:inactive} Chips)"
+                    },
+                    
+                    
                 }
             },
             j_unik_tic_tac = {
                 name = "Tic Tac",
                 text = {
-                    "Scoring {C:attention}Light Suits{} become {C:unik_noughts}#1#",
+                    {
+                        "Scoring {C:attention}Light Suits{} become {C:unik_noughts}#1#",
                     "Scoring {C:attention}Dark Suits{} become {C:unik_crosses}#2#",
-                    "{E:2,C:red}Destroyed{} after {C:attention}#3#{} trigger#<s>3#",
+                    },
+                    {
+                        "{E:2,C:red}Destroyed{} after {C:attention}#3#{} trigger#<s>3#",
+                    },
+                    
+                    
                 }
             },
             j_unik_mountain_dew = {
@@ -5895,9 +6185,15 @@ return {
             j_merry_andy = {
                 name="Merry Andy",
                 text={
-                    "Gain {C:red}+#1#{} Discard#<s>1# when",
+                    {
+                        "Gain {C:red}+#1#{} Discard#<s>1# when",
                     "{C:attention}Blind{} is selected",
-                    "{C:red}#2#{} hand size",
+                    },
+                    {
+                        "{C:red}#2#{} hand size",
+                    },
+                    
+                    
                 },
                 unlock={
                     "Win a run in {E:1,C:attention}#1#",
@@ -5963,20 +6259,32 @@ return {
             j_bunc_crop_circles_noughts = {
                 name = "Crop Circles",
                 text = {
-                    'Base suit {C:clubs}Clubs{} give {C:mult}+#1#{} Mult,',
+                    {
+                        'Base suit {C:clubs}Clubs{} give {C:mult}+#1#{} Mult,',
                     'Base suit {C:unik_noughts}Noughts{} give {C:mult}+#3#{} Mult,',
-                    '{C:attention}8s{} give {C:mult}+#2#{} Mult,',
+                    },
+                    {
+                        '{C:attention}8s{} give {C:mult}+#2#{} Mult,',
                     '{C:attention}Qs{}, {C:attention}10s{}, {C:attention}9s{}, {C:attention}6s{} give {C:mult}+#3#{} Mult'
+                    },
+                    
+                    
                 }
             },
             j_bunc_crop_circles_noughts_exotic = {
                 name = "Crop Circles",
                 text = {
-                    'Base suit {C:bunc_fleurons}Fleurons{} give {C:mult}+#4#{} Mult,',
+                    {
+                        'Base suit {C:bunc_fleurons}Fleurons{} give {C:mult}+#4#{} Mult,',
                     'Base suit {C:clubs}Clubs{} give {C:mult}+#1#{} Mult,',
                     'Base suit {C:unik_noughts}Noughts{} give {C:mult}+#3#{} Mult,',
-                    '{C:attention}8s{} give {C:mult}+#2#{} Mult,',
+                    },
+                    {
+                        '{C:attention}8s{} give {C:mult}+#2#{} Mult,',
                     '{C:attention}Qs{}, {C:attention}10s{}, {C:attention}9s{}, {C:attention}6s{} give {C:mult}+#3#{} Mult'
+                    },
+                    
+                    
                 }
             },
 
@@ -6036,16 +6344,16 @@ return {
                 name = "Cosmopolitan",
                 text = {
                     "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
-                    "{C:attention}+#3#{} retriggers when scored",
-                    "{C:inactive}(Once per card)"
+                    "{C:attention}+#3#{} retrigger#<s>3# when scored",
+                    "{C:inactive}(Once per Joker)"
                 }
             },
             j_unik_midori_sour = {
                 name = "Midori Sour",
                 text = {
                     "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
-                    "{C:unik_copper}+#3#{} {C:unik_copper}rescores{} when scored",
-                    "{C:inactive}(Once per card)"
+                    "{C:unik_copper}+#3#{} {C:unik_copper}rescore#<s>3#{} when scored",
+                    "{C:inactive}(Once per Joker)"
                 }
             },
 
@@ -8899,11 +9207,12 @@ return {
             unik_overshoot_lenient = "Lenient",
             unik_overshoot_strict = "Strict (Recommended)",
 
-            unik_legendary_blinds_desc1 = "Enable Epic/Legendary Blinds",
-            unik_legendary_blinds_desc2 = "when Overshoot is high",
+            unik_legendary_blinds_desc1 = "Enable Epic/Legendary Blinds when Overshoot is high",
             --they may have a different spawning condition instead.
             unik_legendary_blinds_desc3 = "With BOOK OF SHADOWS active, without Overshoot, Epic Blinds will spawn after Round 40 and Legendary Blinds after 90 no matter what.",
-            
+            unik_always_toggle_unlock_option = "Always enable 'Unlock All'",
+            unik_always_toggle_unlock_desc = "Always keep Unlock All enabled, even when already pressed",
+            unik_always_toggle_unlock_desc2 = "Useful for mod testing",
             unik_overshoot_enable_desc = "Enable detrimental effects when you score too much above requirements, highly recommended with Big Number mods",
             unik_overshoot_enable_desc2 = "With BOOK OF SHADOWS active, it's recommended to disable this as it's not balanced with frequent use of Big Numbers; Enable Straddle instead.",
             unik_menu_desc = "Enable the custom menu screen",

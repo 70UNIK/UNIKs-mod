@@ -129,7 +129,7 @@ local function draw_indicators(indicators, card, x_offset, y_offset,radi)
 				if UNIK.hasBlindside() and card.config.center.unik_exotic then
 					y = (y + HEIGHT + (GAP/2))
 				else
-					y = GAP
+					y = y + (GAP*2/3) + HEIGHT
 				end
 				-- GAP
 			end

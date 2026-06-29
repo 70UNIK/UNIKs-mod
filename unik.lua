@@ -74,14 +74,21 @@ SMODS.current_mod.config_tab = function() --Config tab
 			info = AlterConfigWithbos(
 				{
 					localize("unik_legendary_blinds_desc1"),
-					localize("unik_legendary_blinds_desc2")
 				},
 				{
 					localize("unik_legendary_blinds_desc1"),
-					localize("unik_legendary_blinds_desc2"),
 					localize("unik_legendary_blinds_desc3"),
 				}
 			)
+		}),
+		create_toggle({
+			label = localize("unik_always_toggle_unlock_option"),
+			ref_table = unik_config,
+			ref_value = "unik_always_toggle_unlock",
+			info = {
+				localize("unik_always_toggle_unlock_desc"),
+				localize("unik_always_toggle_unlock_desc2"),
+			}
 		}),
 		create_toggle({
 			label = localize("unik_enable_overshoot_option"),
@@ -104,19 +111,6 @@ SMODS.current_mod.config_tab = function() --Config tab
 				localize("unik_menu_desc"),
 			},
 		}),
-		-- create_option_cycle({
-		-- 	label = localize("unik_overshoot_config"),
-		-- 	scale = 0.8,
-		-- 	w = 9,
-		-- 	options = {localize("unik_overshoot_off"), localize("unik_overshoot_lenient"), localize("unik_overshoot_strict")},
-		-- 	current_option = unik_config.unik_overshoot_level,
-		-- 	opt_callback = 'unik_update_overshoot_opt',
-		-- 	info = {
-		-- 		localize("unik_overshoot_desc1"),
-		-- 		localize("unik_overshoot_desc2"),
-		-- 		localize("unik_overshoot_desc3"),
-		-- 	},
-		-- })
 	},
 	}
 end
@@ -362,13 +356,6 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
-
-SMODS.Atlas({ 
-  key = "unik_rotarots", 
-  path = "unik_rotarots2.png", 
-  px = 107, 
-  py = 107
-})
 
 SMODS.Atlas {
 	key = "unik_blindside_blinds",

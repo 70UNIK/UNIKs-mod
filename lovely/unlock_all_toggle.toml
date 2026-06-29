@@ -1,0 +1,20 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 9999
+
+[[patches]]
+[patches.regex]
+target = 'functions/button_callbacks.lua'
+pattern = '''if(.*)G.PROFILES\[G.SETTINGS.profile\].all_unlocked'''
+position = 'after'
+match_indent = true
+payload = ''' and not unik_config.unik_always_toggle_unlock '''
+
+[[patches]]
+[patches.regex]
+target = 'functions/UI_definitions.lua'
+pattern = '''not G.PROFILES\[G.SETTINGS.profile\].all_unlocked'''
+position = 'after'
+match_indent = true
+payload = ''' or unik_config.unik_always_toggle_unlock '''
