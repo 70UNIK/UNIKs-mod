@@ -80,45 +80,6 @@ pattern = '''if G.GAME.blind:press_play() then'''
 position = 'before'
 match_indent = true
 payload = '''
-if G.jokers then
-    for _, v in pairs(G.jokers.cards) do
-        if v.ability.name == "j_unik_hook_n_discard" then
-            --taken from the hook
-            G.E_MANAGER:add_event(Event({ 
-                func = function()
-                local any_selected = nil
-                local _cards = {}
-                for k, v in ipairs(G.hand.cards) do
-                    if not v.highlighted then
-                        _cards[#_cards+1] = v
-                    end
-                end
-                for i = 1, 2 do
-                    if G.hand.cards and G.hand.cards[i] then 
-                        local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('hook'))
-                        if selected_card then
-                             G.hand:add_to_highlighted(selected_card, true)
-                            table.remove(_cards, card_key)
-                            any_selected = true
-                            play_sound('card1', 1)
-                        end
-                       
-                    end
-                end
-                if any_selected then G.FUNCS.discard_cards_from_highlighted(nil, true) end
-                if any_selected then
-                    v:juice_up(0.8, 0.8)
-                end
-                delay(0.7)
-            return true end })) 
-            card_eval_status_text(v, "extra", nil, nil, nil, {
-                message = localize("k_unik_hooked"),
-                colour = G.C.UNIK_THE_HOOK,
-                card=v,
-            })
-        end
-    end
-end
 
 --Also blind edition before play
 if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then

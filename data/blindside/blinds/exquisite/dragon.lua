@@ -7,7 +7,7 @@ BLINDSIDE.Blind({
         extra = {
             value = 1,
             x_mult = 2,
-            x_mult_up = 0.5,
+            x_mult_up = 1,
             retain = true,
             chance = 1,
             trigger = 2,

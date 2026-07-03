@@ -60,6 +60,52 @@ SMODS.Joker {
                 }
             end
         end
+        --press_play
+        if context.press_play then
+            --taken from the hook
+            G.E_MANAGER:add_event(Event({ 
+                trigger = 'after',
+                delay = 0.5,
+                func = function()
+                local any_selected = nil
+                local _cards = {}
+                for k, v in ipairs(G.hand.cards) do
+                    if not v.highlighted and not v.highlighted_by_hook then
+                        _cards[#_cards+1] = v
+                    end
+                end
+                for i = 1, 2 do
+                    if G.hand.cards and G.hand.cards[i] then 
+                        local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('hook'))
+                        if selected_card then
+                             G.hand:brute_force_highlight(selected_card, true)
+                            table.remove(_cards, card_key)
+                            any_selected = true
+                            selected_card.highlighted_by_hook = true
+                             G.E_MANAGER:add_event(Event({ 
+                            func = function()
+                                selected_card.highlighted_by_hook = nil
+                            return true end })) 
+                            
+                            play_sound('card1', 1)
+                        end
+                       
+                    end
+                end
+                if any_selected then G.FUNCS.discard_cards_from_highlighted(nil, true) end
+                if any_selected then
+                    card:juice_up(0.8, 0.8)
+                end
+                card_eval_status_text(card, "extra", nil, nil, nil, {
+                    message = localize("k_unik_hooked"),
+                    colour = G.C.UNIK_THE_HOOK,
+                    card=card,
+                })
+                
+                
+            return true end })) 
+            delay(0.5)
+        end
         --self destruct during the hook
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Hook")) and not (G.GAME.blind.disabled) then
             selfDestruction(card,"k_unik_blind_start_hook",G.C.UNIK_THE_HOOK)
