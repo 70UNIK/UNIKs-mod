@@ -105,7 +105,7 @@ function end_round()
                         G.GAME.unik_crown_progress = G.GAME.unik_crown_progress - 1
                         G.GAME.blind:set_blind(G.P_BLINDS["bl_unik_legendary_crown"])
                         ChangePhaseCrown()
-                        G.GAME.blind.chips = G.GAME.round_scores['hand'].amt*1.5
+                        G.GAME.blind.chips = G.GAME.round_scores['hand'].amt--*1.5
                         if to_big(G.GAME.blind.chips) <= to_big(0) then
                             G.GAME.blind.chips = 1
                         end

@@ -1,0 +1,4 @@
+--^1.05 Chips, --> ^1.08 Chips
+--+2 Card selection limit when played or held
+--+2 hand size when held
+--retained

@@ -1,0 +1,1 @@
+--+$4 per hand lost this round, +$3 per discard lost this round

@@ -1,0 +1,2 @@
+--hand size set to 1, bet and pair is not allowed
+--you're forced to utilise tech blinds, hiss tags, auto handsize blinds such as epic bellows and the dragon

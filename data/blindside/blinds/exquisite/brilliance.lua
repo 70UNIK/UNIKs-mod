@@ -5,8 +5,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 3,
-            money = 10,
-            money_up = 10,
+            money = 12,
+            money_up = 12,
             batteries = 2,
         }},
     hues = {"Yellow"},

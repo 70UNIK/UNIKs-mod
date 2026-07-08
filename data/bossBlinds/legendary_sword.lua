@@ -30,8 +30,8 @@ SMODS.Blind{
         G.GAME.force_one_hand = true
         G.GAME.unik_killed_by_sword_legendary = true
         --set blind size to ^2.666x
-        G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
-        ease_discard(-G.GAME.current_round.discards_left - 666)
+        --G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
+        --ease_discard(-G.GAME.current_round.discards_left - 666)
         G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
         ease_hands_played(-G.GAME.blind.hands_sub)
         G.GAME.unik_original_hand_size = G.hand.config.card_limit
@@ -49,7 +49,7 @@ SMODS.Blind{
         G.GAME.force_no_discards = nil
         G.GAME.force_one_hand = nil
         G.GAME.unik_killed_by_sword_legendary = nil
-        ease_discard(G.GAME.blind.discards_sub + 666)
+        --ease_discard(G.GAME.blind.discards_sub + 666)
         ease_hands_played(G.GAME.blind.hands_sub)
         G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 1))
         if G.jokers then

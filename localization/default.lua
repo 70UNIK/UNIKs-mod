@@ -241,16 +241,6 @@ return {
                     "when possible"
                 }
             },
-            
-            ["bl_bld_chicot"] = {
-				["name"] = "Chicot",
-				["text"] = {
-					"Converts scored Blinds",
-					"into Big and Small",
-					"Blinds after scoring",
-                    "for this Round",
-				},
-			},
 
             bl_unik_blindside_oxy = {
                 name = "Oxy",
@@ -724,18 +714,19 @@ return {
             bl_unik_blindside_redeo = {
                 name = "Redeo",
                 text = {
-                    "+1 Ante per $5",
+                    "+1 Ante per $10",
                     "spent this Ante",
                     "If less than",
                     "#1# spent this", --(total money spent this run)^0.75
-                    "Ante, ^2 Ante"
+                    "Ante, ^2 Ante on select",
+                    "(Currently $#2# spent)"
                 }
             },
             bl_unik_blindside_exponentia = {
                 name = "Exponentia",
                 text = {
                     "^#1# Mult each hand",
-                    "Gains ^#2# when any",
+                    "Gains ^#2# Mult when any",
                     "Mult effect triggers",
                     "Immediately scores when",
                     "any Chips effect triggers",
@@ -772,29 +763,28 @@ return {
                     "on play and gains ^#2# Mult", --^1.5 mult
                     "If no mineral card owned",
                     "hand will not score",
-                    "(Currently ^#2# Mult)"
                 }
             },
             bl_unik_blindside_facile = {
                 name = "Facile",
                 text = {
                     "If more than 10 Blinds",
-                    "have been scored,",
-                    "future scored blinds",
+                    "have been scored, subsequent",
+                    "scored blinds this hand",
                     "give ^#1# Mult to Joker", --^3
                     "(Retriggers included)"
                 }
             },
-
-            bl_unik_blindside_gourmand = {
-                name = "The Gourmand",
+            bl_unik_blindside_effarcire = {
+                name = "Effarcire",
                 text = {
-                    "Retrigger a random",
-                    "Ancient Joker for",
-                    "this round 10 times",
-                    "(Currently #1#)",
+                    "Hand Size",
+                    "set to 1",
+                    "Bet and Pair",
+                    "not allowed"
                 }
             },
+
 
             bl_unik_fill = {
                 name = "The Fill",
@@ -1505,7 +1495,6 @@ return {
 				text = {
                     "Hand Size set to 1",
                     "Play only 1 hand,",
-                    "with 0 discards",
 				},  
 
             },
@@ -1546,7 +1535,7 @@ return {
                     "Set hands to 1 per attempt",
                     "Deck and discards not replenished",
                     "Per defeat, rescale blind to",
-                    "(best hand this run)#3#",
+                    "highest score this run",
                     "If Max Hands = 1, increase",
                     "requirements by #4#",
                 }
@@ -3282,8 +3271,6 @@ return {
                     },
                     {"Always scores"},
                     {"{C:green}Retained"}, 
-					{"{C:red}Forced to",
-					"{C:red}be selected",},
                 }
             },
             m_unik_blindside_lily_upgraded = {
@@ -4048,9 +4035,96 @@ return {
                     },
                 }
             },
-            --^1.5 mult after scoring, creates a gillotine tag (disables jokers up to Epic Jokers, then ^0.5 mult and ^0.5 chips to joker)
-            m_unik_blindside_legendary_crimson_heart = {
-
+            m_unik_blindside_legendary_sapphire_stamp = {
+                name = "Paheksunnanleima", --Stamp of disapproval, low exponents but free handsize and card selection limit.
+                text = {
+                    {
+                        "{X:blue,C:white}Blue{} {X:gold,C:white}Yellow{}",
+                        "{X:dark_edition,C:white}^#1#{} Chips"
+                    },
+                    {
+                        "{C:attention}+#2#{} Card Selection",
+                        "Limit when played",
+                        "or held in hand"
+                    },
+                    {
+                        "{C:attention}+#3#{} Hand Size",
+                        "when held in hand"
+                    },
+                    {
+                        "{C:green}Retained"
+                    },
+                },
+            },
+            m_unik_blindside_legendary_silver_sword = {
+                name = "Sadistinenmiekka",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
+                        "When held,",
+                        "if hand contains",
+                        "only {C:attention}#1#{} Blind#<s>1#,",
+                        "{C:attention}Retrigger{} and {C:unik_copper}Rescore{}",
+                        "first played Blind {C:attention}#2#{} time#<s>2#"
+                    },
+                    {
+                        "{C:attention}Burns{} on success"
+                    },
+                    {
+                        "Shuffled to the",
+                        "{C:attention}top{} of the deck",
+                        "at round start",
+                    }
+                },
+            },
+            m_unik_blindside_legendary_silver_sword_upgraded = {
+                name = "Sadistinenmiekka",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
+                        "When held,",
+                        "If hand contains",
+                        "{C:attention}#1#{} or less Blind#<s>1#,",
+                        "{C:attention}Retrigger{} and {C:unik_copper}Rescore{}",
+                        "first played Blind {C:attention}#2#{} time#<s>2#"
+                    },
+                    {
+                        "{C:green}Retained"
+                    },
+                    {
+                        "{C:attention}Burns{} on success"
+                    },
+                    {
+                        "Shuffled to the",
+                        "{C:attention}top{} of the deck",
+                        "at round start",
+                    }
+                },
+            },
+            --
+            m_unik_blindside_legendary_viridian_valve = {
+                name = "Valvenrikottulupaus", --valve's broken promise
+                text = {
+                    {
+                        "{X:green,C:white}Green{} {X:purple,C:white}Purple",
+                        "{X:dark_edition,C:white}^#1#{} Mult if poker",
+                        "hand does not contain",
+                        "more than{C:attention}#2#{} Blind#<s>2#",
+                    },
+                }
+            },
+            --green, Other blinds each give ^1 Mult then +^0.02 Mult for each unique hue held in hand it shares (ie: a 2 hue blind can give up to ^1.04 mult)
+            m_unik_blindside_legendary_chartuese_chamber = {
+                name = "Kidutuskammio",
+                text = {
+                    {
+                        "{X:green,C:white}Green{} {X:purple,C:white}Purple",
+                        "Other scored blinds",
+                        "each give {X:dark_edition,C:white}^#1#{} then",
+                        "{X:dark_edition,C:white}+^#2#{} for each unique hue",
+                        "{C:attention}shared{} with {C:attention}held{} Blinds",
+                    },
+                }
             },
         },
         Rotarot = {
@@ -8021,7 +8095,7 @@ return {
                 name = '"Ancient" Tag',
                 text = {
                     "{C:attention}Replaces{} the next",
-                    "{X:unik_ancient,C:white}Ancient{} Joker with",
+                    "{C:unik_ancient}Ancient{} Joker with",
                     "{C:attention}Ancient Joker",
                 }
             },
@@ -8109,7 +8183,31 @@ return {
                     "{C:attention}non-Boss{} Joker with a",
                     "{X:unik_detrimental,C:white}Cursed{} Joker"
                 }
-            }
+            },
+            tag_unik_blindside_reel = {
+                name = "Reel Tag",
+                text = {
+
+                }
+            },
+            tag_unik_blindside_greedy= {
+                name = "Greedy Tag",
+                text = {
+
+                }
+            },
+            tag_unik_blindside_wrench = {
+                name = "Wrench Tag",
+                text = {
+
+                }
+            },
+            tag_unik_blindside_super_booster = {
+                name = "Super Booster Tag",
+                text = {
+
+                }
+            },
         },
         Tarot={
             c_unik_wheel_of_misfortune = {

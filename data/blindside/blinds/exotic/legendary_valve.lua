@@ -1,2 +1,2 @@
 --legendary valve:
---^1.33 Mult if hand does not contain a 3 of a kind. --> ^1.43 Mult
+--^1.3 Mult if hand does not contain a 3 of a kind. --> ^1.45 Mult

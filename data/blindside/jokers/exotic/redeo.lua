@@ -1,0 +1,1 @@
+--+1 ante per $10 spent this ante, if less than $(this run) spend this ante, on blind select, ^2 ante

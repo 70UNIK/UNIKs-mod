@@ -1,0 +1,1 @@
+--all blinds in a symbol pack are upgraded

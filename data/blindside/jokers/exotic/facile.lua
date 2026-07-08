@@ -1,0 +1,1 @@
+--^2.5 mult to joker per blind scored after the 10th scored blind
