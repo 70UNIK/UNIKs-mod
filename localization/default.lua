@@ -3854,7 +3854,7 @@ return {
                 "Mult {X:mult,C:white}Xlog_#2#(Mult)"},
 
 					{"{C:unik_copper}Rescores{} once for",
-					"every Tag#<s>3# held",
+					"every {C:attention}#3#{} Tag#<s>3# held",
 					"{C:inactive}(Currently {C:attention}#4#{C:inactive} time#<s>4#)"},
                 }
             },
@@ -3943,12 +3943,12 @@ return {
                         "{X:red,C:white}Red{} {X:dark_edition,C:white}Faded",
                         "While {C:attention}held in hand{},",
                         "{C:unik_copper}Rescore {C:attention}first{}",
-                        "scoring Blind for every",
+                        "scoring Blind for every ",
                         "{X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
                         "in your full deck"
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#1#{C:inactive} Rescores)"
+                        "{C:inactive}(Currently {C:attention}#1#{C:inactive} Rescore#<s>1#)"
                     },
                 }
             },
@@ -3960,11 +3960,11 @@ return {
                         "While {C:attention}held in hand{},",
                         "{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last",
                         "scoring Blind for every",
-                        "{C:attention}#2# {X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
+                        "{C:attention}#2#{X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
                         "in your full deck"
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#1#{C:inactive} Rescores)"
+                        "{C:inactive}(Currently {C:attention}#1#{C:inactive} Rescore#<s>1#)"
                     },
                 }
             },
@@ -4062,13 +4062,17 @@ return {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
                         "When held,",
-                        "if hand contains",
+                        "if played hand contains",
                         "only {C:attention}#1#{} Blind#<s>1#,",
                         "{C:attention}Retrigger{} and {C:unik_copper}Rescore{}",
-                        "first played Blind {C:attention}#2#{} time#<s>2#"
+                        "{C:attention}first{} played Blind for every",
+                        "{X:dark_edition,C:white}Faded{} Blind#<s>2# in full deck"
+                    },
+                {
+                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} Rescore#<s>3#)"
                     },
                     {
-                        "{C:attention}Burns{} on success"
+                        "{C:green}Retained"
                     },
                     {
                         "Shuffled to the",
@@ -4083,16 +4087,17 @@ return {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
                         "When held,",
-                        "If hand contains",
+                        "If played hand contains",
                         "{C:attention}#1#{} or less Blind#<s>1#,",
-                        "{C:attention}Retrigger{} and {C:unik_copper}Rescore{}",
-                        "first played Blind {C:attention}#2#{} time#<s>2#"
+                        "{C:unik_copper}Rescore{} {C:attention}first{} played",
+                        "Blind for every",
+                        "{X:dark_edition,C:white}Faded{} Blind#<s>2# in full deck"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} Rescore#<s>3#)"
                     },
                     {
                         "{C:green}Retained"
-                    },
-                    {
-                        "{C:attention}Burns{} on success"
                     },
                     {
                         "Shuffled to the",

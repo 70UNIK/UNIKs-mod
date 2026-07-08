@@ -10,7 +10,7 @@ BLINDSIDE.Blind({
             log_base = 50,
             log_down = 25,
             x_mult_up = 0.5,
-            tags = 1,
+            tags = 2,
             tag_down = 1,
         }
     },

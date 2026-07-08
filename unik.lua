@@ -1323,8 +1323,10 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
 
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_magnet.lua")()
-	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_nuke.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_crown.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_stamp.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_nuke.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_sword.lua")()
 	--JOKERS
 	NFS.load(mod_path .. "data/blindside/jokers/big/fruity_joker.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/big/plain_jane.lua")()	

@@ -111,6 +111,9 @@ function Card:add_to_deck(from_debuff)
     if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_hand_size_added then
         self.ability.extra.unik_hand_size_added = nil
     end
+    if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_selection_limit_added then
+        self.ability.extra.unik_selection_limit_added = nil
+    end
     if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.dragon_attempt_made then
         self.ability.extra.dragon_attempt_made = nil
     end

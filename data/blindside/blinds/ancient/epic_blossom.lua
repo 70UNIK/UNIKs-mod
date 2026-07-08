@@ -6,7 +6,7 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            interval = 1
+            interval = 2
         }},
     hues = {"Red", "Faded"},
     calculate = function(self, card, context) 
