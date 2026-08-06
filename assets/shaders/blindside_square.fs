@@ -44,6 +44,7 @@ float yInterpolate(float x, float sign){
     return -1.;
 }
 
+//MAJOR PROBLEM: the distortion VARIES per size of the atlas, i need to find a way to have it distort independently for better crossmod compat.
 vec2 shift(vec2 pos,vec2 uv){
     vec2 newPos = pos;
     //horizontal quadrants

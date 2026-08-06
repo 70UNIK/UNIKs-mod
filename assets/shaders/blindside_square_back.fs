@@ -57,10 +57,10 @@ vec2 shift(vec2 pos,vec2 uv){
             (uv.y /height) - heightbuffer < ((uv.x /width) + widthbuffer*3.))
         )
         {
-        newPos.y = pos.y - 0.03* pow(uv.y/0.5 - (yInterpolate(uv.x,-1.)),3.);
-        newPos.y = newPos.y + 0.03* -pow((uv.y - 0.5)/0.5 - (yInterpolate(uv.x,1.)),3.) ;
+        newPos.y = pos.y - 0.033* pow(uv.y/0.5 - (yInterpolate(uv.x,-1.)),3.);
+        newPos.y = newPos.y + 0.033* -pow((uv.y - 0.5)/0.5 - (yInterpolate(uv.x,1.)),3.) ;
  
-        newPos.x = pos.x + 0.04* (1./height)*abs(pow(2. * uv.y - 1.,2.));
+        newPos.x = pos.x + 0.027* (1./height)*abs(pow(2. * uv.y - 1.,2.));
     }
     //right quadrant
     else if (
@@ -71,9 +71,9 @@ vec2 shift(vec2 pos,vec2 uv){
             (uv.y /height) - heightbuffer < ((uv.x /width) + widthbuffer*3.))
         )
         {
-        newPos.y = pos.y - 0.03 * pow(uv.y/0.5 - (yInterpolate(uv.x,1.)),3.);
-        newPos.y = newPos.y + 0.03* -pow((uv.y - 0.5)/0.5 - (yInterpolate(uv.x,-1.)),3.) ;
-        newPos.x = pos.x - 0.04* (1./height)*abs(pow(2. * uv.y - 1.,2.));
+        newPos.y = pos.y - 0.033 * pow(uv.y/0.5 - (yInterpolate(uv.x,1.)),3.);
+        newPos.y = newPos.y + 0.033* -pow((uv.y - 0.5)/0.5 - (yInterpolate(uv.x,-1.)),3.) ;
+        newPos.x = pos.x - 0.027* (1./height)*abs(pow(2. * uv.y - 1.,2.));
         
     }
     //upper quadrant
@@ -85,9 +85,9 @@ vec2 shift(vec2 pos,vec2 uv){
             (uv.y /height) - heightbuffer < ((uv.x /width) + widthbuffer*3.))
         )
         {
-        newPos.x = pos.x - 0.022 * pow(uv.x/0.5 - (yInterpolate(uv.x,1.)),3.);
-        newPos.x = newPos.x + 0.022* -pow((uv.x - 0.5)/0.5 - (yInterpolate(uv.x,1.)),3.) ;
-        newPos.y = pos.y + 0.018* (1./height)*abs(pow(2. * uv.x - 1.,2.));
+        newPos.x = pos.x - 0.014 * pow(uv.x/0.5 - (yInterpolate(uv.x,1.)),3.);
+        newPos.x = newPos.x + 0.014* -pow((uv.x - 0.5)/0.5 - (yInterpolate(uv.x,1.)),3.) ;
+        newPos.y = pos.y + 0.02* (1./height)*abs(pow(2. * uv.x - 1.,2.));
         
     }
     //lower quadrant
@@ -99,9 +99,9 @@ vec2 shift(vec2 pos,vec2 uv){
             (uv.y /height) - heightbuffer > ((uv.x /width) + widthbuffer*3.))
         )
         {
-        newPos.x = pos.x - 0.022 * pow(uv.x/0.5 - (yInterpolate(uv.x,1.)),3.);
-        newPos.x = newPos.x + 0.022* -pow((uv.x - 0.5)/0.5 - (yInterpolate(uv.x,1.)),3.) ;
-        newPos.y = pos.y - 0.018* (1./height)*abs(pow(2. * uv.x - 1.,2.));
+        newPos.x = pos.x - 0.014 * pow(uv.x/0.5 - (yInterpolate(uv.x,1.)),3.);
+        newPos.x = newPos.x + 0.014* -pow((uv.x - 0.5)/0.5 - (yInterpolate(uv.x,1.)),3.) ;
+        newPos.y = pos.y - 0.02* (1./height)*abs(pow(2. * uv.x - 1.,2.));
     }
     newPos.x = newPos.x + (blindside_square_back.x * 0.0000001);
     return newPos;

@@ -11,24 +11,13 @@ BLINDSIDE.Blind({
             value = 1,
             max_cards = 1,
             max_cards_up = 1,
-            shuffled_top_start = true,
             retain = true,
             interval = 1,
         }},
     hues = {"Faded","Blue"},
     calculate = function(self, card, context) 
-        if context.repetition and context.cardarea == G.play and card.area == G.hand and (context.other_card == context.scoring_hand[1] ) and context.other_card.ability.extra.rescore ~= 1 and #G.play.cards <= card.ability.extra.max_cards then
-            local rescores = 0
-            if G.playing_cards then
-                for k, v in pairs(G.playing_cards) do
-                    if v:is_color("Faded") then rescores = rescores + (1/card.ability.extra.interval) end
-                end 
-            end
-            return {
-                    repetitions = math.floor(rescores)
-                }
-        end
-        if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and ((not context.cardarea and not context.main_eval) or context.main_eval) and card.area == G.hand and #G.play.cards <= card.ability.extra.max_cards then
+        if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and ((not context.cardarea and not context.main_eval) or context.main_eval) 
+        and card.area == G.hand and (#G.play.cards <= card.ability.extra.max_cards or card.ability.extra.upgraded) then
             local rescores = 0
             if G.playing_cards then
                 for k, v in pairs(G.playing_cards) do

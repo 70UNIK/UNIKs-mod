@@ -3943,8 +3943,8 @@ return {
                         "{X:red,C:white}Red{} {X:dark_edition,C:white}Faded",
                         "While {C:attention}held in hand{},",
                         "{C:unik_copper}Rescore {C:attention}first{}",
-                        "scoring Blind for every ",
-                        "{X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
+                        "scoring Blind for every",
+                        "{C:attention}#2# {X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
                         "in your full deck"
                     },
                     {
@@ -3960,13 +3960,16 @@ return {
                         "While {C:attention}held in hand{},",
                         "{C:unik_copper}Rescore {C:attention}first{} and {C:attention}last",
                         "scoring Blind for every",
-                        "{C:attention}#2#{X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
+                        "{C:attention}#2# {X:red,C:white}Red{} or {X:dark_edition,C:white}Faded{} Blind#<s>2#",
                         "in your full deck"
                     },
                     {
                         "{C:inactive}(Currently {C:attention}#1#{C:inactive} Rescore#<s>1#)"
                     },
                 }
+            },
+            m_unik_blindside_epic_manacle = {
+                name = "",
             },
             --scaling ^chips
             m_unik_blindside_legendary_golden_crown = {
@@ -4040,15 +4043,39 @@ return {
                 text = {
                     {
                         "{X:blue,C:white}Blue{} {X:gold,C:white}Yellow{}",
-                        "{X:dark_edition,C:white}^#1#{} Chips"
+                        "{X:chips,C:white}X#1#{} Chips and",
+                        "Chips {X:chips,C:white}Xlog_#2#(Chips)",
                     },
                     {
-                        "{C:attention}+#2#{} Card Selection",
+                        "{C:attention}+#3#{} Card Selection",
                         "Limit when played",
                         "or held in hand"
                     },
                     {
-                        "{C:attention}+#3#{} Hand Size",
+                        "{C:attention}+#4#{} Hand Size",
+                        "when held in hand"
+                    },
+                    {
+                        "{C:green}Retained"
+                    },
+                },
+            },
+            m_unik_blindside_legendary_sapphire_stamp_upgraded = {
+                name = "Paheksunnanleima", --Stamp of disapproval, low exponents but free handsize and card selection limit.
+                text = {
+                    {
+                        "{X:blue,C:white}Blue{} {X:gold,C:white}Yellow{}",
+                        "{X:chips,C:white}X#1#{} Chips and",
+                        "Chips {X:chips,C:white}Xlog_#2#(Chips)",
+                        "when played or held"
+                    },
+                    {
+                        "{C:attention}+#3#{} Card Selection",
+                        "Limit when played",
+                        "or held in hand"
+                    },
+                    {
+                        "{C:attention}+#4#{} Hand Size",
                         "when held in hand"
                     },
                     {
@@ -4064,20 +4091,15 @@ return {
                         "When held,",
                         "if played hand contains",
                         "only {C:attention}#1#{} Blind#<s>1#,",
-                        "{C:attention}Retrigger{} and {C:unik_copper}Rescore{}",
-                        "{C:attention}first{} played Blind for every",
+                        "{C:unik_copper}Rescore{} {C:attention}first{} played",
+                        "Blind for every",
                         "{X:dark_edition,C:white}Faded{} Blind#<s>2# in full deck"
                     },
-                {
+                    {
                         "{C:inactive}(Currently {C:attention}#3#{C:inactive} Rescore#<s>3#)"
                     },
-                    {
+                    { 
                         "{C:green}Retained"
-                    },
-                    {
-                        "Shuffled to the",
-                        "{C:attention}top{} of the deck",
-                        "at round start",
                     }
                 },
             },
@@ -4087,8 +4109,6 @@ return {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
                         "When held,",
-                        "If played hand contains",
-                        "{C:attention}#1#{} or less Blind#<s>1#,",
                         "{C:unik_copper}Rescore{} {C:attention}first{} played",
                         "Blind for every",
                         "{X:dark_edition,C:white}Faded{} Blind#<s>2# in full deck"
@@ -4098,11 +4118,6 @@ return {
                     },
                     {
                         "{C:green}Retained"
-                    },
-                    {
-                        "Shuffled to the",
-                        "{C:attention}top{} of the deck",
-                        "at round start",
                     }
                 },
             },
@@ -4125,8 +4140,9 @@ return {
                     {
                         "{X:green,C:white}Green{} {X:purple,C:white}Purple",
                         "Other scored blinds",
-                        "each give {X:dark_edition,C:white}^#1#{} then",
-                        "{X:dark_edition,C:white}+^#2#{} for each unique hue",
+                        "each give {X:mult,C:white}X#1#{} Mult",
+                        "and Mult {X:mult,C:white}Xlog_#2#(Mult)",
+                        "for each unique hue",
                         "{C:attention}shared{} with {C:attention}held{} Blinds",
                     },
                 }

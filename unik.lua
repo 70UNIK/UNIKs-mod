@@ -1324,6 +1324,7 @@ if next(SMODS.find_mod("Blindside")) then
 
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_magnet.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_crown.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_chamber.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_stamp.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_nuke.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_sword.lua")()

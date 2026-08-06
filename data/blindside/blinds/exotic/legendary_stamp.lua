@@ -11,15 +11,18 @@ BLINDSIDE.Blind({
             value = 1,
             selection_limit = 2,
             hand_size = 2,
-            e_chips = 1.04,
-            e_chips_up = 0.04,
+            xlogchips_base = 10,
+            xlogchips_basedown = 3,
+            xchips = 2,
+            xchips_up = 1,
             retain = true
         }},
     hues = {"Blue","Yellow"},
     calculate = function(self, card, context) 
-        if context.cardarea == G.play and context.main_scoring then
+        if (context.cardarea == G.play or (context.cardarea == G.hand and card.ability.extra.upgraded)) and context.main_scoring then
             return {
-                e_chips = card.ability.extra.e_chips
+                x_chips = card.ability.extra.xchips,
+                xlog_chips = card.ability.extra.xlogchips_base,
             }
         end
         if card.ability.extra.hand_size and card.ability.extra.selection_limit and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added 
@@ -56,14 +59,16 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
         return {
+            key = card.ability.extra.upgraded and 'm_unik_blindside_legendary_sapphire_stamp_upgraded' or 'm_unik_blindside_legendary_sapphire_stamp',
             vars = {
-                card.ability.extra.e_chips,card.ability.extra.selection_limit,card.ability.extra.hand_size,
+                card.ability.extra.xchips,card.ability.extra.xlogchips_base,card.ability.extra.selection_limit,card.ability.extra.hand_size,
             }
         }
     end,
     upgrade = function(card)
         if not card.ability.extra.upgraded then
-            card.ability.extra.e_chips = card.ability.extra.e_chips + card.ability.extra.e_chips_up
+            card.ability.extra.xlogchips_base = card.ability.extra.xlogchips_base - card.ability.extra.xlogchips_basedown
+            card.ability.extra.xchips = card.ability.extra.xchips + card.ability.extra.xchips_up
             card.ability.extra.upgraded = true
         end
     end

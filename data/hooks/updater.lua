@@ -48,7 +48,7 @@ function Game:update(dt)
             self.C.UNIK_RGB[3] = g
             self.C.UNIK_RGB[2] = b
         end
-		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.5) % 360
+		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.02*self.TIMERS.REAL) % 360
         if G.ARGS.LOC_COLOURS then
             G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
         end
