@@ -154,6 +154,11 @@ function ease_hands_played(mod, instant)
                 G.GAME.unik_hands_lost_in_round = G.GAME.unik_hands_lost_in_round - mod2
             end
             SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod2 })
+            if UNIK.hasBlindside() then
+                for i = 1, #G.GAME.tags do
+                    G.GAME.tags[i]:apply_to_run({type = 'hand_mod',hand_mod_val = mod2})
+                end
+            end
             
         end
     end
@@ -175,7 +180,11 @@ function ease_discard(mod, instant, silent)
                 G.GAME.unik_discards_lost_in_round = G.GAME.unik_discards_lost_in_round - mod2
             end
             SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod2 })
-            
+            if UNIK.hasBlindside() then
+                for i = 1, #G.GAME.tags do
+                    G.GAME.tags[i]:apply_to_run({type = 'discard_mod',discard_mod_val = mod2})
+                end
+            end
             
         end
     end

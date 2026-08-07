@@ -16,6 +16,7 @@
 	"conflicts": [
 		"Talisman (<=2.4)",
 		"Entropy (<=1.2)",
-		"Blindside (<=0.3)" 
+		"Blindside (<=0.3)",
+		"POLTERWORX"
     ]
 }

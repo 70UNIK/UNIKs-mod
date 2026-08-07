@@ -267,6 +267,13 @@ SMODS.Atlas {
 	frames = 21
 }
 
+SMODS.Atlas {
+	key = "unik_legendary_blind_enhancements",
+	path = "unik_legendary_blind_enhancements.png",
+	px = 71,
+	py = 95
+}
+
 SMODS.ObjectType({
 	key = "riff_raff",
 	default = "j_riff_raff",
@@ -1380,18 +1387,18 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/tags/handcuffs.lua")()	
 
 	NFS.load(mod_path .. "data/blindside/tags/peak.lua")()
-	--greed
+	NFS.load(mod_path .. "data/blindside/tags/greedy.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/multiplicative.lua")()	
 	NFS.load(mod_path .. "data/blindside/tags/recursive.lua")()	
 	NFS.load(mod_path .. "data/blindside/tags/balance.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/cursed.lua")()	
 
 	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
-	--boosted
+	NFS.load(mod_path .. "data/blindside/tags/super_booster.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/shield.lua")()
-	--reel
+	NFS.load(mod_path .. "data/blindside/tags/reel.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/cult.lua")()
-	--wrench
+	NFS.load(mod_path .. "data/blindside/tags/wrench.lua")()
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_dethroning')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_recursive')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_soul')
@@ -1406,6 +1413,10 @@ if next(SMODS.find_mod("Blindside")) then
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_cult')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_balance')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_cursed')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_wrench')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_greedy')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_reel')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_super_booster')
 
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_pentatope')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_portal')

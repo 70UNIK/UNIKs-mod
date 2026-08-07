@@ -48,5 +48,12 @@ BLINDSIDE.Joker({
     order = 1,
     big = {min = 1},
     active = true,
-    is_assistant = true
+    is_assistant = true,
+    loc_vars = function(self,blind)
+        G.GAME.unik_infuriating_xmult = G.GAME.unik_infuriating_xmult or 1.2
+        return { vars = { G.GAME.unik_infuriating_xmult^2 .. "", 1.2^2 .. "" } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { 1.2^2 .. "", 1.2^2 .. "" } }
+    end,
 })

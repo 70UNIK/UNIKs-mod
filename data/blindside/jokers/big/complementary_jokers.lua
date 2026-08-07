@@ -105,5 +105,19 @@ BLINDSIDE.Joker({
     order = 1,
     big = {min = 1},
     active = true,
-    is_assistant = true
+    is_assistant = true,
+     loc_vars = function (self)
+        return {
+            vars = {
+                1
+            }
+        }
+    end,
+    collection_loc_vars = function(self)
+        return {
+            vars = {
+                1
+            }
+        }
+    end,
 })

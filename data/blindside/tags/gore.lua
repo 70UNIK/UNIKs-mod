@@ -18,11 +18,12 @@ SMODS.Tag {
 	end,
     apply = function(self, tag, context)
         if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
-            tag:yep('+', G.C.SUITS["unik_Noughts"], function() 
+            tag:yep('+', G.C.RED, function() 
                 return true end)
             tag.triggered = true
         end
-        if context.type == 'unik_before_play' then
+        if context.type == 'unik_before_play' and not G.GAME.unik_neck_buffer then
+            G.GAME.unik_neck_buffer = true
             G.E_MANAGER:add_event(Event({
                     trigger = 'before',
                     func = function()
@@ -38,7 +39,7 @@ SMODS.Tag {
                                 G.GAME.cry_banished_keys = {}
                             end
                             G.GAME.cry_banished_keys[neck_banish.config.center.key] = true
-                        
+                            G.GAME.unik_neck_buffer = nil
                         end
                         return true
                     end

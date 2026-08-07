@@ -180,68 +180,6 @@ return {
                 }
             },
 
-            bl_unik_blindside_hunger_warmup = {
-                name = "The Hunger",
-                text = {
-                    "-#1# Mult per",
-                    "Blind held"
-                }
-            },
-            bl_unik_blindside_hunger_phase_1 = {
-                name = "The Hunger, Devourer of Worlds",
-                text = {
-                    "Banish all played",
-                    "and held non-Crude",
-                    "Blinds"
-                }
-            },
-            bl_unik_blindside_hunger_phase_2 = {
-                name = "The Hunger, Devourer of Worlds",
-                text = {
-                    "Add instances of The Devourer",
-                    "equal to 2X your deck size",
-                    "Played and held hand",
-                    "must contain The Devourer",
-                    "or The Hunger",
-                }
-            },
-            bl_unik_blindside_hunger_phase_3 = {
-                name = "The Hunger, Devourer of Worlds",
-                text = {
-                    "^^#1# Mult per hand",
-                    "+^^#1# Mult per Catastrophic",
-                    "Blind in your full deck",
-                }
-            },
-            bl_unik_blindside_hunger_phase_4 = {
-                name = "The Hunger",
-                text = {
-                    "Does Nothing?"
-                }
-            },
-            --highly recommended to just have something that unconditionally prevents death
-            bl_unik_blindside_hunger_phase_5 = {
-                name = "The Hunger, Devourer of Worlds",
-                text = {
-                    "Your Operator permanently",                 
-                    "set to Division",
-                    "Joker Operator set to {2}",
-                    "^^#1# Mult per hand",
-                    "If hand does not hold",
-                    "The Hunger or The Devourer, die",
-                }
-            },
-            --the only way to resolve it is having a keepsake that unconditionally prevents death
-            bl_unik_blindside_hunger_phase_6 = {
-                name = "The Hunger, Devourer of Worlds",
-                text = {
-                    "Apply the effects",
-                    "of every UNIK's mod",
-                    "Legendary and Epic Blinds",
-                    "when possible"
-                }
-            },
-
             bl_unik_blindside_oxy = {
                 name = "Oxy",
                 text = {
@@ -462,16 +400,6 @@ return {
                     "then ^#1# Mult once",
                     "if score exceeds",
                     "requirements this round",
-                }
-            },
-            --change: goob will level down all hands contaiend in played and held hands to make him a pit joker.
-            bl_unik_blindside_goob = {
-                name = "Goob",
-                text = {
-                    "Level down all",
-                    "possible hands",
-                    "from held Blinds",
-                    "on Play"
                 }
             },
             bl_unik_blindside_cosmo = {
@@ -8208,25 +8136,31 @@ return {
             tag_unik_blindside_reel = {
                 name = "Reel Tag",
                 text = {
-
+                    "Gives a free",
+					"{C:bld_obj_filmcard}Mega Cinema Pack",
                 }
             },
             tag_unik_blindside_greedy= {
                 name = "Greedy Tag",
                 text = {
-
+                    "Earn {C:gold}$#1#{} per",
+                    "{C:blue}Hand{} {C:red}lost{} in round",
+                    "Earn {C:gold}$#2#{} per",
+                    "{C:red}Discard{} {C:red}lost{} in round"
                 }
             },
             tag_unik_blindside_wrench = {
                 name = "Wrench Tag",
                 text = {
-
+                    "{C:attention}Upgrades{} a random",
+                    "Blind in deck",
                 }
             },
             tag_unik_blindside_super_booster = {
                 name = "Super Booster Tag",
                 text = {
-
+                    "Next opened {C:attention}Symbol Pack",
+					"will have {C:attention}upgraded{} Blinds"
                 }
             },
         },
