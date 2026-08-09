@@ -19,6 +19,9 @@ SMODS.Enhancement {
     in_pool = function(self)
         return false
     end,
+    all_in_jest = {
+        multi_enhancement_z_order = -1
+    },
 	calculate = function(self, card, context, effect)
         if context.before then
             G.GAME.unik_enable_lartcep_spawn = true

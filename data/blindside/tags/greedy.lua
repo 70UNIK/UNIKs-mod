@@ -28,6 +28,7 @@ SMODS.Tag {
                 tag:juice_up(1,1)
                 ease_dollars(3)
                 delay(0.3)
+                return true
             end}))
             
         end
@@ -36,6 +37,7 @@ SMODS.Tag {
                 tag:juice_up(1,1)
                 ease_dollars(3)
                 delay(0.3)
+                return true
             end}))
         end
     end,

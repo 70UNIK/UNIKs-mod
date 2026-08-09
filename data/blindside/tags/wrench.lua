@@ -18,11 +18,10 @@ SMODS.Tag {
         }
     },
     apply = function(self, tag, context)
-        if (context.type == 'immediate' or context.type == "round_start_bonus") and not G.GAME.unik_wrench_lock_tag then 
-            G.GAME.unik_wrench_lock_tag = true
+        if (context.type == 'immediate' or context.type == "round_start_bonus") then 
             local cards = {}
             for i,v in pairs (G.playing_cards) do
-                if not v.ability.upgraded then
+                if not v.ability.upgraded and not v.to_be_upgraded then
                     cards[#cards+1] = v
                 end
             end
@@ -31,11 +30,13 @@ SMODS.Tag {
                 G.CONTROLLER.locks[lock] = true
                 tag:yep('+', G.C.DARK_EDITION, function() 
                     local card = pseudorandom_element(cards, pseudoseed("unik_wrench_tag"))
+                    card.to_be_upgraded = true
                     upgrade_blinds({card})
                     G.E_MANAGER:add_event(Event({func = function()
                         
                         G.CONTROLLER.locks[lock] = nil
                         G.GAME.unik_wrench_lock_tag = nil
+                        card.to_be_upgraded = nil
                     return true; end}))
                     
                     return true end)

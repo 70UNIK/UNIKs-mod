@@ -37,7 +37,7 @@ SMODS.Tag {
                 G.GAME.suppress_super_booster_tag = true
                 G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
                         if G.pack_cards and G.pack_cards.cards ~= nil and G.pack_cards.cards[1] and G.pack_cards.VT.y < G.ROOM.T.h then
-                            upgrade_blinds({G.pack_cards.cards})
+                            upgrade_blinds(G.pack_cards.cards)
                             G.GAME.suppress_super_booster_tag = nil
                             tag:yep('+', G.C.DARK_EDITION, function()
                                 return true

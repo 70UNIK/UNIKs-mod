@@ -51,4 +51,7 @@ SMODS.Enhancement {
             end
         end
 	end,
+    all_in_jest = {
+        multi_enhancement_z_order = -1
+    },
 }

@@ -40,15 +40,21 @@ function Game:update(dt)
 
     if G.ARGS.LOC_COLOURS or self.C then
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
-		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
+		
+        if self.C.UNIK_RGB_HUE then
+            local anim_timer = self.TIMERS.REAL * 10
+            local p = anim_timer % 360
+            --print("anim colors: " .. p)
+		    self.C.UNIK_RGB_HUE = (p)
+            local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
 
-        self.C.UNIK_RGB = self.C.UNIK_RGB or {0,0,0,1}
-        if self.C.UNIK_RGB then
-            self.C.UNIK_RGB[1] = r
-            self.C.UNIK_RGB[3] = g
-            self.C.UNIK_RGB[2] = b
+            self.C.UNIK_RGB = self.C.UNIK_RGB or {0,0,0,1}
+            if self.C.UNIK_RGB then
+                self.C.UNIK_RGB[1] = r
+                self.C.UNIK_RGB[3] = g
+                self.C.UNIK_RGB[2] = b
+            end
         end
-		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.02*self.TIMERS.REAL) % 360
         if G.ARGS.LOC_COLOURS then
             G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
         end
@@ -65,6 +71,7 @@ function Game:update(dt)
             local exotic_colors = {{0.4392156862745098,0.5450980392156862,0.5686274509803921,1},{0.11764705882352941,0.6196078431372549,0.7294117647058823,1}}
             local anim_timer = self.TIMERS.REAL * 1.5
             local p = 0.5 * (math.sin(anim_timer) + 1)
+           -- print("exotic colors: " .. p)
             for i = 1, 4 do
                 self.C.UNIK_EXOTIC[i] = exotic_colors[1][i] * p + exotic_colors[2][i] * (1 - p)
             end

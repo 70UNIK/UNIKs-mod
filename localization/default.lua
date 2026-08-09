@@ -402,12 +402,14 @@ return {
                     "requirements this round",
                 }
             },
-            bl_unik_blindside_cosmo = {
-                name = "Cosmo",
+            --change: goob will level down all hands contaiend in played and held hands to make him a pit joker.
+            bl_unik_blindside_goob = {
+                name = "Goob",
                 text = {
-                    "Trimmed Blinds",
-                    "cannot be",
-                    "played",
+                    "Level down all",
+                    "possible hands",
+                    "from held Blinds",
+                    "on Play"
                 }
             },
             --big jokers
@@ -1603,7 +1605,7 @@ return {
 				text = {
 					"Shop rerolls in this ante",
 					"increase blind requirements",
-                    "by +1x",
+                    "by +0.5x",
 				},
             },
  
@@ -2690,7 +2692,7 @@ return {
                         "When played, all",
                         "{X:chips,C:white}XChips{} and higher",
                         "operations set {C:chips}Chips",
-                        "to {C:red}0{} instead",
+                        "to {C:red}-1{} instead",
                     },
                 }
             },
@@ -7853,7 +7855,7 @@ return {
             stake_unik_blindside_mountain_deck = {
                 name = "Mountain Stake????",
                 text = {
-                    "Add {C:red} 1 {X:black,C:white}Crude{} Blind",
+                    "Add {C:red}1 {X:black,C:white}Crude{} Blind",
                     "to deck when",
                     "{C:attention}Boss Joker{} is selected",
                     '{s:0.8}Applies all previous stakes',

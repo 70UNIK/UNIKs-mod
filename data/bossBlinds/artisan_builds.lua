@@ -19,7 +19,7 @@ SMODS.Blind{
             G.GAME.unik_original_chips_artisan = G.GAME.blind.chips
             if G.GAME.ante_rerolls and G.GAME.ante_rerolls > 0 then
                 for i = 1,G.GAME.ante_rerolls do
-                    G.GAME.blind.chips = G.GAME.blind.chips + (G.GAME.unik_original_chips_artisan * 0.5)
+                    G.GAME.blind.chips = G.GAME.blind.chips + (G.GAME.unik_original_chips_artisan * 0.5*0.5)
                     G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                     G.HUD_blind:recalculate(true)
 
@@ -39,9 +39,9 @@ SMODS.Blind{
         G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
         G.HUD_blind:recalculate(true)
     end,
-    defeat = function()
-        G.GAME.ante_rerolls = 0
-    end
+    -- defeat = function()
+    --     G.GAME.ante_rerolls = 0
+    -- end
 }
 
 --hook into reroll
