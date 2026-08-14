@@ -8,7 +8,7 @@ BLINDSIDE.Joker({
     mult = 15,
     base_dollars = 8,
     order = 1,
-    boss = {min = 1},
+    boss = {min = 2},
     active = true,
     loc_vars = function(self,blind)
         G.GAME.unik_blind_xchips = G.GAME.unik_blind_xchips or 1
@@ -45,12 +45,8 @@ BLINDSIDE.Joker({
         end
         if context.unik_chelsea_trigger and context.card and not G.GAME.blind.disabled then
                     G.GAME.unik_dynamic_text_realtime = true
-                G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
-                    blind:wiggle()
                     G.GAME.unik_blind_xchips= G.GAME.unik_blind_xchips + 0.1
                     G.HUD_blind:recalculate(true)
-                    return true
-                end}))
             return {
                 message = "+X" .. 0.1 .. localize('k_unik_jchips'),
                 colour = G.C.BLACK,
