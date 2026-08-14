@@ -93,11 +93,12 @@ BLINDSIDE.Blind({
         if context.press_play then
             for i,v in pairs(G.play.cards) do
                 card.onioned = nil
+                card.ability.burneditall = nil
             end
         end
         --after_effects
         --destruction/burn chances
-        if card.ability.extra.destruction_randomizer then
+        if ( context.burn_card or context.destroy_card) and context.cardarea == G.play and card.ability.extra.destruction_randomizer then
             if (card.ability.extra.destruction_randomizer < 0.4 and not card.ability.extra.upgraded) or (card.ability.extra.destruction_randomizer < 0.2 and not card.ability.extra.upgraded) and card.facing ~= 'back' then
                 --burns self
                 local upgrade_multiplier = not card.ability.extra.upgraded and 1 or 0.5 
@@ -105,15 +106,19 @@ BLINDSIDE.Blind({
                     if context.burn_card and context.cardarea == G.play and context.burn_card == card then
                         return { remove = true }
                     end
+                --all played cards
                 elseif card.ability.extra.destruction_randomizer < 0.35*upgrade_multiplier then
-                    if context.burn_card and context.cardarea == G.play and card.area == G.play then
+                    if context.burn_card and context.cardarea == G.play and card.area == G.play and not card.ability.burneditall then
+                        card.ability.burneditall = true
                         return { remove = true }
                     end
                 elseif card.ability.extra.destruction_randomizer < 0.37*upgrade_multiplier then
+                --destroy self
                     if context.destroy_card and context.destroy_card == card and context.cardarea == G.play and card.area == G.play then
                         return { remove = true }
                     end
                 else
+                    --destroy random blinds
                     if context.destroy_card and context.cardarea == G.play and context.destroy_card.onioned and card.area == G.play then
                         return { remove = true }
                     end

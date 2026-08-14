@@ -1299,7 +1299,7 @@ if next(SMODS.find_mod("Blindside")) then
 	--the jail
 	--the dandy
 	--the circus
-
+	NFS.load(mod_path .. "data/blindside/blinds/crude/apostle.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/lily.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()
 	NFS.load(mod_path .. "data/blindside/blinds/crude/corpo.lua")()
@@ -1355,6 +1355,8 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/cursed/spy.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/cursed/impound_notice.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/legendary/megatron.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/legendary/whitenight.lua")()
+	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/niko.lua")()	
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/moonlight_cookie.lua")()
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/white_lily_cookie.lua")()

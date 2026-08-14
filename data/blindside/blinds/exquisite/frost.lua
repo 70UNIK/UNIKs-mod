@@ -5,8 +5,8 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 3,
-            chips = 100,
-            chips_up = 100,
+            chips = 200,
+            chips_up = 200,
             ignore_hand_selection = true,
         }},
     hues = {"Blue"},

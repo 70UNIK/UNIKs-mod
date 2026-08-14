@@ -3,7 +3,7 @@
 --Amber acorn: flips and shuffles all jokers, shuffles all jokers, held and played cards on play, making it more of a threat
 SMODS.Blind:take_ownership("bl_final_acorn",{
     calculate = function(self, blind, context)
-        if context.press_play then
+        if context.press_play and not G.GAME.blind.disabled  then
             G.E_MANAGER:add_event(Event({
                     func = function()
                         if #G.jokers.cards > 0 then

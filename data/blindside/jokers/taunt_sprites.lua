@@ -66,6 +66,23 @@ if not next(SMODS.find_mod("Bunco")) then
         end
     })
 end
+
+if not next(SMODS.find_mod("paperback")) then
+    print("LOADING TAUNT SPRITE PAPERBACK")
+    SMODS.Joker({
+        key='unik_blindside_whitenight_paperback',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 0, y = 2},
+        soul_pos = {x = 1, y = 2},
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+end
 if not (SMODS.Mods["Cryptid"] or {}).can_load then
     print("LOADING TAUNT SPRITE cryprid")
     SMODS.Joker({

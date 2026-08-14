@@ -515,7 +515,7 @@ return {
             bl_unik_blindside_whitenight = {
                 name = "WhiteNight",
                 text = {
-                    "Add #1# Apostles",
+                    "Add 12 Apostles", --fixed 12 apostles
                     "to your deck",
                     "If scoring hand has no",
                     "Apostles, Banish a",
@@ -3222,7 +3222,6 @@ return {
                         "to Joker"
                     },
                     {"{C:red}Stubborn"},
-                    {"{C:green}Retained"}, 
                 }
             },
             m_unik_blindside_ai_brainrot = {
@@ -6210,15 +6209,9 @@ return {
             j_merry_andy = {
                 name="Merry Andy",
                 text={
-                    {
                         "Gain {C:red}+#1#{} Discard#<s>1# when",
                     "{C:attention}Blind{} is selected",
-                    },
-                    {
                         "{C:red}#2#{} hand size",
-                    },
-                    
-                    
                 },
                 unlock={
                     "Win a run in {E:1,C:attention}#1#",
