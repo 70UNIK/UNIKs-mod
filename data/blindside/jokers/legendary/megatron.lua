@@ -54,7 +54,7 @@ BLINDSIDE.Joker({
                             
                     return true end }))
                 else
-                    UNIK.blindside_chips_modifyV2({x_mult = 1.75})  
+                    BLINDSIDE.chipsmodifyV2({x_mult = 1.75})  
                     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 
                     blind:wiggle()

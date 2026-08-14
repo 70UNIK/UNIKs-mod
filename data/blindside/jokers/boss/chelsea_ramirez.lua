@@ -1,0 +1,69 @@
+--+
+BLINDSIDE.Joker({
+    blindside_joker = true,
+    key = 'unik_blindside_chelsea_ramirez',
+    atlas = 'unik_blindside_jokers',
+    pos = {x=0, y=30},
+    boss_colour = HEX("d19bff"),
+    mult = 15,
+    base_dollars = 8,
+    order = 1,
+    boss = {min = 1},
+    active = true,
+    loc_vars = function(self,blind)
+        G.GAME.unik_blind_xchips = G.GAME.unik_blind_xchips or 1
+        return { vars = { G.GAME.unik_blind_xchips, 0.1 .. "" } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { 1 .. "", 0.1 .. "" } }
+    end,
+    death_card = {
+        card = 'j_unik_jsab_chelsea', 
+        mod_card = function(self, card) --used to apply editions and/or stickers
+            
+        end,
+        quotes = {'unik_blindside_chelsea_lose'},
+        say_times = 7,
+    },
+    calculate = function(self, blind, context)
+        if context.setting_blind and not context.disabled and not G.GAME.blind.disabled then
+            G.GAME.unik_dynamic_text_realtime = true
+            G.GAME.unik_blind_xchips = 1
+        end
+        if (context.after) and not G.GAME.blind.disabled then
+            G.GAME.unik_dynamic_text_realtime = true
+            G.GAME.unik_blind_xchips = G.GAME.unik_blind_xchips or 1
+            G.HUD_blind:recalculate(true)
+            if G.GAME.unik_blind_xchips > 1 then
+                BLINDSIDE.chipsmodifyV2({x_chips = G.GAME.unik_blind_xchips})   
+                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
+                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
+                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+            end
+           G.GAME.blind:set_text()
+            
+        end
+        if context.unik_chelsea_trigger and context.card and not G.GAME.blind.disabled then
+                    G.GAME.unik_dynamic_text_realtime = true
+                G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.3, func = function()
+                    blind:wiggle()
+                    G.GAME.unik_blind_xchips= G.GAME.unik_blind_xchips + 0.1
+                    G.HUD_blind:recalculate(true)
+                    return true
+                end}))
+            return {
+                message = "+X" .. 0.1 .. localize('k_unik_jchips'),
+                colour = G.C.BLACK,
+                focus = context.other_card,
+            }
+        end
+    end,
+    disable = function(self)
+        G.GAME.unik_dynamic_text_realtime = nil
+        G.GAME.unik_blind_xchips = 1
+    end,
+    joker_defeat = function()
+        G.GAME.unik_dynamic_text_realtime = nil
+        G.GAME.unik_blind_xchips = 1
+    end
+})

@@ -127,7 +127,7 @@ BLINDSIDE.Joker({
             G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult or 1
             G.HUD_blind:recalculate(true)
             if G.GAME.unik_blind_xmult > 1 then
-                UNIK.blindside_chips_modifyV2({x_mult = G.GAME.unik_blind_xmult})   
+                BLINDSIDE.chipsmodifyV2({x_mult = G.GAME.unik_blind_xmult})   
                 G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                 G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
                 G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)

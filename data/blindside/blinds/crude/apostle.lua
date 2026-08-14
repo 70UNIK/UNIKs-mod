@@ -14,7 +14,7 @@
         hidden = true,
         calculate = function(self, card, context)
             if context.cardarea == G.play and context.main_scoring then
-                UNIK.blindside_chips_modifyV2({x_mult = card.ability.extra.jokerxmult}) 
+                BLINDSIDE.chipsmodifyV2({x_mult = card.ability.extra.jokerxmult}) 
                 return {
                     message = "X" .. card.ability.extra.jokerxmult .. localize('k_unik_jmult'),
                     colour = G.C.BLACK,
