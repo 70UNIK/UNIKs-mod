@@ -307,8 +307,17 @@ return {
             bl_unik_blindside_yokana_ramirez = {
                 name = "Yokana Ramirez",
                 text = {
-                    "X#1# Chips whenever",
-                    "a Blind is scored",
+                    "X#1# Chips to Joker",
+                    "per Blind scored",
+                }
+            },
+            bl_unik_blindside_toothy_joker = {
+                name = "Toothy Joker",
+                text = {
+                    "+X0.25 Base Chips",
+                    "to Joker per Cinema",
+                    "card used this run",
+                    "(Currently #1# used)",
                 }
             },
             --cube joker + square joker
@@ -520,7 +529,8 @@ return {
                     "If scoring hand has no",
                     "Apostles, Banish a",
                     "random owned Trinket",
-                    "and debuff all played Blinds"
+                    "or debuff all played Blinds",
+                    "if no Trinket owned"
                 }
             },
             bl_unik_blindside_monopoly_money = {
@@ -576,11 +586,13 @@ return {
                     "when Defeated"
                 }
             },
-            bl_unik_blindside_joker_in_yellow={
+            bl_unik_blindside_hashtur={
                 name = "The Joker in Yellow",
                 text = {
-                    "Yellow Blinds permanently",
-                    "gain +1 Mult when played",
+                    "Yellow Blinds",
+                    "in scoring hand",
+                    "permanently gain",
+                    "+2 Mult",
                 }
             },
             bl_unik_blindside_unik = {
@@ -9696,6 +9708,10 @@ return {
             unik_blindside_maya_lose = {
                 "Don't you fucking hurt",
                 "my family again."
+            },
+            unik_blindside_yokana_lose = {
+                "Please stop!",
+                "Leave us alone!",
             },
             unik_blindside_fiendish_joker_lose = {
                 "WHAT'S THE MATTER?",

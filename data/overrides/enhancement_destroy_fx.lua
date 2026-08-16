@@ -73,7 +73,7 @@ SMODS.Enhancement:take_ownership("m_entr_flesh",{
     gore6break = true,
 }, true)
 
-SMODS.Enhancement:take_ownership("m_bld_tablet",{
+BLINDSIDE.Blind:take_ownership("m_bld_tablet",{
     rockbreak = true,
 }, true)
 

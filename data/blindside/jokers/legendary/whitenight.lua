@@ -24,7 +24,7 @@ BLINDSIDE.Joker({
         quotes = {'unik_blindside_whitenight_lose'},
     },
     calculate = function(self, blind, context)
-        if context.before and context.scoring_hand then
+        if context.before and context.scoring_hand and not G.GAME.blind.disabled then
             local has_apostle = false
             for i,v in pairs(context.scoring_hand) do
                 if v.config.center.key == 'm_unik_blindside_apostle' then
@@ -33,18 +33,14 @@ BLINDSIDE.Joker({
                 end
             end
             if not has_apostle then
-                for i,v in pairs(G.play.cards) do
-                    v.config.center.blind_debuff(v, true)
-                    
-                end
+                
                 G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                 G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
                 G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
                 local cards = {}
                 for i,v in pairs(G.jokers.cards) do
-                    if not v.banished_by_goblin then
-                        cards[#cards+1] = v
-                    end
+                    v.debuff = nil
+                    cards[#cards+1] = v
                 end
                 blind:wiggle()
                 --print(cards)
@@ -65,7 +61,16 @@ BLINDSIDE.Joker({
                     
                         
                 else
+                    for i,v in pairs(G.play.cards) do
+                        v.config.center.blind_debuff(v, true)
+                        
+                    end
                 end
+            end
+        end
+        if context.after then
+            for i,v in pairs(G.jokers.cards) do
+                v.debuff = nil
             end
         end
     end,

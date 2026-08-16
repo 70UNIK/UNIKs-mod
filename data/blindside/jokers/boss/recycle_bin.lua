@@ -46,7 +46,7 @@ BLINDSIDE.Joker({
             end}))
             
             return {
-                message = "+X" .. 0.1 .. localize('k_unik_jmult'),
+                message = "+X" .. 0.05 .. localize('k_unik_jmult'),
                 colour = G.C.BLACK,
                 focus = context.other_card,
             }
