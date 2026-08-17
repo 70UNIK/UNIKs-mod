@@ -21,10 +21,13 @@ BLINDSIDE.Joker({
         return  G.GAME.blindside_banana_generated  and not (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5) and G.GAME.modifiers.enable_bld_tough_jokers
     end,
     calculate = function(self, blind, context)
+        if context.setting_blind and G.GAME.modifiers.enable_bld_deplete_hands and G.GAME.current_round.hands_left > 1 then
+            ease_hands_played(-1)
+        end
         if (context.after) and not G.GAME.blind.disabled then
             G.GAME.unik_infuriating_xmult = G.GAME.unik_infuriating_xmult or 1.2
             if G.GAME.unik_infuriating_xmult > 1 then
-                BLINDSIDE.chipsmodifyV2({x_mult = G.GAME.unik_infuriating_xmult})   
+                BLINDSIDE.chipsmodifyV2({x_mult = (G.GAME.unik_infuriating_xmult ^ (BLINDSIDE.has_canvas(context) and 0.95 or 1))})   
                 G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                 G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
                 G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)

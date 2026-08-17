@@ -15,7 +15,7 @@ BLINDSIDE.Joker({
             if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
             G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
             if G.GAME.unik_blindside_cinemas_used_this_run > 1 then
-                return true
+                return G.GAME.blindside_banana_generated  and not (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5) and G.GAME.modifiers.enable_bld_tough_jokers
             end
         else
         return false
@@ -27,6 +27,10 @@ BLINDSIDE.Joker({
     joker_set = function ()
          G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
         UNIK.blindside_chips_modifyV2({chips_base = 0.25 * G.GAME.unik_blindside_cinemas_used_this_run}) 
+        G.GAME.blind:wiggle()
+         G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
+            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
+            G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()
             return true end }))
@@ -40,7 +44,11 @@ BLINDSIDE.Joker({
     end,
     enable = function()
         G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
-        UNIK.blindside_chips_modifyV2({chips_base = 0.25 * G.GAME.unik_blindside_cinemas_used_this_run}) 
+        UNIK.blindside_chips_modifyV2({chips_base = 0.25 * G.GAME.unik_blindside_cinemas_used_this_run }) 
+        G.GAME.blind:wiggle()
+         G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
+            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
+            G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()
             return true end }))
@@ -59,6 +67,11 @@ BLINDSIDE.Joker({
                 0
             }
         }
+    end,
+        calculate = function(self, blind, context)
+        if context.setting_blind and G.GAME.modifiers.enable_bld_deplete_hands and G.GAME.current_round.hands_left > 1 then
+            ease_hands_played(-1)
+        end
     end,
 })
 

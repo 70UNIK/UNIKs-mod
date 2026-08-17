@@ -20,7 +20,7 @@ BLINDSIDE.Joker({
                 end
             end
             if seals >= 5 then
-                return true
+                return G.GAME.blindside_banana_generated  and not (G.GAME.modifiers.enable_bld_elites and G.GAME.round_resets.ante == 5) and G.GAME.modifiers.enable_bld_tough_jokers
             end
         else
         return false
@@ -44,6 +44,9 @@ BLINDSIDE.Joker({
         }
     end,
     calculate = function(self, blind, context)
+        if context.setting_blind and G.GAME.modifiers.enable_bld_deplete_hands and G.GAME.current_round.hands_left > 1 then
+            ease_hands_played(-1)
+        end
         if context.scoring_hand and context.full_hand and context.poker_hands and G.STATE == G.STATES.SELECTING_HAND and not G.GAME.blind.disabled then
             local triggered = false
             for i,v in pairs(context.full_hand) do
@@ -72,7 +75,7 @@ BLINDSIDE.Joker({
                         G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
                         G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
                         G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
-                         BLINDSIDE.chipsmodify(1, 0, 0)
+                         BLINDSIDE.chipsmodify(1 - (BLINDSIDE.has_canvas(context) and 0.5 or 0), 0, 0)
                         G.E_MANAGER:add_event(Event({
                             func = (function()
                             G.GAME.blind:wiggle()

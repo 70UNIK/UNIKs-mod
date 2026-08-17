@@ -37,6 +37,12 @@ BLINDSIDE.Joker({
                                 return true
                             end
                         }))
+                        G.E_MANAGER:add_event(Event({
+                            func = (function()
+                            G.GAME.blind:wiggle()
+                            return true
+                            end)
+                        }))
                     end
                 }
             end

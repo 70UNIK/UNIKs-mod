@@ -271,8 +271,46 @@ return {
                 name = "Maya Ramirez",
                 text = {
                     "Played Blinds",
-                    "Permanently lose",
+                    "permanently lose",
                     "X#1# Chips",
+                }
+            },
+            bl_unik_blindside_game_bro = {
+                name = "Game Bro",
+                text = {
+                    "Gains +#1# Mult per hand",
+                    "Increase this by #2# Mult",
+                    "for every #3# Rounds",
+                }
+            },
+            bl_unik_blindside_chipped_joker = {
+                name = "Chipped Joker",
+                text = {
+                    "Scored Blinds permanently",
+                    "lose #1# Chips and add",
+                    "+X#2# Base Chips to Joker"
+                }
+            },
+            bl_unik_blindside_game_brothers = {
+                name = "Gaming Brothers",
+                text = {
+                    "Gains +#1# Mult",
+                    "per hand",
+                    "Increase this",
+                    "by #2# Mult",
+                    "for every",
+                    "#3# Rounds",
+                }
+            },
+            bl_unik_blindside_game_brothers2 = {
+                name = "Gaming Brothers",
+                text = {
+                    "Gains +#1# Mult",
+                    "per hand",
+                    "Increase this",
+                    "by #2# Mult",
+                    "for every",
+                    "#3# Rounds",
                 }
             },
             bl_unik_blindside_catto_boi = {
@@ -307,7 +345,7 @@ return {
             bl_unik_blindside_yokana_ramirez = {
                 name = "Yokana Ramirez",
                 text = {
-                    "X#1# Chips to Joker",
+                    "X1.2 Chips to Joker",
                     "per Blind scored",
                 }
             },
