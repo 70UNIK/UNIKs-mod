@@ -10,6 +10,8 @@ BLINDSIDE.Blind({
             e_mult_up = 0.2,
             discards = 2,
             discards_up = 2,
+            x_mult = 2.5,
+            x_mult_up = 1.5,
         }},
     hues = {"Red", "Blue"},
     calculate = function(self, card, context) 
@@ -24,7 +26,7 @@ BLINDSIDE.Blind({
             ease_discard(card.ability.extra.discards)
             return {
                 message = localize({type='variable',key='a_unik_discards_1',vars={card.ability.extra.discards}}),
-                --e_mult = card.ability.extra.e_mult
+                x_mult = card.ability.extra.x_mult,
                 colour = G.C.MULT,
             }
         end
@@ -44,7 +46,7 @@ BLINDSIDE.Blind({
         info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
         return {
             vars = {
-                card.ability.extra.e_mult,card.ability.extra.discards
+                card.ability.extra.e_mult,card.ability.extra.discards,card.ability.extra.x_mult
             }
         }
     end,
@@ -52,6 +54,7 @@ BLINDSIDE.Blind({
         if not card.ability.extra.upgraded then
             card.ability.extra.e_mult = card.ability.extra.e_mult + card.ability.extra.e_mult_up
             card.ability.extra.discards = card.ability.extra.discards + card.ability.extra.discards_up
+            card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.x_mult_up
         card.ability.extra.upgraded = true
         end
     end

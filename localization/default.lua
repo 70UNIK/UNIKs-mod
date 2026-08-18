@@ -3843,9 +3843,11 @@ return {
                 text = {
                     {"{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
                     "Gains {X:dark_edition,C:white}^#2#{} Mult",
+                    "and {X:mult,C:white}X#4#{} Mult",
 					"after being played"},
 					{"{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult",
-                "{C:attention}after scoring{C:inactive})"},
+                "{C:attention}after scoring{C:inactive} and",
+                 "{X:mult,C:white}X#3#{C:inactive} Mult)"},
                 }
             },
             m_unik_blindside_epic_bellows = {
@@ -3868,14 +3870,14 @@ return {
                 name = "Ylösalaisin", --upside down
                 text = {
                     {"{X:green,C:white}Green{} {X:purple,C:white}Purple{}",
-                    "{C:green}#1# in #2#{} chance for",
-                    "{X:dark_edition,C:white}^#3#{} Mult or",
-                    "{X:dark_edition,C:white}^#4#{} Chips",
-                    "{C:attention}after scoring"},
+                        "{X:mult,C:white}X#5#{} Mult",
+                        "or {X:chips,C:white}X#6#{} Chips"
+                    },
                     {
-                        "otherwise {X:mult,C:white}X#5#{} Mult",
-                        "or {X:chips,C:white}X#6#{} Chips",
-                        "{C:attention}after scoring",
+                        "{C:green}#1# in #2#{} chance for",
+                        "{X:dark_edition,C:white}^#3#{} Mult or",
+                        "{X:dark_edition,C:white}^#4#{} Chips",
+                        "{C:attention}after scoring"
                     },
 
                 }
@@ -3884,6 +3886,7 @@ return {
                 name = "Verenvuotokoukku",
                 text = {
                     {"{X:red,C:white}Red{} {X:chips,C:white}Blue{}",
+                    "{X:red,C:white}X#3#{} Mult and",
                     "{C:red}+#2#{} Discards"},
                     {
                         "{X:dark_edition,C:white}^#1#{} Mult",
@@ -3896,21 +3899,25 @@ return {
                 }
             },
             --^1.25 Chips after scoring, increase by ^0.15, resets at ^1.25
+            --change to 
             m_unik_blindside_epic_trench = {
                 name = "Merenkaivanto", --trench of the ocean
                 text = {
                     {
                         "{X:chips,C:white}Blue{} {X:dark_edition,C:white}Faded",
                         "Gains {C:white,X:dark_edition}^#1#{} Chips",
+                        "and {X:chips,C:white}X#4#{} Chips",
 					    "when scored"
                     },
 					{
                         "{C:attention}Resets{} to {C:white,X:dark_edition}^#2#",
+                        "and {C:white,X:chips}X#5#",
                         "each round"
                     },
                     {
                         "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Chips",
-                        "{C:attention}after scoring{C:inactive})"
+                        "{C:attention}after scoring{C:inactive} and",
+                        "{X:chips,C:white}X#6#{C:inactive} Chips)"
                     },
                 },
             },
@@ -4062,24 +4069,21 @@ return {
                     },
                 },
             },
+            --rework: change into a blueprint type effect, but only if <= 2 blinds played.
             m_unik_blindside_legendary_silver_sword = {
                 name = "Sadistinenmiekka",
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
-                        "When held,",
-                        "if played hand contains",
-                        "only {C:attention}#1#{} Blind#<s>1#,",
-                        "{C:unik_copper}Rescore{} {C:attention}first{} played",
-                        "Blind for every",
-                        "{X:dark_edition,C:white}Faded{} Blind#<s>2# in full deck"
+                        "{C:attention}Copies{} the {C:attention}leftmost",
+                        "Blind {C:attention}#2#{} time#<s>2#",
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} Rescore#<s>3#)"
+                        "Increase copies by {C:attention}#3#",
+                        "when played"
                     },
-                    { 
-                        "{C:green}Retained"
-                    }
+                    {"{C:green}Retained"},
+                    {"Always Scores"}
                 },
             },
             m_unik_blindside_legendary_silver_sword_upgraded = {
@@ -4087,31 +4091,22 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
-                        "When held,",
-                        "{C:unik_copper}Rescore{} {C:attention}first{} played",
-                        "Blind for every",
-                        "{X:dark_edition,C:white}Faded{} Blind#<s>2# in full deck"
+                        "{C:attention}Copies{} the {C:attention}leftmost",
+                        "Blind {C:attention}#2#{} time#<s>2#",
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} Rescore#<s>3#)"
+                        "{C:unik_copper}Rescore{} this Blind",
+                        "{C:attention}#1#{} time#<s>1#"
                     },
                     {
-                        "{C:green}Retained"
-                    }
+                        "Increase copies by {C:attention}#3#",
+                        "when played"
+                    },
+                    {"{C:green}Retained"},
+                    {"Always Scores"}
                 },
             },
             --
-            m_unik_blindside_legendary_viridian_valve = {
-                name = "Valvenrikottulupaus", --valve's broken promise
-                text = {
-                    {
-                        "{X:green,C:white}Green{} {X:purple,C:white}Purple",
-                        "{X:dark_edition,C:white}^#1#{} Mult if poker",
-                        "hand does not contain",
-                        "more than{C:attention}#2#{} Blind#<s>2#",
-                    },
-                }
-            },
             --green, Other blinds each give ^1 Mult then +^0.02 Mult for each unique hue held in hand it shares (ie: a 2 hue blind can give up to ^1.04 mult)
             m_unik_blindside_legendary_chartuese_chamber = {
                 name = "Kidutuskammio",

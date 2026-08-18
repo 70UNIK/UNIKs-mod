@@ -17,7 +17,7 @@ BLINDSIDE.Blind({
         if card.area and card.added_to_deck then
             local areacards = card.area.cards
             --G.discard, such as the bell
-            if card.highlighted and (card.area == G.hand or card.area == G.discard) and G.hand and G.hand.highlighted then
+            if card.highlighted and (card.area == G.hand) and G.hand and G.hand.highlighted then
                 areacards = G.hand
             end
             if card.area == G.play and context and context.scoring_hand then

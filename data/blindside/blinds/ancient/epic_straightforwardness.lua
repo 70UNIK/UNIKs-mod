@@ -6,7 +6,7 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            joker_e_chips = 0.9,
+            joker_e_chips = 0.92,
             joker_e_chips_down = 0.05,
         }
     },

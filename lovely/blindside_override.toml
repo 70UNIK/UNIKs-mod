@@ -18,6 +18,7 @@ if BLINDSIDE then
         if card.ability and card.ability.extra and type(card.ability.extra) == 'table' then
             if card.ability.extra.e_chips and card.config.center.key == 'm_unik_blindside_epic_trench' then
                 card.ability.extra.e_chips = card.ability.extra.e_chips_base
+                card.ability.extra.x_chips = card.ability.extra.x_chips_base
             end
         end
         card.ability.unik_burned_by_hook = nil

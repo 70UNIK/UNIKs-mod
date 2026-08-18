@@ -12,10 +12,10 @@ BLINDSIDE.Blind({
             e_mult_up = 0.2,
             e_chips = 1.2,
             e_chips_up = 0.2,
-            x_mult = 3,
-            x_mult_up = 2,
-            x_chips = 3,
-            x_chips_up = 2,
+            x_mult = 2.5,
+            x_mult_up = 1.5,
+            x_chips = 2.5,
+            x_chips_up = 1.5,
         }},
     hues = {"Green","Purple"},
     calculate = function(self, card, context) 
@@ -31,15 +31,18 @@ BLINDSIDE.Blind({
                     }
                 end
             else
-                if pseudorandom('flip_alternate_middle') < 0.5 then
-                    return {
-                        x_mult = card.ability.extra.x_mult
-                    }        
-                else
-                    return {
-                        x_chips = card.ability.extra.x_chips
-                    }
-                end
+                
+            end
+        end
+        if context.cardarea == G.play and context.main_scoring then
+            if pseudorandom('flip_alternate_middle2') < 0.5 then
+                return {
+                    x_mult = card.ability.extra.x_mult
+                }        
+            else
+                return {
+                    x_chips = card.ability.extra.x_chips
+                }
             end
         end
     end,

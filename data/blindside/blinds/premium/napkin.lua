@@ -23,13 +23,14 @@ BLINDSIDE.Blind({
         if card.area and card.added_to_deck then
             local areacards = card.area.cards
             --G.discard, such as the bell
-            if card.highlighted and (card.area == G.hand or card.area == G.discard) and G.hand and G.hand.highlighted then
+            if card.highlighted and (card.area == G.hand) and G.hand and G.hand.highlighted then
                 areacards = G.hand
             end
             if card.area == G.play and context and context.scoring_hand then
                 areacards = context.scoring_hand
             end
-            if areacards and areacards[1] and areacards[1] ~= card and areacards[1].config.center.key ~= 'm_unik_blindside_napkin' then
+            if areacards and areacards[1] and areacards[1] ~= card and 
+            (areacards[1].config.center.key ~= 'm_unik_blindside_napkin' and areacards[1].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
                 for i,v in pairs(areacards) do
                     v.bp_iterations = 0
                 end
@@ -65,7 +66,8 @@ BLINDSIDE.Blind({
             cardarea = scoring_hand
         end
         
-        if card.added_to_deck and cardarea and cardarea[1] and cardarea[1] ~= card and cardarea[1].config.center.key ~= 'm_unik_blindside_napkin' then
+        if card.added_to_deck and cardarea and cardarea[1] and cardarea[1] ~= card and 
+        (cardarea[1].config.center.key ~= 'm_unik_blindside_napkin' and cardarea[1].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
             card.ability.napkintype = localize({type = 'name_text', key = cardarea[1].config.center.key, set = 'Enhanced'})
             card.ability.colour = G.C.DARK_EDITION
         else
@@ -137,7 +139,7 @@ function UNIK.detect_bp_loop(card,cardarea_cards,index)
             next.bp_iterations = next.bp_iterations or 0
             next.bp_iterations = next.bp_iterations + 1
             i = i + 1
-        elseif next.config.center.key == 'm_unik_blindside_napkin' then
+        elseif next.config.center.key == 'm_unik_blindside_napkin' or next.config.center.key == 'm_unik_blindside_legendary_silver_sword' then
             next.bp_iterations = next.bp_iterations or 0
             next.bp_iterations = next.bp_iterations + 1
             i = 1

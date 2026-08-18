@@ -17,14 +17,14 @@ BLINDSIDE.Joker({
      loc_vars = function (self)
         return {
             vars = {
-                3,0.1
+                2,0.1
             }
         }
     end,
     collection_loc_vars = function(self)
         return {
             vars = {
-                3,0.1
+                2,0.1
             }
         }
     end,
@@ -38,7 +38,7 @@ BLINDSIDE.Joker({
                 G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
                 G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
                  context.other_card.ability["perma_bonus"] = context.other_card.ability["perma_bonus"] or 0
-                context.other_card.ability["perma_bonus"] = context.other_card.ability["perma_bonus"] - 3 + (BLINDSIDE.has_canvas(context) and 1 or 0)
+                context.other_card.ability["perma_bonus"] = context.other_card.ability["perma_bonus"] - 2 + (BLINDSIDE.has_canvas(context) and 1 or 0)
                 return {
                     message = "+X" .. 0.1 .. " " .. localize('k_unik_jchips_base'),
                     colour = G.C.BLACK,
