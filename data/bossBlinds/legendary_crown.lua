@@ -95,6 +95,7 @@ end
 
 local end_roundref = end_round
 function end_round()
+    G.GAME.unik_force_cursed_jokers = nil
     if not (G.GAME.blind and G.GAME.blind.config and G.GAME.blind.config.blind.key == "bl_entr_endless_entropy_phase_four") then
         if to_big(G.GAME.chips) >= to_big(G.GAME.blind.chips) then
             if G.GAME.unik_crown_progress and G.GAME.unik_crown_progress > 1 then

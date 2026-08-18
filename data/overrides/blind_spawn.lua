@@ -62,6 +62,7 @@ function reset_blinds()
                 G.GAME.round_resets.blind_choices.Boss = get_new_boss()
             end
              SMODS.calculate_context({unik_refresh_blinds = true})
+             G.GAME.unik_force_cursed_jokers = nil
              G.GAME.ante_rerolls = 0
              for i,v in pairs(G.jokers.cards) do
                 v.ability.unik_bought_this_ante = nil
@@ -74,6 +75,7 @@ function reset_blinds()
             G.GAME.round_resets.blind_states.Big == 'Upcoming' and
             G.GAME.round_resets.blind_states.Boss == 'Upcoming' then
                 SMODS.calculate_context({unik_refresh_blinds = true})
+                G.GAME.unik_force_cursed_jokers = nil
                 G.GAME.ante_rerolls = 0
                 for i,v in pairs(G.jokers.cards) do
                     v.ability.unik_bought_this_ante = nil

@@ -1,4 +1,5 @@
 --doubles sell value of all owned trinkets per hand
+--DYSFUNCTIONALL FOR NOIWE
 BLINDSIDE.Joker({
     blindside_joker = true,
     key = 'unik_blindside_rotten_egg',
@@ -31,7 +32,7 @@ BLINDSIDE.Joker({
              G.E_MANAGER:add_event(Event({
                 func = function()
                     for i,v in pairs(G.jokers.cards) do
-                        v.ability.extra_value = (v.ability.extra_value or 0) + v.ability.extra_value
+                        v.ability.extra_value = (v.ability.extra_value or 0) + v.sell_cost
                         v:set_cost()
                         triggered = true
                     end

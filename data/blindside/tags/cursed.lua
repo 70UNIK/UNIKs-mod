@@ -30,11 +30,11 @@ SMODS.Tag {
                         G.GAME.unik_force_cursed_jokers = nil
                             
                         G.E_MANAGER:add_event(Event({func = function()
-                            
+                            G.GAME.unik_force_cursed_jokers = nil
                             G.CONTROLLER.locks[lock] = nil
+                            G.GAME.unik_force_cursed_jokers = nil
                         return true; end}))
                     return true; end}))
-                    
                     G.GAME.unik_lock_soul_tag = nil        
                 return true end)
 
