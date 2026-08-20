@@ -37,6 +37,7 @@ BLINDSIDE.Blind({
                     operation = '+',
                         message_colour = G.C.DARK_EDITION,
                         force_full_val = true,
+                        
                             
                 })
                    SMODS.scale_card(card, {
@@ -47,7 +48,7 @@ BLINDSIDE.Blind({
                     operation = '+',
                         message_colour = G.C.DARK_EDITION,
                         force_full_val = true,
-                            
+                          no_message = true,  
                 })
                 end
             }

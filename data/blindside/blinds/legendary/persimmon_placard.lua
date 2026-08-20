@@ -5,10 +5,10 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 1,
-            x_mult = 4,
-            money = 3,
-            x_mult_up = 2,
-            money_up = 3,
+            x_mult = 5,
+            money = 5,
+            x_mult_up = 4,
+            money_up = 5,
         }},
     hues = {"Yellow"},
     calculate = function(self, card, context) 

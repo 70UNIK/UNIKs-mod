@@ -261,7 +261,7 @@ return {
                 }
             },
             bl_unik_blindside_riif_roof = {
-                name = "Riff Roof",
+                name = "Riff-Roof",
                 text = {
                     "X#1# Mult per",
                     "Trinket owned"
@@ -345,14 +345,14 @@ return {
             bl_unik_blindside_yokana_ramirez = {
                 name = "Yokana Ramirez",
                 text = {
-                    "X1.2 Chips to Joker",
+                    "X1.1 Chips to Joker",
                     "per Blind scored",
                 }
             },
             bl_unik_blindside_toothy_joker = {
                 name = "Toothy Joker",
                 text = {
-                    "+X0.25 Base Chips",
+                    "+X0.05 Base Chips",
                     "to Joker per Cinema",
                     "card used this run",
                     "(Currently #1# used)",

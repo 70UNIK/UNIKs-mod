@@ -21,7 +21,7 @@ BLINDSIDE.Blind({
                 chips = card.ability.extra.chips
             }
         end
-        if context.press_play and card.facing ~= 'back' then
+        if context.press_play and card.facing ~= 'back' and context.main_eval  then
             G.E_MANAGER:add_event(Event({
                     trigger = "after",
                     delay = 1,

@@ -26,7 +26,7 @@ BLINDSIDE.Joker({
     end,
     joker_set = function ()
          G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
-        UNIK.blindside_chips_modifyV2({chips_base = 0.25 * G.GAME.unik_blindside_cinemas_used_this_run}) 
+        UNIK.blindside_chips_modifyV2({chips_base = 0.05 * G.GAME.unik_blindside_cinemas_used_this_run}) 
         G.GAME.blind:wiggle()
          G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
             G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
@@ -37,14 +37,14 @@ BLINDSIDE.Joker({
     end,
     disable = function()
          G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
-        UNIK.blindside_chips_modifyV2({chips_base = -0.25 * G.GAME.unik_blindside_cinemas_used_this_run}) 
+        UNIK.blindside_chips_modifyV2({chips_base = -0.05 * G.GAME.unik_blindside_cinemas_used_this_run}) 
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()
             return true end }))
     end,
     enable = function()
         G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
-        UNIK.blindside_chips_modifyV2({chips_base = 0.25 * G.GAME.unik_blindside_cinemas_used_this_run }) 
+        UNIK.blindside_chips_modifyV2({chips_base = 0.05 * G.GAME.unik_blindside_cinemas_used_this_run }) 
         G.GAME.blind:wiggle()
          G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
             G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"

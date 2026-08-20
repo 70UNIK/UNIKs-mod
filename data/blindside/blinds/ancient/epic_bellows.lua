@@ -8,8 +8,8 @@ BLINDSIDE.Blind({
             value = 1,
             x_mult = 1.6,
             x_mult_up = 0.6,
-            log_base = 50,
-            log_base_down = 25,
+            log_base = 25,
+            log_base_down = 12,
             hand_size = 1,
             retain = true,
         }},
@@ -21,7 +21,7 @@ BLINDSIDE.Blind({
                 xlog_mult = card.ability.extra.log_base,
             }
         end
-        if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
             card.ability.extra.unik_hand_size_added = true
             G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
             G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker + 1
@@ -30,7 +30,7 @@ BLINDSIDE.Blind({
             print("hand_mod: " .. G.GAME.bellows_hs_tracker)
             
         end
-        if G.hand.cards and card and card.ability.extra.hand_size and not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        if G.hand.cards and card and card.ability.extra.hand_size and not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
             card.ability.extra.unik_hand_size_added = nil
             G.hand:change_size(-card.ability.extra.hand_size)
             G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0

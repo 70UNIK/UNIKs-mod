@@ -2,6 +2,9 @@
 BLINDSIDE.Joker({
     blindside_joker = true,
     key = 'unik_blindside_game_brothers',
+    get_assist = function(self)
+        return G.P_BLINDS["bl_unik_blindside_game_brothers2"]
+    end,
     atlas = 'unik_blindside_jokers',
     pos = {x=0, y=34},
     boss_colour = HEX("5A7942"),

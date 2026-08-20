@@ -31,7 +31,10 @@ BLINDSIDE.Blind({
                     }
                 end
             else
-                
+                return {
+                        message = localize('k_nope_ex'),
+                        colour = G.C.GREEN
+                    }
             end
         end
         if context.cardarea == G.play and context.main_scoring then

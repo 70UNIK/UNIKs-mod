@@ -17,14 +17,14 @@ BLINDSIDE.Joker({
      loc_vars = function (self)
         return {
             vars = {
-                2,0.1
+                2,0.05
             }
         }
     end,
     collection_loc_vars = function(self)
         return {
             vars = {
-                2,0.1
+                2,0.05
             }
         }
     end,
@@ -40,11 +40,11 @@ BLINDSIDE.Joker({
                  context.other_card.ability["perma_bonus"] = context.other_card.ability["perma_bonus"] or 0
                 context.other_card.ability["perma_bonus"] = context.other_card.ability["perma_bonus"] - 2 + (BLINDSIDE.has_canvas(context) and 1 or 0)
                 return {
-                    message = "+X" .. 0.1 .. " " .. localize('k_unik_jchips_base'),
+                    message = "+X" .. 0.05 .. " " .. localize('k_unik_jchips_base'),
                     colour = G.C.BLACK,
                     focus = context.other_card,
                     func = function ()
-                        UNIK.blindside_chips_modifyV2({chips_base = 0.1 - (BLINDSIDE.has_canvas(context) and 0.05 or 0)}) 
+                        UNIK.blindside_chips_modifyV2({chips_base = 0.05 - (BLINDSIDE.has_canvas(context) and 0.025 or 0)}) 
                         G.E_MANAGER:add_event(Event({
                             trigger = 'before',
                             delay = 0.8,

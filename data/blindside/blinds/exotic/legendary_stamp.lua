@@ -26,7 +26,7 @@ BLINDSIDE.Blind({
             }
         end
         if card.ability.extra.hand_size and card.ability.extra.selection_limit and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added 
-       and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+       and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
             card.ability.extra.unik_hand_size_added = true
            -- card.ability.extra.unik_selection_limit_added = true
             --add_tag(Tag('tag_bld_toss'))
@@ -35,7 +35,7 @@ BLINDSIDE.Blind({
            --  SMODS.change_play_limit(card.ability.extra.selection_limit)
         end
         if card.ability.extra.hand_size and card.ability.extra.selection_limit and tableContains(card, G.hand.cards)
-        and not card.ability.extra.unik_selection_limit_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        and not card.ability.extra.unik_selection_limit_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
            -- card.ability.extra.unik_hand_size_added = true
             --add_tag(Tag('tag_bld_toss'))
             card.ability.extra.unik_selection_limit_added = true

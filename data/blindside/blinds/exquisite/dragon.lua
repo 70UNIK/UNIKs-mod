@@ -23,7 +23,7 @@ BLINDSIDE.Blind({
         end
         if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) 
         and not card.ability.extra.dragon_attempt_made
-        and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
             card.ability.extra.dragon_attempt_made = true
             print("Attempt made")
             if SMODS.pseudorandom_probability(card, pseudoseed("dragondraw"), card.ability.extra.chance, card.ability.extra.trigger, 'dragondraw') then
@@ -40,7 +40,7 @@ BLINDSIDE.Blind({
             
         end
         if G.hand.cards and card and card.ability.extra.hand_size and not tableContains(card, G.hand.cards) 
-        and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
+        and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
             if card.ability.extra.dragon_attempt_made then
                 card.ability.extra.dragon_attempt_made = nil
                 print("attempt_refresh")
