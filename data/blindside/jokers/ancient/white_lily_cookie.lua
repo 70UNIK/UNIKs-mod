@@ -15,10 +15,10 @@ BLINDSIDE.Joker({
         G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run or 0
         G.GAME.blinds_burned_this_run = G.GAME.blinds_burned_this_run  or 0
         G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult or 1
-        return { vars = { G.GAME.unik_blind_e_mult, 0.02 .. "" , G.GAME.blinds_destroyed_this_run + G.GAME.blinds_burned_this_run  .. ""} }
+        return { vars = { G.GAME.unik_blind_e_mult, 0.02 .. "" , math.floor((G.GAME.blinds_destroyed_this_run + G.GAME.blinds_burned_this_run)/4)  .. "",4 .. ""} }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 1 .. "",0.02 .. "", 0 .. ""} }
+        return { vars = { 1 .. "",0.02 .. "", 0 .. "",4 .. ""} }
     end,
     debuff = {
         akyrs_blind_difficulty = "unik_blindside_ancient",
@@ -41,7 +41,7 @@ BLINDSIDE.Joker({
         G.GAME.blinds_burned_this_run =  G.GAME.blinds_burned_this_run  or 0
         G.GAME.blinds_destroyed_this_run = G.GAME.blinds_destroyed_this_run or 0
         local cards_added = {}
-        for i = 1, G.GAME.blinds_destroyed_this_run + G.GAME.blinds_burned_this_run do
+        for i = 1, math.floor((G.GAME.blinds_destroyed_this_run + G.GAME.blinds_burned_this_run)/4) do
             G.E_MANAGER:add_event(Event({
                 delay = 0.1,
                 func = function()

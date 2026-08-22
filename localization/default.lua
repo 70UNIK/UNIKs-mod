@@ -656,7 +656,7 @@ return {
                     "Yellow hue"
                 },
             },
-            bl_unik_sundae_cookie = {
+            bl_unik_blindside_sundae_cookie = {
                 name = "Sundae Cookie",
                 text = {
                     "X#1# Mult to Joker",
@@ -686,7 +686,7 @@ return {
                     "+^#2# Mult for each",
                     "The Lily in full deck",
                     "Add The Lily for",
-                    "every Blind burned",
+                    "every #4# Blind#<s>4# burned",
                     "or destroyed this run",
                     "(Will add #3#)",
                 }
@@ -3243,17 +3243,6 @@ return {
                 }
             },
             m_unik_blindside_lily = {
-                name = "The Lily",
-                text = {
-                    {
-                        "{X:dark_edition,C:white}Faded{} {X:red,C:white}Red", 
-                        "{X:dark_edition,C:white}^#1#{} Mult to Joker",
-                    },
-                    {"Always scores"},
-                    {"{C:green}Retained"}, 
-                }
-            },
-            m_unik_blindside_lily_upgraded = {
                 name = "The Lily",
                 text = {
                     {
