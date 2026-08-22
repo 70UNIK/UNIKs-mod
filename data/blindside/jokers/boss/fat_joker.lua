@@ -47,9 +47,8 @@ BLINDSIDE.Joker({
         end
         
         if times > 0 then
-            G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + times
-            G.GAME.playing_with_fire = G.GAME.playing_with_fire + (G.GAME.used_vouchers.v_bld_swearjar and 2 or 1) * times
-            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
+            BLINDSIDE.change_fire_amount({amount = 2})
+            BLINDSIDE.add_fire(times)
             BLINDSIDE.chipsmodify(times * mult, 0, 0)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()
@@ -64,9 +63,6 @@ BLINDSIDE.Joker({
         end
         
         if times > 0 then
-            G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + times
-            G.GAME.playing_with_fire = G.GAME.playing_with_fire + (G.GAME.used_vouchers.v_bld_swearjar and 2 or 1) * times
-            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
             BLINDSIDE.chipsmodify(times * -mult, 0, 0)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()
@@ -81,9 +77,6 @@ BLINDSIDE.Joker({
         end
         
         if times > 0 then
-            G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + times
-            G.GAME.playing_with_fire = G.GAME.playing_with_fire + (G.GAME.used_vouchers.v_bld_swearjar and 2 or 1) * times
-            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
             BLINDSIDE.chipsmodify(times * mult, 0, 0)
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()

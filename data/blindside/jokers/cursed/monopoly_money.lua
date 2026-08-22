@@ -29,9 +29,8 @@ BLINDSIDE.Joker({
             G.GAME.blind.active = false
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 ease_dollars(G.GAME.dollars, true)
-                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
-                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                BLINDSIDE.change_fire_amount({amount = 3})
+                BLINDSIDE.add_fire()
                 G.GAME.blind.active = nil
                 blind:wiggle()
             return true end }))

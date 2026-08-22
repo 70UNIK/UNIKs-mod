@@ -85,9 +85,8 @@ for i = 1, #G.hand.cards do
                     local upgrade =G.hand.cards[i].ability.extra.upgraded
                     
                     
-                    G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                    G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-                    G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                    BLINDSIDE.change_fire_amount({amount = 6})
+                    BLINDSIDE.add_fire()
                     
                     G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.1, func = function() 
                         play_sound('cancel', 0.8+ (0.9 + 0.2*math.random())*0.2, 1)
@@ -115,9 +114,8 @@ for i = 1, #G.hand.cards do
                     local upgrade =G.play.cards[i].ability.extra.upgraded
                     
                    
-                    G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                    G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-                    G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                    BLINDSIDE.change_fire_amount({amount = 6})
+                    BLINDSIDE.add_fire()
                     
                     G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.1, func = function() 
                         play_sound('cancel', 0.8+ (0.9 + 0.2*math.random())*0.2, 1)
@@ -139,9 +137,8 @@ for i = 1, #G.hand.cards do
             G.GAME.unik_blind_e_mult = G.GAME.unik_blind_e_mult or 1
             if G.GAME.unik_blind_e_mult > 1 then
                 UNIK.blindside_chips_modifyV2({e_mult = G.GAME.unik_blind_e_mult})   
-                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                BLINDSIDE.change_fire_amount({amount = 6})
+                BLINDSIDE.add_fire()
             end
             
            

@@ -54,9 +54,8 @@ BLINDSIDE.Joker({
                         G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult * 2
                         G.HUD_blind:recalculate(true)
                         BLINDSIDE.chipsmodifyV2({x_mult = G.GAME.unik_blind_xmult})  
-                        G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                        G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-                        G.GAME.playing_with_fire = G.GAME.playing_with_fire + 4 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                        BLINDSIDE.change_fire_amount({amount = 10})
+                        BLINDSIDE.add_fire()
                          G.E_MANAGER:add_event(Event({
                             func = (function()
                             G.GAME.blind:wiggle()

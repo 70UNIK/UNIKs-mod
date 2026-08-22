@@ -34,9 +34,8 @@ BLINDSIDE.Joker({
             -- blind.triggered = true
             -- BLINDSIDE.chipsmodify(1, 0, 0)
             
-            G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-            G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+            BLINDSIDE.change_fire_amount({amount = 3})
+                BLINDSIDE.add_fire()
             local validJokers = {}
                             for i,v in pairs(G.jokers.cards) do
                                 if not SMODS.is_eternal(v,self) and not v.ability.destroyed_by_megatron then

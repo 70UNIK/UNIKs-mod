@@ -21,9 +21,8 @@ BLINDSIDE.Joker({
     calculate = function(self, blind, context)
         if context.scoring_hand and context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
             if tableContains(context.other_card, context.scoring_hand) and context.other_card.facing ~= 'back' then
-                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                BLINDSIDE.change_fire_amount({amount = 2})
+                BLINDSIDE.add_fire()
                 return {
                     message = "X" .. 1.1 .. localize('k_unik_jchips'),
                     colour = G.C.BLACK,

@@ -34,9 +34,8 @@ BLINDSIDE.Joker({
         end
         if context.scoring_hand and context.individual and context.cardarea == G.play then
             if tableContains(context.other_card, context.scoring_hand) and context.other_card.facing ~= 'back' then
-                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
-                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                BLINDSIDE.change_fire_amount({amount = 1})
+                BLINDSIDE.add_fire()
                  context.other_card.ability["perma_bonus"] = context.other_card.ability["perma_bonus"] or 0
                 context.other_card.ability["perma_bonus"] = context.other_card.ability["perma_bonus"] - 2 + (BLINDSIDE.has_canvas(context) and 1 or 0)
                 return {

@@ -34,9 +34,6 @@ BLINDSIDE.Joker({
             end
             if not has_apostle then
                 
-                G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
-                G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
                 local cards = {}
                 for i,v in pairs(G.jokers.cards) do
                     v.debuff = nil
@@ -55,9 +52,7 @@ BLINDSIDE.Joker({
                         G.GAME.cry_banished_keys = {}
                     end
                     G.GAME.cry_banished_keys[neck_banish.config.center.key] = true
-                    G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                    G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
-                    G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                    
                     
                         
                 else
@@ -66,6 +61,8 @@ BLINDSIDE.Joker({
                         
                     end
                 end
+                BLINDSIDE.change_fire_amount({amount = 3})
+                BLINDSIDE.add_fire()
             end
         end
         if context.after then

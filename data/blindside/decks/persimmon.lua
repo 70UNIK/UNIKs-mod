@@ -32,6 +32,10 @@ SMODS.Back {
             BLINDSIDE.set_up_deck({"Yellow"}, 
             {"m_unik_blindside_gun", "m_unik_blindside_gun", "m_unik_blindside_cliff","m_unik_blindside_cliff", "m_unik_blindside_cliff"}, 
             {'m_unik_blindside_impatience','m_unik_blindside_impatience'})
+            local ante = G.GAME.win_ante * 0.75 
+            local int_part, frac_part = math.modf(ante)
+            local rounded = int_part + (frac_part >= 0.5 and 1 or 0) 
+            G.GAME.win_ante = rounded
         return true end }))
         
     end,

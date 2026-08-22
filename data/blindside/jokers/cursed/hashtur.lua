@@ -31,9 +31,8 @@ BLINDSIDE.Joker({
                         func = function()
                             for i,v in pairs(context.scoring_hand) do
                                 if v:is_color('Yellow') then
-                                    G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-                                    G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
-                                    G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+                                    BLINDSIDE.change_fire_amount({amount = 2})
+                                    BLINDSIDE.add_fire()
                                     triggered = true
                                     v.ability["perma_mult"] = v.ability["perma_mult"] or 0
                                     v.ability["perma_mult"] = v.ability["perma_mult"] + 2

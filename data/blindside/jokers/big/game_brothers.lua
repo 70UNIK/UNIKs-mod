@@ -44,9 +44,8 @@ BLINDSIDE.Joker({
             ease_hands_played(-1)
         end
         if context.after and not G.GAME.blind.disabled then
-            G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_3" or "bld_playing_with_fire_each_2"
-            G.GAME.playing_with_fire = G.GAME.playing_with_fire + 2 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+            BLINDSIDE.change_fire_amount({amount = 3})
+            BLINDSIDE.add_fire()
             BLINDSIDE.chipsmodify(math.floor(G.GAME.round*2/3) / (BLINDSIDE.has_canvas(context) and 2 or 1), 0, 0)
         end
     end,

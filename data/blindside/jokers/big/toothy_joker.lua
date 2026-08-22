@@ -28,9 +28,8 @@ BLINDSIDE.Joker({
          G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
         UNIK.blindside_chips_modifyV2({chips_base = 0.05 * G.GAME.unik_blindside_cinemas_used_this_run}) 
         G.GAME.blind:wiggle()
-         G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
-            G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
+        BLINDSIDE.change_fire_amount({amount = 0.1})
+        BLINDSIDE.add_fire(G.GAME.unik_blindside_cinemas_used_this_run)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()
             return true end }))
@@ -46,9 +45,6 @@ BLINDSIDE.Joker({
         G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
         UNIK.blindside_chips_modifyV2({chips_base = 0.05 * G.GAME.unik_blindside_cinemas_used_this_run }) 
         G.GAME.blind:wiggle()
-         G.GAME.playing_with_fire_num = G.GAME.playing_with_fire_num + 1
-            G.GAME.playing_with_fire_each = G.GAME.used_vouchers.v_bld_swearjar and "bld_playing_with_fire_each_2" or "bld_playing_with_fire_each_1"
-            G.GAME.playing_with_fire = G.GAME.playing_with_fire + 1 + (G.GAME.used_vouchers.v_bld_swearjar and 1 or 0)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()
             return true end }))
