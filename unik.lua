@@ -1372,8 +1372,12 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/white_lily_cookie.lua")()
 	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
 	
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/effarcire.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/redeo.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/facile.lua")()
 	NFS.load(mod_path .. "data/blindside/jokers/exotic/exponentia.lua")()
 	NFS.load(mod_path .. "data/blindside/jokers/exotic/formidiulosus.lua")()
+	
 
 	--rituals
 	NFS.load(mod_path .. "data/blindside/rituals/erosion.lua")()

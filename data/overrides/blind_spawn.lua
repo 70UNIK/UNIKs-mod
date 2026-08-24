@@ -64,6 +64,8 @@ function reset_blinds()
              SMODS.calculate_context({unik_refresh_blinds = true})
              G.GAME.unik_force_cursed_jokers = nil
              G.GAME.ante_rerolls = 0
+             G.GAME.unik_ante_spent = 0
+             G.GAME.ante_spent = 0
              for i,v in pairs(G.jokers.cards) do
                 v.ability.unik_bought_this_ante = nil
              end
@@ -77,6 +79,8 @@ function reset_blinds()
                 SMODS.calculate_context({unik_refresh_blinds = true})
                 G.GAME.unik_force_cursed_jokers = nil
                 G.GAME.ante_rerolls = 0
+                G.GAME.unik_ante_spent = 0
+                G.GAME.ante_spent = 0
                 for i,v in pairs(G.jokers.cards) do
                     v.ability.unik_bought_this_ante = nil
                 end

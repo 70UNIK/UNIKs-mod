@@ -67,5 +67,14 @@ local edo = ease_dollars
 function ease_dollars(mod, instant)
     local res = edo(mod, instant)
         SMODS.calculate_context({ money_mod = true, money_mod_val = mod })
+        if mod < 0 then
+            G.GAME.unik_ante_spent = G.GAME.unik_ante_spent or 0
+            G.GAME.unik_global_spent = G.GAME.unik_global_spent or 0
+            if G.GAME.enable_ante_purchase_tracking then
+                G.GAME.unik_ante_spent = G.GAME.unik_ante_spent+ math.abs(mod)
+            end
+            
+            G.GAME.unik_global_spent = G.GAME.unik_global_spent + math.abs(mod)
+        end
     return res
 end

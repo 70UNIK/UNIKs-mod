@@ -27,6 +27,40 @@ function Game:update(dt)
     if G.GAME.unik_dynamic_text_realtime then
 		G.GAME.blind:set_text()
     end
+    local track_ante_purchases = false
+    local blindchoices = {"Small","Big",'Boss'}
+    if G.GAME.round_resets and G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss then
+        for i = 1, #blindchoices do
+            if G.GAME.round_resets.blind_states[blindchoices[i]] ~= 'Defeated' and G.GAME.round_resets.blind_states[blindchoices[i]] ~= 'Skipped' and G.GAME.round_resets.blind_states[blindchoices[i]] ~= 'Hidden' then
+                local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices[blindchoices[i]]]
+                if obj.track_ante_purchases then
+                    track_ante_purchases = true
+                end
+            end
+        end
+    end
+    
+    if track_ante_purchases then
+        G.GAME.enable_ante_purchase_tracking = true
+    else
+        G.GAME.enable_ante_purchase_tracking = false
+        G.GAME.unik_ante_spent = 0
+    end
+
+    --redeo
+    if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss and ( 
+        G.GAME.round_resets.blind_choices.Boss == 'bl_unik_artisan_builds' or
+        G.GAME.round_resets.blind_choices.Boss == 'bl_unik_epic_artisan' or 
+        G.GAME.round_resets.blind_choices.Big == 'bl_unik_epic_artisan' or 
+        G.GAME.round_resets.blind_choices.Small == 'bl_unik_epic_artisan' or 
+        G.GAME.round_resets.blind_choices.Big == 'bl_unik_artisan_builds' or  
+        G.GAME.round_resets.blind_choices.Small == 'bl_unik_artisan_builds'
+        ) then
+        G.GAME.unik_artisan_reroll_time = true
+    else
+        G.GAME.unik_artisan_reroll_time = nil
+        G.GAME.ante_rerolls = 0
+    end
     
     if  G.P_CENTERS and G.P_CENTERS.j_unik_fuzzy then
         G.fuzzyAnim = G.fuzzyAnim or 0

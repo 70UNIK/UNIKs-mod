@@ -693,12 +693,12 @@ return {
             bl_unik_blindside_redeo = {
                 name = "Redeo",
                 text = {
-                    "+1 Ante per $10",
+                    "+#1# Ante per $#2#",
                     "spent this Ante",
                     "If less than",
-                    "#1# spent this", --(total money spent this run)^0.5
-                    "Ante, ^2 Ante",
-                    "(Currently $#2# spent)"
+                    "#3# spent this", --(total money spent this run)^0.5
+                    "Ante, ^#4# Ante",
+                    "(Currently $#5# spent)"
                 }
             }, --art in progress
             bl_unik_blindside_exponentia = {
@@ -9103,6 +9103,7 @@ return {
             b_unik_devour = "DEVOUR",
             b_spectral_rate = "Spectral Rate",
             cry_good_luck_ex = "Good luck!",
+            k_unik_no_bet_pair = "Must not play Bet or Pair",
 
 
             --Moonlight Cookie: She will be the first Joker with full bos functionality (has a fusion, different quotes)
@@ -9403,7 +9404,8 @@ return {
             k_unik_blind = "blind",
             k_unik_card = "card",
             k_unik_applied = "Applied!",
-            k_unik_not_applied = "Not Applied"
+            k_unik_not_applied = "Not Applied",
+            k_unik_redeo_placeholder = "(Total money spent this run)^0.5"
         },
         high_scores={},
         labels={
@@ -9849,7 +9851,19 @@ return {
                 "{X:unik_void_color,C:unik_eye_searing_red,s:2}UNLIMITED{} {X:unik_void_color,C:unik_eye_searing_red,s:2}POWAARRRRRR!!!!!!!",
                 "{X:unik_void_color,C:unik_eye_searing_red,s:2}UNLIMITED{} {X:unik_void_color,C:unik_eye_searing_red,s:2}POWWWWAAAAAAAAARRRRRRRRR!!!!!!!!!!!"
             },
-            
+            unik_blindside_facile_lose = {
+                "Qui plura quam necesse",
+                "est cupiunt, poenam dabunt."
+            },
+            unik_blindside_redeo_lose = {
+                "Qui festinant",
+                "poenam dabunt."
+            },
+            unik_blindside_effarcire_lose = {
+                "Cum te accommodare",
+                "non possis, in",
+                "aeternum manes vinctus."
+            },
 
 
             --finity quips:

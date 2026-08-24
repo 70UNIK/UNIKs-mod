@@ -111,6 +111,45 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load then
             return false
         end
     })
+    SMODS.Joker({
+        key='unik_blindside_facile_cry',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 3, y = 1},
+        soul_pos = { x = 5, y = 1, extra = { x = 4, y = 1 } },
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+    SMODS.Joker({
+        key='unik_blindside_redeo_cry',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 3, y = 2},
+        soul_pos = { x = 5, y = 2, extra = { x = 4, y = 2 } },
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
+    SMODS.Joker({
+        key='unik_blindside_effarcire_cry',
+        order = 10^300,
+        atlas = 'unik_taunt_sprites',
+        cost = 66666666,
+        pos = {x = 3, y = 0},
+        soul_pos = { x = 5, y = 0, extra = { x = 4, y = 0 } },
+        no_doe = true,
+        no_collection = true,
+        in_pool = function()
+            return false
+        end
+    })
 end
 
 -- flippy quips

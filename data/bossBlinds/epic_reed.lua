@@ -82,7 +82,9 @@ function reset_blinds()
     if G.GAME.round_resets.blind_states.Boss == "Defeated" then
         reset_ranks()
         --Epic artesian; if tension is disabled, then you must reroll (total shop rerolls this run)^1.1 or die on blind select
+        G.GAME.unik_global_spent = G.GAME.unik_global_spent or 0
         G.GAME.global_rerolls_pause_val = G.GAME.global_rerolls
+        G.GAME.global_spent_pause_val = G.GAME.unik_global_spent
         --print( G.GAME.global_rerolls_pause_val)
         --If rerolls < 15, set to 15^1.1.
         SMODS.calculate_context({unik_blinds_refresh = true})

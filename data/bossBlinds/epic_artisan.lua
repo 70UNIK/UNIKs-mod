@@ -102,7 +102,7 @@ SMODS.Blind	{
         G.HUD_blind:recalculate(true)
     end,
     defeat = function()
-        G.GAME.ante_rerolls = 0
+
     end
 }
 
