@@ -9,7 +9,7 @@ SMODS.Stake{
     modifiers = function()
         G.GAME.modifiers.unik_bld_add_fuzzy = true
     end,
-
+    blindside_stake = true,
     unik_shader = 'polychrome',
     pos = { x = 2, y = 1 },
     atlas = 'unik_stakes',

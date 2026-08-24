@@ -57,3 +57,12 @@
 --epic rarity equivalent
 --stronger than premiums, weaker than legendaries
 --examples include Pit Blinds and Hyperblinds
+
+--quip override to only say cursed ones
+for i=1,8 do
+    SMODS.JimboQuip:take_ownership("bld_blindside_flippy_lose"..tostring(i),{
+        filter = function(quip, type) 
+            if type == "bld_loss" and not G.GAME.blind.config.blind.cursed then return true, {override_base_checks = true} end
+        end
+    },true)
+end

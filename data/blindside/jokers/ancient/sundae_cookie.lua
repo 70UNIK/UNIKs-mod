@@ -14,16 +14,12 @@ BLINDSIDE.Joker({
         return UNIK.hasBlindside() and CanSpawnAncient()
     end,
     loc_vars = function(self,blind)
-        G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult or 2
+        G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult or 4
         return { vars = { G.GAME.unik_blind_xmult } }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 2 } }
+        return { vars = { 4 } }
     end,
-    get_loc_debuff_text = function(self)
-        return localize("k_unik_all_purple")
-		
-	end,
     debuff = {
         akyrs_blind_difficulty = "unik_blindside_ancient",
         akyrs_cannot_be_overridden = true,
@@ -41,18 +37,21 @@ BLINDSIDE.Joker({
     },
     calculate = function(self, blind, context)
         if context.setting_blind and not context.disabled and not G.GAME.blind.disabled then
-            G.GAME.unik_blind_xmult = 2
+            G.GAME.unik_blind_xmult = 4
             G.GAME.unik_dynamic_text_realtime = true
         end
         if context.scoring_hand and context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
-            if context.other_card:is_color('Purple') and context.other_card.facing ~= 'back' then
+            if context.other_card.facing ~= 'back' then
                 return {
                     message = "X" ..  G.GAME.unik_blind_xmult .. localize('k_unik_jmult'),
                     colour = G.C.BLACK,
                     focus = context.other_card,
                     func = function ()
-                        G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult * 2
-                        G.HUD_blind:recalculate(true)
+                        if context.other_card:is_color('Purple') or context.other_card:is_color('Blue') or context.other_card:is_color('Green') then
+                            G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult * 3
+                            G.HUD_blind:recalculate(true)
+                        end
+                        
                         BLINDSIDE.chipsmodifyV2({x_mult = G.GAME.unik_blind_xmult})  
                         BLINDSIDE.change_fire_amount({amount = 10})
                         BLINDSIDE.add_fire()
@@ -75,14 +74,6 @@ BLINDSIDE.Joker({
               
             end
         end
-    end,
-    debuff_hand = function(self, cards, hand, handname, check)
-        for i,v in pairs(cards) do
-            if not v:is_color('Purple') then
-                return true
-            end
-        end
-        return false
     end,
     disable = function(self)
         G.GAME.unik_blind_xmult = 1

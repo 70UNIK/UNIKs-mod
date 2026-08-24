@@ -9,7 +9,7 @@ SMODS.Stake{
     modifiers = function()
         G.GAME.modifiers.unik_bld_boss_everywhere_big_small = true
     end,
-
+    blindside_stake = true,
     pos = { x = 1, y = 2 },
     atlas = 'unik_stakes',
 }

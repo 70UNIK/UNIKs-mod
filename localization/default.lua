@@ -656,16 +656,15 @@ return {
                     "Yellow hue"
                 },
             },
-            bl_unik_blindside_sundae_cookie = {
+            bl_unik_blindside_sundae_cookie = { --Make unique: Change to: X5 Mult to Joker per blind scored, double this value whenever a blind with purple, blue or green hue is scored
                 name = "Sundae Cookie",
                 text = {
                     "X#1# Mult to Joker",
-                    "then double this",
-                    "value when a Purple",
-                    "Blind is scored",
-                    "All played Blinds",
-                    "must contain",
-                    "Purple hue"    
+                    "per Blind scored",
+                    "Triple this value",
+                    "when a Blind containing",
+                    "Purple, Blue or Green",
+                    "hue is scored"
                 }
             },
             bl_unik_blindside_moonlight_cookie = {
@@ -697,11 +696,11 @@ return {
                     "+1 Ante per $10",
                     "spent this Ante",
                     "If less than",
-                    "#1# spent this", --(total money spent this run)^0.75
-                    "Ante, ^2 Ante on select",
+                    "#1# spent this", --(total money spent this run)^0.5
+                    "Ante, ^2 Ante",
                     "(Currently $#2# spent)"
                 }
-            },
+            }, --art in progress
             bl_unik_blindside_exponentia = {
                 name = "Exponentia",
                 text = {
@@ -754,8 +753,8 @@ return {
                     "give ^#1# Mult to Joker", --^3
                     "(Retriggers included)"
                 }
-            },
-            bl_unik_blindside_effarcire = {
+            }, --art in progress
+            bl_unik_blindside_effarcire = { --hiss tags and tech blinds will be needed, as well as those special +1 hand size when held blinds
                 name = "Effarcire",
                 text = {
                     "Hand Size",
@@ -763,7 +762,7 @@ return {
                     "Bet and Pair",
                     "not allowed"
                 }
-            },
+            }, --art in progress
 
 
             bl_unik_fill = {
@@ -5478,44 +5477,40 @@ return {
                     "Play {C:attention}5 Timber Cards",
                 }
             },
+            -- j_unik_niko = {
+            --     name = "Niko",
+            --     text = {
+            --         {
+            --             "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
+                       
+            --         },
+            --         {
+            --              "{C:attention}Converts{} all scored cards suits",
+            --             "into the first scored {C:attention}Light Suit",
+            --             "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Light Suit{C:inactive,s:0.8} in deck)",
+            --             "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
+            --         },
+            --         {
+            --             "{C:unik_caption,s:0.7,E:1}#3#{}",
+            --             "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+            --             "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
+            --         },
+
+
+            --     },
+            --     unlock = {
+            --         "Win in {C:attention}Checkered Deck",
+            --         "With {C:attention}Ancient Joker"
+            --     }
+            -- }, 
             j_unik_niko = {
                 name = "Niko",
                 text = {
                     {
-                        "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                       
-                    },
-                    {
-                         "{C:attention}Converts{} all scored cards suits",
-                        "into the first scored {C:attention}Light Suit",
-                        "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Light Suit{C:inactive,s:0.8} in deck)",
-                        "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
-                    },
-                    {
-                        "{C:unik_caption,s:0.7,E:1}#3#{}",
-                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                        "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
-                    },
-
-
-                },
-                unlock = {
-                    "Win in {C:attention}Checkered Deck",
-                    "With {C:attention}Ancient Joker"
-                }
-            }, 
-            j_unik_sundae_cookie = {
-                name = "Sundae Cookie",
-                text = {
-                    {
-                        "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                        
-                    },
-                    {
-                        "{C:attention}Converts{} all scored cards suits",
-                        "into the first scored {C:attention}Dark Suit",
-                        "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Dark Suit{C:inactive,s:0.8} in deck)",
-                        "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
+                        "On the {C:attention}first{} hand",
+                        "the first {C:attention}#1#{} played",
+                        "{C:attention}Light Suit{} cards",
+                        "{C:attention}permanently gain{} {C:attention}+#2#{} Retriggers#<s>2#"
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -5528,7 +5523,53 @@ return {
                     "Win in {C:attention}Checkered Deck",
                     "With {C:attention}Ancient Joker"
                 }
-            },            
+            }, 
+            j_unik_sundae_cookie = {
+                name = "Sundae Cookie",
+                text = {
+                    {
+                        "On the {C:attention}last{} hand",
+                        "the first {C:attention}#1#{} played",
+                        "{C:attention}Dark Suit{} cards",
+                        "{C:attention}permanently gain{} {C:unik_copper}+#2# Rescore#<s>2#"
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
+                    },
+
+                },
+                unlock = {
+                    "Win in {C:attention}Checkered Deck",
+                    "With {C:attention}Ancient Joker"
+                }
+            },      
+            -- j_unik_sundae_cookie = {
+            --     name = "Sundae Cookie",
+            --     text = {
+            --         {
+            --             "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
+                        
+            --         },
+            --         {
+            --             "{C:attention}Converts{} all scored cards suits",
+            --             "into the first scored {C:attention}Dark Suit",
+            --             "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Dark Suit{C:inactive,s:0.8} in deck)",
+            --             "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
+            --         },
+            --         {
+            --             "{C:unik_caption,s:0.7,E:1}#3#{}",
+            --             "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+            --             "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
+            --         },
+
+            --     },
+            --     unlock = {
+            --         "Win in {C:attention}Checkered Deck",
+            --         "With {C:attention}Ancient Joker"
+            --     }
+            -- },            
             j_unik_night_skyline = {
                 name = "Night Skyline",
                 text = {

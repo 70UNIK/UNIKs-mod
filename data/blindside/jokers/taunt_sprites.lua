@@ -125,18 +125,3 @@ for i=1,4 do
         end
     }
 end
-
-local googlychar = Card_Character.init
-function Card_Character:init(args)
-
-        if args.googly then
-
-            self.googly = true
-        end
-    local ret = googlychar(self,args)
-    if args.googly then
-
-            self.googly = true
-        end
-    return ret
-end

@@ -13,7 +13,7 @@ SMODS.Stake{
     end,
 
     --colour = ,
-
+    blindside_stake = true,
 
     pos = { x = 1, y = 1 },
     atlas = 'unik_stakes',

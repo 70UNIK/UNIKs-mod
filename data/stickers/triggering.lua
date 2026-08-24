@@ -155,6 +155,10 @@ function Card:update(dt)
     --     print("FORCE IT!")
     --     G.FUNCS.play_cards_from_highlighted()
     -- end
+    if G.GAME.finger_triggered_suppression and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) then
+        G.GAME.finger_triggered_suppression = nil
+        print("softlock detected, aborting")
+    end
     local ret = robotHook(self,dt)
     return ret
 end
