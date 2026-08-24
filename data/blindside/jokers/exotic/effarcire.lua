@@ -60,7 +60,8 @@ BLINDSIDE.Joker({
         return false
     end,
     joker_set = function ()
-        G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 1))
+        G.GAME.unik_original_hand_size = G.hand.config.card_limit
+        G.hand:change_size(-G.hand.config.card_limit + 1)
     end,
     joker_defeat = function()
         G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 1))

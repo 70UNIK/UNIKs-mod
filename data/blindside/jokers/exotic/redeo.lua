@@ -38,44 +38,43 @@ BLINDSIDE.Joker({
     },
     loc_vars = function(self,blind)
         local money = G.GAME.global_spent_pause_val
-        if not G.GAME.global_spent_pause_val or G.GAME.global_spent_pause_val^0.5 < 100 then
+        if not G.GAME.global_spent_pause_val or G.GAME.global_spent_pause_val^0.9 < 100 then
             money = 100
         end
-        return { vars = { 1,25,money,2,G.GAME.unik_ante_spent } }
+        return { vars = { 1,20,money,2,G.GAME.unik_ante_spent } }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 1,25,localize("k_unik_redeo_placeholder"),2,0} }
+        return { vars = { 1,20,localize("k_unik_redeo_placeholder"),2,0} }
     end,
     joker_set = function ()
-        local requirement = math.max(G.GAME.global_spent_pause_val^0.5,100)
+        G.GAME.global_spent_pause_val = G.GAME.global_spent_pause_val or 0
+        print(G.GAME.global_spent_pause_val)
+        local requirement = math.max(G.GAME.global_spent_pause_val^0.9,100)
         print (G.GAME.unik_ante_spent .. " " .. requirement)
+        G.GAME.unik_old_ante = G.GAME.round_resets.ante
         if G.GAME.unik_ante_spent < requirement then
             local difference = G.GAME.round_resets.ante^2 - G.GAME.round_resets.ante
-            for i = 1, difference do
-                G.E_MANAGER:add_event(Event({trigger = 'after',func = function()
-                    ease_ante(1)
-                    G.GAME.blind:wiggle()
-                    BLINDSIDE.change_fire_amount({amount = 10})
-                    BLINDSIDE.add_fire()
-                
-                return true end }))
-                
-            end
+            ease_ante(difference)
+            G.GAME.blind:wiggle()
+            BLINDSIDE.change_fire_amount({amount = 10})
+            BLINDSIDE.add_fire(difference)
             
         else
             local difference = math.floor(G.GAME.unik_ante_spent/25)
-            for i = 1, difference do
-                G.E_MANAGER:add_event(Event({trigger = 'after',func = function()
-                    ease_ante(1)
-                    G.GAME.blind:wiggle()
-                    BLINDSIDE.change_fire_amount({amount = 10})
-                    BLINDSIDE.add_fire()
-                
-                return true end }))
-                
-            end
+            ease_ante(difference)
+            G.GAME.blind:wiggle()
+            BLINDSIDE.change_fire_amount({amount = 10})
+            BLINDSIDE.add_fire(difference)
             
         end
+         G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
+                G.GAME.blind.basechips = math.max(1,get_blind_amount(G.GAME.round_resets.ante)*G.GAME.starting_params.ante_scaling)
+                G.GAME.blind.basechips_text = number_format(to_big(G.GAME.blind.basechips), 100000)
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                BLINDSIDE.chipsupdate()
+            return true end }))
+            return true end }))
+        
     end,
 
 })

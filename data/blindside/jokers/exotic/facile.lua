@@ -37,10 +37,10 @@ BLINDSIDE.Joker({
         say_times = 6,
     },
     loc_vars = function(self,blind)
-        return { vars = { 3 } }
+        return { vars = { 1.75 } }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 3 } }
+        return { vars = { 1.75 } }
     end,
     calculate = function(self, blind, context)
         
@@ -48,12 +48,12 @@ BLINDSIDE.Joker({
             if context.other_card.facing ~= 'back' then
                 if G.GAME.unik_facile_count >= 10 then
                     return {
-                        message = "^" ..  3 .. localize('k_unik_jmult'),
+                        message = "^" ..  1.75 .. localize('k_unik_jmult'),
                         colour = G.C.BLACK,
                         focus = context.other_card,
                         func = function ()
                             
-                            UNIK.blindside_chips_modifyV2({e_mult = 3})   
+                            UNIK.blindside_chips_modifyV2({e_mult = 1.75})   
                             BLINDSIDE.change_fire_amount({amount = 13})
                             BLINDSIDE.add_fire()
                             G.E_MANAGER:add_event(Event({
@@ -76,7 +76,7 @@ BLINDSIDE.Joker({
                     G.GAME.unik_facile_count = G.GAME.unik_facile_count + 1
                     local num = G.GAME.unik_facile_count
                     return {
-                        message = num,
+                        message = num .. "",
                         colour = G.C.BLACK,
                         focus = context.other_card,
                     }

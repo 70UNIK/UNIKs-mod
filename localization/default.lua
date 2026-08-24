@@ -9405,7 +9405,7 @@ return {
             k_unik_card = "card",
             k_unik_applied = "Applied!",
             k_unik_not_applied = "Not Applied",
-            k_unik_redeo_placeholder = "(Total money spent this run)^0.5"
+            k_unik_redeo_placeholder = "(Total money spent this run)^0.9"
         },
         high_scores={},
         labels={
