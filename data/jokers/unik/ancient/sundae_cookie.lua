@@ -1,4 +1,4 @@
---Beware of using wild cards! Like Niko, Sundae Cookie treats wild cards as "has spades, clubs, halberds and crowns", so will randomly select if multiple suits are present!
+
 local sundae_quotes = {
 	normal = {
 		'k_unik_sundae_normal1',
@@ -20,166 +20,47 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
-    config = { extra = {x_mult = 2.5}},
+    config = { extra = {cards = 2,repetitions = 1}},
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('dark')
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
 		local quoteset = 'normal'
-        local RNDM = math.random(#sundae_quotes[quoteset])
-        local extra = ""
-        local suits = getDominantSuit('dark')
-        local suit = G.GAME.current_round.unik_sundae_card and G.GAME.current_round.unik_sundae_card.suit or "Spades"
-        if suits and #suits == 1 then
-            suit = suits[1]
-        end
-        if RNDM == 4 then
-            extra = localize(suit or "Spades","suits_plural") .. "!"
-        end
 		return {
-		vars = {localize( suit or "Spades", "suits_plural"),center.ability.extra.x_mult,localize(sundae_quotes[quoteset][RNDM] .. "" ) .. extra, colours = {G.C.SUITS[suit or "Spades"],},
-	},
-    
-    }
+            vars = {center.ability.extra.cards,center.ability.extra.repetitions,localize(sundae_quotes[quoteset][math.random(#sundae_quotes[quoteset])] .. "")},
+        }
 	end,
 	pronouns = "she_her",
     calculate = function(self, card, context)	
-        if context.individual and context.cardarea == G.play then
-            if not G.GAME.current_round.unik_sundae_card then
-                G.GAME.current_round.unik_sundae_card = { suit = "Spades" }
-            end
-            local suits = getDominantSuit('dark')
-            if suits and #suits == 1 then
-                if context.other_card:is_suit(suits[1]) then
-                    return {
-                        x_mult = card.ability.extra.x_mult,
-                        card = card
-                    }
-                end
-            else
-                if context.other_card:is_suit(G.GAME.current_round.unik_sundae_card.suit) then
-                    return {
-                        x_mult = card.ability.extra.x_mult,
-                        card = card
-                    }
-                end
+        if context.before and context.cardarea == G.jokers then
+            if G.GAME.current_round.hands_left == 0 then
+                local limit = card.ability.extra.cards
+                local cards = {}
+                 for i,v in pairs(context.scoring_hand) do
+                            if UNIK.is_suit_type(v,'dark') and limit > 0 then
+                                v.ability.perma_rescores = v.ability.perma_rescores or 0
+                                v.ability.perma_rescores = v.ability.perma_rescores + 1
+                                limit = limit - 1
+                                cards[#cards+1] = v
+                            end
+                        end
+                 G.E_MANAGER:add_event(Event({
+                    delay = 0,
+                    func = function()
+                        for i,v in pairs(cards) do
+                            v:juice_up()
+                        end
+                        return true
+                    end
+                }))
+                return {
+                    extra = {message = localize('k_upgrade_ex'), colour = HEX("991A79")},
+                    colour = HEX("991A79"),
+                }
             end
         end
-        if context.after and context.cardarea == G.jokers and not context.repetition and not context.retrigger_joker then
-            local firstSuit = nil
-            for i,v in pairs(context.scoring_hand) do
-                if UNIK.is_suit_type(v,'dark') then
-                    for i = 1, #UNIK.dark_suits do
-                    if UNIK.dark_suits[i] == v.base.suit then
-                        firstSuit = UNIK.dark_suits[i]
-                        break;
-                    end
-                end
-                    break;
-                end
-            end
-            
-            if firstSuit then
-                local validCards = {}
-            for i,v in pairs(context.scoring_hand) do
-                if v.base.suit ~= firstSuit then
-                    validCards[#validCards+1] = v
-                end
-            end
-
-            for i=1, #validCards do
-                local percent = 1.15 - (i-0.999)/(#validCards-0.998)*0.3
-                G.E_MANAGER:add_event(Event({
-                    delay = 0.15,
-                    trigger= 'after',
-                    func = function()
-                        validCards[i]:flip();play_sound('card1', percent);validCards[i]:juice_up(0.3, 0.3);
-                        return true
-                    end
-                }))
-            end
-            for i=1, #validCards do
-                G.E_MANAGER:add_event(Event({
-                        delay = 0.1,
-                        trigger= 'after',
-                        func = function()
-                            assert(SMODS.change_base(validCards[i], firstSuit))
-                            return true
-                        end
-                }))
-            end
-            for i=1, #validCards do
-                local percent = 0.85 + ( i - 0.999 ) / ( #validCards - 0.998 ) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    delay = 0.15,
-                    trigger= 'after',
-                    func = function()
-                        validCards[i]:flip(); play_sound('tarot2', percent, 0.6); validCards[i]:juice_up(0.3, 0.3);
-                        return true
-                    end
-                }))
-            end
-            end
-            
+        if context.after and not context.blueprint then
+            local eval = function() return  G.GAME.current_round.hands_left == 1 end
+            juice_card_until(card, eval, true)
         end
     end,
 }
---returns a table containing suits
-function getDominantSuit(type)
-    local suitTable = {}
-    local highestCount = 0
-    local highestSuits = {}
-    if type == 'dark' then
-        
-    elseif type == 'light' then
-    else
-        print("INVALID SUIT TYPE DETECTED: Suit must be 'light' or 'dark'")
-        return nil
-    end
-    if not G.playing_cards then
-        return nil
-    end
-    for k, v in ipairs(G.playing_cards) do
-        if UNIK.is_suit_type(v,type) then
-            for i = 1, #UNIK[type..'_suits'] do
-                local suit = UNIK[type..'_suits'][i]
-                suitTable[suit] = suitTable[suit] or 0
-                if v:is_suit(suit) then
-                    suitTable[suit] = suitTable[suit] + 1
-                    
-                end
-            end
-        end
-    end
-   -- print(suitTable)
-    for i,v in pairs(suitTable) do
-        --designates highest suit
-        if v > highestCount then
-            highestCount = v
-            highestSuits = {i}
-        elseif v == highestCount then
-            highestSuits[#highestSuits+1] = i
-        end
-    end
-   -- print(highestSuits)
-    return highestSuits
-end
-
-function reset_sundae_card()
-    G.GAME.current_round.unik_sundae_card = { suit = "Spades" }
-    local suits = getDominantSuit('dark')
-    if suits then
-        local suit = pseudorandom_element(suits, pseudoseed("unik_sundae_cookie_22222" .. G.GAME.round_resets.ante))
-        G.GAME.current_round.unik_sundae_card.suit = suit
-    end
-end
-local rcc = reset_castle_card
-function reset_castle_card()
-	rcc()
-    G.E_MANAGER:add_event(Event({
-        trigger = 'before',
-        func = function()
-            reset_sundae_card()
-            return true
-        end
-    }))
-    
-end

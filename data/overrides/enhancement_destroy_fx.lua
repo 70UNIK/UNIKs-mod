@@ -73,9 +73,12 @@ SMODS.Enhancement:take_ownership("m_entr_flesh",{
     gore6break = true,
 }, true)
 
-BLINDSIDE.Blind:take_ownership("m_bld_tablet",{
-    rockbreak = true,
-}, true)
+if BLINDSIDE then
+    BLINDSIDE.Blind:take_ownership("m_bld_tablet",{
+        rockbreak = true,
+    }, true)
+
+end
 
 
 

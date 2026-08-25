@@ -4266,22 +4266,16 @@ return {
                     "YOU SHOULDNT SEE THIS"
                 }
             },
-            j_unik_blindside_taunt_goob_pwx={
-                name = "YOU SHOULDNT SEE THIS",
-                text = {
-                    "YOU SHOULDNT SEE THIS"
-                }
-            },
             j_unik_blindside_fiendish_joker_bunc={
                 name = "YOU SHOULDNT SEE THIS",
                 text = {
                     "YOU SHOULDNT SEE THIS"
                 }
             },
-            --ironic for a pwx crossmod element, this will be styled more like an exotic joker
+            --ironic for a bos crossmod element, this will be styled more like an exotic joker
             --initially does nothing in case you dont want to suffer
             --wonderous
-            j_unik_jen_hellgate_off = {
+            j_unik_bos_hellgate_off = {
                 name = "Hellgate",
                 text= {
                     "{C:inactive}Does nothing?",
@@ -4292,7 +4286,7 @@ return {
                     "{C:inactive}Joker instead"
                 }
             },
-            j_unik_jen_hellgate = {
+            j_unik_bos_hellgate = {
                 name = "Hellgate",
                 text= {
                     "Gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult for every",
@@ -4306,7 +4300,30 @@ return {
                 }
             },
 
+
             -- The rest --
+            j_unik_goob = {
+                name = "Goob",
+                text = {
+                    {
+                        "On the first hand,",
+                        "{C:planet}levels up{} the",
+                        "{C:attention}highest{} visible Poker hand",
+                        "based on {C:attention}held cards"
+                    },
+                    {
+                        "{C:inactive}(Will level up",
+                        "{C:attention}#1#{C:inactive})",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Dandy's World{}",
+                    },
+                    
+                }
+            },
+
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
                 text = {
@@ -5510,12 +5527,12 @@ return {
                         "On the {C:attention}first{} hand",
                         "the first {C:attention}#1#{} played",
                         "{C:attention}Light Suit{} cards",
-                        "{C:attention}permanently gain{} {C:attention}+#2#{} Retriggers#<s>2#"
+                        "permanently gain {C:attention}+#2#{} Retrigger#<s>2#"
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
                         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-                        "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
                     },
 
                 },
@@ -5528,10 +5545,10 @@ return {
                 name = "Sundae Cookie",
                 text = {
                     {
-                        "On the {C:attention}last{} hand",
+                        "On the {C:attention}last{} hand", --since rescores are considered "stronger" than retriggers, makes sense for rescores to be set back.
                         "the first {C:attention}#1#{} played",
                         "{C:attention}Dark Suit{} cards",
-                        "{C:attention}permanently gain{} {C:unik_copper}+#2# Rescore#<s>2#"
+                        "permanently gain {C:unik_copper}+#2# Rescore#<s>2#"
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#3#{}",
@@ -9192,7 +9209,8 @@ return {
 
             k_unik_niko_normal1="Oh, hi! My name is Niko!",
             k_unik_niko_normal2="This is something different...",
-            k_unik_niko_normal3="I think we should play ",
+            k_unik_niko_normal3="I think I can help out here!",
+            k_unik_niko_normal4="I do miss being with my mom...",
 
             k_unik_niko_nikoed="Oh god... I don't feel right...", --Niko sticker
 
@@ -9280,7 +9298,7 @@ return {
             k_unik_sundae_normal1 = "Come one, come all, to Sugarland!",
             k_unik_sundae_normal2 = "Nothing beats hearing the joyful laughter of Cookies!",
             k_unik_sundae_normal3 = "Come along and join the fun here!",
-            k_unik_sundae_normal4 = "Hehehe! Lets play ", -- [suit]!
+            k_unik_sundae_normal4 = "Hehehe! It'll be fun at Sugarland!", -- [suit]!
 
             k_unik_must_select = "Must select ",
             k_unik_skip_req = " to skip",
@@ -9397,15 +9415,20 @@ return {
             k_unik_complementary_warning = "Hand contains untrimmed or editioned Blinds",
             k_unik_enhancement_warning = "Hand contaings Blinds with Trims",
             k_unik_random_blind = "(a random Blind in deck)",
-            ph_up_ante_2_blindside="Raise all Jokers",
-            ph_up_ante_3_blindside="Refresh Jokers",
-            ph_choose_blind_2_blindside="next Joker",
             k_unik_destroyed = "Destroyed!",
             k_unik_blind = "blind",
             k_unik_card = "card",
             k_unik_applied = "Applied!",
             k_unik_not_applied = "Not Applied",
-            k_unik_redeo_placeholder = "(Total money spent this run)^0.9"
+            k_unik_redeo_placeholder = "(Total money spent this run)^0.9",
+            
+            k_unik_goob_normal1 = "Want a hug?",
+            k_unik_goob_normal2 = "It'll be a nice day today!",
+            k_unik_goob_normal3 = "All these cards... Seems quite fun!",
+
+            k_unik_goob_levelup1 = "Get over here! Teeheehee!",
+            k_unik_goob_levelup2 = "It's time for hugs!",
+            k_unik_goob_levelup3 = "Ahhhh... Hug...!",
         },
         high_scores={},
         labels={
@@ -9468,11 +9491,6 @@ return {
             special_lose_unik_F5={
                 "Maybe we could've gotten",
                 "the storm-chasing clown car!",
-            },
-            --Lily
-            special_lose_unik_sprunki_lily={
-                "Be careful around Sprunkis,",
-                "they bite... some literally!",
             },
             --Tall poppy syndrome
             special_lose_unik_tall_poppy_syndrome={

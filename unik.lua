@@ -945,7 +945,6 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/pink_guard.lua")()
 
 
 --Rare
---: create a summit card if hand contains a five of a kind
 NFS.load(mod_path .. "data/jokers/unik/rare/railroad_crossing.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
@@ -979,6 +978,7 @@ NFS.load(mod_path .. "data/jokers/unik/legendary/ALICE.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/catto_boi.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/goob.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
