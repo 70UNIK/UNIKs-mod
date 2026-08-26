@@ -23,7 +23,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     config = { extra = {cards = 2,repetitions = 1}},
 	loc_vars = function(self, info_queue, center)
-        info_queue[#info_queue + 1] = UNIK.suit_tooltip('dark')
+        info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 		local quoteset = 'normal'
 		return {
             vars = {center.ability.extra.cards,center.ability.extra.repetitions,localize(niko_quotes[quoteset][math.random(#niko_quotes[quoteset])] .. "")},

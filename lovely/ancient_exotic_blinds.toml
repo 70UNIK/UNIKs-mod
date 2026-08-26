@@ -1,7 +1,8 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 99999
+priority = 214748365
+
 
 ##LEGENDARY BLIND SQUARES
 [[patches]]

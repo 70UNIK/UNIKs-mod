@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 [[patches]]
 [patches.pattern]
@@ -42,5 +42,7 @@ UNIK_SUMMIT = HEX("6f859e"),
 UNIK_COPPER = HEX("F8A065"),
 UNIK_EQMULT = HEX("cb7f7f"),
 UNIK_EQCHIPS = HEX("5b89a6"),
+UNIK_LIGHT_SUIT = HEX('F06841'),
+UNIK_DARK_SUIT = HEX('3C4A4E'),
 """
 match_indent = true

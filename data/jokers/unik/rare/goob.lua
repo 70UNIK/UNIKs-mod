@@ -39,15 +39,15 @@ SMODS.Joker {
             if text ~= "NULL" then
                 for i = #G.handlist,1,-1 do
                     if G.GAME.hands[G.handlist[i]].visible and next(poker_hands[G.handlist[i]]) then
-                        print(G.handlist[i])
+                    --    print(G.handlist[i])
                         hand = G.handlist[i]
                     end
                 end
             end
-            print(G.GAME.hands)
+           -- print(G.GAME.hands)
             
         end
-        print(hand)
+       -- print(hand)
         
         return { 
            vars = {localize(hand, 'poker_hands'),localize(goob_quotes[quoteset][math.random(#goob_quotes[quoteset])] .. "")} }
@@ -69,7 +69,7 @@ SMODS.Joker {
                         hand = G.handlist[i]
                     end
                 end
-                local quoteset = 'normal'
+                local quoteset = 'levelup'
                 
                 return {
                     card = card,

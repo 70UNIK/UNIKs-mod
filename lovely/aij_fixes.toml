@@ -1,0 +1,18 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+# fixes critical crashes that occur with AIJ and UNIK's
+# an unresolved issue so far involves saving/loading with the fucking astral symbols.
+# also cloudwatching is an issue on AIJ's end.
+# --eval G.shop_jokers.cards[1]:set_ability('j_aij_cloudwatching')
+# j_aij_ijoker_co
+# --eval G.shop_jokers.cards[1]:set_ability('j_aij_ijoker_co')
+[[patches]]
+[patches.regex]
+target = '''=[SMODS allinjest "Utils/functions.lua"]'''
+pattern = '''k \~\= \'Boss\''''
+position = "before"
+match_indent = true
+payload = ''' G.blind_select_opts and '''

@@ -1,4 +1,19 @@
 --When a [random blind] is played, it permanently gains +1 retrigger, debuffs said blind 
+
+
+local function  reset_blacklist_blind()
+    local card = "m_bld_sharp"
+    if G.playing_cards then
+        local cards = pseudorandom_element(G.playing_cards, pseudoseed('blacklist_blindside'..G.GAME.round_resets.ante))
+        if cards then
+            card = cards.config.center.key
+        end
+        
+    end
+    G.GAME.unik_blindside_blacklist_blind = card
+   -- print( G.GAME.unik_blindside_blacklist_blind)
+end
+
 BLINDSIDE.Joker({
     blindside_joker = true,
     key = 'unik_blindside_blacklist',
@@ -78,6 +93,7 @@ BLINDSIDE.Joker({
             for i,v in pairs(G.playing_cards) do
                 v.flipped_by_blacklist = nil
             end
+            reset_blacklist_blind()
                         return true
                     end}))
         end
@@ -144,19 +160,6 @@ BLINDSIDE.Joker({
     end,
 })
 
-
-local function  reset_blacklist_blind()
-    local card = "m_bld_sharp"
-    if G.playing_cards then
-        local cards = pseudorandom_element(G.playing_cards, pseudoseed('blacklist_blindside'..G.GAME.round_resets.ante))
-        if cards then
-            card = cards.config.center.key
-        end
-        
-    end
-    G.GAME.unik_blindside_blacklist_blind = card
-   -- print( G.GAME.unik_blindside_blacklist_blind)
-end
 
 --After defeating the final boss blind (ignoring ante) or at start, reset the ranks
 local resetReedRanks = reset_blinds

@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 # plural handler (annoyingly fragile overwrite)
 # also i pass the whole vars here, even though it's inefficient, just because it looks better

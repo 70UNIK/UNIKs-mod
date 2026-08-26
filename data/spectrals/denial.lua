@@ -6,12 +6,12 @@ SMODS.Consumable{
 	cost = 4,
 	atlas = "unik_consumables",
     config = {
-		max_highlighted = 5,
-        suit_conv = 'unik_Crosses'
+        suit_conv = 'unik_Crosses',
+		cards = 6,
 	},
 	loc_vars = function(self, info_queue, center)
 		          info_queue[#info_queue + 1] = { set = "Other", key = "unik_crosses_info" }
-		return { vars = {center.ability.max_highlighted,localize(
+		return { vars = {center.ability.cards,localize(
 					"unik_Crosses",
 					"suits_plural"
 				),
@@ -22,37 +22,59 @@ SMODS.Consumable{
 			
 		}
 	end,
-	 use = function(self)
+	can_use = function (self, card)
+       	for key, value in pairs(G.hand.cards) do
+			if value.base.suit ~= card.ability.suit_conv then
+				return true
+			end
+		end
+        return false
+    end,
+	 use = function(self,card)
+		local validCards = {}
+		local temp_hand = {}
+		for k, v in ipairs(G.hand.cards) do 
+			if v.base.suit ~= card.ability.suit_conv then
+				temp_hand[#temp_hand+1] = v 
+			end
+		end
+		table.sort(temp_hand, function (a, b) return not a.playing_card or not b.playing_card or a.playing_card < b.playing_card end)
+		pseudoshuffle(temp_hand, pseudoseed('unik_denial'))
 
-        for i=1, #G.hand.highlighted do
-            local percent = 1.15 - (i-0.999)/(#G.hand.highlighted-0.998)*0.3
+		for i = 1, math.min(card.ability.cards,#temp_hand) do 
+			validCards[#validCards+1] = temp_hand[i] 
+		end
+		table.sort(validCards, function (a, b) return not a.playing_card or not b.playing_card or a.playing_card < b.playing_card end)
+
+        for i=1, #validCards do
+            local percent = 1.15 - (i-0.999)/(#validCards-0.998)*0.3
 			G.E_MANAGER:add_event(Event({
 					delay = 0.15,
 					trigger= 'after',
 					func = function()
-						G.hand.highlighted[i]:flip();play_sound('card1', percent);G.hand.highlighted[i]:juice_up(0.3, 0.3);
+						validCards[i]:flip();play_sound('card1', percent);validCards[i]:juice_up(0.3, 0.3);
 						return true
 					end
 			}))
         end
         delay(0.2)
-        for i=1, #G.hand.highlighted do
+        for i=1, #validCards do
 			G.E_MANAGER:add_event(Event({
 					delay = 0.1,
 					trigger= 'after',
 					func = function()
-						G.hand.highlighted[i]:change_suit(self.config.suit_conv);
+						validCards[i]:change_suit(card.ability.suit_conv);
 						return true
 					end
 			}))
         end
-        for i=1, #G.hand.highlighted do
-            local percent = 0.85 + ( i - 0.999 ) / ( #G.hand.highlighted - 0.998 ) * 0.3
+        for i=1, #validCards do
+            local percent = 0.85 + ( i - 0.999 ) / ( #validCards - 0.998 ) * 0.3
 			G.E_MANAGER:add_event(Event({
 				delay = 0.15,
 				trigger= 'after',
 				func = function()
-					 G.hand.highlighted[i]:flip(); play_sound('tarot2', percent, 0.6); G.hand.highlighted[i]:juice_up(0.3, 0.3);
+					 validCards[i]:flip(); play_sound('tarot2', percent, 0.6); validCards[i]:juice_up(0.3, 0.3);
 					return true
 				end
 			}))

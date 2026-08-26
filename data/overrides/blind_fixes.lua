@@ -74,3 +74,18 @@ SMODS.Blind:take_ownership("bl_final_acorn",{
     end,
     
 },true) 
+
+--the seed (AIJ): will use my own small/big blind system instead of what the hell they have cause it softlocks my run
+
+SMODS.Blind:take_ownership("bl_aij_the_seed",{
+    defeat = function(self)
+        local temp = G.GAME.blind and G.GAME.blind.disabled
+        if temp then
+            return
+        end
+        G.GAME.aij_force_big_to_be_boss = true
+        -- G.GAME.aij_has_big_boss = true
+        -- G.GAME.aij_big_boss_reset_ante = true
+        -- G.GAME.round_resets.blind_choices.Big_Boss = get_new_boss()
+    end
+},true)

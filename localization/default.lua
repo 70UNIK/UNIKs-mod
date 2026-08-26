@@ -5254,13 +5254,13 @@ return {
                 name = "Kouign Amann Cookie",
                 text = {
                     {
-                        "Scored {C:attention}Light Suits",
+                        "Scored {C:unik_light_suit}Light Suits",
                         "give {X:mult,C:white}X#1#{} Mult",
                        
                     },
                     {
                          "Increases by {X:mult,C:white}X#2#{} Mult",
-                        "for each {C:attention}unique {C:attention}Light Suit",
+                        "for each {C:attention}unique {C:unik_light_suit}Light Suit",
                         "in scoring hand",
                         "{C:inactive}(Capped at {X:mult,C:white}X#4#{C:inactive} Mult)",
                     },
@@ -5274,7 +5274,7 @@ return {
                 },
                 unlock = {
                     "Play a {C:attention}Spectrum",
-                    "with all {C:attention}Light Suits{} present",
+                    "with all {C:unik_light_suit}Light Suits{} present",
                 }
             },
             j_unik_hacker = {
@@ -5526,7 +5526,7 @@ return {
                     {
                         "On the {C:attention}first{} hand",
                         "the first {C:attention}#1#{} played",
-                        "{C:attention}Light Suit{} cards",
+                        "{C:unik_light_suit}Light Suit{} cards",
                         "permanently gain {C:attention}+#2#{} Retrigger#<s>2#"
                     },
                     {
@@ -5545,9 +5545,9 @@ return {
                 name = "Sundae Cookie",
                 text = {
                     {
-                        "On the {C:attention}last{} hand", --since rescores are considered "stronger" than retriggers, makes sense for rescores to be set back.
+                        "On the {C:attention}first{} hand", --since rescores are considered "stronger" than retriggers, makes sense for rescores to be set back.
                         "the first {C:attention}#1#{} played",
-                        "{C:attention}Dark Suit{} cards",
+                        "{C:unik_dark_suit}Dark Suit{} cards",
                         "permanently gain {C:unik_copper}+#2# Rescore#<s>2#"
                     },
                     {
@@ -5591,12 +5591,12 @@ return {
                 name = "Night Skyline",
                 text = {
                     {
-                        "Scored {C:attention}Dark Suits",
+                        "Scored {C:unik_dark_suit}Dark Suits",
                     "give {X:mult,C:white}X#1#{} Mult",
                     },
                     {
                         "Increases by {X:mult,C:white}X#2#{} Mult",
-                    "for each {C:attention}Dark Suit",
+                    "for each {C:unik_dark_suit}Dark Suit",
                     "in scoring hand",
                     },
                     
@@ -6270,8 +6270,8 @@ return {
                 name = "Tic Tac",
                 text = {
                     {
-                        "Scoring {C:attention}Light Suits{} become {C:unik_noughts}#1#",
-                    "Scoring {C:attention}Dark Suits{} become {C:unik_crosses}#2#",
+                        "Scoring {C:unik_light_suit}Light Suits{} become {C:unik_noughts}#1#",
+                    "Scoring {C:unik_dark_suit}Dark Suits{} become {C:unik_crosses}#2#",
                     },
                     {
                         "{E:2,C:red}Destroyed{} after {C:attention}#3#{} trigger#<s>3#",
@@ -7775,19 +7775,19 @@ return {
                     "{C:inactive}(Eternal excluded)",
                 }
             },
-            c_unik_ring = {
+            c_unik_ring = { --7 random cards in hand
                 name = "Ring",
                 text = {
-                    "Converts up to",
-                    "{C:attention}#1#{} selected cards",
+                    "Converts {C:attention}#1#",
+                    "random cards in hand",
                     "to {V:1}#2#{}",
                 }
             },
-            c_unik_denial = {
+            c_unik_denial = { --7 random cards in hand
                 name = "Denial",
                 text = {
-                    "Converts up to",
-                    "{C:attention}#1#{} selected cards",
+                    "Converts {C:attention}#1#",
+                    "random cards in hand",
                     "to {V:1}#2#{}",
                 }
             },

@@ -1,7 +1,7 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = 99999
+priority = 214748365
 
 
 ###Death quips that will occur after getting killed by a boss that has a specific message, even on endless.

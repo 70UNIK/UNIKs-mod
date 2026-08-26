@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 9999
+priority = 214748365
 
 ### Bigger Blind and Boring Blank functionality to emulate Small and Big Blinds in appearance and functionality, while still ""bosses""
 ### And also make them ineligable for reroll (but can appear naturally) and not enable chicot/luchador to function
