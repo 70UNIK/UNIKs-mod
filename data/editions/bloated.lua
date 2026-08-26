@@ -129,6 +129,10 @@ calculate = function(self, card, context)
 
 --Gore6 (custom card destruction animation)
 function Card:bloated_pop()
+	if self.getting_sliced and not (self.ability.set == 'Default' or self.ability.set == 'Enhanced') then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self, shatters = true})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
     local dissolve_time = 0.4
     self.shattered = true
     self.dissolve = 0

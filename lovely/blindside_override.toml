@@ -28,6 +28,7 @@ if BLINDSIDE then
 end
 '''
 
+###hook fix
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'
@@ -41,6 +42,7 @@ if _cards[i].unik_burned_by_hook then
 end
 '''
 
+### hook fix2
 [[patches]]
 [patches.pattern]
 target = 'functions/state_events.lua'

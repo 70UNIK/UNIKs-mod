@@ -47,7 +47,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''functions/button_callbacks.lua'''
-pattern = '''if G.GAME.tags[i]:apply_to_run({type = 'immediate'}) then break end'''
+pattern = '''G.GAME.tags[i]:apply_to_run({type = 'immediate'})'''
 position = "before"
 payload = '''
 	if not G.GAME.unik_mortons_fork then
@@ -56,7 +56,7 @@ match_indent = true
 [[patches]]
 [patches.pattern]
 target = '''functions/button_callbacks.lua'''
-pattern = '''if G.GAME.tags[i]:apply_to_run({type = 'immediate'}) then break end'''
+pattern = '''G.GAME.tags[i]:apply_to_run({type = 'immediate'})'''
 position = "after"
 payload = '''
 	end

@@ -32,15 +32,6 @@ SMODS.Joker {
         if context.after and card.ability.extra.to_be_destroyed and not context.blueprint and not context.repetition and not context.retrigger_joker then
             G.E_MANAGER:add_event(Event({
                 trigger="immediate",
-
-                func = function()
-                    
-                    
-                    return true
-                end
-            }))
-            G.E_MANAGER:add_event(Event({
-                trigger="immediate",
                 func = function()
                     --Dissolving
                         play_sound('tarot1')

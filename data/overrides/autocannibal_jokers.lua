@@ -46,35 +46,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 			if (not card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod2) <= to_big(0))
 				or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod2) <= to_big(card.ability.extra.depleted_threshold))
 			then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.3,
-							blockable = false,
-							func = function()
-								G.jokers:remove_card(card)
-								card:remove()
-								card = nil
-								return true
-							end,
-						}))
-						return true
-					end,
-				}))
-				card_eval_status_text(
-					card,
-					"extra",
-					nil,
-					nil,
-					nil,
-					{ message = localize("k_eaten_ex"), colour = G.C.CHIPS }
-				)
+				selfDestruction(card,"k_eaten_ex",G.C.CHIPS)
 			else
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -120,26 +92,7 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 	calculate = function(self, card, context)
 		if context.after and not context.blueprint then
 			if (card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod2 < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod2 <= 0) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					message = localize('k_melted_ex'),
-					colour = G.C.CHIPS
-				}
+				selfDestruction(card,'k_melted_ex',G.C.CHIPS)
 			else
 				 SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -193,26 +146,7 @@ SMODS.Joker:take_ownership("j_popcorn",{
 			and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			-- adding depleted functionality for popcorn
 			if (card.ability.unik_depleted and card.ability.extra.mult - card.ability.extra.extra < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.mult - card.ability.extra.extra <= 0) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					message = localize('k_eaten_ex'),
-					colour = G.C.RED
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.RED)
 			else
 				SMODS.scale_card(card, {
                     ref_table = card.ability.extra,
@@ -257,27 +191,7 @@ SMODS.Joker:take_ownership("j_ramen",{
 	calculate = function(self, card, context)
 		if (context.discard and not context.blueprint) then
 			if (card.ability.unik_depleted and card.ability.extra.Xmult - card.ability.extra.extra < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.Xmult - card.ability.extra.extra <= 1) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					card = card,
-					message = localize('k_eaten_ex'),
-					colour = G.C.RED
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.RED)
 			else
 				 SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -334,27 +248,7 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 			and not context.repetition
 			and not context.retrigger_joker then
 			if (card.ability.unik_depleted and card.ability.extra.h_size - card.ability.extra.h_mod < card.ability.extra.depleted_threshold) or (not (card.ability.unik_depleted) and card.ability.extra.h_size - card.ability.extra.h_mod <= 0) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					card = card,
-					message = localize('k_eaten_ex'),
-					colour = G.C.FILTER
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.FILTER)
 			else
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -389,26 +283,7 @@ SMODS.Joker:take_ownership("j_mf_lollipop",{
 	calculate = function(self, card, context)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint and not context.retrigger_joker then
 		if (card.ability.x_mult - card.ability.extra <= 1.01 and not card.ability.unik_depleted) or (card.ability.x_mult - card.ability.extra <= 0 and card.ability.unik_depleted) then 
-			G.E_MANAGER:add_event(Event({
-			func = function()
-				play_sound('tarot1')
-				card.T.r = -0.2
-				card:juice_up(0.3, 0.4)
-				card.states.drag.is = true
-				card.children.center.pinch.x = true
-				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-				func = function()
-					G.jokers:remove_card(card)
-					card:remove()
-					card = nil
-					return true; end})) 
-				return true
-			end
-			})) 
-			return {
-			message = localize('k_eaten_ex'),
-			colour = G.C.FILTER
-			}
+			selfDestruction(card,'k_eaten_ex',G.C.FILTER)
 		else
 			SMODS.scale_card(card, {
 				ref_table = card.ability,
@@ -553,31 +428,7 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 			})
 			--floating point precision can kiss my ass istg
 			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.3,
-							blockable = false,
-							func = function()
-								G.jokers:remove_card(card)
-								card:remove()
-								card = nil
-								return true
-							end,
-						}))
-						return true
-					end,
-				}))
-				return {
-					message = localize("k_eaten_ex"),
-					colour = G.C.DARK_EDITION,
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
 			else
 				return {
 					message = "-^" .. number_format(card.ability.emult_mod) .. " Mult",

@@ -28,27 +28,13 @@ payload = '''
     end
 '''
 match_indent = true
-
-##STANDARD
+# UNIVERSAL
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or G.GAME.blind:has_death_quotes() then --Only add Jimbo to say a quip if the game over happens when the run is lost
-'''
-match_indent = true
-
-##FINITY
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or G.GAME.blind:has_death_quotes() or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
-'''
+pattern = '''G.GAME.round_resets.ante <= G.GAME.win_ante(.*)\-\-Only add Jimbo to say a quip if the game over happens when the run is lost'''
+position = 'before'
+payload = ''' G.GAME.blind:has_death_quotes() or '''
 match_indent = true
 
 [[patches]]

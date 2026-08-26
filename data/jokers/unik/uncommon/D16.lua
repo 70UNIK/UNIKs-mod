@@ -90,6 +90,10 @@ SMODS.Joker {
 }
 
 function Card:boom_break()
+    if self.getting_sliced and not (self.ability.set == 'Default' or self.ability.set == 'Enhanced') then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self, shatters = true})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
     local dissolve_time = 0.7
     self.shattered = true
     self.dissolve = 0

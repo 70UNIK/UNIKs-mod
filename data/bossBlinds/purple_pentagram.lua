@@ -9,10 +9,10 @@ SMODS.Blind{
     config = {},
         death_message="special_lose_unik_killed_by_pentagram",
     set_blind = function(self, reset, silent)
-        G.GAME.unik_pentagram_manager_fix = true
+
         if not reset then
             --print("vvvv")
-            G.GAME.unik_killed_by_pentagram = true
+
             for i = 1, 4 do
                 G.E_MANAGER:add_event(Event({
                     delay = 0.5,
@@ -50,8 +50,4 @@ SMODS.Blind{
             end
         end
     end,
-    defeat = function(self)
-		G.GAME.unik_killed_by_pentagram = nil
-        G.GAME.unik_pentagram_manager_fix = nil
-	end,
 }

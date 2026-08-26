@@ -1,40 +1,11 @@
 
-function selfDestruction(card,message,color,dissolve)
-    -- This part plays the animation.
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            
-            --Dissolving
-            if (dissolve) then
-                card:start_dissolve()
-            --extinct animation
-            else
-                play_sound('tarot1')
-                card.T.r = -0.2
-                card:juice_up(0.3, 0.4)
-                card.states.drag.is = true
-                card.children.center.pinch.x = true
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.3,
-                    blockable = false,
-                    func = function()
-                        G.jokers:remove_card(card)
-                        card:remove()
-                        card = nil
-                        return true;
-                    end
-                }))
-            end
-            
-            return true
-        end
-    }))
+function selfDestruction(card,message,color,dissolve,timer,bypass_eternal)
+    SMODS.destroy_cards({card},{pinch_anim = not dissolve and true or false,bypass_eternal = bypass_eternal or true})
     card_eval_status_text(card, "extra", nil, nil, nil, {
         message = localize(message),
         colour = color,
         card=card,
-        delay = 0.5,
+        delay = timer or 0.5,
     })
 end
 
@@ -53,40 +24,8 @@ function UNIK.shallow_copy(t)
 	return t2
 end
 
-function selfDestruction_noMessage(card,dissolve)
-    -- This part plays the animation.
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            --Dissolving
-            if (dissolve) then
-                if SMODS.shatters(card) then
-                    card:shatter()
-                else
-                    card:start_dissolve()
-                end
-            --extinct animation
-            else
-                play_sound('tarot1')
-                card.T.r = -0.2
-                card:juice_up(0.3, 0.4)
-                card.states.drag.is = true
-                card.children.center.pinch.x = true
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.3,
-                    blockable = false,
-                    func = function()
-                        G.jokers:remove_card(card)
-                        card:remove()
-                        card = nil
-                        return true;
-                    end
-                }))
-            end
-            
-            return true
-        end
-    }))
+function selfDestruction_noMessage(card,dissolve,bypass_eternal)
+    SMODS.destroy_cards({card},{pinch_anim = not dissolve and true or false,bypass_eternal = bypass_eternal or true})
 end
 
 local removeHook = Card.remove_from_deck
@@ -233,47 +172,6 @@ function CardArea:emplace(card, location, stay_flipped)
         }))
     end
     if self == G.jokers then
-       --print("11")
-        --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)
-        if (SMODS.Mods["extracredit"] or {}).can_load then
-            if card and card.config and card.config.center and card.config.center.key == "j_ExtraCredit_averagealice" then
-                if pseudorandom('unik_average_alice_exotic_change') < 1/100 then
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            card_eval_status_text(card, "extra", nil, nil, nil, {
-                                message = localize("k_unik_average_alice"),
-                                colour = G.C.PURPLE,
-                                card=card,
-                            })
-                            play_sound('tarot1')
-                            card.T.r = -0.2
-                            card:juice_up(0.3, 0.4)
-                            card.states.drag.is = true
-                            card.children.center.pinch.x = true
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'after',
-                                delay = 0.3,
-                                blockable = false,
-                                func = function()
-                                    G.jokers:remove_card(card)
-                                    card:remove()
-                                    card = nil
-                                    return true;
-                                end
-                            }))
-                            local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_extra_credit_alice")
-                            card2:start_materialize()
-                            card2:add_to_deck()
-                            G.jokers:emplace(card2)
-                            return true
-                        end
-                    }))
-                end
-            end
-        end
-
-        --print("Joker added")
-        --print(card.ability.name)
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)

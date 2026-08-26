@@ -4951,16 +4951,6 @@ return {
                     },
                 }
             }, 
-            j_ExtraCredit_averagealice = { --overriding loc to include a 0.6% chance to get Alice on purchase
-                name = 'Average Alice',
-                text = {
-                    "{C:white,X:mult}X#1#{} Mult if played",
-                    "hand contains a scoring",
-                    "{C:attention}Odd{} and {C:attention}Even{} card",
-                    "{C:inactive,s:0.7}If obtained, fixed {C:green,s:0.7}1%{C:inactive,s:0.7} chance",
-                    "{C:inactive,s:0.7}to obtain {C:legendary,s:0.7,E:1}Alice {C:inactive,s:0.7}instead",
-                }
-            },
             j_unik_foundation = {
                 name = 'Foundation',
                 text = {

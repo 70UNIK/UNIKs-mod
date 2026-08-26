@@ -51,6 +51,8 @@ payload = '''
             '''
 root_capture = '$root'
 times = 1
+
+## flag not working
 [[patches]]
 [patches.regex]
 target = "card.lua"

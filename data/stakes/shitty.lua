@@ -88,36 +88,10 @@ function Card:cry_calculate_consumeable_perishable()
 	end
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
         self.ability.perish_tally = 0
-        self.ability.block_wl_copy = true
+        --self.ability.block_wl_copy = true
         --self:set_debuff()
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                play_sound("tarot1")
-                self.T.r = -0.2
-                self:juice_up(0.3, 0.4)
-                self.states.drag.is = true
-                self.children.center.pinch.x = true
-                G.E_MANAGER:add_event(Event({
-                    trigger = "after",
-                    delay = 0.3,
-                    blockable = false,
-                    func = function()
-                        if self.area then
-                            self.area:remove_card(self)
-                        end
-                        self:remove()
-                        self = nil
-                        return true
-                    end,
-                }))
-                return true
-            end,
-        }))
-         card_eval_status_text(self, "jokers", nil, nil, nil, {
-            message = localize("k_unik_perished"),
-            delay = 0.5 ,
-            colour = G.C.PERISHABLE,
-        })
+
+        selfDestruction(self,"k_unik_perished",G.C.PERISHABLE)
     else
         disposableConsumableOverride(self)
     end
@@ -128,37 +102,8 @@ function Card:calculate_perishable()
     if self.ability.perishable and not self.ability.perish_tally then self.ability.perish_tally = G.GAME.perishable_rounds end
     if (G.GAME.modifiers.destroy_perishables or self.ability.eternal) and self.ability.perishable and self.ability.perish_tally > 0 then
         if self.ability.perish_tally <= 1 then
-            self.ability.perish_tally = 0
-            self.ability.block_wl_copy = true
-            --self:set_debuff()
-                G.E_MANAGER:add_event(Event({
-                func = function()
-                    play_sound("tarot1")
-                    self.T.r = -0.2
-                    self:juice_up(0.3, 0.4)
-                    self.states.drag.is = true
-                    self.children.center.pinch.x = true
-                    G.E_MANAGER:add_event(Event({
-                        trigger = "after",
-                        delay = 0.3,
-                        blockable = false,
-                        func = function()
-                            if self.area then
-                                self.area:remove_card(self)
-                            end
-                            self:remove()
-                            self = nil
-                            return true
-                        end,
-                    }))
-                    return true
-                end,
-            }))
-            card_eval_status_text(self, "jokers", nil, nil, nil, {
-                message = localize("k_unik_perished"),
-                delay = 0.5 ,
-                colour = G.C.PERISHABLE,
-            })
+            self.ability.perish_tally = 1
+            selfDestruction(self,"k_unik_perished",G.C.PERISHABLE)
         else
             self.ability.perish_tally = self.ability.perish_tally - 1
             card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={self.ability.perish_tally}},colour = G.C.FILTER, delay = 0.45})
