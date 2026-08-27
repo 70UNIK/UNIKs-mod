@@ -887,6 +887,25 @@ return {
                     "by X66 and voucher becomes Eternal",
                 }
             },
+            bl_unik_traitor = {
+                name = "The Traitor",
+                text = {
+                    "Open a Baneful Buffoon",
+                    "Pack containing Decaying",
+                    "Detrimental Jokers",
+                    "Skip it to Banish the",
+                    "rightmost non-Eternal Joker",
+                }
+            },
+            bl_unik_cursed = {
+                name = "The Curse",
+                text = {
+                    "Open a Cursed Pack",
+                    "Skip it to Banish",
+                    "the leftmost",
+                    "non-Eternal Joker"
+                }
+            },
 
             bl_cry_chromatic_fixed = {
                 name = "The Chromatic",
@@ -4323,6 +4342,25 @@ return {
                     
                 }
             },
+            j_unik_pink_chocolate = {
+                name = "Pink Chocolate",
+                text = {
+                    {
+                        "Only {C:unik_unik_color}UNIK's mod{} {C:attention}Jokers",
+                        "and {C:spectral}Spectrals{} may appear",
+                    },
+                    {
+                        "Only {C:unik_unik_color}UNIK's mod{} and {C:attention}vanilla",
+                        "{C:attention}Booster Packs{} may appear"
+                    },
+                    {
+                        "{C:red}Self Destructs{} after",
+                        "adding {C:attention}#1#{} {C:attention}Jokers{} or",
+                        "using {C:attention}#1#{} {C:spectral}Spectrals",
+                        "{C:inactive}(Values shared)"
+                    },
+                }
+            },
 
             j_unik_lucky_seven = {
                 name = 'Lucky 7',
@@ -4485,13 +4523,14 @@ return {
                 name = 'Broken Window',
                 text={
                     {
-                                            "{C:red}Self destructs{} when less than", 
+                               "{C:attention}All {C:diamonds}Diamond{} cards are {C:red}debuffed{}",               
                     },
                     {
+                        "{C:red}Self destructs{} when less than", 
                         "{C:attention}#1#{} {C:diamonds}Diamond{} card(s) remain in deck or",
                     "{C:unik_window_color}The Window{} is triggered",      
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:diamonds}Diamond(s){C:inactive})",
-                        "{C:attention}All {C:diamonds}Diamond{} cards are {C:red}debuffed{}", 
+                       
                     },
                     
                 },                 
@@ -4885,11 +4924,10 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult, ",
+                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult",
                     },
                     {
-                        "{C:attention}Prevents{} Joker",
-                        "{C:red}destruction{} once",
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} once",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
                         "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)"
                     },
@@ -4904,15 +4942,30 @@ return {
                     "Destroy an {C:unik_ancient}Ancient{} Joker",
                 }
             },
+            --no longer broken
             j_unik_coupon_codes = {
                 name="Coupon Codes",
                 text={
                     {
-                        "Obtain a {C:attention}Voucher Tag{}",
-                        "and a {C:attention}Coupon Tag{}",
-                        "for every {C:attention}#1#{} items",
-                        "above {C:money}$#3#{} purchased",
+                        "Once per round,",
+                        "obtain a {C:attention}Voucher Tag{}",
+                        "and a {C:attention}Coupon Tag{} after",
+                        "purchasing {C:attention}#1#{}",
+                        "items above {C:money}$#3#{}",
                         "{C:inactive}(Currently #2#/#1# items)",
+                    },
+                },
+            },
+            j_unik_coupon_codes_inactive = {
+                name="Coupon Codes",
+                text={
+                    {
+                        "Once per round,",
+                        "obtain a {C:attention}Voucher Tag{}",
+                        "and a {C:attention}Coupon Tag{} after",
+                        "purchasing {C:attention}#1#{}",
+                        "items above {C:money}$#3#{}",
+                        "{C:inactive}(Inactive)",
                     },
                 },
             },
@@ -6953,6 +7006,78 @@ return {
                     "{X:mult,C:white} X#3# {} Mult",
                 },
             },
+            --fish fingers
+            -- j_aij_fish_fingers={
+            --     name = "Fish Fingers",
+            --     text = {
+            --         "{C:blue}+#1#{} Hands per round,",
+            --         "loses {C:blue}-#2#{} Hand when Blind",
+            --         "is {C:attention}defeated"
+            --     }
+            -- },
+            --all in jest
+            --fish fingers (WILL LIKELY KILL YOU OUTRIGHT!)
+            
+            j_aij_fish_fingers_depleted={
+                name = "Fish Fingers",
+                text = {
+                    "{C:blue}#4##1#{} Hand#<s>1# per round,",
+                    "loses {C:blue}-#2#{} Hand#<s>2# when Blind",
+                    "is {C:attention}defeated",
+                    "{C:red}Self destructs{} at",
+                    "{C:blue}-#3#{} Hand#<s>3#"
+                }
+            },
+            --chgips n dip
+            j_aij_chips_n_dip_depleted = {
+                name = "Chips 'n Dip",
+                text = {
+                    "{X:chips,C:white}X#1#{} Chips, loses {X:chips,C:white}X#2#{} Chips",
+                    "at end of {C:attention}round",
+                    "{C:red}Self destructs{} at {X:chips,C:white}X#1#{} Chips"
+                }
+            },
+            j_aij_plain_packaging_depleted = {
+                name = "Plain Packaging",
+                text = {
+                    "{C:mult}#4##1#{} Mult, {C:mult}-#2#{} Mult when",
+                    "a {C:attention}Joker{} is {C:money}sold{}",
+                    "or {C:red}destroyed{}",
+                    "{C:red}Self destructs{} at",
+                    "{C:mult}#3#{} Mult"
+                }
+            },
+            j_aij_saveloy_depleted = {
+                name = "Saveloy",
+                text = {
+                    '{C:mult}#4##1#{} Mult, {C:mult}-#2#{} Mult for',
+                    'every {C:green}reroll{} in the',
+                    '{C:money}shop',
+                    "{C:red}Self destructs{} at",
+                    "{C:mult}#3#{} Mult"
+                }
+            },
+            j_aij_cheerio_depleted = {
+                name = "Cheerio",
+                text = {
+                    '{C:chips}#3##1#{} Chips, when {C:attention}rerolling{}',
+                    'in the {C:money}Shop{}, lose {C:chips}Chips{} equal',
+                    'to the {C:money}cost{} of rerolling',
+                    "{C:red}Self destructs{} when below",
+                    "{C:chips}#2#{} Chips"
+                }
+            }, 
+            j_aij_turrn_depleted = {
+                name = "Turrón",
+                text = {
+                    '{C:attention}#4##1#{} Shop Slots',
+                    "{C:red}-#2#{} Shop Slot at",
+                    "end of round",
+                    "{C:red}Self destructs{} when below",
+                    "{C:chips}#3#{} Slots"
+                }
+            },
+
             --Nachos
             j_paperback_nachos_depleted = {
                 name = "Nachos",
@@ -7535,7 +7660,8 @@ return {
             unik_mad = {
                 name = "{C:unik_eye_searing_red}Mutually Assured Destruction",
                 text = {
-                    "If {C:red}destroyed",
+                    "If {C:red}destroyed{}",
+                    "or {C:attention}rerolled{},",
                     "{X:unik_void_color,C:unik_eye_searing_red,s:2}DIE.",
                     "{C:red}Unremovable"
                 }

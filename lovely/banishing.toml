@@ -10,5 +10,14 @@ priority = 214748365
 target = "functions/common_events.lua"
 pattern = '''if v.yes_pool_flag and not G.GAME.pool_flags[v.yes_pool_flag] then add = nil end'''
 position = "after"
-payload = '''if G.GAME.cry_banished_keys[v.key] then add = nil end'''
+payload = '''if G.GAME.cry_banished_keys[v.key] then add = nil end
+
+if UNIK.has_pink_choc() and (not v.mod or (v.mod and v.mod.id and v.mod.id ~= "unik")) then
+    if v.set == 'Joker' or (v.consumeable and v.set == 'Spectral') or
+    (v.set == 'Booster' and v.kind and v.kind ~= 'Arcana' and v.kind ~= 'Planet' and v.kind ~= 'Buffoon' and v.kind ~= 'Spectral' and v.kind ~= 'unik_summit' and v.kind ~= 'unik_lartceps') then
+        add = nil
+    end
+    
+end
+'''
 match_indent = true

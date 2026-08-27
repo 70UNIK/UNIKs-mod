@@ -22,6 +22,7 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+    demicolon_compat = true,
     config = {},
     pronouns = "he_him",
      pools = {["character"] = true },
@@ -53,7 +54,7 @@ SMODS.Joker {
            vars = {localize(hand, 'poker_hands'),localize(goob_quotes[quoteset][math.random(#goob_quotes[quoteset])] .. "")} }
 	end,
     calculate = function(self, card, context)
-        if context.press_play  then
+        if context.press_play or context.force_trigger then
             if G.GAME.current_round.hands_played == 0 then
                 local validCards = {}
                 for i,v in pairs(G.hand.cards) do

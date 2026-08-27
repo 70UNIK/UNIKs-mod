@@ -56,3 +56,17 @@ function Card.remove(self)
     return ret
 end
 
+local set_abilityref = Card.set_ability
+function Card:set_ability(center, initial, delay)
+    local initialyl = UNIK.shallow_copy(self)
+    local initialkey = initialyl.config.center.key
+    local nuke = initialyl and initialyl.ability and initialyl.ability.unik_mad
+    local output = set_abilityref(self, center, initial, delay)
+    
+    if nuke and initialkey ~= self.config.center.key then
+        print("DIE!")
+        UNIK.instakill()
+        
+    end 
+    return output
+end

@@ -65,6 +65,7 @@ SMODS.Sticker{
 
 local updateStickerHook = Card.update
 function Card:update(dt)
+    
     if self.ability and self.ability.unik_shielded then
         self.debuff = false
         self.perma_debuff = false

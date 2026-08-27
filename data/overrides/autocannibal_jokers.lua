@@ -446,3 +446,8 @@ function SMODS.is_eternal(card, trigger)
 	if card.ability.eternal then return true end
 	return ret
 end
+
+--All in jest food jokers
+SMODS.Joker:take_ownership("",{
+	
+}, true)

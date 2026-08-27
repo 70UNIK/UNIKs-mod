@@ -59,7 +59,6 @@ function Card:add_to_deck(from_debuff)
     if self then
         SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
     end
-    
         self.will_be_destroyed_1 = nil
        self.will_be_gored = nil
 end
@@ -67,8 +66,12 @@ end
 local emplaceHook = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
     emplaceHook(self,card, location, stay_flipped)
-    if self and self.config.center and self.config.center.rarity == 'unik_nil_rarity' and (self == G.pack_cards or self == G.shop_jokers or self == G.consumeables or self == G.jokers or self == G.shop_booster or self == G.shop_vouchers )then
-        if self.ability and self.ability.unik_taw then
+    --detrimental jokers do not take a joker slot to be a bit more fairer.
+    if card.config.center.rarity == 'unik_detrimental' then
+        card.ability.card_limit = 1
+    end
+    if card and card.config.center and card.config.center.rarity == 'unik_nil_rarity' and (self == G.pack_cards or self == G.shop_jokers or self == G.consumeables or self == G.jokers or self == G.shop_booster or self == G.shop_vouchers )then
+        if card.ability and card.ability.unik_taw then
             UNIK.instakill()
         else
             selfDestruction_noMessage(self)
@@ -79,6 +82,7 @@ function CardArea:emplace(card, location, stay_flipped)
     if  G.consumeables and G.jokers then
         SMODS.calculate_context({ unik_emplace = true, added = card, cardarea = self,location = location, isFlipped = stay_flipped})
     end
+    
     --Happiness is mandatory: Joker slot check after the hook
     if card.ability.set == "unik_lartceps" then
         card.ability.eternal = true

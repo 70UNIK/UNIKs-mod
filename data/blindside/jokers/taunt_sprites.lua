@@ -33,19 +33,7 @@ if not UNIK.has_bos() then
         soul_pos = {x = 1, y = 0},
         no_doe = true,
         no_collection = true,
-        in_pool = function()
-            return false
-        end
-    })
-    SMODS.Joker({
-        key='unik_blindside_taunt_goob_pwx',
-        order = 10^300,
-        atlas = 'unik_taunt_sprites',
-        cost = 66666666,
-        pos = {x = 0, y = 1},
-        soul_pos = {x = 1, y = 1},
-        no_doe = true,
-        no_collection = true,
+        rarity = 'unik_nil_rarity',
         in_pool = function()
             return false
         end
@@ -58,6 +46,7 @@ if not next(SMODS.find_mod("Bunco")) then
         order = 10^300,
         atlas = 'unik_taunt_sprites',
         cost = 66666666,
+        rarity = 'unik_nil_rarity',
         pos = {x = 2, y = 0},
         no_doe = true,
         no_collection = true,
@@ -72,6 +61,7 @@ if not next(SMODS.find_mod("paperback")) then
     SMODS.Joker({
         key='unik_blindside_whitenight_paperback',
         order = 10^300,
+        rarity = 'unik_nil_rarity',
         atlas = 'unik_taunt_sprites',
         cost = 66666666,
         pos = {x = 0, y = 2},
@@ -88,6 +78,7 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load then
     SMODS.Joker({
         key='unik_blindside_formidiulosus_cry',
         order = 10^300,
+        rarity = 'unik_nil_rarity',
         atlas = 'unik_taunt_sprites',
         cost = 66666666,
         pos = {x = 0, y = 3},
@@ -101,6 +92,7 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load then
     SMODS.Joker({
         key='unik_blindside_exponentia_cry',
         order = 10^300,
+        rarity = 'unik_nil_rarity',
         atlas = 'unik_taunt_sprites',
         cost = 66666666,
         pos = {x = 0, y = 4},
@@ -114,6 +106,7 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load then
     SMODS.Joker({
         key='unik_blindside_facile_cry',
         order = 10^300,
+        rarity = 'unik_nil_rarity',
         atlas = 'unik_taunt_sprites',
         cost = 66666666,
         pos = {x = 3, y = 1},
@@ -127,6 +120,7 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load then
     SMODS.Joker({
         key='unik_blindside_redeo_cry',
         order = 10^300,
+        rarity = 'unik_nil_rarity',
         atlas = 'unik_taunt_sprites',
         cost = 66666666,
         pos = {x = 3, y = 2},
@@ -140,6 +134,7 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load then
     SMODS.Joker({
         key='unik_blindside_effarcire_cry',
         order = 10^300,
+        rarity = 'unik_nil_rarity',
         atlas = 'unik_taunt_sprites',
         cost = 66666666,
         pos = {x = 3, y = 0},

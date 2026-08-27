@@ -1,24 +1,32 @@
---Redeem a random disposable voucher at the end of the round. 1 in 2 chance to redeem another disposable voucher.
+--NERF: ONly allow this once per sound
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_coupon_codes',
     atlas = 'unik_normal_jokers',
     rarity = 3,
 	pos = { x = 1, y = 1 },
-
     cost = 10,
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
-    config = { extra = {purchased_cards = 0,requirement=12} },
+    config = { extra = {purchased_cards = 0,requirement=12,active = true} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_coupon
         info_queue[#info_queue + 1] = G.P_TAGS.tag_voucher
-		return { vars = { center.ability.extra.requirement,center.ability.extra.purchased_cards,0} }
+		return { key = center.ability.extra.active and "j_unik_coupon_codes" or "j_unik_coupon_codes_inactive", vars = { center.ability.extra.requirement,center.ability.extra.purchased_cards,0} }
 	end,
     calculate = function(self, card, context)
-        if context.buying_card and to_big(context.card.sell_cost) > to_big(0) and to_big(context.card.cost) > to_big(0) then
+        if context.end_of_round and context.cardarea == G.jokers and not context.blueprint and not context.repetition and not context.retrigger_joker and not card.ability.extra.active then
+            card.ability.extra.purchased_cards = 0
+            card.ability.extra.active = true
+            return {
+                message = localize('k_reset'),
+                colour = HEX("ff8bcb"),
+                card = card,
+            }
+        end
+        if context.buying_card and to_big(context.card.sell_cost) > to_big(0) and to_big(context.card.cost) > to_big(0) and card.ability.extra.active then
             if not context.blueprint and not context.retrigger_joker then
                 card.ability.extra.purchased_cards = card.ability.extra.purchased_cards + 1
             end
@@ -47,6 +55,7 @@ SMODS.Joker {
                         trigger = 'after',
                         func = function()
                             card.ability.extra.purchased_cards = 0
+                            card.ability.extra.active = nil
                             return true
                         end,
                     }))
