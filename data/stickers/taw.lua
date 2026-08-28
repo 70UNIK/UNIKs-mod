@@ -13,6 +13,16 @@ SMODS.Sticker{
     order = 3200,
 }
 
+local set_abilityref = Card.set_ability
+function Card:set_ability(center, initial, delay)
+    local tawsome = self and self.ability and (self.ability.unik_taw)
+    if (not tawsome) or G.SETTINGS.paused then
+        set_abilityref(self, center, initial, delay)
+    else
+        set_abilityref(self, G.P_CENTERS[self.config.center.key], initial, delay)
+    end
+end
+
 local updateStickerHook = Card.update
 function Card:update(dt)
     if self.added_to_deck then
@@ -56,7 +66,7 @@ function Card.remove(self)
     local ret = remove_ref(self)
     if not G.GAME.ignore_delete_context then
         if self.ability.unik_taw and not self.ability.unik_already_used_taw and not self.ability.unik_bypass_taw and not G.SETTINGS.paused then
-            if originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers then
+            if originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers and originalArea  ~= G.aij_coconut_holder then
                 local _card = nil
                 --create a new card instead with edition if it's a decrementing one
                 if self.config.center.pools and (self.config.center.pools.autocannibalism_food) then

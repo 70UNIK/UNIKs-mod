@@ -127,8 +127,8 @@ end
 
 
 function Card:metalBreak(colour)
-    if self.getting_sliced and not (self.ability.set == 'Default' or self.ability.set == 'Enhanced') then
-        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self, shatters = true})
+    if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
         if flags.no_destroy then self.getting_sliced = nil; return false end
     end
     local dissolve_time = 1.0
@@ -199,8 +199,8 @@ function Card:metalBreak(colour)
 end
 
 function Card:woodBreak()
-    if self.getting_sliced and not (self.ability.set == 'Default' or self.ability.set == 'Enhanced') then
-        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self, shatters = true})
+    if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
         if flags.no_destroy then self.getting_sliced = nil; return false end
     end
     local dissolve_time = 1.0
@@ -254,8 +254,8 @@ function Card:woodBreak()
 end
 
 function Card:rockBreak(colour)
-    if self.getting_sliced and not (self.ability.set == 'Default' or self.ability.set == 'Enhanced') then
-        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self, shatters = true})
+    if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
         if flags.no_destroy then self.getting_sliced = nil; return false end
     end
     local dissolve_time = 1.0

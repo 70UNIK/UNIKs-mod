@@ -32,7 +32,7 @@ SMODS.Joker {
 	pronouns = "she_her",
     calculate = function(self, card, context)	
         if context.before and context.cardarea == G.jokers then
-            if G.GAME.current_round.hands_played == 0 then
+            if G.GAME.current_round.hands_left == 0 then
                 local limit = card.ability.extra.cards
                 local cards = {}
                  for i,v in pairs(context.scoring_hand) do
@@ -58,11 +58,9 @@ SMODS.Joker {
                 }
             end
         end
-        if context.first_hand_drawn then
-            if not context.blueprint then
-                local eval = function() return G.GAME.current_round.hands_played == 0 end
-                juice_card_until(card, eval, true)
-            end
+        if context.after and not context.blueprint then
+            local eval = function() return  G.GAME.current_round.hands_left == 1 end
+            juice_card_until(card, eval, true)
         end
     end,
 }

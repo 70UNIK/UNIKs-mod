@@ -325,3 +325,22 @@ SMODS.Joker:take_ownership("j_aij_mistake",{
 		end
 	end
 }, true)
+
+--AIJ crash fix attempt 1: Prevent any card in astral pins from saving cause that may be causing the major crash
+function CardArea:save()
+	
+    if not self.cards then return end
+    local cardAreaTable = {
+        cards = {},
+        config = self.config,
+    }
+	if self == G.aij_astral_pin_area then
+		--print("BLOCKED SAVING ON ASTRAL PIN AREA")
+		return cardAreaTable
+	end
+    for i = 1, #self.cards do
+        cardAreaTable.cards[#cardAreaTable.cards + 1] = self.cards[i]:save()
+    end
+
+    return cardAreaTable
+end

@@ -9,7 +9,7 @@ function Card:set_triggering(triggering)
     if self.config.center.set == 'Colour' then
         return nil
     end
-    if not self.config.center.triggering_blacklist and not SMODS.is_eternal(self,self) then
+    if not self.config.center.triggering_blacklist and not SMODS.is_eternal(self,self) and not self.unik_activated_ability and (not self.all_in_jest or (self.all_in_jest and self.all_in_jest.use_ability ))then
         self.ability.unik_triggering = triggering
         self:set_cost()
     end

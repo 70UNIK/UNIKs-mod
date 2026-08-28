@@ -59,7 +59,7 @@ end
 local set_abilityref = Card.set_ability
 function Card:set_ability(center, initial, delay)
     local initialyl = UNIK.shallow_copy(self)
-    local initialkey = initialyl.config.center.key
+    local initialkey = initialyl.config and initialyl.config.center and initialyl.config.center.key
     local nuke = initialyl and initialyl.ability and initialyl.ability.unik_mad
     local output = set_abilityref(self, center, initial, delay)
     

@@ -5588,7 +5588,7 @@ return {
                 name = "Sundae Cookie",
                 text = {
                     {
-                        "On the {C:attention}first{} hand", --since rescores are considered "stronger" than retriggers, makes sense for rescores to be set back.
+                        "On the {C:attention}final{} hand", --since rescores are considered "stronger" than retriggers, makes sense for rescores to be set back.
                         "the first {C:attention}#1#{} played",
                         "{C:unik_dark_suit}Dark Suit{} cards",
                         "permanently gain {C:unik_copper}+#2# Rescore#<s>2#"
