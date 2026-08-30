@@ -71,19 +71,33 @@ SMODS.Joker {
                     end
                 end
                 local quoteset = 'levelup'
-                
-                return {
-                    card = card,
-                    message = localize(goob_quotes[quoteset][math.random(#goob_quotes[quoteset])] .. ""),
-                    func = function()
-                        SMODS.upgrade_poker_hands({
-                            hands = hand,
-                            level_up = 1,
-                            from = card,
-                            instant = nil,
-                        })
-                    end
-                }
+                if not context.blueprint_card then
+                    return {
+                        card = card,
+                        message = localize(goob_quotes[quoteset][math.random(#goob_quotes[quoteset])] .. ""),
+                        func = function()
+                            SMODS.upgrade_poker_hands({
+                                hands = hand,
+                                level_up = 1,
+                                from = card,
+                                instant = nil,
+                            })
+                        end
+                    }
+                else
+                    return {
+                        card = card,
+                        message = localize("k_upgrade_ex"),
+                        func = function()
+                            SMODS.upgrade_poker_hands({
+                                hands = hand,
+                                level_up = 1,
+                                from = card,
+                                instant = nil,
+                            })
+                        end
+                    }
+                end
             end
         end
         if context.first_hand_drawn then

@@ -45,15 +45,11 @@ JokerDisplay.Definitions["j_unik_gt710"] = {
 }
 JokerDisplay.Definitions["j_unik_noon"] = {
     text = {
-        {
-            border_nodes = {
-                { text = "X" },
-                { ref_table = "card.joker_display_values", ref_value = "x_mult", retrigger_type = "exp" }
-            }
-        }
+        { text = "+" },
+        { ref_table = "card.joker_display_values", ref_value = "mult", retrigger_type = "mult" }
     },
     calc_function = function(card)
-        card.joker_display_values.x_mult = G.GAME and G.GAME.current_round.hands_played ~= 0 and G.GAME.current_round.hands_left > 0 and card.ability.extra.x_mult or 1
+        card.joker_display_values.mult = G.GAME and G.GAME.current_round.hands_played ~= 0 and G.GAME.current_round.hands_left > 0 and card.ability.extra.mult or 0
     end
 }
 JokerDisplay.Definitions["j_unik_up_n_go"] = {

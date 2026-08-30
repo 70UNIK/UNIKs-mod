@@ -6,6 +6,11 @@ local sundae_quotes = {
         'k_unik_sundae_normal3',
         'k_unik_sundae_normal4',
 	},
+    trigger = {
+        'k_unik_sundae_trigger1',
+        'k_unik_sundae_trigger3',
+        'k_unik_sundae_trigger2',
+    }
 }
 
 SMODS.Joker {
@@ -52,10 +57,21 @@ SMODS.Joker {
                         return true
                     end
                 }))
-                return {
-                    extra = {message = localize('k_upgrade_ex'), colour = HEX("991A79")},
-                    colour = HEX("991A79"),
-                }
+                local quoteset = 'trigger'
+                
+                if #cards > 0 then
+                    if not context.blueprint_card then
+                         return {
+                            message = localize(sundae_quotes[quoteset][math.random(#sundae_quotes[quoteset])] .. ""),
+                            colour = HEX("991A79"),
+                        }
+                    else
+                         return {
+                            message = localize("k_upgrade_ex"),
+                            
+                        }
+                    end
+                end
             end
         end
         if context.after and not context.blueprint then

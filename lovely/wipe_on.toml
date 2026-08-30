@@ -18,7 +18,7 @@ payload = '''
 
         local jokers = UNIK.all_mod_characters_list()
         joker = pseudorandom_element(jokers, pseudoseed("select_random_wipe_on_sprite"))
-        G.screenwipecard = Card(1, 1, G.CARD_W, G.CARD_H, nil, G.P_CENTERS[joker])
+        G.screenwipecard = Card(1, 1, G.CARD_W, G.CARD_H, nil, G.P_CENTERS[joker],{ bypass_discovery_center = true })
     else
 '''
 match_indent = true

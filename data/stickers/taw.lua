@@ -153,10 +153,13 @@ end
 
 local is_eternalref = SMODS.is_eternal
 function SMODS.is_eternal(c, ...)
+    if c and not c.config or (c and c.config and not c.config.center) then
+        return false
+    end
     if c and c.ability and c.ability.unik_taw then
         return true
     end
-    if c and c.config.center.key == 'm_unik_blindside_taw' then
+    if c and c.config and c.config.center and c.config.center.key == 'm_unik_blindside_taw' then
         return true
     end
     if c then

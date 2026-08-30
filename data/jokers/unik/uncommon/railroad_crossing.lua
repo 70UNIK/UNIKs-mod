@@ -2,7 +2,7 @@
 SMODS.Joker {
     key = "unik_railroad_crossing",
     atlas = "unik_normal_jokers",
-    rarity = 3,
+    rarity = 2,
     cost = 7,
     pos = { x = 9, y = 1 },
     blueprint_compat = true,

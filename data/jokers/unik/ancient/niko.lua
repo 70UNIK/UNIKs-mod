@@ -7,6 +7,11 @@ local niko_quotes = {
         'k_unik_niko_normal3',
         'k_unik_niko_normal4',
 	},
+    trigger = {
+        'k_unik_niko_trigger1',
+        'k_unik_niko_trigger2',
+        'k_unik_niko_trigger3',
+    },
 }
 
 SMODS.Joker {
@@ -52,10 +57,21 @@ SMODS.Joker {
                         return true
                     end
                 }))
-                return {
-                    message = localize('k_upgrade_ex'),
-                    colour = HEX("991A79"),
-                }
+                local quoteset = 'trigger'
+                if #cards > 0 then
+                    if not context.blueprint_card then
+                         return {
+                            message = localize(niko_quotes[quoteset][math.random(#niko_quotes[quoteset])] .. ""),
+                            colour = HEX("991A79"),
+                        }
+                    else
+                         return {
+                            message = localize("k_upgrade_ex"),
+                            
+                        }
+                    end
+                end
+               
             end
         end
         if context.first_hand_drawn then

@@ -941,12 +941,12 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/mountain_dew.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pink_chocolate.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pink salt.lua")()
-NFS.load(mod_path .. "data/jokers/unik/uncommon/aquamarine.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/aquamarine.lua")() --deserves to be uncommon due to probability + consistency with the minerals
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pink_guard.lua")()
-
+NFS.load(mod_path .. "data/jokers/unik/uncommon/railroad_crossing.lua")() --demoted to uncommon due to severe debuffing conditions, requirement for crosses AND that aquamarine is uncommon.
 
 --Rare
-NFS.load(mod_path .. "data/jokers/unik/rare/railroad_crossing.lua")()
+
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
@@ -962,12 +962,12 @@ NFS.load(mod_path .. "data/jokers/unik/rare/last_tile.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() --deserves to be rare, similar to how baron is rare, and also safe xlog mult
 NFS.load(mod_path .. "data/jokers/unik/rare/tic_tac.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
-NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")() --deserves to be rare due to compounding effect of repeated xmult despite glass cards inherent fragility
 --NFS.load(mod_path .. "data/jokers/unik/rare/electroplating.lua")() --NOT released until v0.8, will only be here for the purpose of testing perma rescoring
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
@@ -977,7 +977,7 @@ NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")()
 NFS.load(mod_path .. "data/jokers/unik/legendary/ALICE.lua")()
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/catto_boi.lua")()
-NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")() --deserves to be rare, cause compounding xlog chips
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/goob.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()

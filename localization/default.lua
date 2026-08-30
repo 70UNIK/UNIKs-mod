@@ -4980,7 +4980,7 @@ return {
             j_unik_noon = { --this would suck on black deck or with 3 hands...
                 name="Noon",
                 text={
-                    "{X:mult,C:white}X#1#{} Mult",
+                    "{C:red}+#1#{} Mult",
                     "if {C:red}not{} the {C:attention}first{}",
                     " or {C:attention}last{} hand",
                 }    
@@ -5926,7 +5926,9 @@ return {
             j_unik_numerical_reinforcement = {
                 name = "Taped 7",
                 text = {
-                    "Scoring {C:unik_unik_color}Pink Cards{} are",
+                    "Played {C:unik_unik_color}Pink Cards{} give",
+                    "{C:blue}+#1#{} Chips when",
+                    "{C:attention}scored{} and are",
                     "no longer {C:red}destroyed{}",
                 }
             },
@@ -9306,10 +9308,10 @@ return {
             k_k_amann_normal4="The Light is in my dough!",
             k_k_amann_normal5="Working hard makes a Cookie so much sweeter!",
             
-            k_k_amann_trigger1="Justice be served!",
-            k_k_amann_trigger2="The light shall show the way!",
-            k_k_amann_trigger3="My Paladin's Spirit!",
-            k_k_amann_trigger4="Sweet and strong, here I come!",
+            -- k_k_amann_trigger1="Justice be served!",
+            -- k_k_amann_trigger2="The light shall show the way!",
+            -- k_k_amann_trigger3="My Paladin's Spirit!",
+            -- k_k_amann_trigger4="Sweet and strong, here I come!",
 
             --Poppy
             k_poppy_normal1="Oh! It's nice seeing you here!",
@@ -9327,6 +9329,10 @@ return {
             k_unik_niko_normal2="This is something different...",
             k_unik_niko_normal3="I think I can help out here!",
             k_unik_niko_normal4="I do miss being with my mom...",
+
+            k_unik_niko_trigger1 = "How this?",
+            k_unik_niko_trigger2 = "I've heard of these, they're quite strong...",
+            k_unik_niko_trigger3 = "Hey... I think this'll help out...",
 
             k_unik_niko_nikoed="Oh god... I don't feel right...", --Niko sticker
 
@@ -9415,6 +9421,10 @@ return {
             k_unik_sundae_normal2 = "Nothing beats hearing the joyful laughter of Cookies!",
             k_unik_sundae_normal3 = "Come along and join the fun here!",
             k_unik_sundae_normal4 = "Hehehe! It'll be fun at Sugarland!", -- [suit]!
+
+            k_unik_sundae_trigger1 = "Hehe!",
+            k_unik_sundae_trigger2 = "These should be quite fun!",
+            k_unik_sundae_trigger3 = "Nothing's like a great treat from Sugarland!",
 
             k_unik_must_select = "Must select ",
             k_unik_skip_req = " to skip",

@@ -4,7 +4,7 @@ SMODS.Joker {
     atlas = 'unik_normal_jokers',
     rarity = 1,
 	pos = { x = 3, y = 5 },
-    config = { extra = { x_mult = 1.75} }, --For comparison, in mainline cryptid, stardust is the common "unconditional Xmult" Joker, hence it's 1.75x
+    config = { extra = { mult = 16} }, --For comparison, in mainline cryptid, stardust is the common "unconditional Xmult" Joker, hence it's 1.75x
     cost = 4,
     blueprint_compat = true,
 	perishable_compat = true,
@@ -16,8 +16,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
 		if (context.joker_main and G.GAME.current_round.hands_played ~= 0 and G.GAME.current_round.hands_left > 0) or context.forcetrigger then
 			return {
-				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
-				Xmult_mod = card.ability.extra.x_mult,
+				mult = card.ability.extra.mult,
 			}
 		end
 	end
