@@ -79,6 +79,7 @@ local function BlindIncrement()
 			and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].increment_in_ante
             and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].increment_by_click
             and G.GAME.round_resets.blind_states[c] ~= "Defeated"
+            and G.GAME.round_resets.blind_states[c] ~= "Skipped"
             and G.GAME.round_resets.blind_states[c] ~= 'Hide'
             and G.GAME.round_resets.blind_states[c] ~= 'Current'
             

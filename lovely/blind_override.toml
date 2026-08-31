@@ -43,13 +43,79 @@ pattern = '''self[self.current_slot or ''] = nil
         self.current_slot = current_type'''
 position = "at"
 payload = '''
-self.boss = blind and not not blind.boss
-if not self.boss then
+self.boss = blind and blind.boss
+if not blind or (blind and not blind.boss) then
     self[self.current_slot or ''] = nil
             local current_type = string.lower(G.GAME.blind_on_deck or '')
             self[current_type] = blind and true or nil
             self.current_slot = current_type
-    if blind and not blind.boss then self.boss = nil end
+    --print("TYUPE:" .. current_type)
+    if blind and not blind.boss then 
+        self.boss = nil 
+        --print("deboss")
+    end
 end
+--print(self:get_type())
+--print(self.dollars)
+if G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward[self:get_type()] then 
+    self.dollars = 0 
+else
+    self.dollars = blind and blind.dollars or 0
+end
+'''
+match_indent = true
+
+## SMODS YOU BROKE THE MUSIC
+[[patches]]
+[patches.pattern]
+target = '''blind.lua'''
+pattern = '''if G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward[self:get_type()] then self.dollars = 0 end'''
+position = "at"
+payload = '''if G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward[self:get_type()] then 
+--print("SET ZERO2!")
+self.dollars = 0 
+end'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
+pattern = '''if G.GAME.blind and self == G.GAME.blind then
+        return G.GAME.blind_on_deck
+    end'''
+position = "at"
+payload = '''
+--FUCK OFF
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
+pattern = '''else return '' end'''
+position = "at"
+payload = '''
+else
+    if G.GAME.blind and self == G.GAME.blind then
+        return G.GAME.blind_on_deck
+    end
+    return ''
+end
+'''
+match_indent = true
+
+##ui 
+[[patches]]
+[patches.pattern]
+target = '''functions/UI_definitions.lua'''
+pattern = '''if G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward[type] then _reward = nil end'''
+position = "at"
+payload = '''
+local isSmall = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].small or false
+local isBig = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].big or false
+local isBoss = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].boss or false
+if isSmall and G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward['Small'] then _reward = nil end
+if isBig and G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward['Big'] then _reward = nil end
+if isBoss and G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward['Boss'] then _reward = nil end
 '''
 match_indent = true
