@@ -17,6 +17,7 @@ payload = '''
 --legendary_blind_patch1
 if blind_choice.config.glitchy_anim then
     blind_choice.animation.legendary_glitch_anim = (blind_choice.config.glitchy_anim)
+    print("GLITCH1")
 end
 '''
 match_indent = true
@@ -35,6 +36,7 @@ payload = '''
 if v.glitchy_anim and discovered then
     temp_blind.legendary_glitch_anim = v.glitchy_anim
     print(temp_blind.legendary_glitch_anim)
+    print("GLITCH2")
 end
 '''
 match_indent = true
@@ -52,6 +54,7 @@ payload = '''
 --legendary_blind_patch2
 if v.glitchy_anim then
     temp_blind.legendary_glitch_anim = v.glitchy_anim
+    print("GLITCH3")
 end
 '''
 match_indent = true
@@ -66,7 +69,7 @@ payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if self.glitchy_anim then
 --legendary_blind_patch5
---print("GLITCH REGISTERED2")
+print("GLITCH REGISTERED2")
     self.children.animatedSprite.legendary_glitch_anim = self.glitchy_anim
 end
 '''
@@ -83,6 +86,7 @@ payload = '''
 --If the blind has a "glitchy animation" (Legendary blinds only)
 if G.GAME.blind.glitchy_anim then
     blind_sprite.legendary_glitch_anim = G.GAME.blind.glitchy_anim
+    print("GLITCH4")
 end
 '''
 match_indent = true
@@ -96,6 +100,7 @@ payload = '''
 self.glitchy_anim = blindTable and blindTable.glitchy_anim or nil
 if self.glitchy_anim then
 self.children.animatedSprite.legendary_glitch_anim = self.glitchy_anim
+print("GLITCH5")
 end
 '''
 match_indent = true

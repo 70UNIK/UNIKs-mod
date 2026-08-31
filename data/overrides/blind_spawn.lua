@@ -161,6 +161,14 @@ function SMODS.create_blind_pool(blind_type, skip_cull,...)
             end
         end
 
+        if  UNIK.hasBlindside() then
+            for k, v in pairs(eligible_bosses) do
+                if v and not BLINDSIDE.is_blindside(k) then
+                    eligible_bosses[k] = nil
+                end
+            end
+        end
+
         if skip_cull then 
             local final_pool = {}
             for k, _ in pairs(eligible_bosses) do
@@ -168,6 +176,8 @@ function SMODS.create_blind_pool(blind_type, skip_cull,...)
             end
             return final_pool
         end
+
+        
 
         local min_use = 100
         for k, v in pairs(G.GAME.bosses_used[blind_type] or G.GAME.bosses_used) do

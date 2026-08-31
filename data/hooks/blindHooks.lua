@@ -341,6 +341,32 @@ G.FUNCS.use_blind_card = function(e)
 	end
 end
 
+--SMODS BREAKAGE FIX!
+local restoreOldAnim = AnimatedSprite.animate
+function AnimatedSprite:animate()
+    if self.legendary_glitch_anim then
+        local new_frame = math.floor(G.ANIMATION_FPS*(G.TIMERS.REAL - self.offset_seconds))%self.current_animation.frames
+        if new_frame ~= self.current_animation.current then
+            self.current_animation.current = new_frame
+            self.frame_offset = math.floor(self.animation.w*(self.current_animation.current))
+            self.sprite:setViewport( 
+                self.frame_offset,
+                self.animation.h*self.animation.y,
+                self.animation.w,
+                self.animation.h)
+        end
+        if self.float then 
+            self.T.r = 0.02*math.sin(2*G.TIMERS.REAL+self.T.x)
+            self.offset.y = -(1+0.3*math.sin(0.666*G.TIMERS.REAL+self.T.y))*self.shadow_parrallax.y
+            self.offset.x = -(0.7+0.2*math.sin(0.666*G.TIMERS.REAL+self.T.x))*self.shadow_parrallax.x
+        end
+    else
+        local ret = restoreOldAnim(self)
+        return ret
+    end
+    
+end
+
 --For legendary blinds,etc... It changes the atlas, without changing the base atlas
 function AnimatedSprite:shift_atlas(sprite_pos)
     self.animation = {
