@@ -107,7 +107,7 @@ local blindPool = SMODS.create_blind_pool
 function SMODS.create_blind_pool(blind_type, skip_cull,...)
     local force_bosses = blind_type == 'boss' or false
     
-    local force_finishers = SMODS.is_showdown_ante() or false
+    local force_finishers = blind_type == 'boss' and SMODS.is_showdown_ante() or false
     local force_epic = false
     local other_args = {...}
     if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
@@ -131,68 +131,70 @@ function SMODS.create_blind_pool(blind_type, skip_cull,...)
         end
     end
     
-    --base game
-    if not UNIK.hasBlindside() then
-        if force_finishers then
-            blind_type = 'boss'
-            for k, v in pairs(G.P_BLINDS) do
-                if v.boss and v.boss.showdown then
-                    local res, options = SMODS.add_to_pool(v)
-                    options = options or {}
-                    if boss_already_chosen(k) then
-                    elseif options.ignore_showdown_check then
-                        eligible_bosses[k] = res and true or nil
-                    else
+    if force_finishers then
+        blind_type = 'boss'
+        for k, v in pairs(G.P_BLINDS) do
+            if v.boss and v.boss.showdown then
+                local res, options = SMODS.add_to_pool(v)
+                options = options or {}
+                if boss_already_chosen(k) then
+                elseif options.ignore_showdown_check then
+                    eligible_bosses[k] = res and true or nil
+                else
+                    if not UNIK.hasBlindside() then
                         if (unik_config.unik_legendary_blinds and force_epic and (v.boss.epic or v.boss.legendary)) then
                             eligible_bosses[k] = res and true or nil
-                        elseif (not force_epic and not v.boss.epic and not v.boss.legendary) then
+                        elseif (not force_epic) then
+                            eligible_bosses[k] = res and true or nil
+                        end
+                    else
+                        if (unik_config.unik_legendary_blinds and force_epic and (v.boss.ancient or v.boss.exotic)) then
+                            eligible_bosses[k] = res and true or nil
+                        elseif (not force_epic) then
                             eligible_bosses[k] = res and true or nil
                         end
                     end
-                else
-                    eligible_bosses[k] = nil
+                    
+                end
+            else
+                eligible_bosses[k] = nil
+            end
+        end
+
+        if skip_cull then 
+            local final_pool = {}
+            for k, _ in pairs(eligible_bosses) do
+                final_pool[#final_pool + 1] = k
+            end
+            return final_pool
+        end
+
+        local min_use = 100
+        for k, v in pairs(G.GAME.bosses_used[blind_type] or G.GAME.bosses_used) do
+            if eligible_bosses[k] then
+                eligible_bosses[k] = v
+                if eligible_bosses[k] <= min_use then 
+                    min_use = eligible_bosses[k]
                 end
             end
-
-            if skip_cull then 
-                local final_pool = {}
-                for k, _ in pairs(eligible_bosses) do
+        end
+        local final_pool = {}
+        for k, v in pairs(eligible_bosses) do
+            if eligible_bosses[k] then
+                if eligible_bosses[k] > min_use and not G.P_BLINDS[k][blind_type].allow_duplicates then 
+                    eligible_bosses[k] = nil
+                else
                     final_pool[#final_pool + 1] = k
                 end
-                return final_pool
             end
+        end
 
-            local min_use = 100
-            for k, v in pairs(G.GAME.bosses_used[blind_type] or G.GAME.bosses_used) do
-                if eligible_bosses[k] then
-                    eligible_bosses[k] = v
-                    if eligible_bosses[k] <= min_use then 
-                        min_use = eligible_bosses[k]
-                    end
-                end
-            end
-            local final_pool = {}
-            for k, v in pairs(eligible_bosses) do
-                if eligible_bosses[k] then
-                    if eligible_bosses[k] > min_use and not G.P_BLINDS[k][blind_type].allow_duplicates then 
-                        eligible_bosses[k] = nil
-                    else
-                        final_pool[#final_pool + 1] = k
-                    end
-                end
-            end
-
-            local output = {}
-            for k, _ in pairs(eligible_bosses) do
-                output[#output + 1] = k
-            end
-            
-            return output
+        local output = {}
+        for k, _ in pairs(eligible_bosses) do
+            output[#output + 1] = k
         end
         
-    --blindside
-    else
-
+        return output
     end
 
 

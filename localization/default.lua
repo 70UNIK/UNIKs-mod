@@ -924,63 +924,12 @@ return {
                     "replaced every hand",
                 },
             },
-            bl_cry_box_fixed = {
-                name = "The Box",
-				text = {
-					"Leftmost Common Joker",
-					"is debuffed",
-				},
-            },
-            bl_cry_landlord_fixed = {
-				name = "The Landlord",
-				text = {
-					"Lose $1",
-					"per Joker owned",
-					"when hand played",
-				},
-			},
-            bl_cry_shackle_fixed = {
-				name = "The Shackle",
-				text = {
-					"Leftmost Negative Joker",
-					"is debuffed",
-				},
-			},
-            bl_cry_lavender_loop_fixed = {
-				name = "Lavender Loop",
-				text = {
-					"1.1X blind requirements every",
-					"6 seconds spent this round,",
-					"multiplied by game speed",
-				},
-			},
-            bl_cry_pin_fixed = {
-				name = "The Pin",
-				text = {
-					"Leftmost Joker with Epic",
-					"or higher rarity are debuffed",
-				},
-			},
-            bl_cry_windmill_fixed = {
-				name = "The Windmill",
-				text = {
-					"Leftmost Uncommon Joker",
-					"is debuffed",
-				},
-			},
-            bl_cry_striker_fixed = {
-				name = "The Striker",
-				text = {
-					"Leftmost Rare Joker",
-					"is debuffed",
-				},
-			},
 
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
-					"Create 4 Disposable Detrimental Jokers",
-                    "on Blind Selection",
+					"Create 4 Disposable Detrimental",
+                    "Jokers on Blind Selection",
 				},
             },
             bl_unik_indigo_icbm={
