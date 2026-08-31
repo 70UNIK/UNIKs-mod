@@ -3,7 +3,7 @@ SMODS.Blind{
     key = 'unik_the_jollyless',
     config = {},
 	boss = {
-		min = 1,
+		min = -66,
 		max = 10,
 	},
     atlas = "unik_showdown_blinds",

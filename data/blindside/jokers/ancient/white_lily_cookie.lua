@@ -6,7 +6,7 @@ BLINDSIDE.Joker({
     mult = 25,
     base_dollars = 16,
     order = 999999,
-    boss = {min = 1,showdown = true,ancient = true},
+    boss = {min = -66,showdown = true,ancient = true},
     active = true,
     in_pool = function(self, args)
         return UNIK.hasBlindside() and CanSpawnAncient()

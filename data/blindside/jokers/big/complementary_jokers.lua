@@ -10,7 +10,7 @@ BLINDSIDE.Joker({
     mult = 8,
     base_dollars = 12,
     order = 1,
-    big = {min = 1},
+    big = {min = -66},
     active = true,
     --can spawn if at least 5 blinds with editions are in deck.
     in_pool = function(self, args)
@@ -105,7 +105,7 @@ BLINDSIDE.Joker({
     mult = 8,
     base_dollars = 12,
     order = 1,
-    big = {min = 1},
+    big = {min = -66},
     active = true,
     is_assistant = true,
      loc_vars = function (self)

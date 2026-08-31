@@ -1,6 +1,6 @@
 SMODS.Blind{
     key = 'unik_septic_seance',
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 25},
     boss_colour= HEX("5e7297"),

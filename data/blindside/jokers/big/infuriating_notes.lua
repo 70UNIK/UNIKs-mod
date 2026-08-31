@@ -12,7 +12,7 @@ BLINDSIDE.Joker({
     mult = 10,
     base_dollars = 12,
     order = 1,
-    big = {min = 1},
+    big = {min = -66},
     active = true,
     loc_vars = function(self,blind)
         G.GAME.unik_infuriating_xmult = G.GAME.unik_infuriating_xmult or 1.2
@@ -48,7 +48,7 @@ BLINDSIDE.Joker({
     mult = 10,
     base_dollars = 12,
     order = 1,
-    big = {min = 1},
+    big = {min = -66},
     active = true,
     is_assistant = true,
     loc_vars = function(self,blind)

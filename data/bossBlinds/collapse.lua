@@ -3,7 +3,7 @@ SMODS.Blind{
     key = 'unik_collapse',
     config = {},
 	boss = {
-		min = 1,
+		min = -66,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 8},

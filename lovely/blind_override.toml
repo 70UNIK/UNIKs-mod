@@ -26,6 +26,29 @@ SMODS.add_boss_to_used_table(ret_boss, new_type or 'boss')
 '''
 
 [[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
+pattern = '''ret_boss = SMODS.poll_object({type = 'Blind', blind_type = blind_type, seed = blind_type or 'boss'})'''
+position = "before"
+match_indent = true
+payload = '''
+--print("tuype incoming" .. (blind_type or 'NIL'))
+
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
+pattern = '''ret_boss = pseudorandom_element(SMODS.create_blind_pool(blind_type), pseudoseed(blind_type or 'boss'))'''
+position = "before"
+match_indent = true
+payload = '''
+print("tuype incoming2--" .. (blind_type or 'NIL'))
+
+'''
+
+
+[[patches]]
 [patches.regex]
 target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
 pattern = '''string\.lower\(k\)'''

@@ -8,7 +8,7 @@ BLINDSIDE.Joker({
     mult = 10,
     base_dollars = 8, --hahahahahahahahahahhaaa
     order = 1,
-    boss = {min = 1},
+    boss = {min = -66},
     active = true,
     death_card = {
         card = 'j_unik_fat_joker', 

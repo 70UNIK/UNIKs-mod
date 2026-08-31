@@ -16,7 +16,7 @@ frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_crown',
     config = {},
-    boss = {min = 1,legendary = true,showdown = true, no_orb = true, hardcore = true}, 
+    boss = {min = -66,legendary = true,showdown = true, no_orb = true, hardcore = true}, 
     atlas = "unik_legendary_crown",
     pos = {x=0, y=0}, --This could shift with glitch FX (may use dandy code for this)
     boss_colour= HEX("e0bc42"),

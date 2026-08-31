@@ -2,7 +2,7 @@ SMODS.Blind	{
     key = 'unik_fuck_eternal_egg',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true},
+    boss = {min = -66, showdown = true},
     boss_colour = HEX("f0e2bc"),
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 30},

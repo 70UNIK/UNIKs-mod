@@ -14,7 +14,7 @@ BLINDSIDE.Joker({
     mult = 66,
     base_dollars = 16,
     order = 999999,
-    boss = {min = 1,showdown = true,exotic = true},
+    boss = {min = -66,showdown = true,exotic = true},
     active = true,
     in_pool = function(self, args)
         return UNIK.hasBlindside() and CanSpawnExotic()

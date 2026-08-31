@@ -13,7 +13,7 @@ frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_chamber',
     config = {},
-    boss = {min = 1,legendary = true,showdown = true,no_orb = true}, 
+    boss = {min = -66,legendary = true,showdown = true,no_orb = true}, 
     atlas = "unik_legendary_chamber",
     pos = {x=0, y=0},
     boss_colour= HEX("9bc117"),

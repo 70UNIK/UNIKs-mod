@@ -23,7 +23,7 @@ SMODS.Blind	{
     key = 'unik_epic_artisan',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
+    boss = {min = -66, showdown = true, hardcore = true, epic = true,no_orb = true},
     boss_colour = HEX("0f2140"),
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 6},

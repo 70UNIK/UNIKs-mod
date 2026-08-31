@@ -2,7 +2,7 @@ SMODS.Blind{
     key = 'unik_emerald_escalator',
     config = {},
 	boss = {
-		min = 1, showdown = true
+		min = -66, showdown = true
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 35},

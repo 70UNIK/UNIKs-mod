@@ -307,6 +307,10 @@ SMODS.Sound({
 	path = "gunshot.ogg",
 })
 SMODS.Sound({
+	key = "loudbuzzer",
+	path = "loudbuzzer.ogg",
+})
+SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
 })

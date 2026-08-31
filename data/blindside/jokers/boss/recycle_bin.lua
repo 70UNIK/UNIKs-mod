@@ -8,7 +8,7 @@ BLINDSIDE.Joker({
     mult = 12,
     base_dollars = 8,
     order = 1,
-    boss = {min = 1},
+    boss = {min = -66},
     active = true,
     loc_vars = function(self,blind)
         G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult or 1

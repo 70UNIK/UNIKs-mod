@@ -4,7 +4,7 @@
 SMODS.Blind{
     key = 'unik_gabe_cant_count',
     config = {},
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 42},
     boss_colour= HEX("40826D"),

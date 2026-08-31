@@ -7,7 +7,7 @@ BLINDSIDE.Joker({
     mult = 8,
     base_dollars = 8,
     order = 1,
-    boss = {min = 1},
+    boss = {min = -66},
     active = true,
     --can spawn if at least 5 blinds with trims are in deck.
     in_pool = function(self, args)

@@ -51,7 +51,7 @@ end
 
 SMODS.Blind{
     key = 'unik_shitty_superposition',
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 38},
     boss_colour= G.C.DARK_EDITION,

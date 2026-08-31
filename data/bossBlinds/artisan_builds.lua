@@ -4,7 +4,7 @@ SMODS.Blind{
     key = 'unik_artisan_builds',
     config = {},
 	boss = {
-		min = 1,
+		min = -66,
 	},
     pronouns = "he_him",
     atlas = "unik_showdown_blinds",

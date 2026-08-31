@@ -7,7 +7,7 @@ BLINDSIDE.Joker({
     mult = 70,
     base_dollars = 16,
     order = 999999,
-    boss = {min = 1,showdown = true,ancient = true},
+    boss = {min = -66,showdown = true,ancient = true},
     active = true,
     blind_data = {e_chips = 1,e_chips_mod = 0.07},
     in_pool = function(self, args)

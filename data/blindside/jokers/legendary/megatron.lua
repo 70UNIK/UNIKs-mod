@@ -6,7 +6,7 @@ BLINDSIDE.Joker({
     boss_colour = HEX('6E6E6E'),
     mult = 16,
     base_dollars = 10,
-    boss = {min = 1, showdown = true},
+    boss = {min = -66, showdown = true},
     order = 22,
     active = true,
     in_pool = function(self, args)

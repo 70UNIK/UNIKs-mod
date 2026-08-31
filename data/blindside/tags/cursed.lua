@@ -58,6 +58,14 @@ function get_new_cursed(current)
     end
     if G.FORCE_CURSED then return G.FORCE_CURSED end
 
+    if SMODS.optional_features.object_weights then
+     --   print("weight1")
+        local ret_boss = SMODS.poll_object({type = 'Blind',  blind_type = 'cursed', seed = 'cursed'})
+     --   print(ret_boss)
+        G.GAME.bosses_used[ret_boss] = G.GAME.bosses_used[ret_boss] + 1
+        return ret_boss
+    end
+
     local eligible_bosses = {bl_unik_blindside_monopoly_money = true}
     for k, v in pairs(G.P_BLINDS) do
         local res, options = SMODS.add_to_pool(v)

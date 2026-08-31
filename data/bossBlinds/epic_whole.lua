@@ -2,7 +2,7 @@ SMODS.Blind {
     key = 'unik_epic_whole',
     config = {},
     showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true,unskippable_ante = true},
+    boss = {min = -66, showdown = true, hardcore = true, epic = true,no_orb = true,unskippable_ante = true},
     boss_colour = HEX("555e36"),
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 24},
