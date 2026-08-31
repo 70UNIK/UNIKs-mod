@@ -1,0 +1,55 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
+pattern = '''SMODS.add_boss_to_used_table(ret_boss, blind_type or 'boss')'''
+position = "at"
+match_indent = true
+payload = '''
+--last minute override check to avoid index crash
+local new_type = blind_type
+if G.P_BLINDS[ret_boss].boss and not G.P_BLINDS[ret_boss][new_type] then
+    new_type = 'boss'
+    print("EMERGENCY OVERRIDE TYPE TO BOSS")
+elseif G.P_BLINDS[ret_boss].big and not G.P_BLINDS[ret_boss][new_type] then
+    new_type = 'big'
+    print("EMERGENCY OVERRIDE TYPE TO BIG")
+elseif G.P_BLINDS[ret_boss].small and not G.P_BLINDS[ret_boss][new_type] then
+    new_type = 'small'
+    print("EMERGENCY OVERRIDE TYPE TO SMALL")
+end
+SMODS.add_boss_to_used_table(ret_boss, new_type or 'boss')
+'''
+
+[[patches]]
+[patches.regex]
+target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
+pattern = '''string\.lower\(k\)'''
+position = "at"
+match_indent = true
+payload = '''UNIK.check_and_change_blind_type(string.lower(k))'''
+
+## SMODS YOU BROKE THE MUSIC
+[[patches]]
+[patches.pattern]
+target = '''blind.lua'''
+pattern = '''self[self.current_slot or ''] = nil
+        local current_type = string.lower(G.GAME.blind_on_deck or '')
+        self[current_type] = blind and true or nil
+        self.current_slot = current_type'''
+position = "at"
+payload = '''
+self.boss = blind and not not blind.boss
+if not self.boss then
+    self[self.current_slot or ''] = nil
+            local current_type = string.lower(G.GAME.blind_on_deck or '')
+            self[current_type] = blind and true or nil
+            self.current_slot = current_type
+    if blind and not blind.boss then self.boss = nil end
+end
+'''
+match_indent = true

@@ -12,6 +12,7 @@ end
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true,
 	post_trigger = true,
+	object_weights = true,
 	--quantum_enhancements = false,
 	-- Here are some other ones Steamodded has
 	-- These ones add new card areas that Steamodded will calculate through

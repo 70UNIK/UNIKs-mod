@@ -21,10 +21,10 @@ function vice_check()
 		return 1
 	end
 	
-    if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*multiplier*10000)/10000)) == 0 then
+    if G.GAME.round_resets.ante and G.GAME.round_resets.ante % math.floor(G.GAME.win_ante/(math.floor(G.GAME.unik_vice_squeeze*multiplier*10000)/10000)) == 0 and G.GAME.round_resets.ante > 0 then
         return 1
     end
-    if G.GAME.round_resets.ante and G.GAME.round_resets.ante% G.GAME.win_ante == 0 then
+    if G.GAME.round_resets.ante and G.GAME.round_resets.ante% G.GAME.win_ante == 0 and G.GAME.round_resets.ante > 0 then
         return 1
     end
 	if G.GAME.all_finishers then

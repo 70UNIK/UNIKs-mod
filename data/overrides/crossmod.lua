@@ -344,3 +344,127 @@ function CardArea:save()
 
     return cardAreaTable
 end
+
+
+--AIJ light suit compat
+SMODS.Joker:take_ownership("j_aij_bad_apple",{
+    
+    calculate = function(self, card, context)
+        if context.end_of_round and context.main_eval and not context.blueprint then
+            local random_value = pseudorandom("bad_apple", 0, 5)
+            card.ability.extra.light_suits = tostring(random_value)
+            card.ability.extra.dark_suits = tostring(5 - random_value)
+            return {
+                message = localize('k_reset'),
+                card = card
+            }
+        end
+        if context.before and not context.blueprint then
+            local dark_count, light_count = 0, 0
+            for _, card in ipairs(context.scoring_hand) do
+                if UNIK.is_suit_type(card,'dark') then
+                    dark_count = dark_count + 1
+                elseif UNIK.is_suit_type(card,'light') then
+                    light_count = light_count + 1
+                end
+            end
+            if dark_count == tonumber(card.ability.extra.dark_suits) and light_count == tonumber(card.ability.extra.light_suits) then
+                SMODS.scale_card(card, {
+	                ref_table = card.ability.extra,
+                    ref_value = "xmult",
+	                scalar_value = "xmult_mod",
+                })
+            end
+        end
+        if context.joker_main then 
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end
+}, true)
+
+SMODS.Joker:take_ownership("j_aij_rubberhose",{
+    
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local dark, light = 0, 0
+            for _, v in ipairs(context.scoring_hand) do
+                if UNIK.is_suit_type(v,'dark') then dark = dark + 1 end
+                if UNIK.is_suit_type(v,'light') then light = light + 1 end
+            end
+            
+            if (dark > 0 and light == 0) or (light > 0 and dark == 0) then
+                return {
+                    mult = card.ability.extra.mult
+                }
+            end
+        end
+    end
+}, true)
+
+SMODS.Joker:take_ownership("j_aij_yin",{
+    
+    calculate = function(self, card, context)
+         if context.individual and context.cardarea == G.play then
+            if UNIK.is_suit_type(context.other_card,'dark') then
+				local suits = {}
+				for j=1,#UNIK.dark_suits do
+					suits[UNIK.dark_suits[j]] = 0
+				end
+
+                for _, played_card in ipairs(context.scoring_hand) do
+					for j,x in pairs(suits) do
+						if played_card:is_suit(j) then
+							suits[j] = 1
+						end
+					end
+                end
+                local unique_count = 0
+				for j,x in pairs(suits) do
+					if x > 0 then
+						unique_count = unique_count + 1
+					end
+				end
+                if unique_count > 0 then
+                    return {
+                        mult = unique_count * card.ability.extra.mult
+                    }
+                end
+            end
+        end
+    end
+}, true)
+
+SMODS.Joker:take_ownership("j_aij_yang",{
+    
+    calculate = function(self, card, context)
+         if context.individual and context.cardarea == G.play then
+            if UNIK.is_suit_type(context.other_card,'light') then
+				local suits = {}
+				for j=1,#UNIK.light_suits do
+					suits[UNIK.light_suits[j]] = 0
+				end
+
+                for _, played_card in ipairs(context.scoring_hand) do
+					for j,x in pairs(suits) do
+						if played_card:is_suit(j) then
+							suits[j] = 1
+						end
+					end
+                end
+                local unique_count = 0
+				for j,x in pairs(suits) do
+					if x > 0 then
+						unique_count = unique_count + 1
+					end
+				end
+                if unique_count > 0 then
+                    return {
+                        mult = unique_count * card.ability.extra.mult
+                    }
+                end
+            end
+        end
+    end
+}, true)

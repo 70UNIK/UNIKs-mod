@@ -83,3 +83,33 @@ target = "functions/state_events.lua"
 pattern = '''G\.GAME\.round\_resets\.ante \=\= G\.GAME\.win\_ante'''
 position = "at"
 payload = '''G.GAME.round_resets.ante >= G.GAME.win_ante'''
+
+# add bigger blinds/boring blank into the blindpool initially if boss
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils/weights.lua"]'
+pattern = '''for k, v in pairs(G.GAME.banned_keys) do'''
+position = "before"
+match_indent = true
+payload = '''
+if blind_type == 'boss' then
+    
+    if SMODS.is_showdown_ante() then
+        local k = 'bl_unik_boring_blank'
+        local res, options = SMODS.add_to_pool(G.P_BLINDS[k])
+        options = options or {}
+        if boss_already_chosen(k) then end
+        eligible_bosses[k] = res and true or nil
+    else
+        local k = 'bl_unik_bigger_blind'
+        local res, options = SMODS.add_to_pool(G.P_BLINDS[k])
+        options = options or {}
+        if boss_already_chosen(k) then end
+        eligible_bosses[k] = res and true or nil
+    end
+else
+    eligible_bosses['bl_unik_boring_blank'] = nil
+    eligible_bosses['bl_unik_bigger_blind'] = nil
+end
+
+'''

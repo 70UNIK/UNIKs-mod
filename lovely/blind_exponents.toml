@@ -66,7 +66,7 @@ match_indent = true
 [[patches]]
 [patches.regex]
 target = "functions/UI_definitions.lua"
-pattern = '''\{n\=G\.UIT\.T\, config\=\{text \= (.*)\, scale \= 0\.4\, colour = G\.C\.RED\}\}'''
+pattern = '''\{n\=G\.UIT\.T\, config\=\{text \= blind\.mult\.\.l(.*)\, scale \= 0\.4\, colour = G\.C\.RED\}\}'''
 position = "before"
 payload = '''
  UNIK.custom_base_size(blind,discovered,vars) or 
