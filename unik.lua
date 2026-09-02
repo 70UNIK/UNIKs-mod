@@ -1473,6 +1473,11 @@ if next(SMODS.find_mod("Blindside")) then
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_summoning_circle_relic')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_sapient_sacrifice_relic')
 
+	BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_hiking_boots_relic')
+	BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_tent_camp_relic')
+	BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_summoning_circle_relic')
+	BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_sapient_sacrifice_relic')
+
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_everest')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_aconcagua')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_charleston')
@@ -1494,6 +1499,16 @@ if next(SMODS.find_mod("Blindside")) then
 	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_mitchell')
 	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_narodnaya')
 	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_whitney')
+
+	BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_1')
+	BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_2')
+	BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_3')
+	BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_4')
+
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_1')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_2')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_3')
+	BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_4')
 
 	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_pink_bow')
 	BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_faerie_tiara')

@@ -12,4 +12,5 @@ SMODS.Voucher {
     redeem = function(self, card)
         add_tag(Tag('tag_unik_blindside_tent_camp_relic'))
     end,
+    requires = {'v_unik_blindside_hiking_boots'}
 }

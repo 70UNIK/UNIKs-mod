@@ -13,9 +13,21 @@ SMODS.Voucher {
         add_tag(Tag('tag_unik_blindside_sapient_sacrifice_relic'))
         G.E_MANAGER:add_event(Event({
             func = function()
-                G.GAME.bld_obj_ritual_rate = 1
+                G.GAME.bld_obj_ritual_rate = 0.33
                 return true
             end
         }))
     end,
+    requires = {'v_unik_blindside_summoning_circle'}
+}
+
+BLINDSIDE.shop_rates[#BLINDSIDE.shop_rates+1] = 
+{
+    type = 'bld_obj_ritual',
+    boss = function()
+      return G.GAME.bld_obj_ritual_rate/1.5
+    end,
+    blind = function()
+      return G.GAME.bld_obj_ritual_rate
+    end
 }

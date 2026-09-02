@@ -8926,7 +8926,8 @@ return {
                 name = "Sapient Sacrifice",
                 text = {
                     "{C:bld_obj_ritual}Ritual Cards{} may",
-                    "spawn in {C:attention}Blind Shops"
+                    "spawn in {C:attention}Blind",
+                    "and {C:attention}Boss Shops"
                 }
             },
 

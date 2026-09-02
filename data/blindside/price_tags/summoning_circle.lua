@@ -13,4 +13,7 @@ SMODS.Voucher {
     redeem = function(self, card)
         add_tag(Tag('tag_unik_blindside_summoning_circle_relic'))
     end,
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_TAGS.tag_unik_blindside_cult
+    end,
 }

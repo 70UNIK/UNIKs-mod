@@ -19,7 +19,7 @@ SMODS.Booster{
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
-				return 1
+				return 2
 			else
 				return 0
 			end
@@ -57,7 +57,7 @@ SMODS.Booster{
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
-				return 1
+				return 2
 			else
 				return 0
 			end
@@ -95,7 +95,7 @@ SMODS.Booster{
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
-				return 1
+				return 2
 			else
 				return 0
 			end
@@ -133,7 +133,7 @@ SMODS.Booster{
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
-				return 0.15
+				return 0.875
 			else
 				return 0
 			end
