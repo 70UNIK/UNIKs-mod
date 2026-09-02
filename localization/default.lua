@@ -3404,6 +3404,7 @@ return {
                         "{C:attention}Play{} selected cards",
                         "when selected"
                     },
+                    {"{C:attention}Burns"}, 
                     {"Always scores"},
                     {"{C:red}Stubborn"}, 
 					{"{C:red}Forced to",
@@ -4138,7 +4139,8 @@ return {
 					"When Joker is selected,",
 					"create {C:attention}2{} copies of the",
 					"last consumed positive {C:attention}Tag",
-                    "{C:inactive}({X:unik_detrimental,C:white}Cursed{C:inactive} Tags excluded)",
+                    "{C:inactive}({X:unik_detrimental,C:white}Cursed{C:inactive} and {C:dark_edition} Wrench",
+                    "{C:inactive}Tags excluded)",
 					"{C:inactive}(Currently: {C:attention}#1#{C:inactive})"
 				}
 			},
@@ -8833,6 +8835,7 @@ return {
 					"{C:inactive}(Check {C:attention}Run Info{C:inactive})",
 				},
 			},
+
             v_unik_summit_merchant = {
 				name = "Summit Merchant",
 				text = {
@@ -8849,6 +8852,53 @@ return {
 					"in the shop",
 				},
 			},
+            v_unik_hiking_gear = {
+                name = "Hiking Gear",
+                text = {
+                    "Create a free",
+                    "{C:unik_summit}Mega Summit Pack",
+                    "after defeating",
+                    "{C:attention}Boss Blind"
+                }
+            },
+            v_unik_mountaineer = {
+                name = "Mountaineer",
+                text = {
+                    "{C:unik_summit}Summit Card{} bonuses are increased",
+                    "by {C:attention}X#1#{} for additive values",
+                    "and {C:attention}X#2#{} for multiplicative values"
+                }
+            },
+            --blindside
+            v_unik_blindside_hiking_boots = {
+                name = "Hiking Boots",
+                text = {
+                    "Create a free",
+                    "{C:unik_summit}Jumbo Summit Pack",
+                    "in each {C:attention}Boss Shop"
+                }
+            },
+            v_unik_blindside_tent_camp = {
+                name = "Tent Camp",
+                text = {
+                    "{C:unik_summit}Summit{} Booster Packs",
+                    "may appear in {C:attention}Boss Shops"
+                }
+            },
+            v_unik_blindside_summoning_circle = {
+                name = "Summoning Circle",
+                text = {
+                    "Create a {C:bld_obj_ritual}Cult Tag",
+                    "after defeating {C:attention}Boss Joker"
+                }
+            },
+            v_unik_blindside_sapient_sacrifice = {
+                name = "Sapient Sacrifice",
+                text = {
+                    "{C:bld_obj_ritual}Ritual Cards{} may",
+                    "spawn in {C:attention}Blind Shops"
+                }
+            },
 
         },
     },

@@ -10,7 +10,7 @@
 	"badge_text_colour": "",
 	"version": "0.7",
 	"dependencies": [
-        "Steamodded (>=1.0.0~BETA-1620a)", 
+        "Steamodded (>=26.829.0)", 
 		"Lovely (>=0.8.0)"
     ],
 	"conflicts": [

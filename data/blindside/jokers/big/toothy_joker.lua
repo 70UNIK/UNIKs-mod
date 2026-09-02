@@ -28,7 +28,7 @@ BLINDSIDE.Joker({
          G.GAME.unik_blindside_cinemas_used_this_run = G.GAME.unik_blindside_cinemas_used_this_run or 0
         UNIK.blindside_chips_modifyV2({chips_base = 0.05 * G.GAME.unik_blindside_cinemas_used_this_run}) 
         G.GAME.blind:wiggle()
-        BLINDSIDE.change_fire_amount({amount = 0.1})
+        BLINDSIDE.change_fire_amount({amount = 0.25})
         BLINDSIDE.add_fire(G.GAME.unik_blindside_cinemas_used_this_run)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 BLINDSIDE.chipsupdate()

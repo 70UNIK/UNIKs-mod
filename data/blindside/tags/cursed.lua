@@ -62,6 +62,7 @@ function get_new_cursed(current)
      --   print("weight1")
         local ret_boss = SMODS.poll_object({type = 'Blind',  blind_type = 'cursed', seed = 'cursed'})
      --   print(ret_boss)
+        G.GAME.bosses_used[ret_boss] = G.GAME.bosses_used[ret_boss] or 0
         G.GAME.bosses_used[ret_boss] = G.GAME.bosses_used[ret_boss] + 1
         return ret_boss
     end

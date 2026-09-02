@@ -7,7 +7,12 @@ SMODS.Tag {
     atlas = 'unik_tags',
     pos = {x = 5, y = 1},
     in_pool = function(self, args)
+        if G.GAME.selected_back.effect.center.config.extra then
+            if not G.GAME.selected_back.effect.center.config.extra.blindside then return false end
+            return pseudorandom('wrench_spawn'..G.SEED) < 0.33
+        else
         return false
+        end
     end,
     pools = {["bld_obj_blindside"] = true},
     loc_vars = function(self, info_queue,tag)
@@ -15,6 +20,7 @@ SMODS.Tag {
 	end,
     config = {
         extra = {
+            cannot_copy = true
         }
     },
     apply = function(self, tag, context)

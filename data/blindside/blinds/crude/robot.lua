@@ -8,7 +8,7 @@ BLINDSIDE.Blind({
         forced_selection = true,
         extra = {
             value = 30,
-            x_chips = 3,
+            x_chips = 3.5,
             hands = 1,
             stubborn = true,
         }},
@@ -35,6 +35,9 @@ BLINDSIDE.Blind({
                 x_chips = card.ability.extra.x_chips
             }
         end
+        if context.burn_card and context.cardarea == G.play and context.burn_card == card then
+            return { remove = true }
+        end
         if context.unik_triggering and card.area == G.hand then 
             if (context.selected_card == card) or (context.selected_card.area == G.hand) then
                 play_sound('unik_gunshot')
@@ -58,8 +61,9 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         if card.ability.extra.upgraded then
              info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
-              info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
+              
         end
+        info_queue[#info_queue+1] = {key = 'bld_burn', set = 'Other'}
          info_queue[#info_queue+1] = {key = 'bld_stubborn', set = 'Other'}
 
         

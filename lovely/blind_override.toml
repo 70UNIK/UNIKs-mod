@@ -38,6 +38,14 @@ payload = '''
 
 [[patches]]
 [patches.pattern]
+target = '''=[SMODS _ "src/utils/weights.lua"]'''
+pattern = '''if eligible_bosses[k] > min_use and not G.P_BLINDS[k][blind_type].allow_duplicates then'''
+position = "at"
+match_indent = true
+payload = '''if type(eligible_bosses[k]) ~= 'boolean' and eligible_bosses[k] > min_use and not G.P_BLINDS[k][blind_type].allow_duplicates then '''
+
+[[patches]]
+[patches.pattern]
 target = '''=[SMODS _ "src/game_objects/blind.lua"]'''
 pattern = '''ret_boss = pseudorandom_element(SMODS.create_blind_pool(blind_type), pseudoseed(blind_type or 'boss'))'''
 position = "before"

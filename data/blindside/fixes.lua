@@ -45,6 +45,7 @@
         loc_vars = function (self, info_queue, card)
             info_queue[#info_queue+1] = card.ability.extra.last_tag and {key = card.ability.extra.last_tag, set = 'Tag'} or nil
             info_queue[#info_queue+1] = {key = 'tag_unik_blindside_cursed', set = 'Tag'}
+            info_queue[#info_queue+1] = {key = 'tag_unik_blindside_wrench', set = 'Tag'}
             return {
                 vars = {
                     card.ability.extra.last_tag and localize({key = card.ability.extra.last_tag, type = 'name_text', set = 'Tag'}) or localize("matryoshka_none")

@@ -1,0 +1,1 @@
+--creates a mining tag, burns --> creates 2 mining tags, burns
