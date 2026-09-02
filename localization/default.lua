@@ -8319,6 +8319,36 @@ return {
 					"will have {C:attention}upgraded{} Blinds"
                 }
             },
+                        --blindside
+            tag_unik_blindside_hiking_boots_relic = {
+                name = "Hiking Boots",
+                text = {
+                    "Create a free",
+                    "{C:unik_summit}Jumbo Summit Pack",
+                    "in each {C:attention}Boss Shop"
+                }
+            },
+            tag_unik_blindside_tent_camp_relic = {
+                name = "Tent Camp",
+                text = {
+                    "{C:unik_summit}Summit{} Booster Packs",
+                    "may appear in {C:attention}Boss Shops"
+                }
+            },
+            tag_unik_blindside_summoning_circle_relic = {
+                name = "Summoning Circle",
+                text = {
+                    "Create a {C:bld_obj_ritual}Cult Tag",
+                    "after defeating {C:attention}Boss Joker"
+                }
+            },
+            tag_unik_blindside_sapient_sacrificev = {
+                name = "Sapient Sacrifice",
+                text = {
+                    "{C:bld_obj_ritual}Ritual Cards{} may",
+                    "spawn in {C:attention}Blind Shops"
+                }
+            },
         },
         Tarot={
             c_unik_wheel_of_misfortune = {

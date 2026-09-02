@@ -1422,6 +1422,17 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/tags/reel.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/cult.lua")()
 	NFS.load(mod_path .. "data/blindside/tags/wrench.lua")()
+
+	NFS.load(mod_path .. "data/blindside/price_tags/hiking_boots.lua")()
+	NFS.load(mod_path .. "data/blindside/price_tags/tent_camp.lua")()
+	NFS.load(mod_path .. "data/blindside/price_tags/summoning_circle.lua")()
+	NFS.load(mod_path .. "data/blindside/price_tags/sapient_sacrifice.lua")()
+
+	NFS.load(mod_path .. "data/blindside/relics/hiking_boots.lua")()
+	NFS.load(mod_path .. "data/blindside/relics/tent_camp.lua")()
+	NFS.load(mod_path .. "data/blindside/relics/summoning_circle.lua")()
+	NFS.load(mod_path .. "data/blindside/relics/sapient_sacrifice.lua")()
+
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_dethroning')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_recursive')
 	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_soul')
@@ -1451,6 +1462,16 @@ if next(SMODS.find_mod("Blindside")) then
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_kill')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_backstab')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_caldera')
+
+	BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_hiking_boots')
+	BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_tent_camp')
+	BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_summoning_circle')
+	BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_sapient_sacrifice')
+
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_hiking_boots_relic')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_tent_camp_relic')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_summoning_circle_relic')
+	BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_sapient_sacrifice_relic')
 
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_everest')
 	BLINDSIDE.addToPool('bld_obj_blindside','c_unik_aconcagua')

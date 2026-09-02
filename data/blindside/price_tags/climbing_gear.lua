@@ -1,4 +1,0 @@
---PRICE TAGS:
---Cult of personality: Create a Cult tag after defeating a Boss Joker
---Joker Sacrifice: Ritual cards may appear in Boss Shops
---scope decreased

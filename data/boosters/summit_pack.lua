@@ -16,6 +16,17 @@ SMODS.Booster{
 	pos = { x = 10, y = 5 },
     cost = 4,
     weight = 1, 
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 1
+			else
+				return 0
+			end
+		else 
+			return 1 
+		end
+	end,
     config = { extra = 2, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -43,7 +54,17 @@ SMODS.Booster{
     atlas = "unik_consumables",
 	pos = { x = 9, y = 6 },
     cost = 4,
-    weight = 1,
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 1
+			else
+				return 0
+			end
+		else 
+			return 1 
+		end
+	end,
     config = { extra = 2, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -71,7 +92,17 @@ SMODS.Booster{
     atlas = "unik_consumables",
 	pos = { x = 9, y = 5 },
     cost = 6,
-    weight = 1, 
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 1
+			else
+				return 0
+			end
+		else 
+			return 1 
+		end
+	end,
     config = { extra = 4, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -99,7 +130,17 @@ SMODS.Booster{
     atlas = "unik_consumables",
 	pos = { x = 8, y = 5 },
     cost = 8,
-    weight = 0.15, 
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 0.15
+			else
+				return 0
+			end
+		else 
+			return 0.15 
+		end
+	end,
     config = { extra = 4, choose = 2 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
