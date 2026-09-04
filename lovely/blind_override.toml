@@ -148,5 +148,7 @@ local isBoss = G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].boss or false
 if isSmall and G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward['Small'] then _reward = nil end
 if isBig and G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward['Big'] then _reward = nil end
 if isBoss and G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward['Boss'] then _reward = nil end
+
+if G.GAME.modifiers.no_blind_reward and G.GAME.modifiers.no_blind_reward[G.P_BLINDS[G.GAME.round_resets.blind_choices[type]].key] then _reward = nil end
 '''
 match_indent = true

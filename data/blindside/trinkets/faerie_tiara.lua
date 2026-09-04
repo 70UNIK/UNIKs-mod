@@ -39,7 +39,7 @@ SMODS.Joker {
             G.E_MANAGER:add_event(Event({
                 trigger="before",
                 func = function()
-                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit or (context.unik_destroyed_joker.edition and context.unik_destroyed_joker.edition.negative) then
                 local create = 1
                 G.GAME.joker_buffer = G.GAME.joker_buffer + create
                 
@@ -79,7 +79,7 @@ SMODS.Joker {
 }
 
 local function attempt_backup_copy_lily(card)
-    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+    if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit or (card.edition and card.edition.negative) then
         local create = 1
         G.GAME.joker_buffer = G.GAME.joker_buffer + create
         

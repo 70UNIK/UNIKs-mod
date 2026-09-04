@@ -32,7 +32,7 @@ BLINDSIDE.Joker({
         }
     end,
     calculate = function(self, blind, context)
-        if (context.other_joker) then
+        if (context.other_joker) and not G.GAME.blind.disabled  then
             return {
                     message = "X" .. 1.15 .. localize('k_unik_jmult'),
                     colour = G.C.BLACK,

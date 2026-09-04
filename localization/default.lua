@@ -2407,8 +2407,8 @@ return {
                     "{X:dark_edition,C:white}Faded{}",
                     "When played,",
                     "has some",
-                    "{C:unik_eye_searing_red,s:1.5,E:4}RANDOM{}",
-                    "effects{C:unik_eye_searing_red,s:1.5,E:4}!!!"
+                    "{E:1,C:unik_eye_searing_red,s:1.5}RANDOM{}",
+                    "effects{E:1,C:unik_eye_searing_red,s:1.5}!!!",
                 }
             },
             m_unik_blindside_onion_upgraded = {
@@ -2417,8 +2417,8 @@ return {
                     "{X:dark_edition,C:white}Faded{}",
                     "When played,",
                     "has some",
-                    "{C:unik_eye_searing_red,s:1.5,E:4}RANDOM{}",
-                    "effects{C:unik_eye_searing_red,s:1.5,E:4}!!!",
+                    "{E:1,C:unik_eye_searing_red,s:1.5}RANDOM{}",
+                    "effects{E:1,C:unik_eye_searing_red,s:1.5}!!!",
                     "{C:inactive}(Negative effect",
                     "{C:inactive}chances reduced)"
                 }
@@ -2578,6 +2578,37 @@ return {
                         "#1# {C:attention}Reroll Tag#<s>1#",
 
                     },
+                    {
+                        "{C:attention}Burns",
+                    }
+                }
+            },
+            m_unik_blindside_pickaxe = {
+                name = "The Pickaxe",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{}",
+                        "Before scoring, create",
+                        "a {C:attention}Mining Tag",
+
+                    },
+                    {
+                        "{C:attention}Burns",
+                    }
+                }
+            },
+            m_unik_blindside_pickaxe_upgraded = {
+                name = "The Pickaxe",
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{}",
+                        "Before scoring, create",
+                        "#1# {C:attention}Mining Tag#<s>1#",
+
+                    },
+                    {
+                        "{C:attention}Burns",
+                    }
                 }
             },
             m_unik_blindside_hunter = {
@@ -3567,7 +3598,7 @@ return {
                         "{C:gold}+$#1#{}",
                     },
                     {
-                        "Create #2# {C:attention}Battery Tag#<s>2#",
+                        "Create {C:attention}#2# Battery Tag#<s>2#",
                         "before scoring"
                     },
                     {

@@ -37,6 +37,10 @@ BLINDSIDE.Blind({
 
             
 		end
+        if context.burn_card and context.cardarea == G.play and context.burn_card == card and card.ability.extra.to_be_burned then
+            card.ability.extra.to_be_burned = nil
+            return { remove = true }
+        end
         if (context.hand_discard or context.hand_retain) and context.other_card == card and card.ability.extra.to_be_burned and not card.ability.extra.upgraded then
             card.ability.extra.to_be_burned = nil
                 return { burn = true }

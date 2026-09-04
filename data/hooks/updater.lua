@@ -2,7 +2,10 @@
 
 local updateHook = Game.update
 function Game:update(dt)
-
+    if G.GAME.modifiers and G.GAME.modifiers.no_blind_reward then
+        G.GAME.modifiers.no_blind_reward['bl_unik_blindside_fiendish_joker'] = true
+    end
+    
     G.GAME.unik_excommunication = false
     --Artisan builds
     if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss and (

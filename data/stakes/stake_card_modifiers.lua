@@ -98,3 +98,23 @@ function get_stake_sprite(_stake, _scale)
     end
     return stake_sprite
 end
+
+SMODS.DrawStep {
+    key = 'back_sticker',
+    order = 10,
+    func = function(self)
+        if self.sticker and G.shared_stickers[self.sticker] then
+            local stake = G.P_STAKES['stake_'..string.lower(self.sticker)] or {}
+            if stake.unik_shader then 
+                G.shared_stickers[self.sticker].role.draw_major = self
+                local sticker_offset = self.sticker_offset or {}
+                G.shared_stickers[self.sticker]:draw_shader('dissolve', nil, nil, true, self.children.center, nil, self.sticker_rotation, sticker_offset.x, sticker_offset.y)
+                G.shared_stickers[self.sticker]:draw_shader(stake.unik_shader, nil, self.ARGS.send_to_shader, true, self.children.center, nil, self.sticker_rotation, sticker_offset.x, sticker_offset.y) 
+
+            end
+            
+            
+        end
+    end,
+    conditions = { vortex = false, facing = 'back' },
+}

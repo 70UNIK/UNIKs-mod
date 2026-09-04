@@ -5,9 +5,10 @@ BLINDSIDE.Blind({
     config = {
         extra = {
             value = 3,
-            money = 12,
+            money = 13,
             money_up = 12,
             batteries = 2,
+            batteries_up = 2,
         }},
     hues = {"Yellow"},
     unik_exquisite = true,
@@ -42,6 +43,7 @@ BLINDSIDE.Blind({
     upgrade = function(card)
         if not card.ability.extra.upgraded then
             card.ability.extra.money = card.ability.extra.money + card.ability.extra.money_up
+            card.ability.extra.batteries = card.ability.extra.batteries + card.ability.extra.batteries_up
             card.ability.extra.upgraded = true
         end
     end
