@@ -26,6 +26,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = {cards = 2,repetitions = 1}},
+    attributes = { 'rescore', 'suit','modify_card','perma_bonus','hands' },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('dark')
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }

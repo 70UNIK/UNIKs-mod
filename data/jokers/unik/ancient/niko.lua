@@ -27,6 +27,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = {cards = 2,repetitions = 1}},
+    attributes = { 'retrigger', 'suit','modify_card','perma_bonus' },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
 		local quoteset = 'normal'

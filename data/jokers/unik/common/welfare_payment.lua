@@ -10,6 +10,8 @@ SMODS.Joker {
             dollar_mod = 2.5,
 		},
 	},
+	attributes = { 'economy' },
+
 	perishable_compat = true,
     eternal_compat = true,
     demicolon_compat = true,

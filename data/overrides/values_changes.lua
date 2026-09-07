@@ -15,6 +15,7 @@ SMODS.Joker:take_ownership("j_gift",{
 },true)
 
 SMODS.Joker:take_ownership("j_gros_michel",{
+    attributes = { 'mult','chance','food','banishing'},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
         local num,denom = SMODS.get_probability_vars(center, 1, center.ability.extra.odds, 'gros_michel')

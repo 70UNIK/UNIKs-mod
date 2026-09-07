@@ -28,6 +28,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = true,
 	demicoloncompat = true,
+	attributes = { 'echips', 'scaling', 'seven' ,'rank'},
 	--Contra logos from ascensio has ^0.01 chips per 7 or 4 contained in scoring hand (doesnt have to score), but unless you have joker retriggers, it cannot retrigger 7s.
 	--This has ^0.01 chips per scoring 7 (can be retriggered). You can retrgger scoring 7s, which makes this potentally stronger than contra logos even if harder to use. Also pink cards.
 	--This is why I nerfed it to ^0.01

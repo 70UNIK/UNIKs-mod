@@ -14,6 +14,7 @@ SMODS.Joker {
 	-- Modest
     config = { extra = { mult = 10, mult_mod = 8}, immutable = {hand_size = 5}, },
     cost = 4,
+	attributes = { 'mult' },
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,

@@ -6,6 +6,7 @@ SMODS.Joker {
 	pos = { x = 7, y = 6 },
     cost = 4,
     config = { extra = { chips = 37} },
+    attributes = { 'enhancements','chips','on_destroy' },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_pink
         return {

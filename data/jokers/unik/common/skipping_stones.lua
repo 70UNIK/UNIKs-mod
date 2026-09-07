@@ -7,6 +7,7 @@ SMODS.Joker {
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+    attributes = { 'enhancements','retrigger','rank','suit' },
     config = { extra = {retriggers = 1},immutable = {max_retriggers = 50} },
     loc_vars = function(self, info_queue, center)
         return { 

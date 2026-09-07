@@ -10,6 +10,7 @@ SMODS.Joker {
             suit = 'unik_Crosses',
 		},
 	},
+	attributes = { 'mult','suit','unik_crosses' },
 	perishable_compat = true,
     eternal_compat = true,
     demicolon_compat = true,

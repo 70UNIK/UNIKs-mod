@@ -10,6 +10,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = {cash = 1.5}},
+    attributes = { 'economy','discard' },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_hands_lost" }
         return { 

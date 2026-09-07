@@ -18,6 +18,7 @@ SMODS.Joker {
         extra = { retriggers = 1},
         immutable = { max_retriggers = 50 },
     },
+    attributes = { 'retrigger','consumable' },
     cost = (4 + containerrarity),
     blueprint_compat = true,
 	perishable_compat = true,

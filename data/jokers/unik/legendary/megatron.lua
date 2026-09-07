@@ -36,6 +36,7 @@ SMODS.Joker {
 			vars = {center.ability.extra.x_mult,center.ability.immutable.blind_size,localize(megatron_quotes[quoteset][math.random(#megatron_quotes[quoteset])] .. "")}
 		}
 	end,
+    attributes = { 'xmult','chance','eblindsize','destroy_card' },
     paperback = {
         permanently_eternal = true,
     },

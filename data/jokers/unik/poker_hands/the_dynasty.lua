@@ -11,6 +11,7 @@ if SpectrumAPI then
 				type = UNIK.spectrum_name,
 			},
 		},
+		attributes = { 'xmult','hand_type' },
 		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
@@ -57,6 +58,7 @@ else
 	SMODS.Joker {
 		key = "unik_the_dynasty",
 		atlas = "unik_consumables",
+		attributes = { 'xmult','hand_type' },
 		pos = { x = 7, y = 3 },
 		config = {
 			extra = {

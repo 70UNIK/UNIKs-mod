@@ -9,6 +9,8 @@ SMODS.Joker {
         return { 
             vars = { center.ability.extra.x_mult,center.ability.immutable.rounds } }
     end,
+	attributes = { 'xmult' },
+
 	blueprint_compat = true,
     perishable_compat = true,
     eternal_compat = false,

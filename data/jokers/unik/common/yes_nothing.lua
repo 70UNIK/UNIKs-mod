@@ -29,6 +29,8 @@ SMODS.Joker {
 	eternal_compat = true,
     immutable = true,
     pools = {["Dice"] = true},
+	attributes = { 'mod_chance','passive' },
+
     loc_vars = function(self, info_queue, center)
 	end,
     calculate = function(self, card, context)

@@ -10,6 +10,7 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
+    attributes = { 'economy','seven','ten','rank' },
     pools = {["unik_seven"] = true },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.money} }
