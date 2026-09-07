@@ -15,7 +15,8 @@ BLINDSIDE.Blind({
             xlogchips_basedown = 3,
             xchips = 2,
             xchips_up = 1,
-            retain = true
+            retain = true,
+            bld_return_to_hand_after_play = true,
         }},
     hues = {"Blue","Yellow"},
     calculate = function(self, card, context) 

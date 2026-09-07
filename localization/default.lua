@@ -1419,6 +1419,7 @@ return {
             bl_unik_legendary_vessel={
                 name = "Väkivaltainenalus", --Violent Vessel
 				text = {
+                    "Extremely high Blind Size",
 					"If requirements reached",
                     "before last hand, die",
 				},
@@ -1440,8 +1441,11 @@ return {
             bl_unik_legendary_sword={ --ortalab's silver sword on CRACK. X66.6 blind requirements as well and all burgulars are debuffed
                 name = "Sadistinenmiekka", --Sadistic Sword
 				text = {
-                    "Hand Size set to 1",
-                    "Play only 1 hand,",
+                    "Play only 1 hand",
+                    "with 0 discards",
+                    "X0.5 Hand Size",
+                    "Extremely high",
+                    "Blind Size",
 				},  
 
             },
@@ -1483,8 +1487,6 @@ return {
                     "Deck and discards not replenished",
                     "Per defeat, rescale blind to",
                     "highest score this run",
-                    "If Max Hands = 1, increase",
-                    "requirements by #4#",
                 }
             },
             --just like the actual gambling machine - Jacks or better
@@ -1599,7 +1601,7 @@ return {
 				text = {
 					"Hands exceeding #1#",
                     "will be multiplied",
-                    "by 0.03x",
+                    "by 0.1x",
 				},
             },
             bl_unik_collapse={
@@ -3709,6 +3711,10 @@ return {
                     },
                     {
                         "{C:green}Retained"
+                    },
+                    {
+                        "{C:attention}Returns to hand",
+                        "{C:attention}after play"
                     }
                 }
             },
@@ -4032,6 +4038,10 @@ return {
                     {
                         "{C:green}Retained"
                     },
+                    {
+                        "{C:attention}Returns to hand",
+                        "{C:attention}after play"
+                    }
                 },
             },
             m_unik_blindside_legendary_sapphire_stamp_upgraded = {
@@ -4055,6 +4065,10 @@ return {
                     {
                         "{C:green}Retained"
                     },
+                    {
+                        "{C:attention}Returns to hand",
+                        "{C:attention}after play"
+                    }
                 },
             },
             --rework: change into a blueprint type effect, but only if <= 2 blinds played.
@@ -4253,7 +4267,7 @@ return {
                 name = "Tic Tac Toe Board",
                 text = {
                     "Creates either a",
-                    "{C:unik_copper}Circles Tag{} or",
+                    "{C:unik_copper}Circles Tag{} and",
                     "a {C:attention}Peak Tag{}",
 					"when deck is {C:attention}reshuffled"
                 }
@@ -8380,6 +8394,13 @@ return {
                     "spawn in {C:attention}Blind Shops"
                 }
             },
+            -- tag_boss = {
+            --     name = "Boss Tag",
+            --     text = {
+            --         "{C:attention}+1{} ",
+            --         "Boss reroll",
+            --     }
+            -- },
         },
         Tarot={
             c_unik_wheel_of_misfortune = {

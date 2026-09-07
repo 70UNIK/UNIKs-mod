@@ -28,14 +28,13 @@ SMODS.Blind{
     set_blind = function(self, reset, silent)
         G.GAME.force_no_discards = true
         G.GAME.force_one_hand = true
-        G.GAME.unik_killed_by_sword_legendary = true
         --set blind size to ^2.666x
-        --G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
-        --ease_discard(-G.GAME.current_round.discards_left - 666)
+        G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
+        ease_discard(-G.GAME.current_round.discards_left - 666)
         G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
         ease_hands_played(-G.GAME.blind.hands_sub)
-        G.GAME.unik_original_hand_size = G.hand.config.card_limit
-        G.hand:change_size(-G.hand.config.card_limit + 1)
+        G.GAME.unik_subtracted_handsize = math.ceil(G.hand.config.card_limit/2)
+        G.hand:change_size(-G.GAME.unik_subtracted_handsize)
 	end,
     in_pool = function()
         return CanSpawnLegendary()
@@ -44,29 +43,29 @@ SMODS.Blind{
     unik_after_play = function(self)
         ease_hands_played(-666)
 	end,
-    --somehow if that happens, set the base to be 
-    disable = function(self)
-        G.GAME.force_no_discards = nil
-        G.GAME.force_one_hand = nil
-        G.GAME.unik_killed_by_sword_legendary = nil
-        --ease_discard(G.GAME.blind.discards_sub + 666)
-        ease_hands_played(G.GAME.blind.hands_sub)
-        G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 1))
-        if G.jokers then
-            for _, v in pairs(G.jokers.cards) do
-                if v.config.center.key == "j_cry_effarcire" then
-                    G.FUNCS.draw_from_deck_to_hand(#G.deck.cards)
-                end
-            end
-        end
-        G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^1.4666)
-        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-        G.HUD_blind:recalculate(true)
-	end,
+    -- --somehow if that happens, set the base to be 
+    -- disable = function(self)
+    --     G.GAME.force_no_discards = nil
+    --     G.GAME.force_one_hand = nil
+    --     --ease_discard(G.GAME.blind.discards_sub + 666)
+    --     ease_hands_played(G.GAME.blind.hands_sub)
+    --     G.hand:change_size(G.GAME.unik_subtracted_handsize)
+    --     G.GAME.unik_subtracted_handsize = nil
+    --     if G.jokers then
+    --         for _, v in pairs(G.jokers.cards) do
+    --             if v.config.center.key == "j_cry_effarcire" then
+    --                 G.FUNCS.draw_from_deck_to_hand(#G.deck.cards)
+    --             end
+    --         end
+    --     end
+    --     G.GAME.blind.chips = G.GAME.blind.chips/(G.GAME.blind.chips^1.4666)
+    --     G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+    --     G.HUD_blind:recalculate(true)
+	-- end,
 	defeat = function(self)
         G.GAME.force_no_discards = nil
         G.GAME.force_one_hand = nil
-        G.GAME.unik_killed_by_sword_legendary = nil
-        G.hand:change_size(-G.hand.config.card_limit + G.GAME.unik_original_hand_size + (G.hand.config.card_limit - 1))
+        G.hand:change_size(G.GAME.unik_subtracted_handsize)
+        G.GAME.unik_subtracted_handsize = nil
 	end,
 }

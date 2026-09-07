@@ -57,9 +57,6 @@ SMODS.Blind{
                     scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
                 })
             end
-            if G.GAME.round_resets.hands == 1 then
-                G.GAME.blind.chips = G.GAME.round_scores['hand'].amt^6.666
-            end
             G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
             ease_hands_played(-G.GAME.blind.hands_sub)
             

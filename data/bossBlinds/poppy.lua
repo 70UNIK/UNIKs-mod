@@ -21,7 +21,7 @@ SMODS.Blind{
 	death_message="special_lose_unik_tall_poppy_syndrome",
 	unik_mod_final_score = function(self,sum)
 		if to_big(sum) > to_big(G.GAME.blind.chips) * 2.5 then
-			return {mod_score = 0.03}
+			return {mod_score = 0.1}
 		end 
 		return nil
 	end,

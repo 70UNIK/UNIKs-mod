@@ -5,7 +5,7 @@ SMODS.Joker {
     pos = {x = 1, y = 1},
     rarity = 'bld_keepsake',
     cost = 12,
-    config = {extra = {active = true,limit = 1}},
+    config = {extra = {active = true,limit = 2}},
     pronouns = "she_her",
     in_pool = function(self, args)
         return UNIK.hasBlindside()

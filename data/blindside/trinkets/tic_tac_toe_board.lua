@@ -19,11 +19,8 @@ SMODS.Joker({
                 trigger = 'before',
                 delay = 0.5,
                 func = function ()
-                    if pseudorandom('toe_board') < 0.5 then
-                        add_tag(Tag('tag_unik_blindside_peak'))
-                    else
-                        add_tag(Tag('tag_unik_blindside_recursive'))
-                    end
+                    add_tag(Tag('tag_unik_blindside_peak'))
+                    add_tag(Tag('tag_unik_blindside_recursive'))
                     card:juice_up(0.65, 0.65)
                     play_sound('generic1', 0.9 + math.random()*0.1, 0.8)
                     play_sound('holo1', 1.2 + math.random()*0.1, 0.4)

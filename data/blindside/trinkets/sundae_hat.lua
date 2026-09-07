@@ -8,7 +8,7 @@ SMODS.Joker({
     eternal_compat = true,
     config = {
             extra = {
-                x_mult = 1.75,
+                x_mult = 2,
             }
         },
     in_pool = function(self, args)

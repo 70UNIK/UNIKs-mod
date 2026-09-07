@@ -48,7 +48,7 @@ SMODS.Booster{
 			},
 		}
 	end,
-	unskippable = function(self) --Always unskippable
+	unik_unskippable = function(self) --Always unskippable
 		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
 		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity <= 0 then
 			return false

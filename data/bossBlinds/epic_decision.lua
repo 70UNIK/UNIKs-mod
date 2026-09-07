@@ -69,8 +69,8 @@ G.FUNCS.can_skip_booster = function(e)
         if SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config then
             obj = SMODS.OPENED_BOOSTER.config.center or nil
         end
-		if obj and obj.unskippable and type(obj.unskippable) == "function" then
-			if obj:unskippable() == true then
+		if obj and obj.unik_unskippable and type(obj.unik_unskippable) == "function" then
+			if obj:unik_unskippable() == true then
 				e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 				e.config.button = nil
 			else
@@ -90,7 +90,7 @@ local bos_no_skip = G.FUNCS.skip_booster
 G.FUNCS.skip_booster = function(e)
     local obj = SMODS.OPENED_BOOSTER.config.center
     local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-    if obj.unskippable and type(obj.unskippable) == "function" and obj:unskippable() == true then
+    if obj.unik_unskippable and type(obj.unik_unskippable) == "function" and obj:unik_unskippable() == true then
         if G.GAME.blind then
             play_sound('cancel', 0.8, 1)
             local text = localize('k_nope_ex')

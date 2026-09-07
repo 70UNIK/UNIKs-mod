@@ -15,7 +15,7 @@ BLINDSIDE.Blind({
             unik_unique = true
         }},
     hues = {"Faded"},
-    gore6_break = true,
+    gore6break =  true,
     calculate = function(self, card, context) 
         if context.before then
             local exists = false
@@ -44,7 +44,7 @@ BLINDSIDE.Blind({
             }
         end
         if context.destroy_card and card.ability.extra.times <= 0 then
-            if context.destroy_card ~= card and context.cardarea == G.play then
+            if context.destroy_card == card and context.cardarea == G.play and not card.ability.extra.created then
                 card.ability.extra.created = true
 
                  G.E_MANAGER:add_event(Event({

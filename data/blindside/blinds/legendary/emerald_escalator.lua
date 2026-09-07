@@ -11,6 +11,7 @@ BLINDSIDE.Blind({
             x_score_mod_up = 0.5,
             x_score_base_up = 1,
             retain = true,
+            bld_return_to_hand_after_play = true,
         }},
     hues = {"Green"},
     legendary = true,

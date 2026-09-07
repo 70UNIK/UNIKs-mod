@@ -42,8 +42,13 @@ SMODS.Booster{
 	end,
 	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
 	no_doe = true,
-	unskippable = function(self) --Unskippable when all jokers are eternal and slots not full.
+	unik_unskippable = function(self) --Unskippable when all jokers are eternal and slots not full.
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
+		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity <= 0 then
+			return false
+		end
 		local validJokers = 0
+		--print("skipcheck")
         for i,v in pairs(G.jokers.cards) do
             if not SMODS.is_eternal(v,self) then
                 validJokers = validJokers + 1

@@ -7,7 +7,7 @@ SMODS.Joker {
     cost = 15,
 	blueprint_compat = true,
 	eternal_compat = true,
-    config = { extra = { mult = 1, chips = 5} },
+    config = { extra = { mult = 2, chips = 10} },
     in_pool = function(self, args)
         return UNIK.hasBlindside()
     end,

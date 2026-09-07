@@ -89,3 +89,15 @@ position = 'after'
 payload = '''
 if v.cursed then bosses_used[k] = 0 end
 '''
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''if c.config.center.key == 'm_bld_house' then'''
+match_indent = true
+position = 'before'
+payload = '''
+if (c.ability and c.ability.extra and type(c.ability.extra) == 'table' and c.ability.extra.bld_return_to_hand_after_play) then
+    table.insert(cards_to_hand, c)
+end
+'''

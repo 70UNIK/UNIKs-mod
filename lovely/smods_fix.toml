@@ -20,3 +20,23 @@ payload = '''
 instant = instant,
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/runselectpage.lua"]'''
+pattern = '''if card.config.center.shiny then Sprite.draw_shader(_sprite, 'negative_shine', nil, _sprite.ARGS.send_to_shader) end'''
+position = "after"
+payload = '''
+if card.config.center.unik_shader then Sprite.draw_shader(_sprite, card.config.center.unik_shader, nil, _sprite.ARGS.send_to_shader) end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/runselectpage.lua"]'''
+pattern = '''if card.config.center.shiny then Sprite.draw_shader(_sprite, 'voucher', nil, _sprite.ARGS.send_to_shader) end'''
+position = "after"
+payload = '''
+if card.config.center.unik_shader then Sprite.draw_shader(_sprite, card.config.center.unik_shader, nil, _sprite.ARGS.send_to_shader) end
+'''
+match_indent = true

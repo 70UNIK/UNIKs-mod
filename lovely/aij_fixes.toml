@@ -64,3 +64,12 @@ pattern = '''if v and type(v) == 'table' and v.ability[v.config.center.key] and 
 position = "at"
 match_indent = true
 payload = '''if v and type(v) == 'table' and v.ability and v.config and v.config.center and v.config.center.key and v.ability[v.config.center.key] and (count_debuffed or not v.debuff) then'''
+
+[[patches]]
+[patches.regex]
+target = '''=[SMODS allinjest "Items/Enhancements/canvas.lua"]'''
+pattern = '''#G.play.cards >= 1'''
+position = "after"
+match_indent = true
+payload = ''' and G.STATE == G.STATES.HAND_PLAYED and TableContains(card,G.play.cards) '''
+

@@ -13,7 +13,7 @@ BLINDSIDE.Blind({
             unik_unique = true
         }},
     hues = {"Faded"},
-    gore6_break = true,
+    gore6break =  true,
     calculate = function(self, card, context) 
         if context.before then
             local exists = false
