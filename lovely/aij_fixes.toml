@@ -73,3 +73,26 @@ position = "after"
 match_indent = true
 payload = ''' and G.STATE == G.STATES.HAND_PLAYED and TableContains(card,G.play.cards) '''
 
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS allinjest "Items/Jokers/big_red.lua"]'''
+pattern = '''local is_mult_joker = function(center)'''
+position = "after"
+match_indent = true
+payload = '''
+if UNIK.is_mult_joker(center) then
+    return true
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS allinjest "Items/Jokers/big_red.lua"]'''
+pattern = '''local is_chips_joker = function(center)'''
+position = "after"
+match_indent = true
+payload = '''
+if UNIK.is_chips_joker(center) then
+    return true
+end
+'''

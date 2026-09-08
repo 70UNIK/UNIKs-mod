@@ -11,9 +11,11 @@ SMODS.Joker {
 	eternal_compat = false,
     attributes = { 'stickers','food'},
     in_pool = function(self)
-        for i,v in pairs(G.jokers.cards) do 
-            if v.ability.perishable then
-                return true
+        if G.jokers and G.jokers.cards then
+            for i,v in pairs(G.jokers.cards) do 
+                if v.ability.perishable then
+                    return true
+                end
             end
         end
 		if G.GAME.modifiers.enable_perishables_in_shop then

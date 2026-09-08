@@ -8,6 +8,7 @@
 	"priority": 777000,
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
+	"badge_shader": "unik_badge_shader",
 	"version": "0.7",
 	"dependencies": [
         "Steamodded (>=26.829.0)", 

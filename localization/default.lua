@@ -4621,7 +4621,7 @@ return {
                         "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Chips)",
                     },
                     {
-                        "{C:unik_caption,s:0.7,E:1,f:unik_five_by_five}#3#{}",
+                        "{C:unik_caption,s:0.5,E:1,f:unik_five_by_five}#3#{}",
                         "{C:dark_edition,s:0.7,E:2}Character and Floating Sprite by : 70UNIK{}",
                         "{C:unik_ancient,s:0.7,E:2}Origin : Just Shapes and Beats{}",
                     },
@@ -9331,17 +9331,17 @@ return {
 
             --Unik
             ---Normal:
-            k_unik_unik_normal1 = "Maybe you don't mind I'm crossdressing here...",
-            k_unik_unik_normal2 = "I'll help out here, although I'll take my time.",
-            k_unik_unik_normal3 = "Quite an experience, wearing this here...",
+            k_unik_unik_normal1 = "Oh hello there!",
+            k_unik_unik_normal2 = "For why I like the number '7'? Just a hunch one day.",
+            k_unik_unik_normal3 = "Not sure if you can tell that I am male...",
             k_unik_unik_normal4 = "I can admittedly be a bit dreary at times...",
-            k_unik_unik_normal5 = "Let me know what I can help out with.",
-            k_unik_unik_normal6 = "Umm, hi... Can't believe I'm here now...",
+            k_unik_unik_normal5 = "Uh, meow?",
+            k_unik_unik_normal6 = "Funny that I call myself and my friends 'Ancients'...",
 
 
             k_unik_unik_scared1 = "Wh... IT'S TOO MUCH!!!",
             k_unik_unik_scared2 = "PLEASE STOP! I can't handle this!",
-            k_unik_unik_scared3 = "The fuck is all this?!",
+            k_unik_unik_scared3 = "AHHHH AAAAAHHHHHHH!!!!",
             --Chelsea
             ---Normal:
             k_unik_chelsea_normal1 = "Hola! Maybe I can help out?",

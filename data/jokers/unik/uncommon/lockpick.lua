@@ -48,14 +48,17 @@ SMODS.Joker {
 		end
     end,
     in_pool = function(self)
-        for i,v in pairs(G.jokers.cards) do 
-            if v.ability.eternal then
+        if G.jokers and G.jokers.cards then
+            for i,v in pairs(G.jokers.cards) do 
+                if v.ability.eternal then
+                    return true
+                end
+            end
+            if G.GAME.modifiers.enable_eternals_in_shop then
                 return true
             end
         end
-		if G.GAME.modifiers.enable_eternals_in_shop then
-			return true
-		end
+        
 		return false
 	end,
 	loc_vars = function(self, info_queue, center)

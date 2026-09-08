@@ -44,6 +44,9 @@ end
 if _shader=='unik_fuzzy' then
     G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
 end
+if _shader=='unik_badge_shader' then
+    G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
+end
 '''
 match_indent = true
 

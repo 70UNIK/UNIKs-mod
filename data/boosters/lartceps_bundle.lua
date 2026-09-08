@@ -29,6 +29,7 @@ SMODS.Booster{
 			},
 		}
 	end,
+	bypass_mf_unpleasant = true,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_LARTCEPS1)
         ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.RED, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}

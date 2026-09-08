@@ -19,7 +19,8 @@ SMODS.Blind{
 				for i = 1,#G.jokers.cards do
                     if G.jokers.cards[i].config.center.key == "j_cry_sync_catalyst" or
                     G.jokers.cards[i].config.center.key == 'j_paperback_milk_tea' or
-                     G.jokers.cards[i].config.center.key =='j_paperback_let_it_happen'
+                     G.jokers.cards[i].config.center.key =='j_paperback_let_it_happen' or
+                     SMODS.has_attribute(G.jokers.cards[i].config.center, "balance")
                      then
                         return true
                     end
@@ -60,6 +61,35 @@ SMODS.Blind{
 		G.GAME.unik_disable_catalyst = nil
 	end,
 }
+
+local scie = SMODS.calculate_individual_effect
+function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
+     if G.GAME.unik_disable_catalyst then
+        if key == 'aij_balance_percent' or key == 'balance' then
+            key = nil
+            if G.GAME.blind then
+                G.E_MANAGER:add_event(Event({
+                    func = (function()
+                    G.GAME.blind:wiggle()
+                    if SMODS.hand_debuff_source then SMODS.hand_debuff_source:juice_up(0.3,0) else SMODS.juice_up_blind() end
+                    return true
+                    end)
+                }))
+                if not effect.remove_default_message then
+                    if from_edition then
+                        card_eval_status_text(scored_card, 'jokers', nil, percent, nil, {message = localize('k_unik_plasma_deck_fail'), colour =  G.C.RED,delay = 1})
+                    else
+                        card_eval_status_text(scored_card or effect.card or effect.focus, 'extra', nil, percent, nil, {message = localize('k_unik_plasma_deck_fail'), colour =  G.C.RED,delay = 1})
+                    end
+                end
+            end
+        end
+    end
+    local ret = scie(effect, scored_card, key, amount, from_edition)
+    if ret then
+        return ret
+    end
+end
 
 if CardSleeves then
     local plasmaSleeve = CardSleeves.Sleeve:get_obj('sleeve_casl_plasma')

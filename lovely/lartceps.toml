@@ -63,6 +63,16 @@ payload = '''
 '''
 match_indent = true
 
+##Bypass unpleasant card's effect for lartceps bundle to avoid softlock
+[[patches]]
+[patches.regex]
+target = '''card.lua'''
+pattern = '''next\(SMODS\.find\_card\(\"j\_mf\_unpleasantcard\"\)\)'''
+position = "after"
+payload = ''' and not self.config.center.bypass_mf_unpleasant '''
+match_indent = true
+
+
 
 ##Part 1 of below:
 [[patches]]
