@@ -54,5 +54,7 @@ local oldfunc = Game.main_menu
 		if (SMODS.Mods and SMODS.Mods.Talisman) or (SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load) then
 			print("WARNING: TALISMAN, INSTEAD OF CDATAMAN HAS BEEN LOADED. THERE MAY BE UNEXPECTED COMPARISON ERRORS")
 		end
+
+		print(SMODS.ObjectTypes['character'].cards)
 		return ret
 	end

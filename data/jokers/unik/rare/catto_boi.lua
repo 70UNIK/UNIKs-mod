@@ -26,7 +26,7 @@ SMODS.Joker {
     demicoloncompat = true,
     config = {extra = {x_mult = 1,x_mult_mod_good = 0.05, malice = 0.05},immutable = {x_mult_threshold = 1.0,dead = false}},
     pronouns = "he_him",
-    attributes = { 'scaling','suit','diamonds','hearts','spades','xmult'},
+    attributes = { 'scaling','suit','diamonds','hearts','spades','xmult','character'},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
         return {

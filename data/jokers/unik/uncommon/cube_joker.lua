@@ -67,14 +67,3 @@ SMODS.Joker {
 
 -- Pool used by "squares/cubes"
 --Unik is not part of this to maintain rarity.
-SMODS.ObjectType({
-	key = "unik_cube",
-	default = "j_square",
-	cards = {
-	},
-	inject = function(self)
-		SMODS.ObjectType.inject(self)
-		-- insert base game jokers
-		self:inject_card(G.P_CENTERS.j_square)
-	end,
-})

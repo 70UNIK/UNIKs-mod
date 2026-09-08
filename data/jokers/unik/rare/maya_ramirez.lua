@@ -40,7 +40,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     pools = {["unik_cube"] = true,["character"] = true },
-	attributes = { 'xchips','perma_bonus','modify_card'},
+	attributes = { 'xchips','perma_bonus','modify_card','character'},
     config = { extra = {x_chips_scored = 0.05} },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'alone'

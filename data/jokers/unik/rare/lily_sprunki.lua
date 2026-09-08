@@ -23,7 +23,7 @@ SMODS.Joker {
 	pos = { x = 3, y = 2 },
 	soul_pos = { x = 4, y = 2 },
     cost = 8,
-    attributes = {'activated','destroy_card'},
+    attributes = {'activated','destroy_card','character'},
     config = {extra = {active = true,quoteset = 'normal',limit = 2}},
     pronouns = "she_her",
     bypass_group_selection = true, --for polyminos stuff

@@ -10,7 +10,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = { } },
-    attributes = { 'rank','ten','hand_type','unik_summit','consumables','generation'},
+    attributes = { 'rank','ten','hand_type','unik_summit_card','consumables','generation'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {} }
 	end,
@@ -22,7 +22,7 @@ SMODS.Joker {
                 if context.scoring_hand[i]:get_id() == 10 then tens = tens + 1 end
             end
             if tens >= 1 and next(context.poker_hands["Straight"]) or context.force_trigger then
-                local card_type = 'unik_summit'
+                local card_type = 'unik_summit_card'
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 G.E_MANAGER:add_event(Event({
                     trigger = 'before',

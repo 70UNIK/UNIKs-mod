@@ -13,7 +13,7 @@ SMODS.Back {
     loc_vars = function(self, info_queue)
       return {
         vars = {
-          localize { type = 'name_text', key = 'c_unik_everest', set = 'unik_summit' },
+          localize { type = 'name_text', key = 'c_unik_everest', set = 'unik_summit_card' },
         }
       }
     end,

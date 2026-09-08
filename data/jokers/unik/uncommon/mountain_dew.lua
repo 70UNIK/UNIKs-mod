@@ -10,13 +10,13 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = false,
     demicoloncompat = true,
-    attributes = { 'generation','unik_summit','tags','food'},
+    attributes = { 'generation','unik_summit_card','tags','food'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.triggers} }
 	end,
     pools = { ["Food"] = true},
     calculate = function(self, card, context)
-		if (context.using_consumeable and context.consumeable.ability.set == 'unik_summit') or context.forcetrigger then
+		if (context.using_consumeable and context.consumeable.ability.set == 'unik_summit_card') or context.forcetrigger then
              
             G.E_MANAGER:add_event(Event({
                 trigger = 'before',

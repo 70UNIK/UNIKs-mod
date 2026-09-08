@@ -30,7 +30,7 @@ SMODS.Joker {
 	eternal_compat = true,
     config = {extra = {left_rescore = 2, right_rescore = 1}, immutable = {max_rescores = 10}},
     pronouns = "she_her",
-    attributes = { 'rescore','position'},
+    attributes = { 'rescore','position','character'},
     pools = {["character"] = true },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'

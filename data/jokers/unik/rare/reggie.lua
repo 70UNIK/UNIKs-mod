@@ -24,7 +24,7 @@ SMODS.Joker {
 	eternal_compat = true,
     config = {extra = {rescore = 1}, immutable = {max_rescores = 10}},
     pronouns = "he_him",
-    attributes = { 'rescore','enhancements'},
+    attributes = { 'rescore','enhancements','character'},
     enhancement_gate = 'm_unik_pink',
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'

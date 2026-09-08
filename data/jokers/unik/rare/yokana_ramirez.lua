@@ -34,7 +34,7 @@ SMODS.Joker {
     rarity = 3,
 	pos = { x = 3, y = 4 },
 	soul_pos = { x = 4, y = 4 },
-	attributes = { 'xchips','joker'},
+	attributes = { 'xchips','joker','character'},
     cost = 8,
 	blueprint_compat = true,
     perishable_compat = true,
