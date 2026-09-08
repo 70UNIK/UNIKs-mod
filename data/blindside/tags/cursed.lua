@@ -58,14 +58,14 @@ function get_new_cursed(current)
     end
     if G.FORCE_CURSED then return G.FORCE_CURSED end
 
-    if SMODS.optional_features.object_weights then
-     --   print("weight1")
-        local ret_boss = SMODS.poll_object({type = 'Blind',  blind_type = 'cursed', seed = 'cursed'})
-     --   print(ret_boss)
-        G.GAME.bosses_used[ret_boss] = G.GAME.bosses_used[ret_boss] or 0
-        G.GAME.bosses_used[ret_boss] = G.GAME.bosses_used[ret_boss] + 1
-        return ret_boss
-    end
+    -- if SMODS.optional_features.object_weights then
+    --  --   print("weight1")
+    --     local ret_boss = SMODS.poll_object({type = 'Blind',  blind_type = 'cursed', seed = 'cursed'})
+    --  --   print(ret_boss)
+    --     G.GAME.bosses_used[ret_boss] = G.GAME.bosses_used[ret_boss] or 0
+    --     G.GAME.bosses_used[ret_boss] = G.GAME.bosses_used[ret_boss] + 1
+    --     return ret_boss
+    -- end
 
     local eligible_bosses = {bl_unik_blindside_monopoly_money = true}
     for k, v in pairs(G.P_BLINDS) do
@@ -96,7 +96,7 @@ function get_new_cursed(current)
     for k, v in pairs(eligible_bosses) do
         if eligible_bosses[k] then
             --print(eligible_bosses[k])
-            if eligible_bosses[k] > min_use then 
+            if type(eligible_bosses[k]) ~= 'boolean' and eligible_bosses[k] > min_use then 
                 eligible_bosses[k] = nil
             end
         end

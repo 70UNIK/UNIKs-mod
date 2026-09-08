@@ -2,15 +2,12 @@
 SMODS.ObjectType({
 	key = "autocannibalism_food",
 	default = "j_popcorn",
-	cards = {},
-	inject = function(self)
-		SMODS.ObjectType.inject(self)
-		-- insert base game food jokers
-		self:inject_card(G.P_CENTERS.j_ice_cream)
-		self:inject_card(G.P_CENTERS.j_turtle_bean)
-		self:inject_card(G.P_CENTERS.j_popcorn)
-		self:inject_card(G.P_CENTERS.j_ramen)
-	end,
+	cards = {
+        'j_ice_cream',
+        'j_turtle_bean',
+        'j_popcorn',
+        'j_ramen',
+    },
 })
 SMODS.Joker {
 	key = 'unik_autocannibalism',

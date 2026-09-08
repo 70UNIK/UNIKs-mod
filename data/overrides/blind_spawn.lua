@@ -25,6 +25,9 @@ function Game:start_run(args)
         end
         
     end
+    if SMODS.optional_features.object_weights then
+        error("\n\n\nHello, this mod cannot run with object_weights = true, as it is responsible for causing card ObjectTypes to entirely fail during spawning, such as character cards, summit cards, and food jokers from across different mods.\n Please either remove the mod that is responsible for it or try to rework your mod's mechanics to not require object_weights = true.\n I have tried to fix it on my end to no avail, so I am NOT going to try to resolve it.\n\n - 70UNIK")
+    end
 end
 get_new_small = get_new_small or function() return 'bl_small' end
 get_new_big = get_new_big or function() return 'bl_big' end
