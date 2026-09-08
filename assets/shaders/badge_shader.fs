@@ -32,10 +32,13 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
 {
     vec4 tex = colour;
     vec2 uv = (screen_coords - badge_pos.xy) / (badge_size.xy * uie_scale);
-    uv.x = uv.x *1.25 - 0.3;
-    uv.y = uv.y *0.25;
+    float width = badge_size.x;
+    uv.x = uv.x *pow((width*0.009),0.5);
+    uv.y = uv.y / pow((width*0.004),0.3)*0.3;
+    
+    
 
-    float iTime = badge_shader.g / 1;
+    float iTime = badge_shader.g / 2;
     number important_value_trust_me_compiler = uie_scale + uie_rot + uie_details.x + badge_shader.x;
     if (important_value_trust_me_compiler == important_value_trust_me_compiler * 2) {
         uv.x = uv.x + 0.000001;
@@ -47,10 +50,10 @@ vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords
     col = col + vec3(sin(iTime + uv.y - 10.)*0.7 + 0.3,sin(iTime + uv.y - 10.)*0.5,sin(iTime + uv.y - 10.)*0.7 + 0.9) * .6;
     
     //SQUARES
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 50; i++){
         for(int j = 0; j < 6; j++){
             
-            vec2 moveduv = uv + vec2(.25 * float(i - 7), -1.2 + mod(.25 * float(j + 1) - iTime * .1, 1.5));
+            vec2 moveduv = uv - vec2(.25 * float(i-5)*pow((width*0.003),0.2), 1.2 - mod(.25 * float(j - 1) - iTime * .1, 1.5));
 
             //ROTATION
             vec2 rotateduv = vec2(0.0);

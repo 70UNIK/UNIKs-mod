@@ -40,3 +40,50 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 	fragColor = col;
 }
+
+bool square(vec2 p, float w){
+	return (abs(p.x) < w && abs(p.y) < w);
+}
+
+//returns seemingly random float between 0.0 and 1.0
+float randomNumber(float seed){
+	float number = seed * seed * 16070.;
+    float final = mod(number, 100.);
+    return 0.01 * final;
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+	vec2 uv = fragCoord.xy / iResolution.y;
+    vec4 col = vec4(sin(iTime + uv.y)*0.5 + 0.7,sin(iTime + uv.y)*0.2 + 0.2,sin(iTime + uv.y)*0.5 + 0.8,0) * .6;
+    
+    float width = 240.;
+    uv.x = uv.x *(width*0.007);
+    uv.y = uv.y *0.25 *(width*0.006);
+    
+    //vec4 col = vec4(0.) * .6;
+    col = col + vec4(sin(iTime + uv.y - 10.)*0.7 + 0.3,sin(iTime + uv.y - 10.)*0.5,sin(iTime + uv.y - 10.)*0.7 + 0.9,0) * .6;
+    
+    //SQUARES
+    for(int i = 0; i < 50; i++){
+        for(int j = 0; j < 6; j++){
+            
+            vec2 moveduv = uv - vec2(.25 * float(i)*(width*0.003), 1.2 - mod(.25 * float(j - 1) - iTime * .1, 1.5));
+
+            //ROTATION
+            vec2 rotateduv = vec2(0.0);
+            
+            float rot = iTime * 2.8 * (.5 - randomNumber(float(i + j + 185))); 
+
+            vec2 newuv = mat2(cos(rot), -sin(rot), sin(rot), cos(rot)) * moveduv;
+
+            if(square(newuv, mod(iTime / 15. + float(i) / 7. + float(j) /  13., .2)) == true){
+                col += vec4(1. - mod(iTime / 15. + float(i) / 7. + float(j) /  13., .2) * 5.,
+                0.5 - mod(iTime / 15. + float(i) / 7. + float(j) /  13., .2) * 2.5,
+                1. - mod(iTime / 15. + float(i) / 7. + float(j) /  13., .2) * 5.,1.); 
+            }
+        }
+    }
+
+	fragColor = col;
+}

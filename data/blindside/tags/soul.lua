@@ -100,48 +100,8 @@ function get_new_big(current)
         return ret
     end
     local boss = big_overrider(current)
-    
-    return boss
-
-end
-
-
-local poller = SMODS.poll_object
-function SMODS.poll_object(args)
-    local newArgs = args
-    if BLINDSIDE.hasBlindside() then
-        if newArgs and newArgs.type == 'Blind' then
-            if newArgs.blind_type then
-                if G.GAME.unik_force_cursed_jokers then
-                        newArgs.blind_type = 'cursed'
-                    end
-                if newArgs.blind_type == 'small' then
-                    if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.blindside_banana_generated and pseudorandom(pseudoseed('unik_small_override')) > 0.75 then
-                        print("bigchance")
-                        newArgs.blind_type = 'big'
-                    end
-                    if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4) then
-                        print("bossoverride")
-                        newArgs.blind_type = 'boss'
-                    end
-                end
-                if newArgs.blind_type == 'big' then
-                    if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.blindside_banana_generated and pseudorandom(pseudoseed('unik_big_override')) > 0.75 then
-                        print("bigchance")
-                        newArgs.blind_type = 'boss'
-                    end
-                    if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4) then
-                        print("bossoverride")
-                        newArgs.blind_type = 'boss'
-                    end
-                end
-            end
-        end
-    end
-    local ret = poller(newArgs)
-    if BLINDSIDE.hasBlindside() and newArgs and newArgs.type == 'Blind' and type(ret) == 'string' then
-        if ret == 'bl_unik_blindside_infuriating_note' then
-            --print("infury")
+    if boss == 'bl_unik_blindside_infuriating_note' then
+            print("infury")
             G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
@@ -149,8 +109,8 @@ function SMODS.poll_object(args)
             --print(G.GAME.unik_infuriating_xmult)
             --print(G.GAME.unik_infuriating_multiplier)
 
-        elseif ret == 'bl_unik_blindside_infuriating_notes' then
-            --print("infury2")
+        elseif boss == 'bl_unik_blindside_infuriating_notes' then
+            print("infury2")
             G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
@@ -158,30 +118,105 @@ function SMODS.poll_object(args)
             --print(G.GAME.unik_infuriating_xmult)
             --print(G.GAME.unik_infuriating_multiplier)
         end
-    end
-    return ret
+    
+    return boss
+
 end
 
--- local getter = SMODS.get_new_blind
--- function SMODS.get_new_blind(blind_type)
---     local typer = blind_type
---     if G.GAME.unik_force_cursed_jokers then
---         typer = 'cursed'
+
+-- local poller = SMODS.poll_object
+-- function SMODS.poll_object(args)
+--     local newArgs = args
+--     if BLINDSIDE.hasBlindside() then
+--         if newArgs and newArgs.type == 'Blind' then
+--             if newArgs.blind_type then
+--                 if G.GAME.unik_force_cursed_jokers then
+--                         newArgs.blind_type = 'cursed'
+--                     end
+--                 if newArgs.blind_type == 'small' then
+--                     if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.blindside_banana_generated and pseudorandom(pseudoseed('unik_small_override')) > 0.75 then
+--                         print("bigchance")
+--                         newArgs.blind_type = 'big'
+--                     end
+--                     if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4) then
+--                         print("bossoverride")
+--                         newArgs.blind_type = 'boss'
+--                     end
+--                 end
+--                 if newArgs.blind_type == 'big' then
+--                     if G.GAME.modifiers.unik_bld_boss_everywhere_big_small and G.GAME.blindside_banana_generated and pseudorandom(pseudoseed('unik_big_override')) > 0.75 then
+--                         print("bigchance")
+--                         newArgs.blind_type = 'boss'
+--                     end
+--                     if G.GAME.unik_force_finisher_blinds or (G.GAME.unik_force_epic_plus and G.GAME.unik_force_epic_plus > 0) or (UNIK.overshootEnabled() and G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 4) then
+--                         print("bossoverride")
+--                         newArgs.blind_type = 'boss'
+--                     end
+--                 end
+--             end
+--         end
 --     end
+--     local ret = poller(newArgs)
+--     if BLINDSIDE.hasBlindside() and newArgs and newArgs.type == 'Blind' and type(ret) == 'string' then
+--         if ret == 'bl_unik_blindside_infuriating_note' then
+--             --print("infury")
+--             G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
+--             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
+--             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
+--             G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier * 1.2
+--             --print(G.GAME.unik_infuriating_xmult)
+--             --print(G.GAME.unik_infuriating_multiplier)
 
-    
-    
---     print(typer)
---     local ret = getter(typer)
-
-
---     if BLINDSIDE.hasBlindside() and not BLINDSIDE.is_blindside(ret) then
---         warn("MAJOR JOKER SPAWN FAILURE; fallback to bl_bld_joker")
---         return 'bl_bld_joker'
+--         elseif ret == 'bl_unik_blindside_infuriating_notes' then
+--             --print("infury2")
+--             G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
+--             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
+--             G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
+--             G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier * 1.2^2
+--             --print(G.GAME.unik_infuriating_xmult)
+--             --print(G.GAME.unik_infuriating_multiplier)
+--         end
 --     end
-    
 --     return ret
 -- end
+
+local getter = SMODS.get_new_blind
+function SMODS.get_new_blind(blind_type)
+    -- local typer = blind_type
+    -- if G.GAME.unik_force_cursed_jokers then
+    --     typer = 'cursed'
+    -- end
+
+    
+    
+    -- print(typer)
+    local ret = getter(blind_type)
+
+
+    if BLINDSIDE.hasBlindside() and not BLINDSIDE.is_blindside(ret) then
+        error("MAJOR JOKER SPAWN FAILURE; ABORTING GAME; MAJOR FIX NEEDED")
+    end
+    if ret == 'bl_unik_blindside_infuriating_note' then
+        print("infury")
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier * 1.2
+        --print(G.GAME.unik_infuriating_xmult)
+        --print(G.GAME.unik_infuriating_multiplier)
+
+    elseif ret == 'bl_unik_blindside_infuriating_notes' then
+        print("infury2")
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_xmult or 1.2
+        G.GAME.unik_infuriating_xmult =  G.GAME.unik_infuriating_multiplier
+        G.GAME.unik_infuriating_multiplier = G.GAME.unik_infuriating_multiplier * 1.2^2
+        --print(G.GAME.unik_infuriating_xmult)
+        --print(G.GAME.unik_infuriating_multiplier)
+    end
+    
+    return ret
+end
 
 
 function soul_check()

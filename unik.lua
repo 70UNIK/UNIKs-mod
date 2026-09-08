@@ -17,6 +17,8 @@ SMODS.Shader({
         vt.y = vt.y + (element.container and element.container.T.y + 0.018 or 0)
         local pos = {vt.x * tile_scale, vt.y * tile_scale}
         local size = {vt.w * tile_scale, vt.h * tile_scale}
+		--print("BADGE SIZE: ")
+		--print( size)
         return {
             badge_pos = pos,
             badge_size = size,
