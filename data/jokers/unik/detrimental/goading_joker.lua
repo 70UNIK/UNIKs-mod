@@ -14,6 +14,7 @@ SMODS.Joker {
     cost = 1,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Spades",debuff_name = "unik_goad",death_message = "k_unik_goading_fuck_you",color = "b95c96",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true},
+    attributes = { 'detrimental','debuff','suit','spades' },
 	blueprint_compat = false,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)

@@ -9,9 +9,10 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     cost = 8,
-    config = { extra = { Emult = 0.25}, immutable = {base_emult = 1.0} },
+    attributes = { 'emult','rank','king'},
+    config = { extra = { Emult = 0.25} },
     loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.Emult + center.ability.immutable.base_emult} }
+		return { vars = {center.ability.extra.Emult + 1} }
 	end,
     --Only spawn if you have at least 1 king of spades in deck
     in_pool = function(self)
@@ -26,14 +27,14 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.forcetrigger then
              return {
-                e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
+                e_mult = card.ability.extra.Emult + 1,
                 colour = G.C.DARK_EDITION,
             }
         end
         if context.joker_main and #context.full_hand == 1 then
             if context.full_hand[1]:get_id() == 13 then
                 return {
-                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
+                    e_mult = card.ability.extra.Emult + 1,
                     colour = G.C.DARK_EDITION,
                 }
             end

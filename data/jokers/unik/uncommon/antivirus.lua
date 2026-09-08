@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     immutable = true,
     pronouns = "it_its",
+    attributes = { 'stickers', 'enhancements' },
     loc_vars = function(self, info_queue, center)
         if not center.ability.unik_shielded then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_shielded" }

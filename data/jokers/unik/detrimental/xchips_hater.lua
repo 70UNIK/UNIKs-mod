@@ -15,6 +15,7 @@ SMODS.Joker {
         return { 
             vars = { center.ability.extra.round_limit,center.ability.extra.rounds } }
     end,
+    attributes = { 'detrimental','xchips','echips','xlogchips','destroy_card' },
     calculate = function(self, card, context)
 		if context.end_of_round and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
             if not card.ability.extra.xchips_triggered then

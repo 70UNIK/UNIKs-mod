@@ -11,6 +11,7 @@ SMODS.Joker {
     unique = true,
     immutable = true,
     pronouns = "it_its",
+    attributes = { 'xmult','xchips','xlogchips','xlogmult','echips','emult'},
     calculate = function(self, card, context)
         if context.before and not context.blueprint and not context.retrigger_joker then
 			G.GAME.unik_store_scoring = true

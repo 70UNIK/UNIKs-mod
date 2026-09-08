@@ -9,6 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     config = {extra = {retriggers = 1}},
+    attributes = { 'suit','unik_crosses','rescore','debuff'},
     loc_vars = function(self, info_queue, center)
         G.GAME.unik_saved_suits_railroad = G.GAME.unik_saved_suits_railroad or {'Spades','Hearts'}
          info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }

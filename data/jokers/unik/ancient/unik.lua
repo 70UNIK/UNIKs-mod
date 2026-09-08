@@ -32,18 +32,18 @@ SMODS.Joker {
 	--Contra logos from ascensio has ^0.01 chips per 7 or 4 contained in scoring hand (doesnt have to score), but unless you have joker retriggers, it cannot retrigger 7s.
 	--This has ^0.01 chips per scoring 7 (can be retriggered). You can retrgger scoring 7s, which makes this potentally stronger than contra logos even if harder to use. Also pink cards.
 	--This is why I nerfed it to ^0.01
-    config = { extra = {Echips_mod = 0.01, Echips = 0.0}, immutable = {base_echips = 1.0,limit = 2.0}}, --normally he should not be cappted in mainline+
+    config = { extra = {Echips_mod = 0.01, Echips = 0.0}, immutable = {limit = 2.0}}, --normally he should not be cappted in mainline+
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		local key = 'j_unik_unik'
 		if UNIK.has_bos() then
 			quoteset = Jen.dramatic and 'drama'  or 'normal'
 		end
-		if center.ability.extra.Echips + center.ability.immutable.base_echips >= center.ability.immutable.limit then
+		if center.ability.extra.Echips + 1 >= center.ability.immutable.limit then
 			key = 'j_unik_unik_capped'
 		end
 		return { key = key,
-		vars = {tostring(center.ability.extra.Echips_mod),center.ability.extra.Echips + center.ability.immutable.base_echips
+		vars = {tostring(center.ability.extra.Echips_mod),center.ability.extra.Echips + 1
 	,localize(unik_quotes[quoteset][math.random(#unik_quotes[quoteset])] .. ""),center.ability.immutable.limit
 	} }
 	end,
@@ -53,19 +53,19 @@ SMODS.Joker {
 		local check = false
 		if context.forcetrigger then
 			return {
-				e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
+				e_chips = card.ability.extra.Echips + 1,
 				colour = G.C.DARK_EDITION,
 			}
 		end
 		if (context.joker_main)  then
-			if (to_big(card.ability.extra.Echips + card.ability.immutable.base_echips) > to_big(1)) then
+			if (to_big(card.ability.extra.Echips + 1) > to_big(1)) then
 				return {
-					e_chips = card.ability.extra.Echips + card.ability.immutable.base_echips,
+					e_chips = card.ability.extra.Echips + 1,
 					colour = G.C.DARK_EDITION,
 				}
 			end
 		end
-		if context.before and not context.blueprint and card.ability.extra.Echips + card.ability.immutable.base_echips < card.ability.immutable.limit then
+		if context.before and not context.blueprint and card.ability.extra.Echips + 1 < card.ability.immutable.limit then
 			local triggered = false
             local increase = 0
             for k, v in ipairs(context.scoring_hand) do
@@ -90,7 +90,7 @@ SMODS.Joker {
 					message_colour = G.C.DARK_EDITION,
 					force_full_val = true,
 					operation = function(ref_table, ref_value, initial, scaling)
-						ref_table[ref_value] = math.min(initial + scaling * increase,card.ability.immutable.limit - card.ability.immutable.base_echips)
+						ref_table[ref_value] = math.min(initial + scaling * increase,card.ability.immutable.limit - 1)
 					end,
 				})
                 				return {

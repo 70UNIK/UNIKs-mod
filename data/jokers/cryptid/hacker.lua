@@ -18,6 +18,7 @@ SMODS.Joker {
 			 new_numerator, new_denominator
 		} }
 	end,
+	attributes = { 'chance','rank','two','three','four','five','generation','consumable','cry_code' },
 	    discovered = true,
     unlocked = true,
     set_badges = function (self, card, badges)

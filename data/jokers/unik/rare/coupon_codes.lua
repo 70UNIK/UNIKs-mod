@@ -10,6 +10,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
+    attributes = { 'shop','generation','tag','voucher'},
     config = { extra = {purchased_cards = 0,requirement=12,active = true} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_coupon

@@ -16,6 +16,7 @@ SMODS.Joker {
     config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false,debuff_name = "unik_plant",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true, ["unik_copyrighted"] = true },
 	blueprint_compat = false,
+    attributes = { 'detrimental','debuff','face' },
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_plant

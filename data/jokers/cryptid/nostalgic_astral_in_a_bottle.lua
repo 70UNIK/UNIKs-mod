@@ -15,6 +15,7 @@ SMODS.Joker {
 	blueprint_compat = false,
     perishable_compat = false,
 	eternal_compat = false,
+	attributes = { 'detrimental','on_sell','emult','modifier','joker' },
     config = { extra = {Emult = 0.9} },
 	loc_vars = function(self, info_queue, center)
 		if not center.edition or (center.edition and not center.edition.cry_astral) then

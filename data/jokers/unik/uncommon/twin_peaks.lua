@@ -9,6 +9,7 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_twin_peaks',
     atlas = 'unik_twin_peaks',
+    attributes = { 'consumables','unik_summit','generation','spectral'},
 	pos = { x = 0, y = 0 },
     rarity = 2,
     config = { extra = { cards = 2 } },

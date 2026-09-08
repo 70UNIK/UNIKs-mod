@@ -15,6 +15,7 @@ SMODS.Joker {
 		extra = { x_mult = 1, x_mult_mod = 0.075, },
         immutable = {funny = 0, funny_limit = 32, destroyed = false},
 	},
+    attributes = { 'banishing','chance','scaling'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {tostring(center.ability.extra.x_mult_mod),tostring(center.ability.extra.x_mult),center.ability.immutable.funny, center.ability.immutable.funny_limit} }
 	end,
@@ -142,4 +143,8 @@ function Card:boom_break()
         blockable = false,
         delay =  0.51*dissolve_time,
     }))
+    if self.ability and self.ability.immutable then
+        self.ability.immutable.destroyed = nil
+    end
+    
 end

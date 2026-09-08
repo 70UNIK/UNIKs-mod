@@ -9,6 +9,7 @@ SMODS.Joker {
     eternal_compat = false,
 	demicoloncompat = true,
     config = { extra = { multiplier = 2} },
+	attributes = { 'generation','consumable','xblindsize','boss_blind'},
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_black_hole" }
 		if not center.edition or (center.edition and not center.edition.negative) then

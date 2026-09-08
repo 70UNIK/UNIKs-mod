@@ -12,6 +12,7 @@ SMODS.Joker {
     no_dbl = true,
 	pos = { x = 9, y = 6 },
     cost = 1,
+    attributes = { 'detrimental','scaling' },
     config = { extra = {rounds = 0,round_limit = 8} },
     loc_vars = function(self, info_queue, center)
         return { 

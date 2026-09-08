@@ -1,0 +1,1 @@
+--scored cards give X1.75 Mult, but have a 1 in 100 chance to BREAK. only spawns after gros michael self banishes.

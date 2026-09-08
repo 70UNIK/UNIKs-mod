@@ -13,6 +13,7 @@ SMODS.Joker {
     no_dbl = true,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Hearts",debuff_name = "unik_head",death_message = "k_unik_headless_rotted",color = "ac9db4",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true},
+    attributes = { 'detrimental','debuff','suit','hearts' },
 	blueprint_compat = false,
     perishable_compat = false,
     experimental = true,

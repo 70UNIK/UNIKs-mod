@@ -11,6 +11,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.09} },
+	attributes = { 'xchips','scaling' },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.max_size} }
 	end,

@@ -16,6 +16,7 @@ SMODS.Joker {
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
+    attributes = { 'detrimental','modify_card','enhancements' },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
         return { vars = {center.ability.extra.min_enhanced_cards, center.ability.extra.enhanced_cards} }

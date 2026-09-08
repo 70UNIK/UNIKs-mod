@@ -10,6 +10,7 @@ SMODS.Joker {
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = false,
+    attributes = { 'stickers','on_sell','banishing'},
     calculate = function(self, card, context)
         if
 			context.selling_card and not context.blueprint

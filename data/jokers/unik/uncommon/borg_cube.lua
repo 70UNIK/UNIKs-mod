@@ -10,6 +10,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = {xmult = 1.5} },
+	attributes = { 'joker', 'editions','space' },
     loc_vars = function(self, info_queue, center)
         if not center.edition or (center.edition and not center.edition.unik_steel) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_steel

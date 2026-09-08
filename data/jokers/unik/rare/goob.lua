@@ -25,6 +25,7 @@ SMODS.Joker {
     demicolon_compat = true,
     config = {},
     pronouns = "he_him",
+    attributes = { 'hand_type','hand_level'},
      pools = {["character"] = true },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'

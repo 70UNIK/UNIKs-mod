@@ -15,6 +15,7 @@ SMODS.Joker {
     eternal_compat = true,
     blueprint_compat = true,
     demicolon_compat = true,
+    attributes = { 'unik_summit','generation','suit','unik_crosses','chance','consumables'},
 	loc_vars = function(self, info_queue, center)
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.base_odds, center.ability.extra.odds, 'unik_pink_salt_summit')
 		return {

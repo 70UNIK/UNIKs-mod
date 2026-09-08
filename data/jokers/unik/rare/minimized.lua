@@ -9,6 +9,7 @@ SMODS.Joker {
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_cry_maximized
 	end,
     pixel_size = { w = 71, h = 30 },
+    attributes = { 'rank','two','jack'},
 }
 local override_minimized = false
 local checking_minimized = false --cardsauce fix

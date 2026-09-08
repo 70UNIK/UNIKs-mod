@@ -10,6 +10,7 @@ SMODS.Joker {
         suit = "unik_Crosses",
         }
     },
+    attributes = { 'unik_crosses','xmult','suit' },
     rarity = 2,
     cost = 6,
     unlocked = true,

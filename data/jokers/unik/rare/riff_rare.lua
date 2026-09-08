@@ -13,6 +13,7 @@ SMODS.Joker {
     demicoloncompat = true,
     immutable = true,
     pools = {["riff_raff"] = true },
+    attributes = { 'joker', 'generation','rarity' },
     calculate = function(self, card, context)
         if context.forcetrigger and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
             local create = 1

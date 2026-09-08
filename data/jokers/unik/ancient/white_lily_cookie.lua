@@ -81,36 +81,36 @@ SMODS.Joker {
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
-    config = { extra = { Emult = 0.0, Emult_mod = 0.1}, immutable = {base_emult = 1.0,limit = 2.0} },
+    config = { extra = { Emult = 0.0, Emult_mod = 0.1}, immutable = {limit = 2.0} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
         local quoteset = 'normal'
         local key = 'j_unik_white_lily_cookie'
-        if center.ability.extra.Emult + center.ability.immutable.base_emult >= center.ability.immutable.limit then
+        if center.ability.extra.Emult + 1 >= center.ability.immutable.limit then
             key = 'j_unik_white_lily_cookie_capped'
         end
 		return { 
-            key = key, vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,tostring(center.ability.extra.Emult_mod),center.ability.immutable.limit,
+            key = key, vars = {center.ability.extra.Emult + 1,tostring(center.ability.extra.Emult_mod),center.ability.immutable.limit,
         localize(wl_quotes[quoteset][math.random(#wl_quotes[quoteset])] .. "")} }
 	end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
+                e_mult = card.ability.extra.Emult + 1,
                 colour = G.C.DARK_EDITION,
             }
         end
         if context.joker_main then
-            if (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
+            if (to_big(card.ability.extra.Emult + 1) > to_big(1)) then
                 return {
-                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
+                    e_mult = card.ability.extra.Emult + 1,
                     colour = G.C.DARK_EDITION,
                 }
             end
 		end
         if not context.blueprint and context.unik_white_lily_increment
-        and card.ability.extra.Emult + card.ability.immutable.base_emult < card.ability.immutable.limit
+        and card.ability.extra.Emult + 1 < card.ability.immutable.limit
         then
                 SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
@@ -119,7 +119,7 @@ SMODS.Joker {
                     base = 1,
                     message_key = "a_powmult",
                     operation = function(ref_table, ref_value, initial, scaling)
-						ref_table[ref_value] = math.min(initial + scaling,card.ability.immutable.limit - card.ability.immutable.base_emult)
+						ref_table[ref_value] = math.min(initial + scaling,card.ability.immutable.limit - 1)
 					end,
                     message_colour = G.C.DARK_EDITION,
                         force_full_val = true,

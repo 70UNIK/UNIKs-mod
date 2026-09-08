@@ -23,6 +23,7 @@ SMODS.Joker{ --Yellow Card
     perishable_compat = false,
     demicoloncompat = true,
     atlas = 'unik_normal_jokers',
+    attributes = { 'joker_slot','chance','scaling','booster'},
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card, card.ability.extra.prob, card.ability.extra.odds, 'unik_invisible_card')
         local key = 'j_unik_invisible_card'

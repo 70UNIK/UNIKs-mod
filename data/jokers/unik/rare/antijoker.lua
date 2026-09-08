@@ -8,6 +8,7 @@ SMODS.Joker {
     rarity = 3,
     cost = 15,
     atlas = 'unik_normal_jokers',
+    attributes = { 'editions','on_sell','joker'},
     pos = { x = 12, y = 2 },
     -- draw = function(self, card, layer)
     --     if card.config.center.discovered or card.bypass_discovery_center then

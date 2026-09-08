@@ -11,6 +11,7 @@ SMODS.Joker {
     no_dbl = true,
     config = { extra = {min_cards = 4,destroyed = false} },
     pools = {["unik_copyrighted"] = true },
+    attributes = { 'detrimental','modify_card','editions','joker_slot' },
     -- loc_txt = {set = 'Joker', key = 'j_unik_happiness'},
     -- force it to become positive
     loc_vars = function(self, info_queue, center)

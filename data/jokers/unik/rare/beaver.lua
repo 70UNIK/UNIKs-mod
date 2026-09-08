@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
+    attributes = { 'enhancements','xlogmult','xmult'},
     config = { extra = {base = 60,x_mult = 1.4} },
     enhancement_gate = 'm_unik_timber',
     loc_vars = function(self, info_queue, center)

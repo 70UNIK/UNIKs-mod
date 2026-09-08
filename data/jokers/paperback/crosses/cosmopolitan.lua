@@ -13,6 +13,7 @@ SMODS.Joker {
 	rarity = 3,
 	pos = { x = 10, y = 3 }, --+10, +0
 	atlas = "unik_normal_jokers",
+	attributes = { 'perma_bonus','retrigger','suit','unik_crosses','food' },
 	cost = 8,
 	unlocked = true,
 	discovered = true,

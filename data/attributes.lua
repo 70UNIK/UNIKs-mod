@@ -10,6 +10,13 @@ SMODS.Attribute {
 SMODS.Attribute {
     key = 'echips'
 }
+
+SMODS.Attribute {
+    key = 'xlogchips'
+}
+SMODS.Attribute {
+    key = 'xlogmult'
+}
 --sticker interacting jokers
 SMODS.Attribute {
     key = 'stickers'
@@ -29,4 +36,20 @@ SMODS.Attribute {
 
 SMODS.Attribute {
     key = 'eblindsize'
+}
+
+SMODS.Attribute {
+    key = 'unik_summit'
+}
+--no standign zone, clock (cryptid)
+SMODS.Attribute {
+    key = 'time_based'
+}
+
+SMODS.Attribute {
+    key = 'unik_ancient'
+}
+
+SMODS.Attribute {
+    key = 'detrimental'
 }

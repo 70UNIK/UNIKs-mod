@@ -20,6 +20,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = { mult = 30} },
+	attributes = { 'mult','consumable','cry_code' },
 	loc_vars = function(self, info_queue, center)
 		return { 
 			vars = {center.ability.extra.mult} 

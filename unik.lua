@@ -165,6 +165,8 @@ if (SMODS.Mods["Cryptid"] or {}).can_load then
 	--UNIK.overshootEnabled() = true
 	--unik_config.unik_legendary_blinds = true
 end
+
+NFS.load(mod_path .. "data/attributes.lua")()
 -- print("OVERSHOOT LEVEL:")
 -- print(unik_config.unik_overshoot_level)
 NFS.load(mod_path .. "talismanless.lua")()

@@ -27,6 +27,7 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_depleted" }
         return { vars = { center.ability.extra.selfDestruct} }
 	end,
+    attributes = { 'detrimental','generation','joker','modify_card','stickers'},
     immutable = true,
 	add_to_deck = function(self, card, from_debuff)
         --add 1 random Eternal Depleted food joker

@@ -5181,7 +5181,7 @@ return {
                 text = {
                     "Retrigger the",
                     "rightmost {C:attention}Joker{}",
-                    "{C:inactive,s:0.7}(Cannot retrigger Joker retriggers)", --important notice
+                    --"{C:inactive,s:0.7}(Similar but act)", --important notice
                 },
                 unlock = {
                     "Discard a {C:attention}Flush Five",

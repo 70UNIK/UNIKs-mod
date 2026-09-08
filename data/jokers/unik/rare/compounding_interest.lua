@@ -14,6 +14,7 @@ SMODS.Joker {
 	},
 	perishable_compat = true,
     eternal_compat = true,
+	attributes = { 'economy'},
     demicolon_compat = true,
 	loc_vars = function(self, info_queue, center)
 		return {

@@ -12,6 +12,7 @@ SMODS.Joker {
 	demicoloncompat = true,
 	real_time_loc = true,
     config = { extra = {x_mult = 3.5, x_mult_mod = 0.07,x_mult_initial = 3.5,selfDestruction = false,message_produced = false,in_scoring = false} },
+	attributes = { 'xmult','scaling','time_based','generation'},
 	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_impounded
 		return { 

@@ -13,6 +13,7 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         return {vars = {center.ability.extra.rescores}}
 	end,
+    attributes = { 'modify_card','perma_bonus','rescore','seals'},
     in_pool = function() --reduce frequency of it appearing
         for i,v in pairs(G.playing_cards) do
             if v.seal and v.seal == 'unik_copper' then

@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicolon_compat = true,
     immutable = true,
+    attributes = { 'unik_summit','emult','echips','economy','xmult','xchips','mult','chips' },
     loc_vars = function(self, info_queue, center)
         if G.GAME and not G.GAME.unik_base_camp_bonus then
             G.GAME.unik_base_camp_bonus = {

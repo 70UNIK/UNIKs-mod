@@ -10,6 +10,7 @@ SMODS.Joker {
 			tags = 2,
 		},
 	},
+	attributes = { 'generation','tag'},
 	perishable_compat = true,
     eternal_compat = true,
     demicolon_compat = true,

@@ -9,6 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = false,
     config = {extra = {triggers = 15}},
+    attributes = { 'modify_card','suit','unik_noughts','unik_crosses'},
     pools = { ["Food"] = true},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')

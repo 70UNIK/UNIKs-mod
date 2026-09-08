@@ -18,6 +18,7 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
     perishable_compat = true,
     demicolon_compat = true,
     enhancement_gate = 'm_bonus',
+    attributes = { 'enhancements','scaling','reset','xchips' },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_bonus
         return {vars = {card.ability.extra.x_chips + card.ability.extra.x_chip_mod, card.ability.extra.x_chip_mod}}

@@ -14,6 +14,7 @@ SMODS.Joker {
     cost = 0,
 	blueprint_compat = false,
     perishable_compat = false,
+    attributes = { 'detrimental','lose_economy' },
 	eternal_compat = false,
     config = { extra = {cash_loss = 1, cash_required = 20, current_cash = 0, enable_check = false,selfDestruct = false},},
 	loc_vars = function(self, info_queue, center)

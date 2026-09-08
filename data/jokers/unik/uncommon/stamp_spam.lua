@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = false,
     demicolon_compat = true,
     config = {extra = {triggers = 4}},
+    attributes = { 'seals','editions','modify_card'},
     loc_vars = function(self, info_queue, center)
         return { vars = {center.ability.extra.triggers}}
 	end,

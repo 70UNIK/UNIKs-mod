@@ -9,6 +9,7 @@ SMODS.Joker {
             xMult = 1.5
         }
     },
+    attributes = { 'xmult','joker','stick' },
 	perishable_compat = true,
     eternal_compat = false,
 	blueprint_compat = true,

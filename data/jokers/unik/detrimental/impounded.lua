@@ -15,6 +15,7 @@ SMODS.Joker {
     no_dbl = true,
     perishable_compat = false,
 	eternal_compat = false,
+    attributes = { 'detrimental','lose_economy','xmult','debuff','stickers','on_sell' },
     config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20,impoundedSeed = ""} },
     loc_vars = function(self, info_queue, center)
         if not center.ability.unik_impounded then

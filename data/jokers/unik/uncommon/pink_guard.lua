@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = {extra = {mult = 0, diamond_mult = 0.25, nought_mult = 1}},
+    attributes = { 'suit','diamonds','unik_noughts','mult','scaling'},
     pronouns = "he_him",
     loc_vars = function(self, info_queue, center)
         return {

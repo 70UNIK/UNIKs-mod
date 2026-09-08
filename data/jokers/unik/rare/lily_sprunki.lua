@@ -23,6 +23,7 @@ SMODS.Joker {
 	pos = { x = 3, y = 2 },
 	soul_pos = { x = 4, y = 2 },
     cost = 8,
+    attributes = {'activated','destroy_card'},
     config = {extra = {active = true,quoteset = 'normal',limit = 2}},
     pronouns = "she_her",
     bypass_group_selection = true, --for polyminos stuff
@@ -76,7 +77,14 @@ SMODS.Joker {
         end
         return cards > 0
     end,
-    unik_activated_ability = function(self,card) 
+    all_in_jest = {
+        ability_cost = function(self, card)
+             return 0
+        end,
+    },
+    unik_activated_ability = function(self,card,args) 
+        args = args or {}
+        SMODS.calculate_context({all_in_jest = {joker_ability_used = true, card = card, retriggered = args.retriggered, args = args}})
         local eternals = 0
         if G.hand and G.hand.highlighted and #G.hand.highlighted > 0 then
             for i, v in pairs(G.hand.highlighted) do

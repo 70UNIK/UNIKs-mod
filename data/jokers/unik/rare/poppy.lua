@@ -25,6 +25,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     immutable = true,
+    attributes = { 'discard','hands','retrigger'},
     config = { extra = {retriggers = 0},immutable = { max_retriggers = 100,discarders = 0 }},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'

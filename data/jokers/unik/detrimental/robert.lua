@@ -14,6 +14,7 @@ SMODS.Joker{
 	pos = { x = 5, y = 11 },
 	soul_pos = { x = 6, y = 11 },
     cost = 0,
+    attributes = { 'chance','face_down' },
 	blueprint_compat = false,
     perishable_compat = false,
 	eternal_compat = false,

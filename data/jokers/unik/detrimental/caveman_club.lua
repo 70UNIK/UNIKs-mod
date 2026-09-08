@@ -15,6 +15,7 @@ SMODS.Joker {
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
+    attributes = { 'detrimental','debuff','suit','clubs' },
     experimental = true,
     loc_vars = function(self, info_queue, center)
         --Nerf to requiring half of cards destroyed (rounded to whole num), so its more in line with Blacklist's requirements

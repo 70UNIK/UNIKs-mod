@@ -11,6 +11,7 @@ SMODS.Joker {
     config = {extra = {rescore = 1}, immutable = {max_rescores = 10}},
     pronouns = "it_its",
     enhancement_gate = 'm_glass',
+    attributes = { 'enhancements','rescore'},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         info_queue[#info_queue + 1] = G.P_CENTERS.m_glass

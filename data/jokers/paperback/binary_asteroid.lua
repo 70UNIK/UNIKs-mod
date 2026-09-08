@@ -4,11 +4,12 @@ SMODS.Joker {
     atlas = 'unik_normal_jokers',
     rarity = 1,
 	pos = { x = 2, y = 6 },
-    cost = 2,
+    cost = 1,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
+    attributes = { 'hands','discards','jokers' },
     config = { extra = { discards = 1,hands = 1},immutable = { max_hand_size_mod = 100 }, },
     loc_vars = function(self, info_queue, center)
 		return { vars = {math.min(center.ability.extra.hands,center.ability.immutable.max_hand_size_mod),math.min(center.ability.extra.discards,center.ability.immutable.max_hand_size_mod)} }

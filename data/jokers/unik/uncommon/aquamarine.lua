@@ -12,6 +12,7 @@ SMODS.Joker {
             rescores = 1,
 		},
 	},
+    attributes = { 'rescore', 'suit','unik_noughts','chance' },
 	perishable_compat = true,
     eternal_compat = true,
     blueprint_compat = true,

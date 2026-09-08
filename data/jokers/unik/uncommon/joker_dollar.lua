@@ -25,6 +25,7 @@ SMODS.Joker {
 			},
 		}
 	end,
+	attributes = { 'economy','enhancements','scaling'},
 	calculate = function(self, card, context)
 		if context.forcetrigger then
             return {

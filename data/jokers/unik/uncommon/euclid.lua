@@ -11,6 +11,7 @@ SMODS.Joker {
     config = {
 		extra = { chips = 59 },
 	},
+    attributes = { 'chips','rank','two','three','five','seven','ace'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.chips} }
 	end,

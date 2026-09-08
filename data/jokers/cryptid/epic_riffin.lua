@@ -17,6 +17,7 @@ SMODS.Joker {
     immutable = true,
     pools = {["riff_raff"] = true },
         discovered = true,
+    attributes = { 'joker', 'generation','rarity' },
     unlocked = true,
     set_badges = function (self, card, badges)
       SMODS.create_mod_badges({ mod = SMODS.find_mod("cry")[1] }, badges)

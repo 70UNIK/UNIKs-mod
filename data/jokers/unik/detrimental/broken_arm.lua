@@ -15,6 +15,7 @@ SMODS.Joker {
 	blueprint_compat = false,
     immutable = true,
     perishable_compat = false,
+    attributes = { 'detrimental','hand_level','hand_type' },
     loc_vars = function(self, info_queue, center)
         -- info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.probability, center.ability.extra.odds, 'unik_the_arm')

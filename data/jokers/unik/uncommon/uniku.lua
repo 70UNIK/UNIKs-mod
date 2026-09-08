@@ -8,6 +8,7 @@ SMODS.Joker {
     rarity = 2,
     config = { extra = { repetitions = 2 } },
     cost = 5,
+    attributes = { 'retrigger','rank','seven'},
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,

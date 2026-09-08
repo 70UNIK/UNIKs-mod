@@ -28,7 +28,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	pronouns = "she_her",
     config = { extra = { exp_levelup = 1.5} },
-	attributes = { 'xmult', 'scaling', 'hand_level', 'hand_type' },
+	attributes = { 'xmult', 'scaling', 'hand_level', 'hand_type','space' },
 	loc_vars = function(self, info_queue, center)
 		local quoteset = 'normal'
 		local xmult = 1

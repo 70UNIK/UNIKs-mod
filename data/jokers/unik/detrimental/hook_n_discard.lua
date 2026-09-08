@@ -11,6 +11,7 @@ SMODS.Joker {
     cost = 1,
     config = { extra = { min_discards = 12, discarded_cards = 2, current_discards = 0} },
     pools = { ["unik_boss_blind_joker"] = true},
+    attributes = { 'detrimental','discard' },
 	blueprint_compat = false,
     perishable_compat = false,
     eternal_compat = false,

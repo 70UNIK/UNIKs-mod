@@ -10,6 +10,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = {x_chips = 1.5} },
+    attributes = { 'enhancements','xchips','rank','suit' },
     loc_vars = function(self, info_queue, center)
         return { 
             vars = {center.ability.extra.x_chips} }

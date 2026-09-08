@@ -12,6 +12,7 @@ SMODS.Joker {
     perishable_compat = false,
     no_dbl = true,
 	eternal_compat = false,
+    attributes = { 'detrimental','joker','generation' },
     config = { extra = {max_jokers = 2,jokers_spawned = 0,self_destruct = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.max_jokers,center.ability.extra.jokers_spawned} }

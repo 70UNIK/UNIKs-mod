@@ -9,6 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = false,
     immutable = true,
+    attributes = { 'editions','hands','modify_card'},
     config = {extra = {to_be_destroyed = false}},
     loc_vars = function(self, info_queue, center)
         if not center.edition or (center.edition and not center.edition.unik_shining_glitter) then

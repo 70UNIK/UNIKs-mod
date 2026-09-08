@@ -10,6 +10,7 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = false,
     demicoloncompat = true,
+    attributes = { 'generation','unik_summit','tags','food'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.triggers} }
 	end,

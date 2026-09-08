@@ -9,6 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     config = {extra = {stones = 1}},
+	attributes = { 'enhancements','rank','suit'},
     in_pool = function()
         local stoneCards = 0
         if G.deck then 

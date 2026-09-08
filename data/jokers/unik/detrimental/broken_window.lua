@@ -14,6 +14,7 @@ SMODS.Joker {
     experimental = true,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Diamonds",debuff_name = "unik_window",death_message = "k_unik_window_fixed",color = "a9a295",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true},
+    attributes = { 'detrimental','debuff','suit','diamonds' },
 	blueprint_compat = false,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)

@@ -8,6 +8,7 @@ SMODS.Joker {
 	atlas = 'unik_normal_jokers',
 	pos = { x = 0, y = 0 },
 	cost = 8,
+	attributes = { 'xchips','rank','seven','ace'},
 	blueprint_compat = true,
 	perishable_compat = true,
 	demicoloncompat = true,

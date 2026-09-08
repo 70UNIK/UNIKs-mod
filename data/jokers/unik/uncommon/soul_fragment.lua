@@ -10,6 +10,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = false,
     demicoloncompat = true,
+    attributes = { 'generation','on_sell','legendary'},
     loc_vars = function(self, info_queue, center)
         if not center.ability.perishable then
             info_queue[#info_queue + 1] = { set = "Other", key = "perishable",vars = { 5, 5 } }

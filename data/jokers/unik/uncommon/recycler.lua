@@ -11,6 +11,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = {x_mult = 1.0, x_mult_mod = 0.02} },
+	attributes = { 'xmult','scaling','on_discard'},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
 	end,

@@ -13,6 +13,7 @@ SMODS.Joker {
     config = { extra = { selfDestruct = false,hand_size = -1,max = 8, min = 6} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
+    attributes = { 'detrimental','hand_size' },
     perishable_compat = false,
     immutable = true,
     loc_vars = function(self, info_queue, center)

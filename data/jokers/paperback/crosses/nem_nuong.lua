@@ -12,6 +12,7 @@ SMODS.Joker {
             stick_key = 'j_unik_meaty_stick'
         }
 	},
+    attributes = { 'mult','chance','food','unik_crosses','suit' },
     pools = { ["Food"] = true},
     eternal_compat = false,
 	blueprint_compat = true,

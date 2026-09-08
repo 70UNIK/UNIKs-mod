@@ -20,6 +20,7 @@ SMODS.Joker {
 	perishable_compat = false,
 	eternal_compat = false,
 	demicoloncompat = true, --NOPE!
+	attributes = { 'hands','on_sell','unik_ancient'},
 	update = function(self,card,dt)
 		card.ability.extra.threshold = 18
 		if card.ability.extra.hands < card.ability.extra.threshold then

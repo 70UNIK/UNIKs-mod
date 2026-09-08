@@ -8,6 +8,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
+    attributes = { 'generation','consumable','spectral'},
     calculate = function(self, card, context)
         if (context.setting_blind or context.forcetrigger) and not (context.blueprint_card or self).getting_sliced then
             if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then

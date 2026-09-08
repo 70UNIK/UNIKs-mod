@@ -154,6 +154,7 @@ SMODS.Joker {
         return { vars = {center.ability.extra.x_mult} }
 
 	end,
+    attributes = { 'xmult','boss_blind'},
     add_to_deck = function(self, card, from_debuff)
         G.E_MANAGER:add_event(Event({
             trigger = 'immediate',

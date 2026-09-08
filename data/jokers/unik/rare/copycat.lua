@@ -9,6 +9,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
 	immutable = true,
+	attributes = { 'position','copying','retrigger','joker'},
 	calculate = function(self, card, context)
 		if (context.retrigger_joker_check) and context.other_card ~= card then
             local otherone = nil
