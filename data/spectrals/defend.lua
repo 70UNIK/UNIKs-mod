@@ -53,6 +53,7 @@ SMODS.Consumable {
                     
                     return true end }))
                 end
+                G.hand:unhighlight_all()
                 card:juice_up(0.3, 0.5)
             return true end })) 
         return true end })) 

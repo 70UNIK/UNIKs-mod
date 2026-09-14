@@ -27,7 +27,8 @@ SMODS.Consumable{
             card.children.center:set_sprite_pos { x = 5, y = 0 }
         end
     end,
-    
+    blindside_booster = true,
+	include_in_vanilla = true,
 	use = function(self, card, area, copier)
         UNIK.add_bonus('x_mult',card.ability.extra.x_mult)
         for i = 1, #G.hand.highlighted do

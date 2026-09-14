@@ -21,7 +21,8 @@ SMODS.Consumable{
 			key = key, vars = {card.ability.extra.money,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
-    
+    blindside_booster = true,
+	include_in_vanilla = true,
 	use = function(self, card, area, copier)
         UNIK.add_bonus('dollars',card.ability.extra.money)
         for i = 1, #G.hand.highlighted do

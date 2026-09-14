@@ -18,6 +18,7 @@ SMODS.Tag {
         local chance, trigger = SMODS.get_probability_vars(tag, self.config.chancefail, self.config.chance, 'recursive_unik')
 		return { vars = { chance,trigger } }
 	end,
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
             tag:yep('+', G.C.SUITS["unik_Noughts"], function() 

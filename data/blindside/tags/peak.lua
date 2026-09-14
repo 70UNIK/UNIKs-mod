@@ -26,6 +26,7 @@ SMODS.Tag {
             x_chips = 0.03,
         }
     },
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
             tag:yep('+', G.C.SUITS["unik_Crosses"], function() 

@@ -17,7 +17,8 @@ SMODS.Consumable{
 			vars = {card.ability.extra.chips,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
-    
+    blindside_booster = true,
+	include_in_vanilla = true,
 	use = function(self, card, area, copier)
         UNIK.add_bonus('chips',card.ability.extra.chips)
         for i = 1, #G.hand.highlighted do

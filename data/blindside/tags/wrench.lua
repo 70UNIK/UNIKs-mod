@@ -23,6 +23,7 @@ SMODS.Tag {
             cannot_copy = true
         }
     },
+    blindside_tag = true,
     apply = function(self, tag, context)
         if (context.type == 'immediate' or context.type == "round_start_bonus") then 
             local cards = {}

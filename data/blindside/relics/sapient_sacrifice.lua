@@ -9,4 +9,5 @@ SMODS.Tag {
     in_pool = function(self, args)
         return false
     end,
+    blindside_tag = true,
 }

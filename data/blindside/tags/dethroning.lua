@@ -13,6 +13,7 @@ SMODS.Tag {
 
 		return { vars = { self.config.hands } }
 	end,
+    blindside_tag = true,
     apply = function(self, tag, context)
         if not G.GAME.imprisonment_buffer and (context.type == 'round_start_bonus') and not G.GAME.unik_override_prince and G.GAME.unik_can_trigger_prince and not G.GAME.blind.config.blind.cursed then
            -- print("remaining at time:" .. G.GAME.unik_prince_hands_remaining )

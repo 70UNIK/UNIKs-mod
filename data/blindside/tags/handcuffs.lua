@@ -20,6 +20,7 @@ SMODS.Tag {
             hex = true,
         }
     },
+    blindside_tag = true,
    set_ability = function (self, tag)
         tag.config.extra.give = true
         if tag.savetable then

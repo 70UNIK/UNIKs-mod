@@ -13,5 +13,6 @@ SMODS.Tag {
         if context.type == 'eval' and (G.GAME.blind.boss or G.GAME.last_joker)  then
             add_tag(Tag('tag_unik_blindside_cult'))
         end
-    end
+    end,
+    blindside_tag = true,
 }

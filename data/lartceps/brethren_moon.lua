@@ -18,7 +18,7 @@ SMODS.Consumable{
         -- G.GAME.hands[G.FUNCS.get_poker_hand_info(G.hand.highlighted)].mult = G.GAME.hands[G.FUNCS.get_poker_hand_info(
 		-- 	G.hand.highlighted
 		-- )].mult + #G.jokers.cards
-		-- G.hand:unhighlight_all()
+		G.hand:unhighlight_all()
         --stolen from black hole
         update_hand_text(
 				{ sound = "button", volume = 0.7, pitch = 0.8, delay = 0.3 },

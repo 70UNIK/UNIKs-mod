@@ -16,6 +16,9 @@ SMODS.Consumable{
 			vars = {card.ability.extra.e_chips,card.ability.extra.max_highlighted},
 		}
 	end,
+    in_pool = function(self)
+        return not UNIK.hasBlindside()
+	end,
     hidden = true,
     soul_set = 'unik_summit',
 	use = function(self, card, area, copier)

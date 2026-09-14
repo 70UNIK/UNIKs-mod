@@ -18,6 +18,7 @@ SMODS.Voucher {
             end
         }))
     end,
+    blindside_price_tag = true,
     requires = {'v_unik_blindside_summoning_circle'}
 }
 

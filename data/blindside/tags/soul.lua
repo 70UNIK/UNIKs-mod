@@ -19,6 +19,7 @@ SMODS.Tag {
             hex = true,
         }
     },
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'immediate' and not G.GAME.unik_lock_soul_tag then 
             G.GAME.unik_lock_soul_tag = true

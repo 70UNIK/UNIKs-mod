@@ -20,6 +20,7 @@ SMODS.Tag {
         extra = {
         }
     },
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'symbol_pack_opened' and not G.GAME.suppress_super_booster_tag then
             local valid = false

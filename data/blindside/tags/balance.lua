@@ -19,6 +19,7 @@ SMODS.Tag {
             }
         }
 	end,
+    blindside_tag = true,
     config = {
         extra = {
             amount = 20,

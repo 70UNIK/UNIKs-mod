@@ -10,6 +10,8 @@ SMODS.Consumable{
         end
         return false
 	end,
+    blindside_booster = true,
+	include_in_vanilla = true,
     config = { extra = { money = 1 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
         local key = 'c_unik_charleston'

@@ -16,6 +16,7 @@ SMODS.Tag {
     loc_vars = function(self, info_queue,tag)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
 	end,
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
             tag:yep('+', G.C.RED, function() 

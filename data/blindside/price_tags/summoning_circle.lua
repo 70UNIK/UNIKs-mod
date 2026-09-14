@@ -16,4 +16,5 @@ SMODS.Voucher {
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_TAGS.tag_unik_blindside_cult
     end,
+    blindside_price_tag = true,
 }

@@ -20,6 +20,7 @@ SMODS.Tag {
         local chance, trigger = SMODS.get_probability_vars(tag, self.config.chance, self.config.trigger, 'multiplicative_unik')
 		return { vars = { chance,trigger } }
     end,
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
                 tag:yep('+', G.C.GREEN, function() 

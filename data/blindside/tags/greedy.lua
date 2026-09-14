@@ -17,6 +17,7 @@ SMODS.Tag {
     loc_vars = function(self, info_queue,tag)
 		return { vars = { 3,3 } }
 	end,
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
             tag:yep('+', G.C.BLUE, function() 

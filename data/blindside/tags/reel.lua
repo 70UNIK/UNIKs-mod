@@ -16,7 +16,7 @@ SMODS.Tag{
             end
         end,
     config = {type = 'new_blind_choice'},
-
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == self.config.type then
             G.CONTROLLER.locks[tag.ID] = true

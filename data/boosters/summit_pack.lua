@@ -16,6 +16,9 @@ SMODS.Booster{
 	pos = { x = 10, y = 5 },
     cost = 4,
     weight = 1, 
+	blindside_booster = true,
+	include_in_vanilla = true,
+
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
@@ -54,6 +57,8 @@ SMODS.Booster{
     atlas = "unik_consumables",
 	pos = { x = 9, y = 6 },
     cost = 4,
+	blindside_booster = true,
+	include_in_vanilla = true,
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
@@ -92,6 +97,8 @@ SMODS.Booster{
     atlas = "unik_consumables",
 	pos = { x = 9, y = 5 },
     cost = 6,
+	blindside_booster = true,
+	include_in_vanilla = true,
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
@@ -130,6 +137,8 @@ SMODS.Booster{
     atlas = "unik_consumables",
 	pos = { x = 8, y = 5 },
     cost = 8,
+	blindside_booster = true,
+	include_in_vanilla = true,
 	get_weight = function(self)
         if UNIK.hasBlindside() then
 			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 

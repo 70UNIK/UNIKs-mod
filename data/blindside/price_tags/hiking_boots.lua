@@ -17,6 +17,7 @@ SMODS.Voucher {
         info_queue[#info_queue + 1] = {key = 'p_unik_summit_2', set = 'Other', vars = {G.P_CENTERS.p_unik_summit_2.config.choose, G.P_CENTERS.p_unik_summit_2.config.extra}}
         return {}
     end,
+    blindside_price_tag = true,
     calculate = function(self, card, context)
         if context.starting_shop and card.ability.triggered then
             card.ability.triggered = false

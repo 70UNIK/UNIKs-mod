@@ -266,7 +266,7 @@ BLINDSIDE.Blind({
                         card =  context.blueprint_card or card,
                     }
                 elseif random2 < 0.6 then
-                    local enhancement = pseudorandom_element(SMODS.ObjectTypes.bld_obj_enhancements.enhancements, 'booster')
+                    local enhancement =  BLINDSIDE.poll_trim('onion')
                     local _cards = {}
                     for k, v in ipairs(context.scoring_hand) do
                         if not v.seal and v ~= card then

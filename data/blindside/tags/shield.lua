@@ -13,6 +13,7 @@ SMODS.Tag {
         end
     end,
     pools = {["bld_obj_blindside"] = true},
+    blindside_tag = true,
     apply = function(self, tag, context)
         if (context.type == 'tag_add') then
             if (context.tag.key == 'tag_bld_debuff' or (G.P_TAGS[context.tag.key] and G.P_TAGS[context.tag.key].config and G.P_TAGS[context.tag.key].config.extra and G.P_TAGS[context.tag.key].config.extra.hex)) and not context.tag.to_be_destroyed_by_shield then

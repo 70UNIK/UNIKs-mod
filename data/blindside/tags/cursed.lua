@@ -16,6 +16,7 @@ SMODS.Tag {
     loc_vars = function(self, info_queue,tag)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_cursed_joker" }
 	end,
+    blindside_tag = true,
     apply = function(self, tag, context)
         if context.type == 'immediate' and not G.GAME.unik_lock_soul_tag then 
             G.GAME.unik_lock_soul_tag = true
