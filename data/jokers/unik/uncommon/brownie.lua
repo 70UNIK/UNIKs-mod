@@ -10,7 +10,11 @@ SMODS.Joker {
     demicolon_compat = true,
     config = { extra = {x_mult = 1.5,x_mult_mod = 0.01,depleted_threshold = 0,destroyed = false} },
     pools = {  ["autocannibalism_food"] = true,["Food"] = true},
-    attributes = { 'xmult','scaling','food' },
+    unik_autocannibal_trigger = function(self, card)
+        card.ability.extra.x_mult = 1
+		card.ability.unik_depleted = true
+	end,
+    attributes = { 'xmult','scaling','food' ,'autocannibalism'},
     loc_vars = function(self, info_queue, center)
         local key = 'j_unik_brownie'
         if center.ability.unik_depleted then

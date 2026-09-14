@@ -179,7 +179,14 @@ return {
                     "Cards on play",
                 }
             },
-
+            bl_aij_the_spear = {
+                name = "The Spear",
+                text = {
+                    'First scoring card',
+                    'each hand is',
+                    'permanently Ultradebuffed'
+                },
+            },
             bl_unik_blindside_oxy = {
                 name = "Oxy",
                 text = {
@@ -4315,6 +4322,22 @@ return {
                 }
             },
 
+            j_paperback_jimbocards_collection = {
+                name = "Jimbocards",
+                text = {
+                "When obtained, destroy all Jokers and",
+                "create {C:attention}#1#{} random {C:dark_edition}Negative{} Jokers.",
+                "All purchases cost {C:money}$#2#{} less.",
+                "Clear each {C:attention}Ante{} in {C:attention}#3#{} hands, or you {S:1.1,C:red,E:2}lose{}",
+                "{C:inactive}({C:attention}#4#{C:inactive} hands left)",
+                "{C:unik_eye_searing_red}Always {X:unik_void_color,E:2,C:unik_eye_searing_red}TAW{}",
+                },
+                unlock = {
+                "Reach Ante",
+                "level {E:1,C:attention}#1#",
+                }
+            },
+
 
             -- The rest --
             j_unik_goob = {
@@ -6043,6 +6066,25 @@ return {
                     "it's seal"
                 }
             },
+            j_unik_splits = {
+                name = "Splits", --rare, but only appears after gros michael self banishes or is banished, pseudo epic
+                text = {
+                    {
+                        "Scored cards give",
+                        "{X:red,C:white}X#1#{} Mult", --X1.75 mult
+                    },
+                    {
+                        "Each scored card",
+                        "has a {C:green}#2# in #3# chance", --1 in 100 chance
+                        "to be {C:red,E:2}destroyed{} after scoring"
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#3#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : FUNHOUSE{}",
+                    },
+                },
+            },
 
             --Bunco crossmod Jokers
             j_unik_bunc_king_minos = {
@@ -7075,6 +7117,17 @@ return {
                     "{C:chips}#3#{} Slots"
                 }
             },
+            j_aij_silly_sausage_depleted = {
+                name = "Silly Sausage",
+                text = {
+                    "{C:green}Rerolls{} cost {C:money}$#1#{} {C:red}more",
+                    "{C:attention}Increases{} by {C:money}$#2#{}",
+                    "after leaving shop",
+                    "{C:red}Self destructs{} when above",
+                    "{C:money}$#3#{}"
+                }
+            },
+            
 
             --Nachos
             j_paperback_nachos_depleted = {
@@ -9080,6 +9133,7 @@ return {
             c_unik_the_rot = "The Rot",
             c_unik_centrelink = "Centrelink",
             c_unik_catto_boi_adventures = "Catto Boi Adventures",
+            c_unik_riff_riff = "Riff Riff",
         },
         collabs={},
         dictionary={
@@ -10204,7 +10258,8 @@ return {
             ch_c_mult_dollar_cap={
                 "{C:red}Mult{} cannot exceed the current {C:money}$",
             },
-            ch_c_unik_no_arcana = {"{C:tarot}Arcana cards{} no longer spawn in the shop"}
+            ch_c_unik_no_arcana = {"{C:tarot}Arcana cards{} no longer spawn in the shop"},
+            ch_c_unik_super_magic_trick = {"{C:attention}Playing Card{} shop spawn rate increased by {C:red}5X"}
         },
     },
 }

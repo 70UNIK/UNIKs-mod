@@ -67,7 +67,127 @@ SMODS.Joker {
 
         end
 	end,
-    unik_can_activate_ability = function(self,card)
+    all_in_jest = {
+        ability_cost = function(self, card)
+             return 0
+        end,
+        can_use_ability = function(self, card, context)
+            if not card.ability.extra.active then return false end
+            local cards = 0
+            for i,v in pairs(G.hand.highlighted) do
+                if not SMODS.is_eternal(v,card) then
+                    cards = cards + 1
+                end
+            end
+            return cards > 0
+        end,
+
+        use_ability = function(self, card, args)
+            args = args or {}
+            SMODS.calculate_context({all_in_jest = {joker_ability_used = true, card = card, retriggered = args.retriggered, args = args}})
+            local eternals = 0
+            if G.hand and G.hand.highlighted and #G.hand.highlighted > 0 then
+                for i, v in pairs(G.hand.highlighted) do
+                    if  SMODS.is_eternal(v, card) then
+                        eternals = eternals + 1
+                    end
+                end
+            end
+            if G.hand and G.hand.highlighted and #G.hand.highlighted - eternals > 0 then 
+                G.CONTROLLER.locks.unik_destroy_selected = true
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card:juice_up(0.5, 0.5)
+                        card.children.center:set_sprite_pos({x = 3, y = 3})
+                        card.children.floating_sprite:set_sprite_pos({x = 4, y = 3})
+                        card.ability.extra.quoteset = 'feral'
+                        return true
+                    end
+                }))
+                card_eval_status_text( card, "extra", nil, nil, nil, {
+                    message = localize('k_unik_lily_sprunki_monster'),
+                    colour = HEX("d377dc"),
+                    card= card,
+                })
+                delay(0.5)
+                local destroyed_cards = {}
+                for i, v in pairs(G.hand.highlighted) do
+                    if not SMODS.is_eternal(v, card) and not v.shattered then
+                        destroyed_cards[#destroyed_cards+1] = v
+                    end
+                end
+                print(#destroyed_cards)
+                if #destroyed_cards == 0 then
+                    for i, v in pairs(G.hand.cards) do
+                        if not SMODS.is_eternal(v, card) and not v.shattered and #destroyed_cards < #G.hand.highlighted then
+                            destroyed_cards[#destroyed_cards+1] = v
+                        end
+                    end
+                end
+                local glass_shattered = {}
+                for k, v in ipairs(destroyed_cards) do
+                    if SMODS.has_enhancement(v, 'm_glass') then glass_shattered[#glass_shattered+1] = v end
+                end
+
+                check_for_unlock{type = 'shatter', shattered = glass_shattered}
+                G.E_MANAGER:add_event(Event({
+                    trigger='immediate',
+                    func = function()
+                        card:juice_up(0.5, 0.5)
+                        card.children.center:set_sprite_pos({x = 3, y = 3})
+                        card.children.floating_sprite:set_sprite_pos({x = 5, y = 3})
+                        G.ROOM.jiggle = G.ROOM.jiggle + 5
+                        --play_sound("unik_gore6") --thats funny
+                        return true
+                    end
+                }))
+                for i=1, #destroyed_cards do
+                    destroyed_cards[i].shattered = true
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            if SMODS.shatters(destroyed_cards[i]) then
+                                destroyed_cards[i]:shatter()
+                            else
+                                destroyed_cards[i]:gore6_break()
+                            end
+                        return true
+                        end
+                    }))
+                end
+                
+                delay(0.8)
+                SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card:juice_up(0.5, 0.5)
+                        card.children.center:set_sprite_pos({x = 3, y = 2})
+                        card.children.floating_sprite:set_sprite_pos({x = 4, y = 2})
+                        card.ability.extra.quoteset = 'tired'
+                        card.ability.extra.triggered = false
+                        card.ability.extra.feral = false
+                        return true
+                    end
+                }))
+                card_eval_status_text( card, "extra", nil, nil, nil, {
+                    message = localize("k_unik_lily_sprunki_after"),
+                    colour = HEX("d377dc"),
+                    card= card,
+                })
+                delay(0.3)
+                G.E_MANAGER:add_event(Event({
+                    delay=0.2,
+                    func = function()
+                        G.CONTROLLER.locks.unik_destroy_selected = nil
+                        card.ability.extra.active = false
+                        return true
+                    end
+                }))
+            else
+                error("UH OH!")
+            end
+        end,
+    },
+    unik_can_activate_ability = not All_in_Jest and function(self,card)
         if not card.ability.extra.active then return false end
         local cards = 0
         for i,v in pairs(G.hand.highlighted) do
@@ -76,13 +196,8 @@ SMODS.Joker {
             end
         end
         return cards > 0
-    end,
-    all_in_jest = {
-        ability_cost = function(self, card)
-             return 0
-        end,
-    },
-    unik_activated_ability = function(self,card,args) 
+    end or nil,
+    unik_activated_ability = not All_in_Jest and function(self,card,args) 
         args = args or {}
         SMODS.calculate_context({all_in_jest = {joker_ability_used = true, card = card, retriggered = args.retriggered, args = args}})
         local eternals = 0
@@ -93,90 +208,90 @@ SMODS.Joker {
                 end
             end
         end
-    if G.hand and G.hand.highlighted and #G.hand.highlighted - eternals > 0 then 
-        G.CONTROLLER.locks.unik_destroy_selected = true
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                 card:juice_up(0.5, 0.5)
-                 card.children.center:set_sprite_pos({x = 3, y = 3})
-                 card.children.floating_sprite:set_sprite_pos({x = 4, y = 3})
-                 card.ability.extra.quoteset = 'feral'
-                return true
-            end
-        }))
-        card_eval_status_text( card, "extra", nil, nil, nil, {
-            message = localize('k_unik_lily_sprunki_monster'),
-            colour = HEX("d377dc"),
-            card= card,
-        })
-        delay(0.5)
-        local destroyed_cards = {}
-        for i, v in pairs(G.hand.highlighted) do
-            if not SMODS.is_eternal(v, card) then
-                destroyed_cards[#destroyed_cards+1] = v
-            end
-        end
-        local glass_shattered = {}
-        for k, v in ipairs(destroyed_cards) do
-            if SMODS.has_enhancement(v, 'm_glass') then glass_shattered[#glass_shattered+1] = v end
-        end
-
-        check_for_unlock{type = 'shatter', shattered = glass_shattered}
-        G.E_MANAGER:add_event(Event({
-            trigger='immediate',
-            func = function()
-                 card:juice_up(0.5, 0.5)
-                 card.children.center:set_sprite_pos({x = 3, y = 3})
-                 card.children.floating_sprite:set_sprite_pos({x = 5, y = 3})
-                G.ROOM.jiggle = G.ROOM.jiggle + 5
-                --play_sound("unik_gore6") --thats funny
-                return true
-            end
-        }))
-        for i=1, #destroyed_cards do
+        if G.hand and G.hand.highlighted and #G.hand.highlighted - eternals > 0 then 
+            G.CONTROLLER.locks.unik_destroy_selected = true
             G.E_MANAGER:add_event(Event({
                 func = function()
-                    if SMODS.shatters(destroyed_cards[i]) then
-                        destroyed_cards[i]:shatter()
-                    else
-                        destroyed_cards[i]:gore6_break()
-                    end
-                  return true
+                    card:juice_up(0.5, 0.5)
+                    card.children.center:set_sprite_pos({x = 3, y = 3})
+                    card.children.floating_sprite:set_sprite_pos({x = 4, y = 3})
+                    card.ability.extra.quoteset = 'feral'
+                    return true
                 end
-              }))
+            }))
+            card_eval_status_text( card, "extra", nil, nil, nil, {
+                message = localize('k_unik_lily_sprunki_monster'),
+                colour = HEX("d377dc"),
+                card= card,
+            })
+            delay(0.5)
+            local destroyed_cards = {}
+            for i, v in pairs(G.hand.highlighted) do
+                if not SMODS.is_eternal(v, card) then
+                    destroyed_cards[#destroyed_cards+1] = v
+                end
+            end
+            local glass_shattered = {}
+            for k, v in ipairs(destroyed_cards) do
+                if SMODS.has_enhancement(v, 'm_glass') then glass_shattered[#glass_shattered+1] = v end
+            end
+
+            check_for_unlock{type = 'shatter', shattered = glass_shattered}
+            G.E_MANAGER:add_event(Event({
+                trigger='immediate',
+                func = function()
+                    card:juice_up(0.5, 0.5)
+                    card.children.center:set_sprite_pos({x = 3, y = 3})
+                    card.children.floating_sprite:set_sprite_pos({x = 5, y = 3})
+                    G.ROOM.jiggle = G.ROOM.jiggle + 5
+                    --play_sound("unik_gore6") --thats funny
+                    return true
+                end
+            }))
+            for i=1, #destroyed_cards do
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        if SMODS.shatters(destroyed_cards[i]) then
+                            destroyed_cards[i]:shatter()
+                        else
+                            destroyed_cards[i]:gore6_break()
+                        end
+                    return true
+                    end
+                }))
+            end
+            
+            delay(0.8)
+            SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    card:juice_up(0.5, 0.5)
+                    card.children.center:set_sprite_pos({x = 3, y = 2})
+                    card.children.floating_sprite:set_sprite_pos({x = 4, y = 2})
+                    card.ability.extra.quoteset = 'tired'
+                    card.ability.extra.triggered = false
+                    card.ability.extra.feral = false
+                    return true
+                end
+            }))
+            card_eval_status_text( card, "extra", nil, nil, nil, {
+                message = localize("k_unik_lily_sprunki_after"),
+                colour = HEX("d377dc"),
+                card= card,
+            })
+            delay(0.3)
+            G.E_MANAGER:add_event(Event({
+                delay=0.2,
+                func = function()
+                    G.CONTROLLER.locks.unik_destroy_selected = nil
+                    card.ability.extra.active = false
+                    return true
+                end
+            }))
+        else
+            error("UH OH!")
         end
-        
-        delay(0.8)
-        SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                 card:juice_up(0.5, 0.5)
-                card.children.center:set_sprite_pos({x = 3, y = 2})
-                card.children.floating_sprite:set_sprite_pos({x = 4, y = 2})
-                 card.ability.extra.quoteset = 'tired'
-                  card.ability.extra.triggered = false
-                  card.ability.extra.feral = false
-                return true
-            end
-        }))
-        card_eval_status_text( card, "extra", nil, nil, nil, {
-            message = localize("k_unik_lily_sprunki_after"),
-            colour = HEX("d377dc"),
-            card= card,
-        })
-        delay(0.3)
-        G.E_MANAGER:add_event(Event({
-            delay=0.2,
-            func = function()
-                G.CONTROLLER.locks.unik_destroy_selected = nil
-                card.ability.extra.active = false
-                return true
-            end
-        }))
-    else
-        error("UH OH!")
-    end
-    end,
+    end or nil,
 
 }
 

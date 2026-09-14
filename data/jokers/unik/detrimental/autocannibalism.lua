@@ -1,7 +1,7 @@
 -- Pool used by autocannibalism
 SMODS.ObjectType({
 	key = "autocannibalism_food",
-	default = "j_popcorn",
+	default = "j_turtle_bean",
 	cards = {
         'j_ice_cream',
         'j_turtle_bean',
@@ -46,10 +46,13 @@ SMODS.Joker {
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.pools and v.config.center.pools.autocannibalism_food and not v.ability.unik_depleted then
+            if v.config.center.pools and (v.config.center.pools.autocannibalism_food or v.config.center.unik_autocannibal_trigger) and not v.ability.unik_depleted then
                 v.ability.eternal = true
                 v.ability.unik_depleted = true
-                if v.ability.name == "Turtle Bean" then
+                if v.config.center.unik_autocannibal_trigger then
+                    print("NOMNOM")
+                    v.config.center:unik_autocannibal_trigger(v)
+                elseif v.ability.name == "Turtle Bean" then
                     --cancel out hand size increase
                     G.hand:change_size(-v.ability.extra.h_size)
                     v.ability.extra.h_size = 0
@@ -87,11 +90,14 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         if context.unik_emplace and context.added and context.cardarea == G.jokers then
-            if context.added.config.center.pools and context.added.config.center.pools.autocannibalism_food and not context.added.ability.unik_depleted then
+            if context.added.config.center.pools and (context.added.config.center.pools.autocannibalism_food or v.config.center.unik_autocannibal_trigger) and not context.added.ability.unik_depleted then
                 local v = context.added
                 v.ability.eternal = true
                 v.ability.unik_depleted = true
-                if v.ability.name == "Turtle Bean" then
+                if v.config.center.unik_autocannibal_trigger then
+                    print("NOMNOM")
+                    v.config.center:unik_autocannibal_trigger(v)
+                elseif v.ability.name == "Turtle Bean" then
                     --cancel out hand size increase
                     G.hand:change_size(-v.ability.extra.h_size)
                     v.ability.extra.h_size = 0

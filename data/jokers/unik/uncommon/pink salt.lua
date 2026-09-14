@@ -34,7 +34,7 @@ SMODS.Joker {
         and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit
         
         ) then
-            local card_type = 'unik_summit_card'
+            local card_type = 'unik_summit'
             G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             G.E_MANAGER:add_event(Event({
                 trigger = 'before',

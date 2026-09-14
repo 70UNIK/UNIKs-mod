@@ -9,6 +9,11 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 			depleted_threshold = -200,
 		},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.chips = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'chips','food','autocannibalism','scaling','on_click'},
 	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_cry_clicked_cookie2'
@@ -70,6 +75,12 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 	config = {
 		extra = {chips = 100, chip_mod2 = 5,depleted_threshold = -100}
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.chips = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'chips','food','autocannibalism','scaling'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_ice_cream'
 		local sign = "+"
@@ -122,6 +133,12 @@ SMODS.Joker:take_ownership("j_popcorn",{
 	config = {
 		extra = {mult = 20, extra = 4,depleted_threshold = -20},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.mult = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'mult','food','autocannibalism','scaling'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_popcorn'
 		local sign = "+"
@@ -174,6 +191,12 @@ SMODS.Joker:take_ownership("j_ramen",{
 	config = {
 		extra = {Xmult = 2, extra = 0.01,depleted_threshold = 0},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.Xmult = 1 
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'xmult','food','autocannibalism','scaling','discard'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_ramen'
 		if center.ability.unik_depleted then
@@ -222,6 +245,13 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 	config = {
 		extra = {h_size = 5, h_mod = 1,depleted_threshold = -5},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		G.hand:change_size(-card.ability.extra.h_size)
+        card.ability.extra.h_size = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'hand_size','food','autocannibalism','scaling'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_turtle_bean'
 		local sign = "+"
@@ -279,6 +309,11 @@ SMODS.Joker:take_ownership("j_mf_lollipop",{
 		vars = { center.ability.x_mult, center.ability.extra,0 }
 		}
 	end,
+	unik_autocannibal_trigger = function(self, card)
+        card.ability.x_mult = 1
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'xmult','food','autocannibalism','scaling'},
 	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	calculate = function(self, card, context)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint and not context.retrigger_joker then
@@ -321,6 +356,11 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 		}
 		}
 	end,
+	unik_autocannibal_trigger = function(self, card)
+        card.ability.extra.X_chips = 1
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'xchips','food','autocannibalism','scaling','discard'},
 	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	demicolon_compat = true,
 	calculate = function(self, card, context)
@@ -387,6 +427,11 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 			},
 		}
 	end,
+	unik_autocannibal_trigger = function(self, card)
+        card.ability.emult = 1
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'emult','food','autocannibalism','scaling','rerolls'},
 	pools = { ["Food"] = true, ["autocannibalism_food"] = true},
 	calculate = function(self, card, context)
 		if context.joker_main then
@@ -446,6 +491,7 @@ function SMODS.is_eternal(card, trigger)
 	if card.ability.eternal then return true end
 	return ret
 end
+
 
 --All in jest food jokers
 SMODS.Joker:take_ownership("",{

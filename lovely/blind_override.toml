@@ -51,7 +51,7 @@ pattern = '''ret_boss = pseudorandom_element(SMODS.create_blind_pool(blind_type)
 position = "before"
 match_indent = true
 payload = '''
-print("tuype incoming2--" .. (blind_type or 'NIL'))
+--print("tuype incoming2--" .. (blind_type or 'NIL'))
 
 '''
 

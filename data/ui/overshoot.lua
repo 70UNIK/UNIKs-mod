@@ -230,11 +230,10 @@ function create_UIBox_HUD_blind()
     return ret
 end
 
-if UNIK.hasBlindside() then
-    local _create_UIBox_HUD_jokerblind = create_UIBox_HUD_jokerblind
-    function create_UIBox_HUD_jokerblind()
-        local ret = _create_UIBox_HUD_jokerblind()
-
+local _create_UIBox_HUD_jokerblind = create_UIBox_HUD_jokerblind
+function create_UIBox_HUD_jokerblind()
+    local ret = _create_UIBox_HUD_jokerblind()
+    if UNIK.hasBlindside() then
 
         -- if (not G.GAME.blind.boss) then
         --     return ret
@@ -270,8 +269,9 @@ if UNIK.hasBlindside() then
             }
         end
         
-        return ret
+        
     end
+    return ret
 end
 
 function unik_ease_overshoot(mod)

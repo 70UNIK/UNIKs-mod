@@ -27,6 +27,10 @@ function Game:update(dt)
         G.GAME.unik_artisan_reroll_time = nil
         G.GAME.ante_rerolls = 0
     end
+    -- if G.GAME and G.GAME.blind then
+    --     G.GAME.blind:change_colour()
+    -- end
+    
     if G.GAME.unik_dynamic_text_realtime then
 		G.GAME.blind:set_text()
     end

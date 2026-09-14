@@ -22,7 +22,7 @@ SMODS.Joker {
                 if context.scoring_hand[i]:get_id() == 10 then tens = tens + 1 end
             end
             if tens >= 1 and next(context.poker_hands["Straight"]) or context.force_trigger then
-                local card_type = 'unik_summit_card'
+                local card_type = 'unik_summit'
                 G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                 G.E_MANAGER:add_event(Event({
                     trigger = 'before',

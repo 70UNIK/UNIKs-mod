@@ -35,13 +35,14 @@ SMODS.Tag {
                         G.E_MANAGER:add_event(Event({func = function()
                             
                             G.CONTROLLER.locks[lock] = nil
+                            tag.triggered = true
                         return true; end}))
                     return true; end}))
                     
                     G.GAME.unik_lock_soul_tag = nil
                     return true
                 end)
-                tag.triggered = true
+                
             else
                 G.GAME.unik_lock_soul_tag = nil
             end

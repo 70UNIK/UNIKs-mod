@@ -110,6 +110,7 @@ function get_new_cursed(current)
     end
     local _, boss = pseudorandom_element(eligible_bosses, pseudoseed('cursed'))
     if boss then
+        G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] or 0
         G.GAME.bosses_used[boss] = G.GAME.bosses_used[boss] + 1
     else --fallback
         boss = 'bl_unik_blindside_monopoly_money'

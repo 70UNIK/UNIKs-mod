@@ -10,8 +10,12 @@ SMODS.Joker {
 	eternal_compat = false,
     demicoloncompat = true,
     config = { extra = {mult = 10, mult_mod = 0.2,destroyed = false,depleted_threshold = -10} },
-    attributes = { 'mult','food'},
+    attributes = { 'mult','food','autocannibalism','scaling'},
     pools = {  ["autocannibalism_food"] = true,["Food"] = true},
+    unik_autocannibal_trigger = function(self, card)
+        card.ability.extra.mult = 0
+		card.ability.unik_depleted = true
+	end,
     loc_vars = function(self, info_queue, center)
         local sign = "+"
         if lenient_bignum(center.ability.extra.mult) < lenient_bignum(0) then

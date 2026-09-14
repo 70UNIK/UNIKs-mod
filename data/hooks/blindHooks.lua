@@ -410,22 +410,44 @@ G.FUNCS.skip_blind = function(e)
             e.disable_button = nil
         end
     elseif G.GAME.blind_on_deck == "Small" and obj3.boss and (obj3.boss.epic or obj3.boss.legendary or obj3.boss.ancient or obj3.boss.exotic or obj3.boss.unskippable_ante and G.GAME.round_resets.blind_states.Small ~= "Defeated") then
-        play_sound('unik_loudbuzzer', 1)
-        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
-        local text = localize('k_nope_ex')
-        attention_text({
-            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj3.boss_colour or G.C.RED
-        })
+        if obj3.boss.legendary or obj3.boss.exotic then
+            play_sound('unik_loudbuzzer',0.75)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_unik_boss_reroll_nope')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+            })
+            G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+            --jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+        else
+            play_sound('unik_loudbuzzer', 1)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_nope_ex')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+            })
+        end
         if e and e.disable_button then
             e.disable_button = nil
         end
     elseif G.GAME.blind_on_deck == "Big" and obj2.boss and (obj2.boss.epic or obj2.boss.legendary or obj2.boss.ancient or obj2.boss.exotic  or (obj2.boss.unskippable_ante and G.GAME.round_resets.blind_states.Big ~= "Defeated")) then
-        play_sound('unik_loudbuzzer', 1)
-        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
-        local text = localize('k_nope_ex')
-        attention_text({
-            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj2.boss_colour or G.C.RED
-        })
+        if obj3.boss.legendary or obj3.boss.exotic then
+            play_sound('unik_loudbuzzer',0.75)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_unik_boss_reroll_nope')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+            })
+            G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+            --jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+        else
+            play_sound('unik_loudbuzzer', 1)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_nope_ex')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
+            })
+        end
         if e and e.disable_button then
             e.disable_button = nil
         end

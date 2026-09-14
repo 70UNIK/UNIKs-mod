@@ -2,6 +2,10 @@
 SMODS.Attribute {
     key = 'rescore'
 }
+--esophagus now support
+SMODS.Attribute {
+    key = 'autocannibalism'
+}
 -- despot, white lily
 SMODS.Attribute {
     key = 'emult'

@@ -259,3 +259,29 @@ function UNIK.get_sorted_by_position(area)
 
   return cards
 end
+
+--replacement function
+function UNIK.spawn_card_from_attribute(attribute,args)
+    local attempts = 0
+    local copiers_pool = {}
+    local type = args.type or "Joker"
+    local backup = args.backup or "j_joker"
+    local seed = args.seed or 'unik_attribute_spawn'
+    repeat
+        local jokers_pool = get_current_pool(type)
+        for i, joker_key in ipairs(jokers_pool) do
+            if G.P_CENTERS[joker_key] and G.P_CENTERS[joker_key].attributes and G.P_CENTERS[joker_key].attributes[attribute] then
+                table.insert(copiers_pool, joker_key)
+            end
+        end
+        attempts = attempts + 1
+    until #copiers_pool ~= 0 or attempts > 1
+    
+    if #copiers_pool == 0 then
+        copiers_pool = {backup} -- Blueprint makes more sense as the default, but 404 is funnier
+    end
+
+    local chosen_joker = pseudorandom_element(copiers_pool, pseudoseed(seed))
+    local new_card = SMODS.create_card({key = chosen_joker})
+    return new_card
+end
