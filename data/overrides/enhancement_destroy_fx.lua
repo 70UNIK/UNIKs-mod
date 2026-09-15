@@ -103,23 +103,29 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             return nil
         end
     end
-    if self.seal and self.seal == 'unik_blindside_explosive' then
-        self:boom_break2()
+    if G.play and self.seal and self.seal == 'unik_blindside_explosive' and self.area  then
         self.already_blown_up = true --prevents recursively blowing up each other
-        local area = self.area
-        local index = -1
-        for i = 1, #area.cards do
-            if area.cards[i] == self then
-                index = i
-                break
+        if self.area ~= G.play then
+            local area = self.area
+            local index = -1
+            for i = 1, #area.cards do
+                if area.cards[i] == self then
+                    index = i
+                    break
+                end
+            end
+
+            if index > 1 and not area.cards[index - 1].already_blown_up then
+                area.cards[index - 1]:start_dissolve()
+            end
+            if index < #area.cards and not area.cards[index + 1].already_blown_up then
+                area.cards[index + 1]:start_dissolve()
             end
         end
-        if index > 1 and not area.cards[index - 1].already_blown_up then
-            area.cards[index - 1]:start_dissolve()
-        end
-        if index < #area.cards and not area.cards[index - 1].already_blown_up then
-            area.cards[index + 1]:start_dissolve()
-        end
+        
+        
+        self:boom_break2()
+        
         return nil
     end
     if self.config.center.woodbreak then 

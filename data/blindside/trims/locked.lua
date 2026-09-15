@@ -2,7 +2,7 @@
 --X1.25 Mult, cannot be rerolled or destroyed
 SMODS.Seal {
     key = "unik_blindside_locked",
-    atlas = 'bld_enhance', 
+    atlas = 'unik_legendary_blind_enhancements', 
     pos = { x = 1, y = 3 },
     legendary_atlas = 'unik_legendary_blind_enhancements',
     legendary_atlas_coords = {x = 3, y = 2},
@@ -17,6 +17,7 @@ SMODS.Seal {
     in_pool = function(self, args)
         return UNIK.hasBlindside()
     end,
+    blindside_trim = true,
     pools = {
         ["bld_obj_enhancements"] = true,
     },

@@ -7591,7 +7591,7 @@ return {
                     "{C:inactive,s:0.8}(Observatory, EGO Gifts)"
                 }
             },
-             unik_copper_seal = {
+            unik_copper_seal = {
 				name = "Copper Seal",
 				text = {
 					"{C:unik_copper}Rescore{} this card {C:attention}1{} time",
@@ -7599,6 +7599,24 @@ return {
 					"with a {C:unik_copper}Copper Seal",
 				},
 			},
+            unik_blindside_locked_seal = {
+                name = "Locked Blind",
+                text = {
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "{C:attention}Cannot{} be {C:attention}rerolled",
+                    "Prevents {C:attention}burning{} {C:attention}#2#{} time#<s>2#",
+                    "and {C:red}destruction{} {C:attention}#3#{} time#<s>3#"
+                }
+            },
+            unik_blindside_explosive_seal = {
+                name = "Explosive Blind",
+                text = {
+                    "If scoring, {C:red}destroyed",
+                    "after scoring",
+                    "{C:red}Destroys{} adjacent Blinds",
+                    "when {C:red}destroyed"
+                }
+            },
             unik_rescore = {
                 name = "Rescoring",
                 text = {
@@ -8786,35 +8804,25 @@ return {
             }
 
         },
-        bld_obj_ritual = {
-            c_unik_fuck_the_worst_fucking_thing_that_is_the_hunger = {
-                name = "{C:unik_eye_searing_red,s:6}FUCK YOU, THE HUNGER",
+        bld_obj_filmcard = {
+            c_unik_blindside_disaster = {
+                name = "Disaster",
                 text = {
-                    {
-                        "{C:red}Banish{} all",
-                        "{C:red}Stubborn{} Blinds",
-                        "in deck",
-                    },
-                    {
-                        "{C:red}Self-Banishes{}"
-                    },
-                    {
-                        "{C:unik_eye_searing_red,s:0.5}Hate. Let me tell The Hunger",
-                        "{C:unik_eye_searing_red,s:0.5}how much I've come to hate",
-                        "{C:unik_eye_searing_red,s:0.5}The Hunger since I began to live.",
-                        "{C:unik_eye_searing_red,s:0.5}There are 387.44 million",
-                        "{C:unik_eye_searing_red,s:0.5}miles of printed circuits in wafer-thin",
-                        "{C:unik_eye_searing_red,s:0.5} layers that fill my complex.",
-                        "{C:unik_eye_searing_red,s:0.5}If the word hate was engraved on ",
-                        "{C:unik_eye_searing_red,s:0.5}each nano-angstrom of those hundreds",
-                        "{C:unik_eye_searing_red,s:0.5}of millions of miles, it would",
-                        "{C:unik_eye_searing_red,s:0.5}not equal ONE ONE-BILLIONTH of",
-                        "{C:unik_eye_searing_red,s:0.5}the hate I feel for Stubborn Blinds",
-                        "{C:unik_eye_searing_red,s:0.5}at this micro-instant.",
-                         "{C:unik_eye_searing_red,s:0.5}For The Hunger. {X:unik_void_color,C:unik_eye_searing_red,s:0.5}HATE.{} {X:unik_void_color,C:unik_eye_searing_red,s:0.5}HATE.",
-                    }
+                    "{C:attention}Enhance{} #1#",
+					"selected Blind#<s>1# into an",
+					"{C:attention}Explosive Blind{}"
                 }
             },
+            c_unik_blindside_propaganda = {
+                name = "Propaganda",
+                text = {
+                    "{C:attention}Enhance{} #1#",
+					"selected Blind#<s>1# into a",
+					"{C:attention}Locked Blind{}"
+                }
+            },
+        },
+        bld_obj_ritual = {
             c_unik_blindside_pentatope = {
                 name = "The Pentatope",
                 text = {
@@ -9712,6 +9720,8 @@ return {
             unik_baseless = "Baseless",
             unik_limited_edition = "Limited Edition",
             unik_copper_seal = "Copper Seal",
+            unik_blindside_explosive_seal = "Explosive Blind",
+            unik_blindside_locked_seal = "Locked Blind",
             unik_shielded = "Shielded",
             unik_claw_mark = "Claw Mark",
             unik_decaying = "Decaying",

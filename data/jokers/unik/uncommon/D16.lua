@@ -119,7 +119,7 @@ function Card:boom_break()
     G.E_MANAGER:add_event(Event({
         blockable = false,
         func = (function()
-                play_sound("unik_explosion1", math.random()*0.2 + 0.9,0.5)
+                play_sound("unik_explosion1", math.random()*0.2 + 0.9,1)
                 play_sound('generic1', math.random()*0.2 + 0.9,0.5)
             return true end)
     }))

@@ -7,7 +7,7 @@ function Card:start_burn(cardarea, cell_fix, dissolve_colours, silent, dissolve_
             return false
         elseif self and self.ability and self.ability.seal and self.ability.seal.extra and type(self.ability.seal.extra) == 'table' 
         and self.ability.seal.extra.locked_burn_limit and self.ability.seal.extra.locked_burn_limit > 0 then
-            if self.ability.seal.extra.locked_burn_limit < 1 then
+            if self.ability.seal.extra.locked_burn_limit <= 1 then
                 self:set_seal(nil, nil, true)
                 self:juice_up()
                 card_eval_status_text(self, 'extra', nil, nil, nil, {instant = true, message = localize('k_unik_weapon_destroyed') --[[index]], colour = HEX('7B5877')})
@@ -15,7 +15,34 @@ function Card:start_burn(cardarea, cell_fix, dissolve_colours, silent, dissolve_
                 self.ability.seal.extra.locked_burn_limit = self.ability.seal.extra.locked_burn_limit - 1
                 card_eval_status_text(self, 'extra', nil, nil, nil, {instant = true, message = localize('k_nope_ex') --[[index]], colour = HEX('7B5877')})
             end
-            return false
+                G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                blockable = false,
+                delay =  1.05,
+                func = (function()
+                if self then 
+                    play_sound('card1', 0.85 + percent*0.2/100, 0.6*(vol or 1))
+                    if cardarea then self = cardarea:remove_card(self) end
+                    if self then drawn = true end
+                    local stay_flipped = G.GAME and G.GAME.blind and G.GAME.blind:stay_flipped(G.exhaust, self, G.play)
+                    if not stay_flipped then
+                        stay_flipped = G.GAME and G.GAME.blindassist and G.GAME.blindassist:stay_flipped(G.exhaust, self, G.play)
+                    end
+                    if G.GAME.modifiers.flipped_cards and to == G.hand then
+                        if pseudorandom(pseudoseed('flipped_card')) < 1/G.GAME.modifiers.flipped_cards then
+                            stay_flipped = true
+                        end
+                    end
+                    G.discard:emplace(self, nil, stay_flipped)
+                else
+                    print("an error has occured")
+                    play_sound('card1', 0.85 + percent*0.2/100, 0.6*(vol or 1))
+                    if self then drawn = true end
+                end
+                return true
+                end
+                )}))
+                return
         end
         local ret = burnHook(self,cardarea, cell_fix, dissolve_colours, silent, dissolve_time_fac, no_juice)
         return ret
@@ -49,29 +76,29 @@ function Card.remove(self)
             
            
         elseif self and self.seal and self.ability and self.ability.seal and self.ability.seal.extra and type(self.ability.seal.extra) == 'table' 
-        and self.ability.seal.extra.locked_destroy_limit and self.ability.seal.extra.locked_destroy_limit > 0
+        and self.ability.seal.extra.locked_destroy_limit and self.ability.seal.extra.locked_destroy_limit > 0 and not G.SETTINGS.paused
         then 
-            
-            local _card = copy_card(self, nil, nil, G.playing_card)
-                _card.ability.extra.taw_unbreakable = true
-                G.deck.config.card_limit = G.deck.config.card_limit + 1
-                table.insert(G.playing_cards, _card)
-                _card:add_to_deck()
-                _card:start_materialize()
-                self.shattered = nil
-                self.already_blown_up = nil
-                if G.hand and G.hand.cards and G.GAME.blind.in_blind then
-                    G.hand:emplace(_card)
+            if originalArea == G.hand or originalArea == G.play or originalArea == G.deck or originalArea == G.discard or originalArea == G.exhaust then
+                local _card = copy_card(self, nil, nil, G.playing_card)
+                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                    table.insert(G.playing_cards, _card)
+                    _card:add_to_deck()
+                    _card:start_materialize()
+                    self.shattered = nil
+                    self.already_blown_up = nil
+                    if G.hand and G.hand.cards and G.GAME.blind.in_blind then
+                        G.hand:emplace(_card)
+                    else
+                        G.deck:emplace(_card)
+                    end
+                if _card.ability.seal.extra.locked_destroy_limit <= 1 then
+                    _card:set_seal(nil, nil, true)
+                    _card:juice_up()
+                    card_eval_status_text(_card, 'extra', nil, nil, nil, {instant = true, message = localize('k_unik_weapon_destroyed') --[[index]], colour = HEX('7B5877')})
                 else
-                    G.deck:emplace(_card)
+                    _card.ability.seal.extra.locked_destroy_limit = _card.ability.seal.extra.locked_destroy_limit - 1
+                    card_eval_status_text(_card, 'extra', nil, nil, nil, {instant = true, message = localize('k_nope_ex') --[[index]], colour = HEX('7B5877')})
                 end
-            if _card.ability.seal.extra.locked_destroy_limit < 1 then
-                _card:set_seal(nil, nil, true)
-                _card:juice_up()
-                card_eval_status_text(_card, 'extra', nil, nil, nil, {instant = true, message = localize('k_unik_weapon_destroyed') --[[index]], colour = HEX('7B5877')})
-            else
-                _card.ability.seal.extra.locked_destroy_limit = _card.ability.seal.extra.locked_destroy_limit - 1
-                card_eval_status_text(_card, 'extra', nil, nil, nil, {instant = true, message = localize('k_nope_ex') --[[index]], colour = HEX('7B5877')})
             end
         end
     end

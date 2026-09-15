@@ -40,6 +40,10 @@ if _cards[i].unik_burned_by_hook then
     _cards[i].unik_burned_by_hook = nil
     burned = true
 end
+if _cards[i].already_blown_up then
+    _cards[i].already_blown_up = nil
+    removed = true
+end
 '''
 
 ### hook fix2

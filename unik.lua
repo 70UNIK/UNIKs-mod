@@ -1465,6 +1465,10 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/trims/locked.lua")()
 	NFS.load(mod_path .. "data/blindside/trims/explosive.lua")()
 
+	--need to manually add to bld_obj_enhancements still
+	BLINDSIDE.addToPool('bld_obj_enhancements','unik_blindside_explosive')
+	BLINDSIDE.addToPool('bld_obj_enhancements','unik_blindside_locked')
+
 	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_dethroning')
 	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_recursive')
 	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_soul')

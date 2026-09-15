@@ -10,7 +10,7 @@ pattern = '''-- TARGET: card destroyed'''
 position = 'after'
 payload = '''
 if card.will_be_destroyed_1  or card.will_be_gored then
-    --destroyed = true
+    destroyed = true
 end
 '''
 match_indent = true
