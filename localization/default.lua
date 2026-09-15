@@ -603,7 +603,8 @@ return {
                     "If hand contains only",
                     "a single instance of",
                     "#1#, it gains",
-                    "+#2# Retrigger#<s>2#"
+                    "+#2# Retrigger#<s>2#",
+                    "(Blind Changes per hand)"
                 }
             },
             bl_unik_blindside_ghost = {
@@ -4273,10 +4274,9 @@ return {
             j_unik_blindside_tic_tac_toe_board = {
                 name = "Tic Tac Toe Board",
                 text = {
-                    "Creates either a",
-                    "{C:unik_copper}Circles Tag{} and",
-                    "a {C:attention}Peak Tag{}",
-					"when deck is {C:attention}reshuffled"
+                    "Creates a {C:unik_copper}Circles Tag{}",
+                    "and a {C:unik_summit}Peak Tag{} when",
+					"deck is {C:attention}reshuffled"
                 }
             },
             

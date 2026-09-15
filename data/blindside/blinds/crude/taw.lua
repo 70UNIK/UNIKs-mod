@@ -3,7 +3,18 @@
 local burnHook = Card.start_burn
 function Card:start_burn(cardarea, cell_fix, dissolve_colours, silent, dissolve_time_fac, no_juice)
     if not self.destroyed then
-        if self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unbreakable then
+        if self and self.seal and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unbreakable then
+            return false
+        elseif self and self.ability and self.ability.seal and self.ability.seal.extra and type(self.ability.seal.extra) == 'table' 
+        and self.ability.seal.extra.locked_burn_limit and self.ability.seal.extra.locked_burn_limit > 0 then
+            if self.ability.seal.extra.locked_burn_limit < 1 then
+                self:set_seal(nil, nil, true)
+                self:juice_up()
+                card_eval_status_text(self, 'extra', nil, nil, nil, {instant = true, message = localize('k_unik_weapon_destroyed') --[[index]], colour = HEX('7B5877')})
+            else
+                self.ability.seal.extra.locked_burn_limit = self.ability.seal.extra.locked_burn_limit - 1
+                card_eval_status_text(self, 'extra', nil, nil, nil, {instant = true, message = localize('k_nope_ex') --[[index]], colour = HEX('7B5877')})
+            end
             return false
         end
         local ret = burnHook(self,cardarea, cell_fix, dissolve_colours, silent, dissolve_time_fac, no_juice)
@@ -14,6 +25,7 @@ end
 local remove_ref = Card.remove
 function Card.remove(self)
     local originalArea = self.area
+    
 
     local ret = remove_ref(self)
     if not G.GAME.ignore_delete_context then
@@ -25,6 +37,8 @@ function Card.remove(self)
                 table.insert(G.playing_cards, _card)
                 _card:add_to_deck()
                 _card:start_materialize()
+                self.shattered = nil
+                self.already_blown_up = nil
                 if G.hand and G.hand.cards and G.GAME.blind.in_blind then
                     G.hand:emplace(_card)
                 else
@@ -34,14 +48,41 @@ function Card.remove(self)
 
             
            
+        elseif self and self.seal and self.ability and self.ability.seal and self.ability.seal.extra and type(self.ability.seal.extra) == 'table' 
+        and self.ability.seal.extra.locked_destroy_limit and self.ability.seal.extra.locked_destroy_limit > 0
+        then 
+            
+            local _card = copy_card(self, nil, nil, G.playing_card)
+                _card.ability.extra.taw_unbreakable = true
+                G.deck.config.card_limit = G.deck.config.card_limit + 1
+                table.insert(G.playing_cards, _card)
+                _card:add_to_deck()
+                _card:start_materialize()
+                self.shattered = nil
+                self.already_blown_up = nil
+                if G.hand and G.hand.cards and G.GAME.blind.in_blind then
+                    G.hand:emplace(_card)
+                else
+                    G.deck:emplace(_card)
+                end
+            if _card.ability.seal.extra.locked_destroy_limit < 1 then
+                _card:set_seal(nil, nil, true)
+                _card:juice_up()
+                card_eval_status_text(_card, 'extra', nil, nil, nil, {instant = true, message = localize('k_unik_weapon_destroyed') --[[index]], colour = HEX('7B5877')})
+            else
+                _card.ability.seal.extra.locked_destroy_limit = _card.ability.seal.extra.locked_destroy_limit - 1
+                card_eval_status_text(_card, 'extra', nil, nil, nil, {instant = true, message = localize('k_nope_ex') --[[index]], colour = HEX('7B5877')})
+            end
         end
     end
     return ret
 end
 
+--blocks rerolling
 local set_abilityref = Card.set_ability
 function Card:set_ability(center, initial, delay)
-    local tawsome = self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unrerollable
+    local tawsome = self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unrerollable 
+    or (self.seal and self.seal == 'unik_blindside_locked')
     if (not tawsome) or G.SETTINGS.paused then
         set_abilityref(self, center, initial, delay)
     else

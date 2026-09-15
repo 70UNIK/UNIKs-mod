@@ -337,6 +337,10 @@ SMODS.Sound({
 	path = "explosion1.ogg",
 })
 SMODS.Sound({
+	key = "explosion2",
+	path = "explosion2.ogg",
+})
+SMODS.Sound({
 	key = "woodBreak",
 	path = "woodBreak.ogg",
 })
@@ -1452,6 +1456,14 @@ if next(SMODS.find_mod("Blindside")) then
 	NFS.load(mod_path .. "data/blindside/relics/tent_camp.lua")()
 	NFS.load(mod_path .. "data/blindside/relics/summoning_circle.lua")()
 	NFS.load(mod_path .. "data/blindside/relics/sapient_sacrifice.lua")()
+
+	--cinemas
+	NFS.load(mod_path .. "data/blindside/cinema/propaganda.lua")()
+	NFS.load(mod_path .. "data/blindside/cinema/disaster.lua")()
+
+	--trims
+	NFS.load(mod_path .. "data/blindside/trims/locked.lua")()
+	NFS.load(mod_path .. "data/blindside/trims/explosive.lua")()
 
 	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_dethroning')
 	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_recursive')
