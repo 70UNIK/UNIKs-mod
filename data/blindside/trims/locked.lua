@@ -9,7 +9,7 @@ SMODS.Seal {
     config = { 
         extra = { 
             x_mult = 1.2,
-            locked_destroy_limit = 2,
+            locked_destroy_limit = 3,
             locked_burn_limit = 5,
         } 
     },
@@ -46,7 +46,7 @@ function Card:set_seal(_seal, silent, immediate)
     local ret = sealant(self,_seal, silent, immediate)
     if _seal == 'unik_blindside_locked' and self.ability and self.ability.seal and self.ability.seal.extra then
         self.ability.seal.extra.locked_burn_limit = 5
-        self.ability.seal.extra.locked_destroy_limit = 2
+        self.ability.seal.extra.locked_destroy_limit = 3
     end
     return ret
 end

@@ -34,8 +34,8 @@ function Card.remove(self)
     
 
     local ret = remove_ref(self)
-    if not G.GAME.ignore_delete_context then
-        if self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unbreakable and not self.ability.unik_bypass_taw and not G.SETTINGS.paused then
+    if not G.GAME.ignore_delete_context and self and not self.bypass_taw then
+        if self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unbreakable and not self.ability.unik_bypass_taw and not self.unik_bypass_taw and not G.SETTINGS.paused then
             if originalArea == G.hand or originalArea == G.play or originalArea == G.deck or originalArea == G.discard or originalArea == G.exhaust then
                 local _card = copy_card(self, nil, nil, G.playing_card)
                 _card.ability.extra.taw_unbreakable = true
@@ -55,7 +55,7 @@ function Card.remove(self)
             
            
         elseif self and self.seal and self.ability and self.ability.seal and self.ability.seal.extra and type(self.ability.seal.extra) == 'table' 
-        and self.ability.seal.extra.locked_destroy_limit and self.ability.seal.extra.locked_destroy_limit > 0 and not G.SETTINGS.paused
+        and self.ability.seal.extra.locked_destroy_limit and self.ability.seal.extra.locked_destroy_limit > 0 and not G.SETTINGS.paused and not self.ability.unik_bypass_taw and not self.unik_bypass_taw
         then 
             if originalArea == G.hand or originalArea == G.play or originalArea == G.deck or originalArea == G.discard or originalArea == G.exhaust then
                 local _card = copy_card(self, nil, nil, G.playing_card)

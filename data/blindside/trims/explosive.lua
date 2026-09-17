@@ -61,6 +61,16 @@ SMODS.Seal {
         return 0
     end,
 }
+--attempted fix by forcing it to NEVER be able to be emplaced/drawn to another cardarea if destroyed.
+local drawer = draw_card
+function draw_card(from, to, percent, dir, sort, card, delay, mute, stay_flipped, vol, discarded_only)
+    -- if card and card.destroyed or card.already_blown_up then
+    --     print("its destroyed but its moving areas anyway")
+    -- end
+    local ret = drawer(from, to, percent, dir, sort, card, delay, mute, stay_flipped, vol, discarded_only)
+    return ret
+end
+
 --7B5877
 function Card:boom_break2()
     if not SMODS.is_playing_card(self) then

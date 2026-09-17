@@ -32,7 +32,7 @@ SMODS.Shader({
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true,
 	post_trigger = true,
-	--object_weights = true, --yeah... THIS FUCKS WITH A LOT OF STUFF...
+	--object_weights = true, --Issue fixed with it breaking pools but only in dev smods
 	--quantum_enhancements = false,
 	-- Here are some other ones Steamodded has
 	-- These ones add new card areas that Steamodded will calculate through

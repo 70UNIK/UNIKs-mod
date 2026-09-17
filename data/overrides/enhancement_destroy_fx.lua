@@ -83,8 +83,9 @@ end
 local popper = Card.bloated_pop
 function Card:bloated_pop()
     if G.play and self.seal and self.seal == 'unik_blindside_explosive' and self.area  then
-        self.already_blown_up = true --prevents recursively blowing up each other
-        if self.area ~= G.play then
+        --self.already_blown_up = true --prevents recursively blowing up each other
+        if self.area ~= G.play or not self.already_blown_up then
+            self.already_blown_up = true --prevents recursively blowing up each other
             local area = self.area
             local index = -1
             for i = 1, #area.cards do
@@ -96,14 +97,16 @@ function Card:bloated_pop()
 
             if index > 1 and not area.cards[index - 1].already_blown_up then
                 area.cards[index -1 ].destroyed = true
+                area.cards[index - 1 ].already_blown_up = true
                 area.cards[index - 1]:start_dissolve()
             end
             if index < #area.cards and not area.cards[index + 1].already_blown_up then
                 area.cards[index + 1 ].destroyed = true
+                area.cards[index + 1 ].already_blown_up = true
                 area.cards[index + 1]:start_dissolve()
             end
         end
-        
+        self.already_blown_up = true --prevents recursively blowing up each other
         
         self:boom_break2()
         
@@ -118,8 +121,9 @@ local dissolveHook = Card.start_dissolve
 function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
     local enhancements = SMODS.get_enhancements(self)
     if G.play and self.seal and self.seal == 'unik_blindside_explosive' and self.area  then
-        self.already_blown_up = true --prevents recursively blowing up each other
-        if self.area ~= G.play then
+        --self.already_blown_up = true --prevents recursively blowing up each other
+        if self.area ~= G.play or not self.already_blown_up then
+            self.already_blown_up = true --prevents recursively blowing up each other
             local area = self.area
             local index = -1
             for i = 1, #area.cards do
@@ -130,13 +134,17 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             end
 
             if index > 1 and not area.cards[index - 1].already_blown_up then
+                area.cards[index -1 ].destroyed = true
+                area.cards[index - 1 ].already_blown_up = true
                 area.cards[index - 1]:start_dissolve()
             end
             if index < #area.cards and not area.cards[index + 1].already_blown_up then
+                area.cards[index + 1 ].destroyed = true
+                area.cards[index + 1 ].already_blown_up = true
                 area.cards[index + 1]:start_dissolve()
             end
         end
-        
+        self.already_blown_up = true --prevents recursively blowing up each other
         
         self:boom_break2()
         

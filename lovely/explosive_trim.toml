@@ -1,0 +1,52 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''            if card then'''
+position = "before"
+payload = '''
+--print(card.config.center.key)
+if card and card.destroyed or card and card.already_blown_up then
+    card.bypass_taw = true
+    card:remove()
+    print("its destroyed but its moving areas anyway... ABORT !")
+    return true
+end
+'''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Blindside "lib/utils/utils.lua"]'
+pattern = '''local childParts = Particles(0, 0, 0,0, {'''
+position = "before"
+payload = '''
+print(self.config.center.key)
+if self and self.destroyed or self and self.already_blown_up then
+    print("its destroyed but its burning anyway... ABORT !")
+    self.bypass_taw = true
+    self:remove()
+    return true
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'G.exhaust:emplace(self, nil, stay_flipped)'
+pattern = '''G.exhaust:emplace(self, nil, stay_flipped)'''
+position = "before"
+payload = '''
+print(self.config.center.key)
+if self and self.destroyed or self and self.already_blown_up then
+    self.bypass_taw = true
+    self:remove()
+    print("its destroyed but its burning anyway2... ABORT !")
+end
+'''
+match_indent = true

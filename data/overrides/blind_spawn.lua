@@ -33,6 +33,7 @@ get_new_small = get_new_small or function() return 'bl_small' end
 get_new_big = get_new_big or function() return 'bl_big' end
 
 --can force modify a small slot into a boss, etc...
+--fixes a major SMODS bug
 function UNIK.check_and_change_blind_type(type)
     local newType = string.lower(type)
     if G.GAME.OvershootFXVal and G.GAME.OvershootFXVal >= 5 then
