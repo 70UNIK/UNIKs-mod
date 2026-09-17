@@ -3272,7 +3272,7 @@ return {
                 }
             },
             m_unik_blindside_ai_brainrot = {
-                name = "The GPT",
+                name = "The Slop",
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded", 
@@ -3291,7 +3291,7 @@ return {
                 }
             },
             m_unik_blindside_ai_brainrot_upgraded = {
-                name = "The GPT",
+                name = "The Slop",
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded", 
@@ -7696,6 +7696,20 @@ return {
                     "{C:attention}Copies{} itself",
                     "if {C:red}destroyed",
                     "{C:inactive,s:0.9}(Avoids destruction when possible)"
+                }
+            },
+            unik_shitty_perishable = { --displayed if eternal or shitty stake without pokadot
+                name = "Perishable",
+                text = {
+                    "{C:red}Destroyed{} after {C:attention}#1#{} Round#<s>1#",
+                    "{C:inactive}({C:attention}#2#{C:inactive} remaining)",        
+                }
+            },
+            unik_shitty_perishable_consumable = {
+                name = "Perishable",
+                text = {
+                    "{C:red}Destroyed{} at",
+                    "end of round",    
                 }
             },
             unik_taw = {

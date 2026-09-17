@@ -65,26 +65,8 @@ calculate = function(self, card, context)
 			then
 				card.ability.unik_destroyed_mid_scoring = true
 				-- this event call might need to be pushed later to make more sense
-				G.E_MANAGER:add_event(Event({
-					func = function()
-                        card:juice_up(3, 0.5)
-						card.states.drag.is = true
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.3,
-							blockable = false,
-							func = function()
-								card.debuff = true
-								card.ability.no_score = true
-								G.jokers:remove_card(card)
-								card:bloated_pop()					
-								card = nil
-								return true
-							end,
-						}))
-						return true
-					end,
-				}))
+				card.bloonpop = true
+				selfDestruction_noMessage(card,true)
 			end
 		end
 		if context.main_scoring and context.cardarea == G.play then
@@ -105,23 +87,7 @@ calculate = function(self, card, context)
 		end
 
 		if context.destroy_card and context.destroy_card == card and card.config.will_pop then
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					card.states.drag.is = true
-					G.E_MANAGER:add_event(Event({
-						trigger = "after",
-						delay = 0.3,
-						blockable = false,
-						func = function()
-							G.jokers:remove_card(card)
-							card:bloated_pop()
-							card = nil
-							return true
-						end,
-					}))
-					return true
-				end,
-			}))
+			card.bloonpop = true
 			return { remove = true }
 		end
 	end,

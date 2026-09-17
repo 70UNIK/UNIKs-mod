@@ -98,7 +98,10 @@ for i = 1, #G.hand.cards do
                         end
                     return true end })) 
                     delay(0.1)
-                    crudes = crudes + 1
+                    if (not G.hand.cards[i].seal or (G.hand.cards[i].seal and G.hand.cards[i].seal ~= 'unik_blindside_locked')) then
+                        crudes = crudes + 1
+                    end
+                    
                 end
                 
             end
@@ -127,7 +130,9 @@ for i = 1, #G.hand.cards do
                         end
                     return true end })) 
                     delay(0.1)
-                    crudes = crudes + 1
+                    if (not G.play.cards[i].seal or (G.play.cards[i].seal and G.play.cards[i].seal ~= 'unik_blindside_locked')) then
+                        crudes = crudes + 1
+                    end
                 end
                 
             end

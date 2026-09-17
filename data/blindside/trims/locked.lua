@@ -29,7 +29,7 @@ SMODS.Seal {
         end
     end,
     weight = function(self, info_queue, card) 
-        return 0.75 --a bit lower than usual
+        return 1 --a bit lower than usual
     end,
     loc_vars = function(self, info_queue, card)
         return {

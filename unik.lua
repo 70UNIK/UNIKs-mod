@@ -352,7 +352,10 @@ SMODS.Sound({
 	key = "rock_break",
 	path = "rock_break.ogg",
 })
-
+SMODS.Sound({
+	key = "locked_break",
+	path = "locked_break.ogg",
+})
 
 SMODS.Atlas {
 	key = "unik_stickers",
