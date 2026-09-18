@@ -104,7 +104,9 @@ SMODS.Consumable:take_ownership('c_bld_assimilate',{
         else
             card = copy_card(G.hand.highlighted[2], nil, nil, G.playing_card)
             card:remove_sticker('bld_upgrade')
+             G.GAME.bypass_reroll_block = true
             card:set_ability(enhancement)
+            G.GAME.bypass_reroll_block = nil
             if G.hand.highlighted[2].ability.extra.upgraded or upgraded then
                 upgrade_blinds({card}, nil, true)
             end

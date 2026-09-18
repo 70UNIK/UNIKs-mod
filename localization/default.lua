@@ -4085,7 +4085,7 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
-                        "{C:attention}Copies{} the {C:attention}leftmost",
+                        "{C:attention}Copies{} the {C:attention}rightmost",
                         "Blind {C:attention}#2#{} time#<s>2#",
                     },
                     {
@@ -4101,7 +4101,7 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:blue,C:white}Blue{}",
-                        "{C:attention}Copies{} the {C:attention}leftmost",
+                        "{C:attention}Copies{} the {C:attention}rightmost",
                         "Blind {C:attention}#2#{} time#<s>2#",
                     },
                     {
@@ -7805,7 +7805,16 @@ return {
                     "when triggered",
                     "or defeated",
                 }
-            }
+            },
+            unik_copying_blind = {
+                name = "Copying",
+                text = {
+                    "{C:attention}Assumes{} the effect",
+                    "of Blind when possible",
+                    "{C:attention}instead{C:attention} of {C:attention}retriggering",
+                    "or {C:attention}copying",
+                }
+            },
             
         },
         Planet={

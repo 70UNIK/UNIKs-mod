@@ -26,7 +26,7 @@ target = '=[SMODS Blindside "lib/utils/utils.lua"]'
 pattern = '''local childParts = Particles(0, 0, 0,0, {'''
 position = "before"
 payload = '''
-print(self.config.center.key)
+--print(self.config.center.key)
 if self and self.destroyed or self and self.already_blown_up then
     print("its destroyed but its burning anyway... ABORT !")
     self.bypass_taw = true

@@ -30,7 +30,7 @@ SMODS.Back {
         BLINDSIDE.set_up_blindside()
         G.E_MANAGER:add_event(Event({func = function()
             BLINDSIDE.set_up_deck({"Yellow"}, 
-            {"m_unik_blindside_gun", "m_unik_blindside_gun", "m_unik_blindside_cliff","m_unik_blindside_cliff", "m_unik_blindside_cliff"}, 
+            {"m_unik_blindside_gun", "m_unik_blindside_gun", "m_unik_blindside_cliff","m_unik_blindside_cliff", "m_unik_blindside_cliff", "m_unik_blindside_cliff"}, 
             {'m_unik_blindside_impatience','m_unik_blindside_impatience'})
             local ante = G.GAME.win_ante * 0.75 
             local int_part, frac_part = math.modf(ante)

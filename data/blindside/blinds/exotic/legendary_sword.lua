@@ -11,7 +11,7 @@ BLINDSIDE.Blind({
             value = 1,
             copies = 0,
             copies_up = 1,
-            repetitions = 3,
+            repetitions = 2,
             retain = true,
         }},
     hues = {"Faded","Blue"},
@@ -25,7 +25,7 @@ BLINDSIDE.Blind({
                     colour = G.C.DARK_EDITION,
                 }
         end
-        if context.unik_after_effect and context.scoring_hand and card.ability.extra.upgraded then
+        if context.unik_after_effect and context.scoring_hand and card.ability.extra.upgraded and (card.area == G.hand or card.area == G.play) then
             return {
                 rescore = card.ability.extra.repetitions
             }
@@ -39,16 +39,16 @@ BLINDSIDE.Blind({
             if card.area == G.play and context and context.scoring_hand then
                 areacards = context.scoring_hand
             end
-            if areacards and areacards[1] and areacards[1] ~= card 
-            and (areacards[1].config.center.key ~= 'm_unik_blindside_napkin' and areacards[1].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
+            if areacards and areacards[#areacards] and areacards[#areacards] ~= card 
+            and ( areacards[#areacards].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
                 for i,v in pairs(areacards) do
                     v.bp_iterations = 0
                 end
-                if card.ability.extra.copies > 0 and not UNIK.detect_bp_loop(card,areacards,1) then
+                if card.ability.extra.copies > 0 and not UNIK.detect_bp_loop(card,areacards,#areacards) then
                     --print("copying " .. areacards[1].config.center.key)
                     areacards[1].ability.block_scaling_copied = true
                     for k = 1,  card.ability.extra.copies do
-                        local effect = UNIK.blueprint_enhancement(card, areacards[1], context)
+                        local effect = UNIK.blueprint_enhancement(card, areacards[#areacards], context)
                         if effect then
                             effect.colour = G.C.DARK_EDITION
                             effect.card = card
@@ -70,6 +70,7 @@ BLINDSIDE.Blind({
     end,
     unik_exotic = true,
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_copying_blind" }
         if card.ability.extra.upgraded then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         end
@@ -84,10 +85,10 @@ BLINDSIDE.Blind({
         end
         
         
-        if card.added_to_deck and cardarea and cardarea[1] and cardarea[1] ~= card 
-        and (cardarea[1].config.center.key ~= 'm_unik_blindside_napkin' and cardarea[1].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
+        if card.added_to_deck and cardarea and cardarea[#cardarea] and cardarea[#cardarea] ~= card 
+        and ( cardarea[#cardarea].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
             if card.ability.extra.copies > 0 then
-                card.ability.napkintype = localize({type = 'name_text', key = cardarea[1].config.center.key, set = 'Enhanced'})
+                card.ability.napkintype = localize({type = 'name_text', key = cardarea[#cardarea].config.center.key, set = 'Enhanced'})
                 card.ability.colour = G.C.DARK_EDITION
             else
                 card.ability.napkintype = "Inactive"

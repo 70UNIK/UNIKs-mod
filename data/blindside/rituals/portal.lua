@@ -65,7 +65,7 @@ SMODS.Consumable {
             delay = 1,
             func = function()
                 legendary.states.visible = true
-                    play_sound('unik_jenomega', 1,1)
+                    --play_sound('unik_jenomega', 1,1)
                     legendary:add_to_deck()
                     G.play:emplace(legendary)
                     G.deck.config.card_limit = G.deck.config.card_limit + 1

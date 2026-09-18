@@ -59,6 +59,7 @@ BLINDSIDE.Blind({
     end,
     unik_exquisite = true,
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_copying_blind" }
         local cardarea = card.area and card.area.cards or nil
         if G.play and card.area == G.play then
             local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)

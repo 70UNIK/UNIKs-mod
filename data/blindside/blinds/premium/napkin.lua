@@ -30,7 +30,7 @@ BLINDSIDE.Blind({
                 areacards = context.scoring_hand
             end
             if areacards and areacards[1] and areacards[1] ~= card and 
-            (areacards[1].config.center.key ~= 'm_unik_blindside_napkin' and areacards[1].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
+            (areacards[1].config.center.key ~= 'm_unik_blindside_napkin') then
                 for i,v in pairs(areacards) do
                     v.bp_iterations = 0
                 end
@@ -60,6 +60,7 @@ BLINDSIDE.Blind({
     end,
     rare = true,
     loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_copying_blind" }
         local cardarea = card.area and card.area.cards or nil
         if G.play and card.area == G.play then
             local text,disp_text,poker_hands,scoring_hand,non_loc_disp_text = G.FUNCS.get_poker_hand_info(G.play.cards)
@@ -67,7 +68,7 @@ BLINDSIDE.Blind({
         end
         
         if card.added_to_deck and cardarea and cardarea[1] and cardarea[1] ~= card and 
-        (cardarea[1].config.center.key ~= 'm_unik_blindside_napkin' and cardarea[1].config.center.key ~= 'm_unik_blindside_legendary_silver_sword') then
+        (cardarea[1].config.center.key ~= 'm_unik_blindside_napkin') then
             card.ability.napkintype = localize({type = 'name_text', key = cardarea[1].config.center.key, set = 'Enhanced'})
             card.ability.colour = G.C.DARK_EDITION
         else
@@ -139,10 +140,14 @@ function UNIK.detect_bp_loop(card,cardarea_cards,index)
             next.bp_iterations = next.bp_iterations or 0
             next.bp_iterations = next.bp_iterations + 1
             i = i + 1
-        elseif next.config.center.key == 'm_unik_blindside_napkin' or next.config.center.key == 'm_unik_blindside_legendary_silver_sword' then
+        elseif next.config.center.key == 'm_unik_blindside_napkin' then
             next.bp_iterations = next.bp_iterations or 0
             next.bp_iterations = next.bp_iterations + 1
             i = 1
+        elseif next.config.center.key == 'm_unik_blindside_legendary_silver_sword' then
+            next.bp_iterations = next.bp_iterations or 0
+            next.bp_iterations = next.bp_iterations + 1
+            i = #cardarea_cards
         else
             return nil
         end

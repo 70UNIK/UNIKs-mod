@@ -18,6 +18,7 @@ BLINDSIDE.Blind({
     gore6break =  true,
     calculate = function(self, card, context) 
         if context.before then
+            card.ability.extra.created = nil
             local exists = false
             for i,v in pairs(context.scoring_hand) do
                 if v == card then
