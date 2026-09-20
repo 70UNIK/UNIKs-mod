@@ -1449,11 +1449,10 @@ return {
             bl_unik_legendary_sword={ --ortalab's silver sword on CRACK. X66.6 blind requirements as well and all burgulars are debuffed
                 name = "Sadistinenmiekka", --Sadistic Sword
 				text = {
-                    "Play only 1 hand",
-                    "with 0 discards",
+                    "Play only 1 hand with 0 discards",
                     "X0.5 Hand Size",
-                    "Extremely high",
-                    "Blind Size",
+                    "Extremely high Blind Size",
+                    "",
 				},  
 
             },
@@ -1464,7 +1463,6 @@ return {
                     "Must only play the last",
                     "(Current discards) cards", --+1 is a pity system designed to make it possible if you decide to do burgular. Very difficult but still possible.
                     "drawn from deck",
-                    "Must play at least 1 card",
                     "(Currently #1#)",
 				},                  
             },

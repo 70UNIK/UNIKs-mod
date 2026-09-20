@@ -55,7 +55,7 @@ SMODS.Blind{
         return false
 	end,
 	debuff_hand = function(self, cards, hand, handname, check)
-        if next(hand["cry_None"]) then	
+        if (SMODS.Mods["Cryptid"] or {}).can_load and next(hand["cry_None"]) then	
             G.GAME.blind.triggered = true
 			return true
 		end

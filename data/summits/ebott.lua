@@ -23,29 +23,37 @@ SMODS.Consumable{
     soul_set = 'unik_summit',
 	use = function(self, card, area, copier)
         UNIK.add_bonus('e_mult',card.ability.extra.e_mult)
-        for i = 1, #G.hand.highlighted do
-            local highlighted = G.hand.highlighted[i]
-            highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] or 0
-            highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] + card.ability.extra.e_mult
+        UNIK.add_perma_bonus({
+            type = 'perma_e_mult',
+            message_key = 'a_powmult',
+            message_colour = G.C.DARK_EDITION,
+            from_card = card,
+            cards = G.hand.highlighted,
+            value = card.ability.extra.e_mult,
+        })
+        -- for i = 1, #G.hand.highlighted do
+        --     local highlighted = G.hand.highlighted[i]
+        --     highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] or 0
+        --     highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] + card.ability.extra.e_mult
             
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after', 
-                delay = 0.1, 
-                func = function()
+        --     G.E_MANAGER:add_event(Event({
+        --         trigger = 'after', 
+        --         delay = 0.1, 
+        --         func = function()
                 
-                card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_powmult",
-                        vars = { number_format(1+highlighted.ability["perma_e_mult"]) },
-                    }),
-                    colour = G.C.DARK_EDITION,
-                    card=highlighted,
-                })
-                return true 
-                end 
-            }))
-        end
+        --         card_eval_status_text(highlighted, "extra", nil, nil, nil, {
+        --             message = localize({
+        --                 type = "variable",
+        --                 key = "a_powmult",
+        --                 vars = { number_format(1+highlighted.ability["perma_e_mult"]) },
+        --             }),
+        --             colour = G.C.DARK_EDITION,
+        --             card=highlighted,
+        --         })
+        --         return true 
+        --         end 
+        --     }))
+        -- end
         card:juice_up(0.3, 0.5)  
     end
 }

@@ -26,24 +26,31 @@ SMODS.Consumable{
     
 	use = function(self, card, area, copier)
         UNIK.add_bonus('dollars',card.ability.extra.money)
-        for i = 1, #G.hand.highlighted do
-            local highlighted = G.hand.highlighted[i]
-                highlighted.ability["perma_p_dollars"] = highlighted.ability["perma_p_dollars"] or 0
-                highlighted.ability["perma_p_dollars"] = highlighted.ability["perma_p_dollars"] + card.ability.extra.money
+        UNIK.add_perma_bonus({
+            type = 'perma_p_dollars',
+            message_colour = G.C.GOLD,
+            from_card = card,
+            cards = G.hand.highlighted,
+            value = card.ability.extra.money,
+        })
+        -- for i = 1, #G.hand.highlighted do
+        --     local highlighted = G.hand.highlighted[i]
+        --         highlighted.ability["perma_p_dollars"] = highlighted.ability["perma_p_dollars"] or 0
+        --         highlighted.ability["perma_p_dollars"] = highlighted.ability["perma_p_dollars"] + card.ability.extra.money
                 
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after', 
-                delay = 0.1, 
-                func = function()
-                card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-                    message = '$' .. highlighted.ability["perma_p_dollars"],
-                    colour = G.C.GOLD,
-                    card=highlighted,
-                })
-                return true 
-                end 
-            }))
-        end
+        --     G.E_MANAGER:add_event(Event({
+        --         trigger = 'after', 
+        --         delay = 0.1, 
+        --         func = function()
+        --         card_eval_status_text(highlighted, "extra", nil, nil, nil, {
+        --             message = '$' .. highlighted.ability["perma_p_dollars"],
+        --             colour = G.C.GOLD,
+        --             card=highlighted,
+        --         })
+        --         return true 
+        --         end 
+        --     }))
+        -- end
         card:juice_up(0.3, 0.5)  
     end
 }
