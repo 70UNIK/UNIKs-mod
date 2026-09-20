@@ -8,6 +8,7 @@ SMODS.Consumable{
     cost = 4,
 	pos = {x = 0, y = 4},
 	key = 'unik_wheel_of_misfortune',
+	attributes = {'chance','joker','generation','edition','modify_card'},
     update = function(self,card,dt)
         if (G.jokers) then
             card.eligible_strength_jokers2 = EMPTY(card.eligible_strength_jokers2)

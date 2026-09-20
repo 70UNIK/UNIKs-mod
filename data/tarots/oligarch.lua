@@ -4,6 +4,7 @@ SMODS.Consumable{
 	pos = { x = 0, y = 5 },
 	config = { mod_conv = "m_unik_dollar", max_highlighted = 1 },
 	atlas = "unik_consumables",
+	attributes = {'modify_card', 'enhancements'},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_dollar
 

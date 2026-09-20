@@ -24,36 +24,13 @@ SMODS.Consumable{
 	use = function(self, card, area, copier)
         UNIK.add_bonus('e_chips',card.ability.extra.e_chips)
         UNIK.add_perma_bonus({
-            type = 'perma_h_x_mult',
+            type = 'perma_e_chips',
             message_key = 'a_powchips',
             message_colour = G.C.DARK_EDITION,
             from_card = card,
             cards = G.hand.highlighted,
             value = card.ability.extra.e_chips,
         })
-        -- for i = 1, #G.hand.highlighted do
-        --     local highlighted = G.hand.highlighted[i]
-        --     highlighted.ability["perma_e_chips"] = highlighted.ability["perma_e_chips"] or 0
-        --     highlighted.ability["perma_e_chips"] = highlighted.ability["perma_e_chips"] + card.ability.extra.e_chips
-            
-        --     G.E_MANAGER:add_event(Event({
-        --         trigger = 'after', 
-        --         delay = 0.1, 
-        --         func = function()
-                
-        --         card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-        --             message = localize({
-        --                 type = "variable",
-        --                 key = "a_powchips",
-        --                 vars = { number_format(1+highlighted.ability["perma_e_chips"]) },
-        --             }),
-        --             colour = G.C.DARK_EDITION,
-        --             card=highlighted,
-        --         })
-        --         return true 
-        --         end 
-        --     }))
-        -- end
         card:juice_up(0.3, 0.5)  
     end
 }

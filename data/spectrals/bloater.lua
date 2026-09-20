@@ -14,6 +14,7 @@ SMODS.Consumable{
 	can_use = function(self, card)
 		return true
 	end,
+	attributes = {'hand_size','playing_card','generation'},
 	loc_vars = function(self, info_queue, center)
         G.GAME.unik_bloater_bloat = G.GAME.unik_bloater_bloat or 0
         local formula = (G.GAME.unik_bloater_bloat + 1) * 4

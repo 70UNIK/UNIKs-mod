@@ -9,6 +9,7 @@ SMODS.Consumable {
     loc_vars = function(self, info_queue, center)
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
     end,
+    attributes = {'booster','shop','banishing','joker','destroy_card'},
     can_use = function(self, card)
         local shop_jokers = G.shop_jokers and #G.shop_jokers.highlighted or 0
         local booster_cards = G.pack_cards and #G.pack_cards.highlighted or 0

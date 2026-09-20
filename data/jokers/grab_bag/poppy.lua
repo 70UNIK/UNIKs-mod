@@ -13,6 +13,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     discovered = true,
     unlocked = true,
+    attributes = { 'xmult','scaling' },
     loc_vars = function(self, info_queue, center)
         local blindsize = 0
         if G.GAME.blind then

@@ -18,6 +18,7 @@ SMODS.Consumable {
         end
         return false
     end,
+    attributes = {'modify_card', 'stickers','joker','playing_card'},
     use = function(self, card, area, copier)
          G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             local cards1 = G.jokers.highlighted

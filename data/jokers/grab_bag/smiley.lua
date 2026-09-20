@@ -14,7 +14,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     discovered = true,
     unlocked = true,
-
+    attributes = { 'hand_size','modify_card','editions','xmult', },
     loc_vars = function(self, info_queue, center)
         local dispMult = center.ability.extra.Xmult
         if G.hand and G.hand.cards and G.hand.highlighted then

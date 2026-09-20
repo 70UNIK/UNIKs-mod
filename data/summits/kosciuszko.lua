@@ -17,6 +17,7 @@ SMODS.Consumable{
 			vars = {card.ability.extra.chips,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
+    attributes = {'perma_bonus','chips','modify_card'},
     blindside_booster = true,
 	include_in_vanilla = true,
 	use = function(self, card, area, copier)
@@ -29,28 +30,6 @@ SMODS.Consumable{
             cards = G.hand.highlighted,
             value = card.ability.extra.chips,
         })
-        -- for i = 1, #G.hand.highlighted do
-        --     local highlighted = G.hand.highlighted[i]
-        --         highlighted.ability["perma_bonus"] = highlighted.ability["perma_bonus"] or 0
-        --         highlighted.ability["perma_bonus"] = highlighted.ability["perma_bonus"] + card.ability.extra.chips
-                
-        --     G.E_MANAGER:add_event(Event({
-        --         trigger = 'after', 
-        --         delay = 0.1, 
-        --         func = function()
-        --         card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-        --             message = localize({
-        --                 type = "variable",
-        --                 key = "a_chips",
-        --                 vars = { number_format(highlighted.ability["perma_bonus"]) },
-        --             }),
-        --             colour = G.C.CHIPS,
-        --             card=highlighted,
-        --         })
-        --         return true 
-        --         end 
-        --     }))
-        -- end
         card:juice_up(0.3, 0.5)  
     end
 }

@@ -10,6 +10,7 @@ SMODS.Consumable {
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_copper_seal" }
         return { vars = { card.ability.max_highlighted } }
     end,
+    attributes = {'modify_card', 'seals'},
     use = function(self, card, area, copier)
         for i,v in pairs(G.hand.highlighted) do
             local conv_card = v

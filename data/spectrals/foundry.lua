@@ -9,6 +9,7 @@ SMODS.Consumable{
     config = {
 		max_highlighted = 1, extra = {odds = 3, cards_added = 3}
 	},
+	attributes = {'modify_card', 'editions','generation', 'playing_card'},
 	can_use = function(self, card)
 		if card.area ~= G.hand then
 			local check = true

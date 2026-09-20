@@ -10,6 +10,7 @@ SMODS.Consumable{
         end
         return false
 	end,
+    --attributes = {'perma_bonus','emult','modify_card'},
     config = { extra = { e_mult = 0.05 ,max_highlighted = 1} },
     loc_vars = function(self, info_queue, card)
 		return {
@@ -31,29 +32,6 @@ SMODS.Consumable{
             cards = G.hand.highlighted,
             value = card.ability.extra.e_mult,
         })
-        -- for i = 1, #G.hand.highlighted do
-        --     local highlighted = G.hand.highlighted[i]
-        --     highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] or 0
-        --     highlighted.ability["perma_e_mult"] = highlighted.ability["perma_e_mult"] + card.ability.extra.e_mult
-            
-        --     G.E_MANAGER:add_event(Event({
-        --         trigger = 'after', 
-        --         delay = 0.1, 
-        --         func = function()
-                
-        --         card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-        --             message = localize({
-        --                 type = "variable",
-        --                 key = "a_powmult",
-        --                 vars = { number_format(1+highlighted.ability["perma_e_mult"]) },
-        --             }),
-        --             colour = G.C.DARK_EDITION,
-        --             card=highlighted,
-        --         })
-        --         return true 
-        --         end 
-        --     }))
-        -- end
         card:juice_up(0.3, 0.5)  
     end
 }

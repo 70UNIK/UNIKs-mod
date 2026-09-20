@@ -10,7 +10,7 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     config = { extra = {cash_loss = 3} },
-    attributes = { 'stickers','jokers','modify_card','lose_economy'},
+    attributes = { 'stickers','joker','modify_card','lose_economy'},
     in_pool = function(self)
         if G.jokers and G.jokers.cards then
             for i,v in pairs(G.jokers.cards) do 

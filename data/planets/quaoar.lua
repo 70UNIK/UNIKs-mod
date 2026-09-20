@@ -7,6 +7,7 @@ if SpectrumAPI then
 		key = "unik_quaoar",
 		atlas = "unik_consumables",
 		pos = { x = 8, y = 0 },
+		attributes = {'space','hand_type','hand_level'},
 		config = { hand_type = "spa_Spectrum", softlock = true },
 		aurinko = true,
 		set_card_type_badge = function(self, card, badges)
@@ -24,6 +25,7 @@ else
 	SMODS.Consumable{
 		set = "Planet",
 		key = "unik_quaoar",
+		attributes = {'space','hand_type','hand_level'},
 		atlas = "unik_consumables",
 		pos = { x = 8, y = 0 },
 		config = { hand_type = "unik_spectrum", softlock = true },

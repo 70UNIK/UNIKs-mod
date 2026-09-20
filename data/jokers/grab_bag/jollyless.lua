@@ -14,6 +14,7 @@ SMODS.Joker {
     discovered = true,
     unlocked = true,
     pools = { ["M"] = true },
+	attributes = { 'scaling','joker','destroy_card' },
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_jolly
 		return { vars = {center.ability.extra.Xmult_mod,center.ability.extra.Xmult} }

@@ -22,6 +22,7 @@ SMODS.Consumable{
 			
 		}
 	end,
+	attributes = {'modify_card', 'suit','unik_noughts'},
 	can_use = function (self, card)
        	for key, value in pairs(G.hand.cards) do
 			if value.base.suit ~= card.ability.suit_conv then

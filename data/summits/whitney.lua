@@ -21,6 +21,7 @@ SMODS.Consumable{
 			key = key, vars = {card.ability.extra.money,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
+    attributes = {'perma_bonus','economy','modify_card'},
     blindside_booster = true,
 	include_in_vanilla = true,
 	use = function(self, card, area, copier)
@@ -32,24 +33,6 @@ SMODS.Consumable{
             cards = G.hand.highlighted,
             value = card.ability.extra.money,
         })
-        -- for i = 1, #G.hand.highlighted do
-        --     local highlighted = G.hand.highlighted[i]
-        --         highlighted.ability["perma_h_dollars"] = highlighted.ability["perma_h_dollars"] or 0
-        --         highlighted.ability["perma_h_dollars"] = highlighted.ability["perma_h_dollars"] + card.ability.extra.money
-                
-        --     G.E_MANAGER:add_event(Event({
-        --         trigger = 'after', 
-        --         delay = 0.1, 
-        --         func = function()
-        --         card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-        --             message = '$' .. highlighted.ability["perma_h_dollars"],
-        --             colour = G.C.GOLD,
-        --             card=highlighted,
-        --         })
-        --         return true 
-        --         end 
-        --     }))
-        -- end
         card:juice_up(0.3, 0.5)  
     end
 }

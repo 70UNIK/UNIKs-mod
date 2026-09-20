@@ -11,6 +11,7 @@ SMODS.Consumable{
     config = {
         max_highlighted = 2,
     },
+    attributes = {'bunc_linked','modify_card'},
     use = function(self, card)
         local cards = UNIK.get_sorted_by_position(G.hand)
         local rightmostCard = cards[#cards]

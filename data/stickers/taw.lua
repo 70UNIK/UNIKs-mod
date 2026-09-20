@@ -22,7 +22,7 @@ function copy33(obj, seen)
     local s = seen or {}
     local res = {}
     s[obj] = res
-    for k, v in pairs(obj) do res[copy3(k, s)] = copy3(v, s) end
+    for k, v in pairs(obj) do res[copy33(k, s)] = copy33(v, s) end
     return setmetatable(res, getmetatable(obj))
 end
 

@@ -6,6 +6,7 @@ if SpectrumAPI then
 		priority = 1,
 		object_type = "Planet",
 		key = "unik_haumea",
+		attributes = {'space','hand_type','hand_level'},
 		atlas = "unik_consumables",
 		pos = { x = 9, y = 0 },
 		config = { hand_type = "spa_Straight_Spectrum", softlock = true },
@@ -24,6 +25,7 @@ if SpectrumAPI then
 else
 	SMODS.Consumable{
 		set = "Planet",
+		attributes = {'space','hand_type','hand_level'},
 		key = "unik_haumea",
 		atlas = "unik_consumables",
 		pos = { x = 9, y = 0 },

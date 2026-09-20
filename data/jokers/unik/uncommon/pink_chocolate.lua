@@ -14,7 +14,7 @@ SMODS.Joker {
     eternal_compat = false,
     blueprint_compat = false,
     demicolon_compat = false,
-    attributes = { 'passive','food','spectral','jokers','booster'},
+    attributes = { 'passive','food','spectral','joker','booster'},
 	loc_vars = function(self, info_queue, center)
 		return {
 			vars = {

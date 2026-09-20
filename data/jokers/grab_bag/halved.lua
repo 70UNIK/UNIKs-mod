@@ -15,6 +15,7 @@ SMODS.Joker {
     discovered = true,
     unlocked = true,
     pixel_size = { w = 71, h = 46 },
+    attributes = { 'xmult' },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Xmult, center.ability.immutable.card_limit} }
 	end,

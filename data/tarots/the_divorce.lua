@@ -10,6 +10,7 @@ SMODS.Consumable{
 	end,
     	    unlocked = true,
     discovered = true,
+    attributes = {'bunc_linked','modify_card'},
      use = function(self, card)
         local cards = G.hand.highlighted
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()

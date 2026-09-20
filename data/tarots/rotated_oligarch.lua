@@ -7,6 +7,7 @@ SMODS.Consumable{
 	mf_rotate_by = math.pi / 4,
 	config = { mod_conv = "m_unik_bill", max_highlighted = 2 },
 	atlas = "unik_consumables",
+	attributes = {'modify_card', 'enhancements'},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_bill
 

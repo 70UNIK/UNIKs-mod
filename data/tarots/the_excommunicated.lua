@@ -12,6 +12,7 @@ SMODS.Consumable{
 	end,
     	    unlocked = true,
     discovered = true,
+    attributes = {'bunc_linked','destroy_cards'},
      use = function(self, card)
         local cards = G.hand.highlighted
         for i = #cards, 1, -1 do

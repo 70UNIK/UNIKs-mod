@@ -14,6 +14,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     discovered = true,
     unlocked = true,
+    attributes = { 'scaling','reroll','xmult' },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Xmult_mod, center.ability.extra.Xmult} }
 	end,

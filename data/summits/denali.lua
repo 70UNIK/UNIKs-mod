@@ -10,6 +10,7 @@ SMODS.Consumable{
         end
         return false
 	end,
+    attributes = {'perma_bonus','xchips','modify_card'},
     config = { extra = { x_chips = 0.2 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
         local cardOrBlind = UNIK.hasBlindside() and 'k_unik_blind' or 'k_unik_card'
@@ -29,28 +30,6 @@ SMODS.Consumable{
             cards = G.hand.highlighted,
             value = card.ability.extra.x_chips,
         })
-        -- for i = 1, #G.hand.highlighted do
-        --     local highlighted = G.hand.highlighted[i]
-        --         highlighted.ability["perma_x_chips"] = highlighted.ability["perma_x_chips"] or 0
-        --         highlighted.ability["perma_x_chips"] = highlighted.ability["perma_x_chips"] + card.ability.extra.x_chips
-                
-        --     G.E_MANAGER:add_event(Event({
-        --         trigger = 'after', 
-        --         delay = 0.1, 
-        --         func = function()
-        --         card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-        --             message = localize({
-        --                 type = "variable",
-        --                 key = "a_xchips",
-        --                 vars = { number_format(1+highlighted.ability["perma_x_chips"]) },
-        --             }),
-        --             colour = G.C.CHIPS,
-        --             card=highlighted,
-        --         })
-        --         return true 
-        --         end 
-        --     }))
-        -- end
         card:juice_up(0.3, 0.5)  
     end
 }

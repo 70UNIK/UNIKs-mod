@@ -36,7 +36,7 @@ SMODS.Joker {
     },
     no_pointer = true,
     no_code = true,
-    attributes = { 'emult','jokers','stickers' },
+    attributes = { 'emult','joker','stickers' },
     loc_vars = function(self, info_queue, center)
         local BlindSize = 0
         local quoteset = 'eggless'

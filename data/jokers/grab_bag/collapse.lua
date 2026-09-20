@@ -14,7 +14,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     discovered = true,
     unlocked = true,
-
+    attributes = { 'scaling','chips','destroy_card','rank','suit','enhancements' },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.chip_mod,center.ability.extra.chips} }
 	end,

@@ -6696,12 +6696,21 @@ return {
             j_unik_smiley = {
                 name = "The Smiley",
                 text = {
-                    "{C:attention}First{} Played Hand",
+                    {
+                        "{C:attention}First{} Played Hand",
                     "becomes {C:unik_shitty_edition}Positive",
-                    "{C:unik_shitty_edition}Positive{} cards give",
+                    },
+                    {
+                        "{C:unik_shitty_edition}Positive{} cards give",
                     "{X:mult,C:white}X#1#{} Mult when scored",
-                    "Decrease this by {X:mult,C:white}X#2#{}",
+                    },
+                    {
+                        "Decrease this by {X:mult,C:white}X#2#{}",
                     "per card held",
+                    },
+                    
+                    
+                    
                 }
             },
             j_unik_halved = {
@@ -6723,32 +6732,54 @@ return {
             j_unik_collapse = {
                 name = "The Collapse",
                 text = {
-                    "This Joker gains {C:chips}+#1#{} Chips",
-                    "per {C:attention}Rankless and",
-                    "{C:attention}Suitless{} card {C:red}destroyed",
-                    "{C:red}Destroy{} all played",
-                    "{C:attention}rankless and suitless{} cards",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
+                    {
+                        "This Joker gains {C:chips}+#1#{} Chips",
+                        "per {C:attention}Rankless and",
+                        "{C:attention}Suitless{} card {C:red}destroyed",    
+                    },
+                    {
+                        "{C:red}Destroy{} all played",
+                        "{C:attention}rankless and suitless{} cards",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
+                    },
+                    
                 }
             },
             j_unik_bloon = {
                 name = "The Bloon",
                 text = {
-                    "{C:attention}First{} Played Hand",
+                    {
+                        "{C:attention}First{} Played Hand",
                     "becomes {C:unik_shitty_edition}Bloated",
-                    "{C:unik_shitty_edition}Bloated{} cards give",
+                    },
+                    {
+                        "{C:unik_shitty_edition}Bloated{} cards give",
                     "{X:mult,C:white}X#1#{} Mult when scored",
+                    },
+                    
+                    
                 }
             },
             j_unik_poppy_gb = {
                 name = "The Poppy",
                 text = {
-                    "Gain {X:mult,C:white}X#1#{} Mult",
+                    {
+                        "Gain {X:mult,C:white}X#1#{} Mult",
                     "per hand played",
-                    "{C:red}Lose{} {X:mult,C:white}X#2#{} Mult if",
+                    },
+                    {
+                        "{C:red}Lose{} {X:mult,C:white}X#2#{} Mult if",
                     "hand exceeds {C:attention}X3{} requirements",
                     "{C:inactive}({C:attention}#3#{C:inactive})",
-                    "{C:inactive}(Currently {X:mult,C:white}X#4#{C:inactive} Mult)",
+                    },
+                    {
+                        "{C:inactive}(Currently {X:mult,C:white}X#4#{C:inactive} Mult)",
+                    },
+                    
+                    
+                    
                 }
             },
             j_unik_fuzzy = {
@@ -6763,12 +6794,18 @@ return {
             j_unik_jollyless = {
                 name = "The Jollyless",
                 text = {
-                    "{C:red}Destroy{} all {C:cry_jolly}Jolly{} and {C:cry_jolly}M{} Jokers",
+                    {
+                        "{C:red}Destroy{} all {C:cry_jolly}Jolly{} and {C:cry_jolly}M{} Jokers",
                     "when Blind is selected",
                     "{C:inactive}(The Jollyless Excluded)",
-                    "Gain {X:mult,C:white}X#1#{} Mult per Joker",
+                    },
+                    {
+                        "Gain {X:mult,C:white}X#1#{} Mult per Joker",
                     "{C:red}destroyed{} this way",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                    },
+                    
+                    
                 }
             },
             j_unik_gun = {
