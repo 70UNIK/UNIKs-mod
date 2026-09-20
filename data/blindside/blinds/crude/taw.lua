@@ -35,11 +35,12 @@ function Card.remove(self)
 
     local ret = remove_ref(self)
     if not G.GAME.ignore_delete_context and self and not self.bypass_taw then
-        if self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unbreakable and not self.ability.unik_bypass_taw and not self.unik_bypass_taw and not G.SETTINGS.paused then
+        if G.deck and G.hand and self and self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unbreakable and not self.ability.unik_bypass_taw and not self.unik_bypass_taw and not G.SETTINGS.paused then
             if originalArea == G.hand or originalArea == G.play or originalArea == G.deck or originalArea == G.discard or originalArea == G.exhaust then
                 local _card = copy_card(self, nil, nil, G.playing_card)
                 _card.ability.extra.taw_unbreakable = true
                 G.deck.config.card_limit = G.deck.config.card_limit + 1
+                
                 table.insert(G.playing_cards, _card)
                 _card:add_to_deck()
                 _card:start_materialize()
@@ -92,6 +93,7 @@ local set_abilityref = Card.set_ability
 function Card:set_ability(center, initial, delay)
     local tawsome = self and (self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.taw_unrerollable 
     or (self.seal and self.seal == 'unik_blindside_locked')) and not G.GAME.bypass_reroll_block
+    local old_ability = copy33(self.ability)
     if (not tawsome) or G.SETTINGS.paused then
         set_abilityref(self, center, initial, delay)
     else
@@ -100,10 +102,11 @@ function Card:set_ability(center, initial, delay)
             card_eval_status_text(self, 'extra', nil, nil, nil, {instant = true, message = localize('k_nope_ex') --[[index]], colour = HEX('7B5877')})
             play_sound('bld_clang', 1.5, 1)
         end
+        
         set_abilityref(self, G.P_CENTERS[self.config.center.key], initial, delay)
+        self.ability = copy33(old_ability) --restore old table to avoid issues with resetting values
     end
 end
-
 BLINDSIDE.Blind({
     key = 'unik_blindside_taw',
     atlas = 'unik_blindside_blinds',

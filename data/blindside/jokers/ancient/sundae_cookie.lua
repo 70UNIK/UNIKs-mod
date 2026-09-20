@@ -40,14 +40,14 @@ BLINDSIDE.Joker({
             G.GAME.unik_blind_xmult = 4
             G.GAME.unik_dynamic_text_realtime = true
         end
-        if context.scoring_hand and context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
+        if context.scoring_hand and context.individual and context.cardarea == G.play and not G.GAME.blind.disabled and context.other_card then
             if context.other_card.facing ~= 'back' then
                 return {
                     message = "X" ..  G.GAME.unik_blind_xmult .. localize('k_unik_jmult'),
                     colour = G.C.BLACK,
                     focus = context.other_card,
                     func = function ()
-                        if context.other_card:is_color('Purple') or context.other_card:is_color('Blue') or context.other_card:is_color('Green') then
+                        if context.other_card and (context.other_card:is_color('Purple') or context.other_card:is_color('Blue') or context.other_card:is_color('Green')) then
                             G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult * 3
                             G.HUD_blind:recalculate(true)
                         end

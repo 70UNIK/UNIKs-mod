@@ -60,7 +60,7 @@ BLINDSIDE.Joker({
             BLINDSIDE.add_fire(difference)
             
         else
-            local difference = math.floor(G.GAME.unik_ante_spent/25)
+            local difference = math.floor(G.GAME.unik_ante_spent/20)
             ease_ante(difference)
             G.GAME.blind:wiggle()
             BLINDSIDE.change_fire_amount({amount = 10})

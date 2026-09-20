@@ -13,13 +13,28 @@ SMODS.Sticker{
     order = 3200,
 }
 
+function copy33(obj, seen)
+    -- Handle non-tables and previously-seen tables.
+    if type(obj) ~= 'table' then return obj end
+    if seen and seen[obj] then return seen[obj] end
+  
+    -- New table; mark it as seen and copy recursively.
+    local s = seen or {}
+    local res = {}
+    s[obj] = res
+    for k, v in pairs(obj) do res[copy3(k, s)] = copy3(v, s) end
+    return setmetatable(res, getmetatable(obj))
+end
+
 local set_abilityref = Card.set_ability
 function Card:set_ability(center, initial, delay)
     local tawsome = self and self.ability and (self.ability.unik_taw)
+    local old_ability = copy33(self.ability)
     if (not tawsome) or G.SETTINGS.paused then
         set_abilityref(self, center, initial, delay)
     else
         set_abilityref(self, G.P_CENTERS[self.config.center.key], initial, delay)
+        self.ability = copy33(old_ability) --restore old table to avoid issues with resetting values
     end
 end
 

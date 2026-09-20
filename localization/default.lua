@@ -704,7 +704,7 @@ return {
                     "+#1# Ante per $#2#",
                     "spent this Ante",
                     "If less than",
-                    "#3# spent this", --(total money spent this run)^0.5
+                    "$#3# spent this", --(total money spent this run)^0.5
                     "Ante, ^#4# Ante",
                     "(Currently $#5# spent)"
                 }
