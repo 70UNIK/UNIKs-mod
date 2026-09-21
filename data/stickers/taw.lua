@@ -28,6 +28,10 @@ end
 
 local set_abilityref = Card.set_ability
 function Card:set_ability(center, initial, delay)
+    -- if SMODS.is_playing_card(self) and self.ability and self.ability.set then
+    --     self:set_sprites(nil, self)
+    -- end
+    
     local tawsome = self and self.ability and (self.ability.unik_taw)
     local old_ability = copy33(self.ability)
     if (not tawsome) or G.SETTINGS.paused then

@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 214748365
+priority = 999999
 
 ## Initializer
 
@@ -64,6 +64,19 @@ payload = '''
     then
         return suit == G.P_CENTERS[self.config.center.key].unik_specific_suit
     else
+        for k, v in pairs(SMODS.get_enhancements(self)) do
+            if G.P_CENTERS[k].unik_specific_suit then
+                return suit == G.P_CENTERS[k].unik_specific_suit
+            end
+        end
+        if All_in_Jest then
+            for k, v in pairs(All_in_Jest.get_inherent_effects(self, 'enhancement', nil, true)) do
+            -- print(k)
+                if G.P_CENTERS[k].unik_specific_suit then
+                    return suit == G.P_CENTERS[k].unik_specific_suit
+                end
+            end
+        end
    -- print(suit)
     
 '''
@@ -77,3 +90,4 @@ payload = '''
     end  
 '''
 match_indent = true
+

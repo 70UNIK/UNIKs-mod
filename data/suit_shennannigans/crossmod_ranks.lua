@@ -5,14 +5,35 @@ function UNIK.sprite_info_override(_center,_front, card, orig_a, orig_p)
     _center = _center or card.config.center
     _front = _front or card.base
     local hc = G.SETTINGS.colour_palettes[card.base] == "hc" and "_hc" or ""
+
+    -- --inherent custom rank suit shit
+    -- for k, v in pairs(SMODS.get_enhancements(card)) do
+    --     if G.P_CENTERS[k].unik_specific_base_value and G.P_CENTERS[k].unik_specific_suit and G.P_CENTERS[k].inherent_atlas and not card.config.center.key == k and 
+    --     not UNIK.has_aij_second_enhancement(card,k)  then
+    --         return  G.ASSET_ATLAS[G.P_CENTERS[k].inherent_atlas.atlas], G.P_CENTERS[k].inherent_atlas.pos
+    --     end
+    -- end
+    -- --print('setsprite')
+    -- if All_in_Jest then
+    --     for k, v in pairs(All_in_Jest.get_inherent_effects(card, 'enhancement', nil, true)) do
+    --         print("k" .. k)
+    --         print(card.config.center.key)
+    --         print(UNIK.has_aij_second_enhancement(card,k))
+    --          if G.P_CENTERS[k].inherent_atlas and card.config.center.key ~= k and 
+    --         not UNIK.has_aij_second_enhancement(card,k)  then
+    --             print(G.P_CENTERS[k].inherent_atlas)
+    --             return  G.ASSET_ATLAS[G.P_CENTERS[k].inherent_atlas.atlas], G.P_CENTERS[k].inherent_atlas.pos
+    --         end
+    --     end
+    -- end
     if _front.value == "paperback_Apostle" then
         if _front.suit == "unik_Noughts" then
             return G.ASSET_ATLAS['unik_ranks' .. hc], { x = 0, y = 1}
         elseif _front.suit == "unik_Crosses" then
             return G.ASSET_ATLAS['unik_ranks' .. hc], { x = 0, y = 0}
         end
-
-    elseif _front.value == "entr_nilrank" then
+    end
+    if _front.value == "entr_nilrank" then
         if _front.suit == "unik_Noughts" then
             return G.ASSET_ATLAS['unik_nils' .. hc], { x = 1, y = 1}
         elseif _front.suit == "unik_Crosses" then
@@ -21,6 +42,20 @@ function UNIK.sprite_info_override(_center,_front, card, orig_a, orig_p)
     end
 
     return orig_a, orig_p
+end
+
+function UNIK.has_aij_second_enhancement(card,enhancement)
+    if not card.config.aij_other_center or not card or not card.config then
+        return false
+    end
+    if card.config.aij_other_center and not  card.config.aij_other_center['ability'] then
+        return false
+    end
+    if card.config.aij_other_center['ability'].extra_enhancement and card.config.aij_other_center['ability'].extra_enhancement == enhancement then
+        --print(card.config.aij_other_center['ability'])
+        return true
+    end
+    return false
 end
 
 function UNIK.is_pure_rank(card)
