@@ -60,6 +60,10 @@ SMODS.Blind{
 		G.GAME.unik_killed_by_leak = nil
 		G.GAME.unik_disable_catalyst = nil
 	end,
+    aij_calculate_counter_score = function()
+        --increase in chance when having balance based jokers, really jacks up when you're in plasma deck or that balancing legendary
+        return 0
+    end
 }
 
 local scie = SMODS.calculate_individual_effect

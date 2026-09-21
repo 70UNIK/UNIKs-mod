@@ -53,4 +53,8 @@ SMODS.Blind{
         end
        
 	end,
+    aij_calculate_counter_score = function()
+        --increas chance based on average no. hands you played that have > 3 cards
+        return 0
+    end
 }

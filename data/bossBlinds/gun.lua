@@ -39,6 +39,12 @@ SMODS.Blind{
 
         end
 
+    end,
+    aij_calculate_counter_score = function()
+        --increases chance based on:
+        --consumables held
+        --dependency on discards
+        return 0
     end
     -- unik_before_play = function(self)
     --     for i,v in pairs(G.hand.cards) do

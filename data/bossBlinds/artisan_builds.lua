@@ -42,6 +42,10 @@ SMODS.Blind{
     -- defeat = function()
     --     G.GAME.ante_rerolls = 0
     -- end
+    aij_calculate_counter_score = function()
+        --reroll a lot of times this ante
+        return 0
+    end
 }
 
 --hook into reroll

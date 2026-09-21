@@ -61,4 +61,8 @@ SMODS.Blind{
         end   
         G.GAME.unik_positive_draw = nil
     end,
+    aij_calculate_counter_score = function()
+        --gets worse the more blinds you dont beat in 1 hand
+        return 0
+    end
 }

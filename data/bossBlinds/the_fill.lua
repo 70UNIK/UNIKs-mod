@@ -23,4 +23,8 @@ SMODS.Blind{
         end
         return false
 	end,
+    aij_calculate_counter_score = function()
+        --more noughts played, the worse
+        return 0
+    end
 }

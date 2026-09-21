@@ -32,4 +32,11 @@ SMODS.Blind{
         end
         return false
 	end,
+    aij_calculate_counter_score = function()
+        --Max counter:
+        -- 1) Jokers that rely on rankless/suitless or stone cards
+        -- 2) High roportion of rankless/suitless cards in your deck or in the last 10 played hands
+        -- 3) Playing bulwark dramatically increases the chances
+        return 0
+    end
 }

@@ -27,6 +27,10 @@ SMODS.Blind{
         end
         return false
 	end,
+    aij_calculate_counter_score = function()
+        --vastly increases the probabilites for each xchips effect triggered in the last few hands, xchips jokers owned
+        return 0
+    end
 }
 
 function UNIK.has_hater2()

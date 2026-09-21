@@ -25,6 +25,10 @@ SMODS.Blind{
 		end 
 		return nil
 	end,
+	aij_calculate_counter_score = function()
+        --if your score catches on fire, and you score consistently over X3 reqs in the last X hands on average, it becomes
+        return 0
+    end
 }
 
 local smods_calculate_round_score_stuff = SMODS.calculate_round_score

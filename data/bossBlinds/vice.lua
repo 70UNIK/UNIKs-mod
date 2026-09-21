@@ -39,7 +39,11 @@ SMODS.Blind{
 			})
 		end
 		return false
-	end
+	end,
+	aij_calculate_counter_score = function()
+        --universally bad, even worse if you have epic blind sauce
+        return 0
+    end
 }
 --Epic vice: the next 8 boss blinds become epic+ blinds
 

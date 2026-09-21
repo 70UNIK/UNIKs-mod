@@ -29,6 +29,11 @@ SMODS.Blind{
         G.ROOM.jiggle = G.ROOM.jiggle + 0.5
         
     end,
+    aij_calculate_counter_score = function()
+        --Max counter:
+        -- 1) Higher dependency on non-first hands
+        return 0
+    end
 }
 
 
