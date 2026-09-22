@@ -23,6 +23,7 @@ SMODS.Edition({
         per = 1,
 		vol = 1.3,
 	},
+	attributes = { 'detrimental','destroy_card','chance' },
     disable_base_shader = true,
 	detrimental = true,
     -- loc_txt = {

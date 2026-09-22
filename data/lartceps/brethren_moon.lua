@@ -10,6 +10,7 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    attributes = { 'detrimental','hand_level', },
     no_doe = true,
     no_grc = true,
 	no_ccd = true,

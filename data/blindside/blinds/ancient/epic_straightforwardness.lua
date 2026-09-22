@@ -21,7 +21,7 @@ BLINDSIDE.Blind({
             UNIK.blindside_chips_modifyV2({e_chips = card.ability.extra.joker_e_chips})  
             return {
                 message = "^" .. card.ability.extra.joker_e_chips .. localize('k_unik_jchips'),
-                colour = G.C.L_BLACK
+                colour = G.C.BLACK
             }
         end
     end,

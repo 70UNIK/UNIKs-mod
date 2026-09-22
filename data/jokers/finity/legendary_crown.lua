@@ -53,7 +53,6 @@ SMODS.Joker {
         if context.forcetrigger then
             return {
 				e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                colour = G.C.DARK_EDITION,
 			}
         end
         if context.after and not context.blueprint then
@@ -63,7 +62,7 @@ SMODS.Joker {
 					ref_value = "Emult",
 					scalar_value = "Emult_mod",
 					message_key = "a_powmult",
-					message_colour = G.C.DARK_EDITION,
+					message_colour = SMODS.Gradients.unik_emult,
                     force_full_val = true,
                     base = 1,
 				})
@@ -76,7 +75,6 @@ SMODS.Joker {
 		if (context.joker_main) and to_big(card.ability.extra.Emult) ~= to_big(1) then
             return {
 				e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                colour = G.C.DARK_EDITION,
 			}
         end
 

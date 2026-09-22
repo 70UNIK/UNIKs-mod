@@ -12,6 +12,7 @@ SMODS.Consumable{
     no_doe = true,
     no_grc = true,
 	no_ccd = true,
+    attributes = { 'detrimental','chance','modify_card','enhancements' },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_namta
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.unluck, center.ability.extra.odds, 'unik_sauron')

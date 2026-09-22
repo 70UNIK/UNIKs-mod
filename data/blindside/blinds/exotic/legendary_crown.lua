@@ -19,7 +19,7 @@ BLINDSIDE.Blind({
                     ref_value = "e_chips",
                     scalar_value = "e_chips_mod",
                     operation = '+',
-                    message_colour = G.C.DARK_EDITION,
+                    message_colour = SMODS.Gradients.unik_echips,
                     force_full_val = true,
                 })
                 return {

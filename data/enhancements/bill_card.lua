@@ -11,6 +11,7 @@ SMODS.Enhancement {
             vars = { card.ability.extra.money,card.ability.extra.money_mod}
         }
     end,
+    attributes = { 'economy'},
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then
             local dollars = 0

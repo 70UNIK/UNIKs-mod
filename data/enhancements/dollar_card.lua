@@ -9,6 +9,7 @@ SMODS.Enhancement {
             vars = { card.ability.extra.money}
         }
     end,
+    attributes = { 'economy'},
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then
             return {

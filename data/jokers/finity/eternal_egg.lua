@@ -75,14 +75,12 @@ SMODS.Joker {
         if context.forcetrigger then
             return {
 				e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                colour = G.C.DARK_EDITION,
 			}
         end
         if (context.other_joker and card ~= context.other_joker) then
             if context.other_joker.config.center.key == 'j_egg' and context.other_joker.ability.eternal then --Common
 				return {
                     e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                    colour = G.C.DARK_EDITION,
 				}
             end
         end

@@ -12,6 +12,7 @@ SMODS.Consumable{
     no_doe = true,
     no_grc = true,
 	no_ccd = true,
+    attributes = { 'detrimental','joker_slot', },
 	use = function(self, card, area, copier)
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             G.jokers.config.card_limit = math.max(0,G.jokers.config.card_limit-2)

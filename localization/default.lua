@@ -1783,8 +1783,8 @@ return {
             e_unik_corrupted = {
 				name = "Corrupted",
 				text = {
-					"{X:dark_edition,C:white}^#1#{} Mult",
-                    "{X:dark_edition,C:white}^#2#{} Chips",
+					"{X:unik_emult,C:white}^#1#{} Mult",
+                    "{X:unik_echips,C:white}^#2#{} Chips",
                     "when triggered or held",
 				},
 			},
@@ -1981,7 +1981,7 @@ return {
                         "When played, gains",
                         "{X:chips,C:white}X#2#{} Chips when",
                         "{C:chips}Chips{}, {X:chips,C:white}XChips{},",
-                        "{X:dark_edition,C:white}^Chips{}, etc... trigger",
+                        "{X:unik_echips,C:white}^Chips{}, etc... trigger",
                         "{C:attention}once{} during hand",
                         "{C:inactive}(Itself excluded)",
                     },
@@ -2959,7 +2959,7 @@ return {
                 text = {
                     {
                                                 "{X:dark_edition,C:white}Faded",  
-                        "{X:dark_edition,C:white}^#1#{} Mult to Joker"
+                        "{X:unik_emult,C:white}^#1#{} Mult to Joker"
                     },
                     {
                         "After played in",
@@ -2978,7 +2978,7 @@ return {
                 text = {
                     {
                                                 "{X:dark_edition,C:white}Faded",  
-                        "{X:unik_rgb,C:white}^^#1#{} Chips to Joker"
+                        "{X:unik_ee_chips,C:white}^^#1#{} Chips to Joker"
                     },
                     {
 
@@ -3253,7 +3253,7 @@ return {
                 text = {
                     {
                         "{X:dark_edition,C:white}Faded{} {X:red,C:white}Red", 
-                        "{X:dark_edition,C:white}^#1#{} Mult to Joker",
+                        "{X:unik_emult,C:white}^#1#{} Mult to Joker",
                     },
                     {"Always scores"},
                 }
@@ -3370,7 +3370,7 @@ return {
                     {
                         "{X:green,C:white}Green",
                         "{C:green}#1# in #2#{} chance",
-                        "for {X:dark_edition,C:white}^#3#{} Mult",
+                        "for {X:unik_emult,C:white}^#3#{} Mult",
                         "to Joker"
                     },
                     {
@@ -3819,7 +3819,7 @@ return {
                 text = {
                     {
                         "{X:chips,C:white}Blue{} {X:gold,C:white}Yellow",
-                        "{X:dark_edition,C:white}^#1#{} Chips",
+                        "{X:unik_echips,C:white}^#1#{} Chips",
                         "to Joker",
                     },
                     {"{C:attention}Burns"},
@@ -3842,10 +3842,10 @@ return {
                 name = "Ylitsepääsemätönseinä",
                 text = {
                     {"{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
-                    "Gains {X:dark_edition,C:white}^#2#{} Mult",
+                    "Gains {X:unik_emult,C:white}^#2#{} Mult",
                     "and {X:mult,C:white}X#4#{} Mult",
 					"after being played"},
-					{"{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult",
+					{"{C:inactive}(Currently {X:unik_emult,C:white}^#1#{C:inactive} Mult",
                 "{C:attention}after scoring{C:inactive} and",
                  "{X:mult,C:white}X#3#{C:inactive} Mult)"},
                 }
@@ -3875,8 +3875,8 @@ return {
                     },
                     {
                         "{C:green}#1# in #2#{} chance for",
-                        "{X:dark_edition,C:white}^#3#{} Mult or",
-                        "{X:dark_edition,C:white}^#4#{} Chips",
+                        "{X:unik_emult,C:white}^#3#{} Mult or",
+                        "{X:unik_echips,C:white}^#4#{} Chips",
                         "{C:attention}after scoring"
                     },
 
@@ -3889,7 +3889,7 @@ return {
                     "{X:red,C:white}X#3#{} Mult and",
                     "{C:red}+#2#{} Discards"},
                     {
-                        "{X:dark_edition,C:white}^#1#{} Mult",
+                        "{X:unik_emult,C:white}^#1#{} Mult",
                         "{C:attention}after scoring"
                     },
                     {"{C:attention}Burns{} all",
@@ -3905,17 +3905,17 @@ return {
                 text = {
                     {
                         "{X:chips,C:white}Blue{} {X:dark_edition,C:white}Faded",
-                        "Gains {C:white,X:dark_edition}^#1#{} Chips",
+                        "Gains {C:white,X:unik_echips}^#1#{} Chips",
                         "and {X:chips,C:white}X#4#{} Chips",
 					    "when scored"
                     },
 					{
-                        "{C:attention}Resets{} to {C:white,X:dark_edition}^#2#",
+                        "{C:attention}Resets{} to {C:white,X:unik_echips}^#2#",
                         "and {C:white,X:chips}X#5#",
                         "each round"
                     },
                     {
-                        "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Chips",
+                        "{C:inactive}(Currently {X:unik_echips,C:white}^#3#{C:inactive} Chips",
                         "{C:attention}after scoring{C:inactive} and",
                         "{X:chips,C:white}X#6#{C:inactive} Chips)"
                     },
@@ -3963,13 +3963,13 @@ return {
                 text = {
                     {
                         "{X:money,C:white}Yellow{} {X:chips,C:white}Blue{}",
-                        "Gains {X:dark_edition,C:white}^#2#{} Chips",
+                        "Gains {X:unik_echips,C:white}^#2#{} Chips",
                         "if hand is {C:attention}at least{}",
                         "your {C:attention}best hand{} this run",
                         "{C:inactive}({C:attention}#3#{C:inactive})",
                     },
                     {
-                        "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Chips)"
+                        "{C:inactive}(Currently {X:unik_echips,C:white}^#1#{C:inactive} Chips)"
                     }
                 }
             },
@@ -3983,7 +3983,7 @@ return {
                 text = {
                     {
                         "{X:red,C:white}Red{} {X:chips,C:white}Blue",
-                        "{X:dark_edition,C:white}^#1#{} Mult when",
+                        "{X:unik_emult,C:white}^#1#{} Mult when",
                         "held in hand"
                     },
                     --handsize bonus is too op
@@ -3996,7 +3996,7 @@ return {
                 text = {
                     {
                         "{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
-                        "{X:dark_edition,C:white}^#1#{} Mult"
+                        "{X:unik_emult,C:white}^#1#{} Mult"
                     },
                     {
                         "If hand score",
@@ -4012,7 +4012,7 @@ return {
                 text = {
                     {
                         "{X:purple,C:white}Purple{} {X:green,C:white}Green{}",
-                        "{X:dark_edition,C:white}^#1#{} Mult"
+                        "{X:unik_emult,C:white}^#1#{} Mult"
                     },
                     {
                         "If hand score",
@@ -4309,11 +4309,11 @@ return {
             j_unik_bos_hellgate = {
                 name = "Hellgate",
                 text= {
-                    "Gains {X:unik_void_color,C:unik_eye_searing_red}^^^#1#{} Mult for every",
+                    "Gains {X:unik_void_color,C:unik_emult}^^^#1#{} Mult for every",
                     "{X:unik_void_color,C:unik_eye_searing_red}Epic+{} {X:unik_void_color,C:unik_eye_searing_red}Blind{} defeated",
                     "{C:red}All{} Boss Blinds become",
                     "{X:unik_void_color,C:unik_eye_searing_red}Epic+{} {X:unik_void_color,C:unik_eye_searing_red}Blinds",
-                    "{C:inactive}(Currently {X:unik_void_color,C:unik_eye_searing_red}^^^#2# {C:inactive}Mult)",
+                    "{C:inactive}(Currently {X:unik_void_color,C:unik_emult}^^^#2# {C:inactive}Mult)",
                     "{C:unik_eye_searing_red,s:0.7}At this point, scoring becomes secondary.",
                     "{C:unik_eye_searing_red,s:0.7}Look what you have done.",
                     "{C:unik_eye_searing_red,s:0.7}Face your conseqences.",
@@ -4636,10 +4636,10 @@ return {
                 name = '{C:unik_unik_color,f:unik_five_by_five}UNIK',
                 text = {
                     {
-                        "This Joker gains {X:dark_edition,C:white}^#1#{} Chips", 
+                        "This Joker gains {X:unik_echips,C:white}^#1#{} Chips", 
                         "for each {C:attention}7{} in scoring hand", --Remove retriggers cause otherwise he becomes extremely powerful fast with retriggers, makes him more in line with Alice
-                        "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Chips)",
-                        "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#4#{C:inactive,s:0.7} Chips)",
+                        "{C:inactive}(Currently {X:unik_echips,C:white}^#2#{C:inactive} Chips)",
+                        "{C:inactive,s:0.7}(Caps at {X:unik_echips,C:white,s:0.7}^#4#{C:inactive,s:0.7} Chips)",
                     },
                     {
                         "{C:unik_caption,s:0.5,E:1,f:unik_five_by_five}#3#{}",
@@ -4653,7 +4653,7 @@ return {
                 name = '{C:unik_unik_color,f:unik_five_by_five}UNIK',
                 text = {
                     {
-                        "{X:dark_edition,C:white}^#2#{C:inactive} Chips", 
+                        "{X:unik_echips,C:white}^#2#{C:inactive} Chips", 
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1,f:unik_five_by_five}#3#{}",
@@ -4711,7 +4711,7 @@ return {
                 text={
                     {
                         "This Joker gains {X:chips,C:white}X#2#{} Chips when",
-                        "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:dark_edition,C:white}^Chips{}, etc... trigger",
+                        "{C:chips}Chips{}, {X:chips,C:white}XChips{} or {X:unik_echips,C:white}^Chips{}, etc... trigger",
                         "{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
                     },
                     {
@@ -4838,7 +4838,7 @@ return {
                 name="Rancid Smoothie",
                 text={
                     {
-                        "{X:dark_edition,C:white}^#1#{} Mult {C:attention}after scoring{}",
+                        "{X:unik_emult,C:white}^#1#{} Mult {C:attention}after scoring{}",
                     },
                     {
                         "Selling will {C:red}divide{} values",
@@ -4920,11 +4920,11 @@ return {
                         
                     },
                     {
-                        "Gains {X:dark_edition,C:white}^#2#{} Mult when this happens",
-                        "{C:inactive}(Currently {X:dark_edition,C:white}^#1#{C:inactive} Mult)",
+                        "Gains {X:unik_emult,C:white}^#2#{} Mult when this happens",
+                        "{C:inactive}(Currently {X:unik_emult,C:white}^#1#{C:inactive} Mult)",
                         "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
                         "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)",
-                        "{C:inactive,s:0.7}(Caps at {X:dark_edition,C:white,s:0.7}^#3#{C:inactive,s:0.7} Mult)",
+                        "{C:inactive,s:0.7}(Caps at {X:unik_emult,C:white,s:0.7}^#3#{C:inactive,s:0.7} Mult)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#4#{}", --TODO: adjustable quotes, for 
@@ -4941,7 +4941,7 @@ return {
                 name = 'White Lily Cookie',
                 text = {
                     {
-                        "{X:dark_edition,C:white}^#1#{C:inactive} Mult",
+                        "{X:unik_emult,C:white}^#1#{C:inactive} Mult",
                     },
                     {
                         "{C:attention}Prevents{} Joker {C:red}destruction{} once",
@@ -5086,7 +5086,7 @@ return {
             j_unik_lone_despot={
                 name = "Lone Despot",
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult if played hand",
+                    "{X:unik_emult,C:white}^#1#{} Mult if played hand",
                     "{C:attention}only contains{} a",
                     "single {C:attention}King{}",
                 },
@@ -5391,13 +5391,13 @@ return {
                 name = "XCHIPS IS NOT VANILLA!!!!!",
                 text = {
                     {
-                        "{X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... cards and Jokers",
+                        "{X:chips,C:white}XChips{}, {X:unik_echips,C:white}^Chips{}, etc... cards and Jokers",
                     "will {C:red}not trigger{} and are {C:red}destroyed{} instead",
                     },
                     {
                         "{C:red}Self destructs{} after {C:attention}#1#",
                     "{C:attention}consecutive{} rounds without",
-                    "attempted {X:chips,C:white}XChips{}, {X:dark_edition,C:white}^Chips{}, etc... triggers",
+                    "attempted {X:chips,C:white}XChips{}, {X:unik_echips,C:white}^Chips{}, etc... triggers",
                     "{C:inactive}(Currently {C:attention}#2#{C:inactive})",
                     },
                     
@@ -5461,7 +5461,7 @@ return {
                 name = "Nostalgic Astral in a Bottle",
                 text = {
                     {
-                        "{X:dark_edition,C:white}^#1#{} Mult after scoring",
+                        "{X:unik_emult,C:white}^#1#{} Mult after scoring",
                     },
                     {
                         "Sell to add {C:dark_edition}Astral{} and",
@@ -5794,7 +5794,7 @@ return {
                         "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
-                    "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult)",
+                    "{C:inactive}{X:unik_emult,C:white}^#5#{C:inactive} Mult)",
                     "{C:inactive,s:0.8}(Exponentials and Money are X1)",
                     },
                     
@@ -5813,7 +5813,7 @@ return {
                          "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
-                    "{C:inactive}{X:dark_edition,C:white}^#6#{C:inactive} chips)",
+                    "{C:inactive}{X:unik_echips,C:white}^#6#{C:inactive} chips)",
                     "{C:inactive,s:0.8}(Exponentials and Money are X1)",
                     },
                     
@@ -5832,7 +5832,7 @@ return {
                         "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult, {C:chips}+#2#{C:inactive} chips,",
                     "{C:inactive}{X:mult,C:white}X#3#{C:inactive} Mult, {X:chips,C:white}X#4#{C:inactive} chips,",
                     "{C:inactive}{C:gold}$#7#{C:inactive} after round,",
-                    "{C:inactive}{X:dark_edition,C:white}^#5#{C:inactive} Mult, {X:dark_edition,C:white}^#6#{C:inactive} chips)",
+                    "{C:inactive}{X:unik_emult,C:white}^#5#{C:inactive} Mult, {X:unik_echips,C:white}^#6#{C:inactive} chips)",
                     "{C:inactive,s:0.8}(Exponentials and Money are X1)",
                     },
                     
@@ -6607,7 +6607,7 @@ return {
                     {
                         "{C:attention}Eggcellent Buffoon Packs{}",
                         "may spawn in the shop",
-                        "{C:purple}Eternal {C:attention}Eggs{} give {X:dark_edition,C:white}^#1#{} Mult",
+                        "{C:purple}Eternal {C:attention}Eggs{} give {X:unik_emult,C:white}^#1#{} Mult",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#2#{}",
@@ -6621,10 +6621,10 @@ return {
             j_unik_indigo_icbm={
                 name = "Indigo ICBM",
                 text = {
-                    "Gains {X:dark_edition,C:white}^#1# Mult{} when hand played", --gains 0.1
+                    "Gains {X:unik_emult,C:white}^#1# Mult{} when hand played", --gains 0.1
                     "{C:red}Resets{} if hand score exceeds",
                     "{C:attention}#1#", --3x requirements
-                    "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Mult)", --hard to use unless you spam the tax.
+                    "{C:inactive}(Currently {X:unik_emult,C:white}^#2#{C:inactive} Mult)", --hard to use unless you spam the tax.
                 }
             },
             j_unik_maroon_magnet={
@@ -6664,7 +6664,7 @@ return {
                     "First drawn hand",
                     "is {C:red}debuffed",
                     "Scored {C:red}debuffed{} cards give",
-                    "{X:dark_edition,C:white}^#1#{} Mult", --^1.4 Mult
+                    "{X:unik_emult,C:white}^#1#{} Mult", --^1.4 Mult
                     "{C:unik_caption,s:0.7,E:1}SCRREEEEEECCHH!!!!! SCRAAAARRRCCHH!!!{}",
                     "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                     "{C:unik_ancient,s:0.7,E:2}Origin : Alien{}",
@@ -6674,11 +6674,11 @@ return {
                 name = "Korruptionkruunu",
                 text = {
                     {
-                        "Gains {X:dark_edition,C:white}^#1#{} Mult", --gains ^1 Mult.
+                        "Gains {X:unik_emult,C:white}^#1#{} Mult", --gains ^1 Mult.
                         "if hand is {C:attention}at least{}",
                         "your {C:attention}best hand{} this run",
                         "{C:inactive}({C:attention}#2#{C:inactive})",
-                        "{C:inactive}(Currently {X:dark_edition,C:white}^#3#{C:inactive} Mult)",
+                        "{C:inactive}(Currently {X:unik_emult,C:white}^#3#{C:inactive} Mult)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#4#{}",
@@ -7189,11 +7189,11 @@ return {
             j_cry_starfruit_depleted = {
 				name = "Starfruit",
 				text = {
-					"{X:dark_edition,C:white}^#1#{} Mult,",
-					"loses {X:dark_edition,C:white}^#2#{} Mult per",
+					"{X:unik_emult,C:white}^#1#{} Mult,",
+					"loses {X:unik_emult,C:white}^#2#{} Mult per",
 					"{C:attention}reroll{} in the shop",
                     "{E:2,C:red}Self destructs{} at",
-                    "{X:dark_edition,C:white}^0{} Mult",
+                    "{X:unik_emult,C:white}^0{} Mult",
 				},
 			},
         },
@@ -7560,22 +7560,22 @@ return {
 
             card_e_chips = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Chips"
+                    "{X:unik_echips,C:white}^#1#{} Chips"
                 }
             },
             card_extra_e_chips = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} extra Chips"
+                    "{X:unik_echips,C:white}^#1#{} extra Chips"
                 }
             },
             card_e_mult = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} Mult"
+                    "{X:unik_emult,C:white}^#1#{} Mult"
                 }
             },
             card_extra_e_mult = {
                 text = {
-                    "{X:dark_edition,C:white}^#1#{} extra Mult"
+                    "{X:unik_emult,C:white}^#1#{} extra Mult"
                 }
             },
             card_extra_rescore = {
@@ -7960,7 +7960,7 @@ return {
             c_unik_celeste = {
                 name = "Celeste",
                 text = {
-                    "Permanently add {X:dark_edition,C:white}^#1#{} Chips",
+                    "Permanently add {X:unik_echips,C:white}^#1#{} Chips",
                     "to {C:attention}#2#{} selected card#<s>2#", 
                     "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Celeste {C:inactive,s:0.8}is already held"
@@ -7978,7 +7978,7 @@ return {
             c_unik_ebott = {
                 name = "Ebott",
                 text = {
-                    "Permanently add {X:dark_edition,C:white}^#1#{} Mult",
+                    "Permanently add {X:unik_emult,C:white}^#1#{} Mult",
                     "to {C:attention}#2#{} selected card#<s>2#", 
                     "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Ebott {C:inactive,s:0.8}is already held"
@@ -8388,8 +8388,8 @@ return {
             tag_unik_blindside_downscale = {
                 name = "Downscale Tag",
                 text = {
-                    "{X:dark_edition,C:white}^0.9{} Mult and",
-                    "{X:dark_edition,C:white}^0.9{} Chips after",
+                    "{X:unik_emult,C:white}^0.9{} Mult and",
+                    "{X:unik_echips,C:white}^0.9{} Chips after",
 					"hand is scored"
                 }
             },
@@ -8722,7 +8722,7 @@ return {
                     "{C:red}Subtract{} Played and Held",
                     "{C:chips}#1#{} Chips, {C:mult}#2#{} Mult",
                     "{X:chips,C:white}X#3#{} Chips, {X:mult,C:white}X#4#{} Mult",
-                    "{X:dark_edition,C:white}^#5#{} Mult and {C:money}$#6#{} from all cards"
+                    "{X:unik_emult,C:white}^#5#{} Mult and {C:money}$#6#{} from all cards"
                     --All cards lose perma bonuses and permanently lose -4 Mult, -30 Chips,  X0.5 Mult and X0.5 Chips
                 }
             },

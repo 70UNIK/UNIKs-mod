@@ -11,6 +11,7 @@ SMODS.Enhancement {
     weight = 0,
     immutable = true,
     gore6break = true,
+     attributes = { 'detrimental','generation','consumable','unik_lartceps_card','eblindsize'},
     loc_vars = function(self, info_queue, card)
         return {
             vars = { card.ability.extra.x_mult, card.ability.extra.x_chips,card.ability.extra.blind_size}

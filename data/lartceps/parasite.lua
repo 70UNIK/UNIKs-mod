@@ -12,6 +12,7 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    attributes = { 'detrimental','bunc_linked_group','enhancements','modify_card'},
         set_badges = function (self, card, badges)
       SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
     end,

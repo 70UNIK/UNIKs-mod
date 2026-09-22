@@ -35,7 +35,7 @@ BLINDSIDE.Blind({
                     scalar_value = "e_chips_gain",
                     message_key = "a_powchips",
                     operation = '+',
-                        message_colour = G.C.DARK_EDITION,
+                        message_colour = SMODS.Gradients.unik_echips,
                         force_full_val = true,
                         
                             
@@ -46,7 +46,7 @@ BLINDSIDE.Blind({
                     scalar_value = "x_chips_gain",
                     message_key = "a_powchips",
                     operation = '+',
-                        message_colour = G.C.DARK_EDITION,
+                        message_colour = G.C.CHIPS,
                         force_full_val = true,
                           no_message = true,  
                 })

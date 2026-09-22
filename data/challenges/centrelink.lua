@@ -9,6 +9,7 @@ SMODS.Challenge{
 		},
 		modifiers = {
             extra_hand_bonus = 0,
+            {id = 'dollars', value = -10},
         },
 	},
 	jokers = {
@@ -23,32 +24,44 @@ SMODS.Challenge{
         G.GAME.tarot_rate = 0
     end,
 	restrictions = {
-        banned_tags = function(self)
-            local banList = {}
-            --Ban empowered and gamblers tag, as well as rare, uncommon and epic tags
-
-            banList[#banList+1] = {id = 'tag_charm'}
-            
-            return banList
-        end,
-		banned_cards = {
-            { id = 'p_arcana_normal_1', ids = {
+         banned_cards = function(self)
+                local bannedCards = {}
+                bannedCards[#bannedCards+1] = { id = 'p_arcana_normal_1', ids = {
                 'p_arcana_normal_1', 'p_arcana_normal_2',
                 'p_arcana_normal_3', 'p_arcana_normal_4',
                 'p_arcana_jumbo_1', 'p_arcana_jumbo_2',
                 'p_arcana_mega_1', 'p_arcana_mega_2' }
-            },
-            {id = 'v_tarot_merchant'},
-            {id = 'v_tarot_tycoon'},
-            {id = 'c_unik_charleston'},
-            {id = 'c_unik_whitney'},
-            {id = 'c_talisman'},
-            {id = 'c_immolate'},
-            {id = 'c_devil'},
-            {id = 'c_temperance'},
-            {id = 'c_hermit'},
-            {id = 'j_unik_golden_glove'},
-		},
+            }
+                bannedCards[#bannedCards+1] = {id = 'v_tarot_tycoon'}
+                bannedCards[#bannedCards+1] = {id = 'c_unik_charleston'}
+                bannedCards[#bannedCards+1] = {id = 'c_unik_whitney'}
+                bannedCards[#bannedCards+1] = {id = 'c_talisman'}
+                bannedCards[#bannedCards+1] = {id = 'c_immolate'}
+                bannedCards[#bannedCards+1] = {id = 'c_devil'}
+                bannedCards[#bannedCards+1] = {id = 'c_unik_oligarch'}
+                bannedCards[#bannedCards+1] = {id = 'c_temperance'}
+                bannedCards[#bannedCards+1] = {id = 'c_hermit'}
+                bannedCards[#bannedCards+1] = {id = 'm_gold'}
+                bannedCards[#bannedCards+1] = {id = 'm_unik_dollar'}
+                
+                for i,v in pairs(G.P_CENTERS) do
+                    if SMODS.has_attribute(v, "economy") or SMODS.has_attribute(v, "tarot") and v.key ~= 'j_vagabond'
+                    then
+                        bannedCards[#bannedCards+1] = {id = v.key}
+                    end
+                end
+
+                return bannedCards
+            end,
+            banned_tags = function(self)
+                local bannedCards = {}
+                for i,v in pairs(G.P_TAGS) do
+                    if SMODS.has_attribute(v, "economy") or SMODS.has_attribute(v, "tarot")  then
+                        bannedCards[#bannedCards+1] = {id = v.key}
+                    end
+                end
+                return bannedCards
+            end,
         banned_other = function(self)
 			local banList = {}
 			banList[#banList+1] = {id = 'bl_unik_raspberry_racket', type = 'blind'}

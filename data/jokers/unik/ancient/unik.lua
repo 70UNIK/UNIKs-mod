@@ -54,14 +54,12 @@ SMODS.Joker {
 		if context.forcetrigger then
 			return {
 				e_chips = card.ability.extra.Echips + 1,
-				colour = G.C.DARK_EDITION,
 			}
 		end
 		if (context.joker_main)  then
 			if (to_big(card.ability.extra.Echips + 1) > to_big(1)) then
 				return {
 					e_chips = card.ability.extra.Echips + 1,
-					colour = G.C.DARK_EDITION,
 				}
 			end
 		end
@@ -87,7 +85,7 @@ SMODS.Joker {
 					scalar_value = "Echips_mod",
 					base = 1,
 					message_key = "a_powchips",
-					message_colour = G.C.DARK_EDITION,
+					message_colour = SMODS.Gradients.unik_echips,
 					force_full_val = true,
 					operation = function(ref_table, ref_value, initial, scaling)
 						ref_table[ref_value] = math.min(initial + scaling * increase,card.ability.immutable.limit - 1)

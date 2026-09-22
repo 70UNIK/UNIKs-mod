@@ -26,7 +26,7 @@ SMODS.Consumable{
         UNIK.add_perma_bonus({
             type = 'perma_e_chips',
             message_key = 'a_powchips',
-            message_colour = G.C.DARK_EDITION,
+            message_colour = SMODS.Gradients.unik_echips,
             from_card = card,
             cards = G.hand.highlighted,
             value = card.ability.extra.e_chips,

@@ -24,6 +24,7 @@ SMODS.Consumable{
 	pos = {x = 1, y = 1},
 	key = 'unik_reeducation',
     config = {},
+    attributes = { 'detrimental','modify_card','editions' },
     can_use = function(self, card)
 		return true
 	end,

@@ -28,14 +28,12 @@ SMODS.Joker {
         if context.forcetrigger then
              return {
                 e_mult = card.ability.extra.Emult + 1,
-                colour = G.C.DARK_EDITION,
             }
         end
         if context.joker_main and #context.full_hand == 1 then
             if context.full_hand[1]:get_id() == 13 then
                 return {
                     e_mult = card.ability.extra.Emult + 1,
-                    colour = G.C.DARK_EDITION,
                 }
             end
         end

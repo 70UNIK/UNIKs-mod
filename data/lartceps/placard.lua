@@ -12,6 +12,7 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    attributes = { 'detrimental','modify_card','stickers','chance' },
     loc_vars = function(self, info_queue, center)
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.base, center.ability.extra.odds, 'unik_placard')
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_ultradebuffed" }

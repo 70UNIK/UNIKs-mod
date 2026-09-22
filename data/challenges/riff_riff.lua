@@ -7,7 +7,7 @@ SMODS.Challenge{
                 {id = 'unik_super_magic_trick'},
             },
         modifiers = {
-            {id = 'joker_slots', value = 4},
+            {id = 'joker_slots', value = 5},
         }
 	},
 	jokers = {

@@ -492,3 +492,37 @@ function UNIK.balance_exp(exp,card,nomessage)
 
 	delay(0.6)
 end
+
+--might as well intialize gradients for emult and echips
+
+SMODS.Gradient {
+    key = 'emult',
+    colours = {
+        G.C.DARK_EDITION, HEX("db005f")
+    },
+    cycle = 10,
+    interpolation = 'trig'
+}
+SMODS.Gradient {
+    key = 'echips',
+    colours = {
+        G.C.DARK_EDITION,HEX('41bed9') 
+    },
+    cycle = 10,
+    interpolation = 'trig'
+}
+
+
+SMODS.Gradient {
+	key = 'ee_chips',
+	colours = {G.C.CHIPS, G.C.UNIK_RGB},
+	interpolation = 'trig', 
+	cycle = 10
+}
+
+SMODS.Gradient {
+	key = 'ee_mult',
+	colours = {G.C.MULT, G.C.UNIK_RGB},
+	interpolation = 'trig',
+	cycle = 10
+}

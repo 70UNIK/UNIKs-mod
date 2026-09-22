@@ -14,6 +14,7 @@ SMODS.Enhancement {
     immutable = true,
 	unik_specific_suit = "unik_pink",
     unik_specific_base_value = "7", --corresponds to normal base_value
+    attributes = { 'rank','seven','xlogchips','destroy_card'},
     inherent_atlas = {atlas = 'unik_enhancements',pos = {x = 0, y = 2}},
     unik_is_custom_rank = false, 
 

@@ -13,7 +13,7 @@ SMODS.Enhancement {
     shatters = true, --lefunny
     force_no_face = true, --true = always face, false = always face
 	--NEW! specific_suit suit. Like abstracted!
-
+    attributes = { 'suit','club','mult','xlogmult','destroy_card'},
 	unik_specific_suit = "Clubs",
     unik_specific_base_value = "unik_green", --corresponds to normal base_value
 

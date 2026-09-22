@@ -98,14 +98,12 @@ SMODS.Joker {
         if context.forcetrigger then
             return {
                 e_mult = card.ability.extra.Emult + 1,
-                colour = G.C.DARK_EDITION,
             }
         end
         if context.joker_main then
             if (to_big(card.ability.extra.Emult + 1) > to_big(1)) then
                 return {
                     e_mult = card.ability.extra.Emult + 1,
-                    colour = G.C.DARK_EDITION,
                 }
             end
 		end
@@ -121,7 +119,7 @@ SMODS.Joker {
                     operation = function(ref_table, ref_value, initial, scaling)
 						ref_table[ref_value] = math.min(initial + scaling,card.ability.immutable.limit - 1)
 					end,
-                    message_colour = G.C.DARK_EDITION,
+                    message_colour = SMODS.Gradients.unik_emult,
                         force_full_val = true,
                 })
             

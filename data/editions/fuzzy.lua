@@ -36,6 +36,7 @@ SMODS.Edition({
 		per = 1,
 		vol = 1,
 	},
+	attributes = { 'detrimental','lose_economy','mult','chips'},
     -- loc_txt = {
 	-- 	name = 'Positive',
     --     label = 'Positive',

@@ -9,7 +9,7 @@ SMODS.Joker {
 	blueprint_compat = false, --nope!
     perishable_compat = true,
 	eternal_compat = false,
-    attributes = { 'stickers','food'},
+    attributes = { 'stickers','food','modify_card'},
     in_pool = function(self)
         if G.jokers and G.jokers.cards then
             for i,v in pairs(G.jokers.cards) do 

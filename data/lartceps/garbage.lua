@@ -8,6 +8,7 @@ SMODS.Consumable{
     no_doe = true,
     no_grc = true,
 	no_ccd = true,
+	attributes = { 'detrimental','playing_card','generation' },
     can_use = function(self, card)
 		return true
 	end,

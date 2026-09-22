@@ -25,7 +25,7 @@ BLINDSIDE.Blind({
                 scalar_value = "e_mult_up",
                 operation = '+',
                 message_key = "a_powmult",
-                    message_colour = G.C.DARK_EDITION,
+                    message_colour = SMODS.Gradients.unik_emult,
                     force_full_val = true,
             })
             SMODS.scale_card(card, {

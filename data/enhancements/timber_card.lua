@@ -14,6 +14,7 @@ SMODS.Enhancement {
             vars = { card.ability.extra.Xmult,card.ability.immutable.Xlogmultbase,new_numerator, new_denominator }
         }
     end,
+    attributes = { 'xmult','xlogmult','chance','destroy_card'},
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then
             return {

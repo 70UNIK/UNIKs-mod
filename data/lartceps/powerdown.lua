@@ -16,6 +16,7 @@ SMODS.Consumable{
 	pos = {x = 2, y = 0},
 	key = 'unik_rip_girlfriend',
     config = {},
+    attributes = { 'detrimental','hand_level','destroy_card' },
     can_use = function(self, card)
 		return true
 	end,

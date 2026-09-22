@@ -27,7 +27,7 @@ SMODS.Consumable{
         UNIK.add_perma_bonus({
             type = 'perma_e_mult',
             message_key = 'a_powmult',
-            message_colour = G.C.DARK_EDITION,
+            message_colour = SMODS.Gradients.unik_emult,
             from_card = card,
             cards = G.hand.highlighted,
             value = card.ability.extra.e_mult,

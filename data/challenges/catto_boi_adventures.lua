@@ -82,22 +82,36 @@ SMODS.Challenge{
         -- end,
 		banned_cards = function(self)
              local banList = {}
-			 banList[#banList+1] = {id = 'j_gluttenous_joker'}
-			 banList[#banList+1] = {id = 'j_onyx_agate'}
+			 --banList[#banList+1] = {id = 'j_gluttenous_joker'}
+			 --banList[#banList+1] = {id = 'j_onyx_agate'}
 			 banList[#banList+1] = {id = 'j_unik_landfill'}
 			banList[#banList+1] = {id = 'c_sigil'}
 			banList[#banList+1] = {id = 'c_star'}
-			banList[#banList+1] = {id = 'c_sigil'}
+			--banList[#banList+1] = {id = 'c_sigil'}
 			banList[#banList+1] = {id = 'c_lovers'}
 			banList[#banList+1] = {id = 'c_moon'}
 			banList[#banList+1] = {id = 'c_unik_ring'}
+			banList[#banList+1] = {id = 'm_wild'}
 			banList[#banList+1] = {id = 'c_unik_denial'}
+			for i,v in pairs(G.P_CENTERS) do
+                    if SMODS.has_attribute(v, "clubs") 
+                    then
+                        banList[#banList+1] = {id = v.key}
+                    end
+                end
 			return banList 
 		end,
         banned_other = function(self)
 			local banList = {}
 			banList[#banList+1] = {id = 'bl_goad', type = 'blind'}
+			banList[#banList+1] = {id = 'bl_club', type = 'blind'}
             banList[#banList+1] = {id = 'bl_head', type = 'blind'}
+			for i,v in pairs(G.P_BLINDS) do
+                    if SMODS.has_attribute(v, "clubs") or SMODS.has_attribute(v, "spades") or SMODS.has_attribute(v, "hearts") 
+                    then
+                        banList[#banList+1] = {id = v.key}
+                    end
+                end
 			return banList
 		end,
 	},
