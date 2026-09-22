@@ -49,6 +49,7 @@ BLINDSIDE.Blind({
             end
         end
     end,
+    always_scores = true,
     unik_ancient = true,
     loc_vars = function(self, info_queue, card)
         local chance, trigger = SMODS.get_probability_vars(card, card.ability.extra.chance, card.ability.extra.trigger, 'flip_alternate')

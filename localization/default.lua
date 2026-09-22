@@ -656,8 +656,8 @@ return {
                 name = "Niko",
                 text = {
                     "X#1# Mult to Joker",
-                    "then double this",
-                    "value when a Yellow",
+                    "then multiply this by",
+                    "#2# when a Yellow",
                     "Blind is scored",
                     "All played Blinds",
                     "must contain",
@@ -3920,6 +3920,20 @@ return {
                     },
                 }
             },
+            m_unik_blindside_epic_fossil = {
+                name = "Mätäneväfossiili", --Decaying fossil
+                text = {
+                    {
+                        "{X:green,C:white}Green{} {X:red,C:white}Red{}",
+                        "When {C:attention}held{}, played Poker Hand",
+                        "{C:mult}Mult{} and {C:chips}Chips{} are",
+                        "multiplied by {X:purple,C:white}X#1#"
+                    },
+                    {
+                        "{C:attention}Burns{} when held"
+                    }
+                }
+            },
             m_unik_blindside_epic_mouth = {
                 name = "Nälänhädänkynnyksellä" --Mouth of Famine, X0.25 Mult to Joker, when played or held, all calculations that increase Joker Mult or Chips decrease it instead, burns when triggered.
             },
@@ -3937,7 +3951,7 @@ return {
                         "{X:unik_echips,C:white}^#4#{} Chips",
                         "{C:attention}after scoring"
                     },
-
+                    {"Always Scores"}
                 }
             },
             m_unik_blindside_epic_hook = {
@@ -4172,17 +4186,16 @@ return {
                 },
             },
             --
-            --green, Other blinds each give ^1 Mult then +^0.02 Mult for each unique hue held in hand it shares (ie: a 2 hue blind can give up to ^1.04 mult)
+            --green, ^1 Mult then +^0.03 Mult --> ^0.04 based on number of base blind hues in played hand
             m_unik_blindside_legendary_chartuese_chamber = {
                 name = "Kidutuskammio",
                 text = {
                     {
                         "{X:green,C:white}Green{} {X:purple,C:white}Purple",
-                        "Other scored blinds",
-                        "each give {X:mult,C:white}X#1#{} Mult",
-                        "and Mult {X:mult,C:white}Xlog_#2#(Mult)",
-                        "for each unique hue",
-                        "{C:attention}shared{} with {C:attention}held{} Blinds",
+                        "{X:unik_emult,C:white}^#1#{} Mult then",
+                        "{X:unik_emult,C:white}+^#2#{} Mult for",
+                        "each {C:attention}unique base{} hues",
+                        "from other blinds in scoring hand",
                     },
                 }
             },

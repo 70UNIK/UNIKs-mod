@@ -13,10 +13,10 @@ BLINDSIDE.Joker({
     end,
     loc_vars = function(self,blind)
         G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult or 2
-        return { vars = { G.GAME.unik_blind_xmult } }
+        return { vars = { G.GAME.unik_blind_xmult,1.5 } }
     end,
     collection_loc_vars = function(self)
-        return { vars = { 2 } }
+        return { vars = { 2,1.5 } }
     end,
     get_loc_debuff_text = function(self)
         return localize("k_unik_all_yellow")
@@ -49,7 +49,7 @@ BLINDSIDE.Joker({
                     colour = G.C.BLACK,
                     focus = context.other_card,
                     func = function ()
-                        G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult * 2
+                        G.GAME.unik_blind_xmult = G.GAME.unik_blind_xmult * 1.5
                         G.HUD_blind:recalculate(true)
                         BLINDSIDE.chipsmodifyV2({x_mult = G.GAME.unik_blind_xmult})  
                         BLINDSIDE.change_fire_amount({amount = 10})
