@@ -3860,12 +3860,70 @@ return {
                         "while held in hand"
                     },
                     {
+                        "{C:unik_copper}Rescores{} once and",
                         "{C:attention}+#3#{} hand size",
                             "while held in hand",
                     },
                     {"{C:green}Retained"},
                 }
             },
+            m_unik_blindside_epic_hammer = { 
+                name = "Epäoikeudenmukaisuudenvasara", --Hammer of Injustice
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:green,C:white}Green{}",
+                        "While {C:attention}held in hand{},",
+                        "{C:unik_copper}rescore {C:attention}first{} scoring",
+                        "Blind for every",
+                        "{C:attention}#1#{} Blind#<s>1# held",
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} rescore#<s>2#)"
+                    },
+                    {
+                        "{C:attention}+#3#{} hand size",
+                            "while held in hand",
+                    },
+                },
+            },
+            m_unik_blindside_epic_hammer_upgraded = { 
+                name = "Epäoikeudenmukaisuudenvasara", --Hammer of Injustice
+                text = {
+                    {
+                        "{X:dark_edition,C:white}Faded{} {X:green,C:white}Green{}",
+                        "While {C:attention}held in hand{},",
+                        "{C:unik_copper}rescore {C:attention}first{} and {C:attention}last",
+                        "scoring Blinds for every",
+                        "{C:attention}#1#{} Blind#<s>1# held",
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} rescore#<s>2#)"
+                    },
+                    {
+                        "{C:attention}+#3#{} hand size",
+                            "while held in hand",
+                    },
+                },
+            },
+            m_unik_blindside_epic_dagger = {
+                name = "Murhantikari", --Dagger of murder, X1 Mult, +X1 Mult per item Banished this run, creates a KILL when scored (must have room), 
+                text = {
+                    {
+                        "{X:red,C:white}Red{} {X:dark_edition,C:white}Faded{}",
+                        "{X:mult,C:white}+X#1#{} Mult per {C:attention}unique",
+                        "item {C:red}banished{} this run",
+                       
+                    },
+                    {
+                         "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
+                    },
+                    {
+                        "When scored",
+                        "create a {C:bld_obj_ritual}K I L L",
+                        "{C:inactive}(Must have room)",
+                    },
+                }
+            },
+            m_unik_blindside_epic_mouth = {
+                name = "Nälänhädänkynnyksellä" --Mouth of Famine, X0.25 Mult to Joker, when played or held, all calculations that increase Joker Mult or Chips decrease it instead, burns when triggered.
+            },
+
             m_unik_blindside_epic_flip = {
                 name = "Ylösalaisin", --upside down
                 text = {
@@ -3990,7 +4048,7 @@ return {
                                         {"{C:green}Retained"},
                 }
             },
-            --^1.5 chips, but banishes all other played blinds if score exceeds ^1.4 requirements
+            --I made it still destroy held and played blinds regardless to retain some challenge of using this and that locked blind will be useful.
             m_unik_blindside_legendary_indigo_icbm = {
                 name = "Tuomiopäivänlaite",
                 text = {
@@ -4019,8 +4077,7 @@ return {
                         "exceeds {C:attention}^#2#{} requirements",
                         "{C:inactive}({C:attention}#3#{C:inactive})",
                         "{C:red,E:2}Destroy{} {C:attention}all{} other",
-                        "played Blinds and",
-                        "{C:attention}Burn{} {C:attention}all{} held Blinds",
+                        "played and held Blinds",
                     },
                 }
             },

@@ -25,7 +25,7 @@ BLINDSIDE.Blind({
                     colour = G.C.DARK_EDITION,
                 }
         end
-        if context.unik_after_effect and context.scoring_hand and card.ability.extra.upgraded and (card.area == G.hand or card.area == G.play) then
+        if context.unik_after_effect and context.scoring_hand and card.ability.extra.upgraded and (card.area == G.hand or card.area == G.play) and (context.cardarea == G.hand or context.cardarea == G.play) then
             return {
                 rescore = card.ability.extra.repetitions
             }

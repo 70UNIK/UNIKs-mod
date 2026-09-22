@@ -1,30 +1,38 @@
---X1.5 Mult and Xlog mult when held in hand, rescores once, +1 hand size while held, retained
+--retriggers the first (or last) scored blind once for every 3 blinds held in hand, +1 Hand Size when held in hand
 BLINDSIDE.Blind({
-    key = 'unik_blindside_epic_bellows',
+    key = 'unik_blindside_epic_hammer',
     atlas = 'unik_blindside_epic_blinds',
-    pos = {x = 0, y = 4},
+    pos = {x = 0, y = 8},
     config = {
         extra = {
             value = 1,
-            x_mult = 1.6,
-            x_mult_up = 0.6,
-            log_base = 25,
-            log_base_down = 12,
+            interval = 2,
             hand_size = 1,
-            retain = true,
         }},
-    hues = {"Yellow","Blue"},
+    hues = {"Faded","Green"},
     calculate = function(self, card, context) 
-        if context.cardarea == G.hand and context.main_scoring then
-            return {
-                x_mult = card.ability.extra.x_mult,
-                xlog_mult = card.ability.extra.log_base,
-            }
-        end
-        if context.unik_after_effect and context.cardarea == G.hand and (card.area == G.hand) and ((not context.cardarea and not context.main_eval) or context.main_eval) then
-            return {
-                rescore = 1
-            }
+        if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and ((not context.cardarea and not context.main_eval) or context.main_eval) and card.area == G.hand then
+            local validCards = {}
+            local rescores = math.floor((#G.hand.cards - #G.hand.highlighted)/card.ability.extra.interval)
+            for i = 1, math.floor(rescores) do
+                local strct = {}
+                strct[#strct+1] = context.scoring_hand[1]
+                if card.ability.extra.upgraded then
+                    strct[#strct+1] = context.scoring_hand[#context.scoring_hand]
+                end
+                strct.unik_scoring_segment = true
+                validCards[#validCards+1] = strct
+            end
+            
+            if #validCards > 0 then
+                return {
+                    target_cards = validCards,
+                    card = context.blueprint_card or card,
+                    message = '+1',
+                    colour = HEX('F6EEF8'),
+                }
+            end   
+            
         end
         if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
             card.ability.extra.unik_hand_size_added = true
@@ -47,17 +55,20 @@ BLINDSIDE.Blind({
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
+        local triggers = 0
+        if G.hand and G.hand.cards then
+            triggers = math.floor((#G.hand.cards - #G.hand.highlighted)/card.ability.extra.interval)
+        end
         return {
+            key = card.ability.extra.upgraded and 'm_unik_blindside_epic_hammer_upgraded' or 'm_unik_blindside_epic_hammer',
             vars = {
-                card.ability.extra.x_mult,card.ability.extra.log_base,card.ability.extra.hand_size
+                card.ability.extra.interval,triggers,card.ability.extra.hand_size
             }
         }
     end,
     upgrade = function(card)
         if not card.ability.extra.upgraded then
-            card.ability.extra.x_mult = card.ability.extra.x_mult +card.ability.extra.x_mult_up
-            card.ability.extra.log_base = card.ability.extra.log_base - card.ability.extra.log_base_down
-            card.ability.extra.upgraded = true
+        card.ability.extra.upgraded = true
         end
     end
 })
