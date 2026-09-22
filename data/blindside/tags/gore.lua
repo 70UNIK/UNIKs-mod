@@ -23,10 +23,11 @@ SMODS.Tag {
                 return true end)
             tag.triggered = true
         end
-        if context.type == 'unik_before_play' and not G.GAME.unik_neck_buffer then
-            G.GAME.unik_neck_buffer = true
+        if context.type == 'unik_before_play' then
+            --G.GAME.unik_neck_buffer = true
             G.E_MANAGER:add_event(Event({
-                    trigger = 'before',
+                    trigger = 'after',
+                    delay= 1,
                     func = function()
                         if G.jokers and G.jokers.cards and #G.jokers.cards > 0 then
                             local neck_banish =  G.jokers.cards[1]
@@ -40,7 +41,7 @@ SMODS.Tag {
                                 G.GAME.cry_banished_keys = {}
                             end
                             G.GAME.cry_banished_keys[neck_banish.config.center.key] = true
-                            G.GAME.unik_neck_buffer = nil
+                           -- G.GAME.unik_neck_buffer = nil
                         end
                         return true
                     end

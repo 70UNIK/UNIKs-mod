@@ -55,7 +55,7 @@ SMODS.Back {
             ease_dollars(3)
             delay(0.3)
         end
-        if  context.setting_blind and context.blind then
+        if  context.setting_blind and context.blind and not context.perkeo then
             local cardsadded = {}
              G.E_MANAGER:add_event(Event({
                 delay = 1,

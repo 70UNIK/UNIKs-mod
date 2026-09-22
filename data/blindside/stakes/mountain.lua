@@ -10,7 +10,7 @@ SMODS.Stake{
         
     end,
     calculate = function(self, context) 
-        if  context.setting_blind and context.blind and context.blind.boss then
+        if  context.setting_blind and context.blind and context.blind.boss and not context.perkeo then
             local cardsadded = {}
              G.E_MANAGER:add_event(Event({
                 delay = 1,

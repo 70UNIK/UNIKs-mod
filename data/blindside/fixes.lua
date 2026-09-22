@@ -13,7 +13,7 @@
  --exclude cursed tags
  SMODS.Joker:take_ownership("j_bld_matryoshka",{
     calculate = function(self, card, context)
-            if context.setting_blind and card.ability.extra.last_tag then
+            if context.setting_blind and card.ability.extra.last_tag and not context.perkeo then
                 G.E_MANAGER:add_event(Event({
                     func = function ()
                         add_tag(Tag(card.ability.extra.last_tag))

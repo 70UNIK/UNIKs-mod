@@ -8,6 +8,7 @@
                 value = 30,
                 jokerxmult = 1.5,
                 jokerxmultdown = 0.75,
+                stubborn = true,
             }},
         hues = {"Faded"},
         curse = true,

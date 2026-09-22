@@ -45,7 +45,7 @@ SMODS.Back {
                 G.playing_cards[i]:set_debuff(false)
             end
         end
-        if context.setting_blind then
+        if context.setting_blind and not context.perkeo then
             add_tag(Tag('tag_bld_maxim'))
             delay(0.3)
         end

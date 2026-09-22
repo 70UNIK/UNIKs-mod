@@ -30,7 +30,7 @@ SMODS.Tag {
         if context.type == 'after_hand' then
             mult = mod_mult(mult ^ self.config.extra.e_mult)
             update_hand_text({delay = 0}, {mult = mult})
-            tag_area_status_text(tag, "^0.9", G.C.DARK_EDITION, false, 0)
+            tag_area_status_text(tag, "^0.9", SMODS.Gradients.unik_emult, false, 0)
             G.E_MANAGER:add_event(Event({trigger = 'immediate', func = function()
                 play_sound('unik_emult',0.9,1)
                 tag:juice_up()
@@ -39,7 +39,7 @@ SMODS.Tag {
             delay(1)
             hand_chips = mod_chips(hand_chips^ self.config.extra.e_mult)
             update_hand_text({delay = 0}, {chips = hand_chips})
-            tag_area_status_text(tag, "^0.9", G.C.DARK_EDITION, false, 0)
+            tag_area_status_text(tag, "^0.9", SMODS.Gradients.unik_echips, false, 0)
             G.E_MANAGER:add_event(Event({trigger = 'immediate', func = function()
                 play_sound('unik_echip',0.9,1)
                 tag:juice_up()

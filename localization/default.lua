@@ -657,7 +657,7 @@ return {
                 text = {
                     "X#1# Mult to Joker",
                     "then multiply this by",
-                    "#2# when a Yellow",
+                    "X#2# when a Yellow",
                     "Blind is scored",
                     "All played Blinds",
                     "must contain",
