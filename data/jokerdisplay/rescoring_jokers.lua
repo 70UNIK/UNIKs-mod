@@ -111,9 +111,10 @@ JokerDisplay.Definitions["j_unik_aquamarine"] = {
         { ref_table = "card.joker_display_values", ref_value = "not_", scale = 0.3, colour = G.C.RED },
 	},
     rescore_function = function(playing_card, scoring_hand, held_in_hand, joker_card)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(joker_card, joker_card.ability.extra.base_odds, joker_card.ability.extra.odds, 'unik_aquamarine_resc2')
         if held_in_hand then return 0 end
         return playing_card:is_suit('unik_Noughts') and JokerDisplay.in_scoring(playing_card, scoring_hand) and 
-        not SMODS.pseudorandom_probability(joker_card, 'unik_aquamarine_resc2', joker_card.ability.extra.base_odds, joker_card.ability.extra.odds, 'unik_aquamarine_resc2') and
+        not pseudorandom('unik_aquamarine_resc3') > new_numerator/new_denominator and
                 joker_card.ability.extra.rescores * JokerDisplay.calculate_joker_triggers(joker_card) or 0
     end,
     calc_function = function(card)

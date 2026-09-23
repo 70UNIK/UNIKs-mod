@@ -26,6 +26,7 @@ SMODS.Edition({
 	-- 		"{C:red}#1#{} #2#"
 	-- 	}
 	-- },
+	attributes = { 'xmult' },
     config = {
 		base_x_mult = 1.5, x_mult = 2,joker_x_mult = 0.5,trigger = nil,metal_scoring = nil
 	},

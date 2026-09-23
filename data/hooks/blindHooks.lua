@@ -86,10 +86,12 @@ end
 local disblref2 = Blind.disable
 
 function Blind:disable()
+    
 	local obj = self.config.blind
 	if obj and obj.boss then
 		if obj.boss.legendary or obj.boss.exotic then
-			play_sound('cancel', 0.7 + 0.05, 0.7)
+			play_sound('unik_loudbuzzer',0.75)
+         G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
             local text = localize('k_unik_boss_immune')
             attention_text({
                 scale = 1.0, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
@@ -98,7 +100,8 @@ function Blind:disable()
 			G.GAME.blind:wiggle()
 			return true
         elseif obj.boss.epic then
-            play_sound('cancel', 0.8, 1)
+            play_sound('unik_loudbuzzer',1)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
             local text = 'Blind is immune!'
             attention_text({
                 scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
@@ -106,7 +109,8 @@ function Blind:disable()
 			G.GAME.blind:wiggle()
 			return true
 		elseif obj.boss.ancient then
-            play_sound('cancel', 0.8, 1)
+            play_sound('unik_loudbuzzer',1)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
             local text = localize('k_unik_joker_immune')
             attention_text({
                 scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
@@ -116,7 +120,9 @@ function Blind:disable()
         end
         
 	end
+    G.GAME.unik_override_prince = true
     local ret = disblref2(self)
+    G.GAME.unik_override_prince = true
     if SMODS and SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config and SMODS.OPENED_BOOSTER.config.center then
         local obj2 = SMODS.OPENED_BOOSTER.config.center
         if obj2 and obj2.unik_disablable and obj2.unik_disablable == true then
@@ -135,25 +141,86 @@ function Blind:disable()
 end
 
 --blindside rerollers
+--will have to override if film reel is obtained
+
 local bsreroll_boss = G.FUNCS.blind_reroll_boss
 G.FUNCS.blind_reroll_boss = function(e) 
+    local deduct_hand = true
+    if G.from_boss_tag then
+        deduct_hand = false
+    end
     local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
-		play_sound('cancel', 0.7 + 0.05, 0.7)
+	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) and not G.GAME.used_vouchers["v_bld_film_reel"] then
+		play_sound('unik_loudbuzzer',0.75)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
         })
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
-    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
-        play_sound('cancel', 0.8, 1)
+    elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) and not G.GAME.used_vouchers["v_bld_film_reel"] then
+        play_sound('unik_loudbuzzer', 1)
+         G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_nope_ex')
+       
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
         })
 	else
-		return bsreroll_boss(e)
+        --complex film reel procedure: rerolls all 3
+        if G.GAME.used_vouchers["v_bld_film_reel"] then
+            local triggered = false
+
+            local set = {"Small","Big","Boss"}
+            for i = 1, #set do
+                if G.GAME.round_resets.blind_states[set[i]] ~= 'Defeated' and G.GAME.round_resets.blind_states[set[i]] ~= 'Skipped' and G.GAME.round_resets.blind_states[set[i]] ~= 'Hidden' then
+                    local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices[set[i]]]
+                    if obj2 and obj2.boss and (obj2.boss.legendary or obj2.boss.exotic) then
+                        play_sound('unik_loudbuzzer',0.75)
+                        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+                        local text = localize('k_unik_boss_reroll_nope')
+                        attention_text({
+                            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+                        })
+                        G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+                        --jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+                    elseif obj2 and obj2.boss and (obj2.boss.epic or obj2.boss.ancient ) then
+                        play_sound('unik_loudbuzzer', 1)
+                        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+                        local text = localize('k_nope_ex')
+                        attention_text({
+                            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj2.boss_colour or G.C.RED
+                        })
+                    else
+                        if set[i] == "Small" then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_small()
+                            triggered = true
+                        elseif set[i] == "Big" then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_big()
+                             triggered = true
+                        elseif set[i] == "Boss" then
+                            G.from_boss_tag = true
+                            G.FUNCS.reroll_boss()
+                             triggered = true
+                        end
+    
+                    end
+                end
+            end
+            if deduct_hand and  triggered then 
+                ease_hands_played(-1)
+                G.GAME.round_resets.hands = G.GAME.round_resets.hands - 1
+                G.GAME.round_resets.hands_removed = (G.GAME.round_resets.hands_removed or 0) + 1
+            end
+            G.from_boss_tag = nil
+            
+        else
+            return bsreroll_boss(e)
+        end
+		
 	end
 end
 --big reroll
@@ -161,7 +228,8 @@ local bsreroll_big =  G.FUNCS.reroll_big
 G.FUNCS.reroll_big = function(e) 
     local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
 	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
-		play_sound('cancel', 0.7 + 0.05, 0.7)
+		play_sound('unik_loudbuzzer',0.75)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
@@ -169,7 +237,8 @@ G.FUNCS.reroll_big = function(e)
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
     elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
-        play_sound('cancel', 0.8, 1)
+        play_sound('unik_loudbuzzer', 1)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_nope_ex')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
@@ -183,7 +252,8 @@ local bsreroll_small =    G.FUNCS.reroll_small
   G.FUNCS.reroll_small = function(e) 
     local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
 	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
-		play_sound('cancel', 0.7 + 0.05, 0.7)
+		play_sound('unik_loudbuzzer',0.75)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
@@ -191,7 +261,8 @@ local bsreroll_small =    G.FUNCS.reroll_small
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
     elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
-        play_sound('cancel', 0.8, 1)
+        play_sound('unik_loudbuzzer', 1)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_nope_ex')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
@@ -201,13 +272,12 @@ local bsreroll_small =    G.FUNCS.reroll_small
 	end
 end
 
-
-
 local gfrb2 = G.FUNCS.reroll_boss
 G.FUNCS.reroll_boss = function(e)
 	local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
 	if obj and obj.boss and (obj.boss.legendary or obj.boss.exotic) then
-		play_sound('cancel', 0.7 + 0.05, 0.7)
+		play_sound('unik_loudbuzzer',0.75)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
@@ -215,7 +285,8 @@ G.FUNCS.reroll_boss = function(e)
         G.ROOM.jiggle = G.ROOM.jiggle + 1.5
 		--jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
     elseif obj and obj.boss and (obj.boss.epic or obj.boss.ancient ) then
-        play_sound('cancel', 0.8, 1)
+        play_sound('unik_loudbuzzer', 1)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_nope_ex')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
@@ -229,7 +300,8 @@ local bunco_hook = G.FUNCS.use_blind_card
 G.FUNCS.use_blind_card = function(e)
     local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
     if obj and obj.boss and obj.boss.legendary then
-		play_sound('cancel', 0.7 + 0.05, 0.7)
+		play_sound('unik_loudbuzzer',0.75)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_unik_boss_reroll_nope')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
@@ -255,7 +327,8 @@ G.FUNCS.use_blind_card = function(e)
 
         G.FUNCS.end_consumeable(nil, 0.2)
     elseif obj and obj.boss and obj.boss.epic then
-        play_sound('cancel', 0.8, 1)
+        play_sound('unik_loudbuzzer', 1)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_nope_ex')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
@@ -284,6 +357,32 @@ G.FUNCS.use_blind_card = function(e)
 	end
 end
 
+--SMODS BREAKAGE FIX!
+local restoreOldAnim = AnimatedSprite.animate
+function AnimatedSprite:animate()
+    if self.legendary_glitch_anim then
+        local new_frame = math.floor(G.ANIMATION_FPS*(G.TIMERS.REAL - self.offset_seconds))%self.current_animation.frames
+        if new_frame ~= self.current_animation.current then
+            self.current_animation.current = new_frame
+            self.frame_offset = math.floor(self.animation.w*(self.current_animation.current))
+            self.sprite:setViewport( 
+                self.frame_offset,
+                self.animation.h*self.animation.y,
+                self.animation.w,
+                self.animation.h)
+        end
+        if self.float then 
+            self.T.r = 0.02*math.sin(2*G.TIMERS.REAL+self.T.x)
+            self.offset.y = -(1+0.3*math.sin(0.666*G.TIMERS.REAL+self.T.y))*self.shadow_parrallax.y
+            self.offset.x = -(0.7+0.2*math.sin(0.666*G.TIMERS.REAL+self.T.x))*self.shadow_parrallax.x
+        end
+    else
+        local ret = restoreOldAnim(self)
+        return ret
+    end
+    
+end
+
 --For legendary blinds,etc... It changes the atlas, without changing the base atlas
 function AnimatedSprite:shift_atlas(sprite_pos)
     self.animation = {
@@ -301,7 +400,8 @@ G.FUNCS.skip_blind = function(e)
     local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Big]
     local obj3 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Small]
 	if obj.key == 'bl_unik_epic_cookie' or G.GAME.modifiers.unik_no_skipping or (obj.boss and obj.boss.unskippable_ante) then
-        play_sound('cancel', 0.8, 1)
+        play_sound('unik_loudbuzzer', 1)
+        G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
         local text = localize('k_nope_ex')
         attention_text({
             scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj.boss_colour or G.C.RED
@@ -309,21 +409,45 @@ G.FUNCS.skip_blind = function(e)
         if e and e.disable_button then
             e.disable_button = nil
         end
-    elseif G.GAME.blind_on_deck == "Small" and obj3.boss and (obj3.boss.epic or obj3.boss.legendary or obj3.boss.unskippable_ante and G.GAME.round_resets.blind_states.Small ~= "Defeated") then
-        play_sound('cancel', 0.8, 1)
-        local text = localize('k_nope_ex')
-        attention_text({
-            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj3.boss_colour or G.C.RED
-        })
+    elseif G.GAME.blind_on_deck == "Small" and obj3.boss and (obj3.boss.epic or obj3.boss.legendary or obj3.boss.ancient or obj3.boss.exotic or obj3.boss.unskippable_ante and G.GAME.round_resets.blind_states.Small ~= "Defeated") then
+        if obj3.boss.legendary or obj3.boss.exotic then
+            play_sound('unik_loudbuzzer',0.75)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_unik_boss_reroll_nope')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+            })
+            G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+            --jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+        else
+            play_sound('unik_loudbuzzer', 1)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_nope_ex')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj3.boss_colour or G.C.RED
+            })
+        end
         if e and e.disable_button then
             e.disable_button = nil
         end
-    elseif G.GAME.blind_on_deck == "Big" and obj2.boss and (obj2.boss.epic or obj2.boss.legendary or (obj2.boss.unskippable_ante and G.GAME.round_resets.blind_states.Big ~= "Defeated")) then
-        play_sound('cancel', 0.8, 1)
-        local text = localize('k_nope_ex')
-        attention_text({
-            scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj2.boss_colour or G.C.RED
-        })
+    elseif G.GAME.blind_on_deck == "Big" and obj2.boss and (obj2.boss.epic or obj2.boss.legendary or obj2.boss.ancient or obj2.boss.exotic  or (obj2.boss.unskippable_ante and G.GAME.round_resets.blind_states.Big ~= "Defeated")) then
+        if obj2.boss.legendary or obj2.boss.exotic then
+            play_sound('unik_loudbuzzer',0.75)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_unik_boss_reroll_nope')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
+            })
+            G.ROOM.jiggle = G.ROOM.jiggle + 1.5
+            --jl.a(localize('k_nope_ex'), G.SETTINGS.GAMESPEED * 2, 0.8, G.C.RED)
+        else
+            play_sound('unik_loudbuzzer', 1)
+            G.ROOM.jiggle = (G.ROOM.jiggle or 0) + 25
+            local text = localize('k_nope_ex')
+            attention_text({
+                scale = 0.9, text = text, hold = 0.75, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = obj2.boss_colour or G.C.RED
+            })
+        end
         if e and e.disable_button then
             e.disable_button = nil
         end
@@ -388,6 +512,7 @@ end
 
 local end_roundref = end_round
 function end_round()
+    
     local instakill = G.GAME.blind:unik_after_defeat(G.GAME.chips,G.GAME.blind.chips)
     if instakill then
         G.GAME.chips = -1
@@ -399,4 +524,115 @@ function end_round()
     local ret = end_roundref()
 
     return ret
+end
+
+local pcfh = G.FUNCS.play_cards_from_highlighted
+function G.FUNCS.play_cards_from_highlighted(e)
+	G.GAME.before_play_buffer2 = true
+    stop_use()
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            G.STATE = G.STATES.HAND_PLAYED
+            G.STATE_COMPLETE = true
+            return true
+        end
+    }))
+    
+    --Steel blind edition, each held card
+
+    --Epic cookie: Deselect cards pending destruction
+    for i=1, #G.hand.highlighted do
+        if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.set_for_destruction then
+            G.hand:remove_from_highlighted(G.hand.highlighted[i])
+        end
+    end
+    --Only play if highlight cards are > 0
+    if (SMODS.Mods["Cryptid"] or {}).can_load  then
+        if #G.hand.highlighted == 0 and (Cryptid.enabled("set_cry_poker_hand_stuff") == true) and G.PROFILES[G.SETTINGS.profile].cry_none then
+            G.PROFILES[G.SETTINGS.profile].cry_none = true
+        end
+    end
+
+    --Now that none hand is enabled, no need to disable playing hopefully it unlocks none hand by then
+    if ((not (SMODS.Mods["Cryptid"] or {}).can_load  ) or (Cryptid.enabled("set_cry_poker_hand_stuff") ~= true)) and #G.hand.highlighted == 0 then
+        
+    else
+
+        -- -NAN fix
+        if G.GAME.round_scores['hand'] and not G.GAME.round_scores['hand'].amt then
+            G.GAME.round_scores['hand'].amt = math.huge
+            G.GAME.round_scores.hand.amt = math.huge
+        end
+
+
+        --Polymino autoselect all cards in selected group
+        local id = {}
+        G.GAME.unik_no_finger_trigger = true
+
+        if G.hand and G.hand.highlighted then
+            for i = 1, #G.hand.highlighted do
+                if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group then
+                    local exists = false
+                    for i,v in pairs(id) do
+
+                        if G.hand.highlighted[i] and G.hand.highlighted[i].ability and G.hand.highlighted[i].ability.group and G.hand.highlighted[i].ability.group.id == v then
+                            exists = true
+                        end
+                    end
+                    if not exists then
+                        id[#id+1] = G.hand.highlighted[i].ability.group.id
+                    end
+                    
+                end
+            end
+        end
+        --enable 
+        if #G.hand.highlighted > 6 then
+            G.GAME.unik_scored_over_5 = true 
+        end
+       -- print(id)
+        --print(#id)
+        if #id > 0 then
+            for i,v in pairs(G.hand.cards) do
+                for j,x in pairs(id) do
+                    
+                    if v and v.ability and v.ability.group and v.ability.group.id == x and not v.highlighted then
+                        G.hand:brute_force_highlight(v)
+                    end
+                end
+            end
+        end
+        G.GAME.unik_wiggle_consumed = nil
+        G.GAME.unik_no_finger_trigger = nil
+        
+        G.GAME.blind:unik_before_play()
+        if G.GAME.blind_edition and G.GAME.blind_edition[G.GAME.blind_on_deck] and not reset and (G.GAME.blind and G.GAME.blind.name and G.GAME.blind.name ~= '') then
+            local edi = G.P_BLIND_EDITIONS[G.GAME.blind_edition[G.GAME.blind_on_deck]]
+            if edi.unik_before_play and (type(edi.unik_before_play) == "function") then
+                edi:unik_before_play()
+            end
+        end
+        
+        if G.GAME.modifiers.unik_decay_on_play then
+            for i = 1, #G.hand.highlighted do
+                G.hand.highlighted[i].ability.unik_decaying = true
+            end
+        end
+        G.GAME.no_repeat_play = true
+        SMODS.calculate_context({on_select_play = true})
+        G.GAME.no_repeat_play = nil
+        for i = 1, #G.GAME.tags do
+            G.GAME.tags[i]:apply_to_run({type = 'unik_before_play'})
+        end
+        --end
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                UNIK.railroad_suits()
+                return true
+            end
+        }))
+        pcfh(e)
+    end
+	G.GAME.before_play_buffer2 = nil
 end

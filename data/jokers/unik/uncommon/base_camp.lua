@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_base_camp',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 7, y = 3 },
     cost = 5,
@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicolon_compat = true,
     immutable = true,
+    attributes = { 'unik_summit_card','emult','echips','economy','xmult','xchips','mult','chips' },
     loc_vars = function(self, info_queue, center)
         if G.GAME and not G.GAME.unik_base_camp_bonus then
             G.GAME.unik_base_camp_bonus = {

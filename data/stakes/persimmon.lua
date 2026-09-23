@@ -16,7 +16,7 @@ SMODS.Stake{
     colour = HEX('ec5800'),
     shiny = true,
     pos = { x = 1, y = 0 },
-    sticker_pos = { x = 1, y = 0 },
+    sticker_pos = { x = 1, y = 3 },
     atlas = 'unik_stakes',
-    sticker_atlas = 'unik_sticker_stakes'
+    sticker_atlas = 'unik_stickers'
 }

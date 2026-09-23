@@ -2,9 +2,9 @@
 SMODS.Consumable{
     set = "Tarot",
    	key = "unik_excommunicated",
-	pos = { x = 0, y = 2 },
+	pos = { x = 0, y = 6 },
 	config = {  max_highlighted = 2 },
-	atlas = "unik_tarots",
+	atlas = "unik_consumables",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
 
@@ -12,6 +12,7 @@ SMODS.Consumable{
 	end,
     	    unlocked = true,
     discovered = true,
+    attributes = {'bunc_linked','destroy_cards'},
      use = function(self, card)
         local cards = G.hand.highlighted
         for i = #cards, 1, -1 do

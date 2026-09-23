@@ -1,12 +1,13 @@
 SMODS.Joker {
     key = 'unik_skipping_stones',
-    atlas = 'unik_common',
-	pos = { x = 1, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 1, y = 6 },
     rarity = 1,
     cost = 5,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
+    attributes = { 'enhancements','retrigger','rank','suit' },
     config = { extra = {retriggers = 1},immutable = {max_retriggers = 50} },
     loc_vars = function(self, info_queue, center)
         return { 

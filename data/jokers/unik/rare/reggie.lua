@@ -1,9 +1,3 @@
-SMODS.Atlas {
-	key = "unik_reggie",
-	path = "unik_reggie.png",
-	px = 71,
-	py = 95
-}
 
 local reggie_quotes = {
 	normal = {
@@ -20,16 +14,17 @@ local reggie_quotes = {
 }
 SMODS.Joker {
     key = "unik_reggie",
-    atlas = 'unik_reggie',
+    atlas = 'unik_character_jokers',
     rarity = 3,
     cost = 7,
-    pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+    pos = { x = 6, y = 4 },
+	soul_pos = { x = 7, y = 4 },
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     config = {extra = {rescore = 1}, immutable = {max_rescores = 10}},
     pronouns = "he_him",
+    attributes = { 'rescore','enhancements','character'},
     enhancement_gate = 'm_unik_pink',
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'

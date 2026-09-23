@@ -2,7 +2,10 @@
 
 local updateHook = Game.update
 function Game:update(dt)
-
+    if G.GAME.modifiers and G.GAME.modifiers.no_blind_reward then
+        G.GAME.modifiers.no_blind_reward['bl_unik_blindside_fiendish_joker'] = true
+    end
+    
     G.GAME.unik_excommunication = false
     --Artisan builds
     if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss and (
@@ -24,8 +27,46 @@ function Game:update(dt)
         G.GAME.unik_artisan_reroll_time = nil
         G.GAME.ante_rerolls = 0
     end
+    -- if G.GAME and G.GAME.blind then
+    --     G.GAME.blind:change_colour()
+    -- end
+    
     if G.GAME.unik_dynamic_text_realtime then
 		G.GAME.blind:set_text()
+    end
+    local track_ante_purchases = false
+    local blindchoices = {"Small","Big",'Boss'}
+    if G.GAME.round_resets and G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss then
+        for i = 1, #blindchoices do
+            if G.GAME.round_resets.blind_states[blindchoices[i]] ~= 'Defeated' and G.GAME.round_resets.blind_states[blindchoices[i]] ~= 'Skipped' and G.GAME.round_resets.blind_states[blindchoices[i]] ~= 'Hidden' then
+                local obj = G.P_BLINDS[G.GAME.round_resets.blind_choices[blindchoices[i]]]
+                if obj.track_ante_purchases then
+                    track_ante_purchases = true
+                end
+            end
+        end
+    end
+    
+    if track_ante_purchases then
+        G.GAME.enable_ante_purchase_tracking = true
+    else
+        G.GAME.enable_ante_purchase_tracking = false
+        G.GAME.unik_ante_spent = 0
+    end
+
+    --redeo
+    if G.GAME.round_resets.blind_choices and G.GAME.round_resets.blind_choices.Boss and ( 
+        G.GAME.round_resets.blind_choices.Boss == 'bl_unik_artisan_builds' or
+        G.GAME.round_resets.blind_choices.Boss == 'bl_unik_epic_artisan' or 
+        G.GAME.round_resets.blind_choices.Big == 'bl_unik_epic_artisan' or 
+        G.GAME.round_resets.blind_choices.Small == 'bl_unik_epic_artisan' or 
+        G.GAME.round_resets.blind_choices.Big == 'bl_unik_artisan_builds' or  
+        G.GAME.round_resets.blind_choices.Small == 'bl_unik_artisan_builds'
+        ) then
+        G.GAME.unik_artisan_reroll_time = true
+    else
+        G.GAME.unik_artisan_reroll_time = nil
+        G.GAME.ante_rerolls = 0
     end
     
     if  G.P_CENTERS and G.P_CENTERS.j_unik_fuzzy then
@@ -40,15 +81,21 @@ function Game:update(dt)
 
     if G.ARGS.LOC_COLOURS or self.C then
         self.C.UNIK_RGB_HUE = self.C.UNIK_RGB_HUE or 0
-		local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
+		
+        if self.C.UNIK_RGB_HUE then
+            local anim_timer = self.TIMERS.REAL * 10
+            local p = anim_timer % 360
+            --print("anim colors: " .. p)
+		    self.C.UNIK_RGB_HUE = (p)
+            local r, g, b = hsv2222(self.C.UNIK_RGB_HUE / 360, .5, 1)
 
-        self.C.UNIK_RGB = self.C.UNIK_RGB or {0,0,0,1}
-        if self.C.UNIK_RGB then
-            self.C.UNIK_RGB[1] = r
-            self.C.UNIK_RGB[3] = g
-            self.C.UNIK_RGB[2] = b
+            self.C.UNIK_RGB = self.C.UNIK_RGB or {0,0,0,1}
+            if self.C.UNIK_RGB then
+                self.C.UNIK_RGB[1] = r
+                self.C.UNIK_RGB[3] = g
+                self.C.UNIK_RGB[2] = b
+            end
         end
-		self.C.UNIK_RGB_HUE = (self.C.UNIK_RGB_HUE + 0.5) % 360
         if G.ARGS.LOC_COLOURS then
             G.ARGS.LOC_COLOURS.UNIK_RGB = self.C.UNIK_RGB
         end
@@ -58,6 +105,18 @@ function Game:update(dt)
             self.C.UNIK_ANCIENT[1] = 0.5411764705882353 + 0.3*math.sin(self.TIMERS.REAL*1.3)
             self.C.UNIK_ANCIENT[2] = 0.20784313725490197 + 0.15*math.sin(self.TIMERS.REAL*1.3)
             self.C.UNIK_ANCIENT[3] = 0.6823529411764706 + 0.31*math.sin(self.TIMERS.REAL*1.3)
+        end
+        self.C.UNIK_EXOTIC = self.C.UNIK_EXOTIC or {0.4392156862745098,0.5450980392156862,0.5686274509803921,1}
+        --exotic colors for legendary blinds
+        if self.C.UNIK_EXOTIC then
+            local exotic_colors = {{0.4392156862745098,0.5450980392156862,0.5686274509803921,1},{0.11764705882352941,0.6196078431372549,0.7294117647058823,1}}
+            local anim_timer = self.TIMERS.REAL * 1.5
+            local p = 0.5 * (math.sin(anim_timer) + 1)
+           -- print("exotic colors: " .. p)
+            for i = 1, 4 do
+                self.C.UNIK_EXOTIC[i] = exotic_colors[1][i] * p + exotic_colors[2][i] * (1 - p)
+            end
+            --HEX("708b91"), HEX("1e9eba")
         end
         self.C.UNIK_SHITTY_EDITION = self.C.UNIK_SHITTY_EDITION or {0,0,0,1}
         --self.C.UNIK_SHITTY_EDITION[3] = 0.6+0.2*math.sin(self.TIMERS.REAL*1.3)

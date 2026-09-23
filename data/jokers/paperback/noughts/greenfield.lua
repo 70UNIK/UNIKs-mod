@@ -1,15 +1,16 @@
 SMODS.Joker {
     key = 'unik_lush_forest',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 1, y = 4 },
     config = {
         extra = {
-        xMult = 1.075,
-        xMult_gain = 0.075,
-        xMult_base = 1.075,
+        xMult = 1.08,
+        xMult_gain = 0.3,
+        xMult_base = 1.08,
         suit = "unik_Noughts",
         }
     },
+    attributes = { 'unik_noughts','xmult','suit' },
     rarity = 2,
     cost = 6,
     unlocked = true,

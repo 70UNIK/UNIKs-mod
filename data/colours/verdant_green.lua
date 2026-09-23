@@ -1,17 +1,19 @@
 --create a negative awakening every 8 rounds. Supercedes stone grey.
 SMODS.Consumable({
     object_type = "Consumable",
-    set = "Colour",
+    set = "Spectral",
     key = "lily_green",
-    pos = { x = 1, y = 1 },
+    soul_set = "Colour",
+    pos = { x = 9, y = 3 },
     config = {
       val = 0,
       partial_rounds = 0,
       upgrade_rounds = 7,
     },
     hidden = true,
+    disable_shine = true,
     cost = 4,
-    atlas = "unik_colours",
+    atlas = "unik_consumables",
     unlocked = true,
     discovered = true,
     display_size = { w = 71, h = 87 },

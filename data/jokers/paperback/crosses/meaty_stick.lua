@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_meaty_stick',
-    atlas = 'unik_common',
-	pos = { x = 3, y = 3 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 3, y = 8 },
     rarity = 1,
     cost = 7,
     config = {
@@ -9,6 +9,7 @@ SMODS.Joker {
             xMult = 1.5
         }
     },
+    attributes = { 'xmult','joker','stick' },
 	perishable_compat = true,
     eternal_compat = false,
 	blueprint_compat = true,

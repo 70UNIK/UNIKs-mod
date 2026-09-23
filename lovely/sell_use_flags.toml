@@ -1,6 +1,6 @@
 [manifest]
 version = "1.0.0"
-priority = 9999
+priority = 214748365
 
 ###full credit to paperback for this one
 ###may not cover everything though
@@ -51,6 +51,8 @@ payload = '''
             '''
 root_capture = '$root'
 times = 1
+
+## flag not working
 [[patches]]
 [patches.regex]
 target = "card.lua"

@@ -1,8 +1,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jollyless',
-    atlas = 'unik_grab_bag_jokers',
-    pos = { x = 3, y = 0 },
+    atlas = 'unik_normal_jokers',
+    pos = { x = 10, y = 8 },
     rarity = "gb_boss",
 	-- Modest
     config = { extra = { Xmult = 1, Xmult_mod = 1.5}},
@@ -14,6 +14,7 @@ SMODS.Joker {
     discovered = true,
     unlocked = true,
     pools = { ["M"] = true },
+	attributes = { 'scaling','joker','destroy_card' },
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_jolly
 		return { vars = {center.ability.extra.Xmult_mod,center.ability.extra.Xmult} }

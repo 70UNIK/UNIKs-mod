@@ -1,0 +1,96 @@
+const float height = 69.0/95.0;
+const float heightbuffer = (1. - height)/2.;
+const float width = 69.0/71.0;
+const float widthbuffer = (1. - width) / 2.;
+const float amplitude = 0.1;
+
+//What to do:
+//"pinch" effect intensifing quadratically as it leaves x = 0.5 and y = 0.5
+//"pinch" evenly on 69px x 69px bounding box, basically shifting 45 degrees to corners if exactly on an angle point.
+
+//if ((newPos.y /height) - heightbuffer < (newPos.x /width) + widthbuffer*2.){ forward angle
+//backwards angle... invo0lveds 1 -...
+//sign mu7st be -1 or 1
+//gets y pos for the x pos
+float yInterpolate(float x, float sign){
+    if (sign == -1.){
+        return (height+heightbuffer - x * height);
+    }
+    else if (sign == 1.){
+        return 1. + x * height - (height+heightbuffer);
+    }
+    return -1.;
+}
+
+
+
+vec2 shift(vec2 pos){
+    vec2 newPos = pos;
+    //horizontal quadrants
+ 
+     //left quadrant
+    if (
+        (
+            (pos.y /height) - heightbuffer < 1. - ((pos.x /width) - widthbuffer*4.)
+        )
+         && !(
+            (pos.y /height) - heightbuffer < ((pos.x /width) + widthbuffer*3.))
+        )
+        {
+        newPos.y = pos.y - 0.14 * pow(pos.y/0.5 - (yInterpolate(pos.x,-1.)),3.);
+        newPos.y = newPos.y + 0.14* -pow((pos.y - 0.5)/0.5 - (yInterpolate(pos.x,1.)),3.) ;
+ 
+        newPos.x = pos.x + 0.32* (1./height)*abs(pow(2. * pos.y - 1.,2.));
+    }
+    //right quadrant
+    else if (
+        !(
+            (pos.y /height) - heightbuffer < 1. - ((pos.x /width) - widthbuffer*4.)
+        )
+         && (
+            (pos.y /height) - heightbuffer < ((pos.x /width) + widthbuffer*3.))
+        )
+        {
+        newPos.y = pos.y - 0.14 * pow(pos.y/0.5 - (yInterpolate(pos.x,1.)),3.);
+        newPos.y = newPos.y + 0.14* -pow((pos.y - 0.5)/0.5 - (yInterpolate(pos.x,-1.)),3.) ;
+        newPos.x = pos.x - 0.32* (1./height)*abs(pow(2. * pos.y - 1.,2.));
+        
+    }
+    //upper quadrant
+    else if (
+        (
+            (pos.y /height) - heightbuffer < ((pos.x /width) + widthbuffer*2.)
+        )
+         && (
+            (pos.y /height) - heightbuffer < ((pos.x /width) + widthbuffer*3.))
+        )
+        {
+        newPos.x = pos.x - 0.14 * pow(pos.x/0.5 - (yInterpolate(pos.x,1.)),3.);
+        newPos.x = newPos.x + 0.14* -pow((pos.x - 0.5)/0.5 - (yInterpolate(pos.x,1.)),3.) ;
+        newPos.y = pos.y + 0.09* (1./height)*abs(pow(2. * pos.x - 1.,2.));
+        
+    }
+    //lower quadrant
+    else if (
+        (
+            (pos.y /height) - heightbuffer > ((pos.x /width) + widthbuffer*2.)
+        )
+         && (
+            (pos.y /height) - heightbuffer > ((pos.x /width) + widthbuffer*3.))
+        )
+        {
+        newPos.x = pos.x - 0.14 * pow(pos.x/0.5 - (yInterpolate(pos.x,1.)),3.);
+        newPos.x = newPos.x + 0.14* -pow((pos.x - 0.5)/0.5 - (yInterpolate(pos.x,1.)),3.) ;
+        newPos.y = pos.y - 0.09* (1./height)*abs(pow(2. * pos.x - 1.,2.));
+    }
+    return newPos;
+}
+//69/95 = 
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+	vec2 pos = fragCoord.xy / iResolution.xy;
+    
+    
+    
+    fragColor = texture(iChannel0, shift(pos));
+}

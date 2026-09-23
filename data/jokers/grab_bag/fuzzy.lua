@@ -14,6 +14,7 @@ SMODS.Joker {
     pos = { x = 0,y = 0 },
     rarity = "gb_boss",
 	-- Modest
+    attributes = { 'chips','mult','economy','lose_economy' },
     config = { extra = { min_mult = -5,max_mult = 15,min_chips = -35,max_chips = 75, min_dollars = -2, max_dollars = 3}},
     cost = 5,
     blueprint_compat = true,

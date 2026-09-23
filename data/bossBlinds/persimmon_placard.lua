@@ -1,7 +1,7 @@
 SMODS.Blind{
     key = 'unik_persimmon_placard',
     config = {},
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 3},
     boss_colour= HEX("EC5800"),

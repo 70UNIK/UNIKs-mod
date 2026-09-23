@@ -1,7 +1,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_cube_joker',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 3, y = 0 },
 
@@ -11,6 +11,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.09} },
+	attributes = { 'xchips','scaling' },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_chips,center.ability.extra.x_chips_mod, center.ability.extra.max_size} }
 	end,
@@ -66,14 +67,3 @@ SMODS.Joker {
 
 -- Pool used by "squares/cubes"
 --Unik is not part of this to maintain rarity.
-SMODS.ObjectType({
-	key = "unik_cube",
-	default = "j_square",
-	cards = {
-	},
-	inject = function(self)
-		SMODS.ObjectType.inject(self)
-		-- insert base game jokers
-		self:inject_card(G.P_CENTERS.j_square)
-	end,
-})

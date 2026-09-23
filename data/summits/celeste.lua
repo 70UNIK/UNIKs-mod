@@ -1,6 +1,6 @@
 SMODS.Consumable{
     set = 'Spectral', 
-	atlas = 'unik_summits',
+	atlas = 'unik_consumables',
     cost = 4,
 	pos = {x = 2, y = 1},
 	key = 'unik_celeste',
@@ -16,33 +16,21 @@ SMODS.Consumable{
 			vars = {card.ability.extra.e_chips,card.ability.extra.max_highlighted},
 		}
 	end,
+    in_pool = function(self)
+        return not UNIK.hasBlindside()
+	end,
     hidden = true,
     soul_set = 'unik_summit',
 	use = function(self, card, area, copier)
         UNIK.add_bonus('e_chips',card.ability.extra.e_chips)
-        for i = 1, #G.hand.highlighted do
-            local highlighted = G.hand.highlighted[i]
-            highlighted.ability["perma_e_chips"] = highlighted.ability["perma_e_chips"] or 0
-            highlighted.ability["perma_e_chips"] = highlighted.ability["perma_e_chips"] + card.ability.extra.e_chips
-            
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after', 
-                delay = 0.1, 
-                func = function()
-                
-                card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_powchips",
-                        vars = { number_format(1+highlighted.ability["perma_e_chips"]) },
-                    }),
-                    colour = G.C.DARK_EDITION,
-                    card=highlighted,
-                })
-                return true 
-                end 
-            }))
-        end
+        UNIK.add_perma_bonus({
+            type = 'perma_e_chips',
+            message_key = 'a_powchips',
+            message_colour = SMODS.Gradients.unik_echips,
+            from_card = card,
+            cards = G.hand.highlighted,
+            value = card.ability.extra.e_chips,
+        })
         card:juice_up(0.3, 0.5)  
     end
 }

@@ -1,8 +1,8 @@
 SMODS.Joker {
 	key = 'unik_happiness',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
-	pos = { x = 0, y = 0 },
+	pos = { x = 9, y = 4 },
     cost = 0,
 	blueprint_compat = false,
 	perishable_compat = false,
@@ -11,6 +11,7 @@ SMODS.Joker {
     no_dbl = true,
     config = { extra = {min_cards = 4,destroyed = false} },
     pools = {["unik_copyrighted"] = true },
+    attributes = { 'detrimental','modify_card','editions','joker_slot' },
     -- loc_txt = {set = 'Joker', key = 'j_unik_happiness'},
     -- force it to become positive
     loc_vars = function(self, info_queue, center)

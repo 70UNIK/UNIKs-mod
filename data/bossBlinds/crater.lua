@@ -29,4 +29,11 @@ SMODS.Blind{
             return true
         end
     end,
+    aij_calculate_counter_score = function()
+        --Mainly hampers the shop
+        --Max counter:
+        -- 1) Double tags or any tag duplication would increase the odds
+        -- 2) Vessel Kiln will make it have a tangible effect on score due to the vessel tags
+        return 0
+    end,
 }

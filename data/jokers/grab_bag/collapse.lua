@@ -2,8 +2,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_collapse',
-    atlas = 'unik_grab_bag_jokers',
-    pos = { x = 2, y = 0 },
+    atlas = 'unik_normal_jokers',
+    pos = { x = 9, y = 8 },
     rarity = "gb_boss",
 	-- Modest
     config = { extra = { chips = 0, chip_mod = 60}, },
@@ -14,7 +14,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     discovered = true,
     unlocked = true,
-
+    attributes = { 'scaling','chips','destroy_card','rank','suit','enhancements' },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.chip_mod,center.ability.extra.chips} }
 	end,

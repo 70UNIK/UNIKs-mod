@@ -2,14 +2,15 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_a_taste_of_power',
-    atlas = 'unik_rare',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 1, y = 0 },
+	pos = { x = 11, y = 0 },
     cost = 1,
 	blueprint_compat = false,
     perishable_compat = true,
     demicoloncompat = true,
 	eternal_compat = false,
+    attributes = { 'generation','unik_ancient','on_sell'},
     loc_vars = function(self, info_queue, center)
         if not center.ability.unik_decaying then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_decaying",vars = { 4, 4 } }

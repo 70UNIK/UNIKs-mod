@@ -34,6 +34,21 @@ function Card:is_face(from_boss)
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and G.P_CENTERS[self.config.center.key].force_no_face then
         return false
     end
+    --Calculate using get_enhancements:
+    --This gets REALLY messy cause quantum enhancements are NOT A FUCKING THING, so first past the post is the best I can do
+    for k, v in pairs(SMODS.get_enhancements(self)) do
+        if G.P_CENTERS[k].force_no_face then
+            return false
+        end
+    end
+    if All_in_Jest then
+        for k, v in pairs(All_in_Jest.get_inherent_effects(self, 'enhancement', nil, true)) do
+           -- print(k)
+            if G.P_CENTERS[k].force_no_face then
+                return false
+            end
+        end
+    end
     local ret = faceHook(self,from_boss)
     return ret
 end
@@ -50,16 +65,57 @@ function Card:get_id(skippmk)
             return SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].id
         end
     end
+    --Calculate using get_enhancements:
+    --This gets REALLY messy cause quantum enhancements are NOT A FUCKING THING, so first past the post is the best I can do
+    for k, v in pairs(SMODS.get_enhancements(self)) do
+      --  print(k)
+        if G.P_CENTERS[k].unik_specific_base_value then
+            if not SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value] then
+                return G.ENHANCEMENT_OVERRIDE_RANKS[k][2]
+            else
+                return SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value].id
+            end
+        end
+    end
+    if All_in_Jest then
+        for k, v in pairs(All_in_Jest.get_inherent_effects(self, 'enhancement', nil, true)) do
+           -- print(k)
+            if G.P_CENTERS[k].unik_specific_base_value then
+                if not SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value] then
+                    return G.ENHANCEMENT_OVERRIDE_RANKS[k][2]
+                else
+                    return SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value].id
+                end
+            end
+        end
+    end
+    
 	local vars = getIDenhance(self,skippmk)
 
 	return vars
 end
+--All_in_Jest.get_inherent_effects(self, 'enhancement', nil, true)
 
 function Card:get_baseValOverride()
     if G.P_CENTERS[self.config.center.key].set == "Enhanced" and 
         G.P_CENTERS[self.config.center.key].unik_specific_base_value
     then
         return G.P_CENTERS[self.config.center.key].unik_specific_base_value
+    end
+    --Calculate using get_enhancements:
+    --This gets REALLY messy cause quantum enhancements are NOT A FUCKING THING, so first past the post is the best I can do
+    for k, v in pairs(SMODS.get_enhancements(self)) do
+        if G.P_CENTERS[k].unik_specific_base_value then
+            return G.P_CENTERS[self.config.center.key].unik_specific_base_value
+        end
+    end
+    if All_in_Jest then
+        for k, v in pairs(All_in_Jest.get_inherent_effects(self, 'enhancement', nil, true)) do
+           -- print(k)
+            if G.P_CENTERS[k].unik_specific_base_value then
+                return G.P_CENTERS[self.config.center.key].unik_specific_base_value
+            end
+        end
     end
     return self.base.value
 end
@@ -76,6 +132,29 @@ function Card:get_rank_value()
             return 0
         else
             return SMODS.Ranks[G.P_CENTERS[self.config.center.key].unik_specific_base_value].nominal
+        end
+    end
+    --Calculate using get_enhancements:
+    --This gets REALLY messy cause quantum enhancements are NOT A FUCKING THING, so first past the post is the best I can do
+    for k, v in pairs(SMODS.get_enhancements(self)) do
+        if G.P_CENTERS[k].unik_specific_base_value then
+            if not SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value] then
+            return 0
+        else
+            return SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value].nominal
+        end
+        end
+    end
+    if All_in_Jest then
+        for k, v in pairs(All_in_Jest.get_inherent_effects(self, 'enhancement', nil, true)) do
+           -- print(k)
+            if G.P_CENTERS[k].unik_specific_base_value then
+                if not SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value] then
+                    return 0
+                else
+                    return SMODS.Ranks[G.P_CENTERS[k].unik_specific_base_value].nominal
+                end
+            end
         end
     end
     return self.base.nominal
@@ -118,6 +197,36 @@ function Card:get_nominal(mod)
         end
         mult = 1
         vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
+    end
+    --Calculate using get_enhancements:
+    --This gets REALLY messy cause quantum enhancements are NOT A FUCKING THING, so first past the post is the best I can do
+    for k, v in pairs(SMODS.get_enhancements(self)) do
+        if 
+        G.P_CENTERS[k].unik_specific_suit
+        then
+            if SMODS.Suits[G.P_CENTERS[k].unik_specific_suit] then
+                -- print(SMODS.Suits[G.P_CENTERS[self.config.center.key].unik_specific_suit].max_nominal.value)
+                specific_suit_nominal = SMODS.Suits[G.P_CENTERS[k].unik_specific_suit].suit_nominal
+            end
+            mult = 1
+            vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
+            break
+        end
+    end
+    if All_in_Jest then
+        for k, v in pairs(All_in_Jest.get_inherent_effects(self, 'enhancement', nil, true)) do
+            if 
+            G.P_CENTERS[k].unik_specific_suit
+            then
+                if SMODS.Suits[G.P_CENTERS[k].unik_specific_suit] then
+                    -- print(SMODS.Suits[G.P_CENTERS[self.config.center.key].unik_specific_suit].max_nominal.value)
+                    specific_suit_nominal = SMODS.Suits[G.P_CENTERS[k].unik_specific_suit].suit_nominal
+                end
+                mult = 1
+                vars = 10*specific_rank_nominal*rank_mult + specific_suit_nominal*mult + (self.base.suit_nominal_original or 0)*0.0001*mult + 10*self.base.face_nominal*rank_mult + 0.000001*self.unique_val
+                break
+            end
+        end
     end
     return vars
 end

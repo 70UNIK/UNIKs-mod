@@ -9,7 +9,7 @@ function Card:set_triggering(triggering)
     if self.config.center.set == 'Colour' then
         return nil
     end
-    if not self.config.center.triggering_blacklist and not SMODS.is_eternal(self,self) then
+    if not self.config.center.triggering_blacklist and not SMODS.is_eternal(self,self) and not self.unik_activated_ability and (not self.config.center.all_in_jest or (self.config.center.all_in_jest and self.config.center.all_in_jest.use_ability ))then
         self.ability.unik_triggering = triggering
         self:set_cost()
     end
@@ -48,10 +48,8 @@ SMODS.Sticker{
 		if context.unik_triggering then 
             if (context.selected_card == card) then
                 if SMODS.pseudorandom_probability(card, 'unik_triggering_playing_card', 1, 8, 'unik_triggering_playing_card') then
-                    if next(SMODS.find_mod("Bunco")) then
-                        play_sound('bunc_gunshot')
-                        card:juice_up(1,1)
-                    end
+                    play_sound('unik_gunshot')
+                    card:juice_up(1.25,1.25)
                     return {
                         message = localize("k_unik_triggered"),
                         colour = G.C.RED,
@@ -67,6 +65,7 @@ SMODS.Sticker{
 
 local updateStickerHook = Card.update
 function Card:update(dt)
+    
     if self.ability and self.ability.unik_shielded then
         self.debuff = false
         self.perma_debuff = false
@@ -103,7 +102,19 @@ function Card:update(dt)
             end
         end
     --Ultradebuffed
-    elseif self.ability and self.ability.unik_ultradebuffed then
+    end
+    if self.ability and self.ability.all_in_jest and self.ability.all_in_jest.perma_debuff then
+        self.ability.all_in_jest.perma_debuff = nil
+        self.ability.unik_ultradebuffed = true
+    end
+    if self.ability and self.ability.unik_impounded_blindside then
+        if not self.debuff and not self.area.config.collection then
+            self.debuff = true
+            self:set_debuff(true)
+            if self.area == G.jokers then self:remove_from_deck(true) end
+        end
+    end
+    if self.ability and self.ability.unik_ultradebuffed then
         self.ability.unik_shielded = nil
         if not self.debuff and not self.area.config.collection then
             self.debuff = true
@@ -116,11 +127,58 @@ function Card:update(dt)
     return ret
 end
 
+local highlighter = CardArea.can_highlight
+function CardArea:can_highlight(card)
+    local ret = highlighter(self,card)
+    if G.GAME.force_play_anyway then
+        return false
+    end
+    return ret
+end
+
+--the robot (blindside)
+local robotHook = Card.update
+function Card:update(dt)
+    if self.config.center.key == 'm_unik_blindside_robot' and self.ability.forced_selection then
+        if (self.area == G.hand) and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) then
+            if not G.GAME.finger_triggered_suppression then
+                stop_use()
+                -- play_sound('unik_gunshot')
+                -- self:juice_up(1.25,1.25)
+                print("BEEP BOOP MOTHERFUCKER!")
+                G.FUNCS.play_cards_from_highlighted()
+            end
+        end
+    end
+    -- if G.GAME.force_play_anyway then
+    --     G.GAME.force_play_anyway = nil
+    --     stop_use()
+    --     print("FORCE IT!")
+    --     G.FUNCS.play_cards_from_highlighted()
+    -- end
+    if G.GAME.finger_triggered_suppression and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) then
+        G.GAME.finger_triggered_suppression = nil
+        print("softlock detected, aborting")
+    end
+    local ret = robotHook(self,dt)
+    return ret
+end
+
+
+local pcfh = G.FUNCS.play_cards_from_highlighted
+function G.FUNCS.play_cards_from_highlighted(e)
+    if not G.GAME.finger_triggered_suppression then
+        G.GAME.finger_triggered_suppression = true
+        pcfh(e)
+    else
+        print("SUPPRESSED!")
+    end
+end
 
 function Card:calculate_triggering(is_higlighted)
     self.highlighted = is_higlighted
     local eval = {}
-    if self.highlighted == true and (self.area == G.hand) and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and not G.GAME.unik_using_automatic_consumeable  and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0)) then
+    if self.highlighted == true and (self.area == G.hand) and (G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.DRAW_TO_HAND) and not G.GAME.unik_using_automatic_consumeable  and (not (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) or self.ability.forced_selection) then
         SMODS.calculate_context({unik_triggering = true, selected_card = self},eval)
     end
     local triggered = false
@@ -132,6 +190,7 @@ function Card:calculate_triggering(is_higlighted)
                 if triggered then break end
                 if v.finger_triggered then
                     triggered = true
+                    v.card:juice_up(2,2)
                     if v.message then
                         card_eval_status_text(v.card, "extra", nil, nil, nil, {
                             message = v.message,
@@ -145,7 +204,11 @@ function Card:calculate_triggering(is_higlighted)
 
         end
     end
-    if triggered then
+    if triggered and self.ability.forced_selection then
+        stop_use()
+        print("BEEP BOOP!")
+        G.GAME.force_play_anyway = true
+    elseif triggered and not G.GAME.force_play_anyway then
         stop_use()
         print("TRIGGERED!")
         G.FUNCS.play_cards_from_highlighted()

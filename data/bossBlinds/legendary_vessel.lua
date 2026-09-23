@@ -8,14 +8,14 @@ frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_vessel',
     config = {},
-    boss = {min = 1,legendary = true, showdown = true,no_orb = true}, 
+    boss = {min = -66,legendary = true, showdown = true,no_orb = true}, 
     atlas = "unik_legendary_vessel",
     pos = {x=0, y=0},
     boss_colour= HEX("8a71e1"), 
     dollars = 13,
     mult = 1,
     unik_exponent = {1,2.5},
-    glitchy_anim = {min = 0, 5},
+    glitchy_anim = {min = 0, max = 5},
     debuff = {
         akyrs_blind_difficulty = "unik_legendary",
         akyrs_cannot_be_overridden = true,

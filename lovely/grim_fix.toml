@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 ### display the fake score before not allowing the hand and/or adding to blind, now with bunco compat.
 [[patches]]

@@ -3,7 +3,7 @@
 --After becoming megatron, all D16 instances become Eternal Megatrons and D16 is ba
 SMODS.Joker {
     key = 'unik_D16',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 5, y = 2 },
     rarity = 2,
     cost = 7,
@@ -15,6 +15,7 @@ SMODS.Joker {
 		extra = { x_mult = 1, x_mult_mod = 0.075, },
         immutable = {funny = 0, funny_limit = 32, destroyed = false},
 	},
+    attributes = { 'banishing','chance','scaling'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {tostring(center.ability.extra.x_mult_mod),tostring(center.ability.extra.x_mult),center.ability.immutable.funny, center.ability.immutable.funny_limit} }
 	end,
@@ -23,8 +24,13 @@ SMODS.Joker {
     in_pool = function()
 		return not G.GAME.d16_boom_boom
 	end,
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.immutable.destroyed = false
+    end,
     calculate = function(self, card, context)
-		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed then
+		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed and
+        ((not context.identifier) or (context.identifier and context.identifier ~= 'unik_aquamarine_resc2'))
+        then
             SMODS.scale_card(card, {
 				ref_table =card.ability.extra,
 				ref_value = "x_mult",
@@ -85,6 +91,10 @@ SMODS.Joker {
 }
 
 function Card:boom_break()
+    if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
     local dissolve_time = 0.7
     self.shattered = true
     self.dissolve = 0
@@ -109,7 +119,7 @@ function Card:boom_break()
     G.E_MANAGER:add_event(Event({
         blockable = false,
         func = (function()
-                play_sound("unik_explosion1", math.random()*0.2 + 0.9,0.5)
+                play_sound("unik_explosion1", math.random()*0.2 + 0.9,1)
                 play_sound('generic1', math.random()*0.2 + 0.9,0.5)
             return true end)
     }))
@@ -133,4 +143,8 @@ function Card:boom_break()
         blockable = false,
         delay =  0.51*dissolve_time,
     }))
+    if self.ability and self.ability.immutable then
+        self.ability.immutable.destroyed = nil
+    end
+    
 end

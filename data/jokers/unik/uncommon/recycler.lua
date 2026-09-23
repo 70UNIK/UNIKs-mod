@@ -2,7 +2,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_recycler',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 4, y = 0 },
     cost = 7,
@@ -11,6 +11,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = {x_mult = 1.0, x_mult_mod = 0.02} },
+	attributes = { 'xmult','scaling','on_discard'},
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
 	end,

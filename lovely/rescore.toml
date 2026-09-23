@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 [[patches]]
 [patches.pattern]
@@ -31,7 +31,7 @@ pattern = '''percent(.*)=(.*)\((.*)\)/\(\#context.cardarea.cards-0.998\)(.*)'''
 position = 'before'
 payload = '''
 if unik_isRescoringOnly then
-    percent = (i-0.999)/(#context.unik_end_round_rescored_cards-0.998) + (j-1)*0.1
+    percent = (i-0.214748365)/(#context.unik_end_round_rescored_cards-0.998) + (j-1)*0.1
 else
 '''
 match_indent = true

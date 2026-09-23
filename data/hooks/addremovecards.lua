@@ -1,77 +1,31 @@
 
-function selfDestruction(card,message,color,dissolve)
-    -- This part plays the animation.
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            
-            --Dissolving
-            if (dissolve) then
-                card:start_dissolve()
-            --extinct animation
-            else
-                play_sound('tarot1')
-                card.T.r = -0.2
-                card:juice_up(0.3, 0.4)
-                card.states.drag.is = true
-                card.children.center.pinch.x = true
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.3,
-                    blockable = false,
-                    func = function()
-                        G.jokers:remove_card(card)
-                        card:remove()
-                        card = nil
-                        return true;
-                    end
-                }))
-            end
-            
-            return true
-        end
-    }))
+function selfDestruction(card,message,color,dissolve,timer,bypass_eternal)
+    SMODS.destroy_cards({card},{pinch_anim = not dissolve and true or false,bypass_eternal = bypass_eternal or true})
     card_eval_status_text(card, "extra", nil, nil, nil, {
         message = localize(message),
         colour = color,
         card=card,
-        delay = 0.5,
+        delay = timer or 0.5,
     })
 end
 
-function selfDestruction_noMessage(card,dissolve)
-    -- This part plays the animation.
-    G.E_MANAGER:add_event(Event({
-        func = function()
-            --Dissolving
-            if (dissolve) then
-                if SMODS.shatters(card) then
-                    card:shatter()
-                else
-                    card:start_dissolve()
-                end
-            --extinct animation
-            else
-                play_sound('tarot1')
-                card.T.r = -0.2
-                card:juice_up(0.3, 0.4)
-                card.states.drag.is = true
-                card.children.center.pinch.x = true
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.3,
-                    blockable = false,
-                    func = function()
-                        G.jokers:remove_card(card)
-                        card:remove()
-                        card = nil
-                        return true;
-                    end
-                }))
-            end
-            
-            return true
-        end
-    }))
+function CardArea:brute_force_highlight(card,silent)
+    self.highlighted[#self.highlighted+1] = card
+    card:highlight(true)
+    if not silent then play_sound('cardSlide1') end
+end
+
+-- mmm shallow....
+function UNIK.shallow_copy(t)
+	local t2 = {}
+	for k, v in pairs(t) do
+		t2[k] = v
+	end
+	return t2
+end
+
+function selfDestruction_noMessage(card,dissolve,bypass_eternal)
+    SMODS.destroy_cards({card},{pinch_anim = not dissolve and true or false,bypass_eternal = bypass_eternal or true})
 end
 
 local removeHook = Card.remove_from_deck
@@ -86,16 +40,49 @@ end
 local add_to_deck_hook = Card.add_to_deck
 function Card:add_to_deck(from_debuff)
     add_to_deck_hook(self,from_debuff)
-    SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
+    if self and self.config.center and self.config.center.rarity == 'unik_nil_rarity' then
+        if self.ability and self.ability.unik_taw then
+            UNIK.instakill()
+        else
+            selfDestruction_noMessage(self)
+        end
+    end
+    if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_hand_size_added then
+        self.ability.extra.unik_hand_size_added = nil
+    end
+    if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_selection_limit_added then
+        self.ability.extra.unik_selection_limit_added = nil
+    end
+    if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.dragon_attempt_made then
+        self.ability.extra.dragon_attempt_made = nil
+    end
+    if self then
+        SMODS.calculate_context({ unik_add_to_deck = true, added = self, from_debuff = from_debuff})
+    end
+        self.will_be_destroyed_1 = nil
+       self.will_be_gored = nil
 end
 
 local emplaceHook = CardArea.emplace
-
 function CardArea:emplace(card, location, stay_flipped)
     emplaceHook(self,card, location, stay_flipped)
+    --detrimental jokers do not take a joker slot to be a bit more fairer.
+    if card.config.center.rarity == 'unik_detrimental' then
+        card.ability.card_limit = 1
+    end
+    if card and card.config.center and card.config.center.rarity == 'unik_nil_rarity' and (self == G.pack_cards or self == G.shop_jokers or self == G.consumeables or self == G.jokers or self == G.shop_booster or self == G.shop_vouchers )then
+        if card.ability and card.ability.unik_taw then
+            UNIK.instakill()
+        else
+            selfDestruction_noMessage(self)
+        end
+    end
+    if card then card.will_be_destroyed_1 = nil end
+                if card then card.will_be_gored = nil end
     if  G.consumeables and G.jokers then
         SMODS.calculate_context({ unik_emplace = true, added = card, cardarea = self,location = location, isFlipped = stay_flipped})
     end
+    
     --Happiness is mandatory: Joker slot check after the hook
     if card.ability.set == "unik_lartceps" then
         card.ability.eternal = true
@@ -105,6 +92,14 @@ function CardArea:emplace(card, location, stay_flipped)
         card.ability.dissolve_immune = true
         card.ability.debuff_immune = true
         unik_set_sell_cost(card,-666)
+    end
+    if card and card.ability and card.ability.extra and type(card.ability.extra) == 'table' and card.ability.extra.unik_unique and card.added_to_deck then
+        for i,v in pairs(G.playing_cards) do
+            if card.config.center.key == v.config.center.key and v ~= card then
+                selfDestruction(card,"k_nope_ex",G.C.MULT)
+                return true
+            end
+        end
     end
     if card.ability.unik_disposable or card.ability.unik_niko or card.ability.unik_depleted then
         unik_set_sell_cost(card,0)
@@ -126,7 +121,7 @@ function CardArea:emplace(card, location, stay_flipped)
                  G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     func = function()
-                        local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, 'c_soul', 'sup')
+                        local n_card = create_card(nil,G.consumeables, nil, nil, nil, nil, UNIK.hasBlindside() and 'c_soul', 'sup')
                         n_card.no_omega = true
                         n_card.ability.unik_decaying = true
                         n_card:add_to_deck()
@@ -181,47 +176,6 @@ function CardArea:emplace(card, location, stay_flipped)
         }))
     end
     if self == G.jokers then
-       --print("11")
-        --Replace average alice with alice in a 0.6% chance (for now for test purposes, 60%)
-        if (SMODS.Mods["extracredit"] or {}).can_load then
-            if card and card.config and card.config.center and card.config.center.key == "j_ExtraCredit_averagealice" then
-                if pseudorandom('unik_average_alice_exotic_change') < 1/100 then
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            card_eval_status_text(card, "extra", nil, nil, nil, {
-                                message = localize("k_unik_average_alice"),
-                                colour = G.C.PURPLE,
-                                card=card,
-                            })
-                            play_sound('tarot1')
-                            card.T.r = -0.2
-                            card:juice_up(0.3, 0.4)
-                            card.states.drag.is = true
-                            card.children.center.pinch.x = true
-                            G.E_MANAGER:add_event(Event({
-                                trigger = 'after',
-                                delay = 0.3,
-                                blockable = false,
-                                func = function()
-                                    G.jokers:remove_card(card)
-                                    card:remove()
-                                    card = nil
-                                    return true;
-                                end
-                            }))
-                            local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_extra_credit_alice")
-                            card2:start_materialize()
-                            card2:add_to_deck()
-                            G.jokers:emplace(card2)
-                            return true
-                        end
-                    }))
-                end
-            end
-        end
-
-        --print("Joker added")
-        --print(card.ability.name)
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
@@ -269,3 +223,65 @@ function CardArea:emplace(card, location, stay_flipped)
     end
 end
 
+function UNIK.trigger_globals_after_play()
+    G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        func = function()
+            -- local cards_destroyed_after = {}
+            -- for i,v in pairs(G.playing_cards) do
+            --     -- if (v.will_be_destroyed_1  or v.will_be_gored) and not v.removed then
+            --     if v.removed then
+            --         cards_destroyed_after[#cards_destroyed_after+1] = v
+            --         print("leftover cleanup")
+            --     end
+                    
+            --     --      cards_destroyed_after[#cards_destroyed_after+1] = v
+            --     -- end
+            -- end
+            -- SMODS.destroy_cards(cards_destroyed_after)
+            return true
+        end
+    }))
+   
+    
+end
+
+function UNIK.get_sorted_by_position(area)
+  local cards = {}
+
+  for i = 1, #area.highlighted do
+    cards[i] = area.highlighted[i]
+  end
+
+  table.sort(cards, function(a, b)
+    return a.T.x < b.T.x
+  end)
+
+  return cards
+end
+
+--replacement function
+function UNIK.spawn_card_from_attribute(attribute,args)
+    local attempts = 0
+    local copiers_pool = {}
+    local type = args.type or "Joker"
+    local backup = args.backup or "j_joker"
+    local seed = args.seed or 'unik_attribute_spawn'
+    repeat
+        local jokers_pool = get_current_pool(type)
+        for i, joker_key in ipairs(jokers_pool) do
+            if G.P_CENTERS[joker_key] and G.P_CENTERS[joker_key].attributes and G.P_CENTERS[joker_key].attributes[attribute] then
+                table.insert(copiers_pool, joker_key)
+            end
+        end
+        attempts = attempts + 1
+    until #copiers_pool ~= 0 or attempts > 1
+    
+    if #copiers_pool == 0 then
+        copiers_pool = {backup} -- Blueprint makes more sense as the default, but 404 is funnier
+    end
+
+    local chosen_joker = pseudorandom_element(copiers_pool, pseudoseed(seed))
+    local new_card = SMODS.create_card({key = chosen_joker})
+    return new_card
+end

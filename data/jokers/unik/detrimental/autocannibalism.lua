@@ -1,23 +1,20 @@
 -- Pool used by autocannibalism
 SMODS.ObjectType({
 	key = "autocannibalism_food",
-	default = "j_popcorn",
-	cards = {},
-	inject = function(self)
-		SMODS.ObjectType.inject(self)
-		-- insert base game food jokers
-		self:inject_card(G.P_CENTERS.j_ice_cream)
-		self:inject_card(G.P_CENTERS.j_turtle_bean)
-		self:inject_card(G.P_CENTERS.j_popcorn)
-		self:inject_card(G.P_CENTERS.j_ramen)
-	end,
+	default = "j_turtle_bean",
+	cards = {
+        'j_ice_cream',
+        'j_turtle_bean',
+        'j_popcorn',
+        'j_ramen',
+    },
 })
 SMODS.Joker {
 	key = 'unik_autocannibalism',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
     no_dbl = true,
-	pos = { x = 0, y = 1 },
+	pos = { x = 9, y = 5 },
     cost = 1,
     config = { extra = { selfDestruct = false} },
 	blueprint_compat = false,
@@ -27,6 +24,7 @@ SMODS.Joker {
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_depleted" }
         return { vars = { center.ability.extra.selfDestruct} }
 	end,
+    attributes = { 'detrimental','generation','joker','modify_card','stickers'},
     immutable = true,
 	add_to_deck = function(self, card, from_debuff)
         --add 1 random Eternal Depleted food joker
@@ -48,10 +46,13 @@ SMODS.Joker {
         for _, v in pairs(G.jokers.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.pools and v.config.center.pools.autocannibalism_food and not v.ability.unik_depleted then
+            if v.config.center.pools and (v.config.center.pools.autocannibalism_food or v.config.center.unik_autocannibal_trigger) and not v.ability.unik_depleted then
                 v.ability.eternal = true
                 v.ability.unik_depleted = true
-                if v.ability.name == "Turtle Bean" then
+                if v.config.center.unik_autocannibal_trigger then
+                    print("NOMNOM")
+                    v.config.center:unik_autocannibal_trigger(v)
+                elseif v.ability.name == "Turtle Bean" then
                     --cancel out hand size increase
                     G.hand:change_size(-v.ability.extra.h_size)
                     v.ability.extra.h_size = 0
@@ -89,11 +90,14 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         if context.unik_emplace and context.added and context.cardarea == G.jokers then
-            if context.added.config.center.pools and context.added.config.center.pools.autocannibalism_food and not context.added.ability.unik_depleted then
+            if context.added.config.center.pools and (context.added.config.center.pools.autocannibalism_food or v.config.center.unik_autocannibal_trigger) and not context.added.ability.unik_depleted then
                 local v = context.added
                 v.ability.eternal = true
                 v.ability.unik_depleted = true
-                if v.ability.name == "Turtle Bean" then
+                if v.config.center.unik_autocannibal_trigger then
+                    print("NOMNOM")
+                    v.config.center:unik_autocannibal_trigger(v)
+                elseif v.ability.name == "Turtle Bean" then
                     --cancel out hand size increase
                     G.hand:change_size(-v.ability.extra.h_size)
                     v.ability.extra.h_size = 0

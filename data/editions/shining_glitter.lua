@@ -20,6 +20,7 @@ SMODS.Edition({
 		per = 1,
 		vol = 1,
 	},
+	attributes = { 'xchips' },
     config = {
 		x_chips = 1.5, trigger = nil
 	},

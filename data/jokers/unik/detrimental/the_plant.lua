@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_the_plant",
-	path = "unik_the_plant.png",
-	px = 71,
-	py = 95
-}
+
 SMODS.Joker {
     dependencies = {
 		items = {
@@ -12,15 +7,16 @@ SMODS.Joker {
 	},
 	key = 'unik_the_plant',
     no_dbl = true,
-    atlas = 'unik_the_plant',
+    atlas = 'unik_character_jokers',
     rarity = 'unik_detrimental',
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 2, y = 0 },
+	pos = { x = 7, y = 11 },
+	soul_pos = { x = 8, y = 11 },
     cost = 1,
     experimental = true, --requires a complex function for iterating per card so this is appropriate
     config = { extra = {minFaceCards = 7, faceCards = 12, selfDestruct = false,debuff_name = "unik_plant",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true, ["unik_copyrighted"] = true },
 	blueprint_compat = false,
+    attributes = { 'detrimental','debuff','face' },
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_plant

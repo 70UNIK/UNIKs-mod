@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_chelsea",
-	path = "unik_chelsea.png",
-	px = 71,
-	py = 95
-}
+
 
 local chelsea_quotes = {
 	alone = {
@@ -28,16 +23,16 @@ local chelsea_quotes = {
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_chelsea',
-    atlas = 'unik_chelsea',
+    atlas = 'unik_character_jokers',
     rarity = 3,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 6, y = 5 },
+	soul_pos = { x = 7, y = 5 },
     cost = 8,
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
-
+	attributes = { 'scaling','xchips','character'},
     config = { extra = {x_chips = 1.0, x_chips_mod = 0.02} },
     pools = {["unik_cube"] = true,["character"] = true },
 	loc_vars = function(self, info_queue, center)
@@ -60,6 +55,19 @@ SMODS.Joker {
 				colour = G.C.CHIPS,
 			}
         end
+		 if context.unik_chelsea_trigger then
+			 SMODS.scale_card(card, {
+                    ref_table =card.ability.extra,
+                    ref_value = "x_chips",
+                    scalar_value = "x_chips_mod",
+                    message_key = "a_xchips",
+                    message_colour = G.C.CHIPS,
+                    force_full_val = true,
+                })
+				return {
+
+				}
+		 end
 		if (context.joker_main and (to_big(card.ability.extra.x_chips) > to_big(1))) and not card.ability.extra.unik_godsmarble_debuff then
 			return {
 
@@ -73,6 +81,7 @@ SMODS.Joker {
 local scie = SMODS.calculate_individual_effect
 function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
     local ret = scie(effect, scored_card, key, amount, from_edition)
+	
     --print("TEST")
     if ((key == "x_chips" or key == "xchips" or key == "Xchips" or key == "x_chips_mod" or key == "Xchips_mod" or key == "x_chips"
 or key == "Echips_mod" or key == "e_chips_mod" or key == "Echips" or key == "e_chips" or key == "echips" or key == "Echip_mod"
@@ -84,18 +93,25 @@ or key == "xlog_chips" or key == "xlogchips" or key == "xlog_chips_mod"
 ) and amount ~= 1) or
 
     key == "chips" or key == "chip_mod" or key == "chip" or key == "chips_mod" then
-        for _, v in pairs(SMODS.find_card('j_unik_jsab_chelsea')) do
-            if not v.ability.extra.unik_godsmarble_debuff then
-                SMODS.scale_card(v, {
-                    ref_table =v.ability.extra,
-                    ref_value = "x_chips",
-                    scalar_value = "x_chips_mod",
-                    message_key = "a_xchips",
-                    message_colour = G.C.CHIPS,
-                    force_full_val = true,
-                })
-            end
-        end
+		if not G.GAME.block_additional_shit then
+			G.GAME.block_additional_shit = true
+			SMODS.calculate_context({unik_chelsea_trigger = true, card = scored_card})
+			for i,v in pairs(G.play.cards) do
+				if v.config.center.key == 'm_unik_blindside_catterfly' and v.ability.unik_in_scoring_hand and not v.debuff and v ~= scored_card and not v.ability.unik_chelsea_scaled then
+					v.ability.unik_chelsea_scaled = true
+					 SMODS.scale_card(v, {
+						ref_table =v.ability.extra,
+						ref_value = "x_chips",
+						scalar_value = "x_chip_mod",
+						message_key = "a_xchips",
+						message_colour = G.C.CHIPS,
+						force_full_val = true,
+						delay = 0.4,
+					})
+				end
+			end
+			G.GAME.block_additional_shit = nil
+		end
     end
     return ret
 end

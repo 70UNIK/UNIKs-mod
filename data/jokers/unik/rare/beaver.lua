@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_beaver',
-    atlas = 'unik_rare',
-	pos = { x = 3, y = 2 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 13, y = 2 },
     rarity = 3,
     cost = 8,
     blueprint_compat = true,
@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     immutable = true,
+    attributes = { 'enhancements','xlogmult','xmult'},
     config = { extra = {base = 60,x_mult = 1.4} },
     enhancement_gate = 'm_unik_timber',
     loc_vars = function(self, info_queue, center)

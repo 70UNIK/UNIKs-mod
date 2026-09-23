@@ -12,10 +12,24 @@ local summit_digital_hallucinations_compat = {
 SMODS.Booster{
     key = "unik_summit_1",
 	kind = "unik_summit",
-    atlas = "unik_cube_boosters",
-	pos = { x = 2, y = 2 },
+    atlas = "unik_consumables",
+	pos = { x = 10, y = 5 },
     cost = 4,
     weight = 1, 
+	blindside_booster = true,
+	include_in_vanilla = true,
+
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 2
+			else
+				return 0
+			end
+		else 
+			return 1 
+		end
+	end,
     config = { extra = 2, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -40,10 +54,22 @@ SMODS.Booster{
 SMODS.Booster{
     key = "unik_summit_4",
 	kind = "unik_summit",
-    atlas = "unik_cube_boosters",
-	pos = { x = 1, y = 3 },
+    atlas = "unik_consumables",
+	pos = { x = 9, y = 6 },
     cost = 4,
-    weight = 1,
+	blindside_booster = true,
+	include_in_vanilla = true,
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 2
+			else
+				return 0
+			end
+		else 
+			return 1 
+		end
+	end,
     config = { extra = 2, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -68,10 +94,22 @@ SMODS.Booster{
 SMODS.Booster{
     key = "unik_summit_2",
 	kind = "unik_summit",
-    atlas = "unik_cube_boosters",
-	pos = { x = 1, y = 2 },
+    atlas = "unik_consumables",
+	pos = { x = 9, y = 5 },
     cost = 6,
-    weight = 1, 
+	blindside_booster = true,
+	include_in_vanilla = true,
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 2
+			else
+				return 0
+			end
+		else 
+			return 1 
+		end
+	end,
     config = { extra = 4, choose = 1 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,
@@ -96,10 +134,22 @@ SMODS.Booster{
 SMODS.Booster{
     key = "unik_summit_3",
 	kind = "unik_summit",
-    atlas = "unik_cube_boosters",
-	pos = { x = 0, y = 2 },
+    atlas = "unik_consumables",
+	pos = { x = 8, y = 5 },
     cost = 8,
-    weight = 0.15, 
+	blindside_booster = true,
+	include_in_vanilla = true,
+	get_weight = function(self)
+        if UNIK.hasBlindside() then
+			if G.GAME.used_vouchers.v_unik_blindside_tent_camp then 
+				return 0.875
+			else
+				return 0
+			end
+		else 
+			return 0.15 
+		end
+	end,
     config = { extra = 4, choose = 2 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = summit_digital_hallucinations_compat,

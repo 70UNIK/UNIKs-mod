@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 [[patches]]
 [patches.pattern]
@@ -9,12 +9,12 @@ target = '''=[SMODS Cryptid "items/enhanced.lua"]'''
 pattern = '''polychrome = { atlas = "cry_atlaseditiondeck", pos = { x = 2, y = 0 } },'''
 position = "after"
 payload = '''
-unik_positive = { atlas = "unik_edition_deck", pos = { x = 0, y = 0 } },
-unik_bloated = { atlas = "unik_edition_deck", pos = { x = 1, y = 0 } },
-unik_halfjoker = { atlas = "unik_edition_deck", pos = { x = 2, y = 0 } },
-unik_fuzzy = { atlas = "unik_edition_deck", pos = { x = 0, y = 1 } },
-unik_corrupted = { atlas = "unik_edition_deck", pos = { x = 1, y = 1 } },
-unik_steel = { atlas = "unik_edition_deck", pos = { x = 2, y = 1 } },
+unik_positive = { atlas = "unik_decks", pos = { x = 3, y = 0 } },
+unik_bloated = { atlas = "unik_decks", pos = { x = 4, y = 0 } },
+unik_halfjoker = { atlas = "unik_decks", pos = { x = 5, y = 0 } },
+unik_fuzzy = { atlas = "unik_decks", pos = { x = 3, y = 1 } },
+unik_corrupted = { atlas = "unik_decks", pos = { x = 4, y = 1 } },
+unik_steel = { atlas = "unik_decks", pos = { x = 5, y = 1 } },
 '''
 match_indent = true
 
@@ -24,10 +24,10 @@ target = '''=[SMODS Cryptid "items/enhanced.lua"]'''
 pattern = '''cry_flickering = { atlas = "cry_atlasdeck", pos = { x = 6, y = 2 } },'''
 position = "after"
 payload = '''
-unik_depleted = { atlas = "unik_sticker_deck", pos = { x = 0, y = 0 } },
-unik_disposable = { atlas = "unik_sticker_deck", pos = { x = 1, y = 0 } },
-unik_niko = { atlas = "unik_sticker_deck", pos = { x = 2, y = 0 } },
-unik_impounded = { atlas = "unik_sticker_deck", pos = { x = 0, y = 1 } },'''
+unik_depleted = { atlas = "unik_decks", pos = { x = 3, y = 2 } },
+unik_disposable = { atlas = "unik_decks", pos = { x = 4, y = 2 } },
+unik_niko = { atlas = "unik_decks", pos = { x = 5, y = 2 } },
+unik_impounded = { atlas = "unik_decks", pos = { x = 3, y = 3 } },'''
 match_indent = true
 
 ## Betmma real time shader method
@@ -42,6 +42,9 @@ if _shader=='unik_corrupted' then
     G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
 end
 if _shader=='unik_fuzzy' then
+    G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
+end
+if _shader=='unik_badge_shader' then
     G.SHADERS[_shader or 'dissolve']:send("real_time",G.TIMERS.REAL - (G.vortex_time or 0))
 end
 '''

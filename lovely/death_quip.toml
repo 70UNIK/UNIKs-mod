@@ -1,7 +1,7 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = 99999
+priority = 214748365
 
 
 ###Death quips that will occur after getting killed by a boss that has a specific message, even on endless.
@@ -28,27 +28,13 @@ payload = '''
     end
 '''
 match_indent = true
-
-##STANDARD
+# UNIVERSAL
 [[patches]]
-[patches.pattern]
+[patches.regex]
 target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or G.GAME.blind:has_death_quotes() then --Only add Jimbo to say a quip if the game over happens when the run is lost
-'''
-match_indent = true
-
-##FINITY
-[[patches]]
-[patches.pattern]
-target = 'game.lua'
-pattern = '''if G.GAME.round_resets.ante <= G.GAME.win_ante or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then --Only add Jimbo to say a quip if the game over happens when the run is lost'''
-position = 'at'
-payload = '''
-if G.GAME.round_resets.ante <= G.GAME.win_ante or G.GAME.blind:has_death_quotes() or (FinisherBossBlindQuips and FinisherBossBlindQuips[G.GAME.blind.config.blind.key] and FinisherBossBlindQuips[G.GAME.blind.config.blind.key][3]) then
-'''
+pattern = '''G.GAME.round_resets.ante <= G.GAME.win_ante(.*)\-\-Only add Jimbo to say a quip if the game over happens when the run is lost'''
+position = 'before'
+payload = ''' G.GAME.blind:has_death_quotes() or '''
 match_indent = true
 
 [[patches]]
@@ -58,6 +44,9 @@ pattern = 'self.config = {args = args}'
 position = "after"
 payload = '''
 if G.GAME.blind:has_death_quotes() and G.GAME.blind.config.blind.death_card then
+    if G.GAME.blind.config.blind.death_card.card then
+        
+    end
 	self.children.card = Card(self.T.x, self.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, args.center and G.P_CENTERS[args.center] or G.P_CENTERS[G.GAME.blind.config.blind.death_card.card] or G.P_CENTERS.j_joker, {bypass_discovery_center = true})
     if G.GAME.blind.config.blind.death_card and G.GAME.blind.config.blind.death_card.mod_card and type(G.GAME.blind.config.blind.death_card.mod_card) == 'function' then
         G.GAME.blind:mod_card(self.children.card)

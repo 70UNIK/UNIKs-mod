@@ -172,12 +172,6 @@ function CardArea:can_highlight(card)
     return highlightHook(self,card)
 end
 
-function CardArea:brute_force_highlight(card,silent)
-    self.highlighted[#self.highlighted+1] = card
-    card:highlight(true)
-    if not silent then play_sound('cardSlide1') end
-end
-
 --Still allow for the 8's bypass
 local bunc_original_add_to_highlighted = CardArea.add_to_highlighted
 function CardArea:add_to_highlighted(card, silent)

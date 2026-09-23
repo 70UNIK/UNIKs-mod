@@ -4,7 +4,7 @@
 SMODS.Blind{
     key = 'unik_raspberry_racket',
     config = {},
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 12},
     boss_colour= HEX("ff3181"),

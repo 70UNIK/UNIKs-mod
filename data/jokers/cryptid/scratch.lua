@@ -11,15 +11,16 @@ SMODS.Joker {
 		},
     },
 	key = 'unik_scratch',
-    atlas = 'unik_common',
+    atlas = 'unik_normal_jokers',
     rarity = 1,
-	pos = { x = 4, y = 0 },
+	pos = { x = 4, y = 5 },
     cost = 4,
 	blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
     config = { extra = { mult = 30} },
+	attributes = { 'mult','consumable','cry_code' },
 	loc_vars = function(self, info_queue, center)
 		return { 
 			vars = {center.ability.extra.mult} 

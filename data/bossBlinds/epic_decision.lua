@@ -2,7 +2,7 @@ SMODS.Blind	{
     key = 'unik_epic_decision',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
+    boss = {min = -66, showdown = true, hardcore = true, epic = true,no_orb = true},
     boss_colour = G.C.UNIK_LARTCEPS1,
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 16},
@@ -69,8 +69,8 @@ G.FUNCS.can_skip_booster = function(e)
         if SMODS.OPENED_BOOSTER and SMODS.OPENED_BOOSTER.config then
             obj = SMODS.OPENED_BOOSTER.config.center or nil
         end
-		if obj and obj.unskippable and type(obj.unskippable) == "function" then
-			if obj:unskippable() == true then
+		if obj and obj.unik_unskippable and type(obj.unik_unskippable) == "function" then
+			if obj:unik_unskippable() == true then
 				e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 				e.config.button = nil
 			else
@@ -85,12 +85,12 @@ G.FUNCS.can_skip_booster = function(e)
 	end
 end
 
---Hook for booster skip to say NOPE! in almanac (since alamanac overrides)
-local almanac_no_skip = G.FUNCS.skip_booster
+--Hook for booster skip to say NOPE! in bos (since alamanac overrides)
+local bos_no_skip = G.FUNCS.skip_booster
 G.FUNCS.skip_booster = function(e)
     local obj = SMODS.OPENED_BOOSTER.config.center
     local obj2 = G.P_BLINDS[G.GAME.round_resets.blind_choices.Boss]
-    if obj.unskippable and type(obj.unskippable) == "function" and obj:unskippable() == true then
+    if obj.unik_unskippable and type(obj.unik_unskippable) == "function" and obj:unik_unskippable() == true then
         if G.GAME.blind then
             play_sound('cancel', 0.8, 1)
             local text = localize('k_nope_ex')
@@ -108,7 +108,7 @@ G.FUNCS.skip_booster = function(e)
         if obj.skip_effect and type(obj.skip_effect) == "function" then
             obj:skip_effect()
         end
-        almanac_no_skip(e)
+        bos_no_skip(e)
         --Draw cards after the booster pack has been skipped/finished
         
     end

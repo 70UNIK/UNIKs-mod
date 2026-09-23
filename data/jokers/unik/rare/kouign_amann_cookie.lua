@@ -1,12 +1,7 @@
 --Rework effect 2:
 --Light suits give X1.0 Mult, increase by X0.25 per each unique light suit in scoring hand
 --
-SMODS.Atlas {
-	key = "unik_kouign_amann_cookie",
-	path = "unik_kouign_amann_cookie.png",
-	px = 71,
-	py = 95
-}
+
 local k_amann_quotes = {
 	normal = {
 		'k_k_amann_normal1',
@@ -24,15 +19,16 @@ local k_amann_quotes = {
 }
 SMODS.Joker {
     key = 'unik_kouign_amann_cookie',
-    atlas = 'unik_kouign_amann_cookie',
-	pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 },
+    atlas = 'unik_character_jokers',
+	pos = { x = 6, y = 2 },
+    soul_pos = { x = 7, y = 2 },
     rarity = 3,
     cost = 8,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     demicolon_compat = true,
+    attributes = { 'xmult','suit','character'},
     config = { extra = {x_mult = 1.0,x_mult_mod = 0.25}, immutable = {x_mult_display = 1.0,x_mult_cap = 1.75} },
     pools = {["character"] = true },
     loc_vars = function(self, info_queue, center)

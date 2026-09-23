@@ -23,6 +23,7 @@ SMODS.Edition({
 		per = 1,
 		vol = 2,
 	},
+	attributes = { 'detrimental','emult','echips' },
 	get_weight = function(self)
 		if G.GAME.unik_bad_editions_everywhere then
 			return G.GAME.edition_rate * 4

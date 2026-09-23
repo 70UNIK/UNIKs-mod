@@ -1,0 +1,1 @@
+--X1.75 Mult, then X0.2 Mult if hand score exceeds X2.5 requirements

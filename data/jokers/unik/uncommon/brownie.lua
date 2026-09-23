@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_brownie',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 3, y = 3 },
     rarity = 2,
     cost = 7,
@@ -10,6 +10,11 @@ SMODS.Joker {
     demicolon_compat = true,
     config = { extra = {x_mult = 1.5,x_mult_mod = 0.01,depleted_threshold = 0,destroyed = false} },
     pools = {  ["autocannibalism_food"] = true,["Food"] = true},
+    unik_autocannibal_trigger = function(self, card)
+        card.ability.extra.x_mult = 1
+		card.ability.unik_depleted = true
+	end,
+    attributes = { 'xmult','scaling','food' ,'autocannibalism'},
     loc_vars = function(self, info_queue, center)
         local key = 'j_unik_brownie'
         if center.ability.unik_depleted then

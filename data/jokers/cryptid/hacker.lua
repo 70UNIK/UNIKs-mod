@@ -3,7 +3,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_hacker',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 1, y = 2 },
     cost = 6,
@@ -18,6 +18,7 @@ SMODS.Joker {
 			 new_numerator, new_denominator
 		} }
 	end,
+	attributes = { 'chance','rank','two','three','four','five','generation','consumable','cry_code' },
 	    discovered = true,
     unlocked = true,
     set_badges = function (self, card, badges)

@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 9999
+priority = 214748365
 
 ###i had to
 [[patches]]
@@ -24,6 +24,6 @@ end
 return text, disp_text, poker_hands, scoring_hand, non_loc_disp_text, percent, percent_delta
 end
 function evaluate_play_after(text, disp_text, poker_hands, scoring_hand, non_loc_disp_text, percent, percent_delta)
---deleted
+--does nothing
 '''
 match_indent = true

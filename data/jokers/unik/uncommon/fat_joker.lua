@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_fat_joker',
-    atlas = "unik_uncommon",
+    atlas = "unik_normal_jokers",
     rarity = 2,
     pos = {x = 7, y = 1},
 	cost = 6,
@@ -12,6 +12,7 @@ SMODS.Joker {
     config = {
 		extra = { card = 1.5 },
 	},
+    attributes = { 'full_deck','mult'},
     loc_vars = function(self, info_queue, center)
         local mult = 26 * center.ability.extra.card
         if G.playing_cards and G.GAME.starting_deck_size then

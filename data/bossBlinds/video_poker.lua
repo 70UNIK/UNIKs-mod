@@ -4,7 +4,7 @@
 SMODS.Blind{
     key = 'unik_video_poker',
     config = {},
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 16},
     boss_colour= HEX("0000ff"),

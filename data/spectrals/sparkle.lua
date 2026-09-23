@@ -1,13 +1,14 @@
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_sparkle",
-	atlas = "unik_spectrals",
-	pos = { x = 1, y = 1 },
+	atlas = "unik_consumables",
+	pos = { x = 4, y = 5 },
 	cost = 4,
 	order = 90,
     config = {
 		max_highlighted = 1, extra= {cards_added = 3}
 	},
+	attributes = {'modify_card', 'editions','generation', 'playing_card'},
 	can_use = function(self, card)
 		if card.area ~= G.hand then
 			local check = true

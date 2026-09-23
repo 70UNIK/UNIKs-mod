@@ -1,8 +1,8 @@
 SMODS.Booster{
     key = "unik_character",
 	kind = "character",
-    atlas = "unik_cube_boosters",
-	pos = { x = 0, y = 3 },
+    atlas = "unik_consumables",
+	pos = { x = 8, y = 6 },
     cost = 10,
     weight = 0.05, --very rare
     config = { extra = 4, choose = 1 },
@@ -11,12 +11,12 @@ SMODS.Booster{
         if pseudorandom("character_soul_" .. G.GAME.round_resets.ante) > 0.995 then
             return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_soul", nil)
         end
-		--has a 0.1% chance to appear when in these packs when almanac is installed
-		if UNIK.has_almanac() then
-			if pseudorandom("almanac_funny" .. G.GAME.round_resets.ante) > 0.999 then
-				return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_jen_yawetag", nil)
-			end
-		end
+		--has a 0.1% chance to appear when in these packs when bos is installed
+		-- if UNIK.has_bos() then
+		-- 	if pseudorandom("bos_funny" .. G.GAME.round_resets.ante) > 0.999 then
+		-- 		return create_card("Spectral", G.pack_cards, nil, nil, true, true, "c_jen_yawetag", nil)
+		-- 	end
+		-- end
 		return create_card("character", G.pack_cards, nil, nil, true, true, nil, "character")
 	end,
 	ease_background_colour = function(self)

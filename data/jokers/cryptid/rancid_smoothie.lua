@@ -7,14 +7,15 @@ SMODS.Joker {
 	},
 	-- How the code refers to the joker.
 	key = 'unik_rancid_smoothie',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'cry_cursed',
 	no_dbl = true,
-	pos = { x = 2, y = 1 },
+	pos = { x = 11, y = 5 },
     cost = 1,
 	blueprint_compat = false,
     perishable_compat = false,
 	eternal_compat = false,
+	attributes = { 'stickers','detrimental','on_sell','emult','editions','modify_card','joker' },
     config = { extra = {Emult = 0.9, divisor = 1.25} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Emult,center.ability.extra.divisor} }

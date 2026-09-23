@@ -2,7 +2,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_soul_fragment',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 2, y = 1 },
     cost = 5,
@@ -10,6 +10,7 @@ SMODS.Joker {
     perishable_compat = false,
 	eternal_compat = false,
     demicoloncompat = true,
+    attributes = { 'generation','on_sell','legendary'},
     loc_vars = function(self, info_queue, center)
         if not center.ability.perishable then
             info_queue[#info_queue + 1] = { set = "Other", key = "perishable",vars = { 5, 5 } }

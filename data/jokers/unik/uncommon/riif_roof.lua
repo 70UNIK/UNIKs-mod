@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_riif_roof',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 1, y = 0 },
     cost = 6,
@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = { Xmult = 1.3} },
+    attributes = { 'xmult','joker','rarity'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Xmult} }
 	end,

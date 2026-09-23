@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_yokana",
-	path = "unik_yokana.png",
-	px = 71,
-	py = 95
-}
+
 
 local yokana_quotes = {
 	alone = {
@@ -35,10 +30,11 @@ local yokana_quotes = {
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_jsab_yokana',
-    atlas = 'unik_yokana',
+    atlas = 'unik_character_jokers',
     rarity = 3,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 3, y = 4 },
+	soul_pos = { x = 4, y = 4 },
+	attributes = { 'xchips','joker','character'},
     cost = 8,
 	blueprint_compat = true,
     perishable_compat = true,

@@ -1,14 +1,15 @@
 -- $2 per hand lost this round.
 SMODS.Joker {
     key = 'unik_golden_glove',
-    atlas = 'unik_common',
-	pos = { x = 3, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 3, y = 6 },
     rarity = 1,
     cost = 6,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     demicoloncompat = true,
+    attributes = { 'economy','hands' },
     config = { extra = {cash = 2}},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_hands_lost" }

@@ -11,6 +11,15 @@ AKYRS.DescriptionDummy{
 AKYRS.DescriptionDummy{
     key = "unik_legendary_blind"
 }
+AKYRS.DescriptionDummy{
+    key = "unik_blindside_ancient_blind"
+}
+AKYRS.DescriptionDummy{
+    key = "unik_blindside_cursed_blind"
+}
+AKYRS.DescriptionDummy{
+    key = "unik_blindside_exotic_blind"
+}
 local original_blind_icon_pos = AKYRS.other_mods_blind_icons_pos
 AKYRS.other_mods_blind_icons_pos = function(key)
     -- insert your code over here
@@ -19,6 +28,15 @@ AKYRS.other_mods_blind_icons_pos = function(key)
     end
     if key == "unik_legendary" then 
         return G.ASSET_ATLAS["unik_akio_icons"], { x = 1, y = 0 } 
+    end
+    if key == "unik_blindside_ancient" then 
+        return G.ASSET_ATLAS["unik_akio_icons"], { x = 0, y = 1 } 
+    end
+    if key == "unik_blindside_exotic" then 
+        return G.ASSET_ATLAS["unik_akio_icons"], { x = 1, y = 1 } 
+    end
+    if key == "unik_blindside_cursed" then 
+        return G.ASSET_ATLAS["unik_akio_icons"], { x = 2, y = 1 } 
     end
     if key == "unik_all_unskippable_blinds" then 
         return G.ASSET_ATLAS["unik_akio_icons"], { x = 3, y = 0 } 

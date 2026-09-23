@@ -76,5 +76,9 @@ SMODS.Blind{
 	end,
     in_pool = function()
         return not G.GAME.used_vouchers.v_magic_trick and G.GAME.round_resets.ante >= 3
+    end,
+    aij_calculate_counter_score = function()
+        --universeally bad apart from hologram and fat joker + amplify the chances if you score over ^1.1 too many times
+        return 0
     end
 }

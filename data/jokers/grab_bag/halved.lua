@@ -2,8 +2,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_halved',
-    atlas = 'unik_grab_bag_jokers',
-    pos = { x = 4, y = 0 },
+    atlas = 'unik_normal_jokers',
+    pos = { x = 11, y = 8 },
     rarity = "gb_boss",
 	-- Modest
     config = { extra = { Xmult = 4}, immutable = {card_limit = 3}},
@@ -15,6 +15,7 @@ SMODS.Joker {
     discovered = true,
     unlocked = true,
     pixel_size = { w = 71, h = 46 },
+    attributes = { 'xmult' },
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Xmult, center.ability.immutable.card_limit} }
 	end,

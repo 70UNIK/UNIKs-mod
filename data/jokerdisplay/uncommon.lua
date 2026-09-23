@@ -630,3 +630,26 @@ JokerDisplay.Definitions["j_unik_riif_roof"] = {
         return { x_mult = (card.config.center.rarity == 1 and mod_joker.ability.extra.Xmult ^ JokerDisplay.calculate_joker_triggers(mod_joker) or nil) }
     end
 }
+
+JokerDisplay.Definitions["j_unik_pink_chocolate"] = { -- Seltzer
+        reminder_text = {
+            { text = "(" },
+            { ref_table = "card.ability.extra",              ref_value = "cards" },
+            { text = "/" },
+            { ref_table = "card.joker_display_values", ref_value = "start_count" },
+            { text = ")" },
+        },
+        calc_function = function(card)
+            card.joker_display_values.start_count = card.joker_display_values.start_count or card.ability.extra.cards
+        end,
+        style_function = function(card, text, reminder_text, extra)
+            local children = reminder_text and reminder_text.children
+            if not children then return end
+
+            local colour = (card.ability.extra.cards <= 1) and G.C.RED or G.C.UI.TEXT_INACTIVE
+            for i = 2, 4 do
+                local child = children[i]
+                if child then child.config.colour = colour end
+            end
+        end,
+    }

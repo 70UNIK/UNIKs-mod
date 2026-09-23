@@ -140,7 +140,7 @@ JokerDisplay.Definitions["j_unik_kouign_amann_cookie"] = {
         },
     },
     reminder_text = {
-        {ref_table = "card.joker_display_values", ref_value = "localized_text",retrigger_type = "mult", colour = G.C.ORANGE },
+        {ref_table = "card.joker_display_values", ref_value = "localized_text",retrigger_type = "mult", colour = G.C.UNIK_LIGHT_SUIT },
     },
     calc_function = function(card)
         local count = 0
@@ -236,7 +236,7 @@ JokerDisplay.Definitions["j_unik_lone_despot"] = {
                 { text = "^" },
                 { ref_table = "card.joker_display_values", ref_value = "e_mult", retrigger_type = "exp" },
             },
-            border_colour = G.C.DARK_EDITION,
+            border_colour = SMODS.Gradients.unik_emult,
         },
     },
     reminder_text = {
@@ -250,7 +250,7 @@ JokerDisplay.Definitions["j_unik_lone_despot"] = {
                 count = 1
             end
         end
-        card.joker_display_values.e_mult = (card.ability.immutable.base_emult+ card.ability.extra.Emult) ^ count
+        card.joker_display_values.e_mult = (1+ card.ability.extra.Emult) ^ count
         card.joker_display_values.localized_text = localize('k_single_king')
     end,
 }
@@ -474,5 +474,48 @@ JokerDisplay.Definitions["j_unik_the_dynasty"] = {
         end
         card.joker_display_values.x_mult = x_mult
         card.joker_display_values.localized_text = localize(card.ability.extra.type, 'poker_hands')
+    end
+}
+
+JokerDisplay.Definitions["j_unik_goob"] = {
+    reminder_text = {
+            { text = "(" },
+            { ref_table = "card.joker_display_values", ref_value = "active_text" },
+            { text = ")" },
+        },
+    extra = {
+            {
+                { text = "(", colour = G.C.TEXT_INACTIVE},
+                { ref_table = "card.joker_display_values", ref_value = "poker_hand" , colour = G.C.FILTER},
+                { text = ")" , colour = G.C.TEXT_INACTIVE},
+            }
+        },
+    calc_function = function(card)
+        card.joker_display_values.is_active = G.GAME.current_round.hands_played == 0
+        card.joker_display_values.active_text = localize("jdis_" ..
+            (card.joker_display_values.is_active and "active" or "inactive"))
+        local validCards = {}
+            for i,v in pairs(G.hand.cards) do
+                if not TableContains(v,G.hand.highlighted) then
+                    validCards[#validCards+1] = v
+                end
+            end
+            local text, poker_hands, validCards = JokerDisplay.evaluate_hand(validCards)
+            local hand = "High Card"
+             if text ~= 'Unknown' and text ~= 'NULL' then
+                for i = #G.handlist,1,-1 do
+                    if G.GAME.hands[G.handlist[i]].visible and next(poker_hands[G.handlist[i]]) then
+                        --print(G.handlist[i])
+                        hand = G.handlist[i]
+                    end
+                end
+            end
+            card.joker_display_values.poker_hand = localize(hand, 'poker_hands')
+    end,
+    style_function = function(card, text, reminder_text, extra)
+        if reminder_text and reminder_text.children and reminder_text.children[2] then
+            reminder_text.children[2].config.colour = card.joker_display_values.is_active and G.C.GREEN or
+                G.C.UI.TEXT_INACTIVE
+        end
     end
 }

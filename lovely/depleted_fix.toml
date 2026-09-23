@@ -1,13 +1,13 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = 9999
+priority = 214748365
 
 [[patches]]
 [patches.pattern]
 target = "card.lua"
 pattern = '''if self.ability.name == 'Ramen' and not context.blueprint then
-                if to_big(self.ability.x_mult) - to_big(self.ability.extra) <= to_big(1) then 
+                if self.ability.x_mult - self.ability.extra <= 1 then 
                     SMODS.destroy_cards(self, nil, nil, true)
                     return {
                         card = self,
@@ -21,8 +21,10 @@ pattern = '''if self.ability.name == 'Ramen' and not context.blueprint then
                         scalar_value = "extra",
                         operation = "-",
                         message_key = 'a_xmult_minus',
-                        colour = G.C.RED
+                        colour = G.C.RED,
+                        message_delay = 0.2,
                     })
+                    return nil, true
                 end
             end'''
 position = "at"
@@ -47,6 +49,7 @@ pattern = '''if self.ability.name == 'Ice Cream' and not context.blueprint then
                                 operation = "-",
                                 message_key = 'a_chips_minus'
                             })
+                            return nil, true
                         end
                     end'''
 position = "at"
@@ -75,6 +78,7 @@ pattern = '''if self.ability.name == 'Turtle Bean' and not context.blueprint the
                                 G.hand:change_size(- change)
                             end
                         })
+                        return nil, true
                     end
                 end'''
 position = "at"
@@ -100,6 +104,7 @@ pattern = '''if self.ability.name == 'Popcorn' and not context.blueprint then
                             colour = G.C.MULT,
                             operation = '-'
                         })
+                        return nil, true
                     end
                 end'''
 position = "at"

@@ -1,14 +1,16 @@
 SMODS.Joker {
 	key = 'unik_up_n_go',
-    atlas = 'unik_common',
+    atlas = 'unik_normal_jokers',
     rarity = 1,
-	pos = { x = 5, y = 0 },
+	pos = { x = 5, y = 5 },
     cost = 4,
     config = { extra = {x_mult = 2.5}, immutable = {rounds = 3}},
     loc_vars = function(self, info_queue, center)
         return { 
             vars = { center.ability.extra.x_mult,center.ability.immutable.rounds } }
     end,
+	attributes = { 'xmult' },
+
 	blueprint_compat = true,
     perishable_compat = true,
     eternal_compat = false,

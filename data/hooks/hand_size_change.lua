@@ -21,3 +21,10 @@ function CardArea:change_size(delta)
     end}))
     return res
 end
+
+local drawHook = SMODS.draw_cards
+function SMODS.draw_cards(delta)
+    local ret = drawHook(delta)
+    print("DRAW ATTEMPT1")
+    return ret
+end

@@ -1,8 +1,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_bloon',
-    atlas = 'unik_grab_bag_jokers',
-    pos = { x = 0, y = 1 },
+    atlas = 'unik_normal_jokers',
+    pos = { x = 7, y = 9 },
     rarity = "gb_boss",
 	-- Modest
     config = { extra = { Xmult = 2.5}, },
@@ -13,6 +13,7 @@ SMODS.Joker {
 	demicoloncompat = true,
     discovered = true,
     unlocked = true,
+    attributes = { 'hand_size','modify_card','editions','xmult' },
     loc_vars = function(self, info_queue, center)
         if not center.edition or (center.edition and not center.edition.unik_bloated) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_bloated

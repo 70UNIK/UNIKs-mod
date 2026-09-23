@@ -2,12 +2,7 @@
 --If force triggered, produces xmult equal to sum of played ranks / 100 instead.
 --Must have unstable compat (for instance, decimal cards, 161)
 --Does not count ranks for rankless/custom ranks (abstract)
-SMODS.Atlas {
-	key = "unik_pibby",
-	path = "unik_pibby.png",
-	px = 71,
-	py = 95
-}
+
 local pibby_quotes = {
 	normal = {
 		'k_unik_pibby_normal1',
@@ -25,20 +20,21 @@ local pibby_quotes = {
 }
 SMODS.Joker {
     key = 'unik_pibby',
-    atlas = 'unik_pibby',
+    atlas = 'unik_character_jokers',
     rarity = 3,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
-    sinis = { x = 2, y = 0 },
+	pos = { x = 3, y = 0 },
+	soul_pos = { x = 4, y = 0 },
+    sinis = { x = 5, y = 0 },
     cost = 8,
     blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
+    attributes = { 'xmult','rank','character'},
     config = { extra = {x_mult = 1},immutable = {divisor = 175} },
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
-        if UNIK.has_almanac() then
+        if UNIK.has_bos() then
 			quoteset = Jen.sinister and 'drama'  or 'normal'
 		end
 		return { vars = {center.ability.immutable.divisor,center.ability.extra.x_mult,localize(pibby_quotes[quoteset][math.random(#pibby_quotes[quoteset])] .. "")} }

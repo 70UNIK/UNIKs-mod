@@ -1,8 +1,8 @@
 --$2 per discard lost this round at 0 discards
 SMODS.Joker {
     key = 'unik_instant_gratification',
-    atlas = 'unik_common',
-	pos = { x = 4, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 4, y = 6 },
     rarity = 1,
     cost = 6,
     blueprint_compat = true,
@@ -10,6 +10,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = {cash = 1.5}},
+    attributes = { 'economy','discard' },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_hands_lost" }
         return { 

@@ -9,6 +9,7 @@ SMODS.Consumable{
     no_doe = true,
     no_grc = true,
 	no_ccd = true,
+	attributes = { 'detrimental','lose_economy', },
     can_use = function(self, card)
 		return true
 	end,

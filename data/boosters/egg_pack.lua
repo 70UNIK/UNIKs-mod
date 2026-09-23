@@ -14,8 +14,8 @@ local egg_digital_hallucinations_compat = {
 SMODS.Booster{
     key = "unik_egg_pack",
 	kind = "Joker",
-    atlas = "unik_cube_boosters",
-	pos = { x = 2, y = 1 },
+    atlas = "unik_consumables",
+	pos = { x = 10, y = 4 },
     cost = 4,
     weight = 0.7, 
     config = { extra = 4, choose = 1 },
@@ -40,10 +40,15 @@ SMODS.Booster{
         ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.RED, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
 		SMODS.Booster.update_pack(self, dt)
 	end,
-	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (almanac)
+	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
 	no_doe = true,
-	unskippable = function(self) --Unskippable when all jokers are eternal and slots not full.
+	unik_unskippable = function(self) --Unskippable when all jokers are eternal and slots not full.
+		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
+		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity <= 0 then
+			return false
+		end
 		local validJokers = 0
+		--print("skipcheck")
         for i,v in pairs(G.jokers.cards) do
             if not SMODS.is_eternal(v,self) then
                 validJokers = validJokers + 1

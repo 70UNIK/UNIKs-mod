@@ -1,0 +1,46 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''for i = 1, #G.GAME.tags do
+            G.GAME.tags[i]:apply_to_run({type = 'round_start_bonus'})
+        end'''
+match_indent = true
+position = 'after'
+payload = '''
+if G.GAME.unik_can_trigger_prince then
+    G.E_MANAGER:add_event(Event({
+        trigger = 'before',
+        func = function()
+        --print(G.GAME.unik_override_prince)
+            if G.GAME.unik_prince_hands_remaining < 1 and G.GAME.blind.disabled and not G.GAME.unik_override_prince then
+                UNIK.summon_blind()
+            end
+            return true
+        end
+    }))
+end
+G.GAME.unik_can_trigger_prince = false
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = '''for i = 1, #G.GAME.tags do
+            G.GAME.tags[i]:apply_to_run({type = 'round_start_bonus'})
+        end'''
+match_indent = true
+position = 'before'
+payload = '''
+G.GAME.unik_prince_hands_remaining = G.GAME.unik_prince_hands_remaining or 0
+if G.GAME.unik_can_trigger_prince then
+    
+    if G.GAME.blind and G.GAME.blind.disabled then
+        G.GAME.unik_prince_hands_remaining = math.max(G.GAME.unik_prince_hands_remaining - 1,0)
+    end
+end
+'''

@@ -1,7 +1,7 @@
 --LAST TILE: Add Mosaic to all scored cards on final hand, self destructs.
 SMODS.Joker {
     key = 'unik_rainbow_river',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 6, y = 2 },
     rarity = 2,
     cost = 6,
@@ -10,6 +10,7 @@ SMODS.Joker {
 	eternal_compat = false,
     demicolon_compat = true,
     config = {extra = {triggers = 4}},
+    attributes = { 'hand_type','editions','modify_card'},
     loc_vars = function(self, info_queue, center)
         return { vars = {center.ability.extra.triggers}}
 	end,

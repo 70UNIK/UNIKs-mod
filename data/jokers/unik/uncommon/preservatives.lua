@@ -2,17 +2,20 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_preservatives',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 2, y = 3 },
     cost = 5,
 	blueprint_compat = false, --nope!
     perishable_compat = true,
 	eternal_compat = false,
+    attributes = { 'stickers','food','modify_card'},
     in_pool = function(self)
-        for i,v in pairs(G.jokers.cards) do 
-            if v.ability.perishable then
-                return true
+        if G.jokers and G.jokers.cards then
+            for i,v in pairs(G.jokers.cards) do 
+                if v.ability.perishable then
+                    return true
+                end
             end
         end
 		if G.GAME.modifiers.enable_perishables_in_shop then

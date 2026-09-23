@@ -1,0 +1,2 @@
+--copy a random owned trinket, destroy all other owned trinkets (removes negative from copy)
+--literally Ankh

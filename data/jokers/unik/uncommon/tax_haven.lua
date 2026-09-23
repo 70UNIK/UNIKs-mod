@@ -2,7 +2,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_tax_haven',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 0, y = 2 },
     cost = 5,
@@ -10,15 +10,24 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = true,
     config = { extra = {cash_loss = 3} },
+    attributes = { 'stickers','joker','modify_card','lose_economy'},
     in_pool = function(self)
-        for i,v in pairs(G.jokers.cards) do 
-            if v.ability.rental then
+        if G.jokers and G.jokers.cards then
+            for i,v in pairs(G.jokers.cards) do 
+                if v.ability.rental then
+                    return true
+                end
+            end
+            for i,v in pairs(G.playing_cards) do 
+                if v.ability.rental then
+                    return true
+                end
+            end
+            if G.GAME.modifiers.enable_rentals_in_shop then
                 return true
             end
         end
-		if G.GAME.modifiers.enable_rentals_in_shop then
-			return true
-		end
+        
 		return false
 	end,
 	loc_vars = function(self, info_queue, center)

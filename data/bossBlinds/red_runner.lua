@@ -1,7 +1,7 @@
 --all cards debuffed until a hand containing a straight is played 
 SMODS.Blind{
     key = 'unik_red_runner',
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 36},
     boss_colour= HEX("ff0000"),

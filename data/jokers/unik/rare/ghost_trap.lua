@@ -5,15 +5,16 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_ghost_trap',
-    atlas = 'unik_rare',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 0, y = 0 },
+	pos = { x = 10, y = 0 },
     cost = 8,
 	blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
 	experimental = true,
 	demicoloncompat = true,
+	attributes = { 'destroy_card','xmult','scaling'},
     config = { extra = {x_mult = 1.0, x_mult_mod = 1.5,limit = 10,destroyed = false} },
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.limit} }

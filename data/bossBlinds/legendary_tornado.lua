@@ -9,7 +9,7 @@ frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_tornado',
     config = {},
-    boss = {min = 1,legendary = true,showdown = true,no_orb = true}, 
+    boss = {min = -66,legendary = true,showdown = true,no_orb = true}, 
     atlas = "unik_legendary_tornado",
     pos = {x=0, y=0},
     boss_colour= HEX("3dd9ca"), 
@@ -55,7 +55,7 @@ SMODS.Blind{
         return false
 	end,
 	debuff_hand = function(self, cards, hand, handname, check)
-        if next(hand["cry_None"]) then	
+        if (SMODS.Mods["Cryptid"] or {}).can_load and next(hand["cry_None"]) then	
             G.GAME.blind.triggered = true
 			return true
 		end

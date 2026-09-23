@@ -7,10 +7,11 @@ local blacklisted_editions = {
 SMODS.Consumable{
     set = "Rotarot",
    	key = "unik_rot_wheel_of_misfortune",
-	pos = { x = 1, y = 0 },
-	atlas = "unik_rotarots",
-	display_size = { w = 106, h = 106 },
+	pos = { x = 1, y = 6 },
+	atlas = "unik_consumables",
+	mf_rotate_by = math.pi / 4,
     cost = 4,
+	attributes = {'chance','edition','modify_card'},
     update = function(self,card,dt)
         if (G.jokers) then
             card.eligible_strength_jokers2 = EMPTY(card.eligible_strength_jokers2)

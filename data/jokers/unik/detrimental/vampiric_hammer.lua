@@ -6,9 +6,9 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_vampiric_hammer',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
-	pos = { x = 4, y = 2 },
+	pos = { x = 13, y = 6 },
     no_dbl = true,
     cost = 1,
     --will not be changed in modest
@@ -16,6 +16,7 @@ SMODS.Joker {
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
+    attributes = { 'detrimental','modify_card','enhancements' },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
         return { vars = {center.ability.extra.min_enhanced_cards, center.ability.extra.enhanced_cards} }

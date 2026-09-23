@@ -1,6 +1,6 @@
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = 'unik_summits',
+	atlas = 'unik_consumables',
     cost = 3,
 	pos = {x = 0, y = 3},
 	key = 'unik_kosciuszko',
@@ -12,35 +12,24 @@ SMODS.Consumable{
 	end,
     config = { extra = { chips = 22 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
+        local cardOrBlind = UNIK.hasBlindside() and 'k_unik_blind' or 'k_unik_card'
 		return {
-			vars = {card.ability.extra.chips,card.ability.extra.max_highlighted},
+			vars = {card.ability.extra.chips,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
-    
+    attributes = {'perma_bonus','chips','modify_card'},
+    blindside_booster = true,
+	include_in_vanilla = true,
 	use = function(self, card, area, copier)
         UNIK.add_bonus('chips',card.ability.extra.chips)
-        for i = 1, #G.hand.highlighted do
-            local highlighted = G.hand.highlighted[i]
-                highlighted.ability["perma_bonus"] = highlighted.ability["perma_bonus"] or 0
-                highlighted.ability["perma_bonus"] = highlighted.ability["perma_bonus"] + card.ability.extra.chips
-                
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after', 
-                delay = 0.1, 
-                func = function()
-                card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_chips",
-                        vars = { number_format(highlighted.ability["perma_bonus"]) },
-                    }),
-                    colour = G.C.CHIPS,
-                    card=highlighted,
-                })
-                return true 
-                end 
-            }))
-        end
+        UNIK.add_perma_bonus({
+            type = 'perma_bonus',
+            message_key = 'a_chips',
+            message_colour = G.C.CHIPS,
+            from_card = card,
+            cards = G.hand.highlighted,
+            value = card.ability.extra.chips,
+        })
         card:juice_up(0.3, 0.5)  
     end
 }

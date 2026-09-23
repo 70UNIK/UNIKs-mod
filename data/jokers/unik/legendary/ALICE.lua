@@ -11,18 +11,13 @@ local function contains(table_, value)
 
     return false
 end
-SMODS.Atlas {
-	key = "unik_alice",
-	path = "unik_alice.png",
-	px = 71,
-	py = 95
-}
+
 SMODS.Joker {
 	key = 'unik_extra_credit_alice',
-    atlas = 'unik_alice',
+    atlas = 'unik_character_jokers',
     rarity = 4,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 7, y = 10 },
+	soul_pos = { x = 8, y = 10 },
     cost = 20,
 	blueprint_compat = true,
     perishable_compat = true,
@@ -34,6 +29,7 @@ SMODS.Joker {
 	end,
     pools = {},
     pronouns = "she_her",
+    attributes = { 'xmult','scaling','rank' },
     calculate = function(self, card, context)
         if context.forcetrigger or context.joker_main then
             return {

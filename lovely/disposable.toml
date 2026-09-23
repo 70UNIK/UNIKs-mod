@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 9999
+priority = 214748365
 ### disposable/niko/bloated functionality
 ## stolen from cryptid code:
 
@@ -30,7 +30,9 @@ unik_old_force_epic_plus = 4,
 unik_reed_ranks = {{rank = "Ace", id = 14},{rank = "7", id = 7},{rank = "10", id = 10}},
 epic_cookie_click_interval = -1, -- -1 = disabled.
 ante_rerolls = 0,
+unik_ante_spent = 0,
 global_rerolls = 0,
+unik_global_spent = 0,
 unik_spades = 0,
 unik_hearts = 0,
 unik_diamonds = 0,
@@ -41,6 +43,7 @@ unik_limited_edition_rounds = 5,
 unik_hands_lost_in_round = 0,
 unik_discards_lost_in_round = 0,
 unik_light_dark_bonuses = {light = {mult = 1.5, chips = 1.5}, dark = {mult = 1.5,chips = 1.5}},
+unik_can_trigger_prince = true,
 '''
 match_indent = true
 
@@ -76,6 +79,13 @@ i = 1
 while i <= #G.consumeables.cards do
     local gone = G.consumeables.cards[i]:calculate_disposable()
     if not gone then i = i + 1 end
+end
+i = 1
+if UNIK.hasBlindside() then
+    while i <= #G.jokers.cards do
+        G.jokers.cards[i]:calculate_impounded()
+        i = i + 1
+    end
 end
 '''
 match_indent = true
@@ -152,35 +162,22 @@ if self.ability.unik_disposable or self.ability.unik_niko then
         if SMODS.pseudorandom_probability(self, 'unik_niko_consumable', 2, G.GAME.unik_consumeable_niko_death_odds, 'unik_niko_consumable') then
 	    local gone = true
             self.ability.extinct = true
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    play_sound('tarot1')
-                    self.T.r = -0.2
-                    self:juice_up(0.3, 0.4)
-                    self.states.drag.is = true
-                    self.children.center.pinch.x = true
-                    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-                        func = function()
-                                if self.area then self.area:remove_card(self) end
-                                self:remove()
-                                self = nil
-                            return true; end}))
-                    return true
-                end
-            }))
+            self.ability.unik_disposed = true
+			
             if self.ability.unik_niko then
-                card_eval_status_text(self, "jokers", nil, nil, nil, {
-                    message = localize("k_unik_you_killed_niko"),
-                    delay = 0.4 ,
-                    colour = G.C.RED,
-               })               
+				selfDestruction(self,"k_unik_you_killed_niko",G.C.RED,false,0.5)
+           
             else
-                card_eval_status_text(self, "jokers", nil, nil, nil, {
-                    message = localize("k_unik_disposed"),
-                    delay = 0.4 ,
-                    colour = G.C.RED,
-               })
+                selfDestruction(self,"k_unik_disposed",G.C.RED,false,0.5)
+   
             end
+			G.E_MANAGER:add_event(Event({
+				trigger ="after",
+				func = function()
+					self.ability.unik_disposed = nil
+					return true
+				end,
+			}))
             return true
         end
     end

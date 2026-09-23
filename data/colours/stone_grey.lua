@@ -2,7 +2,7 @@
     object_type = "Consumable",
     set = "Colour",
     key = "stone_grey",
-    pos = { x = 2, y = 0 },
+    pos = { x = 10, y = 2 },
     config = {
       val = 0,
       partial_rounds = 0,
@@ -10,7 +10,7 @@
     },
     cost = 4,
     hidden = true,
-    atlas = "unik_colours",
+    atlas = "unik_consumables",
     unlocked = true,
     discovered = true,
     display_size = { w = 71, h = 87 },

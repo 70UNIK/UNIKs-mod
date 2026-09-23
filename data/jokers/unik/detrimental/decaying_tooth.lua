@@ -7,13 +7,14 @@ SMODS.Joker {
 	},
 	-- How the code refers to the joker.
 	key = 'unik_decaying_tooth',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
 	no_dbl = true,
-	pos = { x = 0, y = 3 },
+	pos = { x = 9, y = 7 },
     cost = 0,
 	blueprint_compat = false,
     perishable_compat = false,
+    attributes = { 'detrimental','lose_economy' },
 	eternal_compat = false,
     config = { extra = {cash_loss = 1, cash_required = 20, current_cash = 0, enable_check = false,selfDestruct = false},},
 	loc_vars = function(self, info_queue, center)
@@ -67,5 +68,14 @@ local edo = ease_dollars
 function ease_dollars(mod, instant)
     local res = edo(mod, instant)
         SMODS.calculate_context({ money_mod = true, money_mod_val = mod })
+        if mod < 0 then
+            G.GAME.unik_ante_spent = G.GAME.unik_ante_spent or 0
+            G.GAME.unik_global_spent = G.GAME.unik_global_spent or 0
+            if G.GAME.enable_ante_purchase_tracking then
+                G.GAME.unik_ante_spent = G.GAME.unik_ante_spent+ math.abs(mod)
+            end
+            
+            G.GAME.unik_global_spent = G.GAME.unik_global_spent + math.abs(mod)
+        end
     return res
 end

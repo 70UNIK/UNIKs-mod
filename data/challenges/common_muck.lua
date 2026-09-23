@@ -25,7 +25,7 @@ SMODS.Challenge{
             banList[#banList+1] = {id = 'c_unik_gateway'}
             for k, v in pairs(G.P_CENTERS) do
             -- Check if its a joker
-            --also nil check to avoid registring banned jokers (almanac)
+            --also nil check to avoid registring banned jokers (bos)
                 if v.set == "Joker" and v ~= nil then
                     --check if its not a common (cursed jokers will still appear, cause Bigger Boo and Purple Pentagram)
                     if v.rarity ~= 1 and v.rarity ~= 'unik_detrimental' and v.rarity ~= 'cry_cursed' then

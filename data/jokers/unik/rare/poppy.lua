@@ -1,9 +1,4 @@
-SMODS.Atlas {
-	key = "unik_poppy",
-	path = "unik_poppy.png",
-	px = 71,
-	py = 95
-}
+
 local poppy_quotes = {
 	normal = {
 		'k_poppy_normal1',
@@ -21,15 +16,16 @@ local poppy_quotes = {
 }
 SMODS.Joker {
     key = 'unik_poppy',
-    atlas = 'unik_poppy',
-	pos = { x = 0, y = 0 },
-    soul_pos = { x = 1, y = 0 },
+    atlas = 'unik_character_jokers',
+	pos = { x = 6, y = 0 },
+    soul_pos = { x = 7, y = 0 },
     rarity = 3,
     cost = 9,
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     immutable = true,
+    attributes = { 'discard','hands','retrigger','character'},
     config = { extra = {retriggers = 0},immutable = { max_retriggers = 100,discarders = 0 }},
     loc_vars = function(self, info_queue, center)
         local quoteset = 'normal'
@@ -159,6 +155,11 @@ function ease_hands_played(mod, instant)
                 G.GAME.unik_hands_lost_in_round = G.GAME.unik_hands_lost_in_round - mod2
             end
             SMODS.calculate_context({ hand_mod = true, hand_mod_val = mod2 })
+            if UNIK.hasBlindside() then
+                for i = 1, #G.GAME.tags do
+                    G.GAME.tags[i]:apply_to_run({type = 'hand_mod',hand_mod_val = mod2})
+                end
+            end
             
         end
     end
@@ -180,7 +181,11 @@ function ease_discard(mod, instant, silent)
                 G.GAME.unik_discards_lost_in_round = G.GAME.unik_discards_lost_in_round - mod2
             end
             SMODS.calculate_context({ discard_mod = true, discard_mod_val = mod2 })
-            
+            if UNIK.hasBlindside() then
+                for i = 1, #G.GAME.tags do
+                    G.GAME.tags[i]:apply_to_run({type = 'discard_mod',discard_mod_val = mod2})
+                end
+            end
             
         end
     end

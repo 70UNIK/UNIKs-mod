@@ -11,7 +11,7 @@ frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_magnet',
     config = {},
-    boss = {min = 1,legendary = true, showdown = true,no_orb = true}, 
+    boss = {min = -66,legendary = true, showdown = true,no_orb = true}, 
     atlas = "unik_legendary_magnet",
     pos = {x=0, y=0},
     boss_colour= HEX("5c0007"), --all legendary blinds will be blood red and black.

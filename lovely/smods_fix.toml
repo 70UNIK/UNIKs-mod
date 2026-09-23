@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 [[patches]]
 [patches.pattern]
@@ -13,35 +13,30 @@ match_indent = true
 
 [[patches]]
 [patches.pattern]
-target = '''=[SMODS _ "src/utils.lua"]'''
-pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
-position = "before"
-payload = '''if G.GAME.blind and G.GAME.blind.children and G.GAME.blind.children.animatedSprite and G.GAME.blind.children.animatedSprite then'''
-match_indent = true
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS _ "src/utils.lua"]'''
-pattern = '''if G.GAME.blind then t[#t + 1] = { object = G.GAME.blind, scored_card = G.GAME.blind.children.animatedSprite } end'''
-position = "after"
-payload = '''end'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS _ "src/utils.lua"]'''
-pattern = '''if specific_vars and specific_vars.bonus_x_chips then
-        localize{type = 'other', key = 'card_h_x_chips', nodes = desc_nodes, vars = {specific_vars.bonus_h_x_chips}}'''
-position = "at"
-payload = '''if specific_vars and specific_vars.bonus_h_x_chips then
-        localize{type = 'other', key = 'card_h_x_chips', nodes = desc_nodes, vars = {specific_vars.bonus_h_x_chips}}'''
-match_indent = true
-
-[[patches]]
-[patches.pattern]
 target = '''functions/common_events.lua'''
 pattern = '''SMODS.upgrade_poker_hands({'''
 position = "after"
 payload = '''
 instant = instant,
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/runselectpage.lua"]'''
+pattern = '''if card.config.center.shiny then Sprite.draw_shader(_sprite, 'negative_shine', nil, _sprite.ARGS.send_to_shader) end'''
+position = "after"
+payload = '''
+if card.config.center.unik_shader then Sprite.draw_shader(_sprite, card.config.center.unik_shader, nil, _sprite.ARGS.send_to_shader) end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/game_objects/runselectpage.lua"]'''
+pattern = '''if card.config.center.shiny then Sprite.draw_shader(_sprite, 'voucher', nil, _sprite.ARGS.send_to_shader) end'''
+position = "after"
+payload = '''
+if card.config.center.unik_shader then Sprite.draw_shader(_sprite, card.config.center.unik_shader, nil, _sprite.ARGS.send_to_shader) end
 '''
 match_indent = true

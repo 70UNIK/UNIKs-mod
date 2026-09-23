@@ -2,7 +2,7 @@ SMODS.Blind	{
     key = 'unik_epic_collapse',
     config = {},
 	showdown = true,
-    boss = {min = 1, showdown = true, hardcore = true, epic = true,no_orb = true},
+    boss = {min = -66, showdown = true, hardcore = true, epic = true,no_orb = true},
     boss_colour = HEX("444444"),
     atlas = 'unik_legendary_blinds',
     pos = {x = 0, y = 8},
@@ -35,7 +35,7 @@ SMODS.Blind	{
         if stoneCards < 1 then
             return false
         end
-        --maybe its funnier to have it spawn even without stone hands in deck in almanac
+        --maybe its funnier to have it spawn even without stone hands in deck in bos
         return CanSpawnEpic()
 	end,
 	unik_kill_hand = function(self, cards, hand, handname, check)

@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 ### Epic Decision and Lartceps
 
@@ -44,6 +44,34 @@ payload = '''
 	end
 '''
 match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''G.GAME.tags[i]:apply_to_run({type = 'immediate'})'''
+position = "before"
+payload = '''
+	if not G.GAME.unik_mortons_fork then
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''G.GAME.tags[i]:apply_to_run({type = 'immediate'})'''
+position = "after"
+payload = '''
+	end
+'''
+match_indent = true
+
+##Bypass unpleasant card's effect for lartceps bundle to avoid softlock
+[[patches]]
+[patches.regex]
+target = '''card.lua'''
+pattern = '''next\(SMODS\.find\_card\(\"j\_mf\_unpleasantcard\"\)\)'''
+position = "after"
+payload = ''' and not self.config.center.bypass_mf_unpleasant '''
+match_indent = true
+
 
 
 ##Part 1 of below:

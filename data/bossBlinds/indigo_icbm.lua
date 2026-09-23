@@ -3,7 +3,7 @@
 SMODS.Blind{
     key = 'unik_indigo_icbm',
     config = {},
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 1},
     boss_colour= HEX("250088"),

@@ -3,9 +3,9 @@
 --Defeat this blind, [Number of hands] times
 --Set hands to 1, only replenish if defeated blind (otherwise set to -6666, to counter hunter)
 --As for if deck is replenished, it WILL NOT be replenished, it just immediately sets score to 0 then displays disabled text
---After each defeat, rescale to highest score x 1.25 (^1.01 in almanac)
---If hands = 1, blind size is increased by ^6.666 (^^6.666 in almanac)
---To survive, joker rearrangement, scaling jokers or in almanac, amalgamate or hydrea is the way to survive (as well as high consistent scoring and keeping an eye on the highest score)
+--After each defeat, rescale to highest score x 1.25 (^1.01 in bos)
+--If hands = 1, blind size is increased by ^6.666 (^^6.666 in bos)
+--To survive, joker rearrangement, scaling jokers or in bos, amalgamate or hydrea is the way to survive (as well as high consistent scoring and keeping an eye on the highest score)
 SMODS.Atlas({ 
     key = "unik_legendary_crown", 
     atlas_table = "ANIMATION_ATLAS", 
@@ -16,7 +16,7 @@ frames = 21 })
 SMODS.Blind{
     key = 'unik_legendary_crown',
     config = {},
-    boss = {min = 1,legendary = true,showdown = true, no_orb = true, hardcore = true}, 
+    boss = {min = -66,legendary = true,showdown = true, no_orb = true, hardcore = true}, 
     atlas = "unik_legendary_crown",
     pos = {x=0, y=0}, --This could shift with glitch FX (may use dandy code for this)
     boss_colour= HEX("e0bc42"),
@@ -57,9 +57,6 @@ SMODS.Blind{
                     scale = 1, text = text, hold = 2, align = 'cm', offset = {x = 0,y = -2.7},major = G.play,colour = G.C.UNIK_EYE_SEARING_RED
                 })
             end
-            if G.GAME.round_resets.hands == 1 then
-                G.GAME.blind.chips = G.GAME.round_scores['hand'].amt^6.666
-            end
             G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
             ease_hands_played(-G.GAME.blind.hands_sub)
             
@@ -95,6 +92,7 @@ end
 
 local end_roundref = end_round
 function end_round()
+    G.GAME.unik_force_cursed_jokers = nil
     if not (G.GAME.blind and G.GAME.blind.config and G.GAME.blind.config.blind.key == "bl_entr_endless_entropy_phase_four") then
         if to_big(G.GAME.chips) >= to_big(G.GAME.blind.chips) then
             if G.GAME.unik_crown_progress and G.GAME.unik_crown_progress > 1 then
@@ -105,7 +103,7 @@ function end_round()
                         G.GAME.unik_crown_progress = G.GAME.unik_crown_progress - 1
                         G.GAME.blind:set_blind(G.P_BLINDS["bl_unik_legendary_crown"])
                         ChangePhaseCrown()
-                        G.GAME.blind.chips = G.GAME.round_scores['hand'].amt*1.5
+                        G.GAME.blind.chips = G.GAME.round_scores['hand'].amt--*1.5
                         if to_big(G.GAME.blind.chips) <= to_big(0) then
                             G.GAME.blind.chips = 1
                         end

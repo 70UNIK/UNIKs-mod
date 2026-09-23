@@ -1,0 +1,3 @@
+--navy decK:
+--create a random summit card when boss joker is selected (must have room)
+--create a crude blind when big joker is selected

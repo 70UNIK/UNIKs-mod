@@ -13,6 +13,8 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_head_color = G.C.UNIK_THE_HEAD
     G.ARGS.LOC_COLOURS.unik_arm_color = G.C.UNIK_THE_ARM
     G.ARGS.LOC_COLOURS.unik_hook_color = G.C.UNIK_THE_HOOK
+    G.ARGS.LOC_COLOURS.unik_exotic = G.C.UNIK_EXOTIC
+    G.ARGS.LOC_COLOURS.unik_exquisite = G.C.UNIK_EXQUISITE
     G.ARGS.LOC_COLOURS.unik_orta_hammer_color = G.C.UNIK_ORTA_THE_HAMMER
     G.ARGS.LOC_COLOURS.unik_eye_searing_blue = G.C.UNIK_EYE_SEARING_BLUE
     G.ARGS.LOC_COLOURS.unik_eye_searing_red = G.C.UNIK_EYE_SEARING_RED
@@ -30,5 +32,9 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_rgb = G.C.UNIK_RGB
     G.ARGS.LOC_COLOURS.unik_summit = G.C.UNIK_SUMMIT
     G.ARGS.LOC_COLOURS.unik_copper = G.C.UNIK_COPPER
+    G.ARGS.LOC_COLOURS.unik_eqmult = G.C.UNIK_EQMULT
+    G.ARGS.LOC_COLOURS.unik_eqchips = G.C.UNIK_EQCHIPS
+    G.ARGS.LOC_COLOURS.unik_light_suit = G.C.UNIK_LIGHT_SUIT
+    G.ARGS.LOC_COLOURS.unik_dark_suit = G.C.UNIK_DARK_SUIT
     return locHook(_c,_default)
 end

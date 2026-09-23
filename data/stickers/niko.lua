@@ -105,42 +105,21 @@ function Card:calculate_disposable()
 	if not self.ability.unik_disposed then
 		if self.ability.unik_disposable or self.ability.unik_niko then
 			self.ability.unik_disposed = true
+			
+            if self.ability.unik_niko then
+				selfDestruction(self,"k_unik_you_killed_niko",G.C.RED,false,0.5)
+           
+            else
+                selfDestruction(self,"k_unik_disposed",G.C.RED,false,0.5)
+   
+            end
 			G.E_MANAGER:add_event(Event({
+				trigger ="after",
 				func = function()
-					play_sound("tarot1")
-					self.T.r = -0.2
-					self:juice_up(0.3, 0.4)
-					self.states.drag.is = true
-					self.children.center.pinch.x = true
-					G.E_MANAGER:add_event(Event({
-						trigger = "after",
-						delay = 0.3,
-						blockable = false,
-						func = function()
-							if self.area then
-								self.area:remove_card(self)
-							end
-							self:remove()
-							self = nil
-							return true
-						end,
-					}))
+					self.ability.unik_disposed = nil
 					return true
 				end,
 			}))
-            if self.ability.unik_niko then
-                card_eval_status_text(self, "jokers", nil, nil, nil, {
-                    message = localize("k_unik_you_killed_niko"),
-                    delay = 0.5 ,
-                    colour = G.C.RED,
-               })               
-            else
-                card_eval_status_text(self, "jokers", nil, nil, nil, {
-                    message = localize("k_unik_disposed"),
-                    delay = 0.5 ,
-                    colour = G.C.RED,
-               })
-            end
 			return true
 		end
 	end

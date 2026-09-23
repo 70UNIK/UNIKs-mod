@@ -34,6 +34,7 @@ SMODS.Edition({
 			return 0
 		end
 	end,
+    attributes = { 'detrimental' },
     on_apply = function(card)
         if card.ability.set ~= "Default" and card.ability.set ~= "Enhanced" then
             local X, Y, W, H = card.T.x, card.T.y, card.T.w, card.T.h

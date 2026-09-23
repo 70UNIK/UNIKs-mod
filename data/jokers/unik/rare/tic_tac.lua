@@ -1,14 +1,15 @@
 --wild cards become crosses by default
 SMODS.Joker {
     key = 'unik_tic_tac',
-    atlas = 'unik_rare',
-	pos = { x = 4, y = 2 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 14, y = 2 },
     rarity = 3,
     cost = 7,
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = false,
     config = {extra = {triggers = 15}},
+    attributes = { 'modify_card','suit','unik_noughts','unik_crosses'},
     pools = { ["Food"] = true},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')

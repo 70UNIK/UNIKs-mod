@@ -6,15 +6,16 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_caveman_club',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
     no_dbl = true,
-	pos = { x = 1, y = 1 },
+	pos = { x = 10, y = 5 },
     cost = 1,
     config = { extra = {minCards = 7, cards = 13, selfDestruct = false,suit = "Clubs",debuff_name = "unik_club",death_message = "k_unik_weapon_destroyed",color = "b9cb92",entered = false} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
+    attributes = { 'detrimental','debuff','suit','clubs' },
     experimental = true,
     loc_vars = function(self, info_queue, center)
         --Nerf to requiring half of cards destroyed (rounded to whole num), so its more in line with Blacklist's requirements

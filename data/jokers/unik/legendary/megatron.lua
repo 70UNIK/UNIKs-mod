@@ -1,11 +1,6 @@
 --Megatron:
 --X2 Mult when a probability fails. Destroy a random Joker whenever a probability succeeds, otherwise ^1.05 Blind Size if it cannot destroy a joker.
-SMODS.Atlas {
-	key = "unik_megatron",
-	path = "unik_megatron.png",
-	px = 71,
-	py = 95
-}
+
 local megatron_quotes = {
 	normal = {
 		'k_unik_megatron1',
@@ -26,9 +21,9 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_megatron',
 	rarity = 4,
-	atlas = 'unik_megatron',
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	atlas = 'unik_character_jokers',
+	pos = { x = 3, y = 11 },
+	soul_pos = { x = 4, y = 11 },
 	cost = 20,
 	blueprint_compat = true,
 	perishable_compat = false,
@@ -41,6 +36,7 @@ SMODS.Joker {
 			vars = {center.ability.extra.x_mult,center.ability.immutable.blind_size,localize(megatron_quotes[quoteset][math.random(#megatron_quotes[quoteset])] .. "")}
 		}
 	end,
+    attributes = { 'xmult','chance','eblindsize','destroy_card' },
     paperback = {
         permanently_eternal = true,
     },

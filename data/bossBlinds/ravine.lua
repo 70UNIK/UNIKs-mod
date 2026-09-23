@@ -21,6 +21,13 @@ SMODS.Blind{
             delay(0.7)
         end
     end,
+    aij_calculate_counter_score = function()
+        --Mainly hampers the shop
+        --Max counter:
+        -- 1) Double tags or any tag duplication would increase the odds
+        -- 2) Vessel Kiln will make it have a tangible effect on score due to the vessel tags
+        return 0
+    end,
 
     in_pool = function(self)
         if (G.GAME.round_resets.ante < self.boss.min) or get_deck_win_stake() < 9 then

@@ -5,15 +5,16 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_border_wall',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
     no_dbl = true,
-	pos = { x = 1, y = 0 },
+	pos = { x = 10, y = 4 },
     cost = 1,
     config = { extra = { selfDestruct = false,blind_size = 2,exceeds = 3,applied = false} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     perishable_compat = false,
+    attributes = { 'detrimental','xblindsize' },
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
         return { vars = { center.ability.extra.selfDestruct, center.ability.extra.blind_size, center.ability.extra.exceeds} }
@@ -100,35 +101,3 @@ SMODS.Joker {
         end
     end
 }
--- if JokerDisplay then
--- end
-
--- function SselfDestruction(card,message)
---     -- This part plays the animation.
---     G.E_MANAGER:add_event(Event({
---         func = function()
---             play_sound('tarot1')
---             card.T.r = -0.2
---             card:juice_up(0.3, 0.4)
---             card.states.drag.is = true
---             card.children.center.pinch.x = true
---             G.E_MANAGER:add_event(Event({
---                 trigger = 'after',
---                 delay = 0.3,
---                 blockable = false,
---                 func = function()
---                     G.jokers:remove_card(card)
---                     card:remove()
---                     card = nil
---                     return true;
---                 end
---             }))
---             return true
---         end
---     }))
---     return {
---         message = localize(message),
---         colour = HEX("8a59a5"),
---         card=card,
---     }
--- end

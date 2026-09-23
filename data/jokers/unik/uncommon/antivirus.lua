@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = "unik_antivirus",
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
     cost = 6,
     pos = { x = 1, y = 3 },
@@ -9,6 +9,7 @@ SMODS.Joker {
 	eternal_compat = true,
     immutable = true,
     pronouns = "it_its",
+    attributes = { 'stickers', 'enhancements' },
     loc_vars = function(self, info_queue, center)
         if not center.ability.unik_shielded then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_shielded" }

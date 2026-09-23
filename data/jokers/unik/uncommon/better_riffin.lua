@@ -1,7 +1,7 @@
 
 SMODS.Joker {
     key = 'unik_better_riffin',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 8, y = 2 },
     cost = 7,
@@ -11,6 +11,7 @@ SMODS.Joker {
     demicoloncompat = true,
     immutable = true,
     pools = {["riff_raff"] = true },
+    attributes = { 'joker', 'generation','rarity' },
     calculate = function(self, card, context)
         if context.forcetrigger and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
             local create = 1

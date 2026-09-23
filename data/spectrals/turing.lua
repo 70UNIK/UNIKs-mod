@@ -2,14 +2,15 @@
 SMODS.Consumable {
     key = 'unik_lightning',
     set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 3, y = 1 },
+	atlas = "unik_consumables",
+    pos = { x = 6, y = 5 },
     cost = 4,
     config = {mod_conv = "unik_copper_seal", max_highlighted = 1 },
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_copper_seal" }
         return { vars = { card.ability.max_highlighted } }
     end,
+    attributes = {'modify_card', 'seals'},
     use = function(self, card, area, copier)
         for i,v in pairs(G.hand.highlighted) do
             local conv_card = v

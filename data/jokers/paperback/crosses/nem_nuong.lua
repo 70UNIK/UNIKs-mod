@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_nem_nuong',
-    atlas = 'unik_common',
-	pos = { x = 2, y = 3 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 2, y = 8 },
     rarity = 1,
     cost = 6,
 	config = {
@@ -12,6 +12,7 @@ SMODS.Joker {
             stick_key = 'j_unik_meaty_stick'
         }
 	},
+    attributes = { 'mult','chance','food','unik_crosses','suit' },
     pools = { ["Food"] = true},
     eternal_compat = false,
 	blueprint_compat = true,

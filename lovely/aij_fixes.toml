@@ -1,0 +1,98 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+# fixes critical crashes that occur with AIJ and UNIK's
+# an unresolved issue so far involves saving/loading with the fucking astral symbols.
+# also cloudwatching is an issue on AIJ's end.
+# --eval G.shop_jokers.cards[1]:set_ability('j_aij_cloudwatching')
+# j_aij_ijoker_co
+# --eval G.shop_jokers.cards[1]:set_ability('j_aij_ijoker_co')
+[[patches]]
+[patches.regex]
+target = '''=[SMODS allinjest "Utils/functions.lua"]'''
+pattern = '''k \~\= \'Boss\''''
+position = "before"
+match_indent = true
+payload = ''' G.blind_select_opts and '''
+
+##attempting to debug the astral pin issue
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''if obj.load and type(obj.load) == 'function' then'''
+position = "before"
+match_indent = true
+payload = '''
+
+if not obj then 
+    if aij_other_obj then
+        print("OBJ " .. aij_other_obj.config.center.key .. " may have been overrided...")
+    end
+    print("MAJOR PROBLEM: CARD FAILED TO LOAD!")
+    return nil
+end'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS _ "src/utils.lua"]'''
+pattern = '''if v and type(v) == 'table' and v.config.center.key == key and (count_debuffed or not v.debuff) then'''
+position = "at"
+match_indent = true
+payload = '''
+if v and v.config and not v.config.center then
+    print("UH OH! MISSING CARD INFO! REMOVING THIS NOW!")
+    --print(area)
+    for i,v in pairs(G) do
+        if v == area then
+            print(i)
+        end
+    end
+    print("EMERGENCY REPLACEMENT")
+    v = nil
+    area.cards = {}
+    area.highlighted = {}
+end
+if v and type(v) == 'table' and v.config and v.config.center and v.config.center.key == key and (count_debuffed or not v.debuff) then'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS allinjest "Utils/copiers.lua"]'''
+pattern = '''if v and type(v) == 'table' and v.ability[v.config.center.key] and (count_debuffed or not v.debuff) then'''
+position = "at"
+match_indent = true
+payload = '''if v and type(v) == 'table' and v.ability and v.config and v.config.center and v.config.center.key and v.ability[v.config.center.key] and (count_debuffed or not v.debuff) then'''
+
+[[patches]]
+[patches.regex]
+target = '''=[SMODS allinjest "Items/Enhancements/canvas.lua"]'''
+pattern = '''#G.play.cards >= 1'''
+position = "after"
+match_indent = true
+payload = ''' and G.STATE == G.STATES.HAND_PLAYED and TableContains(card,G.play.cards) '''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS allinjest "Items/Jokers/big_red.lua"]'''
+pattern = '''local is_mult_joker = function(center)'''
+position = "after"
+match_indent = true
+payload = '''
+if UNIK.is_mult_joker(center) then
+    return true
+end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''=[SMODS allinjest "Items/Jokers/big_red.lua"]'''
+pattern = '''local is_chips_joker = function(center)'''
+position = "after"
+match_indent = true
+payload = '''
+if UNIK.is_chips_joker(center) then
+    return true
+end
+'''

@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_euclid',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 4, y = 2 },
     rarity = 2,
     cost = 6,
@@ -11,6 +11,7 @@ SMODS.Joker {
     config = {
 		extra = { chips = 59 },
 	},
+    attributes = { 'chips','rank','two','three','five','seven','ace'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.chips} }
 	end,

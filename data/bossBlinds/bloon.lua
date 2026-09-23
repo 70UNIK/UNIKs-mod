@@ -40,4 +40,12 @@ SMODS.Blind{
             G.GAME.blind:wiggle()
         end
 	end,
+    aij_calculate_counter_score = function()
+         --Can destroy playing cards you dont want to be destroyed as well as the rightmost joker.
+        --Max counter:
+        -- 1) Jokers such as the copycat, GIVEN the rightmost joker in the last 10 played hands is most commonly not shielded.
+        -- 2) probability increasing jokers, or increase based on probability
+        -- 3) scaled based on Proportion of shielded cards in the last 10 played hands
+        return 0
+    end
 }

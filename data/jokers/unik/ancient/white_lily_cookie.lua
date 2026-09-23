@@ -52,12 +52,7 @@ local function White_lily_copy(card)
     
 
 end
-SMODS.Atlas {
-	key = "unik_white_lily",
-	path = "unik_white_lily.png",
-	px = 71,
-	py = 95
-}
+
 
 --helps with white lily persistance even if she gets destroyed
 function UNIK.white_lily_present()
@@ -71,50 +66,49 @@ end
 --TODO: also disable her cloning functionality if you use BALATRO's SOUL, to not make her way to op, but more importantly, fix a critical issue (she will get destroyed and clone over and over, crashing the game)
 SMODS.Joker {
 	key = 'unik_white_lily_cookie',
-    atlas = 'unik_white_lily',
+    atlas = 'unik_character_jokers',
     rarity = "unik_ancient",
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 0, y = 2 },
+	soul_pos = { x = 1, y = 2 },
     cost = 50,
 	blueprint_compat = true,
     perishable_compat = false,
     demicoloncompat = true,
 	eternal_compat = true,
     pronouns = "she_her",
+    attributes = { 'emult', 'scaling', 'joker','generation', 'on_destroy' },
     -- Mainline:
     -- Commit can only be used on her ONCE, if she recieves COMMIT again, she cannot create a copy 
     -- Madness: No COMMIT limit, feel free to go ham on creating free Exotics
     --Why 0.15? Exponents can be op, scaling exponents even more so. ^1.5 or close to that is very strong in vanilla balance.
-    config = { extra = { Emult = 0.0, Emult_mod = 0.1}, immutable = {base_emult = 1.0,limit = 2.0} },
+    config = { extra = { Emult = 0.0, Emult_mod = 0.1}, immutable = {limit = 2.0} },
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
         local quoteset = 'normal'
         local key = 'j_unik_white_lily_cookie'
-        if center.ability.extra.Emult + center.ability.immutable.base_emult >= center.ability.immutable.limit then
+        if center.ability.extra.Emult + 1 >= center.ability.immutable.limit then
             key = 'j_unik_white_lily_cookie_capped'
         end
 		return { 
-            key = key, vars = {center.ability.extra.Emult + center.ability.immutable.base_emult,tostring(center.ability.extra.Emult_mod),center.ability.immutable.limit,
+            key = key, vars = {center.ability.extra.Emult + 1,tostring(center.ability.extra.Emult_mod),center.ability.immutable.limit,
         localize(wl_quotes[quoteset][math.random(#wl_quotes[quoteset])] .. "")} }
 	end,
     pools = { ["unik_cookie_run"] = true, ["unik_copyrighted"] = true },
     calculate = function(self, card, context)
         if context.forcetrigger then
             return {
-                e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                colour = G.C.DARK_EDITION,
+                e_mult = card.ability.extra.Emult + 1,
             }
         end
         if context.joker_main then
-            if (to_big(card.ability.extra.Emult + card.ability.immutable.base_emult) > to_big(1)) then
+            if (to_big(card.ability.extra.Emult + 1) > to_big(1)) then
                 return {
-                    e_mult = card.ability.extra.Emult + card.ability.immutable.base_emult,
-                    colour = G.C.DARK_EDITION,
+                    e_mult = card.ability.extra.Emult + 1,
                 }
             end
 		end
         if not context.blueprint and context.unik_white_lily_increment
-        and card.ability.extra.Emult + card.ability.immutable.base_emult < card.ability.immutable.limit
+        and card.ability.extra.Emult + 1 < card.ability.immutable.limit
         then
                 SMODS.scale_card(card, {
                     ref_table =card.ability.extra,
@@ -123,9 +117,9 @@ SMODS.Joker {
                     base = 1,
                     message_key = "a_powmult",
                     operation = function(ref_table, ref_value, initial, scaling)
-						ref_table[ref_value] = math.min(initial + scaling,card.ability.immutable.limit - card.ability.immutable.base_emult)
+						ref_table[ref_value] = math.min(initial + scaling,card.ability.immutable.limit - 1)
 					end,
-                    message_colour = G.C.DARK_EDITION,
+                    message_colour = SMODS.Gradients.unik_emult,
                         force_full_val = true,
                 })
             
@@ -144,6 +138,48 @@ function unik_set_sell_cost(card, amount)
   card:set_cost()
 end
 
+--vermillion type shit where it removes from deck but replaces the card instead of destroying it, which isnt covered by WL so far.
+--Has an in-built check to check if its already present (rerolling cards, debuffs)
+local removeHook = Card.remove_from_deck
+function Card:remove_from_deck(from_debuff)
+    local oldArea = self.area
+    local ret = removeHook(self,from_debuff)
+    if self.ability and self.ability.set == 'Joker' and UNIK.white_lily_present() and not self.unik_dissolve_sell_flag and 
+    not self.ability.unik_lily_mark and not self.ability.unik_taw and oldArea and oldArea ~= G.aij_coconut_holder and not G.SETTINGS.paused 
+    and((oldArea and oldArea == G.jokers) or (oldArea and oldArea == G.consumeables))
+    then
+        G.E_MANAGER:add_event(Event({
+            delay = 0,
+            trigger= 'after',
+            func = function()
+                local found = false
+                for i,v in pairs(oldArea.cards) do
+                    if v == self then
+                        print("already present")
+                        found = true
+                    end
+                end
+                if not found then
+                    print("copying")
+                    G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                     G.E_MANAGER:add_event(Event({
+                        delay = 0,
+                        trigger= 'immediate',
+                        func = function()
+                            White_lily_copy(self)
+                            G.GAME.joker_buffer = 0
+                            return true
+                        end
+                    }))
+                end
+                return true
+            end
+        }))
+    end
+    
+    return ret
+end
+
 --Brand new! Context copied from paperback
 -- Add new context that happens after destroying jokers
 local remove_ref = Card.remove
@@ -152,8 +188,9 @@ function Card.remove(self)
     local white_lily = false
     G.GAME.unik_white_lily_persistance = G.GAME.unik_white_lily_persistance or 0
     -- Check that the card being removed is a joker that's in the player's deck, is a joker cardarea (or not in the cardarea) and that it's not being sold
-    if not G.GAME.ignore_delete_context then
-        if self.added_to_deck and self.ability.set == 'Joker' and (not self.unik_dissolve_sell_flag) and ((originalArea and originalArea == G.jokers) or (not originalArea) or (originalArea and originalArea ~= G.shop_jokers and originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers))  then
+    if not G.GAME.ignore_delete_context and not G.SETTINGS.paused  then
+        if self.ability.set == 'Joker' and (not self.unik_dissolve_sell_flag) and 
+        ((originalArea and originalArea == G.jokers) or (originalArea and originalArea == G.consumeables)) then
             if G and G.GAME then
                 if self.config.center.key == 'j_unik_white_lily_cookie' then
                     G.GAME.unik_white_lily_persistance = G.GAME.unik_white_lily_persistance + 1

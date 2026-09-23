@@ -3,13 +3,14 @@
 SMODS.Consumable{
     set = "Tarot",
    	key = "unik_divorce",
-	pos = { x = 2, y = 1 },
-	atlas = "unik_tarots",
+	pos = { x = 2, y = 5 },
+	atlas = "unik_consumables",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
 	end,
     	    unlocked = true,
     discovered = true,
+    attributes = {'bunc_linked','modify_card'},
      use = function(self, card)
         local cards = G.hand.highlighted
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()

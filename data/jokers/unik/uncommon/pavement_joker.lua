@@ -2,13 +2,14 @@
 --Rankless/Suitless cards can fill gaps of 1 in straights, flushes, spectrums and of a kind hands
 SMODS.Joker {
     key = 'unik_pavement_joker',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 2, y = 2 },
     rarity = 2,
     cost = 6,
     perishable_compat = true,
 	eternal_compat = true,
     config = {extra = {stones = 1}},
+	attributes = { 'enhancements','rank','suit'},
     in_pool = function()
         local stoneCards = 0
         if G.deck then 
@@ -39,6 +40,17 @@ SMODS.Joker {
 local fourHook = SMODS.four_fingers
 function SMODS.four_fingers(hand_type)
     local ret = fourHook(hand_type)
+	local fingers = 0
+	--multiple four fingers reduce the requirements of straights and flushes by 1 each. impactical, but makes sense
+	for i,v in pairs(G.jokers.cards) do
+		if v.config.center.key == 'j_four_fingers' and not v.debuff then
+			fingers = fingers + 1
+		end
+	end
+	--if more than 1 four finger, subtract ret based on fingers - 1 (1 is already counted)
+	if fingers > 1 then
+		ret = ret - (fingers - 1)
+	end
     return math.max(math.ceil(ret - UNIK.paved_calc()),0)
 end
 

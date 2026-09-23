@@ -14,6 +14,8 @@ SMODS.Enhancement {
     immutable = true,
 	unik_specific_suit = "unik_pink",
     unik_specific_base_value = "7", --corresponds to normal base_value
+    attributes = { 'rank','seven','xlogchips','destroy_card'},
+    inherent_atlas = {atlas = 'unik_enhancements',pos = {x = 0, y = 2}},
     unik_is_custom_rank = false, 
 
     loc_vars = function(self, info_queue, card)
@@ -21,6 +23,9 @@ SMODS.Enhancement {
             vars = { card.ability.extra.Xlogchipbase}
         }
     end,
+    all_in_jest = {
+        multi_enhancement_z_order = -1
+    },
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then
             return {

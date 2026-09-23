@@ -1,9 +1,10 @@
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = 'unik_summits',
+	atlas = 'unik_consumables',
     cost = 3,
 	pos = {x = 1, y = 0},
 	key = 'unik_aconcagua',
+    attributes = {'perma_bonus','xmult','modify_card'},
     can_use = function(self, card)
         if G.hand and (#G.hand.highlighted <= card.ability.extra.max_highlighted) and G.hand.highlighted[1] then
             return true
@@ -12,35 +13,23 @@ SMODS.Consumable{
 	end,
     config = { extra = { x_mult = 0.2 ,max_highlighted = 2} },
     loc_vars = function(self, info_queue, card)
+        local cardOrBlind = UNIK.hasBlindside() and 'k_unik_blind' or 'k_unik_card'
 		return {
-			vars = {card.ability.extra.x_mult,card.ability.extra.max_highlighted},
+			vars = {card.ability.extra.x_mult,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
-    
+    blindside_booster = true,
+	include_in_vanilla = true,
 	use = function(self, card, area, copier)
         UNIK.add_bonus('x_mult',card.ability.extra.x_mult)
-        for i = 1, #G.hand.highlighted do
-            local highlighted = G.hand.highlighted[i]
-                highlighted.ability["perma_h_x_mult"] = highlighted.ability["perma_h_x_mult"] or 0
-                highlighted.ability["perma_h_x_mult"] = highlighted.ability["perma_h_x_mult"] + card.ability.extra.x_mult
-                
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after', 
-                delay = 0.1, 
-                func = function()
-                card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_xmult",
-                        vars = { number_format(1+highlighted.ability["perma_h_x_mult"]) },
-                    }),
-                    colour = G.C.MULT,
-                    card=highlighted,
-                })
-                return true 
-                end 
-            }))
-        end
+        UNIK.add_perma_bonus({
+            type = 'perma_h_x_mult',
+            message_key = 'a_xmult',
+            message_colour = G.C.MULT,
+            from_card = card,
+            cards = G.hand.highlighted,
+            value = card.ability.extra.x_mult,
+        })
         card:juice_up(0.3, 0.5)  
     end
 }

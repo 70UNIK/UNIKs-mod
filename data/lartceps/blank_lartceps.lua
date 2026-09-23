@@ -8,6 +8,7 @@ SMODS.Consumable {
     no_doe = true,
     no_grc = true,
 	no_ccd = true,
+    attributes = { 'detrimental','generation','consumables','unik_lartceps_card' },
     can_use = function(self, card)
         return (card.area or {}) ~= G.consumeables
     end,

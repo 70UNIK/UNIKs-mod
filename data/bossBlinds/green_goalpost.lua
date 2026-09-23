@@ -4,7 +4,7 @@ SMODS.Blind{
     --Hahahahahah no jolly for you
     key = 'unik_green_goalpost',
     config = {},
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 13},
     boss_colour= HEX("00ff00"),

@@ -27,4 +27,8 @@ SMODS.Blind{
             end
         end
 	end,
+    aij_calculate_counter_score = function()
+        --counters low base mult/chips, and in-hand scoring as well as when probabilities are not forced to 0, unless > 60% of playing cards are shielded
+        return 0
+    end
 }

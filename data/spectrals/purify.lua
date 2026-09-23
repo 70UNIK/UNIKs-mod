@@ -17,13 +17,14 @@ UNIK.detrimental_removable_stickers = {
 SMODS.Consumable {
     key = 'unik_purify',
     set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 3, y = 0 },
+	atlas = "unik_consumables",
+    pos = { x = 6, y = 4 },
     cost = 4,
-    config = {jokers_highlighted = 1 },
+    config = {jokers_highlighted = 1,cards_highlighted = 3 },
     loc_vars = function(self, info_queue, card)
         return { vars = {card.ability.jokers_highlighted } }
     end,
+    attributes = {'modify_card', 'stickers','joker','playing_card'},
     in_pool = function(self)
         for i,v in pairs(G.jokers.cards) do 
             for w = 1, #UNIK.detrimental_removable_stickers do
@@ -40,6 +41,7 @@ SMODS.Consumable {
 	end,
     can_use = function(self, card)
         if G.jokers and G.hand and ((#G.jokers.highlighted > 0 and #G.jokers.highlighted <= card.ability.jokers_highlighted and #G.hand.highlighted == 0)
+        or (#G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.cards_highlighted and #G.jokers.highlighted == 0)
         ) then
             return true
         end
@@ -48,10 +50,16 @@ SMODS.Consumable {
     use = function(self, card, area, copier)
          G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             local cards1 = G.jokers.highlighted
+            local cards2 = G.hand.highlighted
             for i=1, #cards1 do
                 local percent = 1.15 - (i-0.999)/(#cards1-0.998)*0.3
                 
                 G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards1[i]:flip();play_sound('card1', percent);cards1[i]:juice_up(0.3, 0.3);return true end }))
+            end
+             for i=1, #cards2 do
+                local percent = 1.15 - (i-0.999)/(#cards2-0.998)*0.3
+                
+                G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards2[i]:flip();play_sound('card1', percent);cards2[i]:juice_up(0.3, 0.3);return true end }))
             end
         
             G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.15, func = function()
@@ -67,6 +75,21 @@ SMODS.Consumable {
                         cards1[i]:set_edition(nil, true)
                     end
                     cards1[i]:set_debuff(false)
+                    
+                    return true end }))
+                    
+                end
+                for i=1, #cards2 do
+                    
+                    local percent = 0.85 + (i-0.999)/(#cards2-0.998)*0.3
+                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards2[i]:flip();play_sound('tarot2', percent, 0.6);cards2[i]:juice_up(0.3, 0.3);
+                    for z = 1, #UNIK.detrimental_removable_stickers do
+                        cards2[i].ability[UNIK.detrimental_removable_stickers[z]] = nil;
+                    end
+                    if isDetrimentalEdition(cards2[i]) then
+                        cards2[i]:set_edition(nil, true)
+                    end
+                    cards2[i]:set_debuff(false)
                     
                     return true end }))
                     

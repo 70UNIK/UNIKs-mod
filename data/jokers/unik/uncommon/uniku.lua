@@ -3,11 +3,12 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_uniku',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 3, y = 2 },
     rarity = 2,
     config = { extra = { repetitions = 2 } },
     cost = 5,
+    attributes = { 'retrigger','rank','seven'},
     blueprint_compat = true,
 	perishable_compat = true,
 	eternal_compat = true,

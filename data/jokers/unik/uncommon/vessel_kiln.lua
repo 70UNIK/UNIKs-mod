@@ -2,7 +2,7 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_vessel_kiln',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
 	pos = { x = 3, y = 1 },
     config = { extra = { x_chips = 2.5} }, 
@@ -11,6 +11,7 @@ SMODS.Joker {
 	perishable_compat = true,
 	eternal_compat = true,
 	demicoloncompat = true,
+	attributes = { 'xchips','tag'},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_TAGS.tag_unik_vessel
 		return { vars = {center.ability.extra.x_chips} }

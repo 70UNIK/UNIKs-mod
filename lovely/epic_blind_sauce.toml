@@ -1,0 +1,27 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+## if you decide to reroll the finisher, get ANOTHER finisher!
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''G.GAME.round_resets.blind_choices.Boss = get_new_boss()'''
+position = "before"
+payload = '''
+if next(find_joker("j_unik_epic_blind_sauce")) then
+     G.GAME.unik_force_finisher_blinds = true
+end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = '''G.GAME.round_resets.blind_choices.Boss = get_new_boss()'''
+position = "after"
+payload = '''
+G.GAME.unik_force_finisher_blinds = nil
+'''
+match_indent = true

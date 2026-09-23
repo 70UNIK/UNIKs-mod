@@ -1,10 +1,11 @@
 --Reverse the probabilities
 SMODS.Joker {
     key = 'unik_lucky_seven',
-    atlas = 'unik_common',
+    atlas = 'unik_normal_jokers',
     rarity = 1,
-	pos = { x = 0, y = 0 },
+	pos = { x = 0, y = 5 },
     cost = 4,
+    attributes = { 'mult','economy','seven','rank','chance' },
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,

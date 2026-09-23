@@ -1,13 +1,14 @@
 SMODS.Joker {
     key = 'unik_landfill',
-    atlas = 'unik_common',
-	pos = { x = 2, y = 2 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 2, y = 7 },
     rarity = 1,
     cost = 4,
     blueprint_compat = true,
     perishable_compat = false,
 	eternal_compat = true,
     demicoloncompat = true,
+    attributes = { 'chips','scaling' },
     config = { extra = {chips = 0, chip_mod = 3, bad_chip_mod = 2}},
     loc_vars = function(self, info_queue, center)
         return { 

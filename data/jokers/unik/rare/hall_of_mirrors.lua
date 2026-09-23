@@ -1,16 +1,17 @@
 --rescore all scored glass cards
 SMODS.Joker {
     key = "unik_hall_of_mirrors",
-    atlas = 'unik_rare',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
     cost = 7,
-    pos = { x = 1, y = 2 },
+    pos = { x = 11, y = 2 },
     blueprint_compat = true,
     perishable_compat = true,
 	eternal_compat = true,
     config = {extra = {rescore = 1}, immutable = {max_rescores = 10}},
     pronouns = "it_its",
     enhancement_gate = 'm_glass',
+    attributes = { 'enhancements','rescore'},
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }
         info_queue[#info_queue + 1] = G.P_CENTERS.m_glass

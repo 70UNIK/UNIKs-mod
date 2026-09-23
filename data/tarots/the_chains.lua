@@ -2,8 +2,8 @@
 SMODS.Consumable{
     set = "Tarot",
    	key = "unik_chains",
-	pos = { x = 1, y = 1 },
-	atlas = "unik_tarots",
+	pos = { x = 1, y = 5 },
+	atlas = "unik_consumables",
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
         return {vars = {card and card.ability.max_highlighted or self.config.max_highlighted}}
@@ -11,6 +11,7 @@ SMODS.Consumable{
     config = {
         max_highlighted = 2,
     },
+    attributes = {'bunc_linked','modify_card'},
     use = function(self, card)
         local cards = UNIK.get_sorted_by_position(G.hand)
         local rightmostCard = cards[#cards]
@@ -77,17 +78,3 @@ SMODS.Consumable{
       SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
     end,
 }
-
-function UNIK.get_sorted_by_position(area)
-  local cards = {}
-
-  for i = 1, #area.highlighted do
-    cards[i] = area.highlighted[i]
-  end
-
-  table.sort(cards, function(a, b)
-    return a.T.x < b.T.x
-  end)
-
-  return cards
-end

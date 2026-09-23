@@ -1,5 +1,6 @@
 --INNOCENSE DOSENT GET YOU FAR!!!!!!!!!!!!
 --destroy 50% of jokers, 50% of consumeables, 50% of cards and halve all hand levels and statistics(rounded down), just like GF
+
 function CloneTable(table2)
     local newTable = {}
     for i,v in pairs(table2) do
@@ -15,6 +16,7 @@ SMODS.Consumable{
 	pos = {x = 2, y = 0},
 	key = 'unik_rip_girlfriend',
     config = {},
+    attributes = { 'detrimental','hand_level','destroy_card' },
     can_use = function(self, card)
 		return true
 	end,

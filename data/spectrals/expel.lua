@@ -2,13 +2,14 @@
 SMODS.Consumable {
     key = 'unik_expel',
     set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 2, y = 0 },
+	atlas = "unik_consumables",
+    pos = { x = 5, y = 4 },
     cost = 4,
     config = {max_card = 1 },
     loc_vars = function(self, info_queue, center)
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
     end,
+    attributes = {'booster','shop','banishing','joker','destroy_card'},
     can_use = function(self, card)
         local shop_jokers = G.shop_jokers and #G.shop_jokers.highlighted or 0
         local booster_cards = G.pack_cards and #G.pack_cards.highlighted or 0
@@ -215,7 +216,7 @@ SMODS.Consumable {
 local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
   function G.UIDEF.use_and_sell_buttons(card)
     if (card.area == G.pack_cards and G.pack_cards) and card.ability.consumeable then --Add a use button
-      if card.config.center.key == 'c_unik_expel' then
+      if card.config.center.key == 'c_unik_expel' or card.config.center.key == 'c_unik_blindside_kill' then
         return {
           n = G.UIT.ROOT,
           config = { padding = -0.1, colour = G.C.CLEAR },

@@ -1,17 +1,12 @@
 --Gateway but only spawns UNIK, cause he's the only "cube" joker thats an exotic (cause hes the creator)
 --Only spawns with a 0.3% chance in "Square" pack (like with SOUL)
 --Copied from cryptid, since apart from the "spawns exclusively UNIK and only spawns in cube pack", it's the same as gateway.
-SMODS.Atlas({
-	key = "unik_gateway", --this is easier to spell then consumables
-	path = "unik_gateway.png",
-	px = 71,
-	py = 95,
-})
+
 SMODS.Consumable{
     set = "Spectral",
 	key = "unik_gateway",
-	atlas = "unik_spectrals",
-	pos = { x = 0, y = 2},
+	atlas = "unik_consumables",
+	pos = { x = 3, y = 6},
 	cost = 4,
 	order = 90,
 	no_doe = true,
@@ -58,7 +53,7 @@ SMODS.DrawStep {
     key = 'floating_sprite',
     order = 60,
     func = function(self)
-       if self.ability.name == 'c_unik_gateway' and (self.config.center.discovered or self.bypass_discovery_center) then
+       if (self.ability.name == 'c_unik_gateway' or self.ability.name == 'c_unik_blindside_pentatope' or self.config.center.key == 'c_unik_blindside_portal') and (self.config.center.discovered or self.bypass_discovery_center) then
 			local edition_soul_sprite = false
 			local edition = nil;
             if self.edition then 
@@ -190,7 +185,20 @@ SMODS.DrawStep {
 local set_spritesref2 = Card.set_sprites
 function Card:set_sprites(_center, _front)
 	set_spritesref2(self, _center, _front)
-	if _center and _center.name == "c_unik_gateway" then
+	if _center and (_center.name == "c_unik_gateway") then
+		self.children.floating_sprite = Sprite(
+			self.T.x,
+			self.T.y,
+			self.T.w,
+			self.T.h,
+			G.ASSET_ATLAS[_center.atlas or _center.set],
+			{ x = 4, y = 6 }
+		)
+		self.children.floating_sprite.role.draw_major = self
+		self.children.floating_sprite.states.hover.can = false
+		self.children.floating_sprite.states.click.can = false
+	end
+	if _center and (_center.name == "c_unik_blindside_pentatope") then
 		self.children.floating_sprite = Sprite(
 			self.T.x,
 			self.T.y,
@@ -198,6 +206,19 @@ function Card:set_sprites(_center, _front)
 			self.T.h,
 			G.ASSET_ATLAS[_center.atlas or _center.set],
 			{ x = 1, y = 2 }
+		)
+		self.children.floating_sprite.role.draw_major = self
+		self.children.floating_sprite.states.hover.can = false
+		self.children.floating_sprite.states.click.can = false
+	end
+	if _center and (_center.name == "c_unik_blindside_portal") then
+		self.children.floating_sprite = Sprite(
+			self.T.x,
+			self.T.y,
+			self.T.w,
+			self.T.h,
+			G.ASSET_ATLAS[_center.atlas or _center.set],
+			{ x = 3, y = 2 }
 		)
 		self.children.floating_sprite.role.draw_major = self
 		self.children.floating_sprite.states.hover.can = false

@@ -9,6 +9,7 @@ SMODS.Enhancement {
             vars = { card.ability.extra.money}
         }
     end,
+    attributes = { 'economy'},
 	calculate = function(self, card, context, effect)
 		if context.cardarea == G.play and context.main_scoring then
             return {
@@ -37,4 +38,7 @@ SMODS.Enhancement {
         card.children.center
       )
     end,
+    all_in_jest = {
+        multi_enhancement_z_order = -1
+    },
 }

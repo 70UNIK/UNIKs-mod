@@ -13,6 +13,35 @@ SMODS.Sticker{
     order = 3200,
 }
 
+function copy33(obj, seen)
+    -- Handle non-tables and previously-seen tables.
+    if type(obj) ~= 'table' then return obj end
+    if seen and seen[obj] then return seen[obj] end
+  
+    -- New table; mark it as seen and copy recursively.
+    local s = seen or {}
+    local res = {}
+    s[obj] = res
+    for k, v in pairs(obj) do res[copy33(k, s)] = copy33(v, s) end
+    return setmetatable(res, getmetatable(obj))
+end
+
+local set_abilityref = Card.set_ability
+function Card:set_ability(center, initial, delay)
+    -- if SMODS.is_playing_card(self) and self.ability and self.ability.set then
+    --     self:set_sprites(nil, self)
+    -- end
+    
+    local tawsome = self and self.ability and (self.ability.unik_taw)
+    local old_ability = copy33(self.ability)
+    if (not tawsome) or G.SETTINGS.paused then
+        set_abilityref(self, center, initial, delay)
+    else
+        set_abilityref(self, G.P_CENTERS[self.config.center.key], initial, delay)
+        self.ability = copy33(old_ability) --restore old table to avoid issues with resetting values
+    end
+end
+
 local updateStickerHook = Card.update
 function Card:update(dt)
     if self.added_to_deck then
@@ -56,7 +85,7 @@ function Card.remove(self)
     local ret = remove_ref(self)
     if not G.GAME.ignore_delete_context then
         if self.ability.unik_taw and not self.ability.unik_already_used_taw and not self.ability.unik_bypass_taw and not G.SETTINGS.paused then
-            if originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers then
+            if originalArea ~= G.shop_booster and originalArea ~= G.shop_vouchers and originalArea ~= G.pack_cards and originalArea ~= G.shop_jokers and originalArea  ~= G.aij_coconut_holder then
                 local _card = nil
                 --create a new card instead with edition if it's a decrementing one
                 if self.config.center.pools and (self.config.center.pools.autocannibalism_food) then
@@ -143,7 +172,13 @@ end
 
 local is_eternalref = SMODS.is_eternal
 function SMODS.is_eternal(c, ...)
+    if c and not c.config or (c and c.config and not c.config.center) then
+        return false
+    end
     if c and c.ability and c.ability.unik_taw then
+        return true
+    end
+    if c and c.config and c.config.center and c.config.center.key == 'm_unik_blindside_taw' then
         return true
     end
     if c then

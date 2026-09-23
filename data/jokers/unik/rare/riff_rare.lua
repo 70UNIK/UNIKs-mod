@@ -3,9 +3,9 @@
 --create an rare joker when selecting big or boss blind
 SMODS.Joker {
     key = 'unik_riff_rare',
-    atlas = 'unik_rare',
+    atlas = 'unik_normal_jokers',
     rarity = 3,
-	pos = { x = 2, y = 0 },
+	pos = { x = 12, y = 0 },
     cost = 9,
     blueprint_compat = true,
     perishable_compat = true,
@@ -13,6 +13,7 @@ SMODS.Joker {
     demicoloncompat = true,
     immutable = true,
     pools = {["riff_raff"] = true },
+    attributes = { 'joker', 'generation','rarity' },
     calculate = function(self, card, context)
         if context.forcetrigger and #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
             local create = 1

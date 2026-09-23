@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority = 214748365
 
 [[patches]]
 [patches.pattern]
@@ -12,6 +12,8 @@ payload = """UNIK_SHITTY_EDITION = {0,0,0,1},
 UNIK_LARTCEPS1 = {1,0,0,1},
 UNIK_RGB = {0,0,0,1},
 UNIK_ANCIENT = {0,0,0,1},
+UNIK_EXOTIC = {0,0,0,1},
+UNIK_EXQUISITE = HEX("ef0098"),
 UNIK_RGB_HUE = 0,
 UNIK_LARTCEPS_INVERSE = {1,0,0,1},
 UNIK_THE_PLANT = HEX('709284'),
@@ -38,5 +40,9 @@ UNIK_UNIK = HEX('fe90ff'),
 UNIK_CAPTION = HEX('009A9A'),
 UNIK_SUMMIT = HEX("6f859e"),
 UNIK_COPPER = HEX("F8A065"),
+UNIK_EQMULT = HEX("cb7f7f"),
+UNIK_EQCHIPS = HEX("5b89a6"),
+UNIK_LIGHT_SUIT = HEX('F06841'),
+UNIK_DARK_SUIT = HEX('3C4A4E'),
 """
 match_indent = true

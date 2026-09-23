@@ -2,8 +2,8 @@
 SMODS.Consumable {
     key = 'unik_defend',
     set = 'Spectral',
-	atlas = "unik_spectrals",
-    pos = { x = 2, y = 1 },
+	atlas = "unik_consumables",
+    pos = { x = 5, y = 5 },
     cost = 4,
     config = {jokers_highlighted = 2, cards_highlighted = 3 },
     loc_vars = function(self, info_queue, card)
@@ -18,6 +18,7 @@ SMODS.Consumable {
         end
         return false
     end,
+    attributes = {'modify_card', 'stickers','joker','playing_card'},
     use = function(self, card, area, copier)
          G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             local cards1 = G.jokers.highlighted
@@ -53,6 +54,7 @@ SMODS.Consumable {
                     
                     return true end }))
                 end
+                G.hand:unhighlight_all()
                 card:juice_up(0.3, 0.5)
             return true end })) 
         return true end })) 

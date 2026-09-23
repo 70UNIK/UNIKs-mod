@@ -1,7 +1,7 @@
 SMODS.Joker {
     key = 'unik_treacherous_joker',
-    atlas = 'unik_common',
-	pos = { x = 0, y = 2 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 0, y = 7 },
     rarity = 1,
     cost = 4,
 	config = {
@@ -10,6 +10,7 @@ SMODS.Joker {
             suit = 'unik_Noughts',
 		},
 	},
+	attributes = { 'mult','suit','unik_noughts' },
 	perishable_compat = true,
     eternal_compat = true,
     demicolon_compat = true,

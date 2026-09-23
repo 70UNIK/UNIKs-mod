@@ -1,14 +1,15 @@
 --LAST TILE: Add Mosaic to all scored cards on final hand, self destructs.
 SMODS.Joker {
     key = 'unik_last_tile',
-    atlas = 'unik_rare',
-	pos = { x = 2, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 12, y = 1 },
     rarity = 3,
     cost = 7,
     blueprint_compat = false,
     perishable_compat = true,
 	eternal_compat = false,
     immutable = true,
+    attributes = { 'editions','hands','modify_card'},
     config = {extra = {to_be_destroyed = false}},
     loc_vars = function(self, info_queue, center)
         if not center.edition or (center.edition and not center.edition.unik_shining_glitter) then
@@ -30,15 +31,6 @@ SMODS.Joker {
             }
         end
         if context.after and card.ability.extra.to_be_destroyed and not context.blueprint and not context.repetition and not context.retrigger_joker then
-            G.E_MANAGER:add_event(Event({
-                trigger="immediate",
-
-                func = function()
-                    
-                    
-                    return true
-                end
-            }))
             G.E_MANAGER:add_event(Event({
                 trigger="immediate",
                 func = function()

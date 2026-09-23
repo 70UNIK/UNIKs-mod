@@ -1,6 +1,6 @@
 SMODS.Joker {
     key = 'unik_yes_nothing',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 1, --Abstract cards make this rare now.
     -- The wheel
     -- Turquoise tornado
@@ -29,6 +29,8 @@ SMODS.Joker {
 	eternal_compat = true,
     immutable = true,
     pools = {["Dice"] = true},
+	attributes = { 'mod_chance','passive' },
+
     loc_vars = function(self, info_queue, center)
 	end,
     calculate = function(self, card, context)

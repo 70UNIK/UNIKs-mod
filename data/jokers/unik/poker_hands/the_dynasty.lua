@@ -3,14 +3,15 @@ if SpectrumAPI then
 		priority = 1,
 		object_type = "Joker",
 		key = "unik_the_dynasty",
-		atlas = "unik_poker_hand_shit",
-		pos = { x = 0, y = 3 },
+		atlas = "unik_consumables",
+		pos = { x = 7, y = 3 },
 		config = {
 			extra = {
 				Xmult = 5,
 				type = UNIK.spectrum_name,
 			},
 		},
+		attributes = { 'xmult','hand_type' },
 		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
@@ -56,8 +57,9 @@ if SpectrumAPI then
 else
 	SMODS.Joker {
 		key = "unik_the_dynasty",
-		atlas = "unik_poker_hand_shit",
-		pos = { x = 0, y = 3 },
+		atlas = "unik_consumables",
+		attributes = { 'xmult','hand_type' },
+		pos = { x = 7, y = 3 },
 		config = {
 			extra = {
 				Xmult = 5,

@@ -30,7 +30,7 @@ SMODS.Challenge{
             local bannedCards = {}
             for k, v in pairs(G.P_CENTERS) do
                 -- Check if its a joker
-                --also nil check to avoid registring banned jokers (almanac)
+                --also nil check to avoid registring banned jokers (bos)
                 if v.set == "Joker" and v ~= nil then
                     --ban all but high card and none type jokers
                     if (SMODS.Mods["Cryptid"] or {}).can_load then

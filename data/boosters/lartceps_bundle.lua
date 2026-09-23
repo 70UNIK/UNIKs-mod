@@ -12,8 +12,8 @@ local lartceps_digital_hallucinations_compat = {
 SMODS.Booster{
     key = "unik_lartceps_bundle",
 	kind = "unik_lartceps",
-    atlas = "unik_cube_boosters",
-	pos = { x = 1, y = 1 },
+    atlas = "unik_consumables",
+	pos = { x = 9, y = 4 },
     cost = 0,
     weight = 0, 
     config = { extra = 10, choose = 4 },
@@ -29,6 +29,7 @@ SMODS.Booster{
 			},
 		}
 	end,
+	bypass_mf_unpleasant = true,
 	ease_background_colour = function(self)
 		ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_LARTCEPS1)
         ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.RED, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
@@ -38,7 +39,7 @@ SMODS.Booster{
         ease_background_colour{new_colour = G.C.BLUE, special_colour = G.C.RED, tertiary_colour = darken(G.C.BLACK, 0.4), contrast = 3}
 		SMODS.Booster.update_pack(self, dt)
 	end,
-	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (almanac)
+	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
 	no_doe = true,
 	skip_req_message = function(self)
 		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
@@ -48,7 +49,7 @@ SMODS.Booster{
 			},
 		}
 	end,
-	unskippable = function(self) --Always unskippable
+	unik_unskippable = function(self) --Always unskippable
 		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
 		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity <= 0 then
 			return false

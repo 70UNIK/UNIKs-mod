@@ -1,6 +1,6 @@
 SMODS.Consumable{ -- The 8
     set = 'Polymino', 
-    atlas = 'unik_polyminos',
+    atlas = 'unik_consumables',
     key = 'unik_the_quadruple',
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
@@ -29,7 +29,7 @@ SMODS.Consumable{ -- The 8
         link_cards(G.hand.highlighted, self.key)
         card:juice_up(0.3, 0.5)
     end,
-    pos = {x = 1, y = 0,},
+    pos = {x = 4, y = 7,},
     set_badges = function (self, card, badges)
       SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
     end,

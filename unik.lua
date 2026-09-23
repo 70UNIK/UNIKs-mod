@@ -6,12 +6,33 @@ if not UNIK then
 	UNIK = {}
 end
 
+SMODS.Shader({
+    key = "badge_shader",
+    path = "badge_shader.fs",
+	send_vars = function (element, ...)
+--        if math.random() < 0.01 then print("shader's working") end
+        local tile_scale = G.TILESCALE*G.TILESIZE*G.CANV_SCALE
+        local vt = {x=element.VT.x, y=element.VT.y, w=element.VT.w, h=element.VT.h}
+        vt.x = vt.x + (element.container and element.container.T.x or 0)
+        vt.y = vt.y + (element.container and element.container.T.y + 0.018 or 0)
+        local pos = {vt.x * tile_scale, vt.y * tile_scale}
+        local size = {vt.w * tile_scale, vt.h * tile_scale}
+		--print("BADGE SIZE: ")
+		--print( size)
+        return {
+            badge_pos = pos,
+            badge_size = size,
+        }
+    end
+})
+
 --function to get no. jokers from other mods, used to modify spawn rate of "rare" rares, such as EARTHMOVER and foundation.
 
 -- Enable optional features
 SMODS.current_mod.optional_features = {
 	retrigger_joker = true,
 	post_trigger = true,
+	--object_weights = true, --Issue fixed with it breaking pools but only in dev smods
 	--quantum_enhancements = false,
 	-- Here are some other ones Steamodded has
 	-- These ones add new card areas that Steamodded will calculate through
@@ -24,32 +45,26 @@ SMODS.current_mod.optional_features = {
 	},
 }
 
-function UNIK.has_almanac()
+function UNIK.has_bos()
 	
-	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
-		return true
-	end
-	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
+	return UNIK.has_BOS()
+end
+function UNIK.has_BOS()
+	if next(SMODS.find_mod("BOS")) or next(SMODS.find_mod("bos")) then
 		return true
 	end
 	return false
 end
 
-function UNIK.get_almanac_prefix()
-	if next(SMODS.find_mod("Jen")) or next(SMODS.find_mod("jen")) or (SMODS.Mods["jen"] or {}).can_load or (SMODS.Mods["Jen"] or {}).can_load  then
-		return 'jen'
-	end
-	if next(SMODS.find_mod("PWX")) or next(SMODS.find_mod("pwx")) or (SMODS.Mods["pwx"] or {}).can_load or (SMODS.Mods["PWX"] or {}).can_load  then
-		return 'pwx'
-	end
-	return 'jen'
+function UNIK.get_bos_prefix()
+	return 'bos'
 end
 if next(SMODS.find_mod("Cryptlib")) then
 	print("CRYPTLIB IS FOUND")
 end
 
-function AlterConfigWithAlmanac(config1,config2)
-	if UNIK.has_almanac() then
+function AlterConfigWithbos(config1,config2)
+	if UNIK.has_bos() then
 		return config2
 	end
 	return config1
@@ -77,23 +92,30 @@ SMODS.current_mod.config_tab = function() --Config tab
 			label = localize("unik_legendary_blinds_option"),
 			ref_table = unik_config,
 			ref_value = "unik_legendary_blinds",
-			info = AlterConfigWithAlmanac(
+			info = AlterConfigWithbos(
 				{
 					localize("unik_legendary_blinds_desc1"),
-					localize("unik_legendary_blinds_desc2")
 				},
 				{
 					localize("unik_legendary_blinds_desc1"),
-					localize("unik_legendary_blinds_desc2"),
 					localize("unik_legendary_blinds_desc3"),
 				}
 			)
 		}),
 		create_toggle({
+			label = localize("unik_always_toggle_unlock_option"),
+			ref_table = unik_config,
+			ref_value = "unik_always_toggle_unlock",
+			info = {
+				localize("unik_always_toggle_unlock_desc"),
+				localize("unik_always_toggle_unlock_desc2"),
+			}
+		}),
+		create_toggle({
 			label = localize("unik_enable_overshoot_option"),
 			ref_table = unik_config,
 			ref_value = "unik_overshoot_enabled",
-			info = AlterConfigWithAlmanac({
+			info = AlterConfigWithbos({
 					localize("unik_overshoot_enable_desc"),
 				},
 				{
@@ -110,19 +132,6 @@ SMODS.current_mod.config_tab = function() --Config tab
 				localize("unik_menu_desc"),
 			},
 		}),
-		-- create_option_cycle({
-		-- 	label = localize("unik_overshoot_config"),
-		-- 	scale = 0.8,
-		-- 	w = 9,
-		-- 	options = {localize("unik_overshoot_off"), localize("unik_overshoot_lenient"), localize("unik_overshoot_strict")},
-		-- 	current_option = unik_config.unik_overshoot_level,
-		-- 	opt_callback = 'unik_update_overshoot_opt',
-		-- 	info = {
-		-- 		localize("unik_overshoot_desc1"),
-		-- 		localize("unik_overshoot_desc2"),
-		-- 		localize("unik_overshoot_desc3"),
-		-- 	},
-		-- })
 	},
 	}
 end
@@ -138,18 +147,22 @@ function UNIK.hasBlindside()
 	return false
 end
 
+function firstToUpper(str)
+    return (str:gsub("^%l", string.upper))
+end
+
 function UNIK.overshootEnabled(no_comment)
 	if not unik_config.unik_overshoot_enabled then
 		return false
 	end
 	--temporary
-	if UNIK.hasBlindside() then
-		if not no_comment then
-			print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
-		end
+	-- if UNIK.hasBlindside() then
+	-- 	if not no_comment then
+	-- 		print("All overshoot functionality in Blindside is temporarily disabled until v0.7.")
+	-- 	end
 		
-		return false
-	end
+	-- 	return false
+	-- end
 	return true
 end
 
@@ -160,18 +173,20 @@ function UNIK.isIndigenousSummitNaming()
 	return false
 end
 
-function UNIK.getSummitAtlas()
-	if UNIK.isIndigenousSummitNaming() then
-		return 'unik_summits_alt'
-	end
-	return 'unik_summits'
-end
+-- function 'unik_consumables'
+-- 	-- if UNIK.isIndigenousSummitNaming() then
+-- 	-- 	return 'unik_summits_alt'
+-- 	-- end
+-- 	return 'unik_consumables'
+-- end
 
 if (SMODS.Mods["Cryptid"] or {}).can_load then
 	--print("So, you chose slop... Well be prepared to be treated as slop in return...")
 	--UNIK.overshootEnabled() = true
 	--unik_config.unik_legendary_blinds = true
 end
+
+NFS.load(mod_path .. "data/attributes.lua")()
 -- print("OVERSHOOT LEVEL:")
 -- print(unik_config.unik_overshoot_level)
 NFS.load(mod_path .. "talismanless.lua")()
@@ -182,14 +197,9 @@ NFS.load(mod_path .. "data/hooks/colours.lua")()
 NFS.load(mod_path .. "data/hooks/updater.lua")()
 NFS.load(mod_path .. "data/hooks/boosterHooks.lua")()
 NFS.load(mod_path .. "data/misc/plurals.lua")()
+NFS.load(mod_path .. "data/misc/activated_ability.lua")()
 
 
-SMODS.Atlas({
-	key = "unik_cube_boosters",
-	path = "unik_cube_boosters.png",
-	px = 71,
-	py = 95,
-})
 --Custom spectrum stuff
 function UNIK.can_load_spectrums()
 	if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled))
@@ -213,41 +223,55 @@ SMODS.Atlas {
 	px = 66,
 	py = 66,
 }
+
+--NEW UNIFIED GENERAL ATLASes
+
 SMODS.Atlas {
-	key = "unik_edition_deck",
-	path = "unik_edition_deck.png",
+	key = "unik_consumables",
+	path = "unik_consumables.png",
 	px = 71,
 	py = 95
 }
 SMODS.Atlas {
-	key = "unik_sticker_deck",
-	path = "unik_sticker_decks.png",
+	key = "unik_normal_jokers",
+	path = "unik_normal_jokers.png",
 	px = 71,
 	py = 95
 }
+
 SMODS.Atlas {
-	key = "unik_sticker_stakes",
-	path = "unik_sticker_stakes.png",
+	key = "unik_character_jokers",
+	path = "unik_character_jokers.png",
 	px = 71,
 	py = 95
 }
+
 SMODS.Atlas {
-	key = "unik_stakes",
-	path = "unik_stakes.png",
-	px = 29,
-	py = 29
+	key = "unik_finity_jokers",
+	path = "unik_finity_jokers.png",
+	px = 71,
+	py = 95
 }
+
+SMODS.Atlas {
+	key = "unik_blindside_consumables",
+	path = "unik_blindside_consumables.png",
+	px = 71,
+	py = 95
+}
+
 SMODS.Atlas {
 	key = "unik_enhancements",
 	path = "unik_enhancements.png",
 	px = 71,
 	py = 95
 }
+
 SMODS.Atlas {
-	key = "placeholder_voucher",
-	path = "placeholder_voucher.png",
-	px = 71,
-	py = 95
+	key = "unik_stakes",
+	path = "unik_stakes.png",
+	px = 29,
+	py = 29
 }
 
 SMODS.Atlas {
@@ -266,16 +290,19 @@ SMODS.Atlas {
 	frames = 21
 }
 
+SMODS.Atlas {
+	key = "unik_legendary_blind_enhancements",
+	path = "unik_legendary_blind_enhancements.png",
+	px = 71,
+	py = 95
+}
+
 SMODS.ObjectType({
 	key = "riff_raff",
 	default = "j_riff_raff",
 	cards = {
+		'j_riff_raff',
 	},
-	inject = function(self)
-		SMODS.ObjectType.inject(self)
-		-- insert base game jokers
-		self:inject_card(G.P_CENTERS.j_riff_raff)
-	end,
 })
 --hooks--
 ---happiness is mandatory ---
@@ -294,12 +321,24 @@ SMODS.Atlas({
 		py = 34, 
 		frames = 21 })
 SMODS.Sound({
+	key = "gunshot",
+	path = "gunshot.ogg",
+})
+SMODS.Sound({
+	key = "loudbuzzer",
+	path = "loudbuzzer.ogg",
+})
+SMODS.Sound({
 	key = "gore6",
 	path = "gore6.ogg",
 })
 SMODS.Sound({
 	key = "explosion1",
 	path = "explosion1.ogg",
+})
+SMODS.Sound({
+	key = "explosion2",
+	path = "explosion2.ogg",
 })
 SMODS.Sound({
 	key = "woodBreak",
@@ -313,7 +352,10 @@ SMODS.Sound({
 	key = "rock_break",
 	path = "rock_break.ogg",
 })
-
+SMODS.Sound({
+	key = "locked_break",
+	path = "locked_break.ogg",
+})
 
 SMODS.Atlas {
 	key = "unik_stickers",
@@ -334,56 +376,8 @@ SMODS.Atlas {
 	py = 34
 }
 SMODS.Atlas {
-	key = "unik_common",
-	path = "unik_common.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_uncommon",
-	path = "unik_uncommon.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
 	key = "placeholders",
 	path = "placeholders.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_rare",
-	path = "unik_rare.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_epic",
-	path = "unik_epic.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_cursed",
-	path = "unik_cursed.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_tarots",
-	path = "unik_tarots.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_spectrals",
-	path = "unik_spectrals.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_vouchers",
-	path = "unik_vouchers.png",
 	px = 71,
 	py = 95
 }
@@ -400,19 +394,21 @@ SMODS.Atlas {
 	py = 95
 }
 
-SMODS.Atlas({ 
-  key = "unik_rotarots", 
-  path = "unik_rotarots2.png", 
-  px = 107, 
-  py = 107
-})
-
 SMODS.Atlas {
-	key = "unik_grab_bag_jokers",
-	path = "unik_grab_bag_jokers.png",
+	key = "unik_blindside_blinds",
+	path = "unik_blindside_blinds.png",
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas {
+	key = "unik_trinkets",
+	path = "unik_trinkets.png",
+	px = 71,
+	py = 95
+}
+
+
 
 -- Pool used by boss blind jokers
 SMODS.ObjectType({
@@ -432,19 +428,6 @@ SMODS.ConsumableType {
         return false
     end
 }
-SMODS.Atlas {
-	key = "unik_summits",
-	path = "unik_summits.png",
-	px = 71,
-	py = 95
-}
-SMODS.Atlas {
-	key = "unik_summits_alt",
-	path = "unik_summits_alt.png",
-	px = 71,
-	py = 95
-}
-
 SMODS.Atlas {
 	key = "unik_seals",
 	path = "unik_seals.png",
@@ -518,6 +501,7 @@ UNIK.detrimental_rarities = {
 	unik_detrimental = true,
 	cry_cursed = true,
 	jen_junk = true,
+	jen_doom = true,
 	valk_supercursed = true,
 }
 
@@ -560,7 +544,7 @@ NFS.load(mod_path .. "data/decks/shining_glitter_deck.lua")()
 NFS.load(mod_path .. "data/enhancements/pink_card.lua")()
 NFS.load(mod_path .. "data/enhancements/dollar_card.lua")()	
 NFS.load(mod_path .. "data/enhancements/timber_card.lua")()	
-if MoreFluff then
+if (SMODS.Mods["MoreFluff"] or {}).can_load then
 	NFS.load(mod_path .. "data/enhancements/green_card.lua")()
 	NFS.load(mod_path .. "data/enhancements/bill_card.lua")()
 end
@@ -578,6 +562,7 @@ NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
 NFS.load(mod_path .. "data/misc/rescoring_api.lua")()
+NFS.load(mod_path .. "data/misc/extra_soul.lua")()
 --seals
 NFS.load(mod_path .. "data/seals/copper_seal.lua")()
 
@@ -641,15 +626,6 @@ NFS.load(mod_path .. "data/suit_shennannigans/crossmod_ranks.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
 end
-
-
---HANDS
-SMODS.Atlas {
-	key = "unik_poker_hand_shit",
-	path = "poker_hand_shit.png",
-	px = 71,
-	py = 95
-}
 if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/poker_hands/bulwark.lua")()
 	--planets
@@ -657,6 +633,8 @@ if not (SMODS.Mods["Cryptid"] or {}).can_load  then
 end
 
 NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
+NFS.load(mod_path .. "data/poker_hands/biparte.lua")()
+
 
 UNIK.spectrum_name = 'unik_spectrum'
 if SpectrumAPI then
@@ -702,14 +680,6 @@ if next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/tarots/the_divorce.lua")()
 	NFS.load(mod_path .. "data/tarots/the_excommunicated.lua")()
 end
-
-SMODS.Atlas {
-	key = "unik_polyminos",
-	path = "unik_polyminos.png",
-	px = 71,
-	py = 95
-}
-
 --Polyminos
 if next(SMODS.find_mod("Bunco")) then
 	NFS.load(mod_path .. "data/polyminos/the_double.lua")()
@@ -755,7 +725,7 @@ NFS.load(mod_path .. "data/summits/denali.lua")()
 
 
 --rotarots
-if MoreFluff then
+if (SMODS.Mods["MoreFluff"] or {}).can_load then
 	NFS.load(mod_path .. "data/tarots/rotated_crossdresser.lua")() 
 	NFS.load(mod_path .. "data/tarots/rotated_oligarch.lua")() 
 	NFS.load(mod_path .. "data/tarots/rotated_wheel_of_misfortune.lua")() 
@@ -793,16 +763,8 @@ if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/vouchers/spectral_acclimator.lua")() 
 end
 
-
---MF color cards
-SMODS.Atlas({ 
-  key = "unik_colours", 
-  path = "unik_colours.png",
-  px = 71, 
-  py = 95 
-})
 --Color cards
-if MoreFluff and mf_config and mf_config["Colour Cards"] == true then
+if (SMODS.Mods["MoreFluff"] or {}).can_load then
 	NFS.load(mod_path .. "data/colours/spectral_blue.lua")()
 	if (SMODS.Mods["paperback"] or {}).can_load then
 		NFS.load(mod_path .. "data/colours/lavender.lua")()
@@ -816,7 +778,6 @@ end
 --TODO: Replace "cube pack" with "UNIK's pack" in the next update, basically an icon pack of sorts
 NFS.load(mod_path .. "data/boosters/summit_pack.lua")()
 NFS.load(mod_path .. "data/boosters/character_pack.lua")()
--- NFS.load(mod_path .. "data/boosters/cube_pack.lua")()
 NFS.load(mod_path .. "data/boosters/lartceps_bundle.lua")()
 NFS.load(mod_path .. "data/boosters/egg_pack.lua")()
 
@@ -1007,15 +968,15 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/road_sign.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/multesers.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/brownie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/mountain_dew.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/uncommon/pink_chocolate.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/preservatives.lua")()  
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pink salt.lua")()
-NFS.load(mod_path .. "data/jokers/unik/uncommon/aquamarine.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/aquamarine.lua")() --deserves to be uncommon due to probability + consistency with the minerals
 NFS.load(mod_path .. "data/jokers/unik/uncommon/pink_guard.lua")()
-
+NFS.load(mod_path .. "data/jokers/unik/uncommon/railroad_crossing.lua")() --demoted to uncommon due to severe debuffing conditions, requirement for crosses AND that aquamarine is uncommon.
 
 --Rare
---: create a summit card if hand contains a five of a kind
-NFS.load(mod_path .. "data/jokers/unik/rare/railroad_crossing.lua")()
+
 NFS.load(mod_path .. "data/jokers/unik/rare/711.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/minimized.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/copycat.lua")()
@@ -1031,12 +992,12 @@ NFS.load(mod_path .. "data/jokers/unik/rare/last_tile.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/ghost_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/compounding_interest.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/lone_despot.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() 
+NFS.load(mod_path .. "data/jokers/unik/rare/beaver.lua")() --deserves to be rare, similar to how baron is rare, and also safe xlog mult
 NFS.load(mod_path .. "data/jokers/unik/rare/tic_tac.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
-NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")() --deserves to be rare due to compounding effect of repeated xmult despite glass cards inherent fragility
 --NFS.load(mod_path .. "data/jokers/unik/rare/electroplating.lua")() --NOT released until v0.8, will only be here for the purpose of testing perma rescoring
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then
@@ -1046,8 +1007,9 @@ NFS.load(mod_path .. "data/jokers/unik/legendary/megatron.lua")()
 NFS.load(mod_path .. "data/jokers/unik/legendary/ALICE.lua")()
 --Rare (characters)
 NFS.load(mod_path .. "data/jokers/unik/rare/catto_boi.lua")()
-NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/reggie.lua")() --deserves to be rare, cause compounding xlog chips
 NFS.load(mod_path .. "data/jokers/unik/rare/poppy.lua")()
+NFS.load(mod_path .. "data/jokers/unik/rare/goob.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/kouign_amann_cookie.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/pibby.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/rare/lily_sprunki.lua")()
@@ -1080,7 +1042,11 @@ if (SMODS.Mods["paperback"] or {}).can_load then
 	NFS.load(mod_path .. "data/jokers/paperback/noughts/charred_stick.lua")() 
 	NFS.load(mod_path .. "data/jokers/paperback/crosses/flowerbeds.lua")() 
 	NFS.load(mod_path .. "data/jokers/paperback/noughts/greenfield.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/crosses/cosmopolitan.lua")() 
+	NFS.load(mod_path .. "data/jokers/paperback/noughts/midori_sour.lua")() 
+	
 	NFS.load(mod_path .. "data/jokers/paperback/weetomancer.lua")() 
+
 	
 end
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
@@ -1133,7 +1099,7 @@ if next(SMODS.find_mod("finity")) then
 	NFS.load(mod_path .. "data/jokers/finity/eternal_egg.lua")() 
 	if unik_config.unik_legendary_blinds then
 		if (SMODS.Mods["Cryptid"] or {}).can_load then
-			Cryptid.pointerblistifytype("rarity", "unik_finity_legendary_crown")
+			Cryptid.pointerblistifytype("rarity", "unik_legendary_blind_finity")
 		end
 		SMODS.Rarity({
 			key = "unik_legendary_blind_finity",
@@ -1187,6 +1153,7 @@ NFS.load(mod_path .. "data/challenges/common_muck.lua")()
  NFS.load(mod_path .. "data/challenges/singleton.lua")()
   NFS.load(mod_path .. "data/challenges/the_rot.lua")()
   NFS.load(mod_path .. "data/challenges/centrelink.lua")()
+  NFS.load(mod_path .. "data/challenges/riff_riff.lua")()
   NFS.load(mod_path .. "data/challenges/catto_boi_adventures.lua")()
 --  NFS.load(mod_path .. "data/challenges/rich_get_richer_2.lua")()
 NFS.load(mod_path .. "data/challenges/video_poker_1.lua")()
@@ -1219,6 +1186,7 @@ NFS.load(mod_path .. "data/overrides/drunkard_merry_andy_buff.lua")()
 NFS.load(mod_path .. "data/overrides/mr_bones_ui.lua")()	
 NFS.load(mod_path .. "data/overrides/matador.lua")()	
 NFS.load(mod_path .. "data/overrides/black_hole_observatory.lua")()	
+NFS.load(mod_path .. "data/overrides/blind_fixes.lua")()	
 
 NFS.load(mod_path .. "data/overrides/enhancement_destroy_fx.lua")()	
 NFS.load(mod_path .. "data/overrides/values_changes.lua")()	
@@ -1237,13 +1205,389 @@ if unik_config.unik_custom_menu then
 end
 
 --blindside:
+
+SMODS.Atlas({ 
+    key = "unik_blindside_epic_blinds", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_blindside_epic_blinds.png", 
+    px = 71, 
+    py = 95, 
+frames = 3 })
+
+SMODS.Atlas({ 
+    key = "unik_blindside_legendary_blinds", 
+    atlas_table = "ANIMATION_ATLAS", 
+    path = "unik_blindside_legendary_blinds.png", 
+    px = 71, 
+    py = 95, 
+frames = 3 })
+
 if next(SMODS.find_mod("Blindside")) then
-	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()	
-	--temporarily disabled until v0.7
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
-	-- NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+	BLINDSIDE.add_crossmod_rarity({
+		key = 'unik_ancient',
+		background_colour = G.C.UNIK_ANCIENT,
+		text_colour = G.C.WHITE,
+		text = 'k_unik_ancient',
+		spawn_rate = function(self)
+			---print("ancientnospawn")
+			return 0
+		end,
+		default_blind_key = 'm_unik_blindside_epic_wall'
+	})
+	BLINDSIDE.add_crossmod_rarity({
+		key = 'unik_exotic',
+		background_colour = G.C.UNIK_EXOTIC,
+		text_colour = G.C.WHITE,
+		text = 'k_unik_exotic',
+		spawn_rate = function(self)
+			---print("ancientnospawn")
+			return 0
+		end,
+		default_blind_key = 'm_unik_blindside_legendary_golden_crown'
+	})
+	BLINDSIDE.add_crossmod_rarity({
+		key = 'unik_exquisite',
+		background_colour = G.C.UNIK_EXQUISITE,
+		text_colour = G.C.WHITE,
+		text = 'k_unik_exquisite',
+		spawn_rate = function(self)
+			--print("exoticnospawn")
+			return 0.004
+		end,
+		default_blind_key = 'm_unik_blindside_tracer',
+	})
+	NFS.load(mod_path .. "data/stickers/impounded_blindside.lua")() 
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/ancient_exotic_spawn.lua")()
+	NFS.load(mod_path .. "data/blindside/fixes.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/taunt_sprites.lua")()	
+	NFS.load(mod_path .. "data/blindside/trims/square_trims.lua")()
+	
+	--BLINDS
+	NFS.load(mod_path .. "data/blindside/blinds/simple/collapse.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/artesian.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/the_gun.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/simple/the_bloon.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/smiley.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/pinned.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/simple/halved.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/simple/approval.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/fill.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/chromatic.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/hurdle.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/sharp.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/the_cliff.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/the_stop.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/copper.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/tree.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/simple/peak.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/trade.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/hunter.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/simple/riff.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/simple/pickaxe.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/blinds/premium/prince.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/vice.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/wrench.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/shine.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/catalyst.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/nought.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/cross.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/shield.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/napkin.lua")()	
+	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/scrum.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/upgrade.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/onion.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/prison.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/blinds/premium/catterfly.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/premium/kitsune.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/blinds/premium/cat.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/blossom.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/bubbles.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/evergreen.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/descending.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/the_fail.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/watermelon.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/bat.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/lamppost.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/patina.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/hater.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/fizzy.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/bliss.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/zu.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/premium/decepticon.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/tracer.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/earthmover.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/panopticon.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/circus.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/brilliance.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/dragon.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/frost.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/end.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/jail.lua")()	
+	NFS.load(mod_path .. "data/blindside/blinds/exquisite/dandy.lua")()	
+	--the jail
+	--the dandy
+	--the circus
+	NFS.load(mod_path .. "data/blindside/blinds/crude/apostle.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/lily.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/magician.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/corpo.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/taw.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/impatience.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/robot.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/brainrot.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/goblin.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/blacklist.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/vomit.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/landlord.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/nut.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/crude/close.lua")()
+
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/salmon_steps.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/persimmon_placard.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/emerald_escalator.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/purple_pentagram.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/legendary/bronze_bug.lua")()
+	
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_flip.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_fossil.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_trench.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_hammer.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_dagger.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_straightforwardness.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_sand.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_bellows.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_hook.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/ancient/epic_wall.lua")()
+
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_magnet.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_crown.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_chamber.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_stamp.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_nuke.lua")()
+	NFS.load(mod_path .. "data/blindside/blinds/exotic/legendary_sword.lua")()
+	--JOKERS
+	NFS.load(mod_path .. "data/blindside/jokers/big/fruity_joker.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/plain_jane.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/toothy_joker.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/chipped_joker.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/game_bro.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/infuriating_note.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/big/complementary_jokers.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/infuriating_notes.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/big/game_brothers.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/lily.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/chelsea_ramirez.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/yokana_ramirez.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/maya_ramirez.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/railroad_crossing.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/recycle_bin.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/energy_compressor.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/riif_roof.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/fat_joker.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/boss/fiendish_joker.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/oxy.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/boss/goob.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/monopoly_money.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/blacklist.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/spy.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/rotten_egg.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/hashtur.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/cursed/impound_notice.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/legendary/megatron.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/legendary/whitenight.lua")()
+	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/niko.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/sundae_cookie.lua")()	
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/moonlight_cookie.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/white_lily_cookie.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/ancient/unik.lua")()	
+	
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/effarcire.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/redeo.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/facile.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/exponentia.lua")()
+	NFS.load(mod_path .. "data/blindside/jokers/exotic/formidiulosus.lua")()
+	
+
+	--rituals
+	NFS.load(mod_path .. "data/blindside/rituals/erosion.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/caldera.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/augment.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/mirror.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/repetition.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/bind.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/backstab.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/kill.lua")()
+	--NFS.load(mod_path .. "data/blindside/rituals/fuckyouinparticularthehunger.lua")()
+	
+	--Spy (Curse tag)
+	--
+	NFS.load(mod_path .. "data/blindside/rituals/pentatope.lua")()
+	NFS.load(mod_path .. "data/blindside/rituals/portal.lua")()
+
+	--TAGS
+	NFS.load(mod_path .. "data/blindside/tags/gore.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/pentagram.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/landslide.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/downscale.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/soul.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/handcuffs.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/tags/peak.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/greedy.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/multiplicative.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/recursive.lua")()	
+	NFS.load(mod_path .. "data/blindside/tags/balance.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/cursed.lua")()	
+
+	NFS.load(mod_path .. "data/blindside/tags/dethroning.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/super_booster.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/shield.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/reel.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/cult.lua")()
+	NFS.load(mod_path .. "data/blindside/tags/wrench.lua")()
+
+	NFS.load(mod_path .. "data/blindside/price_tags/hiking_boots.lua")()
+	NFS.load(mod_path .. "data/blindside/price_tags/tent_camp.lua")()
+	NFS.load(mod_path .. "data/blindside/price_tags/summoning_circle.lua")()
+	NFS.load(mod_path .. "data/blindside/price_tags/sapient_sacrifice.lua")()
+
+	NFS.load(mod_path .. "data/blindside/relics/hiking_boots.lua")()
+	NFS.load(mod_path .. "data/blindside/relics/tent_camp.lua")()
+	NFS.load(mod_path .. "data/blindside/relics/summoning_circle.lua")()
+	NFS.load(mod_path .. "data/blindside/relics/sapient_sacrifice.lua")()
+
+	--cinemas
+	NFS.load(mod_path .. "data/blindside/cinema/propaganda.lua")()
+	NFS.load(mod_path .. "data/blindside/cinema/disaster.lua")()
+
+	--trims
+	NFS.load(mod_path .. "data/blindside/trims/locked.lua")()
+	NFS.load(mod_path .. "data/blindside/trims/explosive.lua")()
+
+	--need to manually add to bld_obj_enhancements still
+	BLINDSIDE.addToPool('bld_obj_enhancements','unik_blindside_explosive')
+	BLINDSIDE.addToPool('bld_obj_enhancements','unik_blindside_locked')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_dethroning')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_recursive')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_soul')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_landslide')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_downscale')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_gore')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_pentagram')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_handcuffs')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_multiplicative')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_peak')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_shield')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_cult')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_balance')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_cursed')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_wrench')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_greedy')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_reel')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_super_booster')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_pentatope')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_portal')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_erosion')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_bind')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_augment')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_mirror')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_repetition')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_kill')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_backstab')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_blindside_caldera')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_hiking_boots')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_tent_camp')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_summoning_circle')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','v_unik_blindside_sapient_sacrifice')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_hiking_boots_relic')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_tent_camp_relic')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_summoning_circle_relic')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','tag_unik_blindside_sapient_sacrifice_relic')
+	-- BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_hiking_boots_relic')
+	-- BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_tent_camp_relic')
+	-- BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_summoning_circle_relic')
+	-- BLINDSIDE.addToPool('bld_obj_relics','tag_unik_blindside_sapient_sacrifice_relic')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_everest')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_aconcagua')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_charleston')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_denali')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_elbrus')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_elbert')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_kosciuszko')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_mitchell')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_narodnaya')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','c_unik_whitney')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_everest')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_aconcagua')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_charleston')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_denali')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_elbrus')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_elbert')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_kosciuszko')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_mitchell')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_narodnaya')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','c_unik_whitney')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_1')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_2')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_3')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','p_unik_summit_4')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_1')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_2')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_3')
+	-- BLINDSIDE.addToPool('bld_obj_blindside_and_vanilla','p_unik_summit_4')
+
+	-- BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_pink_bow')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_faerie_tiara')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_celestial_nightcap')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_cat_hat')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_sundae_hat')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_tic_tac_toe_board')
+	-- BLINDSIDE.addToPool('bld_obj_blindside','j_unik_blindside_microwave')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_complementary_jokers')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_complementary_jokers2')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_infuriating_notes')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_infuriating_notes2')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_game_brothers')
+	BLINDSIDE.addToPool('bld_obj_excludejokers','bl_unik_blindside_game_brothers2')
+	
+	
+	NFS.load(mod_path .. "data/blindside/trinkets/pink_bow.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/faerie_tiara.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/celestial_nightcap.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/cat_hat.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/sundae_hat.lua")()	
+	
+	NFS.load(mod_path .. "data/blindside/trinkets/tic_tac_toe_board.lua")()	
+	NFS.load(mod_path .. "data/blindside/trinkets/microwave.lua")()	
+	
+
+	--stakes
+	NFS.load(mod_path .. "data/blindside/stakes/greed.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/endless.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/tic_tac_toe.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/mountain.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/polychrome.lua")()	
+	
+	NFS.load(mod_path .. "data/blindside/stakes/shining_glitter.lua")()	
+	NFS.load(mod_path .. "data/blindside/stakes/steel.lua")()	
+	--decks
+	NFS.load(mod_path .. "data/blindside/decks/shitty.lua")()	
+	NFS.load(mod_path .. "data/blindside/decks/persimmon.lua")()	
+	NFS.load(mod_path .. "data/blindside/decks/endless.lua")()	
 end
 
 
@@ -1264,6 +1608,12 @@ if JokerDisplay then
 	NFS.load(mod_path .. "data/jokerdisplay/editions.lua")() 
 	NFS.load(mod_path .. "data/jokerdisplay/detrimental.lua")() 
 end
+
+if UNIK.has_bos() then
+	NFS.load(mod_path .. "data/overrides/pwx_stuff.lua")() 
+end
+
+NFS.load(mod_path .. "data/misc/tag_squish.lua")()
 
 
 ---

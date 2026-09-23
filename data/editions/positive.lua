@@ -27,6 +27,7 @@ SMODS.Edition({
 	-- 		"{C:red}#1#{} #2#"
 	-- 	}
 	-- },
+	attributes = { 'detrimental','joker_slots', },
     in_shop = false,
     badge_colour = G.C.UNIK_SHITTY_EDITION,
 	config = { card_limit = -1},

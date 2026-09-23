@@ -73,15 +73,83 @@ SMODS.Enhancement:take_ownership("m_entr_flesh",{
     gore6break = true,
 }, true)
 
-SMODS.Enhancement:take_ownership("m_bld_tablet",{
-    rockbreak = true,
-}, true)
+if BLINDSIDE then
+    BLINDSIDE.Blind:take_ownership("m_bld_tablet",{
+        rockbreak = true,
+    }, true)
 
+end
+
+local popper = Card.bloated_pop
+function Card:bloated_pop()
+    if G.play and self.seal and self.seal == 'unik_blindside_explosive' and self.area  then
+        --self.already_blown_up = true --prevents recursively blowing up each other
+        if self.area ~= G.play or not self.already_blown_up then
+            self.already_blown_up = true --prevents recursively blowing up each other
+            local area = self.area
+            local index = -1
+            for i = 1, #area.cards do
+                if area.cards[i] == self then
+                    index = i
+                    break
+                end
+            end
+
+            if index > 1 and not area.cards[index - 1].already_blown_up then
+                area.cards[index -1 ].destroyed = true
+                area.cards[index - 1 ].already_blown_up = true
+                area.cards[index - 1]:start_dissolve()
+            end
+            if index < #area.cards and not area.cards[index + 1].already_blown_up then
+                area.cards[index + 1 ].destroyed = true
+                area.cards[index + 1 ].already_blown_up = true
+                area.cards[index + 1]:start_dissolve()
+            end
+        end
+        self.already_blown_up = true --prevents recursively blowing up each other
+        
+        self:boom_break2()
+        
+        return nil
+    end
+    local ret = popper(self)
+    return ret
+end
 
 
 local dissolveHook = Card.start_dissolve
 function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_juice)
     local enhancements = SMODS.get_enhancements(self)
+    if G.play and self.seal and self.seal == 'unik_blindside_explosive' and self.area  then
+        --self.already_blown_up = true --prevents recursively blowing up each other
+        if self.area ~= G.play or not self.already_blown_up then
+            self.already_blown_up = true --prevents recursively blowing up each other
+            local area = self.area
+            local index = -1
+            for i = 1, #area.cards do
+                if area.cards[i] == self then
+                    index = i
+                    break
+                end
+            end
+
+            if index > 1 and not area.cards[index - 1].already_blown_up then
+                area.cards[index -1 ].destroyed = true
+                area.cards[index - 1 ].already_blown_up = true
+                area.cards[index - 1]:start_dissolve()
+            end
+            if index < #area.cards and not area.cards[index + 1].already_blown_up then
+                area.cards[index + 1 ].destroyed = true
+                area.cards[index + 1 ].already_blown_up = true
+                area.cards[index + 1]:start_dissolve()
+            end
+        end
+        self.already_blown_up = true --prevents recursively blowing up each other
+        
+        self:boom_break2()
+        
+        return nil
+    end
     for key, _ in pairs(enhancements) do
         if G.P_CENTERS[key].woodbreak then 
             self:woodBreak()
@@ -94,8 +162,21 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
             return nil
         elseif G.P_CENTERS[key].gore6break then 
             self:gore6_break()
+            
+            return nil
+        elseif G.P_CENTERS[key].bloonpop then
+            self:bloated_pop()
+            
             return nil
         end
+    end
+    if self.bloonpop then
+        self:bloated_pop()
+        self.bloonpop = nil
+        return nil
+    end
+    if self.boombreak then
+        self:boom_break()
     end
     if self.config.center.woodbreak then 
         self:woodBreak()
@@ -108,9 +189,15 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         return nil
     elseif self.config.center.gore6break then 
             self:gore6_break()
+            self.gore6break = nil
             return nil
         end
-    if self.to_be_destroyed_by_lily then
+    if self.gore6break then
+        self:gore6_break()
+        self.gore6break = nil
+        return nil;
+    end
+    if self.to_be_destroyed_by_lily or self.will_be_gored then
         self:gore6_break()
         return nil
     end
@@ -121,6 +208,10 @@ end
 
 
 function Card:metalBreak(colour)
+    if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
     local dissolve_time = 1.0
     self.shattered = true
     self.dissolve = 0
@@ -189,6 +280,10 @@ function Card:metalBreak(colour)
 end
 
 function Card:woodBreak()
+    if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
     local dissolve_time = 1.0
     self.shattered = true
     self.dissolve = 0
@@ -240,6 +335,10 @@ function Card:woodBreak()
 end
 
 function Card:rockBreak(colour)
+    if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
     local dissolve_time = 1.0
     self.shattered = true
     self.dissolve = 0

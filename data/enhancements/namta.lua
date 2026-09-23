@@ -11,6 +11,7 @@ SMODS.Enhancement {
     weight = 0,
     immutable = true,
     gore6break = true,
+     attributes = { 'detrimental','generation','consumable','unik_lartceps_card','eblindsize'},
     loc_vars = function(self, info_queue, card)
         return {
             vars = { card.ability.extra.x_mult, card.ability.extra.x_chips,card.ability.extra.blind_size}
@@ -19,6 +20,9 @@ SMODS.Enhancement {
     in_pool = function(self)
         return false
     end,
+    all_in_jest = {
+        multi_enhancement_z_order = -1
+    },
 	calculate = function(self, card, context, effect)
         if context.before then
             G.GAME.unik_enable_lartcep_spawn = true

@@ -1,0 +1,2 @@
+--flesh deck: start with 1 the prison and 1 the earthmover
+--+2 win ante, final boss is always an Ancient Joker.

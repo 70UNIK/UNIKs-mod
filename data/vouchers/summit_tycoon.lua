@@ -2,8 +2,8 @@
 SMODS.Voucher{
     key = "unik_summit_tycoon",
 	config = { extra = {rate = 2} },
-	atlas = "unik_vouchers",
-	pos = { x = 1, y = 1 },
+	atlas = "unik_consumables",
+	pos = { x = 5, y = 3 },
 	requires = { "v_unik_summit_merchant" },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { (card and card.ability.extra.rate or self.config.extra.rate) } }

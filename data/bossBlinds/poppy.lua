@@ -5,7 +5,7 @@ SMODS.Blind{
     key = 'unik_the_poppy',
     config = {},
 	boss = {
-		min = 1,
+		min = -66,
 	},
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 6},
@@ -21,10 +21,14 @@ SMODS.Blind{
 	death_message="special_lose_unik_tall_poppy_syndrome",
 	unik_mod_final_score = function(self,sum)
 		if to_big(sum) > to_big(G.GAME.blind.chips) * 2.5 then
-			return {mod_score = 0.03}
+			return {mod_score = 0.1}
 		end 
 		return nil
 	end,
+	aij_calculate_counter_score = function()
+        --if your score catches on fire, and you score consistently over X3 reqs in the last X hands on average, it becomes
+        return 0
+    end
 }
 
 local smods_calculate_round_score_stuff = SMODS.calculate_round_score

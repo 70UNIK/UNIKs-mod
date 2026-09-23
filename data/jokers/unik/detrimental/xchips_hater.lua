@@ -1,10 +1,10 @@
 --XCHIPS IS NOT VANILLA! - if an exchips joker+ is triggered, it is destroyed instead of scoring. self destructs if no xchips triggers occur for the next 6 consecutive rounds.
 SMODS.Joker {
     key = 'unik_xchips_hater',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
 	no_dbl = true,
-	pos = { x = 2, y = 3 },
+	pos = { x = 11, y = 7 },
     cost = 0,
 	blueprint_compat = false,
     perishable_compat = false,
@@ -15,6 +15,7 @@ SMODS.Joker {
         return { 
             vars = { center.ability.extra.round_limit,center.ability.extra.rounds } }
     end,
+    attributes = { 'detrimental','xchips','echips','xlogchips','destroy_card' },
     calculate = function(self, card, context)
 		if context.end_of_round and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
             if not card.ability.extra.xchips_triggered then

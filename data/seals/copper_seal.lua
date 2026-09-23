@@ -6,6 +6,7 @@ SMODS.Seal {
     atlas = "unik_seals",
     pos = { x = 0, y = 0 },
     badge_colour = G.C.UNIK_COPPER,
+    attributes = {'rescore'},
     calculate = function(self, card, context)
         --FUTURE: Phanta compatibility with unscoring card effects
 

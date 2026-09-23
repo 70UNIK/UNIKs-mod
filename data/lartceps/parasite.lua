@@ -1,9 +1,9 @@
 --Forcibly link 1-3 lartceps cards to 3 in 4 cards in deck each
 SMODS.Consumable{
     set = 'unik_lartceps', 
-	atlas = 'unik_polyminos',
+	atlas = 'unik_consumables',
     cost = 0,
-	pos = {x = 0, y = 1},
+	pos = {x = 2, y = 7},
 	key = 'unik_parasite',
     config = {extra = {lart_min = 1, lart_max = 3, base = 1, odds = 4}},
     no_doe = true,
@@ -12,6 +12,7 @@ SMODS.Consumable{
     can_use = function(self, card)
 		return true
 	end,
+    attributes = { 'detrimental','bunc_linked_group','enhancements','modify_card'},
         set_badges = function (self, card, badges)
       SMODS.create_mod_badges({ mod = SMODS.find_mod("Bunco")[1] }, badges)
     end,

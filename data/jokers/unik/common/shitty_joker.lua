@@ -2,8 +2,8 @@
 SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_shitty_joker',
-    atlas = 'unik_common',
-	pos = { x = 0, y = 1 },
+    atlas = 'unik_normal_jokers',
+	pos = { x = 0, y = 6 },
     rarity = 1,
 	-- Modest
     config = { extra = { discards = 1},immutable = { max_hand_size_mod = 100 }, },

@@ -2,7 +2,7 @@
 
 SMODS.Blind{
     key = 'unik_burgundy_brain',
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 27},
     boss_colour= HEX("800020"),

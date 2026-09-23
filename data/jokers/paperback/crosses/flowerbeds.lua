@@ -1,15 +1,16 @@
 SMODS.Joker {
     key = 'unik_shibazakura',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
 	pos = { x = 0, y = 4 },
     config = {
         extra = {
-        xMult = 1.075,
-        xMult_gain = 0.075,
-        xMult_base = 1.075,
+        xMult = 1.08,
+        xMult_gain = 0.3,
+        xMult_base = 1.08,
         suit = "unik_Crosses",
         }
     },
+    attributes = { 'unik_crosses','xmult','suit' },
     rarity = 2,
     cost = 6,
     unlocked = true,

@@ -1,5 +1,29 @@
+--blindside: hook into it's own rescore function to obtain all its retriggers
+if BLINDSIDE then
+    local blindscore = BLINDSIDE.rescore_card
+    function BLINDSIDE.rescore_card(card, context)
+        if G.GAME.unik_only_rescore then
+            return false
+        end
+        if card.ability and card.ability.extra and card.ability.block_recursive_napkin and type(card.ability.extra) == "table" then
+            card.ability.extra.rescore = 1
+            print("recursive block attempt")
+        end
+        local ret = blindscore(card, context)
+        if not G.GAME.unik_block_blindside_rescore then
+            card.blindside_rescore =  card.blindside_rescore or 0
+            card.blindside_rescore =  card.blindside_rescore + 1
+        end
+        if card.ability and card.ability.extra and card.ability.block_recursive_napkin and type(card.ability.extra) == "table" then
+            card.ability.extra.rescore = nil
+             print("recursive block attemptend")
+        end
 
-
+        return ret
+        
+        
+    end
+end
 
 local localBonusHook = SMODS.localize_perma_bonuses
 function SMODS.localize_perma_bonuses(specific_vars, desc_nodes)
@@ -16,7 +40,6 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
 
     -- Post-scoring
     local eval = {}
-    
     SMODS.calculate_context({cardarea = calc_card_area, full_hand = G.play.cards, scoring_hand = scoring_hand, unik_after_effect = true},eval)
     --Enhancements
     local enhancementRescores = {}
@@ -30,17 +53,27 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
                         v.card.unik_rescored = true
                         sealRescores[#sealRescores+1] = {card = v.card, rescore = v.rescore}
                     end
+                    if v.extra then
+                        on_card_rescursive_rescore_finding(v.extra,sealRescores)
+                    end
                 elseif i == 'enhancement' then
                     if v.rescore and v.card then
                         v.card.unik_rescored = true
                         enhancementRescores[#enhancementRescores+1] = {card = v.card, rescore = v.rescore}
+                    end
+                    if v.extra then
+                        on_card_rescursive_rescore_finding(v.extra,enhancementRescores)
                     end
                 elseif i ~= 'jokers' then
                     if v.rescore and v.card then
                         v.card.unik_rescored = true
                         micelRescores[#micelRescores+1] = {card = v.card, rescore = v.rescore}
                     end
+                    if v.extra then
+                        on_card_rescursive_rescore_finding(v.extra,micelRescores)
+                    end
                 end
+                
             end
 
         end
@@ -69,45 +102,76 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
     local jokerRescores = {}
     local eval2 = {}
     SMODS.calculate_context({unik_kite_experiment = true, cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand},eval2)
+    --this does not work for recursive stuff such as SMODS.merge_effects (the napkin for instance). This will need to be converted
+    --print(calc_card_area == G.hand)
     for i = 1, #eval2 do
-                        --for scenarios such as rescoring a random card and that card changes
-        if eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and type(eval2[i].jokers.target_cards) == 'table' and eval2[i].jokers.target_cards[1] and eval2[i].jokers.target_cards[1].unik_scoring_segment then
-            for w = 1, #eval2[i].jokers.target_cards do
-                local struct = {}
-                for x = 1, #eval2[i].jokers.target_cards[w] do
-                    struct[#struct+1] = {card = eval2[i].jokers.target_cards[w][x], rescore = 1}
+        if eval2[i] and type(eval2[i]) == 'table' then
+            --print(eval2[i])
+            for i,v in pairs(eval2[i]) do
+                --recursive blueprint effects n more!
+                
+                --for scenarios such as rescoring a random card and that card changes
+                if v.target_cards and type( v.target_cards) == 'table' and  v.target_cards[1] and  v.target_cards[1].unik_scoring_segment then
+                    for w = 1, #v.target_cards do
+                        local struct = {}
+                        for x = 1, #v.target_cards[w] do
+                            struct[#struct+1] = {card = v.target_cards[w][x], rescore = 1}
+                        end
+                        struct.source = v.card or nil
+                        struct.message = v.message or nil
+                        struct.colour = v.colour or nil
+                        --"""JOker"""
+                        jokerRescores[#jokerRescores+1] = struct
+                    end
+                elseif v.target_cards and v.rescore then
+                    local struct = {}
+                    --If specified as a table, then individualize for each card(ideally align EXACTLY with the cards, but has mesures)
+                    if type(v.rescore) == 'table' then
+                        for z = 1, math.min(#v.target_cards,#v.rescore) do
+                            local x = v.target_cards[z]
+                            local rescoreAmount = v.rescore[z]
+                            x.unik_rescored = true
+                            struct[#struct+1] = {card = x, rescore = rescoreAmount}
+                        end
+                    --Otherwise apply for all selected cards
+                    else
+                        for j,x in pairs(v.target_cards) do
+                            x.unik_rescored = true
+                            struct[#struct+1] = {card = x, rescore = v.rescore}
+                        end
+                    end
+
+                    struct.source = v.card or nil
+                    struct.message = v.message or nil
+                    struct.colour = v.colour or nil
+                    jokerRescores[#jokerRescores+1] = struct
                 end
-                struct.source = eval2[i].jokers.card
-                struct.message = eval2[i].jokers.message
-                struct.colour = eval2[i].jokers.colour
-                jokerRescores[#jokerRescores+1] = struct
+                if v.extra then
+                    recursive_rescore_finding(v.extra,jokerRescores)
+                end
+
             end
-        elseif eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and eval2[i].jokers.rescore then
-            local struct = {}
-            --If specified as a table, then individualize for each card(ideally align EXACTLY with the cards, but has mesures)
-            if type(eval2[i].jokers.rescore) == 'table' then
-                for z = 1, math.min(#eval2[i].jokers.target_cards,#eval2[i].jokers.rescore) do
-                    local x = eval2[i].jokers.target_cards[z]
-                    local rescoreAmount = eval2[i].jokers.rescore[z]
-                    x.unik_rescored = true
-                    struct[#struct+1] = {card = x, rescore = rescoreAmount}
-                end
-            --Otherwise apply for all selected cards
-            else
-                for j,x in pairs(eval2[i].jokers.target_cards) do
-                    x.unik_rescored = true
-                    struct[#struct+1] = {card = x, rescore = eval2[i].jokers.rescore}
+        end
+    end
+
+    for i = 1, #G.GAME.tags do
+        local ret = G.GAME.tags[i]:apply_to_run({type = 'unik_rescoring_cards', full_hand = G.play.cards,scoring_hand = scoring_hand, context = context,cardarea = calc_card_area})
+        if ret then
+            --print(ret)
+            if ret.target_cards and type( ret.target_cards) == 'table' and  ret.target_cards[1] and  ret.target_cards[1].unik_scoring_segment then
+                for w = 1, #ret.target_cards do
+                    local struct = {}
+                    for x = 1, #ret.target_cards[w] do
+                        struct[#struct+1] = {card = ret.target_cards[w][x], rescore = 1}
+                    end
+                    struct.source = ret.card or nil
+                    struct.message = ret.message or nil
+                    struct.colour = ret.colour or nil
+                    struct.from_tag = ret.from_tag or false
+                    --"""JOker"""
+                    jokerRescores[#jokerRescores+1] = struct
                 end
             end
-            
-            
-            -- if triggered then
-            --     card_eval_status_text(eval2[i].jokers.card, 'jokers', nil, nil, nil, eval2[i].jokers)
-            -- end
-            struct.source = eval2[i].jokers.card
-            struct.message = eval2[i].jokers.message
-            struct.colour = eval2[i].jokers.colour
-            jokerRescores[#jokerRescores+1] = struct
         end
     end
     --Amalgamate the tables:
@@ -151,37 +215,126 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             play_area_status_text(localize('k_unik_repeat'))
             SMODS.calculate_context({unik_post_rescore = true,rescored_cards = rescoring_cards,cardarea = calc_card_area, full_hand = G.play.cards,scoring_hand = scoring_hand})
             if v.source and v.message then
-                card_eval_status_text(v.source, "extra", nil, nil, nil, {
-                    message = v.message,
-                    colour = v.colour or G.C.FILTER,
-                    card=v.source,
-                })
+                if v.from_tag and BLINDSIDE then
+                    tag_area_status_text(v.source, v.message, v.colour or G.C.FILTER, false, 0)
+                    
+                     G.E_MANAGER:add_event(Event({
+                        trigger = 'before',
+                        func = function()
+                            v.source:juice_up(1,1)
+                            return true
+                        end
+                    }))
+                else
+                    card_eval_status_text(v.source, "extra", nil, nil, nil, {
+                        message = v.message,
+                        colour = v.colour or G.C.FILTER,
+                        card=v.source,
+                    })
+                end
+
                 
             end
             for _,x in pairs(rescoring_cards) do
+                G.GAME.unik_block_blindside_rescore = true
+                G.GAME.unik_only_rescore = nil
                 local pased = context
                 pased.cardarea = calc_card_area 
+
                 SMODS.score_card(x, pased)
+                if BLINDSIDE and x.blindside_rescore then
+                    for z = 1, x.blindside_rescore do
+                        G.GAME.unik_block_blindside_rescore = true
+                        card_eval_status_text(x, "extra", nil, nil, nil, {
+                            message = (localize('k_again_ex')),
+                            colour = v.colour or G.C.FILTER,
+                            card=x,
+                        })
+                        G.GAME.unik_only_rescore = nil
+                        BLINDSIDE.rescore_card(x, context)
+                        G.GAME.unik_only_rescore = true
+                        
+                    end
+                end
+                G.GAME.unik_block_blindside_rescore = nil
+                G.GAME.unik_only_rescore = true
             end
 
 
         end
     end
-        --clean table
+    --     --clean table
+    G.GAME.unik_only_rescore = nil
     for i,v in pairs(calc_card_area.cards) do
         if v.unik_rescored then
           --  print("CLEAN")
             v.unik_rescored = nil
         end
+        v.blindside_rescore = nil
     end
     for i,v in pairs(G.play.cards) do
         if v.unik_rescored then
            -- print("CLEAN")
             v.unik_rescored = nil
         end
+        v.blindside_rescore = nil
     end
 
 
+end
+
+function on_card_rescursive_rescore_finding(v,rescoreType)
+    if v.rescore and v.card then
+        v.card.unik_rescored = true
+        rescoreType[#rescoreType+1] = {card = v.card, rescore = v.rescore}
+    end
+    if v.extra then
+        recursive_rescore_finding(v.extra,rescoreType)
+    end
+end
+
+function recursive_rescore_finding(v,jokerRescores)
+    --recursive blueprint effects n more!
+    
+    --for scenarios such as rescoring a random card and that card changes
+    if v.target_cards and type( v.target_cards) == 'table' and  v.target_cards[1] and  v.target_cards[1].unik_scoring_segment then
+        for w = 1, #v.target_cards do
+            local struct = {}
+            for x = 1, #v.target_cards[w] do
+                struct[#struct+1] = {card = v.target_cards[w][x], rescore = 1}
+            end
+            struct.source = v.card or nil
+            struct.message = v.message or nil
+            struct.colour = v.colour or nil
+            --"""JOker"""
+            jokerRescores[#jokerRescores+1] = struct
+        end
+    elseif v.target_cards and v.rescore then
+        local struct = {}
+        --If specified as a table, then individualize for each card(ideally align EXACTLY with the cards, but has mesures)
+        if type(v.rescore) == 'table' then
+            for z = 1, math.min(#v.target_cards,#v.rescore) do
+                local x = v.target_cards[z]
+                local rescoreAmount = v.rescore[z]
+                x.unik_rescored = true
+                struct[#struct+1] = {card = x, rescore = rescoreAmount}
+            end
+        --Otherwise apply for all selected cards
+        else
+            for j,x in pairs(v.target_cards) do
+                x.unik_rescored = true
+                struct[#struct+1] = {card = x, rescore = v.rescore}
+            end
+        end
+
+        struct.source = v.card or nil
+        struct.message = v.message or nil
+        struct.colour = v.colour or nil
+        jokerRescores[#jokerRescores+1] = struct
+    end
+    if v.extra then
+        recursive_rescore_finding(v.extra,jokerRescores)
+    end
 end
 
 --challenge: rescore effects on end of round
@@ -229,58 +382,66 @@ function SMODS.calculate_end_of_round_effects(context)
                 end
             end
         end
-            local jokerRescores = {}
+        local jokerRescores = {}
         local eval2 = {}
         SMODS.calculate_context({unik_kite_experiment = true, cardarea = context.cardarea, unik_end_of_round = true},eval2)
+
         for i = 1, #eval2 do
-                            --for scenarios such as rescoring a random card and that card changes
-            if eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and type(eval2[i].jokers.target_cards) == 'table' and eval2[i].jokers.target_cards[1] and eval2[i].jokers.target_cards[1].unik_scoring_segment then
-                for w = 1, #eval2[i].jokers.target_cards do
-                    local struct = {}
-                    for x = 1, #eval2[i].jokers.target_cards[w] do
-                        struct[#struct+1] = {card = eval2[i].jokers.target_cards[w][x], rescore = 1}
+            if eval2[i] and type(eval2[i]) == 'table' then
+                --print(eval2[i])
+                for i,v in pairs(eval2[i]) do
+                    --recursive blueprint effects n more!
+                    
+                    --for scenarios such as rescoring a random card and that card changes
+                    if v.target_cards and type( v.target_cards) == 'table' and  v.target_cards[1] and  v.target_cards[1].unik_scoring_segment then
+                        for w = 1, #v.target_cards do
+                            local struct = {}
+                            for x = 1, #v.target_cards[w] do
+                                struct[#struct+1] = {card = v.target_cards[w][x], rescore = 1}
+                            end
+                            struct.source = v.card or nil
+                            struct.message = v.message or nil
+                            struct.colour = v.colour or nil
+                            --"""JOker"""
+                            jokerRescores[#jokerRescores+1] = struct
+                        end
+                    elseif v.target_cards and v.rescore then
+                        local struct = {}
+                        --If specified as a table, then individualize for each card(ideally align EXACTLY with the cards, but has mesures)
+                        if type(v.rescore) == 'table' then
+                            for z = 1, math.min(#v.target_cards,#v.rescore) do
+                                local x = v.target_cards[z]
+                                local rescoreAmount = v.rescore[z]
+                                x.unik_rescored = true
+                                struct[#struct+1] = {card = x, rescore = rescoreAmount}
+                            end
+                        --Otherwise apply for all selected cards
+                        else
+                            for j,x in pairs(v.target_cards) do
+                                x.unik_rescored = true
+                                struct[#struct+1] = {card = x, rescore = v.rescore}
+                            end
+                        end
+
+                        struct.source = v.card or nil
+                        struct.message = v.message or nil
+                        struct.colour = v.colour or nil
+                        jokerRescores[#jokerRescores+1] = struct
                     end
-                    struct.source = eval2[i].jokers.card
-                    struct.message = eval2[i].jokers.message
-                    struct.colour = eval2[i].jokers.colour
-                    jokerRescores[#jokerRescores+1] = struct
+                    if v.extra then
+                        recursive_rescore_finding(v.extra,jokerRescores)
+                    end
+
                 end
-            elseif eval2[i] and eval2[i].jokers and eval2[i].jokers.target_cards and eval2[i].jokers.rescore then
-                local struct = {}
-                --If specified as a table, then individualize for each card(ideally align EXACTLY with the cards, but has mesures)
-                if type(eval2[i].jokers.rescore) == 'table' then
-                    for z = 1, math.min(#eval2[i].jokers.target_cards,#eval2[i].jokers.rescore) do
-                        local x = eval2[i].jokers.target_cards[z]
-                        local rescoreAmount = eval2[i].jokers.rescore[z]
-                        x.unik_rescored = true
-                        struct[#struct+1] = {card = x, rescore = rescoreAmount}
-                    end
-                --Otherwise apply for all selected cards
-                else
-                    for j,x in pairs(eval2[i].jokers.target_cards) do
-                        x.unik_rescored = true
-                        struct[#struct+1] = {card = x, rescore = eval2[i].jokers.rescore}
-                    end
-                end
-                
-                
-                -- if triggered then
-                --     card_eval_status_text(eval2[i].jokers.card, 'jokers', nil, nil, nil, eval2[i].jokers)
-                -- end
-                struct.source = eval2[i].jokers.card
-                struct.message = eval2[i].jokers.message
-                struct.colour = eval2[i].jokers.colour
-                jokerRescores[#jokerRescores+1] = struct
             end
         end
-        --Amalgamate the tables:
         local combinedTable = {}
         combinedTable[#combinedTable+1] = enhancementRescores
         combinedTable[#combinedTable+1] = sealRescores
         combinedTable[#combinedTable+1] = micelRescores
 
         for i,v in pairs(jokerRescores) do
-        --  print(v)
+              --print(v)
             combinedTable[#combinedTable+1] = v
         end
         for i,v in pairs(combinedTable) do

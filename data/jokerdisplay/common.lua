@@ -45,15 +45,13 @@ JokerDisplay.Definitions["j_unik_gt710"] = {
 }
 JokerDisplay.Definitions["j_unik_noon"] = {
     text = {
-        {
-            border_nodes = {
-                { text = "X" },
-                { ref_table = "card.joker_display_values", ref_value = "x_mult", retrigger_type = "exp" }
-            }
-        }
-    },
+            { text = "+" },
+            { ref_table = "card.joker_display_values", ref_value = "mult", retrigger_type = "mult" }
+        },
+        text_config = { colour = G.C.MULT },
+    
     calc_function = function(card)
-        card.joker_display_values.x_mult = G.GAME and G.GAME.current_round.hands_played ~= 0 and G.GAME.current_round.hands_left > 0 and card.ability.extra.x_mult or 1
+        card.joker_display_values.mult = G.GAME and G.GAME.current_round.hands_played ~= 0 and G.GAME.current_round.hands_left > 0 and card.ability.extra.mult or 0
     end
 }
 JokerDisplay.Definitions["j_unik_up_n_go"] = {
@@ -235,6 +233,35 @@ JokerDisplay.Definitions["j_unik_violent_joker"] = {
     style_function = function(card, text, reminder_text, extra)
         local suit_node = reminder_text and reminder_text.children and reminder_text.children[2]
         if suit_node then suit_node.config.colour = lighten(G.C.SUITS["unik_Crosses"], 0.35) end
+    end
+}
+JokerDisplay.Definitions["j_unik_numerical_reinforcement"] = {
+        text = {
+                { text = "+"},
+                { ref_table = "card.joker_display_values", ref_value = "chips", retrigger_type = "mult"},
+            },
+            text_config = { colour = G.C.CHIPS },
+        
+        
+        reminder_text = {
+            { text = "(" },
+            { ref_table = "card.joker_display_values", ref_value = "localized_text", colour = G.C.UNIK_UNIK, retrigger_type = "mult" },
+            { text = ")" },
+        },
+    calc_function = function(card)
+        local chips = 0
+        local text, _, scoring_hand = JokerDisplay.evaluate_hand()
+        if text ~= 'Unknown' then
+            for _, scoring_card in pairs(scoring_hand) do
+                if scoring_card.ability.name and  SMODS.has_enhancement(scoring_card,'m_unik_pink')then
+                    chips = chips +
+                        card.ability.extra.chips *
+                        JokerDisplay.calculate_card_triggers(scoring_card, scoring_hand)
+                end
+            end
+        end
+        card.joker_display_values.chips = chips
+        card.joker_display_values.localized_text = localize("k_unik_pink")
     end
 }
 JokerDisplay.Definitions["j_unik_treacherous_joker"] = {

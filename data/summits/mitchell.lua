@@ -1,8 +1,8 @@
 SMODS.Consumable{
     set = 'unik_summit', 
-	atlas = UNIK.getSummitAtlas(),
+	atlas = 'unik_consumables',
     cost = 3,
-	pos = {x = 1, y = 3},
+	pos = UNIK.isIndigenousSummitNaming() and {x = 3, y = 1} or  {x = 1, y = 3},
 	key = 'unik_mitchell',
     can_use = function(self, card)
         if G.hand and (#G.hand.highlighted <= card.ability.extra.max_highlighted) and G.hand.highlighted[1] then
@@ -16,35 +16,24 @@ SMODS.Consumable{
         if UNIK.isIndigenousSummitNaming() then
             key = key .. '_i'
         end
+        local cardOrBlind = UNIK.hasBlindside() and 'k_unik_blind' or 'k_unik_card'
 		return {
-			key = key, vars = {card.ability.extra.chips,card.ability.extra.max_highlighted},
+			key = key, vars = {card.ability.extra.chips,card.ability.extra.max_highlighted,localize(cardOrBlind)},
 		}
 	end,
-    
+    attributes = {'perma_bonus','chips','modify_card'},
+    blindside_booster = true,
+	include_in_vanilla = true,
 	use = function(self, card, area, copier)
         UNIK.add_bonus('chips',card.ability.extra.chips)
-        for i = 1, #G.hand.highlighted do
-            local highlighted = G.hand.highlighted[i]
-                highlighted.ability["perma_h_chips"] = highlighted.ability["perma_h_chips"] or 0
-                highlighted.ability["perma_h_chips"] = highlighted.ability["perma_h_chips"] + card.ability.extra.chips
-                
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after', 
-                delay = 0.1, 
-                func = function()
-                card_eval_status_text(highlighted, "extra", nil, nil, nil, {
-                    message = localize({
-                        type = "variable",
-                        key = "a_chips",
-                        vars = { number_format(highlighted.ability["perma_h_chips"]) },
-                    }),
-                    colour = G.C.CHIPS,
-                    card=highlighted,
-                })
-                return true 
-                end 
-            }))
-        end
+        UNIK.add_perma_bonus({
+            type = 'perma_h_chips',
+            message_key = 'a_chips',
+            message_colour = G.C.CHIPS,
+            from_card = card,
+            cards = G.hand.highlighted,
+            value = card.ability.extra.chips,
+        })
         card:juice_up(0.3, 0.5)  
     end
 }

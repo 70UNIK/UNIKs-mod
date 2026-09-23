@@ -23,6 +23,7 @@ SMODS.Edition({
         per = 1,
 		vol = 1.3,
 	},
+	attributes = { 'detrimental','destroy_card','chance' },
     disable_base_shader = true,
 	detrimental = true,
     -- loc_txt = {
@@ -65,26 +66,8 @@ calculate = function(self, card, context)
 			then
 				card.ability.unik_destroyed_mid_scoring = true
 				-- this event call might need to be pushed later to make more sense
-				G.E_MANAGER:add_event(Event({
-					func = function()
-                        card:juice_up(3, 0.5)
-						card.states.drag.is = true
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.3,
-							blockable = false,
-							func = function()
-								card.debuff = true
-								card.ability.no_score = true
-								G.jokers:remove_card(card)
-								card:bloated_pop()					
-								card = nil
-								return true
-							end,
-						}))
-						return true
-					end,
-				}))
+				card.bloonpop = true
+				selfDestruction_noMessage(card,true)
 			end
 		end
 		if context.main_scoring and context.cardarea == G.play then
@@ -105,23 +88,7 @@ calculate = function(self, card, context)
 		end
 
 		if context.destroy_card and context.destroy_card == card and card.config.will_pop then
-			G.E_MANAGER:add_event(Event({
-				func = function()
-					card.states.drag.is = true
-					G.E_MANAGER:add_event(Event({
-						trigger = "after",
-						delay = 0.3,
-						blockable = false,
-						func = function()
-							G.jokers:remove_card(card)
-							card:bloated_pop()
-							card = nil
-							return true
-						end,
-					}))
-					return true
-				end,
-			}))
+			card.bloonpop = true
 			return { remove = true }
 		end
 	end,
@@ -129,6 +96,10 @@ calculate = function(self, card, context)
 
 --Gore6 (custom card destruction animation)
 function Card:bloated_pop()
+	if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
     local dissolve_time = 0.4
     self.shattered = true
     self.dissolve = 0

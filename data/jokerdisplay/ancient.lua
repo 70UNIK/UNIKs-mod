@@ -1,92 +1,63 @@
 --all ancient rarity jokers
 JokerDisplay.Definitions["j_unik_niko"] = {
     text = {
-        {
-            border_nodes = {
-                { text = "X" },
-                { ref_table = "card.joker_display_values", ref_value = "x_mult", retrigger_type = "exp" }
-            }
-        }
+        { text = "(", colour = G.C.TEXT_INACTIVE },
+        { ref_table = "card.joker_display_values", ref_value = "active_text" },
+        { text = ")" , colour = G.C.TEXT_INACTIVE },
     },
     reminder_text = {
-        { text = "(" },
-        { ref_table = "card.joker_display_values", ref_value = "niko_card_suit" },
-        { text = ")" }
+        {ref_table = "card.joker_display_values", ref_value = "localized_text",retrigger_type = "mult", colour = G.C.UNIK_LIGHT_SUIT },
     },
     calc_function = function(card)
-        local count = 0
-        local text, _, scoring_hand = JokerDisplay.evaluate_hand()
-        local suits = getDominantSuit('light')
-        local suit = G.GAME.current_round.unik_niko_card and G.GAME.current_round.unik_niko_card.suit or "Hearts"
-        if suits and #suits == 1 then
-            suit = suits[1]
-        end
-        if text ~= 'Unknown' then
-            for _, scoring_card in pairs(scoring_hand) do
-                if scoring_card:is_suit(suit) then
-                    count = count +
-                        JokerDisplay.calculate_card_triggers(scoring_card, scoring_hand)
-                end
-            end
-        end
-        card.joker_display_values.x_mult = card.ability.extra.x_mult ^ count
-        card.joker_display_values.niko_card_suit = localize(suit, 'suits_plural')
+        card.joker_display_values.is_active = G.GAME.current_round.hands_played == 0
+        card.joker_display_values.active_text = localize("jdis_" ..
+            (card.joker_display_values.is_active and "active" or "inactive"))
+        card.joker_display_values.localized_text = "(" .. localize('k_light_suits') .. ")"
     end,
     style_function = function(card, text, reminder_text, extra)
-        if reminder_text and reminder_text.children[2] then
-            local suits = getDominantSuit('light')
-            local suit = G.GAME.current_round.unik_niko_card and G.GAME.current_round.unik_niko_card.suit or "Hearts"
-            if suits and #suits == 1 then
-                suit = suits[1]
-            end
-            reminder_text.children[2].config.colour = lighten(G.C.SUITS[suit], 0.35)
+        if text and text.children and text.children[2] then
+            text.children[2].config.colour = card.joker_display_values.is_active and G.C.GREEN or
+                G.C.UI.TEXT_INACTIVE
         end
+        if text.children[1] then
+                text.children[1].config.colour = G.C.UI.TEXT_INACTIVE
+            end
+            if text.children[3] then
+                    text.children[3].config.colour = G.C.UI.TEXT_INACTIVE
+                end
     end
 }
 JokerDisplay.Definitions["j_unik_sundae_cookie"] = {
     text = {
-        {
-            border_nodes = {
-                { text = "X" },
-                { ref_table = "card.joker_display_values", ref_value = "x_mult", retrigger_type = "exp" }
-            }
-        }
+        { text = "(" , colour = G.C.TEXT_INACTIVE},
+        { ref_table = "card.joker_display_values", ref_value = "active_text" },
+        { text = ")", colour = G.C.TEXT_INACTIVE },
     },
     reminder_text = {
-        { text = "(" },
-        { ref_table = "card.joker_display_values", ref_value = "sundae_card_suit" },
-        { text = ")" }
+        {ref_table = "card.joker_display_values", ref_value = "localized_text",retrigger_type = "mult", colour = G.C.UNIK_DARK_SUIT },
     },
     calc_function = function(card)
-        local count = 0
-        local text, _, scoring_hand = JokerDisplay.evaluate_hand()
-        local suits = getDominantSuit('dark')
-        local suit = G.GAME.current_round.unik_sundae_card and G.GAME.current_round.unik_sundae_card.suit or "Spades"
-        if suits and #suits == 1 then
-            suit = suits[1]
-        end
-        if text ~= 'Unknown' then
-            for _, scoring_card in pairs(scoring_hand) do
-                if scoring_card:is_suit(suit) then
-                    count = count +
-                        JokerDisplay.calculate_card_triggers(scoring_card, scoring_hand)
-                end
-            end
-        end
-        card.joker_display_values.x_mult = card.ability.extra.x_mult ^ count
-        card.joker_display_values.sundae_card_suit = localize(suit, 'suits_plural')
+        card.joker_display_values.is_active = ((G.GAME.current_round.hands_left == 1 and not next(G.play.cards)) or
+        (G.GAME.current_round.hands_left == 0 and next(G.play.cards))) or
+            next(find_joker("cry-panopticon")) or next(find_joker("j_paperback_the_world"))
+        card.joker_display_values.active_text = localize("jdis_" ..
+            (card.joker_display_values.is_active and "active" or "inactive"))
+        card.joker_display_values.localized_text = "(" .. localize('k_dark_suits') .. ")"
     end,
     style_function = function(card, text, reminder_text, extra)
-        if reminder_text and reminder_text.children[2] then
-            local suits = getDominantSuit('dark')
-            local suit = G.GAME.current_round.unik_sundae_card and G.GAME.current_round.unik_sundae_card.suit or "Spades"
-            if suits and #suits == 1 then
-                suit = suits[1]
-            end
-            reminder_text.children[2].config.colour = lighten(G.C.SUITS[suit], 0.35)
+        if text and text.children and text.children[2] then
+            text.children[2].config.colour = card.joker_display_values.is_active and G.C.GREEN or
+                G.C.UI.TEXT_INACTIVE
         end
+        if text.children[1] then
+                text.children[1].config.colour = G.C.UI.TEXT_INACTIVE
+            end
+            if text.children[3] then
+                    text.children[3].config.colour = G.C.UI.TEXT_INACTIVE
+                end
     end
 }
+--TODO, redo niko and sundae to be based of last tile
 JokerDisplay.Definitions["j_unik_unik"] = {
     text = {
         {
@@ -94,11 +65,11 @@ JokerDisplay.Definitions["j_unik_unik"] = {
                 { text = "^" },
                 { ref_table = "card.joker_display_values", ref_value = "Echips", retrigger_type = "exp" }
             },
-            border_colour = G.C.DARK_EDITION,
+            border_colour = SMODS.Gradients.unik_echips,
         }
     },
     calc_function = function(card)
-        card.joker_display_values.Echips = card.ability.extra.Echips + card.ability.immutable.base_echips
+        card.joker_display_values.Echips = card.ability.extra.Echips + 1
     end
 }
 JokerDisplay.Definitions["j_unik_white_lily_cookie"] = {
@@ -108,11 +79,11 @@ JokerDisplay.Definitions["j_unik_white_lily_cookie"] = {
                 { text = "^" },
                 { ref_table = "card.joker_display_values", ref_value = "Emult", retrigger_type = "exp" }
             },
-            border_colour = G.C.DARK_EDITION,
+            border_colour = SMODS.Gradients.unik_emult,
         }
     },
     calc_function = function(card)
-        card.joker_display_values.Emult = card.ability.extra.Emult + card.ability.immutable.base_emult
+        card.joker_display_values.Emult = card.ability.extra.Emult + 1
     end
 }
 JokerDisplay.Definitions["j_unik_moonlight_cookie"] = {

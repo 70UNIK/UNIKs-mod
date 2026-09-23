@@ -5,9 +5,10 @@ SMODS.Joker {
 	-- How the code refers to the joker.
 	key = 'unik_711',
 	rarity = 3,
-	atlas = 'unik_uncommon',
+	atlas = 'unik_normal_jokers',
 	pos = { x = 0, y = 0 },
 	cost = 8,
+	attributes = { 'xchips','rank','seven','ace'},
 	blueprint_compat = true,
 	perishable_compat = true,
 	demicoloncompat = true,

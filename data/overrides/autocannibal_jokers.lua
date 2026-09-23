@@ -9,6 +9,11 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 			depleted_threshold = -200,
 		},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.chips = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'chips','food','autocannibalism','scaling','on_click'},
 	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_cry_clicked_cookie2'
@@ -46,35 +51,7 @@ SMODS.Joker:take_ownership("j_cry_clicked_cookie",{
 			if (not card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod2) <= to_big(0))
 				or (card.ability.unik_depleted and to_big(card.ability.extra.chips) - to_big(card.ability.extra.chip_mod2) <= to_big(card.ability.extra.depleted_threshold))
 			then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.3,
-							blockable = false,
-							func = function()
-								G.jokers:remove_card(card)
-								card:remove()
-								card = nil
-								return true
-							end,
-						}))
-						return true
-					end,
-				}))
-				card_eval_status_text(
-					card,
-					"extra",
-					nil,
-					nil,
-					nil,
-					{ message = localize("k_eaten_ex"), colour = G.C.CHIPS }
-				)
+				selfDestruction(card,"k_eaten_ex",G.C.CHIPS)
 			else
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -98,6 +75,12 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 	config = {
 		extra = {chips = 100, chip_mod2 = 5,depleted_threshold = -100}
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.chips = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'chips','food','autocannibalism','scaling'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_ice_cream'
 		local sign = "+"
@@ -120,26 +103,7 @@ SMODS.Joker:take_ownership("j_ice_cream",{
 	calculate = function(self, card, context)
 		if context.after and not context.blueprint then
 			if (card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod2 < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.chips - card.ability.extra.chip_mod2 <= 0) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					message = localize('k_melted_ex'),
-					colour = G.C.CHIPS
-				}
+				selfDestruction(card,'k_melted_ex',G.C.CHIPS)
 			else
 				 SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -169,6 +133,12 @@ SMODS.Joker:take_ownership("j_popcorn",{
 	config = {
 		extra = {mult = 20, extra = 4,depleted_threshold = -20},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.mult = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'mult','food','autocannibalism','scaling'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_popcorn'
 		local sign = "+"
@@ -193,26 +163,7 @@ SMODS.Joker:take_ownership("j_popcorn",{
 			and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			-- adding depleted functionality for popcorn
 			if (card.ability.unik_depleted and card.ability.extra.mult - card.ability.extra.extra < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.mult - card.ability.extra.extra <= 0) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					message = localize('k_eaten_ex'),
-					colour = G.C.RED
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.RED)
 			else
 				SMODS.scale_card(card, {
                     ref_table = card.ability.extra,
@@ -240,6 +191,12 @@ SMODS.Joker:take_ownership("j_ramen",{
 	config = {
 		extra = {Xmult = 2, extra = 0.01,depleted_threshold = 0},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		card.ability.extra.Xmult = 1 
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'xmult','food','autocannibalism','scaling','discard'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_ramen'
 		if center.ability.unik_depleted then
@@ -257,27 +214,7 @@ SMODS.Joker:take_ownership("j_ramen",{
 	calculate = function(self, card, context)
 		if (context.discard and not context.blueprint) then
 			if (card.ability.unik_depleted and card.ability.extra.Xmult - card.ability.extra.extra < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.Xmult - card.ability.extra.extra <= 1) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					card = card,
-					message = localize('k_eaten_ex'),
-					colour = G.C.RED
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.RED)
 			else
 				 SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -308,6 +245,13 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 	config = {
 		extra = {h_size = 5, h_mod = 1,depleted_threshold = -5},
 	},
+	unik_autocannibal_trigger = function(self, card)
+		G.hand:change_size(-card.ability.extra.h_size)
+        card.ability.extra.h_size = 0
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'hand_size','food','autocannibalism','scaling'},
+	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	loc_vars = function(self, info_queue, center)
 		local key = 'j_turtle_bean'
 		local sign = "+"
@@ -334,27 +278,7 @@ SMODS.Joker:take_ownership("j_turtle_bean",{
 			and not context.repetition
 			and not context.retrigger_joker then
 			if (card.ability.unik_depleted and card.ability.extra.h_size - card.ability.extra.h_mod < card.ability.extra.depleted_threshold) or (not (card.ability.unik_depleted) and card.ability.extra.h_size - card.ability.extra.h_mod <= 0) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound('tarot1')
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-							func = function()
-									G.jokers:remove_card(card)
-									card:remove()
-									card = nil
-								return true; end})) 
-						return true
-					end
-				})) 
-				return {
-					card = card,
-					message = localize('k_eaten_ex'),
-					colour = G.C.FILTER
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.FILTER)
 			else
 				SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
@@ -385,30 +309,16 @@ SMODS.Joker:take_ownership("j_mf_lollipop",{
 		vars = { center.ability.x_mult, center.ability.extra,0 }
 		}
 	end,
+	unik_autocannibal_trigger = function(self, card)
+        card.ability.x_mult = 1
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'xmult','food','autocannibalism','scaling'},
 	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	calculate = function(self, card, context)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint and not context.retrigger_joker then
 		if (card.ability.x_mult - card.ability.extra <= 1.01 and not card.ability.unik_depleted) or (card.ability.x_mult - card.ability.extra <= 0 and card.ability.unik_depleted) then 
-			G.E_MANAGER:add_event(Event({
-			func = function()
-				play_sound('tarot1')
-				card.T.r = -0.2
-				card:juice_up(0.3, 0.4)
-				card.states.drag.is = true
-				card.children.center.pinch.x = true
-				G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.3, blockable = false,
-				func = function()
-					G.jokers:remove_card(card)
-					card:remove()
-					card = nil
-					return true; end})) 
-				return true
-			end
-			})) 
-			return {
-			message = localize('k_eaten_ex'),
-			colour = G.C.FILTER
-			}
+			selfDestruction(card,'k_eaten_ex',G.C.FILTER)
 		else
 			SMODS.scale_card(card, {
 				ref_table = card.ability,
@@ -446,6 +356,11 @@ SMODS.Joker:take_ownership("j_paperback_nachos",{
 		}
 		}
 	end,
+	unik_autocannibal_trigger = function(self, card)
+        card.ability.extra.X_chips = 1
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'xchips','food','autocannibalism','scaling','discard'},
 	pools = { ["autocannibalism_food"] = true, ["Food"] = true },
 	demicolon_compat = true,
 	calculate = function(self, card, context)
@@ -512,6 +427,11 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 			},
 		}
 	end,
+	unik_autocannibal_trigger = function(self, card)
+        card.ability.emult = 1
+		card.ability.unik_depleted = true
+	end,
+	attributes = { 'emult','food','autocannibalism','scaling','rerolls'},
 	pools = { ["Food"] = true, ["autocannibalism_food"] = true},
 	calculate = function(self, card, context)
 		if context.joker_main then
@@ -553,31 +473,7 @@ SMODS.Joker:take_ownership("j_cry_starfruit",{
 			})
 			--floating point precision can kiss my ass istg
 			if (to_number(card.ability.emult) <= 0.00000001 and not card.ability.unik_depleted) or (to_number(card.ability.emult + card.ability.immutable.base_emult) <= 0.00000001 and card.ability.unik_depleted) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.3,
-							blockable = false,
-							func = function()
-								G.jokers:remove_card(card)
-								card:remove()
-								card = nil
-								return true
-							end,
-						}))
-						return true
-					end,
-				}))
-				return {
-					message = localize("k_eaten_ex"),
-					colour = G.C.DARK_EDITION,
-				}
+				selfDestruction(card,'k_eaten_ex',G.C.DARK_EDITION)
 			else
 				return {
 					message = "-^" .. number_format(card.ability.emult_mod) .. " Mult",
@@ -595,3 +491,9 @@ function SMODS.is_eternal(card, trigger)
 	if card.ability.eternal then return true end
 	return ret
 end
+
+
+--All in jest food jokers
+SMODS.Joker:take_ownership("",{
+	
+}, true)

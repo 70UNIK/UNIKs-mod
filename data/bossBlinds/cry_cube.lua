@@ -11,7 +11,7 @@ SMODS.Blind:take_ownership('blind', -- object key (class prefix not required)
         pos = { x = 0, y = 21 },
         dollars = 5,
         boss = {
-            min = 1,
+            min = -66,
         },
         calculate = function(self, blind, context)
             local cube_mod_mult = mod_mult

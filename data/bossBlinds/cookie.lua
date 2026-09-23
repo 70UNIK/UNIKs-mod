@@ -3,7 +3,7 @@ SMODS.Blind{
     key = 'unik_cookie',
     config = {},
 
-    boss = {min = 1, max = 6666666}, 
+    boss = {min = -66, max = 6666666}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 18},
     boss_colour= HEX("d58c4b"), 
@@ -29,6 +29,11 @@ SMODS.Blind{
         G.ROOM.jiggle = G.ROOM.jiggle + 0.5
         
     end,
+    aij_calculate_counter_score = function()
+        --Max counter:
+        -- 1) Higher dependency on non-first hands
+        return 0
+    end
 }
 
 
@@ -79,6 +84,7 @@ local function BlindIncrement()
 			and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].increment_in_ante
             and G.P_BLINDS[G.GAME.round_resets.blind_choices[c]].increment_by_click
             and G.GAME.round_resets.blind_states[c] ~= "Defeated"
+            and G.GAME.round_resets.blind_states[c] ~= "Skipped"
             and G.GAME.round_resets.blind_states[c] ~= 'Hide'
             and G.GAME.round_resets.blind_states[c] ~= 'Current'
             

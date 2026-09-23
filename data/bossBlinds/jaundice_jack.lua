@@ -1,6 +1,6 @@
 SMODS.Blind{
     key = 'unik_jaundice_jack',
-    boss = {min = 1, showdown = true}, 
+    boss = {min = -66, showdown = true}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 24},
     boss_colour= HEX("f3c851"),

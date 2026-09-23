@@ -1,7 +1,7 @@
 --X2 Blind size, defeating this will give a negative black hole and self destruct.
 SMODS.Joker {
     key = 'unik_malicious_face',
-    atlas = 'unik_uncommon',
+    atlas = 'unik_normal_jokers',
     rarity = 2,
     cost = 4,
     pos = { x = 5, y = 3 },
@@ -9,6 +9,7 @@ SMODS.Joker {
     eternal_compat = false,
 	demicoloncompat = true,
     config = { extra = { multiplier = 2} },
+	attributes = { 'generation','consumable','xblindsize','boss_blind'},
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = { set = "Spectral", key = "c_black_hole" }
 		if not center.edition or (center.edition and not center.edition.negative) then
@@ -72,29 +73,10 @@ SMODS.Joker {
 				end,
 			}))
 			if not SMODS.is_eternal(card) then
-				G.E_MANAGER:add_event(Event({
-					func = function()
-						play_sound("tarot1")
-						card.T.r = -0.2
-						card:juice_up(0.3, 0.4)
-						card.states.drag.is = true
-						card.children.center.pinch.x = true
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.3,
-							blockable = false,
-							func = function()
-								G.jokers:remove_card(card)
-								card:remove()
-								card = nil
-								return true
-							end,
-						}))
-						return true
-					end,
-				}))
+				selfDestruction_noMessage(card,false,false)
+				card.gone = true
 			end
-			card.gone = true
+			
 		end
 	end,
 }

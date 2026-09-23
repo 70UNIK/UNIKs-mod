@@ -1,10 +1,5 @@
 --Robert/The Wheel: 1 in 7 chance card is drawn face down. Self destructs after playing at least 5 scoring face down cards
-SMODS.Atlas {
-	key = "unik_robert",
-	path = "unik_robert.png",
-	px = 71,
-	py = 95
-}
+
 SMODS.Joker{
 	dependencies = {
 		items = {
@@ -13,12 +8,13 @@ SMODS.Joker{
 	},
 	-- How the code refers to the joker.
 	key = 'unik_robert',
-    atlas = 'unik_robert',
+    atlas = 'unik_character_jokers',
     rarity = 'unik_detrimental',
 	no_dbl = true,
-	pos = { x = 0, y = 0 },
-	soul_pos = { x = 1, y = 0 },
+	pos = { x = 5, y = 11 },
+	soul_pos = { x = 6, y = 11 },
     cost = 0,
+    attributes = { 'chance','face_down' },
 	blueprint_compat = false,
     perishable_compat = false,
 	eternal_compat = false,

@@ -1,0 +1,51 @@
+--^^0.95 Mult after hand is scored
+SMODS.Tag {
+    key = "unik_blindside_downscale",
+    hide_ability = false,
+    atlas = 'unik_tags',
+    pos = {x = 4, y = 5},
+    in_pool = function(self, args)
+        return false
+    end,
+    loc_vars = function(self, info_queue,tag)
+        return {
+            vars = {
+                self.config.extra.e_mult
+            }
+        }
+	end,
+    config = {
+        extra = {
+            e_mult = 0.9,
+            hex = true,
+        }
+    },
+    blindside_tag = true,
+    apply = function(self, tag, context)
+        if context.type == 'shop_start' and not BLINDSIDE.taglock_active() then
+            tag:yep('+', G.C.RED, function() 
+                return true end)
+            tag.triggered = true
+        end
+        if context.type == 'after_hand' then
+            mult = mod_mult(mult ^ self.config.extra.e_mult)
+            update_hand_text({delay = 0}, {mult = mult})
+            tag_area_status_text(tag, "^0.9", SMODS.Gradients.unik_emult, false, 0)
+            G.E_MANAGER:add_event(Event({trigger = 'immediate', func = function()
+                play_sound('unik_emult',0.9,1)
+                tag:juice_up()
+                return true
+            end}))
+            delay(1)
+            hand_chips = mod_chips(hand_chips^ self.config.extra.e_mult)
+            update_hand_text({delay = 0}, {chips = hand_chips})
+            tag_area_status_text(tag, "^0.9", SMODS.Gradients.unik_echips, false, 0)
+            G.E_MANAGER:add_event(Event({trigger = 'immediate', func = function()
+                play_sound('unik_echip',0.9,1)
+                tag:juice_up()
+                return true
+            end}))
+            return true
+        end
+    end,
+}

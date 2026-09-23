@@ -5,16 +5,17 @@ SMODS.Joker {
 		},
 	},
 	key = 'unik_broken_arm',
-    atlas = 'unik_cursed',
+    atlas = 'unik_normal_jokers',
     rarity = 'unik_detrimental',
     no_dbl = true,
-	pos = { x = 3, y = 2 },
+	pos = { x = 12, y = 6 },
     cost = 1,
     config = { extra = { decrease = 1, maxLevel1 = 7, level1 = 0, selfDestruct = false,probability = 1,odds = 4} },
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = false,
     immutable = true,
     perishable_compat = false,
+    attributes = { 'detrimental','hand_level','hand_type' },
     loc_vars = function(self, info_queue, center)
         -- info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.probability, center.ability.extra.odds, 'unik_the_arm')

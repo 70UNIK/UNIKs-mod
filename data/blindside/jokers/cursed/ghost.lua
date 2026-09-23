@@ -1,0 +1,1 @@
+--if hand contains at least 5 scoring blinds, a random scoring blind permanently gains +1 retrigger
