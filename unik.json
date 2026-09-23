@@ -9,7 +9,7 @@
 	"badge_colour": "fe90ff",
 	"badge_text_colour": "",
 	"badge_shader": "unik_badge_shader",
-	"version": "0.7",
+	"version": "0.7.0a",
 	"icon_path": "modicon.png",
 	"dependencies": [
         "Steamodded (>=26.829.0)", 

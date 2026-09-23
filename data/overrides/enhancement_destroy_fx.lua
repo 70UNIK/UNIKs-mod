@@ -151,24 +151,27 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         return nil
     end
     for key, _ in pairs(enhancements) do
-        if G.P_CENTERS[key].woodbreak then 
-            self:woodBreak()
-            return nil
-        elseif G.P_CENTERS[key].metalbreak then 
-            self:metalBreak(type(G.P_CENTERS[key].metalbreak) == "table" and G.P_CENTERS[key].metalbreak.colour or nil)
-            return nil
-        elseif G.P_CENTERS[key].rockbreak then 
-            self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
-            return nil
-        elseif G.P_CENTERS[key].gore6break then 
-            self:gore6_break()
-            
-            return nil
-        elseif G.P_CENTERS[key].bloonpop then
-            self:bloated_pop()
-            
-            return nil
+        if key and G.P_CENTERS[key] then --nilcheck
+            if G.P_CENTERS[key].woodbreak then 
+                self:woodBreak()
+                return nil
+            elseif G.P_CENTERS[key].metalbreak then 
+                self:metalBreak(type(G.P_CENTERS[key].metalbreak) == "table" and G.P_CENTERS[key].metalbreak.colour or nil)
+                return nil
+            elseif G.P_CENTERS[key].rockbreak then 
+                self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
+                return nil
+            elseif G.P_CENTERS[key].gore6break then 
+                self:gore6_break()
+                
+                return nil
+            elseif G.P_CENTERS[key].bloonpop then
+                self:bloated_pop()
+                
+                return nil
+            end
         end
+        
     end
     if self.bloonpop then
         self:bloated_pop()
