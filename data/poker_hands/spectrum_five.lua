@@ -23,3 +23,6 @@ SMODS.PokerHand { -- Spectrum Five (Referenced from SixSuits)
     return { SMODS.merge_lists(parts._5, parts.unik_spectrum) }
   end
 }
+if next(SMODS.find_mod("Spectrallib")) then
+    Spectrallib.ascension_numbers["unik_spectrum_five"] = 5
+end

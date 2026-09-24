@@ -29,3 +29,7 @@ SMODS.PokerHand({
 		return #stones >= 5 and { stones } or {}
 	end,
 })
+
+if next(SMODS.find_mod("Spectrallib")) then
+    Spectrallib.ascension_numbers["unik_bulwark"] = 5
+end

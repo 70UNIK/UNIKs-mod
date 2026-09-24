@@ -31,3 +31,7 @@
 --     if PB_UTIL and PB_UTIL.config.suits_enabled then
         
 --     end
+
+if next(SMODS.find_mod("Spectrallib")) then
+    Spectrallib.ascension_numbers["unik_spectrum"] = 5
+end
