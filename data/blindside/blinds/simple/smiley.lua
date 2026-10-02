@@ -4,32 +4,34 @@ BLINDSIDE.Blind({
     atlas = 'unik_blindside_blinds',
     pos = {x = 0, y = 1},
     config = {
+        extra_slots_used = 1,
         extra = {
             value = 34,
             dollars = 6,
             dollars_up = 6,
+            hand_size = -1,
         }
     },
     hues = {"Yellow"},
     calculate = function(self, card, context) 
-        if context.before then
-            local exists = false
-            for i,v in pairs(context.scoring_hand) do
-                if v == card then
-                    exists = true
-                    break
-                end
-            end
-            if exists then
-                add_tag(Tag('tag_unik_blindside_handcuffs'))
-                return {
-                    focus =  context.blueprint_card or card,
-                    message = localize('k_unik_too_bad'),
-                    card =  context.blueprint_card or card,
-                    colour = G.C.MULT,
-                }
-            end
-        end
+        -- if context.before then
+        --     local exists = false
+        --     for i,v in pairs(context.scoring_hand) do
+        --         if v == card then
+        --             exists = true
+        --             break
+        --         end
+        --     end
+        --     if exists then
+        --         add_tag(Tag('tag_unik_blindside_handcuffs'))
+        --         return {
+        --             focus =  context.blueprint_card or card,
+        --             message = localize('k_unik_too_bad'),
+        --             card =  context.blueprint_card or card,
+        --             colour = G.C.MULT,
+        --         }
+        --     end
+        -- end
         if context.cardarea == G.play and context.main_scoring then
             
             return {
@@ -39,10 +41,10 @@ BLINDSIDE.Blind({
     end,
     common = true,
     loc_vars = function(self, info_queue, card)
-        info_queue[#info_queue + 1] = G.P_TAGS['tag_unik_blindside_handcuffs']
+        --info_queue[#info_queue + 1] = G.P_TAGS['tag_unik_blindside_handcuffs']
         return {
             vars = {
-                card.ability.extra.dollars,
+                card.ability.extra.dollars,card.ability.extra.hand_size
             }
         }
     end,

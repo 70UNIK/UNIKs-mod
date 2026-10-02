@@ -63,9 +63,20 @@ function Card:add_to_deck(from_debuff)
        self.will_be_gored = nil
 end
 
+
+
 local emplaceHook = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
+    local oldArea = card and card.area or nil
     emplaceHook(self,card, location, stay_flipped)
+
+    if self == G.hand and card and card.config.center and card.config.center.unik_add_to_hand and type(card.config.center.unik_add_to_hand) == 'function' then
+        card.config.center:unik_add_to_hand(card)
+        print("Attempt func")
+    elseif self ~= G.hand and oldArea and oldArea == G.hand and card and card.config.center and card.config.center.unik_remove_from_hand and type(card.config.center.unik_remove_from_hand) == 'function' then
+        card.config.center:unik_remove_from_hand(card)
+        print("Attempt rem func")
+    end
     --detrimental jokers do not take a joker slot to be a bit more fairer.
     if card.config.center.rarity == 'unik_detrimental' then
         card.ability.card_limit = 1

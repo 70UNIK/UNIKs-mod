@@ -4,11 +4,14 @@ BLINDSIDE.Blind({
     atlas = 'unik_blindside_epic_blinds',
     pos = {x = 0, y = 8},
     config = {
+        card_limit = 1,
         extra = {
             value = 1,
             interval = 2,
             hand_size = 1,
-        }},
+        }
+        
+    },
     hues = {"Faded","Green"},
     calculate = function(self, card, context) 
         if context.unik_kite_experiment and context.scoring_hand and context.cardarea == G.play and ((not context.cardarea and not context.main_eval) or context.main_eval) and card.area == G.hand then
@@ -34,22 +37,22 @@ BLINDSIDE.Blind({
             end   
             
         end
-        if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
-            card.ability.extra.unik_hand_size_added = true
-            G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
-            G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker + 1
-            --add_tag(Tag('tag_bld_toss'))
-            G.hand:change_size(card.ability.extra.hand_size)
-            print("hand_mod: " .. G.GAME.bellows_hs_tracker)
+        -- if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
+        --     card.ability.extra.unik_hand_size_added = true
+        --     G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
+        --     G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker + 1
+        --     --add_tag(Tag('tag_bld_toss'))
+        --     G.hand:change_size(card.ability.extra.hand_size)
+        --     print("hand_mod: " .. G.GAME.bellows_hs_tracker)
             
-        end
-        if G.hand.cards and card and card.ability.extra.hand_size and not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
-            card.ability.extra.unik_hand_size_added = nil
-            G.hand:change_size(-card.ability.extra.hand_size)
-            G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
-            G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker - 1
-            print("hand_mod: " .. G.GAME.bellows_hs_tracker)
-        end
+        -- end
+        -- if G.hand.cards and card and card.ability.extra.hand_size and not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
+        --     card.ability.extra.unik_hand_size_added = nil
+        --     G.hand:change_size(-card.ability.extra.hand_size)
+        --     G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
+        --     G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker - 1
+        --     print("hand_mod: " .. G.GAME.bellows_hs_tracker)
+        -- end
     end,
     unik_ancient = true,
     loc_vars = function(self, info_queue, card)
