@@ -37,22 +37,6 @@ BLINDSIDE.Blind({
             end   
             
         end
-        -- if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
-        --     card.ability.extra.unik_hand_size_added = true
-        --     G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
-        --     G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker + 1
-        --     --add_tag(Tag('tag_bld_toss'))
-        --     G.hand:change_size(card.ability.extra.hand_size)
-        --     print("hand_mod: " .. G.GAME.bellows_hs_tracker)
-            
-        -- end
-        -- if G.hand.cards and card and card.ability.extra.hand_size and not tableContains(card, G.hand.cards) and card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
-        --     card.ability.extra.unik_hand_size_added = nil
-        --     G.hand:change_size(-card.ability.extra.hand_size)
-        --     G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
-        --     G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker - 1
-        --     print("hand_mod: " .. G.GAME.bellows_hs_tracker)
-        -- end
     end,
     unik_ancient = true,
     loc_vars = function(self, info_queue, card)
