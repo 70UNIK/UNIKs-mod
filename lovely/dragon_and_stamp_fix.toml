@@ -37,7 +37,7 @@ match_indent = true
 [[patches]]
 [patches.regex]
 target = '''functions/button_callbacks.lua'''
-pattern = '''math\.max\(G\.GAME\.starting\_params\.(.*)\, (.*)\)'''
+pattern = '''math\.max\(G\.GAME\.starting\_params\.(.*)\, .\)'''
 position = "after"
 payload = " + UNIK.get_bonus_selection_limit()"
 match_indent = true
@@ -47,7 +47,7 @@ match_indent = true
 [[patches]]
 [patches.regex]
 target = '''=[SMODS Blindside "lib/utils/utils.lua"]'''
-pattern = '''math\.max\(G\.GAME\.starting\_params\.(.*)\, (.*)\)'''
+pattern = '''math\.max\(G\.GAME\.starting\_params\.(.*)\, .\)'''
 position = "after"
 payload = " + UNIK.get_bonus_selection_limit()"
 match_indent = true
