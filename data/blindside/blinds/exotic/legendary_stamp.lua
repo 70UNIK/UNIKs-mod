@@ -27,29 +27,6 @@ BLINDSIDE.Blind({
                 xlog_chips = card.ability.extra.xlogchips_base,
             }
         end
-        -- if card.ability.extra.hand_size and card.ability.extra.selection_limit and tableContains(card, G.hand.cards)
-        -- and not card.ability.extra.unik_selection_limit_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
-        --    -- card.ability.extra.unik_hand_size_added = true
-        --     --add_tag(Tag('tag_bld_toss'))
-        --     card.ability.extra.unik_selection_limit_added = true
-        --    -- G.hand:change_size(card.ability.extra.hand_size)
-            
-        -- end
-        -- if card.ability.extra.selection_limit and not tableContains(card, G.hand.cards)
-        -- and card.ability.extra.unik_selection_limit_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED then
-        --     card.ability.extra.unik_selection_limit_added = nil
-            
-        -- end
-    end,
-    unik_add_to_hand = function(self,card)
-        print("Attempt func3")
-        SMODS.change_discard_limit(card.ability.extra.selection_limit)
-             SMODS.change_play_limit(card.ability.extra.selection_limit)
-    end,
-    unik_remove_from_hand = function(self,card)
-        print("Attempt rm func3")
-        SMODS.change_discard_limit(-card.ability.extra.selection_limit)
-             SMODS.change_play_limit(-card.ability.extra.selection_limit)
     end,
     unik_exotic = true,
     loc_vars = function(self, info_queue, card)

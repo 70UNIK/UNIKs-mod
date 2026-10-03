@@ -11,5 +11,5 @@ priority = 214748365
 target = "cardarea.lua"
 pattern = "(.*)#self.highlighted(.*)self.config.highlighted_limit."
 position = "after"
-payload = "   and not G.GAME.unik_video_poker_rules   "
+payload = " + UNIK.get_bonus_selection_limit()  and not G.GAME.unik_video_poker_rules   "
 match_indent = true

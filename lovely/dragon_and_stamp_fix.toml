@@ -1,7 +1,7 @@
 [manifest]
 version = "0.0.1"
 dump_lua = true
-priority = 999
+priority =  214748365
 
 
 ### dragon handsize reset while not draw_from_hand_to_discard
@@ -30,4 +30,24 @@ print("RESET!")
     card.ability.card_limit = 0
 end
 '''
+match_indent = true
+
+### Always have infinite selection limit in video poker to avoid softlocking.
+### also includes stuff around the stamp
+[[patches]]
+[patches.regex]
+target = '''functions/button_callbacks.lua'''
+pattern = '''math\.max\(G\.GAME\.starting\_params\.(.*)\, (.*)\)'''
+position = "after"
+payload = " + UNIK.get_bonus_selection_limit()"
+match_indent = true
+
+### Always have infinite selection limit in video poker to avoid softlocking.
+### also includes stuff around the stamp
+[[patches]]
+[patches.regex]
+target = '''=[SMODS Blindside "lib/utils/utils.lua"]'''
+pattern = '''math\.max\(G\.GAME\.starting\_params\.(.*)\, (.*)\)'''
+position = "after"
+payload = " + UNIK.get_bonus_selection_limit()"
 match_indent = true

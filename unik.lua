@@ -562,6 +562,7 @@ NFS.load(mod_path .. "data/editions/fuzzy.lua")()
 NFS.load(mod_path .. "data/editions/corrupted.lua")()
 
 NFS.load(mod_path .. "data/misc/rescoring_api.lua")()
+NFS.load(mod_path .. "data/misc/dynamic_selection_limit.lua")()
 NFS.load(mod_path .. "data/misc/extra_soul.lua")()
 --seals
 NFS.load(mod_path .. "data/seals/copper_seal.lua")()

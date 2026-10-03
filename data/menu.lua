@@ -51,8 +51,11 @@ local oldfunc = Game.main_menu
 				return true
 			end,
 		}))
-		if (SMODS.Mods and SMODS.Mods.Talisman) or (SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load) then
+		if (SMODS.Mods["Talisman"] or {}).can_load then
 			print("WARNING: TALISMAN, INSTEAD OF CDATAMAN HAS BEEN LOADED. THERE MAY BE UNEXPECTED COMPARISON ERRORS")
 		end
+		-- if (SMODS.Mods and SMODS.Mods.Talisman) or (SMODS.Mods.Talisman and SMODS.Mods.Talisman.can_load) then
+		-- 	print("WARNING: TALISMAN, INSTEAD OF CDATAMAN HAS BEEN LOADED. THERE MAY BE UNEXPECTED COMPARISON ERRORS")
+		-- end
 		return ret
 	end
