@@ -27,7 +27,7 @@ BLINDSIDE.Blind({
                     delay = 1,
                     func = function()
                         if card.area == G.play and SMODS.pseudorandom_probability(card, pseudoseed("blind_upgrade_self"), card.ability.extra.chance, card.ability.extra.trigger, "blind_upgrade_self") then
-                            upgrade_blinds({card})
+                            upgrade_blinds({card},nil,nil,card)
                             return {
                                 message = localize('k_upgrade_ex'),
                                 colour = G.C.GREEN,

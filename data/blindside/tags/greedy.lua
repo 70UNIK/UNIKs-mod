@@ -27,19 +27,21 @@ SMODS.Tag {
         if context.type == 'hand_mod' and context.hand_mod_val < 0 then
             G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
                 tag:juice_up(1,1)
-                ease_dollars(3)
-                delay(0.3)
+                
                 return true
             end}))
+            ease_dollars(3*math.abs(context.hand_mod_val))
+                delay(0.3)
             
         end
         if context.type == 'discard_mod' and context.discard_mod_val < 0 then
             G.E_MANAGER:add_event(Event({trigger = 'after', func = function()
                 tag:juice_up(1,1)
-                ease_dollars(3)
-                delay(0.3)
+                
                 return true
             end}))
+            ease_dollars(3*math.abs(context.discard_mod_val))
+            delay(0.3)
         end
     end,
 }

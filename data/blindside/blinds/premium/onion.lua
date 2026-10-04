@@ -160,7 +160,7 @@ BLINDSIDE.Blind({
                             delay = 0.5,
                             func = function()
                                 local card = pseudorandom_element(cards,'onion_upgrade')
-                                upgrade_blinds({card})
+                                upgrade_blinds({card},nil,nil,card)
                                 return {
                                     message = localize('k_upgrade_ex'),
                                     colour = G.C.GREEN,
