@@ -26,6 +26,7 @@ BLINDSIDE.Blind({
             card.ability.card_limit = 0
             if SMODS.pseudorandom_probability(card, pseudoseed("dragondraw"), card.ability.extra.chance, card.ability.extra.trigger, 'dragondraw') then
                 card.ability.card_limit = 1
+                card.ability.temp_card_limit = 1
             else
                 card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_nope_ex') --[[index]], volume = 0.7, colour = G.C.GREEN})
             end
