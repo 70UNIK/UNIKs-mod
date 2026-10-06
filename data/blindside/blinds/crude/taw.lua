@@ -95,6 +95,12 @@ function Card:set_ability(center, initial, delay)
     or (self.seal and self.seal == 'unik_blindside_locked')) and not G.GAME.bypass_reroll_block
     local old_ability = copy33(self.ability)
     if (not tawsome) or G.SETTINGS.paused then
+        --dragon temp handsize fix
+        if self and self.ability and self.ability.temp_card_limit then
+            self.ability.card_limit = self.ability.card_limit - self.ability.temp_card_limit 
+            self.ability.temp_card_limit  = nil
+            print("ERASED HANDSIZE BONUS!")
+        end
         set_abilityref(self, center, initial, delay)
     else
         if self.seal and self.seal == 'unik_blindside_locked' then
