@@ -2253,9 +2253,9 @@ return {
                         "{C:money}+$#1#{} when scored"
                     },
                     {
-                        "Create a",
-                        "{C:red}Handcuffs Tag{}",
-                        "when played",
+                        "{C:red}-1{} Hand Size",
+                        -- "{C:red}Handcuffs Tag{}",
+                        -- "when played",
                     }
                 }
             },
@@ -3589,8 +3589,8 @@ return {
                     },
                     {
                         "{C:green}#2# in #3#{} chance",
-                        "for {C:attention}+#4#{} hand size",
-                        "when drawn and held",
+                        "{C:attention}+#4#{} hand size",
+                        "while held in hand",
                         "{C:inactive}({V:1}#5#{C:inactive})"
                     },
                     {

@@ -4,6 +4,7 @@ BLINDSIDE.Blind({
     atlas = 'unik_blindside_blinds',
     pos = {x = 8, y = 5},
     config = {
+       -- card_limit = 1,
         extra = {
             value = 1,
             x_mult = 2,
@@ -21,40 +22,16 @@ BLINDSIDE.Blind({
                 x_mult = card.ability.extra.x_mult,
             }
         end
-        if G.hand.cards and card and card.ability.extra.hand_size and tableContains(card, G.hand.cards) 
-        and not card.ability.extra.dragon_attempt_made
-        and not card.ability.extra.unik_hand_size_added and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
-            card.ability.extra.dragon_attempt_made = true
-            print("Attempt made")
+         if context.main_eval and (context.hand_drawn and context.cardarea == G.hand and tableContains(card, context.hand_drawn)) or (context.other_drawn and context.cardarea == G.hand and tableContains(card, context.other_drawn)) then
+            card.ability.card_limit = 0
             if SMODS.pseudorandom_probability(card, pseudoseed("dragondraw"), card.ability.extra.chance, card.ability.extra.trigger, 'dragondraw') then
-                card.ability.extra.unik_hand_size_added = true
-                G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
-                G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker + 1
-                --add_tag(Tag('tag_bld_toss'))
-                G.hand:change_size(card.ability.extra.hand_size)
-                print("hand_mod: " .. G.GAME.bellows_hs_tracker)
+                card.ability.card_limit = 1
             else
-                card_eval_status_text(card, 'extra', nil, nil, nil, {instant = true, message = localize('k_nope_ex') --[[index]], volume = 0.7, colour = G.C.GREEN})
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_nope_ex') --[[index]], volume = 0.7, colour = G.C.GREEN})
             end
-            
-            
-        end
-        if G.hand.cards and card and card.ability.extra.hand_size and not tableContains(card, G.hand.cards) 
-        and G.STATE ~= G.STATES.SMODS_BOOSTER_OPENED and not context.blueprint then
-            if card.ability.extra.dragon_attempt_made then
-                card.ability.extra.dragon_attempt_made = nil
-                print("attempt_refresh")
-            end
-            if card.ability.extra.unik_hand_size_added then
-                card.ability.extra.unik_hand_size_added = nil
-                G.hand:change_size(-card.ability.extra.hand_size)
-                G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
-                G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker - 1
-                print("hand_mod: " .. G.GAME.bellows_hs_tracker)
-            end
-            
-        end
+         end
     end,
+
     unik_exquisite = true,
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {key = 'bld_retain', set = 'Other'}
@@ -62,8 +39,8 @@ BLINDSIDE.Blind({
         
         return {
             vars = {
-                card.ability.extra.x_mult,chance,trigger,card.ability.extra.hand_size, card.ability.extra.unik_hand_size_added and localize("k_unik_applied") or localize("k_unik_not_applied"),colours = {
-					card.ability.extra.unik_hand_size_added and G.C.FILTER or  G.C.UI.TEXT_INACTIVE,
+                card.ability.extra.x_mult,chance,trigger,card.ability.extra.hand_size, card.ability.card_limit and card.ability.card_limit > 0 and localize("k_unik_applied") or localize("k_unik_not_applied"),colours = {
+					card.ability.card_limit and card.ability.card_limit > 0 and G.C.FILTER or  G.C.UI.TEXT_INACTIVE,
 				},
             }
         }
@@ -76,3 +53,11 @@ BLINDSIDE.Blind({
         end
     end
 })
+
+
+local drawer = draw_card
+function draw_card(from, to, percent, dir, sort, card, delay, mute, stay_flipped, vol, discarded_only)
+    
+    local ret = drawer(from, to, percent, dir, sort, card, delay, mute, stay_flipped, vol, discarded_only)
+    return ret
+end

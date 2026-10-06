@@ -70,7 +70,7 @@ always_scores = true,
                         func = function()
                             copy_card:start_materialize()
                             if not copy_card.ability.extra or (copy_card.ability.extra and not copy_card.ability.extra.upgraded) then
-                                upgrade_blinds({copy_card})
+                                upgrade_blinds({copy_card},nil,nil,card)
                             end
                             
                             return true

@@ -34,3 +34,7 @@ SMODS.PokerHand { -- Straight Spectrum (Referenced from SixSuits)
     end
   end
 }
+
+if next(SMODS.find_mod("Spectrallib")) then
+    Spectrallib.ascension_numbers["unik_straight_spectrum"] = 5
+end

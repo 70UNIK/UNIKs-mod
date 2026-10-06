@@ -30,19 +30,17 @@ SMODS.Tag {
             if #cards > 0 then
                 local lock = tag.ID
                 G.CONTROLLER.locks[lock] = true
+                local card = pseudorandom_element(cards, pseudoseed("unik_wrench_tag"))
+                card.to_be_upgraded = true
+                upgrade_blinds({card},nil,nil,tag)
                 tag:yep('+', G.C.DARK_EDITION, function() 
-                    local card = pseudorandom_element(cards, pseudoseed("unik_wrench_tag"))
-                    card.to_be_upgraded = true
-                    upgrade_blinds({card})
-                    G.E_MANAGER:add_event(Event({func = function()
-                        
-                        G.CONTROLLER.locks[lock] = nil
-                        G.GAME.unik_wrench_lock_tag = nil
-                        card.to_be_upgraded = nil
-                    return true; end}))
+                    
+                    G.CONTROLLER.locks[lock] = nil   
+                    card.to_be_upgraded = nil
+                    tag.triggered = true
                     
                     return true end)
-                tag.triggered = true
+                
             else
                 G.GAME.unik_wrench_lock_tag = nil
             end

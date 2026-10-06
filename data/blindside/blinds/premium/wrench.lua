@@ -46,7 +46,7 @@
                 end
                 if #_cards > 0 then
                     local selected_card, card_key = pseudorandom_element(_cards, pseudoseed('wrench'))
-                    upgrade_blinds({selected_card})
+                    upgrade_blinds({selected_card},nil,nil,card)
                     local success = false
                     while not success do
                         local seed = math.random(1000000,9999999)

@@ -125,20 +125,20 @@ function Card.remove(self)
             SMODS.calculate_context({ unik_blind_destroyed = true, blind = self })
             --print("Destroyed: " .. G.GAME.blinds_destroyed_this_run)
             print("REMOVED!")
-            if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_hand_size_added then
-                self.ability.extra.unik_hand_size_added = nil
-                print("REMOVED BY OTHER MEANS!")
-                G.hand:change_size(-self.ability.extra.hand_size)
-                G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
-                G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker - 1
-                print("hand_mod: " .. G.GAME.bellows_hs_tracker)
-            end
-            if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_selection_limit_added then
-                self.ability.extra.unik_selection_limit_added = nil
-                --print("REMOVED BY OTHER MEANS!")
-                 SMODS.change_discard_limit(-self.ability.extra.selection_limit)
-                SMODS.change_play_limit(-self.ability.extra.selection_limit)
-            end
+            -- if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_hand_size_added then
+            --     self.ability.extra.unik_hand_size_added = nil
+            --     print("REMOVED BY OTHER MEANS!")
+            --     G.hand:change_size(-self.ability.extra.hand_size)
+            --     G.GAME.bellows_hs_tracker = G.GAME.bellows_hs_tracker or 0
+            --     G.GAME.bellows_hs_tracker =G.GAME.bellows_hs_tracker - 1
+            --     print("hand_mod: " .. G.GAME.bellows_hs_tracker)
+            -- end
+            -- if self.ability and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.unik_selection_limit_added then
+            --     self.ability.extra.unik_selection_limit_added = nil
+            --     --print("REMOVED BY OTHER MEANS!")
+            --      SMODS.change_discard_limit(-self.ability.extra.selection_limit)
+            --     SMODS.change_play_limit(-self.ability.extra.selection_limit)
+            -- end
         end
     end
     local ret = remove_ref(self)
