@@ -1,0 +1,23 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if add and not G.GAME.banned_keys[v.key] then "
+position = "after"
+match_indent = true
+payload = '''
+    -- If the selected deck or sleeve is the Pink one and this key is a UNIK's mod Joker
+    -- add copies of it to the pool, so that it is more common to get
+    local fr_frequency = UNIK.get_unik_joker_frequency() - 1
+
+    if add and fr_frequency > 0 and (v.mod and v.mod.id and v.mod.id == "unik") then
+        for i = 1,fr_frequency do
+            _pool[#_pool + 1] = v.key
+            _pool_size = _pool_size + 1
+        end
+    end
+'''

@@ -533,6 +533,7 @@ end
 NFS.load(mod_path .. "data/stakes/stake_card_modifiers.lua")() 
 --decks
 NFS.load(mod_path .. "data/decks/greed_deck.lua")()
+NFS.load(mod_path .. "data/decks/pink_deck.lua")()
 NFS.load(mod_path .. "data/decks/mountain_deck.lua")()
 NFS.load(mod_path .. "data/decks/tic_tac_toe_deck.lua")()
 NFS.load(mod_path .. "data/decks/endless_deck.lua")()

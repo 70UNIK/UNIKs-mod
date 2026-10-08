@@ -51,6 +51,13 @@ return {
                     "Start with an {C:unik_summit,T:c_unik_everest}Everest{}",
                 }
             },
+            b_unik_pink_deck = {
+                name = "Pink Deck",
+                text = {
+                    "{C:unik_unik_color}UNIK's mod{} {C:attention}Jokers",
+                    "appear at {C:attention}#1#X{} the usual rate",
+                }
+            },
             b_unik_haunted_deck = {
                 name = "Haunted Deck",
                 text = {
