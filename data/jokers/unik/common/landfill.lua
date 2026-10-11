@@ -16,42 +16,34 @@ SMODS.Joker {
         }
 	end,
     calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.before and not context.blueprint then
-            local cards = 0
-			for k, v in ipairs(context.scoring_hand) do
-				v.landfill_incompat = true
-			end
-			for k, v in ipairs(context.full_hand) do
-				if not v.landfill_incompat then
-					cards = cards + 1
-					G.E_MANAGER:add_event(Event({
-						func = function()
-							v:juice_up()
-							return true
-						end,
-					}))
-				end
-			end
-			for k, v in ipairs(context.scoring_hand) do
-				v.landfill_incompat = nil
-			end
-            if cards > 0 then
-				SMODS.scale_card(card, {
-					ref_table = card.ability.extra,
-					ref_value = "chips",
-					scalar_value = "chip_mod",
-					message_key = "a_chips",
-					message_colour = G.C.CHIPS,
-                    force_full_val = true,
-					operation = function(ref_table, ref_value, initial, scaling)
-						ref_table[ref_value] = initial + scaling * cards
-					end,
-				})
-                card.ability.extra.chips = math.max(card.ability.extra.chips,0)
-				return {
+        --so it can work with phanta better
+        if context.individual and context.cardarea == "unscored" and not context.blueprint then
+            card.ability.extra.chips = math.max(card.ability.extra.chips,0)
+            return {
+                func = function()
+                    if context.other_card then
+                        local juice_card = context.other_card
+                        G.E_MANAGER:add_event(Event({
+                            func = function()
+                                if juice_card then
+                                    juice_card:juice_up()
+                                end
+                                return true
+                            end,
+                        }))
+                    end
                     
-                }
-			end
+                    
+                    SMODS.scale_card(card, {
+                        ref_table = card.ability.extra,
+                        ref_value = "chips",
+                        scalar_value = "chip_mod",
+                        message_key = 'a_chips',
+                        message_colour = G.C.CHIPS,
+                        operation = '+',
+                    })
+                end
+            }
         end
         if context.individual and context.cardarea == G.play and not context.blueprint then
             SMODS.scale_card(card, {

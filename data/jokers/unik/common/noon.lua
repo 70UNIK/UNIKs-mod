@@ -4,7 +4,7 @@ SMODS.Joker {
     atlas = 'unik_normal_jokers',
     rarity = 1,
 	pos = { x = 3, y = 5 },
-    config = { extra = { mult = 20} }, --For comparison, in mainline cryptid, stardust is the common "unconditional Xmult" Joker, hence it's 1.75x
+    config = { extra = { mult = 17} }, 
 	attributes = { 'mult','hands' },
     cost = 4,
     blueprint_compat = true,
