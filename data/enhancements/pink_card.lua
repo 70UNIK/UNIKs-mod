@@ -37,6 +37,7 @@ SMODS.Enhancement {
         if context.destroy_card and context.destroy_card == card and context.cardarea == G.play and not next(find_joker("j_unik_numerical_reinforcement")) then
             for i,v in pairs(G.play.cards) do
                 if v:get_id() ~= 7 then
+                    check_for_unlock({ type = 'unik_pink_self_destruct' })
                     return { remove = true }
                 end
             end
@@ -44,6 +45,7 @@ SMODS.Enhancement {
         if (context.cardarea == "unscored") and context.destroy_card == card then
             for i,v in pairs(G.play.cards) do
                 if v:get_id() ~= 7 then
+                    check_for_unlock({ type = 'unik_pink_self_destruct' })
                     return { remove = true }
                 end
             end

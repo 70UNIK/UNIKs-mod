@@ -11,6 +11,22 @@ SMODS.Joker {
     perishable_compat = true,
 	eternal_compat = false,
     attributes = { 'stickers','on_sell','banishing'},
+    check_for_unlock = function(self, args)
+        if args.type == 'modify_jokers' and G.jokers then
+        local eternals = 0
+        for _, v in ipairs(G.jokers.cards) do
+            if SMODS.is_eternal(v,self) then
+                eternals = eternals + 1
+            end
+        end
+        return eternals >= G.jokers.config.card_limit
+        end
+    end,
+    unlocked = false,
+  	discovered = false,
+    locked_loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = { set = "Other", key = "eternal" }
+    end,
     calculate = function(self, card, context)
         if
 			context.selling_card and not context.blueprint

@@ -15,6 +15,26 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod} }
 	end,
+	unlocked = false,
+  	discovered = false,
+	check_for_unlock = function(self, args)
+		if args.type == 'unik_ramen_eaten' then
+			return true
+		end
+	end,
+	locked_loc_vars = function(self, info_queue, card)
+		
+    	local other_name = localize('k_unknown')
+			if G.P_CENTERS['j_ramen'].unlocked then
+				info_queue[#info_queue + 1] = G.P_CENTERS.j_ramen
+				other_name = localize { type = 'name_text', set = 'Joker', key = 'j_ramen' }
+			end
+		return {
+			vars = {
+				other_name
+			}
+		}
+	end,
     calculate = function(self, card, context)
 		if context.forcetrigger then
 			return {

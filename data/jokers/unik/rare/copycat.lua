@@ -25,4 +25,14 @@ SMODS.Joker {
 			end
 		end
 	end,
+	unlocked = false,
+  	discovered = false,
+	check_for_unlock = function(self, args)
+        if args.type == 'discard_custom' and args.cards then
+       		 local eval = evaluate_poker_hand(args.cards)
+			if next(eval['Flush Five']) then
+				return true
+			end
+        end
+    end,
 }

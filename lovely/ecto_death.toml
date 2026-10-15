@@ -1,0 +1,24 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority =  214748365
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''G.hand:change_size(-G.GAME.ecto_minus)'''
+position = 'after'
+payload = '''
+if G.hand.config.card_limit <= 0 then
+    G.GAME.prime_your_ecto_death = true
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.regex]
+target = '''functions/common_events.lua'''
+pattern = '''not specific\_vars\.not\_hidden'''
+position = 'after'
+payload = ''' and not _c.override_legendary_unlock_loc '''
+match_indent = true

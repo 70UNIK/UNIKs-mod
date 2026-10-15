@@ -370,12 +370,6 @@ SMODS.Atlas {
 	py = 34
 }
 SMODS.Atlas {
-	key = "unik_tags_shiny",
-	path = "unik_tags_shiny.png",
-	px = 34,
-	py = 34
-}
-SMODS.Atlas {
 	key = "placeholders",
 	path = "placeholders.png",
 	px = 71,

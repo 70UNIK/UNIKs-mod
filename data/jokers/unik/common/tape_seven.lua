@@ -26,5 +26,15 @@ SMODS.Joker {
 			end
 		end
         
-	end
+	end,
+     unlocked = false,
+  	discovered = false,
+    check_for_unlock = function(self, args)
+        if args.type == 'unik_pink_self_destruct'  then
+            return true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_pink
+    end,
 } 

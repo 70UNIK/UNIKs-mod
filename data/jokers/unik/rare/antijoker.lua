@@ -6,7 +6,7 @@ SMODS.Joker {
     perishable_compat = false,
     demicoloncompat = true,
     rarity = 3,
-    cost = 15,
+    cost = 12,
     atlas = 'unik_normal_jokers',
     attributes = { 'editions','on_sell','joker'},
     pos = { x = 12, y = 2 },
@@ -54,7 +54,27 @@ SMODS.Joker {
             }
         end
     end,
+     unlocked = false,
+  	discovered = false,
+     check_for_unlock = function(self, args)
+        if args.type == 'unik_ecto_death'  then
+            return true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_ectoplasm
+    end,
 }
+
+local gameoverse = Game.update_game_over
+function Game:update_game_over(dt)
+    local ret = gameoverse(self,dt)
+    if G.GAME.prime_your_ecto_death then
+        check_for_unlock({ type = 'unik_ecto_death' })
+    end
+    
+    return ret
+end
 
 SMODS.DrawStep {
 	key = "antijoker_edition",

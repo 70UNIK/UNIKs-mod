@@ -4408,8 +4408,8 @@ return {
                 "{C:unik_eye_searing_red}Always {X:unik_void_color,E:2,C:unik_eye_searing_red}TAW{}",
                 },
                 unlock = {
-                "Reach Ante",
-                "level {E:1,C:attention}#1#",
+                    "Reach Ante",
+                    "level {E:1,C:attention}#1#",
                 }
             },
 
@@ -4496,7 +4496,7 @@ return {
                     "{C:inactive,s:0.7}ROOF! ROOF!{}",
                 },
                 unlock = {
-                    "Own {C:attention}Baseball Card",
+                    "Own {C:attention}#1#", --Baseball Card
                     "while only having",
                     "{C:blue}Common{} Jokers"
                 }
@@ -4509,8 +4509,8 @@ return {
 					"card {C:attention}discarded{}",
 					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
                 },
-                unlock = {
-                    "Have {C:attention}Ramen{} get eaten",
+                unlock = { --DONE
+                    "Have {C:attention}#1#{} get {C:red}eaten",
                 }
             },
             j_unik_happiness = {
@@ -4843,8 +4843,8 @@ return {
                 },
                 unlock = {
                     "Own {C:attention}Half Joker",
-                    "while in",
-                    "{C:attention}The Psychic{} Boss"
+                    "while facing",
+                    "{C:attention}The Psychic{}"
                 }
             },
             j_unik_1_5_joker_exp = {
@@ -4863,8 +4863,8 @@ return {
                 },
                 unlock = {
                     "Own {C:attention}Half Joker",
-                    "while in",
-                    "{C:attention}The Psychic{} Boss"
+                    "while facing",
+                    "{C:attention}The Psychic{}"
                 }
             },
             j_unik_no_standing_zone = {
@@ -5033,7 +5033,7 @@ return {
 
                 },
                 unlock = {
-                    "Destroy an {C:unik_ancient}Ancient{} Joker",
+                    "{C:red}Destroy{} an {C:unik_ancient}Ancient{} Joker",
                 }
             },
             --no longer broken
@@ -5131,7 +5131,7 @@ return {
                     "{C:purple}Eternal{} Jokers for",
                     "{E:2,C:red}negative{} sell value",
                 },
-                unlock = {
+                unlock = { --DONE
                     "Fill your Joker slots",
                     "with {C:purple}Eternal{} Jokers",
                 }
@@ -5240,9 +5240,9 @@ return {
                     "{C:inactive,s:0.8s}(Capped at {C:dark_edition}+#5#{C:inactive} slots)",
                 },
                 unlock = {
-					"Skip {C:attention}30",
-					"Booster Packs in",
-                    "1 run",
+					"Skip {C:attention}#1#",
+					"Booster Pack#<s>1# in",
+                    "a single run",
 				},
             },
             j_unik_invisible_card_full = {
@@ -5251,9 +5251,9 @@ return {
                     "{C:dark_edition}+#4#{} Joker slot#<s>4#",
                 },
                 unlock = {
-					"Skip {C:attention}30",
-					"Booster Packs in",
-                    "1 run",
+					"Skip {C:attention}#1#",
+					"Booster Pack#<s>1# in",
+                    "a single run",
 				},
             },
             --next batch of 8 base jokers
@@ -5384,7 +5384,7 @@ return {
                     },
                 },
                 unlock = {
-                    "Retrigger {C:attention}1{} card {C:attention}4{} times"
+                    "Retrigger {C:attention}1{} card {C:attention}#2#{} time#<s>2#"
                 }
             },
             j_unik_kouign_amann_cookie = { --Retrigger all light cards and reduce their requirements by 10% per trigger. (RARE)
@@ -5604,7 +5604,7 @@ return {
                     },
                 },
                 unlock = {
-                    "{E:2,C:red}Banish {C:attention}D16{} with",
+                    "{E:2,C:red}Banish {C:attention}#1#{} with",
                     "it's own effect"
                 }
             },
@@ -5631,32 +5631,6 @@ return {
                     "Play {C:attention}5 Timber Cards",
                 }
             },
-            -- j_unik_niko = {
-            --     name = "Niko",
-            --     text = {
-            --         {
-            --             "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                       
-            --         },
-            --         {
-            --              "{C:attention}Converts{} all scored cards suits",
-            --             "into the first scored {C:attention}Light Suit",
-            --             "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Light Suit{C:inactive,s:0.8} in deck)",
-            --             "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
-            --         },
-            --         {
-            --             "{C:unik_caption,s:0.7,E:1}#3#{}",
-            --             "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-            --             "{C:unik_ancient,s:0.7,E:2}Origin : Oneshot{}",
-            --         },
-
-
-            --     },
-            --     unlock = {
-            --         "Win in {C:attention}Checkered Deck",
-            --         "With {C:attention}Ancient Joker"
-            --     }
-            -- }, 
             j_unik_niko = {
                 name = "Niko",
                 text = {
@@ -5698,32 +5672,7 @@ return {
                     "Win in {C:attention}Checkered Deck",
                     "With {C:attention}Ancient Joker"
                 }
-            },      
-            -- j_unik_sundae_cookie = {
-            --     name = "Sundae Cookie",
-            --     text = {
-            --         {
-            --             "Scored {V:1}#1#{} give {X:mult,C:white}X#2#{} Mult", --X3 mult
-                        
-            --         },
-            --         {
-            --             "{C:attention}Converts{} all scored cards suits",
-            --             "into the first scored {C:attention}Dark Suit",
-            --             "{C:inactive,s:0.8}(Selects the most frequent {C:attention,s:0.8}Dark Suit{C:inactive,s:0.8} in deck)",
-            --             "{C:inactive,s:0.8}(Randomly selects per round if Suits appear equally)",
-            --         },
-            --         {
-            --             "{C:unik_caption,s:0.7,E:1}#3#{}",
-            --             "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
-            --             "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run - Tower of Adventures{}",
-            --         },
-
-            --     },
-            --     unlock = {
-            --         "Win in {C:attention}Checkered Deck",
-            --         "With {C:attention}Ancient Joker"
-            --     }
-            -- },            
+            },              
             j_unik_night_skyline = {
                 name = "Night Skyline",
                 text = {
@@ -5957,6 +5906,10 @@ return {
                     "{C:gold}$#2#{} below the",
                     "{C:attention}Interest Limit{} at",
                     "the end of round",
+                },
+                unlock = {
+                    "Redeem {C:attention}Seed Money{} while",
+                    "Interest is {C:red}disabled"
                 }
             },
             j_unik_preservatives = {
@@ -6024,6 +5977,10 @@ return {
                     "{C:blue}+#1#{} Chips when",
                     "{C:attention}scored{} and are",
                     "no longer {C:red}destroyed{}",
+                },
+                unlock = {
+                    "{C:red}Destroy{} a {C:unik_unik_color}Pink Card{}",
+                    "with it's own effect"
                 }
             },
 
@@ -6044,6 +6001,10 @@ return {
                     "add {C:dark_edition}Negative{} to a",
                     "random {C:attention}Joker",
                     "{C:inactive}(Currently {C:attention}#2#/#1#{C:inactive})"
+                },
+                unlock = {
+                    "{C:red}Die{} due to",
+                    "overusing {C:spectral}Ectoplasm"
                 }
             },
             j_unik_hall_of_mirrors = {
@@ -6066,6 +6027,11 @@ return {
                 text = {
                     "Playing Cards gain",
                     "{C:attention}Shielded{} when {C:attention}enhanced",
+                },
+                unlock = {
+                    "Play a {C:attention}#1#{} card hand",
+                    "consisting of only",
+                    "{C:red}debuffed{} cards"
                 }
             },
             j_unik_malicious_face = {
@@ -6159,6 +6125,9 @@ return {
                         "{C:unik_ancient,s:0.7,E:2}Origin : FUNHOUSE{}",
                     },
                 },
+                unlock = {
+                    "{C:red}Banish{} {C:attention}Cavendish",
+                }
             },
 
             --Bunco crossmod Jokers
@@ -6906,72 +6875,6 @@ return {
             },
             
 
-            -- j_cry_oldinvisible = {
-			-- 	name = "Nostalgic Invisible Joker",
-			-- 	text = {
-			-- 		"{C:attention}Duplicate{} a random",
-			-- 		"{C:attention}Joker{} every {C:attention}4",
-			-- 		"Joker cards sold",
-			-- 		"{s:0.8}Nostalgic Invisible Joker and{}",
-            --         "{s:0.8}Joker slot adding Jokers Excluded{}", --Motebook, invisible card, negative joker
-			-- 		"{C:inactive}(Currently #1#/4){}",
-			-- 	},
-			-- },
-
-
-
-            ---OVERRIDES
-            -- j_cry_oil_lamp = {
-			-- 	name = "Oil Lamp",
-			-- 	text = {
-			-- 		"Increase values of {C:attention}Joker{} to the right",
-			-- 		"by {C:attention}+#1#x{} at end of round",
-			-- 	},
-			-- },
-            -- j_cry_tropical_smoothie = {
-			-- 	name = "Tropical Smoothie",
-			-- 	text = {
-			-- 		"Sell this card",
-			-- 		"to {C:attention}add to{} values",
-			-- 		"of owned jokers by {C:attention}+#1#x{}",
-			-- 	},
-			-- },
-            j_cry_oil_lamp_reworked = {
-				name = "Oil Lamp",
-				text = {
-					"Increase values of {C:attention}Joker{} to the right",
-					"by {C:attention}X#1#{} at end of round",
-                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
-				},
-            },
-            j_cry_jawbreaker_balanced = {
-				name = "Jawbreaker",
-				text = {
-					"When {C:attention}Boss Blind{} defeated,",
-					"increase values of ",
-                    "adjcent {C:attention}Jokers{} by {C:attention}X#1#{}",
-                    "{E:2,C:red}self destructs{}",
-                    "{C:inactive}(Only applys once per Joker)",
-				},
-			},
-            j_cry_tropical_smoothie_reworked = {
-				name = "Tropical Smoothie",
-				text = {
-					"Sell this card",
-					"to {C:attention}multiply{} values",
-					"of owned Jokers by {C:attention}X#1#{}",
-                    "{C:inactive}(Reverts after {C:attention}#2#{C:inactive} Rounds)",
-				},
-			},
-            j_cry_gemini_reworked= {
-                name = "Gemini",
-				text = {
-					"{C:attention}Increase{} values",
-					"of leftmost {C:attention}Joker",
-					"by {C:attention}X#1#{} at end of round",
-                    "{C:inactive}(Capped at {C:attention}X#2#{}{C:inactive})",
-				},
-            },
             j_paperback_deadringer = {
                 name = "Deadringer",
                 text = {
@@ -6979,19 +6882,6 @@ return {
                 "{C:attention}#4#{} time#<s>4#, and scored {C:attention}#3#s{} {C:attention}#5#{} time#<s>5#"
                 }
             },
-
-            j_cry_notebook_balanced = {
-				name = "Motebook",
-				text = {
-					"{C:green} #1# in #2#{} chance to gain {C:dark_edition}+#6#{} Joker",
-					"slot#<s>6# per {C:attention}reroll{} in the shop",
-					"{C:green}Always triggers{} if there are",
-					"{C:attention}#5#{} or more {C:attention}Jolly Jokers{}",
-					"{C:red}Works once per round{}",
-					"{C:inactive}(Currently {C:dark_edition}+#3#{}{C:inactive} and #4#){}",
-                    "{C:inactive}(Capped at {C:dark_edition}+#7#{}{C:inactive} slots){}",
-				},
-			},
 
             j_unik_cloneman = {
                 name = "Clone man",
@@ -7002,66 +6892,10 @@ return {
 					"{C:inactive}(Stacks additively)",
                     "{C:inactive,s:0.8}(Clone man excluded)",
 				}, 
-                unlock = {
-                    "Own {C:attention}2 Showmen{} at once"
+                unlock = { --DONE
+                    "Own {C:attention}#1# #2#{} at once"
                 }
             },
-
-
-            j_cry_pirate_dagger_balanced = {
-				name = "Pirate Dagger",
-				text = {
-					"When {C:attention}Blind{} is selected,",
-					"destroy Joker to the right",
-					"and gain {C:attention}one-fifth{} of",
-					"its sell value as {X:chips,C:white} XChips {}",
-					"{C:inactive}(Currently {X:chips,C:white} X#1# {C:inactive} Chips)",
-				},
-			},
-
-            
-            j_cry_cotton_candy_balanced = {
-				name = "Cotton Candy",
-				text = {
-					"When sold, {C:attention}Joker{} to",
-					"it's right becomes {C:dark_edition}Negative{}",
-				},
-			},
-
-            j_cry_mstack_balanced = {
-				name = "M Stack",
-				text = {
-					"Retrigger all cards played",
-					"once for every",
-					"{C:attention}#2#{} {C:inactive}[#3#]{} {C:attention}Jolly Joker#<s>2#{} sold",
-                    "{s:0.7,C:inactive}(Requirements increase by {s:0.7,X:red,C:white}X#4#{s:0.7,C:inactive} per upgrade){}",
-                    "{C:inactive}(Capped at {C:attention:}#5#{}{C:inactive} retriggers){}",
-					"{C:inactive}(Currently{}{C:attention:} #1#{}{C:inactive} retriggers){}",
-				},
-			},
-            --create 4 random disposable copies, randomly selecting a joker owned.
-            j_cry_speculo_balanced = {
-                name = "Speculo",
-				text = {
-					"Creates #1# {C:red}Niko{} {C:dark_edition}Negative{} copies",
-					"of any random {C:attention}Jokers{} owned",
-					"at the end of the {C:attention}shop",
-					"{C:inactive,s:0.8}Does not copy other Speculo{}",
-				},
-            },
-            j_cry_equilib_balanced = {
-				name = "Ace Aequilibrium",
-				text = {
-					"Jokers appear using the",
-					"order from the {C:attention}Collection{}",
-					"Create {C:attention}#1#{} Joker#<s>1#",
-					"when hand is played",
-                    "{C:inactive}(Must have room)",
-					"{C:cry_exotic,s:0.8}Exotic {C:inactive,s:0.8}or better Jokers cannot appear",
-					"{s:0.8}Last Joker Generated: {C:attention,s:0.8}#2#",
-				},
-			},
-
             --Proper depleted loc
             --Clicked cookie
             j_cry_clicked_cookie2 = {
@@ -9834,6 +9668,7 @@ return {
             k_unik_goob_levelup1 = "Get over here! Teeheehee!",
             k_unik_goob_levelup2 = "It's time for hugs!",
             k_unik_goob_levelup3 = "Ahhhh... Hug...!",
+            k_showmen = "Showmen",
         },
         high_scores={},
         labels={

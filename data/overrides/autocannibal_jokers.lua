@@ -215,6 +215,14 @@ SMODS.Joker:take_ownership("j_ramen",{
 		if (context.discard and not context.blueprint) then
 			if (card.ability.unik_depleted and card.ability.extra.Xmult - card.ability.extra.extra < card.ability.extra.depleted_threshold) or (not card.ability.unik_depleted and card.ability.extra.Xmult - card.ability.extra.extra <= 1) then
 				selfDestruction(card,'k_eaten_ex',G.C.RED)
+				 G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        check_for_unlock({ type = 'unik_ramen_eaten' })
+                    return true
+                end)}))
+				
 			else
 				 SMODS.scale_card(card, {
 					ref_table = card.ability.extra,
