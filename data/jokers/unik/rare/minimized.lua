@@ -10,6 +10,22 @@ SMODS.Joker {
 	end,
     pixel_size = { w = 71, h = 30 },
     attributes = { 'rank','two','jack'},
+    unlocked = false,
+  	discovered = false,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' then
+            local eval = evaluate_poker_hand(args.cards)
+            local nontwos = 0
+			if next(eval['Flush Five']) then
+                for i,v in pairs(args.cards) do
+                    if v:get_id() ~= 2 then
+                        return false
+                    end
+                end
+				return true
+			end
+        end
+    end,
 }
 local override_minimized = false
 local checking_minimized = false --cardsauce fix

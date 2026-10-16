@@ -32,3 +32,45 @@ payload = '''
 if self.config.center.key == 'c_judgement' then check_for_unlock{type = 'unik_spawn_judgement',card = card} end
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''functions/button_callbacks.lua'''
+pattern = '''SMODS.calculate_context({skipping_booster = true, booster = booster_obj})'''
+position = 'after'
+payload = '''
+
+G.GAME.unik_boosters_skipped = G.GAME.unik_boosters_skipped or 0
+G.GAME.unik_boosters_skipped = G.GAME.unik_boosters_skipped + 1
+check_for_unlock{type = 'unik_skip_booster',booster_obj = booster_obj}
+'''
+match_indent = true
+
+###poppy
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true})'''
+position = "after"
+payload = '''
+for i = 1, #G.play.cards do
+    if G.play.cards[i].unik_poppy_unlock_repetitions and G.play.cards[i].unik_poppy_unlock_repetitions > 0 then
+        check_for_unlock({ type = 'unik_poppy_repetitions',card = G.play.cards[i],total_repetitions = G.play.cards[i].unik_poppy_unlock_repetitions })
+    end
+    
+end
+'''
+match_indent = true
+###tax haven
+
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context\(\{(.*)end_of_round = true(.*)'''
+position = "after"
+payload = '''
+G.GAME.unik_rental_loss = G.GAME.unik_rental_loss or 0
+check_for_unlock({ type = 'unik_rental_loss',money_lost = G.GAME.unik_rental_loss })
+G.GAME.unik_rental_loss = 0
+'''
+match_indent = true

@@ -44,4 +44,14 @@ SMODS.Joker {
             end
 		end
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' then
+            local eval = evaluate_poker_hand(args.cards)
+			if next(eval['unik_bulwark']) then
+				return true
+			end
+        end
+    end,
+    unlocked = false,
+  	discovered = false,
 }

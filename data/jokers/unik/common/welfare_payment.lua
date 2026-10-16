@@ -48,4 +48,24 @@ SMODS.Joker {
 		end
 		return true
 	end,
+	check_for_unlock = function(self, args)
+        if args.type == 'unik_redeeming_voucher' and args.card.config.center.key == 'v_seed_money' and G.GAME.modifiers.no_interest then
+            return true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        local other_name = localize('k_unknown')
+        if G.P_CENTERS['v_seed_money'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.v_seed_money
+            
+            other_name = localize { type = 'name_text', set = 'Voucher', key = 'v_seed_money' }
+        end
+        return {
+        vars = {
+            other_name
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

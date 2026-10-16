@@ -62,4 +62,25 @@ SMODS.Joker{ --chain lightning but for xchips and bonus cards
             card.ability.extra.x_chips = 1
         end
     end,
+     unlocked = false,
+  	discovered = false,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' and args.cards then
+            local bonus = 0
+            for i,v in pairs(args.cards) do
+                if SMODS.has_enhancement(v,'m_bonus') then
+                    bonus = bonus + 1
+                end
+            end
+            return bonus >= 5
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_bonus
+        return {
+            vars = {
+                5
+            }
+        }
+    end,
 }

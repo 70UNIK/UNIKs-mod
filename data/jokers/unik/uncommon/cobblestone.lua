@@ -48,4 +48,24 @@ SMODS.Joker {
 			end
         end
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'modify_deck' and G.playing_cards then
+            local stones = 0
+            for i,v in pairs(G.playing_cards) do
+                if type(v) == 'table' and v.ability and G.GAME and G.playing_cards and v and SMODS.has_no_suit(v) and SMODS.has_no_rank(v) then
+                    stones = stones + 1
+                end
+            end
+            return stones >= 20
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+        vars = {
+            20
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

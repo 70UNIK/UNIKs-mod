@@ -62,5 +62,29 @@ SMODS.Joker {
             end
         end
        
-    end
+    end,
+    unlocked = false,
+  	discovered = false,
+    check_for_unlock = function(self, args)
+        if args.type == 'unik_rental_loss' and args.money_lost >= 15 then
+            return true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                15
+            }
+        }
+    end,
 }
+
+local renter = Card.calculate_rental
+function Card:calculate_rental()
+    local ret = renter(self)
+    if self.ability.rental then
+        G.GAME.unik_rental_loss = G.GAME.unik_rental_loss or 0 
+        G.GAME.unik_rental_loss = G.GAME.unik_rental_loss + G.GAME.rental_rate
+    end
+    return ret
+end

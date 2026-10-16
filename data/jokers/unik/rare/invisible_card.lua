@@ -101,4 +101,19 @@ SMODS.Joker{ --Yellow Card
             card.children.center
         )
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'unik_skip_booster' then
+            G.GAME.unik_boosters_skipped = G.GAME.unik_boosters_skipped or 0
+            return G.GAME.unik_boosters_skipped >= 15
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+        vars = {
+            15
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

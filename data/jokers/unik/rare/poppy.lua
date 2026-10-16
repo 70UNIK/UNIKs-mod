@@ -135,6 +135,20 @@ SMODS.Joker {
             }
         end
     end,
+    unlocked = false,
+  	discovered = false,
+    check_for_unlock = function(self, args)
+        if args.type == 'unik_poppy_repetitions' and args.total_repetitions >= 4 then
+            return true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                4
+            }
+        }
+    end,
 }
 
 --TODO:
@@ -166,6 +180,15 @@ function ease_hands_played(mod, instant)
     handyHook(mod,instant)
     
     
+end
+
+-- Repetition Calc hook for Combo Breaker card repetition tracking
+local rep_calc = SMODS.calculate_repetitions
+function SMODS.calculate_repetitions(card, context, reps)
+    local rep_return = rep_calc(card, context, reps)
+    card.unik_poppy_unlock_repetitions = card.unik_poppy_unlock_repetitions or 0
+    card.unik_poppy_unlock_repetitions = card.unik_poppy_unlock_repetitions + #rep_return
+    return rep_return
 end
 
 local tossyHook = ease_discard

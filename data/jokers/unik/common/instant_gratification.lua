@@ -25,4 +25,28 @@ SMODS.Joker {
             
         end
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'win_custom' and G.jokers then
+            for i,v in pairs(G.jokers.cards) do
+                if v.config.center.key == 'j_delayed_grat' then
+                    return true
+                end
+            end
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        local other_name = localize('k_unknown')
+        if G.P_CENTERS['j_delayed_grat'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_delayed_grat
+            
+            other_name = localize { type = 'name_text', set = 'Joker', key = 'j_delayed_grat' }
+        end
+        return {
+        vars = {
+            other_name
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

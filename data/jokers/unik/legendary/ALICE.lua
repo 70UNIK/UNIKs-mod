@@ -29,6 +29,9 @@ SMODS.Joker {
 	end,
     pools = {},
     pronouns = "she_her",
+    unlock_condition = { hidden = true },
+    unlocked = false,
+	discovered = false,
     attributes = { 'xmult','scaling','rank' },
     calculate = function(self, card, context)
         if context.forcetrigger or context.joker_main then

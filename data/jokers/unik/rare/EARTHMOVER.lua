@@ -85,4 +85,15 @@ SMODS.Joker {
 			end
 		end
 	end,
+	check_for_unlock = function(self, args)
+        if args.type == 'modify_jokers' and G.jokers then
+            for _, v in ipairs(G.jokers.cards) do
+                if v.config.center.rarity == 'unik_ancient' then 
+                    return true
+                end  
+            end
+        end
+    end,
+    unlocked = false,
+  	discovered = false,
 }

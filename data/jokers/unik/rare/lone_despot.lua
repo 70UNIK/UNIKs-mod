@@ -16,11 +16,14 @@ SMODS.Joker {
 	end,
     --Only spawn if you have at least 1 king of spades in deck
     in_pool = function(self)
-        for i,v in pairs(G.playing_cards) do
-            if v:get_id() == 13 then
-                return true
+        if G.playing_cards then
+            for i,v in pairs(G.playing_cards) do
+                if v:get_id() == 13 then
+                    return true
+                end
             end
         end
+        
         return false
     end,
     pronouns = "he_him",

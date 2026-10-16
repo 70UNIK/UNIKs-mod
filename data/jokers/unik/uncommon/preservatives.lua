@@ -62,5 +62,39 @@ SMODS.Joker {
             -- end
         end
        
-    end
+    end,
+    check_for_unlock = function(self, args)
+        if args.type == 'modify_jokers' and G.jokers then
+            for _, v in ipairs(G.jokers.cards) do
+                if v.config.center_key == "j_blueprint" or v.config.center_key == "j_brainstorm"  then 
+                    if v.ability.unik_disposable or v.ability.perishable or v.ability.unik_decaying or v.ability.unik_niko then
+                        return true
+                    end
+                end  
+            end
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+         info_queue[#info_queue + 1] = {key = 'perishable', set = 'Other', vars = {G.GAME.perishable_rounds or 1, G.GAME.perishable_rounds or G.GAME.perishable_rounds}}
+          info_queue[#info_queue + 1] = {key = 'unik_disposable', set = 'Other'}
+        local other_name1 = localize('k_unknown')
+        local other_name2 = localize('k_unknown')
+        if G.P_CENTERS['j_blueprint'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_blueprint
+            
+            other_name1 = localize { type = 'name_text', set = 'Joker', key = 'j_blueprint' }
+        end
+        if G.P_CENTERS['j_brainstorm'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_brainstorm
+            
+            other_name2 = localize { type = 'name_text', set = 'Joker', key = 'j_brainstorm' }
+        end
+        return {
+        vars = {
+            other_name1,other_name2
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

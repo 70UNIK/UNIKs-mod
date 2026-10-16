@@ -22,6 +22,7 @@ SMODS.PokerHand({
 			if
 				card.config.center_key == "m_stone"
 				or (card.config.center.no_rank and card.config.center.no_suit and not card.config.center.not_stoned)
+				or (G.GAME and G.hand and card and card.ability and SMODS.has_no_suit(card) and SMODS.has_no_rank(card))
 			then
 				stones[#stones + 1] = card
 			end

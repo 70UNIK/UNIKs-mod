@@ -37,4 +37,25 @@ SMODS.Joker {
             }
 		end
     end,
+     unlocked = false,
+  	discovered = false,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' and args.cards then
+            local bonus = 0
+            for i,v in pairs(args.cards) do
+                if SMODS.has_enhancement(v,'m_unik_timber') then
+                    bonus = bonus + 1
+                end
+            end
+            return bonus >= 5
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_unik_timber
+        return {
+            vars = {
+                5
+            }
+        }
+    end,
 }
