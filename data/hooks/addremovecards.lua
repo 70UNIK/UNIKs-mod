@@ -27,6 +27,16 @@ end
 function selfDestruction_noMessage(card,dissolve,bypass_eternal)
     SMODS.destroy_cards({card},{pinch_anim = not dissolve and true or false,bypass_eternal = bypass_eternal or true})
 end
+local remove_ref = Card.remove
+function Card.remove(self)
+
+    local ret = remove_ref(self)
+    if not G.GAME.ignore_delete_context and not G.SETTINGS.paused and self.playing_card and G.playing_cards and TableContains(G.playing_cards,self) then 
+        check_for_unlock({type = 'modify_deck'}) 
+            
+    end
+    return ret
+end
 
 local removeHook = Card.remove_from_deck
 function Card:remove_from_deck(from_debuff)

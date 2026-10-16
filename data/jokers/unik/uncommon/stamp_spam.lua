@@ -46,4 +46,28 @@ SMODS.Joker {
 		end
 		return false
 	end,
+    check_for_unlock = function(self, args)
+        if args.type == 'modify_deck' and G.playing_cards then
+            local unique_seals = {}
+            for i,v in pairs(G.playing_cards) do
+                if v.seal then
+                    unique_seals[v.seal] = true
+                end
+            end
+            local seals = 0
+            for i,v in pairs(unique_seals) do
+                seals = seals + 1
+            end
+            return seals >= 4
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                4
+            }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

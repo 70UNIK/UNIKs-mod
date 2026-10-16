@@ -174,4 +174,40 @@ SMODS.Joker {
             card.ability.extra.x_mult = 1
         end
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' then
+            local eval = evaluate_poker_hand(args.cards)
+			-- if next(eval['unik_spectrum']) then
+			-- 	return true
+			-- end
+            local light_suits = {}
+            if UNIK.contains_spectrum(eval) then
+                for i,v in pairs(args.cards) do
+                     for j=1,#UNIK.light_suits do
+                        if v:is_suit(UNIK.light_suits[j]) and not light_suits[UNIK.light_suits[j]] then
+                            light_suits[UNIK.light_suits[j]] = true;
+                            break
+                        end
+                    end
+                end
+                local counter = 0
+                for j=1,#UNIK.light_suits do
+                    if light_suits[UNIK.light_suits[j]] then
+                        counter= counter + 1
+                    end
+                end
+                return counter >= 3
+            end
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = UNIK.suit_tooltip('light')
+        return {
+            vars = {
+                3
+            }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

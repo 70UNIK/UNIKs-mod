@@ -82,4 +82,37 @@ SMODS.Joker {
             end
         end
     end,
+        check_for_unlock = function(self, args)
+        if args.type == 'win_custom' and G.jokers then
+            local back = G.GAME.selected_back
+            local back_config = back and back.effect.center
+            for i,v in pairs(G.jokers.cards) do
+                if v.config.center.key == 'j_ancient' and back_config.key == 'b_checkered' then
+                    return true
+                end
+            end
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        local other_name = localize('k_unknown')
+        local other_name2 = localize('k_unknown')
+        if G.P_CENTERS['b_checkered'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.b_checkered
+            
+            other_name = localize { type = 'name_text', set = 'Back', key = 'b_checkered' }
+        end
+        if G.P_CENTERS['j_ancient'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_ancient
+            
+            other_name2 = localize { type = 'name_text', set = 'Joker', key = 'j_ancient' }
+        end
+        return {
+            vars = {
+                other_name,
+                other_name2
+            }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

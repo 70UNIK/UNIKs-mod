@@ -53,4 +53,34 @@ SMODS.Joker {
     in_pool = function(self)
 		return UNIK.suit_in_deck('unik_Noughts') 
 	end,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' then
+            local eval = evaluate_poker_hand(args.cards)
+			-- if next(eval['unik_spectrum']) then
+			-- 	return true
+			-- end
+            local diamond = false
+            local nought = false
+            if not UNIK.contains_spectrum(eval) then
+                for i,v in pairs (args.cards) do
+                    if v.base.suit == 'Diamonds' then
+                        diamond = true
+                    end
+                    if v.base.suit == 'unik_Noughts' then
+                        nought = true
+                    end
+                end
+            end
+            return diamond and nought
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                localize('Diamonds', 'suits_singular'),localize('unik_Noughts', 'suits_singular')
+            }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

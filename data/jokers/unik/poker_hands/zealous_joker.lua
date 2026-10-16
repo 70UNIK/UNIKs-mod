@@ -42,6 +42,16 @@ if SpectrumAPI then
 			end
 			return false
 		end,
+		check_for_unlock = function(self, args)
+			if args.type == "hand_contents" then
+					local eval = evaluate_poker_hand(args.cards)
+				if UNIK.contains_spectrum(eval) then
+					return true
+				end
+			end
+		end,
+		unlocked = false,
+		discovered = false,
 	}, 
 	({
                 Dynasty = "xmult_handtype_jokers",
@@ -90,6 +100,16 @@ else
 			end
 			return false
 		end,
+		check_for_unlock = function(self, args)
+			if args.type == "hand_contents" then
+					local eval = evaluate_poker_hand(args.cards)
+				if UNIK.contains_spectrum(eval) then
+					return true
+				end
+			end
+		end,
+		unlocked = false,
+		discovered = false,
 	}
 
 end

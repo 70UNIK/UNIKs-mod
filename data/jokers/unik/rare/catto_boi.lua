@@ -160,4 +160,24 @@ SMODS.Joker {
     in_pool = function(self)
 		return UNIK.suit_in_deck('Diamonds') 
 	end,
+    check_for_unlock = function(self, args)
+        if args.type == 'modify_deck' and G.playing_cards then
+            local cross = false
+            for i,v in pairs(G.playing_cards) do
+                if v.base.suit == 'Diamonds' then
+                    cross = true
+                else return false end
+            end
+            return cross == true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                localize('Diamonds', 'suits_plural')
+            }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

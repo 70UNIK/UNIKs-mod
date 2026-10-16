@@ -633,6 +633,9 @@ NFS.load(mod_path .. "data/poker_hands/biparte.lua")()
 
 
 UNIK.spectrum_name = 'unik_spectrum'
+if PB_UTIL and not PB_UTIL.config.suits_enabled then
+	UNIK.spectrum_name = 'paperback_Spectrum'
+end
 if SpectrumAPI then
 	UNIK.spectrum_name = 'spa_Spectrum'
 end

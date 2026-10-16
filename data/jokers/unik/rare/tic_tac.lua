@@ -100,4 +100,31 @@ SMODS.Joker {
             
         end
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'modify_deck' and G.playing_cards then
+            local cross = false
+            local nought = false
+            for i,v in pairs(G.playing_cards) do
+                if v.base.suit == 'unik_Crosses' then
+                    cross = true
+                end
+                if v.base.suit == 'unik_Noughts' then
+                    nought = true
+                end
+                if cross and nought then
+                    return true
+                end
+            end
+            return cross and nought
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                localize('unik_Noughts', 'suits_singular'),localize('unik_Crosses', 'suits_singular')
+            }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }
