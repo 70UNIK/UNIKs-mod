@@ -6,11 +6,11 @@ SMODS.Back {
     order = 15,
 
     loc_vars = function(self, info_queue, card)
-      return {
-        vars = {
-            self.config.extra.lost_hand_bonus,self.config.extra.lost_discard_bonus
+        return {
+            vars = {
+                self.config.extra.lost_hand_bonus,self.config.extra.lost_discard_bonus
+            }
         }
-      }
     end,
     calculate = function(self, card, context)
         if not context.blueprint and not context.retrigger_joker and not context.repetition and (context.hand_mod and context.hand_mod_val < 0) then
@@ -23,5 +23,17 @@ SMODS.Back {
                 dollars = card.effect.config.extra.lost_discard_bonus * math.abs(context.discard_mod_val)
             }
         end
-    end
+    end,
+    locked_loc_vars = function(self,args)
+        return {
+            vars = {
+                localize { type = 'name_text', set = 'Stake', key = 'stake_unik_shitty' },
+                colours = { get_stake_col(9) }
+            }
+        }
+    end,
+    check_for_unlock = function(self, args)
+        return args.type == 'win_stake' and get_deck_win_stake() >= 9
+    end,
+    unlocked = false,
 }

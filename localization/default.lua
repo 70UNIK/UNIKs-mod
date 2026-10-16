@@ -55,8 +55,9 @@ return {
                     "Earn no {C:attention}Interest",
                 },
                 unlock = {
-                    "Use all {C:blue}Hands{} and {C:red}Discards",
-                    "in {C:attention}#1#" --green deck
+                    "Win a run with any",
+                    "deck on at least",
+                    "{V:1}#1#{} difficulty", --shitty stake
                 }
             },
             b_unik_mountain = {
@@ -67,8 +68,8 @@ return {
                     "Start with an {C:unik_summit,T:c_unik_everest}Everest{}",
                 },
                 unlock = {
-                    "Obtain a {C:unik_summit}Summit Card",
-                    "in your {C:attention}Consumables{} area"
+                    "Discover every", --win persimmon stake
+                    "{C:unik_summit}Summit Card"
                 }
             },
             b_unik_pink_deck = {
@@ -94,7 +95,8 @@ return {
                     "Win Ante is {C:red}#2#{}",
                 },
                 unlock = {
-                    "Reach Ante level {C:attention}#1#"
+                    "Reach Ante level {C:attention}#2#", --14
+                    "on at least {V:1}#1#{} difficulty" --persimmon stake
                 }
             },
             b_unik_optimized_deck = {
@@ -112,8 +114,8 @@ return {
                     "{C:unik_noughts}#3#{} and {C:unik_crosses}#4#{}",
                 },
                 unlock = {
-                    "Have a deck consisting of",
-                    "only {C:unik_noughts,E:1}#1#{} and {C:unik_crosses,E:1}#2#{}"
+                    "Play a {C:attention}Spectrum", --Play a Spectrum containing Noughts and Crosses
+                    "containing {C:unik_noughts,E:1}#1#{} and {C:unik_crosses,E:1}#2#{}"
                 }
             },
             b_unik_blindside_endless = {
@@ -7214,11 +7216,11 @@ return {
         },
         Other={			
 			undiscovered_unik_lartceps = {
-				name = "Not Discovered",
+				name = "Not Discovered...",
 				text = {
-					"Use this card in an",
-					"unseeded run to",
-					"learn what it does",
+					"{C:unik_eye_searing_red}Hope you are",
+					"{C:unik_eye_searing_red}not forced to",
+					"{C:unik_eye_searing_red}use this...",
 				},
 			},
             undiscovered_unik_summit = {

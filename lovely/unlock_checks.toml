@@ -57,7 +57,7 @@ for i = 1, #G.play.cards do
     if G.play.cards[i].unik_poppy_unlock_repetitions and G.play.cards[i].unik_poppy_unlock_repetitions > 0 then
         check_for_unlock({ type = 'unik_poppy_repetitions',card = G.play.cards[i],total_repetitions = G.play.cards[i].unik_poppy_unlock_repetitions })
     end
-    
+    G.play.cards[i].unik_poppy_unlock_repetitions = nil
 end
 '''
 match_indent = true
@@ -72,5 +72,15 @@ payload = '''
 G.GAME.unik_rental_loss = G.GAME.unik_rental_loss or 0
 check_for_unlock({ type = 'unik_rental_loss',money_lost = G.GAME.unik_rental_loss })
 G.GAME.unik_rental_loss = 0
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''-- TARGET: effects before scoring starts'''
+position = "after"
+payload = '''
+check_for_unlock({ type = 'unik_cards_held',cards = G.hand.cards })
 '''
 match_indent = true

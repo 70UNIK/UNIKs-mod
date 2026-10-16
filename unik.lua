@@ -441,8 +441,8 @@ SMODS.ConsumableType {
 
 SMODS.UndiscoveredSprite({
 	key = "unik_summit",
-	atlas = "unik_summits",
-	path = "unik_summits.png",
+	atlas = "unik_consumables",
+	path = "unik_consumables.png",
 	pos = { x = 2, y = 2 },
 	px = 71,
 	py = 95,

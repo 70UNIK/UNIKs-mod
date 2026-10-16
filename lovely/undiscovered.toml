@@ -1,0 +1,25 @@
+[manifest]
+version = "0.0.1"
+dump_lua = true
+priority = 214748365
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/card_draw.lua"]'
+pattern = '''local shared_sprite = (self.ability.set == 'Edition' or self.ability.set == 'Joker') and G.shared_undiscovered_joker or G.shared_undiscovered_tarot'''
+position = 'after'
+match_indent = true
+payload = '''
+
+if not G.shared_undiscovered_unik_summit then G.shared_undiscovered_unik_summit = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS['unik_consumables'], {x = 3, y = 2}) end
+
+if self.ability.set == 'unik_summit' then
+    shared_sprite = G.shared_undiscovered_unik_summit
+end
+
+if not G.shared_undiscovered_unik_lartceps then G.shared_undiscovered_unik_lartceps = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS['unik_lartceps'], {x = 1, y = 2}) end
+
+if self.ability.set == 'unik_lartceps' then
+    shared_sprite = G.shared_undiscovered_unik_lartceps
+end
+'''

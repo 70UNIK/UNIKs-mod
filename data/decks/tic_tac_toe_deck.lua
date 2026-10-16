@@ -29,4 +29,30 @@ G.E_MANAGER:add_event(Event({
             end
         }))
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' then
+            local eval = evaluate_poker_hand(args.cards)
+            if UNIK.contains_spectrum(eval) then
+                local nought = false
+                local cross = false
+                for i,v in pairs(args.cards) do
+                    if v.base.suit == 'unik_Noughts' then
+                        nought = true
+                    end
+                    if v.base.suit == 'unik_Crosses' then
+                        cross = true
+                    end
+                end
+                return nought and cross
+            end
+        end
+    end,
+    locked_loc_vars = function(self,args)
+        return {
+            vars = {
+                localize('unik_Noughts', 'suits_plural'),localize('unik_Crosses', 'suits_plural')
+            }
+        }
+    end,
+    unlocked = false,
 }

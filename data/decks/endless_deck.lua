@@ -26,5 +26,17 @@ SMODS.Back {
             end
         }))
         
-    end
+    end,
+    locked_loc_vars = function(self,args)
+        return {
+            vars = {
+                localize { type = 'name_text', set = 'Stake', key = 'stake_gold' },14,
+                colours = { get_stake_col(8) }
+            }
+        }
+    end,
+    check_for_unlock = function(self, args)
+        return args.type == 'ante_up' and args.ante == 14 and get_deck_win_stake() >= 8
+    end,
+    unlocked = false,
 }

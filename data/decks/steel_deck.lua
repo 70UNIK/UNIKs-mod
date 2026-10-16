@@ -19,7 +19,28 @@
         }
       }
     end,
-    edition_back_shader = 'unik_steel'
+    edition_back_shader = 'unik_steel',
+     check_for_unlock = function(self, args)
+        if args.type == 'unik_cards_held' and args.cards then
+			local steels = 0
+			for i,v in pairs(args.cards) do
+				if v.edition and v.edition.unik_steel then
+					steels = steels + 1
+				end
+			end
+			return steels >= 5
+            
+        end
+    end,
+    locked_loc_vars = function(self,args)
+        return {
+            vars = {
+                5
+            }
+        }
+    end,
+    unlocked = false,
+
   }
 
 SMODS.DrawStep {
@@ -35,7 +56,7 @@ SMODS.DrawStep {
 						) == "table" and self.params.viewed_back or (self.params.viewed_back and G.GAME.viewed_back or G.GAME.selected_back))
 					or Back(G.P_CENTERS["b_red"])
 
-			if currentBack.effect.center.edition_back_shader and self.sprite_facing and self.sprite_facing == 'back' then
+			if currentBack.effect.center.edition_back_shader and currentBack.effect.center.unlocked and self.sprite_facing and self.sprite_facing == 'back' then
 				self.children.back:draw_shader(currentBack.effect.center.edition_back_shader, nil, self.ARGS.send_to_shader, true)
 			end
      	 end
