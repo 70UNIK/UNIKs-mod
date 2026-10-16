@@ -13,6 +13,10 @@ return {
                 text = {
                     "Start with a",
                     "{C:dark_edition,T:c_unik_prism}Prism{} and {C:spectral,T:c_deja_vu}Deja Vu",
+                },
+                unlock = {
+                    "Play a hand containing",
+                    "{C:attention}#1# {C:dark_edition}Polychrome{} card#<s>1#"
                 }
             },
             b_unik_steel = {
@@ -20,6 +24,10 @@ return {
                 text = {
                     "Start with a",
                     "{C:dark_edition,T:c_unik_foundry}Foundry{} and {C:spectral,T:c_deja_vu}Deja Vu",
+                },
+                unlock = {
+                    "Hold at least",
+                    "{C:attention}#1# {C:dark_edition}Steel{} editioned card#<s>1#"
                 }
             },
             b_unik_shining_glitter = {
@@ -27,6 +35,10 @@ return {
                 text = {
                     "Start with a",
                     "{C:dark_edition,T:c_unik_sparkle}Sparkle{} and {C:spectral,T:c_deja_vu}Deja Vu",
+                },
+                unlock = {
+                    "Play a hand containing",
+                    "{C:attention}#1# {C:dark_edition}Glittergrid{} card#<s>1#"
                 }
             },
             --Foil deck:
@@ -41,6 +53,10 @@ return {
                     "{C:money}$#1#{s:0.85} per {C:blue}Hand{} lost in round",
                     "{C:money}$#2#{s:0.85} per {C:red}Discard{} lost in round",
                     "Earn no {C:attention}Interest",
+                },
+                unlock = {
+                    "Use all {C:blue}Hands{} and {C:red}Discards",
+                    "in {C:attention}#1#" --green deck
                 }
             },
             b_unik_mountain = {
@@ -49,6 +65,10 @@ return {
                     "{C:unik_summit}Summit{} cards may",
                     "appear in the shop",
                     "Start with an {C:unik_summit,T:c_unik_everest}Everest{}",
+                },
+                unlock = {
+                    "Obtain a {C:unik_summit}Summit Card",
+                    "in your {C:attention}Consumables{} area"
                 }
             },
             b_unik_pink_deck = {
@@ -72,6 +92,9 @@ return {
                     "Start at Ante {C:attention}#4#",
                     "and with extra {C:money}$#5#",
                     "Win Ante is {C:red}#2#{}",
+                },
+                unlock = {
+                    "Reach Ante level {C:attention}#1#"
                 }
             },
             b_unik_optimized_deck = {
@@ -87,6 +110,10 @@ return {
                     "Start with a full set of",
                     "{C:spades}#1#{}, {C:hearts}#2#{},",
                     "{C:unik_noughts}#3#{} and {C:unik_crosses}#4#{}",
+                },
+                unlock = {
+                    "Have a deck consisting of",
+                    "only {C:unik_noughts,E:1}#1#{} and {C:unik_crosses,E:1}#2#{}"
                 }
             },
             b_unik_blindside_endless = {
@@ -4407,7 +4434,7 @@ return {
                 "{C:inactive}({C:attention}#4#{C:inactive} hands left)",
                 "{C:unik_eye_searing_red}Always {X:unik_void_color,E:2,C:unik_eye_searing_red}TAW{}",
                 },
-                unlock = {
+                unlock = { --N/A
                     "Reach Ante",
                     "level {E:1,C:attention}#1#",
                 }
@@ -4495,7 +4522,7 @@ return {
                     "each give {X:mult,C:white} X#1# {} Mult",
                     "{C:inactive,s:0.7}ROOF! ROOF!{}",
                 },
-                unlock = {
+                unlock = { --(firstdeck)  --test
                     "Own {C:attention}#1#", --Baseball Card
                     "while only having",
                     "{C:blue}Common{} Jokers"
@@ -4831,8 +4858,8 @@ return {
                         "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI{}",
                     },
                 },    
-                unlock = {
-                    "Redeem {C:red}Magic Trick",
+                unlock = { --test
+                    "Redeem {C:red}#1#",
                 }             
             },
             j_unik_1_5_joker = {
@@ -4841,8 +4868,8 @@ return {
                     "{C:mult}+#1#{} Mult if played hand contains",
                     "{C:attention}#3#{} or more cards",
                 },
-                unlock = {
-                    "Own {C:attention}Half Joker",
+                unlock = {  --test
+                    "Own {C:attention}#1#",
                     "while facing",
                     "{C:attention}The Psychic{}"
                 }
@@ -4861,8 +4888,8 @@ return {
                  
                     
                 },
-                unlock = {
-                    "Own {C:attention}Half Joker",
+                unlock = {  --test
+                    "Own {C:attention}#1#",
                     "while facing",
                     "{C:attention}The Psychic{}"
                 }
@@ -5010,7 +5037,7 @@ return {
                     }
 
                 },
-                unlock = {
+                unlock = { --WILL NOT DO
                     "Destroy an {C:unik_ancient}Ancient{} Joker",
                 }
             },
@@ -5032,7 +5059,7 @@ return {
                     }
 
                 },
-                unlock = {
+                unlock = { --WILL NOT DO
                     "{C:red}Destroy{} an {C:unik_ancient}Ancient{} Joker",
                 }
             },
@@ -5167,9 +5194,9 @@ return {
                     "{C:attention}only contains{} a",
                     "single {C:attention}King{}",
                 },
-                unlock = {
-                    "Play {C:attention}High Card",
-                    "with a single scoring {C:attention}King",
+                unlock = { --test
+                    "Play a hand with",
+                    "only a single {C:attention}King{} of {C:spades}Spades",
                 }
             },
             j_unik_epic_blind_sauce = {
@@ -5203,9 +5230,9 @@ return {
                     "create an {C:cry_epic}Epic{} {C:attention}Joker",
                     "{C:inactive}(Must have room)",
                 },
-                unlock = {
+                unlock = { --N/A
                     "Gain an {C:cry_epic}Epic{} Joker",
-                    "from {C:attention}Judgement",
+                    "from {C:attention}#1#",
                 }
             },
             j_unik_riff_rare = {
@@ -5216,9 +5243,9 @@ return {
                     "create a {C:red}Rare{} {C:attention}Joker",
                     "{C:inactive}(Must have room)",
                 },
-                unlock = {
+                unlock = { --test
                     "Gain a {C:red}Rare{} Joker",
-                    "from {C:attention}Judgement",
+                    "from {C:attention}#1#",
                 }
             },
             j_unik_borg_cube = {
@@ -5281,7 +5308,7 @@ return {
                     "rightmost {C:attention}Joker{}",
                     --"{C:inactive,s:0.7}(Similar but act)", --important notice
                 },
-                unlock = {
+                unlock = { --DONE
                     "Discard a {C:attention}Flush Five",
                 }
             },
@@ -5308,7 +5335,7 @@ return {
                 },
                 unlock = {
                     "Play a hand with",
-                    "{C:attention}5 bonus Cards",
+                    "{C:attention}#1# bonus Card#<s>1#",
                 }
             },
             j_unik_minimized = { --rare 
@@ -5346,7 +5373,7 @@ return {
 	
 					
 				},
-				unlock = {
+				unlock = { --N/A
 					"Play a {C:attention}Flush Five{}",
 					"of {C:attention}Kings",
 				},
@@ -5436,6 +5463,11 @@ return {
                     },
                     
                     
+                },
+                unlock = {
+                    "{C:red}Lose {C:money}$#1#{} from",
+                    "{C:attention}Rental{} Jokers in",
+                    "a single round"
                 }
             },
 
@@ -5446,7 +5478,7 @@ return {
                     "lost in round",
                 },
                 unlock = {
-                    "Win with {C:attention}Delayed Gratification",
+                    "Win with {C:attention}#1#",
                 }
             },
             j_unik_golden_glove={
@@ -5565,6 +5597,10 @@ return {
                     
                     
                 },
+                unlock = {
+                    "Obtain an",
+                    "{C:unik_ancient}Ancient{} Joker"
+                }
             },
             j_unik_euclid = {
                 name = "Euclid",
@@ -5603,7 +5639,7 @@ return {
                         "{C:unik_ancient,s:0.7,E:2}Origin : Transformers One{}",
                     },
                 },
-                unlock = {
+                unlock = { --DONE
                     "{E:2,C:red}Banish {C:attention}#1#{} with",
                     "it's own effect"
                 }
@@ -5628,7 +5664,7 @@ return {
                     "and Mult {X:mult,C:white}Xlog_#2#(Mult)"
                 },
                 unlock = {
-                    "Play {C:attention}5 Timber Cards",
+                    "Play {C:attention}#1# Timber Card#<s>1#",
                 }
             },
             j_unik_niko = {
@@ -5743,9 +5779,9 @@ return {
                     "when {C:attention}Blind{} is selected",
                     "{C:inactive}(Must have room)",
                 },
-                unlock = {
+                unlock = { --test
                     "Obtain an {C:uncommon}Uncommon{} Joker",
-                    "from {C:attention}Judgement"
+                    "from {C:attention}#1#"
                 }
             },
             j_unik_double_up = {
@@ -5918,6 +5954,11 @@ return {
                     "Remove all {C:red}Perishable",
                     "stickers from the",
                     "next {C:attention}#1#{} Jokers",
+                },
+                unlock = {
+                    "Obtain a {C:red}Perishable{} or",
+                    "{C:red}Disposable{} {C:attention}#1#",
+                    "or {C:attention}#2#",--blueprint or brainstorm
                 }
             },  
             j_unik_stamp_spam = {
@@ -5935,6 +5976,11 @@ return {
                     },
                          
                     
+                },
+                unlock = {
+                    "Have at least {C:attention}#1#{}",
+                    "unique {C:dark_edition}seal#<s>1#{} in",
+                    "your deck"
                 }
             },
             j_unik_bun_bun = {
@@ -5978,7 +6024,7 @@ return {
                     "{C:attention}scored{} and are",
                     "no longer {C:red}destroyed{}",
                 },
-                unlock = {
+                unlock = { --DONE
                     "{C:red}Destroy{} a {C:unik_unik_color}Pink Card{}",
                     "with it's own effect"
                 }
@@ -6002,7 +6048,7 @@ return {
                     "random {C:attention}Joker",
                     "{C:inactive}(Currently {C:attention}#2#/#1#{C:inactive})"
                 },
-                unlock = {
+                unlock = { --DONE
                     "{C:red}Die{} due to",
                     "overusing {C:spectral}Ectoplasm"
                 }
@@ -6012,7 +6058,7 @@ return {
                 text = {
                     "{C:unik_copper}Rescore{} all scored",
                     "{C:attention}Glass Cards {C:attention}#1#{} time"
-                }
+                },
             },
             j_unik_perk_lottery = {
                 name = "Perk Lottery",
@@ -6125,7 +6171,7 @@ return {
                         "{C:unik_ancient,s:0.7,E:2}Origin : FUNHOUSE{}",
                     },
                 },
-                unlock = {
+                unlock = { --Joker Not implemented yet
                     "{C:red}Banish{} {C:attention}Cavendish",
                 }
             },
@@ -6205,6 +6251,9 @@ return {
                 "{X:mult,C:white}X#1#{} Mult if played",
                 "hand contains",
                 "a {C:attention}#2#"
+                },
+                unlock = {
+                    "Play a {C:attention}Spectrum",
                 }
             },
             j_unik_lurid_joker = {
@@ -6213,6 +6262,9 @@ return {
                 "{C:chips}+#1#{} Chips if played",
                 "hand contains",
                 "a {C:attention}#2#"
+                },
+                unlock = {
+                    "Play a {C:attention}Spectrum",
                 }
             },
             j_unik_zealous_joker = {
@@ -6221,6 +6273,9 @@ return {
                 "{C:mult}+#1#{} Mult if played",
                 "hand contains",
                 "a {C:attention}#2#"
+                },
+                unlock = {
+                    "Play a {C:attention}Spectrum",
                 }
             },
             j_unik_pavement_joker = {
@@ -6261,8 +6316,11 @@ return {
                         "{C:red,E:2}Self destructs{} after",
                     "{C:attention}#1#{} trigger#<s>1#"
                     },
-                        
-                
+                },
+                unlock = {
+                    "Have at least {C:attention}#1#{}",
+                    "unique {C:dark_edition}edition#<s>1#{} in",
+                    "your deck"
                 }
             },
 
@@ -6306,7 +6364,12 @@ return {
                     "Played {V:1}#1#{} have a",
                     "{C:green}#2# in #3#{} chance to",
                     "{C:red}not{} be {C:unik_copper}Rescored{} #4# time#<s>4#"
-                }
+                },
+                unlock = {  --test
+                    "Have at least {E:1,C:attention}#1#",
+                    "cards with {E:1,C:unik_noughts}#2#",
+                    "suit in your deck",
+                },
             },
             j_unik_pink_salt = {
                 name = "Himalyan Salt",
@@ -6315,7 +6378,12 @@ return {
                     "{C:green}#2# in #3#{} chance to",
                     "{C:red}not{} create a {C:unik_summit}Summit Card",
                     "{C:inactive}(Must have room)",
-                }
+                },
+                unlock = {  --test
+                    "Have at least {E:1,C:attention}#1#",
+                    "cards with {E:1,C:unik_crosses}#2#",
+                    "suit in your deck",
+                },
             },
             --retrigger all crosses, 1 other random suit in deck is debuffed per hand (global variable)
             j_unik_railroad_crossing = {
@@ -6332,6 +6400,10 @@ return {
                     },
                     
                     
+                },
+                unlock = {
+                    "Have a deck consisting of",
+                    "only {C:unik_crosses,E:1}#1#{}"
                 }
             },
             --gain +0.25 Mult when a diamond is scored, gain +1 Mult when a nought is scored
@@ -6352,6 +6424,11 @@ return {
                     
                     
                     
+                },
+                unlock = {
+                    "Play a {C:attention}non-Spectrum{} hand",
+                    "containing a {C:unik_noughts}#1#",
+                    "and a {C:diamonds}#2#"
                 }
             },
             --gains X0.075 mult  when a cross is scored, loses X0.1 mult and a 1 in 3 chance to self destruct when a nought or a heart is scored 
@@ -6376,6 +6453,11 @@ return {
                         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                         "{C:unik_ancient,s:0.7,E:2}Origin : Catto Boi{}",
                     },
+                },
+                unlock = {
+                    "Own {C:attention}#1#{}", --greedy joker
+                    "and {C:attention}#2#{} in", --rough gem
+                    "{C:attention}#3#" --checkered deck
                 }
             },
             j_unik_landfill = {
@@ -6403,8 +6485,10 @@ return {
                     {
                         "{E:2,C:red}Destroyed{} after {C:attention}#3#{} trigger#<s>3#",
                     },
-                    
-                    
+                },
+                unlock = {
+                    "Obtain both {C:unik_noughts}#1#{}",
+                    "cards and {C:unik_crosses}#2#{} cards"
                 }
             },
             j_unik_mountain_dew = {
@@ -6603,7 +6687,7 @@ return {
                     '{C:attention}Seal{}, {C:dark_edition}Edition',
                     'and are all {C:attention}Shielded',
                 },
-                unlock = {
+                unlock = { --N/A
                     'Open {E:1,C:attention}#1#',
                     'Booster Packs',
                     '{C:inactive}(#2#)'

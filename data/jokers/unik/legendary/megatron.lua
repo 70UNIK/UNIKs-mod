@@ -118,9 +118,10 @@ SMODS.Joker {
     override_legendary_unlock_loc = true,
     locked_loc_vars = function(self, info_queue, card)
         local other_name = localize('k_unknown')
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
         if G.P_CENTERS['j_unik_D16'].unlocked then
             info_queue[#info_queue + 1] = G.P_CENTERS.j_unik_D16
-            info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
+            
             other_name = localize { type = 'name_text', set = 'Joker', key = 'j_unik_D16' }
         end
         return {

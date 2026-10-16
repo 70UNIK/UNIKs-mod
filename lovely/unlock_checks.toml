@@ -9,7 +9,7 @@ target = '''card.lua'''
 pattern = '''G.hand:change_size(-G.GAME.ecto_minus)'''
 position = 'after'
 payload = '''
-if G.hand.config.card_limit <= 0 then
+if G.hand.config.card_limit <= 0 or G.hand.config.card_limit - G.GAME.ecto_minus <= 0 then
     G.GAME.prime_your_ecto_death = true
 end
 '''
@@ -21,4 +21,14 @@ target = '''functions/common_events.lua'''
 pattern = '''not specific\_vars\.not\_hidden'''
 position = 'after'
 payload = ''' and not _c.override_legendary_unlock_loc '''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''card.lua'''
+pattern = '''if self.ability.name == 'The Soul' then check_for_unlock{type = 'spawn_legendary'} end'''
+position = 'after'
+payload = '''
+if self.config.center.key == 'c_judgement' then check_for_unlock{type = 'unik_spawn_judgement',card = card} end
+'''
 match_indent = true

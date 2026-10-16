@@ -16,6 +16,12 @@ SMODS.Joker {
 	perishable_compat = true,
     eternal_compat = true,
     blueprint_compat = true,
+    unlocked = false,
+  	discovered = false,
+    unlock_condition = { type = 'modify_deck', extra = { count = 20, suit = 'unik_Noughts' } },
+    locked_loc_vars = function(self, info_queue, card)
+        return { vars = { 20, localize('unik_Noughts', 'suits_singular') } }
+    end,
 	loc_vars = function(self, info_queue, center)
         local new_numerator, new_denominator = SMODS.get_probability_vars(center, center.ability.extra.base_odds, center.ability.extra.odds, 'unik_aquamarine_resc')
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_rescore" }

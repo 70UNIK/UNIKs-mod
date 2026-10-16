@@ -47,5 +47,36 @@ SMODS.Joker {
 				mult_mod = card.ability.extra.mult
 			}
 		end
-	end
+	end,
+	check_for_unlock = function(self, args)
+        if args.type == 'unik_blind_setter' and args.blind and args.blind.key == 'bl_psychic' and G.jokers then
+			for i,v in pairs(G.jokers.cards) do
+				if v.config.center.key == 'j_half' then
+					return true
+				end
+			end
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        local other_name = localize('k_unknown')
+        if G.P_CENTERS['j_half'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_half
+            
+            other_name = localize { type = 'name_text', set = 'Joker', key = 'j_half' }
+        end
+        return {
+        vars = {
+            other_name
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }
+
+local blinder = Blind.set_blind
+function Blind:set_blind(blind, reset, silent)
+	local ret = blinder(self,blind,reset,silent)
+	check_for_unlock({ type = 'unik_blind_setter',blind = blind })
+	return ret
+end

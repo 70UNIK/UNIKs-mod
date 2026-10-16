@@ -13,6 +13,40 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, center)
 		return { vars = {center.ability.extra.Xmult} }
 	end,
+    check_for_unlock = function(self, args)
+        if args.type == 'modify_jokers' and G.jokers then
+            local baseball = false
+            local non_commons = 0
+            local commons = 0
+            for _, v in ipairs(G.jokers.cards) do
+                if v.config.center_key == "j_baseball" and not baseball then 
+                    baseball = true 
+                else
+                    if v.config.center.rarity == 1 then 
+                        commons = commons + 1
+                    else
+                        non_commons = non_commons + 1
+                    end
+                end  
+            end
+            return baseball and non_commons == 0 and commons > 0
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        local other_name = localize('k_unknown')
+        if G.P_CENTERS['j_baseball'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.j_baseball
+            
+            other_name = localize { type = 'name_text', set = 'Joker', key = 'j_baseball' }
+        end
+        return {
+        vars = {
+            other_name
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
     pronouns = "he_him",
     calculate = function(self, card, context)
         if context.forcetrigger then

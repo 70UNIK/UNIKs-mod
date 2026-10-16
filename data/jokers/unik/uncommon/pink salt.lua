@@ -27,6 +27,12 @@ SMODS.Joker {
 			},
 		}
 	end,
+    unlocked = false,
+  	discovered = false,
+    unlock_condition = { type = 'modify_deck', extra = { count = 20, suit = 'unik_Crosses' } },
+    locked_loc_vars = function(self, info_queue, card)
+        return { vars = { 20, localize('unik_Crosses', 'suits_singular') } }
+    end,
     pools = { ["Food"] = true}, --it IS edible
 	calculate = function(self, card, context)
         if context.forcetrigger or 

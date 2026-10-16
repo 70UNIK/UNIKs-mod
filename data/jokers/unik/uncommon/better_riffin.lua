@@ -60,4 +60,21 @@ SMODS.Joker {
 			}
         end
     end,
+    check_for_unlock = function(self, args)
+        if args.type == 'unik_spawn_judgement' and args.card and args.card.config.center.rarity == 2 then
+			return true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.c_judgement
+            
+        local other_name = localize { type = 'name_text', set = 'Tarot', key = 'c_judgement' }
+        return {
+        vars = {
+            other_name
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }

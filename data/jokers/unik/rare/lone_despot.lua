@@ -37,5 +37,16 @@ SMODS.Joker {
                 }
             end
         end
-    end
+    end,
+    check_for_unlock = function(self, args)
+        if args.type == 'hand_contents' then
+            if #args.cards == 1 then
+                if args.cards[1]:get_id() == 13 and args.cards[1]:is_suit('Spades')then
+                    return true
+                end
+            end
+        end
+    end,
+    unlocked = false,
+  	discovered = false,
 }

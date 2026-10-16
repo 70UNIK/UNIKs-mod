@@ -292,8 +292,36 @@ SMODS.Joker {
             error("UH OH!")
         end
     end or nil,
-
+    check_for_unlock = function(self, args)
+        if args.type == 'unik_redeeming_voucher' and args.card.config.center.key == 'v_magic_trick' then
+            return true
+        end
+    end,
+    locked_loc_vars = function(self, info_queue, card)
+        local other_name = localize('k_unknown')
+        if G.P_CENTERS['v_magic_trick'].unlocked then
+            info_queue[#info_queue + 1] = G.P_CENTERS.v_magic_trick
+            
+            other_name = localize { type = 'name_text', set = 'Voucher', key = 'v_magic_trick' }
+        end
+        return {
+        vars = {
+            other_name
+        }
+        }
+    end,
+    unlocked = false,
+  	discovered = false,
 }
+
+local redemption = Card.redeem
+function Card:redeem()
+    local ret = redemption(self)
+    check_for_unlock({ type = 'unik_redeeming_voucher',card = self })
+    return ret
+end
+
+
 
 -- if JokerDisplay then
 -- 	JokerDisplay.Definitions["j_unik_lily_sprunki"] = {
