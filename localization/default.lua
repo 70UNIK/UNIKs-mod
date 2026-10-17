@@ -4858,7 +4858,7 @@ return {
                 text={
                     {
                         "{B:1,C:white,s:0.8}Activated Ability",
-                        "{C:red,E:2}Destroy{} selected cards",
+                        "{C:red,E:2}Destroy{} up to {C:attention}#3#{} selected card#<s>3#",
                         "{C:inactive}(once until next cashout)",
                         "{C:inactive}(#1#)",
                     },
@@ -4866,7 +4866,27 @@ return {
                         "{C:unik_caption,s:0.7,E:1}#2#{}",
                         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                         "{C:dark_edition,s:0.7,E:2}Character by : Kaeofthekae{}",
-                        "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI{}",
+                        "{C:dark_edition,s:0.7,E:2}Design partially by : u/Medical_Coffee7039{}",
+                        "{C:unik_ancient,s:0.7,E:2}Origin : SPRUNKI (?){}",
+                    },
+                },    
+                unlock = { --DONE
+                    "Redeem {C:red}#1#",
+                }             
+            },
+            j_unik_lily_sprunki2 = {
+                name="Lily",
+                text={
+                    {
+                        "{B:1,C:white,s:0.8}Activated Ability",
+                        "{C:red,E:2}Destroy{} up to {C:attention}#1#{} selected card#<s>1#",
+                        "{C:inactive}(once until next cashout)",
+                        "{C:inactive}(#1#)",
+                    },
+                    {
+                        "{C:unik_caption,s:0.7,E:1}#2#{}",
+                        "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
+                        "{C:dark_edition,s:0.7,E:2}Original Character by : Kaeofthekae{}",
                     },
                 },    
                 unlock = { --DONE
@@ -6665,6 +6685,9 @@ return {
                     "Gives {X:mult,C:white}X#1#{} Mult for every",
                     "{C:attention}\"Stick\"{} Joker you have",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                },
+                unlock = {
+                    "{C:red}Eat{} {C:attention,E:1}#1#{}",
                 }
             },
             j_unik_bo_la_lot={
@@ -6681,6 +6704,9 @@ return {
                     "Gives {X:mult,C:white}X#1#{} Mult for every",
                     "{C:attention}\"Stick\"{} Joker you have",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
+                },
+                unlock = {
+                    "{C:red}Eat{} {C:attention,E:1}#1#{}",
                 }
             },
             j_unik_cosmopolitan = {
@@ -6689,6 +6715,10 @@ return {
                     "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
                     "{C:attention}+#3#{} retrigger#<s>3# when scored",
                     "{C:inactive}(Once per Joker)"
+                },
+                unlock = {
+                    "Play {C:attention,E:1}#1# {C:unik_crosses,E:1}#2#",
+                    "Flushes in one run"
                 }
             },
             j_unik_midori_sour = {
@@ -6697,6 +6727,10 @@ return {
                     "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
                     "{C:unik_copper}+#3#{} {C:unik_copper}rescore#<s>3#{} when scored",
                     "{C:inactive}(Once per Joker)"
+                },
+                unlock = {
+                    "Play {C:attention,E:1}#1# {C:unik_noughts,E:1}#2#",
+                    "Flushes in one run"
                 }
             },
 
@@ -9674,7 +9708,31 @@ return {
             k_unik_catto_boi_why2 = "I CAN'T EXPERIENCE THIS AGAIN!...",
             k_unik_catto_boi_die = "AAAAAAARRRRRGGGHHHH!!.....",
 
+            k_unik_lily_normal1 = "Why am I wearing a Microwave? Not sure, but I'm used to it...",
+            k_unik_lily_normal2 = "I can eat lots of things while as a beast... in theory.",
+            k_unik_lily_normal3 = "Hi... I'm Lily! ",
+            k_unik_lily_normal4 = "Shame I don't look like a girl while as a beast...",
+            k_unik_lily_normal5 = "Apart from my duties, I don't hang out much...",
+            k_unik_lily_normal_bloat = "I can destroy all these cards you know?",
+            k_unik_lily_normal_bloat1 = "Feeling quite hungry looking at all these cards...",
 
+            k_unik_lily_trigger1 = "TIME TO BITE!",
+            k_unik_lily_trigger2 = "THOSE CARDS ARE MINE!",
+            k_unik_lily_trigger3 = "RRRAGGRAAGRGRGRHHHH!",
+
+            k_unik_lily_beast1 = "WATCH OUT FOR MY BITE!",
+            k_unik_lily_beast2 = "BEAST GIRL HERE! NOW TIME TO SMASH!",
+            k_unik_lily_beast4 = "DON'T MIND ME, JUST DOING WHAT I DO BEST.",
+            k_unik_lily_beast3 = "DON'T ASK HOW MY HEAD STILL FITS IN THIS.",
+
+            k_unik_lily_after1 = "Tastes... OK.",
+            k_unik_lily_after2 = "Whew!",
+            k_unik_lily_after3 = "Oh... and back to normal...",
+
+            k_unik_lily_exhaust1 = "I need some time to digest what I ate...",
+            k_unik_lily_exhaust2 = "Need a break before I transform again...",
+            k_unik_lily_exhaust3 = "I want to rest now...",
+            k_unik_lily_exhaust4 = "Well at least my clothes fix themselves...",
             --more overshoot shit
             k_unik_overshoot_addition = "OVERSHOOT",
             k_unik_overshoot_score = "SCORE NEEDED",
@@ -10065,6 +10123,10 @@ return {
             },
             unik_blindside_lily_lose = {
                 "Oh... God..."
+            },
+            unik_blindside_new_lily_lose = {
+                "Don't you mess",
+                "around me!",
             },
             unik_blindside_railroad_crossing_lose = {
                 "PERSON FOUND DEAD",

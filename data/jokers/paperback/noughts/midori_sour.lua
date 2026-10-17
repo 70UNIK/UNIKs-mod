@@ -14,8 +14,6 @@ SMODS.Joker {
 	atlas = "unik_normal_jokers",
 	attributes = { 'perma_bonus','rescore','suit','unik_noughts','food' },
 	cost = 8,
-	unlocked = true,
-	discovered = true,
 	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = false,
@@ -54,8 +52,22 @@ SMODS.Joker {
 			},
 		}
 	end,
+	unlocked = false,
+	discovered = false,
+	check_for_unlock = function (self, args)
+		if args.type == 'paperback_suit_flushes' then
+			if G.GAME.paperback.played_flushes['unik_Noughts'] and G.GAME.paperback.played_flushes['unik_Noughts'] >= 5 then
+				return true
+			end
+		end
+	end,
     set_badges = function (self, card, badges)
-        SMODS.create_mod_badges({ mod = SMODS.find_mod("paperback")[1] }, badges)
+		if card.config.center.discovered then
+			SMODS.create_mod_badges({ mod = SMODS.find_mod("paperback")[1] }, badges)
+		end
     end,
+	locked_loc_vars = function (self, info_queue, card)
+		return {vars = {5, localize(card.ability.extra.suit, 'suits_singular'),}}
+	end,
 }
 --the next 5 scored noughts will permanently gain +1 rescore (only applies once per card), rare

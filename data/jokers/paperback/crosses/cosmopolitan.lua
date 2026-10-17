@@ -15,8 +15,6 @@ SMODS.Joker {
 	atlas = "unik_normal_jokers",
 	attributes = { 'perma_bonus','retrigger','suit','unik_crosses','food' },
 	cost = 8,
-	unlocked = true,
-	discovered = true,
 	blueprint_compat = true,
 	eternal_compat = false,
 	perishable_compat = false,
@@ -44,7 +42,21 @@ SMODS.Joker {
 	calculate = PB_UTIL.suit_drink_calculate,
 
 	loc_vars = PB_UTIL.suit_drink_loc_vars,
-	set_badges = function (self, card, badges)
-		SMODS.create_mod_badges({ mod = SMODS.find_mod("paperback")[1] }, badges)
+	unlocked = false,
+	discovered = false,
+	check_for_unlock = function (self, args)
+		if args.type == 'paperback_suit_flushes' then
+			if G.GAME.paperback.played_flushes['unik_Crosses'] and G.GAME.paperback.played_flushes['unik_Crosses'] >= 5 then
+				return true
+			end
+		end
+	end,
+    set_badges = function (self, card, badges)
+		if card.config.center.discovered then
+			SMODS.create_mod_badges({ mod = SMODS.find_mod("paperback")[1] }, badges)
+		end
+    end,
+	locked_loc_vars = function (self, info_queue, card)
+		return {vars = {5, localize(card.ability.extra.suit, 'suits_singular'),}}
 	end,
 }
