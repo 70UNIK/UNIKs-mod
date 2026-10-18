@@ -25,7 +25,7 @@ function CardArea:remove_from_highlighted(card, force)
     if card and card.ability and card.ability.unik_shielded then
         card.ability.forced_selection = false
     end
-    print(card)
+    
     removeHighlight(self,card,force)
 end
 

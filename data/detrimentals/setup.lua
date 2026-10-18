@@ -1,22 +1,25 @@
-SMODS.current_mod.custom_card_areas = function(G) -- g is the same as G
+local areas_ref = SMODS.current_mod.custom_card_areas or function(G) end
+SMODS.current_mod.custom_card_areas = function(G)
+    local ret = areas_ref(G)
     G.unik_detriment_area = CardArea( -- Should be saved in G for it to be preserved between reloads
         15, -- x coordinate
-        2.5, -- y coordinate
+        2.7, -- y coordinate
         G.CARD_W * 2, -- width (this is the default for G.jokers)
-        G.CARD_H * 0.95, -- height (this is the default for G.jokers)
+        G.CARD_H * 0.95*(63/95), -- height (this is the default for G.jokers)
         {
             -- optional, but recommended configs:
-            card_limit = 0, -- card limit, doesn't actually affect the area unless checked manually
+            card_limit = 999999999999999999999, -- card limit, doesn't actually affect the area unless checked manually
             type = 'joker', -- area type, doesn't affect what type of cards can be in it, only how they're displayed and act
             -- values can be `title`, `title_2`, `joker`, `shop`, `deck`, `hand`, `consumeable`, `voucher`, `play`, `discard`
-            highlight_limit = 0,
+            highlight_limit = 999999999999999999999,
             -- optional:
             --bg_colour = G.C.TEXT_INACTIVE, -- background color
             no_card_count = true, -- removes the card count ui for the area types that have it by default
             align_buttons = true, -- aligns the buttons for cards like in the Joker/Consumable areas
         }
     )
-    --G.unik_detriment_area.states.visible = false
+    return ret
+    
 end
 
 --partner sized as astro said
@@ -29,6 +32,15 @@ function Card:set_sprites(_center, _front)
         self.T.h = G.CARD_H*63/95
         self.T.w = G.CARD_W*47/71
     end
+end
+
+local highlighter = CardArea.can_highlight
+function CardArea:can_highlight(card)
+    if  self.config.type == 'Detriment' then
+        return true
+    end
+    local ret = highlighter(self,card)
+    return ret
 end
 
 UNIK.detriments = {

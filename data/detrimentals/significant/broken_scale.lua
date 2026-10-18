@@ -23,7 +23,7 @@ UNIK.detriment{
         end
     end,
     calculate = function(self, card, context)
-		if context.end_of_round and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
+		if context.end_of_round and context.cardarea == G.unik_detriments and not context.repetition and not context.blueprint then
             card.ability.extra.rounds = card.ability.extra.rounds + 1
             if card.ability.extra.rounds > card.ability.extra.round_limit then
                 selfDestruction(card,"k_unik_weapon_destroyed",G.C.BLACK)

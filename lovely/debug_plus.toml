@@ -1,0 +1,38 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 99999
+
+###EXPERIMENTAL!
+###theoretically adds the option to TAB + 3 to spawn blinds easily.
+### if not playing, adds to deck
+###if playing in round, adds to hand
+
+[[patches]]
+[patches.pattern]
+target = "engine/controller.lua"
+pattern = '''if key == "3" then'''
+position = "after"
+payload = '''
+if _card.config.center.blindside_blind and BLINDSIDE.hasBlindside() then
+    local beta = SMODS.create_card({area = G.unik_detriment_area, key = _card.config.center.key})
+    _card:set_sprites(_card.config.center)
+    beta:add_to_deck()
+    
+    G.unik_detriment_area:emplace(beta)
+    
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '''=[lovely debugplus.core "debugplus/core.lua"]'''
+pattern = '''elseif _card.ability.consumeable then'''
+position = "before"
+payload = '''
+elseif _card.config.center.set == "Detriment" then
+    _area = G.unik_detriment_area
+    
+'''
+match_indent = true

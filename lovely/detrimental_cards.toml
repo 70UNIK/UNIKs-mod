@@ -15,3 +15,11 @@ pattern = '''
 payload = '''
 table.insert(t, 2, G.unik_detriment_area)
 '''
+
+[[patches]]
+[patches.regex]
+target = 'card.lua'
+match_indent = true
+position = 'after'
+pattern = '''if self\.ability\.consumeable or self\.ability\.set \=\= \'Joker\''''
+payload = ''' or self.config.center.set == 'Detriment' '''

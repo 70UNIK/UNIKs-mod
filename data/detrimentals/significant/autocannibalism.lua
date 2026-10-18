@@ -26,9 +26,8 @@ UNIK.detriment{
                 return true
             end
         }))
-        for _, v in pairs(G.jokers.cards) do
-            --print("Joker in set:")
-            --print(v.ability.name)
+        for i = #G.jokers.cards,1,-1 do
+            local v = G.jokers.cards[i]
             if v.config.center.pools and (v.config.center.pools.autocannibalism_food or v.config.center.unik_autocannibal_trigger) and not v.ability.unik_depleted then
                 v.ability.eternal = true
                 v.ability.unik_depleted = true
@@ -67,6 +66,13 @@ UNIK.detriment{
     --destroy all depleted cards
     remove_from_deck = function(self,from_debuff)
         for _, v in pairs(G.jokers.cards) do
+            --print("Joker in set:")
+            --print(v.ability.name)
+            if v.ability.unik_depleted then
+                selfDestruction(v,'k_eaten_ex',G.C.BLACK)
+            end
+        end
+        for _, v in pairs(G.unik_detriment_area.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
             if v.ability.unik_depleted then
@@ -113,6 +119,11 @@ UNIK.detriment{
         if context.unik_remove_from_deck and context.removed then
             local exists = false
             for _, v in pairs(G.jokers.cards) do
+                if v.config.center.pools and v.config.center.pools.autocannibalism_food and v ~= context.removed then
+                    exists = true
+                end
+            end
+            for _, v in pairs(G.unik_detriment_area.cards) do
                 if v.config.center.pools and v.config.center.pools.autocannibalism_food and v ~= context.removed then
                     exists = true
                 end

@@ -39,6 +39,7 @@ end
   local G_UIDEF_use_and_sell_buttons_ref = G.UIDEF.use_and_sell_buttons
   function G.UIDEF.use_and_sell_buttons(card)
     local tdc =  G_UIDEF_use_and_sell_buttons_ref(card)
+    
     if not All_in_Jest then
         if (card.area == G.jokers) and card.config.center.all_in_jest and 
          card.config.center.all_in_jest.use_ability and type(card.config.center.all_in_jest.use_ability) == "function"   then --Add a devour button
