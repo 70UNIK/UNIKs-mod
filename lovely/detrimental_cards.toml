@@ -1,0 +1,17 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 214748365
+
+# Adds detrimental pin area to calculation pipeline
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+match_indent = true
+position = 'after'
+pattern = '''
+-- TARGET: add your own CardAreas for joker evaluation
+'''
+payload = '''
+table.insert(t, 2, G.unik_detriment_area)
+'''

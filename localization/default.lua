@@ -1776,6 +1776,21 @@ return {
             --     }
             -- }
         },
+        Detriment = {
+            detr_unik_border_wall = {
+                name = 'Border Wall',
+                text={
+                    {
+                         "{C:red}X#1#{} Blind size",
+                    },
+                    {
+                         "{C:red}Self destructs{} when scoring", 
+                        "above {C:attention}#2#x{} Blind requirements or",
+                        "when facing {C:unik_wall_color}The Wall{}",    
+                    },
+                },                 
+            },
+        },
         Edition={            
             e_unik_positive={
                 name="Positive",
@@ -9833,6 +9848,13 @@ return {
             k_unik_goob_levelup2 = "It's time for hugs!",
             k_unik_goob_levelup3 = "Ahhhh... Hug...!",
             k_showmen = "Showmen",
+
+            --Detriment stuff
+            k_unik_detriment = "Detriment",
+            k_unik_mild = "Mild",
+            k_unik_significant = "Significant",
+            k_unik_severe = "Severe",
+            k_unik_catastrophic = "Catastrophic", --currently unused
         },
         high_scores={},
         labels={

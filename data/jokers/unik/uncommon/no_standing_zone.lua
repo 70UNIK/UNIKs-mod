@@ -33,9 +33,9 @@ SMODS.Joker {
 					trigger = 'after',
 					delay = 0.8,
 					func = function()
-							local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_impounded")
+							local card2 = create_card("Joker", G.unik_detriment_area, nil, nil, nil, nil, "j_unik_impounded")
 							card2:add_to_deck()
-							G.jokers:emplace(card2)
+							G.unik_detriment_area:emplace(card2)
 							card2:start_materialize()
 						return true
 					end

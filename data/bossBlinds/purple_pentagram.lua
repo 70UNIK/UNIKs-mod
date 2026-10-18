@@ -17,13 +17,13 @@ SMODS.Blind{
                 G.E_MANAGER:add_event(Event({
                     delay = 0.5,
                     func = function()
-                        local card2 = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_pentagram_curse")
+                        local card2 = create_card("Joker", G.unik_detriment_area, nil, 'unik_detrimental', nil, nil, nil, "unik_pentagram_curse")
                         print(card2.config.center.key)
                         --destroy card2 if its jimbo
                         card2:start_materialize()
                         card2:add_to_deck() --This causes problems. Why?
                         card2.ability.unik_disposable = true
-                        G.jokers:emplace(card2)
+                        G.unik_detriment_area:emplace(card2)
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
                         G.ROOM.jiggle = G.ROOM.jiggle + 1
@@ -42,12 +42,10 @@ SMODS.Blind{
     --If disabled, destroy up to 4 cursed Jokers
     disable = function(self)
         G.GAME.unik_killed_by_pentagram = nil
-        for _, v in pairs(G.jokers.cards) do
+        for _, v in pairs(G.unik_detriment_area.cards) do
             --print("Joker in set:")
             --print(v.ability.name)
-            if v.config.center.rarity == 'unik_detrimental' and v.ability.unik_disposable then
-                selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
-            end
+            selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
         end
     end,
 }

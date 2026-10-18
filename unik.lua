@@ -1113,6 +1113,24 @@ end
 ---------------
 ---CURSED JONKLERS
 ---------------
+---
+---
+---
+---
+-- New gen cursed jokers: Detriments
+NFS.load(mod_path .. "data/detrimentals/setup.lua")()
+SMODS.Atlas {
+	key = "unik_detriments",
+	path = "unik_detriments.png",
+	px = 63,
+	py = 47,
+}
+--MILD
+--SIGNIFICANT
+NFS.load(mod_path .. "data/detrimentals/significant/border_wall.lua")()
+--SEVERE
+
+
 NFS.load(mod_path .. "data/jokers/unik/detrimental/happiness.lua")()
 NFS.load(mod_path .. "data/jokers/unik/detrimental/autocannibalism.lua")()
 NFS.load(mod_path .. "data/jokers/unik/detrimental/impounded.lua")() 
