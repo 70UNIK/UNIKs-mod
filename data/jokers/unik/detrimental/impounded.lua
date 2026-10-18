@@ -127,7 +127,7 @@ function Card:can_sell_card(context)
         --G.STATE == G.STATES.BLIND_SELECT 
         then return false end
     --ALWAYS make it unsellable if detrimental.
-    if self.config.center.rarity == 'unik_detrimental' and not self.config.center.sellable then
+    if (self.config.center.rarity == 'unik_detrimental' or self.config.center.set == 'Detriment') and not self.config.center.sellable then
         return false
     end
     if (G.SETTINGS.tutorial_complete or G.GAME.pseudorandom.seed ~= 'TUTORIAL' or G.GAME.round_resets.ante > 1) and

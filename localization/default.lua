@@ -1790,6 +1790,57 @@ return {
                     },
                 },                 
             },
+            detr_unik_autocannibalism = {
+                name = 'Esophagus Now',
+                text={
+                    {
+                        "Create an {C:attention}Eternal Depleted{} decrementing food Joker",
+                    },
+                    {
+                        "Add {C:attention}Eternal and Depleted{} to new and",
+                        "existing decrementing food Jokers,",
+                        "set values to {C:attention}self destruct values{}",  
+                        "and moves to the {C:unik_detrimental}Detriment{} card area", 
+                    },
+                    {
+                        "{C:red}Self destructs{} if none of above Jokers are owned",
+                    },
+                       
+                },                 
+            },
+            detr_unik_impound_notice = {
+                name="Impound Notice",
+                text={
+                    {
+                         "{X:mult,C:white}X#1#{} Mult",
+                        "{C:red}Impounds{} a random Joker on spawn",
+                    },
+                    {
+                        "{C:attention}Sell{} to remove {C:red}Impounded{} from Joker",
+                        "Selling costs {X:money,C:white}X#2#ln(x+1){} the total",
+                        "{C:attention}selling price{} of {C:red}Impounded{} Joker",
+                        "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
+                    },
+                   
+                    
+                }
+            },
+            detr_unik_broken_scale = {
+                name = 'Broken Scale',
+                text = {
+                    {
+                        "Scaling {C:attention}Jokers",
+                    "scale {C:red}1/3 as fast{}",
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{}",
+					"after {C:attention}#2#{} rounds",
+                    "{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} rounds){}",
+                    },
+                    
+                    
+                }
+            },
         },
         Edition={            
             e_unik_positive={
@@ -7264,6 +7315,13 @@ return {
 			},
         },
         Other={			
+            undiscovered_Detriment = {
+                name = "Not Discovered...",
+                text = {
+                    "Hope you won't find",
+                    "out what it does..."
+                }
+            },
 			undiscovered_unik_lartceps = {
 				name = "Not Discovered...",
 				text = {
@@ -9850,6 +9908,7 @@ return {
             k_showmen = "Showmen",
 
             --Detriment stuff
+            k_unik_detriments = "Detriments",
             k_unik_detriment = "Detriment",
             k_unik_mild = "Mild",
             k_unik_significant = "Significant",

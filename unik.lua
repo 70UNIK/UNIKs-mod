@@ -457,6 +457,8 @@ SMODS.UndiscoveredSprite({
 	py = 95,
 })
 
+
+
 --fonts
 SMODS.Font {
     key = 'unik_five_by_five',
@@ -1122,12 +1124,26 @@ NFS.load(mod_path .. "data/detrimentals/setup.lua")()
 SMODS.Atlas {
 	key = "unik_detriments",
 	path = "unik_detriments.png",
-	px = 63,
-	py = 47,
+	px = 47,
+	py = 63,
 }
+
+SMODS.UndiscoveredSprite({
+	key = "Detriment",
+	atlas = "unik_detriments",
+	path = "unik_detriments.png",
+	pos = { x = 0, y = 2 },
+	px = 47,
+	py = 63,
+	no_overlay = true,
+})
 --MILD
 --SIGNIFICANT
+NFS.load(mod_path .. "data/detrimentals/significant/impound_notice.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/border_wall.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/autocannibalism.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/broken_scale.lua")()
+
 --SEVERE
 
 

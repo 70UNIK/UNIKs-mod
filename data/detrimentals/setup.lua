@@ -23,9 +23,9 @@ end
 local Card_set_sprites_ref = Card.set_sprites
 function Card:set_sprites(_center, _front)
     Card_set_sprites_ref(self, _center, _front)
-    if _center and _center.set == "Detriment" and not _center:is_unlocked() then
-        -- self.children.center = Sprite(self.T.x, self.T.y, G.CARD_W*46/71, G.CARD_H*58/95, G.ASSET_ATLAS["partner_Partner"], {x = 0, y = 4})
-        -- self.children.center:set_role({major = self, role_type = "Glued", draw_major = self})
+    if _center and _center.set == "Detriment" then
+        --  self.children.center = Sprite(self.T.x, self.T.y, G.CARD_W*46/71, G.CARD_H*58/95, G.ASSET_ATLAS["partner_Partner"], {x = 0, y = 4})
+        --  self.children.center:set_role({major = self, role_type = "Glued", draw_major = self})
         self.T.h = G.CARD_H*63/95
         self.T.w = G.CARD_W*47/71
     end
@@ -87,9 +87,15 @@ UNIK.detriment = SMODS.Center:extend{
     unlocked = true,
     discovered = false,
     detriment = true,
+    sellable = false,
     set = 'Detriment',
+    pre_inject_class = function(self)
+		G.P_CENTER_POOLS[self.set] = G.P_CENTER_POOLS[self.set] or {}
+	end,
+	set_card_type_badge = function(self, card, badges)
+		badges[#badges+1] = create_badge(localize('k_unik_detriment'), HEX("474931"),HEX("FFFFFF") , 1 )
+	end,
     set_badges = function(self, card, badges)
-        badges[#badges+1] = create_badge(localize('k_unik_detriment'), HEX("474931"),HEX("FFFFFF") , 1 )
         for i,v in pairs(UNIK.detriment_severities) do
             if self.severity == v.value then
                 badges[#badges+1] = create_badge(localize(v.key), v.badge_colour, v.text_colour, 1 )
@@ -97,9 +103,11 @@ UNIK.detriment = SMODS.Center:extend{
         end
     end,
     inject = function(self)
+        SMODS.Center.inject(self)
         UNIK.detriments[self.key] = self
         if not G.P_CENTER_POOLS.Detriment then G.P_CENTER_POOLS.Detriment = {} end
-        SMODS.insert_pool(G.P_CENTER_POOLS[self.set], self)
+        --print("INJECT" .. self.key)
+        --SMODS.insert_pool(G.P_CENTER_POOLS[self.set], self)
     end,
     get_obj = function(self, key) return UNIK.detriments[key] end,   
 }
@@ -124,57 +132,19 @@ end
 G.FUNCS.your_collection_detriments = function(e)
 	G.SETTINGS.paused = true
 	G.FUNCS.overlay_menu{
-		definition = create_UIBox_your_collection_detriments(),
+		definition = G.UIDEF.create_UIBox_your_collection_detriments(),
 	}
 end
 
-function create_UIBox_your_collection_detriments()
-    local deck_tables = {}
-
-    G.your_collection = {}
-    for j = 1, 2 do
-        G.your_collection[j] = CardArea(
-        G.ROOM.T.x + 0.2*G.ROOM.T.w/2,G.ROOM.T.h,
-        (4.25+j)*G.CARD_W,
-        1*G.CARD_H, 
-        {card_limit = 4 + j, type = 'title', highlight_limit = 0, collection = true})
-        table.insert(deck_tables, 
-        {n=G.UIT.R, config={align = "cm", padding = 0, no_fill = true}, nodes={
-        {n=G.UIT.O, config={object = G.your_collection[j]}}
-        }}
-        )
-    end
-
-    local tarot_options = {}
-    for i = 1, math.floor(#G.P_CENTER_POOLS.Detriment/11) do
-        table.insert(tarot_options, localize('k_page')..' '..tostring(i)..'/'..tostring(math.floor(#G.P_CENTER_POOLS.Detriment/11)))
-    end
-
-        for j = 1, #G.your_collection do
-        for i = 1, 4+j do
-        local center = G.P_CENTER_POOLS["Detriment"][i+(j-1)*(5)]
-        local card = Card(G.your_collection[j].T.x + G.your_collection[j].T.w/2, G.your_collection[j].T.y, G.CARD_W, G.CARD_H, nil, center)
-        card:start_materialize(nil, i>1 or j>1)
-        G.your_collection[j]:emplace(card)
-        end
-    end
-
-    INIT_COLLECTION_CARD_ALERTS()
-    
-    local t = create_UIBox_generic_options({ 
-    colour = G.ACTIVE_MOD_UI and ((G.ACTIVE_MOD_UI.ui_config or {}).collection_colour or
-        (G.ACTIVE_MOD_UI.ui_config or {}).colour),
-    bg_colour = G.ACTIVE_MOD_UI and ((G.ACTIVE_MOD_UI.ui_config or {}).collection_bg_colour or
-        (G.ACTIVE_MOD_UI.ui_config or {}).bg_colour),
-    back_colour = G.ACTIVE_MOD_UI and ((G.ACTIVE_MOD_UI.ui_config or {}).collection_back_colour or
-        (G.ACTIVE_MOD_UI.ui_config or {}).back_colour),
-    outline_colour = G.ACTIVE_MOD_UI and ((G.ACTIVE_MOD_UI.ui_config or {}).collection_outline_colour or
-        (G.ACTIVE_MOD_UI.ui_config or {}).outline_colour),
-    back_func = G.ACTIVE_MOD_UI and "openModUI_"..G.ACTIVE_MOD_UI.id or 'your_collection', contents = {
-                {n=G.UIT.R, config={align = "cm", minw = 2.5, padding = 0.1, r = 0.1, colour = G.C.BLACK, emboss = 0.05}, nodes=deck_tables},
-                    {n=G.UIT.R, config={align = "cm"}, nodes={
-                        create_option_cycle({options = tarot_options, w = 4.5, cycle_shoulders = true, opt_callback = 'your_collection_detriments', focus_args = {snap_to = true, nav = 'wide'},current_option = 1, colour = G.C.RED, no_pips = true})
-                    }}
-            }})
-    return t
+function G.UIDEF.create_UIBox_your_collection_detriments()
+    local pool = {}
+	for k, v in pairs(G.P_CENTER_POOLS.Detriment) do
+        print(v.key)
+		if not v.no_collection then pool[#pool + 1] = v end
+	end
+	return SMODS.card_collection_UIBox(pool, { 6, 3 }, {
+		no_materialize = true,
+		h_mod = 0.95,
+		back_func = 'your_collection_other_gameobjects',
+	})
 end

@@ -1,0 +1,125 @@
+UNIK.detriment{
+    key = "unik_autocannibalism",
+    atlas = "unik_detriments",
+	pos = { x = 3, y = 1 },
+    severity = 2,
+    loc_vars = function(self, info_queue, center)
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
+        info_queue[#info_queue + 1] = { set = "Other", key = "unik_depleted" }
+	end,
+    attributes = { 'detrimental','generation','joker','modify_card','stickers'},
+    immutable = true,
+	add_to_deck = function(self, card, from_debuff)
+        --add 1 random Eternal Depleted food joker
+        G.E_MANAGER:add_event(Event({
+            trigger = 'before',
+            func = function()
+                card:juice_up(0.8, 0.8)
+                local card2 = create_card("autocannibalism_food", G.jokers, nil, nil, nil, nil, nil, "autocannibal")
+                if card2.ability.name == "Turtle Bean" then
+                    --prevent temporary hand size boost
+                    card2.ability.extra.h_size = 0
+                end
+                card2:add_to_deck()
+                G.jokers:emplace(card2)
+                card2:start_materialize()
+                return true
+            end
+        }))
+        for _, v in pairs(G.jokers.cards) do
+            --print("Joker in set:")
+            --print(v.ability.name)
+            if v.config.center.pools and (v.config.center.pools.autocannibalism_food or v.config.center.unik_autocannibal_trigger) and not v.ability.unik_depleted then
+                v.ability.eternal = true
+                v.ability.unik_depleted = true
+                if v.config.center.unik_autocannibal_trigger then
+                    print("NOMNOM")
+                    v.config.center:unik_autocannibal_trigger(v)
+                    print("move to detriment area")
+                    G.jokers:remove_card(v)
+                    G.unik_detriment_area:emplace(v)
+                elseif v.ability.name == "Turtle Bean" then
+                    --cancel out hand size increase
+                    G.hand:change_size(-v.ability.extra.h_size)
+                    v.ability.extra.h_size = 0
+                elseif  v.ability.name == "Ramen" then        
+                    v.ability.extra.Xmult = 1       
+                elseif v.ability.name == "Ice Cream" then
+                    v.ability.extra.chips = 0
+                elseif v.config.center.key == "j_cry_clicked_cookie" then 
+                    v.ability.extra.chips = 0
+                elseif v.config.center.key == 'j_unik_multesers' then
+                    v.ability.extra.mult = 0
+                elseif v.ability.name == "Popcorn" then
+                    v.ability.extra.mult = 0
+                elseif v.config.center.key == "j_mf_lollipop" then
+                    v.ability.x_mult = 1
+                elseif v.config.center.key == "j_paperback_nachos" then 
+                    v.ability.extra.X_chips = 1
+                elseif v.config.center.key == "j_cry_starfruit" then
+                    v.ability.emult = 1
+                elseif v.config.center.key == 'j_unik_brownie' then
+                    v.ability.extra.x_mult = 1
+                end
+            end
+        end
+	end,
+    --destroy all depleted cards
+    remove_from_deck = function(self,from_debuff)
+        for _, v in pairs(G.jokers.cards) do
+            --print("Joker in set:")
+            --print(v.ability.name)
+            if v.ability.unik_depleted then
+                selfDestruction(v,'k_eaten_ex',G.C.BLACK)
+            end
+        end
+    end,
+    calculate = function(self, card, context)
+        if context.unik_emplace and context.added and context.cardarea == G.jokers then
+            if context.added.config.center.pools and (context.added.config.center.pools.autocannibalism_food or context.added.config.center.unik_autocannibal_trigger) and not context.added.ability.unik_depleted then
+                local v = context.added
+                v.ability.eternal = true
+                v.ability.unik_depleted = true
+                if v.config.center.unik_autocannibal_trigger then
+                    print("NOMNOM")
+                    v.config.center:unik_autocannibal_trigger(v)
+                    G.jokers:remove_card(v)
+                    G.unik_detriment_area:emplace(v)
+                elseif v.ability.name == "Turtle Bean" then
+                    --cancel out hand size increase
+                    G.hand:change_size(-v.ability.extra.h_size)
+                    v.ability.extra.h_size = 0
+                elseif  v.ability.name == "Ramen" then        
+                    v.ability.extra.Xmult = 1       
+                elseif v.ability.name == "Ice Cream" then
+                    v.ability.extra.chips = 0
+                elseif v.config.center.key == "j_cry_clicked_cookie" then 
+                    v.ability.extra.chips = 0
+                elseif v.config.center.key == 'j_unik_multesers' then
+                    v.ability.extra.mult = 0
+                elseif v.ability.name == "Popcorn" then
+                    v.ability.extra.mult = 0
+                elseif v.config.center.key == "j_mf_lollipop" then
+                    v.ability.x_mult = 1
+                elseif v.config.center.key == "j_paperback_nachos" then 
+                    v.ability.extra.X_chips = 1
+                elseif v.config.center.key == "j_cry_starfruit" then
+                    v.ability.emult = 1
+                elseif v.config.center.key == 'j_unik_brownie' then
+                    v.ability.extra.x_mult = 1
+                end
+            end
+        end
+        if context.unik_remove_from_deck and context.removed then
+            local exists = false
+            for _, v in pairs(G.jokers.cards) do
+                if v.config.center.pools and v.config.center.pools.autocannibalism_food and v ~= context.removed then
+                    exists = true
+                end
+            end
+            if not exists then
+                selfDestruction(card,"k_eaten_ex",G.C.BLACK)
+            end
+        end
+    end,
+}

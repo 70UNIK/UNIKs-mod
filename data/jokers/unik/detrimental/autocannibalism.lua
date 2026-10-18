@@ -16,13 +16,11 @@ SMODS.Joker {
     no_dbl = true,
 	pos = { x = 9, y = 5 },
     cost = 1,
-    config = { extra = { selfDestruct = false} },
 	blueprint_compat = false,
     perishable_compat = false,
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_depleted" }
-        return { vars = { center.ability.extra.selfDestruct} }
 	end,
     attributes = { 'detrimental','generation','joker','modify_card','stickers'},
     immutable = true,
