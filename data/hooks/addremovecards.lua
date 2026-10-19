@@ -81,7 +81,7 @@ function CardArea:emplace(card, location, stay_flipped)
     
     emplaceHook(self,card, location, stay_flipped)
     --detrimental jokers ALWAYS go to G.unik_detriment_area
-    if G.unik_detriment_area and card.config.center.rarity == 'unik_detrimental' and self ~= G.unik_detriment_area and self == G.jokers then
+    if G.unik_detriment_area and (card.config.center.rarity == 'unik_detrimental' or card.config.center.rarity == 'cry_cursed') and self ~= G.unik_detriment_area and self == G.jokers then
         print("move to detriment area")
         G.jokers:remove_card(card)
         G.unik_detriment_area:emplace(card)

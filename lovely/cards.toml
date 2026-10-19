@@ -10,10 +10,9 @@ priority = 214748365
 target = '''=[SMODS Cryptid "items/spooky.lua"]'''
 pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
-payload = '''and card.config.center.key ~= "j_unik_impounded" 
+payload = '''
 and card.config.center.key ~= "j_cry_astral_bottle" 
 and card.config.center.key ~= "j_unik_rancid_smoothie"
-and card.config.center.key ~= "j_buf_afan_spc" 
 '''
 match_indent = true
 
@@ -24,10 +23,9 @@ match_indent = true
 target = '''=[SMODS Cryptid "lib/ui.lua"]'''
 pattern = '''and card.ability.name ~= "cry-Monopoly"'''
 position = "after"
-payload = '''and card.config.center.key ~= "j_unik_impounded" 
+payload = '''
 and card.config.center.key ~= "j_cry_astral_bottle" 
 and card.config.center.key ~= "j_unik_rancid_smoothie"
-and card.config.center.key ~= "j_buf_afan_spc" 
 and card.config.center.key ~= "j_unik_astral_bottle"
 '''
 match_indent = true
@@ -49,29 +47,10 @@ pattern = 'if self.area and self.ability.couponed and (self.area == G.shop_joker
 position = 'after'
 match_indent = true
 payload = '''
-if self.config.center.key == 'j_unik_impounded' and self.added_to_deck then
+if (self.config.center.key == 'j_unik_impounded' or self.config.center.override_cursed_cost) and self.added_to_deck then
     self.sell_cost = self.ability.extra.cost + (self.ability.extra_value or 0)
 end
 '''
-
-### do not set impounded cost to 0
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "items/spooky.lua"]'''
-pattern = '''if self.config and self.config.center and self.config.center.rarity == 'unik_detrimental' then'''
-position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == 'unik_detrimental' or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
-match_indent = true
-
-### do not set impounded cost to 0
-[[patches]]
-[patches.pattern]
-target = '''=[SMODS Cryptid "lib/overrides.lua"]'''
-pattern = '''if self.config and self.config.center and self.config.center.rarity == 'unik_detrimental' then'''
-position = "at"
-payload = '''if self.config and self.config.center and (self.config.center.rarity == 'unik_detrimental' or self.ability.unik_disposable or self.ability.unik_niko) and self.config.center.key ~= "j_buf_afan_spc" and self.config.center.key ~= "j_unik_impounded" then'''
-match_indent = true
-
 ### Hook n discard, ensure cards are discarded BEFORE scoring (similar to the hook)
 [[patches]]
 [patches.pattern]

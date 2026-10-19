@@ -3,7 +3,7 @@ UNIK.detriment{
     atlas = "unik_detriments",
 	pos = { x = 1, y = 1 },
     severity = 2,
-    attributes = { 'detrimental','scaling' },
+    attributes = { 'detrimental','scaling','short-term','detriment' },
     config = { extra = {rounds = 0,round_limit = 8} },
     loc_vars = function(self, info_queue, center)
         return { 

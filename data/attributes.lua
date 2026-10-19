@@ -58,6 +58,21 @@ SMODS.Attribute {
     key = 'detrimental'
 }
 
+SMODS.Attribute {
+    key = 'detriment'
+}
+--detriments that immediately have a negative effect
+SMODS.Attribute {
+    key = 'immediate'
+}
+--detriments that take effect over a round or two
+SMODS.Attribute {
+    key = 'short-term'
+}
+--detriments that take effect over an ante or longer
+SMODS.Attribute {
+    key = 'long-term'
+}
 function UNIK.is_mult_joker(center)
     if SMODS.has_attribute(center, "mult") or SMODS.has_attribute(center, "xmult") or SMODS.has_attribute(center, "xlogmult") 
     or SMODS.has_attribute(center, "emult") or SMODS.has_attribute(center, "eemult") or SMODS.has_attribute(center, "eeemult") 

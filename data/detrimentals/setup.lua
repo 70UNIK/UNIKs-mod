@@ -54,8 +54,8 @@ UNIK.detriment_severities = {
         spawn_rate = function(self)
 			return 0.7
 		end,
-        badge_colour = HEX("f6b600"),
-        text_colour = HEX("FFFFFF"),
+        badge_colour = G.C.UNIK_MILD,
+        text_colour = G.C.WHITE,
         default_key = 'detr_unik_poop',
     },
     significant = {
@@ -64,9 +64,9 @@ UNIK.detriment_severities = {
         spawn_rate = function(self)
 			return 0.3
 		end,
-        badge_colour = HEX("ff7400"),
-        text_colour = HEX("FFFFFF"),
-         default_key = 'detr_unik_impounded',
+        badge_colour = G.C.UNIK_SIGNIFICANT,
+        text_colour = G.C.WHITE,
+         default_key = 'detr_unik_impound_notice',
     },
     severe = {
         value = 3,
@@ -74,8 +74,8 @@ UNIK.detriment_severities = {
         spawn_rate = function(self)
 			return 0
 		end,
-        badge_colour = HEX("FF0000"),
-        text_colour = HEX("FFFFFF"),
+        badge_colour = G.C.UNIK_SEVERE,
+        text_colour = G.C.WHITE,
         default_key = 'detr_unik_xchips_hater',
     }
 }

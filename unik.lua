@@ -1138,6 +1138,9 @@ SMODS.UndiscoveredSprite({
 	no_overlay = true,
 })
 --MILD
+NFS.load(mod_path .. "data/detrimentals/subpar/poop.lua")()
+NFS.load(mod_path .. "data/detrimentals/subpar/breathalyzer.lua")()
+NFS.load(mod_path .. "data/detrimentals/subpar/inflation.lua")()
 --SIGNIFICANT
 NFS.load(mod_path .. "data/detrimentals/significant/impound_notice.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/border_wall.lua")()

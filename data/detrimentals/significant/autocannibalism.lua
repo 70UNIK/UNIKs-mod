@@ -7,8 +7,9 @@ UNIK.detriment{
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_depleted" }
 	end,
-    attributes = { 'detrimental','generation','joker','modify_card','stickers'},
+    attributes = { 'detrimental','generation','joker','modify_card','stickers','immediate','detriment'},
     immutable = true,
+    dongtong_compat = false,
 	add_to_deck = function(self, card, from_debuff)
         --add 1 random Eternal Depleted food joker
         G.E_MANAGER:add_event(Event({

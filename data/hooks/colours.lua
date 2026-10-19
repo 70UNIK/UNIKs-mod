@@ -36,5 +36,8 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_eqchips = G.C.UNIK_EQCHIPS
     G.ARGS.LOC_COLOURS.unik_light_suit = G.C.UNIK_LIGHT_SUIT
     G.ARGS.LOC_COLOURS.unik_dark_suit = G.C.UNIK_DARK_SUIT
+    G.ARGS.LOC_COLOURS.unik_mild = G.C.UNIK_MILD
+    G.ARGS.LOC_COLOURS.unik_significant = G.C.UNIK_SIGNIFICANT
+    G.ARGS.LOC_COLOURS.unik_severe = G.C.UNIK_SEVERE
     return locHook(_c,_default)
 end

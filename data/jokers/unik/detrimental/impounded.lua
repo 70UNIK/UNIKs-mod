@@ -78,16 +78,19 @@ SMODS.Joker {
                                 select.ability.unik_impounded_seed = card.ability.extra.impoundedSeed
                                 SMODS.debuff_card(select,true,card.ability.extra.impoundedSeed)
                                 card:set_cost()
+          
                                 return true
                             end
                         }))
                     elseif successful == false and not ghostTrap == true then
                         card.ability.extra.cost = -1 * card.ability.extra.fallback_cost
                         card:set_cost()
+               
                     end
                 else
                     card.ability.extra.cost = -1 * card.ability.extra.fallback_cost
                     card:set_cost()
+
                 end
                 return true
             end
@@ -134,7 +137,7 @@ function Card:can_sell_card(context)
         self.area and
         self.area.config.type == 'joker' and
         (not SMODS.is_eternal(self, {from_sell = true}) or ( SMODS.is_eternal(self, {from_sell = true}) and lockpick and not self.config.center.dissolve_immune and not self.ability.dissolve_immune)) then
-            if self.config.center.key == "j_unik_impounded" or self.config.center.key == "j_buf_afan_spc"  then
+            if self.config.center.key == "j_unik_impounded" or self.config.center.must_afford_to_sell or self.config.center.key == "j_buf_afan_spc"  then
                 --Takes in factor credit card
                 if to_big((G.GAME.dollars-G.GAME.bankrupt_at) + self.ability.extra.cost) < to_big(0) then
                     return false

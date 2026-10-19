@@ -3,18 +3,20 @@ UNIK.detriment{
     atlas = "unik_detriments",
 	pos = { x = 2, y = 1 },
     severity = 2,
-    attributes = { 'detrimental','lose_economy','xmult','debuff','stickers','on_sell' },
-    config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20,impoundedSeed = ""} },
+    attributes = { 'detrimental','lose_economy','xmult','debuff','stickers','on_sell','immediate','detriment'  },
+    config = { extra = {x_mult = 0.5,multiplier = 20,cost = -15,fallback_cost = 20,impoundedSeed = "",x_mult2 = 0.35} },
     loc_vars = function(self, info_queue, center)
         if not center.ability.unik_impounded then
             info_queue[#info_queue + 1] = { set = "Other", key = "unik_impounded" }
         end
         return { 
-            vars = { center.ability.extra.x_mult,center.ability.extra.multiplier,center.ability.extra.fallback_cost} }
+            vars = { center.ability.extra.x_mult,center.ability.extra.multiplier,center.ability.extra.x_mult2,center.ability.extra.fallback_cost} }
 	end,
+    dongtong_compat = false,
     immutable = true,
     sellable = true,
     override_cursed_cost = true,
+    must_afford_to_sell = true,
     --add debuffs
     add_to_deck = function(self, card, from_debuff)
         G.E_MANAGER:add_event(Event({
@@ -66,16 +68,21 @@ UNIK.detriment{
                                 select.ability.unik_impounded_seed = card.ability.extra.impoundedSeed
                                 SMODS.debuff_card(select,true,card.ability.extra.impoundedSeed)
                                 card:set_cost()
+
                                 return true
                             end
                         }))
                     elseif successful == false and not ghostTrap == true then
                         card.ability.extra.cost = -1 * card.ability.extra.fallback_cost
                         card:set_cost()
+                        card.ability.extra.x_mult = card.ability.extra.x_mult2
+     
                     end
                 else
                     card.ability.extra.cost = -1 * card.ability.extra.fallback_cost
                     card:set_cost()
+                    card.ability.extra.x_mult = card.ability.extra.x_mult2
+
                 end
                 return true
             end

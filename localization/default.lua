@@ -1819,7 +1819,11 @@ return {
                         "{C:attention}Sell{} to remove {C:red}Impounded{} from Joker",
                         "Selling costs {X:money,C:white}X#2#ln(x+1){} the total",
                         "{C:attention}selling price{} of {C:red}Impounded{} Joker",
-                        "{C:inactive,s:0.7}(Costs {C:money,s:0.7}$#3#{C:inactive,s:0.7} if no valid Joker owned){}",
+                    },
+                    {
+                        "{C:inactive}({X:mult,C:white}X#3#{} {C:inactive}Mult and costs",
+                        "{C:inactive}{C:money}$#4#{C:inactive} to sell instead",
+                        "{C:inactive}if {C:red}no{C:inactive} valid Joker owned)"
                     },
                    
                     
@@ -1841,6 +1845,76 @@ return {
                     
                 }
             },
+            detr_unik_poop = {
+                name = "Poop",
+                text = {
+                    {
+                        "{C:mult}#1#{} Mult"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{}",
+                        "after using {C:attention}#2#{}",
+                        "{C:red}Discard#<s>2#"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Discard#<s>2#)"
+                    }
+                }
+            },
+            detr_unik_breathalyzer = {
+                name = "Breathalyzer",
+                text = {
+                    {
+                        "{C:red}#1#{} Discard"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{}",
+                        "after {C:attention}#2# consecutive",
+                        "round#<s>2# without using",
+                        "a {C:red}Discard"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Round#<s>2#)"
+                    }
+
+                }
+            },
+            detr_unik_inflation = {
+                name = "Inflation",
+                text = {
+                    {
+                        "Shop prices are",
+                        "{C:red}increased{} by {C:money}$#1#",
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after",
+                        "{C:attention}skipping #2#{} Blind#<s>2#",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Blind#<s>2# skipped)"
+                    }
+                }
+            },
+            detr_unik_office_drone = {
+                name = "Office Drone",
+                text = {
+                    {
+                        "{C:chips}-#1#{} Chips",
+                        "if played hand is the",
+                        "{C:attention}most played hand"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after",
+                        "{C:red}not{} playing the",
+                        "{C:attention}most played hand",
+                        "{C:attention}#2#{} time#<s>2# {C:attention}consecutively",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Hands#<s>2#)"
+                    }
+
+                }
+            }
         },
         Edition={            
             e_unik_positive={
@@ -9910,10 +9984,13 @@ return {
             --Detriment stuff
             k_unik_detriments = "Detriments",
             k_unik_detriment = "Detriment",
-            k_unik_mild = "Mild",
+            k_unik_mild = "Subpar",
             k_unik_significant = "Significant",
             k_unik_severe = "Severe",
             k_unik_catastrophic = "Catastrophic", --currently unused
+
+            k_unik_poop_remove = "Cleaned up!",
+            k_unik_deflated = "Brought down!",
         },
         high_scores={},
         labels={
