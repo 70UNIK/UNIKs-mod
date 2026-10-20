@@ -827,6 +827,9 @@ NFS.load(mod_path .. "data/bossBlinds/darkness.lua")() --Unless i rework edition
 NFS.load(mod_path .. "data/bossBlinds/ravine.lua")()
 NFS.load(mod_path .. "data/bossBlinds/crater.lua")()
 NFS.load(mod_path .. "data/bossBlinds/abyss.lua")()
+NFS.load(mod_path .. "data/bossBlinds/wart.lua")()
+--NFS.load(mod_path .. "data/bossBlinds/junction.lua")()
+--NFS.load(mod_path .. "data/bossBlinds/horde.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/bossBlinds/cryptid/joyless.lua")() --Cryptid crossmod
 end
@@ -835,6 +838,7 @@ end
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
+--NFS.load(mod_path .. "data/bossBlinds/puce_portal.lua")()
 NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
 NFS.load(mod_path .. "data/bossBlinds/raspberry_racket.lua")()
@@ -1141,11 +1145,16 @@ SMODS.UndiscoveredSprite({
 NFS.load(mod_path .. "data/detrimentals/subpar/poop.lua")()
 NFS.load(mod_path .. "data/detrimentals/subpar/breathalyzer.lua")()
 NFS.load(mod_path .. "data/detrimentals/subpar/inflation.lua")()
+NFS.load(mod_path .. "data/detrimentals/subpar/dingo_fence.lua")()
+NFS.load(mod_path .. "data/detrimentals/subpar/office_drone.lua")()
 --SIGNIFICANT
 NFS.load(mod_path .. "data/detrimentals/significant/impound_notice.lua")()
-NFS.load(mod_path .. "data/detrimentals/significant/border_wall.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/autocannibalism.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/broken_scale.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/border_wall.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/hook_n_discard.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/robert.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/handcuffs.lua")()
 
 --SEVERE
 

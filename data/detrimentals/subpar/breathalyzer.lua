@@ -18,6 +18,9 @@ UNIK.detriment{
         G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.discards
         ease_discard(-card.ability.extra.discards)
     end,
+    in_pool = function(self, args)
+        return true
+    end,
     calculate = function(self, card, context)
         if context.end_of_round and context.cardarea == G.unik_detriments and not context.repetition and not context.blueprint then
             if not card.ability.extra.used then
@@ -34,7 +37,7 @@ UNIK.detriment{
             
         end
 
-		if context.discard then
+		if context.discard and context.other_card == context.full_hand[#context.full_hand] then
             card.ability.extra.curr_round = 0
             return{
                 message = localize('k_reset'),

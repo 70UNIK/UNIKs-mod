@@ -10,6 +10,7 @@ UNIK.detriment{
     attributes = { 'detrimental','generation','joker','modify_card','stickers','immediate','detriment'},
     immutable = true,
     dongtong_compat = false,
+    blueprint_compat = false,
 	add_to_deck = function(self, card, from_debuff)
         --add 1 random Eternal Depleted food joker
         G.E_MANAGER:add_event(Event({

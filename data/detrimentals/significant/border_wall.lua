@@ -36,6 +36,8 @@ UNIK.detriment{
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.blind_size, center.ability.extra.exceeds} }
 	end,
+    blueprint_compat = true,
+    immutable = true,
     dongtong_compat = false,
 	-- Inverse of above function.
 	remove_from_deck = function(self, card, from_debuff)

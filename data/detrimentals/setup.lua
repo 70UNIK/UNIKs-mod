@@ -105,7 +105,7 @@ UNIK.detriment = SMODS.Center:extend{
 		G.P_CENTER_POOLS[self.set] = G.P_CENTER_POOLS[self.set] or {}
 	end,
 	set_card_type_badge = function(self, card, badges)
-		badges[#badges+1] = create_badge(localize('k_unik_detriment'), HEX("474931"),HEX("FFFFFF") , 1 )
+		badges[#badges+1] = create_badge(localize('k_unik_detriment'), G.C.UNIK_DETRIMENT,G.C.WHITE , 1 )
 	end,
     set_badges = function(self, card, badges)
         for i,v in pairs(UNIK.detriment_severities) do
@@ -124,16 +124,6 @@ UNIK.detriment = SMODS.Center:extend{
     get_obj = function(self, key) return UNIK.detriments[key] end,   
 }
 
-function UNIK.create_detriment(args)
-    local seed = args and args.seed or "unik_detriment_default"
-
-    local card2 = create_card("Detriment", G.unik_detriment_area, nil, 'unik_detrimental', nil, nil, nil, seed)
-    print(card2.config.center.key)
-    card2:start_materialize()
-    card2:add_to_deck()
-    G.unik_detriment_area:emplace(card2)
-end
-
 --UI:
 SMODS.current_mod.custom_collection_tabs = function()
 	return {
@@ -151,12 +141,109 @@ end
 function G.UIDEF.create_UIBox_your_collection_detriments()
     local pool = {}
 	for k, v in pairs(G.P_CENTER_POOLS.Detriment) do
-        print(v.key)
 		if not v.no_collection then pool[#pool + 1] = v end
 	end
 	return SMODS.card_collection_UIBox(pool, { 6, 3 }, {
-		no_materialize = true,
-		h_mod = 0.95,
+		h_mod = 0.95*63/95,
+        w_mod = 0.71*47*1.35/71,
 		back_func = 'your_collection_other_gameobjects',
 	})
+end
+
+function UNIK.create_detriment(args)
+    local seed = args and args.seed or "unik_detriment_default"..G.GAME.round_resets.ante
+    local severity = args and args.severity or nil
+    local key = args and args.forced_key or UNIK.poll_detriment_card({seed = seed,severity = severity})
+    
+    local card = SMODS.create_card { key = key }
+    card:start_materialize()
+    card:add_to_deck()
+    G.unik_detriment_area:emplace(card)
+    return card
+end
+
+--Returns the detriment severity.
+--Returns either a number or a string.
+function UNIK.poll_detriment_severity(args)
+    local force_severity = args.force_severity or nil
+    local seed = args.seed or 'unik_detriment_default'
+    local total_weight = 0
+    local severity_weights = {}
+    if force_severity then
+        return force_severity
+    end
+    local rarity_poll = pseudorandom(pseudoseed(seed or ('unik_detriment_default'..G.GAME.round_resets.ante))) -- Generate the poll value
+    for i,v in pairs(UNIK.detriment_severities) do
+        local rate = 0
+        if v.spawn_rate and type(v.spawn_rate) == 'function' then
+            rate = v:spawn_rate()
+        end
+        total_weight = total_weight + rate
+        severity_weights[v.key] = {}
+        severity_weights[v.key].rate = rate
+        severity_weights[v.key].severity = v.value
+    end
+    for i,v in pairs(severity_weights) do
+        v.rate = v.rate/total_weight
+    end
+     local weight_i = 0
+    for i,v in pairs(severity_weights) do
+        weight_i = weight_i + v.rate
+        --print(rarity_poll .. " " .. weight_i)
+        if rarity_poll < weight_i then
+            --print(v.rate .. " " .. v.name)
+            return v.severity
+        end
+    end
+end
+
+function UNIK.poll_detriment_card(args)
+    local severity = args.severity or nil
+    local seed = args.seed or ('unik_detriment_default'.. G.GAME.round_resets.ante)
+    local pool = {}
+    local final_pool = {}
+    if not severity then
+        severity = UNIK.poll_detriment_severity(seed)
+    end
+    for k, v in pairs(G.P_CENTER_POOLS.Detriment) do
+		pool[#pool + 1] = v
+	end
+    for k, v in ipairs(pool) do
+        local add = nil
+        local in_pool, pool_opts = SMODS.add_to_pool(v, { source = seed })
+        pool_opts = pool_opts or {}
+    
+        if G.GAME.used_jokers[v.key] then
+            print("ALREDY EXISTS!")
+        end
+        if in_pool and not (G.GAME.used_jokers[v.key] and not SMODS.showman(v.key)) then 
+            add = true 
+        end
+        if v.severity ~= severity then
+            add = nil
+        end
+        if v.no_pool_flag and G.GAME.pool_flags[v.no_pool_flag] then add = nil end
+        if v.yes_pool_flag and not G.GAME.pool_flags[v.yes_pool_flag] then add = nil end
+        if G.GAME.cry_banished_keys[v.key] then add = nil end
+
+        if add then
+            final_pool[#final_pool+1] = v.key
+        end
+    end
+    print(final_pool)
+    --run through backups!
+    if #final_pool == 0 then
+        print("EMPTY POOL! backup!")
+        for i,v in pairs(UNIK.detriment_severities) do
+            if v.value == severity then
+                return v.default_key
+            end
+        end
+        warn("INVALID RARITY, DEFAULTING TO detr_unik_poop")
+        return 'detr_unik_poop' --hard default when all else fails
+    else
+        local final_key = pseudorandom_element(final_pool, pseudoseed(seed))
+        print(final_key)
+        return final_key
+    end
 end

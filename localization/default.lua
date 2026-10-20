@@ -972,8 +972,9 @@ return {
             bl_unik_purple_pentagram={
                 name = "Purple Pentagram",
 				text = {
-					"Create 4 Disposable Detrimental",
-                    "Jokers on Blind Selection",
+					"Create 2 Subpar and 2 Significant",
+                    "Detriments on Blind Selection",
+                    "for the Blind"
 				},
             },
             bl_unik_indigo_icbm={
@@ -1669,56 +1670,44 @@ return {
                     "by +0.5x",
 				},
             },
+            bl_unik_wart = {
+                name = "The Wart",
+                text = {
+                    "Creates a Subpar",
+                    "Detriment on",
+                    "Blind Selection"
+                }
+            },
+            bl_unik_junction = {
+                name = "The Junction",
+                text = {
+                    "Create a Baneful Pack",
+                    "containing Significant",
+                    "Detriment cards",
+                    "Skip it to Banish the",
+                    "Rightmost Joker",
+                }
+            },
+            bl_unik_horde = {
+                name = "The Horde",
+                text = {
+                    "Create a Mega Baneful Pack",
+                    "containing Subpar Detriment cards",
+                    "Skipping will Banish the Leftmost",
+                    "Joker unless at least 3 are selected",
+                }
+            },
+            bl_unik_puce_portal = {
+                name = "Puce Portal",
+                text = {
+                    "Create an unskippable",
+                    "Mega Baneful Pack",
+                    "containing Severe",
+                    "Detriment cards",
+                    "Must select 2 to proceed",
+                }
+            }
  
-            --beast blinds? Around epic blind difficulty, although the art will resemble, but become more distinct from epic blinds.
-            --Spawns same time as epic blinds.
-            bl_unik_beast_shadow_milk={
-                name = "Kauheapetos", --Dreadful Deception if this appears, all blinds appear as big blinds.
-                text = {
-                    "Disguised as a random Blind", -- can occupy small, big or boss slot, but all blinds are unskippable/unrerollable.
-                    "Flip and shuffle all cards",
-                    "and Jokers per hand",
-                    "Must play #1# cards",
-                    "all cards must score",
-                }
-            },
-            bl_unik_beast_shadow_milk_fakeout={
-                name = "Big Blind?"
-            },
-            bl_unik_beast_burning_spice={
-                name = "Maailmojentuhoaja", --Destroyer of worlds
-                text = {
-                    "Destroy all cards",
-                    "in first drawn hand",
-                    "+#2# ante per card", --+1 ante
-                    "destroyed",
-                }
-            },
-            bl_unik_beast_mystic_flour={
-                name = "Rappeutumisenpöly", --Dust of Decay
-                text = {
-                    "Joker values are multiplied",
-                    "by 0.95x every second spent",
-                    "in this round", --excluding scoring, resets joker values upon defeat.. unless its bos
-                }
-            },
-            bl_unik_beast_eternal_sugar={
-                name = "Ikuinenkuilu", --Eternal Abyss
-                text = {
-                    "^1.03 Blind size",
-                    "per trigger",
-                }
-            },
-            bl_unik_beast_silent_salt = {
-                name = "Suolaamaa", --Salt the earth
-                text = {
-                    'Add Namta Cards equal',
-                    'to half your deck size',
-                    'Must hold at least 2', --at least not play them
-                    'Namta cards in hand', --hidden interaction, white lily will permanently lose her self duping ability.
-                }
-            },
-            
         },
         --akioyoris shennanngians
         DescriptionDummy={
@@ -1799,8 +1788,8 @@ return {
                     {
                         "Add {C:attention}Eternal and Depleted{} to new and",
                         "existing decrementing food Jokers,",
-                        "set values to {C:attention}self destruct values{}",  
-                        "and moves to the {C:unik_detrimental}Detriment{} card area", 
+                        "set values to {C:attention}self destruct values{} and",  
+                        "moves them to the {X:unik_detriment,C:white}Detriment{} card area", 
                     },
                     {
                         "{C:red}Self destructs{} if none of above Jokers are owned",
@@ -1845,6 +1834,112 @@ return {
                     
                 }
             },
+            detr_unik_handcuffs = {
+                name = 'Handcuffs',
+                text={
+                    {
+                        "{C:red}#2#{} hand size",
+                    },
+                    {
+                        "E:2,C:red}Self destructs{} when hand", 
+                    "size is {C:attention}above #3#{}, {C:attention}below #4#{} or",
+                    "when facing {C:unik_manacle_color}The Manacle{}",  
+                    },                 
+                }, 
+            },
+            detr_unik_robert = {
+                name = "Robert",
+                text = {
+                    {
+                        "{C:green}#1# in #2#{} chance card is",
+                        "drawn {C:red}face-down{}",
+                        
+                    },
+                    {
+                        "E:2,C:red}Self destructs{} when a hand", 
+                        "containing {C:attention}#3#{} or more scoring",
+                        "{C:red}face-down{} cards is played",
+                        "or when facing {C:unik_wheel_color}The Wheel{}",
+                    },
+                }
+            },
+            detr_unik_bloodprint = {
+                name = "Bloodprint",
+                text = {
+                    {
+                        "{C:attention}Copies{} the effect",
+                        "of a random {X:unik_detriment,C:white}Detriment",
+                        "when possible",
+                    },
+                    {
+                        "If already copying, {C:attention}changes",
+                        "copied {X:unik_detriment,C:white}Detriment{}",
+                        "at end of round",
+                        "{C:inactive,s:0.8}(Immediately changes if copied",
+                        "{C:inactive,s:0.8}card is destroyed)"
+                    },
+                    {
+                        "E:2,C:red}Self destructs{} if not copying",
+                        "anything for {C:attention}#1# consecutive{} round#<s>1#"
+                    }
+                }
+            },
+            detr_unik_hook_n_discard = {
+                name="Hook n' Discard",
+                text={
+                    {
+                        "Discards {C:attention}2{} {C:attention}random{} cards per hand",
+                    },
+                    {
+                        "{C:red}Self destructs{} after {C:attention}#1#{} {C:attention}consecutive{}",
+                        "discards with only {C:attention}2{} cards",
+                        "or when facing {C:unik_hook_color}The Hook{}",      
+                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} discards)",
+                    },
+                    
+                }
+            },
+            detr_unik_ransom = {
+                name = "Ransom",
+                text = {
+                    {
+                        "{C:red}Debuffs{} a random Joker",
+                        "of the {C:attention}highest rarity"
+                    },
+                    {
+                        "{C:attention}Selling{} costs {X:money,C:white}X#1#{}", --X1.25, so it harms those with higher econ more
+                        "your current {C:money}money",
+                        "and will {C:attention}undebuff{} Joker",
+                    },
+                    {
+                        "If held after {C:attention}#1#{} Round#<s>1#",
+                        "{C:red}Destroy debuffed{} Joker",
+                        "and {E:2,C:red}Self destruct{}"
+                    },
+                    {
+                        "{C:red}Destroy{} a random Joker",
+                        "and {E:2,C:red}Self destruct{} if",
+                        "{C:red}debuffed{} Joker is {C:red}removed"
+                    }
+                }
+            },
+            detr_unik_ = {
+                name = "",
+                text = {
+                    {
+                        "{C:red}Debuffs{} {C:attention}#1#{} random",
+                        "scoring card",
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after playing",
+                        "{C:attention}#2#{} hand#<s>2# containing",
+                        "at least {C:attention}#3#{} {C:red}Debuffed{} card#<s>3#"
+                    }
+                }
+            },
+            
+
+            --subpar
             detr_unik_poop = {
                 name = "Poop",
                 text = {
@@ -1901,7 +1996,7 @@ return {
                     {
                         "{C:chips}-#1#{} Chips",
                         "if played hand is the",
-                        "{C:attention}most played hand"
+                        "{C:attention}most played hand",
                     },
                     {
                         "{E:2,C:red}Self destructs{} after",
@@ -1913,6 +2008,158 @@ return {
                         "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Hands#<s>2#)"
                     }
 
+                }
+            },
+            detr_unik_dingo_fence = {
+                name = "Dingo Fence",
+                text = {
+                    {
+                        "{C:red}X#1#{} Blind size",
+                    },
+                    {
+                        "{C:red}Self destructs{} after {C:attention}#2#{}",
+                        "{C:attention}consecutive{} round#<s>2# with",
+                        "{C:attention}0{} {C:blue}hands{} remaining"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Hands#<s>2#)"
+                    }
+                }
+            },
+
+            --severe
+            detr_unik_amputation = {
+                name = "Amputation",
+                text = {
+                    {
+                        "{C:red}#1#{} Hand#<s>1#", -- -1 hand
+                        "{C:red}#2#{} Selection Limit",-- -1 selection limit
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after",
+                        "playing a {C:attention}Four of a Kind",
+                        "#3# time#<s>3#"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#4#/#3# {C:inactive}Hands#<s>2#)"
+                    }
+                }
+            },
+            detr_unik_intruder = {
+                name = "Intruder",
+                text = {
+                    {
+                        "{C:mult}+#1#{} Mult"
+                    },
+                    {
+                        "Is added to {C:attention}Joker{} slots",
+                        "{C:red}Destroys{} {C:attention}random{} Jokers",
+                        "until there is room",
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after "
+                    },
+                }
+            },
+            detr_unik_blacklist = { --it targets your most played ranks, subsequent ones depending on which ones are alraedy targeted will be targeted
+                name = "Blacklist",
+                text = {
+                    {
+                        "Hand will {E:1,C:red}not{} score if",
+                        "a {C:attention}#3#{} is played or held"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} if no",
+                        "{C:attention}#3#s{} are in deck"
+                    },
+                }
+            },
+            detr_unik_perishable_bottle = {
+                name = "Perishable in a Bottle",
+                text = {
+                    {
+                        "{X:unik_echips,C:white}^#1#{} Chips",
+                        "and {X:unik_emult,C:white}^#2#{} Mult"
+                    },
+                    {
+                        "Sell this card to",
+                        "apply {C:red}Perishable",
+                        "on a {C:attention}random{} Joker"
+                    }
+                }
+            },
+            detr_unik_wildfire = {
+                name = "Wildfire",
+                text = {
+                    {
+                        "{C:attention}All {C:attention}Enhanced{} cards are {C:red}debuffed{}", 
+                    },
+                    {
+                        "{C:red}Self destructs{} when less than", 
+                        "{C:attention}#1#{} {C:attention}Enhanced{} card(s) remain in deck",  
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive}  {C:attention}Enhanced Card#<s>2#{C:inactive})",
+                    },
+                }
+            },
+            detr_unik_wildfire_bunc = {
+                name = "Wildfire",
+                text = {
+                    {
+                        "{C:attention}All {C:attention}Enhanced{} cards are {C:red}debuffed{}", 
+                    },
+                    {
+                        "{C:red}Self destructs{} when less than", 
+                        "{C:attention}#1#{} {C:attention}Enhanced{} Card#<s>1# remain in deck",
+                        "or when facing {C:unik_flame_color}The Flame{}",      
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive}  {C:attention}Enhanced Card#<s>2#{C:inactive})",
+                    },
+                }
+            },
+            detr_unik_decaying_tooth = {
+                name = "Decaying Tooth",
+                text = {
+                    {
+                        "{C:red}Lose {C:gold}$#1#{} per card played",
+                    },
+                    {
+                        "{C:red}Self destructs{} after earning",
+                        "at least {C:gold}$#2#{} in a hand or",
+                        "when facing {C:unik_tooth_color}The Tooth{}",
+                    },
+                }
+            },
+            detr_unik_happiness_is_mandatory = {
+                name = "Happiness is Mandatory",
+                text = {
+                    {
+                        "Add {C:unik_shitty_edition}Positive{} to a",
+                        "random Joker when obtained"
+                    },
+                    {
+                        "Add {C:unik_shitty_edition}Positive{} to a random",
+                        "played card per hand",
+                    },
+                    {
+                        "{C:red,E:2}Self destructs{} after playing",
+                        "{C:attention}#1#{} scoring {C:unik_shitty_edition}Positive{} cards",
+                        "{C:inactive,s:0.6}Happiness is mandatory. Failure to be happy is treason.{}",
+                    },
+
+                }
+            },
+            detr_unik_xchips_hater = {
+                name = "XCHIPS IS NOT VANILLA!1!11!1!!!",
+                text = {
+                    {
+                        "{X:chips,C:white}XChips{}, {X:unik_echips,C:white}^Chips{}, etc... cards and Jokers",
+                         "will {C:red}not trigger{} and are {C:red}destroyed{} instead",
+                    },
+                    {
+                        "{C:red}Self destructs{} after {C:attention}#1#",
+                        "{C:attention}consecutive{} rounds without",
+                        "attempted {X:chips,C:white}XChips{}, {X:unik_echips,C:white}^Chips{}, etc... triggers",
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive})",
+                    },
                 }
             }
         },
@@ -4980,14 +5227,30 @@ return {
                 name="Ghost Trap",
                 text={
                     {
-                        "This Joker {C:red}destroys{} all {X:unik_detrimental,C:white}Detrimental{} Jokers",
-                        "and gains {X:mult,C:white}X#2#{} Mult per Joker",
-                        "destroyed that way",
+                        "{B:1,C:white,s:0.8}Activated Ability",
+                        "{C:red,E:2}Destroy{} a random {X:unik_detriment,C:white}Detriment",
+                        "and gain {X:mult,C:white}X#1#{} Mult"
                     },
                     {
-                        "{C:red}Self destructs{} after",
-                    "destroying {C:attention}#3#{} Joker#<s>3#",
-					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult){}",
+                        "{C:attention}(Active!)",
+                        "{C:inactive}(Cooldown of {C:attention}#3# {C:inactive}Round#<s>3#)",
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult){}"
+                    },
+					
+                    
+                },
+            },
+            j_unik_ghost_trap_inactive = {
+                name="Ghost Trap",
+                text={
+                    {
+                        "{B:1,C:white,s:0.8}Activated Ability",
+                        "{C:red,E:2}Destroy{} a random {X:unik_detriment,C:white}Detriment",
+                        "and gain {X:mult,C:white}X#1#{} Mult"
+                    },
+                    {
+                        "{C:inactive}(Active after {C:attention}#4# {C:inactive}Round#<s>4#)",
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult){}"
                     },
 					
                     
@@ -5000,7 +5263,7 @@ return {
                         "{B:1,C:white,s:0.8}Activated Ability",
                         "{C:red,E:2}Destroy{} up to {C:attention}#3#{} selected card#<s>3#",
                         "{C:inactive}(once until next cashout)",
-                        "{C:inactive}(#1#)",
+                        "{V:2}(#1#)",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#2#{}",
@@ -8733,8 +8996,8 @@ return {
             c_unik_wheel_of_misfortune = {
                 name = "The Evocation",
                 text = {
-                    "{C:green}#1# in #2#{} chance to create ",
-                    "a {X:unik_detrimental,C:white}Detrimental{} Joker",
+                    "{C:green}#1# in #2#{} chance to create",
+                    "a random {X:unik_detrimental,C:white}Detriment{}",
                     "otherwise apply {C:dark_edition}Steel{}, {C:dark_edition}Glittergrid{},",
                     "or {C:dark_edition}Negative{} to a {C:attention}random{} Joker",
                 }
@@ -9991,6 +10254,7 @@ return {
 
             k_unik_poop_remove = "Cleaned up!",
             k_unik_deflated = "Brought down!",
+            k_unik_fight_club_quit = "Resigned!",
         },
         high_scores={},
         labels={

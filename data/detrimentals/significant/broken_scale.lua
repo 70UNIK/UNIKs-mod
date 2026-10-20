@@ -10,9 +10,9 @@ UNIK.detriment{
             vars = { center.ability.extra.rounds,center.ability.extra.round_limit } }
     end,
     pools = { ["unik_boss_blind_joker"] = true},
-	blueprint_compat = false,
-    perishable_compat = false,
+	blueprint_compat = true,
     immutable = true,
+
 	calc_scaling = function(self, card, other_card, initial_value, scalar_value, args)
         if scalar_value > 0 then
             return {
@@ -22,7 +22,17 @@ UNIK.detriment{
             }
         end
     end,
+    in_pool = function(self, args)
+        return true
+    end,
     calculate = function(self, card, context)
+        if context.scaling_card then
+            local original_scalar = context.scalar
+            local new_scalar = original_scalar/3
+            return {
+                override_scalar = new_scalar,
+            }
+        end
 		if context.end_of_round and context.cardarea == G.unik_detriments and not context.repetition and not context.blueprint then
             card.ability.extra.rounds = card.ability.extra.rounds + 1
             if card.ability.extra.rounds > card.ability.extra.round_limit then

@@ -17,13 +17,8 @@ SMODS.Blind{
                 G.E_MANAGER:add_event(Event({
                     delay = 0.5,
                     func = function()
-                        local card2 = create_card("Joker", G.unik_detriment_area, nil, 'unik_detrimental', nil, nil, nil, "unik_pentagram_curse")
-                        print(card2.config.center.key)
-                        --destroy card2 if its jimbo
-                        card2:start_materialize()
-                        card2:add_to_deck() --This causes problems. Why?
-                        card2.ability.unik_disposable = true
-                        G.unik_detriment_area:emplace(card2)
+                        local card2 = UNIK.create_detriment({severity = i < 3 and 1 or 2,seed = "unik_pentagram" })
+                        card2.ability.created_by_pentagram = true
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
                         G.ROOM.jiggle = G.ROOM.jiggle + 1
@@ -41,11 +36,19 @@ SMODS.Blind{
     end,
     --If disabled, destroy up to 4 cursed Jokers
     disable = function(self)
-        G.GAME.unik_killed_by_pentagram = nil
         for _, v in pairs(G.unik_detriment_area.cards) do
-            --print("Joker in set:")
-            --print(v.ability.name)
-            selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
+            if v.ability.created_by_pentagram then
+                selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
+            end
+            
+        end
+    end,
+    defeat = function(self)
+        for _, v in pairs(G.unik_detriment_area.cards) do
+            if v.ability.created_by_pentagram then
+                selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
+            end
+            
         end
     end,
 }

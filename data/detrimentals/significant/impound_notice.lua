@@ -14,6 +14,7 @@ UNIK.detriment{
 	end,
     dongtong_compat = false,
     immutable = true,
+    blueprint_compat = true,
     sellable = true,
     override_cursed_cost = true,
     must_afford_to_sell = true,
@@ -106,8 +107,7 @@ UNIK.detriment{
         --calculate Xmult
 		if context.joker_main then
 			return {
-				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
-				Xmult_mod = card.ability.extra.x_mult,
+				x_mult = card.ability.extra.x_mult,
 			}
 		end
     end

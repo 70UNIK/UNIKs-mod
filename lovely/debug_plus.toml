@@ -14,11 +14,11 @@ target = "engine/controller.lua"
 pattern = '''if key == "3" then'''
 position = "after"
 payload = '''
-if _card.config.center.blindside_blind and BLINDSIDE.hasBlindside() then
+if _card.config.center.set == "Detriment" then
     local beta = SMODS.create_card({area = G.unik_detriment_area, key = _card.config.center.key})
     _card:set_sprites(_card.config.center)
     beta:add_to_deck()
-    
+    beta:start_materialize()
     G.unik_detriment_area:emplace(beta)
     
 end

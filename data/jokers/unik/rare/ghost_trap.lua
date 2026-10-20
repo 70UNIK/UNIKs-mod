@@ -14,70 +14,70 @@ SMODS.Joker {
 	eternal_compat = true,
 	experimental = true,
 	demicoloncompat = true,
-	attributes = { 'destroy_card','xmult','scaling'},
-    config = { extra = {x_mult = 1.0, x_mult_mod = 1.5,limit = 10,destroyed = false} },
+	attributes = { 'destroy_card','xmult','scaling','detriment'},
+    config = { extra = {x_mult = 1.0, x_mult_mod = 0.75,round_cooldown = 2,rounds_left = 0} },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.x_mult,center.ability.extra.x_mult_mod,center.ability.extra.limit} }
-	end,
-	add_to_deck = function(self, card, from_debuff)
-		for i,v in pairs(G.jokers.cards) do
-			if UNIK.detrimental_rarities[v.config.center.rarity] and not card.ability.extra.destroyed then
-				v.ability.getting_captured = true
-				selfDestruction(v,"k_unik_pentagram_purified",G.C.MULT)
-				if card.ability.extra.limit > 0 then
-					SMODS.scale_card(card, {
-						ref_table =card.ability.extra,
-						ref_value = "x_mult",
-						scalar_value = "x_mult_mod",
-						message_key = "a_xmult",
-						message_colour = G.C.MULT,
-					})
-					card.ability.extra.limit = card.ability.extra.limit - 1
-				elseif not card.ability.extra.destroyed  then
-					card.ability.extra.destroyed = true
-					selfDestruction(card,'k_unik_ghost_trap_explode',G.C.MULT)
-				end
-			end
-		end
-        
+		return { vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.extra.round_cooldown ,center.ability.extra.rounds_left,
+		colours = { 
+			G.C.SECONDARY_SET.Enhanced
+		}
+	} }
 	end,
 	-- on self destruction, release all cursed jokers
 
     calculate = function(self, card, context)
-		if (context.joker_main and (to_big(card.ability.extra.x_mult) > to_big(1))) then
+		if context.joker_main or context.forcetrigger then
 			return {
-				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
-				Xmult_mod = card.ability.extra.x_mult,
+				x_mult = card.ability.extra.x_mult
 			}
 		end
-		if context.forcetrigger and not context.blueprint and not context.retrigger_joker and not context.repetition then
-			return {
-				message = localize({ type = "variable", key = "a_xmult", vars = { card.ability.extra.x_mult } }),
-				Xmult_mod = card.ability.extra.x_mult,
-			}
-		end
-		if context.unik_add_to_deck and context.added then
-			if (UNIK.detrimental_rarities[context.added.config.center.rarity]) 
-			and not context.added.ability.getting_captured then
-				context.added.ability.getting_captured = true
-				selfDestruction(context.added,"k_unik_pentagram_purified",G.C.MULT)
-				if card.ability.extra.limit > 0 then
-					SMODS.scale_card(card, {
-						ref_table =card.ability.extra,
-						ref_value = "x_mult",
-						scalar_value = "x_mult_mod",
-						message_key = "a_xmult",
-						message_colour = G.C.MULT,
-					})
-					card.ability.extra.limit = card.ability.extra.limit - 1
-				elseif not card.ability.extra.destroyed  then
-					card.ability.extra.destroyed = true
-					selfDestruction(card,'k_unik_ghost_trap_explode',G.C.MULT)
-				end
+		if context.end_of_round and context.cardarea == G.jokers and card.ability.extra.rounds_left > 0 and not context.blueprint then
+			card.ability.extra.rounds_left = card.ability.extra.rounds_left - 1
+			if card.ability.extra.rounds_left > 0 then
+				return {
+					message = localize{type='variable',key='a_remaining',vars={card.ability.extra.rounds_left}},
+					colour = G.C.MULT
+				}	
+			else
+				return {
+					message = localize('k_active_ex'),
+					colour = G.C.MULT
+				}	
 			end
 			
 		end
     end,
+	all_in_jest = {
+        ability_cost = function(self, card)
+             return 0
+        end,
+        can_use_ability = function(self, card, context)
+			return G.unik_detriment_area and #G.unik_detriment_area.cards > 0 and card.ability.extra.rounds_left == 0
+        end,
+
+        use_ability = function(self, card, args)
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					if #G.unik_detriment_area.cards > 0 then
+						local card_destroyed = pseudorandom_element(G.unik_detriment_area.cards,pseudoseed('unik_ghost_trap'))
+						selfDestruction(card_destroyed,"k_unik_pentagram_purified",G.C.MULT)
+						SMODS.scale_card(card, {
+							ref_table =card.ability.extra,
+							ref_value = "x_mult",
+							scalar_value = "x_mult_mod",
+							message_key = "a_xmult",
+							message_colour = G.C.MULT,
+							operation = '+',
+							force_full_val = true,
+						})	
+						card.ability.extra.rounds_left = card.ability.extra.round_cooldown
+					end
+					
+					return true
+				end
+			}))
+		end,
+    },
 }
 
 --ghost trap: if purchased/obtained, then ignore detrimentals/curseds

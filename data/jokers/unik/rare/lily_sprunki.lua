@@ -63,7 +63,7 @@ SMODS.Joker {
             localize(lily_quotes[quoteset][math.random(#lily_quotes[quoteset])] .. "")
             ,center.ability.extra.limit,
             colours = { 
-                G.C.SECONDARY_SET.Enhanced
+                G.C.SECONDARY_SET.Enhanced,center.ability.extra.active and G.C.FILTER or G.C.TEXT_INACTIVE
             }
         } }
     end,
@@ -118,7 +118,6 @@ SMODS.Joker {
                 end
             end
             if G.hand and G.hand.highlighted and #G.hand.highlighted - eternals > 0 then 
-                G.CONTROLLER.locks.unik_destroy_selected = true
                 G.E_MANAGER:add_event(Event({
                     func = function()
                         card:juice_up(0.5, 0.5)
@@ -198,14 +197,6 @@ SMODS.Joker {
                     card= card,
                 })
                 delay(0.3)
-                G.E_MANAGER:add_event(Event({
-                    delay=0.2,
-                    func = function()
-                        G.CONTROLLER.locks.unik_destroy_selected = nil
-                        card.ability.extra.active = false
-                        return true
-                    end
-                }))
             else
                 error("UH OH!")
             end

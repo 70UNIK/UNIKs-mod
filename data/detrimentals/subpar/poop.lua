@@ -2,10 +2,11 @@ UNIK.detriment{
     key = "unik_poop",
     atlas = "unik_detriments",
 	pos = { x = 3, y = 0 },
-    config = { extra = { mult = -3, discards = 20,curr_discards = 0} },
+    config = { extra = { mult = -3, discards = 20,curr_discards = 0} }, --why emult? 
     severity = 1,
     immutable = true,
     dongtong_compat = false,
+    blueprint_compat = true,
     attributes = { 'detrimental','mult','detriment', 'immediate'},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult,card.ability.extra.discards,card.ability.extra.curr_discards} }
@@ -16,8 +17,8 @@ UNIK.detriment{
                 mult = card.ability.extra.mult
             }
         end
-		if context.discard  then
-            card.ability.extra.rounds = card.ability.extra.rounds + 1
+		if context.discard and context.other_card == context.full_hand[#context.full_hand] and not context.blueprint  then
+            card.ability.extra.curr_discards = card.ability.extra.curr_discards + 1
             if card.ability.extra.curr_discards > card.ability.extra.discards then
                 selfDestruction(card,"k_unik_poop_remove",G.C.BLACK)
             else

@@ -23,3 +23,14 @@ match_indent = true
 position = 'after'
 pattern = '''if self\.ability\.consumeable or self\.ability\.set \=\= \'Joker\''''
 payload = ''' or self.config.center.set == 'Detriment' '''
+
+# invisiible
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+match_indent = true
+position = 'after'
+pattern = '''(self.config.type == 'shop' and self ~= G.shop_vouchers) then'''
+payload = '''
+elseif G.unik_detriment_area and self == G.unik_detriment_area then
+'''

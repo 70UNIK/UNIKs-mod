@@ -4,6 +4,7 @@ function CardArea:change_size(delta)
     G.E_MANAGER:add_event(Event({
         trigger = "after",
         func = function() 
+            SMODS.calculate_context({unik_hand_size_change = true,cardarea = self,mod = delta})
             if G.jokers then
                 for _, v in pairs(G.jokers.cards) do
                     if v.ability.name == "j_unik_handcuffs" then
