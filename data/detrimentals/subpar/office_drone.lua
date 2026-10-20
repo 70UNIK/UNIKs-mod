@@ -1,8 +1,8 @@
 UNIK.detriment{
-    key = "unik_poop",
+    key = "unik_office_drone",
     atlas = "unik_detriments",
 	pos = { x = 1, y = 2 },
-    config = { extra = { chips = -50,hands_no_most = 9,hands = 0 } }, --why emult? 
+    config = { extra = { chips = -35,hands_no_most = 9,hands = 0 } }, --why emult? 
     severity = 1,
     immutable = true,
     dongtong_compat = false,
@@ -25,7 +25,8 @@ UNIK.detriment{
                 if card.ability.extra.hands > 0 then
                     card.ability.extra.hands = 0
                     return {
-                        message = localize('k_reset')
+                        message = localize('k_reset'),
+                        colour = G.C.BLACK,
                     }
                 end
             else
@@ -42,15 +43,20 @@ UNIK.detriment{
             end
         end
         if context.joker_main and context.scoring_name then
+            local reset = true
             local play_more_than = (G.GAME.hands[context.scoring_name].played or 0)
             for handname, values in pairs(G.GAME.hands) do
-                if handname ~= context.scoring_name and values.played >= play_more_than and SMODS.is_poker_hand_visible(handname) then
-                    return {
-                        chips = card.ability.extra.chips
-                    }
+                if handname == context.scoring_name and values.played >= play_more_than and SMODS.is_poker_hand_visible(handname) then
+                    reset = false
+                    break
+                    
                 end
             end
-            
+            if reset then
+                return {
+                    chips = card.ability.extra.chips
+                }
+            end
         end
     end,
 }

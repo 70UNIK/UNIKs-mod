@@ -17,7 +17,7 @@ SMODS.Joker {
 	attributes = { 'destroy_card','xmult','scaling','detriment'},
     config = { extra = {x_mult = 1.0, x_mult_mod = 0.75,round_cooldown = 2,rounds_left = 0} },
 	loc_vars = function(self, info_queue, center)
-		return { vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.extra.round_cooldown ,center.ability.extra.rounds_left,
+		return { key = center.ability.extra.rounds_left == 0 and 'j_unik_ghost_trap' or 'j_unik_ghost_trap_inactive', vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.extra.round_cooldown ,center.ability.extra.rounds_left,
 		colours = { 
 			G.C.SECONDARY_SET.Enhanced
 		}

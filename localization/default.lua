@@ -1837,7 +1837,7 @@ return {
                         "{C:red}#2#{} hand size",
                     },
                     {
-                        "E:2,C:red}Self destructs{} when hand", 
+                        "{E:2,C:red}Self destructs{} when hand", 
                     "size is {C:attention}above #3#{}, {C:attention}below #4#{} or",
                     "when facing {C:unik_manacle_color}The Manacle{}",  
                     },                 
@@ -1890,7 +1890,7 @@ return {
                         "{C:red}Self destructs{} after {C:attention}#1#{} {C:attention}consecutive{}",
                         "discards with only {C:attention}2{} cards",
                         "or when facing {C:unik_hook_color}The Hook{}",      
-                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} discards)",
+                        "{C:inactive}(Currently {C:attention}#3#{C:inactive} discard#<s>1#)",
                     },
                     
                 }
@@ -1990,7 +1990,7 @@ return {
                 name = "Office Drone",
                 text = {
                     {
-                        "{C:chips}-#1#{} Chips",
+                        "{C:chips}#1#{} Chips",
                         "if played hand is the",
                         "{C:attention}most played hand",
                     },
@@ -2001,7 +2001,7 @@ return {
                         "{C:attention}#2#{} time#<s>2# {C:attention}consecutively",
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Hands#<s>2#)"
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Hand#<s>2#)"
                     }
 
                 }
@@ -2018,7 +2018,7 @@ return {
                         "{C:attention}0{} {C:blue}hands{} remaining"
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Hands#<s>2#)"
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Hand#<s>2#)"
                     }
                 }
             },
@@ -2037,7 +2037,7 @@ return {
                         "#3# time#<s>3#"
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#4#/#3# {C:inactive}Hands#<s>2#)"
+                        "{C:inactive}(Currently {C:attention}#4#/#3# {C:inactive}Hand#<s>2#)"
                     }
                 }
             },

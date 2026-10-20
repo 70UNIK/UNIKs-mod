@@ -159,7 +159,6 @@ SMODS.Joker {
                         card:juice_up(0.5, 0.5)
                         card.children.center:set_sprite_pos({x = 3, y = 3})
                         card.children.floating_sprite:set_sprite_pos({x = 5, y = 3})
-                        G.ROOM.jiggle = G.ROOM.jiggle + 5
                         --play_sound("unik_gore6") --thats funny
                         return true
                     end
@@ -171,12 +170,15 @@ SMODS.Joker {
                             if SMODS.shatters(destroyed_cards[i]) then
                                 destroyed_cards[i]:shatter()
                             else
+                                destroyed_cards[i].to_be_eaten_by_lily = true
                                 destroyed_cards[i]:start_dissolve()
+                                
                             end
                         return true
                         end
                     }))
                 end
+                
                 
                 delay(0.8)
                 SMODS.calculate_context({ remove_playing_cards = true, removed = destroyed_cards })
@@ -196,6 +198,10 @@ SMODS.Joker {
                     colour = HEX("d377dc"),
                     card= card,
                 })
+                --clear all these flags to avoid awkwardness if there are stuff that copy playing cards on destruction
+                for i,v in pairs(G.playing_cards) do
+                    v.to_be_eaten_by_lily = nil
+                end
                 delay(0.3)
             else
                 error("UH OH!")
@@ -252,71 +258,3 @@ G.FUNCS.cash_out = function(e)
     -- G.GAME.unik_fiendish_cap = nil
 end
 
---Gore6 (custom card destruction animation)
-function Card:gore6_break()
-    local enhancements = SMODS.get_enhancements(self)
-    for key, _ in pairs(enhancements) do
-        if G.P_CENTERS[key].woodbreak then 
-            self:woodBreak()
-            return nil
-        elseif G.P_CENTERS[key].metalbreak then 
-            self:metalBreak(G.P_CENTERS[key].metalbreak.colour or nil)
-            return nil
-        elseif G.P_CENTERS[key].rockbreak then 
-            self:rockBreak(type(G.P_CENTERS[key].rockbreak) == "table" and G.P_CENTERS[key].rockbreak.colour or nil)
-            return nil
-        end
-    end
-     if not SMODS.is_playing_card(self) then
-        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
-        if flags.no_destroy then self.getting_sliced = nil; return false end
-    end
-    local dissolve_time = 0.7
-    self.shattered = true
-    self.dissolve = 0
-    self.dissolve_colours = {{0.5,0,0,0.8}}
-    self:juice_up()
-    local childParts = Particles(0, 0, 0,0, {
-        timer_type = 'TOTAL',
-        timer = 0.007*dissolve_time,
-        scale = 0.3,
-        speed = 4,
-        lifespan = 0.5*dissolve_time,
-        attach = self,
-        colours = self.dissolve_colours,
-        fill = true
-    })
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.5*dissolve_time,
-        func = (function() childParts:fade(0.15*dissolve_time) return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        blockable = false,
-        func = (function()
-                play_sound("unik_gore6", math.random()*0.2 + 0.9,0.5)
-                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
-            return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'ease',
-        blockable = false,
-        ref_table = self,
-        ref_value = 'dissolve',
-        ease_to = 1,
-        delay =  0.5*dissolve_time,
-        func = (function(t) return t end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.55*dissolve_time,
-        func = (function() self:remove() return true end)
-    }))
-    G.E_MANAGER:add_event(Event({
-        trigger = 'after',
-        blockable = false,
-        delay =  0.51*dissolve_time,
-    }))
-end

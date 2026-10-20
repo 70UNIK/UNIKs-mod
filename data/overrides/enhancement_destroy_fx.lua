@@ -57,9 +57,9 @@ SMODS.Enhancement:take_ownership("m_mf_brass",{
     metalbreak = {colour = {255/255,209/255,99/255,1.0}},
 }, true)
 
-SMODS.Joker:take_ownership("j_steel_joker",{
-    metalbreak = {colour = {215/255,228/255,245/255,1.0}},
-}, true)
+-- SMODS.Joker:take_ownership("j_steel_joker",{
+--     metalbreak = {colour = {215/255,228/255,245/255,1.0}},
+-- }, true)
 SMODS.Enhancement:take_ownership("m_aij_wood",{
     woodbreak = true,
 }, true)
@@ -204,6 +204,10 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         self:gore6_break()
         return nil
     end
+    if self.to_be_eaten_by_lily then
+        self:templerun_rip()
+        return nil
+    end
     local ret = dissolveHook(self,dissolve_colours, silent, dissolve_time_fac, no_juice)
     return ret
 end
@@ -312,6 +316,118 @@ function Card:woodBreak()
         blockable = false,
         func = (function()
                 play_sound("unik_woodBreak", math.random()*0.2 + 0.9,1)
+                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
+            return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blockable = false,
+        ref_table = self,
+        ref_value = 'dissolve',
+        ease_to = 1,
+        delay =  0.5*dissolve_time,
+        func = (function(t) return t end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.55*dissolve_time,
+        func = (function() self:remove() return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.51*dissolve_time,
+    }))
+end
+
+--ripping sound, exclusive for lily (apart from the half edition)
+function Card:templerun_rip()
+     if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
+    local dissolve_time = 0.7
+    self.shattered = true
+    self.dissolve = 0
+    self.dissolve_colours = {{1,1,1,1}}
+    self:juice_up()
+    local childParts = Particles(0, 0, 0,0, {
+        timer_type = 'TOTAL',
+        timer = 0.007*dissolve_time,
+        scale = 0.3,
+        speed = 4,
+        lifespan = 0.5*dissolve_time,
+        attach = self,
+        colours = self.dissolve_colours,
+        fill = true
+    })
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.5*dissolve_time,
+        func = (function() childParts:fade(0.15*dissolve_time) return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        blockable = false,
+        func = (function()
+                play_sound("unik_templerun_rip", math.random()*0.2 + 0.9,0.5)
+                play_sound('generic1', math.random()*0.2 + 0.9,0.5)
+            return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'ease',
+        blockable = false,
+        ref_table = self,
+        ref_value = 'dissolve',
+        ease_to = 1,
+        delay =  0.5*dissolve_time,
+        func = (function(t) return t end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.55*dissolve_time,
+        func = (function() self:remove() return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.51*dissolve_time,
+    }))
+end
+
+--Gore6 (custom card destruction animation)
+function Card:gore6_break()
+     if not SMODS.is_playing_card(self) then
+        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = self})
+        if flags.no_destroy then self.getting_sliced = nil; return false end
+    end
+    local dissolve_time = 0.7
+    self.shattered = true
+    self.dissolve = 0
+    self.dissolve_colours = {{0.5,0,0,0.8}}
+    self:juice_up()
+    local childParts = Particles(0, 0, 0,0, {
+        timer_type = 'TOTAL',
+        timer = 0.007*dissolve_time,
+        scale = 0.3,
+        speed = 4,
+        lifespan = 0.5*dissolve_time,
+        attach = self,
+        colours = self.dissolve_colours,
+        fill = true
+    })
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        blockable = false,
+        delay =  0.5*dissolve_time,
+        func = (function() childParts:fade(0.15*dissolve_time) return true end)
+    }))
+    G.E_MANAGER:add_event(Event({
+        blockable = false,
+        func = (function()
+                play_sound("unik_gore6", math.random()*0.2 + 0.9,0.5)
                 play_sound('generic1', math.random()*0.2 + 0.9,0.5)
             return true end)
     }))

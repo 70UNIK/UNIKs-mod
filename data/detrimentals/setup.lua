@@ -2,9 +2,9 @@ local areas_ref = SMODS.current_mod.custom_card_areas or function(G) end
 SMODS.current_mod.custom_card_areas = function(G)
     local ret = areas_ref(G)
     G.unik_detriment_area = CardArea( -- Should be saved in G for it to be preserved between reloads
-        15, -- x coordinate
+        14.5, -- x coordinate
         2.7, -- y coordinate
-        G.CARD_W * 2, -- width (this is the default for G.jokers)
+        G.CARD_W * 2.3, -- width (this is the default for G.jokers)
         G.CARD_H * 0.95*(63/95), -- height (this is the default for G.jokers)
         {
             -- optional, but recommended configs:

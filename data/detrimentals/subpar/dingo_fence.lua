@@ -76,7 +76,8 @@ UNIK.detriment{
         end
         --end applied
         if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
-            if not card.ability.extra.fire then
+            card.ability.extra.applied = false
+            if G.GAME.current_round.hands_left == 0 then
                 card.ability.extra.rounds = card.ability.extra.rounds + 1
                 if card.ability.extra.rounds >= card.ability.extra.no_hands_rounds then
                     selfDestruction(card,"k_unik_wall_jumped",G.C.BLACK)
@@ -86,17 +87,14 @@ UNIK.detriment{
                         colour = G.C.BLACK,
                     }
                 end
+            else
+                card.ability.extra.rounds = 0
+                return {
+                        message = localize('k_reset'),
+                        colour = G.C.BLACK,
+                    }
             end
-            card.ability.extra.fire = false
-            
+                
         end
-        if context.final_scoring_step and SMODS.calculate_round_score() > G.GAME.blind.chips and not context.blueprint  then
-            card.ability.extra.fire = true
-            card.ability.extra.rounds = 0
-			return {
-                message = localize('k_reset'),
-                colour = G.C.BLACK,
-			}
-		end
     end
 }

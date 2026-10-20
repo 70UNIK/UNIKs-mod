@@ -27,7 +27,9 @@ UNIK.detriment{
         end
         if context.on_select_play and not context.blueprint
         then
-            print("ccc")
+            for i,v in pairs(G.playing_cards) do
+                v.unik_flipped_check = nil
+            end
             for i,v in pairs(G.hand.highlighted) do
                 v.unik_flipped_check = true
             end
@@ -42,9 +44,7 @@ UNIK.detriment{
             if flips >= card.ability.extra.min_facedowns then
                 selfDestruction(card,"k_unik_wheel_burst",G.C.UNIK_THE_WHEEL)
             end
-            for i,v in pairs(G.playing_cards) do
-                v.ability.extra.unik_flipped_check = nil
-            end
+            
         end
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Wheel")) and not (G.GAME.blind.disabled) and not context.blueprint
         and not context.retrigger_joker then
