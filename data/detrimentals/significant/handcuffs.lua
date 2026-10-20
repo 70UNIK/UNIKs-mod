@@ -2,7 +2,7 @@ UNIK.detriment{
     key = "unik_handcuffs",
     atlas = "unik_detriments",
 	pos = { x = 4, y = 1 },
-    config = { extra = { selfDestruct = false,hand_size = -1,max = 8, min = 6} },
+    config = { extra = { added = false,hand_size = -1,max = 8, min = 6} },
     severity = 2,
     immutable = true,
     dongtong_compat = false,
@@ -18,7 +18,7 @@ UNIK.detriment{
 		G.hand:change_size(card.ability.extra.hand_size)
         card.ability.extra.max = G.hand.config.card_limit
         card.ability.extra.min = G.hand.config.card_limit - 2
-        
+        card.ability.extra.added = true
 	end,
 	-- Inverse of above function.
 	remove_from_deck = function(self, card, from_debuff)
@@ -29,11 +29,11 @@ UNIK.detriment{
         if context.setting_blind and (G.GAME.blind and (G.GAME.blind.config.blind.name == "The Manacle")) and not (G.GAME.blind.disabled) and not context.blueprint then
             selfDestruction(card,"k_unik_blind_start_manacle",HEX("575757"))
         end
-        if context.unik_hand_size_change and G.hand and context.cardarea == G.hand and not context.blueprint then
-            if G.hand.config.card_limit < v.ability.extra.min then
-                selfDestruction(v,"k_unik_manacle_small",HEX("575757"))
-            elseif G.hand.config.card_limit > v.ability.extra.max then
-                selfDestruction(v,"k_unik_manacle_big",HEX("575757"))
+        if context.unik_hand_size_change and G.hand and context.cardarea == G.hand and not context.blueprint and card.ability.extra.added then
+            if G.hand.config.card_limit < card.ability.extra.min then
+                selfDestruction(card,"k_unik_manacle_small",HEX("575757"))
+            elseif G.hand.config.card_limit > card.ability.extra.max then
+                selfDestruction(card,"k_unik_manacle_big",HEX("575757"))
             end
         end
     end

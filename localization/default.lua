@@ -1681,11 +1681,9 @@ return {
             bl_unik_junction = {
                 name = "The Junction",
                 text = {
-                    "Create a Baneful Pack",
-                    "containing Significant",
-                    "Detriment cards",
-                    "Skip it to Banish the",
-                    "Rightmost Joker",
+                    "Create a Baneful Pack containing",
+                    "Significant Detriment cards",
+                    "Skip it to destroy a random Joker",
                 }
             },
             bl_unik_horde = {
@@ -1694,17 +1692,15 @@ return {
                     "Create a Mega Baneful Pack",
                     "containing Subpar Detriment cards",
                     "Skipping will Banish the Leftmost",
-                    "Joker unless at least 3 are selected",
+                    "Destructible Joker",
                 }
             },
             bl_unik_puce_portal = {
                 name = "Puce Portal",
                 text = {
                     "Create an unskippable",
-                    "Mega Baneful Pack",
-                    "containing Severe",
-                    "Detriment cards",
-                    "Must select 2 to proceed",
+                    "Mega Baneful Pack containing",
+                    "Severe Detriment cards",
                 }
             }
  
@@ -1856,7 +1852,7 @@ return {
                         
                     },
                     {
-                        "E:2,C:red}Self destructs{} when a hand", 
+                        "{E:2,C:red}Self destructs{} when a hand", 
                         "containing {C:attention}#3#{} or more scoring",
                         "{C:red}face-down{} cards is played",
                         "or when facing {C:unik_wheel_color}The Wheel{}",
@@ -7771,7 +7767,16 @@ return {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2# Eternal Rental Egg#<s>2#{}",
 					"{C:red}Skipping will Banish{}",
-                    "{C:red} a random Joker{}"
+                    "{C:red}a random Joker{}"
+                }
+            },
+            p_unik_baneful_significant_1 = {
+                name = "Significant Baneful Pack",
+                text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# {X:unik_significant,C:white}Significant{} {C:white,X:unik_detriment}Detriment#<s>2#{}",
+					"{C:red}Skipping will Destroy{}",
+                    "{C:red}a random Joker{}"
                 }
             },
             unik_decrementing_food_jokers = {
@@ -10255,6 +10260,7 @@ return {
             k_unik_poop_remove = "Cleaned up!",
             k_unik_deflated = "Brought down!",
             k_unik_fight_club_quit = "Resigned!",
+            k_unik_baneful_pack = "Baneful Pack",
         },
         high_scores={},
         labels={

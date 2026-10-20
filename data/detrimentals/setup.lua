@@ -143,7 +143,7 @@ function G.UIDEF.create_UIBox_your_collection_detriments()
 	for k, v in pairs(G.P_CENTER_POOLS.Detriment) do
 		if not v.no_collection then pool[#pool + 1] = v end
 	end
-	return SMODS.card_collection_UIBox(pool, { 6, 3 }, {
+	return SMODS.card_collection_UIBox(pool, { 6, 6 }, {
 		h_mod = 0.95*63/95,
         w_mod = 0.71*47*1.35/71,
 		back_func = 'your_collection_other_gameobjects',
@@ -152,13 +152,32 @@ end
 
 function UNIK.create_detriment(args)
     local seed = args and args.seed or "unik_detriment_default"..G.GAME.round_resets.ante
+    local dissolve = args and args.no_dissolve and false or true
     local severity = args and args.severity or nil
     local key = args and args.forced_key or UNIK.poll_detriment_card({seed = seed,severity = severity})
     
     local card = SMODS.create_card { key = key }
-    card:start_materialize()
+    if dissolve == true then
+        card:start_materialize()
+    end
+    
     card:add_to_deck()
     G.unik_detriment_area:emplace(card)
+    return card
+end
+
+function UNIK.create_detriment_booster(area,args)
+    local seed = args and args.seed or "unik_detriment_default"..G.GAME.round_resets.ante
+    local severity = args and args.severity or nil
+    local key = args and args.forced_key or UNIK.poll_detriment_card({seed = seed,severity = severity})
+    
+    local front = SMODS.set_create_card_front or ((_type=='Base' or _type == 'Enhanced') and pseudorandom_element(G.P_CARDS, pseudoseed('front'..(key_append or '')..G.GAME.round_resets.ante))) or nil
+    local card = Card(area.T.x + area.T.w/2, area.T.y, G.CARD_W, G.CARD_H, front, G.P_CENTERS[key],
+    {bypass_discovery_center = SMODS.bypass_create_card_discovery_center or area==G.shop_jokers or area == G.pack_cards or area == G.shop_vouchers or (G.shop_demo and area==G.shop_demo) or area==G.jokers or area==G.consumeables,
+     bypass_discovery_ui = SMODS.bypass_create_card_discovery_center or area==G.shop_jokers or area == G.pack_cards or area==G.shop_vouchers or (G.shop_demo and area==G.shop_demo),
+     discover = SMODS.bypass_create_card_discover or area==G.jokers or area==G.consumeables, 
+     bypass_back = G.GAME.selected_back.pos})
+
     return card
 end
 

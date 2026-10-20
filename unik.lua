@@ -828,7 +828,7 @@ NFS.load(mod_path .. "data/bossBlinds/ravine.lua")()
 NFS.load(mod_path .. "data/bossBlinds/crater.lua")()
 NFS.load(mod_path .. "data/bossBlinds/abyss.lua")()
 NFS.load(mod_path .. "data/bossBlinds/wart.lua")()
---NFS.load(mod_path .. "data/bossBlinds/junction.lua")()
+NFS.load(mod_path .. "data/bossBlinds/junction.lua")()
 --NFS.load(mod_path .. "data/bossBlinds/horde.lua")()
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/bossBlinds/cryptid/joyless.lua")() --Cryptid crossmod
@@ -1141,6 +1141,8 @@ SMODS.UndiscoveredSprite({
 	py = 63,
 	no_overlay = true,
 })
+
+NFS.load(mod_path .. "data/boosters/baneful_pack.lua")()
 --MILD
 NFS.load(mod_path .. "data/detrimentals/subpar/poop.lua")()
 NFS.load(mod_path .. "data/detrimentals/subpar/breathalyzer.lua")()

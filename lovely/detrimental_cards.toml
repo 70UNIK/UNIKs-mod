@@ -34,3 +34,20 @@ pattern = '''(self.config.type == 'shop' and self ~= G.shop_vouchers) then'''
 payload = '''
 elseif G.unik_detriment_area and self == G.unik_detriment_area then
 '''
+
+# addtoarea
+[[patches]]
+[patches.pattern]
+target = 'functions/button_callbacks.lua'
+match_indent = true
+position = 'before'
+pattern = '''elseif card.ability.set == 'Joker' then '''
+payload = '''
+elseif card.ability.set == 'Detriment' then 
+    card:add_to_deck()
+    G.unik_detriment_area:emplace(card)
+    play_sound('card1', 0.8, 0.6)
+    play_sound('generic1')
+    dont_dissolve = true
+    delay_fac = 0.2
+'''
