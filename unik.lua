@@ -1149,23 +1149,32 @@ NFS.load(mod_path .. "data/detrimentals/subpar/breathalyzer.lua")()
 NFS.load(mod_path .. "data/detrimentals/subpar/inflation.lua")()
 NFS.load(mod_path .. "data/detrimentals/subpar/dingo_fence.lua")()
 NFS.load(mod_path .. "data/detrimentals/subpar/office_drone.lua")()
+NFS.load(mod_path .. "data/detrimentals/subpar/blind_booster.lua")()
 --SIGNIFICANT
 NFS.load(mod_path .. "data/detrimentals/significant/impound_notice.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/autocannibalism.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/giant_douche.lua")()
+NFS.load(mod_path .. "data/detrimentals/significant/turd_sandwich.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/broken_scale.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/border_wall.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/hook_n_discard.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/robert.lua")()
 NFS.load(mod_path .. "data/detrimentals/significant/handcuffs.lua")()
-
+NFS.load(mod_path .. "data/detrimentals/significant/decaying_tooth.lua")()
 --SEVERE
+NFS.load(mod_path .. "data/detrimentals/severe/happiness_is_mandatory.lua")()
+NFS.load(mod_path .. "data/detrimentals/severe/dismemberment.lua")()
+NFS.load(mod_path .. "data/detrimentals/severe/perishable_in_a_bottle.lua")()
+NFS.load(mod_path .. "data/detrimentals/severe/ransomware.lua")()
+NFS.load(mod_path .. "data/detrimentals/severe/incinerator.lua")()
+NFS.load(mod_path .. "data/detrimentals/severe/wildfire.lua")()
 
-
-NFS.load(mod_path .. "data/jokers/unik/detrimental/happiness.lua")()
-NFS.load(mod_path .. "data/jokers/unik/detrimental/autocannibalism.lua")()
-NFS.load(mod_path .. "data/jokers/unik/detrimental/impounded.lua")() 
+--OUTDATED: Detrimental Jokers
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/happiness.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/autocannibalism.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/impounded.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/detrimental/monster_spawner.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_scale.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_scale.lua")()
 NFS.load(mod_path .. "data/jokers/unik/detrimental/xchips_hater.lua")() --noimage
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/rancid_smoothie.lua")()
@@ -1178,13 +1187,13 @@ NFS.load(mod_path .. "data/jokers/unik/detrimental/caveman_club.lua")()
 NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_window.lua")()
 NFS.load(mod_path .. "data/jokers/unik/detrimental/goading_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/detrimental/headless_joker.lua")()
-NFS.load(mod_path .. "data/jokers/unik/detrimental/handcuffs.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/detrimental/border_wall.lua")()
-NFS.load(mod_path .. "data/jokers/unik/detrimental/hook_n_discard.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_arm.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/detrimental/decaying_tooth.lua")() --noimage
-NFS.load(mod_path .. "data/jokers/unik/detrimental/robert.lua")() --noimage
-NFS.load(mod_path .. "data/jokers/unik/detrimental/vampiric_hammer.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/handcuffs.lua")() 
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/border_wall.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/hook_n_discard.lua")() 
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_arm.lua")() 
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/decaying_tooth.lua")() --noimage
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/robert.lua")() --noimage
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/vampiric_hammer.lua")()
 --- 
 NFS.load(mod_path .. "data/overrides/autocannibal_jokers.lua")() 
 NFS.load(mod_path .. "data/overrides/crossmod.lua")() 

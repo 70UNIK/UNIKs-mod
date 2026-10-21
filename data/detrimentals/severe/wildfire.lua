@@ -1,0 +1,1 @@
+--The Flame, all enhanced cards are debuffed

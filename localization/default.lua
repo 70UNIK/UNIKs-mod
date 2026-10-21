@@ -1895,30 +1895,7 @@ return {
                     
                 }
             },
-            detr_unik_ransom = {
-                name = "Ransom",
-                text = {
-                    {
-                        "{C:red}Debuffs{} a random Joker",
-                        "of the {C:attention}highest rarity"
-                    },
-                    {
-                        "{C:attention}Selling{} costs {X:money,C:white}X#1#{}", --X1.25, so it harms those with higher econ more
-                        "your current {C:money}money",
-                        "and will {C:attention}undebuff{} Joker",
-                    },
-                    {
-                        "If held after {C:attention}#1#{} Round#<s>1#",
-                        "{C:red}Destroy debuffed{} Joker",
-                        "and {E:2,C:red}Self destruct{}"
-                    },
-                    {
-                        "{C:red}Destroy{} a random Joker",
-                        "and {E:2,C:red}Self destruct{} if",
-                        "{C:red}debuffed{} Joker is {C:red}removed"
-                    }
-                }
-            },
+            
             detr_unik_ = {
                 name = "",
                 text = {
@@ -1933,7 +1910,19 @@ return {
                     }
                 }
             },
-            
+            detr_unik_decaying_tooth = {
+                name = "Decaying Tooth",
+                text = {
+                    {
+                        "{C:red}Lose {C:gold}$#1#{} per card played",
+                    },
+                    {
+                        "{C:red}Self destructs{} after earning",
+                        "at least {C:gold}$#2#{} in a hand or",
+                        "when facing {C:unik_tooth_color}The Tooth{}",
+                    },
+                }
+            },
 
             --subpar
             detr_unik_poop = {
@@ -2024,12 +2013,35 @@ return {
             },
 
             --severe
-            detr_unik_amputation = {
-                name = "Amputation",
+            detr_unik_ransom = {
+                name = "Ransom",
+                text = {
+                    {
+                        "{B:1,C:white,s:0.8}Activated Ability",
+                        "All Jokers are {C:red}Ransomed",
+                    },
+                    {
+                        "Using {C:attention}removes sticker{}",
+                        "from a random Joker",
+                        "{C:attention}Use cost{} is {X:money,C:white}X#1#", --X0.4, so having like 5 jokers requires you to pay up x2 your money.
+                        "your money when obtaining",
+                        "this {X:unik_detriment,C:white}Detriment",
+                    },
+                    {
+                        "If held after {C:attention}#2#{} Round#<s>2#",
+                        "{C:red}Banish{} remaining {C:red}Ransomed{}",
+                        "Jokers and {E:2,C:red}Self destruct{}",
+                        "{E:2,C:red}Self destructs{} if no",
+                        "{C:red}Ransomed{} Jokers remain",
+                    },
+                }
+            },
+            detr_unik_dismemberment = {
+                name = "Dismemberment",
                 text = {
                     {
                         "{C:red}#1#{} Hand#<s>1#", -- -1 hand
-                        "{C:red}#2#{} Selection Limit",-- -1 selection limit
+                        "{C:red}#2#{} Card Selection Limit",-- -1 selection limit
                     },
                     {
                         "{E:2,C:red}Self destructs{} after",
@@ -2070,7 +2082,7 @@ return {
                     },
                 }
             },
-            detr_unik_perishable_bottle = {
+            detr_unik_perishable_in_a_bottle = { --rework: applies perishable on the rightmost Joker without perishable sticker on at the end of the round, self destructs when a joker perishes.
                 name = "Perishable in a Bottle",
                 text = {
                     {
@@ -2091,7 +2103,7 @@ return {
                         "{C:attention}All {C:attention}Enhanced{} cards are {C:red}debuffed{}", 
                     },
                     {
-                        "{C:red}Self destructs{} when less than", 
+                        "{E:2,C:red}Self destructs{} when less than", 
                         "{C:attention}#1#{} {C:attention}Enhanced{} card(s) remain in deck",  
                         "{C:inactive}(Currently {C:attention}#2#{C:inactive}  {C:attention}Enhanced Card#<s>2#{C:inactive})",
                     },
@@ -2104,26 +2116,31 @@ return {
                         "{C:attention}All {C:attention}Enhanced{} cards are {C:red}debuffed{}", 
                     },
                     {
-                        "{C:red}Self destructs{} when less than", 
+                        "{E:2,C:red}Self destructs{} when less than", 
                         "{C:attention}#1#{} {C:attention}Enhanced{} Card#<s>1# remain in deck",
                         "or when facing {C:unik_flame_color}The Flame{}",      
                         "{C:inactive}(Currently {C:attention}#2#{C:inactive}  {C:attention}Enhanced Card#<s>2#{C:inactive})",
                     },
                 }
             },
-            detr_unik_decaying_tooth = {
-                name = "Decaying Tooth",
+            detr_unik_incinerator = {
+                name = "Incinerator",
                 text = {
                     {
-                        "{C:red}Lose {C:gold}$#1#{} per card played",
+                        "{C:red}Destroys{} the rightmost",
+                        "destructible Joker when",
+                        "{C:attention}Blind is selected"
                     },
                     {
-                        "{C:red}Self destructs{} after earning",
-                        "at least {C:gold}$#2#{} in a hand or",
-                        "when facing {C:unik_tooth_color}The Tooth{}",
+                        "{E:2,C:red}Self destructs{} after",
+                        "{C:attention}selling{} #1# Joker#<s>1#"
                     },
+                    {
+                        "{C:inactive}(Currently {C:attention}#2#/#1# {C:inactive}Joker#<s>1# sold)"
+                    }
                 }
             },
+            
             detr_unik_happiness_is_mandatory = {
                 name = "Happiness is Mandatory",
                 text = {

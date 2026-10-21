@@ -17,6 +17,7 @@ SMODS.Consumable {
         local jokers = G.jokers and #G.jokers.highlighted or 0
         local boosters = G.shop_booster and #G.shop_booster.highlighted or 0
         local vouchers = G.shop_vouchers and #G.shop_vouchers.highlighted or 0
+        local detriments = G.unik_detriment_area and #G.unik_detriment_area.highlighted or 0
         --Exclude currently selected card
         if G.consumeables then
             for i,v in pairs(G.consumeables.highlighted) do
@@ -59,7 +60,15 @@ SMODS.Consumable {
                 end
             end
         end
-        if (shop_jokers + booster_cards + consumables + jokers + boosters + vouchers == 1) then
+         if G.unik_detriment_area then
+          for i,v in pairs(G.unik_detriment_area.highlighted) do
+                if v == card then
+                    detriments = detriments - 1
+                    break
+                end
+            end
+        end
+        if (shop_jokers + booster_cards + consumables + jokers + boosters + vouchers + detriments == 1) then
             return true
         end
         return false
@@ -118,6 +127,16 @@ SMODS.Consumable {
         end
         if G.shop_vouchers and #G.shop_vouchers.highlighted >= 1 then
             for i,v in pairs (G.shop_vouchers.highlighted) do
+                if v ~= card then
+                    c = v
+                    --print(c.config.center.key)
+                    break
+                end
+                --print(v.config.center.key)
+            end
+        end
+        if G.unik_detriment_area and #G.unik_detriment_area.highlighted >= 1 then
+            for i,v in pairs (G.unik_detriment_area.highlighted) do
                 if v ~= card then
                     c = v
                     --print(c.config.center.key)
