@@ -51,3 +51,29 @@ elseif card.ability.set == 'Detriment' then
     dont_dissolve = true
     delay_fac = 0.2
 '''
+
+
+# blind booster
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+match_indent = true
+position = 'before'
+pattern = '''card:flip()'''
+payload = '''
+if card.config.center.set == 'Booster' and UNIK.has_blindbooster() then
+
+elseif card.force_flipped_booster and UNIK.has_blindbooster() then
+    card.force_flipped_booster = nil
+else
+'''
+# blind booster
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+match_indent = true
+position = 'after'
+pattern = '''card:flip()'''
+payload = '''
+end
+'''

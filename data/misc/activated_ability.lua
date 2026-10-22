@@ -40,7 +40,7 @@ end
   function G.UIDEF.use_and_sell_buttons(card)
     local tdc =  G_UIDEF_use_and_sell_buttons_ref(card)
     if not All_in_Jest then
-        if (card.area == G.jokers) and card.config.center.all_in_jest and 
+        if (card.area == G.jokers or card.area == G.unik_detriment_area) and card.config.center.all_in_jest and 
          card.config.center.all_in_jest.use_ability and type(card.config.center.all_in_jest.use_ability) == "function"   then --Add a devour button
             local sell = nil
             local use = nil
@@ -62,9 +62,24 @@ end
             use = 
                 {n=G.UIT.C, config={align = "cr"}, nodes={
                 
-                {n=G.UIT.C, config={ref_table = card, align = "cr",maxw = 1.25, padding = 0.1, r=0.08, minw = 1.25, minh = (card.area and card.area.config.type == 'joker') and 0 or 1, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'unik_activate_ability_button', func = 'unik_can_activate_ability_button'}, nodes={
+                {n=G.UIT.C, config={ref_table = card, align = "cr",maxw = 1.25, padding = 0.1, r=0.08, minw = 1.25, minh = (card.area and card.area.config.type == 'joker') and 0 or 1, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = false, button = 'unik_activate_ability_button', func = 'unik_can_activate_ability_button'}, nodes={
                     {n=G.UIT.B, config = {w=0.1,h=0.6}},
-                    {n=G.UIT.T, config={text = localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
+                    {n=G.UIT.C, config={align = "tm"}, nodes={
+                    {n=G.UIT.R, config={align = "cm", maxw = 1.25}, nodes={
+                        {n=G.UIT.T, config={text = localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = card.aij_ability_cost_label and 0.4 or 0.55, shadow = true}}
+                    }},
+                    card.aij_ability_cost_label and {n=G.UIT.R, config={align = "cm"}, nodes={
+                        {n=G.UIT.T, config={text = localize('$'),colour = G.C.WHITE, scale = 0.4, shadow = true}},
+                        {n=G.UIT.T, config={ref_table = card, ref_value = 'aij_ability_cost_label',colour = G.C.WHITE, scale = 0.55, shadow = true}}
+                    }} or nil
+                    }},
+                    -- {n=G.UIT.B, config = {w=0.1,h=0.6}},
+                    
+                    -- {n=G.UIT.T, config={text = localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}},
+                    -- {n=G.UIT.R, config={align = "cm"}, nodes={
+                    --     {n=G.UIT.T, config={text = '-'..localize('$'),colour = G.C.WHITE, scale = 0.4, shadow = true}},
+                    --     {n=G.UIT.T, config={ref_table = card, ref_value = 'aij_ability_cost_label',colour = G.C.WHITE, scale = 0.55, shadow = true}}
+                    -- }},
                 }}
             }}
             --overwriting usual buttons

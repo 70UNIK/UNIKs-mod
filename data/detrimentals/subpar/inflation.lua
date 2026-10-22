@@ -6,7 +6,7 @@ UNIK.detriment{
     severity = 1,
     immutable = true,
     dongtong_compat = false,
-    attributes = { 'detrimental','lose_economy','detriment', 'immediate'},
+    attributes = { 'detrimental','lose_economy','detriment'},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.price_hike,card.ability.extra.skips,card.ability.extra.blinds_skipped} }
 	end,

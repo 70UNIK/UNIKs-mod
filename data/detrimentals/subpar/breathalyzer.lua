@@ -6,7 +6,7 @@ UNIK.detriment{
     severity = 1,
     immutable = true,
     dongtong_compat = false,
-    attributes = { 'detrimental','discard','detriment', 'immediate'},
+    attributes = { 'detrimental','discard','detriment'},
     loc_vars = function(self, info_queue, card)
         return { vars = {card.ability.extra.discards,card.ability.extra.rounds,card.ability.extra.curr_round} }
 	end,
@@ -37,7 +37,7 @@ UNIK.detriment{
             
         end
 
-		if context.discard and context.other_card == context.full_hand[#context.full_hand] then
+		if context.discard and (#context.full_hand == 0 or context.other_card == context.full_hand[#context.full_hand]) and not context.blueprint then
             card.ability.extra.curr_round = 0
             return{
                 message = localize('k_reset'),

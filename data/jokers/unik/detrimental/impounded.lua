@@ -120,33 +120,3 @@ SMODS.Joker {
 		end
     end
 }
---Hook to prevent selling Impounded if you're in debt.
-local sellPrevention = Card.can_sell_card
-function Card:can_sell_card(context)
-    local lockpick = next(find_joker("j_unik_lockpick"))
-    if (G.play and #G.play.cards > 0) or
-        (G.CONTROLLER.locked) or 
-        (G.GAME.STOP_USE and G.GAME.STOP_USE > 0) --or 
-        --G.STATE == G.STATES.BLIND_SELECT 
-        then return false end
-    --ALWAYS make it unsellable if detrimental.
-    if (self.config.center.rarity == 'unik_detrimental' or self.config.center.set == 'Detriment') and not self.config.center.sellable then
-        return false
-    end
-    if (G.SETTINGS.tutorial_complete or G.GAME.pseudorandom.seed ~= 'TUTORIAL' or G.GAME.round_resets.ante > 1) and
-        self.area and
-        self.area.config.type == 'joker' and
-        (not SMODS.is_eternal(self, {from_sell = true}) or ( SMODS.is_eternal(self, {from_sell = true}) and lockpick and not self.config.center.dissolve_immune and not self.ability.dissolve_immune)) then
-            if self.config.center.key == "j_unik_impounded" or self.config.center.must_afford_to_sell or self.config.center.key == "j_buf_afan_spc"  then
-                --Takes in factor credit card
-                if to_big((G.GAME.dollars-G.GAME.bankrupt_at) + self.ability.extra.cost) < to_big(0) then
-                    return false
-                end
-            else
-                return true
-            end
-    end
-    
-    local vaz = sellPrevention(self,context)
-    return vaz
-end

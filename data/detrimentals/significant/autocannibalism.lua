@@ -1,3 +1,14 @@
+-- Pool used by autocannibalism
+SMODS.ObjectType({
+	key = "autocannibalism_food",
+	default = "j_turtle_bean",
+	cards = {
+        'j_ice_cream',
+        'j_turtle_bean',
+        'j_popcorn',
+        'j_ramen',
+    },
+})
 UNIK.detriment{
     key = "unik_autocannibalism",
     atlas = "unik_detriments",
@@ -7,7 +18,7 @@ UNIK.detriment{
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_decrementing_food_jokers" }
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_depleted" }
 	end,
-    attributes = { 'detrimental','generation','joker','modify_card','stickers','immediate','detriment'},
+    attributes = { 'detrimental','generation','joker','modify_card','stickers','detriment'},
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = false,

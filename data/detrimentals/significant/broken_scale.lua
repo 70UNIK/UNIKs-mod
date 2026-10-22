@@ -3,7 +3,7 @@ UNIK.detriment{
     atlas = "unik_detriments",
 	pos = { x = 1, y = 1 },
     severity = 2,
-    attributes = { 'detrimental','scaling','short-term','detriment' },
+    attributes = { 'detrimental','scaling','detriment' },
     config = { extra = {rounds = 0,round_limit = 8} },
     loc_vars = function(self, info_queue, center)
         return { 
@@ -12,7 +12,7 @@ UNIK.detriment{
     pools = { ["unik_boss_blind_joker"] = true},
 	blueprint_compat = true,
     immutable = true,
-
+    dongtong_compat = false,
 	calc_scaling = function(self, card, other_card, initial_value, scalar_value, args)
         if scalar_value > 0 then
             return {

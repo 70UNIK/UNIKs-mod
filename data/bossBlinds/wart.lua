@@ -1,6 +1,6 @@
 SMODS.Blind{
     key = 'unik_wart',
-    boss = {min = 2}, 
+    boss = {min = 3}, 
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 44},
     boss_colour= HEX("e07850"),

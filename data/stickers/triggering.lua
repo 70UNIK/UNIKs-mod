@@ -66,10 +66,17 @@ SMODS.Sticker{
 local updateStickerHook = Card.update
 function Card:update(dt)
     
+    if self.ability and self.ability.unik_ransomed then
+        if not self.debuff and not self.area.config.collection then
+            self.debuff = true
+            if self.area == G.jokers then self:remove_from_deck(true) end
+        end
+    end
     if self.ability and self.ability.unik_shielded then
         self.debuff = false
         self.perma_debuff = false
     end
+    
     if self.ability and self.ability.unik_triggering then
         if (self.area == G.consumeables or self.area == G.hand) and self.ability and self.ability.unik_can_autotrigger then
             local canUse = false

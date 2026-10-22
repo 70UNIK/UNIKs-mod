@@ -7,7 +7,7 @@ UNIK.detriment{
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = true,
-    attributes = { 'detrimental','chips','detriment', 'immediate'},
+    attributes = { 'detrimental','chips','detriment'},
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips,card.ability.extra.hands_no_most,card.ability.extra.hands} }
 	end,
@@ -46,7 +46,7 @@ UNIK.detriment{
             local reset = true
             local play_more_than = (G.GAME.hands[context.scoring_name].played or 0)
             for handname, values in pairs(G.GAME.hands) do
-                if handname == context.scoring_name and values.played >= play_more_than and SMODS.is_poker_hand_visible(handname) then
+                if handname ~= context.scoring_name and values.played >= play_more_than and SMODS.is_poker_hand_visible(handname) then
                     reset = false
                     break
                     

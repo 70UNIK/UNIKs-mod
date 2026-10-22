@@ -40,5 +40,6 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.unik_significant = G.C.UNIK_SIGNIFICANT
     G.ARGS.LOC_COLOURS.unik_severe = G.C.UNIK_SEVERE
     G.ARGS.LOC_COLOURS.unik_detriment = G.C.UNIK_DETRIMENT
+    G.ARGS.LOC_COLOURS.unik_flame_color = G.C.UNIK_THE_FLAME
     return locHook(_c,_default)
 end

@@ -1917,10 +1917,46 @@ return {
                         "{C:red}Lose {C:gold}$#1#{} per card played",
                     },
                     {
-                        "{C:red}Self destructs{} after earning",
+                        "{E:2,C:red}Self destructs{} after earning",
                         "at least {C:gold}$#2#{} in a hand or",
                         "when facing {C:unik_tooth_color}The Tooth{}",
                     },
+                }
+            },
+            detr_unik_turd_sandwich = {
+                name = "Turd Sandwich",
+                text = {
+                    {
+                        "{C:mult}#1#{} Mult and",
+                        "{X:mult,C:white}X#2#{} Mult"
+                    },
+                    {
+                        "{C:mult}+#3#{} Mult and",
+                        "{X:mult,C:white}+X#4#{} Mult per",
+                        "card {C:attention}discarded"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} at",
+                        "{X:mult,C:white}X#5#{} Mult"
+                    }
+                }
+            },
+            detr_unik_giant_douche = {
+                name = "Giant Douche",
+                text = {
+                    {
+                        "{X:mult,C:white}X#1#{} Mult if", --X0.35
+                        "{C:red}Discards{} are above {C:attention}#2#"
+                    },
+                    {
+                        "{C:red}Debuffs{} drawn cards after",
+                        "a {C:red}Discard{} is used"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after playing",
+                        "a winning hand containing",
+                        "{C:attention}only{} {C:red}debuffed{} cards"
+                    }
                 }
             },
 
@@ -2002,7 +2038,7 @@ return {
                         "{C:red}X#1#{} Blind size",
                     },
                     {
-                        "{C:red}Self destructs{} after {C:attention}#2#{}",
+                        "{E:2,C:red}Self destructs{} after {C:attention}#2#{}",
                         "{C:attention}consecutive{} round#<s>2# with",
                         "{C:attention}0{} {C:blue}hands{} remaining"
                     },
@@ -2011,17 +2047,41 @@ return {
                     }
                 }
             },
+            detr_unik_blind_booster = {
+                name = "Blind Pack",
+                text = {
+                    {
+                        "{C:attention}Booster Packs{} are",
+                        "created {C:red}Face-down"
+                    },
+                    {
+                        "{C:green}#3# in #4#{} Cards",
+                        "in {C:attention}Booster Packs{} are",
+                        "created {C:red}Face-down",
+                        "{C:inactive,s:0.7}(Jokers excluded)"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after",
+                        "{C:red}not{} skipping",
+                        "{C:attention}#1# consecutive{} Booster Pack#<s>1#"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#2#/#1# {C:inactive}Booster#<s>2#)"
+                    }
+                    
+                }
+            },
 
             --severe
-            detr_unik_ransom = {
-                name = "Ransom",
+            detr_unik_ransomware = {
+                name = "Ransomware",
                 text = {
                     {
                         "{B:1,C:white,s:0.8}Activated Ability",
                         "All Jokers are {C:red}Ransomed",
                     },
                     {
-                        "Using {C:attention}removes sticker{}",
+                        "Use to {C:attention}remove sticker{}",
                         "from a random Joker",
                         "{C:attention}Use cost{} is {X:money,C:white}X#1#", --X0.4, so having like 5 jokers requires you to pay up x2 your money.
                         "your money when obtaining",
@@ -2041,15 +2101,16 @@ return {
                 text = {
                     {
                         "{C:red}#1#{} Hand#<s>1#", -- -1 hand
-                        "{C:red}#2#{} Card Selection Limit",-- -1 selection limit
+                        "{C:red}#2#{} Play Selection Limit",-- -1 selection limit'
+                        "{C:red}#3#{} Hand Size",-- -1 selection limit'
                     },
                     {
                         "{E:2,C:red}Self destructs{} after",
-                        "playing a {C:attention}Four of a Kind",
-                        "#3# time#<s>3#"
+                        "adding {C:attention}#4#{} Playing Cards",
+                        "to the deck"
                     },
                     {
-                        "{C:inactive}(Currently {C:attention}#4#/#3# {C:inactive}Hand#<s>2#)"
+                        "{C:inactive}(Currently {C:attention}#5#/#4# {C:inactive}Card#<s>4#)"
                     }
                 }
             },
@@ -2104,8 +2165,8 @@ return {
                     },
                     {
                         "{E:2,C:red}Self destructs{} when less than", 
-                        "{C:attention}#1#{} {C:attention}Enhanced{} card(s) remain in deck",  
-                        "{C:inactive}(Currently {C:attention}#2#{C:inactive}  {C:attention}Enhanced Card#<s>2#{C:inactive})",
+                        "{C:attention}#1#{} {C:attention}Enhanced{} Card#<s>1# remain in deck",
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:attention}Enhanced Card#<s>2#{C:inactive})",
                     },
                 }
             },
@@ -2119,7 +2180,7 @@ return {
                         "{E:2,C:red}Self destructs{} when less than", 
                         "{C:attention}#1#{} {C:attention}Enhanced{} Card#<s>1# remain in deck",
                         "or when facing {C:unik_flame_color}The Flame{}",      
-                        "{C:inactive}(Currently {C:attention}#2#{C:inactive}  {C:attention}Enhanced Card#<s>2#{C:inactive})",
+                        "{C:inactive}(Currently {C:attention}#2#{C:inactive} {C:attention}Enhanced Card#<s>2#{C:inactive})",
                     },
                 }
             },
@@ -2154,7 +2215,7 @@ return {
                     },
                     {
                         "{C:red,E:2}Self destructs{} after playing",
-                        "{C:attention}#1#{} scoring {C:unik_shitty_edition}Positive{} cards",
+                        "{C:attention}#1#{} scoring {C:unik_shitty_edition}Positive{} card#<s>1#",
                         "{C:inactive,s:0.6}Happiness is mandatory. Failure to be happy is treason.{}",
                     },
 
@@ -7705,6 +7766,16 @@ return {
                     "{C:red}Unremovable{}",
                 },
             },
+            unik_ransomed = {
+                name = "Ransomed",
+                text = {
+                    "Card is {C:red}debuffed{},",
+                    "{C:red}cannot{} be",
+                    "{C:attention}sold{} and will",
+                    "soon be destroyed",
+                    "by {C:red}Ransomware"
+                }
+            },
             p_unik_cube_1 = {
 				name = "Jumbo Cube Pack",
 				text = {
@@ -10278,6 +10349,11 @@ return {
             k_unik_deflated = "Brought down!",
             k_unik_fight_club_quit = "Resigned!",
             k_unik_baneful_pack = "Baneful Pack",
+            k_unik_booster_opened = "Opened!",
+            k_unik_blind_start_flame = "The Flame",
+            k_unik_flame_extinguish = "Extinguished!",
+            k_unik_ransomware_thanks = "T H A N K   Y O U",
+            k_unik_ransomware_rage = "}}:fhE&#(4${{F{F\"'FO##$11)*874$$66_---}"
         },
         high_scores={},
         labels={
@@ -10308,6 +10384,7 @@ return {
             unik_lily_mark = "Mark of the Lily",
             unik_mad = "M.A.D",
             unik_impounded_blindside = "Locked",
+            unik_ransomed = "Ransomed",
         },
         quips={
             special_lose_unik_you_got_nil={

@@ -7,9 +7,9 @@ UNIK.detriment{
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = true,
-    attributes = { 'detrimental','face-down','detriment', 'immediate','chance'},
+    attributes = { 'detrimental','face-down','detriment','chance'},
     loc_vars = function(self, info_queue, card)
-        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds,'unik_wheel')
         return { vars = { 
             new_numerator,
             new_denominator,

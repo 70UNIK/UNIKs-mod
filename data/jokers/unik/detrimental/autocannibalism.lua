@@ -1,14 +1,4 @@
--- Pool used by autocannibalism
-SMODS.ObjectType({
-	key = "autocannibalism_food",
-	default = "j_turtle_bean",
-	cards = {
-        'j_ice_cream',
-        'j_turtle_bean',
-        'j_popcorn',
-        'j_ramen',
-    },
-})
+
 SMODS.Joker {
 	key = 'unik_autocannibalism',
     atlas = 'unik_normal_jokers',

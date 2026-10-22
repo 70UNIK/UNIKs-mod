@@ -4,7 +4,7 @@ UNIK.detriment{
 	pos = { x = 3, y = 4 },
     config = { extra = { blind_size = 1.5,no_hands_rounds = 4,rounds = 0,applied = false,fire = false} },
     severity = 1,
-    attributes = { 'detrimental','xblindsize','immediate','detriment' },
+    attributes = { 'detrimental','xblindsize','detriment' },
     add_to_deck = function(self, card, from_debuff)
         print("2")
 		-- If it appears during a blind (purple pentagram, trick o treat), then it should adjust it on spawn

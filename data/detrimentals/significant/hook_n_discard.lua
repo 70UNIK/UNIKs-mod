@@ -7,7 +7,7 @@ UNIK.detriment{
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = true,
-    attributes = { 'detrimental','face-down','detriment', 'immediate','chance'},
+    attributes = { 'detrimental','face-down','detriment'},
     loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.min_discards, center.ability.extra.discarded_cards, center.ability.extra.current_discards} }
 	end,

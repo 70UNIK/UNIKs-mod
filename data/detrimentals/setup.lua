@@ -233,7 +233,7 @@ function UNIK.poll_detriment_card(args)
         pool_opts = pool_opts or {}
     
         if G.GAME.used_jokers[v.key] then
-            print("ALREDY EXISTS!")
+           -- print("ALREDY EXISTS!")
         end
         if in_pool and not (G.GAME.used_jokers[v.key] and not SMODS.showman(v.key)) then 
             add = true 
@@ -249,7 +249,7 @@ function UNIK.poll_detriment_card(args)
             final_pool[#final_pool+1] = v.key
         end
     end
-    print(final_pool)
+    --print(final_pool)
     --run through backups!
     if #final_pool == 0 then
         print("EMPTY POOL! backup!")
@@ -262,7 +262,7 @@ function UNIK.poll_detriment_card(args)
         return 'detr_unik_poop' --hard default when all else fails
     else
         local final_key = pseudorandom_element(final_pool, pseudoseed(seed))
-        print(final_key)
+        --print(final_key)
         return final_key
     end
 end

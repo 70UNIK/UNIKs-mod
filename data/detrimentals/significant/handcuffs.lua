@@ -7,7 +7,7 @@ UNIK.detriment{
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = false,
-    attributes = { 'detrimental','hand_size','detriment', 'immediate'},
+    attributes = { 'detrimental','hand_size','detriment'},
      loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.bl_manacle
         return { vars = { center.ability.extra.selfDestruct, center.ability.extra.hand_size, center.ability.extra.max, center.ability.extra.min } }

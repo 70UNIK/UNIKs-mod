@@ -14,7 +14,7 @@ SMODS.Joker {
 	eternal_compat = true,
 	experimental = true,
 	demicoloncompat = true,
-	attributes = { 'destroy_card','xmult','scaling','detriment'},
+	attributes = { 'destroy_card','xmult','scaling','detriment','activated'},
     config = { extra = {x_mult = 1.0, x_mult_mod = 0.75,round_cooldown = 2,rounds_left = 0} },
 	loc_vars = function(self, info_queue, center)
 		return { key = center.ability.extra.rounds_left == 0 and 'j_unik_ghost_trap' or 'j_unik_ghost_trap_inactive', vars = {center.ability.extra.x_mult_mod,center.ability.extra.x_mult,center.ability.extra.round_cooldown ,center.ability.extra.rounds_left,
@@ -56,6 +56,8 @@ SMODS.Joker {
         end,
 
         use_ability = function(self, card, args)
+			args = args or {}
+            SMODS.calculate_context({all_in_jest = {joker_ability_used = true, card = card, retriggered = args.retriggered, args = args}})
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					if #G.unik_detriment_area.cards > 0 then
