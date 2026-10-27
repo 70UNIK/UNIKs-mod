@@ -2,14 +2,15 @@ SMODS.Sound({
     key = "ransom_jumpscare",
     path = "ransom_jumpscare.ogg",
 })
-
+--TODO:
+--For multiple instances of ransomware, it will have to use tables along with a ransomware "unique hash code"
 UNIK.detriment{
     key = "unik_ransomware",
     atlas = "unik_detriments",
 	pos = { x = 1, y = 3 },
     severity = 3,
     attributes = { 'detrimental','modify_card','destroy_card','banishing','debuff','detriment','activated' },
-    config = { extra = {rounds_left = 3,multiplier = 0.4,use_cost = 20} },
+    config = { extra = {rounds_left = 3,multiplier = 0.3,use_cost = 20} },
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
         info_queue[#info_queue + 1] = { set = "Other", key = "unik_ransomed" }
@@ -79,6 +80,7 @@ UNIK.detriment{
             if jokers < 1 then
                 selfDestruction(card,'k_unik_ransomware_thanks',HEX("00FF00"),true)
             end
+            SMODS.calculate_context({other_ransomware_check = true})
             delay(0.5)
 		end,
     },
@@ -92,6 +94,17 @@ UNIK.detriment{
 
         --backup
 		if context.joker_type_destroyed and not card.ability.extra.rage_state and not context.blueprint and context.card and context.card ~= card then
+            local jokers = 0
+            for i,v in pairs(G.jokers.cards) do
+                if v.ability.unik_ransomed then
+                    jokers = jokers + 1
+                end
+            end
+            if jokers < 1 then
+                selfDestruction(card,'k_unik_ransomware_thanks',HEX("00FF00"),true)
+            end
+        end
+        if context.other_ransomware_check then
             local jokers = 0
             for i,v in pairs(G.jokers.cards) do
                 if v.ability.unik_ransomed then
@@ -123,11 +136,19 @@ UNIK.detriment{
 					colour = G.C.BLACK
 				}	
 			else
+                
+    
                 G.E_MANAGER:add_event(Event({
                     trigger = 'before',
                     func = function()
                         card.ability.extra.rage_state = true
+                        
+                        card.area:remove_card(card)
+                        G.play:emplace(card)
+                        
                         card.children.center:set_sprite_pos({x = 5, y = 6})
+                        card.role.draw_major.T.w = card.role.draw_major.T.w * 4
+                        card.role.draw_major.T.h = card.role.draw_major.T.h * 4
                         play_sound('unik_ransom_jumpscare', 1, 13)
                         return true
                     end
@@ -173,14 +194,12 @@ local updateStickerHook2 = Card.update
 function Card:update(dt)
     local ret = updateStickerHook2(self,dt)
     if self.config.center.key == 'detr_unik_ransomware' and self.ability.extra.rage_state then
-        self:juice_up(0,3)
+        self:juice_up(0,2)
         for i,v in pairs(G.jokers.cards) do
-            if v.ability.unik_impounded then
-                v:juice_up(0,3)
+            if v.ability.unik_ransomed then
+                v:juice_up(0,2)
             else
-                if v.ability.unik_impounded then
                 v:juice_up(0,1)
-            end
             end
         end
         if not (G.SETTINGS.paused) then

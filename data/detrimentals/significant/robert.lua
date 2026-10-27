@@ -28,10 +28,14 @@ UNIK.detriment{
         if context.on_select_play and not context.blueprint
         then
             for i,v in pairs(G.playing_cards) do
+                
                 v.unik_flipped_check = nil
             end
             for i,v in pairs(G.hand.highlighted) do
-                v.unik_flipped_check = true
+                if v.facing == 'back' then
+                    v.unik_flipped_check = true
+                end
+                
             end
         end
         if context.after and not context.blueprint then

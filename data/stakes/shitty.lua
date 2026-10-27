@@ -68,6 +68,7 @@ function Card:cry_calculate_voucher_perishable()
                 delay = 0.5 ,
                 colour = G.C.PERISHABLE,
             })
+            --
 		else
 			self.ability.perish_tally = self.ability.perish_tally - 1
 			card_eval_status_text(self, "extra", nil, nil, nil, {
@@ -92,6 +93,7 @@ function Card:cry_calculate_consumeable_perishable()
         --self:set_debuff()
 
         selfDestruction(self,"k_unik_perished",G.C.PERISHABLE)
+       -- SMODS.calculate_context({unik_perishing_joker = true,card = self})
     else
         disposableConsumableOverride(self)
     end
@@ -104,6 +106,7 @@ function Card:calculate_perishable()
         if self.ability.perish_tally <= 1 then
             self.ability.perish_tally = 1
             selfDestruction(self,"k_unik_perished",G.C.PERISHABLE)
+            --SMODS.calculate_context({unik_perishing_joker = true,card = self})
         else
             self.ability.perish_tally = self.ability.perish_tally - 1
             card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={self.ability.perish_tally}},colour = G.C.FILTER, delay = 0.45})

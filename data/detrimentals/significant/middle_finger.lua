@@ -1,0 +1,1 @@
+--middlemost card gives -66 Chips and X0.5 mult 

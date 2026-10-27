@@ -34,6 +34,7 @@ function Card:calculate_decaying()
             --self.ability.block_wl_copy = true
             --self:set_debuff()
             selfDestruction(self,"k_unik_perished",G.C.PERISHABLE)
+            SMODS.calculate_context({unik_perishing_joker = true,card = self})
         else
             self.ability.unik_decaying_tally = self.ability.unik_decaying_tally - 1
             card_eval_status_text(self, 'extra', nil, nil, nil, {message = localize{type='variable',key='a_remaining',vars={self.ability.unik_decaying_tally}},colour = G.C.PERISHABLE, delay = 0.5})

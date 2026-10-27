@@ -49,6 +49,7 @@ SMODS.Joker {
                             local _card = copy_card(context.unik_destroyed_joker, nil, nil, nil, nil)
                             _card:add_to_deck()
                             _card:start_materialize()
+                            _card.getting_sliced = nil
                             G.jokers:emplace(_card)
                              _card.ability.destroyed_by_megatron = nil
                             G.GAME.joker_buffer = 0

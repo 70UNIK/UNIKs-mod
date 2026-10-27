@@ -839,7 +839,7 @@ end
 --The Garbage: Add random debuffed niko cards equal to 20% of total cards in deck
 NFS.load(mod_path .. "data/bossBlinds/boring_blank.lua")()
 NFS.load(mod_path .. "data/bossBlinds/purple_pentagram.lua")()
---NFS.load(mod_path .. "data/bossBlinds/puce_portal.lua")()
+NFS.load(mod_path .. "data/bossBlinds/puce_portal.lua")()
 NFS.load(mod_path .. "data/bossBlinds/indigo_icbm.lua")() 
 NFS.load(mod_path .. "data/bossBlinds/maroon_magnet.lua")()
 NFS.load(mod_path .. "data/bossBlinds/raspberry_racket.lua")()

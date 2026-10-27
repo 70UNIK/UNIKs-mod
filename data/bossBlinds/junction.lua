@@ -1,9 +1,8 @@
 SMODS.Blind	{
     key = 'unik_junction',
     config = {},
-	showdown = true,
     boss = {min = 3}, 
-    boss_colour = HEX("FF5A2300"),
+    boss_colour = HEX("B53E16"),
     atlas = "unik_showdown_blinds",
     pos = { x = 0, y = 45},
     vars = {},
@@ -14,7 +13,6 @@ SMODS.Blind	{
             G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
             G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering and draw cards afterwards if in blind.
-            G.GAME.lartceps_pack_pity = 1
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 func = function()

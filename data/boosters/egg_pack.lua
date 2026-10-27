@@ -18,7 +18,7 @@ SMODS.Booster{
 	pos = { x = 10, y = 4 },
     cost = 4,
     weight = 0.7, 
-    config = { extra = 4, choose = 1 },
+    config = { extra = 4, choose = 1 ,forced_choose = 1},
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = egg_digital_hallucinations_compat,
 	loc_vars = function(self, info_queue, card)
@@ -43,8 +43,7 @@ SMODS.Booster{
 	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
 	no_doe = true,
 	unik_unskippable = function(self) --Unskippable when all jokers are eternal and slots not full.
-		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
-		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity <= 0 then
+		if G.GAME.unik_booster_forced_choose and G.GAME.unik_booster_forced_choose <= 0 then
 			return false
 		end
 		local validJokers = 0
@@ -69,23 +68,21 @@ SMODS.Booster{
         return carder
 	end,
 	skip_req_message = function(self)
-		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
 		
 		return {
 			{
-				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'lartceps_pack_pity'},localize("k_unik_skip_req2"),
+				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'unik_booster_forced_choose'},localize("k_unik_skip_req2"),
 			},
 		}
 	end,
 	skip_effect = function(self)
-		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 1
 		local validJokers = {}
         for i,v in pairs(G.jokers.cards) do
             if not SMODS.is_eternal(v,self) then
                 validJokers[#validJokers+1] = v
             end
         end
-		if #validJokers > 0 and not G.GAME.disable_banish_FX and G.GAME.lartceps_pack_pity > 0 then
+		if #validJokers > 0 and not G.GAME.disable_banish_FX and G.GAME.unik_booster_forced_choose > 0 then
 			 local select = pseudorandom_element(validJokers, pseudoseed("unik_egg_banish"))
 			 if G.GAME.blind then
 				G.GAME.blind:wiggle()

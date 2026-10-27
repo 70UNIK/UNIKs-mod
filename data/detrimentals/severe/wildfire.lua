@@ -5,7 +5,7 @@ UNIK.detriment{
 	pos = { x = 4, y = 3 },
     severity = 3,
      attributes = { 'detrimental','debuff','enhancements' },
-    config = { extra = {minCards = 2, cards = 4, selfDestruct = false,entered = false} },
+    config = { extra = {minCards = 1, cards = 4, selfDestruct = false,entered = false} },
     loc_vars = function(self, info_queue, center)
         return { key = next(SMODS.find_mod("Bunco")) and 'detr_unik_wildfire_bunc' or 'detr_unik_wildfire',
         vars = { center.ability.extra.minCards,center.ability.extra.cards} }
@@ -22,7 +22,7 @@ UNIK.detriment{
                 end
             end
         end
-        card.ability.extra.minCards = math.floor(cards/2)
+        card.ability.extra.minCards = math.floor(cards/4)
         G.E_MANAGER:add_event(Event({
             trigger = 'after',
             func = function()

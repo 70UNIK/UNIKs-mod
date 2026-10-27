@@ -27,7 +27,6 @@ SMODS.Blind	{
             G.GAME.blind:wiggle()
             G.GAME.blind.triggered = true
             G.GAME.unik_mortons_fork = true --flag will prevent other booster tags from triggering and draw cards afterwards if in blind.
-            G.GAME.lartceps_pack_pity = 4
             if G.jokers.cards then
 				G.GAME.blind:wiggle()
 				G.GAME.blind.triggered = true
@@ -70,7 +69,7 @@ G.FUNCS.can_skip_booster = function(e)
             obj = SMODS.OPENED_BOOSTER.config.center or nil
         end
 		if obj and obj.unik_unskippable and type(obj.unik_unskippable) == "function" then
-			if obj:unik_unskippable() == true then
+			if obj:unik_unskippable(SMODS.OPENED_BOOSTER) == true then
 				e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 				e.config.button = nil
 			else

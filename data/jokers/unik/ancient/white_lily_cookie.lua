@@ -36,7 +36,7 @@ local function White_lily_copy(card)
         end
         _card.ability.destroyed_by_megatron = nil
         _card.ability.unik_lily_mark = true
-        
+        _card.getting_sliced = nil
     
 
     

@@ -80,6 +80,9 @@ UNIK.detriment_severities = {
     }
 }
 
+function UNIK.detriment_tooltip()
+end
+
 ---PIXEL SIZE will be 3/4 of a usual card
 ---@ class UNIK.detriment : SMODS.Center
 ---@ field severity any Text or number. 1 = Mild, 2 = Significant, 3 = Severe, 4 = a Hypothetical "catastrophic"
@@ -221,6 +224,7 @@ function UNIK.poll_detriment_card(args)
     local seed = args.seed or ('unik_detriment_default'.. G.GAME.round_resets.ante)
     local pool = {}
     local final_pool = {}
+    local final_showman = {}
     if not severity then
         severity = UNIK.poll_detriment_severity(seed)
     end
@@ -229,6 +233,7 @@ function UNIK.poll_detriment_card(args)
 	end
     for k, v in ipairs(pool) do
         local add = nil
+        local add_showman = nil
         local in_pool, pool_opts = SMODS.add_to_pool(v, { source = seed })
         pool_opts = pool_opts or {}
     
@@ -237,21 +242,42 @@ function UNIK.poll_detriment_card(args)
         end
         if in_pool and not (G.GAME.used_jokers[v.key] and not SMODS.showman(v.key)) then 
             add = true 
+        elseif in_pool then
+            add_showman = true
         end
         if v.severity ~= severity then
             add = nil
+            add_showman = nil
         end
-        if v.no_pool_flag and G.GAME.pool_flags[v.no_pool_flag] then add = nil end
-        if v.yes_pool_flag and not G.GAME.pool_flags[v.yes_pool_flag] then add = nil end
-        if G.GAME.cry_banished_keys[v.key] then add = nil end
+        if v.no_pool_flag and G.GAME.pool_flags[v.no_pool_flag] then 
+            add = nil 
+            add_showman = nil
+        end
+        if v.yes_pool_flag and not G.GAME.pool_flags[v.yes_pool_flag] then 
+            add = nil 
+            add_showman = nil
+        end
+        if G.GAME.cry_banished_keys[v.key] then 
+            add = nil 
+            add_showman = nil
+        end
 
-        if add then
+        if add and not G.GAME.banned_keys[v.key] then
             final_pool[#final_pool+1] = v.key
+            final_showman[#final_showman+1] = v.key
+        elseif add_showman and not G.GAME.banned_keys[v.key] then
+            final_showman[#final_showman+1] = v.key
         end
     end
     --print(final_pool)
     --run through backups!
     if #final_pool == 0 then
+        print("EMPTY POOL!, moving to showman mode")
+        if #final_showman > 0 then
+            local final_key = pseudorandom_element(final_showman, pseudoseed(seed))
+            return final_key
+        end
+        
         print("EMPTY POOL! backup!")
         for i,v in pairs(UNIK.detriment_severities) do
             if v.value == severity then
@@ -266,3 +292,4 @@ function UNIK.poll_detriment_card(args)
         return final_key
     end
 end
+

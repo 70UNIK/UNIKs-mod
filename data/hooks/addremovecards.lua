@@ -247,6 +247,7 @@ function CardArea:emplace(card, location, stay_flipped)
     end
 end
 
+
 --Hook to prevent selling Impounded if you're in debt.
 local sellPrevention = Card.can_sell_card
 function Card:can_sell_card(context)

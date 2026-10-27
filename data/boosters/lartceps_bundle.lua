@@ -16,7 +16,7 @@ SMODS.Booster{
 	pos = { x = 9, y = 4 },
     cost = 0,
     weight = 0, 
-    config = { extra = 10, choose = 4 },
+    config = { extra = 10, choose = 4,forced_choose = 4 },
     --try to enter with Caine at your own risk!
     cry_digital_hallucinations = lartceps_digital_hallucinations_compat,
 	generate_lartceps = true,
@@ -42,16 +42,14 @@ SMODS.Booster{
 	no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
 	no_doe = true,
 	skip_req_message = function(self)
-		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
 		return {
 			{
-				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'lartceps_pack_pity'},localize("k_unik_skip_req"),
+				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'unik_booster_forced_choose'},localize("k_unik_skip_req"),
 			},
 		}
 	end,
-	unik_unskippable = function(self) --Always unskippable
-		G.GAME.lartceps_pack_pity = G.GAME.lartceps_pack_pity or 4
-		if G.GAME.lartceps_pack_pity and G.GAME.lartceps_pack_pity <= 0 then
+	unik_unskippable = function(self,booster) --Always unskippable
+		if G.GAME.unik_booster_forced_choose and G.GAME.unik_booster_forced_choose <= 0 then
 			return false
 		end
 		return true

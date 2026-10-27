@@ -38,6 +38,13 @@ SMODS.Joker {
 				message_key = "a_xmult",
 				message_colour = G.C.MULT,
 			})
+            return {
+                
+            }
+        end
+        if context.pseudorandom_result and context.result and not context.blueprint and not card.ability.immutable.destroyed and
+        ((not context.identifier) or (context.identifier and context.identifier ~= 'unik_aquamarine_resc2'))
+        then
             if not context.retrigger_joker and not context.repetition then
                 card.ability.immutable.funny = card.ability.immutable.funny + 1
             end         
@@ -74,9 +81,6 @@ SMODS.Joker {
                     colour = G.C.UNIK_EYE_SEARING_RED,
                 }
             end
-            return {
-                
-            }
         end
         if context.pseudorandom_result and context.result and not context.blueprint and not context.retrigger_joker and not card.ability.immutable.destroyed then
             card.ability.immutable.funny = 0

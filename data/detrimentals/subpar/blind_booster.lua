@@ -129,6 +129,6 @@ end
 
 function UNIK.has_blindbooster(args)
     local truth = next(SMODS.find_card('detr_unik_blind_booster'))
-    print(truth)
+ --   print(truth)
     return truth
 end

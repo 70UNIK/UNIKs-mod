@@ -2147,13 +2147,14 @@ return {
                 name = "Perishable in a Bottle",
                 text = {
                     {
-                        "{X:unik_echips,C:white}^#1#{} Chips",
-                        "and {X:unik_emult,C:white}^#2#{} Mult"
+                        "Applies {C:red}Perishable{} on the",
+                        "{C:attention}leftmost{} Joker without",
+                        "{C:red}Perishable{} sticker at the",
+                        "end of the round"
                     },
                     {
-                        "Sell this card to",
-                        "apply {C:red}Perishable",
-                        "on a {C:attention}random{} Joker"
+                        "{E:2,C:red}Self destructs{} if a",
+                        "Joker {C:red}Perishes",
                     }
                 }
             },
@@ -6136,7 +6137,7 @@ return {
                     "Gain {X:mult,C:white}X#1#{} Mult whenever",
                     "a {C:green}probability {C:attention}fails",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-                    "{C:inactive}(#3#/#4# consecutive fails...)",
+                    "{C:inactive}(#3#/#4# consecutive successes...)",
                 }
             },
             j_unik_megatron = {
@@ -7867,6 +7868,14 @@ return {
                     "{C:red}a random Joker{}"
                 }
             },
+            p_unik_baneful_severe_1 = {
+                name = "Mega Severe Baneful Pack",
+                text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# {X:unik_severe,C:white}Severe{} {C:white,X:unik_detriment}Detriment#<s>2#{}",
+					"{C:red}Unskippable{}",
+                }
+            },
             unik_decrementing_food_jokers = {
 				name = "Decrementing Food Jokers",
 				text = {
@@ -8108,6 +8117,12 @@ return {
                 name = "Dark Suits",
                 text = {
                 "{C:spades}Spades{}, {C:clubs}Clubs{}"
+                }
+            },
+            unik_detriment_chances = {
+                name = "Detriment Chances",
+                text = {
+                    
                 }
             },
             
@@ -10353,7 +10368,9 @@ return {
             k_unik_blind_start_flame = "The Flame",
             k_unik_flame_extinguish = "Extinguished!",
             k_unik_ransomware_thanks = "T H A N K   Y O U",
-            k_unik_ransomware_rage = "}}:fhE&#(4${{F{F\"'FO##$11)*874$$66_---}"
+            k_unik_ransomware_rage = "}}:fhE&#(4${{F{F\"'FO##$11)*874$$66_---}",
+            k_unik_incinerator = "Incinerated!",
+            k_unik_perishing = "The Decay Starts...",
         },
         high_scores={},
         labels={
