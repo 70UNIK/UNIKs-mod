@@ -1959,6 +1959,35 @@ return {
                     }
                 }
             },
+            detr_unik_middle_finger = {
+                name = "Middle Finger",
+                text = {
+                    {
+                        "{C:attention}Middlemost{} scoring card",
+                        "gives {C:chips}#1#{} Chips and",
+                        "{X:mult,C:white}#2#{} Mult when scored"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after scoring",
+                        "the {C:attention}middlemost{} card",
+                        "{C:attention}exactly #3#{} time#<s>3# in a hand"
+                    }
+                }
+            },
+            detr_unik_monster_spawner = {
+                name = "Monster Spawner",
+                text = {
+                    {
+                        "Create {C:attention}#1#{} random {X:unik_detriment,C:white}Detriment#<s>1#{}",
+                    "at end of {C:attention}Boss Blind", 
+                    },
+                    {
+                        "{C:red}Self destructs{} after",
+                    "creating {C:attention}#2#{} {X:unik_detrimental,C:white}Detriment#<s>2#{}",
+                    "{C:inactive}(Currently {C:attention}#3#/#2#{C:inactive} {X:unik_detrimental,C:white}Detriment#<s>2#{C:inactive})",
+                    },
+                }
+            },
 
             --subpar
             detr_unik_poop = {
@@ -2069,6 +2098,107 @@ return {
                         "{C:inactive}(Currently {C:attention}#2#/#1# {C:inactive}Booster#<s>2#)"
                     }
                     
+                }
+            },
+            detr_unik_abstraction = {
+                name = "Abstraction",
+                text = {
+                    {
+                        "{C:chips}#1#{} Chips for",
+                        "each {C:attention}Joker{} held",
+                        "{C:inactive}(Currently {C:chips}#2#{C:inactive} Chips)"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after",
+                        "{C:red}destroying{} {C:attention}#3#{} Joker#<s>3#",
+                        
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#4#/#3# {C:inactive}Joker#<s>3#)"
+                    }
+                }
+            },
+            detr_unik_broken_hourglass = {
+                name = "Broken Hourglass",
+                text = {
+                    {
+                        "{C:money}-$#1#{} whenever",
+                        "a {C:red}Discard{} is used"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{}",
+                        "after {C:attention}#2#{} round#<s>2# ",
+                        "without using {C:red}Discards",
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#3#/#2# {C:inactive}Round#<s>2#)"
+                    }
+                }
+            },
+            detr_unik_emphoso = {
+                name = "Emphoso",
+                text = {
+                    {
+                        "Scored {C:attention}Face Cards",
+                        "give {C:mult}#1#{} Mult"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after holding",
+                        "at least {C:attention}#2#{}",
+                        "{C:attention}King#<s>2#{},{C:attention} Queen#<s>2#{} or {C:attention}Jack#<s>2#{}",
+                        "at the end of round",
+                    }
+                }
+            },
+            detr_unik_flock_camera = {
+                name = "Flock Camera",
+                text = {
+                    {
+                        "{C:mult}#1#{} Mult if",
+                        "{C:attention}Poker Hand{} has already",
+                        "been played this round"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after playing",
+                        "the same {C:attention}Poker Hand{}",
+                        "{C:attention}#2# Consecutive{} time#<s>2#"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#4# {C:attention}#3#/#2# {C:inactive}Time#<s>2#)"
+                    }
+                }
+            },
+            detr_unik_meteor_storm = {
+                name = "Meteor Storm",
+                text = {
+                    {
+                        "{C:red}Levels down{} #1# random",
+                        "{C:attention}Poker Hand#<s>1#{} when",
+                        "Blind is selected"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after playing",
+                        "a level {C:attention}#2#{} or lower",
+                        "{C:attention}Poker Hand #3#{} time#<s>3#"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#4#/#3# {C:inactive}Hand#<s>3#)"
+                    }
+                }
+            },
+            detr_unik_straightjacket = {
+                name = "Straightjacket",
+                text = {
+                    {
+                        "{C:chips}#1#{} Chips if",
+                        "hand does {C:red}not{} contain",
+                        "a {C:attention}Straight"
+                    },
+                    {
+                        "{E:2,C:red}Self destructs{} after",
+                        "playing a hand containing",
+                        "a {C:attention}Straight Flush"
+                    }
                 }
             },
 
@@ -5196,6 +5326,23 @@ return {
                     "{E:1,s:1.3,C:unik_ancient}?????",
                 }
             },
+            j_unik_moonlight_cookie_ancient = { --capped at X1
+                name = 'Ancient Moonlight Cookie',
+                text = {
+                    {
+                        "{X:chips,C:white}X#1#{} Chips and {X:mult,C:white}X#1#{} Mult",
+                        "to Poker Hand per level {C:attention}gained{}", 
+                    },
+                    {
+                        "Gives {X:mult,C:white}Xmult{} equal to",
+                        "Played Poker Hand {C:mult}Mult",
+                        "{C:inactive}(Will give {X:mult,C:white}X#3#{C:inactive} Mult)"
+                    }
+                },
+                unlock = {
+                    "{E:1,s:1.3,C:unik_ancient}?????",
+                }
+            },
             j_unik_scratch = { 
                 name = 'Scratch',
                 text = {
@@ -5238,6 +5385,42 @@ return {
                 },
                 unlock = {
                     "{E:1,s:1.3,C:unik_ancient}?????",
+                }
+            },
+            j_unik_unik_ancient = { --mainline: ^0.03 chips
+                name = 'Ancient UNIK',
+                text = {
+                    {
+                        "This Joker gains {X:unik_echips,C:white}^#1#{} Chips", 
+                        "for each {C:attention}7{} in scoring hand", --Remove retriggers cause otherwise he becomes extremely powerful fast with retriggers, makes him more in line with Alice
+                        "{C:inactive}(Currently {X:unik_echips,C:white}^#2#{C:inactive} Chips)",
+                        "{C:inactive,s:0.7}(Caps at {X:unik_echips,C:white,s:0.7}^#4#{C:inactive,s:0.7} Chips)",
+                    }
+
+                },
+                unlock = {
+                    "{E:1,s:1.3,C:unik_ancient}?????",
+                }
+            },
+            j_unik_unik_capped_ancient = {
+                name = 'Ancient UNIK',
+                text = {
+                    {
+                        "{X:unik_echips,C:white}^#2#{C:inactive} Chips", 
+                    }
+
+                },
+                unlock = {
+                    "{E:1,s:1.3,C:unik_ancient}?????",
+                }
+            },
+            --creates a negative ancient joker when obtained, on blind select create an ancient joker (must have room), spend $10 to reroll the ancient joker's selected suit immediately.
+            j_unik_ancient_ancient_joker = {
+                name = 'Ancient Ancient Joker',
+                text = {
+                    {
+
+                    }
                 }
             },
             --Cube jokers
@@ -5550,6 +5733,26 @@ return {
                     "{E:1,s:1.3,C:unik_ancient}?????",
                 }
             },
+            j_unik_white_lily_cookie_ancient = {
+                name = 'Ancient White Lily Cookie',
+                text = {
+                    {
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} once",
+                        
+                    },
+                    {
+                        "Gains {X:unik_emult,C:white}^#2#{} Mult when this happens",
+                        "{C:inactive}(Currently {X:unik_emult,C:white}^#1#{C:inactive} Mult)",
+                        "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
+                        "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)",
+                        "{C:inactive,s:0.7}(Caps at {X:unik_emult,C:white,s:0.7}^#3#{C:inactive,s:0.7} Mult)",
+                    }
+
+                },
+                unlock = {
+                    "{E:1,s:1.3,C:unik_ancient}?????",
+                }
+            },
             j_unik_white_lily_cookie_capped = {
                 name = 'White Lily Cookie',
                 text = {
@@ -5566,6 +5769,23 @@ return {
                         "{C:dark_edition,s:0.7,E:2}Floating Sprite by : 70UNIK{}",
                         "{C:unik_ancient,s:0.7,E:2}Origin : Cookie Run{}",
                     }
+
+                },
+                unlock = {
+                    "{E:1,s:1.3,C:unik_ancient}?????",
+                }
+            },
+            j_unik_white_lily_cookie_capped_ancient = {
+                name = 'Ancient White Lily Cookie',
+                text = {
+                    {
+                        "{X:unik_emult,C:white}^#1#{C:inactive} Mult",
+                    },
+                    {
+                        "{C:attention}Prevents{} Joker {C:red}destruction{} once",
+                        "{C:inactive}(Copies become {C:dark_edition}Negative{C:inactive} if no room)",
+                        "{C:inactive,s:0.8}(Creates a new copy instead if contains decrementing values)"
+                    },
 
                 },
                 unlock = {
@@ -6209,6 +6429,22 @@ return {
                     "With {C:attention}#2#"
                 }
             }, 
+            --april fools "Ancient Joker"
+            j_unik_niko_ancient = {
+                name = "Ancient Niko",
+                text = {
+                    {
+                        "On the {C:attention}first{} hand",
+                        "the first {C:attention}#1#{} played",
+                        "{C:unik_light_suit}Light Suit{} cards",
+                        "permanently gain {C:attention}+#2#{} Retrigger#<s>2#"
+                    },
+                },
+                unlock = { --test
+                    "Win in {C:attention}#1#",
+                    "With {C:attention}#2#"
+                }
+            },
             j_unik_sundae_cookie = {
                 name = "Sundae Cookie",
                 text = {
@@ -6229,7 +6465,22 @@ return {
                     "Win in {C:attention}#1#",
                     "With {C:attention}#2#"
                 }
-            },              
+            },    
+            j_unik_sundae_cookie_ancient = {
+                name = "Ancient Sundae Cookie",
+                text = {
+                    {
+                        "On the {C:attention}final{} hand", --since rescores are considered "stronger" than retriggers, makes sense for rescores to be set back.
+                        "the first {C:attention}#1#{} played",
+                        "{C:unik_dark_suit}Dark Suit{} cards",
+                        "permanently gain {C:unik_copper}+#2# Rescore#<s>2#"
+                    },
+                },
+                unlock = { --test
+                    "Win in {C:attention}#1#",
+                    "With {C:attention}#2#"
+                }
+            },    
             j_unik_night_skyline = {
                 name = "Night Skyline",
                 text = {
@@ -10371,6 +10622,7 @@ return {
             k_unik_ransomware_rage = "}}:fhE&#(4${{F{F\"'FO##$11)*874$$66_---}",
             k_unik_incinerator = "Incinerated!",
             k_unik_perishing = "The Decay Starts...",
+            k_unik_abstract_throw_away = "Thrown Away!",
         },
         high_scores={},
         labels={

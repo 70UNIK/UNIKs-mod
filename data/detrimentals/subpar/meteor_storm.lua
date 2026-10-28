@@ -1,0 +1,1 @@
+-- Levels down 2 random poker hands on blind select, self destructs after playing a level 2 or lower poker hand 15 times.

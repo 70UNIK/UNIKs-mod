@@ -1,0 +1,1 @@
+-- -25 Chips if hand does not contain a straight, self destructs if played hand contains a straight flush.

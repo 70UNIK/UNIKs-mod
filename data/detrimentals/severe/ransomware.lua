@@ -93,7 +93,7 @@ UNIK.detriment{
     calculate = function(self, card, context)
 
         --backup
-		if context.joker_type_destroyed and not card.ability.extra.rage_state and not context.blueprint and context.card and context.card ~= card then
+		if context.unik_other_joker_destroy and not card.ability.extra.rage_state and not context.blueprint and context.card and context.card ~= card then
             local jokers = 0
             for i,v in pairs(G.jokers.cards) do
                 if v.ability.unik_ransomed then
@@ -169,6 +169,7 @@ UNIK.detriment{
                                 G.GAME.cry_banished_keys[v.config.center.key] = true
                                 v:juice_up(2,2)
                                 v:gore6_break()
+                                local flags = SMODS.calculate_context({joker_type_destroyed = true, card = v})
                                 G.ROOM.jiggle = G.ROOM.jiggle + 2
                                 return true
                             end

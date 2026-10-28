@@ -1,1 +1,1 @@
--- -$2 per discard used
+-- -$2 per discard used, self destructs after 7 rounds without using any discards

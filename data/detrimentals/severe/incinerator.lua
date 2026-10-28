@@ -7,7 +7,7 @@ UNIK.detriment{
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = true,
-    attributes = { 'detrimental','destroy_card','jokers','detriment'},
+    attributes = { 'detrimental','destroy_card','joker','detriment'},
      loc_vars = function(self, info_queue, center)
         return { vars = { center.ability.extra.jokers_to_sell,center.ability.extra.jokers_sold } }
 	end,

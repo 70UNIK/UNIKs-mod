@@ -46,6 +46,7 @@ SMODS.Blind	{
                              G.GAME.blind.triggered = true
                             G.GAME.blind:wiggle()
                             neck_banish:gore6_break()
+                            local flags = SMODS.calculate_context({joker_type_destroyed = true, card = neck_banish})
                             if not G.GAME.banned_keys then
                             G.GAME.banned_keys = {}
                             end
@@ -91,6 +92,7 @@ SMODS.Blind	{
                         G.GAME.blind.triggered = true
                         G.GAME.blind:wiggle()
                         G.jokers.cards[i]:gore6_break()
+                        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = G.jokers.cards[i]})
                         if not G.GAME.banned_keys then
                         G.GAME.banned_keys = {}
                         end

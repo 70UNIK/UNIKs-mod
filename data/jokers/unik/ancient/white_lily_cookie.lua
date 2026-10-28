@@ -192,6 +192,7 @@ function Card.remove(self)
         if self.ability.set == 'Joker' and (not self.unik_dissolve_sell_flag) and 
         ((originalArea and originalArea == G.jokers) or (originalArea and originalArea == G.consumeables)) then
             if G and G.GAME then
+                SMODS.calculate_context({ unik_other_joker_destroy = true, card = self  })
                 if self.config.center.key == 'j_unik_white_lily_cookie' then
                     G.GAME.unik_white_lily_persistance = G.GAME.unik_white_lily_persistance + 1
                     white_lily = true

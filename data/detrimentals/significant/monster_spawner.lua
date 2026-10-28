@@ -1,0 +1,1 @@
+-- creates arandom detriment after defeating a boss blind, self destructgs after creating 2 detriments.

@@ -7,7 +7,7 @@ UNIK.detriment{
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = true,
-    attributes = { 'detrimental','destroy_card','jokers','detriment'},
+    attributes = { 'detrimental','destroy_card','joker','detriment'},
      loc_vars = function(self, info_queue, center)
         if not center.ability.perishable then
             info_queue[#info_queue + 1] = {key = 'perishable', set = 'Other', vars = {G.GAME.perishable_rounds or 1, G.GAME.perishable_rounds or G.GAME.perishable_rounds}}

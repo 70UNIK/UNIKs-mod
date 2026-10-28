@@ -1,1 +1,1 @@
---Face cards give -4 Mult
+--Face cards give -4 Mult, self destructs after holding at least 7 face cards when playing a hand

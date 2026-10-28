@@ -34,6 +34,7 @@ SMODS.Tag {
                             --neck_banish.banished_by_goblin = true
                             tag:juice_up(3,3)
                             neck_banish:gore6_break()
+                            local flags = SMODS.calculate_context({joker_type_destroyed = true, card = neck_banish})
                             if not G.GAME.banned_keys then
                             G.GAME.banned_keys = {}
                             end

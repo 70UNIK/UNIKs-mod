@@ -49,6 +49,7 @@ SMODS.Joker {
                         func = function()
                         
                         card:gore6_break()
+                        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = card})
                     return true end }))
                 else
                     context.card.sell_cost = -context.card.sell_cost

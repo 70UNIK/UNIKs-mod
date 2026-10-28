@@ -1,1 +1,1 @@
---middlemost card gives -66 Chips and X0.5 mult 
+--middlemost card gives -66 Chips and X0.5 mult, self destructs after playing 7 consecutive hands that are high card

@@ -52,7 +52,7 @@ SMODS.Joker {
                             func = function()
                                 G.jokers:remove_card(context.other_card)
                                 context.other_card:gore6_break()
-                                
+                                local flags = SMODS.calculate_context({joker_type_destroyed = true, card = context.other_card})
                                 card:juice_up(2, 0.5)
                                 return true
                             end,
