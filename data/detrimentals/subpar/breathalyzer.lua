@@ -33,12 +33,15 @@ UNIK.detriment{
                         colour = G.C.BLACK,
                     }
                 end
+            else
+                card.ability.extra.used = nil
             end
             
         end
 
 		if context.discard and (#context.full_hand == 0 or context.other_card == context.full_hand[#context.full_hand]) and not context.blueprint then
             card.ability.extra.curr_round = 0
+            card.ability.extra.used = true
             return{
                 message = localize('k_reset'),
                 colour = G.C.BLACK,

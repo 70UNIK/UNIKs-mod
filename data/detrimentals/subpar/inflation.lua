@@ -2,7 +2,7 @@ UNIK.detriment{
     key = "unik_inflation",
     atlas = "unik_detriments",
 	pos = { x = 2, y = 2 },
-    config = { extra = { price_hike = 2,blinds_skipped = 0,skips = 3} },
+    config = { extra = { price_hike = 1,blinds_skipped = 0,skips = 3} },
     severity = 1,
     immutable = true,
     dongtong_compat = false,

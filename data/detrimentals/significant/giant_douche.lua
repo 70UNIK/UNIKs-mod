@@ -7,7 +7,7 @@ UNIK.detriment{
     immutable = true,
     dongtong_compat = false,
     blueprint_compat = true,
-    attributes = { 'detrimental','discard','debuff','x_mult','detriment'},
+    attributes = { 'detrimental','discard','debuff','xmult','detriment'},
     loc_vars = function(self, info_queue, card)
         return { vars = {card.ability.extra.x_mult,0} }
 	end,

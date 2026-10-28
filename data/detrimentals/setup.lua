@@ -66,7 +66,7 @@ UNIK.detriment_severities = {
 		end,
         badge_colour = G.C.UNIK_SIGNIFICANT,
         text_colour = G.C.WHITE,
-         default_key = 'detr_unik_impound_notice',
+         default_key = 'detr_unik_turd_sandwich',
     },
     severe = {
         value = 3,
@@ -76,7 +76,7 @@ UNIK.detriment_severities = {
 		end,
         badge_colour = G.C.UNIK_SEVERE,
         text_colour = G.C.WHITE,
-        default_key = 'detr_unik_xchips_hater',
+        default_key = 'detr_unik_dismemberment',
     }
 }
 

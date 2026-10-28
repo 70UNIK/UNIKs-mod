@@ -92,7 +92,6 @@ SMODS.Joker {
                                     card.states.drag.is = true
                                     card.children.center.pinch.x = true
                                     card:gore6_break()
-                                    local flags = SMODS.calculate_context({joker_type_destroyed = true, card = card})
                                 
                                 return true
                             end
@@ -129,7 +128,6 @@ SMODS.Joker {
                                     card.states.drag.is = true
                                     card.children.center.pinch.x = true
                                     card:gore6_break()
-                                    local flags = SMODS.calculate_context({joker_type_destroyed = true, card = card})
                                 return true
                             end
                         }))

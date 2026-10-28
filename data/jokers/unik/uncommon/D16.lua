@@ -67,7 +67,6 @@ SMODS.Joker {
                             card.states.drag.is = true
                             card.children.center.pinch.x = true
                             card:boom_break()
-                            local flags = SMODS.calculate_context({joker_type_destroyed = true, card = card})
                             local card2 = create_card("Joker", G.jokers, nil, nil, nil, nil, "j_unik_megatron")
                             card2.ability.eternal = true
                             card2:add_to_deck()

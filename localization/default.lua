@@ -1965,12 +1965,15 @@ return {
                     {
                         "{C:attention}Middlemost{} scoring card",
                         "gives {C:chips}#1#{} Chips and",
-                        "{X:mult,C:white}#2#{} Mult when scored"
+                        "{X:mult,C:white}X#2#{} Mult when scored"
                     },
                     {
-                        "{E:2,C:red}Self destructs{} after scoring",
-                        "the {C:attention}middlemost{} card",
-                        "{C:attention}exactly #3#{} time#<s>3# in a hand"
+                        "{E:2,C:red}Self destructs{} if",
+                        "the middlemost card is",
+                        "{C:red}Debuffed{} in {C:attention}#3#{} hand#<s>3#"
+                    },
+                    {
+                        "{C:inactive}(Currently {C:attention}#4#/#3# {C:inactive}Hand#<s>3#)"
                     }
                 }
             },
@@ -2143,10 +2146,9 @@ return {
                         "give {C:mult}#1#{} Mult"
                     },
                     {
-                        "{E:2,C:red}Self destructs{} after holding",
-                        "at least {C:attention}#2#{}",
-                        "{C:attention}King#<s>2#{},{C:attention} Queen#<s>2#{} or {C:attention}Jack#<s>2#{}",
-                        "at the end of round",
+                        "{E:2,C:red}Self destructs{} after holding ",
+                        "at least {C:attention}#2#{} {C:attention}King#<s>2#{},{C:attention} Queen#<s>2#{}",
+                        "or {C:attention}Jack#<s>2#{} at the end of round",
                     }
                 }
             },
@@ -2168,8 +2170,8 @@ return {
                     }
                 }
             },
-            detr_unik_meteor_storm = {
-                name = "Meteor Storm",
+            detr_unik_meteor_shower = {
+                name = "Meteor Shower",
                 text = {
                     {
                         "{C:red}Levels down{} #1# random",
@@ -2207,10 +2209,10 @@ return {
                 name = "Ransomware",
                 text = {
                     {
-                        "{B:1,C:white,s:0.8}Activated Ability",
                         "All Jokers are {C:red}Ransomed",
                     },
                     {
+                        "{B:1,C:white,s:0.8}Activated Ability",
                         "Use to {C:attention}remove sticker{}",
                         "from a random Joker",
                         "{C:attention}Use cost{} is {X:money,C:white}X#1#", --X0.4, so having like 5 jokers requires you to pay up x2 your money.
@@ -10623,6 +10625,8 @@ return {
             k_unik_incinerator = "Incinerated!",
             k_unik_perishing = "The Decay Starts...",
             k_unik_abstract_throw_away = "Thrown Away!",
+            k_unik_melted = "Melted!",
+            k_unik_smashed = "Smashed!",
         },
         high_scores={},
         labels={

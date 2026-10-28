@@ -18,7 +18,7 @@ UNIK.detriment{
                 mult = card.ability.extra.mult
             }
         end
-        if context.after and context.cardarea == G.unik_detriment_area then
+        if context.after and context.cardarea == G.unik_detriment_area  and not context.blueprint then
             if context.scoring_name == card.ability.extra.last_poker_hand then
                 card.ability.extra.hands_played = card.ability.extra.hands_played + 1
                 if card.ability.extra.hands_played > card.ability.extra.hands then

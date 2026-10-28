@@ -16,7 +16,7 @@ UNIK.detriment{
 	end,
     calculate = function(self, card, context)
         --standard perishable
-        if context.end_of_round and context.cardarea == G.unik_detriment_area then
+        if context.end_of_round and context.cardarea == G.unik_detriment_area and not context.individual then
             for i,v in pairs(G.jokers.cards) do
                 if v and v.ability and v.ability.perishable and v.ability.perish_tally and v.ability.perish_tally <= 0 then
                     selfDestruction(card,'k_unik_perished',G.C.PERISHABLE)

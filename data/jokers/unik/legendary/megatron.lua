@@ -65,7 +65,6 @@ SMODS.Joker {
                         func = function()
                         
                         select:gore6_break()
-                        local flags = SMODS.calculate_context({joker_type_destroyed = true, card = select})
                         card:juice_up(2.5, 0.4)
                     return true end }))
                 return {

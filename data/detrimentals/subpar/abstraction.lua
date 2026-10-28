@@ -22,8 +22,9 @@ UNIK.detriment{
             end
            
         end
-		if context.unik_other_joker_destroy and not context.blueprint and context.card and context.card ~= card then
-            if card.ability.extra.jokers_destroyed > card.ability.extra.jokers_to_destroy then
+		if context.unik_other_joker_destroy and not context.blueprint and context.card and context.card ~= card  and not context.blueprint  then
+            card.ability.extra.jokers_destroyed = card.ability.extra.jokers_destroyed + 1
+            if card.ability.extra.jokers_destroyed >= card.ability.extra.jokers_to_destroy then
                 selfDestruction(card,"k_unik_abstract_throw_away",G.C.BLACK)
             else
                 return{
