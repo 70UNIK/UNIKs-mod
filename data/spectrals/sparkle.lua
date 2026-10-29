@@ -6,7 +6,7 @@ SMODS.Consumable{
 	cost = 4,
 	order = 90,
     config = {
-		max_highlighted = 1, extra= {cards_added = 3}
+		max_highlighted = 1, extra= {cards_added = 2}
 	},
 	attributes = {'modify_card', 'editions','generation', 'playing_card'},
 	can_use = function(self, card)

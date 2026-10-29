@@ -22,7 +22,7 @@ UNIK.detriment{
         return true
     end,
     calculate = function(self, card, context)
-        if context.end_of_round and context.cardarea == G.unik_detriments and not context.repetition and not context.blueprint then
+        if context.end_of_round and context.cardarea == G.unik_detriment_area and not context.repetition and not context.blueprint then
             if not card.ability.extra.used then
                 card.ability.extra.curr_round = card.ability.extra.curr_round + 1
                 if card.ability.extra.curr_round > card.ability.extra.rounds then

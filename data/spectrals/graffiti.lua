@@ -1,0 +1,1 @@
+--create 3 random tags, create 3 random detriments

@@ -46,12 +46,10 @@ SMODS.Edition({
 	calculate = function(self, card, context)
 		if
 			(
-				context.edition -- for when on jonklers
-				and context.cardarea == G.jokers -- checks if should trigger
-				and card.config.trigger -- fixes double trigger
+				context.post_joker
 			) or (
 				context.main_scoring -- for when on playing cards
-				and (context.cardarea == G.play or context.cardarea == G.hand)
+				and (context.cardarea == G.play or context.cardarea == G.hand or context.cardarea == G.consumeables)
 			)
 		then
 			return {

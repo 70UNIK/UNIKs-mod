@@ -2446,8 +2446,9 @@ return {
 				name = "Steel",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
-                    "then {X:mult,C:white}X#2#{} Mult",
-                    "if Joker has {C:attention}triggered{}",
+                    "if Joker has",
+                    "{C:red}not {C:attention}triggered{}",
+                    "during scoring",
 				},
 			},
             e_unik_shining_glitter = {
@@ -6359,7 +6360,7 @@ return {
                     "Gain {X:mult,C:white}X#1#{} Mult whenever",
                     "a {C:green}probability {C:attention}fails",
                     "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)",
-                    "{C:inactive}(#3#/#4# consecutive successes...)",
+                    "{C:inactive}(#3#/#4# consecutive fails...)",
                 }
             },
             j_unik_megatron = {
@@ -8129,6 +8130,15 @@ return {
 					"{C:red}Unskippable{}",
                 }
             },
+            p_unik_baneful_subpar_1 = {
+                name = "Mega Subpar Baneful Pack",
+                text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# {X:unik_subpar,C:white}Subar{} {C:white,X:unik_detriment}Detriment#<s>2#{}",
+					"{C:red}Skipping will Banish{}",
+                    "{C:red}a random Joker{}"
+                }
+            },
             unik_decrementing_food_jokers = {
 				name = "Decrementing Food Jokers",
 				text = {
@@ -8737,46 +8747,61 @@ return {
             c_unik_foundry = {
                 name = "Foundry",
                 text = {
-                    "Add {C:dark_edition}Steel{} to {C:attention}#1#",
+                    {
+                        "Add {C:dark_edition}Steel{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
-                    "Add {C:attention}#2#{} random",
+                    },
+                    {
+                        "Add {C:attention}#2#{} random",
                     "unmodified playing card#<s>2#",
+                    },
+                    
+                    
                 }
             },
-            -- c_cry_pointer_no_dupe = {
-			-- 	name = "POINTER://",
-			-- 	text = {
-			-- 		"Create a card",
-			-- 		"of {C:cry_code}your choice",
-			-- 		"{C:inactive,s:0.8}(Exotic Jokers excluded)",
-            --         "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
-            --         "{C:cry_code,s:0.8}POINTER:// {C:inactive,s:0.8}is already held"
-			-- 	},
-			-- },
+            
             c_unik_prism = {
                 name = "Prism",
                 text = {
-                     "Add {C:dark_edition}Polychrome{} to {C:attention}#1#",
+                    {
+                        "Add {C:dark_edition}Polychrome{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
-                    "Add {C:attention}#2#{} random",
+                    },
+                    {
+                        "Add {C:attention}#2#{} random",
                     "unmodified playing card#<s>2#",
+                    },
+                     
+                    
                 }
             },
             c_unik_bloater ={
                 name = "Overcapacity",
                 text = {
-                    "{C:attention}+#1#{} Hand Size",
-                    "Add {C:attention}#2#{} random",
-                    "unmodified playing card#<s>2#",
+                    {
+                        "{C:attention}+#1#{} Hand Size",
+                    },
+                    {
+                        "Add {C:attention}#2#{} random",
+                    "{C:unik_shitty_edition}Positive{} playing card#<s>2#",
+                    },
+                    
+                    
                 }
             },
             c_unik_sparkle = {
                 name = "Sparkle",
                 text = {
-                     "Add {C:dark_edition}Glittergrid{} to {C:attention}#1#",
+                    {
+                        "Add {C:dark_edition}Glittergrid{} to {C:attention}#1#",
                     "selected playing card#<s>1#",
-                    "Add {C:attention}#2#{} random",
+                    },
+                    {
+                        "Add {C:attention}#2#{} random",
                     "unmodified playing card#<s>2#",
+                    },
+                     
+                    
                 } 
             },
             c_unik_celeste = {
@@ -8856,13 +8881,71 @@ return {
                     "to {V:1}#2#{}",
                 }
             },
-            c_unik_forever = {
-                name = "Forever",
+            -- c_unik_forever = {
+            --     name = "Forever",
+            --     text = {
+            --         "Selected {C:attention}Playing cards{} gain",
+            --         "or lose {C:purple}Eternal"
+            --     }
+            -- }
+            c_unik_necronomicon = {
+                name = "Necronomicon",
                 text = {
-                    "Selected {C:attention}Playing cards{} gain",
-                    "or lose {C:purple}Eternal"
+                    {
+                        "Creates {C:attention}#1#{}",
+                        "{C:spectral}Spectral{} Card#<s>1#",
+                        "{C:inactive}(Must have room)"
+                    },
+                    {
+                        "Creates a",
+                        "{X:unik_subpar,C:white}Subpar{} {X:unik_detriment,C:white}Detriment"
+                    },
                 }
-            }
+            },
+            c_unik_doppleganger = {
+                name = "Doppleganger",
+                text = {
+                    {
+                        "{C:red}Destroy{} the {C:attention}Leftmost",
+                        "destructible {C:attention}Joker{} to",
+                        "create a copy of",
+                        "a random {C:attention}Joker",
+                    },
+                    {
+                        "Creates a",
+                        "{X:unik_significant,C:white}Significant{} and a",
+                        "{X:unik_severe,C:white}Severe{} {X:unik_detriment,C:white}Detriment"
+                    }
+                }
+            },
+            c_unik_jinx = {
+                name = "Jinx",
+                text = {
+                    {
+                        "Add {C:dark_edition}Glittergrid{} to",
+                        "a random {C:attention}Joker"
+                    },
+                    {
+                        "Creates a",
+                        "{X:unik_significant,C:white}Significant{} {X:unik_detriment,C:white}Detriment"
+                    }
+                }
+            },
+            c_unik_erase = {
+                name = "Erase",
+                text = {
+                    {
+                        "{C:red}Removes{} all {C:attention}Enhancements",
+                        "{C:attention}Editions{} and {C:attention}Seals",
+                        "from up to {C:attention}#1#{} Selected Cards and Jokers",
+                        "{C:inactive}({C:dark_edition}Negative {C:inactive}Excluded)"
+                    },
+                    {
+                        "Earn {C:money}$#1#{} per",
+                        "modifier {C:red}removed"
+                    }
+                }
+            },
         },
         Stake = (not All_in_Jest or (All_in_Jest and not All_in_Jest.config.blue_stake_rework)) and {
             stake_unik_shitty = {
@@ -9385,6 +9468,14 @@ return {
                     "Enhances {C:attention}#1#{} selected",
                     "card#<s>1# into a",
                     "{C:attention}Timber Card",
+                }
+            },
+            c_unik_weakness = {
+                name = "Weakness",
+                text = {
+                    "Decreases rank of",
+                    "up to {C:attention}#1#{} selected",
+                    "card#<s>1# by {C:attention}#2#",
                 }
             },
             --Linked group specific tarots
@@ -10627,6 +10718,8 @@ return {
             k_unik_abstract_throw_away = "Thrown Away!",
             k_unik_melted = "Melted!",
             k_unik_smashed = "Smashed!",
+
+            bunc_mysterious_tarot = "Tarot?",
         },
         high_scores={},
         labels={

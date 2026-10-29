@@ -31,20 +31,7 @@ SMODS.Joker {
 		if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed and
         ((not context.identifier) or (context.identifier and context.identifier ~= 'unik_aquamarine_resc2'))
         then
-            SMODS.scale_card(card, {
-				ref_table =card.ability.extra,
-				ref_value = "x_mult",
-				scalar_value = "x_mult_mod",
-				message_key = "a_xmult",
-				message_colour = G.C.MULT,
-			})
-            return {
-                
-            }
-        end
-        if context.pseudorandom_result and context.result and not context.blueprint and not card.ability.immutable.destroyed and
-        ((not context.identifier) or (context.identifier and context.identifier ~= 'unik_aquamarine_resc2'))
-        then
+            
             if not context.retrigger_joker and not context.repetition then
                 card.ability.immutable.funny = card.ability.immutable.funny + 1
             end         
@@ -80,8 +67,24 @@ SMODS.Joker {
                     message = localize("k_unik_D16_boom"),
                     colour = G.C.UNIK_EYE_SEARING_RED,
                 }
+            else
+                SMODS.scale_card(card, {
+				ref_table =card.ability.extra,
+				ref_value = "x_mult",
+				scalar_value = "x_mult_mod",
+				message_key = "a_xmult",
+				message_colour = G.C.MULT,
+			})
+            return {
+
+            }
             end
         end
+        -- if context.pseudorandom_result and not context.result and not context.blueprint and not card.ability.immutable.destroyed and
+        -- ((not context.identifier) or (context.identifier and context.identifier ~= 'unik_aquamarine_resc2'))
+        -- then
+            
+        -- end
         if context.pseudorandom_result and context.result and not context.blueprint and not context.retrigger_joker and not card.ability.immutable.destroyed then
             card.ability.immutable.funny = 0
         end

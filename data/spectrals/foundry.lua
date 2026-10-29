@@ -7,7 +7,7 @@ SMODS.Consumable{
 	atlas = "unik_consumables",
 	order = 90,
     config = {
-		max_highlighted = 1, extra = {odds = 3, cards_added = 3}
+		max_highlighted = 1, extra = {odds = 3, cards_added = 2}
 	},
 	attributes = {'modify_card', 'editions','generation', 'playing_card'},
 	can_use = function(self, card)

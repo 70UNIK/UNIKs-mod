@@ -1,0 +1,1 @@
+--destroys the leftmost destructible joker then copies a random joker and creates a severe detriment, 

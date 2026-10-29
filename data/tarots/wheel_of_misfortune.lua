@@ -25,7 +25,7 @@ SMODS.Consumable{
     config = { extra = { mischance = 3, odds = 4 } },
     loc_vars = function(self, info_queue, card)
         if not card.edition or (card.edition and not card.edition.unik_steel) then
-			info_queue[#info_queue + 1] = G.P_CENTERS.e_unik_steel
+			info_queue[#info_queue + 1] = { set = "Edition", key = "e_unik_steel_joker", config = {extra = G.P_CENTERS.e_unik_steel.config.x_mult} }
 		end
 		if not card.edition or (card.edition and not card.edition.negative) then
 			info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
@@ -38,7 +38,14 @@ SMODS.Consumable{
 			vars = {new_numerator, new_denominator},
 		}
 	end,
-    
+    set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(
+			G.localization.misc.dictionary.bunc_mysterious_tarot,
+			get_type_colour(self or card.config, card),
+			nil,
+			1.2
+		)
+	end,
 	use = function(self, card, area, copier)
         local used_consumable = copier or card
         if SMODS.pseudorandom_probability(card, 'unik_wheelmisfortune', card.ability.extra.mischance, card.ability.extra.odds, 'unik_wheelmisfortune')  then --bad

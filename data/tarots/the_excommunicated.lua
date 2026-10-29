@@ -10,6 +10,14 @@ SMODS.Consumable{
 
 		return { vars = { card and card.ability.max_highlighted or self.config.max_highlighted } }
 	end,
+    set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(
+			G.localization.misc.dictionary.bunc_mysterious_tarot,
+			get_type_colour(self or card.config, card),
+			nil,
+			1.2
+		)
+	end,
     	    unlocked = true,
     discovered = true,
     attributes = {'bunc_linked','destroy_cards'},

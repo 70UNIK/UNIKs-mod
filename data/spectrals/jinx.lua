@@ -1,0 +1,1 @@
+--add glittergrid to a random joker, create a significant detriment

@@ -11,6 +11,14 @@ SMODS.Consumable{
     config = {
         max_highlighted = 2,
     },
+    set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(
+			G.localization.misc.dictionary.bunc_mysterious_tarot,
+			get_type_colour(self or card.config, card),
+			nil,
+			1.2
+		)
+	end,
     attributes = {'bunc_linked','modify_card'},
     use = function(self, card)
         local cards = UNIK.get_sorted_by_position(G.hand)

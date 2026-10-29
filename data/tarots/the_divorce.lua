@@ -8,6 +8,14 @@ SMODS.Consumable{
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = 'Other', key = 'bunc_linked_group'}
 	end,
+    set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(
+			G.localization.misc.dictionary.bunc_mysterious_tarot,
+			get_type_colour(self or card.config, card),
+			nil,
+			1.2
+		)
+	end,
     	    unlocked = true,
     discovered = true,
     attributes = {'bunc_linked','modify_card'},

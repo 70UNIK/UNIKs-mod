@@ -1,0 +1,2 @@
+--create 2 spectral cards (must have room)
+--create a random subpar detriment.

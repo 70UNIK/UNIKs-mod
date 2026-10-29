@@ -3,7 +3,7 @@ UNIK.detriment{
     key = "unik_meteor_shower",
     atlas = "unik_detriments",
 	pos = { x = 1, y = 5 },
-    config = { extra = { poker_hands = 2,min_level = 2,hands = 0,hands_required = 8,applied = false} }, --why emult? 
+    config = { extra = { poker_hands = 2,min_level = 2,hands = 0,hands_required = 15,applied = false} }, --why emult? 
     severity = 1,
     immutable = true,
     dongtong_compat = false,
@@ -13,7 +13,7 @@ UNIK.detriment{
         return { vars = { card.ability.extra.poker_hands,card.ability.extra.min_level,card.ability.extra.hands_required,card.ability.extra.hands} }
 	end,
     add_to_deck = function(self, card, from_debuff)
-        if not card.ability.extra.applied then
+        if  G.GAME.blind.in_blind and not card.ability.extra.applied then
             card.ability.extra.applied = true
             local _poker_hands = {}
             local random_hands = {}
@@ -49,10 +49,10 @@ UNIK.detriment{
         if context.end_of_round then
             card.ability.extra.applied = false
         end
-        if context.cardarea == G.jokers and context.before then
+        if context.cardarea == G.unik_detriment_area and context.before then
             if G.GAME.hands[context.scoring_name].level <= card.ability.extra.min_level then
                 card.ability.extra.hands = card.ability.extra.hands + 1
-                if card.ability.extra.level1 == card.ability.extra.maxLevel1 then
+                if card.ability.extra.hands >= card.ability.extra.hands_required then
                     selfDestruction(card,"k_extinct_ex",G.C.BLACK)
                 else
                     return{

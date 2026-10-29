@@ -16,7 +16,7 @@ SMODS.Joker {
 	end,
     pools = { ["Food"] = true},
     calculate = function(self, card, context)
-		if (context.using_consumeable and context.consumeable.ability.set == 'unik_summit_card') or context.forcetrigger then
+		if (context.using_consumeable and context.consumeable.ability.set == 'unik_summit') or context.forcetrigger then
              
             G.E_MANAGER:add_event(Event({
                 trigger = 'before',

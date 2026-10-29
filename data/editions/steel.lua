@@ -40,7 +40,7 @@ SMODS.Edition({
 			return { key = key, vars = {self.config.base_x_mult}, }
 		elseif card.area and (card.area.config.type == 'joker' or card.area == G.jokers) or (card.ability and card.ability.set == 'Joker') then
 			key = 'e_unik_steel_joker'
-			return { key = key, vars = {self.config.x_mult,self.config.joker_x_mult
+			return { key = key, vars = {self.config.x_mult
 			}, }
 		end
         return { key = key, vars = {self.config.base_x_mult}, }
@@ -55,19 +55,19 @@ SMODS.Edition({
     in_shop = true,
     badge_colour = G.C.DARK_EDITION,
     calculate = function(self, card, context)
-		if context.before then
+		if context.press_play then
 			card.config.metal_scoring = true
 		end
-		if context.edition and context.cardarea == G.jokers and card.config.trigger then
+		if context.post_joker and not card.ability.steel_penalty_trigger then
 			return {
 				x_mult = self.config.x_mult,
 			} 
 		end
-		if context.post_trigger and context.other_card == card and not card.ability.steel_penalty_trigger and card.config.metal_scoring then
+		if context.post_trigger and context.other_card == card and card.config.metal_scoring then
 			card.ability.steel_penalty_trigger = true
-			return {
-				x_mult = self.config.joker_x_mult,
-			} 
+			-- return {
+			-- 	x_mult = self.config.joker_x_mult,
+			-- } 
 		end
 		--held in hand or on consumeables
 		if (context.main_scoring and context.cardarea == G.hand)then
@@ -81,13 +81,12 @@ SMODS.Edition({
 			} 
 		end
 
-		if context.joker_main then
-			card.config.trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)
-		end
+		-- if context.joker_main then
+		-- 	card.config.steel_trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)
+		-- end
 
 		if context.after then
 			card.ability.steel_penalty_trigger = nil
-			card.config.trigger = nil
 			card.config.metal_scoring = nil
 		end
 	end,

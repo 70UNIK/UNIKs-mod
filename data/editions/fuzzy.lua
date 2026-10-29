@@ -72,12 +72,10 @@ SMODS.Edition({
     calculate = function(self, card, context)
 		if
 			(
-				context.edition -- for when on jonklers
-				and context.cardarea == G.jokers -- checks if should trigger
-				and card.config.trigger -- fixes double trigger
+				context.post_joker
 			) or (
 				context.main_scoring -- for when on playing cards
-				and context.cardarea == G.play
+				and context.cardarea == G.play or context.cardarea == G.consumeables
 			)
 		then
 			return {
@@ -86,13 +84,7 @@ SMODS.Edition({
                 dollars = pseudorandom("unik_fuzzy_dollars", self.config.min_dollars, self.config.max_dollars),
 			} -- updated value
 		end
-		if context.joker_main then
-			card.config.trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)
-		end
-
-		if context.after then
-			card.config.trigger = nil
-		end
+	
 	end,
 generate_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
 		if not full_UI_table.name then

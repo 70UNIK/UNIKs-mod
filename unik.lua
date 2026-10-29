@@ -675,6 +675,7 @@ NFS.load(mod_path .. "data/poker_hands/light_dark_spectrum.lua")()
 NFS.load(mod_path .. "data/tarots/crossdresser.lua")()
 NFS.load(mod_path .. "data/tarots/oligarch.lua")()
 NFS.load(mod_path .. "data/tarots/carpenter.lua")()
+NFS.load(mod_path .. "data/tarots/weakness.lua")()
 NFS.load(mod_path .. "data/tarots/wheel_of_misfortune.lua")()
 --Bunco polymino tarots
 if next(SMODS.find_mod("Bunco")) then
@@ -698,6 +699,10 @@ NFS.load(mod_path .. "data/spectrals/turing.lua")()
 NFS.load(mod_path .. "data/spectrals/defend.lua")() 
 --NFS.load(mod_path .. "data/spectrals/forever.lua")() 
 NFS.load(mod_path .. "data/spectrals/purify.lua")() 
+NFS.load(mod_path .. "data/spectrals/necronomicon.lua")() 
+NFS.load(mod_path .. "data/spectrals/jinx.lua")() 
+NFS.load(mod_path .. "data/spectrals/doppleganger.lua")() 
+
 NFS.load(mod_path .. "data/spectrals/expel.lua")() 
 NFS.load(mod_path .. "data/spectrals/ring.lua")() 
 NFS.load(mod_path .. "data/spectrals/denial.lua")() 

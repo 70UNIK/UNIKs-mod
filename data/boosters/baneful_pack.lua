@@ -24,10 +24,10 @@ SMODS.Booster{
 			},
 		}
 	end,
-	-- ease_background_colour = function(self)
-    --   ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_DETRIMENT)
-    --   ease_background_colour { new_colour = G.C.UNIK_DETRIMENT, special_colour = G.C.BLACK, contrast = 2 }
-	-- end,
+	ease_background_colour = function(self)
+      ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_DETRIMENT)
+      ease_background_colour { new_colour = G.C.UNIK_DETRIMENT, special_colour = G.C.BLACK, contrast = 2 }
+	end,
 	create_card = function(self, card, i)
         return UNIK.create_detriment_booster(G.pack_cards,{severity = 2,no_dissolve = true })
 	end,
@@ -82,57 +82,6 @@ SMODS.Booster{
 
 
 SMODS.Booster{
-    key = "unik_baneful_severe_1",
-	kind = "Detriment",
-    atlas = "unik_consumables",
-	pos = { x = 11, y = 6 },
-    cost = 0,
-    weight = 0, 
-
-	get_weight = function(self)
-        return 0
-	end,
-    in_pool = function(self, args)
-        return false
-    end,
-    config = { extra = 5, choose = 2,forced_choose = 2},
-	draw_hand = false,
-	loc_vars = function(self, info_queue, card)
-		return {
-			vars = {
-				card and card.ability.choose or self.config.choose,
-				card and card.ability.extra or self.config.extra,
-			},
-		}
-	end,
-	-- ease_background_colour = function(self)
-    --   ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_DETRIMENT)
-    --   ease_background_colour { new_colour = G.C.UNIK_DETRIMENT, special_colour = G.C.BLACK, contrast = 2 }
-	-- end,
-	create_card = function(self, card, i)
-        return UNIK.create_detriment_booster(G.pack_cards,{severity = 3,no_dissolve = true })
-	end,
-    no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
-	no_doe = true,
-	group_key = "k_unik_baneful_pack",
-    unik_disablable = true,
-    unik_unskippable = function(self) --Unskippable when no jokers exist
-		if G.GAME.unik_booster_forced_choose and G.GAME.unik_booster_forced_choose <= 0 then
-			return false
-		end
-		return true
-	end,
-    skip_req_message = function(self)
-		
-		return {
-			{
-				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'unik_booster_forced_choose'},localize("k_unik_skip_req"),
-			},
-		}
-	end,
-}
-
-SMODS.Booster{
     key = "unik_baneful_subpar_1",
 	kind = "Detriment",
     atlas = "unik_consumables",
@@ -149,6 +98,7 @@ SMODS.Booster{
     config = { extra = 5, choose = 2,forced_choose = 2},
 	draw_hand = false,
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = { set = "Other", key = "unik_banishing" }
 		return {
 			vars = {
 				card and card.ability.choose or self.config.choose,
@@ -156,10 +106,10 @@ SMODS.Booster{
 			},
 		}
 	end,
-	-- ease_background_colour = function(self)
-    --   ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_DETRIMENT)
-    --   ease_background_colour { new_colour = G.C.UNIK_DETRIMENT, special_colour = G.C.BLACK, contrast = 2 }
-	-- end,
+	ease_background_colour = function(self)
+      ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_DETRIMENT)
+      ease_background_colour { new_colour = G.C.UNIK_DETRIMENT, special_colour = G.C.BLACK, contrast = 2 }
+	end,
 	create_card = function(self, card, i)
         return UNIK.create_detriment_booster(G.pack_cards,{severity = 1,no_dissolve = true })
 	end,
@@ -218,5 +168,58 @@ SMODS.Booster{
 			end
 		end
 		
+	end,
+}
+
+
+
+SMODS.Booster{
+    key = "unik_baneful_severe_1",
+	kind = "Detriment",
+    atlas = "unik_consumables",
+	pos = { x = 11, y = 6 },
+    cost = 0,
+    weight = 0, 
+
+	get_weight = function(self)
+        return 0
+	end,
+    in_pool = function(self, args)
+        return false
+    end,
+    config = { extra = 5, choose = 2,forced_choose = 2},
+	draw_hand = false,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				card and card.ability.choose or self.config.choose,
+				card and card.ability.extra or self.config.extra,
+			},
+		}
+	end,
+	ease_background_colour = function(self)
+      ease_colour(G.C.DYN_UI.MAIN, G.C.UNIK_DETRIMENT)
+      ease_background_colour { new_colour = G.C.UNIK_DETRIMENT, special_colour = G.C.BLACK, contrast = 2 }
+	end,
+	create_card = function(self, card, i)
+        return UNIK.create_detriment_booster(G.pack_cards,{severity = 3,no_dissolve = true })
+	end,
+    no_music = true, --prevent override of music, such as in boss blinds. WIll have to program it in without the decision (bos)
+	no_doe = true,
+	group_key = "k_unik_baneful_pack",
+    unik_disablable = true,
+    unik_unskippable = function(self) --Unskippable when no jokers exist
+		if G.GAME.unik_booster_forced_choose and G.GAME.unik_booster_forced_choose <= 0 then
+			return false
+		end
+		return true
+	end,
+    skip_req_message = function(self)
+		
+		return {
+			{
+				localize("k_unik_must_select"),{ref_table = G.GAME, ref_value = 'unik_booster_forced_choose'},localize("k_unik_skip_req"),
+			},
+		}
 	end,
 }
