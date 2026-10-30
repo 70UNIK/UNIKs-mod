@@ -11,11 +11,11 @@ SMODS.Back {
     order = 15,
 
     loc_vars = function(self, info_queue)
-		return {
-			vars = {
-			localize { type = 'name_text', key = 'c_unik_everest', set = 'unik_summit' },
-			}
-		}
+      return {
+        vars = {
+          localize { type = 'name_text', key = 'c_unik_everest', set = 'unik_summit' },
+        }
+      }
     end,
     apply = function(self, back)
         G.GAME.unik_summit_rate = 2
