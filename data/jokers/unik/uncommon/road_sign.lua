@@ -10,7 +10,7 @@ SMODS.Joker {
 	eternal_compat = true,
     demicoloncompat = true,
     config = { extra = { } },
-    attributes = { 'rank','ten','hand_type','unik_summit_card','consumables','generation'},
+    attributes = { 'rank','ten','hand_type','unik_summit','consumables','generation'},
     loc_vars = function(self, info_queue, center)
 		return { vars = {} }
 	end,
