@@ -56,7 +56,7 @@ SMODS.Edition({
 		end,
 calculate = function(self, card, context)
 		if
-			context.cardarea == G.jokers or context.cardarea == G.unik_detriment_area
+			(context.cardarea == G.jokers or context.cardarea == G.unik_detriment_area)
 			and context.post_trigger and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability
 			and context.other_card == card --animation-wise this looks weird sometimes
 		then
@@ -78,15 +78,6 @@ calculate = function(self, card, context)
 			end
 			
 		end
-
-		if context.joker_main then
-			card.config.trigger = true -- context.edition triggers twice, this makes it only trigger once (only for jonklers)
-		end
-
-		if context.after then
-			card.config.trigger = nil
-		end
-
 		if context.destroy_card and context.destroy_card == card and card.config.will_pop then
 			card.bloonpop = true
 			return { remove = true }

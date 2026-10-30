@@ -156,7 +156,7 @@ SMODS.Consumable {
         if c and c ~= nil and (c.config.center.key == 'j_unik_megatron' or c.config.center.key == "j_paperback_white_night" 
             or (c.config and c.config.center and c.config.center.paperback and c.config.center.paperback.permanently_eternal) or c.ability.unik_taw)
             then
-                if not is_detriment then
+                
                      if not G.GAME.banned_keys then
                 G.GAME.banned_keys = {}
                 end
@@ -164,7 +164,6 @@ SMODS.Consumable {
                     G.GAME.cry_banished_keys = {}
                 end
                 G.GAME.cry_banished_keys[card.config.center.key] = true
-                end
                
                 G.E_MANAGER:add_event(Event({
                     trigger="immediate",
@@ -175,13 +174,16 @@ SMODS.Consumable {
         elseif c and c ~= nil then
              G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
 
-            if  G.shop_vouchers and G.shop_vouchers.highlighted[1] and c.shop_voucher then
-                G.GAME.current_round.voucher.spawn[c.config.center.key] = nil
-            end
-            if not G.GAME.cry_banished_keys then
-                G.GAME.cry_banished_keys = {}
-            end
-            G.GAME.cry_banished_keys[c.config.center.key] = true
+                if not is_detriment then
+                    if  G.shop_vouchers and G.shop_vouchers.highlighted[1] and c.shop_voucher then
+                        G.GAME.current_round.voucher.spawn[c.config.center.key] = nil
+                    end
+                    if not G.GAME.cry_banished_keys then
+                        G.GAME.cry_banished_keys = {}
+                    end
+                    G.GAME.cry_banished_keys[c.config.center.key] = true
+                end
+            
 
             if not not c.base.value then -- is there a case where ~= nil would fail here?
                 for k, v in pairs(G.P_CARDS) do

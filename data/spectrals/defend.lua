@@ -48,15 +48,27 @@ SMODS.Consumable {
                 for i=1, #cards2 do
                     
                     local percent = 0.85 + (i-0.999)/(#cards2-0.998)*0.3
-                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() cards2[i]:flip();play_sound('tarot2', percent, 0.6);cards2[i]:juice_up(0.3, 0.3);
+
+                    G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() 
+                        cards2[i]:flip();
+                    play_sound('tarot2', percent, 0.6);
+                    cards2[i]:juice_up(0.3, 0.3);
                     cards2[i].ability.unik_shielded = true
                     if G.GAME.blind then G.GAME.blind:debuff_card(cards2[i]) end
                     
                     return true end }))
                 end
-                G.hand:unhighlight_all()
+                    G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.2,
+                    func = function()
+                        G.hand:unhighlight_all()
+                        return true
+                    end
+                })) 
                 card:juice_up(0.3, 0.5)
-            return true end })) 
+            return true end }))
+
         return true end })) 
     end,
 }

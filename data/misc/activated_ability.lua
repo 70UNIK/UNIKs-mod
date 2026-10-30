@@ -28,10 +28,27 @@ G.FUNCS.unik_activate_ability_button = function(e, mute, nosave)
     stop_use()
     local card = e.config.ref_table
     local area = card.area
+    G.CONTROLLER.locks.use = true
+    local prev_state = G.STATE
+    G.TAROT_INTERRUPT = G.STATE
+    G.STATE = (G.STATE == G.STATES.TAROT_PACK and G.STATES.TAROT_PACK) or
+      (G.STATE == G.STATES.PLANET_PACK and G.STATES.PLANET_PACK) or
+      (G.STATE == G.STATES.SPECTRAL_PACK and G.STATES.SPECTRAL_PACK) or
+      (G.STATE == G.STATES.STANDARD_PACK and G.STATES.STANDARD_PACK) or
+      (G.STATE == G.STATES.SMODS_BOOSTER_OPENED and G.STATES.SMODS_BOOSTER_OPENED) or
+      (G.STATE == G.STATES.BUFFOON_PACK and G.STATES.BUFFOON_PACK) or
+      G.STATES.PLAY_TAROT
+    
     if not All_in_Jest then
         e.config.ref_table.config.center.all_in_jest:use_ability(card)
     end
     SMODS.calculate_context({all_in_jest = {using_ability = true, card = card, area = card.from_area}})
+     G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.1,
+            func = function()
+        G.TAROT_INTERRUPT = nil
+        G.CONTROLLER.locks.use = false
+        G.STATE = prev_state
+    return true end }))
 end
 
 

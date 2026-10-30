@@ -136,6 +136,7 @@ SMODS.Joker {
                 local destroyed_cards = {}
                 for i, v in pairs(G.hand.highlighted) do
                     if not SMODS.is_eternal(v, card) and not v.shattered then
+                        v.to_be_eaten_by_lily = true
                         destroyed_cards[#destroyed_cards+1] = v
                     end
                 end
@@ -143,12 +144,14 @@ SMODS.Joker {
                 if #destroyed_cards == 0 then
                     for i, v in pairs(G.hand.cards) do
                         if not SMODS.is_eternal(v, card) and not v.shattered and #destroyed_cards < #G.hand.highlighted then
+                            v.to_be_eaten_by_lily = true
                             destroyed_cards[#destroyed_cards+1] = v
                         end
                     end
                 end
                 local glass_shattered = {}
                 for k, v in ipairs(destroyed_cards) do
+                    v.to_be_eaten_by_lily = true
                     if SMODS.has_enhancement(v, 'm_glass') then glass_shattered[#glass_shattered+1] = v end
                 end
 
@@ -163,21 +166,23 @@ SMODS.Joker {
                         return true
                     end
                 }))
-                for i=1, #destroyed_cards do
-                    destroyed_cards[i].shattered = true
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            if SMODS.shatters(destroyed_cards[i]) then
-                                destroyed_cards[i]:shatter()
-                            else
-                                destroyed_cards[i].to_be_eaten_by_lily = true
-                                destroyed_cards[i]:start_dissolve()
+                
+                       SMODS.destroy_cards(destroyed_cards)
+                -- for i=1, #destroyed_cards do
+                --     destroyed_cards[i].shattered = true
+                --     G.E_MANAGER:add_event(Event({
+                --         func = function()
+                --             if SMODS.shatters(destroyed_cards[i]) then
+                --                 destroyed_cards[i]:shatter()
+                --             else
+                --                 destroyed_cards[i].to_be_eaten_by_lily = true
+                --                 destroyed_cards[i]:start_dissolve()
                                 
-                            end
-                        return true
-                        end
-                    }))
-                end
+                --             end
+                --         return true
+                --         end
+                --     }))
+                -- end
                 
                 
                 delay(0.8)
@@ -198,10 +203,7 @@ SMODS.Joker {
                     colour = HEX("d377dc"),
                     card= card,
                 })
-                --clear all these flags to avoid awkwardness if there are stuff that copy playing cards on destruction
-                for i,v in pairs(G.playing_cards) do
-                    v.to_be_eaten_by_lily = nil
-                end
+
                 delay(0.3)
             else
                 error("UH OH!")

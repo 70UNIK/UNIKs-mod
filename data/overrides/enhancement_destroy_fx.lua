@@ -201,10 +201,14 @@ function Card:start_dissolve(dissolve_colours, silent, dissolve_time_fac, no_jui
         return nil;
     end
     if self.to_be_destroyed_by_lily or self.will_be_gored then
+        self.to_be_destroyed_by_lily = nil
+        self.will_be_gored = nil
         self:gore6_break()
         return nil
     end
+
     if self.to_be_eaten_by_lily then
+        self.to_be_eaten_by_lily = nil
         self:templerun_rip()
         return nil
     end

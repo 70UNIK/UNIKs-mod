@@ -48,6 +48,7 @@ function Game:update(dt)
     end
     
     if track_ante_purchases then
+        
         G.GAME.enable_ante_purchase_tracking = true
     else
         G.GAME.enable_ante_purchase_tracking = false
