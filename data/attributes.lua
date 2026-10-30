@@ -43,7 +43,7 @@ SMODS.Attribute {
 }
 
 SMODS.Attribute {
-    key = 'unik_summit'
+    key = 'summit_unik'
 }
 --no standign zone, clock (cryptid)
 SMODS.Attribute {
