@@ -18,7 +18,7 @@ UNIK.detriment{
                 mult = card.ability.extra.mult
             }
         end
-        if context.after and context.cardarea == G.unik_detriment_area and not context.blueprint then
+        if context.end_of_round and context.cardarea == G.unik_detriment_area and not context.blueprint then
             local faces = 0
             for i,v in pairs(G.hand.cards) do
                 local id = v:get_id()

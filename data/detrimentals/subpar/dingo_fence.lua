@@ -23,7 +23,7 @@ UNIK.detriment{
                     }))
                     card_eval_status_text(card, "extra", nil, nil, nil, {
                         message = localize("cry_good_luck_ex"),
-                        colour = G.C.UNIK_MILD,
+                        colour = G.C.BLACK,
                         card=card,
                     })
                     return true

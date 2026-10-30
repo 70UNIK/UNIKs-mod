@@ -3,7 +3,7 @@ UNIK.detriment{
     key = "unik_straightjacket",
     atlas = "unik_detriments",
 	pos = { x = 7, y = 2 },
-    config = { extra = { chips = -28, hand = 'Straight',destroy_hand = 'Straight Flush'} }, --why emult? 
+    config = { extra = { chips = -30, hand = 'Straight',destroy_hand = 'Straight Flush'} }, --why emult? 
     severity = 1,
     immutable = true,
     dongtong_compat = false,

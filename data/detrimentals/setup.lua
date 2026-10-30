@@ -50,11 +50,11 @@ UNIK.detriments = {
 UNIK.detriment_severities = {
     mild = {
         value = 1,
-        key = 'k_unik_mild',
+        key = 'k_unik_subpar',
         spawn_rate = function(self)
 			return 0.7
 		end,
-        badge_colour = G.C.UNIK_MILD,
+        badge_colour = G.C.UNIK_SUBPAR,
         text_colour = G.C.WHITE,
         default_key = 'detr_unik_poop',
     },

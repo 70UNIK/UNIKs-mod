@@ -274,9 +274,12 @@ function create_UIBox_HUD_jokerblind()
     return ret
 end
 
-function unik_ease_overshoot(mod)
+function unik_ease_overshoot(mode)
     if UNIK.overshootEnabled() then
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
+        G.GAME.unik_overshoot_cap = G.GAME.unik_overshoot_cap or 1
+        
+        local mod = math.min(mode,G.GAME.unik_overshoot_cap)
         G.GAME.overshoot_floor = G.GAME.overshoot_floor or 0
         if G.GAME.unik_overshoot + mod >= G.GAME.overshoot_floor then
             G.E_MANAGER:add_event(Event({
@@ -286,6 +289,9 @@ function unik_ease_overshoot(mod)
                 local ante_UI2 = G.HUD:get_UIE_by_ID('unik_overshoot_desc')
                 mod = mod or 0
                 if mod ~= 0 then
+                    if mode > G.GAME.unik_overshoot_cap then
+                        G.GAME.unik_overshoot_cap = math.ceil(G.GAME.unik_overshoot_cap*1.1)
+                    end
                     local text = '+'
                 local col = G.C.UNIK_EYE_SEARING_RED
                 if mod < 0 then

@@ -135,10 +135,12 @@ SMODS.Consumable {
                 --print(v.config.center.key)
             end
         end
+        local is_detriment = false
         if G.unik_detriment_area and #G.unik_detriment_area.highlighted >= 1 then
             for i,v in pairs (G.unik_detriment_area.highlighted) do
                 if v ~= card then
                     c = v
+                    is_detriment = true
                     --print(c.config.center.key)
                     break
                 end
@@ -154,13 +156,16 @@ SMODS.Consumable {
         if c and c ~= nil and (c.config.center.key == 'j_unik_megatron' or c.config.center.key == "j_paperback_white_night" 
             or (c.config and c.config.center and c.config.center.paperback and c.config.center.paperback.permanently_eternal) or c.ability.unik_taw)
             then
-                if not G.GAME.banned_keys then
+                if not is_detriment then
+                     if not G.GAME.banned_keys then
                 G.GAME.banned_keys = {}
                 end
                 if not G.GAME.cry_banished_keys then
                     G.GAME.cry_banished_keys = {}
                 end
                 G.GAME.cry_banished_keys[card.config.center.key] = true
+                end
+               
                 G.E_MANAGER:add_event(Event({
                     trigger="immediate",
                     func = function()

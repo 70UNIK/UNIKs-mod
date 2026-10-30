@@ -2,7 +2,7 @@ UNIK.detriment{
     key = "unik_office_drone",
     atlas = "unik_detriments",
 	pos = { x = 1, y = 2 },
-    config = { extra = { chips = -35,hands_no_most = 9,hands = 0 } }, --why emult? 
+    config = { extra = { chips = -40,hands_no_most = 9,hands = 0 } }, --why emult? 
     severity = 1,
     immutable = true,
     dongtong_compat = false,

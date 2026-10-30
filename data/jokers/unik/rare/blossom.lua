@@ -41,20 +41,33 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.unik_kite_experiment and context.scoring_hand then
             local validCards = {}
-            for i = 1, math.max(card.ability.extra.left_rescore,card.ability.extra.right_rescore) do
-                local strct = {}
-                for j = 1, #context.scoring_hand do
-                    
-                    if j == 1 and i <= card.ability.extra.left_rescore then
-                        strct[#strct+1] = context.scoring_hand[j]
+            if #context.scoring_hand > 1 then
+                for i = 1, math.max(card.ability.extra.left_rescore,card.ability.extra.right_rescore) do
+                    local strct = {}
+                    for j = 1, #context.scoring_hand do
+                        
+                        if j == 1 and i <= card.ability.extra.left_rescore then
+                            strct[#strct+1] = context.scoring_hand[j]
+                        end
+                        if j == #context.scoring_hand and i <= card.ability.extra.right_rescore then
+                            strct[#strct+1] = context.scoring_hand[j]
+                        end
                     end
-                    if j == #context.scoring_hand and i <= card.ability.extra.right_rescore then
-                        strct[#strct+1] = context.scoring_hand[j]
-                    end
+                    strct.unik_scoring_segment = true
+                    validCards[#validCards+1] = strct
                 end
-                strct.unik_scoring_segment = true
-                validCards[#validCards+1] = strct
+            elseif #context.scoring_hand == 1 then
+                for i = 1, card.ability.extra.left_rescore+card.ability.extra.right_rescore do
+                    local strct = {}
+                    for j = 1, #context.scoring_hand do
+                        
+                        strct[#strct+1] = context.scoring_hand[j]
+                    end
+                    strct.unik_scoring_segment = true
+                    validCards[#validCards+1] = strct
+                end
             end
+            
             
             if #validCards > 0 then
                 --Complex structure:

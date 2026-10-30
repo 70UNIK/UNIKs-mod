@@ -485,12 +485,12 @@ if (SMODS.Mods["Cryptid"] or {}).can_load then
 end
 
 --Discount Cursed
-SMODS.Rarity({
-	key = "unik_detrimental",
-	loc_txt = {},
-	badge_colour = HEX("474931"),
-	fallback_joker = 'j_unik_impounded'
-})
+-- SMODS.Rarity({
+-- 	key = "unik_detrimental",
+-- 	loc_txt = {},
+-- 	badge_colour = HEX("474931"),
+-- 	fallback_joker = 'j_unik_impounded'
+-- })
 NFS.load(mod_path .. "data/overrides/rarity_ownership.lua")() 
 
 UNIK.detrimental_rarities = {
@@ -1188,20 +1188,20 @@ NFS.load(mod_path .. "data/detrimentals/severe/wildfire.lua")()
 -- NFS.load(mod_path .. "data/jokers/unik/detrimental/happiness.lua")()
 -- NFS.load(mod_path .. "data/jokers/unik/detrimental/autocannibalism.lua")()
 -- NFS.load(mod_path .. "data/jokers/unik/detrimental/impounded.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/detrimental/monster_spawner.lua")() 
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/monster_spawner.lua")() 
 -- NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_scale.lua")()
-NFS.load(mod_path .. "data/jokers/unik/detrimental/xchips_hater.lua")() --noimage
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/xchips_hater.lua")() --noimage
 if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/jokers/cryptid/rancid_smoothie.lua")()
 	NFS.load(mod_path .. "data/jokers/cryptid/nostalgic_astral_in_a_bottle.lua")() --noimage
 end
 
 --Blind based detrimental/cursed
-NFS.load(mod_path .. "data/jokers/unik/detrimental/the_plant.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/detrimental/caveman_club.lua")()
-NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_window.lua")()
-NFS.load(mod_path .. "data/jokers/unik/detrimental/goading_joker.lua")() 
-NFS.load(mod_path .. "data/jokers/unik/detrimental/headless_joker.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/the_plant.lua")() 
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/caveman_club.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/broken_window.lua")()
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/goading_joker.lua")() 
+-- NFS.load(mod_path .. "data/jokers/unik/detrimental/headless_joker.lua")()
 -- NFS.load(mod_path .. "data/jokers/unik/detrimental/handcuffs.lua")() 
 -- NFS.load(mod_path .. "data/jokers/unik/detrimental/border_wall.lua")()
 -- NFS.load(mod_path .. "data/jokers/unik/detrimental/hook_n_discard.lua")() 

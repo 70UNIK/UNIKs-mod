@@ -56,7 +56,7 @@ SMODS.Edition({
 		end,
 calculate = function(self, card, context)
 		if
-			context.cardarea == G.jokers
+			context.cardarea == G.jokers or context.cardarea == G.unik_detriment_area
 			and context.post_trigger and not context.other_context.fixed_probability and not context.other_context.fix_probability and not context.other_context.mod_probability
 			and context.other_card == card --animation-wise this looks weird sometimes
 		then

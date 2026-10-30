@@ -3,7 +3,7 @@ UNIK.detriment{
     key = "unik_abstraction",
     atlas = "unik_detriments",
 	pos = { x = 3, y = 5 },
-    config = { extra = { chip_mod = -15, jokers_destroyed = 0,jokers_to_destroy = 4} }, --why emult? 
+    config = { extra = { chip_mod = -12, jokers_destroyed = 0,jokers_to_destroy = 4} }, --why emult? 
     severity = 1,
     immutable = true,
     dongtong_compat = false,

@@ -69,7 +69,8 @@ function Card:update(dt)
     if self.ability and self.ability.unik_ransomed then
         if not self.debuff and not self.area.config.collection then
             self.debuff = true
-            if self.area == G.jokers then self:remove_from_deck(true) end
+            self:set_debuff(true)
+
         end
     end
     if self.ability and self.ability.unik_shielded then
@@ -118,7 +119,7 @@ function Card:update(dt)
         if not self.debuff and not self.area.config.collection then
             self.debuff = true
             self:set_debuff(true)
-            if self.area == G.jokers then self:remove_from_deck(true) end
+
         end
     end
     if self.ability and self.ability.unik_ultradebuffed then
@@ -127,7 +128,7 @@ function Card:update(dt)
             self.debuff = true
             self.perma_debuff = true
             self:set_debuff(true)
-            if self.area == G.jokers then self:remove_from_deck(true) end
+
         end
     end
     local ret = updateStickerHook(self,dt)

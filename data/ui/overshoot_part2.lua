@@ -8,6 +8,8 @@ function G.UIDEF.overshoot_info(cantexit)
         if G.GAME and G.GAME.blind and G.GAME.blind.in_blind then
             base_value = G.GAME.blind.chips
         end
+            G.GAME.unik_overshoot_cap = G.GAME.unik_overshoot_cap or 1
+        local capper = G.GAME.unik_overshoot_cap
         -- automatically break if naneinf is detected (will default to +7)
         local amount = math.min(base_value*10^50,base_value^2.5)
         for i = 1, 20 do 
@@ -25,15 +27,18 @@ function G.UIDEF.overshoot_info(cantexit)
             -- end
             overshoot_amounts[#overshoot_amounts+1] = {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes={
                 {n=G.UIT.C, config={align = "cm", minw = 0.7}, nodes={
-                {n=G.UIT.T, config={text = "+" .. interval, scale = 0.4, colour = cantexit and darken(G.C.JOKER_GREY,0.3) or G.C.FILTER, shadow = true,id='overshoot_info_amount_value_' .. i}},
+                {n=G.UIT.T, config={text = "+" .. interval, scale = 0.4, colour = cantexit and darken(G.C.JOKER_GREY,0.3) or (i <= capper and G.C.FILTER) or darken(G.C.JOKER_GREY,0.3), shadow = true,id='overshoot_info_amount_value_' .. i}},
                 }},
                 {n=G.UIT.C, config={align = "cr", minw = 2.8}, nodes={
                 {n=G.UIT.O, config={object = blind_chip}},
                 {n=G.UIT.C, config={align = "cm", minw = 0.03, minh = 0.01}, nodes={}},
-                {n=G.UIT.T, config={text =number_format(value), scale = 0.4, colour = cantexit and darken(G.C.JOKER_GREY,0.3) or G.C.RED, shadow = true,id='overshoot_info_amount_' .. i}},
+                {n=G.UIT.T, config={text =number_format(value), scale = 0.4, colour = cantexit and darken(G.C.JOKER_GREY,0.3) or (i <= capper and G.C.RED) or darken(G.C.JOKER_GREY,0.3), shadow = true,id='overshoot_info_amount_' .. i}},
                 }}
             }}
             --naneinf will stop generating more lists
+            if i > capper then
+                break
+            end
             if tostring(number_format(value)) == 'naneinf' then
                 break
             end
@@ -77,12 +82,14 @@ function G.UIDEF.overshoot_info(cantexit)
             
             
         end
+        
         local localover = G.GAME.unik_overshoot
+        local localCap = G.GAME.unik_overshoot_cap
         local realstorage = {}
         realstorage[#realstorage+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
-                {n=G.UIT.C, config={align = "cm", r = 0.1, colour = darken(G.C.BLACK, 0.05), padding = 0.1,minw = 2,scale = 0.6}, nodes={
+                {n=G.UIT.C, config={align = "cm", r = 0.1, colour = darken(G.C.BLACK, 0.05), padding = 0.2,minw = 3,scale = 0.5}, nodes={
                     {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
-                        {n=G.UIT.T, config={text = localize('k_current') .. " ", scale = 0.5, colour = lighten(G.C.RED, 0.2), shadow = true}},
+                        --{n=G.UIT.T, config={text = localize('k_current') .. " ", scale = 0.5, colour = lighten(G.C.RED, 0.2), shadow = true}},
                         {n=G.UIT.T, config={text = localize('k_overshoot'), scale = 0.5, colour = lighten(G.C.RED, 0.2), shadow = true}},
                     }},
                     {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
@@ -90,7 +97,20 @@ function G.UIDEF.overshoot_info(cantexit)
                         {n=G.UIT.T, config={text = localover, scale = 2, colour = lighten(G.C.UNIK_RGB, 0.2), shadow = true, id = 'overshoot_info_number'}},
                     }}
                 }},
-            }}
+                {n=G.UIT.C, config={align = "cm", r = 0.1, colour = darken(G.C.BLACK, 0.05), padding = 0.2,minw = 3,scale = 0.5,
+                hover = true, 
+                can_collide = true,
+                unik_fake_tooltip = {title = localize("k_unik_overshoot_cap_title"), text = localize("k_overshoot_unik_cap_info")},
+                }, nodes={
+                        {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+                            {n=G.UIT.T, config={text = localize('k_unik_cap'), scale = 0.5, colour = lighten(G.C.RED, 0.2), shadow = true}},
+                        }},
+                        {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
+                            --{n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.GAME, ref_value = 'unik_overshoot'}}, colour = lighten(G.C.UNIK_RGB, 0.2),shadow = true, scale = 2}),id = 'overshoot_info_number'}},
+                            {n=G.UIT.T, config={text = localCap, scale = 2, colour = lighten(G.C.FILTER, 0.2), shadow = true, id = 'overshoot_cap_number'}},
+                        }}
+                    }}
+                }}
         realstorage[#realstorage+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05}, nodes={
             {n=G.UIT.C, config={align = "cm"}, nodes={
                 {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={
@@ -190,11 +210,20 @@ function predictFXValue(overshoot)
     end
 end
 
+function calculate_new_cap(increase,cap)
+    if increase > cap then
+        return math.ceil(1.1*cap)
+    end
+end
+
+
 function unik_trigger_overshoot_menu(increase)
     if UNIK.overshootEnabled() then
         G.FUNCS.overlay_menu{
             definition = G.UIDEF.overshoot_info(true),config = {no_esc = true}
         }
+        local cap_broken = false
+        local new_cap = G.GAME.unik_overshoot_cap
         --print(increase)
         --print(G.GAME.unik_overshoot)
         --print(predictFXValue(G.GAME.unik_overshoot + increase))
@@ -205,6 +234,50 @@ function unik_trigger_overshoot_menu(increase)
                 for i = 1, 20 do
                     local isnaninf = false
                     delay(0.4)
+                    --halt if naneinf
+                    if i > G.GAME.unik_overshoot_cap then
+                        cap_broken = true
+                        if cap_broken then
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    local number1 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_'.. i)
+                                    local number2 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_value_'.. i)
+                                    if tostring(number2.config.text) == 'naneinf' then
+                                        isnaninf = true
+                                    end
+                                    number1.config.colour = G.C.RED
+                                    number2.config.colour = G.C.RED
+                                    number1:juice_up(0.7,0.7)
+                                    number2:juice_up(0.7,0.7)
+                                    -- play_sound('highlight2', 0.4, 0.2)
+                                    -- play_sound('generic1')
+                                --  print(i)
+                                    --modify UI
+                                    if i > 1 then
+                                        local number3 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_'.. (i-1))
+                                        local number4 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_value_'.. (i-1))
+                                        number3:juice_up(0.7,0.7)
+                                        number4:juice_up(0.7,0.7)
+                                        
+                                    end
+                                return true
+                                end
+                            }))
+                            G.E_MANAGER:add_event(Event({
+                            func = function()
+                                
+                                local target = G.OVERLAY_MENU:get_UIE_by_ID("overshoot_cap_number")
+                                target.config.text = calculate_new_cap(increase,new_cap)
+                                G.OVERLAY_MENU:recalculate() 
+                                target:juice_up(1.0,1.0)
+                                play_sound('glass'..math.random(1, 6), math.random()*0.1 + 0.45,0.75)
+                                play_sound('generic1')
+                                return true
+                            end
+                        }))
+                        end
+                        break
+                    end
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             local number1 = G.OVERLAY_MENU:get_UIE_by_ID('overshoot_info_amount_'.. i)
@@ -229,7 +302,7 @@ function unik_trigger_overshoot_menu(increase)
                         return true
                         end
                     }))
-                    --halt if naneinf
+                    
                     if i >= increase or isnaninf then
                         break
                     end
@@ -250,9 +323,9 @@ function unik_trigger_overshoot_menu(increase)
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             
-                            local newOvershootEffect = G.OVERLAY_MENU:get_UIE_by_ID('unik_overshoot_effect_box'.. predictFXValue(G.GAME.unik_overshoot + increase))
+                            local newOvershootEffect = G.OVERLAY_MENU:get_UIE_by_ID('unik_overshoot_effect_box'.. predictFXValue(G.GAME.unik_overshoot + math.min(increase, G.GAME.unik_overshoot_cap)))
                             local target = G.OVERLAY_MENU:get_UIE_by_ID("overshoot_info_number")
-                            target.config.text = G.GAME.unik_overshoot + increase
+                            target.config.text = G.GAME.unik_overshoot + math.min(increase, G.GAME.unik_overshoot_cap)
                             G.OVERLAY_MENU:recalculate() 
 
                             newOvershootEffect.config.colour = G.C.UNIK_RGB

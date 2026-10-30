@@ -33,6 +33,8 @@ elseif ante_UI and not UNIK.overshootEnabled(true) then
     }
 end
 
+
+
 if to_big(upper22) > to_big(ceiling222) or nanny == 'naneinf' or nanny == 'TREE(3)' then
     G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
     G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0
@@ -57,6 +59,15 @@ else
         G.GAME.unik_overshoot = G.GAME.unik_overshoot or 0
         if UNIK.overshootEnabled() then
             unik_ease_overshoot(-1)
+        end
+    end
+    if UNIK.overshootEnabled() then
+        G.GAME.unik_overshoot_decrement_internal = G.GAME.unik_overshoot_decrement_internal or 0
+        G.GAME.unik_overshoot_decrement_internal = G.GAME.unik_overshoot_decrement_internal + 1
+        if G.GAME.unik_overshoot_decrement_internal >= 3 then
+            
+            G.GAME.unik_overshoot_decrement_internal = 0
+            G.GAME.unik_overshoot_cap = math.max(G.GAME.unik_overshoot_cap - 1,1)
         end
     end
     G.GAME.nuke_spawn = G.GAME.nuke_spawn or 0

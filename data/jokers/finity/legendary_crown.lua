@@ -44,7 +44,7 @@ SMODS.Joker {
     blueprint_compat = true,
     unlocked = true,
     discovered = true, --workaround:
-    rarity = "unik_finity_jokers",
+    rarity = "unik_legendary_blind_finity",
     pos = { x = 0, y = 1 },
     soul_pos = { x = 1, y = 1 },
     cost = 10, 

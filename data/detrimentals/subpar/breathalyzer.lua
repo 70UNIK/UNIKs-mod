@@ -25,7 +25,7 @@ UNIK.detriment{
         if context.end_of_round and context.cardarea == G.unik_detriment_area and not context.repetition and not context.blueprint then
             if not card.ability.extra.used then
                 card.ability.extra.curr_round = card.ability.extra.curr_round + 1
-                if card.ability.extra.curr_round > card.ability.extra.rounds then
+                if card.ability.extra.curr_round >= card.ability.extra.rounds then
                     selfDestruction(card,"k_unik_weapon_destroyed",G.C.BLACK)
                 else
                     return{

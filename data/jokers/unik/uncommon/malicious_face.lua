@@ -8,6 +8,7 @@ SMODS.Joker {
     immutable = true,
     eternal_compat = false,
 	demicoloncompat = true,
+	blueprint_compat = false,
     config = { extra = { multiplier = 2} },
 	attributes = { 'generation','consumable','xblindsize','boss_blind'},
     loc_vars = function(self, info_queue, center)

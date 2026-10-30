@@ -18,22 +18,19 @@ UNIK.detriment{
         G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hand
         ease_hands_played(card.ability.extra.hand)
         SMODS.change_play_limit(card.ability.extra.selection_limit)
-        card.ability.extra.added = true
 	end,
 	-- Inverse of above function.
 	remove_from_deck = function(self, card, from_debuff)
 		-- Adds - instead of +, so they get subtracted when this card is removed.
-        if card.ability.extra.added  then
-            G.hand:change_size(-card.ability.extra.hand_size)
+        G.hand:change_size(-card.ability.extra.hand_size)
             G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hand
             ease_hands_played(-card.ability.extra.hand)
             SMODS.change_play_limit(-card.ability.extra.selection_limit)
-        end
 		
 	end,
     calculate = function(self, card, context)
-        if context.playing_card_added and not context.blueprint then
-            card.ability.extra.cards_added = card.ability.extra.cards_added + 1
+        if context.playing_card_added and context.cards and not context.blueprint then
+            card.ability.extra.cards_added = card.ability.extra.cards_added + #context.cards
             if card.ability.extra.cards_added >= card.ability.extra.cards_to_add then
                 selfDestruction(card,'k_unik_arm_healed',G.C.BLACK)
             else

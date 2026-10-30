@@ -77,3 +77,34 @@ pattern = '''card:flip()'''
 payload = '''
 end
 '''
+
+# add/remove deck
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+match_indent = true
+position = 'after'
+pattern = '''if self.area == G.jokers then self:add_to_deck(true) end'''
+payload = '''
+if self.area == G.unik_detriment_area then self:add_to_deck(true) end
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+match_indent = true
+position = 'after'
+pattern = '''if self.area == G.jokers then self:remove_from_deck(true) end'''
+payload = '''
+if self.area == G.unik_detriment_area then self:remove_from_deck(true) end
+'''
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+match_indent = true
+position = 'after'
+pattern = '''if self.area == G.jokers then if should_debuff then self:remove_from_deck(true) else self:add_to_deck(true) end end'''
+payload = '''
+if self.area == G.unik_detriment_area then if should_debuff then self:remove_from_deck(true) else self:add_to_deck(true) end end
+'''

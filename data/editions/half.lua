@@ -84,6 +84,21 @@ SMODS.Edition({
     
 
 -- end
+
+-- local player = G.FUNCS.evaluate_play
+-- G.FUNCS.evaluate_play = function(e)
+--     G.GAME.unik_halfjoker_active = true
+--     local ret = player(e)
+--      G.E_MANAGER:add_event(Event({
+--         trigger = 'before',
+--         func = function()
+--             G.GAME.unik_halfjoker_active = nil
+--             return true
+--         end
+--     }))
+    
+--     return ret
+-- end
 local updateStickerHook2 = Card.update
 function Card:update(dt)
     local ret = updateStickerHook2(self,dt)
@@ -97,6 +112,8 @@ function Card:update(dt)
                     self:set_debuff()
                 end
             end
+        -- elseif G.jokers and self.edition and self.edition.unik_halfjoker and not G.GAME.unik_halfjoker_active then
+        --     self:set_debuff()
         end
         if (self.config.center.rarity == 'unik_detrimental' or self.config.center.set == "Detriment" ) and not self.config.center.override_cursed_cost then
             unik_set_sell_cost(self,0)

@@ -11,7 +11,7 @@ SMODS.Consumable{
 	atlas = "unik_consumables",
 	mf_rotate_by = math.pi / 4,
     cost = 4,
-	attributes = {'chance','edition','modify_card'},
+	attributes = {'chance','editions'},
     update = function(self,card,dt)
         if (G.jokers) then
             card.eligible_strength_jokers2 = EMPTY(card.eligible_strength_jokers2)

@@ -102,8 +102,11 @@ return {
             b_unik_optimized_deck = {
                 name = "Optimized Deck",
                 text = {
+                    "Multiplicative, Loglinear and Exponential",
+                    "Scoring Operations score",
+                    "in this set order after",
                     "Start with a {C:dark_edition}Negative{}",
-                    "{C:attention}Eternal{} {C:attention,T:j_unik_energy_compressor}Energy Compressor{}",
+                    "{C:unik_eternal}Eternal{} {C:attention,T:j_unik_energy_compressor}Energy Compressor{}",
                 }
             },
             b_unik_tic_tac_toe = {
@@ -1779,10 +1782,10 @@ return {
                 name = 'Esophagus Now',
                 text={
                     {
-                        "Create an {C:attention}Eternal Depleted{} decrementing food Joker",
+                        "Create an {C:unik_eternal}Eternal {C:unik_detriment}Depleted{} decrementing food Joker",
                     },
                     {
-                        "Add {C:attention}Eternal and Depleted{} to new and",
+                        "Add {C:unik_eternal}Eternal{} and {C:unik_detriment}Depleted{} to new and",
                         "existing decrementing food Jokers,",
                         "set values to {C:attention}self destruct values{} and",  
                         "moves them to the {X:unik_detriment,C:white}Detriment{} card area", 
@@ -2279,9 +2282,9 @@ return {
                 name = "Perishable in a Bottle",
                 text = {
                     {
-                        "Applies {C:red}Perishable{} on the",
+                        "Applies {C:unik_perishable}Perishable{} on the",
                         "{C:attention}leftmost{} Joker without",
-                        "{C:red}Perishable{} sticker at the",
+                        "{C:unik_perishable}Perishable{} sticker at the",
                         "end of the round"
                     },
                     {
@@ -2394,7 +2397,7 @@ return {
                 text={
                     "{C:green}#1# in #2#{} chance card is",
                     "{E:2,C:red}destroyed{} on trigger",
-                    "{C:attention}bypassing{} {C:purple}Eternals{}",
+                    "{C:attention}bypassing{} {C:unik_eternal}Eternals{}",
                 }
             },
             e_unik_bloated_consumeable={
@@ -2421,10 +2424,9 @@ return {
             e_unik_halfjoker = {
                 name = "Half",
                 text = {
-                    "Card is {E:2,C:red}debuffed{}",
-                    "when {C:attention}4 or more{}",
-                    "cards are played",
-                    "or selected",
+                    "Card is {E:2,C:red}debuffed{} in scoring",
+                    "when {C:attention}4 or more{} cards",
+                    "are played or selected",
                 }
             },
             e_unik_steel = {
@@ -3466,7 +3468,7 @@ return {
                         "{C:inactive,s:0.7}(Cannot copy {s:0.7,C:bld_obj_rune}Techys{s:0.7,C:inactive} or Rare Consumables)",
                     },
                     {
-                        "Creates a {C:dark_edition}Negative{} {C:red}Decaying",
+                        "Creates a {C:dark_edition}Negative{} {C:unik_perishable}Decaying",
                         "copy of the leftmost held",
                         "{C:attention}consumable{} before scoring"
                     },
@@ -5698,7 +5700,7 @@ return {
                 name="Soul Fragment",
                 text={
                     "Sell this card to create a random",
-                    "{C:attention}Perishable{} {C:legendary}Legendary{} Joker", 
+                    "{C:unik_perishable}Perishable{} {C:legendary}Legendary{} Joker", 
                     "with {C:money}$0{} sell value",
                 }               
             },
@@ -5707,7 +5709,7 @@ return {
                 name="A Taste of Power",
                 text={
                     "Sell this card to create a random",
-                    "{C:attention}Decaying {C:unik_ancient}Ancient{} Joker", 
+                    "{C:unik_perishable}Decaying {C:unik_ancient}Ancient{} Joker", 
                     "with {C:money}$0{} sell value",
                 }             
             },
@@ -5894,12 +5896,12 @@ return {
                 name = 'Lockpick',
                 text = {
                     "You can now {C:red}banish",
-                    "{C:purple}Eternal{} Jokers for",
+                    "{C:unik_eternal}Eternal{} Jokers for",
                     "{E:2,C:red}negative{} sell value",
                 },
                 unlock = { --DONE
                     "Fill your Joker slots",
-                    "with {C:purple}Eternal{} Jokers",
+                    "with {C:unik_eternal}Eternal{} Jokers",
                 }
             },
             j_unik_double_container = {
@@ -6198,7 +6200,7 @@ return {
                 name = "Tax Haven",
                 text = {
                     {
-                        "{C:attention}Remove{} all {C:attention}Rental{} Stickers",
+                        "{C:attention}Remove{} all {C:unik_rental}Rental{} Stickers",
                     "on all owned",
                     "Jokers and cards",
                     },
@@ -6210,7 +6212,7 @@ return {
                 },
                 unlock = { --done
                     "{C:red}Lose {C:money}$#1#{} from",
-                    "{C:attention}Rental{} Jokers in",
+                    "{C:unik_rental}Rental{} Jokers in",
                     "a single round"
                 }
             },
@@ -6318,7 +6320,7 @@ return {
                     },
                     {
                         "Sell to add {C:dark_edition}Astral{} and",
-                    "{C:red}Perishable{} to a {C:attention}random{} Joker",
+                    "{C:unik_perishable}Perishable{} to a {C:attention}random{} Joker",
                     },
                     
                     
@@ -6726,12 +6728,12 @@ return {
             j_unik_preservatives = {
                 name = "Preservatives",
                 text = {
-                    "Remove all {C:red}Perishable",
+                    "Remove all {C:unik_perishable}Perishable",
                     "stickers from the",
                     "next {C:attention}#1#{} Jokers",
                 },
                 unlock = { --done
-                    "Obtain a {C:red}Perishable{} or",
+                    "Obtain a {C:unik_perishable}Perishable{} or",
                     "{C:red}Disposable{} {C:attention}#1#",
                     "or {C:attention}#2#",--blueprint or brainstorm
                 }
@@ -7525,7 +7527,7 @@ return {
                     {
                         "{C:attention}Eggcellent Buffoon Packs{}",
                         "may spawn in the shop",
-                        "{C:purple}Eternal {C:attention}Eggs{} give {X:unik_emult,C:white}^#1#{} Mult",
+                        "{C:unik_eternal}Eternal {C:attention}Eggs{} give {X:unik_emult,C:white}^#1#{} Mult",
                     },
                     {
                         "{C:unik_caption,s:0.7,E:1}#2#{}",
@@ -8016,7 +8018,7 @@ return {
                 name = "Impounded",
                 text = {
                     "Card is {C:red}debuffed{}",
-                    "and has {C:purple}eternal{} and {C:attention}rental{}",
+                    "and has {C:unik_eternal}Eternal{} and {C:unik_rental}Rental{}",
                     "until {C:red}Impound Notice{} is sold",
                     "{C:red}Unremovable{}",
                 },
@@ -8783,7 +8785,8 @@ return {
                     },
                     {
                         "Add {C:attention}#2#{} random",
-                    "{C:unik_shitty_edition}Positive{} playing card#<s>2#",
+                    "{C:unik_shitty_edition}Positive{} {E:2,C:red}Ultradebuffed{}",
+                    "playing card#<s>2#"
                     },
                     
                     
@@ -8809,7 +8812,7 @@ return {
                 text = {
                     "Permanently add {X:unik_echips,C:white}^#1#{} Chips",
                     "to {C:attention}#2#{} selected card#<s>2#", 
-                    "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
+                    "{C:inactive,s:0.8}Becomes a {C:unik_perishable,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Celeste {C:inactive,s:0.8}is already held"
                 }
             },
@@ -8827,7 +8830,7 @@ return {
                 text = {
                     "Permanently add {X:unik_emult,C:white}^#1#{} Mult",
                     "to {C:attention}#2#{} selected card#<s>2#", 
-                    "{C:inactive,s:0.8}Becomes a {C:attention,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
+                    "{C:inactive,s:0.8}Becomes a {C:unik_perishable,s:0.8}Decaying {{C:spectral,s:0.8}Soul {C:inactive,s:0.8}if",
                     "{C:spectral,s:0.8}Ebott {C:inactive,s:0.8}is already held"
                 }
             },
@@ -8850,10 +8853,17 @@ return {
             c_unik_expel = {
                 name = "Expel",
                 text = {
-                    "{C:red}Banish{} a selected {C:attention}Joker,",
-                    "{C:attention}Consumable{}, {C:attention}Shop item",
-                    "or {C:attention}Booster item",
-                    "{C:inactive}(Bypasses Eternal)",
+                    {
+                        "{C:red}Banish{} a selected {C:attention}Joker,",
+                        "{C:attention}Consumable{}, {C:attention}Shop item",
+                        "or {C:attention}Booster item",
+                        "{C:inactive}(Bypasses Eternal)",
+                    },
+                    {
+                        "Can destroy but {C:red}cannot",
+                        "{C:red}Banish{} {X:unik_detriment,C:white}Detriments"
+                    },
+                    
                 }
             },
             c_unik_purify = {
@@ -8881,19 +8891,21 @@ return {
                     "to {V:1}#2#{}",
                 }
             },
-            -- c_unik_forever = {
-            --     name = "Forever",
-            --     text = {
-            --         "Selected {C:attention}Playing cards{} gain",
-            --         "or lose {C:purple}Eternal"
-            --     }
-            -- }
+            c_unik_everlasting = {
+                name = "Everlasting",
+                text = {
+                    "Toggles {C:unik_eternal}Eternal",
+                    "on {C:attention}#1#{} selected Playing",
+                    "Card#<s>1#{} or {C:attention}#2#{}",
+                    "selected Joker#<s>2#"
+                }
+            },
             c_unik_necronomicon = {
                 name = "Necronomicon",
                 text = {
                     {
-                        "Creates {C:attention}#1#{}",
-                        "{C:spectral}Spectral{} Card#<s>1#",
+                        "Creates up to {C:attention}#1#{}",
+                        "random {C:spectral}Spectral{} Card#<s>1#",
                         "{C:inactive}(Must have room)"
                     },
                     {
@@ -8913,7 +8925,6 @@ return {
                     },
                     {
                         "Creates a",
-                        "{X:unik_significant,C:white}Significant{} and a",
                         "{X:unik_severe,C:white}Severe{} {X:unik_detriment,C:white}Detriment"
                     }
                 }
@@ -8952,9 +8963,9 @@ return {
 				name = "Shitty Stake",
 				colour = "Shitty", --this is used for auto-generated sticker localization
 				text = {
-					"{C:attention}Perishable{} Jokers can be {C:attention}Disposable{}",
+					"{C:unik_perishable}Perishable{} Jokers can be {C:attention}Disposable{}",
 					"{s:0.8,C:inactive}({s:0.8,C:red}Destroyed {s:0.8,C:inactive}after round){}",
-                    "{C:attention}Perishable{} Jokers are {C:red}destroyed{} instead of being {C:red}debuffed",
+                    "{C:unik_perishable}Perishable{} Jokers are {C:red}destroyed{} instead of being {C:red}debuffed",
                     '{s:0.8}Applies all previous stakes',
 				},
 			},
@@ -9044,9 +9055,9 @@ return {
 				name = "Shitty Stake",
 				colour = "Shitty", --this is used for auto-generated sticker localization
 				text = {
-					"{C:attention}Perishable{} Jokers can be {C:attention}Disposable{}",
+					"{C:unik_perishable}Perishable{} Jokers can be {C:attention}Disposable{}",
 					"{s:0.8,C:inactive}({s:0.8,C:red}Destroyed {s:0.8,C:inactive}after round){}",
-                    "{C:attention}Perishable{} Jokers are {C:red}destroyed{} instead of being {C:red}debuffed",
+                    "{C:unik_perishable}Perishable{} Jokers are {C:red}destroyed{} instead of being {C:red}debuffed",
                     '{s:0.8}Applies all previous stakes',
 				},
 			},
@@ -9542,7 +9553,7 @@ return {
                 text = {
                     "{C:attention}Randomly{} {E:2,C:red}Destroy 50%{} of",
                     "Jokers, Consumables and Cards",
-                    "{C:attention}including{} {C:purple}Eternals{},",
+                    "{C:attention}including{} {C:unik_eternal}Eternals{},",
                     "then {E:2,C:red}halve{} {C:attention}all{} hand statistics",
                 }
             },
@@ -10600,6 +10611,8 @@ return {
             k_unik_overshoot_score = "SCORE NEEDED",
             k_current = "Current",
             k_overshoot_effects = "Active Overshoot Effect",
+            k_unik_cap = "Cap",
+
             k_unik_code = "Code: ",
             k_all_hands_no_sf= "All hands except Straight Flush",
             k_unik_height_placeholder = "(Most Played Hand)",
@@ -10607,6 +10620,15 @@ return {
             k_unik_height_2 = "Final Hand must be a ",
             k_unik_toxin_1 = "First hand will multiply the Blind Size",
             k_unik_toxin_2 = "Must only play ",
+            k_unik_overshoot_cap_title = "Cap",
+            k_overshoot_unik_cap_info = {
+                "Overshoot is capped by",
+                "the value displayed.",
+                "Will increase if Overshoot",
+                "increase goes above cap",
+                "Slowly decreases if not",
+                "triggering Overshoot",
+            },
 
             k_flower_potted = "YOU IDIOT!",
             unik_overshoot_config = "Overshoot level (Restart Required)",
@@ -10699,7 +10721,7 @@ return {
             --Detriment stuff
             k_unik_detriments = "Detriments",
             k_unik_detriment = "Detriment",
-            k_unik_mild = "Subpar",
+            k_unik_subpar = "Subpar",
             k_unik_significant = "Significant",
             k_unik_severe = "Severe",
             k_unik_catastrophic = "Catastrophic", --currently unused
@@ -11290,7 +11312,7 @@ return {
             ch_c_unik_legendary_at_any_time = {"{C:red}Epic Blinds{} can spawn {X:unik_void_color,C:red}anytime"},
             ch_c_cry_no_vouchers = { "{C:attention}Vouchers{} no longer appear in the shop" },
             ch_c_unik_all_triggering = {"All {C:attention}Playing Cards{} are {C:red}Triggering"},
-            ch_c_unik_decay_on_play = {"All played cards become {C:red}Decaying"},
+            ch_c_unik_decay_on_play = {"All played cards become {C:unik_perishable}Decaying"},
             ch_c_mult_dollar_cap={
                 "{C:red}Mult{} cannot exceed the current {C:money}$",
             },

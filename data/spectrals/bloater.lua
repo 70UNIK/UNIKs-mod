@@ -19,6 +19,7 @@ SMODS.Consumable{
 		if not center.edition or (center.edition and not center.edition.unik_positive) then
 			info_queue[#info_queue + 1] = { set = "Edition", key = "e_unik_positive_playing_card", config = {extra = -1} }
 		end
+		info_queue[#info_queue + 1] = { set = "Other", key = "unik_ultradebuffed" }
         G.GAME.unik_bloater_bloat = G.GAME.unik_bloater_bloat or 0
         local formula = (G.GAME.unik_bloater_bloat + 1) * 4
 		return { vars = {center.ability.extra.hand_size,formula } }
@@ -37,11 +38,9 @@ SMODS.Consumable{
 						G.playing_card = (G.playing_card and G.playing_card + 1) or 1
 						local edition = G.P_CENTERS.c_base
 						local card_ = Card(G.play.T.x + G.play.T.w/2, G.play.T.y, G.CARD_W, G.CARD_H, pseudorandom_element(G.P_CARDS, pseudoseed('garbage_random')), G.P_CENTERS.c_base, {playing_card = G.playing_card})
-						if G.GAME.selected_back.effect.config.cry_force_edition and G.GAME.selected_back.effect.config.cry_force_edition ~= "random" then
-							local edition = {unik_positive = true}
-							edition[G.GAME.selected_back.effect.config.cry_force_edition] = true
-							card_:set_edition(edition, true, true);
-						end
+						card_:set_edition({unik_positive = true}, true, false);
+						card_:start_materialize()
+						card_.ability.unik_ultradebuffed = true
 						if math.floor(i/2) ~= i then play_sound('card1') end
 						table.insert(G.playing_cards, card_)
 
