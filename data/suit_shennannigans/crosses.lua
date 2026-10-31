@@ -12,7 +12,7 @@ SMODS.Suit {
 
 	pos = { y = 0 },
 	ui_pos = { x = 0, y = 0 },
-
+	shade = "dark",
 	in_pool = function(self, args)
 		if args and args.initial_deck then
 			-- local back = G.GAME.selected_back
