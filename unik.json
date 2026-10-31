@@ -12,7 +12,7 @@
 	"version": "0.8.0",
 	"icon_path": "modicon.png",
 	"dependencies": [
-        "Steamodded (>=26.829.0)", 
+        "Steamodded (>=26.1002.0)", 
 		"Lovely (>=0.8.0)"
     ],
 	"conflicts": [
