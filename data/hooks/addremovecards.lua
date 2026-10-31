@@ -78,6 +78,8 @@ end
 local emplaceHook = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
     local oldArea = card and card.area or nil
+
+    card.eaten = nil
     
     emplaceHook(self,card, location, stay_flipped)
     --detrimental jokers ALWAYS go to G.unik_detriment_area

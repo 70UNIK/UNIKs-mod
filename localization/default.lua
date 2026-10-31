@@ -8872,6 +8872,7 @@ return {
                     "Remove all {C:red}detrimental {C:attention}Stickers",
                     "and {C:unik_shitty_edition}Editions{} from",
                     "{C:attention}#1#{} selected Joker#<s>1#",
+                    "or {C:attention}#2#{} selected Playing Card#<s>2#",
                     "{C:inactive}(Eternal excluded)",
                 }
             },

@@ -135,16 +135,18 @@ SMODS.Joker {
                 delay(0.5)
                 local destroyed_cards = {}
                 for i, v in pairs(G.hand.highlighted) do
-                    if not SMODS.is_eternal(v, card) and not v.shattered then
+                    if not SMODS.is_eternal(v, card) and not v.eaten then
                         v.to_be_eaten_by_lily = true
+                        v.eaten = true
                         destroyed_cards[#destroyed_cards+1] = v
                     end
                 end
                 print(#destroyed_cards)
                 if #destroyed_cards == 0 then
                     for i, v in pairs(G.hand.cards) do
-                        if not SMODS.is_eternal(v, card) and not v.shattered and #destroyed_cards < #G.hand.highlighted then
+                        if not SMODS.is_eternal(v, card) and not v.eaten and #destroyed_cards < #G.hand.highlighted then
                             v.to_be_eaten_by_lily = true
+                            v.eaten = true
                             destroyed_cards[#destroyed_cards+1] = v
                         end
                     end
@@ -152,6 +154,7 @@ SMODS.Joker {
                 local glass_shattered = {}
                 for k, v in ipairs(destroyed_cards) do
                     v.to_be_eaten_by_lily = true
+                    v.eaten = true
                     if SMODS.has_enhancement(v, 'm_glass') then glass_shattered[#glass_shattered+1] = v end
                 end
 

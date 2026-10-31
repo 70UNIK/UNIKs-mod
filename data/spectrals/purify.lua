@@ -22,7 +22,7 @@ SMODS.Consumable {
     cost = 4,
     config = {jokers_highlighted = 1,cards_highlighted = 3 },
     loc_vars = function(self, info_queue, card)
-        return { vars = {card.ability.jokers_highlighted } }
+        return { vars = {card.ability.jokers_highlighted,card.ability.cards_highlighted } }
     end,
     attributes = {'modify_card', 'stickers','joker','playing_card'},
     in_pool = function(self)
@@ -93,9 +93,22 @@ SMODS.Consumable {
                     
                     return true end }))
                     
+                                
                 end
+                G.E_MANAGER:add_event(Event({
+                        delay = 0.2,
+                        trigger= 'after',
+                        func = function()
+                                G.hand:unhighlight_all();
+                            return true
+                        end
+                    }))
+                    delay(0.5)
                 card:juice_up(0.3, 0.5)
             return true end })) 
+            
+        
         return true end })) 
+        delay(0.5)
     end,
 }
