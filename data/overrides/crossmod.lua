@@ -402,15 +402,16 @@ SMODS.Joker:take_ownership("j_aij_rubberhose",{
         end
     end
 }, true)
-
+--TODO yin.yang
 SMODS.Joker:take_ownership("j_aij_yin",{
     
     calculate = function(self, card, context)
          if context.individual and context.cardarea == G.play then
             if UNIK.is_suit_type(context.other_card,'dark') then
 				local suits = {}
-				for j=1,#UNIK.dark_suits do
-					suits[UNIK.dark_suits[j]] = 0
+				local dark_suits = UNIK.get_suits_of_type('dark')
+				for j=1,#dark_suits do
+					suits[dark_suits[j]] = 0
 				end
 
                 for _, played_card in ipairs(context.scoring_hand) do
@@ -441,9 +442,10 @@ SMODS.Joker:take_ownership("j_aij_yang",{
     calculate = function(self, card, context)
          if context.individual and context.cardarea == G.play then
             if UNIK.is_suit_type(context.other_card,'light') then
+				local light_suits = UNIK.get_suits_of_type('light')
 				local suits = {}
-				for j=1,#UNIK.light_suits do
-					suits[UNIK.light_suits[j]] = 0
+				for j=1,#light_suits do
+					suits[light_suits[j]] = 0
 				end
 
                 for _, played_card in ipairs(context.scoring_hand) do

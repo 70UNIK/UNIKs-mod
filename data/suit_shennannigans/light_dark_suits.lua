@@ -20,6 +20,19 @@ if next(SMODS.find_mod('Bunco')) then
 	table.insert(UNIK.dark_suits, prefix .. '_Halberds')
 end
 
+-- Load modded suits
+if next(SMODS.find_mod('Bunco')) then
+  local prefix = SMODS.find_mod('Bunco')[1].prefix or "bunc"
+
+  --Adding shades to the Bunco suits via take_ownership until they add their own shades
+  SMODS.Suit:take_ownership(prefix .. '_Fleurons', {
+    shade = 'light'
+  }, true)
+  SMODS.Suit:take_ownership(prefix .. '_Halberds', {
+    shade = 'dark'
+  }, true)
+end
+
 --stolen from paperback
 function UNIK.is_suit_type(card,type)
 	return card:is_suit_shade(type)
@@ -44,11 +57,19 @@ function UNIK.suit_in_deck(suit)
   
 end
 
+function UNIK.get_suits_of_type(type)
+	local suits = {}
+	for i, v in pairs(SMODS.Suits) do
+		if v.shade and type == v.shade then suits[#suits + 1] = i end
+	end
+	return suits
+end
+
 --also stolen from paperback AGAIN!
 function UNIK.suit_tooltip(type)
 	local suits = {}
 	for i, v in pairs(SMODS.Suits) do
-		if type == v.shade then suits[#suits + 1] = i end
+		if v.shade and type == v.shade then suits[#suits + 1] = i end
 	end
 
 	local key = 'paperback_' .. type .. '_suits'

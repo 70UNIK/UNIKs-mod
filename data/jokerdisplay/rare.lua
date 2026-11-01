@@ -128,12 +128,13 @@ JokerDisplay.Definitions["j_unik_kouign_amann_cookie"] = {
         local text, _, scoring_hand = JokerDisplay.evaluate_hand(hand)
         local existingSuits = {}
         local xmult = card.ability.extra.x_mult
+        local light_suit_default = UNIK.get_suits_of_type('light')
          for i,v in pairs(scoring_hand) do
             if not SMODS.has_any_suit(v) then
-                for j=1,#UNIK.light_suits do
-                    if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                for j=1,#light_suit_default do
+                    if v:is_suit(light_suit_default[j]) and not existingSuits[light_suit_default[j]] then
                         xmult = xmult + card.ability.extra.x_mult_mod
-                        existingSuits[UNIK.light_suits[j]] = true;
+                        existingSuits[light_suit_default[j]] = true;
                         break
                     end
                 end
@@ -142,10 +143,10 @@ JokerDisplay.Definitions["j_unik_kouign_amann_cookie"] = {
         --then wilds
         for i,v in pairs(scoring_hand) do
             if SMODS.has_any_suit(v) then
-                for j=1,#UNIK.light_suits do
-                    if v:is_suit(UNIK.light_suits[j]) and not existingSuits[UNIK.light_suits[j]] then
+                for j=1,#light_suit_default do
+                    if v:is_suit(light_suit_default[j]) and not existingSuits[light_suit_default[j]] then
                         xmult = xmult + card.ability.extra.x_mult_mod
-                        existingSuits[UNIK.light_suits[j]] = true;
+                        existingSuits[light_suit_default[j]] = true;
                         break
                     end
                 end

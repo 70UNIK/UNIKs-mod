@@ -7446,8 +7446,8 @@ return {
             j_unik_cosmopolitan = {
                 name = "Cosmopolitan",
                 text = {
-                    "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
-                    "{C:attention}+#3#{} retrigger#<s>3# when scored",
+                    "The next {C:attention}#1#{} played and scored {V:1}#2#{}",
+                    "permanently gain {C:attention}+#3#{} retrigger#<s>3# when scored",
                     "{C:inactive}(Once per Joker)"
                 },
                 unlock = {
@@ -7458,8 +7458,8 @@ return {
             j_unik_midori_sour = {
                 name = "Midori Sour",
                 text = {
-                    "The next {C:attention}#1#{} scored {V:1}#2#{} permanently gain",
-                    "{C:unik_copper}+#3#{} {C:unik_copper}rescore#<s>3#{} when scored",
+                    "The next {C:attention}#1#{} played and scored {V:1}#2#{}",
+                    "permanently gain {C:unik_copper}+#3#{} {C:unik_copper}rescore#<s>3#{} when scored",
                     "{C:inactive}(Once per Joker)"
                 },
                 unlock = {
