@@ -1,36 +1,46 @@
-SMODS.PokerHand({
-	key = "bulwark",
-	visible = false,
-	chips = 70,
-	mult = 7,
-	l_chips = 30,
-	l_mult = 2,
-	example = {
-		{ "S_A", true, enhancement = "m_stone" },
-		{ "S_A", true, enhancement = "m_stone" },
-		{ "S_A", true, enhancement = "m_stone" },
-		{ "S_A", true, enhancement = "m_stone" },
-		{ "S_A", true, enhancement = "m_stone" },
-	},
-	evaluate = function(parts, hand)
-		--DO NOT EVALUATE WITH BLINDSIDE ACTIVE!!!!!
-		if UNIK.hasBlindside() then
-			return false
-		end
-		local stones = {}
-		for i, card in ipairs(hand) do
-			if
-				card.config.center_key == "m_stone"
-				or (card.config.center.no_rank and card.config.center.no_suit and not card.config.center.not_stoned)
-				or (G.GAME and G.hand and card and card.ability and SMODS.has_no_suit(card) and SMODS.has_no_rank(card))
-			then
-				stones[#stones + 1] = card
+if not (SMODS.Mods["Cryptid"] or {}).can_load  then
+	SMODS.PokerHand({
+		key = "bulwark",
+		visible = false,
+		chips = 70,
+		mult = 7,
+		l_chips = 30,
+		l_mult = 2,
+		example = {
+			{ "S_A", true, enhancement = "m_stone" },
+			{ "S_A", true, enhancement = "m_stone" },
+			{ "S_A", true, enhancement = "m_stone" },
+			{ "S_A", true, enhancement = "m_stone" },
+			{ "S_A", true, enhancement = "m_stone" },
+		},
+		evaluate = function(parts, hand)
+			--DO NOT EVALUATE WITH BLINDSIDE ACTIVE!!!!!
+			if UNIK.hasBlindside() then
+				return false
 			end
-		end
-		return #stones >= 5 and { stones } or {}
-	end,
-})
+			local stones = {}
+			for i, card in ipairs(hand) do
+				if
+					card.config.center_key == "m_stone"
+					or (card.config.center.no_rank and card.config.center.no_suit and not card.config.center.not_stoned)
+					or (G.GAME and G.hand and card and card.ability and SMODS.has_no_suit(card) and SMODS.has_no_rank(card))
+				then
+					stones[#stones + 1] = card
+				end
+			end
+			return #stones >= 5 and { stones } or {}
+		end,
+	})
 
-if next(SMODS.find_mod("Spectrallib")) then
-    Spectrallib.ascension_numbers["unik_bulwark"] = 5
+	if next(SMODS.find_mod("Spectrallib")) then
+		Spectrallib.ascension_numbers["unik_bulwark"] = 5
+	end
+end
+
+function UNIK.contains_bulwark(hands)
+	for k, v in pairs(hands) do
+		if (k:find('Bulwark', nil, true) or k:find('bulwark', nil, true) or k:find('unik_bulwark', nil, true)) and #v > 0 then
+		return true
+		end
+	end
 end

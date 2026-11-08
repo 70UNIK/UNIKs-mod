@@ -34,9 +34,8 @@ SMODS.Tag{
                     local lock = tag.ID
                     G.CONTROLLER.locks[lock] = true
                     tag:too_bad("TOO BAD",  G.C.UNIK_VOID_COLOR, function()
-                        local card = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_demon")
-                        card:add_to_deck()
-                        G.jokers:emplace(card)
+                        --TODO: Swapout
+                        UNIK.create_detriment({seed = "unik_demon_detriment" })
                         G.CONTROLLER.locks[lock] = nil
                         return true
                     end)

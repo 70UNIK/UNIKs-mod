@@ -72,14 +72,14 @@ function UNIK.spectrum_played()
 end
 
 function UNIK.contains_spectrum(hands)
-  if PB_UTIL and PB_UTIL.config.suits_enabled then
-    return  PB_UTIL.contains_spectrum(hands)
-  end
-  for k, v in pairs(hands) do
-    if (k:find('Spectrum', nil, true) or k:find('spectrum', nil, true) or k:find('unik_spectrum', nil, true)) and #v > 0 then
-      return true
-    end
-  end
+	if PB_UTIL and PB_UTIL.config.suits_enabled then
+		return  PB_UTIL.contains_spectrum(hands)
+	end
+	for k, v in pairs(hands) do
+		if (k:find('Spectrum', nil, true) or k:find('spectrum', nil, true) or k:find('unik_spectrum', nil, true)) and #v > 0 then
+		return true
+		end
+	end
 end
 
 --extremely experimental function that is designed to work with patches from all in jest. Still has problems.

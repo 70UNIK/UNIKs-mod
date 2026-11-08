@@ -10,6 +10,38 @@ SMODS.Seal {
     calculate = function(self, card, context)
         --FUTURE: Phanta compatibility with unscoring card effects
 
+        if context.unik_after_effect and context.cardarea and context.scoring_hand and context.cardarea == "unscored"  then
+            -- print("XXXXXXXXVVVV")
+            -- print(context.cardarea.cards)
+            local success = false
+            local unscoring = {}
+            for i = 1, #G.play.cards do
+                local v = G.play.cards[i]
+                if not SMODS.in_scoring(v, context.scoring_hand) then
+                    unscoring[#unscoring+1] = v
+                end
+            end
+            for i = 1, #unscoring do
+                local v = unscoring
+                if unscoring == card then
+                    if i > 1 and unscoring[i-1].seal and unscoring[i-1].seal == 'unik_copper' and not unscoring[i-1].debuff then
+                        success = true
+                        break
+                    end
+                    if i < #unscoring and unscoring[i+1].seal and unscoring[i+1].seal == 'unik_copper' and not unscoring[i+1].debuff then
+                        success = true
+                        break
+                    end
+                end
+                
+            end
+            if success then
+                return {
+                    rescore = 1
+                }
+            end
+        end
+
         if context.unik_after_effect and context.cardarea and context.cardarea == G.hand  then
             -- print("XXXXXXXXVVVV")
             -- print(context.cardarea.cards)

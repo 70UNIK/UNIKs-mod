@@ -626,10 +626,11 @@ if (SMODS.Mods["Cryptid"] or {}).can_load  then
 	NFS.load(mod_path .. "data/overrides/abstract_fix.lua")()
 end
 if not (SMODS.Mods["Cryptid"] or {}).can_load  then
-	NFS.load(mod_path .. "data/poker_hands/bulwark.lua")()
+	
 	--planets
 	NFS.load(mod_path .. "data/planets/asteroid_belt.lua")()
 end
+NFS.load(mod_path .. "data/poker_hands/bulwark.lua")()
 
 NFS.load(mod_path .. "data/poker_hands/spectrum_calc.lua")()
 NFS.load(mod_path .. "data/poker_hands/biparte.lua")()

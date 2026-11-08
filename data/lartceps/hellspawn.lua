@@ -5,7 +5,7 @@ SMODS.Consumable{
     cost = 0,
 	pos = {x = 0, y = 1},
 	key = 'unik_hellspawn',
-    config = {extra = {jokers = 16}},
+    config = {extra = {subpars = 10, significants = 7, severes = 3}},
     no_doe = true,
     no_grc = true,
 	no_ccd = true,
@@ -16,7 +16,9 @@ SMODS.Consumable{
     loc_vars = function(self, info_queue, center)
 		return {
 			vars = {
-				center.ability.extra.jokers,
+				center.ability.extra.subpars,
+				center.ability.extra.significants,
+				center.ability.extra.severes
 			},
 		}
 	end,
@@ -27,16 +29,35 @@ SMODS.Consumable{
 		G.jokers:emplace(showman)
 
         G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-            for i = 1, card.ability.extra.jokers do
+            for i = 1, card.ability.extra.subpars do
 				G.E_MANAGER:add_event(Event({
 					delay = 0.1,
 					func = function()
+						--TODO swap out 
                         play_sound("timpani")
-                        local card_ = create_card("Joker", G.jokers, nil, 'unik_detrimental', nil, nil, nil, "unik_hellspawn")
-                        card_:start_materialize()
-                        card_:add_to_deck()
-                        G.jokers:emplace(card_)
-                        card:juice_up(0.3, 0.5)
+                        UNIK.create_detriment({severity = 1,seed = "unik_hellspawn_sub" })
+						return true
+					end
+				}))
+			end
+			for i = 1, card.ability.extra.significants do
+				G.E_MANAGER:add_event(Event({
+					delay = 0.1,
+					func = function()
+						--TODO swap out 
+                        play_sound("timpani")
+                        UNIK.create_detriment({severity = 2,seed = "unik_hellspawn_sig" })
+						return true
+					end
+				}))
+			end
+			for i = 1, card.ability.extra.severes do
+				G.E_MANAGER:add_event(Event({
+					delay = 0.1,
+					func = function()
+						--TODO swap out 
+                        play_sound("timpani")
+                        UNIK.create_detriment({severity = 3,seed = "unik_hellspawn_sev" })
 						return true
 					end
 				}))

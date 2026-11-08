@@ -9154,7 +9154,7 @@ return {
                 name = "Demon Tag",
                 text = {
                     "{C:green}#1# in #2#{} chance to either",
-                    "create a {X:unik_detrimental,C:white}Detrimental{} Joker,",
+                    "create a random {X:unik_detriment,C:white}Detrimental{},",
                     "{C:red}destroy{} a {C:attention}random{} Joker,",
                     "create a {C:unik_manacle_color}Handcuffs Tag{},",
                     "add {C:unik_shitty_edition}Positive{} to a {C:attention}random{} Joker,",
@@ -9623,7 +9623,9 @@ return {
             c_unik_hellspawn = {
                 name = "Hellspawn", -- DEFAULT
                 text = {
-                    "{E:2,C:red}Add #1#{} {X:unik_detrimental,C:white}Detrimental{} Jokers",
+                    "{E:2,C:red}Add #1#{} {X:unik_subpar,C:white}Subpar{} {X:unik_detriment,C:white}Detriment#<s>1#{}, ",
+                    "{C:red}#2# {X:unik_significant,C:white}Significant{} {X:unik_detriment,C:white}Detriment#<s>2#{}",
+                    "and {E:2,C:red} #3#{} {X:unik_severe,C:white}Severe{} {X:unik_detriment,C:white}Detriment#<s>3#{}",
                     "{C:inactive,s:0.5}(Temporarily create a showman in the process)", 
                 }
             },

@@ -72,6 +72,15 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
                     if v.extra then
                         on_card_rescursive_rescore_finding(v.extra,micelRescores)
                     end
+                else
+                    --micalleneous rescoring only on a card
+                    if v.rescore and v.card then
+                        v.card.unik_rescored = true
+                        micelRescores[#micelRescores+1] = {card = v.card, rescore = v.rescore}
+                    end
+                    if v.extra then
+                        on_card_rescursive_rescore_finding(v.extra,micelRescores)
+                    end
                 end
                 
             end
@@ -88,6 +97,16 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
             end
         end
     end
+    --phanta shit
+    if scoring_hand and calc_card_area == "unscored" and (calc_card_area == G.play) then
+        for i,v in pairs(G.play.cards) do
+            if SMODS.in_scoring(v, scoring_hand) and v.ability and v.ability.perma_rescores and v.ability.perma_rescores > 0 then
+                v.unik_rescored = true
+                micelRescores[#micelRescores+1] = {card = v, rescore = v.ability.perma_rescores}
+            end
+        end
+    end
+    --held in hand
     if (calc_card_area == G.hand) then
         for i,v in pairs(calc_card_area.cards) do
             if v.ability and v.ability.perma_rescores and v.ability.perma_rescores > 0 then
@@ -115,7 +134,9 @@ function SMODS.calculate_main_scoring(context, scoring_hand)
                     for w = 1, #v.target_cards do
                         local struct = {}
                         for x = 1, #v.target_cards[w] do
+                            v.target_cards[w][x].unik_rescored = true
                             struct[#struct+1] = {card = v.target_cards[w][x], rescore = 1}
+                            
                         end
                         struct.source = v.card or nil
                         struct.message = v.message or nil
@@ -301,6 +322,7 @@ function recursive_rescore_finding(v,jokerRescores)
         for w = 1, #v.target_cards do
             local struct = {}
             for x = 1, #v.target_cards[w] do
+                v.target_cards[w][x].unik_rescored = true
                 struct[#struct+1] = {card = v.target_cards[w][x], rescore = 1}
             end
             struct.source = v.card or nil
@@ -352,21 +374,25 @@ function SMODS.calculate_end_of_round_effects(context)
         for i = 1, #eval do
             if eval[i] and type(eval[i]) == 'table' then
                 for i,v in pairs(eval[i]) do
-                    if i == 'seals' then
-                        if v.rescore and v.card then
-                            v.card.unik_rescored = true
-                            sealRescores[#sealRescores+1] = {card = v.card, rescore = v.rescore}
-                        end
-                    elseif i == 'enhancement' then
-                        if v.rescore and v.card then
-                            v.card.unik_rescored = true
-                            enhancementRescores[#enhancementRescores+1] = {card = v.card, rescore = v.rescore}
-                        end
-                    elseif i ~= 'jokers' then
-                        if v.rescore and v.card then
-                            v.card.unik_rescored = true
-                            micelRescores[#micelRescores+1] = {card = v.card, rescore = v.rescore}
-                        end
+                    -- if i == 'seals' then
+                    --     if v.rescore and v.card then
+                    --         v.card.unik_rescored = true
+                    --         sealRescores[#sealRescores+1] = {card = v.card, rescore = v.rescore}
+                    --     end
+                    -- elseif i == 'enhancement' then
+                    --     if v.rescore and v.card then
+                    --         v.card.unik_rescored = true
+                    --         enhancementRescores[#enhancementRescores+1] = {card = v.card, rescore = v.rescore}
+                    --     end
+                    -- elseif i ~= 'jokers' then
+                    --     if v.rescore and v.card then
+                    --         v.card.unik_rescored = true
+                    --         micelRescores[#micelRescores+1] = {card = v.card, rescore = v.rescore}
+                    --     end
+                    -- end
+                    if v.rescore and v.card then
+                        v.card.unik_rescored = true
+                        micelRescores[#micelRescores+1] = {card = v.card, rescore = v.rescore}
                     end
                 end
 
@@ -397,6 +423,7 @@ function SMODS.calculate_end_of_round_effects(context)
                         for w = 1, #v.target_cards do
                             local struct = {}
                             for x = 1, #v.target_cards[w] do
+                                v.target_cards[w][x].unik_rescored = true
                                 struct[#struct+1] = {card = v.target_cards[w][x], rescore = 1}
                             end
                             struct.source = v.card or nil
