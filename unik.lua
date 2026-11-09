@@ -939,6 +939,7 @@ NFS.load(mod_path .. "data/jokers/unik/common/welfare_payment.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/tape_seven.lua")()
 
 NFS.load(mod_path .. "data/jokers/unik/common/up_n_go.lua")()
+NFS.load(mod_path .. "data/jokers/unik/common/geofruit.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/violent_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/common/traitorous_joker.lua")()
 
@@ -961,10 +962,11 @@ NFS.load(mod_path .. "data/jokers/unik/uncommon/soul_fragment.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/fat_joker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/joker_dollar.lua")()	
 NFS.load(mod_path .. "data/jokers/unik/uncommon/lockpick.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/cobblestone.lua")()
+NFS.load(mod_path .. "data/jokers/unik/uncommon/boulder_colorado.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/chipzel.lua")()
 NFS.load(mod_path .. "data/jokers/unik/uncommon/euclid.lua")()
-NFS.load(mod_path .. "data/jokers/unik/uncommon/pavement_joker.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/uniku.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/D16.lua")() 
 NFS.load(mod_path .. "data/jokers/unik/uncommon/rainbow_river.lua")() 
@@ -1010,6 +1012,7 @@ NFS.load(mod_path .. "data/jokers/unik/rare/double_up.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/coupon_codes.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/antijoker.lua")()
 NFS.load(mod_path .. "data/jokers/unik/rare/hall_of_mirrors.lua")() --deserves to be rare due to compounding effect of repeated xmult despite glass cards inherent fragility
+NFS.load(mod_path .. "data/jokers/unik/rare/red_circle_of_death.lua")()
 --NFS.load(mod_path .. "data/jokers/unik/rare/electroplating.lua")() --NOT released until v0.8, will only be here for the purpose of testing perma rescoring
 
 if (not PB_UTIL or ( PB_UTIL and not PB_UTIL.config.suits_enabled)) and not next(SMODS.find_mod("Bunco")) then

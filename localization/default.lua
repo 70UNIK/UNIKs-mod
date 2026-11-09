@@ -5041,6 +5041,52 @@ return {
 
 
             -- The rest --
+            j_unik_geofruit = {
+                name = "Geofruit",
+                text = {
+                    {
+                        "Scored cards",
+                        "give {C:chips}+#1#{} Chips"
+                    },
+                    {
+                        "{C:red}Destroyed{} after",
+                        "scoring {C:attention}#2#{} card#<s>2#"
+                    },
+                    
+                }
+            },
+            j_unik_boulder_colorado = {
+                name = "Boulder, Colorado",
+                text = {
+                    {
+                        "{C:unik_copper}Rescore{} all played",
+                        "{C:attention}Rankless and Suitless{}",
+                        "Cards {C:attention}#1#{} time#<s>1#"
+                    }
+                },
+                unlock = { --N/A
+                    "Trigger a single ",
+                    "{C:attention}Rankless and Suitless",
+                    "card {C:attention}#1#{} times",
+                }
+            },
+            j_unik_red_circle_of_death = {
+                name = "..!",
+                text = {
+                    {
+                        "On the {C:attention}Final Hand",
+                        "if hand does {C:red}not",
+                        "meet requirements",
+                        "{X:unik_ee_mult,C:white}!Mult{} then",
+                        "{C:red,E:2}Self-Banish"
+                    }
+                },
+                unlock = {
+                    "{C:red}Die{} to a",
+                    "{C:attention}Finisher Blind"
+                }
+            },
+
             j_unik_goob = {
                 name = "Goob",
                 text = {
@@ -6061,10 +6107,9 @@ return {
             j_unik_skipping_stones = { --skipping stones (common) [CODE DONE]
                 name = "Skipping Stones",
                 text = {
-                    "Retrigger all scored",
-                    "{C:attention}Rankless and",
-                    "{C:attention}Suitless{} cards",
-                    "{C:attention}#1#{} time#<s>1#",
+                    "Retrigger all played",
+                    "{C:attention}Rankless and {C:attention}Suitless{}",
+                    "cards {C:attention}#1#{} time#<s>1#",
                 },
                 unlock = { --done
                     "Play a {C:attention}Bulwark",
@@ -10615,6 +10660,7 @@ return {
             k_current = "Current",
             k_overshoot_effects = "Active Overshoot Effect",
             k_unik_cap = "Cap",
+            k_unik_dead_ex = "Dead!",
 
             k_unik_code = "Code: ",
             k_all_hands_no_sf= "All hands except Straight Flush",
@@ -11265,6 +11311,7 @@ return {
             a_Xlog_chips = "Chips Xlog_#1#(Chips)",
             a_eq_mult = "=#1# Mult",
             a_eq_chips = "=#1# Chips",
+            a_factorial_mult = "!Mult",
             a_unik_hands_1="#1# hands",
             a_unik_discards_1="#1# discards",
             a_unik_reed_construct="ranks #1# or #2#",

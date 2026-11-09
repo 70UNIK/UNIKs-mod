@@ -72,7 +72,10 @@ function Game:update_game_over(dt)
     if G.GAME.prime_your_ecto_death then
         check_for_unlock({ type = 'unik_ecto_death' })
     end
-    
+    if G.GAME.blind.boss and G.GAME.blind.config.blind.boss.showdown then
+        check_for_unlock({ type = 'unik_lose_to_showdown' })
+    end
+
     return ret
 end
 

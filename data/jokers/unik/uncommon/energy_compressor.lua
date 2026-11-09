@@ -74,49 +74,56 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             {type = "xlog_chips",instances = {}}, -- 3
             {type = "e_chips",instances = {}}, -- 4
             {type = "ee_chips",instances = {}}, -- 5
-            {type = "eee_chips",instances = {}}, -- 6
-            {type = "hyper_chips",instances = {}}, -- 7
-            {type = "mult",instances = {}}, -- 8
-            {type = "x_mult",instances = {}}, -- 9
-            {type = "xlog_mult",instances = {}}, --10
-            {type = "e_mult",instances = {}}, --11
-            {type = "ee_mult",instances = {}},--12
-            {type = "eee_mult",instances = {}},--13
-            {type = "hyper_mult",instances = {}},--14
+            {type = "factorial_chips",instances = {}},--6
+            {type = "eee_chips",instances = {}}, -- 7
+            {type = "hyper_chips",instances = {}}, -- 8
+            {type = "mult",instances = {}}, -- 9
+            {type = "x_mult",instances = {}}, -- 10
+            {type = "xlog_mult",instances = {}}, --11
+            {type = "e_mult",instances = {}}, --12
+            {type = "ee_mult",instances = {}},--13
+            {type = "factorial_mult",instances = {}},--14
+            {type = "eee_mult",instances = {}},--15
+            {type = "hyper_mult",instances = {}},--16
         }
         if G.GAME.energy_compressor_blind_effect and (key == "mult" or key == "mult_mod") then
             stored = true
-            local index = 8
+            local index = 9
              G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
         if (key == 'x_mult' or key == 'xmult' or key == 'Xmult_mod' or key == 'x_mult_mod') then
             stored = true
-            local index = 9
+            local index = 10
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
         if  (key == "xlog_mult" or key == "xlogmult" or key == "xlog_mult_mod") then
             stored = true
-            local index = 10
+            local index = 11
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
         if (key == 'e_mult' or key == 'emult' or key == 'Emult_mod') and amount ~= 1 then
             stored = true
-            local index = 11
+            local index = 12
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
         if (key == 'ee_mult' or key == 'eemult' or key == 'EEmult_mod') and amount ~= 1 then
             stored = true
-            local index = 12
+            local index = 13
+            G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
+        end
+        if (key == 'factorial_mult' or key == 'factorial_mult_mod') then
+            stored = true
+            local index = 14
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
         if (key == 'eee_mult' or key == 'eeemult' or key == 'EEEmult_mod') and amount ~= 1 then
             stored = true
-            local index = 13
+            local index = 15
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
         if (key == 'hyper_mult' or key == 'hypermult' or key == 'hypermult_mod') and type(amount) == 'table' then
             stored = true
-            local index = 14
+            local index = 16
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
 
@@ -145,14 +152,19 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
             local index = 5
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
-        if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') and amount ~= 1 then
+        if (key == 'factorial_chips' or key == 'factorial_chip_mod') and amount ~= 1 then
             stored = true
             local index = 6
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
-        if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') and type(amount) == 'table' then
+        if  (key == 'eee_chips' or key == 'eeechips' or key == 'EEEchip_mod') and amount ~= 1 then
             stored = true
             local index = 7
+            G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
+        end
+        if (key == 'hyper_chips' or key == 'hyperchips' or key == 'hyperchip_mod') and type(amount) == 'table' then
+            stored = true
+            local index = 8
             G.GAME.unik_stored_scoring[index].instances[#G.GAME.unik_stored_scoring[index].instances+1] = amount
         end
         

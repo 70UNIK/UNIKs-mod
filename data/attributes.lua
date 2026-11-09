@@ -73,10 +73,18 @@ SMODS.Attribute {
 SMODS.Attribute {
     key = 'long-term'
 }
+
+SMODS.Attribute {
+    key = 'eemult'
+}
+
+SMODS.Attribute {
+    key = 'factorialmult'
+}
 function UNIK.is_mult_joker(center)
     if SMODS.has_attribute(center, "mult") or SMODS.has_attribute(center, "xmult") or SMODS.has_attribute(center, "xlogmult") 
     or SMODS.has_attribute(center, "emult") or SMODS.has_attribute(center, "eemult") or SMODS.has_attribute(center, "eeemult") 
-    or SMODS.has_attribute(center, "hypermult") or SMODS.has_attribute(center, "eqmult")
+    or SMODS.has_attribute(center, "hypermult") or SMODS.has_attribute(center, "eqmult") or SMODS.has_attribute(center, "factorialmult")
     then
         return true
     end

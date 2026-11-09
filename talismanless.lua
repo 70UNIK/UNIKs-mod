@@ -158,12 +158,48 @@ function SMODS.calculate_individual_effect(effect, scored_card, key, amount, fro
 			end
 			return true
 		end
+		if (key == 'factorial_mult' or key == 'factorial_mult_mod') then
+						if effect.card then
+				juice_card(effect.card)
+			end
+			local mult = SMODS.Scoring_Parameters["mult"]
+			mult:modify(UNIK.factorial(mult.current) - mult.current)
+
+			if not effect.remove_default_message then
+				if from_edition then
+					card_eval_status_text(
+						scored_card,
+						"jokers",
+						nil,
+						percent,
+						nil,
+						{ message = "!" .. localize("k_mult"), colour = G.C.EDITION, edition = true }
+					)
+				elseif key ~= "factorial_mult_mod" then
+					if effect.emult_message then
+						card_eval_status_text(
+							scored_card or effect.card or effect.focus,
+							"extra",
+							nil,
+							percent,
+							nil,
+							effect.emult_message
+						)
+					else
+						
+						card_eval_status_text(scored_card or effect.card or effect.focus, "factorial_mult", amount, percent)
+					end
+				end
+			end
+			return true
+		end
 end
 for _, v in ipairs({
 	"xlog_mult", "xlogmult", "xlog_mult_mod",
 	"xlog_chips", "xlogchips", "xlog_chips_mod",
 	'eq_mult', 'Eqmult_mod',
 	'eq_chips',"Eqchips_mod",
+	'factorial_mult','factorial_mult_mod'
 }) do
 	table.insert(SMODS.scoring_parameter_keys, v)
 end
@@ -491,6 +527,51 @@ function UNIK.balance_exp(exp,card,nomessage)
 	}))
 
 	delay(0.6)
+end
+
+--Gamma function, this suffers from stack overflow
+-- local function gammafunc(z)
+--     local gamma = 0.577215664901
+--     local coeff = -0.65587807152056
+--     local quad = -0.042002635033944
+--     local qui = 0.16653861138228
+--     local set = -0.042197734555571
+
+--     function recigamma(rz)
+--       	return rz + gamma * rz^2 + coeff * rz^3 + quad * rz^4 + qui * rz^5 + set * rz^6
+--     end
+     
+--     if z == 1 then
+--         return 1
+-- 	--also has backup functions to abort the recursion if hitting math.huge
+--     elseif math.abs(z) <= 0.5 then
+--        	local ret =  1 / recigamma(z)
+-- 		if ret == math.huge then
+-- 			return math.huge
+-- 		end
+-- 		return ret
+--     else
+--         local ret = (z - 1) * gammafunc(z - 1)
+-- 		if ret == math.huge then
+-- 			return math.huge
+-- 		end
+-- 		return ret
+--     end
+-- end
+
+local function sterling(n)
+	if n == 1 then
+		return 1
+	end
+	local z = 0
+	local e = math.exp(1)
+	z = math.sqrt(2*math.pi*n) * (n/e)^n
+	return z
+end
+function UNIK.factorial(x)
+	local sterling = sterling(x)
+	print(sterling)
+	return sterling
 end
 
 --might as well intialize gradients for emult and echips

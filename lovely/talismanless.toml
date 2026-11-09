@@ -53,14 +53,21 @@ elseif eval_type == 'e_chips' and not UNIK.has_talisman() and not next(SMODS.fin
     sound = 'unik_echip'
     amt = amt
     text = '^' .. number_format(amt) .. ' ' .. localize('k_chips')
-    colour = G.C.DARK_EDITION
+    colour = SMODS.Gradients.unik_echips
     config.type = 'fade'
     config.scale = 0.7
 elseif eval_type == 'e_mult' and not UNIK.has_talisman() and not next(SMODS.find_mod("Cryptlib"))  then
     sound = 'unik_emult'
     amt = amt
     text = '^' .. number_format(amt) .. ' ' .. localize('k_mult')
-    colour = G.C.DARK_EDITION
+    colour = SMODS.Gradients.unik_emult
+    config.type = 'fade'
+    config.scale = 0.7
+elseif eval_type == 'factorial_mult' then
+    sound = 'unik_eemult'
+    amt = amt
+    text = '!' .. localize('k_mult')
+    colour = SMODS.Gradients.unik_ee_mult
     config.type = 'fade'
     config.scale = 0.7
 '''
