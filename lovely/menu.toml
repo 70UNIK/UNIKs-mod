@@ -18,12 +18,7 @@ match_indent = true
 [[patches]]
 [patches.regex]
 target = "game.lua"
-pattern = '''(.*)replace_card(.*)=(.*)G.P_CARDS.S_A(.*)'''
-position = "after"
-payload = '''
-
-if unik_config.unik_custom_menu then
-    replace_card:remove()
-    replace_card = Card(self.title_top.T.x, self.title_top.T.y, 1.2*G.CARD_W*SC_scale, 1.2*G.CARD_H*SC_scale, G.P_CARDS.unik_CROSSES_A, G.P_CENTERS.c_base)
-end
-'''
+pattern = '''G\.P\_CARDS\.S\_A'''
+position = "at"
+payload = '''unik_config.unik_custom_menu and G.P_CARDS.unik_CROSSES_A or G.P_CARDS.S_A'''
+match_indent = true

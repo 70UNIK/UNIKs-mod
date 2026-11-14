@@ -51,7 +51,7 @@ function UNIK.suit_tooltip(type)
 		if type == v.shade then suits[#suits + 1] = i end
 	end
 
-	local key = 'paperback_' .. type .. '_suits'
+	local key = 'unik_' .. type .. '_suits'
 	if #suits <= 2 then
 		return {
 		set = 'Other',
