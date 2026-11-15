@@ -53,14 +53,42 @@ target = 'functions/state_events.lua'
 pattern = '''SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true})'''
 position = "after"
 payload = '''
-for i = 1, #G.play.cards do
-    if G.play.cards[i].unik_poppy_unlock_repetitions and G.play.cards[i].unik_poppy_unlock_repetitions > 0 then
-        check_for_unlock({ type = 'unik_poppy_repetitions',card = G.play.cards[i],total_repetitions = G.play.cards[i].unik_poppy_unlock_repetitions })
+for i,v in pairs(G.playing_cards) do
+    if v.unik_poppy_unlock_repetitions and v.unik_poppy_unlock_repetitions > 0 then
+        check_for_unlock({ type = 'unik_poppy_repetitions',card = v,total_repetitions = v.unik_poppy_unlock_repetitions })
     end
-    G.play.cards[i].unik_poppy_unlock_repetitions = nil
+    v.unik_poppy_unlock_repetitions = nil
 end
 '''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''-- TARGET: effects before scoring starts'''
+position = "after"
+payload = '''
+for i,v in pairs(G.playing_cards) do
+    v.unik_poppy_unlock_repetitions = nil
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''SMODS.calculate_context({full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands, after = true})'''
+position = "after"
+payload = '''
+for i,v in pairs(G.playing_cards) do
+    if v.unik_poppy_unlock_repetitions and v.unik_poppy_unlock_repetitions > 0 then
+        check_for_unlock({ type = 'unik_poppy_repetitions',card = v,total_repetitions = v.unik_poppy_unlock_repetitions })
+    end
+    v.unik_poppy_unlock_repetitions = nil
+end
+'''
+match_indent = true
+###tax haven
 ###tax haven
 
 [[patches]]
